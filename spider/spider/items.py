@@ -8,7 +8,7 @@
 import scrapy
 
 
-class TrabajoFinalItem(scrapy.Item):
+class FinalWorkItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = scrapy.Field()
