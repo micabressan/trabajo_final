@@ -2,7 +2,6 @@
 
 from scrapy import Spider, Request
 import urlparse
-#from spider.items import FinalWorkItems
 
 
 class TrabajoFinalSpider(Spider):
