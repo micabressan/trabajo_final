@@ -1,0 +1,31 @@
+import Control.Monad.State.Strict
+import Data.Map.Strict as M
+
+type FibState = State (Map Int Integer) Integer
+
+fib :: Int -> FibState
+fib n = do
+  if (n == 1) || (n == 2)
+    then return 1
+    else do
+      u <- fibCached (n - 1)
+      v <- fibCached (n - 2)
+      return (u + v)
+
+fibCached :: Int -> FibState
+fibCached n = do
+  cache <- get
+  case (M.lookup n cache) of
+    Just x -> return x
+    Nothing -> do
+      r <- fib n
+      cache <- get
+      put (insert n r cache)
+      return r
+
+computeFib :: Int -> Integer
+computeFib n = evalState (fibCached n) empty
+
+main :: IO()
+main = do
+  putStrLn (show (computeFib 100000))

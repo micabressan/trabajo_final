@@ -1,0 +1,7 @@
+def my_function(param):
+    param = param + 2
+    return param
+ 
+# call function
+variable = 2
+result = my_function(variable)

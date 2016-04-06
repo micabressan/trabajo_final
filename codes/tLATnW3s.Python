@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+# © Monstrofil, 2015
+import os
+if not os.path.exists('files/'):
+    os.makedirs('files/')
+
+class File():
+    def __init__(self, name, offset, length, pack):
+        self.name = name + '.xz'
+        self.offset = offset
+        self.length = length - 16
+        self.pack = pack
+
+    def save(self):
+        f = open(self.pack, 'rb')
+        f.seek(self.offset)
+        data = f.read(self.length)
+        f.close()
+
+        while os.path.isfile('files/' + self.name):
+            self.name += '_'
+        f = open('files/' + self.name, 'wb')
+        f.write(data)
+        f.close()
+
+    
+
+import struct
+f = open('index', 'rb')
+pl = 10
+while(True):
+    data = [ord(ch) for ch in f.read(pl)]
+    len = data[-2] + data[-1]
+    filename = f.read(len)
+
+    postfix = f.read(1)
+    if ord(postfix) == 114:
+        pl = 13
+    else:
+        pl = 10
+    #print filename, postfix
+
+    
+    if postfix != 's':
+        data = [ord(ch) for ch in f.read(9)]
+        off = chr(data[0]) + chr(data[1]) + chr(data[2]) + chr(data[3])
+        #print 'offset:', struct.unpack("<L", off)[0]
+
+        
+        size = chr(data[4]) + chr(data[5]) + chr(data[6]) + chr(data[7])
+        #print 'size:', struct.unpack("<L", size)[0]
+
+        if 'results_screen.xml' in filename: ##save only .swf files
+            raw_input()
+            t = File(filename, struct.unpack("<L", off)[0], struct.unpack("<L", size)[0], "../pack_000%s.pkg"%data[8])
+            t.save()
+    else:
+        print filename

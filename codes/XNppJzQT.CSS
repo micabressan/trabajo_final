@@ -1,0 +1,270 @@
+html {
+    background-color: #F0F0F0;
+    background-image: none;
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+html body {
+  
+  color: black;
+  background-color: #F0F0F0;
+  background-image: none;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+  margin: 0 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div.boardlist {
+    color: black;
+    font-size: 16px;
+    font-family: "Lucida Grande", Verdana, sans-serif;
+    text-decoration: none;
+    background-color: #F0F0F0;
+    text-align:left;
+    position:fixed;
+    border-style: solid;
+    border-color: black;
+    border-top-width: 5px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+
+div.boardlist a {
+    color: black;
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-variant: normal;
+    font-style: normal;
+    text-transform: none;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+html body h1 {
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    background-image: none;
+    text-align:center;
+}
+div.title {
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    background-image: none;
+    text-align:center;
+}
+html body a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    background-image: none;
+}
+
+
+* input {
+    color: black;
+    background-color: #F0F0F0;
+    border-style: dotted;
+    border-color: black;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 1px;
+    text-decoration: none;
+    text-transform: none;
+    font-variant: normal;
+    font-style: normal;
+    font-weight: normal;
+}
+tr td input {
+    color: black;
+    background-color: #F0F0F0;
+    border-style: dotted;
+    border-color: black;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 1px;
+    text-decoration: none;
+    text-transform: none;
+    font-variant: normal;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+#body {
+    background-color: #F0F0F0;
+    color: #000000;
+    font-family: Helvetica, Arial, sans-serif;
+    border-color: black;
+    border-style: dotted;
+}
+html body hr {
+    background-color: #F0F0F0;
+    background-image: none;
+    font-family: Helvetica, Arial, sans-serif;
+    margin-bottom: 23px;
+    padding-bottom: 8px;
+    border-style: solid;
+    border-color: black;
+}
+div.post.reply {
+    background-color: #F0F0F0;
+    color: black;
+    font-size: 15px;
+    border-style: solid;
+    border-color: black;
+    border-top-width: 5px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin: 0.2em 16px;
+    padding: 0.2em 0.3em 0.5em 0.6em;
+    display: inline-block;
+}
+ 
+span.omitted {
+  display: block;
+        margin-top: 1em;
+}
+br.clear {
+        clear: left;
+}
+span.controls {
+        float: right;
+        margin: 0;
+        padding: 0;
+        font-size: 80%;
+}
+span.controls.op {
+        float: none;
+        margin-left: 10px;
+}
+span.controls a {
+        margin: 0;
+}
+div#wrap {
+        width: 900px;
+        margin:0 auto;
+}
+div.ban {
+        background: #F0F0F0;
+        border: 1px solid black;
+        max-width: 700px;
+        margin: 30px auto;
+}
+div.ban p, div.ban h2 {
+        padding: 3px 7px;
+}
+div.ban h2 {
+        background: #F0F0F0;
+        color: black;
+        font-size: 12pt;
+}
+div.ban p {
+        font-size: 12px;
+        margin-bottom: 12px;
+}
+div.ban p.reason {
+        font-weight: bold;
+}
+span.heading {
+        color: black;
+        font-size: 11pt;
+        font-weight: bold;
+        display: block;
+}
+span.spoiler {
+        background: black;
+        color: black;
+}
+div.post.reply p.body span.spoiler a {
+        color: black;
+}
+span.spoiler:hover, div.post.reply p.body span.spoiler:hover a {
+        background: #F0F0F0;
+  color: black;
+}
+span.subject {
+    color: black;
+}
+span.name {
+    color: black;
+}
+span.trip {
+    font-weight: bold;
+    color: black;
+}
+span.quote {
+    color: #FFDB00;
+}
+span.omitted a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+span.unimportant {
+    color: black;
+}
+span.subject {
+    color: #000000;
+}
+div.styles {
+        float: right;
+        padding-bottom: 20px;
+}
+div.styles a {
+        margin: 0 10px;
+}
+div.styles a.selected {
+        text-decoration: none;
+}
+ 
+p.intro label time {
+    margin-left: 17px;
+}
+ 
+ 
+div.pages {
+    background-color: #F0F0F0
+    color: black;
+    border-style: solid;
+    border-color: black;
+    border-top-width: 8px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+div.pages a {
+    color: black;
+    font-weight: bold;
+}
+div.delete {
+    background-color: #F0F0F0
+    font-weight: bold;
+    border-style: solid;
+    border-color: black;
+    color: #ffffff;
+    border-top-width: 8px;
+    width: 60%;
+    border-bottom-width: 6px;
+    border-left-width: 34px;
+   
+}
+div.delete input {
+    border-color: black;
+    border-style: dotted;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    color: black;
+    background-color: #F0F0F0;
+    border-bottom-width: 1px;
+}

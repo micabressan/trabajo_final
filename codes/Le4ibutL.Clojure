@@ -1,0 +1,58 @@
+(defn integer-partition-helper
+  "Returns all integer partitions of n where no partition is larger than m."
+  [n m]
+  (cond
+    (= n 0) '(())
+    (= m 0) '()
+    true (let
+           [upper (min n m)
+            subpart (fn [k] (map #(conj % k) (ipart (- n k) k)))]
+           (mapcat subpart (range upper 0 -1)))))
+
+(defn iparts
+  "Returns all integer partitions of n."
+  [n]
+  (ipart-helper n n))
+
+(defn choose [n k]
+  "Binomial coefficient"
+  (let [rprod (fn [a b] (reduce * (range a (inc b))))]
+    (/ (rprod (- n k -1) n) (rprod 1 k))))
+
+(defn factorial
+  [n]
+  (cond (< n 1) 1
+        true (* n (factorial (dec n)))))
+
+(defn tails
+  "Returns seq of all suffixes of the input seq"
+  [lst]
+  (cond (empty? lst) '(())
+        true (conj (tails (rest lst)) lst)))
+
+(defn ways
+  "Given an integer partition of n, counts up the way that you could assign n
+  distinct objects to non-distinct partitions. "
+  [partition]
+  (let [N (reduce + 0 partition)
+        dup-sizes (map count (vals (group-by (fn[x] x) partition)))
+        dup-denominator (reduce * (map factorial dup-sizes))
+        untaken (map #(reduce + 0 %) (tails partition))
+        elts (map choose untaken partition)]
+    (/ (reduce * elts) dup-denominator)
+  ))
+
+(defn ways-distinct-partitions
+  "Given an integer partition of n, counts up the way that you could assign n
+  distinct objects to distinct partitions. "
+  [partition]
+  (let [untaken (map #(reduce + 0 %) (tails partition))
+        elts (map choose untaken partition)]
+    (reduce * elts)
+  ))
+
+(reduce + (map ways (filter #(= 10 (count %)) (iparts 17))))
+;2758334150
+
+(reduce + (map ways-distinct-partitions (filter #(= 10 (count %)) (iparts 17))))
+;9944898163200

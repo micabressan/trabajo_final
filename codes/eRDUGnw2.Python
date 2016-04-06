@@ -1,0 +1,133 @@
+#*- coding: utf-8 -*-
+
+from flask import Flask, session, render_template, request, make_response, url_for, redirect
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from authomatic.adapters import WerkzeugAdapter
+from authomatic import Authomatic
+
+from config import CONFIG, SECRET_KEY
+
+app = Flask(__name__)
+app.config.from_object('config')
+db = SQLAlchemy(app)
+
+# http://flask-login.readthedocs.org/en/latest/#flask.ext.login.LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+app.secret_key = SECRET_KEY
+
+# Instantiate Authomatic.
+authomatic = Authomatic(CONFIG, SECRET_KEY, report_errors=False)
+
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(120), index = True, unique = True)
+    name = db.Column(db.String(120), index=True)
+    #TODO: Add admin role. role = db.Column(db.Boolean, default = 0)
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key = True )
+    q_text = db.Column(db.String(120), index = True, unique = True)
+    user_id = db.Column(db.Integer)
+    
+@login_manager.user_loader
+def load_user(uid):
+    return User.query.filter_by(id = uid).first()
+
+
+@app.route('/')
+def index():
+    """
+    Home handler
+    """
+
+    return render_template('index.html')
+
+@app.route('/login')
+@app.route('/login/<provider_name>/', methods=['GET', 'POST'])
+def login(provider_name):
+
+    """
+    Login handler, must accept both GET and POST to be able to use OpenID.
+    """
+
+    # We need response object for the WerkzeugAdapter.
+    response = make_response()
+
+    # Log the user in, pass it the adapter and the provider name.
+    result = authomatic.login(WerkzeugAdapter(request, response), provider_name)
+
+    # If there is no LoginResult object, the login procedure is still pending.
+    if result:
+
+        if result.user:
+            # We need to update the user to get more info.
+            result.user.update()
+
+        #Yandex doesn't porvide email in the result, so we fix it
+        if result.provider.name == 'yandex':
+            email = result.user.username + '@yandex.ru'
+        else:
+            email = result.user.email
+
+        if email != None:
+
+            user = User.query.filter_by(email=email).first()
+
+            if user is not None:
+
+                login_user(user)
+
+            else:
+
+                user = User(email=email, name=result.user.name)
+                db.session.add(user)
+                db.session.commit()
+
+            # The rest happens inside the template.
+            return redirect(url_for('ask'))
+
+        else:
+
+            return redirect(url_for('problem'))
+
+    # Don't forget to return the response.
+    return response
+
+@app.route('/ask_question', methods=['GET', 'POST'] )
+@login_required
+def ask():
+    
+    class QForm():
+        
+        question = TextAreaField(validators = [Required()])
+    
+    form = QForm()
+    
+    if form.validate_on_submit():
+        
+        question = Question(q_text=form.question, user_id=current_user.id)
+        
+        return redirect('/index')
+    
+    return render_template('ask_question.html', form=form)
+
+@app.route('/logout', methods=['GET'])
+@login_required
+def logout():
+
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/oops', methods=['GET'])
+def problem():
+
+    return render_template('problem.html')
+
+
+# Run the app.
+if __name__ == '__main__':
+    app.run(debug=True)

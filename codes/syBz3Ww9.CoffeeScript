@@ -1,0 +1,128 @@
+APP.factory "api", ($http, $q, modal) ->
+
+	@_session_key 	= null
+	@_url_prefix 	= '/api'
+	@_ready 		= $q.defer()
+
+	@setSessionKey = (session_key) ->
+		@_session_key = session_key
+
+	@getSessionKey = ->
+		@_session_key
+
+	@renewSessionKey = ->
+		
+	@ready = ->
+		@_ready.promise
+
+	@init = ->
+		q = $q.defer()
+
+		@get("/session/status").then (response) =>
+			q.resolve response
+			@_ready.resolve()
+		.catch (error) ->
+			q.reject error
+
+		q.promise
+
+	@call = (method_url, method, params) ->
+		q = $q.defer()
+
+		url = method_url
+
+		config = 
+			headers :
+				"X-Api-Client" : "browser"
+
+		if @_session_key
+			config.headers["X-Session-Key"] = @_session_key
+
+
+		unless url.charAt 0 is "/"
+			url = "/#{url}" 
+
+		url = "#{@_url_prefix}#{url}"
+
+		switch method
+			when "get"
+				if params
+					url = "#{url}/#{params.join('/')}"
+			when "delete"
+				if params
+					url = "#{url}/#{params.join('/')}"
+
+		fn_raw_call = (method, url, params, config) ->
+			switch method
+				when "get"
+					request = $http.get url, config
+				when "delete"
+					request = $http.delete url, config
+				when "put"
+					request = $http.put url, params, config
+				when "post"
+					request = $http.post url, params, config
+
+			request
+
+		request = fn_raw_call method, url, params, config
+
+		fn_parse_response = (response, q) =>
+			if response.data.status
+				q.resolve response.data.payload
+			else
+				reject_object = {}
+
+				if response.data.error.otp
+					modal.token(response.data.error.otp).then (otp_data) =>
+						params.otp = otp_data
+						fn_raw_call(method, url, params, config).then (response) ->
+							fn_parse_response response, q
+						.catch (error) ->
+							fn_parse_error error, q
+						
+					.catch ->
+						q.reject 
+							messages : ['Wykonanie akcji nie powiodło się, ponieważ wymagana była dodatkowa autoryzacja.']
+							fields   : {}
+
+					return
+				
+				if response.data.error.messages
+					reject_object['messages'] = response.data.error.messages
+				else
+					reject_object['messages'] = 'Brak odpowiedzi od serwera.'
+
+				if response.data.error.fields
+					reject_object['fields'] = response.data.error.fields
+				else
+					reject_object['fields'] = {}
+
+				q.reject reject_object
+
+		fn_parse_error = (error, q) =>
+			q.reject
+				messages : ["Wystąpił błąd #{error.status} podczas przetwarzania zapytania. #{error.statusText}."]
+				fields   : []
+			
+		request.then (response) ->
+			fn_parse_response response, q
+		.catch (error) ->
+			fn_parse_error error, q
+
+		q.promise
+
+	@get = (url, params) ->
+		@call url, "get", params
+
+	@post = (url, params) ->
+		@call url, "post", params
+
+	@put = (url, params) ->
+		@call url, "put", params
+
+	@delete = (url, params) ->
+		@call url, "delete", params
+
+
+	@

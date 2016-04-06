@@ -1,0 +1,23 @@
+#[no_mangle]
+extern {
+    fn VidExt_Init() -> M64pError;
+}
+
+pub fn VidExt_Init() -> M64pError {
+
+    println!("VidExt_Init");
+    return 0;
+}
+
+
+
+src/lib.rs:51:1: 55:2 error: duplicate definition of value `VidExt_Init`
+src/lib.rs:51 pub fn VidExt_Init() -> M64pError {
+src/lib.rs:52 
+src/lib.rs:53     println!("VidExt_Init");
+src/lib.rs:54     return M64pError::Success;
+src/lib.rs:55 }
+src/lib.rs:42:5: 42:35 note: first definition of value `VidExt_Init` here
+src/lib.rs:42     fn VidExt_Init() -> M64pError;
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+error: aborting due to previous error

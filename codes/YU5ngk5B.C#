@@ -1,0 +1,240 @@
+// Code Created by Wellington Pires
+
+using SiliconStudio.Core.Mathematics;
+using SiliconStudio.Paradox.Engine;
+using SiliconStudio.Paradox.Graphics;
+using SiliconStudio.Paradox.UI;
+using SiliconStudio.Paradox.UI.Controls;
+using SiliconStudio.Paradox.UI.Panels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HealthBar
+{
+    public class UIScript : AsyncScript
+    {
+        private Canvas gameRoot;
+        private SpriteSheet uiImages;
+       // private UIImageGroup uiImages;
+        private ImageElement fillHP;
+        private ImageElement fillMP;
+        private SpriteFont spriteFont;
+
+        private Button hpButtonIncrement;
+        private Button hpButtonDecrement;
+        private Button mpButtonIncrement;
+        private Button mpButtonDecrement;
+
+        private float fillHPWidth = 551.0f;
+        private float fillHPHeight = 82.0f;
+
+        private float fillMPWidth = 558.0f;
+        private float fillMPHeight = 86.0f;
+
+        public void Start()
+        {
+            uiImages = Asset.Load<SpriteSheet>("UIImages");
+            spriteFont = Asset.Load<SpriteFont>("Font");
+
+            createHealthBarUI();
+
+            Entity.Get<UIComponent>().RootElement = gameRoot;
+        }
+
+        public override async Task Execute()
+        {
+            Start();
+            hpButtonIncrement.Click += (s, e) => HPButtonIncrementClick();
+            hpButtonDecrement.Click += (s, e) => HPButtonDecrementClick();
+
+            mpButtonIncrement.Click += (s, e) => MPButtonIncrementClick();
+            mpButtonDecrement.Click += (s, e) => MPButtonDecrementClick();
+
+            while(Game.IsRunning) {
+                await Script.NextFrame();
+            }
+        }
+
+        private void HPButtonIncrementClick()
+        {
+
+            if (fillHP.Source.Region.Width < fillHPWidth)
+            {
+                var region = fillHP.Source.Region;
+
+                region.Width += 10.0f;
+
+                fillHP.Source.Region = region;
+            }
+
+        }
+
+        private void HPButtonDecrementClick()
+        {
+            if (fillHP.Source.Region.Width > 0)
+            {
+                var region = fillHP.Source.Region;
+
+                region.Width -= 10.0f;
+
+                fillHP.Source.Region = region;
+            }
+        }
+
+        private void MPButtonIncrementClick()
+        {
+
+            if (fillMP.Source.Region.Width < fillMPWidth)
+            {
+                var region = fillMP.Source.Region;
+
+                region.Width += 10.0f;
+
+                fillMP.Source.Region = region;
+            }
+
+        }
+
+        private void MPButtonDecrementClick()
+        {
+            if (fillMP.Source.Region.Width > 0)
+            {
+                var region = fillMP.Source.Region;
+
+                region.Width -= 10.0f;
+
+                fillMP.Source.Region = region;
+            }
+        }
+
+        private void createHealthBarUI()
+        {
+
+            var charInfo = new ImageElement
+            {
+                Source = uiImages["CharInfo"],
+            };
+            charInfo.Size = new Vector3(charInfo.Source.Region.Width, charInfo.Source.Region.Height, 1f);
+            charInfo.SetCanvasRelativePosition(new Vector3(0f, 0f, 1f));
+
+            #region HP
+
+            fillHP = new ImageElement
+            {
+                Source = uiImages["FillHP"]
+            };
+            fillHP.Size = new Vector3(fillHPWidth, fillHPHeight, 1f); 
+            fillHP.SetCanvasRelativePosition(new Vector3(0.148f, 0.039f, 1f));
+
+            var hpText = new TextBlock
+            {
+                Font = spriteFont,
+                Text = "HP",
+                TextColor = Color.White,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            hpText.SetCanvasRelativePosition(new Vector3(0.35f, 0.6f, 0f));
+
+            hpButtonIncrement = new Button
+            {
+                Content = new TextBlock
+                {
+                    Font = spriteFont,
+                    Text = "+",
+                    TextColor = Color.White,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                },
+                Padding = new Thickness(5, 5, 5, 5),
+                MinimumWidth = 50f,
+            };
+            hpButtonIncrement.SetCanvasRelativePosition(new Vector3(0.3f, 0.7f, 0f));
+
+            hpButtonDecrement = new Button
+            {
+                Content = new TextBlock
+                {
+                    Font = spriteFont,
+                    Text = "-",
+                    TextColor = Color.White,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                },
+                Padding = new Thickness(5, 5, 5, 5),
+                MinimumWidth = 50f,
+            };
+            hpButtonDecrement.SetCanvasRelativePosition(new Vector3(0.4f, 0.7f, 0f));
+
+            #endregion
+
+            #region MP
+
+            fillMP = new ImageElement
+            {
+                Source = uiImages["FillMP"]
+            };
+            fillMP.Size = new Vector3(fillMPWidth, fillMPHeight, 1f);
+            fillMP.SetCanvasRelativePosition(new Vector3(0.146f, 0.176f, 1f));
+
+            var mpText = new TextBlock
+            {
+                Font = spriteFont,
+                Text = "MP",
+                TextColor = Color.White,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            mpText.SetCanvasRelativePosition(new Vector3(0.55f, 0.6f, 0f));
+
+
+            mpButtonIncrement = new Button
+            {
+                Content = new TextBlock
+                {
+                    Font = spriteFont,
+                    Text = "+",
+                    TextColor = Color.White,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                },
+                Padding = new Thickness(5, 5, 5, 5),
+                MinimumWidth = 50f,
+            };
+            mpButtonIncrement.SetCanvasRelativePosition(new Vector3(0.5f, 0.7f, 0f));
+
+            mpButtonDecrement = new Button
+            {
+                Content = new TextBlock
+                {
+                    Font = spriteFont,
+                    Text = "-",
+                    TextColor = Color.White,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                },
+                Padding = new Thickness(5, 5, 5, 5),
+                MinimumWidth = 50f,
+            };
+            mpButtonDecrement.SetCanvasRelativePosition(new Vector3(0.6f, 0.7f, 0f));
+
+            #endregion
+
+            gameRoot = new Canvas();
+            gameRoot.Children.Add(charInfo);
+            gameRoot.Children.Add(fillHP);
+            gameRoot.Children.Add(fillMP);
+
+            gameRoot.Children.Add(hpText);
+            gameRoot.Children.Add(hpButtonIncrement);
+            gameRoot.Children.Add(hpButtonDecrement);
+
+            gameRoot.Children.Add(mpText);
+            gameRoot.Children.Add(mpButtonIncrement);
+            gameRoot.Children.Add(mpButtonDecrement);
+        }
+    }
+}

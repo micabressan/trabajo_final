@@ -1,0 +1,17 @@
+>>> class L(list):
+...   def append(self, *args, **kwargs):
+...     super(L, self).append(*args, **kwargs)
+...     return self
+... 
+>>> def my_id(x):
+...     print x
+...     return id(x)
+...
+>>> id(L([1, 2, 3])) == id(L([1, 2, 3]))
+True
+>>> id(L([1, 2, 3])) == id(L([1, 2, 3]).append(1))
+True
+>>> my_id(L([1, 2, 3]).append(1)) == my_id(L([1, 2, 3]))
+[1, 2, 3, 1]
+[1, 2, 3]
+True

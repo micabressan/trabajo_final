@@ -1,0 +1,8 @@
+for (index, door) in self.doors.iter_mut().enumerate() {
+         if (index as u32 % number == 0 ) {
+            match door {
+               Door::Closed => door = Door::Open,
+               Door::Open => door = Door::Closed,
+            }
+         }
+      }

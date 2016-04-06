@@ -1,0 +1,11 @@
+; Set the API config properties based on server params.
+(defn get-param [n d]
+  (let [system_env (System/getenv n)
+        system_prop (System/getProperty n)]
+    (if-let [param (if system_env system_env system_prop)]
+      param
+      (do
+        (log/error (str "Server " n " parameter not set! Defaulting to " d))
+        d))))
+
+(api.core/set-env! (keyword (get-param "PARAM1" :dev)))

@@ -1,0 +1,18 @@
+static mut l_debug_message: Option<extern fn(Context: *mut libc::c_void,
+                                             level:   libc::c_int,
+                                             Message: *const libc::c_char)> = None;
+
+#[no_mangle]
+pub extern "C"
+fn PluginStartup( CoreLibHandle: m64p::DynlibHandle,
+                  Context:       *mut libc::c_void,
+                  DebugCallback: extern fn(Context: *mut libc::c_void,
+                                           level:   libc::c_int,
+                                           Message: *const libc::c_char))
+                  -> m64p::Error {
+    unsafe {
+        l_debug_context = Some(Context);
+        l_debug_message = Some(DebugCallback);
+    }
+    return m64p::Error::Success;
+}

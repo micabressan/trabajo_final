@@ -1,0 +1,55 @@
+boxes = [
+			{name: 'a', capacity: 100}
+			{name: 'b', capacity: 200}
+			{name: 'c', capacity: 300}
+			{name: 'd', capacity: 400}
+			{name: 'e', capacity: 500}
+			{name: 'f', capacity: 600}
+			{name: 'g', capacity: 700}
+			{name: 'h', capacity: 800}
+		]
+
+		getPayments = (money)->
+			moneyLeft = money
+			backup = _.cloneDeep(boxes)
+			availableBoxes = _.clone(boxes)
+			payments = []
+			boxBiggerThanMoney = null
+
+			getNextBiggestBox = ()->
+				box = _.max availableBoxes, 'capacity'
+				availableBoxes = _.without(availableBoxes, box)
+				box
+
+			while moneyLeft > 0
+				box = getNextBiggestBox()
+				if !_.isEmpty(box)
+					if box.capacity == moneyLeft || (box.capacity < moneyLeft && !boxBiggerThanMoney)
+						payments.push {box:box.name, money: box.capacity}
+						moneyLeft -= box.capacity
+						box.capacity = 0
+					else if box.capacity > moneyLeft
+						boxBiggerThanMoney = box
+					else if box.capacity < moneyLeft && boxBiggerThanMoney
+						box = boxBiggerThanMoney
+						payments.push {box: box.name, money: box.capacity}
+						box.capacity -= moneyLeft
+						moneyLeft = 0
+				else if _.isEmpty(box) && boxBiggerThanMoney
+					box = boxBiggerThanMoney
+					payments.push {box: box.name, money: box.capacity}
+					box.capacity -= moneyLeft
+					moneyLeft = 0
+				else
+					console.log 'IM SORRY MASTER BUT I FAILED YOU'
+					boxes = backup
+					return []
+
+
+			return payments
+
+
+
+		payments = getPayments(1000)
+		payments2 = getPayments(1000)
+		console.log 'what?', payments, payments2, boxes

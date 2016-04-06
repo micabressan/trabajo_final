@@ -1,0 +1,89 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+
+/// <summary>
+/// Helper editor class for locating object references.
+/// </summary>
+public class ReferenceFinder
+{
+	private const string SCENE_FILE_EXTENSION = ".unity";
+
+	/// <summary>
+	/// Finds references to the selected objects in the project view.
+	/// </summary>
+	[MenuItem("Assets/Find References in Project %#g", false, 29)]
+	public static void FindProjectReferences()
+	{
+		FindProjectReferences (Selection.activeObject);
+	}
+	
+	private static void FindProjectReferences (Object obj)
+	{
+		var filter = string.Empty;
+		
+		Debug.LogWarning ("looking for project references to " + obj.name, obj);
+
+		// Get GUIDs of all the assets in the asset database.
+		var allAssetGuids = AssetDatabase.FindAssets (filter);
+		List<Object> foundObjects = new List<Object> ();
+
+		var sw = System.Diagnostics.Stopwatch.StartNew ();
+
+		var numberOfAssets = allAssetGuids.Length;
+		float i = 0f;
+
+		// Iterate over all assets in the project.
+		foreach (var asset in allAssetGuids)
+		{
+			EditorUtility.DisplayProgressBar("Searching for project references", "Searching for references", i / numberOfAssets);
+
+			var path = AssetDatabase.GUIDToAssetPath (asset);
+
+			// Load asset TODO -- assuming this is a game object.
+			var currentObject = AssetDatabase.LoadAssetAtPath (path, typeof(Object));
+
+			if (currentObject != null)
+			{
+				if (path.EndsWith(SCENE_FILE_EXTENSION))
+				{
+					var scene = EditorBuildSettings.scenes.Where(s => s.path == path).FirstOrDefault();
+
+					if (scene == null || !scene.enabled)
+					{
+						continue;
+					}
+				}
+
+				var dependencies = EditorUtility.CollectDependencies (new[] { currentObject });
+
+				if (dependencies.Any (d => d == obj 
+				                      && d != currentObject 
+				                      && !foundObjects.Contains (d) 
+				                      && !foundObjects.Contains (currentObject))) 
+				{
+					foundObjects.Add (currentObject);
+				}
+			}
+
+			i++;
+		}
+
+		EditorUtility.ClearProgressBar();
+		
+		if (foundObjects.Count == 0)
+		{
+			Debug.LogWarning("No references to: " + obj.name);
+		}
+		else
+		{
+			foreach (var o in foundObjects)
+			{
+				Debug.LogWarning (o.name + " at path: " + AssetDatabase.GetAssetPath (o), o);
+			}
+		}
+		
+		Debug.LogWarning ("Completed search in: " + sw.Elapsed.ToString ());
+	}
+}

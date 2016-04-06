@@ -1,0 +1,16 @@
+ul {
+  list-style-type: none;
+}
+
+li {
+  width: 400px;
+  margin-bottom: 15px;
+  font-family: Consolas;
+}
+
+li > p {
+  height: auto;
+  word-break: keep-all;
+  width: 400px;
+  border: 1px solid black;
+}

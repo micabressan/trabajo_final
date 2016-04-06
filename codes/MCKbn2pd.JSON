@@ -1,0 +1,70 @@
+{
+    "categories": [
+        {
+            "id": "1",
+            "name": "Пицца",
+            "htmlClass": "pizzas",
+            "goods": [
+                {
+                    "id": "469",
+                    "category_id": "1",
+                    "name": "Большая Бонанза",
+                    "data": "Соус барбекю, говядина, двойной бекон, ветчина, лук, помидоры, сыр моцаррела, халапеньо, сыр фета",
+                    "image": "/uploads/catalog/bb5905b54059595b371579db0604de5a.jpg",
+                    "image_full": "/uploads/catalog/57c5637a0079414c09e72ae0d0f118d4.jpg",
+                    "weight": null,
+                    "types": [
+                        "С мясом",
+                        "Соус Барбекью",
+                        "Новинка"
+                    ],
+                    "addedIngredients": [
+                        "232",
+                        "234",
+                        "248"
+                    ],
+                    "variations": [
+                        {
+                            "id": "15617",
+                            "andromeda_id": "8270",
+                            "name": "Традиционное тесто, маленькая (23 см)",
+                            "freeSauceCount": "0",
+                            "price": "389",
+                            "doughType": "традиционное",
+                            "diameter": 23,
+                            "availableIngredients": [
+                                {
+                                    "id": "230",
+                                    "price": "69"
+                                },
+                                {
+                                    "id": "231",
+                                    "price": "69"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "15621",
+                            "andromeda_id": "8271",
+                            "name": "Традиционное тесто, средняя (30 см)",
+                            "freeSauceCount": "0",
+                            "price": "559",
+                            "doughType": "традиционное",
+                            "diameter": 30,
+                            "availableIngredients": [
+                                {
+                                    "id": "230",
+                                    "price": "79"
+                                },
+                                {
+                                    "id": "231",
+                                    "price": "79"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

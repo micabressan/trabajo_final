@@ -1,0 +1,15 @@
+;first example, this one works fine
+
+(ns foo)
+
+(defn print-extension
+	[path]		
+	(println
+		(org.apache.commons.io.FilenameUtils/getExtension path
+	))
+)
+
+;;invocation below
+;lein repl
+; (load-file "/home/john/get-extension.clj")
+;(/foo/print-extension "/home/john/get-extension.clj") ; gives "clj", it is OK.

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:SportradarData fileName="Soccer.Russia.PremierLeague.1516.PremierLeague1516.7507168" generatedAt="2015-08-22T16:00:20.999+02:00" serviceId="9" serviceName="schedulesandresult" updateType="delta" xmlns:ns2="http://xmlexport.scoreradar.com/V1">
+    <Sport id="1" name="Soccer">
+        <Translation key="name">
+            <TranslatedValue lang="ru" value="Футбол"/>
+        </Translation>
+        <Category id="21" name="Russia">
+            <Translation key="name">
+                <TranslatedValue lang="ru" value="Россия"/>
+            </Translation>
+            <Tournament id="53" name="Premier League" stageType="Main stage of tournament" uniqueTournamentId="203">
+                <Translation key="name">
+                    <TranslatedValue lang="ru" value="Премьер-Лига"/>
+                </Translation>
+                <Season end="2016-06-06T23:59:00+02:00" id="10512" name="Premier League 15/16" start="2015-07-16T00:00:00+02:00" year="15/16">
+                    <Translation key="name">
+                        <TranslatedValue lang="ru" value="Премьер Лига 15/16"/>
+                    </Translation>
+                </Season>
+                <UniqueTournament description="Highest division in the Russian football league" name="Premier League" id="203">
+                    <Translation key="name">
+                        <TranslatedValue lang="ru" value="Премьер Лига"/>
+                    </Translation>
+                </UniqueTournament>
+                <Leagues>
+                    <League description="Premier League 15/16" end="2016-05-23T23:59:00+02:00" numberofteams="16" presentationId="0" round="0" seasondescription="Main stage of tournament" seasontype="21" start="2015-07-16T00:00:00+02:00" tableId="17880" tournamentid="53"/>
+                </Leagues>
+                <Matches>
+                    <Match AAMSMatchId="18362.2" dateOfMatch="2015-08-22T14:00:00+02:00" id="7507168" neutralGround="false" toBeConfirmed="false">
+                        <Roundinfo round="6"/>
+                        <Teams>
+                            <Team gender="M" name="FC Amkar Perm" betradarTeamId="316989" type="1" id="2332">
+                                <Translation key="name">
+                                    <TranslatedValue lang="ru" value="ФК Амкар Пермь"/>
+                                </Translation>
+                            </Team>
+                            <Team gender="M" name="FC Spartak Moscow" betradarTeamId="33765" type="2" id="2323">
+                                <Translation key="name">
+                                    <TranslatedValue lang="ru" value="Спартак Москва"/>
+                                </Translation>
+                            </Team>
+                        </Teams>
+                        <Result canceled="false" postponed="false">
+                            <Comment>0:1 (20.) Y.Movsisyan, 0:2 (66.) Q.Promes, 0:3 (72.) Q.Promes, 1:3 (78.) J.Gol</Comment>
+                            <Score orderById="0" type="FT" value="1:3"/>
+                            <Score orderById="1" type="HT" value="0:1"/>
+                        </Result>
+                    </Match>
+                </Matches>
+            </Tournament>
+        </Category>
+    </Sport>
+</ns2:SportradarData>

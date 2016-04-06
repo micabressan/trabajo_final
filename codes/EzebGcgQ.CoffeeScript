@@ -1,0 +1,167 @@
+base = require './base'
+str_parser = require './string_parser'
+moment = require 'moment-timezone'
+
+class Crawler extends base.Base
+  timezone: 'America/Los_Angeles'
+  onlyDaily: true
+
+  loginURL: 'https://sso.openx.com/login/process'
+  loginURL2: 'http://ox-ui.studybreakmedia.servedbyopenx.com/ox/4.0/session'
+  @website: true
+  total = []
+  ad_tag_per_site = 0
+  ad_tag_count = 0
+  ad_tag_total_count = 0
+  accountId = "" 
+
+  init: () ->
+    @loginForm =
+      email: @username
+    @timezonePrepare()
+
+
+  process_get_account_id: (err, resp, body, cb) ->
+    accountURL = "http://ox-ui.studybreakmedia.servedbyopenx.com/ox/4.0/account"
+    @request accountURL, (err, resp, body) =>
+      accountData = JSON.parse resp.body
+      @accountId = accountData.objects[1].uid
+      console.log @accountId
+      sitesURL = "http://ox-ui.studybreakmedia.servedbyopenx.com/ox/4.0/site?account_uid=#{@accountId}&status=Active&sort=name&overload=medium&offset=0&limit=500"
+      #console.log sitesURL
+      @request sitesURL, (err, resp, body) =>
+        sitesData = JSON.parse resp.body
+        #console.log sitesData
+        row_init = 0
+        for record of sitesData.objects
+          @ad_tag_per_site = 0
+          site_id = sitesData.objects[row_init].uid
+          namesite = sitesData.objects[row_init].name
+          console.log site_id
+          adunitURL = "http://ox-ui.studybreakmedia.servedbyopenx.com/ox/4.0/adunit?site_id=#{site_id}&status=Active&sort=name&overload=medium&offset=0&limit=500" 
+          @process_get_adunit adunitURL, namesite, err, resp, body, cb
+          row_init++ 
+
+  process_get_adunit: (adunitURL, namesite, err, resp, body, cb) ->
+    json = "olololo"
+    @request adunitURL, (err, resp, body) =>
+      adunitData = JSON.parse resp.body
+      row = 0
+      ad_tag_total_count += +adunitData.objects.length
+      for record of adunitData.objects 
+        uid = adunitData.objects[row].uid
+        name = adunitData.objects[row].name
+        ssdd = @process_get_adtag err, resp, body, row, uid, adunitData, name, namesite, cb           
+        row++ 
+  
+  process_get_adtag: (err, resp, body, row, uid, adunitData, name, namesite, cb) ->
+    adtagURL = "http://ox-ui.studybreakmedia.servedbyopenx.com/ox/4.0/adunit/performance/#{uid}?start_date={start_days_ago}&end_date={end_days_ago}"
+    adtagURL = adtagURL.replace /{start_days_ago}/, @daysAgo(@start_date)
+    adtagURL = adtagURL.replace /{end_days_ago}/, @daysAgo(@end_date)    
+    uid = adunitData.objects[row].uid   
+    @request adtagURL, (err, resp, body) =>     
+      adtagData = JSON.parse resp.body
+      @extract adunitData, adtagData, uid, name, namesite, cb, err, resp
+
+  run: (cb) ->
+    @login (err, resp, body) =>
+      @headers['oauth-assist'] = true
+      @request @loginURL2, {method: 'PUT', form: {oob: true, oauth_callback_url: 'http://ox-ui.studybreakmedia.servedbyopenx.com/#ready?'}}, (err, resp, body) =>
+        linkWithToken = body
+        @request linkWithToken, method: 'POST', (err, resp, body) =>
+          authVerifier = resp.headers['location']
+          authVerifier = authVerifier.replace '#ready?', 'ox/4.0/ready?'
+          @request authVerifier, (err, resp, body) =>
+            @process_get_account_id err, resp, body, cb
+            
+  extract: (adunitData, adtagData, uid, name, namesite, cb, err, resp) ->
+    data = {}
+    
+    reportData =
+      impressions: 0
+      cpm: 0
+      revenue: 0
+      requests: 0
+      fill_rate: 0
+      currency: 0
+
+    impressions_total = 0
+    revenue_total = 0
+    clicks_total = 0
+    conversions_total = 0
+    requests_total = 0
+    fill_rate_total = 0
+    cpm_total = 0
+    
+    row = 0
+    for record of adtagData.content
+      try
+        clicks = adtagData.content[row].click
+      catch error
+        clicks = null
+      try
+        impressions = adtagData.content[row].imp
+      catch error
+        impressions = null
+      try
+        revenue = adtagData.content[row].rev
+      catch error
+        revenue = null
+      try
+        conversion = adtagData.content[row].conv
+      catch error
+        conversion = null  
+      try
+        requests = adtagData.content[row].req 
+      catch error
+        requests = null
+      
+      row++
+     
+      impressions_total += +impressions
+      revenue_total  += +revenue
+      clicks_total += +clicks
+      conversions_total += +conversion
+      requests_total += +requests
+
+      if requests_total != 0 && requests_total != null
+        fill_rate_total = impressions_total / requests_total
+      else
+        fill_rate_total = null
+
+      if impressions_total != 0 && impressions_total != null
+        cpm_total = (revenue_total * 1000) / impressions_total
+      else
+        cpm_total = null  
+    
+      detailed =
+        ad_uid: uid
+        ad_tag: name
+        website: namesite
+        clicks:  clicks_total
+        impressions:  impressions_total
+        requests:  requests_total
+        revenue:  revenue_total
+        conversion: conversions_total
+        fill_rate: fill_rate_total
+        cpm: cpm_total
+        currency: "USD"
+    
+    if ad_tag_per_site == (adunitData.objects.length - 1)
+      ad_tag_per_site = 0 
+    else
+      ad_tag_per_site++
+    
+    total.push detailed
+    reportData.detailed = total
+    console.log detailed
+    ad_tag_count++
+    if ad_tag_count == ad_tag_total_count
+      console.log reportData
+      cb reportData
+
+  daysAgo: (date) ->
+    1 + Math.floor (new Date - moment(date).endOf('day')) / 24 / 60 / 60 / 1000
+
+module.exports =
+  Crawler: Crawler

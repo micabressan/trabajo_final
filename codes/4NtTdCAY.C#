@@ -1,0 +1,130 @@
+IPlayer[] plys;
+IPlayer Bot;
+SizeableType  size;
+int test =0;
+int i=0;
+IObject ItemSpawners; 
+
+bool fire = false;
+Random rnd = new Random();
+Vector2 position; 
+Vector2 LastRegistered = Vector2.Zero;
+
+bool jump = false;
+List<IPlayer> BotList = new List<IPlayer>();
+IPlayer[] Bots = new IPlayer[8];
+
+public void OnStartup() {
+
+
+	 for(int i=0;i<2;i++) {
+		Game.ShowPopupMessage(i.ToString());
+		Bots[i] = Game.CreatePlayer(new Vector2(-50f,0f));
+		Bots[i].SetBotType(BotType.TutorialA);
+		BotList.Add(Bots[i]);
+	} 
+
+	/* foreach(IPlayer ply in Game.GetPlayers()) {
+
+	IPlayer Bot1 = Game.CreatePlayer(new Vector2(-50f,0f));
+	Bot1.SetBotType(BotType.TutorialA);
+	BotList.Add(Bot1);
+	} */
+
+	Game.ShowPopupMessage(Game.GetPlayers().Length.ToString());
+
+	//CreateTimer(100, 0, "Firing", "");
+	// CreateTimer(10, 0, "CheckItem", "");
+	CreateTimer(500, 0, "Jump", "");
+	// CreateTimer(100,0,"Velocity","");
+
+
+}
+
+public void Velocity(TriggerArgs args) {
+
+	//Game.ShowPopupMessage(Game.GetPlayers()[0].GetAngularVelocity().ToString());
+	//Game.ShowPopupMessage(Game.GetPlayers()[0].GetLinearVelocity().ToString());
+	//updateText("VelocityUpdate1",Game.GetPlayers()[0].GetLinearVelocity().ToString());
+	// foreach (IPlayer Bot in Game.GetPlayers()) Bot.RunToPosition(Game.GetPlayers()[0].GetWorldPosition(),1);
+
+}
+
+/* public void CheckItem(TriggerArgs args){
+
+
+	if(( ( Bot.GetWorldPosition() ) - ( ItemSpawners.GetWorldPosition() )).LengthSquared() < 200 ) {
+		//ItemSpawners.Remove();
+	}
+
+
+} */
+
+public void Jump(TriggerArgs args){
+  
+	foreach(IPlayer Test in BotList) {
+	position = Test.GetWorldPosition();
+  	if (LastRegistered == position && !Test.IsMeleeAttacking && !Test.IsDead && fire == false) {
+		jump = true;	
+   		Test.SetLinearVelocity(new Vector2(5f*Test.FacingDirection,8f));
+  	}
+  	LastRegistered = position;
+	jump = false;	
+	}
+}
+
+public void Firing(TriggerArgs args){
+
+
+		IPlayerStatistics stat = Bot.Statistics;
+
+		if (test < stat.TotalProjectilesHitBy  && !Game.IsGameOver){
+		
+			 //Bots.Gib();
+			foreach (IObject obj in Game.GetObjectsByCustomId("TurretTimer"))  obj.Remove();
+			fire = true;
+			IObjectTimerTrigger Turret = (IObjectTimerTrigger)Game.CreateObject("TimerTrigger"); 
+    			Turret.SetIntervalTime(300); // let it tick each second
+    			Turret.SetRepeatCount(6); 
+   			Turret.SetScriptMethod("Turret"); // Method to call
+			Turret.CustomId = "TurretTimer";
+    			Turret.Trigger();  
+
+		}	
+		test = stat.TotalProjectilesHitBy;
+}
+
+public void Turret(TriggerArgs args){
+
+	if(!Game.IsGameOver && jump == false) {
+
+		Bot.SetBotType(BotType.None);
+		Vector2 aim = Game.GetPlayers()[rnd.Next(Game.GetActiveUsers().Length-1)].GetWorldPosition();
+		int face = (aim.X-Bot.GetWorldPosition().X > 0 )? 1 : -1;
+		Vector2 Start = new Vector2(face*8f,8f) + Bot.GetWorldPosition();
+		Game.SpawnProjectile(ProjectileItem.PISTOL,Start, aim-Start);
+			if( i%6 == 0 )  {
+			Bot.SetBotType(BotType.TutorialA);
+			fire = false;
+			i=1;
+			}
+	Game.ShowPopupMessage(i.ToString());
+	i++;
+
+	}
+}
+
+// create timer trigger
+private void CreateTimer(int interval, int count, string method, string id) {
+	IObjectTimerTrigger timerTrigger = (IObjectTimerTrigger)Game.CreateObject("TimerTrigger"); 
+	timerTrigger.SetIntervalTime(interval);
+	timerTrigger.SetRepeatCount(count);
+	timerTrigger.SetScriptMethod(method);
+	timerTrigger.CustomId = id;
+	timerTrigger.Trigger();
+}
+
+//Update Text
+public void updateText(String label, String text){
+	((IObjectText)Game.GetSingleObjectByCustomId(label)).SetText(text);
+}

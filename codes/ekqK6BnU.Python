@@ -1,0 +1,164 @@
+#!/usr/bin/env python
+import sys
+import re
+from os import listdir
+from os.path import isfile, join, realpath, basename
+
+def getQueryTypeForFileName(fileName, format):
+    split = re.split(format, fileName)
+    return split[0][:-1]
+
+def getFormatForFileName(fileName):
+    split = re.split("_",fileName)
+    coltype = re.split(".dat",  split[len(split)-1])[0]
+    return coltype
+
+def writeCSV(fileName, matrix):
+    with open(fileName, 'w+') as f:
+        for r in matrix:
+            for c in r:
+                if c == r[0]:
+                    f.write(str(c))
+                else:
+                    f.write(", " + str(c))
+            f.write("\n")
+
+# Create a CSV describing performance for each format for a particular query
+def createCSVForQuery(files, query, outpath):
+    fileByFormat= dict()
+    dataByFormat = dict()
+
+    for fpath in [n[0] for n in files.values()]:
+        format = getFormatForFileName(basename(fpath))
+        print("Format:" + format)
+        q = getQueryTypeForFileName(basename(fpath), format)
+        if( q == query ):
+            if format in fileByFormat.keys():
+                raise Exception("Duplicate file for format {0}".format(format))
+            fileByFormat[format] = fpath
+        else:
+            print("No such query " + q)
+
+
+    for format, fpath in fileByFormat.iteritems():
+        dataByFormat[format] = list()
+        with open(fpath) as f:
+            for line in f.readlines():
+                if(line[0] != "#" and len(line.strip("\n")) > 0):
+                    dataByFormat[format].append(re.split(":", line.strip("\n"))[1])
+
+    rows = [dataByFormat.keys()]
+    length = max([len(dataByFormat[key]) for key in dataByFormat.keys()])
+
+    for i in range(0, length):
+        l = list()
+        for key in dataByFormat.keys():
+             l.append(dataByFormat[key][i].strip())
+        rows.append(l)
+
+
+    writeCSV(outpath + "/" + query + ".csv", rows)
+
+
+# Create a CSV containing the values for each query for a particular format
+def createCSVForFormat(format, files, outpath):
+    fileByQuery = dict()
+    dataByQuery = dict()
+    for fpath in files:
+        query = getQueryTypeForFileName(basename(fpath), format)
+        fileByQuery[query] = fpath;
+    for key in fileByQuery.keys():
+        dataByQuery[key] = list()
+    for key in fileByQuery.keys():
+        with open(fileByQuery[key]) as f:
+            for line in f.readlines():
+                if(line[0] != "#" and len(line.strip("\n")) > 0):
+                    dataByQuery[key].append(re.split(":", line.strip("\n"))[1])
+    rows = [dataByQuery.keys()]
+
+    length = max([len(dataByQuery[key]) for key in dataByQuery.keys()])
+
+    for i in range(0, length):
+        l = list()
+        for key in dataByQuery.keys():
+             l.append(dataByQuery[key][i].strip())
+        rows.append(l)
+
+    writeCSV(outpath + "/" + format + ".csv", rows)
+
+def appendFile(inFileDict, qtype, file):
+    if qtype not in inFileDict.keys():
+        inFileDict[qtype] = [file]
+    else:
+        inFileDict[qtype].append(file)
+
+def loadFilesForQuery(inpath, outpath, query):
+    regex = query + "_[A-Z]*\.dat$"
+
+    onlyfiles = [f for f in listdir(inpath) 
+                if isfile(join(inpath,f)) and 
+                f[0] != '.' and 
+                re.match(regex, f)]
+    print regex
+
+    inFileDict = dict()
+    for f in onlyfiles:
+        format = getFormatForFileName(f)
+        print(format)
+       # qtype = getQueryTypeForFile(f, format)
+        appendFile(inFileDict, format, join(inpath,f))
+    createCSVForQuery(inFileDict, query, outpath)
+
+def loadFilesForFormat(inpath, outpath, form):
+
+    if(form != None):
+        regex = ".*_" + form + "\.dat$"
+    else:
+        regex = ".*_[A-Z]*\.dat$"
+    
+    onlyfiles = [f for f in listdir(inpath) 
+                if isfile(join(inpath,f)) and 
+                f[0] != '.' and 
+                re.match(regex, f)]
+    print regex
+    inFileDict = dict()
+
+    for f in onlyfiles:
+        format = getFormatForFileName(f)
+       # qtype = getQueryTypeForFile(f, format)
+        appendFile(inFileDict, format, join(inpath,f)) 
+
+    for key in inFileDict.keys():
+        createCSVForFormat(key, inFileDict[key], outpath)
+
+def main():
+    query = None
+    inpath = None
+    outpath = None
+    form = None
+    xn = iter(xrange(len(sys.argv)))
+    for n in xn:
+        if(sys.argv[n] == "-q"):
+            query = sys.argv[n+1] 
+            next(xn) 
+        elif(sys.argv[n] == "-i"):
+            inpath = sys.argv[n+1] 
+            next(xn)
+        elif(sys.argv[n] == "-o"):
+            outpath = sys.argv[n+1] 
+            next(xn)
+        elif(sys.argv[n] == "-f"):
+            form = sys.argv[n+1]
+            next(xn)
+
+    #    loadFilesByFormat(sys.argv[1])
+    if(inpath == None or outpath == None):
+        print("Bad arguments")
+        sys.exit(1)
+
+    if(query):
+        loadFilesForQuery(inpath, outpath, query)
+    else:
+        loadFilesForFormat(inpath, outpath, form)
+
+main()

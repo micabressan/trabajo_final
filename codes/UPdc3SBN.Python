@@ -1,0 +1,39 @@
+import random
+
+defa = [3, 3] #(Canni, Misso)
+defb = [0, 0]
+a = defa
+b = defb
+
+m = [[0, 1], [1, 0], [1, 1], [2, 0], [0, 2]]
+
+while b != [3, 3]:
+    if (a[1] > 0 and a[0] > a[1]) or (b[1] > 0 and b[0] > b[1]):
+        print "-" * 6 + "dayum"
+        a = defa
+        b = defb
+        continue
+    s = random.randrange(len(m))
+    while m[s][0] > a[0] or m[s][1] > a[1]:
+        s = random.randrange(len(m))
+    
+    print "Send:", m[s]
+    a = map(lambda x, y: x - y, a, m[s])
+    b = map(lambda x, y: x + y, b, m[s])
+    
+    if (a[1] > 0 and a[0] > a[1]) or (b[1] > 0 and b[0] > b[1]):
+        print "-" * 6 + "dayum"
+        a = defa
+        b = defb
+        continue
+
+    s = random.randrange(len(m))
+    while m[s][0] > b[0] or m[s][1] > b[1]:
+        s = random.randrange(len(m))
+    print "Rec:", m[s] 
+    a = map(lambda x, y: x + y, a, m[s])
+    b = map(lambda x, y: x - y, b, m[s])
+
+    print a, b
+
+print "done"

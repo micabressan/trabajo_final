@@ -1,0 +1,35 @@
+Const HKLM   = &h80000002
+Const HKCU   = &H80000001
+Const DELETE = &h10000
+
+Set sh = CreateObject("WScript.Shell")
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+CurrentDirectory = fso.GetAbsolutePathName(".")
+temploc = sh.ExpandEnvironmentStrings("%temp%")
+
+Set reg = GetObject("winmgmts://./root/default:StdRegProv")
+reg.CheckAccess HKLM, "SYSTEM\CurrentControlSet", DELETE, isAdmin
+
+If Not isAdmin Then
+  ' Copie du BMP et du fichier REG vers le dossier temporaire
+  sourceBMPfile = fso.buildpath(CurrentDirectory, "manufacturer.bmp")
+  sourceREGfile = fso.buildpath(CurrentDirectory, "iconesetlogo.reg")
+  fso.CopyFile sourceBMPfile, temploc & "\"
+  fso.CopyFile sourceREGfile, temploc & "\"  
+  If WScript.Arguments.Count = 0 Then
+    ' Ouverture du script avec élévation de privilèges
+    CreateObject("Shell.Application").ShellExecute WScript.FullName, _
+      Chr(34) & WScript.ScriptFullName & Chr(34) & " uac", _
+      sh.CurrentDirectory, "runas", 1
+    WScript.Quit 0
+  Else
+    WScript.Echo "Privilege elevation failed!"
+    WScript.Quit 1
+  End If
+Else
+  ' Si le script dispose des privilèges
+  ' J effectue les opérations que je veux MAIS
+  ' On ne peut pas passer de variable d'execution path lorsqu'on passe en UAC admin
+  ' vu qu'il prendra par défaut %System32%
+End If

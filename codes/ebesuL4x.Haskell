@@ -1,0 +1,22 @@
+map f' = foldr(\x xs->(f x:xs))[]
+
+split = foldr(\x (xs,ys)->if(odd x) then (x:xs, ys) else (xs, x:ys))([],[])
+
+pow a b = foldr (*) 1 (replicate b a)
+
+quicksort[]=[]
+quicksort(x:xs)= quicksort small ++ [x] ++ quicksort large
+	where
+		small = [y | y<-xs, y<=x]
+		large = [y | y<-xs, y>x]
+
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys)= if x<=y
+					then x:merge xs (y:ys)
+					else y:merge (x:xs) ys
+
+mergesort [] = []
+mergesort [x] = [x]
+mergesort xs = let (as,bs) = splitAt (length xs "quot" 2) xs
+				in merge (mergesort as)(mergesort bs)

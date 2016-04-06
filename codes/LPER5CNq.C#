@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+
+class SomePrimesRange
+{
+    static void Main()
+    {
+
+        for (int i = 2; i < 260; i++)
+        {
+            if (i % 2 == 0)
+            {
+
+            }
+            else if (i % i == 0)
+            {
+                Console.WriteLine(i);
+            }
+            List<int> numbers = new List<int>(260);
+            numbers.Add(i);
+            foreach (int a in numbers)
+            {
+                Console.WriteLine("Enter a position:");
+                int position = int.Parse(Console.ReadLine());
+                Console.WriteLine(position);
+            }
+        }
+    }
+}

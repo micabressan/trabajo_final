@@ -1,0 +1,33 @@
+from evennia import default_cmds
+from evennia.contrib.menusystem import *
+from character import setup_stats
+from world import rulebook
+
+
+class CmdSetStats(default_cmds.MuxCommand):
+    """ sets the priority of the primary attributes of the character and allows for 25 randomly generated rolls
+    """
+
+    key = "setstats"
+    locks = "cmd:all()"
+
+    def OnYes(self, _):
+        setup_stats(self, priority)
+        break
+
+    def OnNo(self, _):
+        rolls = rolls - 1
+        return "you have " + str(rolls) + " rolls remaining"
+    
+    def func(self):
+        message = "Runaria uses a method of rolling the dice to create player attributes. These attributes are: strength, dexterity, constitution, intelligence, wisdom, and charisma. Choose the order of your attributes from the most important to your character to the least important.\n\nAn example is as follows: strength dexterity constitution intelligence wisdom charisma\n\nYou will only be able to roll 25 times, so when you see a decent roll you should accept it."
+        caller = self.caller
+        rolls = 25
+        self.caller.msg(message)
+        priority = input('Enter your attribute order: ')
+        while rolls > 0:
+            roll_stat(6)
+            prompt_yesno(self.caller, question="Do you wish to keep this roll?",
+                        yesfunc=self.OnYes,
+                        nofunc=self.OnNo,
+                        default="N")

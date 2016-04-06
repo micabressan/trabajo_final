@@ -1,0 +1,31 @@
+# ======================================================================
+# >> IMPORTS
+# ======================================================================
+# Source Python
+from events.hooks import pre_event_manager
+from events import Event
+
+from entities.entity import Entity
+from players.helpers import playerinfo_from_userid
+
+
+def load():
+    pre_event_manager.register_for_event('player_spawn', pre_player_spawn)
+
+def unload():
+    pre_event_manager.unregister_for_event('player_spawn', pre_player_spawn)
+    
+def pre_player_spawn(args):
+    userid = args.get_int("userid")
+    
+    name = playerinfo_from_userid(userid).get_name()
+    
+    print(userid, name)
+    
+@Event("player_spawn")
+def player_spawn(args):
+    userid = args.get_int("userid")
+
+    name = playerinfo_from_userid(userid).get_name()
+    
+    print(name, userid)

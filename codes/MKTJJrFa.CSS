@@ -1,0 +1,50 @@
+.start-bg.bg-1, .start-bg.bg-2, .start-bg.bg-3, .start-bg.bg-4 {
+  position: fixed;
+  height: 150%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.start-bg.bg-1 {
+  background: radial-gradient(rgba(62, 137, 189, 1) 0%, rgba(62, 137, 189, 0) 70%);
+  -webkit-animation: spin 6000ms infinite linear;
+}
+.start-bg.bg-2 {
+  background: radial-gradient(rgba(44, 53, 98, 1) 0%, rgba(44, 53, 98, 0) 70%);
+  -webkit-animation: spin 22000ms infinite linear;
+  margin-left: -82%;
+}
+.start-bg.bg-3 {
+  background: radial-gradient(rgba(157, 87, 176, 1) 0%, rgba(157, 87, 176, 0) 70%);
+  -webkit-animation: spin 15000ms infinite linear;
+  margin-top: -52%;
+  margin-left: -10%;
+}
+.start-bg.bg-4 {
+  background: radial-gradient(rgba(78, 133, 209, 0.7) 0%, rgba(78, 133, 209, 0) 70%);
+  -webkit-animation: spin 18000ms infinite linear;
+  margin-left: 23%;
+  width: 150%;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}

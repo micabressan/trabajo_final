@@ -1,0 +1,72 @@
+ant -f C:\\Users\\USER\\Documents\\NetBeansProjects\\Innovation jfxsa-run
+init:
+Deleting: C:\Users\USER\Documents\NetBeansProjects\Innovation\build\built-jar.properties
+deps-jar:
+Updating property file: C:\Users\USER\Documents\NetBeansProjects\Innovation\build\built-jar.properties
+Compiling 1 source file to C:\Users\USER\Documents\NetBeansProjects\Innovation\build\classes
+compile:
+Detected JavaFX Ant API version 1.3
+Launching <fx:jar> task from C:\Program Files\Java\jdk1.8.0_45\jre\..\lib\ant-javafx.jar
+Warning: From JDK7u25 the Codebase manifest attribute should be used to restrict JAR repurposing.
+         Please set manifest.custom.codebase property to override the current default non-secure value '*'.
+Launching <fx:deploy> task from C:\Program Files\Java\jdk1.8.0_45\jre\..\lib\ant-javafx.jar
+jfx-deployment-script:
+jfx-deployment:
+jar:
+Copying 12 files to C:\Users\USER\Documents\NetBeansProjects\Innovation\dist\run571875679
+jfx-project-run:
+Executing C:\Users\USER\Documents\NetBeansProjects\Innovation\dist\run571875679\Innovation.jar using platform C:\Program Files\Java\jdk1.8.0_45\jre/bin/java
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1770)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1653)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3471)
+	at javafx.scene.Scene$ClickGenerator.access$8100(Scene.java:3399)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3767)
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3486)
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2495)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:350)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:275)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$350(GlassViewEventHandler.java:385)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$86/364705965.get(Unknown Source)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:404)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:384)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
+	at com.sun.glass.ui.View.notifyMouse(View.java:927)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$145(WinApplication.java:101)
+	at com.sun.glass.ui.win.WinApplication$$Lambda$36/1963387170.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at sun.reflect.misc.Trampoline.invoke(MethodUtil.java:71)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at sun.reflect.misc.MethodUtil.invoke(MethodUtil.java:275)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1765)
+	... 31 more
+Caused by: java.lang.NullPointerException: Input stream must not be null
+	at javafx.scene.image.Image.validateInputStream(Image.java:1109)
+	at javafx.scene.image.Image.<init>(Image.java:694)
+	at innovation.FXMLDocumentController.checkResult(FXMLDocumentController.java:52)
+	at innovation.FXMLDocumentController.selectBlue(FXMLDocumentController.java:40)
+	... 41 more
+Deleting directory C:\Users\USER\Documents\NetBeansProjects\Innovation\dist\run571875679
+jfxsa-run:
+BUILD SUCCESSFUL (total time: 9 seconds)

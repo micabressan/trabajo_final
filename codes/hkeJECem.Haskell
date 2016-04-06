@@ -1,0 +1,34 @@
+import Control.Monad.ST
+import Control.Monad.Reader
+import qualified Data.HashTable.ST.Basic as H
+
+type HT s = H.HashTable s Int Int
+type CST s = ReaderT (HT s) (ST s)
+
+fibCore :: Int -> Int -> CST s Int
+fibCore n base = do
+  if (n == 1) || (n == 2)
+    then return 1
+    else do
+      u <- fibCoreCached (n - 1) base
+      v <- fibCoreCached (n - 2) base
+      return (mod (u + v) base)
+
+fibCoreCached :: Int -> Int -> CST s Int
+fibCoreCached n base = do
+  cache <- ask
+  x <- lift (H.lookup cache n)
+  case x of
+    Just t -> return t
+    Nothing -> do
+      r <- fibCore n base
+      lift (H.insert cache n r)
+      return r
+
+fib :: Int -> Int -> Int
+fib n base = runST $ do
+  cache <- H.new
+  (flip runReaderT) cache $ fibCoreCached n base
+  
+main :: IO()
+main = putStrLn (show (fib 10000000 999983))

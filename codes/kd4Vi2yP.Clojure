@@ -1,0 +1,9 @@
+;params {:af_token "aetrn...." :answer_correct_1 "on" :answer_correct_3 "on" ...(some more key/val pairs)}
+
+(reduce
+      (fn [a b]
+        (let [id-correct (keyword (str "answer_correct_" b))]
+          (if (id-correct params)
+            (conj a {:question_id q-id :user_id user-id :answer_id (id-correct params)})
+            a)))
+      [] (range 1 11))

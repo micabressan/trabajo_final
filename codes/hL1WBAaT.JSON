@@ -1,0 +1,19 @@
+{
+    books: [
+        {
+            id: 32411
+            title: "Anatomy: Dr. Arivu Selvan",
+            status: "IN_CHECKOUT"
+            date: 1439189917
+        }
+    ],
+
+    courses: [
+        {
+            id: 32411
+            title: "Anatomy: Dr. Arivu Selvan",
+            status: "COMPLETED"
+            date: 1439189917
+        }
+    ]
+}

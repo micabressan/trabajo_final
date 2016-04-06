@@ -1,0 +1,18 @@
+public class Kata
+{
+	public static Object PlayerRankUp(int points)
+	{
+		object value;
+
+		if (points >= 100)
+		{
+			value = "Welcome....";
+		}
+		else 
+		{
+			value = false;
+		}
+
+		return value;
+	}
+}

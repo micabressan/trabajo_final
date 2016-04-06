@@ -1,0 +1,35 @@
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
+module Test where
+
+data Foo1 = Foo1
+data Bar1 = Bar1
+
+data Foo2 = Foo2
+data Bar2 = Bar2
+
+type family DataTo2 a where
+  DataTo2 Foo1 = Foo2
+  DataTo2 a = Bar2
+
+class To2 a where
+  to2 :: a -> DataTo2 a
+instance To2 Foo1 where
+  to2 Foo1 = Foo2
+instance To2 Bar1 where
+  to2 Bar1 = Bar2
+
+class ToString a where
+  toString :: a -> String
+instance ToString Foo1 where
+  toString Foo1 = "overlapping Foo1"
+instance ToString Foo2 where
+  toString Foo2 = "Foo2"
+instance ToString Bar2 where
+  toString Bar2 = "Bar2"
+instance {-# OVERLAPPABLE #-} To2 a => ToString a where
+  toString = toString . to2
+
+main :: IO ()
+main = putStrLn $ toString Foo1

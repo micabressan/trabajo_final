@@ -1,0 +1,62 @@
+#####PROGRAMME CREATED BY GIORGOS NIKITOPOULOS#####
+
+
+import math
+from sets import Set
+from itertools import combinations
+
+
+#declare the numbers
+
+#Do the opperations
+results = Set([0])
+combinations = Set([])
+
+from itertools import permutations 
+
+for item in permutations(range(10), 3): 
+    combinations.add(item)
+while 0 == 0:
+    elem = combinations.pop()
+    a = elem[0]
+    b = elem[1]
+    c = elem[2]
+
+
+    results.add(a + b + c)
+    results.add(a + b * c)
+    results.add(a + b - c)
+    results.add(a + b ^ c)
+    if c != 0:
+        results.add(a + b / c)
+    results.add(a - b + c)
+    results.add(a - b * c)
+    results.add(a - b - c)
+    results.add(a - b ^ c)
+    if c !=0: 
+        results.add(a - b / c)
+
+    results.add(a * b + c)
+    results.add(a * b * c)
+    results.add(a * b - c)
+    results.add(a * b ^ c)
+    if c != 0:
+        results.add(a * b / c)
+    if b != 0:
+        results.add(a / b + c)
+        results.add(a / b * c)
+        results.add(a / b - c)
+        results.add(a / b ^ c)
+    if b and a and c != 0:
+        results.add(a / b / c)
+    results.add(a ^ b + c)
+    results.add(a ^ b * c)
+    results.add(a ^ b - c)
+    results.add(a ^ b ^ c)
+    if c != 0:
+        results.add(a ^ b / c)
+    print(elem)
+    print(sorted(results))
+
+    results = Set([0])
+#THIS WILL CREATE THE LIST ON THE PASTEBIN BELLOW#

@@ -1,0 +1,13 @@
+on chat:
+    replace all "fuck", "bitch" and "ass" with "derp" in the message
+    if player has permission "rank.developer":
+    	set message to "§a%message%"
+    if player has permission "rank.moderator":
+    	set message to "§9%message%"
+    	replace all "&" with "§" in the message
+    if player has permission "rank.admin":
+    	set message to "§6%message%"
+    	replace all "&" with "§" in the message
+    if player has permission "rank.owner":
+    	set message to "§c%message%"
+    	replace all "&" with "§" in the message

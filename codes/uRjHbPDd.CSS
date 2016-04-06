@@ -1,0 +1,147 @@
+#WikiaArticle.WikiaArticle {
+    width: 100%;
+}
+
+#WikiaPageHeader.WikiaPageHeader .header-column.header-tally {
+	width: 200px;
+}
+
+#WikiaPageHeader.WikiaPageHeader #PageShareContainer {
+	float: left;
+}
+
+.wikia-menu-button,
+.wikia-button,
+.control-button {
+	background: none !important;
+	border: 1px solid #ccc !important;
+	padding: 2px 2px 3px 4px !important;
+	width: auto !important;
+}
+
+.control-button {
+	padding: 2px 2px 0 4px !important;
+}
+
+.EditPage .module_page_controls .control-button.even {
+	float: initial !important;
+	margin-left: 6px !important;
+	padding: 1px 11px 2px !important;
+	height: auto !important;
+	font-weight: bold !important;
+	font-size: 13px !important;
+	color: #888 !important;
+}
+
+.wikia-menu-button:hover,
+.wikia-button:hover,
+.control-button:hover {
+	background: none !important;
+	background-color: rgba(219,204,67,.25) !important;
+}
+
+.wikia-menu-button a,
+.wikia-menu-button input,
+.wikia-menu-button button,
+.wikia-button a,
+.wikia-button input,
+.wikia-button button,
+.control-button a,
+.control-button input,
+.control-button button {
+	color: #6f6e6e !important;
+	font-weight: bold !important;
+	font-size: 13px !important;
+	background: none !important;
+	border: none !important;
+	width: auto !important;
+}
+
+.wikia-menu-button a:hover,
+.wikia-menu-button input:hover,
+.wikia-menu-button button:hover,
+.wikia-button a:hover,
+.wikia-button input:hover,
+.wikia-button button:hover,
+.control-button a:hover,
+.control-button input:hover,
+.control-button button:hover {
+	background: none !important;
+}
+
+.wikia-menu-button a img,
+.wikia-menu-button input img,
+.wikia-menu-button button img,
+.wikia-button a img,
+.wikia-button input img,
+.wikia-button button img,
+.control-button a img,
+.control-button input img,
+.control-button button img {
+	display: none !important;
+}
+
+.wikia-menu-button .drop,
+.wikia-button .drop,
+.control-button .drop {
+	background: none !important;
+	border-left: none !important;
+}
+
+.wikia-menu-button .drop:hover,
+.wikia-button .drop:hover,
+.control-button .drop:hover {
+	background: rgba(200,200,200,.2) !important;
+	height: 19px !important;
+}
+
+.wikia-menu-button .chevron,
+.wikia-button .chevron,
+.control-button .chevron {
+	border-top-color: #888 !important;
+}
+
+.wikia-menu-button.active ul,
+.wikia-button.active ul,
+.control-button.active ul {
+	top: 27px !important;
+	border: 1px solid #ccc !important;
+	box-shadow: none !important;
+	border-bottom-right-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+}
+
+.wikia-menu-button.active ul li:hover,
+.wikia-button.active ul li:hover,
+.control-button.active ul li:hover {
+	background-color: rgba(219,204,67,.25) !important;
+}
+
+.wikia-button {
+	font-weight: bold !important;
+	font-size: 13px !important;
+	color: #888 !important;
+}
+
+.commentsbubble {
+	display: none !important;
+}
+
+html body #WikiaPage.WikiaPage .wikia-button.comments {
+	padding: 2px 10px !important;
+}
+
+#WikiaPageHeader.WikiaPageHeader .header-container .header-column h2 {
+	display: none;
+}
+
+#WikiaPageHeader.WikiaPageHeader .header-container .header-column.header-tally {
+	display: none;
+}
+
+#WikiaPageHeader.WikiaPageHeader .header-container + .wikia-menu-button,
+#WikiaPageHeader.WikiaPageHeader .wikia-button.comments {
+	position: relative;
+	top: -43px;
+	float: right;
+}

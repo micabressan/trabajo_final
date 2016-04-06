@@ -1,0 +1,47 @@
+public List<Point> buriedBlocks(Grid temp)
+        {            
+            List<Point> nullblocks = new List<Point>();
+            List<Point> usedPositions = new List<Point>();
+
+            for (int x = 0; x < temp.Width; x++)
+            {
+                if (temp.GameGrid[x, 0] == null)
+                {                 
+                    nullblocks.Add(new Point(x,0));                   
+                }
+            }
+
+            for (int i = 0; i < nullblocks.Count; i++)
+            {
+                if (usedPositions.Contains(nullblocks[i]))
+                {
+                    break;
+                }
+                else 
+                {
+                    if ((nullblocks[i].X) + 1 == null)
+                    { 
+                        nullblocks.Add(new Point((nullblocks[i].X) + 1,nullblocks[i].Y));
+                        usedPositions.Add(new Point((nullblocks[i].X) + 1,nullblocks[i].Y));
+                    }
+                    if ((nullblocks[i].X) - 1  == null)
+                    { 
+                        nullblocks.Add(new Point((nullblocks[i].X) - 1,nullblocks[i].Y));
+                        usedPositions.Add(new Point((nullblocks[i].X) - 1, nullblocks[i].Y));
+                    }
+                    if ((nullblocks[i].Y) + 1 == null)
+                    {
+                        nullblocks.Add(new Point(nullblocks[i].X, (nullblocks[i].Y) +1));
+                        usedPositions.Add(new Point(nullblocks[i].X, (nullblocks[i].Y) + 1));
+                    }
+                    if ((nullblocks[i].Y)- 1 == null)
+                    {
+                        nullblocks.Add(new Point(nullblocks[i].X, (nullblocks[i].Y) - 1));
+                        usedPositions.Add(new Point(nullblocks[i].X, (nullblocks[i].Y) - 1));
+                    }
+                }
+
+            }
+
+            return ;           
+        }

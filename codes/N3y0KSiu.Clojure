@@ -1,0 +1,6 @@
+[:button.btn.btn-primary {:on-click (fn [event] (do
+                                                  (.preventDefault event)
+                                                  (create-new-contact params result)
+                                                  (list-contacts) ;; I want this to be called after create-new-contact
+                                                  (js/console.log @params)
+                                                  (js/console.log "result : " @result)))} "Add New Contact"]

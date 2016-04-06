@@ -1,0 +1,14 @@
+4.6 HTTP Response Splitting
+
+Bei einem Angriff mittels “HTTP Response Splitting” wird die Anwendung durch gefälschte Anfragen manipuliert. Dabei wird nicht direkt auf den Webserver selbst Einfluss genommen sondern auf vorgeschaltete Systeme wie zum Beispiel: Proxy-Server, Cache-Server und auch der Browser selbst zählt zu diesen Systemen. Das einsetzen dieses Angriffs kann XSS-Angriffe oder Sniffing-Angriffe für Angreifer ermöglichen. Alle diese Angriffe funktionieren unabhängig davon, welcher Browser oder welcher Webserver verwendet werden. Um erfolgreich “HTTP Response Splitting”-Angriffe zu starten muss nur eine einzige Schwachstelle in einer Anwendung vorhanden sein. Dieser Schwachpunkt kann darin bestehen das einer header-Funktion ungenügend geprüfte Parameter übergeben werden mit den Sonderzeichen \r (CR) und \n (LF). Es handelt sich um die Sonderzeichen für Zeilenumbrüche. Die URL-codierte Schweibweise ist %0d für \r und %0a für \n. index.php/url=$0a$0d
+
+Grundlegend sind es drei Parteien welche bei einem “HTTP Response Splitting”-Angriff eingebunden sind:
+
+Der Webserver, auf dem die angreifbare Anwendung läuft
+Das Ziel, das mit dem Webserver im Auftrag des Angreifers kommuniziert. Zum Beispiel: Proxy-Server, Cache-Server oder der Browser-Cache.
+Die Person welche den Angriff anstößt.
+
+Das Grundprinzip bei “HTTP Response Splitting”-Angriffen ist das es dem Angreifer möglich ist Anfragen zu senden auf welche der Webserver mehrere Antworten gibt. Das Ziel ist das der Angreifen über die zweite Antwort, die volle Kontrolle besitzt wobei die erste Anfrage vernachlässigt wird beziehungsweise keine Bedeutung für den weiteren Verlauf des Angriffs darstellt. (vgl., Kunz und Esser, 2008, p.55-56)
+
+“Nun ist es für den Angreifer möglich, zwei Anfragen, eine manipulierte und eine harmlose, an den Webserver zu schicken, von denen nur die erste Anfrage eine Antwort liefert. Diese Antwort besteht aus zwei gültigen Antworten. Das bedeutet, der Proxy- oder Cache-Server merken sich die erste Anfrage und nehmen die erste Antwort aus der gefälschten Anfrage. Die zweite, harmlose Anfrage wird der zweiten Antwort aus der ersten, gefälschten Anfrage zugeordnet. Somit ist ein Verändern der Applikation oder Phishing möglich, ohne Einfluss auf den Webserver zu nehmen, denn der zwischen Benutzer und Webserver geschaltete Proxy- oder Cache-Server liefert zur »richtigen« Anfrage eine gefälschte Antwort zurück.”
+(zit., Kunz und Esser, 2008, p.56)

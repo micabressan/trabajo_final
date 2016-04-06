@@ -1,0 +1,827 @@
+[
+  {
+    "places": [
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-104.387729",
+        "targetLatitude": "55.240868",
+        "longitude": "-136.730272",
+        "latitude": "44.565899",
+        "about": "Est reprehenderit culpa dolor aliqua aliqua ut fugiat nisi irure adipisicing eu id. Incididunt proident ut velit officia nisi pariatur aute cillum veniam sunt magna. Ad dolore duis nisi ipsum magna. Aute culpa cillum pariatur sint dolor laborum veniam esse fugiat voluptate fugiat ex. Quis commodo id amet deserunt fugiat.",
+        "title": "CLARENCE",
+        "type": 0,
+        "SSID": "WIFI0",
+        "remain": 289,
+        "available": true,
+        "guid": "8e92fc83-e24a-4fed-99e2-b650f4310339",
+        "_id": 0
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-114.733585",
+        "targetLatitude": "58.613602",
+        "longitude": "125.288825",
+        "latitude": "-83.745501",
+        "about": "Labore laborum aliqua veniam excepteur proident velit nulla consectetur ipsum qui eu sint ipsum. Labore cillum eu excepteur cupidatat enim aliqua nulla irure laboris fugiat proident excepteur tempor ullamco. Reprehenderit in ipsum sint dolor est non tempor enim. Enim est officia ad adipisicing ex ex anim tempor dolor anim sint irure ipsum sit.",
+        "title": "SKYLAND",
+        "type": 1,
+        "SSID": "WIFI1",
+        "remain": 224,
+        "available": false,
+        "guid": "5686158b-8486-4612-b288-daea5face6d8",
+        "_id": 1
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-131.579518",
+        "targetLatitude": "-32.593757",
+        "longitude": "-43.970595",
+        "latitude": "64.196011",
+        "about": "Nisi id dolore irure velit. Adipisicing eu aute magna reprehenderit excepteur anim. Ipsum irure nostrud non incididunt aute Lorem. Proident ullamco in enim velit anim duis laboris ex laboris consequat non ipsum laboris.",
+        "title": "URIE",
+        "type": 0,
+        "SSID": "WIFI2",
+        "remain": 33,
+        "available": false,
+        "guid": "8a590c94-6743-4d41-a269-027a192d19e6",
+        "_id": 2
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "153.124761",
+        "targetLatitude": "-67.500352",
+        "longitude": "12.192662",
+        "latitude": "72.256222",
+        "about": "Veniam sunt excepteur sunt ullamco occaecat. Labore minim sunt mollit duis laboris aute. Fugiat incididunt tempor ipsum Lorem est dolore. Irure commodo Lorem excepteur elit consectetur.",
+        "title": "JACUMBA",
+        "type": 1,
+        "SSID": "WIFI3",
+        "remain": 292,
+        "available": false,
+        "guid": "baa6591e-5e68-4943-877b-04cb6b92bd4a",
+        "_id": 3
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "41.406878",
+        "targetLatitude": "45.163749",
+        "longitude": "32.266387",
+        "latitude": "35.446958",
+        "about": "Voluptate ad dolor minim consequat eiusmod irure in anim do est in eu id magna. Ad voluptate commodo eiusmod aliqua dolore sunt Lorem incididunt labore. Consequat anim tempor eu fugiat amet minim qui irure esse aute. Fugiat culpa id dolore non ex id adipisicing eu elit fugiat.",
+        "title": "GRIMSLEY",
+        "type": 1,
+        "SSID": "WIFI4",
+        "remain": 4,
+        "available": true,
+        "guid": "89bc78b3-2cd7-46ef-8190-ca955c1b2f4f",
+        "_id": 4
+      }
+    ],
+    "route": [
+      {
+        "longitude": "-158.400729",
+        "latitude": "-14.784255"
+      },
+      {
+        "longitude": "-154.347311",
+        "latitude": "58.426931"
+      },
+      {
+        "longitude": "73.779812",
+        "latitude": "50.339932"
+      },
+      {
+        "longitude": "77.535955",
+        "latitude": "-55.006052"
+      },
+      {
+        "longitude": "93.090604",
+        "latitude": "-22.661874"
+      },
+      {
+        "longitude": "-175.76427",
+        "latitude": "-20.68317"
+      },
+      {
+        "longitude": "59.469125",
+        "latitude": "-71.154107"
+      }
+    ],
+    "images": [
+      "http://lorempixel.com/g/640/480/abstract/8",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/7",
+      "http://lorempixel.com/g/640/480/abstract/4",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/2",
+      "http://lorempixel.com/g/640/480/abstract/3"
+    ],
+    "about": "Culpa anim amet nisi duis enim fugiat in nisi aute labore laboris ullamco reprehenderit incididunt. Officia est consectetur aute irure est Lorem sunt labore minim ullamco aliquip elit id. Deserunt Lorem exercitation id voluptate qui ea nostrud. Id cillum dolor aute velit qui ea ullamco. Voluptate ad do nisi labore eu cillum sint cillum ex eiusmod cillum officia.",
+    "color": "#FFFFFF",
+    "icon": "http://lorempixel.com/g/64/64/abstract/5",
+    "title": "ZORTMAN",
+    "cameras": 6,
+    "selfies": 6,
+    "_id": 0
+  },
+  {
+    "places": [
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-104.387729",
+        "targetLatitude": "55.240868",
+        "longitude": "-136.730272",
+        "latitude": "44.565899",
+        "about": "Est reprehenderit culpa dolor aliqua aliqua ut fugiat nisi irure adipisicing eu id. Incididunt proident ut velit officia nisi pariatur aute cillum veniam sunt magna. Ad dolore duis nisi ipsum magna. Aute culpa cillum pariatur sint dolor laborum veniam esse fugiat voluptate fugiat ex. Quis commodo id amet deserunt fugiat.",
+        "title": "CLARENCE",
+        "type": 0,
+        "SSID": "WIFI0",
+        "remain": 289,
+        "available": true,
+        "guid": "8e92fc83-e24a-4fed-99e2-b650f4310339",
+        "_id": 0
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-114.733585",
+        "targetLatitude": "58.613602",
+        "longitude": "125.288825",
+        "latitude": "-83.745501",
+        "about": "Labore laborum aliqua veniam excepteur proident velit nulla consectetur ipsum qui eu sint ipsum. Labore cillum eu excepteur cupidatat enim aliqua nulla irure laboris fugiat proident excepteur tempor ullamco. Reprehenderit in ipsum sint dolor est non tempor enim. Enim est officia ad adipisicing ex ex anim tempor dolor anim sint irure ipsum sit.",
+        "title": "SKYLAND",
+        "type": 1,
+        "SSID": "WIFI1",
+        "remain": 224,
+        "available": false,
+        "guid": "5686158b-8486-4612-b288-daea5face6d8",
+        "_id": 1
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-131.579518",
+        "targetLatitude": "-32.593757",
+        "longitude": "-43.970595",
+        "latitude": "64.196011",
+        "about": "Nisi id dolore irure velit. Adipisicing eu aute magna reprehenderit excepteur anim. Ipsum irure nostrud non incididunt aute Lorem. Proident ullamco in enim velit anim duis laboris ex laboris consequat non ipsum laboris.",
+        "title": "URIE",
+        "type": 0,
+        "SSID": "WIFI2",
+        "remain": 33,
+        "available": false,
+        "guid": "8a590c94-6743-4d41-a269-027a192d19e6",
+        "_id": 2
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "153.124761",
+        "targetLatitude": "-67.500352",
+        "longitude": "12.192662",
+        "latitude": "72.256222",
+        "about": "Veniam sunt excepteur sunt ullamco occaecat. Labore minim sunt mollit duis laboris aute. Fugiat incididunt tempor ipsum Lorem est dolore. Irure commodo Lorem excepteur elit consectetur.",
+        "title": "JACUMBA",
+        "type": 1,
+        "SSID": "WIFI3",
+        "remain": 292,
+        "available": false,
+        "guid": "baa6591e-5e68-4943-877b-04cb6b92bd4a",
+        "_id": 3
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "41.406878",
+        "targetLatitude": "45.163749",
+        "longitude": "32.266387",
+        "latitude": "35.446958",
+        "about": "Voluptate ad dolor minim consequat eiusmod irure in anim do est in eu id magna. Ad voluptate commodo eiusmod aliqua dolore sunt Lorem incididunt labore. Consequat anim tempor eu fugiat amet minim qui irure esse aute. Fugiat culpa id dolore non ex id adipisicing eu elit fugiat.",
+        "title": "GRIMSLEY",
+        "type": 1,
+        "SSID": "WIFI4",
+        "remain": 4,
+        "available": true,
+        "guid": "89bc78b3-2cd7-46ef-8190-ca955c1b2f4f",
+        "_id": 4
+      }
+    ],
+    "route": [
+      {
+        "longitude": "-158.400729",
+        "latitude": "-14.784255"
+      },
+      {
+        "longitude": "-154.347311",
+        "latitude": "58.426931"
+      },
+      {
+        "longitude": "73.779812",
+        "latitude": "50.339932"
+      },
+      {
+        "longitude": "77.535955",
+        "latitude": "-55.006052"
+      },
+      {
+        "longitude": "93.090604",
+        "latitude": "-22.661874"
+      },
+      {
+        "longitude": "-175.76427",
+        "latitude": "-20.68317"
+      },
+      {
+        "longitude": "59.469125",
+        "latitude": "-71.154107"
+      }
+    ],
+    "images": [
+      "http://lorempixel.com/g/640/480/abstract/8",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/7",
+      "http://lorempixel.com/g/640/480/abstract/4",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/2",
+      "http://lorempixel.com/g/640/480/abstract/3"
+    ],
+    "about": "Amet anim culpa tempor consequat dolor ea culpa adipisicing do. Proident cillum fugiat labore aute proident ea ipsum occaecat incididunt sunt excepteur nulla veniam. Aliquip incididunt excepteur ut aute consequat aliqua ea mollit nisi esse amet sit. Sint id incididunt irure consequat cillum. Eiusmod magna Lorem sunt eiusmod ad eu consectetur velit eiusmod do. Dolor officia laboris id ad qui non ipsum. Ex occaecat voluptate amet tempor Lorem enim dolore officia proident incididunt.",
+    "color": "#CCCCCC",
+    "icon": "http://lorempixel.com/g/64/64/abstract/3",
+    "title": "GRABALL",
+    "cameras": 1,
+    "selfies": 2,
+    "_id": 1
+  },
+  {
+    "places": [
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-104.387729",
+        "targetLatitude": "55.240868",
+        "longitude": "-136.730272",
+        "latitude": "44.565899",
+        "about": "Est reprehenderit culpa dolor aliqua aliqua ut fugiat nisi irure adipisicing eu id. Incididunt proident ut velit officia nisi pariatur aute cillum veniam sunt magna. Ad dolore duis nisi ipsum magna. Aute culpa cillum pariatur sint dolor laborum veniam esse fugiat voluptate fugiat ex. Quis commodo id amet deserunt fugiat.",
+        "title": "CLARENCE",
+        "type": 0,
+        "SSID": "WIFI0",
+        "remain": 289,
+        "available": true,
+        "guid": "8e92fc83-e24a-4fed-99e2-b650f4310339",
+        "_id": 0
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-114.733585",
+        "targetLatitude": "58.613602",
+        "longitude": "125.288825",
+        "latitude": "-83.745501",
+        "about": "Labore laborum aliqua veniam excepteur proident velit nulla consectetur ipsum qui eu sint ipsum. Labore cillum eu excepteur cupidatat enim aliqua nulla irure laboris fugiat proident excepteur tempor ullamco. Reprehenderit in ipsum sint dolor est non tempor enim. Enim est officia ad adipisicing ex ex anim tempor dolor anim sint irure ipsum sit.",
+        "title": "SKYLAND",
+        "type": 1,
+        "SSID": "WIFI1",
+        "remain": 224,
+        "available": false,
+        "guid": "5686158b-8486-4612-b288-daea5face6d8",
+        "_id": 1
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-131.579518",
+        "targetLatitude": "-32.593757",
+        "longitude": "-43.970595",
+        "latitude": "64.196011",
+        "about": "Nisi id dolore irure velit. Adipisicing eu aute magna reprehenderit excepteur anim. Ipsum irure nostrud non incididunt aute Lorem. Proident ullamco in enim velit anim duis laboris ex laboris consequat non ipsum laboris.",
+        "title": "URIE",
+        "type": 0,
+        "SSID": "WIFI2",
+        "remain": 33,
+        "available": false,
+        "guid": "8a590c94-6743-4d41-a269-027a192d19e6",
+        "_id": 2
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "153.124761",
+        "targetLatitude": "-67.500352",
+        "longitude": "12.192662",
+        "latitude": "72.256222",
+        "about": "Veniam sunt excepteur sunt ullamco occaecat. Labore minim sunt mollit duis laboris aute. Fugiat incididunt tempor ipsum Lorem est dolore. Irure commodo Lorem excepteur elit consectetur.",
+        "title": "JACUMBA",
+        "type": 1,
+        "SSID": "WIFI3",
+        "remain": 292,
+        "available": false,
+        "guid": "baa6591e-5e68-4943-877b-04cb6b92bd4a",
+        "_id": 3
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "41.406878",
+        "targetLatitude": "45.163749",
+        "longitude": "32.266387",
+        "latitude": "35.446958",
+        "about": "Voluptate ad dolor minim consequat eiusmod irure in anim do est in eu id magna. Ad voluptate commodo eiusmod aliqua dolore sunt Lorem incididunt labore. Consequat anim tempor eu fugiat amet minim qui irure esse aute. Fugiat culpa id dolore non ex id adipisicing eu elit fugiat.",
+        "title": "GRIMSLEY",
+        "type": 1,
+        "SSID": "WIFI4",
+        "remain": 4,
+        "available": true,
+        "guid": "89bc78b3-2cd7-46ef-8190-ca955c1b2f4f",
+        "_id": 4
+      }
+    ],
+    "route": [
+      {
+        "longitude": "-158.400729",
+        "latitude": "-14.784255"
+      },
+      {
+        "longitude": "-154.347311",
+        "latitude": "58.426931"
+      },
+      {
+        "longitude": "73.779812",
+        "latitude": "50.339932"
+      },
+      {
+        "longitude": "77.535955",
+        "latitude": "-55.006052"
+      },
+      {
+        "longitude": "93.090604",
+        "latitude": "-22.661874"
+      },
+      {
+        "longitude": "-175.76427",
+        "latitude": "-20.68317"
+      },
+      {
+        "longitude": "59.469125",
+        "latitude": "-71.154107"
+      }
+    ],
+    "images": [
+      "http://lorempixel.com/g/640/480/abstract/8",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/7",
+      "http://lorempixel.com/g/640/480/abstract/4",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/2",
+      "http://lorempixel.com/g/640/480/abstract/3"
+    ],
+    "about": "In deserunt fugiat cillum est. Nulla fugiat dolore ex excepteur. Consectetur officia nisi esse ullamco qui.",
+    "color": "#CCCCCC",
+    "icon": "http://lorempixel.com/g/64/64/abstract/1",
+    "title": "ROOSEVELT",
+    "cameras": 6,
+    "selfies": 7,
+    "_id": 2
+  },
+  {
+    "places": [
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-104.387729",
+        "targetLatitude": "55.240868",
+        "longitude": "-136.730272",
+        "latitude": "44.565899",
+        "about": "Est reprehenderit culpa dolor aliqua aliqua ut fugiat nisi irure adipisicing eu id. Incididunt proident ut velit officia nisi pariatur aute cillum veniam sunt magna. Ad dolore duis nisi ipsum magna. Aute culpa cillum pariatur sint dolor laborum veniam esse fugiat voluptate fugiat ex. Quis commodo id amet deserunt fugiat.",
+        "title": "CLARENCE",
+        "type": 0,
+        "SSID": "WIFI0",
+        "remain": 289,
+        "available": true,
+        "guid": "8e92fc83-e24a-4fed-99e2-b650f4310339",
+        "_id": 0
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-114.733585",
+        "targetLatitude": "58.613602",
+        "longitude": "125.288825",
+        "latitude": "-83.745501",
+        "about": "Labore laborum aliqua veniam excepteur proident velit nulla consectetur ipsum qui eu sint ipsum. Labore cillum eu excepteur cupidatat enim aliqua nulla irure laboris fugiat proident excepteur tempor ullamco. Reprehenderit in ipsum sint dolor est non tempor enim. Enim est officia ad adipisicing ex ex anim tempor dolor anim sint irure ipsum sit.",
+        "title": "SKYLAND",
+        "type": 1,
+        "SSID": "WIFI1",
+        "remain": 224,
+        "available": false,
+        "guid": "5686158b-8486-4612-b288-daea5face6d8",
+        "_id": 1
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-131.579518",
+        "targetLatitude": "-32.593757",
+        "longitude": "-43.970595",
+        "latitude": "64.196011",
+        "about": "Nisi id dolore irure velit. Adipisicing eu aute magna reprehenderit excepteur anim. Ipsum irure nostrud non incididunt aute Lorem. Proident ullamco in enim velit anim duis laboris ex laboris consequat non ipsum laboris.",
+        "title": "URIE",
+        "type": 0,
+        "SSID": "WIFI2",
+        "remain": 33,
+        "available": false,
+        "guid": "8a590c94-6743-4d41-a269-027a192d19e6",
+        "_id": 2
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "153.124761",
+        "targetLatitude": "-67.500352",
+        "longitude": "12.192662",
+        "latitude": "72.256222",
+        "about": "Veniam sunt excepteur sunt ullamco occaecat. Labore minim sunt mollit duis laboris aute. Fugiat incididunt tempor ipsum Lorem est dolore. Irure commodo Lorem excepteur elit consectetur.",
+        "title": "JACUMBA",
+        "type": 1,
+        "SSID": "WIFI3",
+        "remain": 292,
+        "available": false,
+        "guid": "baa6591e-5e68-4943-877b-04cb6b92bd4a",
+        "_id": 3
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "41.406878",
+        "targetLatitude": "45.163749",
+        "longitude": "32.266387",
+        "latitude": "35.446958",
+        "about": "Voluptate ad dolor minim consequat eiusmod irure in anim do est in eu id magna. Ad voluptate commodo eiusmod aliqua dolore sunt Lorem incididunt labore. Consequat anim tempor eu fugiat amet minim qui irure esse aute. Fugiat culpa id dolore non ex id adipisicing eu elit fugiat.",
+        "title": "GRIMSLEY",
+        "type": 1,
+        "SSID": "WIFI4",
+        "remain": 4,
+        "available": true,
+        "guid": "89bc78b3-2cd7-46ef-8190-ca955c1b2f4f",
+        "_id": 4
+      }
+    ],
+    "route": [
+      {
+        "longitude": "-158.400729",
+        "latitude": "-14.784255"
+      },
+      {
+        "longitude": "-154.347311",
+        "latitude": "58.426931"
+      },
+      {
+        "longitude": "73.779812",
+        "latitude": "50.339932"
+      },
+      {
+        "longitude": "77.535955",
+        "latitude": "-55.006052"
+      },
+      {
+        "longitude": "93.090604",
+        "latitude": "-22.661874"
+      },
+      {
+        "longitude": "-175.76427",
+        "latitude": "-20.68317"
+      },
+      {
+        "longitude": "59.469125",
+        "latitude": "-71.154107"
+      }
+    ],
+    "images": [
+      "http://lorempixel.com/g/640/480/abstract/8",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/7",
+      "http://lorempixel.com/g/640/480/abstract/4",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/2",
+      "http://lorempixel.com/g/640/480/abstract/3"
+    ],
+    "about": "Nostrud dolore reprehenderit cupidatat pariatur ipsum occaecat culpa ipsum ipsum Lorem in. Qui laboris ex mollit velit elit minim velit culpa aliquip. Amet eiusmod officia adipisicing ea. Minim commodo dolor aliquip enim tempor officia duis ad cillum aute ea do. Labore quis anim excepteur in ex mollit adipisicing elit. Mollit quis adipisicing velit eu cupidatat eu magna veniam eu non.",
+    "color": "#CCCCCC",
+    "icon": "http://lorempixel.com/g/64/64/abstract/2",
+    "title": "RODANTHE",
+    "cameras": 7,
+    "selfies": 8,
+    "_id": 3
+  },
+  {
+    "places": [
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-104.387729",
+        "targetLatitude": "55.240868",
+        "longitude": "-136.730272",
+        "latitude": "44.565899",
+        "about": "Est reprehenderit culpa dolor aliqua aliqua ut fugiat nisi irure adipisicing eu id. Incididunt proident ut velit officia nisi pariatur aute cillum veniam sunt magna. Ad dolore duis nisi ipsum magna. Aute culpa cillum pariatur sint dolor laborum veniam esse fugiat voluptate fugiat ex. Quis commodo id amet deserunt fugiat.",
+        "title": "CLARENCE",
+        "type": 0,
+        "SSID": "WIFI0",
+        "remain": 289,
+        "available": true,
+        "guid": "8e92fc83-e24a-4fed-99e2-b650f4310339",
+        "_id": 0
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-114.733585",
+        "targetLatitude": "58.613602",
+        "longitude": "125.288825",
+        "latitude": "-83.745501",
+        "about": "Labore laborum aliqua veniam excepteur proident velit nulla consectetur ipsum qui eu sint ipsum. Labore cillum eu excepteur cupidatat enim aliqua nulla irure laboris fugiat proident excepteur tempor ullamco. Reprehenderit in ipsum sint dolor est non tempor enim. Enim est officia ad adipisicing ex ex anim tempor dolor anim sint irure ipsum sit.",
+        "title": "SKYLAND",
+        "type": 1,
+        "SSID": "WIFI1",
+        "remain": 224,
+        "available": false,
+        "guid": "5686158b-8486-4612-b288-daea5face6d8",
+        "_id": 1
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "-131.579518",
+        "targetLatitude": "-32.593757",
+        "longitude": "-43.970595",
+        "latitude": "64.196011",
+        "about": "Nisi id dolore irure velit. Adipisicing eu aute magna reprehenderit excepteur anim. Ipsum irure nostrud non incididunt aute Lorem. Proident ullamco in enim velit anim duis laboris ex laboris consequat non ipsum laboris.",
+        "title": "URIE",
+        "type": 0,
+        "SSID": "WIFI2",
+        "remain": 33,
+        "available": false,
+        "guid": "8a590c94-6743-4d41-a269-027a192d19e6",
+        "_id": 2
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "153.124761",
+        "targetLatitude": "-67.500352",
+        "longitude": "12.192662",
+        "latitude": "72.256222",
+        "about": "Veniam sunt excepteur sunt ullamco occaecat. Labore minim sunt mollit duis laboris aute. Fugiat incididunt tempor ipsum Lorem est dolore. Irure commodo Lorem excepteur elit consectetur.",
+        "title": "JACUMBA",
+        "type": 1,
+        "SSID": "WIFI3",
+        "remain": 292,
+        "available": false,
+        "guid": "baa6591e-5e68-4943-877b-04cb6b92bd4a",
+        "_id": 3
+      },
+      {
+        "images": [
+          "http://lorempixel.com/640/480/nature/6",
+          "http://lorempixel.com/640/480/city/7",
+          "http://lorempixel.com/640/480/people/8",
+          "http://lorempixel.com/640/480/city/6",
+          "http://lorempixel.com/640/480/nature/8",
+          "http://lorempixel.com/640/480/nature/2",
+          "http://lorempixel.com/640/480/city/7"
+        ],
+        "targetLongitude": "41.406878",
+        "targetLatitude": "45.163749",
+        "longitude": "32.266387",
+        "latitude": "35.446958",
+        "about": "Voluptate ad dolor minim consequat eiusmod irure in anim do est in eu id magna. Ad voluptate commodo eiusmod aliqua dolore sunt Lorem incididunt labore. Consequat anim tempor eu fugiat amet minim qui irure esse aute. Fugiat culpa id dolore non ex id adipisicing eu elit fugiat.",
+        "title": "GRIMSLEY",
+        "type": 1,
+        "SSID": "WIFI4",
+        "remain": 4,
+        "available": true,
+        "guid": "89bc78b3-2cd7-46ef-8190-ca955c1b2f4f",
+        "_id": 4
+      }
+    ],
+    "route": [
+      {
+        "longitude": "-158.400729",
+        "latitude": "-14.784255"
+      },
+      {
+        "longitude": "-154.347311",
+        "latitude": "58.426931"
+      },
+      {
+        "longitude": "73.779812",
+        "latitude": "50.339932"
+      },
+      {
+        "longitude": "77.535955",
+        "latitude": "-55.006052"
+      },
+      {
+        "longitude": "93.090604",
+        "latitude": "-22.661874"
+      },
+      {
+        "longitude": "-175.76427",
+        "latitude": "-20.68317"
+      },
+      {
+        "longitude": "59.469125",
+        "latitude": "-71.154107"
+      }
+    ],
+    "images": [
+      "http://lorempixel.com/g/640/480/abstract/8",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/7",
+      "http://lorempixel.com/g/640/480/abstract/4",
+      "http://lorempixel.com/g/640/480/abstract/5",
+      "http://lorempixel.com/g/640/480/abstract/2",
+      "http://lorempixel.com/g/640/480/abstract/3"
+    ],
+    "about": "In amet sunt Lorem minim eiusmod eiusmod aliqua commodo in. Enim esse consequat veniam anim commodo. Commodo dolore laborum mollit qui est eiusmod irure et.",
+    "color": "#CCCCCC",
+    "icon": "http://lorempixel.com/g/64/64/abstract/5",
+    "title": "DAWN",
+    "cameras": 2,
+    "selfies": 4,
+    "_id": 4
+  }
+]

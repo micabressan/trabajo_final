@@ -1,0 +1,38 @@
+
+import Data.Set ((\\), Set)
+import qualified Data.Set as Set
+import System.Random
+
+type Coord = (Int, Int)
+data Dir = N | E | W | S deriving (Show, Eq)
+
+dirToCoord :: Dir -> Coord
+dirToCoord dir = case dir of
+                        N -> (0,-1)
+                        E -> (1,0)
+                        W -> (-1,0)
+                        S -> (0,1)
+
+oppositeDir :: Dir -> Dir
+oppositeDir dir = case dir of
+                        N -> S; S -> N
+                        E -> W; W-> E
+
+addDir :: Coord -> Dir -> Coord
+(x,y) `addDir` d = let (x',y') = dirToCoord d in (x+x',y+y')
+
+
+genGraph :: StdGen -> (Set Node) -> (Set Node) -> Set Node
+genGraph g visited toVisit
+    | Set.null toVisit = visited
+    | otherwise = let (i, g') = randomR (0, Set.size toVisit - 1) g
+                      node = Set.elemAt i toVisit
+                      in genGraph g' (Set.insert node visited) $ node `Set.delete` (Set.union toVisit (viableNeighbours node))
+                  where viableNeighbours node = Set.filter inBounds $ (neighbours node) \\ visited
+                        neighbours (Node p _) = Set.fromList $ map (\dir -> Node (addDir p dir) (oppositeDir dir)) [N,E,W,S]
+                        inBounds (Node (x,y) _) = and [ f v | f <- [(>0),(<=10)], v <- [x,y]]
+
+
+data Node = Node {nodeAt :: Coord, nodeFrom :: Dir} deriving (Show, Eq)
+instance Ord Node where
+    compare (Node x _) (Node y _) = compare x y

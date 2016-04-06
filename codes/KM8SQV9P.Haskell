@@ -1,0 +1,11 @@
+import XMonad
+import XMonad.Hooks.EwmhDesktops
+
+myTerminal = "urxvt"
+myModMask = mod4Mask
+
+main :: IO()
+main = xmonad $ ewmh defaultConfig
+       { modMask = myModMask
+       , terminal = myTerminal
+       }

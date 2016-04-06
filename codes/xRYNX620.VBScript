@@ -1,0 +1,31 @@
+Private Sub Form_Open(Cancel As Integer)
+		Call optToggle
+	End Sub
+
+	Sub optToggleBox1_AfterUpdate()
+		Call optToggle
+	End Sub
+	Sub optToggle()
+	If Me.optToggleBox1.Value = 0 Then
+		Me.cmdPrsnl1.Visible = False
+		Me.cmdPrsnl2.Visible = False
+		Me.cmdPrsnl3.Visible = False
+		Me.cmdInv1.Visible = False
+		Me.cmdInv2.Visible = False
+		Me.cmdInv3.Visible = False
+	ElseIf Me.optToggleBox1.Value = 1 Then
+		Me.cmdPrsnl1.Visible = True
+		Me.cmdPrsnl2.Visible = True
+		Me.cmdPrsnl3.Visible = True
+		Me.cmdInv1.Visible = False
+		Me.cmdInv2.Visible = False
+		Me.cmdInv3.Visible = False
+		ElseIf Me.optToggleBox1.Value = 2 Then
+		Me.cmdPrsnl1.Visible = False
+		Me.cmdPrsnl2.Visible = False
+		Me.cmdPrsnl3.Visible = False
+		Me.cmdInv1.Visible = True
+		Me.cmdInv2.Visible = True
+		Me.cmdInv3.Visible = True
+	End If
+	End Sub

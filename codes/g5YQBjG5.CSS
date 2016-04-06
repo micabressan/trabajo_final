@@ -1,0 +1,197 @@
+<!DOCTYPE html><head><title> {block:PostSummary} {PostSummary} - {/block:PostSummary}{Title}</title> {block:ifCustomfavicon} <link rel="shortcut icon" href="{image:favicon}"> {/block:ifCustomfavicon} {block:ifnotCustomfavicon} <link rel="shortcut icon" href="{Favicon}"> {/block:ifnotCustomfavicon}
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+
+<meta name="image:Background image" content""/>
+<meta name="image:Favicon" content=""/>
+<meta name="image:Scrollbar image" content=""/>
+<meta name="image:Icon" content""/>
+<meta name="image:Pixel" content""/>
+
+<meta name="color:Background" content="#fff5fa"/>
+<meta name="color:Text" content="#43324e"/>
+<meta name="color:Links" content="#ff50bf"/>
+<meta name="color:Links hover" content="#ffffff"/>
+<meta name="color:Links shadow" content="#ff50bf"/>
+<meta name="color:Links background" content="#f1fffe"/>
+<meta name="color:Blockquote Border" content="#d3f6ff"/>
+<meta name="color:Post border" content="#ffcdeb"/>
+<meta name="color:Post bg" content="#ffffff"/>
+<meta name="color:Shadow" content="#ffdcf2"/>
+<meta name="color:Buttons text" content="##f781c8"/>
+<meta name="color:Buttons text hover" content="#dbf1f9"/>
+<meta name="color:Buttons bg" content="#ffffff"/>
+<meta name="color:Buttons border" content="#ffdff7"/>
+<meta name="color:Scroll" content="#ffffff" />
+<meta name="color:Scrollbar" content="#dff8fe" />
+
+<meta name="select:Font" content="arial" title="Arial">  
+<meta name="select:Font" content="consolas" title="Consolas">  
+
+<meta name="select:Font size" content="11" title="11"> 
+<meta name="select:Font size" content="10" title="10"> 
+
+<meta name="text:Posts size" content="300" />
+<meta name="text:Scrollbar width" content="10" />
+<meta name="text:Drop down navigation txt" content="navigation" />
+
+<meta name="text:Link 1 URL" content="/" />
+<meta name="text:Link 1 name" content="link1" />
+<meta name="text:Link 2 URL" content="/" />
+<meta name="text:Link 2 name" content="link2" />
+<meta name="text:Link 3 URL" content="/" />
+<meta name="text:Link 3 name" content="link3" />
+<meta name="text:Link 4 URL" content="/" />
+<meta name="text:Link 4 name" content="link4" />
+
+<meta name="if:Bg cover" content="0" />
+<meta name="if:Infinite scroll" content="0" />
+<meta name="if:Tiny cursor" content="1" />
+<meta name="if:Left sidebar" content="0" />
+<meta name="if:Icon" content="1" />
+<meta name="if:Icon border" content="0" />
+<meta name="if:Rounded icon" content="0" />
+<meta name="if:Transparent sidebar" content="0" />
+<meta name="if:Links hover shadow" content="1" />
+<meta name="if:Drop down navigation" content="0" />
+<meta name="if:Custom scrollbar" content="1" />
+<meta name="if:Captions" content="1" />
+<meta name="if:Tags" content="1" />
+<meta name="if:Post shadow" content="1" />
+<meta name="if:Custom favicon" content="0" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(".links_body").hide();
+$(".links_head").click(function(){
+$(this).next(".links_body").slideToggle('fast');
+}); }); </script>
+<style type="text/css">
+.links_list { text-align:center;  }
+.links_head { text-align:center; line-height:12px; margin:6px 0 6px 0; } 
+.links_head a { color:{color:Buttons text};background-color:{color:buttons bg}; padding:2px 4px; text-decoration:none; border:1px outset {color:Buttons border};}
+.links_head a:hover {background-color:{color:buttons bg}; padding:2px 5px; color:{color:Buttons text hover}; text-shadow:0px 0px; text-decoration:none; border:1px inset {color:Buttons border};} 
+.links_body { font-size:{select:font size}px; line-height:18px; text-align:center; display:none;} 
+.links_body a {margin:1px;}
+</style>
+
+<style type="text/css">
+iframe#tumblr_controls {top:0px !important; right:0px !important; position: fixed!important; -webkit-filter: invert(100%); opacity:0.3; z-index:9999999999999999999999999999999999999999999999;}
+iframe#tumblr_controls:hover {top:0px !important; position: fixed!important; -webkit-filter: invert(100%); opacity:0.8; z-index: 99999999999999999999999999999999999999999999999999;}
+{block:ifcustomscrollbar}
+::-webkit-scrollbar {width:{text:scrollbar width}px; height:{text:scrollbar width}px;}
+::-webkit-scrollbar-track-piece {background-color:{color:Scroll}; border:1px solid {color:Scrollbar};}
+::-webkit-scrollbar-thumb {background-color:{color:Scrollbar}; background-image:url({image:Scrollbar image});}
+{/block:ifcustomscrollbar}
+html, body, a, a:link { {block:ifTinyCursor} cursor:url(https://31.media.tumblr.com/bdff266e410c6a626f3d7ba461afff73/tumblr_inline_nb3e1jKNMm1rh7826.png),auto; {/block:IfTinyCursor} }
+body {background:{color:background};background-image:url({image:Background image});background-attachment:fixed;background-repeat:repeat;background-position:center;{block:ifBGcover}background-size:100% 100%;{/block:ifBGcover}
+color:{color:text};overflow:auto; font-family:{select:font};font-size:{select:font size}px; line-height:15px; word-spacing:1px;}
+a {color:{color:links};text-decoration:none;background-color:{color:Links background};}a:hover {color:{color:Links hover};text-decoration:none; {block:ifLinkshovershadow} text-shadow:0px 0px 8px {color:Links shadow}; background-color:transparent; {/block:ifLinkshovershadow} {block:ifTinyCursor}cursor:url(https://31.media.tumblr.com/769de35144cf314ac2a3c6cc0f5f369a/tumblr_inline_nb3e1oTcM51rh7826.png),auto;{/block:IfTinyCursor} } 
+li {line-height:16px; margin-left:-25px; list-style:circle; } 
+small {font-size:10px;} big {font-size:12px;} h2 {line-height:20px; margin:0px; padding:0px;} h1 {line-height:20px; margin:0px; padding:0px;}
+
+#hisoka {top:23%; {block:ifleftsidebar} left:15%; {/block:ifleftsidebar} {block:ifnotleftsidebar} right:15%; {block:ifnotleftsidebar} {block:ifnotTransparentsidebar} padding:10px 5px 10px 5px; background-color:{color:post bg}; border:1px solid {color:post border}; border-radius:3px; {block:ifPostshadow} box-shadow:5px 5px {color:shadow}; {/block:ifPostshadow} {/block:ifnotTransparentsidebar} position:fixed; width:100px; height:auto;z-index:9999; }
+#hxh { width:100px; height:auto; }
+#icon { width:85px; border-radius:7px; margin-left:8px;}
+#icon img { {block:ificonborder} max-width:75px; max-height:75px;  border-radius:7px; border:5px double {color:post border}; background-color:{color:post bg}; {/block:ificonborder} {block:ifnoticonborder}  max-width:85px; max-height:85px; {/block:ifnoticonborder} {block:ifroundedicon} border-radius:100%; {/block:ifroundedicon} } 
+#icon a {border-bottom:0px; background-color:transparent;}
+#gum {  line-height:14px;  margin-top:0px;font-size:10px; font-style:italic; text-align:center;} 
+#illumi { line-height:19px; margin:2px 0 4px 0; text-align:center; font-size:10px; }
+#illumi a { color:{color:Buttons text};background-color:{color:buttons bg}; padding:1px 2px; text-decoration:none; margin:1px; border:1px outset {color:Buttons border};}
+#illumi a:hover {background-color:{color:buttons bg}; padding:1px 2px; color:{color:Buttons text hover}; text-shadow:0px 0px; text-decoration:none; margin:1px; border:1px inset {color:Buttons border};}
+#omg {position:fixed; bottom:10px; left:10px; }
+#omg a:hover {text-shadow:0px 0px; color:{color:links};}
+#hisoillu { background-color:{color:post bg}; border:1px solid {color:post border}; padding:4px 6px 5px 4px; font-size:11px; line-height:11px; border-radius:100%; width:10px; height:10px;} 
+
+#kuroshitsuji {margin:0 auto;} 
+#entries {margin:0 auto; {block:indexpage} width:{text:posts size}px; {/block:indexpage} {block:permalinkpage} width:400px; {/block:permalinkpage}}
+#posts { {block:indexpage} width:{text:posts size}px; margin-top:80px;
+margin-bottom:80px;{/block:indexpage} {block:permalinkpage} margin-top:40px; margin-bottom:40px; width:400px; {/block:permalinkpage} background-color:{color:post bg}; border:1px solid {color:post border}; padding:14px 14px 8px 14px; border-radius:3px; {block:ifPostshadow} box-shadow:5px 5px {color:shadow}; {/block:ifPostshadow}} #posts img {overflow:auto; max-width:100%; }
+#ph { {block:indexpage} max-width:{text:posts size}px; {/block:indexpage} {block:permalinkpage} max-width:400px; {/block:permalinkpage}}
+#ph a {background-color:transparent;}
+#vd {margin-bottom:7px; max-width:100%; overflow:auto;}
+
+.caption {overflow:auto; margin-bottom:8px;}
+.caption p { padding: 0; margin:4px 0 4px 0; }
+.caption blockquote {margin:5px 0 0 0;padding-left:5px;overflow:auto; border-left:4px solid {color:blockquote border};}
+.caption blockquote img { max-width:95%; height:auto; width:auto; overflow:auto; margin:5px 0px; }
+.caption blockquote p { padding: 0; margin:0; }
+blockquote {margin:5px 0 0 5px;padding-left:5px; border-left:4px solid{color:blockquote border};overflow:auto;}
+blockquote p { padding: 0; margin:0px; }
+blockquote img {height:auto; width:auto; max-width:95%; overflow:auto; margin:5px 0px; }
+.txt {margin-bottom:10px; overflow:auto;} 
+.txt p { padding: 0; margin:5px 0 5px 0; }
+.txt blockquote {margin:4px 0 0 4px;padding-left:5px; border-left:4px solid {color:blockquote border};overflow:auto;}
+.txt blockquote p { padding: 0; margin:0px; }
+.txt blockquote img {height:auto; width:auto; max-width:95%; overflow:auto; margin:5px 0px; }
+
+#perma {text-align:left; margin-top:5px; line-height:19px; margin-bottom:3px;}
+#perma a {color:{color:Buttons text}; background-color:{color:buttons bg}; text-shadow:0px 0px; border:1px outset {color:Buttons border};}
+#perma a:hover {color:{color:Buttons text hover}; background-color:{color:buttons bg}; text-shadow:0px 0px; border:1px inset {color:Buttons border};}
+#tags {line-height:17px; margin-top:5px; font-style:italic;}
+#permalink {margin-top:11px; line-height:19px; text-align:left; margin-bottom:3px;}
+
+#title {font-size:14px;margin-bottom:5px;text-align:left; font-weight:bold;}
+#titlequote{text-align:left;margin-right:25px;font-size:18px;line-height:21px;font-weight:bold;}
+#source {margin-top:10px;text-align:right;font-size:10px;text-transform:lowercase;}
+.audiocover {width:90px; height:90px;position:absolute; margin-top:0px;} .audiocover img {width:90px; height:90px;} .audioholder {z-index:9999999999; margin:0px auto auto 0px; position:absolute; opacity:0.3; width:30px; height:30px; margin-top:0px; padding:30px; background-color:#fff;} .audioholder:hover {opacity:0.7;} .audioplayer{width:30px; height:30px; overflow:hidden;background-color:#fff;}.audioinfo { margin-left:100px; overflow:auto; font-size:11px;line-height:16px;height:95px; overflow:auto;}
+.q {overflow:auto;}.as {font-size:12px;line-height:25px; overflow:auto; text-align:left; padding-bottom:5px; border-bottom:1px solid {color:post border}; } .a {margin-top:8px;}
+.chat {overflow:auto;} .chat li { margin-left:0px; margin-bottom:4px;padding:0px; list-style:none;} .chat ol {padding:0;list-style:none; margin:0px 0px 4px 0;} .line {padding:5px 0;} .label {font-weight:bold; margin-right:5px;} 
+#pagi {position:absolute; margin-top:-40px; margin-bottom:50px; float:right;Background-color:{color:post bg}; padding:5px 10px; font-size:12px; border:1px solid {color:post border}; {block:ifPostshadow} box-shadow:5px 5px {color:shadow}; {/block:ifPostshadow} font-style:italic;}
+#pagi a {color:{color:text}; text-decoration:none;  background-color:transparent;} #pagi a:hover {color:{color:text}; text-decoration:underline; background-color:transparent; text-shadow:0px 0px;} 
+
+.pagenotes {{block:IndexPage}display: none!important;{/block:IndexPage}overflow:auto; {block:ifPostshadow} box-shadow:5px 5px {color:shadow}; {/block:ifPostshadow} padding:14px; background-color:{color:post bg}; border:1px solid {color:post border}; border-radius:3px;  width:400px; margin-top:0px;margin-bottom:50px;max-height:150px;text-align:left;}
+.pagenotes img {display:none!important;}.pagenotes li {list-style-type:none;padding-bottom:5px;text-align:left; margin:0 0 0 -40px;} .pagenotes ol {margin:0px;} .pagenotes ul {margin:0px;} 
+#s-m-t-tooltip {max-width:300px;margin:30px;background-color:{color:post bg}; border:1px solid {color:post border}; border-radius:3px; color:{color:text}; padding:3px 5px;z-index:999999999999999999999999999999999999;} 
+</style> </head> 
+{block:ifinfinitescroll} <script type="text/javascript" src="http://codysherman.com/tools/infinite-scrolling/code"></script> {/block:ifinfinitescroll} 
+<script src="http://static.tumblr.com/iuw14ew/VSQma1786/jquery.style-my-tooltips.js"></script> 
+<script>
+(function($){
+$(document).ready(function(){
+$("a[title]").style_my_tooltips({
+tip_follows_cursor:true,
+tip_delay_time:60,
+tip_fade_speed:0,
+attribute:"title"
+});
+});
+})(jQuery);
+</script> 
+<body>
+<div id="hisoka"> <div id="hxh"> {block:ificon}<div id="icon"><center><a title="index page link"href="/"><img src="{image:icon}"></a></center></div> {/block:ificon} {block:ifnotDropdownnavigation} <div id="illumi"> {block:ifLink1name} <a href="{text:link 1 url}">{text:link 1 name}</a>{/block:ifLink1name}{block:ifLink2name} <a href="{text:link 2 url}">{text:link 2 name}</a>{/block:ifLink2name}{block:ifLink3name} <a href="{text:link 3 url}">{text:link 3 name}</a>{/block:ifLink3name} {block:ifLink4name} <a href="{text:link 4 url}">{text:link 4 name}</a>{/block:ifLink4name}</div> {/block:ifnotDropdownnavigation} 
+<div id="gum">{description}</div>  {block:ifDropdownnavigation} <div class="links_list"> <p class="links_head"><a title="click">{text:Drop down navigation txt}</a></p> <div class="links_body"> {block:ifLink1name} <a href="{text:link 1 url}">{text:link 1 name}</a>{/block:ifLink1name}{block:ifLink2name}<br> <a href="{text:link 2 url}">{text:link 2 name}</a>{/block:ifLink2name}{block:ifLink3name}<br> <a href="{text:link 3 url}">{text:link 3 name}</a>{/block:ifLink3name}{block:ifLink4name}<br> <a href="{text:link 4 url}">{text:link 4 name}</a>{/block:ifLink4name}</div></div> {/block:ifDropdownnavigation} </div></div> <div id="omg"><a title="theme"href="http://acvilekerman.tumblr.com/tagged/theme"><div id="hisoillu"><i class="fa fa-code"></i></div></a></div>
+
+<div id="kuroshitsuji"> <div class="autopagerize_page_element" ><div id="entries">{block:Posts}<div id="posts">
+{block:Quote}<div id="titlequote">{Quote}</div>{block:Source}<div id="source">{Source}</div>{/block:Source}{/block:Quote}
+{block:Text}<div class="txt">{block:Title}<div id="title">{Title}</div>{/block:Title}{Body}</div>{/block:Text}
+{block:Link}<div class="txt"><div id="title"><a href="{URL}">{Name}</a></div>{block:Description}{Description}{/block:Description}</div>{/block:Link}
+{block:Chat}{block:Title}<div id="title">{Title}</div>{/block:Title}<div class="chat"><ol>{block:Lines}<li class="line {Alt}">{block:Label}<span class="label">{Label}</span>{/block:Label}{Line}</li>{/block:Lines}</ol></div>{/block:Chat}
+{block:Answer}<div class="q"><div class="as"><b>{Asker}</b> said: <i>"{Question}"</i></div><div class="a">{Answer}</div></div>{/block:Answer}
+
+{block:Photo}<div id="ph">{LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" style="max-width:100%;" />{LinkCloseTag}</div>{/block:Photo}
+{block:Photoset}<div style="max-width:100%;" src="{PhotoURL-HighRes}">{Photoset}</div>{/block:Photoset}
+{block:Video}{block:indexpage}<div id="vd"><center>{Video-250}</center></div>{/block:indexpage}{block:permalinkpage}{Video-400}{/block:permalinkpage}{/block:Video}
+{block:Audio}{block:AudioPlayer}<div class="audioholder"><div class="audioplayer">{AudioPlayerwhite}</div></div>{/block:AudioPlayer}{block:AlbumArt}<img class="audiocover"src="{AlbumArtURL}">{/block:AlbumArt}<div class="audioinfo"><h2><i class="fa fa-volume-up"></i> audio</h2><b>Title:</b> {block:Artist} {Artist} -{/block:Artist} {block:TrackName} {TrackName} {/block:TrackName}{block:Album}<br><b>Album:</b> "{Album}" {/block:Album} {block:PlayCount}<br> <b>Play count:</b> {PlayCount} {/block:PlayCount}</div>{/block:Audio}
+ 
+{block:indexpage}{block:ifCaptions}{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}{/block:ifCaptions}{/block:indexpage}
+{block:IndexPage}<div id="perma"><a style="font-size:11px; padding:3px 6px 3px 6px; "href="{Permalink}">{NoteCountwithlabel}</a>
+<a  style="height:15px; padding:0px 6px 3px 6px; font-size:11px;float:right; text-decoration:none; "href="{ReblogURL}" target="_blank" class="details">reblog</a></div> {block:iftags}{block:HasTags}<div id="tags"><img style="max-height:14px; margin-right:1px;"src="{image:pixel}"> {block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</div>{/block:HasTags}{/block:iftags}{/block:IndexPage}
+
+{block:PermalinkPage}{block:Caption}<div class="caption">{Caption}</div>{/block:Caption} <div id="permalink">{block:Date}Posted on {DayOfMonth}/{Month}/{Year} at {24Hour}:{Minutes}:{Seconds}, {Timeago} with {NoteCountwithlabel}. {/block:Date}{block:HasTags}<br> Tags: {block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}{block:RebloggedFrom}<br> <a title="{ReblogParentName}"href="{ReblogParentURL}" target="_blank">Via</a> / <a title="{ReblogRootName}"href="{ReblogRootURL}" target="_blank">Source</a>{/block:RebloggedFrom}</div>{/block:PermalinkPage}
+</div>
+ 
+{block:PostNotes}<div class="pagenotes">{PostNotes}</div>{/block:PostNotes}
+{/block:Posts}
+{block:ifnotinfinitescroll}  {block:Pagination} <div id="pagi">{block:PreviousPage} <a href="{PreviousPage}">previous</a> {/block:PreviousPage}   ({Currentpage} of {TotalPages} pages) {block:NextPage}  <a href="{NextPage}">next</a> {/block:NextPage}</div>{/block:Pagination} {/block:ifnotinfinitescroll} 
+</div> </div> </div> 
+{block:ContentSource}
+<!-- {SourceURL}{block:SourceLogo}<img src="{BlackLogoURL}"
+width="{LogoWidth}" height="{LogoHeight}" alt="{SourceTitle}" />
+{/block:SourceLogo}
+{block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
+{/block:ContentSource} 
+</body> </html>

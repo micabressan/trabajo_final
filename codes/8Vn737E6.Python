@@ -1,0 +1,44 @@
+class Bot:
+    def __init__(self, token, offset = 0):
+        self.api = "https://api.telegram.org/bot%s/" % token
+        self.offset = offset
+    def confirmToken(self):
+        self.makeRequest("getMe")
+    def clearUpdates(self):
+        emptyBuffer = self.getUpdates(0)
+        while len(emptyBuffer) > 0:
+            self.offset = emptyBuffer[-1]["update_id"]
+            emptyBuffer = self.getUpdates(0)
+    def getUpdates(self, timeout = 60):
+        data = {"offset": self.offset + 1}
+        if timeout > 0:
+            data["timeout"] = timeout
+        updates = self.makeRequest("getUpdates", data)
+        if len(updates["result"]) > 0:
+            self.offset = updates["result"][-1]["update_id"]
+        return updates["result"]
+    def makeRequest(self, method, data = None):
+        from urllib.request import urlopen
+        from urllib.parse import urlencode
+        from json import loads
+        try:
+            if data is not None:
+                data = bytes(urlencode(data), "utf-8")
+            response = urlopen(self.api + method, data, timeout = (int(data["timeout"]) + 15) if "timeout" in data.keys() else 15)
+            result = loads(response.read().decode("utf-8"))
+            if "ok" not in result.keys():
+                raise ApiError("bad response")
+            elif not result["ok"]:
+                raise ApiError(result["description"])
+            else:
+                return result
+        except KeyboardInterrupt:
+            raise KeyboardInterrupt()
+        except Exception as e:
+            raise ApiError("loading failed: " + str(e))
+
+class ApiError(Exception):
+    def __init__(self, message):
+        self.message = message
+    def __str__(self):
+        return self.message

@@ -1,0 +1,2292 @@
+[
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0ca",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "switch"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "value",
+                "options": [
+                    {
+                        "text": "OFF",
+                        "value": false
+                    },
+                    {
+                        "text": "ON",
+                        "value": true
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": false,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Switch changes",
+        "text_template": "{dataitem} turns {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0cb",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "dimmer"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "options": [
+                    {
+                        "text": "equals",
+                        "value": "=="
+                    },
+                    {
+                        "text": "is not",
+                        "value": "!="
+                    },
+                    {
+                        "text": "greater than",
+                        "value": ">"
+                    },
+                    {
+                        "text": "less than",
+                        "value": "<"
+                    },
+                    {
+                        "text": "greater or equals than",
+                        "value": ">="
+                    },
+                    {
+                        "text": "less or equals than",
+                        "value": "<="
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "==",
+                "visibility": true
+            },
+            {
+                "maxValue": 100,
+                "minValue": 0,
+                "name": "value",
+                "renderer": "return value+'%'",
+                "stepValue": 1,
+                "type": "number",
+                "value": 50,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Dimmer changes",
+        "text_template": "{dataitem} {comparator} {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0cc",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "temp"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "options": [
+                    {
+                        "text": "equals",
+                        "value": "=="
+                    },
+                    {
+                        "text": "is not",
+                        "value": "!="
+                    },
+                    {
+                        "text": "greater than",
+                        "value": ">"
+                    },
+                    {
+                        "text": "less than",
+                        "value": "<"
+                    },
+                    {
+                        "text": "greater or equals than",
+                        "value": ">="
+                    },
+                    {
+                        "text": "less or equals than",
+                        "value": "<="
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "==",
+                "visibility": true
+            },
+            {
+                "maxValue": 50,
+                "minValue": -50,
+                "name": "value",
+                "stepValue": 1,
+                "type": "number",
+                "value": 80,
+                "visibility": true
+            }
+        ],
+        "group": "Sensors",
+        "name": "Temperature changes",
+        "text_template": "{dataitem} {comparator} {value}°C",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0cd",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "humidity"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "options": [
+                    {
+                        "text": "equals",
+                        "value": "=="
+                    },
+                    {
+                        "text": "is not",
+                        "value": "!="
+                    },
+                    {
+                        "text": "greater than",
+                        "value": ">"
+                    },
+                    {
+                        "text": "less than",
+                        "value": "<"
+                    },
+                    {
+                        "text": "greater or equals than",
+                        "value": ">="
+                    },
+                    {
+                        "text": "less or equals than",
+                        "value": "<="
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "==",
+                "visibility": true
+            },
+            {
+                "maxValue": 100,
+                "minValue": 0,
+                "name": "value",
+                "stepValue": 1,
+                "type": "number",
+                "value": 80,
+                "visibility": true
+            }
+        ],
+        "group": "Sensors",
+        "name": "Humidity changes",
+        "text_template": "{dataitem} {comparator} {value}%",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d3",
+        "blockOptions": {
+            "method": {
+                "args": {
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "setDimmerState"
+            }
+        },
+        "blockType": "then",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "dimmer"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "maxValue": 100,
+                "minValue": 0,
+                "name": "value",
+                "renderer": "return value+'%'",
+                "stepValue": 1,
+                "type": "number",
+                "value": 50,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Set dimmer",
+        "text_template": "{dataitem} to {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0ce",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "lux"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "options": [
+                    {
+                        "text": "equals",
+                        "value": "=="
+                    },
+                    {
+                        "text": "is not",
+                        "value": "!="
+                    },
+                    {
+                        "text": "greater than",
+                        "value": ">"
+                    },
+                    {
+                        "text": "less than",
+                        "value": "<"
+                    },
+                    {
+                        "text": "greater or equals than",
+                        "value": ">="
+                    },
+                    {
+                        "text": "less or equals than",
+                        "value": "<="
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "==",
+                "visibility": true
+            },
+            {
+                "maxValue": 100000,
+                "minValue": 0,
+                "name": "value",
+                "stepValue": 1,
+                "type": "number",
+                "value": 80,
+                "visibility": true
+            }
+        ],
+        "group": "Sensors",
+        "name": "Lux changes",
+        "text_template": "{dataitem} {comparator} {value} lux",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0cf",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "dwsensor"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "type": "text",
+                "value": "==",
+                "visibility": false
+            },
+            {
+                "name": "value",
+                "options": [
+                    {
+                        "text": "OPENED",
+                        "value": true
+                    },
+                    {
+                        "text": "CLOSED",
+                        "value": false
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": true,
+                "visibility": true
+            }
+        ],
+        "group": "Sensors",
+        "name": "Door/Windows sensor changes",
+        "text_template": "{dataitem} is {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d0",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "motion"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "type": "text",
+                "value": "==",
+                "visibility": false
+            },
+            {
+                "name": "value",
+                "options": [
+                    {
+                        "text": "MOVE",
+                        "value": true
+                    },
+                    {
+                        "text": "STILL",
+                        "value": false
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": true,
+                "visibility": true
+            }
+        ],
+        "group": "Sensors",
+        "name": "Motion detected",
+        "text_template": "{dataitem} detects a {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d1",
+        "blockOptions": {
+            "condition_type": "event",
+            "method": {
+                "args": {
+                    "comparator": "comparator",
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "isDataitemState"
+            },
+            "trigger_object": {
+                "dataitem": "dataitem"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "remote"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "comparator",
+                "type": "text",
+                "value": "==",
+                "visibility": false
+            },
+            {
+                "name": "value",
+                "options": [
+                    {
+                        "text": "button 1 short press",
+                        "value": 1
+                    },
+                    {
+                        "text": "button 1 long press",
+                        "value": 2
+                    },
+                    {
+                        "text": "button 2 short press",
+                        "value": 3
+                    },
+                    {
+                        "text": "button 2 long press",
+                        "value": 4
+                    },
+                    {
+                        "text": "button 3 short press",
+                        "value": 5
+                    },
+                    {
+                        "text": "button 3 long press",
+                        "value": 6
+                    },
+                    {
+                        "text": "button 4 short press",
+                        "value": 7
+                    },
+                    {
+                        "text": "button 4 long press",
+                        "value": 8
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": 1,
+                "visibility": true
+            }
+        ],
+        "group": "Remotes",
+        "name": "Remote button pressed",
+        "text_template": "{dataitem} is {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d2",
+        "blockOptions": {
+            "method": {
+                "args": {
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "setSwitchState"
+            }
+        },
+        "blockType": "then",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "switch"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "name": "value",
+                "options": [
+                    {
+                        "text": "OFF",
+                        "value": false
+                    },
+                    {
+                        "text": "ON",
+                        "value": true
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": false,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Set switch",
+        "text_template": "{dataitem} to {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d4",
+        "blockOptions": {
+            "method": {
+                "args": {
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "increaseDimmer"
+            }
+        },
+        "blockType": "then",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "dimmer"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "maxValue": 100,
+                "minValue": 0,
+                "name": "value",
+                "renderer": "return value+'%'",
+                "stepValue": 1,
+                "type": "number",
+                "value": 10,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Dimmer increase",
+        "text_template": "Increase {dataitem} with {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d5",
+        "blockOptions": {
+            "method": {
+                "args": {
+                    "dataitem": "dataitem",
+                    "value": "value"
+                },
+                "name": "decreaseDimmer"
+            }
+        },
+        "blockType": "then",
+        "fields": [
+            {
+                "dataitem_filter": [
+                    "dimmer"
+                ],
+                "name": "dataitem",
+                "type": "dataitem",
+                "visibility": true
+            },
+            {
+                "maxValue": 100,
+                "minValue": 0,
+                "name": "value",
+                "renderer": "return value+'%'",
+                "stepValue": 1,
+                "type": "number",
+                "value": 10,
+                "visibility": true
+            }
+        ],
+        "group": "Actuators",
+        "name": "Dimmer decrease",
+        "text_template": "Decrease {dataitem} with {value}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d6",
+        "blockOptions": {
+            "condition_type": "at",
+            "method": {
+                "args": {
+                    "day": null,
+                    "month": null,
+                    "time": "time",
+                    "weekday": null,
+                    "year": null
+                },
+                "name": "isDate"
+            },
+            "trigger_object": {
+                "day": null,
+                "month": null,
+                "time": "time",
+                "weekday": null,
+                "year": null
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "Every day at...",
+        "text_template": "at {time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d7",
+        "blockOptions": {
+            "condition_type": "at",
+            "method": {
+                "args": {
+                    "day": null,
+                    "month": null,
+                    "time": "time",
+                    "weekday": "weekday",
+                    "year": null
+                },
+                "name": "isDate"
+            },
+            "trigger_object": {
+                "day": null,
+                "month": null,
+                "time": "time",
+                "weekday": "weekday",
+                "year": null
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "weekday",
+                "options": [
+                    {
+                        "text": "Sunday",
+                        "value": "0"
+                    },
+                    {
+                        "text": "Monday",
+                        "value": "1"
+                    },
+                    {
+                        "text": "Tuesday",
+                        "value": "2"
+                    },
+                    {
+                        "text": "Wednesday",
+                        "value": "3"
+                    },
+                    {
+                        "text": "Thursday",
+                        "value": "4"
+                    },
+                    {
+                        "text": "Friday",
+                        "value": "5"
+                    },
+                    {
+                        "text": "Saturday",
+                        "value": "6"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "0",
+                "visibility": true
+            },
+            {
+                "name": "time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "On a day of the week",
+        "text_template": "Every {weekday} on {time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d8",
+        "blockOptions": {
+            "condition_type": "at",
+            "method": {
+                "args": {
+                    "day": "day",
+                    "month": null,
+                    "time": "time",
+                    "weekday": null,
+                    "year": null
+                },
+                "name": "isDate"
+            },
+            "trigger_object": {
+                "day": "day",
+                "month": null,
+                "time": "time",
+                "weekday": null,
+                "year": null
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "On a day of the month",
+        "text_template": "Every {day} of the month at {time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0d9",
+        "blockOptions": {
+            "condition_type": "at",
+            "method": {
+                "args": {
+                    "day": "day",
+                    "month": "month",
+                    "time": "time",
+                    "weekday": null,
+                    "year": "year"
+                },
+                "name": "isDate"
+            },
+            "trigger_object": {
+                "day": "day",
+                "month": "month",
+                "time": "time",
+                "weekday": null,
+                "year": "year"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "year",
+                "options": [
+                    {
+                        "text": "2014",
+                        "value": "2014"
+                    },
+                    {
+                        "text": "2015",
+                        "value": "2015"
+                    },
+                    {
+                        "text": "2016",
+                        "value": "2016"
+                    },
+                    {
+                        "text": "2017",
+                        "value": "2017"
+                    },
+                    {
+                        "text": "2018",
+                        "value": "2018"
+                    },
+                    {
+                        "text": "2019",
+                        "value": "2019"
+                    },
+                    {
+                        "text": "2020",
+                        "value": "2020"
+                    },
+                    {
+                        "text": "2021",
+                        "value": "2021"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "2014",
+                "visibility": true
+            },
+            {
+                "name": "month",
+                "options": [
+                    {
+                        "text": "January",
+                        "value": "1"
+                    },
+                    {
+                        "text": "February",
+                        "value": "2"
+                    },
+                    {
+                        "text": "March",
+                        "value": "3"
+                    },
+                    {
+                        "text": "April",
+                        "value": "4"
+                    },
+                    {
+                        "text": "May",
+                        "value": "5"
+                    },
+                    {
+                        "text": "June",
+                        "value": "6"
+                    },
+                    {
+                        "text": "July",
+                        "value": "7"
+                    },
+                    {
+                        "text": "August",
+                        "value": "8"
+                    },
+                    {
+                        "text": "September",
+                        "value": "9"
+                    },
+                    {
+                        "text": "October",
+                        "value": "10"
+                    },
+                    {
+                        "text": "November",
+                        "value": "11"
+                    },
+                    {
+                        "text": "December",
+                        "value": "12"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "On specific date",
+        "text_template": "On {day} {month} {year} at {time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0da",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "end_day": "end_day",
+                    "end_month": "end_month",
+                    "end_time": "end_time",
+                    "end_weekday": null,
+                    "end_year": "end_year",
+                    "start_day": "start_day",
+                    "start_month": "start_month",
+                    "start_time": "start_time",
+                    "start_weekday": null,
+                    "start_year": "start_year"
+                },
+                "name": "isDateRange"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "start_year",
+                "options": [
+                    {
+                        "text": "2014",
+                        "value": "2014"
+                    },
+                    {
+                        "text": "2015",
+                        "value": "2015"
+                    },
+                    {
+                        "text": "2016",
+                        "value": "2016"
+                    },
+                    {
+                        "text": "2017",
+                        "value": "2017"
+                    },
+                    {
+                        "text": "2018",
+                        "value": "2018"
+                    },
+                    {
+                        "text": "2019",
+                        "value": "2019"
+                    },
+                    {
+                        "text": "2020",
+                        "value": "2020"
+                    },
+                    {
+                        "text": "2021",
+                        "value": "2021"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "2014",
+                "visibility": true
+            },
+            {
+                "name": "end_year",
+                "options": [
+                    {
+                        "text": "2014",
+                        "value": "2014"
+                    },
+                    {
+                        "text": "2015",
+                        "value": "2015"
+                    },
+                    {
+                        "text": "2016",
+                        "value": "2016"
+                    },
+                    {
+                        "text": "2017",
+                        "value": "2017"
+                    },
+                    {
+                        "text": "2018",
+                        "value": "2018"
+                    },
+                    {
+                        "text": "2019",
+                        "value": "2019"
+                    },
+                    {
+                        "text": "2020",
+                        "value": "2020"
+                    },
+                    {
+                        "text": "2021",
+                        "value": "2021"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "2014",
+                "visibility": true
+            },
+            {
+                "name": "start_month",
+                "options": [
+                    {
+                        "text": "January",
+                        "value": "1"
+                    },
+                    {
+                        "text": "February",
+                        "value": "2"
+                    },
+                    {
+                        "text": "March",
+                        "value": "3"
+                    },
+                    {
+                        "text": "April",
+                        "value": "4"
+                    },
+                    {
+                        "text": "May",
+                        "value": "5"
+                    },
+                    {
+                        "text": "June",
+                        "value": "6"
+                    },
+                    {
+                        "text": "July",
+                        "value": "7"
+                    },
+                    {
+                        "text": "August",
+                        "value": "8"
+                    },
+                    {
+                        "text": "September",
+                        "value": "9"
+                    },
+                    {
+                        "text": "October",
+                        "value": "10"
+                    },
+                    {
+                        "text": "November",
+                        "value": "11"
+                    },
+                    {
+                        "text": "December",
+                        "value": "12"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "end_month",
+                "options": [
+                    {
+                        "text": "January",
+                        "value": "1"
+                    },
+                    {
+                        "text": "February",
+                        "value": "2"
+                    },
+                    {
+                        "text": "March",
+                        "value": "3"
+                    },
+                    {
+                        "text": "April",
+                        "value": "4"
+                    },
+                    {
+                        "text": "May",
+                        "value": "5"
+                    },
+                    {
+                        "text": "June",
+                        "value": "6"
+                    },
+                    {
+                        "text": "July",
+                        "value": "7"
+                    },
+                    {
+                        "text": "August",
+                        "value": "8"
+                    },
+                    {
+                        "text": "September",
+                        "value": "9"
+                    },
+                    {
+                        "text": "October",
+                        "value": "10"
+                    },
+                    {
+                        "text": "November",
+                        "value": "11"
+                    },
+                    {
+                        "text": "December",
+                        "value": "12"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "start_day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "end_day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "start_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            },
+            {
+                "name": "end_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "Between two specific dates",
+        "text_template": "Beween {start_day} {start_month} {start_year} at {start_time} and {end_day} {end_month} {end_year} at {end_time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0db",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "end_day": null,
+                    "end_month": null,
+                    "end_time": "end_time",
+                    "end_weekday": "end_weekday",
+                    "end_year": null,
+                    "start_day": null,
+                    "start_month": null,
+                    "start_time": "start_time",
+                    "start_weekday": "start_weekday",
+                    "start_year": null
+                },
+                "name": "isDateRange"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "start_weekday",
+                "options": [
+                    {
+                        "text": "Sunday",
+                        "value": "0"
+                    },
+                    {
+                        "text": "Monday",
+                        "value": "1"
+                    },
+                    {
+                        "text": "Tuesday",
+                        "value": "2"
+                    },
+                    {
+                        "text": "Wednesday",
+                        "value": "3"
+                    },
+                    {
+                        "text": "Thursday",
+                        "value": "4"
+                    },
+                    {
+                        "text": "Friday",
+                        "value": "5"
+                    },
+                    {
+                        "text": "Saturday",
+                        "value": "6"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "0",
+                "visibility": true
+            },
+            {
+                "name": "end_weekday",
+                "options": [
+                    {
+                        "text": "Sunday",
+                        "value": "0"
+                    },
+                    {
+                        "text": "Monday",
+                        "value": "1"
+                    },
+                    {
+                        "text": "Tuesday",
+                        "value": "2"
+                    },
+                    {
+                        "text": "Wednesday",
+                        "value": "3"
+                    },
+                    {
+                        "text": "Thursday",
+                        "value": "4"
+                    },
+                    {
+                        "text": "Friday",
+                        "value": "5"
+                    },
+                    {
+                        "text": "Saturday",
+                        "value": "6"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "0",
+                "visibility": true
+            },
+            {
+                "name": "start_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            },
+            {
+                "name": "end_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "Between two days of the week",
+        "text_template": "Between {start_weekday} at {start_time} and {end_weekday} at {end_time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0dd",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "end_day": null,
+                    "end_month": null,
+                    "end_time": "end_time",
+                    "end_weekday": null,
+                    "end_year": null,
+                    "start_day": null,
+                    "start_month": null,
+                    "start_time": "start_time",
+                    "start_weekday": null,
+                    "start_year": null
+                },
+                "name": "isDateRange"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "start_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            },
+            {
+                "name": "end_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "Between two time sets",
+        "text_template": "Between {start_time} and {end_time}",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0de",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "day": null,
+                    "month": null,
+                    "time": null,
+                    "weekday": "weekday",
+                    "year": null
+                },
+                "name": "isDate"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "weekday",
+                "type": "text",
+                "value": "6|7",
+                "visibility": false
+            }
+        ],
+        "group": "Time",
+        "name": "If it is a weekend",
+        "text_template": "If it is a weekend",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0dc",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "end_day": "end_day",
+                    "end_month": null,
+                    "end_time": "end_time",
+                    "end_weekday": null,
+                    "end_year": null,
+                    "start_day": "start_day",
+                    "start_month": null,
+                    "start_time": "start_time",
+                    "start_weekday": null,
+                    "start_year": null
+                },
+                "name": "isDateRange"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "start_day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "end_day",
+                "options": [
+                    {
+                        "text": "1st",
+                        "value": "1"
+                    },
+                    {
+                        "text": "2nd",
+                        "value": "2"
+                    },
+                    {
+                        "text": "3rd",
+                        "value": "3"
+                    },
+                    {
+                        "text": "4th",
+                        "value": "4"
+                    },
+                    {
+                        "text": "5th",
+                        "value": "5"
+                    },
+                    {
+                        "text": "6th",
+                        "value": "6"
+                    },
+                    {
+                        "text": "7th",
+                        "value": "7"
+                    },
+                    {
+                        "text": "8th",
+                        "value": "8"
+                    },
+                    {
+                        "text": "9th",
+                        "value": "9"
+                    },
+                    {
+                        "text": "10th",
+                        "value": "10"
+                    },
+                    {
+                        "text": "11th",
+                        "value": "11"
+                    },
+                    {
+                        "text": "12th",
+                        "value": "12"
+                    },
+                    {
+                        "text": "13th",
+                        "value": "13"
+                    },
+                    {
+                        "text": "14th",
+                        "value": "14"
+                    },
+                    {
+                        "text": "15th",
+                        "value": "15"
+                    },
+                    {
+                        "text": "16th",
+                        "value": "16"
+                    },
+                    {
+                        "text": "17th",
+                        "value": "17"
+                    },
+                    {
+                        "text": "18th",
+                        "value": "18"
+                    },
+                    {
+                        "text": "19th",
+                        "value": "19"
+                    },
+                    {
+                        "text": "20th",
+                        "value": "20"
+                    },
+                    {
+                        "text": "21st",
+                        "value": "21"
+                    },
+                    {
+                        "text": "22nd",
+                        "value": "22"
+                    },
+                    {
+                        "text": "23th",
+                        "value": "23"
+                    },
+                    {
+                        "text": "24th",
+                        "value": "24"
+                    },
+                    {
+                        "text": "25th",
+                        "value": "25"
+                    },
+                    {
+                        "text": "26th",
+                        "value": "26"
+                    },
+                    {
+                        "text": "27th",
+                        "value": "27"
+                    },
+                    {
+                        "text": "28th",
+                        "value": "28"
+                    },
+                    {
+                        "text": "29th",
+                        "value": "29"
+                    },
+                    {
+                        "text": "30th",
+                        "value": "30"
+                    },
+                    {
+                        "text": "31st",
+                        "value": "31"
+                    },
+                    {
+                        "text": "last day",
+                        "value": "32"
+                    }
+                ],
+                "renderer": "for (var option in options) { if(options[option].value === value){return options[option].text}}",
+                "type": "option",
+                "value": "1",
+                "visibility": true
+            },
+            {
+                "name": "start_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            },
+            {
+                "name": "end_time",
+                "renderer": "var hms = value.split(':'), h = +hms[0], suffix = (h < 12) ? 'AM' : 'PM'; hms[0] = h % 12 || 12; hms[0] = String(hms[0]).lpad('0',2); hms[1] = String(hms[1]).lpad('0',2); return hms.join(':') + ' ' + suffix",
+                "type": "time",
+                "value": "12:00",
+                "visibility": true
+            }
+        ],
+        "group": "Time",
+        "name": "Between two dates",
+        "text_template": "Between {start_day} at {start_time} and {end_day} at {end_time} of every month",
+        "version": 92
+    },
+    {
+        "_id": "55a91d2fdd1a0f789dc0f0df",
+        "blockOptions": {
+            "condition_type": "if",
+            "method": {
+                "args": {
+                    "day": null,
+                    "month": null,
+                    "time": null,
+                    "weekday": "weekday",
+                    "year": null
+                },
+                "name": "isDate"
+            }
+        },
+        "blockType": "when",
+        "fields": [
+            {
+                "name": "weekday",
+                "type": "text",
+                "value": "1|2|3|4|5",
+                "visibility": false
+            }
+        ],
+        "group": "Time",
+        "name": "If it is a weekday",
+        "text_template": "If it is a weekday",
+        "version": 92
+    }
+]

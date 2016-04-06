@@ -1,0 +1,12 @@
+module Main where
+import qualified Data.Vector.Unboxed as U
+
+main :: IO ()
+main = print . sum . amicableList $ [0..10000]
+
+amicableList :: [Int] -> [Int]
+amicableList = U.toList . U.ifilter (\x y -> x /= sumd y && x == (sumd . sumd) y) . U.fromList
+    where sumd = sum . divisors
+
+divisors :: Int -> [Int]
+divisors n = 1 : filter ((==0) . rem n) [2..(n `quot` 2)]

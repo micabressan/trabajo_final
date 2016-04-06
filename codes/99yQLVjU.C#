@@ -1,0 +1,719 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+
+public class WallCreate : MonoBehaviour{
+
+    public GameObject controller_one, controller_two, controller_wall, controller_w_one, controller_w_two, controller_window, controller_door, controller_roof, point_roof;
+    public GameObject[] Doors;
+    public GameObject[] one = new GameObject[1], two = new GameObject[1], wall = new GameObject[1], w_one = new GameObject[1], w_two = new GameObject[1], wind = new GameObject[1], doors = new GameObject[1];
+    public GameObject[] RoofWall;
+    GameObject centerRoof, _ground, roof, mainRoof;
+    public Transform ground;
+    public int n = 0, n_click = 0, k = 0, k_click = 0, wo, j = 0, l = 0, l_one;
+    public List<WallProperties> wp = new List<WallProperties>();
+    public float heightWall, roofHeight = 0.1f;
+    public Vector3 SizeWindow = Vector3.zero;
+    public int mode, modeRoof;
+    public GameObject SelectWall;
+    public bool showWall;
+    public Transform Land;
+    public Texture texture, textureRoof;
+    public Material Ex, RoofMat;
+    public GameObject WindowObject, DoorObject;
+    bool[] bols, newBols;
+    GameObject[] WO = new GameObject[0];
+    public GameObject Center;
+    public bool nonClick;
+    void Start()
+    {
+        WallProperties startCount = new WallProperties();
+        wp.Add(startCount);
+    }
+
+    void Update()
+    {
+
+        foreach (WallProperties _wp in wp)
+            if(_wp.SelfObject != null)
+            _wp.SelfObject.GetComponent<MeshRenderer>().enabled = showWall;
+        foreach (GameObject go in one)
+            if(go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in two)
+            if (go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in wall)
+            if (go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in w_one)
+            if (go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in w_two)
+            if (go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in wind)
+            if (go != null)
+            go.SetActive(!showWall);
+        foreach (GameObject go in WO)
+            if (go != null)
+                go.SetActive(showWall);
+        foreach (GameObject go in doors)
+            if (go != null)
+                go.SetActive(!showWall);
+
+        if(_ground != null)
+        _ground.SetActive(showWall);
+        if(roof != null)
+        roof.SetActive(showWall);
+        if(mainRoof != null)
+        mainRoof.SetActive(showWall);
+
+        if(mode != 4)
+        {
+            foreach (GameObject go in RoofWall)
+                if (go != null)
+                    go.SetActive(!showWall);
+            if (centerRoof != null)
+                centerRoof.SetActive(!showWall);
+        }
+
+        if (!Input.GetMouseButton(2))
+        {
+            if (mode == 0)
+            {
+                if(doors[0] != null)
+                doors[0].SetActive(false);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (n == n_click)
+                    {
+
+                        if (!Input.GetKey(KeyCode.LeftShift))
+                        {
+                            if (one[n] == null)
+                            {
+                                RaycastHit hit;
+                                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                                {
+                                    one[n] = Instantiate(controller_one, hit.point, Quaternion.FromToRotation(-Vector3.down, hit.normal)) as GameObject;
+                                    one[n].transform.position = new Vector3(one[n].transform.position.x, Land.transform.position.y, one[n].transform.position.z);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (two[n - 1] != null && one[n] == null)
+
+                                one[n] = two[n - 1];
+                        }
+                        if (two[n] == null && one[n] != null)
+                        {
+                            RaycastHit hit;
+                            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+
+                            if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                            {
+                                if (one[n].transform.position != hit.point || (Input.GetKey(KeyCode.LeftShift) && one[n] == null))
+                                {
+                                    two[n] = Instantiate(controller_two, hit.point, Quaternion.FromToRotation(-Vector3.down, hit.normal)) as GameObject;
+                                    two[n].transform.position = new Vector3(two[n].transform.position.x, Land.transform.position.y, two[n].transform.position.z);
+                                    wall[n] = Instantiate(controller_wall, hit.point, Quaternion.identity) as GameObject;
+                                    wall[n].transform.LookAt(one[n].transform.position);
+                                    wall[n].transform.localScale = new Vector3(0.01f, 1, Vector3.Distance(one[n].transform.position, two[n].transform.position) / 10);
+                                    wp[n].SelfObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                                    Vector3 toPoint = new Vector3(one[n].transform.position.x,
+                                        one[n].transform.position.y, one[n].transform.position.z + Vector3.Distance(one[n].transform.position, two[n].transform.position));
+                                    Transform[] w1 = new Transform[] { one[n].transform }, w2 = new Transform[] { one[n].transform };
+                                    Destroy(wp[n].SelfObject.GetComponent<Collider>());
+                                    wp[n].SelfObject.GetComponent<MeshFilter>().mesh = Edit(w1, w2, one[n].transform.position, Vector3.zero, toPoint, heightWall, SizeWindow.x, SizeWindow.y, SizeWindow.z, wp[0].door);
+                                    Transform perent = GameObject.CreatePrimitive(PrimitiveType.Capsule).transform;
+                                    Destroy(perent.GetComponent<Collider>());
+                                    perent.GetComponent<MeshRenderer>().enabled = false;
+                                    perent.position = wp[n].SelfObject.GetComponent<MeshFilter>().mesh.vertices[0];
+                                    wp[n].SelfTransform.parent = perent;
+                                    Material mat = new Material(Ex);
+                                    mat.mainTexture = texture;
+                                    wp[n].SelfObject.GetComponent<MeshRenderer>().material = mat;
+                                    perent.transform.position = one[n].transform.position;
+                                    wp[n].SelfTransform.localPosition = new Vector3(wp[n].SelfTransform.localPosition.x - SizeWindow.x, wp[n].SelfTransform.localPosition.y, wp[n].SelfTransform.localPosition.z);
+                                    perent.LookAt(two[n].transform.position);
+                                    wp[n].SelfObject.tag = "Wall";
+                                    wp[n].SelfObject.name = n.ToString();
+                                    wp[n].SelfObject.AddComponent<MeshCollider>().convex = true;
+                                    wp[n].SelfObject.GetComponent<MeshRenderer>().enabled = showWall;
+                                    n++;
+                                    WallProperties Count = new WallProperties();
+                                    wp.Add(Count);
+                                    Array.Resize(ref one, n + 1);
+                                    Array.Resize(ref two, n + 1);
+                                    Array.Resize(ref wall, n + 1);
+                                }
+
+
+                            }
+                        }
+
+
+                    }
+
+                }
+                else
+                    n_click = n;
+            }
+            if (mode == 1)
+            {
+                if (doors[0] != null)
+                doors[0].SetActive(false);
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+
+                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                {
+
+                    if (hit.transform.gameObject.tag == "Wall")
+                    {
+                        if (!Input.GetMouseButtonDown(0))
+                        {
+                            if (k == k_click)
+                            {
+                                if (w_one[k] == null)
+                                    w_one[k] = Instantiate(controller_w_one, new Vector3(hit.point.x, 0.1f, hit.point.z), Quaternion.identity) as GameObject;
+                                else
+                                    w_one[k].transform.position = new Vector3(hit.point.x, 0.12555f, hit.point.z);
+                            }
+                            else
+                            {
+                                if (hit.transform.gameObject == SelectWall)
+                                {
+                                    if (w_two[k - 1] == null)
+                                    {
+                                        w_two[k - 1] = Instantiate(controller_w_two, new Vector3(hit.point.x, 0.1f, hit.point.z), Quaternion.identity) as GameObject;
+                                        wind[k - 1] = Instantiate(controller_window, new Vector3(w_one[k - 1].transform.position.x, 0.12555f, w_one[k - 1].transform.position.z), Quaternion.identity) as GameObject;
+                                    }
+                                    else
+                                    {
+                                        w_two[k - 1].transform.position = new Vector3(hit.point.x, 0.12555f, hit.point.z);
+                                        wind[k - 1].transform.localScale = new Vector3(0.01f, 1, Vector3.Distance(w_one[k - 1].transform.position, w_two[k - 1].transform.position) / 10);
+                                        wind[k - 1].transform.LookAt(w_two[k - 1].transform.position);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (k == k_click)
+                            {
+                                if (w_one[k] != null)
+                                {
+                                    SelectWall = hit.transform.gameObject;
+                                    k++;
+                                    Array.Resize(ref w_one, k + 1);
+                                }
+                            }
+                            else
+                            {
+                                k_click = k;
+                                Array.Resize(ref w_two, k + 1);
+                                Array.Resize(ref wind, k + 1);
+                                int numb = 0;
+                                if(SelectWall != null)
+                                numb = System.Convert.ToInt32(SelectWall.name);
+                                Array.Resize(ref wp[numb].startCutWindowPoint, wp[numb].k + 1);
+                                Array.Resize(ref wp[numb].endCutWindowPoint, wp[numb].k+1);
+                                Array.Resize(ref wp[numb].rezerv, wp[numb].k + 1);
+                                if (Vector3.Distance(wp[numb].SelfTransform.position, w_one[k - 1].transform.position) > Vector3.Distance(wp[numb].SelfTransform.position, w_two[k - 1].transform.position))
+                                {
+                                    Vector3 _pos = w_one[k - 1].transform.position;
+                                    w_one[k - 1].transform.position = w_two[k - 1].transform.position;
+                                    w_two[k - 1].transform.position = _pos;
+                                }
+                               
+                                wp[numb].startCutWindowPoint[wp[numb].k] = w_one[k - 1].transform;
+                                wp[numb].endCutWindowPoint[wp[numb].k] = w_two[k - 1].transform;
+                                wp[numb].rezerv[wp[numb].k] = k - 1;
+                                Array.Resize(ref wp[numb].door, wp[numb].door.Length + 1);
+                                wp[numb].k++;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            if (mode == 2)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    bols = wp[i].door;
+                    newBols = new bool[bols.Length];
+                    if (wp[i].endCutWindowPoint.Length > 0)
+                    {
+                        for (int h = 0; h < wp[i].rezerv.Length; h++)
+                        {
+   
+                                wp[i].startCutWindowPoint[h] = w_one[wp[i].rezerv[h]].transform;
+                                wp[i].endCutWindowPoint[h] = w_two[wp[i].rezerv[h]].transform;
+                          
+                        }
+
+                       
+                        wp[i].startCutWindowPoint = Sort(wp[i].startCutWindowPoint, wp[i].SelfTransform);
+                        wp[i].endCutWindowPoint = Sort(wp[i].endCutWindowPoint, wp[i].SelfTransform);
+                       
+                        wp[i].SelfObject.GetComponent<MeshFilter>().mesh = null;
+                        Transform perent = wp[i].SelfTransform.parent;
+                        perent.rotation = Quaternion.identity;
+                        wp[i].SelfTransform.parent = null;
+                        wp[i].SelfTransform.rotation = Quaternion.identity;
+                        Vector3 toPoint = new Vector3(one[i].transform.position.x,
+                                     one[i].transform.position.y, one[i].transform.position.z + Vector3.Distance(one[i].transform.position, two[i].transform.position));
+                        
+
+                        for (int u = 0; u < wp[i].startCutWindowPoint.Length; u++)
+                        {
+                            wp[i].startCutWindowPoint[u] = CaluclateWindow(wp[i].startCutWindowPoint[u], one[i].transform.position, true, wp[i].SelfTransform);
+                            wp[i].endCutWindowPoint[u] = CaluclateWindow(wp[i].endCutWindowPoint[u], one[i].transform.position, true, wp[i].SelfTransform);
+                             float distance = Vector3.Distance(wp[i].startCutWindowPoint[u].position, wp[i].endCutWindowPoint[u].position)/16.5f;
+                            Array.Resize(ref WO, WO.Length + 1);
+                            if (!newBols[u])
+                            {
+                                WO[wo] = Instantiate(WindowObject, wp[i].startCutWindowPoint[u].localPosition + new Vector3(-SizeWindow.z / 2, SizeWindow.y, 0), Quaternion.identity) as GameObject;
+                                WO[wo].transform.localScale = new Vector3(distance, WO[wo].transform.localScale.y, WO[wo].transform.localScale.z);
+                                WO[wo].transform.localRotation = Quaternion.Euler(0, -90, 0);
+                                WO[wo].transform.parent = wp[i].SelfTransform;
+                            }
+                            else
+                            {
+                                WO[wo] = Instantiate(DoorObject, wp[i].startCutWindowPoint[u].localPosition + new Vector3(-SizeWindow.z / 2, 0, 0), Quaternion.identity) as GameObject;
+                                WO[wo].transform.localRotation = Quaternion.Euler(0, -90, 0);
+                                WO[wo].transform.parent = wp[i].SelfTransform;
+                            }
+
+                             wo++;
+                         }
+                         wp[i].SelfTransform.GetComponent<MeshFilter>().mesh = Edit(wp[i].startCutWindowPoint, wp[i].endCutWindowPoint, one[i].transform.position, Vector3.zero,
+                             toPoint, heightWall, SizeWindow.x, SizeWindow.y, SizeWindow.z, newBols);
+
+                       perent.position = wp[i].SelfObject.GetComponent<MeshFilter>().mesh.vertices[0];
+                      wp[i].SelfTransform.parent = perent;
+                         perent.transform.position = one[i].transform.position;
+                        wp[i].SelfTransform.localPosition = new Vector3(wp[i].SelfTransform.localPosition.x - SizeWindow.x, wp[i].SelfTransform.localPosition.y, wp[i].SelfTransform.localPosition.z);
+                         perent.LookAt(two[i].transform.position);
+                        
+                        
+                    }
+                }
+                mode = 1;
+            }
+
+            if (mode == 3)
+            {
+             
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+
+                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                {
+
+                    if (hit.transform.gameObject.tag == "Wall")
+                    {
+                        
+                            if (!Input.GetMouseButtonDown(0))
+                            {
+
+                                if (doors[0] == null)
+                                {
+                                    doors[0] = Instantiate(controller_door, new Vector3(hit.point.x, 0.12555f, hit.point.z), Quaternion.identity) as GameObject;
+                                    Array.Resize(ref doors, doors.Length + 1);
+                                    j++;
+                                    GameObject t1 = GameObject.FindGameObjectWithTag("DoorPoint1");
+                                    GameObject t2 = GameObject.FindGameObjectWithTag("DoorPoint2");
+                                    t1.tag = "Non";
+                                    t2.tag = "Non";
+                                }
+                                else
+                                {
+                                    doors[0].transform.rotation = hit.transform.rotation;
+                                    doors[0].transform.position = new Vector3(hit.point.x, 0.12557f, hit.point.z);
+                                }
+                                SelectWall = hit.transform.gameObject;
+
+                            }
+                            else
+                            {
+                                doors[j] = Instantiate(controller_door, doors[0].transform.position, doors[0].transform.rotation) as GameObject;
+
+                                k++;
+                                int numb = 0;
+                                if (SelectWall != null)
+                                    numb = System.Convert.ToInt32(SelectWall.name);
+                                Array.Resize(ref doors, doors.Length + 1);
+                                Array.Resize(ref w_one, w_one.Length + 1);
+                                Array.Resize(ref w_two, w_two.Length + 1);
+                                Array.Resize(ref wp[numb].startCutWindowPoint, wp[numb].k + 1);
+                                Array.Resize(ref wp[numb].endCutWindowPoint, wp[numb].k + 1);
+                                Array.Resize(ref wp[numb].rezerv, wp[numb].k + 1);
+                              //  Array.Resize(ref dTi1, dTi1.Length + 1);
+                              //  Array.Resize(ref dTi2, dTi2.Length + 1);
+                                GameObject t1 = GameObject.FindGameObjectWithTag("DoorPoint1");
+                                GameObject t2 = GameObject.FindGameObjectWithTag("DoorPoint2");
+                                w_one[k-1] = t1;
+                                w_two[k-1] = t2;
+                                if (Vector3.Distance(wp[numb].SelfTransform.position, w_one[k - 1].transform.position) > Vector3.Distance(wp[numb].SelfTransform.position, w_two[k - 1].transform.position))
+                                {
+                                    Vector3 _pos = w_one[k - 1].transform.position;
+                                    w_one[k - 1].transform.position = w_two[k - 1].transform.position;
+                                    w_two[k - 1].transform.position = _pos;
+                                }
+
+                                wp[numb].startCutWindowPoint[wp[numb].k] = w_one[k - 1].transform;
+                                wp[numb].endCutWindowPoint[wp[numb].k] = w_two[k - 1].transform;
+
+                                wp[numb].rezerv[wp[numb].k] = k-1;
+                                wp[numb].door[wp[numb].k] = true;
+                                wp[numb].k++;
+                                Array.Resize(ref wp[numb].door, wp[numb].door.Length + 1);
+                                t1.tag = "Untagged";
+                                t2.tag = "Untagged";
+                               // dTi1[j - 1] = t1;
+                                //dTi2[j - 1] = t2;
+                                j++;
+                             
+                            }
+                        
+                       
+                    }
+                }
+
+            }
+            if (mode == 4)
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                foreach (GameObject og in RoofWall)
+                    if (og != null)
+                        og.SetActive(true);
+                if (centerRoof != null)
+                    centerRoof.SetActive(true);
+
+                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (hit.transform.gameObject.tag == "Wall")
+                        {
+                            SelectWall = hit.transform.gameObject;
+                            int numb = System.Convert.ToInt32(hit.transform.name);
+                            GameObject wl = Instantiate(controller_roof, one[numb].transform.position, one[numb].transform.rotation) as GameObject;
+                            wl.transform.localScale = new Vector3(wl.transform.localScale.x, wl.transform.localScale.y, Vector3.Distance(one[numb].transform.position, two[numb].transform.position)/10);
+                            wl.transform.LookAt(two[numb].transform.position);
+                            wl.tag = "RoofWall";
+                            Array.Resize(ref RoofWall, RoofWall.Length + 1);
+                            wl.name = numb.ToString();
+                            RoofWall[RoofWall.Length - 1] = wl;
+
+                        }
+                        if (hit.transform.gameObject.tag == "RoofWall")
+                        {
+                            Destroy(hit.transform.gameObject);
+                        }
+                        if(hit.transform.gameObject.tag == "Respawn")
+                        {
+                            if (!nonClick)
+                            {
+                                if (centerRoof == null)
+                                    centerRoof = Instantiate(point_roof, new Vector3(hit.point.x, hit.transform.position.y + 0.01f, hit.point.z), Quaternion.identity) as GameObject;
+                                else
+                                    centerRoof.transform.position = new Vector3(hit.point.x, hit.transform.position.y + 0.01f, hit.point.z);
+                            }
+                       }
+                    }
+                }
+            
+            }
+            else
+            {
+                foreach (GameObject go in RoofWall)
+                    if (go != null)
+                        go.SetActive(false);
+                if (centerRoof != null)
+                    centerRoof.SetActive(false);
+            }
+
+            if(mode == 5)
+            {
+                
+
+                  GameObject go = new GameObject();
+                  Vector3[] psevdo_one = new Vector3[RoofWall.Length], psevdo_two = new Vector3[RoofWall.Length];
+                 
+                      if (modeRoof == 0)
+                      {
+                          for (int u = 0; u < RoofWall.Length; u++)
+                              if (RoofWall[u] != null)
+                              {
+                                  psevdo_one[u] = one[System.Convert.ToInt32(RoofWall[u].name)].transform.position;
+                                  psevdo_two[u] = two[System.Convert.ToInt32(RoofWall[u].name)].transform.position;
+                              }
+                          if (_ground != null)
+                              Destroy(_ground);
+                          _ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                          go = _ground;
+                          Center = centerRoof;
+                          Center.transform.position = new Vector3(centerRoof.transform.position.x, 0.03199998f, centerRoof.transform.position.z);
+                      }
+                    if(modeRoof == 1)
+                    {
+                        for (int u = 0; u < RoofWall.Length; u++)
+                            if (RoofWall[u] != null)
+                            {
+                                psevdo_one[u] = one[System.Convert.ToInt32(RoofWall[u].name)].transform.position; 
+                                psevdo_two[u] = two[System.Convert.ToInt32(RoofWall[u].name)].transform.position; 
+                                psevdo_one[u] = new Vector3(psevdo_one[u].x, heightWall, psevdo_one[u].z);
+                                psevdo_two[u] = new Vector3(psevdo_two[u].x, heightWall, psevdo_two[u].z);
+                            }
+                        if (mainRoof != null)
+                            Destroy(mainRoof);
+                        mainRoof = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        go = mainRoof;
+                        Center = centerRoof;
+                        Center.transform.position = new Vector3(centerRoof.transform.position.x, heightWall, centerRoof.transform.position.z);
+                    }
+                    if (modeRoof == 2)
+                    {
+                        for (int u = 0; u < RoofWall.Length; u++)
+                            if (RoofWall[u] != null)
+                            {
+                                psevdo_one[u] = one[System.Convert.ToInt32(RoofWall[u].name)].transform.position; ;
+                                psevdo_two[u] = two[System.Convert.ToInt32(RoofWall[u].name)].transform.position; ;
+                                psevdo_one[u] = new Vector3(psevdo_one[u].x, heightWall, psevdo_one[u].z);
+                                psevdo_two[u] = new Vector3(psevdo_two[u].x, heightWall, psevdo_two[u].z);
+                            }
+                        if (roof != null)
+                            Destroy(roof);
+                        roof = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        go = roof;
+                        Center = centerRoof;
+                        Center.transform.position = new Vector3(centerRoof.transform.position.x, heightWall + roofHeight, centerRoof.transform.position.z);
+                    }
+             
+               go.GetComponent<MeshFilter>().mesh = Roof(psevdo_one, psevdo_two, Center.transform.position);
+               RoofMat.mainTexture = textureRoof;
+               go.GetComponent<Renderer>().material = new Material(RoofMat);
+               mode = 4;
+            }
+           
+
+        }
+    }
+
+
+    public Transform[] Sort(Transform[] target, Transform parent)
+    {
+        Transform[] sds = new Transform[target.Length];
+        float[] dstns = new float[target.Length], endDstns = new float[target.Length];
+        int q = 0, index = 0;
+        float max;
+        for (int u = 0; u < target.Length; u++)
+            dstns[u] = Vector3.Distance(parent.position, target[u].position);
+        max = Mathf.Max(dstns);
+        while (q < target.Length)
+        {
+            endDstns[q] = Mathf.Min(dstns);
+            index = Array.FindIndex(dstns, e => e == endDstns[q]);
+            dstns[index] = max+1;
+            sds[q] = target[index];
+            if (bols[index])
+                newBols[q] = true;
+            q++;
+        }
+            return sds;
+    }
+
+
+     
+
+    public static Transform CaluclateWindow(Transform original, Vector3 startPoint, bool OnlyToZ, Transform toParent)
+    {
+        float distance = Vector3.Distance(original.position, startPoint);
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        go.GetComponent<MeshRenderer>().enabled = false;
+        Destroy(go.GetComponent<Collider>());
+        if (OnlyToZ)
+            go.transform.localPosition = new Vector3(startPoint.x, startPoint.y, startPoint.z + distance);
+        else
+            go.transform.position = new Vector3(original.position.x + distance, startPoint.y, startPoint.z + distance);
+
+        go.transform.parent = toParent;
+        return go.transform;
+        
+    }
+
+
+    public static Mesh Roof(Vector3[] pointsOne, Vector3[] pointsTwo, Vector3 center)
+    {
+        Mesh mesh = new Mesh();
+        var cb = new CombineInstance[pointsOne.Length];
+        for (int u = 0; u < pointsTwo.Length; u++)
+        {
+            if(pointsOne[u] != null)
+            cb[u].mesh = Triangle(pointsOne[u], pointsTwo[u], center);
+        }
+        mesh.RecalculateNormals();
+        mesh.CombineMeshes(cb, true, false);
+        return mesh;
+    }
+
+    public static Mesh Triangle(Vector3 pointOne, Vector3 pointTwo, Vector3 center)
+    {
+        var normal = Vector3.zero;
+        var mesh = new Mesh
+        {
+            vertices = new[] { pointOne, center, pointTwo, pointOne, center, pointTwo },
+            normals = new[] { normal, normal, normal, normal, normal, normal, normal, normal },
+            uv = new[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 1), new Vector2(0, 1), new Vector2(0, 0) },
+            triangles = new[] { 2, 1, 0, 5, 3, 4 }
+        };
+        mesh.RecalculateNormals();
+        return mesh;
+    }
+
+    public static Mesh Edit(Transform[] window, Transform[] window2,Vector3 point, Vector3 localPoint, Vector3 to, float h, float winsowSizeX, float winsowSizeY, float winsowSizeZ, bool[] door)
+    {
+        int z = 0;
+        Vector3 start;
+        Mesh final = new Mesh();
+        var cb = new CombineInstance[1];
+        start = point;
+      
+            z++;
+            Array.Resize(ref cb, z);
+            cb[z - 1].mesh = plane(point + new Vector3(-winsowSizeZ, 0, 0), point, h, 0);
+            for (int i = 0; i < window.Length; i++)
+            {
+                z+=12;
+                Array.Resize(ref cb, z);
+                if(!door[i])
+                {
+                    cb[z - 11].mesh = plane(window[i].position, window2[i].position, winsowSizeY, 0);
+                    cb[z - 6].mesh = plane(window2[i].position + new Vector3(-winsowSizeZ, 0, 0), window[i].position + new Vector3(-winsowSizeZ, 0, 0), winsowSizeY, 0);
+                    cb[z - 4].mesh = plane(window2[i].position + new Vector3(-winsowSizeZ, winsowSizeY, 0), window[i].position + new Vector3(-winsowSizeZ, winsowSizeY, 0), 0, winsowSizeZ);
+                }
+                else
+                {
+                    cb[z - 11].mesh = plane(start, window[i].position, h, 0);
+                    cb[z - 6].mesh = plane(start, window[i].position, h, 0);
+                    cb[z - 4].mesh = plane(start, window[i].position, h, 0);
+                }
+                cb[z - 12].mesh = plane(start, window[i].position, h, 0);
+              
+                cb[z-10].mesh = plane(new Vector3(window[i].position.x, window[i].position.y + h - winsowSizeY, window[i].position.z), new Vector3(window2[i].position.x, window[i].position.y + h - winsowSizeY,
+               window2[i].position.z), winsowSizeY, 0);
+                cb[z - 9].mesh = plane(window[i].position + new Vector3(-winsowSizeZ, 0, 0), start + new Vector3(-winsowSizeZ, 0, 0), h, 0);
+               cb[z - 8].mesh = plane(window[i].position + new Vector3(-winsowSizeZ, h, 0), start + new Vector3(-winsowSizeZ, h, 0), 0, winsowSizeZ);
+                cb[z - 7].mesh = plane(window2[i].position + new Vector3(-winsowSizeZ, h, 0), window[i].position + new Vector3(-winsowSizeZ, h, 0), 0, winsowSizeZ);
+    
+                cb[z - 5].mesh = plane(new Vector3(window2[i].position.x - winsowSizeZ, window2[i].position.y + h - winsowSizeY, window2[i].position.z),
+                   window[i].position + new Vector3(-winsowSizeZ,h-winsowSizeY,0), winsowSizeY, 0);
+              
+               cb[z - 3].mesh = plane(window[i].position + new Vector3(-winsowSizeZ, h-winsowSizeY,0),
+                                  window2[i].position + new Vector3(-winsowSizeZ, h - winsowSizeY, 0), 0, winsowSizeZ);
+                cb[z - 2].mesh = plane(window[i].position, window[i].position + new Vector3(-winsowSizeZ, 0, 0), h, 0);
+                cb[z - 1].mesh = plane(window2[i].position + new Vector3(-winsowSizeZ, 0, 0), window2[i].position, h, 0);
+
+                start = window2[i].position;
+            }
+            z += 4;
+            Array.Resize(ref cb, z);
+            cb[z-4].mesh = plane(window2[window2.Length - 1].position, to, h, 0);
+            cb[z - 3].mesh = plane(to + new Vector3(-winsowSizeZ, h, 0), window2[window2.Length - 1].position + new Vector3(-winsowSizeZ, h, 0), 0, winsowSizeZ);
+            cb[z - 2].mesh = plane(to + new Vector3(-winsowSizeZ, 0, 0), window2[window2.Length - 1].position + new Vector3(-winsowSizeZ, 0, 0), h, 0);
+            cb[z - 1].mesh = plane(to, to+new Vector3(-winsowSizeZ, 0, 0), h, 0);
+
+        
+        final.CombineMeshes(cb, true, false);
+        
+        Vector3[] vertices = final.vertices;
+        Vector2[] uvs = new Vector2[vertices.Length];
+        int t = 0;
+        while (t < uvs.Length)
+        {
+            uvs[t] = new Vector2(vertices[t].x, vertices[t].z);
+            t++;
+        }
+        final.uv = uvs;
+
+   
+        
+
+            final.Optimize();
+        return final;
+    }
+
+    public static Mesh plane(Vector3 startPoint, Vector3 EndPoint, float height, float length)
+    {
+        var normal = Vector3.Cross(startPoint, EndPoint + new Vector3(length, height, 0)).normalized;
+        var mesh = new Mesh
+        {
+            vertices = new[] { startPoint, startPoint + new Vector3(length, height, 0), EndPoint + new Vector3(length, height, 0), EndPoint },
+            normals = new[] { normal, normal, normal, normal },
+            uv = new[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) },
+            triangles = new[] { 0, 1, 2, 0, 2, 3 }
+        };
+        mesh.RecalculateNormals();
+        return mesh;
+    }
+
+   public void Refresh()
+    {
+        foreach (GameObject go in one)
+            Destroy(go);
+        foreach (GameObject go in two)
+            Destroy(go);
+        foreach (GameObject go in wall)
+            Destroy(go);
+        foreach (GameObject go in wind)
+            Destroy(go);
+        foreach (GameObject go in w_one)
+            Destroy(go);
+        foreach (GameObject go in w_two)
+            Destroy(go);
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Wall"))
+            Destroy(go);
+        WallProperties _wp = new WallProperties();
+        wp.Add(_wp);
+        n = k = k_click = n_click = 0;
+       one = new GameObject[1];
+        two = new GameObject[1];
+       wall = new GameObject[1];
+       w_one = new GameObject[1];
+       w_two =new GameObject[1];
+       wind = new GameObject[1]; 
+    }
+
+}
+
+[System.Serializable]
+
+public class WallProperties
+{
+    public GameObject SelfObject;
+    public bool[] door = new bool[1];
+    public Transform SelfTransform { get {return SelfObject.transform; } set { value = SelfObject.transform;}}
+    public Mesh SelfMesh;
+    public int[] CutOut;
+    public Transform[] startCutWindowPoint = new Transform[0], endCutWindowPoint = new Transform[0];
+    public int[] rezerv;
+    public Vector3 position { get { return SelfObject.transform.position; } set { value = SelfObject.transform.position; } }
+    public Quaternion rotation { get { return SelfObject.transform.rotation; } set { value = SelfObject.transform.rotation; } }
+
+    public int k;
+
+}

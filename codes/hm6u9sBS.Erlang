@@ -1,0 +1,4 @@
+case foobar() of
+	{ok, NumberReturned} -> doSomethingWith(NumberReturned);
+        {error, ErrReason} -> logError(ErrReason)
+end.

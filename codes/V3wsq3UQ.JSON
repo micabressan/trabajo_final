@@ -1,0 +1,51 @@
+{
+  "optout": true,
+  "config": {
+    "publisherKey": "29",
+    "global": {
+      "copypaste": false,
+      "sharequote": false,
+      "trackAddressBar": true
+    },
+    "widgets": [
+      {
+        "id": "1",
+        "disable": false,
+        "settings": {
+          "buttons": [
+            {
+              "id": "facebook"
+            }
+          ],
+          "url": "",
+          "image": "",
+          "title": "",
+          "radius": "",
+          "size": "",
+          "counter": "",
+          "layout": "",
+          "label": "",
+          "padding": "",
+          "view": "",
+          "button-color": ""
+        }
+      },
+      {
+        "id": "2",
+        "disable": false,
+        "settings": {
+          "buttons": [
+            {
+              "id": "facebook"
+            }
+          ],
+          "layout": "",
+          "label": "",
+          "padding": "",
+          "view": "",
+          "button-color": ""
+        }
+      }
+    ]
+  }
+}

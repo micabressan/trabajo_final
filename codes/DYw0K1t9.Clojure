@@ -1,0 +1,11 @@
+user=> (defn printLngLat [{lng :lng lat :lat}] 
+         (println [lng lat]))
+#'user/printLngLat
+user=> (printLngLat {:lng 1 :lat 3})
+[1 3]
+nil
+user=> (defrecord LngLat [lng lat])
+user.LngLat
+user=> (printLngLat (LngLat. 2 3))
+[2 3]
+nil

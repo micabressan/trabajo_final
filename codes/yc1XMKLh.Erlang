@@ -1,0 +1,13 @@
+fold_range(F,S,N,I) ->
+    case I < N of
+        false -> S;
+        true  -> fold_range(F, F(I,S), N, I+1)
+    end.
+            
+fold_range(F,S,N) ->
+    fold_range(F,S,N,0).
+
+
+%% A fold representing a sequence is of type 
+%% :: ( (E,S) -> S, S ) -> S
+range(N) -> fun(F,S) -> fold_range(F,S,N) end.

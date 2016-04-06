@@ -1,0 +1,138 @@
+{
+	"pAluminum": {
+		"template": "normal",
+		"block": {"name": "TConstruct:SearedBrick", "metadata": 5},
+		"material": "minecraft:stone",
+		"clusterSize": 8,
+		"numClusters": 2,
+		"meanHeight": 54,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pCopper": {
+		"template": "normal",
+		"block": {"name": "TConstruct:SearedBrick", "metadata": 3},
+		"material": "minecraft:stone",
+		"clusterSize": 10,
+		"numClusters": 3,
+		"meanHeight": 44,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pIron": {
+		"template": "normal",
+		"block": "minecraft:iron_ore",
+		"material": "minecraft:stone",
+		"clusterSize": 8,
+		"numClusters": 4,
+		"meanHeight": 34,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pTin": {
+		"template": "normal",
+		"block": {"name": "TConstruct:SearedBrick", "metadata": 4},
+		"material": "minecraft:stone",
+		"clusterSize": 10,
+		"numClusters": 3,
+		"meanHeight": 24,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pGold": {
+		"template": "normal",
+		"block": "minecraft:gold_ore",
+		"material": "minecraft:stone",
+		"clusterSize": 8,
+		"numClusters": 2,
+		"meanHeight": 16,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pLapis": {
+		"template": "normal",
+		"block": "minecraft:lapis_ore",
+		"material": "minecraft:stone",
+		"clusterSize": 4,
+		"numClusters": 3,
+		"meanHeight": 18,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pRedstone": {
+		"template": "normal",
+		"block": "minecraft:redstone_ore",
+		"material": "minecraft:stone",
+		"clusterSize": 8,
+		"numClusters": 2,
+		"meanHeight": 14,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	},
+	"pDiamond": {
+		"template": "normal",
+		"block": "minecraft:diamond_ore",
+		"material": "minecraft:stone",
+		"clusterSize": 6,
+		"numClusters": 2,
+		"meanHeight": 8,
+		"maxVariance": 3,
+		"retrogen": "true",
+		"biomeRestriction": "none",
+		"biomes": [],
+		"dimensionRestriction": "blacklist",
+		"dimensions": [
+			-1,
+			1
+		]
+	}
+}

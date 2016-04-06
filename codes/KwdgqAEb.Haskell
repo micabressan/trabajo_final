@@ -1,0 +1,5 @@
+    match (fromList ["about.rst", "contact.markdown"]) $ do
+        route   $ setExtension ""
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= relativizeUrls

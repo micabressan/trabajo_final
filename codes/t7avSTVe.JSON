@@ -1,0 +1,62 @@
+Shadow Push:
+  name: 'Shadow Push'
+  type: 'Guard Skill'
+  max-level: 1
+  skill-req: ''
+  skill-req-lvl: 1
+  needs-permission: 'False'
+  msg: '&6{player} &2has cast &6{Shadow Push}'
+  icon: 'Wood Spade'
+  icon-data: 0
+  icon-lore:
+  - '&d{Shadow Push} &7({0}/{1})'
+  - '&2Type: &6{Guard Skill}'
+  - ''
+  - '{req:1}Level: {attr:0}'
+  - '{req:3}Cost: {attr:0}'
+  - ''
+  - '&2Mana: {attr:0}'
+  - '&2Cooldown: {attr:30.0}'
+  attributes:
+    level-base: 1
+    level-scale: 0
+    cost-base: 3
+    cost-scale: 0
+    cooldown-base: 30.0
+    cooldown-scale: 0
+    mana-base: 0
+    mana-scale: 0
+  components:
+    Cast-a:
+      type: 'trigger'
+      data:
+        icon-key: ''
+      children:
+        Single-b:
+          type: 'target'
+          data:
+            icon-key: ''
+            range-base: 15
+            range-scale: 1
+            tolerance: 4
+            group: 'Enemy'
+            wall: 'False'
+          children:
+            Direction-c:
+              type: 'condition'
+              data:
+                icon-key: ''
+                type: 'Target'
+                direction: 'Towards'
+              children:
+                Launch-d:
+                  type: 'mechanic'
+                  data:
+                    icon-key: ''
+                    counts: 'True'
+                    forward-base: -2
+                    forward-scale: 0
+                    upward-base: 2
+                    upward-scale: 0
+                    right-base: 0
+                    right-scale: 0

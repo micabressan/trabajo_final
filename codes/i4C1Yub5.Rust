@@ -1,0 +1,13 @@
+use std::thread;
+
+fn main() {
+    let x = &mut 3;
+
+    let thr = thread::spawn(move || {
+        *x += 5;
+    });
+
+    thr.join();
+
+    println!("{}", *x);
+}

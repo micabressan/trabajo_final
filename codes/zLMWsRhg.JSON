@@ -1,0 +1,61 @@
+{
+	"name": "Porsche 991 GT3 RS",
+	"brand": "Porsche",
+	"description": "We all reach a limit eventually. This can be personal, physical or the technically feasible. At that point, we could give up, turn around and admit defeat. Or we could carry on and surpass even ourselves. The new 911 GT3 RS breaks boundaries – an experience we have no intention of keeping from you. Welcome to the stratosphere of your driving capability. For that to be possible, nothing less than an explosion of power is required. Plus a tremendous amount of propulsion: the 4.0-litre flat-six engine delivers 368 kW (500 hp) and a torque of 460 Nm. With a maximum speed of 8,800 rpm, it pushes to the extreme – and yet never feels the strain. Equipped with Porsche Doppelkupplung (PDK) as standard, this thoroughbred athlete blazes through the 100 km/h mark after merely 3.3 seconds – that’s 0.6 seconds faster than its predecessor. Nevertheless, the new 911 GT3 RS is also capable of slowing the pace down: the PIT SPEED button on the centre console activates a safety-oriented speed limiter, cooling the car’s temperament at a single stroke.",
+
+	"tags": ["rwd", "#A5", "Germany", "supercar"],  
+	"class": "street",
+
+	"specs":
+	{
+		"bhp": "500PS",
+		"torque": "460Nm",
+		"weight": "1420kg",
+		"topspeed": "310+km/h",
+		"acceleration": "3.3s",
+		"pwratio": "347.18/ton"
+	},
+	 "torqueCurve": [
+		["0","0"],
+	    ["500","165"],
+		["1000","195"],
+		["1500","215"],
+	    ["2000","235"],
+	    ["2500","255"],
+	    ["3000","265"],
+	    ["3500","275"],
+	    ["4000","285"],
+	    ["4500","315"],
+	    ["5000","400"],
+	    ["5500","430"],
+	    ["6000","460"],
+	    ["6500","454"],
+	    ["7000","460"],
+		["7500","435"],
+		["8000","393"],
+		["8500","370"],
+            ["9000","335"]
+       ],
+       "powerCurve": [
+		["0","0"],
+	    ["500","2"],
+		["1000","70"],
+		["1500","120"],
+	    ["2000","170"],
+	    ["2500","195"],
+	    ["3000","220"],
+	    ["3500","270"],
+	    ["4000","295"],
+	    ["4500","320"],
+	    ["5000","370"],
+	    ["5500","395"],
+	    ["6000","420"],
+	    ["6500","435"],
+	    ["7000","450"],
+	    ["7500","465"],
+	    ["8000","480"],
+		["8500","495"],
+	    ["9000","495"]
+	        ]
+
+}

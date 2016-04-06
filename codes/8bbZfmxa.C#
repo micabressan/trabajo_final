@@ -1,0 +1,16 @@
+ GraphicsPath Path = new GraphicsPath();
+            Path.AddLine(Location.X + CornerRadius, Location.Y, Location.X + Width - (CornerRadius * 2), Location.Y);
+
+            Path.AddArc(Location.X + Width - (CornerRadius * 2), Location.Y, CornerRadius * 2, CornerRadius * 2, 270, 90);
+
+            Path.AddLine(Location.X + Width, Location.Y + CornerRadius, Location.X + Width, Location.Y + Height - (CornerRadius * 2));
+
+            Path.AddArc(Location.X + Width - (CornerRadius * 2), Location.Y + Height - (CornerRadius * 2), CornerRadius * 2, CornerRadius * 2, 0, 90);
+
+            Path.AddLine(Location.X + Width - (CornerRadius * 2), Location.Y + Height, Location.X + CornerRadius, Location.Y + Height);
+
+            Path.AddArc(Location.X, Location.Y + Height - (CornerRadius * 2), CornerRadius * 2, CornerRadius * 2, 90, 90);
+
+            Path.AddLine(Location.X, Location.Y + Height - (CornerRadius * 2), Location.X, Location.Y + CornerRadius);
+
+            Path.AddArc(Location.X, Location.Y, CornerRadius * 2, CornerRadius * 2, 180, 90);

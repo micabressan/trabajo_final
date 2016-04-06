@@ -1,0 +1,324 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+namespace luckyy_mw3_tool_console
+{
+    class CameraManager
+    {
+        public static List<Node> nodes = new List<Node>();
+
+        public static int cameraspeed = 1;
+
+        public static float mulitval = 0.2F;
+
+        public static bool AddNode()
+        {
+            Node node = new Node(MemoryManager.ReadPosition(), MemoryManager.ReadRotation());
+
+            ConsoleManager.Log("SET NODE " + node.rotation[1].ToString());
+            if(nodes.Count == 0)
+                nodes.Add(node);
+            nodes.Add(node);
+            return true;
+        }
+
+        public static bool ClearNodes()
+        {
+            nodes.Clear();
+            return true;
+        }
+
+        public static bool Start()
+        {
+            //ConsoleManager.Log(nodes.Count.ToString());
+
+            if(nodes.Count <= 1)
+            {
+                ConsoleManager.Log("At least 2 points are needed to start the camera flight", ConsoleColor.Red);
+                return false;
+            }
+
+
+            MemoryManager.WritePosition(nodes[0].position);
+            MemoryManager.WriteRotation(nodes[0].rotation);
+            ConsoleManager.Log("3");
+            Thread.Sleep(125);
+            ConsoleManager.Log("2");
+            Thread.Sleep(125);
+            ConsoleManager.Log("1");
+            Thread.Sleep(125);
+
+            //ConsoleManager.Log(nodes.Count.ToString());
+
+            for (int i = 1; i < nodes.Count; i++ )
+            {
+
+                if (i == 1)                //skips the first node because it can't move towards itself
+                    continue;              //skips the first node because it can't move towards itself
+
+                if (i == 1 && nodes[i].position[0] == nodes[i + 1].position[0] && nodes[i].position[1] == nodes[i + 1].position[1]) //KINDA USELESS CODE
+                {                                                                                                                   //KINDA USELESS CODE
+                    continue;                                                                                                       //KINDA USELESS CODE
+                }                                                                                                                   //KINDA USELESS CODE
+
+                //ConsoleManager.Log("CURRENT i" + i.ToString());
+
+                float basestep = 0.001F; //0.002F;
+
+                float step = basestep;
+                while (MemoryManager.ReadPosition() != nodes[i].position)
+                {
+                    if (step >= 1.0F)
+                    {
+                        MemoryManager.WritePosition(nodes[i].position);
+                        MemoryManager.WriteRotation(nodes[i].rotation);
+                        break;
+                    }
+
+                    //float[] pos = MemoryManager.ReadPosition();
+
+                    float newX = Lerp(nodes[i - 1].position[0], nodes[i].position[0], step);
+
+                    float newZ = Lerp(nodes[i - 1].position[1], nodes[i].position[1], step);
+
+                    float newY = Lerp(nodes[i - 1].position[2], nodes[i].position[2], step);
+
+                    float newMouseY = Lerp(nodes[i - 1].rotation[0], nodes[i].rotation[0], step);
+
+                    float newMouseX = Lerp(nodes[i - 1].rotation[1], nodes[i].rotation[1], step);
+
+                    MemoryManager.WritePosition(new float[] { newX, newZ, newY });
+
+                    MemoryManager.WriteRotation(new float[] { newMouseY, newMouseX});
+
+                    step += basestep;
+
+                    if (CaptureManager.isCapturing)
+                    {
+                        while (CaptureManager.waiting)
+                        { }
+                        ConsoleManager.Log("ADVANCING ONE");
+                    }
+                    else
+                    {
+                        Thread.Sleep((int)Math.Round((double)7 / cameraspeed));
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static float GetMultiplierFromTimescale(float timescale)
+        {
+            float multiplier;
+
+            if (timescale == 1.0F)
+                multiplier = 0.2F;
+            else if (timescale == 0.1F || timescale == 0.2F)
+                multiplier = 0.6F;
+            else
+                multiplier = 0.4F;
+
+            return multiplier;
+        }
+
+        public static bool StartBezier() 
+        {
+
+            if (nodes.Count <= 2)
+            {
+                ConsoleManager.Log("At least 3 points are needed to start the bezier camera flight", ConsoleColor.Red);
+                return false;
+            }
+
+            float alldist = 0.0F;
+
+
+            for (int k = 0; k < nodes.Count; k++) // THIS FOR-LOOP is the prepare function of the codtvmm bezier (i guess it fixes the rotations of the points so it rotates in the right direction)
+            {
+
+                try
+                {
+                    float x = nodes[k].rotation[1];
+                    float y = nodes[k + 1].rotation[1];
+
+                    if (y - x >= 180)
+                    {
+                        nodes[k].rotation[1] += 360F;
+                    }
+                    else if (y - x <= -180)
+                    {
+                        nodes[k + 1].rotation[1] += 360F;
+                    }
+
+                    float partdist = distance(nodes[k].position, nodes[k + 1].position);
+                    float angledist = distance(nodes[k].rotation, nodes[k + 1].rotation);
+                    alldist += partdist;
+                    alldist += angledist;
+                }
+                catch(Exception)
+                {
+                    
+                }
+            }
+            MemoryManager.WritePosition(nodes[0].position);        // SET THE POS and ROT IN THE BEGINNING OF THE CAM FLIGHT
+            MemoryManager.WriteRotation(nodes[0].rotation);        // SET THE POS and ROT IN THE BEGINNING OF THE CAM FLIGHT
+
+            //
+
+            float lastDistance = 1000000000F;
+
+            float mul = 3.0F; // seems that's the best
+            float multiplier = GetMultiplierFromTimescale(MemoryManager.ReadTimescale());
+            for (int i = 0; i <= alldist * 10 * multiplier / mul; i++)  
+    		{		
+    		    float t = (i * mul / (alldist * 10.0F * multiplier)); // the completion percent so to say / progress (t is between 0 and 1 and is like the progress of the flight)
+    		    float x = 0;
+    		    float y = 0;
+    		    float z = 0;
+    		    float a = 0;
+    		    float b = 0;
+    		    float c = 0;
+
+                Node current = CalculateBezierPoint(t, nodes[0], nodes[2], nodes[3], nodes[4]); // MY BEZIER NODE CALC FUNCTION
+
+                MemoryManager.WritePosition(current.position);
+                MemoryManager.WriteRotation(current.rotation);
+
+                // IT SEEMS LIKE IT ROTATES TO HAVE THE X-ANGLE BETWEEN 0 and 180, IT ALWAYS ROTATES TO GET A POSITIVE X-ANGLE
+                // ITS WEIRD
+                // SEE FOR YOURSELF
+
+
+    		    //for(int e = 0; e < nodes.Count; e++)		
+                //{
+                //    try
+                //    {
+                //        x += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].position[0]);
+                //        y += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].position[1]);
+                //        z += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].position[2]);
+                //        a += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].rotation[0]);
+                //        b += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].rotation[1]);
+                //        c += (float)(koeff(e - 1, nodes.Count - 1) * pow((1 - t), nodes.Count - e) * pow(t, e - 1) * nodes[e].rotation[2]);
+                //    }
+                //    catch(Exception)
+                //    {
+                //
+                //    }
+    			//}
+		
+    		    //float[] newPosition = new float[] {x, y, z};
+    		    //float[] newRotation = new float[] {a, b, c};
+    		    //MemoryManager.WritePosition(newPosition);
+    		    //MemoryManager.WriteRotation(newRotation);
+
+                //if (distance(newPosition, nodes[nodes.Count - 1].position) > lastDistance && (alldist * 10 * multiplier / mul) / 1.5F < i)
+                //{
+                //    //MEANS WE'RE MOVING AWAY FROM THE LAST POINT
+                //
+                //    break;
+                //}
+                //else
+                //{
+                //    lastDistance = distance(newPosition, nodes[nodes.Count - 1].position);
+                //}
+
+                Thread.Sleep((int)Math.Round((double)7 / cameraspeed));
+
+     		}
+
+            MemoryManager.WritePosition(nodes[nodes.Count - 1].position);
+            MemoryManager.WriteRotation(nodes[nodes.Count - 1].rotation);
+            return true;
+    
+        }
+
+        static float koeff(float x, float y)
+        {
+        	return (fact(y)/(fact(x)*fact(y-x)));
+        }
+        
+        static float fact(float x)
+        {
+        	float c = 1.0F;
+        	if(x == 0) return 1;
+            for (int i = 1; i <= x; i++)
+            {
+                c = c * i;
+            }
+        	return c;
+        }
+
+        static float pow(float a, float b)
+        {
+        	float x = 1;
+        	if(b != 0)
+        	{
+        		for(int i = 1; i <= b; i++)
+        		x = x * a;
+        	}
+
+        	return x;
+        }
+
+        static float distance(float[] from, float[] to)
+        {
+            float deltaX = Math.Abs(from[0] - to[0]);
+            float deltaZ = Math.Abs(from[1] - to[1]);
+            float deltaY = Math.Abs(from[2] - to[2]);
+
+            return (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ + deltaY * deltaY);
+        }
+
+
+        public static Node CalculateBezierPoint(float t, Node p0, Node p1, Node p2, Node p3)
+        {
+
+            float u = 1 - t;
+            float tt = t*t;
+            float uu = u*u;
+            float uuu = uu * u;
+            float ttt = tt * t;
+         
+            float newX = uuu * p0.position[0]; //first term
+            newX += 3 * uu * t * p1.position[0]; //second term
+            newX += 3 * u * tt * p2.position[0]; //third term
+            newX += ttt * p3.position[0]; //fourth term
+
+            float newZ = uuu * p0.position[1]; //first term
+            newZ += 3 * uu * t * p1.position[1]; //second term
+            newZ += 3 * u * tt * p2.position[1]; //third term
+            newZ += ttt * p3.position[1]; //fourth term
+
+            float newY = uuu * p0.position[2]; //first term
+            newY += 3 * uu * t * p1.position[2]; //second term
+            newY += 3 * u * tt * p2.position[2]; //third term
+            newY += ttt * p3.position[2]; //fourth term
+
+            float[] pos = new float[] { newX, newZ, newY };
+
+            float newMouseY = uuu * p0.rotation[0]; //first term
+            newX += 3 * uu * t * p1.rotation[0]; //second term
+            newX += 3 * u * tt * p2.rotation[0]; //third term
+            newX += ttt * p3.rotation[0]; //fourth term
+
+            float newMouseX = uuu * p0.rotation[1]; //first term
+            newX += 3 * uu * t * p1.rotation[1]; //second term
+            newX += 3 * u * tt * p2.rotation[1]; //third term
+            newX += ttt * p3.rotation[1]; //fourth term
+
+            float[] rot = new float[] { newMouseY, newMouseX};
+
+            return new Node(pos, rot);
+        }
+
+        static float Lerp(float from, float to, float progress)
+        {
+            return from + (to - from) * progress;
+        }
+    }
+}

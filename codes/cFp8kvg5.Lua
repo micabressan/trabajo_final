@@ -1,0 +1,8 @@
+monitor = peripheral.wrap("back")
+monitor.clear()
+monitor.setCursorPos(2.2,3.1)
+monitor.setTextScale(2)
+monitor.setTextColor(colors.magenta)
+monitor.write("Brunostmakerne AS")
+monitor.setCursorPos(4, 2)
+monitor.write("Velkommen til")

@@ -1,0 +1,178 @@
+using UnityEngine;
+using System.Collections;
+using UNS;
+
+public class MoveShip : MonoBehaviour
+{
+
+    /// <summary>Движение к цели</summary>
+   public GameObject MyTarget;
+
+    /// <summary>Вектор направления движения</summary>
+    public Vector3 movingVector;
+
+    ///<summary>Квадратичное растояние недолёта до пункта назначения</summary>
+    public float TargetReached;
+    /// <summary>Квадратное расстояние до цели</summary>	
+    public float DistanceToDestination = 0.0f;
+
+    /// <summary>Точка назначения</summary>
+    public Vector3 whither;
+    /// <summary>Перемещение максимальное определяет MaxEngineForce</summary>
+    public float EngineForce = 0.0f;
+    /// <summary>Максивальное ускорение</summary>
+    public float MaxEngineForce = 5.1f;
+    /// <summary>тормажение</summary>
+    public float brakeForce = 1.0f;
+    /// <summary>ускорение</summary>
+    public float accelerationForce = 0.1f;
+
+    /// <summary>Движение</summary>
+    public bool boolmoving = false;
+    /// <summary>Поворот</summary>
+    public bool boolRotation = false;
+    /// <summary>LineRenderer метка</summary>
+    private LineRenderer lr;
+
+    void Awake ()
+    {
+       lr=GetComponent<LineRenderer> ();
+    }
+
+    /// <summary>Лететь к точке</summary>
+    /// <param name="newPoint">Vector3 newPoint</param>
+    public void MoveToPoint(Vector3 newPoint)
+    {
+        TargetReached = 0.001f;//недолёт при перемещении	
+        whither = newPoint;
+        whither.z = 0.0f;
+        MyTarget = null;
+        boolRotation = true;
+        boolmoving = true;
+        UNS.V.CooperationCorp=null;/// Чистим ссылку при движении к новой цели
+    }
+   
+
+
+    /// <summary>Движение к цели</summary>
+    /// <param name="target">string target</param>
+    /// <param name="idWeapons">int idWeapons</param>
+    public void MoveToTarget (string target)
+    {
+       
+
+       MyTarget = UNS.Metod.SearchGO (target);
+       if (MyTarget.tag=="Station")
+       TargetReached = 20.2f;//недолёт при перемещении к станции
+       else
+          TargetReached = 2.2f;//недолёт при перемещении
+
+       boolRotation = true;
+       boolmoving = true;
+       UNS.V.CooperationCorp=null;/// Чистим ссылку при движении к новой цели
+    }
+
+
+    void Update ()
+    {
+        #region Полёт
+       if (boolmoving)
+       {
+
+          if (MyTarget != null)
+          {
+             
+             //Цель следования есть
+             DistanceToDestination = (transform.position-MyTarget.transform.position).sqrMagnitude;//Постоянно вычисляем дистанцию
+             movingVector = Vector3.Normalize (transform.InverseTransformPoint (MyTarget.transform.position));//Постоянно считаем вектор направления движения, так как он меняется при вращении объекта
+             whither = MyTarget.transform.position;//Если объект пропадят, то будет двигаться к последней точке его нахождения
+             whither.z = 0.0f;
+
+             if (UNS.V.OwnerBoxShip.ScriptMS==this)//Если это игрок
+             {
+                lr.SetPosition (0, new Vector3 (MyTarget.transform.position.x-0.75f, MyTarget.transform.position.y));//Рисуем линию пути начало
+                lr.SetPosition (1, new Vector3 (MyTarget.transform.position.x+0.75f, MyTarget.transform.position.y));//Рисуем линию пути конец
+             }
+          }
+          else
+          {
+             //Цели следования нет поворачиваемся к точке
+             DistanceToDestination = (transform.position-whither).sqrMagnitude;
+             movingVector = Vector3.Normalize (transform.InverseTransformPoint (whither));//Постоянно считаем вектор направления движения, так как он меняется при вращении объекта
+
+             if (UNS.V.OwnerBoxShip.ScriptMS==this)//Если это игрок
+             {
+                lr.SetPosition (0, new Vector3 (whither.x-0.75f, whither.y));//Рисуем линию пути начало
+                lr.SetPosition (1, new Vector3 (whither.x+0.75f, whither.y));//Рисуем линию пути конец
+             }
+          }
+
+          switch (DistanceToDestination <= TargetReached)
+          {
+             case false:
+             EngineForce = EngineForce > MaxEngineForce ? MaxEngineForce : EngineForce+accelerationForce;//Разгоняемся или движимся с максимальной скоростью. Тернарное выражение
+             break;
+
+             case true:
+             if (UNS.V.OwnerBoxShip.ScriptMS==this && MyTarget!=null)//Если это игрок и цель не пуста
+             {
+                if (MyTarget.tag=="Station" || MyTarget.tag=="Flagship")//При прилёте смотрим к кому мы двигались и добавляем ссылку
+                   UNS.V.CooperationCorp = MyTarget;
+
+                if (MyTarget.tag=="Loot")//Если подлетели к луту то пробуем на борт его взять
+                   UpLoot (MyTarget.GetComponent<Loot> ().Items);
+
+                if (MyTarget.tag=="Nora")//Если подлетели к Норе то перемещаемся
+                   Debug.Log (MyTarget.name);
+             }
+            
+             EngineForce = 0; 
+             MyTarget = null;//Убираем цель для движения
+             boolmoving = false;//Запрещаем перемещение
+
+             if (UNS.V.OwnerBoxShip.ScriptMS==this)//Если это игрок
+             {
+                lr.SetPosition (0, new Vector3 (transform.position.x-0.75f, transform.position.y));//Рисуем линию пути начало
+                lr.SetPosition (1, new Vector3 (transform.position.x+0.75f, transform.position.y));//Рисуем линию пути конец
+             }
+             break;
+          }
+
+          transform.Translate (movingVector.x * EngineForce * Time.deltaTime, movingVector.y * EngineForce * Time.deltaTime, 0.0f, Space.Self);// движение применяется по отношению к локальным осям
+       }
+
+            
+        #endregion
+
+        #region Поворот
+        if (boolRotation && DistanceToDestination > 10.0f)//Поворачиваться если разрешено и дистанция больше 5 ед.
+        {
+            if (MyTarget != null)
+            {//Цель следования есть
+               transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (transform.position - MyTarget.transform.position, Vector3.forward), 5.0f*Time.deltaTime);
+                transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+            }
+            else
+            {//Цели следования нет поворачиваемся к точке
+               transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (transform.position - whither, Vector3.forward), 5.0f*Time.deltaTime);
+                transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+            }
+        }
+        #endregion
+
+    }
+   /// <summary>Поднимаем Лут если есть место в трюме</summary>
+    /// <param name="p">ID предмета</param>
+   /// <returns>Подобран ли предмет</returns>
+    private void UpLoot (int id)
+    {
+       for (int i=0; i<15; i++)
+          if (UNS.V.OwnerBoxShip.ScriptBS.HoldID[i]==200)//Пробуем его кинуть в свободное место в трюме корабля 
+          {
+             UNS.V.OwnerBoxShip.ScriptBS.HoldID[i]=id;//Записываем ID оборудования в трюм
+             UNS.V.ScriptUI.ShipMenu_Hold[i].sprite = UNS.Items.itemsIcon[id];//На основании ID  присваиваем Спрайт соответствующий
+             MyTarget.GetComponent<Loot> ().Damage(0);//Уничтожаем объект если получилось поднять    
+             return;     
+          }          
+    }
+}

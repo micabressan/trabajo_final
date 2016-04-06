@@ -1,0 +1,70 @@
+#!/usr/bin/python
+
+import socket,optparse
+from time import gmtime,strftime
+
+def getip(host):
+	try:
+		ip = socket.gethostbyname(host)
+	except:
+		pass
+	nmScan(ip)
+
+def nmScan(ip):
+	try:
+		import nmap
+	except ImportError,e:
+		print '[-] Error to import nmap',e
+	nm = nmap.PortScanner()
+	nm.scan(ip,arguments='-A -Pn -O')
+	t = strftime('%a,%d %b %Y %H:%M:%S +0000',gmtime())
+	print 'Starting tool at',t
+	print 'Scanning: %s (%s)' % (ip,nm[ip].hostname())
+	print 'State: %s' % (nm[ip].state())
+	for protocol in nm[ip].all_protocols():
+		if 'tcp' in protocol:
+			print 'Protocol: TCP'
+			tcp_ports = nm[ip]['tcp'].keys()
+			tcp_ports.sort()
+			for tcp_port in tcp_ports:
+				print 'Discovered open {}/tcp on %s'.format(tcp_port) % ip
+		if 'upd' in protocol:
+			print 'Protocol: UDP'
+			udp_ports = nm[ip]['udp'].keys()
+			udp_ports.sort()
+			for udp_port in udp_ports:
+				print 'Discovered open {}/udp on %s'.format(udp_port) % ip
+
+	print nm.csv()
+
+	if nm[ip].has_key('osclass'):
+		print 'OsClass.Vendor: {0}'.format(nm[ip]['osclass']['vendor'])
+		print 'Osclass.Osfamily: {0}'.format(nm[ip]['osclass']['osfamily'])
+		print 'OsClass.Type: {0}'.format(nm[ip]['osclass']['type'])
+		print 'OsClass.Accuracy: {0}'.format(nm[ip]['osclass']['accuracy'])
+		print 'OsClass.Osgen: {0}'.format(nm[ip]['osclass']['osgen'])
+		print ''
+
+	if nm[ip].has_key('osmatch'):
+		print 'OsMatch.Name: {0}'.format(nm[ip]['osclass']['name'])
+		print 'OsMatch.Accuracy: {0}'.format(nm[ip]['osclass']['accuracy'])
+		print 'OsMatch.Line: {0}'.format(nm[ip]['osclass']['line'])
+		print ''
+
+	if nm[ip].has_key('fingerprint'):
+		print 'Fingerprint: {0}'.format(nm[ip]['fingerprint'])
+
+
+def main():
+	parser = optparse.OptionParser('Usage: ./%prog -H <target_host>')
+	parser.add_option('-H',dest='host',type='string',help='specify host for scan')
+	(options,args) = parser.parse_args()
+	host = options.host
+	if host == None:
+		parser.print_help()
+		exit(0)
+	else:
+		getip(host)
+
+if __name__ == '__main__':
+	main()

@@ -1,0 +1,21 @@
+% init/2 is called for both REST and Websocket APIs
+init(Req, _Opts) ->
+    Upgrade = cowboy_req:parse_header(<<"upgrade">>, Req),
+    io:format("merl: ~p", [?Q("{foo, 42}")]),
+    case Upgrade of
+        [<<"websocket">>] -> 
+            Subprotocols = cowboy_req:parse_header(<<"sec-websocket-protocol">>, Req, []),
+            case lists:member(<<"json">>, Subprotocols) of
+                false ->
+                    lager:info("Invalid Websocket subprotocol"),
+                    Req2 = cowboy_req:reply(400, [{<<"server">>, ?HTTP_SERVER}], Req),
+                    Req3 = cowboy_req:set_resp_body(<<"Some error message">>, Req2),
+                    io:format("Req3: ~p\n", [Req3]),
+                    {ok, Req3};
+                true ->
+                    Req2 = cowboy_req:set_resp_header(<<"sec-websocket-protocol">>, <<"json">>, Req),
+                    self() ! delayed_init,
+                    {cowboy_websocket, Req2, #state{}}
+            end;
+        undefined -> http_handle(Req, stateless)
+    end.

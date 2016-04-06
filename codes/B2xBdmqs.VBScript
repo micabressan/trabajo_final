@@ -1,0 +1,22 @@
+Public Function ConvertRow(ByRef Row As Range, ByRef FinalRow As Range)
+
+    Dim Result As Boolean
+    Dim Check As ColumnMapping
+    Dim CItem As Range
+    
+    If WorksheetFunction.CountA(Row) = 0 Then
+        ConvertRow = 1
+        Return
+    End If
+    
+    For Each Item In ColumnMappings
+        Check = Item
+        CItem = Row.Cells(1, Check.Column)
+        If CItem.Value = "" And Check.Required Then
+            FinalRow.Value = ""
+            ConvertRow = 0
+            Return
+        End If
+        FinalRow.Cells(1, Check.Column).Value = CItem.Value
+    Next
+End Function

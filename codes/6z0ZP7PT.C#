@@ -1,0 +1,77 @@
+ class Toy
+    {
+        protected string name;
+        protected double basePrice;
+        public Toy(string name, double baseprice)
+        {
+            this.name = name;
+            this.basePrice = baseprice;
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public double Baseprice
+        {
+            get { return basePrice; }
+            set { basePrice = value; }
+        }
+        public double computerPrice()
+        {
+            return basePrice;
+        }
+    }
+    class Dolly : Toy
+    {
+        private int hairColor;
+        private int accessories;
+        private double accPrice;
+        public Dolly(int hairColor, int accessories, double accPrice, string name, double basePrice)
+            : base(name, basePrice)
+        {
+            this.hairColor = hairColor;
+            this.accessories = accessories;
+            this.accPrice = accPrice;
+        }
+        public double computerPrice()
+        {
+            double DollyPrice = base.basePrice + (accessories * accPrice);
+            return DollyPrice;
+        }
+    }
+    class Safari : Toy
+    {
+        private int animalSize;
+        private int color;
+        public Safari(int animalSize, int color, string name, double basePrice)
+            : base(name, basePrice)
+        {
+            this.animalSize = animalSize;
+            this.color = color;
+        }
+        public double computerPrice()
+        {
+            double SafariPrice = 0.0;
+            if (animalSize == 0)
+                SafariPrice = base.basePrice;
+            if (animalSize == 1)
+                SafariPrice = base.basePrice + 15.0;
+            if (animalSize == 2)
+                SafariPrice = base.basePrice + 30.0;
+            return SafariPrice;
+        }
+
+        public static void Main(string[] args)
+        {
+            Dolly D = new Dolly(10, 3, 30.5, "Buzz", 20.0);
+            Safari S = new Safari(0, 3, "Woody", 20.0);
+            Toy[] arr = new Toy[2];
+            arr[0] = S;
+            arr[1] = D;
+            Console.WriteLine(D.computerPrice());
+            Console.WriteLine(S.computerPrice());
+            Console.ReadKey();
+        }
+    }

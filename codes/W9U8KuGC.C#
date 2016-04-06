@@ -1,0 +1,18 @@
+namespace MyProgram
+{
+	class MainFunctions
+	{
+		static void Main(string[] args)
+		{
+			Console.WriteLine("Enter your username!");
+			string userName;
+			userName = Console.ReadLine();
+			if (userName.Length > 2)
+			{
+				Console.WriteLine("Not long enough!");
+			}
+			Console.WriteLine(userName);
+			Console.ReadLine();
+		}
+	}
+}

@@ -1,0 +1,926 @@
+.banner {
+    display: none;
+}
+
+/*
+ * Превращает на Ычане верхний админбар во фрейм.
+ * Note: внимательнее с конфликтами hatsune.ru/b/ - iichan.hk/b/ и tenhou.ru/m/ - iichan.hk/m/
+ */
+
+/*==================================================================================================
+Каркас
+==================================================================================================*/
+
+/* админбар */
+.adminbar:first-child {
+    bottom: 0;
+    font-size: 0;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+/* заголовки */
+.adminbar:first-child > a[href$="/d/"]::before, .adminbar:first-child > a[href$="/es/"]::before, .adminbar:first-child > a[href$="/an/"]::before, .adminbar:first-child > a[href$="/a/"]::before, .adminbar:first-child > a[href$="('Burichan','list')"]::before, .adminbar:first-child > a[href$="ii.booru.org"]::before {
+    display:block;
+}
+
+/* ссылки */
+.adminbar:first-child > a {
+    display: block;
+    font-size: small;
+}
+
+/*==================================================================================================
+Анимация
+==================================================================================================*/
+
+/* выезжание админбара */
+.adminbar:first-child:hover
+{
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+.adminbar:first-child {
+    transition-property: transform, opacity;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    transform: translate(-90%, 0);
+    opacity: 0;
+}
+
+/* Вся страница съезжает вправо */
+/* .adminbar:first-child:hover ~ *
+{
+    transform: translate(215px, 0);
+}
+
+.adminbar:first-child ~ *
+{
+    transition: transform .2s ease-in-out;
+} */
+
+/*==================================================================================================
+Оформление
+==================================================================================================*/
+
+/* админбар */
+.adminbar:first-child {
+    border-right: 1px solid;
+    background-color: inherit;
+    box-shadow: 0 0 5px black;
+    width: 215px;
+    padding-bottom: 7px;
+}
+
+/* заголовки */
+.adminbar:first-child > a[href$="/d/"]::before, .adminbar:first-child > a[href$="/es/"]::before, .adminbar:first-child > a[href$="/an/"]::before, .adminbar:first-child > a[href$="/a/"]::before, .adminbar:first-child > a[href$="('Burichan','list')"]::before, .adminbar:first-child > a[href$="ii.booru.org"]::before {
+    background: #EEAA88;
+    color: #800000;
+    font-family: sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    margin: 7px -3px 0 -3px;
+    padding: 0px 3px;
+    text-align: left;
+    text-decoration: none;
+}
+
+/* ссылки */
+.adminbar:first-child > a {
+    background: #F0E0D6;
+    color: #800000;
+    font-family: sans-serif;
+    margin: 0 7px;
+    padding: 0 3px 0 3px;
+    text-align: right;
+    text-decoration: none;
+}
+
+.adminbar:first-child > a:hover {
+    background: #FFE;
+}
+
+/* Ссылки не на доски не имеют подписей, поэтому выровнены по левому краю. */
+.adminbar:first-child > a[href$="/hatsune.ru/b/"] ~ a {
+    text-align: left;
+}
+
+.adminbar:first-child > a[href$="blogspot.com"],
+.adminbar:first-child > a[href$="iichantra.ru"],
+.adminbar:first-child > a[href$="overchan.ru"] {
+    text-decoration: underline;
+    font-family: serif;
+    font-size: 12pt;
+    background-color: #FFE;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center !important;
+    text-transform: lowercase;
+}
+
+.adminbar:first-child > a[href$="blogspot.com"] {top: 40px;}
+.adminbar:first-child > a[href$="iichantra.ru"] {top: 58px;}
+.adminbar:first-child > a[href="http://overchan.ru"] {top: 76px;}
+.adminbar:first-child > a[href="http://radio.overchan.ru"] {top: 94px;}
+
+/* Подписи к ссылкам слева. */
+.adminbar:first-child > a[href$="/d/"]::after, .adminbar:first-child > a[href$="/es/"]::after, .adminbar:first-child > a[href$="/gnx/"]::after, .adminbar:first-child > a[href$="/abe/"]::after, .adminbar:first-child > a[href$="/int/"]::after, .adminbar:first-child > a[href$="/ts/"]::after, .adminbar:first-child > a[href$="/au/"]::after, .adminbar:first-child > a[href$="/b/"]::after, .adminbar:first-child > a[href$="/vg/"]::after, .adminbar:first-child > a[href$="/hr/"]::after, .adminbar:first-child > a[href$="/gf/"]::after, .adminbar:first-child > a[href$="/an/"]::after, .adminbar:first-child > a[href$="/ne/"]::after, .adminbar:first-child > a[href$="/tran/"]::after, .adminbar:first-child > a[href$="/tv/"]::after, .adminbar:first-child > a[href$="/cu/"]::after, .adminbar:first-child > a[href$="/l/"]::after, .adminbar:first-child > a[href$="tenhou.ru/m/"]::after, .adminbar:first-child > a[href$="/bro/"]::after, .adminbar:first-child > a[href$="/m/"]::after, .adminbar:first-child > a[href$="/med/"]::after, .adminbar:first-child > a[href$="/mo/"]::after, .adminbar:first-child > a[href$="/mu/"]::after, .adminbar:first-child > a[href$="/bg/"]::after, .adminbar:first-child > a[href$="/sci/"]::after, .adminbar:first-child > a[href$="/w/"]::after, .adminbar:first-child > a[href$="/mi/"]::after, .adminbar:first-child > a[href$="/o/"]::after, .adminbar:first-child > a[href$="/x/"]::after, .adminbar:first-child > a[href$="/p/"]::after, .adminbar:first-child > a[href$="/r/"]::after, .adminbar:first-child > a[href$="/dev/"]::after, .adminbar:first-child > a[href$="/maid/"]::after, .adminbar:first-child > a[href$="/sp/"]::after, .adminbar:first-child > a[href$="/t/"]::after, .adminbar:first-child > a[href$="/tr/"]::after, .adminbar:first-child > a[href$="/tu/"]::after, .adminbar:first-child > a[href$="/ph/"]::after, .adminbar:first-child > a[href$="/fr/"]::after, .adminbar:first-child > a[href$="/s/"]::after, .adminbar:first-child > a[href$="/jp/"]::after, .adminbar:first-child > a[href$="/a/"]::after, .adminbar:first-child > a[href$="/aa/"]::after, .adminbar:first-child > a[href$="/azu/"]::after, .adminbar:first-child > a[href$="/vn/"]::after, .adminbar:first-child > a[href$="/c/"]::after, .adminbar:first-child > a[href$="/ls/"]::after, .adminbar:first-child > a[href$="/ma/"]::after, .adminbar:first-child > a[href$="/me/"]::after, .adminbar:first-child > a[href$="/rm/"]::after, .adminbar:first-child > a[href$="/tan/"]::after, .adminbar:first-child > a[href$="/sos/"]::after, .adminbar:first-child > a[href$="/to/"]::after, .adminbar:first-child > a[href$="/fi/"]::after, .adminbar:first-child > a[href$="/hau/"]::after, .adminbar:first-child > a[href$="hatsune.ru/b/"]::after {
+    float: left;
+}
+
+/*==================================================================================================
+Подписи к заголовкам
+==================================================================================================*/
+
+.adminbar:first-child > a[href$="/d/"]::before                 {content: "Обсуждения";margin-top: 80px;}
+.adminbar:first-child > a[href$="/es/"]::before               {content: "На пробу";}
+.adminbar:first-child > a[href$="/an/"]::before                {content: "Общее";}
+.adminbar:first-child > a[href$="/a/"]::before                 {content: "Японская культура";}
+.adminbar:first-child > a[href$="('Burichan','list')"]::before {content: "Стили";}
+.adminbar:first-child > a[href$="ii.booru.org"]::before        {content: "Разное";}
+
+/*==================================================================================================
+Подписи к списку досок
+==================================================================================================*/
+
+.adminbar:first-child > a[href$="/d/"]::after    {content: "работа сайта";}
+.adminbar:first-child > a[href$="/es/"]::after   {content: "бесконечное лето";}
+.adminbar:first-child > a[href$="hatsune.ru/b/"]::after {content: "vocaloid" !important;}
+.adminbar:first-child > a[href$="/gnx/"]::after  {content: "gainax";}
+.adminbar:first-child > a[href$="/abe/"]::after  {content: "ёситоси абэ";}
+.adminbar:first-child > a[href$="/int/"]::after  {content: "international";}
+.adminbar:first-child > a[href$="/ts/"]::after   {content: "цундере";}
+.adminbar:first-child > a[href$="/au/"]::after   {content: "автомобили";}
+.adminbar:first-child > a[href$="/b/"]::after    {content: "бред";}
+.adminbar:first-child > a[href$="/vg/"]::after   {content: "видеоигры";}
+.adminbar:first-child > a[href$="/hr/"]::after   {content: "высокое разрешение";}
+.adminbar:first-child > a[href$="/gf/"]::after   {content: "gif- и flash-анимация";}
+.adminbar:first-child > a[href$="/an/"]::after   {content: "живопись";}
+.adminbar:first-child > a[href$="/ne/"]::after   {content: "животные";}
+.adminbar:first-child > a[href$="/tran/"]::after {content: "иностранные языки";}
+.adminbar:first-child > a[href$="/tv/"]::after   {content: "кино и тв";}
+.adminbar:first-child > a[href$="/cu/"]::after   {content: "кулинария";}
+.adminbar:first-child > a[href$="/l/"]::after    {content: "литература";}
+.adminbar:first-child > a[href$="tenhou.ru/m/"]::after   {content: "маджонг" !important;}
+.adminbar:first-child > a[href$="/bro/"]::after  {content: "my little pony";}
+.adminbar:first-child > a[href$="/m/"]::after    {content: "макросы/копипаста";}
+.adminbar:first-child > a[href$="/med/"]::after  {content: "медицина";}
+.adminbar:first-child > a[href$="/mo/"]::after   {content: "мотоциклы";}
+.adminbar:first-child > a[href$="/mu/"]::after   {content: "музыка";}
+.adminbar:first-child > a[href$="/bg/"]::after   {content: "настольные игры";}
+.adminbar:first-child > a[href$="/sci/"]::after  {content: "наука";}
+.adminbar:first-child > a[href$="/w/"]::after    {content: "обои";}
+.adminbar:first-child > a[href$="/mi/"]::after   {content: "оружие";}
+.adminbar:first-child > a[href$="/o/"]::after    {content: "оэкаки";}
+.adminbar:first-child > a[href$="/x/"]::after    {content: "паранормальные явления";}
+.adminbar:first-child > a[href$="/p/"]::after    {content: "политика";}
+.adminbar:first-child > a[href$="/r/"]::after    {content: "просьбы";}
+.adminbar:first-child > a[href$="/dev/"]::after  {content: "разработка";}
+.adminbar:first-child > a[href$="/maid/"]::after {content: "служанки";}
+.adminbar:first-child > a[href$="/sp/"]::after   {content: "спорт";}
+.adminbar:first-child > a[href$="/t/"]::after    {content: "торренты";}
+.adminbar:first-child > a[href$="/tr/"]::after   {content: "транспорт";}
+.adminbar:first-child > a[href$="/tu/"]::after   {content: "туризм";}
+.adminbar:first-child > a[href$="/ph/"]::after   {content: "фото";}
+.adminbar:first-child > a[href$="/fr/"]::after   {content: "фурри";}
+.adminbar:first-child > a[href$="/s/"]::after    {content: "электроника и по";}
+.adminbar:first-child > a[href$="/jp/"]::after   {content: "япония";}
+.adminbar:first-child > a[href$="/a/"]::after    {content: "аниме";}
+.adminbar:first-child > a[href$="/aa/"]::after   {content: "аниме арт";}
+.adminbar:first-child > a[href$="/azu/"]::after  {content: "azumanga daioh";}
+.adminbar:first-child > a[href$="/vn/"]::after   {content: "визуальные новеллы";}
+.adminbar:first-child > a[href$="/c/"]::after    {content: "косплей";}
+.adminbar:first-child > a[href$="/ls/"]::after   {content: "lucky star";}
+.adminbar:first-child > a[href$="/ma/"]::after   {content: "манга";}
+.adminbar:first-child > a[href$="/me/"]::after   {content: "меха";}
+.adminbar:first-child > a[href$="/rm/"]::after   {content: "rozen maiden";}
+.adminbar:first-child > a[href$="/tan/"]::after  {content: "сетевые персонажи";}
+.adminbar:first-child > a[href$="/sos/"]::after  {content: "suzumiya haruhi no yūutsu";}
+.adminbar:first-child > a[href$="/to/"]::after   {content: "touhou";}
+.adminbar:first-child > a[href$="/fi/"]::after   {content: "фигурки";}
+.adminbar:first-child > a[href$="/hau/"]::after  {content: "higurashi no naku koro ni";}
+
+.adminbar:first-child > a[href$="ii.booru.org"]::after {
+    content: 'архив рисунков';
+    float: left;
+    margin-right: 5px;
+}
+
+.adminbar:first-child > a[href$="acomics.ichan.ru"]::after {
+    content: 'архив комиксов';
+    float: left;
+    margin-right: 5px;
+}
+
+.adminbar:first-child > a[href$="cf.ichan.ru"]::after {
+    content: 'classic fond archive';
+    float: left;
+    margin-right: 5px;
+}
+
+.adminbar:first-child > a[href$="ost.ichan.ru"]::after {
+    content: 'ru-boards';
+    float: left;
+    margin-right: 5px;
+}
+
+.adminbar:first-child > a[href$="ru_iichan"]::after {
+    content: 'ru_iichan';
+}
+
+/*==================================================================================================
+Скрытые доски
+==================================================================================================*/
+
+.adminbar:first-child > a[href$="/bro/"] {display: none;}
+
+/*==================================================================================================
+Жирные доски
+==================================================================================================*/
+
+.adminbar:first-child > a[href$="/b/"]:not([href$="hatsune.ru/b/"]),
+.adminbar:first-child > a[href$="/a/"] {
+    font-weight: bold;
+}
+
+.adminbar:first-child > a[href$="/cgi-bin/../"]::after {
+    content: '#Ычан';
+    font-size: 35px;
+    font-family: serif;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    text-decoration: underline;
+    left: 0;
+    right: 0;
+}
+
+.adminbar::before {
+    content: '#Ычан';
+    opacity: 0;
+    display: block;
+    font-size: 35px;
+    text-align: center;
+}
+
+/* Чистка */
+
+pre, code
+{
+    word-wrap: break-word;
+}
+
+div[id^="thread"],
+table,
+/*desu*/ form > div:not(.reply) > div:first-child
+{
+    position: relative;
+}
+
+body,
+div[id^="thread"],
+div[id^="thread"] > span.filesize,
+div[id^="thread"] > a:first-of-type,
+td.reply,
+td.reply > span.filesize,
+td.highlight,
+td.highlight > span.filesize,
+/*desu*/ form > div:not(.reply) > div:first-child,
+/*desu*/ form > div:not(.reply) > div:first-child > span.filesize,
+/*desu*/ form > div:not(.reply) > div:first-child > a:first-of-type
+{
+    font-size: 0;
+}
+
+body > div,
+body > form,
+body > p,
+body > span,
+body > table,
+div[id^="thread"] > a,
+div[id^="thread"] > span,
+div[id^="thread"] > div,
+div[id^="thread"] > blockquote,
+div[id^="thread"] > table,
+/*desu*/ form > div:not(.reply) > div:first-child > a,
+/*desu*/ form > div:not(.reply) > div:first-child > span,
+/*desu*/ form > div:not(.reply) > div:first-child > div,
+/*desu*/ form > div:not(.reply) > div:first-child > blockquote,
+/*desu*/ form > div:not(.reply) > div:first-child > table,
+td.reply > a,
+td.reply > span,
+td.reply > div,
+td.reply > blockquote,
+td.reply > table,
+td.highlight > a,
+td.highlight > span,
+td.highlight > div,
+td.highlight > blockquote,
+td.highlight > table
+{
+    font-size: 12pt;
+}
+
+div[id^="thread"] > label,
+/*desu*/ form > div:not(.reply) > div:first-child > label,
+td.reply > label,
+td.highlight > label,
+div[id^="thread"] > span.filesize > a,
+/*desu*/ form > div:not(.reply) > div:first-child > span.filesize > a,
+td.reply > span.filesize > a,
+td.highlight > span.filesize > a
+{
+    font-size: 10pt;
+}
+
+td.doubledash,
+span.thumbnailmsg,
+td.reply > br:first-of-type,
+td.highlight > br:first-of-type,
+div[id^="thread"] > br:first-of-type,
+/*desu*/ form > div:not(.reply) > div:first-child > br:first-of-type
+{
+    display: none;
+}
+
+/* Анимация */
+
+img[src*="thumb"], img[src^="blob"], /*Мамка в комнате*/
+.spoiler, /*Анимация: Спойлер*/
+div[id^="thread"] > .filesize,
+div[id^="thread"] > label,
+/*desu*/ form > div:not(.reply) > div:first-child > .filesize,
+/*desu*/ form > div:not(.reply) > div:first-child > label,
+td.reply > .filesize,
+td.reply > label,
+td.highlight > .filesize,
+td.highlight > label,
+form ~ table,
+body > p:first-child,
+body > .adminbar:first-child, td.reply > .de-post-btns > span, td.highlight > .de-post-btns > span
+{
+    transition: all .2s ease-in-out;
+}
+
+/* Анимация: Скрытые треды */
+
+.de-thr-hid
+{
+    transition: opacity .1s ease-in-out;
+    opacity: .2;
+}
+
+.de-thr-hid:hover
+{
+    opacity: 1;
+}
+
+/* Анимация: Слишком длинное сообщение */
+
+.abbrev > a
+{
+    display: inline-block;
+    height: 1em;
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+}
+
+.abbrev > a:hover
+{
+    height: 2em;
+}
+
+/* Стиль доски: разделители */
+
+br[clear="left"]
+{
+    display: none;
+}
+
+hr {
+    border: 1px solid;
+    border-left: none;
+    border-right: none;
+    height: 4px;
+    clear: both;
+    border-color: #800000;
+}
+
+/*Стиль блока сообщения*/
+
+td.reply
+{
+    border: 1px solid currentcolor;
+    min-width: 200px;
+}
+
+td.reply,
+td.highlight
+{
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    padding: 5px;
+}
+
+td.reply > blockquote,
+td.highlight > blockquote,
+div[id^="thread"] > blockquote,
+/*desu*/ form > div:not(.reply) > div:first-child > blockquote
+{
+    margin: 0 0 0 10px;
+}
+
+img.thumb
+{
+    margin: 0 10px 10px 10px;
+}
+
+p,
+blockquote.unkfunc
+{
+    margin: 0;
+}
+
+/* Ссылка на файл появляется по наведению */
+
+div[id^="thread"] > .filesize,
+/*desu*/ form > div:not(.reply) > div:first-child > .filesize
+{
+    position: absolute;
+    margin: 0 10px;
+    left: 0;
+    /*background: inherit;*//*Default */
+    /*background: #EEF2FF;*//*Burichan*/
+    /*background: #EDDAD2;*//*Gurochan*/
+      background: #FFFFEE;  /*Futaba  */
+}
+
+td.reply > .filesize,
+td.highlight > .filesize
+{
+    margin: 0;
+    /*background: inherit;*//*Default */
+    /*background: #D6DAF0;*//*Burichan*/
+    /*background: #D9AF9E;*//*Gurochan*/
+      background: #F0E0D6;  /*Futaba  */
+}
+
+div[id^="thread"] > .filesize,
+/*desu*/ form > div:not(.reply) > div:first-child > .filesize,
+td.reply > .filesize,
+td.highlight > .filesize, td.reply > .de-post-btns > span:not(.de-post-note), td.highlight > .de-post-btns > span:not(.de-post-note)
+{
+    opacity: 0;
+}
+
+div[id^="thread"]:hover > .filesize,
+/*desu*/ form > div:not(.reply) > div:first-child:hover > .filesize,
+td.reply:hover > .filesize,
+td.highlight:hover > .filesize, td.reply:hover > .de-post-btns > span:not(.de-post-note), td.highlight:hover > .de-post-btns > span:not(.de-post-note)
+{
+    opacity: 1;
+}
+
+/*Вынесенный вверх заголовок*/
+
+div[id^="thread"] > label,
+/*desu*/ form > div:not(.reply) > div:first-child > label
+{
+    left: 0;
+    text-align: left;
+    top: -10px;
+}
+
+td.reply > label,
+td.highlight > label
+{
+    right: 0;
+    text-align: right;
+    top: -5px;
+}
+
+div[id^="thread"] > label,
+/*desu*/ form > div:not(.reply) > div:first-child > label,
+td.reply > label,
+td.highlight > label
+{
+    transform-origin: 50% 100%;
+    margin-right: 5px;
+    position: absolute;
+    opacity: 0;
+    transform: translate(0, -100%) scale(1, 0);
+}
+
+div[id^="thread"]:hover > label,
+/*desu*/ form > div:not(.reply) > div:first-child:hover > label,
+td.reply:hover > label,
+td.highlight:hover > label
+{
+    opacity: 1;
+    transform: translate(0, -100%) scale(1, 1);
+}
+
+/* Стиль блока заголовка */
+
+div[id^="thread"] > label,
+/*desu*/ form > div:not(.reply) > div:first-child > label,
+td.reply > label,
+td.highlight > label
+{
+    /*background: inherit;*//*Default */
+    /*background: #D6DAF0;*//*Burichan*/
+    /*background: #D9AF9E;*//*Gurochan*/
+      background: #F0E0D6;  /*Futaba  */
+    border-radius: 5px;
+    border: 1px solid currentcolor;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    padding: 1px;
+}
+
+/* Маленький треугльник под заголовком */
+
+div[id^="thread"] > label::after,
+/*desu*/ form > div:not(.reply) > div:first-child > label::after,
+td.reply > label::after,
+td.highlight > label::after
+{
+    transform: rotate(-45deg);
+    /*background: inherit;*//*Default */
+    /*background: #D6DAF0;*//*Burichan*/
+    /*background: #D9AF9E;*//*Gurochan*/
+      background: #F0E0D6;  /*Futaba  */
+    border: inherit;
+    border-right: none;
+    border-top: none;
+    bottom: -6px;
+    content: "";
+    height: 10px;
+    position: absolute;
+    width: 10px;
+    z-index:-1;
+}
+
+div[id^="thread"] > label::after,
+/*desu*/ form > div:not(.reply) > div:first-child > label::after
+{
+    left: 5%;
+}
+
+td.reply > label::after,
+td.highlight > label::after
+{
+    left: 50%;
+}
+
+/* Удаление нижнего списка досок */
+
+body > .adminbar ~ .adminbar, /* Ычан */
+body > br[clear="all"] + p:not(.footer) /* остальные */
+{
+    display: none;
+}
+
+/* Селектор страниц выезжает снизу */
+
+/* Стиль панели */
+
+form ~ table
+{
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid currentcolor;
+    border-top-right-radius: 5px;
+    border-top: 1px solid currentcolor;
+    background-color: inherit;
+    box-shadow: 0 0 5px black;
+    padding: 5px;
+}
+
+/* Разметка */
+
+form ~ table
+{
+    transform: translate(0, 90%);
+    bottom: 0;
+    display: block;
+    left: 0;
+    max-width: 80%;
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+}
+
+form ~ table:hover
+{
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+.adminbar:first-child:hover ~ form ~ table {
+    margin-left: 198px;
+}
+
+/* hit area */
+form ~ table::after
+{
+    bottom: 100%;
+    top: -30px;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+form ~ table tbody,
+form ~ table td,
+form ~ table tr
+{
+    display: inline-block;
+    white-space: nowrap;
+    border: none;
+}
+
+form ~ table td:nth-of-type(2)
+{
+    max-width: 600px;
+    overflow: auto;
+}
+
+form ~ table td form
+{
+    display: inline-block;
+}
+
+form ~ table td:nth-of-type(3)::before
+{
+    content: "►";
+}
+
+form ~ table td:nth-of-type(1)::after
+{
+    content: "◄";
+}
+
+/* Стиль кнопок */
+
+
+
+body > a[href$="index.html"], /*"Назад"*/
+div[id^="thread"] > span.reflink + a, span.de-post-btns + a, /*"Ответ"*/
+/*desu*/ form > div:not(.reply) > div:first-child > span.de-ppanel + a,
+/*desu*/ .de-parea > div:first-child > a,
+/*desu*/ #de-txt-panel .de-abtn
+{
+    color: white;
+    background-color: #777;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px;
+    height: 15px;
+    border-radius: 2px;
+    font-family: sans-serif;
+    font-size: 10pt !important;
+}
+
+body > a[href$="index.html"]:hover, /*"Назад"*/
+div[id^="thread"] > span.reflink + a:hover, span.de-post-btns + a:hover, /*"Ответ"*/
+/*desu*/ form > div:not(.reply) > div:first-child > span.de-ppanel + a:hover,
+/*desu*/ .de-parea > div:first-child > a:hover,
+/*desu*/ #de-txt-panel .de-abtn:hover
+{
+    background-color: #aaa;
+}
+
+ol > li, ul > li {
+    margin-left: 5em;
+}
+
+.userdelete {
+    font-size: 0;
+    position: absolute;
+    right: 5px;
+}
+
+.userdelete label {
+    font-size: 10pt;
+    float: right;
+    margin-left: 156px;
+    display: flex;
+}
+
+/* desu only */
+
+#de-updater-div, .de-thread-updater {
+    font-size: 0;
+    border-radius: 2px;
+    margin-top: 10px;
+    background-color: #777;
+    display: block;
+    padding: 2px;
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+#de-updater-div, .de-thread-updater, .de-parea-btn-reply, .de-parea-btn-close, body > a[href$="index.html"] {
+    float: left;
+    margin: 5px 5px 5px 0;
+}
+
+#de-updater-count {
+    color: #777;
+    background-color: white;
+    border-radius: 2px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+#de-updater-div:hover, .de-thread-updater:hover {
+    background-color: #aaa;
+}
+
+div#de-updater-div a, .de-thread-updater a {
+    font-size: 10pt;
+    color: white;
+}
+
+#de-updater-div + br + hr, #de-main > hr, .de-thread-buttons + br + hr {
+    display: none;
+}
+
+.de-post-btns {
+    position: relative;
+}
+.de-btn-hide, .de-btn-hide-user, .de-btn-rep, .de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-src, .de-btn-stick, .de-btn-stick-on, .de-btn-expthr, .de-post-hide .de-btn-hide-user, .de-post-hide .de-btn-hide {
+    border-radius: 2px;
+    background: #777 !important;
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    position: relative;
+}
+
+.de-btn-hide:hover, .de-btn-hide-user:hover, .de-btn-rep:hover, .de-btn-expthr:hover, .de-btn-fav:hover, .de-btn-fav-sel:hover, .de-btn-src:hover, .de-btn-stick:hover, .de-btn-stick-on:hover,
+.de-btn-expthr:hover, .de-post-hide .de-btn-hide-user:hover, .de-post-hide .de-btn-hide:hover, .de-btn-src:hover {
+    background: #aaa !important;
+}
+
+.de-btn-hide::after, .de-btn-hide-user::after, .de-btn-rep::after, .de-btn-expthr::after, .de-btn-fav::after, .de-btn-fav-sel::after, .de-btn-src::after, .de-btn-stick::after, .de-btn-stick-on::after,
+.de-post-btns span:not(.de-post-note)::after, .de-btn-expthr:after, .de-post-hide .de-btn-hide-user::after, .de-post-hide .de-btn-hide::after, .de-btn-src::after {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    position: absolute;
+    color: white;
+    font-family: monospace;
+    text-align: center;
+}
+
+.de-btn-hide::after {
+    content: '☒';
+    top: -4px;
+}
+
+.de-btn-hide-user::after {
+    content: '☒';
+    top: -4px;
+    color: lightgreen !important;
+}
+
+.de-post-hide .de-btn-hide::after {
+    content: '+';
+    top: -4px;
+}
+
+.de-post-hide .de-btn-hide-user::after {
+    content: '+';
+    top: -4px;
+    color: lightgreen !important;
+}
+
+.de-btn-rep::after {
+    content: '➥';
+    top: -2px;
+    font-size: 0.8em;
+}
+
+.de-btn-expthr::after {
+    content: '↕';
+    top: -2px;
+}
+
+.de-btn-fav::after {
+    content: '☆';
+    top: -5px;
+}
+
+.de-btn-fav-sel::after {
+    content: '★';
+    top: -5px;
+    color: yellow !important;
+}
+
+.de-btn-src::after {
+    content: '?';
+    font-size: 10pt;
+    font-family: sans-serif;
+}
+
+.de-btn-stick::after {
+    content: '📌';
+    font-size: .6em;
+}
+
+.de-btn-stick-on::after {
+    content: '📌';
+    font-size: .6em;
+    color: lightgreen !important;
+}
+
+td.reply > .de-refmap, td.highlight > .de-refmap,
+form > div:not(.reply) > div:first-child > .de-refmap
+{
+    font-size: 11px;
+    margin: 0;
+}
+
+td.reply > .de-refmap, td.highlight > .de-refmap,
+{
+    clear: both;
+}
+
+td.reply > .de-ppanel
+{
+    float: right;
+}
+
+#de-qarea
+{
+    float: left;
+    width: auto;
+    margin-left: 30px;
+    border-radius: 5px;
+    border: 1px solid currentcolor;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    padding: 5px;
+}
+
+#de-qarea + table
+{
+    clear: left;
+}
+
+.de-parea > div:first-child,
+#de-txt-panel
+{
+    font-size: 0;
+}
+
+#de-txt-panel .de-abtn,
+#de-txt-panel .de-abtn:hover
+{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin: 0 2.5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#de-txt-panel #de-btn-bold > a
+{
+    font-weight: bold;
+}
+
+#de-txt-panel #de-btn-italic > a
+{
+    font-weight: normal;
+    font-style: italic;
+}
+
+#de-txt-panel #de-btn-strike > a
+{
+    font-weight: normal;
+    text-decoration: line-through !important;
+}
+
+#de-txt-panel #de-btn-code > a
+{
+    font-family: monospace;
+}
+
+.de-img-full {
+  margin: 0 10px;
+}
+
+.de-pview .de-post-btns span:last-child, .de-post-counter:after {
+    float: right;
+}

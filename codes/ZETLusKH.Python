@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+import time
+import xlwt
+import re
+import requests
+import lxml.html
+import winsound
+import sys
+import randua
+from datetime import datetime, timedelta, date
+import ast
+import json
+
+s = requests.Session()
+def Resp(url):
+    while 1:
+        try:
+            resp = s.get(url)
+        except:
+            print 'Network off!'
+            winsound.Beep(500,500)
+            time.sleep(1)
+        else:
+            return resp             
+
+#Program Starts
+if __name__ == "__main__":
+    winsound.Beep(500,500)
+    start = datetime.now()
+    print '%-20s: %s' %('Start', start.time())
+    print '------------------------------------------------------\n'
+
+    Domen = 'https://twi-link.net'
+    WriteCount = 2
+
+    # url = "http://www.tirebuyer.com/tires/michelin/x-ice-xi3/p/style/58823"
+
+    # Tires(url)
+
+   # Brand(url) 
+
+    url = 'https://twi-link.net/'
+    #search_text = '1'
+
+    login_data =    {
+                        '__EVENTTARGET'     : 'ctl00$ctl00$ctl00$SiteContent$SiteContent$SiteContent$B2xPanel1$B2BLoginControl1$LoginButton',
+                        '__EVENTARGUMENT'   : {
+                                                  'ctl00$ctl00$ctl00$SiteContent$SiteContent$SiteContent$B2xPanel1$B2BLoginControl1$UserName' : 'COMTIRES',
+                                                  'ctl00$ctl00$ctl00$SiteContent$SiteContent$SiteContent$B2xPanel1$B2BLoginControl1$Password' : 'MUFG2011',
+                                              },
+                        '__EVENTVALIDATION' : '/wEdAAaEzbcdGVQITmlqj0bLCA89F9HD9Dh098/w/oBn4NwMjaD8AP9S8wJNp4e3XRNTux2VCR6n0X9qQPIkto/X7140v+h+StO4wZW9mG87spJG2odCPYd2qAuoEnOjj724PEmPuoHKelraR/yYPt6oY4zyxDmBbw==',
+                        '__VIEWSTATE'       : '/wEPDwUKMTk4OTM3NTc0NQ9kFgJmD2QWAmYPZBYCZg9kFgQCAQ9kFgICEA8WAh4EaHJlZgUuaHR0cHM6Ly90d2ktbGluay5uZXQvY29udGVudC9maWxlcy9mYXZpY29uLmljb2QCAw9kFgICARBkZBYQAgcPDxYCHgdWaXNpYmxlaGRkAgkPZBYEAgEPZBYCZg8PFgIfAWhkFgQCARAPFgIfAWhkZGQCAw8PFgIfAWhkZAIDD2QWBGYPDxYCHwFoZGQCAg9kFgICAg9kFgQCAQ8WAh8BZxYCZg8PFgIeB1Rvb2xUaXAFBUNsb3NlFgQeB29uY2xpY2sFYHZhciBmID0gZnVuY3Rpb24oKXs7IHJldHVybiB0cnVlO307IGlmKGYoKSl7JGZpbmQoJ1NoaXBUb0xvY2F0aW9uUG9wdXBJRCcpLmhpZGUoKTtyZXR1cm4gZmFsc2U7fR8ABQEjZAIDD2QWAmYPZBYCAgkPDxYEHgRUZXh0BQROZXh0HwIFBE5leHRkZAIPD2QWAgIBD2QWAmYPZBYCAgIPZBYCAgUPZBYCZg9kFgICAw8QZGQWAGQCEQ9kFgICAQ8PFgIfAWdkZAIVD2QWAgIBD2QWAgIBD2QWAmYPZBYCAgEQPCsABQEADxYCHg1QYXRoU2VwYXJhdG9yBQMgLyBkZGQCFw9kFgQCAQ9kFgICAw9kFgICAQ9kFgICAQ9kFgICAQ9kFgICCw9kFgICGw8PFgIfAgUFTG9naW5kZAIDD2QWAmYPZBYCAgEPZBYCAgIPZBYCAgEPFgIfAWcWAmYPDxYCHwIFBUNsb3NlFgQfAwVbdmFyIGYgPSBmdW5jdGlvbigpezsgcmV0dXJuIHRydWU7fTsgaWYoZigpKXskZmluZCgnQWRkVG9CYXNrZXRQb3B1cCcpLmhpZGUoKTtyZXR1cm4gZmFsc2U7fR8ABQEjZAIbD2QWBAIBDxYCHwQFNCZjb3B5OyBDb3B5cmlnaHQgMjAxNSBUV0kgTGluay4gQWxsIHJpZ2h0cyByZXNlcnZlZC5kAgMQPCsADQIADxYCHgtfIURhdGFCb3VuZGdkDBQrAAIFAzA6MBQrAAIWEB8EBQpDb250YWN0IHVzHgVWYWx1ZQUKQ29udGFjdCB1cx4LTmF2aWdhdGVVcmwFCi9jb250YWN0dXMeB0VuYWJsZWRnHgpTZWxlY3RhYmxlZx4IRGF0YVBhdGgFBDAxMDIeCURhdGFCb3VuZGceBlRhcmdldGVkZBYCZg9kFgICAQ8PFggfBAUKQ29udGFjdCB1cx8CBQpDb250YWN0IHVzHwgFCi9jb250YWN0dXMfDWVkZAIdDw8WAh8BaGRkGAMFP2N0bDAwJGN0bDAwJGN0bDAwJExvZ2luVmlld0NvbnRhaW5lciRMb2dpblZpZXdDb250cm9sJExvZ2luVmlldw8PZGZkBS5jdGwwMCRjdGwwMCRjdGwwMCRTaXRlRmlyc3RGb290ZXIkU2l0ZU1hcCRNZW51Dw9kBQVMb2dpbmQFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBVtjdGwwMCRjdGwwMCRjdGwwMCRTaXRlQ29udGVudCRTaXRlQ29udGVudCRTaXRlQ29udGVudCRCMnhQYW5lbDEkQjJCTG9naW5Db250cm9sMSRSZW1lbWJlck1lzlucq6ZQJPtW1IvbWGBDcR+//4Q=',
+                        'returnurl'         : '/search',
+                    }
+
+    s.get(url)
+
+    #search_data = dict(q=search_text)
+
+    headers = {
+        'Accept'                     : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Encoding'            : 'gzip, deflate',
+        'Accept-Language'            : 'ru,en-US;q=0.8,en;q=0.6,tr;q=0.4',
+        'Cache-Control'              : 'max-age=0',
+        'Connection'                 : 'keep-alive',
+        'Content-Length'             : '2325',
+        'Content-Type'               : 'application/json',
+        'Host'                       : 'twi-link.net',
+        'Origin'                     : 'https://twi-link.net',
+        'Referer'                    : 'https://twi-link.net/profile/login?returnurl=%2fsearch',
+        'Upgrade-Insecure-Requests'  : '1',
+        'User-Agent'                 : 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36',
+    }
+
+    url = 'https://twi-link.net/profile/login'
+
+    resp   = s.post(url, data=json.dumps(login_data), headers=headers)
+    source = resp.text
+
+    f = open('d:/source.txt', 'w')
+    f.write(source.encode('utf-8'))
+    f.close
+    # page = s.get("http://twi-link.net/search")
+
+    #https://twi-link.net/profile/login
+
+    #wb.save(destination_filename)
+    end = datetime.now()
+    print '\n------------------------------------------------------'
+    print '%-20s: %s' %('Start', start.time())
+    print '%-20s: %s' %('End', end.time())
+    print '%-20s: %s' %('Time left', end - start)
+
+    print '\n'
+
+    winsound.Beep(500,500)

@@ -1,0 +1,28 @@
+{
+    "client": {
+		"phone": "+79058745560",
+		"client_name": "Алексей Тест"
+	},		
+    "wish_list": [],
+    "unit": {        
+        "id": "55cb58aa2bc61a2048acfcdb"
+    },
+    "payments": {
+        "by_cash": 600,
+        "by_cashless": 20,
+        "by_bonus": 0
+    },
+    "delivery": {
+        "price": 0
+    },
+    "stage": "final.completed",
+    "full_price": 620,
+	"sales": [
+        {
+            "prototype": "55c9de542bc61a21a49b4594",
+            "option": "b53b1835-9970-43f9-a081-0853a228fe09",
+            "count": 5,
+            "discounts": []
+        }
+    ]
+}

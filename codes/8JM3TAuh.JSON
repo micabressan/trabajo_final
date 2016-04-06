@@ -1,0 +1,180 @@
+{
+    "_id": "55b1eed3d391f5398f1cee4b",
+     "adapter_id": 1,
+     "added": "Fri Jul 24 10:52:51 2015",
+     "deviceType": {
+         "basicType": 4,
+         "genericType": 17,
+         "manufacturerId": 134,
+         "manufacturerProductId": 25,
+         "manufacturerProductType": 3,
+         "specificType": 1
+     },
+     "instances": [
+         {
+             "id": 0,
+             "name": "0"
+         }
+     ],
+     "lowlevel": {
+         "BatteryPowered": false,
+         "SDK": "4.55.00",
+         "ZWLib": 3,
+         "ZWProtocolMajor": 3,
+         "ZWProtocolMinor": 67,
+         "applicationMajor": 1,
+         "applicationMinor": 20,
+         "deviceModel": "DSC25-ZWUS",
+         "deviceTypeString": "Routing Multilevel Switch",
+         "hasWakeup": false,
+         "interviewDone": false,
+         "isFailedNode": false,
+         "productName": "",
+         "vendor": "Aeon Labs"
+     },
+     "methods": [
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "int"
+                 }
+             ],
+             "data_type": "dimmer",
+             "hr_name": "Dimmer state",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": true,
+                     "title": "Dimmer state"
+                 }
+             ],
+             "name": "get_dimmer",
+             "op_type": "r"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "int"
+                 }
+             ],
+             "data_type": "dimmer",
+             "hr_name": "Set dimmer state",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "set_dimmer",
+             "op_type": "w"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "bool"
+                 }
+             ],
+             "data_type": null,
+             "hr_name": "Set switch all state",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "set_switch_all",
+             "op_type": "w"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "float"
+                 }
+             ],
+             "data_type": "meter_amper",
+             "hr_name": "Amper",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "get_meter_amper",
+             "op_type": "r"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "float"
+                 }
+             ],
+             "data_type": "meter_kwh",
+             "hr_name": "kWh",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "get_meter_kwh",
+             "op_type": "r"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "float"
+                 }
+             ],
+             "data_type": "meter_volt",
+             "hr_name": "Volt",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "get_meter_volt",
+             "op_type": "r"
+         },
+         {
+             "args": [
+                 {
+                     "name": "value",
+                     "type": "float"
+                 }
+             ],
+             "data_type": "meter_watt",
+             "hr_name": "Watt",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "get_meter_watt",
+             "op_type": "r"
+         },
+         {
+             "args": [],
+             "data_type": "meter",
+             "hr_name": "Reset meter",
+             "instances": [
+                 {
+                     "id": 0,
+                     "show": false
+                 }
+             ],
+             "name": "set_meter",
+             "op_type": "w"
+         }
+     ],
+     "name": "Aeon Labs Smart Dimmer G2 - 3",
+     "tech": "zwave",
+     "type": "dimmer"
+ }

@@ -1,0 +1,3 @@
+> let str = " he1l2lo     w3o4rld 12          3 312 test "
+> intercalate " " [filter isAlpha x | x <- splitOn " " str]
+" hello     world             test "

@@ -1,0 +1,17 @@
+from math import log10
+
+
+def freq(text):
+    dict_sym = {}
+    for i in range(1, len(text)):
+        if text[i] in [str(i) for i in range(10)] and not text[i - 1] in [str(i) for i in range(10)]:
+            if text[i] in dict_sym:
+                dict_sym[text[i]] += 1
+            else:
+                dict_sym[text[i]] = 1
+    return dict_sym
+
+dict_text = freq(input())
+for i in range(1, 10):
+    print(round(dict_text[str(i)] / sum(dict_text.values()), 6)
+          if str(i) in dict_text else '0.0', log10(1 + 1 / (i)))

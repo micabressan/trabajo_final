@@ -1,0 +1,14 @@
+Sub ChangeFont()
+   Worksheets("Plan1").Range("A1:A9").Select
+   Selection.Font.Name = "Tahoma"
+   Selection.Font.Size = 11
+   Selection.Font.Bold = True
+   
+   Worksheets("Plan1").Range("B2").Resize(1, 3).Select
+   Selection.Font.Name = "Tahoma"
+   Selection.Font.Size = 11
+   Selection.Font.Bold = True
+End Sub
+Sub FormatNumbers()
+   Worksheets("Plan1").Range("B3:D9").NumberFormat = "$ 0.00"
+End Sub

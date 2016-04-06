@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cutScene version="1.0" numParts="2">
+	<part time="5000">
+		<camera startX="0" startY="0" endX="300" endY="500"/> <!-- Moves the camera from 0,0 to 300,500 -->
+		<obj_Create id="0" type="String" x="20" y="300"> <!-- Creates a string object with identification number 0-->
+			<string content="This is a String. there are no more than 15 letters per line. It won't break up any words!" spacingX="0.1" spacingY="0.2" fixed="true" textSize="0.5" maxLettersPerLine="20"/>
+		</obj_Create>
+	</part>
+	<part time="1">
+		<obj_Destroy id="0" type="String"/>
+	</part>
+</cutScene>

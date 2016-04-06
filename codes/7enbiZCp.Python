@@ -1,0 +1,39 @@
+# Complete the function below.
+
+def bit_value(bit):
+    if bit == 0:
+        return -1
+    else:
+        return 1
+
+def get_best_streak(arr):
+    # search for min streak sum, when zeroes value is -1, and ones value is 1
+    n = len(arr)
+    current_left = best_left = 0
+    current_right = best_right = 0
+    # starting min_sum as the value of the first bit, because of the constraint 0 <= L <= R < N
+    min_sum = bit_value(arr[0])
+    current_sum = 0
+
+    while current_right < n:
+        current_sum += bit_value(arr[current_right])
+        # if we found a better streak
+        if current_sum <= min_sum:
+            best_left, best_right = current_left, current_right
+            min_sum = current_sum
+        # if the number of ones in this streak is bigger than the number of zeroes
+        if current_sum > 0:
+            current_sum = 0
+            current_left = current_right + 1
+
+        current_right += 1
+    return best_left, best_right
+
+
+def bitFlip(arr):
+    left, right = get_best_streak(arr)
+    # the score is
+    #   the number of ones until the left indicator +
+    #   the number of zeroes between the left and right indicator +
+    #   the number of ones starting from the right indicator
+    return sum(arr[:left]) + sum(1 for i in arr[left:right+1] if i == 0) + sum(arr[right+1:])

@@ -1,0 +1,10 @@
+import Text.Printf (IsChar)
+
+class Foo a where
+    frob :: a -> a
+
+instance (Integral a, Integral b) => Foo (a -> b) where
+    frob a = a
+
+instance (IsChar a, IsChar b) => Foo (a -> b) where
+    frob a = a

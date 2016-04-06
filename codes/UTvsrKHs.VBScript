@@ -1,0 +1,28 @@
+Public Sub Check_ReceivedTime(newMail As Outlook.MailItem)
+  Dim obj As Object
+  Dim ReceivedHour As Integer
+  Dim newReply As MailItem
+  Dim msg As String
+  ReceivedHour = Hour(newMail.ReceivedTime)
+  ReceivedDay = WeekdayName(Weekday(newMail.ReceivedTime))
+  If ReceivedDay = "Saturday" Or ReceivedDay = "Sunday" Or ReceivedHour > 17 Or ReceivedHour < 8 Then
+    Set newReply = newMail.Reply
+    msg = "Thank you for contacting Senior Focused Relocations. We have received your email, however, our office is currently closed. Our office hours are Monday thru Friday, 8:30am to 5pm. We will return your email when we return to the office and look forward to speaking with you. Thank you, Senior Focused Relocations"
+    CreateMail newReply.To, msg
+  Else
+    Debug.Print "After 5pm. Send the automated reply."
+  End If
+  Set newReply = Nothing
+End Sub
+
+Private Sub CreateMail(ReplyAddress As String, msg As String)
+  Dim objMail As Outlook.MailItem
+  Set objMail = CreateItem(olMailItem)
+  With objMail
+    .To = ReplyAddress
+    .Body = msg
+    '.Display
+    ' or
+    .Send
+  End With
+﻿End Sub

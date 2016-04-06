@@ -1,0 +1,10 @@
+pub mod terrain {
+    pub mod voxel {
+      pub use ::voxel::impls::surface_vertex::*;
+
+      pub mod tree {
+        pub use ::voxel::tree::* hiding {T};
+        pub type T = ::voxel::tree::T<super::T>;
+      }
+    }
+}

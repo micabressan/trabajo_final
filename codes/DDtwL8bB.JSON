@@ -1,0 +1,28 @@
+{
+  "type": "com.andiks.battle.skill.aware.composite.BasicPrecondition",
+  "manna": 25,
+  "cooldown": 20000,
+  "skill": {
+    "type": "com.andiks.battle.skill.aware.impl.DirectionalAndTimedBeam",
+    "stepSize": 50,
+    "stepTime": 50,
+    "timeToLive": 1000,
+    "skill": {
+      "type": "com.andiks.battle.skill.aware.impl.Aoe",
+      "radius": 50,
+      "skill": {
+        "type": "com.andiks.battle.skill.aware.impl.TargetTypeMatch",
+        "targetTypes": [
+          "ENEMY"
+        ],
+        "skill": {
+          "type": "com.andiks.battle.skill.aware.impl.TargetAlive",
+          "skill": {
+            "type": "com.andiks.battle.skill.impl.AutoDamageHit",
+            "damageMultiplier": 3.0
+          }
+        }
+      }
+    }
+  }
+}

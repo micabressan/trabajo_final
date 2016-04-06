@@ -1,0 +1,81 @@
+#![feature(custom_derive, plugin)]
+#![plugin(serde_macros)]
+
+#[macro_use]
+extern crate nickel; // HTTP server
+extern crate postgres; // POSTGRESQL database management
+extern crate chrono; // SQL DATE type management
+
+extern crate serde; // JSON
+extern crate serde_json; // JSON
+
+use nickel::{Nickel, HttpRouter, StaticFilesHandler};
+use postgres::{Connection, SslMode};
+use chrono::*;
+use std::sync::Mutex;
+
+
+#[derive(Serialize, Deserialize, Debug)]
+struct PictureMetadata {
+    pub id: i32,
+    pub author: String,
+    pub description: String,
+    pub gps_lat: String,
+    pub gps_long: String,
+    pub date_taken: String,
+    pub rating: Option<f32>,
+}
+
+
+fn main() {
+
+    let dsn = "postgresql://postgres:@127.0.0.1/hypest";
+    let conn = Mutex::new(Connection::connect(dsn, &SslMode::None).unwrap());
+
+    // create the http server
+    let mut server = Nickel::new();
+    server.utilize(StaticFilesHandler::new("/home/jhun/Code/rust/assets/"));
+
+    server.get("/pictures/:id", middleware! { |req| {
+        let photo_id: i32 = req.param("id").unwrap().parse().unwrap();
+        println!("Photo {} request", photo_id);
+
+        let conn = conn.lock().unwrap();
+        let stmt = conn.prepare("SELECT * FROM pictures WHERE id=$1 AND uploaded=TRUE").unwrap();
+
+        let mut body = String::new();
+
+        let query = stmt.query(&[&photo_id]).unwrap();
+        let row = query.iter().next().unwrap();
+
+        let date: chrono::NaiveDate = row.get("date_taken");
+        let date = format!("{}/{}/{}", date.day(), date.month(), date.year());
+
+        let data = PictureMetadata {
+            id: row.get("id"),
+            author: row.get("author"),
+            description: row.get("description"), // optional
+            gps_lat: row.get("gps_lat"),
+            gps_long: row.get("gps_long"),
+            date_taken: date,
+            rating: row.get("rating")
+        };
+
+        /*
+        let id: i32 = row.get("id");
+        let author: String = row.get("author");
+        let description: Option<String> = row.get("description"); // optional
+        let gps_lat: String = row.get("gps_lat");
+        let gps_long: String = row.get("gps_long");
+        let date_taken: chrono::NaiveDate = row.get("date_taken");
+        let rating: Option<f32> = row.get("rating"); // optional
+        */
+
+        //format!("<img src='{}.jpg' />", photo_id);
+
+        serde_json::ser::to_string(&data).unwrap()
+    }});
+
+    server.listen("127.0.0.1:6767");
+
+}

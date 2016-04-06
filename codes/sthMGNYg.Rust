@@ -1,0 +1,6 @@
+  fn parse_arithmetic(&mut self, lhs: Expr) -> Expr {
+    match self.parse_bin_expr(lhs) {
+      None => lhs,
+      Some(exp) => self.parse_arithmetic(exp)
+    }
+  }

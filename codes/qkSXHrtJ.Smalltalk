@@ -1,0 +1,24 @@
+projectRoot := (FileLocator temp).
+
+classesDef := OrderedCollection new.
+
+projectRoot allDirectories do: [ :dir |
+    (dir files select: [ :f | f extension = 'class' ]) do: [ :f |
+        |reader newDef|
+        reader := (JavaClassDefReader onStream: (MultiByteFileStream fileNamed: f)).
+        newDef := JavaClassDefinition new.
+        reader
+            definition: newDef;
+            checkMagic; 
+            loadMinorVersion; 
+            loadMajorVersion; 
+            loadConstantPool; 
+            loadAccessFlags; 
+            loadThisClassInfo; 
+            loadSuperClassInfo; 
+            loadInterfacesInfo; 
+            "loadFieldsInfo; 
+            loadMethodsInfo; "
+            loadAttributesInfo.
+        classesDef add: reader. ]
+     ].

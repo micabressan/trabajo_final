@@ -1,0 +1,10 @@
+module Main where
+
+fib 0 = 0
+fib n | n > 0 = fib(n - 2) + fib(n - 1)-- Enter your code here to complete this function
+
+-- This part is related to the Input/Output and can be used as it is
+-- Do not modify it
+main = do
+    input <- getLine
+    print . fib . (read :: String -> Int) $ input

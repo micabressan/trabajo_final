@@ -1,0 +1,10 @@
+struct Astruct {
+    foo: u8, // imagine it as a struct of multiple objects.
+}
+
+#[no_mangle]
+pub extern "C"
+fn PluginStartup(some_info) {
+    // I'm supposed to create the Astruct datas here as the core requiere the
+    // plugin to start and "some_info" are the infos requiered to create Astruct
+}

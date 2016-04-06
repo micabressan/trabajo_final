@@ -1,0 +1,19 @@
+rpn :: RPNReturnClass r => r
+rpn = step []
+
+class RPNReturnClass r where
+    step :: [Integer] -> r
+
+instance RPNReturnClass Integer where
+    step (x:stack) = x
+
+-- What's wrong with this syntax?
+--instance (RPNReturnClass r) => RPNReturnClass (Integer -> r) where
+--    step stack n = step (n : stack)
+instance (Integral a, RPNReturnClass r) => RPNReturnClass (a -> r) where
+    step stack n = step (toInteger n : stack)
+
+-- Temporary hack while I play with the syntax: all functions just reset
+-- the stack.
+--instance (Integral a, RPNReturnClass r) => RPNReturnClass ((a -> a -> a) -> r) where
+--    step stack fn = step []

@@ -1,0 +1,7 @@
+g :: Int -> ReaderT (HashTable s) (ST s) Int
+g n = do
+  cache <- ask
+  x <- H.lookup cache n
+  case x of
+    Just t -> return t
+    Nothing -> return 218

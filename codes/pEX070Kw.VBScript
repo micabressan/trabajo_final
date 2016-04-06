@@ -1,0 +1,17 @@
+MsgRes = MsgBox("Mount=Ja, Unmount=Nej", 3, "What to do?")
+
+On Error Resume Next
+If MsgRes <> vbCancel Then
+    Set objNetwork = CreateObject("WScript.Network")
+    Set objDrives = objNetwork.EnumNetworkDrives
+    For i = 0 to objDrives.Count - 1 Step 2
+        objNetwork.RemoveNetworkDrive objDrives.Item(i), true, true
+    Next
+    If MsgRes = vbYes Then
+        objNetwork.MapNetworkDrive "W:", "\\SomeMachine\SomeSharedFolder", true, "Username", "Password"
+        objNetwork.MapNetworkDrive "X:", "\\SomeMachine\SomeOtherFolder", true, "Username", "Password"
+        objNetwork.MapNetworkDrive "Y:", "\\SomeMachine\AnotherFolder", true, "Username", "Password"
+        objNetwork.MapNetworkDrive "Z:", "\\SomeMachine\YetAnotherFolder", true, "Username", "Password"
+    End If
+    Set objNetwork = Nothing
+End If

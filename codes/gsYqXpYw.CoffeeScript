@@ -1,0 +1,49 @@
+module.exports =
+
+  attributes: {
+    orderName:
+      type:'string'
+      required: true
+      index:true
+      maxLength:128
+    orderDescription:
+      type:'string'
+      maxLength:128
+    orderKeyWords:
+      type:'array'
+      index:true
+    orderProject:
+      model: "projects"
+      required:true
+    orderItems:
+      model: "prefabPackage"
+      required: true
+      #clarification needed should it be a must field
+    orderReminders:
+      type: 'array'
+    orderCoordDate:
+      type: 'datetime'
+    orderDeliverDate:
+      type: 'datetime'
+    orderAdditionalDates:
+      type : 'array'
+      maxLength:5
+    orderDocuments:
+      type: 'array'
+    orderCompany:
+      model: 'companies'
+    orderOwner:
+      model: 'users'
+    orderStage:
+      type: 'string'
+      enum: ['Coordination','Detailing','Manufacturing','QA','Delivery','Complete']
+    orderStatus:
+      type: 'string'
+      enum: ['Not Started', 'In Progress','Inactive','Complete']
+    orderCreatedBy:
+      model: 'users'
+    orderModifiedBy:
+      model: 'users'  
+
+
+  }

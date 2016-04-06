@@ -1,0 +1,21 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 944f85e..92561ae 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ project(fatrat)
+ 
+-cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
++cmake_minimum_required(VERSION 2.8.0 FATAL_ERROR)
+ if(COMMAND cmake_policy)
+ 	cmake_policy(SET CMP0003 NEW)
+ endif(COMMAND cmake_policy)
+@@ -654,7 +654,7 @@ if(WITH_JPLUGINS)
+ endif(WITH_JPLUGINS)
+ 
+ if(WITH_DOCUMENTATION)
+-	execute_process(COMMAND qcollectiongenerator
++	execute_process(COMMAND ${QT_QCOLLECTIONGENERATOR_EXECUTABLE}
+ 	${CMAKE_CURRENT_SOURCE_DIR}/doc/fatrat.qhcp -o
+ 	${CMAKE_CURRENT_SOURCE_DIR}/doc/fatrat.qhc)
+ 	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/doc/fatrat.qhc DESTINATION share/fatrat/doc)

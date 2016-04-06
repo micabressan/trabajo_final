@@ -1,0 +1,38 @@
+		if Modernizr.history
+			@form.find('.js-image-uploader').bind 'change', (e) =>
+				target = e.target
+				$target = $ target
+
+				imageTarget = $( $target.attr 'data-image-target' )
+				imageParent = imageTarget.parent()
+				imageParent.addClass 'loading'
+				fr = new FileReader()
+				fr.readAsDataURL target.files[0]
+				cleanImage = @form.find('.js-clean-image-uploader')
+
+				fr.onload = (frEvent) ->
+					imageParent.removeClass 'loading'
+
+					tmpImage = document.createElement 'img'
+					tmpImage.onload = () ->
+						imgWrapper = $target.closest('.js-error-wrapper')
+
+						if this.width < 1000
+							imgWrapper.addClass('validation-failed')
+								.find('.validation-error-msg').html $target.attr 'data-width-msg'
+							cleanImage.trigger 'click'
+						else 
+							imgWrapper.removeClass 'validation-failed'
+								.find('.validation-error-msg').html ''
+							imageTarget.attr('src', frEvent.target.result)
+								.addClass 'active'
+							imageTarget.closest('.img-wrap').addClass 'filled'
+
+					tmpImage.src = frEvent.target.result
+		else
+			@form.find('.js-image-uploader').bind 'change', (e) =>
+				target = e.target
+				$target = $ target
+				imgWrapper = $target.closest('.js-error-wrapper')
+				imgWrapper.addClass('validation-ie')
+					.find('.validation-error-msg').html $target.attr 'data-ie-nopreview-msg'

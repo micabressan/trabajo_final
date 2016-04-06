@@ -1,0 +1,10 @@
+bmiTell' :: (RealFloat a) => a -> a -> String
+bmiTell' weight height
+	| bmi <= skinny = "You're underweight, you emo, you!"
+	| bmi <= normal = "Normal"
+	| bmi <= fat = "fat"
+	| otherwise = "Obese"
+	where 	bmi = weight / height ^ 2 -- where is used so we don't have to repeat the calculation 3 times
+			skinny = 18.5
+			normal = 25.0
+			fat = 30.0

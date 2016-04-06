@@ -1,0 +1,37 @@
+| cb ac bc ao bo cao cbo iao ibo i1 i2 i3 i4 i5 t |
+cb := ContractBuilder new.
+ac := Object subclass: #A instanceVariableNames: 'x' classVariableNames: '' poolDictionaries: ''.
+bc := ac subclass: #B instanceVariableNames: 'y' classVariableNames: '' poolDictionaries: ''.
+
+ac compile: 'x ^x'.
+
+i1 := [:q | 2 = 3].
+i2 := [:q | 3 = 4].
+(cb class: ac) addInvariant: i1.
+(cb class: ac) addInvariant: i2.
+(cb class: bc) removeInvariant: i1.
+
+ao := ac new.
+bo := bc new.
+
+cao := cb contractFor: ao.
+cbo := cb contractFor: bo.
+
+iao := Instrument contract: cao on: ao.
+ibo := Instrument contract: cbo on: ao.
+
+t := [:b :h || z |
+    z := Dictionary
+        with: InvariantViolation -> Set new
+        with: PreconditionViolation -> Set new
+        with: PostconditionViolation -> Set new.
+    b on: ContractViolation do: [:e | (z at: e class) add: e. e resume].
+    h value: (z at: InvariantViolation) value: (z at: PreconditionViolation) value: (z at: PostconditionViolation)].
+
+t value: [self assert: [iao x isNil]] value:
+    [:inv :pre :post |
+    self assert: [inv size = 4]].
+
+t value: [self assert: [ibo x isNil]] value:
+    [:inv :pre :post |
+    self assert: [inv size = 2]].

@@ -1,0 +1,13 @@
+import os.path
+import urllib.request
+
+for i in range(55):
+	filename = "%02d.jpg" % i
+	
+	print (filename)
+
+	if not os.path.isfile(filename):
+		try:
+			urllib.request.urlretrieve("http://static.selfmanga.ru/auto/07/02/46/_______" + filename, filename)
+		except Exception:
+			urllib.request.urlretrieve("http://static.selfmanga.ru/auto/07/02/46/_______" + filename + "_res.jpg", filename)

@@ -1,0 +1,5 @@
+$(".button.has_many_add").click( ->
+    $('.user_select').select2({
+      minimumInputLength: 2
+    })
+)

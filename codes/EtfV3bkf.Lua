@@ -1,0 +1,5 @@
+term.clear()
+term.setCursorPos(1,1)
+print("LightOS V1.1")
+term.setCursorPos(1,5)
+print("Current Commands: on, off")

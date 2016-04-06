@@ -1,0 +1,261 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.playtika.client</groupId>
+    <artifactId>plc-parent</artifactId>
+    <name>plc-parent</name>
+    <version>2.0.4</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <flexmojos.version>6.0.1</flexmojos.version>
+        <flex.version>4.6.0.23201</flex.version>
+        <flashplayer.version>11.5</flashplayer.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.mainClass>${project.build.sourceDirectory}/${project.name}.as</project.build.mainClass>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <compile.debug>false</compile.debug>
+            </properties>
+        </profile>
+        <profile>
+            <id>debug</id>
+            <activation>
+                <property>
+                    <name>debug</name>
+                </property>
+            </activation>
+            <properties>
+                <compile.debug>true</compile.debug>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- Specify player version -->
+        <dependency>
+            <groupId>com.adobe.flash.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <version>${flashplayer.version}</version>
+            <type>swc</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- FlexSdk needed for mx package -->
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.version}</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.adobe.flash.framework</groupId>
+                    <artifactId>playerglobal</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- puremvc used in all projects, so we can add it to parent -->
+        <dependency>
+            <groupId>org.puremvc.as3</groupId>
+            <artifactId>PureMVC_AS3</artifactId>
+            <version>2.0.4</version>
+            <type>swc</type>
+        </dependency>
+
+        <!-- add theme manually to avoid warnings -->
+        <dependency>
+            <groupId>com.adobe.flex.framework.themes</groupId>
+            <artifactId>spark</artifactId>
+            <type>swc</type>
+            <scope>theme</scope>
+            <version>${flex.version}</version>
+        </dependency>
+
+        <!-- Scope TEST -->
+        <!-- Unittests support -->
+        <dependency>
+            <groupId>net.flexmojos.oss</groupId>
+            <artifactId>flexmojos-unittest-flexunit4</artifactId>
+            <version>${flexmojos.version}</version>
+            <type>swc</type>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.adobe.flex.framework.air</groupId>
+                    <artifactId>airframework</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.adobe.flex.framework.air</groupId>
+                    <artifactId>air-framework</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Flexunit is external for flexunit-support-->
+        <dependency>
+            <groupId>org.apache.flex</groupId>
+            <artifactId>flexunit</artifactId>
+            <version>4.2.0</version>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-as3</artifactId>
+            <version>1.2.0</version>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockolate</groupId>
+            <artifactId>mockolate</artifactId>
+            <version>0.12.4</version>
+            <classifier>as3</classifier>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.adobe.flex</groupId>
+                <artifactId>framework</artifactId>
+                <version>${flex.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>test_assets</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>net.flexmojos.oss</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <as3>true</as3>
+                    <storepass/>
+                    <targetPlayer>${flashplayer.version}</targetPlayer>
+                    <debug>${compile.debug}</debug>
+                    <sourceFile>${project.build.mainClass}</sourceFile>
+                    <testTimeout>20000</testTimeout>
+                    <defines>
+                        <property>
+                            <name>CONFIG::debug</name>
+                            <value>${compile.debug}</value>
+                        </property>
+                        <property>
+                            <name>CONFIG::versionNumber</name>
+                            <value>'${project.version}'</value>
+                        </property>
+                        <property>
+                            <name>CONFIG::buildTimestamp</name>
+                            <value>'${maven.build.timestamp}'</value>
+                        </property>
+                    </defines>
+                    <compilerWarnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                    </compilerWarnings>
+                    <keepAs3Metadatas>
+                        <name>ArrayElementType</name>
+                    </keepAs3Metadatas>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.version}</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>flex-mojos-repository</id>
+            <name>flex-mojos-repository</name>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>artifactory-ext</id>
+            <name>artifactory-ext-release</name>
+            <url>http://artifactory.corp/artifactory/ext-release-local/</url>
+        </repository>
+        <repository>
+            <id>artifactory-libs-release</id>
+            <name>artifactory-ext-release</name>
+            <url>http://artifactory.corp/artifactory/libs-release-local/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>flex-mojos-plugin-repository</id>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>artifactory-ext</id>
+            <url>http://artifactory.corp/artifactory/ext-release-local/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>artifactory</id>
+            <name>artifactory-releases</name>
+            <url>http://artifactory.corp/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>artifactory</id>
+            <name>artifactory-snapshots</name>
+            <url>http://artifactory.corp/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

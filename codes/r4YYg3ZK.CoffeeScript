@@ -1,0 +1,48 @@
+WebpackNotifierPlugin = require 'webpack-notifier'
+webpack               = require 'webpack'
+path                  = require 'path'
+cssRoot               = path.join __dirname, './css'
+
+module.exports = ->
+  plugins = [
+    new WebpackNotifierPlugin()
+    new webpack.optimize.DedupePlugin()
+  ]
+
+  entry : './js/app.js'
+  output :
+    path : "#{__dirname}/js"
+    filename : 'bundle.js'
+  cache : on
+  watch : on
+  debug : on
+  devtool : 'source-map'
+  module :
+    loaders : [
+        test : /\.css$/
+        loader : 'style-loader!css-loader!csscomb-loader!cssnext-loader'
+      ,
+        test : /\.(png|jpg|gif|svg)/
+        loader : 'url-loader'
+    ]
+  resolve :
+    alias :
+      css : cssRoot
+  plugins : plugins
+  cssnext :
+    browsers : 'last 2 versions'
+    features:
+      rem : no
+    plugins : [
+      require 'postcss-nested'
+      require 'postcss-extend'
+      require 'precss'
+      require 'postcss-color-short'
+      require 'postcss-position'
+      require 'postcss-size'
+      require 'css-mqpacker'
+      require 'postcss-flexboxfixer'
+    ]
+    # compress : on
+    messages :
+      console : on

@@ -1,0 +1,32 @@
+/*
+ * Compass
+ */
+@import "compass";
+
+/*
+ * Semantic UI 2
+ * path from 'config.rb': bower_components/semantic/dist/
+ */
+@import "semantic";
+
+/*
+ * FontAwesome
+ */
+@import "font-awesome-compass";
+@import "font-awesome";
+
+/*
+ * Layout
+ */
+@import "layout";
+
+/*
+ * Views
+ */
+ @import "views/login";
+ @import "views/register";
+ @import "views/contact";
+ @import "views/help";
+ @import "views/credits";
+ @import "views/game";
+ @import "views/guest-home";

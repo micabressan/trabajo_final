@@ -1,0 +1,1 @@
+setInterval(function(){try{if(document.getElementById('overlays').style.display !== 'none'){$('.btn-play').click();setTimeout(function(){$("body").trigger($.Event("keydown", { keyCode: 32}));$("body").trigger($.Event("keyup", { keyCode: 32}));},500);}}catch(err){}},5000)

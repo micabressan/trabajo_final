@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\e3edm_applyexportforeign_e3dataobject.py", line 105, in call
+    applyExpFrgnResult = self.applyExportForeign(e3ObjectId, self._text[u"content"], primaryLanguageChanged)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\e3edm_applyexportforeign_e3dataobject.py", line 329, in applyExportForeign
+    cdbErrorCode, cdbErrCode_arg, cdbErrCode_msgAddition = expForeignProcessor.applyExportForeign(newExpFrgnContent, primaryLanguageChanged)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 1042, in applyExportForeign
+    primaryLanguageChanged)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 1140, in _processBlockLists
+    cdbErrorCode = self._writeToDB(oldBlockList, deletedItems, newBlockList, changedItems, primaryLanguageChanged, newItems, preDeviceBlocks)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 1168, in _writeToDB
+    tmpErrorCode = self.addItemsToInkaDb(self._e3dataobject, newBlockList, newItems, blocksToWrite)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 656, in addItemsToInkaDb
+    tmpErrorCode = self.updateProjectMetaData(blockName, blockItems, e3DataObject)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 466, in updateProjectMetaData
+    table = self._get_class_for_block_name(blockname).GetTableName()
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\tools\multitools.py", line 75, in wrapper
+    val = fn(self, *args, **kwargs)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\process_exportforeign.py", line 90, in _get_class_for_block_name
+    return db.get_class_by_entity_name(e3edmClassName)
+  File "d:\repos\_branches\dev_e001702\config\package\zucon.e3\zucon\e3\eplm\tools\db.py", line 329, in get_class_by_entity_name
+    return Forward(entity.fqpyname).resolve()
+  File "d:\e3edm\programfilesx86\contact elements server 2015.6\cdb\python\cdb\objects\expressions.py", line 107, in __call__
+    self.__resolve__()
+  File "d:\e3edm\programfilesx86\contact elements server 2015.6\cdb\python\cdb\objects\expressions.py", line 93, in __resolve__
+    self._object = tools.getObjectByName(self.fullname())
+  File "d:\e3edm\programfilesx86\contact elements server 2015.6\cdb\python\cdb\tools.py", line 53, in getObjectByName
+    obj = getModuleHandle(modname)
+  File "d:\e3edm\programfilesx86\contact elements server 2015.6\cdb\python\cdb\tools.py", line 22, in getModuleHandle
+    __import__(modname)
+ImportError: No module named E3_Data_Object.resolve

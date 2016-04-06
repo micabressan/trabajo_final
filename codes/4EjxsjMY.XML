@@ -1,0 +1,31 @@
+T 2015/08/24 11:49:03.434036 178.79.160.70:8080 -> 178.79.129.235:50830 [AP]
+HTTP/1.1 200 OK.
+Date: Mon, 24 Aug 2015 10:49:03 GMT.
+Content-Length: 1649.
+Server: Jetty(8.1.3.v20120416).
+.
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+    <section name="dialplan">
+        <context name="dpcarrier">
+            <extension>
+                <condition>
+                    <action application="limit" data="db trunk-limit 1991 10"/>
+                    <action application="set" data="hangup_after_bridge=true"/>
+                    <action application="set" data="ignore_display_updates=true"/>
+                    <action application="set" data="recording_started=true"/>
+                    <action application="set" data="call_direction=inbound"/>
+                    <action application="set" data="continue_on_fail=true"/>
+                    <action application="bridge" data="${lua(~stream:write(tostring(string.gsub(string.gsub('${sofia_contact(client/02392987250@sip.500.uk.com)}', 'sip:.-@', 'sip:02392987250@'), 'sip%%3A.-%%40', 'sip%%3A02392987250%%40'))))}"/>
+                    <action application="set" data="continue_on_fail=false"/>
+                    <action application="set" data="effective_caller_id_number=02392987250"/>
+                    <action application="set" data="effective_caller_id_name=02392987250"/>
+                    <action application="set" data="failover_type=CONDITIONAL"/>
+                    <action application="set" data="failover_original_caller=08450000500"/>
+                    <action application="set" data="failover_original_called=02392987250"/>
+                    <action application="bridge" data="sofia/gateway/gw-11/07815316888"/>
+                    </condition>
+            </extension>
+        </context>
+    </section>
+</document>

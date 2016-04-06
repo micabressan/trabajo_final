@@ -1,0 +1,35 @@
+a .so written in C exposing a PluginGetVersion() function:
+
+$ nm -Ca mupen64plus-video-rice.so | grep PluginGet
+0000000000058450 T PluginGetVersion
+
+My plugin written in Rust, supposed to also expose PluginGetVersion
+
+$ nm -Ca libmupen64plus_video_feedee.so | grep PluginGet
+00000000000b4630 t PluginGetVersion::__rust_abi
+00000000003c6630 d PluginGetVersion::__STATIC_FMTSTR::h560778e3a36fdd11pca
+00000000000b45d0 t PluginGetVersion::h94f08b2f3fa40003Sba
+
+The main app (in C) can't load the function:
+
+library 'mupen64plus-video-feedee.so' is not a Mupen64Plus library.
+
+Here is the C code:
+
+ptr_PluginGetVersion PluginGetVersion = (ptr_PluginGetVersion) osal_dynlib_getproc(handle, "PluginGetVersion");
+    if (PluginGetVersion == NULL)
+    {
+            DebugMessage(M64MSG_ERROR, "library '%s' is not a Mupen64Plus library.", filepath);
+        osal_dynlib_close(handle);
+        return M64ERR_INCOMPATIBLE;
+    }
+
+Here is the rust function code:
+
+extern "C" fn PluginGetVersion(PluginType: *mut M64pPluginType, PluginVersion: *mut libc::c_int, APIVersion: *mut libc::c_int, PluginNamePtr: *const *mut libc::c_char, Capabilities: *mut libc::c_int) -> M64pError {
+
+    println!("Rust PluginGetVersion");
+    return M64pError::Success;
+}
+
+am I missing something? :)

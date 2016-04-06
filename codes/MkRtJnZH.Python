@@ -1,0 +1,182 @@
+import random
+import os
+import sys
+import time
+
+def sceneload(): # creates a fake loading delay 
+    delay_print("...")
+    print "\n"
+    
+def delay_print(s): # makes animated print appear one after another
+	for c in s:
+		sys.stdout.write( '%s' % c )
+		sys.stdout.flush()
+		time.sleep(1.3)
+
+def termclear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+words = [ # 26 words in the list
+    'cat', 'dog', 'fish', 'bread', 'flat', 'apple', 'orange', 'pomegranate', 'octopus', 'fairy',
+    'man', 'woman', 'children', 'celebrity', 'thunder', 'lightning', 'contagious', 'hazardous',
+    'difficult', 'acronym', 'iron', 'spoiler', 'country', 'definitely', 'dungeon', 'caterpillar'
+    ]
+
+hangman = [
+    """
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+                |
+                |
+                |
+             -------""",
+    """ 
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+        ()      |
+                |
+                |
+             -------""",
+    """
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+        ()      |
+        ||      |
+                |
+             -------""",
+    """
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+        ()      |
+       `||'     |
+                |
+             -------""",
+    """
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+        ()      |
+       `||'     |
+        /\      |
+             -------""",
+    """
+         _ _ _ _
+        \       |
+        /       |  
+        \       |
+        () !!!  |
+       `||'     |
+        /\      |
+       '  '   -------"""
+            ]
+            
+failword = [] # full word in one string
+currentword = [] # list with hangman word split into strings of each letter
+guessword = [] # list full of underscores
+chances = [5]
+guess = [0]
+firstletter = [0]
+parts = [0]
+tried = []
+       
+def image():
+    
+    x = hangman[parts[0]]
+    print x
+    print "Attempts remaining: " + str(chances) + "   Letters Used: " + ', '.join(tried)
+ 
+
+def game():
+
+    print "Hangman Game"
+    print 10 * "-"
+    print "Rules:"
+    print "1) Guess a letter until the phrase is complete."
+    print "2) Wrong guesses or guesses already made will result in losing one of your five guesses."
+    print "3) Run out of guesses and the stickman gets hung, and you lose!"
+    print 10 * "-"
+    print ""
+    raw_input("[Press enter to begin]")
+    
+    hangmanword = words[random.randint(0,25)] # grabs a random word from the words list
+    failword.append(hangmanword)
+    
+    for letter in hangmanword:
+        for c in letter:
+            currentword.append(c) # takes every letter from hangmanword and adds it to currentword as separate strings per each letter
+            
+    for letter in hangmanword:
+        for c in letter:
+            guessword.append('_') # creates a list with underscores the length of the hangman word
+            
+    termclear()
+    guessletter()
+    
+def guessletter():
+
+    if '_' in guessword != 0:
+        image()
+        print ' '.join(guessword)
+        guess[0] = raw_input("Guess a letter >>  ")
+        tried.append(guess[0])
+    
+        if guess[0] in currentword > 0: # correct guess
+        
+                if currentword.count(guess[0]) is 1:
+                    termclear()
+                    print "That letter is a part of the phrase! Goodjob. There is one letter " + str(guess) + "."
+                
+                else:
+                    termclear()
+                    print "That letter is a part of the phrase! Goodjob. There are " + str(currentword.count(str(guess[0]))) + " letter " + str(guess) + "'s."
+                
+        else:
+            wronganswer()
+        
+        while guess[0] in currentword != 0:
+                firstletter[0] = currentword.index(guess[0])
+                guessword[firstletter[0]] = guess[0] # updates the hangman game underscores to the guessed characters
+                currentword[firstletter[0]] = '_' # overwrites the stored current word to eliminate characters, so that the same character is not 'scanned'
+         
+        guessletter()
+         
+    else:
+        image()
+        print ' '.join(guessword)
+        print "Goodjob! You spelled '" + failword[0] + "'.\n"
+        exit(1)
+        
+                
+def wronganswer():
+        
+        termclear()
+        print "Oops! The word doesn't have the letter '" + str(guess[0]) + "'.",
+        chances[0] -= 1
+        parts[0] += 1
+
+        if chances[0] > 1:
+            print "You have " + str(chances[0]) + " more guesses left to complete the word."
+            guessletter()
+            
+        elif chances[0] is 1:
+            print "You have one guess left!"
+            guessletter()
+            
+        elif chances[0] is 0:
+            print "You're out of guesses!"
+            print hangman[5]
+            print "GAME OVER!!!\n"
+            exit(1)
+            
+termclear()   
+print hangman[0]          
+game()

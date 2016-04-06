@@ -1,0 +1,24 @@
+def open_command():
+	txt.delete(1.0, END)
+	filename = tkFileDialog.askopenfile(parent=window,mode='rb',title='Select a file')
+	if filename != None:
+		txt.delete(1.0, END)
+		text = filename.read()
+		txt.insert(END, text)
+		filename.close()	   
+     
+            
+def savefile():
+	print ("save file")
+	data = txt.get('1.0', END+'-1c')
+        filename.write(data)
+        filename.close()
+    
+
+def saveas_command():
+    filename = tkFileDialog.asksaveasfile(mode='w')
+    if filename != None:
+    # slice off the last character from get, as an extra return is added
+        data = txt.get('1.0', END+'-1c')
+        filename.write(data)
+        filename.close()

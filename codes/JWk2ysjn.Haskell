@@ -1,0 +1,18 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+import Data.String (IsString (..))
+
+data TypeA = TypeA { foo :: String }
+data TypeB = TypeB { bar :: String }
+
+instance IsString TypeA where
+  fromString = TypeA
+
+instance IsString TypeB where
+  fromString = TypeB
+
+main :: IO ()
+main = do
+  let generic = ["a", "b", "c"] 
+  mapM_ (putStrLn . foo) generic
+  mapM_ (putStrLn . bar) generic

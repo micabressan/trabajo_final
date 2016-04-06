@@ -1,0 +1,7 @@
+pub fn nearest<C>(container: &C, value: C::Output)
+    ->
+        Result<usize, usize>
+    where
+        C: Length + Index<usize>,
+        C::Output: Ord + Sized + Sub + Copy,
+        <<C as Index<usize>>::Output as Sub>::Output: Ord

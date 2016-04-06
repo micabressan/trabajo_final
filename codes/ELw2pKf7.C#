@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Volumenberechnung
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Berechnung des größten Volumens");
+            Console.WriteLine("Eingabe A");
+            double A = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Eingabe B");
+            double B = Convert.ToDouble(Console.ReadLine());
+
+            //double V = 4*Math.Pow(x,3)-2*(a*b)*Math.Pow(x,2)+a*b*x;
+            //double V1 = 12*Math.Pow(x,2) - 4*(a+b)*x + a*b
+            //double x1 = (a+b)/6 + Math.Sqrt(((a+b)/Math.Pow(6,2))-(a*b)/12);
+            //double x2 = (a+b)/6 - Math.Sqrt(((a+b)/Math.Pow(6,2))-(a*b)/12);
+
+            //double V2 = 24*x-4*(a+b);
+
+            Console.WriteLine("Eingabe Präzision");
+            double p = Convert.ToDouble(Console.ReadLine());
+
+            double Vmax = 0;
+            double V = 0;
+            double x = 0;
+            double a = 0;
+            double b = 0;
+            int i = 0;
+            int c = 19;
+
+            do {
+                i = i + 1;
+                Vmax = V;
+                x = x + p;
+                a = A - 2 * x;
+                b = B - 2 * x;
+                V = a * b * x;
+            } while (V > Vmax);
+            Console.WriteLine("Das größtmögliche Volumen für ihre Parameter lautet: " + Vmax);
+            x = x - p;
+            Console.WriteLine("Das größtmögliche Volumen wird bei x = " + x + " erreicht.");
+            Console.WriteLine("Es waren " + i + " Durchgänge nötig.");
+            c = c + i*7;
+            Console.WriteLine("Insgesammt wurden " + c + " Zeilen Code abgearbeitet.");
+            Console.ReadKey();
+        }
+    }
+}

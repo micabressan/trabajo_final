@@ -1,0 +1,12 @@
+            <customer_save_before>
+               <observers>
+                    <euvat_customer_save_before>
+                        <type>disabled</type>
+                    </euvat_customer_save_before>
+                    <wp_dealerregistration_euvat_customer_save_before>
+                        <type>singleton</type>
+                        <class>Wp_DealerRegistration_Model_Euvat_Observer</class>
+                        <method>eventCustomerSaveBefore</method>
+                    </wp_dealerregistration_euvat_customer_save_before>
+                </observers>
+            </customer_save_before>

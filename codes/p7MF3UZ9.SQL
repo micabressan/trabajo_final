@@ -1,0 +1,5 @@
+в 014 повторяется
+11.06.2015 05:58:18 DEBUG 0x7f4fea557700 [lb2:61]	UPDATE `equipcards_history` `eq` JOIN `smartcards_history` `sm` ON (`eq`.`card_id` = `sm`.`card_id` AND (`sm`.`timeto` IS NULL OR `sm`.`timeto` > '2015-06-11 00:00:00')) JOIN `equipment_history` `eq1` ON (`eq`.`equip_id` = `eq1`.`equip_id` AND (`eq1`.`timeto` IS NULL OR `eq1`.`timeto` > '2015-06-11 00:00:00')) SET `eq`.`timeto` = '2015-06-11 00:00:00', `eq`.`reason` = 'vgroup is blocked' WHERE ((`eq1`.`agrm_id` = '137' AND `sm`.`vg_id` = '2008') AND `eq`.`timeto` IS NULL)
+...
+11.06.2015 05:58:18 DEBUG 0x7f4fea557700 [lb2:61]	UPDATE `smartcards_history` SET `timeto` = '2015-06-11 00:00:00', `reason` = 'vgroup is blocked' WHERE (`vg_id` = '2008' AND `timeto` IS NULL)
+11.06.2015 05:58:18 DEBUG 0x7f4fea557700 [lb2:61]	UPDATE `smartcards_history` SET `timeto` = '2015-06-11 00:00:00', `reason` = 'vgroup is blocked' WHERE (`vg_id` = '2008' AND `timeto` > '2015-06-11 00:00:00')

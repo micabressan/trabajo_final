@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RocketPermissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">/2001/XMLSchema">
+  <DefaultGroupId>default</DefaultGroupId>
+  <Groups>
+    <Group>
+      <Id>default</Id>
+      <DisplayName>Guest</DisplayName>
+      <Commands>
+        <Command>p</Command>
+        <Command>reward</Command>
+        <Command>balance</Command>
+        <Command>pay</Command>
+      </Commands>
+    </Group>
+    <Group>
+      <Id>vip</Id>
+      <DisplayName>VIP</DisplayName>
+      <Members>
+        <Member>76561198016438091</Member>
+      </Members>
+      <Commands>
+        <Command>p</Command>
+        <Command>reward</Command>
+        <Command>balance</Command>
+        <Command>pay</Command>
+      </Commands>
+      <ParentGroups />
+    </Group>
+  </Groups>
+</RocketPermissions>

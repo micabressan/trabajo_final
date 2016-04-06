@@ -1,0 +1,74 @@
+Poison Darts:
+  name: 'Poison Darts'
+  type: 'Guard Skill'
+  max-level: 3
+  skill-req: ''
+  skill-req-lvl: 1
+  needs-permission: 'False'
+  msg: '&6{player} &2has cast &6{Poison Darts}'
+  icon: 'Quartz'
+  icon-data: 0
+  icon-lore:
+  - '&d{Poison Darts} &7({0}/{3})'
+  - '&2Type: &6{Guard Skill}'
+  - ''
+  - '{req:1}Level: {attr:0}'
+  - '{req:1}Cost: {attr:1}'
+  - ''
+  - '&2Mana: {attr:0}'
+  - '&2Cooldown: {attr:20.0}'
+  attributes:
+    level-base: 1
+    level-scale: 0
+    cost-base: 1
+    cost-scale: 1
+    cooldown-base: 20.0
+    cooldown-scale: 0
+    mana-base: 0
+    mana-scale: 0
+  components:
+    Cast-a:
+      type: 'trigger'
+      data:
+        icon-key: ''
+      children:
+        Single-b:
+          type: 'target'
+          data:
+            icon-key: ''
+            range-base: 17
+            range-scale: 1
+            tolerance: 4
+            group: 'Enemy'
+            wall: 'False'
+          children:
+            Projectile-c:
+              type: 'mechanic'
+              data:
+                icon-key: ''
+                counts: 'True'
+                spread: 'Cone'
+                projectile: 'Arrow'
+                cost: ''
+                velocity-base: 1
+                velocity-scale: 3
+                amount-base: 2
+                amount-scale: 1
+                angle-base: 45
+                angle-scale: 0
+                height-base: 8
+                height-scale: 0
+                radius-base: 2
+                radius-scale: 0
+              children:
+                Potion-d:
+                  type: 'mechanic'
+                  data:
+                    icon-key: ''
+                    counts: 'True'
+                    potion: 'Poison'
+                    ambient: 'True'
+                    tier-base: 1
+                    tier-scale: 0
+                    seconds-base: 5
+                    seconds-scale: 1

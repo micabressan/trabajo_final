@@ -1,0 +1,39 @@
+ class Primes
+    {
+        static void Main(string[] args)
+        {
+
+            int counter = 0; // how many primes we have found so far
+            int number = 2; // the number we start from
+
+            int position1 = 24; // could be read from console
+            int position2 = 101; // could be read from console
+            int position3 = 251; // could be read from console
+
+            while (counter <= position3) // counter <= maxNumberFromInput e.g. 251
+            {
+                bool isCurrentNumberPrime = true; // assert the number is prime, until we find the opposite
+
+                for (int divider = 2; divider <= Math.Sqrt(number); divider++)
+                {
+                    if (number%divider == 0) // if the number is divisble to any number from 2 to its root, it's certainly not prime
+                    {
+                        isCurrentNumberPrime = false;
+                        break; // we have determined that the number is not prime, we don't need to try to divide to any number anymore. Exit the loop
+                    }
+                }
+
+
+                if (isCurrentNumberPrime) // if the number hasn't divided to any number from the previous loop, the boolean variable will stay "true"
+                {
+                    counter++; // the prime numbers we have found so far are incremented by one
+                    if (counter == position1 || counter == position2 || counter == position3) // if we have found he let's say 24th number, the counter will be 24 so we will print the prime number on position 24
+                    {
+                        Console.WriteLine(number);
+                    }
+                }
+
+                number++; // go to the next number to check if it's prime again
+            }
+        }
+    }

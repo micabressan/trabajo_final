@@ -1,0 +1,88 @@
+__author__ = 'John'
+
+#internal libraries
+import os
+import json
+import base64
+
+#external libraries
+from pbkdf2 import PBKDF2  #pip install pbkdf2
+from Crypto.Cipher import AES  #pip install pycrypto
+
+PAD_CHAR = chr(3)
+
+def generate_passphrase(i):
+    while len(i) < 8:
+        i += i
+    return base64.encodestring(i)[:8]
+
+salt = "tu89geji340t89u2"
+passphrase = PBKDF2(generate_passphrase("PlayerData"), salt).read(32)
+cipher = AES.new(passphrase, AES.MODE_CBC, salt)
+
+def encrypt_save_str(json_str):
+    cipher = AES.new(passphrase, AES.MODE_CBC, salt)
+    if utils.parse_json(json_str):
+        return base64.b64encode(cipher.encrypt(utils.pad_str(json_str)))
+    return None
+
+def decrypt_save_str(enc_str):
+    cipher = AES.new(passphrase, AES.MODE_CBC, salt)
+    if utils.parse_base64(enc_str):
+        decrypted = cipher.decrypt(base64.b64decode(enc_str)).rstrip(PAD_CHAR)
+        if utils.parse_json(decrypted):
+            return decrypted
+    return None
+
+def encrypt_save_file(in_json_file, out_save_file):
+    cipher = AES.new(passphrase, AES.MODE_CBC, salt)
+    if os.path.isfile(in_json_file):
+        file_contents = open(in_json_file, "r").read()
+        if utils.parse_json(file_contents):
+            encrypted = base64.b64encode(cipher.encrypt(utils.pad_str(file_contents)))
+            open(out_save_file, "w").write(encrypted)
+
+def decrypt_save_file(in_save_file, out_json_file, pretty_json = True):
+    cipher = AES.new(passphrase, AES.MODE_CBC, salt)
+    if os.path.isfile(in_save_file):
+        file_contents = open(in_save_file, "r").read()
+        if utils.parse_base64(file_contents):
+            decrypted = cipher.decrypt(base64.b64decode(file_contents)).rstrip(PAD_CHAR)
+            if decrypted[-1] != "}" and decrypted[-1] != PAD_CHAR:  #fix numerous different paddings
+                decrypted = decrypted.rstrip(decrypted[-1])
+            if utils.parse_json(decrypted):
+                if pretty_json:
+                    decrypted = json.dumps(json.loads(decrypted), indent=4)
+                open(out_json_file, "w").write(decrypted)
+
+class utils(object):
+    @staticmethod
+    def pad_str(s, pad_char = PAD_CHAR):
+        return s + ((16 - len(s) % 16) * pad_char)
+
+    @staticmethod
+    def parse_base64(s):
+        try:
+            base64.decodestring(s)
+            return True
+        except:
+            return False
+
+    @staticmethod
+    def parse_json(s):
+        try:
+            json.loads(s)
+            return True
+        except:
+            return False
+
+#decrypt save
+print "Decrypting Vault1.sav to Vault1.json..."
+decrypt_save_file("Vault1.sav", "Vault1.json")
+print "Done!"
+
+
+#encrypt json
+print "Encrypting modded.json to modded.sav..."
+encrypt_save_file("modded.json", "modded.sav")
+print "Done!"

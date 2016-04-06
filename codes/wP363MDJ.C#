@@ -1,0 +1,177 @@
+/*
+     * Пример работы с конфигом
+     * >Загрузка
+     * Config cfg = new Config("settings.ini");
+     * cfg.Load();
+     * >Чтение
+     * Console.WriteLine(cfg["WEAPONS"]["m4a1-s"]["triggerbot.mode"]);
+     * >Запись
+     * cfg["WEAPONS"]["m4a1-s"]["triggerbot.mode"] = 1;
+     * >Сохранение
+     * cfg.Save();
+     */
+    public class Config
+    {
+        public Dictionary<string, ConfigPart> parts = new Dictionary<string, ConfigPart>();
+        public readonly string FileName;
+
+        public Config(string file)
+        {
+            FileName = file;
+        }
+
+        public ConfigPart this[string key]
+        {
+            get
+            {
+                if (!parts.ContainsKey(key))
+                    throw new KeyNotFoundException(string.Format("Раздел конфига :{0}: не найден", key));
+                return parts[key];
+            }
+            set
+            {
+                if (parts.ContainsKey(key))
+                    parts[key] = value;
+                else
+                    parts.Add(key, value);
+            }
+        }
+
+        public void Load()
+        {
+            ConfigPart curPart = null;
+            ConfigSection curSection = null;
+            string[] lines = File.ReadAllLines(FileName);
+            foreach (string line in lines)
+            {
+                string tline = line.Trim();
+                if (tline.StartsWith(":") && tline.EndsWith(":"))
+                {
+                    if (curPart != null || curSection != null)
+                    {
+                        if (curPart == null)
+                            curPart = new ConfigPart(string.Empty);
+                        if (curSection != null)
+                        {
+                            curPart.sections.Add(curSection.name, curSection);
+                            curSection = null;
+                        }
+                        parts.Add(curPart.name, curPart);
+                    }
+                    curPart = new ConfigPart(tline.Substring(1, tline.Length - 2));
+                }
+                else if (tline.StartsWith("[") && tline.EndsWith("]"))
+                {
+                    if (curSection != null)
+                    {
+                        if (curPart == null)
+                            curPart = new ConfigPart(string.Empty);
+                        curPart.sections.Add(curSection.name, curSection);
+                    }
+                    curSection = new ConfigSection(tline.Substring(1, tline.Length - 2));
+                }
+                else if (tline.Contains('='))
+                {
+                    try
+                    {
+                        string[] kv = tline.Split(new char[] { '=' }, 2, StringSplitOptions.None);
+                        if (curSection == null)
+                            curSection = new ConfigSection(string.Empty);
+                        curSection.entries.Add(kv[0].Trim(), int.Parse(kv[1].Trim()));
+                    }
+                    catch { }
+                }
+            }
+            if (curPart != null || curSection != null)
+            {
+                if (curPart == null)
+                    curPart = new ConfigPart(string.Empty);
+                if (curSection != null)
+                {
+                    curPart.sections.Add(curSection.name, curSection);
+                    curSection = null;
+                }
+                parts.Add(curPart.name, curPart);
+            }
+        }
+
+        public void Save()
+        {
+            List<string> lines = new List<string>();
+            foreach (ConfigPart part in parts.Values)
+            {
+                if(!string.IsNullOrEmpty(part.name))
+                    lines.Add(String.Format(":{0}:", part.name));
+                foreach (ConfigSection section in part.sections.Values)
+                {
+                    if (!string.IsNullOrEmpty(section.name))
+                        lines.Add(String.Format("[{0}]", section.name));
+                    foreach (var kv in section.entries)
+                    {
+                        lines.Add(String.Format("{0} = {1}", kv.Key, kv.Value));
+                    }
+                }
+                lines.Add(string.Empty);
+            }
+            lines.RemoveAt(lines.Count - 1);
+            if (File.Exists(FileName))
+                File.Delete(FileName);
+            File.WriteAllLines(FileName, lines);
+        }
+    }
+
+    public class ConfigPart
+    {
+        public readonly string name;
+        public Dictionary<string, ConfigSection> sections = new Dictionary<string, ConfigSection>();
+
+        public ConfigPart(string name)
+        {
+            this.name = name;
+        }
+
+        public ConfigSection this[string key]
+        {
+            get
+            {
+                if (!sections.ContainsKey(key))
+                    throw new KeyNotFoundException(string.Format("Секция конфига [{0}] не найдена", key));
+                return sections[key];
+            }
+            set
+            {
+                if (sections.ContainsKey(key))
+                    sections[key] = value;
+                else
+                    sections.Add(key, value);
+            }
+        }
+    }
+
+    public class ConfigSection
+    {
+        public readonly string name;
+        public Dictionary<string, int> entries = new Dictionary<string, int>();
+
+        public ConfigSection(string name)
+        {
+            this.name = name;
+        }
+
+        public int this[string key]
+        {
+            get
+            {
+                if (!entries.ContainsKey(key))
+                    throw new KeyNotFoundException(string.Format("Вхождение конфига {0} не найдено", key));
+                return entries[key];
+            }
+            set
+            {
+                if (entries.ContainsKey(key))
+                    entries[key] = value;
+                else
+                    entries.Add(key, value);
+            }
+        }
+    }

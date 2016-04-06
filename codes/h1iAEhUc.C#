@@ -1,0 +1,59 @@
+/* ###########################################
+Einsendeaufgabe 5.1
+########################################## */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fernseher
+{
+    public class Fernseher
+    {
+        public bool On { get; set; }
+        public int Channel { get; set; }
+
+        private int volume;
+        public int Volume
+        {
+            get
+            {
+                return volume;
+            }
+            set
+            {
+                if (On)
+                    volume = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return "Angeschaltet: " + On + ", Kanal: " + Channel + ", Lautstaerke: " + Volume;
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Fernseher apparat = new Fernseher();
+
+
+
+            int wert = Convert.ToInt32(Console.ReadLine());
+
+            if (wert == 1)
+            {
+                apparat.On = true;
+                Console.WriteLine("Fernseher ist an");
+            }
+            else
+                apparat.On = false;
+            Console.WriteLine("Fernseher ist aus");
+        }
+    }
+}

@@ -1,0 +1,21 @@
+        
+    if s.value == 0:
+        b.color=color.blue
+
+    elif s.value == 0.5:
+        b.color=color.cyan
+
+    elif s.value == 1:
+        b.color=color.green
+
+    elif s.value == 1.5:
+        b.color=color.yellow
+
+    elif s.value == 2:
+        b.color=color.orange
+
+    elif s.value == 2.5:
+        b.color=color.red
+
+    elif s.value == 3:
+        b.color=color.white

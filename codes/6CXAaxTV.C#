@@ -1,0 +1,11 @@
+public class LevelCompleteController : MonoBehaviour {
+			
+	void Start() {
+		
+		Metoda(1, 2);
+	}
+
+	private void Metoda(int parameter1, int parameter2) {
+		// blablabla
+	}	
+}

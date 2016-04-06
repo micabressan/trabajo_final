@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnExamine_Click(object sender, EventArgs e)
+        {
+            int number;
+            string information;
+            DialogResult dialogresult;
+
+            if(int.TryParse(txtNumber.Text, out number) == true)
+            {
+                if(number < 0)
+                {
+                    information = "The number is negative!";
+                }
+                else if(number > 0)
+                {
+                    information = "The number is positive!";
+                }
+                else
+                {
+                    information = "The number is zero!";
+                }
+                information += "\n\nIf you want to examine another number, press 'Yes'";
+                information += "\nIf you want to stop the program, press 'No'";
+
+                dialogresult = MessageBox.Show(information,
+                    "Number Examined", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2);
+                if(dialogresult == System.Windows.Forms.DialogResult.No)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    txtNumber.Focus();
+                    txtNumber.SelectAll();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Not a number!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+    static void Main(string[] args) {
+      Console.WriteLine("Eingabe a:");
+      double a = Convert.ToDouble(Console.ReadLine());
+      Console.WriteLine("Eingabe b:");
+      double b = Convert.ToDouble(Console.ReadLine());
+
+      int i = 0;
+
+      double x = 1;
+
+      double v = 0, vLast = 0;
+
+      while (v >= vLast) {
+        vLast = v;
+        v = (a-2*x)*(b-2*x)*x;
+        x += 0.01;
+        i++;
+      }
+
+      Console.WriteLine("Max Volumen = "+ vLast +" bei x = " + x + ";  Schleifendurchläufe = "+ i );
+
+     
+      i=0;
+
+      v=0;
+      vLast = 0;
+
+      x = 0;
+      double xl = 0;
+      double xr = (b < a ? b/2 : a/2);
+
+      while (v >= vLast) {
+        vLast = v;
+        double dx = xr-xl;
+        double delta = dx / 3;
+
+        double vl = (a-2*(xl+delta))*(b-2*(xl+delta))*(xl+delta);
+        double vr = (a-2*(xr-delta))*(b-2*(xr-delta))*(xr-delta);
+
+        if (vl < vr) {
+          v = vr; 
+          xl += delta;
+          x = xr;
+        }
+        else {
+          v = vl;
+          xr -= delta;
+          x = xl;
+        }
+        i++;
+
+      }
+      Console.WriteLine("Max Volumen = "+ vLast +" bei x = " + x + ";  Schleifendurchläufe = "+ i );
+      Console.ReadKey();
+
+    }

@@ -1,0 +1,132 @@
+{
+    "$type": "System.Collections.Generic.List`1[[ResQ.Aluminum.Messaging.Messages.DictionaryMessageItem, ResQ.Aluminum.Messaging.Messages]], mscorlib",
+    "$values": [{
+        "$type": "ResQ.Aluminum.Messaging.Messages.DictionaryMessageItem, ResQ.Aluminum.Messaging.Messages",
+        "Key": "Content",
+        "Value": {
+            "$type": "ResQ.Sodium.Domain.DataStepInstance, ResQ.Sodium.Domain",
+            "Actions": {
+                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataStepActionInstance, ResQ.Sodium.Domain]], mscorlib",
+                "$values": [{
+                    "$type": "ResQ.Sodium.Domain.AdvanceOnViewDataStepActionInstance, ResQ.Sodium.Domain",
+                    "DataReferencerActionUpdated": {
+                        "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataReferencerActionUpdateInstance, ResQ.Sodium.Domain]], mscorlib",
+                        "$values": []
+                    },
+                    "Name": "AdvanceOnViewDataStepAction1"
+                }]
+            },
+            "DataReferencers": {
+                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataReferencerInstance, ResQ.Sodium.Domain]], mscorlib",
+                "$values": [{
+                    "$type": "ResQ.Sodium.Domain.DataViewDataReferencerInstance, ResQ.Sodium.Domain",
+                    "DataViewInstanceTemplate": {
+                        "$type": "ResQ.Sodium.Domain.DataViewInstance, ResQ.Sodium.Domain",
+                        "DataViewDocumentReferencers": {
+                            "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewDocumentReferencerInstance, ResQ.Sodium.Domain]], mscorlib",
+                            "$values": [{
+                                "$type": "ResQ.Sodium.Domain.DataViewDocumentReferencerInstance, ResQ.Sodium.Domain",
+                                "DocumentQuery": {
+                                    "$type": "ResQ.Sodium.Domain.CollectionDocumentQueryInstance, ResQ.Sodium.Domain",
+                                    "CollectionDocumentQueryConditionGroups": {
+                                        "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.CollectionDocumentQueryConditionGroupInstance, ResQ.Sodium.Domain]], mscorlib",
+                                        "$values": [{
+                                            "$type": "ResQ.Sodium.Domain.CollectionDocumentQueryConditionGroupInstance, ResQ.Sodium.Domain",
+                                            "CollectionDocumentQueryConditions": {
+                                                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.CollectionDocumentQueryConditionInstance, ResQ.Sodium.Domain]], mscorlib",
+                                                "$values": [{
+                                                    "$type": "ResQ.Sodium.Domain.GuidInClaimsCollectionDocumentQueryConditionInstance, ResQ.Sodium.Domain"
+                                                }]
+                                            }
+                                        }]
+                                    },
+                                    "CollectionOrdering": null
+                                },
+                                "Name": "TestAListReferencer"
+                            }]
+                        },
+                        "DataViewItems": {
+                            "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewItemInstance, ResQ.Sodium.Domain]], mscorlib",
+                            "$values": [{
+                                "$type": "ResQ.Sodium.Domain.TextDataViewItemInstance, ResQ.Sodium.Domain",
+                                "Value": null,
+                                "Name": "TestAListText"
+                            }]
+                        },
+                        "DataViewQueryParameters": {
+                            "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewQueryParameterInstance, ResQ.Sodium.Domain]], mscorlib",
+                            "$values": []
+                        },
+                        "DocumentLoadMechanism": null,
+                        "Name": "TestAListView"
+                    },
+                    "DataViewInstances": {
+                        "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewInstance, ResQ.Sodium.Domain]], mscorlib",
+                        "$values": [{
+                            "$type": "ResQ.Sodium.Domain.DataViewInstance, ResQ.Sodium.Domain",
+                            "DataViewDocumentReferencers": {
+                                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewDocumentReferencerInstance, ResQ.Sodium.Domain]], mscorlib",
+                                "$values": [{
+                                    "$type": "ResQ.Sodium.Domain.DataViewDocumentReferencerInstance, ResQ.Sodium.Domain",
+                                    "DocumentQuery": {
+                                        "$type": "ResQ.Sodium.Domain.CollectionDocumentQueryInstance, ResQ.Sodium.Domain",
+                                        "CollectionDocumentQueryConditionGroups": {
+                                            "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.CollectionDocumentQueryConditionGroupInstance, ResQ.Sodium.Domain]], mscorlib",
+                                            "$values": [{
+                                                "$type": "ResQ.Sodium.Domain.CollectionDocumentQueryConditionGroupInstance, ResQ.Sodium.Domain",
+                                                "CollectionDocumentQueryConditions": {
+                                                    "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.CollectionDocumentQueryConditionInstance, ResQ.Sodium.Domain]], mscorlib",
+                                                    "$values": [{
+                                                        "$type": "ResQ.Sodium.Domain.GuidInClaimsCollectionDocumentQueryConditionInstance, ResQ.Sodium.Domain"
+                                                    }]
+                                                }
+                                            }]
+                                        },
+                                        "CollectionOrdering": null
+                                    },
+                                    "Name": "TestAListReferencer"
+                                }]
+                            },
+                            "DataViewItems": {
+                                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewItemInstance, ResQ.Sodium.Domain]], mscorlib",
+                                "$values": [{
+                                    "$type": "ResQ.Sodium.Domain.TextDataViewItemInstance, ResQ.Sodium.Domain",
+                                    "Value": "First",
+                                    "Name": "TestAListText"
+                                }]
+                            },
+                            "DataViewQueryParameters": {
+                                "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewQueryParameterInstance, ResQ.Sodium.Domain]], mscorlib",
+                                "$values": []
+                            },
+                            "DocumentLoadMechanism": null,
+                            "Name": "TestAListView"
+                        }]
+                    },
+                    "QueryParameterSetters": {
+                        "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.QueryParameterSetterInstance, ResQ.Sodium.Domain]], mscorlib",
+                        "$values": []
+                    },
+                    "DataViewItemDataViewDataReferencerValueSetters": {
+                        "$type": "System.Collections.Generic.List`1[[ResQ.Sodium.Domain.DataViewItemDataViewDataReferencerValueSetterInstance, ResQ.Sodium.Domain]], mscorlib",
+                        "$values": []
+                    },
+                    "Name": "TestAListReferencer"
+                }]
+            },
+            "StepInstanceId": {
+                "$type": "System.Guid",
+                "$value": "00000000-0000-0000-0000-000000000000"
+            },
+            "StepInstanceViewId": {
+                "$type": "System.Guid",
+                "$value": "00000000-0000-0000-0000-000000000000"
+            },
+            "Name": "ViewTestAStep"
+        }
+    }]
+}, "CorrelationId": {
+    "$type": "System.Guid",
+    "$value": "96a728c4-d411-4824-911c-13b9129d01d4"
+}, "StatusCode": 2000, "StatusMessage": null
+}

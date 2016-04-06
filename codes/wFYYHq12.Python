@@ -1,0 +1,6 @@
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+# Import RevitAPI classes data base
+clr.AddReference("RevitAPI")
+from Autodesk.Revit.DB import *

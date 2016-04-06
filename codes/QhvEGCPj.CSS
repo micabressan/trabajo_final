@@ -1,0 +1,11 @@
+.ecwid-productBrowser {
+	margin-top: 140px !important;
+}
+
+.ecwid-minicart {
+	position: fixed !important;
+	bottom: 0px !important;
+	top: 80px;
+	right: 320px;
+	transform: scale(0.8);
+}

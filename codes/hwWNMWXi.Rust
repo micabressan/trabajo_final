@@ -1,0 +1,47 @@
+A core app will look for this prototype in the lib I'm writting:
+
+m64p_error VidExt_Init(void)
+
+in .h, m64p_error is defined like this
+
+ typedef enum {
+   M64ERR_SUCCESS = 0,
+   M64ERR_NOT_INIT,        /* Function is disallowed before InitMupen64Plus() is called */
+   M64ERR_ALREADY_INIT,    /* InitMupen64Plus() was called twice */
+   M64ERR_INCOMPATIBLE,    /* API versions between components are incompatible */
+   M64ERR_INPUT_ASSERT,    /* Invalid parameters for function call, such as ParamValue=NULL for GetCoreParameter() */
+   M64ERR_INPUT_INVALID,   /* Invalid input data, such as ParamValue="maybe" for SetCoreParameter() to set a BOOL-type value */
+   M64ERR_INPUT_NOT_FOUND, /* The input parameter(s) specified a particular item which was not found */
+   M64ERR_NO_MEMORY,       /* Memory allocation failed */
+   M64ERR_FILES,           /* Error opening, creating, reading, or writing to a file */
+   M64ERR_INTERNAL,        /* Internal error (bug) */
+   M64ERR_INVALID_STATE,   /* Current program state does not allow operation */
+   M64ERR_PLUGIN_FAIL,     /* A plugin function returned a fatal error */
+   M64ERR_SYSTEM_FAIL,     /* A system function call, such as an SDL or file operation, failed */
+   M64ERR_UNSUPPORTED,     /* Function call is not supported (ie, core not built with debugger) */
+   M64ERR_WRONG_TYPE       /* A given input type parameter cannot be used for desired operation */
+ } m64p_error;
+
+in my rust I wrote this:
+
+enum M64pError {
+    Sucess = 0,
+    NotInit,
+    AlreadyInit,
+    Incompatible,
+    Assert,
+    Invalid,
+    InputNotFound,
+    NoMemory,
+    Files,
+    Internal,
+    InvalidState,
+    PluginFail,
+    SystemFail,
+    Unsuported,
+    WrongType,
+}
+
+extern {
+    fn VidExt_Init() -> M64pError;
+}

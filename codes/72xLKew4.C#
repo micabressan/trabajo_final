@@ -1,0 +1,23 @@
+using UnityEngine;
+using System.Collections;
+
+public class FPSCamera : MonoBehaviour {
+	Vector3 rotation;
+	public Transform spine;
+	Vector3 POffset;
+	Vector3 ROffset;
+
+	// Use this for initialization
+	void Start () {
+		POffset = transform.localPosition - spine.localPosition;
+		ROffset = transform.localEulerAngles - spine.localEulerAngles;
+	}
+	
+	// Update is called once per frame
+	void LateUpdate ()
+	{
+		transform.localPosition = spine.localPosition + POffset;
+		transform.localEulerAngles = spine.localEulerAngles + ROffset;
+//		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,0);
+	}
+}

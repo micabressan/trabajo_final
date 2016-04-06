@@ -1,0 +1,15 @@
+class MapSpecification:
+    def __init__(self, width, height, room_count = 12):
+        self.width = width
+        self.height = height
+        self.room_count = room_count
+
+def generate_map(mapspec):
+    print "Generate map with width", mapspec.width, "and height", mapspec.height, "and room count", mapspec.room_count
+
+def the_game():
+    spec = MapSpecification(55,27)
+    generate_map(spec)
+
+if __name__ == "__main__":
+    the_game()

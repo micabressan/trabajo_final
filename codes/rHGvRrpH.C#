@@ -1,0 +1,30 @@
+namespace ConsoleApplication55_163
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double numA, num1, max, min;
+            num1 = double.Parse(Console.ReadLine());
+            min = num1;
+            max = num1;
+            for (int i=2; i<=9; i++)
+            {
+                numA = double.Parse(Console.ReadLine());
+                if (numA > 0)
+                {
+                    if (numA < min)
+                        numA = min;
+                }
+                else if (numA < 0)
+                {
+                    if (numA>max)
+                        numA = max;
+                }
+            }
+            Console.Write("the maximum number is: " + max);
+            Console.Write("the minimun number is: " + min);
+            Console.ReadKey();
+        }
+    }
+}

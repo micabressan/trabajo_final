@@ -1,0 +1,6 @@
+(defn remove-dupes [key-fn sort-fn compare-fn items]
+  (->>  (group-by key-fn items)
+        (map (fn [[_ entries]]
+                (first (sort-by sort-fn compare-fn entries))))
+        (remove nil?)
+        flatten))

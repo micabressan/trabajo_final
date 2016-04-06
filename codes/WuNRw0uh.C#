@@ -1,0 +1,50 @@
+using System;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace HashTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Test();
+            Console.ReadKey(true);
+        }
+
+        private static async void Test()
+        {
+            await RunAction(MD5Test);
+            await RunAction(SHA1Test);
+            await RunAction(SHA256Test);
+        }
+
+        private static void MD5Test()
+        {
+            Console.WriteLine("MD5: " + Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.Unicode.GetBytes("Password"))));
+        }
+
+        private static void SHA1Test()
+        {
+            Console.WriteLine("SHA1: " + Convert.ToBase64String(SHA1.Create().ComputeHash(Encoding.Unicode.GetBytes("Password"))));
+        }
+
+        private static void SHA256Test()
+        {
+            Console.WriteLine("SHA256: " + Convert.ToBase64String(SHA256.Create().ComputeHash(Encoding.Unicode.GetBytes("Password"))));
+        }
+
+        private static async Task RunAction(Action action)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            await Task.Run(action);
+            stopWatch.Stop();
+            Console.WriteLine(action.Method.Name + " time elapsed (milliseconds): " + stopWatch.ElapsedMilliseconds);
+            Thread.Sleep(1000);
+        }
+    }
+}

@@ -1,0 +1,61 @@
+module.exports =
+attributes:{
+  prefabProject:
+    model: 'projects'
+    required: true
+  packageName:
+    type: 'string'
+    required: true
+    index: true
+    maxLength:128
+  packageDescription:#This will go for notes
+    type: 'text'
+    required: false
+    maxLength: 128
+  packageItems: type: 'json'
+  packageReminders: type: 'json'#each array item limit to 512
+  packageMfgSteps: type: 'json'#each array item limit to 512
+  packageDocuments: type: 'array'#think about it for longer use case with multiple servers for all file/URL
+  packageVisibility:
+    type: 'string'
+    'enum': [
+      'private'
+      'public'
+    ]
+    defaultsTo: 'private'
+  packageApproved:
+    type: 'string'
+    'enum': [
+      'approved'
+      'notapproved'
+    ]
+    defaultsTo: 'notapproved'
+  packageMultitrade:
+    type: 'string'
+    'enum': [
+      'yes'
+      'no'
+    ]
+    defaultsTo: 'no'
+  packageStatus:
+    type: 'string'
+    'enum': [
+      'active'
+      'inactive'
+      'archive'
+    ]
+    defaultsTo: 'active'
+  packageTags:
+    type: 'array'
+    index: true
+  packageCompany:
+    model:'companies'
+  packageChildren:# waterline supports field type objectid and this will be a collection of objectids inherited this package
+    type: 'array'
+  packageOwner: #can change # one who owns the package
+    model: 'users'
+  packageCreatedBy: # unalterable # one who created the package
+    model: 'users'
+  packageModifiedBy:
+    model: 'users'
+}

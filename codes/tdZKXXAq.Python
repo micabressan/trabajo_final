@@ -1,0 +1,12 @@
+from random import randint
+number = randint(1,10)
+turns = 1
+
+while turns > 0:
+    guess = int(raw_input("Pick a number:"))
+    if guess == number:
+        print "You won!"
+        break
+    turns -= 1
+else:
+    print "You lost."

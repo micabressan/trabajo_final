@@ -1,0 +1,19 @@
+let mut iter = self.ast.statements.iter();
+loop { let statement = iter.next();
+	match statement {
+		Some(s) => {
+			match *s {
+				Statement::FuncDecl(ref fd) => {
+					self.funcs.insert(fd.name.clone(), fd);
+				},
+				Statement::Import(ref i) => {
+					self.execute_import(i);
+				}
+				_ => ()
+			};
+		},
+		None => break
+	}
+};
+
+// self.execute_import() also uses self.funcs as mutable

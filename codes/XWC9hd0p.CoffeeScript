@@ -1,0 +1,110 @@
+audioPreview = () ->
+	st = 
+		pauseBars 	: false
+		numBars 	: 25
+		pBar 		: '<p class="bar"></p>'
+		track 		: ".track"
+		text 		: ".text"
+		progressBar : ".progress-bar"
+		bars 		: ".bars"
+		bar 		: ".bar"
+		audio 		: ".audioPreview"
+		
+	dom = {}
+
+	catchDom = () ->
+		dom.audio 		= $(st.audio)
+		dom.track 		= $(st.track)
+		dom.text 		= $(st.text, dom.track)
+		dom.progressBar = $(st.progressBar, dom.track)
+		dom.bars 		= $(st.bars, dom.progressBar)
+
+		fnPrimaryLayer.createBars()
+		return
+
+	suscribeEvents = () ->
+		dom.track.on 'click', events.playAudio
+		dom.audio.on 'ended', events.hideAudioWhenEnds
+		return
+
+	events =
+		playAudio : (e) ->
+			e.preventDefault()
+			e.stopPropagation()
+
+			fn.toggleElements(dom.text, dom.progressBar)
+			isPaused = fn.audioIsPaused(dom.audio[0])
+
+			el = $(@)
+			objToggleClass = fn.audioPlays(isPaused, dom.audio[0])
+			fn.toggleClass(el, objToggleClass.removeClass, objToggleClass.addClass)
+			return
+
+		hideAudioWhenEnds : (e) ->
+			fn.toggleClass(dom.track, 'icon_pause', 'icon_play')
+			fn.toggleElements(dom.progressBar, dom.text)
+			return
+
+	fnPrimaryLayer =
+		createBars : () ->
+			fn.appendBars(st.numBars, dom.bars, st.pBar)
+			dom.bar = $(st.bar)
+			fn.spaceBetweenBars(dom.bar)
+			return
+
+	fn = 
+		appendBars : (numBars, bars, pBar) ->
+			i = 0
+			while i < numBars
+				bars.append pBar
+				i++
+			return
+		spaceBetweenBars : (bar) ->
+			space = bar.width() + 1
+			bar.each (index) ->
+				$(@).css 'left', index * space + 'px'
+				return
+			return
+		toggleElements : (elementHide, elementShow) ->
+			elementHide.hide()
+			elementShow.show()
+			return
+		audioIsPaused : (audio) ->
+			isPaused = false
+			if audio.paused
+				isPaused = true
+			return isPaused
+		audioPlays : (isPaused, audio) ->
+			switch isPaused
+				when false
+					audio.pause()
+					st.pauseBars = true
+					return {removeClass: 'icon_pause', addClass: 'icon_play'}
+				when true
+					audio.play()
+					st.pauseBars = false
+					return {removeClass: 'icon_play', addClass: 'icon_pause'}
+			return
+		toggleClass : (parent, classRemoved, classAdded) ->
+			parent.children('i').removeClass classRemoved
+			parent.children('i').addClass classAdded
+			return
+
+	setInterval (->
+		if !st.pauseBars
+			dom.bar.each ->
+				el = $(@)
+				el.css 'height', ->
+					Math.random() * 20
+				return
+		return
+	), 150
+
+	initialize = () ->
+		catchDom()
+		suscribeEvents()
+		return
+
+	return initialize()
+
+audioPreview()

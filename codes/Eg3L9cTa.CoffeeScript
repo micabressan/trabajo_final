@@ -1,0 +1,23 @@
+initSearch = ->
+	$('.search #date').datepicker
+	  language: 'es'
+	$('.search #ok').click ->
+	  allVals = []
+	  $('.search #multiselect :checked').each ->
+	    allVals.push $(this).val()
+	  $('.search .placeholder').text allVals
+	  $(this).parents('#multiselect').hide()
+	$('.search .placeholder').click ->
+	  $(this).siblings('#multiselect').show()
+
+
+
+initComments = ->
+if $('.comments-container .comment.show').length == 0
+  $($('.comments-container .comment')[0]).addClass 'show'
+comments = $('.comments-container .comment')
+setInterval (->
+  next = $('.comments-container .comment.show').next()
+  $('.comments-container .comment.show').removeClass 'show'
+  if next.length != 0 then $(next).addClass('show') else $(comments[0]).addClass('show')
+), 5000

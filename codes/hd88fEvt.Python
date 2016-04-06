@@ -1,0 +1,9 @@
+python -m twisted.conch.stdio
+>>> from twisted.names import client
+>>> resolver = client.createResolver(servers=[('2001:4860:4860::8888', 53)])
+>>> resolver.getHostByName('google.com')
+<Deferred at 0x7f9fa9e14908 current result: <twisted.python.failure.Failure <class 'twisted.internet.error.InvalidAddressError'>>>
+>>> resolver = client.createResolver(servers=[('8.8.8.8', 53)])
+>>> resolver.getHostByName('google.com')
+<Deferred at 0x7f9fa9e279e0 waiting on Deferred at 0x7f9fa9e27c68>
+>>>

@@ -1,0 +1,37 @@
+eventsForPinView: pinView dotView: dotView inOrOut: inOrOut portNumber: portNumber distanceToEdge: distanceToEdge
+	| pinEllipse |
+	1 to: pinView shapes size do: [:i| ((pinView shapes at: i) isMemberOf: ROEllipse) ifTrue: [ pinEllipse := (pinView shapes at: i) ]].
+	pinView
+		on: ROMouseLeftClick
+		do: [ :event | 
+			isClicked ifFalse: [ 
+				pinEllipse color: Color red.
+				isClicked := true.
+				pinClicked := pinView.
+				(inOrOut = #in) ifTrue: [
+					window setInPortForNewConnection: portNumber id: id view: dotView distanceToEdge: distanceToEdge.
+				].
+				(inOrOut = #out) ifTrue: [
+					window setOutPortForNewConnection: portNumber id: id view: dotView distanceToEdge: distanceToEdge.
+				].
+			]; ifTrue: [ 
+				(pinClicked = pinView) ifTrue: [ 
+					pinEllipse color: Color red.
+					isClicked := false.
+					pinClicked := ROElement new.
+					window deleteInPortConnection.
+				]
+			]
+		];
+		on: ROMouseEnter 
+		do: [ :event | 
+			pinEllipse color: Color red.
+			window update.
+		];
+		on: ROMouseLeave
+		do: [ :event | 
+			(pinClicked = pinView) ifFalse: [
+				pinEllipse color: Color black.
+				window update.
+			].
+		].

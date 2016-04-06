@@ -1,0 +1,17 @@
+% Demo program that listens on port 4444, and dumps the initial GET request to the terminal
+-module(main).
+-export([server/0]).
+
+server() ->
+  {ok, LSocket} = gen_tcp:listen(4444, [
+    {active, false}
+  ]),
+  {ok, Socket} = gen_tcp:accept(LSocket),
+  SocketRecieved = gen_tcp:recv(Socket, 0),
+  case SocketRecieved of
+    {ok, Data} ->
+      ok = gen_tcp:close(Socket),
+      Data;
+    {error, Err} ->
+      Err
+  end.

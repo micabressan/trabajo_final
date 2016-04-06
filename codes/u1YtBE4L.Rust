@@ -1,0 +1,22 @@
+let stmt = conn.prepare("SELECT * FROM pictures").unwrap();
+
+    for row in stmt.query(&[]).unwrap() {
+        let id: i32 = row.get("id");
+        let author: String = row.get("author");
+        let description: String = row.get("description");
+
+        let rating: String = row.get("rating");
+
+        let gps_lat: String = row.get("gps_lat");
+        let gps_long: String = row.get("gps_long");
+        let date_taken: chrono::NaiveDate = row.get("date_taken");
+
+        println!("id        -> {}\n
+                author      -> {}\n
+                description -> {}\n
+                rating      -> {}\n
+                gps_lat     -> {}\n
+                gps_long    -> {}\n
+                date        -> {}\n
+            ", id, author, description, rating, gps_lat, gps_long, date_taken);
+    }

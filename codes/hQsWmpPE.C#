@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Rainha
+    {
+        int linha, coluna, diferencaLinha, diferencaColuna;
+        Rainha rainha, vizinho, self;
+        
+        public bool podeAtacar(int testaLinha, int testaColuna) {
+            //Teste para mesma linha
+            if(linha == testaLinha)
+            return true;
+           //Teste para diagonais
+            diferencaColuna = testaColuna - coluna;
+            if ((linha + diferencaColuna == testaLinha) || (linha - diferencaColuna == testaLinha))
+                return true;
+            //Nós não podemos atacar, veja se o vizinho pode
+            return vizinho.podeAtacar(testaLinha, testaColuna);
+        }
+
+        
+        public bool inicializa(int col, Rainha viz) {
+            //Inicializa os valores da nossa coluna e vizinho
+            coluna = col;
+            vizinho = viz;
+            //Inicia na linha 1
+            linha = 1;
+            return encontraSolucao();
+        }
+
+
+        public bool encontraSolucao() {
+            while(vizinho.podeAtacar(linha, coluna)){
+                if (!self.avancar())
+                    return false;
+            }
+            //Encontrou uma solução
+            return true;    
+        }
+        
+        public bool avancar() { 
+        //tentar a próxima linha
+            if (linha < 8)
+            {
+                linha = linha + 1;
+                return self.encontraSolucao();
+            }
+         //Não pode mais avançar
+         //Mova o vizinho para a próxima solução
+            if (!vizinho.avancar())
+                return false;
+            //Começa denovo na linha 1
+            linha = 1;
+            return self.encontraSolucao();
+        }
+
+
+        public void imprime() {
+            vizinho.imprime();
+            Console.Write(linha);
+            Console.Write(coluna);
+        }
+
+        static void Main(string[] args)
+        {
+            
+        
+        }
+    }
+}

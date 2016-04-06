@@ -1,0 +1,84 @@
+.menu-people {
+	padding-top: Хуй знает;
+	padding-bottom: Хуй знает;
+
+	text-align: center;
+}
+.menu-people .item {
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+	width: 250px (или сколько там);
+	text-align: center;
+}
+
+.menu-people .img {
+	position: relative;
+	width: 200px;
+	height: 200px; (или сколько там)
+	padding-bottom: 10px;
+}
+.menu-people .img:before {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: -10px;
+	top: 10px;
+	background: #cc0000;
+}
+.menu-people .img:nth-child(4n+1):before {
+	background: #cc0000;
+}
+.menu-people .img:nth-child(4n+2):before {
+	background: #00cc00;
+}
+.menu-people .img:nth-child(4n+3):before {
+	background: #0000cc;
+}
+.menu-people .img:nth-child(4n+4):before {
+	background: #cc00cc;
+}
+.menu-people .img img {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	z-index: 2;
+}
+.menu-people .nm {
+	....стили текста, 
+	font-family: ...;
+	font-size:...;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.menu-people .cn {
+	....стили текста, 
+	font-family: ...;
+	font-size:...;
+	font-weight: bold;
+}
+.menu-people .cn span {
+	position: relative;
+}
+.menu-people .cn span:before,
+.menu-people .cn span:after {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: -30px;
+	height: 20px;
+	width: 1px;
+	background: #cccccc (или какой там);
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.menu-people .cn:before {
+	left: -30px;
+}
+.menu-people .cn:after {
+	right: -30px;
+}

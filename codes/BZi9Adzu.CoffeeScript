@@ -1,0 +1,9 @@
+doIt = (promises) -> Promise.try -> promises().reduce (l,r) -> l.then r
+
+dot = (method, params...) -> (obj) -> obj[method](params...)
+
+doIt -> [
+	hash tracePath, 'sha224'
+	dot 'toString', 'hex'
+	console.log
+]

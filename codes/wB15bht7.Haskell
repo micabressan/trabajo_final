@@ -1,0 +1,47 @@
+import Data.List.Split
+import Control.Monad
+
+data Fraction = Fraction Integer Integer
+
+instance Eq Fraction where
+    (Fraction n0 d0) == (Fraction n1 d1) = n0*d1 == n1*d0
+
+instance Show Fraction where
+    show (Fraction n d) = show n ++ "/" ++ show d
+
+instance Ord Fraction where
+    (Fraction n0 d0) `compare` (Fraction n1 d1) = (n0*d1) `compare` (n1*d0)
+
+instance Num Fraction where
+    (Fraction w x) + (Fraction y z) = simplify $ Fraction j k
+         where j = w * z + y * x
+               k = x * z
+    (Fraction w x) * (Fraction y z) = simplify $ Fraction (w*y) (x*z)
+    negate (Fraction x y) = Fraction (negate x) y
+    abs (Fraction x y)
+        | x < 0     = negate (Fraction x y)
+        | otherwise = Fraction x y
+    signum (Fraction x y)
+        | x < 0     = -1
+        | x == 0    = 0
+        | otherwise = 1
+    fromInteger n = Fraction n 1
+
+main :: IO ()
+main = getLine >>= \x -> 
+           replicateM (read x) getLine >>= 
+               putStrLn . show . foldl1 (+) . map parseFraction 
+	
+simplify :: Fraction -> Fraction
+simplify (Fraction 1 y) = Fraction 1 y
+simplify (Fraction x y) = Fraction p q
+    where p = div x $ gcd x y
+          q = div y $ gcd x y
+
+parseFraction :: String -> Fraction
+parseFraction str
+    | '/' `elem` str = Fraction x y
+    | otherwise  = Fraction (read s) 1
+        where x  = read $ head s
+              y  = read . head $ tail s
+              s = splitOn "/" str

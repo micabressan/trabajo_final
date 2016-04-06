@@ -1,0 +1,13 @@
+homeWebSocketHandler :: WebSocketsT Handler ()
+homeWebSocketHandler = do
+        requestText <- receiveData
+        
+        let request = eitherDecode' requestText :: Either String ClientRequest
+        case request of
+            Right requestData -> 
+                do
+                    setCookie $ def {setCookieName="baws", setCookieValue="bawache"}
+                    response <- liftIO $ performRequest requestData
+                    sendTextData $ toJSONResponse response
+            Left reason -> 
+                sendTextData $ toJSONResponse (ClientError $ T.pack reason)

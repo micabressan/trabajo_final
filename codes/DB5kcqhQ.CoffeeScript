@@ -1,0 +1,49 @@
+namespace App:Helper:Tracking:
+  class MAT
+
+    ADV_ID = '22484'
+    CONV_KEY = 'ecb150999f70266a69a66dad3891634d'
+
+    constructor: (platform) ->
+      @mat = window.plugins.matPlugin
+      @mat.initTracker @['onInitTracker' + platform.capitalize()], @onErrorTrackingFlow, ADV_ID, CONV_KEY
+      return @mat
+
+    onInitTrackerAndroid: =>
+      @initialize = true
+      window.plugins.gaidWrapperPlugin.getGoogleAdvertisingId @onGetGoogleAdvertisingId, @onErrorGetGoogleAdvertisingId
+
+    onGetGoogleAdvertisingId: (answer) =>
+      @mat.setGoogleAdvertisingId @onSetGoogleAdvertisingId, @onErrorTrackingFlow, answer.gaid, answer.isLAT
+      @mat.measureSession @onMeasureSession, @onErrorTrackingFlow
+
+    onSetGoogleAdvertisingId: =>
+      console.log "[Tracking.MAT]: Setting google advertising ID is OK"
+
+    onErrorGetGoogleAdvertisingId: (answer) =>
+      @mat.setAndroidId @onSetAndroidId, @onErrorTrackingFlow, true
+      @mat.measureSession @onMeasureSession, @onErrorTrackingFlow
+
+    onSetAndroidId: =>
+      console.log "[Tracking.MAT]: Setting android ID is OK"
+
+    onInitTrackerIos: =>
+      @initialize = true
+      ifa = window.plugins.ifaWrapperPlugin
+      ifa.getAppleAdvertisingIdentifier @onGetAppleAdvertisingIdentifier, @onErrorGetAppleAdvertisingIdentifier
+
+    onGetAppleAdvertisingIdentifier: (answer) =>
+      @mat.setAppleAdvertisingIdentifier @onSetAppleAdvertisingIdentifier, @onErrorTrackingFlow, answer.ifa, answer.trackingEnabled
+
+    onSetAppleAdvertisingIdentifier: =>
+      @mat.measureSession @onMeasureSession, @onErrorTrackingFlow
+      console.log "[Tracking.MAT]: Setting apple advertising ID is OK"
+
+    onErrorGetAppleAdvertisingIdentifier: =>
+      @mat.measureSession @onMeasureSession, @onErrorTrackingFlow
+
+    onMeasureSession: =>
+      console.log "[Tracking.MAT]: Measure session is OK"
+
+    onErrorTrackingFlow: (message = null) =>
+      console.log "[Tracking.MAT Error]: ", message

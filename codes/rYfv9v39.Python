@@ -1,0 +1,17 @@
+
+import os
+import time
+
+
+def parse():
+    with open('contacts.txt', 'r') as file:
+        for line in file:
+            value = line.split('=')
+            return value
+
+
+text file:
+
+value = 123456
+value2 = 122654
+value3 = 545642

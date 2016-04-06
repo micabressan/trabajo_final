@@ -1,0 +1,21 @@
+def logger(indentation):
+    logger.indent = 0
+    logger.buffer = ""
+
+    def wrap(function):
+        def wrapped_function(*args, **kwargs):
+            indent = " " * 2 * logger.indent
+            strargs = ', '.join([repr(arg) for arg in args]
+                                + ["{0}={1}".format(key, repr(val)) for key, val in kwargs.items()]
+            )
+            logger.buffer += "{0}> {1}({2})\n".format(indent, function.__name__, strargs)
+            #with open("Logs" + os.sep + "trace.log", "a") as f:
+            logger.indent += indentation
+            result = function(*args, **kwargs)
+            logger.indent -= indentation
+            logger.buffer += "{0}< {1}\n".format(indent, result)
+            #with open("Logs" + os.sep + "trace.log", "w") as f:
+            #   f.write(logger.buffer)
+            return result
+        return wrapped_function
+    return wrap

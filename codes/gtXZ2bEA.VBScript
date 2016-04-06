@@ -1,0 +1,21 @@
+Public Type lpPoint
+    x As Long
+    y As Long
+End Type
+Public Declare Function GetCursorPos Lib "user32" (ByRef pos As lpPoint) As Boolean
+
+Sub PasteToUserClick()
+ 
+ Dim p As lpPoint, x As Double, y As Double, l As Layer
+ GetCursorPos p
+ ActiveDocument.ActiveWindow.ScreenToDocument p.x, p.y, x, y
+ Dim Shift As Long
+ Dim b As Boolean
+ Dim s As Shape
+ Dim cr As Long, cg As Long, cb As Long
+ Dim Paste1 As ShapeRange
+ ActiveLayer.Paste
+ Set Paste1 = ActiveSelectionRange
+ Paste1.SetPosition x - Paste1.SizeWidth / 2, y + Paste1.SizeHeight / 2
+
+End Sub

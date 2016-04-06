@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ParlandoIPPhoneDirectory clearlight="true">
+    <Title>Telefoonboek</Title>
+    <Prompt>Prompt</Prompt>
+
+    <DirectoryEntry>
+        <Name>Support</Name>
+        <Telephone>8881234567</Telephone>
+    </DirectoryEntry>
+
+    <DirectoryEntry>
+        <Name>Sales</Name>
+        <Telephone>8887654321</Telephone>
+    </DirectoryEntry>
+
+    <DirectoryEntry>
+        <Name>Billing</Name>
+        <Telephone>8881231231</Telephone>
+    </DirectoryEntry>
+    
+    <DirectoryEntry><Name>	Test1	</Name><Telephone>	1234567890	</Telephone></DirectoryEntry>
+<DirectoryEntry><Name>	Test2	</Name><Telephone>	2345678901	</Telephone></DirectoryEntry>
+<DirectoryEntry><Name>	Test3	</Name><Telephone>	3456789012	</Telephone></DirectoryEntry>
+</ParlandoIPPhoneDirectory>

@@ -1,0 +1,9 @@
+|unMensajero unaConexion unEncriptadorRSA unEncriptadorRC4 unEncriptadorBlowfish|
+
+unEncriptadorRSA := EncriptadorRSA new.
+unEncriptadorBlowfish := EncriptadorBlowfish new.
+unEncriptadorRC4 := EncriptadorRC4 new.
+unaConexion := ConexionSegura encriptador: unEncriptadorBlowfish.
+unMensajero := Mensajero conexion: unaConexion.
+
+unMensajero enviar: 'Holis'

@@ -1,0 +1,8 @@
+    Intvec& operator=(const Intvec& other)
+    {
+        log("copy assignment operator");
+        Intvec tmp(other);
+        std::swap(m_size, tmp.m_size); // Why swap? Can't we just do m_size = other.m_size?
+        std::swap(m_data, tmp.m_data);
+        return *this;
+    }

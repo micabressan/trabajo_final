@@ -1,0 +1,33 @@
+            BigInteger q = 1;
+            BigInteger i = 0;
+            BigInteger inCircle = 0;
+
+            while (true)
+            {
+                BigInteger px = 1;
+                BigInteger pxSquared = 1;
+
+                q <<= 1;
+                var qSquared = q*q;           
+
+                while (px < q)
+                {
+                    BigInteger py = 1;
+
+                    while (py < q)
+                    {
+                        BigRational dist = pxSquared + py * py;
+
+                        if (dist <= qSquared)
+                            inCircle += 4;
+
+                        i++;
+                        py += 2;
+                    }
+
+                    px += 2;
+                    pxSquared = px*px;
+                }
+                var pi = new BigRational(inCircle, i);
+                Console.WriteLine(pi);
+            }

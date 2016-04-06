@@ -1,0 +1,14 @@
+pub enum Token<'a> {
+    Identifier(&'a str),
+}
+
+impl<'a> Reader<'a> {
+    fn read_word(&self) -> Token {
+        let mut word: String;
+        // do stuff with word
+        match word.as_str() {
+            // do some stuff for literal matches
+            s => Token::Identifier(s) // here is where it fails
+        }
+    }
+}

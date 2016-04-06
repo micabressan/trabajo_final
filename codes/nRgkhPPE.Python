@@ -1,0 +1,30 @@
+const DATA = [{"name":"npc01","lev":100,"hp":400,"mp":400},
+			{"name":"npc02","lev":100,"hp":400,"mp":400,"unique_variable":3.14}]
+
+var f = File.new()
+var path = "res://data.txt"
+
+func _ready():
+	save_data()
+	load_data()
+
+func load_data():
+	if f.file_exists(path):
+		f.open(path,File.READ)
+		var line = f.get_line()
+		while(!f.eof_reached() and line != ""):
+			var data = {}
+			data.parse_json(line)
+#			print(data)
+			print("Name: ",data["name"])
+			if data.has("unique_variable"):
+				print("  Unique: ",data["unique_variable"])
+			line = f.get_line()
+		f.close()
+
+func save_data():
+	f.open(path,File.WRITE)
+	for d in DATA:
+		var json = d.to_json()
+		f.store_line(json)
+	f.close()

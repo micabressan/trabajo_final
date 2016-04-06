@@ -1,0 +1,13 @@
+	let mut map = &mut self.layer_to_element_batches;
+        let mut element_batches = match map.get_mut(&layer) {
+            Some(vals) => vals,
+            None => {
+                let vec = Vec::new();
+                map.insert(layer, vec);
+                
+                {
+                    let vec_ref = map.get_mut(&layer).unwrap();
+                    vec_ref
+                }
+            }
+        };

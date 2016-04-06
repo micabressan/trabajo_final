@@ -1,0 +1,126 @@
+using _01.EntityFrameworkMappings;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+
+namespace _04.ImportUsersAndTheirGamesFromXML
+{
+    class ImportFromXML
+    {
+        static void Main()
+        {
+            var ctx = new DiabloEntities();
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load("../../users-and-games.xml");
+
+            XmlNodeList users = xmlDoc.SelectNodes("/users/user");
+
+            foreach (XmlNode userInfo in users)
+            {
+                var newUser = GetUserInfo(userInfo);
+
+                try
+                {
+                    ProcessUser(newUser, ctx, userInfo);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private static void ProcessUser(User newUser, DiabloEntities ctx, XmlNode userInfo)
+        {
+            if (ctx.Users.FirstOrDefault(u => u.Username == newUser.Username) != null)
+            {
+                var message = string.Format("User {0} already exists", newUser.Username);
+                throw new InvalidOperationException(message);
+            }
+
+            Console.WriteLine("Successfully added user {0}", newUser.Username);
+
+            var userGames = userInfo.SelectNodes("games/game");
+            foreach (XmlNode userGame in userGames)
+            {
+                var gameName = userGame.SelectSingleNode("game-name").InnerText;
+
+                if (ctx.Games.FirstOrDefault(g => g.Name == gameName) == null)
+                {
+                    var message = string.Format("No such game: {0}", gameName);
+                    throw new InvalidOperationException(message);
+                }
+
+                var gameId = ctx.Games.FirstOrDefault(g => g.Name == gameName).Id;
+                var charName = userGame.SelectSingleNode("character").Attributes["name"].Value;
+                var charCash = decimal.Parse(userGame.SelectSingleNode("character").Attributes["cash"].Value);
+                var charLevel = int.Parse(userGame.SelectSingleNode("character").Attributes["level"].Value);
+                var joinedOn = DateTime.ParseExact(
+                    userGame.SelectSingleNode("joined-on").InnerText,
+                    "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var newUserGame = new UsersGame()
+                {
+                    GameId = gameId,
+                    Character = new Character()
+                    {
+                        Name = charName
+                    },
+                    Level = charLevel,
+                    Cash = charCash,
+                    JoinedOn = joinedOn
+                };
+
+                ctx.UsersGames.Add(newUserGame);
+                Console.WriteLine("User {0} successfully added to game {1}", newUser.Username, gameName);
+            }
+
+            ctx.Users.Add(newUser);
+            ctx.SaveChanges();
+        }
+
+        private static User GetUserInfo(XmlNode user)
+        {
+            string firstName = null;
+            if (user.Attributes["first-name"] != null)
+            {
+                firstName = user.Attributes["first-name"].Value;
+            }
+
+            string lastName = null;
+            if (user.Attributes["last-name"] != null)
+            {
+                lastName = user.Attributes["last-name"].Value;
+            }
+
+            var username = user.Attributes["username"].Value;
+
+            string email = null;
+            if (user.Attributes["email"] != null)
+            {
+                email = user.Attributes["email"].Value;
+            }
+
+            var isDeleted = user.Attributes["is-deleted"].Value == "1";
+            var ipAddress = user.Attributes["ip-address"].Value;
+            var registrationDate = DateTime.ParseExact(
+                user.Attributes["registration-date"].Value,
+                "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            return new User()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                IpAddress = ipAddress,
+                IsDeleted = isDeleted,
+                RegistrationDate = registrationDate,
+                Username = username
+            };
+        }
+    }
+}

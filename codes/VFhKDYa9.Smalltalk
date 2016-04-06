@@ -1,0 +1,11 @@
+t := [:b :h || z |
+    z := Dictionary
+        with: InvariantViolation -> Set new
+        with: PreconditionViolation -> Set new
+        with: PostconditionViolation -> Set new.
+    b on: ContractViolation do: [:e | (z at: e class) add: e. e resume].
+    h value: (z at: InvariantViolation) value: (z at: PreconditionViolation) value: (z at: PostconditionViolation)].
+t value: [self assert: [iao x isNil]] value:
+    [:inv :pre :post |
+    self assert: [inv size = 2].
+    inv do: [:e | self assert: [e object == ao and: [e condition == i1]]]].

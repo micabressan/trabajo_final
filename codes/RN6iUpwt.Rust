@@ -1,0 +1,9 @@
+fn f1 (x: i32) -> i32 { x }
+fn f2 (x: i32) -> i32 { x * x }
+
+fn main() {
+    let fns = [f1, f2];
+
+    // Specifying explicit type works:
+    // let fns: [fn (i32) -> i32; 2] = [f1, f2];
+}

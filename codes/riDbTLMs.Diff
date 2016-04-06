@@ -1,0 +1,50 @@
+diff --git a/scripts/qmp/isolate_vcpus.sh b/scripts/qmp/isolate_vcpus.sh
+index 96dddf1..14a1e6f 100755
+--- a/scripts/qmp/isolate_vcpus.sh
++++ b/scripts/qmp/isolate_vcpus.sh
+@@ -9,21 +9,25 @@
+ # Get number of cores
+ NCORES=`getconf _NPROCESSORS_ONLN`
+
+-# Note the VCPU masks just works (tm) works on a 2-way SMP system
+-VCPU0_MASK=`printf '%x' $(( 0x1 << ($NCORES - 2) ))`
+-VCPU1_MASK=`printf '%x' $(( 0x2 << ($NCORES - 2) ))`
++# Note the VCPU masks just works (tm) works on a 4-way SMP system
++VCPU0_MASK=`printf '%x' $(( 0x1 << ($NCORES - 4) ))`
++VCPU1_MASK=`printf '%x' $(( 0x2 << ($NCORES - 4) ))`
++VCPU2_MASK=`printf '%x' $(( 0x4 << ($NCORES - 4) ))`
++VCPU3_MASK=`printf '%x' $(( 0x8 << ($NCORES - 4) ))`
+
+-# For 2-way SMP systems we need to special-case the SYS_MASK to just use CPU 0
++# For 4-way SMP systems we need to special-case the SYS_MASK to just use CPU 0
+ # (it is the best we can do in terms of isolation and supporting guest IPI tests)
+-if [[ $NCORES -le 2 ]]; then
++if [[ $NCORES -le 4 ]]; then
+     SYS_MASK="1"
+ else
+-    SYS_MASK=`printf '%x' $(( ( 1 << ($NCORES - 2)) - 1 ))`
++    SYS_MASK=`printf '%x' $(( ( 1 << ($NCORES - 4)) - 1 ))`
+ fi
+
+ echo "QEMU VCPU threads will be assigned to:"
+ echo "vCPU0: 0x$VCPU0_MASK"
+ echo "vCPU1: 0x$VCPU1_MASK"
++echo "vCPU2: 0x$VCPU2_MASK"
++echo "vCPU3: 0x$VCPU3_MASK"
+ echo "All other processes and interrupts will be assigned to: 0x$SYS_MASK"
+
+ # Assign all interrupts to SYS_MASK
+@@ -40,8 +44,12 @@ done
+
+ # Set the CPU affinity of the QEMU VCPU threads to the remaining two CPUs
+ PID0=`./qmp-cpus -s /var/run/qmp | awk '{ print $3 }' | head -n 1`
+-PID1=`./qmp-cpus -s /var/run/qmp | awk '{ print $3 }' | tail -n 1`
++PID1=`./qmp-cpus -s /var/run/qmp | awk '{ print $3 }' | tail -n 3 | head -n 1`
++PID2=`./qmp-cpus -s /var/run/qmp | awk '{ print $3 }' | tail -n 2 | head -n 1`
++PID3=`./qmp-cpus -s /var/run/qmp | awk '{ print $3 }' | tail -n 1`
+ taskset -p 0x$VCPU0_MASK $PID0
+ taskset -p 0x$VCPU1_MASK $PID1
++taskset -p 0x$VCPU2_MASK $PID2
++taskset -p 0x$VCPU3_MASK $PID3
+
+ # All set

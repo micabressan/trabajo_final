@@ -1,0 +1,742 @@
+.class public Lcom/vkontakte/android/LinkParser;
+.super Ljava/lang/Object;
+.source "LinkParser.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/vkontakte/android/LinkParser$CharRange;
+    }
+.end annotation
+
+
+# static fields
+.field public static final HASHTAGS:I = 0x4
+
+.field private static final HASHTAGS_PATTERN:Ljava/util/regex/Pattern;
+
+.field private static final MENTIONS_PATTERN:Ljava/util/regex/Pattern;
+
+.field public static final URLS:I = 0x1
+
+.field private static final URL_PATTERN:Ljava/util/regex/Pattern;
+
+.field public static final VK_MENTIONS:I = 0x2
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 2
+
+    .prologue
+    .line 19
+    const-string v0, "(?:http(?:s)?:\\/\\/)?(?:[a-z\u0430-\u044f0-9_-]+\\.)+(?:[a-z][a-z0-9-]{1,20}|\u0440\u0444)(?:\\/[a-z0-9\u0430-\u044f\u0451_z%~:\\.,-]*)*(?:[\\?&#][a-z0-9\\[\\]_]*(?:=?[a-z0-9~\\._=,%\\|-]*))*(?<![\\.,:-])"
+
+    const/16 v1, 0x42
+
+    invoke-static {v0, v1}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;I)Ljava/util/regex/Pattern;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/vkontakte/android/LinkParser;->URL_PATTERN:Ljava/util/regex/Pattern;
+
+    .line 20
+    const-string v0, "\\[((?:id|club)[0-9]+)\\|([^\\]]+)\\]"
+
+    invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/vkontakte/android/LinkParser;->MENTIONS_PATTERN:Ljava/util/regex/Pattern;
+
+    .line 21
+    const-string v0, "(#[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0454\u0404\u0490\u0491\u0407\u0457\u0406\u0456\u0408\u0458\u040e\u045e_\\d]*[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0456\u0458\u0457\u0454\u0491\u0406\u0408\u0404\u0407\u0490\u040e\u045e][a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0456\u0458\u0457\u0454\u0491\u0406\u0408\u0404\u0407\u0490\u040e\u045e_\\d]+|#[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0456\u0458\u0457\u0454\u0491\u0406\u0408\u0404\u0407\u0490\u040e\u045e_\\d]+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0456\u0458\u0457\u0454\u0491\u0406\u0408\u0404\u0407\u0490\u040e\u045e][a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401\u0456\u0458\u0457\u0454\u0491\u0406\u0408\u0404\u0407\u0490\u040e\u045e_\\d]*)(?:@([a-zA-Z0-9\\._]{2,}))?(?<![\\.,:-])"
+
+    invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/vkontakte/android/LinkParser;->HASHTAGS_PATTERN:Ljava/util/regex/Pattern;
+
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .locals 0
+
+    .prologue
+    .line 12
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    .line 113
+    return-void
+.end method
+
+.method public static parseLinks(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+    .locals 1
+    .param p0, "in"    # Ljava/lang/CharSequence;
+
+    .prologue
+    .line 110
+    const/4 v0, 0x7
+
+    invoke-static {p0, v0}, Lcom/vkontakte/android/LinkParser;->parseLinks(Ljava/lang/CharSequence;I)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static parseLinks(Ljava/lang/CharSequence;I)Ljava/lang/CharSequence;
+    .locals 14
+    .param p0, "in"    # Ljava/lang/CharSequence;
+    .param p1, "flags"    # I
+
+    .prologue
+    .line 32
+    new-instance v10, Ljava/util/ArrayList;
+
+    invoke-direct {v10}, Ljava/util/ArrayList;-><init>()V
+
+    .line 33
+    .local v10, "usedRanges":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lcom/vkontakte/android/LinkParser$CharRange;>;"
+    new-instance v7, Landroid/text/SpannableStringBuilder;
+
+    invoke-direct {v7, p0}, Landroid/text/SpannableStringBuilder;-><init>(Ljava/lang/CharSequence;)V
+
+    .line 34
+    .local v7, "result":Landroid/text/SpannableStringBuilder;
+    and-int/lit8 v11, p1, 0x1
+
+    if-lez v11, :cond_2
+
+    .line 35
+    sget-object v11, Lcom/vkontakte/android/LinkParser;->URL_PATTERN:Ljava/util/regex/Pattern;
+
+    invoke-virtual {v11, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    move-result-object v3
+
+    .line 36
+    .local v3, "matcher":Ljava/util/regex/Matcher;
+    :cond_0
+    :goto_0
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->find()Z
+
+    move-result v11
+
+    if-eqz v11, :cond_2
+
+    .line 37
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    if-lez v11, :cond_1
+
+    .line 38
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    add-int/lit8 v11, v11, -0x1
+
+    invoke-virtual {v7, v11}, Landroid/text/SpannableStringBuilder;->charAt(I)C
+
+    move-result v5
+
+    .line 39
+    .local v5, "prev":C
+    const/16 v11, 0x40
+
+    if-eq v5, v11, :cond_0
+
+    .line 41
+    .end local v5    # "prev":C
+    :cond_1
+    new-instance v9, Lcom/vkontakte/android/LinkSpan;
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->group()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-direct {v9, v11}, Lcom/vkontakte/android/LinkSpan;-><init>(Ljava/lang/String;)V
+
+    .line 42
+    .local v9, "span":Lcom/vkontakte/android/LinkSpan;
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v12
+
+    const/4 v13, 0x0
+
+    invoke-virtual {v7, v9, v11, v12, v13}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
+
+    .line 43
+    new-instance v11, Lcom/vkontakte/android/LinkParser$CharRange;
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v12
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v13
+
+    invoke-direct {v11, v12, v13}, Lcom/vkontakte/android/LinkParser$CharRange;-><init>(II)V
+
+    invoke-virtual {v10, v11}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    goto :goto_0
+
+    .line 46
+    .end local v3    # "matcher":Ljava/util/regex/Matcher;
+    .end local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    :cond_2
+    and-int/lit8 v11, p1, 0x4
+
+    if-lez v11, :cond_9
+
+    .line 47
+    sget-object v11, Lcom/vkontakte/android/LinkParser;->HASHTAGS_PATTERN:Ljava/util/regex/Pattern;
+
+    invoke-virtual {v11, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    move-result-object v3
+
+    .line 48
+    .restart local v3    # "matcher":Ljava/util/regex/Matcher;
+    :cond_3
+    :goto_1
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->find()Z
+
+    move-result v11
+
+    if-eqz v11, :cond_9
+
+    .line 50
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v8
+
+    .line 51
+    .local v8, "s":I
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v0
+
+    .line 52
+    .local v0, "e":I
+    const/4 v2, 0x0
+
+    .line 53
+    .local v2, "intersects":Z
+    invoke-virtual {v10}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    .local v1, "i$":Ljava/util/Iterator;
+    :cond_4
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v11
+
+    if-eqz v11, :cond_7
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v6
+
+    check-cast v6, Lcom/vkontakte/android/LinkParser$CharRange;
+
+    .line 54
+    .local v6, "r":Lcom/vkontakte/android/LinkParser$CharRange;
+    iget v11, v6, Lcom/vkontakte/android/LinkParser$CharRange;->start:I
+
+    if-lt v8, v11, :cond_5
+
+    iget v11, v6, Lcom/vkontakte/android/LinkParser$CharRange;->end:I
+
+    if-le v8, v11, :cond_6
+
+    :cond_5
+    iget v11, v6, Lcom/vkontakte/android/LinkParser$CharRange;->start:I
+
+    if-lt v0, v11, :cond_4
+
+    iget v11, v6, Lcom/vkontakte/android/LinkParser$CharRange;->end:I
+
+    if-gt v0, v11, :cond_4
+
+    .line 55
+    :cond_6
+    const/4 v2, 0x1
+
+    .line 59
+    .end local v6    # "r":Lcom/vkontakte/android/LinkParser$CharRange;
+    :cond_7
+    if-nez v2, :cond_3
+
+    .line 60
+    const/4 v11, 0x2
+
+    invoke-virtual {v3, v11}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v11
+
+    if-nez v11, :cond_8
+
+    .line 61
+    new-instance v9, Lcom/vkontakte/android/LinkSpan;
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v12, "vkontakte://search/"
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->group()Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-direct {v9, v11}, Lcom/vkontakte/android/LinkSpan;-><init>(Ljava/lang/String;)V
+
+    .line 62
+    .restart local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v12
+
+    const/4 v13, 0x0
+
+    invoke-virtual {v7, v9, v11, v12, v13}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
+
+    goto :goto_1
+
+    .line 64
+    .end local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    :cond_8
+    new-instance v9, Lcom/vkontakte/android/LinkSpan;
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v12, "vkontakte://vk.com/"
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    const/4 v12, 0x2
+
+    invoke-virtual {v3, v12}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    const-string v12, "/"
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    const/4 v12, 0x1
+
+    invoke-virtual {v3, v12}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    const/4 v13, 0x1
+
+    invoke-virtual {v12, v13}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-static {v12}, Landroid/net/Uri;->encode(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-direct {v9, v11}, Lcom/vkontakte/android/LinkSpan;-><init>(Ljava/lang/String;)V
+
+    .line 65
+    .restart local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v12
+
+    const/4 v13, 0x0
+
+    invoke-virtual {v7, v9, v11, v12, v13}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
+
+    goto/16 :goto_1
+
+    .line 69
+    .end local v0    # "e":I
+    .end local v1    # "i$":Ljava/util/Iterator;
+    .end local v2    # "intersects":Z
+    .end local v3    # "matcher":Ljava/util/regex/Matcher;
+    .end local v8    # "s":I
+    .end local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    :cond_9
+    and-int/lit8 v11, p1, 0x2
+
+    if-lez v11, :cond_a
+
+    .line 70
+    sget-object v11, Lcom/vkontakte/android/LinkParser;->MENTIONS_PATTERN:Ljava/util/regex/Pattern;
+
+    invoke-virtual {v11, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    move-result-object v3
+
+    .line 71
+    .restart local v3    # "matcher":Ljava/util/regex/Matcher;
+    const/4 v4, 0x0
+
+    .line 72
+    .local v4, "offset":I
+    :goto_2
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->find()Z
+
+    move-result v11
+
+    if-eqz v11, :cond_a
+
+    .line 73
+    new-instance v9, Lcom/vkontakte/android/LinkSpan;
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v12, "vkontakte://vk.com/"
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    const/4 v12, 0x1
+
+    invoke-virtual {v3, v12}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-direct {v9, v11}, Lcom/vkontakte/android/LinkSpan;-><init>(Ljava/lang/String;)V
+
+    .line 74
+    .restart local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    sub-int/2addr v11, v4
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->end()I
+
+    move-result v12
+
+    sub-int/2addr v12, v4
+
+    const/4 v13, 0x2
+
+    invoke-virtual {v3, v13}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v13
+
+    invoke-virtual {v7, v11, v12, v13}, Landroid/text/SpannableStringBuilder;->replace(IILjava/lang/CharSequence;)Landroid/text/SpannableStringBuilder;
+
+    move-result-object v7
+
+    .line 75
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v11
+
+    sub-int/2addr v11, v4
+
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->start()I
+
+    move-result v12
+
+    sub-int/2addr v12, v4
+
+    const/4 v13, 0x2
+
+    invoke-virtual {v3, v13}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v13
+
+    invoke-virtual {v13}, Ljava/lang/String;->length()I
+
+    move-result v13
+
+    add-int/2addr v12, v13
+
+    const/4 v13, 0x0
+
+    invoke-virtual {v7, v9, v11, v12, v13}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
+
+    .line 76
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->group()Ljava/lang/String;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/String;->length()I
+
+    move-result v11
+
+    const/4 v12, 0x2
+
+    invoke-virtual {v3, v12}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-virtual {v12}, Ljava/lang/String;->length()I
+
+    move-result v12
+
+    sub-int/2addr v11, v12
+
+    add-int/2addr v4, v11
+
+    .line 77
+    goto :goto_2
+
+    .line 79
+    .end local v3    # "matcher":Ljava/util/regex/Matcher;
+    .end local v4    # "offset":I
+    .end local v9    # "span":Lcom/vkontakte/android/LinkSpan;
+    :cond_a
+    return-object v7
+.end method
+
+.method public static truncatePost(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+    .locals 13
+    .param p0, "in"    # Ljava/lang/CharSequence;
+
+    .prologue
+    const/16 v12, 0x118
+
+    const/4 v11, 0x6
+
+    const/4 v9, -0x1
+
+    const/4 v10, 0x0
+
+    .line 83
+    const/4 v6, -0x1
+
+    .line 84
+    .local v6, "truncateAt":I
+    invoke-virtual {p0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    const-string v8, "\n"
+
+    invoke-virtual {v7, v8}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v7
+
+    array-length v7, v7
+
+    if-le v7, v11, :cond_1
+
+    .line 85
+    const/4 v1, 0x0
+
+    .line 86
+    .local v1, "index":I
+    invoke-virtual {p0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    .line 87
+    .local v5, "str":Ljava/lang/String;
+    const/4 v0, 0x0
+
+    .local v0, "i":I
+    :goto_0
+    if-ge v0, v11, :cond_0
+
+    .line 88
+    const/16 v7, 0xa
+
+    add-int/lit8 v8, v1, 0x1
+
+    invoke-virtual {v5, v7, v8}, Ljava/lang/String;->indexOf(II)I
+
+    move-result v1
+
+    .line 87
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+
+    .line 90
+    :cond_0
+    move v6, v1
+
+    .line 92
+    .end local v0    # "i":I
+    .end local v1    # "index":I
+    .end local v5    # "str":Ljava/lang/String;
+    :cond_1
+    invoke-interface {p0}, Ljava/lang/CharSequence;->length()I
+
+    move-result v7
+
+    if-le v7, v12, :cond_2
+
+    .line 93
+    invoke-virtual {p0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    const/16 v8, 0x20
+
+    invoke-virtual {v7, v8, v12}, Ljava/lang/String;->indexOf(II)I
+
+    move-result v7
+
+    const/16 v8, 0x12c
+
+    invoke-static {v7, v8}, Ljava/lang/Math;->min(II)I
+
+    move-result v6
+
+    .line 94
+    if-ne v6, v9, :cond_2
+
+    .line 95
+    const/16 v6, 0x118
+
+    .line 97
+    :cond_2
+    if-ne v6, v9, :cond_3
+
+    .line 106
+    .end local p0    # "in":Ljava/lang/CharSequence;
+    :goto_1
+    return-object p0
+
+    .line 99
+    .restart local p0    # "in":Ljava/lang/CharSequence;
+    :cond_3
+    new-instance v4, Landroid/text/SpannableStringBuilder;
+
+    invoke-direct {v4}, Landroid/text/SpannableStringBuilder;-><init>()V
+
+    .line 100
+    .local v4, "ssb":Landroid/text/SpannableStringBuilder;
+    invoke-virtual {v4, p0, v10, v6}, Landroid/text/SpannableStringBuilder;->append(Ljava/lang/CharSequence;II)Landroid/text/SpannableStringBuilder;
+
+    .line 101
+    const-string v7, "...\n"
+
+    invoke-virtual {v4, v7}, Landroid/text/SpannableStringBuilder;->append(Ljava/lang/CharSequence;)Landroid/text/SpannableStringBuilder;
+
+    .line 102
+    invoke-static {}, Landroid/text/Spannable$Factory;->getInstance()Landroid/text/Spannable$Factory;
+
+    move-result-object v7
+
+    sget-object v8, Lcom/vkontakte/android/VKApplication;->context:Landroid/content/Context;
+
+    invoke-virtual {v8}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v8
+
+    const v9, 0x7f0d0244
+
+    invoke-virtual {v8, v9}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v7, v8}, Landroid/text/Spannable$Factory;->newSpannable(Ljava/lang/CharSequence;)Landroid/text/Spannable;
+
+    move-result-object v2
+
+    .line 103
+    .local v2, "showMore":Landroid/text/Spannable;
+    new-instance v3, Landroid/text/style/ForegroundColorSpan;
+
+    sget-object v7, Lcom/vkontakte/android/VKApplication;->context:Landroid/content/Context;
+
+    invoke-virtual {v7}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v7
+
+    const v8, 0x7f0a0028
+
+    invoke-virtual {v7, v8}, Landroid/content/res/Resources;->getColorStateList(I)Landroid/content/res/ColorStateList;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Landroid/content/res/ColorStateList;->getDefaultColor()I
+
+    move-result v7
+
+    invoke-direct {v3, v7}, Landroid/text/style/ForegroundColorSpan;-><init>(I)V
+
+    .line 104
+    .local v3, "span":Landroid/text/style/ForegroundColorSpan;
+    invoke-interface {v2}, Landroid/text/Spannable;->length()I
+
+    move-result v7
+
+    invoke-interface {v2, v3, v10, v7, v10}, Landroid/text/Spannable;->setSpan(Ljava/lang/Object;III)V
+
+    .line 105
+    invoke-virtual {v4, v2}, Landroid/text/SpannableStringBuilder;->append(Ljava/lang/CharSequence;)Landroid/text/SpannableStringBuilder;
+
+    move-object p0, v4
+
+    .line 106
+    goto :goto_1
+.end method

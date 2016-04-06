@@ -1,0 +1,13 @@
+class PROCLAMATION_TYPE(Enum):
+    News = 1
+    Project = 2
+
+# create context
+context['objects'] = objects
+context['tags'] = get_tags(context['objects'])
+context['PROCLAMATION_TYPE'] = PROCLAMATION_TYPE
+
+# in template
+{% if obj.type.value == PROCLAMATION_TYPE.News %}
+<h2>{{ obj.name }}</h2>
+{% else %}

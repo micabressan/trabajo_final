@@ -1,0 +1,42 @@
+import re
+
+print "Enter an industry keyword."
+print "Example: florists, construction, tiles"
+
+keyword = raw_input('> ')
+
+print "How many pages to dig through BBB?"
+total_pages = int(raw_input('> '))
+
+print "Working..."
+
+page_number = 1
+address_list = []
+
+
+address_pattern = r'<address>(.*?)<\/address>'
+import requests
+for page_number in range(1,total_pages):
+    url = 'https://www.bbb.org/search/?type=category&input=' + keyword + '&filter=business&page=' + str(page_number)
+    req = urllib2.Request(url)
+    req.add_header('User-agent', 'Mozilla/5.0')
+    resp = urllib2.urlopen(req)
+    respData = resp.read()
+
+    business_address = re.findall(address_pattern, respData)
+    # use extend to add the data from findall
+    address_list.extend(business_address)
+
+
+for each in address_list:
+    print each
+
+print "\n Save to text file? Hit ENTER if so.\n"
+raw_input('>')
+
+file = open('export.txt','w')
+
+for each in address_list:
+    file.write('%r \n' % each)
+
+file.close()

@@ -1,0 +1,7 @@
+if document.document_thumbnail_url is None:
+                if document.document_id:
+                    url = "".join(["https://cdn.learningace.com/", document.document_id, "_png"])
+                    document.document_thumbnail_url = url
+            else:
+                if not "_png" in document.document_thumbnail_url:
+                    document.document_thumbnail_url = document.document_thumbnail_url + "_png"

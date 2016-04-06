@@ -1,0 +1,53 @@
+--This Rabin Karp program is based on a Java code I had a look at
+--The Java code uses a "Rolling Hash" for the Rabin Karp Algorithm
+--a rolling hash instead of computing the whole thing at once it uses
+--a windowed view that moves through the input.
+
+--To get this windowed view we first must split our input string into smaller pieces which can individually be hashed
+breakupstring :: Int -> [a] -> [[a]] --we break up our string into smaller lists, easier to search
+breakupstring size [] = [] --we will iterate over these smaller values in our search
+breakupstring size ls@(x:xs) |  size <= length ls = size ls : breakupstring size xs 
+							 |  otherwise = breakupstring size xs
+	
+--indexofmatch is used to grab the index of the match and then we return a ‘-1′ if there is no match in the last bit of the line.
+indexofmatch :: (a -> b) -> Maybe a -> Maybe b 
+indexofmatch fn (Just x) = Just (fn x)   
+indexofmatch _ (Nothing) = Nothing  
+
+
+--we set up a string end of our input to allow us to grab then end of our input
+--The string end method uses "drop" from the data.char package
+stringend text start end = take end $ drop start text
+
+randInRange :: Int -> Int -> IO Int
+randInRange a b = getStdRandom $ randomR (a, b)
+
+formdata1 = randInRange 100 2000000000 --formdata 1 will be randomly generated for the hash
+-- <- randomRIO (1,2000000000)
+formdata2 = 256 --formdata 2 will be a constant seed
+
+
+--evaluatehash
+evaluatehash = evaluatehash' formdata2 formdata1  -- hash formula translated for haskell((2562 * ord ‘m’) + (2561 * ord ‘a’) + (2560 * ord ‘r’)) `mod` (1-2000000000)
+evaluatehash' f1 f2 string y = foldl (\acc x -> (f1 * acc + ord x) `mod` f2) 0 $ take y string
+
+
+--we use re-evaluate hash to compare the next hash value
+--in the beginning the 2nd char will have a hash value of ‘rm-2 * ascii char’. We  then multiply it by ‘r’, it now has a hash val ‘rm-1 * ascii char’.
+--we then add the ascii value of the next character along and we have our new hash value.
+
+reevaluatehash = reevaluatehash' formdata2 formdata1 --((firsthash – ((y-1 % q) * ascii firstChar)) % q + (r * ascii nextChar)) % q
+reevaluatehash' f1 f2 firsthash firstChar nextChar x = 
+	let y = if x >0 then (fromIntegral f1 ^ fromIntegral (x-1)) `mod` fromIntegral f2 
+	         else 0
+		     takeOffFirstChar = firsthash - fromIntegral y * ord firstChar
+	in  (ord nextChar + (takeOffFirstChar `mod` fromIntegral f2 * fromIntegral f1 )) `mod` fromIntegral f2
+	
+
+--two different strings can hash to the same value
+CA320rabinKarp :: String -> String -> Int -- takes in 2 strings, returns an integer
+CA320rabinKarp text pattern | pattern == "" = -1
+							| otherwise let lenpat = length pattern
+                                            nextHash firsthash chars = reevaluate firsthash (head chars) (last chars) lenpat
+                                            stringmatch (offset, textHash) = evaluatehash pattern lenpat == textHash && pattern == stringend text offset lenpat	
+                                        in  fromMaybe (-1).indexofmatch fst.find stringmatch.zip [0..].scanl nextHash (evaluatehash text lenpat) $ breakupstring (lenpat+1) text

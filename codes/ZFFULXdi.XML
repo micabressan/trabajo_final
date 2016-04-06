@@ -1,0 +1,79 @@
+<Pages>
+<Namespace Name="Form">
+<Page ID="30" Title="Asignatura">
+<Free Text id="1">
+<noinclude> Este es el formulario ''Asignatura''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=Asignatura}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|Asignatura}}} {| class="formtable" ! Asignaturas relacionadas: | {{{field|AsignaturaRelacionada}}} |- ! Profesores: | {{{field|TieneProfesor}}} |- ! Problemas de interés: | {{{field|ProblemasDeInterés}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2688" Title="CPersonalizada">
+<Free Text id="1">
+<noinclude> Este es el formulario ''CPersonalizada''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=CPersonalizada}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> '''Consulta:''' {{{standard input|free text|rows=10}}} {{{standard input|preview|label=Realizar Consulta}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2663" Title="Colección">
+<Free Text id="1">
+<noinclude> Este es el formulario ''Colección''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=Colección}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|Colección}}} {| class="formtable" ! Incluye problemas: | {{{field|IncluyeProblema}}} |- ! Autor: | {{{field|SuAutor}}} |- ! Pertenece a campos(separar con ","): | {{{field|PerteneceACampo}}} |- ! Aplicable a asignaturas: | {{{field|AplicableAAsignatura}}} |- ! Utilizado en: | {{{field|UtilizadoEn}}} |- ! Páginas de interés: | {{{field|PáginasDeInterés}}} |- ! Solución: | {{{field|Solución}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="31" Title="Departamento">
+<Free Text id="1">
+<noinclude> Este es el formulario ''Departamento''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=Departamento}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|Departamento}}} {| class="formtable" ! Asignaturas: | {{{field|TieneAsignatura}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2661" Title="GrupoDeProblemas">
+<Free Text id="1">
+<noinclude> Este es el formulario ''GrupoDeProblemas''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=GrupoDeProblemas}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|GrupoDeProblemas}}} {| class="formtable" ! Autor: | {{{field|SuAutor}}} |- ! Pertenece a colección: | {{{field|PerteneceAColección}}} |- ! Pertenece a campos(separar con ","): | {{{field|Campo}}} |- ! Grupo anterior: | {{{field|GrupoAnterior}}} |- ! Grupo siguiente: | {{{field|GrupoSiguiente}}} |- ! Utilizado en: | {{{field|UtilizadoEn}}} |- ! Solución: | {{{field|Solución}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2699" Title="P1:DepAsig">
+<Free Text id="1">
+<noinclude> Este es el formulario ''P1:DepAsig''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=P1:DepAsig}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{
+</Free Text>
+<Free Text id="1">
+}} {| class="formtable" ! Asignatura: | {{{field|Asignatura}}} |} {{{end template}}} Introduzca el nombre de la asignatura cuyo departamento quiere saber {{{standard input|preview|label=Buscar}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2702" Title="P2:pgccol">
+<Free Text id="1">
+<noinclude> Este es el formulario ''P2:pgccol''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=P2:pgccol}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{
+</Free Text>
+<Free Text id="1">
+}} {| class="formtable" ! Colección: | {{{field|Colección}}} |} {{{end template}}} Introduzca la colección de la cual quiera buscar problemas y grupos de problemas pertenecientes a esta. {{{standard input|preview|label=Buscar}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2703" Title="P3:pgcprof">
+<Free Text id="1">
+<noinclude> Este es el formulario ''P3:pgcprof''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=P3:pgcprof}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{
+</Free Text>
+<Free Text id="1">
+}} {| class="formtable" ! Persona: | {{{field|Persona}}} |} {{{end template}}} Introduzca el nombre de la persona sobre la cual quiera buscar los problemas, grupos de problemas y colecciones que ha realizado. {{{standard input|preview|label=Buscar}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2704" Title="P4:pgccampo">
+<Free Text id="1">
+<noinclude> Este es el formulario ''P4:pgccampo''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=P4:pgccampo}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{
+</Free Text>
+<Free Text id="1">
+}} {| class="formtable" ! Campo: | {{{field|Campo}}} |} {{{end template}}} Introduzca el campo del cual quiera buscar problemas, grupos de problemas y colecciones pertenecientes a el. {{{standard input|preview|label=Buscar}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2705" Title="P5:asigprof">
+<Free Text id="1">
+<noinclude> Este es el formulario ''P5:asigprof''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=P5:asigprof}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{
+</Free Text>
+<Free Text id="1">
+}} {| class="formtable" ! Profesor: | {{{field|Profesor}}} |} {{{end template}}} Introduzca el profesor del cual quiere saber que asignaturas imparte. {{{standard input|preview|label=Buscar}}} {{{standard input|cancel|label=Finalizado}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="2724" Title="Problema">
+<Free Text id="1">
+<noinclude> Este es el formulario ''Problema''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=Problema}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|Problema}}} {| class="formtable" ! SuAutor: | {{{field|SuAutor}}} |- ! Pertenece a asignatura: | {{{field|PerteneceAAsignatura}}} |- ! Campo: | {{{field|Campo}}} |- ! Pertenece a colección: | {{{field|PerteneceAColección}}} |- ! Problema anterior: | {{{field|ProblemaAnterior}}} |- ! Problema siguiente: | {{{field|ProblemaSiguiente}}} |- ! Problemas relacionados: | {{{field|ProblemasRelacionados}}} |- ! Utilizado en: | {{{field|UtilizadoEn}}} |- ! Solución: | {{{field|Solución}}} |- ! Dificultad: ||{{{field|Dificultad|input type=rating}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+<Page ID="33" Title="Profesor">
+<Free Text id="1">
+<noinclude> Este es el formulario ''Profesor''. Para crear una página con este formulario, ingrese el nombre de la página a continuación; si la página con ese nombre ya existe, será dirigido al formulario para editar esa página. {{#forminput:form=Profesor}} </noinclude><includeonly> <div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div> {{{for template|Profesor}}} {| class="formtable" ! Pertenece a departamento: | {{{field|PerteneceADepartamento}}} |} {{{end template}}} '''Texto libre:''' {{{standard input|free text|rows=10}}} {{{standard input|summary}}} {{{standard input|minor edit}}} {{{standard input|watch}}} {{{standard input|save}}} {{{standard input|preview}}} {{{standard input|changes}}} {{{standard input|cancel}}} </includeonly>
+</Free Text>
+</Page>
+</Namespace>
+</Pages>

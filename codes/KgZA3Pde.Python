@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+
+import sys
+try:
+    import oxygen_rc
+except ImportError:
+    print("No icons :(")
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class AboutInterface:
+    """
+    Building interface for About window
+    """
+    def __init__(self):
+        self.about = QtWidgets.QDialog()
+        self.about.setObjectName("About")
+        self.about.resize(384, 303)
+        win_icon = QtGui.QIcon()
+        win_icon.addPixmap(QtGui.QPixmap(":/images/oxygen/48x48/apps/sysrq_stats.png"), QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
+        self.about.setWindowIcon(win_icon)
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.about)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.mainFrame = QtWidgets.QStackedWidget(self.about)
+        self.mainFrame.setObjectName("mainFrame")
+        self.mainPage = QtWidgets.QWidget()
+        self.mainPage.setObjectName("mainPage")
+        self.main_layout = QtWidgets.QVBoxLayout(self.mainPage)
+        self.main_layout.setContentsMargins(-1, 9, -1, -1)
+        self.main_layout.setObjectName("main_layout")
+        spacer_item = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.main_layout.addItem(spacer_item)
+        self.picture_layout = QtWidgets.QHBoxLayout()
+        self.picture_layout.setObjectName("picture_layout")
+        spacer_item1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.picture_layout.addItem(spacer_item1)
+
+        self.picture = QtWidgets.QLabel(self.mainPage)
+        self.picture.setMinimumSize(QtCore.QSize(71, 71))
+        self.picture.setMaximumSize(QtCore.QSize(71, 71))
+        self.picture.setPixmap(QtGui.QPixmap(":/images/oxygen/512x512/apps/sysrq_stats.png"))
+        self.picture.setScaledContents(True)
+        self.picture.setObjectName("picture")
+        self.picture_layout.addWidget(self.picture)
+
+        spacer_item2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.picture_layout.addItem(spacer_item2)
+        self.main_layout.addLayout(self.picture_layout)
+
+        self.version = QtWidgets.QLabel(self.mainPage)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.version.setFont(font)
+        self.version.setText("Cool program 1.0")
+        self.version.setAlignment(QtCore.Qt.AlignCenter)
+        self.version.setObjectName("version")
+        self.main_layout.addWidget(self.version)
+
+        self.description = QtWidgets.QLabel(self.mainPage)
+        self.description.setAlignment(QtCore.Qt.AlignCenter)
+        self.description.setObjectName("description")
+        self.main_layout.addWidget(self.description)
+
+        self.website_label = QtWidgets.QLabel(self.mainPage)
+        self.website_label.setToolTip("https://example.com")
+        self.website_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.website_label.setOpenExternalLinks(True)
+        self.website_label.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByMouse)
+        self.website_label.setObjectName("website_label")
+        self.main_layout.addWidget(self.website_label)
+
+        spacer_item3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.main_layout.addItem(spacer_item3)
+        self.mainFrame.addWidget(self.mainPage)
+
+        self.creditsPage = QtWidgets.QWidget()
+        self.creditsPage.setObjectName("creditsPage")
+        self.credits_layout = QtWidgets.QVBoxLayout(self.creditsPage)
+        self.credits_layout.setObjectName("credits_layout")
+        self.creditsTab = QtWidgets.QTabWidget(self.creditsPage)
+        self.creditsTab.setObjectName("creditsTab")
+
+        self.authors = QtWidgets.QWidget()
+        self.authors.setObjectName("authors")
+        self.authors_layout = QtWidgets.QVBoxLayout(self.authors)
+        self.authors_layout.setContentsMargins(0, 0, 0, 0)
+        self.authors_layout.setObjectName("authors_layout")
+        self.writtenBy = QtWidgets.QTextBrowser(self.authors)
+        self.writtenBy.setHtml('<p><b>AnyAuthor</b> <i>(Name Surname)</i> &lt;' +
+                               '<a href="mailto:example@example.com">example@example.com</a>&gt;</p>')
+        self.writtenBy.setOpenExternalLinks(True)
+        self.writtenBy.setOpenLinks(True)
+        self.writtenBy.setObjectName("writtenBy")
+        self.authors_layout.addWidget(self.writtenBy)
+
+        self.creditsTab.addTab(self.authors, "")
+        self.translators = QtWidgets.QWidget()
+        self.translators.setObjectName("translators")
+        self.translators_layout = QtWidgets.QVBoxLayout(self.translators)
+        self.translators_layout.setContentsMargins(0, 0, 0, 0)
+        self.translators_layout.setObjectName("translators_layout")
+        self.translatedBy = QtWidgets.QTextBrowser(self.translators)
+        self.translatedBy.setHtml('<h3 align="center">Lang:</h>\n' +
+                                  '<p><b>Foreign Man</b></p>')
+        self.translatedBy.setOpenExternalLinks(True)
+        self.translatedBy.setObjectName("translatedBy")
+        self.translators_layout.addWidget(self.translatedBy)
+
+        self.creditsTab.addTab(self.translators, "")
+        self.designers = QtWidgets.QWidget()
+        self.designers.setObjectName("designers")
+        self.designers_layout = QtWidgets.QHBoxLayout(self.designers)
+        self.designers_layout.setContentsMargins(0, 0, 0, 0)
+        self.designers_layout.setObjectName("designers_layout")
+        self.artworkBy = QtWidgets.QTextBrowser(self.designers)
+        self.artworkBy.setHtml('<p><b>Foobar Media </b><i>(Name Surname)</i></p>')
+        self.artworkBy.setOpenExternalLinks(True)
+        self.artworkBy.setObjectName("artworkBy")
+        self.designers_layout.addWidget(self.artworkBy)
+        self.creditsTab.addTab(self.designers, "")
+        self.credits_layout.addWidget(self.creditsTab)
+        self.mainFrame.addWidget(self.creditsPage)
+
+        self.licensePage = QtWidgets.QWidget()
+        self.licensePage.setObjectName("licensePage")
+        self.license_layout = QtWidgets.QVBoxLayout(self.licensePage)
+        self.license_layout.setObjectName("license_layout")
+        self.license_text = QtWidgets.QTextEdit(self.licensePage)
+        self.license_text.setReadOnly(True)
+        self.license_text.setObjectName("license_text")
+        self.license_text.setHtml('<h2 align="center"><b>License...</b></h>')
+        self.license_layout.addWidget(self.license_text)
+        self.mainFrame.addWidget(self.licensePage)
+        self.verticalLayout.addWidget(self.mainFrame)
+
+        self.buttonsLayout = QtWidgets.QHBoxLayout()
+        self.buttonsLayout.setSpacing(1)
+        self.buttonsLayout.setObjectName("buttonsLayout")
+        self.aboutButton = QtWidgets.QPushButton(self.about)
+        about_icon = QtGui.QIcon()
+        about_icon.addPixmap(QtGui.QPixmap(":/images/oxygen/22x22/actions/help-about.png"), QtGui.QIcon.Normal,
+                             QtGui.QIcon.Off)
+        self.aboutButton.setIcon(about_icon)
+        self.aboutButton.setCheckable(True)
+        self.aboutButton.setChecked(True)
+        self.aboutButton.setAutoDefault(False)
+        self.aboutButton.setObjectName("aboutButton")
+        self.buttonGroup = QtWidgets.QButtonGroup(self.about)
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.buttonGroup.addButton(self.aboutButton)
+        self.buttonsLayout.addWidget(self.aboutButton)
+
+        self.creditsButton = QtWidgets.QPushButton(self.about)
+        people_icon = QtGui.QIcon()
+        people_icon.addPixmap(QtGui.QPixmap(":/images/oxygen/22x22/places/folder-image-people.png"), QtGui.QIcon.Normal,
+                              QtGui.QIcon.Off)
+        self.creditsButton.setIcon(people_icon)
+        self.creditsButton.setCheckable(True)
+        self.creditsButton.setAutoDefault(False)
+        self.creditsButton.setObjectName("creditsButton")
+        self.buttonGroup.addButton(self.creditsButton)
+        self.buttonsLayout.addWidget(self.creditsButton)
+
+        self.licenseButton = QtWidgets.QPushButton(self.about)
+        lock_icon = QtGui.QIcon()
+        lock_icon.addPixmap(QtGui.QPixmap(":/images/oxygen/22x22/status/object-locked.png"), QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
+        self.licenseButton.setIcon(lock_icon)
+        self.licenseButton.setCheckable(True)
+        self.licenseButton.setAutoDefault(False)
+        self.licenseButton.setObjectName("licenseButton")
+        self.buttonGroup.addButton(self.licenseButton)
+        self.buttonsLayout.addWidget(self.licenseButton)
+        spacer_item4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.buttonsLayout.addItem(spacer_item4)
+
+        self.closeButton = QtWidgets.QPushButton(self.about)
+        close_icon = QtGui.QIcon()
+        close_icon.addPixmap(QtGui.QPixmap(":/images/oxygen/22x22/actions/dialog-close.png"), QtGui.QIcon.Normal,
+                             QtGui.QIcon.Off)
+        self.closeButton.setIcon(close_icon)
+        self.closeButton.setCheckable(True)
+        self.closeButton.setAutoDefault(False)
+        self.closeButton.setObjectName("closeButton")
+        self.buttonGroup.addButton(self.closeButton)
+        self.buttonsLayout.addWidget(self.closeButton)
+        self.verticalLayout.addLayout(self.buttonsLayout)
+
+        self.translate_ui()
+        self.mainFrame.setCurrentIndex(0)
+        self.creditsTab.setCurrentIndex(0)
+        self.closeButton.clicked.connect(self.about.close)
+        self.aboutButton.clicked.connect(self.about_tab)
+        self.creditsButton.clicked.connect(self.credits_tab)
+        self.licenseButton.clicked.connect(self.license_tab)
+        QtCore.QMetaObject.connectSlotsByName(self.about)
+        self.about.setTabOrder(self.writtenBy, self.translatedBy)
+        self.about.setTabOrder(self.translatedBy, self.artworkBy)
+        self.about.setTabOrder(self.artworkBy, self.creditsTab)
+        self.about.setTabOrder(self.creditsTab, self.license_text)
+        self.about.setTabOrder(self.license_text, self.aboutButton)
+        self.about.setTabOrder(self.aboutButton, self.creditsButton)
+        self.about.setTabOrder(self.creditsButton, self.licenseButton)
+        self.about.setTabOrder(self.licenseButton, self.closeButton)
+
+    def about_tab(self):
+        """
+        Showing main about page.
+        """
+        print(1)
+        self.mainFrame.setCurrentIndex(0)
+
+    def credits_tab(self):
+        """
+        Showing authors, translators and designers.
+        """
+        print(2)
+        self.mainFrame.setCurrentIndex(1)
+
+    def license_tab(self):
+        """
+        Showing GNU GPL v3 License.
+        """
+        print(3)
+        self.mainFrame.setCurrentIndex(2)
+
+    def translate_ui(self):
+        """
+        Translating UI using GetText.
+        """
+        _ = lambda x: x
+        self.about.setWindowTitle(_("About Cool program"))
+        self.description.setText(_("Very cool and nice program."))
+        self.website_label.setText(_('<p><a href="example.com">Website</a></p>'))
+        self.creditsTab.setTabText(self.creditsTab.indexOf(self.authors), _("Written by"))
+        self.creditsTab.setTabText(self.creditsTab.indexOf(self.translators), _("Translated by"))
+        self.creditsTab.setTabText(self.creditsTab.indexOf(self.designers), _("Artwork by"))
+        self.aboutButton.setText(_("About"))
+        self.creditsButton.setText(_("Credits"))
+        self.licenseButton.setText(_("License"))
+        self.closeButton.setText(_("Close"))
+
+app = QtWidgets.QApplication(sys.argv)
+about = AboutInterface().about
+about.show()
+sys.exit(app.exec_())

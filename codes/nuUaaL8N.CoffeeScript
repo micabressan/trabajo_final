@@ -1,0 +1,7 @@
+# not bluebird :(
+
+read(tracePath).thens [
+	_.map Trace.toString
+	_.join '\n\n'
+	console.log
+]

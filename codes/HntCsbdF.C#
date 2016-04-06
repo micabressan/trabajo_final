@@ -1,0 +1,51 @@
+        public void Process()
+        {
+            var context = HttpContext.Current;
+
+            var rawURL = context.Request.RawUrl;
+            var querystring = String.Empty;
+            var urlParts = rawURL.Split('?');
+            var url = urlParts[0];
+            if (urlParts.Count() == 2) querystring = urlParts[1];
+            if (url.StartsWith("/")) url = url.Substring(1);
+
+            // Static resources
+            if(url.EndsWith(".png") || url.EndsWith(".css"))
+            {
+                return;
+            }
+
+            // Get language component
+            Translation.Language inLanguage = null;
+            {
+                foreach (var lang in Translation.Language.GetAllLanguages())
+                {
+                    if (url.StartsWith(lang.LanguageTag, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        inLanguage = lang;
+                        url = url.Substring(lang.LanguageTag.Length);
+                        if (url.StartsWith("/")) url = url.Substring(1);
+                        break;
+                    }
+                }
+                if (inLanguage == null)
+                {
+                    inLanguage = Translation.Language.GetLanguage(Settings.Translation.ProjectReferenceVersionRequiredLanguageTag);
+                }
+            }
+
+            // Querystring
+            if (!String.IsNullOrEmpty(querystring)) querystring += "&";
+            querystring += "lang=" + inLanguage.LanguageTag.ToLower();
+            querystring = "?" + querystring;
+
+            // Rewrite
+            if (String.IsNullOrEmpty(url))
+            {
+                HttpContext.Current.RewritePath("~/Pages/Default.aspx" + querystring);
+            }
+            else
+            {
+                HttpContext.Current.RewritePath("~/Pages/ErrorPages/404.aspx" + querystring);
+            }
+        }

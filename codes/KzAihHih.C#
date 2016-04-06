@@ -1,0 +1,19 @@
+public static void UpdateTable(SqlConnection connection, DataTable table)
+        {
+            var commandString = "SELECT * FROM " + table.TableName;
+
+            using (var command = new SqlCommand(commandString, connection))
+            {
+                try
+                {
+                    var adapter = new SqlDataAdapter(command) {AcceptChangesDuringUpdate = true};
+                    var builder = new SqlCommandBuilder(adapter);
+
+                    adapter.DeleteCommand = builder.GetDeleteCommand();
+                    adapter.InsertCommand = builder.GetInsertCommand();
+                    adapter.UpdateCommand = builder.GetUpdateCommand();
+
+                    adapter.Update(table);
+                }catch{}
+            }
+        }

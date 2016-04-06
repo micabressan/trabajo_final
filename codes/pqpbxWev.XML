@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>agrarstyle</title>
+		<link>http://www.agrarstyle.de/</link>
+		<description>#agrarstyle Test Feed</description>
+		<image>
+			<url>http://placehold.it/400x450</url>
+			<title>agrarstyle</title>
+			<link>http://www.agrarstyle.de/</link>
+			<description>agrarstyle Avatar</description>
+		</image>
+		<item>
+			<title>Article 3 - Testimage</title>
+			<link>http://example.com/3</link>
+			<guid>http://example.com/3</guid>
+			<pubDate>Mon, 24 Aug 2015 08:20:00 GMT</pubDate>
+			<description>My newest article.</description>
+			<media:content
+			url="http://placehold.it/400x450" 
+			type="image/jpeg" 
+			height="400" 
+			width="450"/>
+		</item>
+		<item>
+			<title>Article 2</title>
+			<link>http://example.com/2</link>
+			<guid>http://example.com/2</guid>
+			<pubDate>Mon, 24 Aug 2015 08:15:12 GMT</pubDate>
+			<description>My second article.
+			<![CDATA[
+          	Some example image text
+          	<a href="http://placehold.it/400x450">[ Read more...]</a>         
+       		]]> 
+			</description>
+		</item>
+		<item>
+			<title>Article 1</title>
+			<link>http://example.com/1</link>
+			<guid>http://example.com/1</guid>
+			<pubDate>Mon, 24 Aug 2015 08:10:45 GMT</pubDate>
+			<description>My first article.</description>
+		</item>
+	</channel>
+</rss>

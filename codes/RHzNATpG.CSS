@@ -1,0 +1,61 @@
+.icons{
+list-style:none;
+margin:10px 0 0 335px;
+height:19px;
+position:relative;
+}
+
+.icons li{
+background:url("img/icons.png") no-repeat;
+float:left;
+height:19px;
+text-indent:-999px;
+cursor:pointer;
+margin-right:5px;
+}
+
+/* Styling each icon */
+
+li.web{ width:15px;}
+li.web.active,
+li.web:hover{ background-position:left bottom;}
+
+li.images{ width:22px; background-position:-18px 0;}
+li.images.active,
+li.images:hover{ background-position:-18px bottom;}
+
+li.news{ width:14px; background-position:-44px 0;}
+li.news.active,
+li.news:hover{ background-position:-44px bottom;}
+
+li.videos{ width:17px; background-position:right 0;}
+li.videos.active,
+li.videos:hover{ background-position:right bottom;}
+
+span.arrow{
+/* The little arrow that moves below the icons */
+
+width:11px;
+height:6px;
+margin:21px 0 0 5px;
+position:absolute;
+background:url('img/arrow.png') no-repeat;
+left:0;
+}
+
+/* The submit button */
+
+#submitButton{
+background:url('img/buttons.png') no-repeat;
+width:83px;
+height:36px;
+text-indent:-9999px;
+overflow:hidden;
+text-transform:uppercase;
+border:none;
+cursor:pointer;
+}
+
+#submitButton:hover{
+background-position:left bottom;
+}

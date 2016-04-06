@@ -1,0 +1,12 @@
+type Agenda = [Contato]
+type Contato = (Nome,Telefone)
+type Nome = String
+type Telefone = String
+
+nome :: Contato -> Nome
+nome (nome, tel) = nome
+
+novo_telefone :: Agenda -> Contato -> Agenda
+novo_telefone [] c = [c]
+novo_telefone (c:cs) c' | nome c == nome c' = c' : cs
+                        | otherwise = c : novo_telefone cs c'

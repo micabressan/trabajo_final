@@ -1,0 +1,41 @@
+I want to use  https://github.com/OriginalEXE/Switcheroo 
+demo of said plugin: http://switcheroo.getkodo.com/
+
+but not for the functionality shown on the demo page.
+
+Only for a part like here http://www.wpthemegenerator.com/ (see the mobile ready bar)
+
+
+
+It took me some hours to find it but it may have been for nothing. 
+
+Here is the example html source that makes it work, taken  from a phpbb theme that uses the switcheroo plugin:
+
+<div class="responsive">
+<!-- Mobile Button -->
+<div class="mobile-btn  pull-right hidden-xs">
+<a href="#" title="Smartphone View" ><i class="icon-mobile-phone"></i></a>
+</div>
+
+<!-- Tablet Button -->
+<div class="tablet-btn  pull-right hidden-xs">
+<a href="#" title="Tablet View" ><i class="icon-tablet"></i></a>
+</div>
+
+<!-- Desktop Button -->
+<div class="desktop-btn  pull-right hidden-xs">
+<a href="#" title="Desktop View" class="active"><i class="icon-desktop"></i></a>
+</div>
+</div>
+The js:
+
+
+$(".responsive a").click(function(){
+  // If this isn't already active
+  if (!$(this).hasClass("active")) {
+    // Remove the class from anything that is active
+    $(".responsive a.active").removeClass("active");
+    // And make this active
+    $(this).addClass("active");
+  }
+});

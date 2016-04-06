@@ -1,0 +1,21 @@
+(ns gui.core
+  (:require [seesaw.core :as seesaw])
+  (:gen-class))
+
+(seesaw/native!)
+
+(defn getset [tag1 tag2 thegui] (seesaw/value! thegui {tag2 (tag1 (seesaw/value thegui))}))
+
+(def gui (seesaw/frame 
+           :on-close :exit
+           :title "Bogus!"
+           :width 200
+           :height 200
+           :content (seesaw/vertical-panel :items [
+              (seesaw/text :id :tag1 :text "")
+              (seesaw/label :id :tag2 :text "Text") 
+              (seesaw/button :text "Click Me" :listen [:action (fn [event] (getset :tag1 :tag2 gui))]) 
+            ]))) 
+ 
+(defn -main [& args]
+  (seesaw/show! gui))

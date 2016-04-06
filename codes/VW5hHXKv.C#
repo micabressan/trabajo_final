@@ -1,0 +1,73 @@
+  class Program {
+    static void Main(string[] args) {
+      Console.WriteLine("Eingabe a:");
+      double a = Convert.ToDouble(Console.ReadLine());
+      Console.WriteLine("Eingabe b:");
+      double b = Convert.ToDouble(Console.ReadLine());
+      Console.WriteLine("Eingabe Genauigkeit (Bspl.: 0,01):");
+      double genauigkeit = Convert.ToDouble(Console.ReadLine());
+      int i = 0;
+
+      double x = 1;
+
+      double v = 0, vLast = 0;
+
+      while (v >= vLast) {
+        vLast = v;
+        v = (a-2*x)*(b-2*x)*x;
+        x += genauigkeit;
+        i++;
+      }
+      Console.Write("Max Volumen = "+ vLast +" bei x = " + x + ";  Schleifendurchläufe = "+ i + "\n\n");
+
+     
+      i=0;
+
+      v=0;
+      vLast = 0;
+      double xLast = 0;
+
+      x = 0;
+      double xl = 0;
+      double xr = (b < a ? b/2 : a/2);
+      double dx = 1;
+
+      while (dx >= genauigkeit) {
+        vLast = v;
+        xLast = x;
+        dx = xr-xl;
+        double delta = dx / 3;
+
+        double vl = (a-2*(xl+delta))*(b-2*(xl+delta))*(xl+delta);
+        double vr = (a-2*(xr-delta))*(b-2*(xr-delta))*(xr-delta);
+
+        if (vl < vr) {
+          xl += delta;
+        }
+        else {
+          xr -= delta;
+        }
+        x = (xl + xr)/2;
+        v = (a-2*x)*(b-2*x)*x;
+        i++;
+
+      }
+      Console.Write("Max Volumen = "+ vLast +" bei x = " + xLast + ";  Schleifendurchläufe = "+ i + "\n\n");
+
+      double x1 = -(-(1.0 / 3) * a - (1.0 / 3) * b) / 2 + Math.Sqrt(Math.Pow(((-(1.0 / 3) * a - (1.0 / 3) * b) / 2), 2) - ((1.0 / 12) * a * b));
+      double x2 = -(-(1.0 / 3) * a - (1.0 / 3) * b) / 2 - Math.Sqrt(Math.Pow(((-(1.0 / 3) * a - (1.0 / 3) * b) / 2), 2) - ((1.0 / 12) * a * b));
+           
+      double pruef_x1 = 24 * x1 - 4 * a - 4 * b;
+      double pruef_x2 = 24 * x2 - 4 * a - 4 * b;
+ 
+      if (pruef_x1 < 0) {
+        Console.Write("Max Volumen = "+ (a-2*x1)*(b-2*x1)*x1 +" bei x = " + x1 + "\n\n");
+      }
+      else if (pruef_x2 < 0) {
+        Console.Write("Max Volumen = "+ (a-2*x2)*(b-2*x2)*x2 +" bei x = " + x2 + "\n\n");
+      }
+
+      Console.ReadKey();
+
+    }
+  }

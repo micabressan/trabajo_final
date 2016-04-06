@@ -1,0 +1,43 @@
+Const JOIN_DOMAIN = 1        ' Joins a computer to a domain. If this value is not specified, the join is a computer to a workgroup
+Const ACCT_CREATE = 2        ' Creates an account on a domain
+Const ACCT_DELETE = 4        ' Deletes an account when a domain exists
+Const WIN9X_UPGRADE = 16        ' The join operation is part of an upgrade from Windows 98 or Windows 95 to Windows 2000 or Windows NT
+Const DOMAIN_JOIN_IF_JOINED = 32        ' Allows a join to a new domain, even if the computer is already joined to a domain
+Const JOIN_UNSECURE = 64        ' Performs an unsecured join
+Const MACHINE_PASSWORD_PASSED = 128        ' The machine, not the user, password passed. This option is only valid for unsecure joins
+Const DEFERRED_SPN_SET = 256        ' Writing SPN and DnsHostName attributes on the computer object should be deferred until the rename that follows the join
+Const NETSETUP_JOIN_READONLY = 2048    ' Use an RODC to perform the domain join against
+Const INSTALL_INVOCATION = 262144    ' The APIs were invoked during install
+
+strDomain = "ADCORP.LAB"                ' The FQDN of the AD domain
+strRODC = "RFSRODC1.ADCORP.LAB"        ' The FQDN of the RODC to use
+strPassword = "Pa$$w0rd"                ' The custom password for the computer account
+
+Set objNetwork = CreateObject("WScript.Network")
+strComputer = objNetwork.ComputerName    ' The NetBIOS name of the local computer
+Set objComputer = GetObject("winmgmts:{impersonationLevel=Impersonate}!\" & strComputer & "rootcimv2:Win32_ComputerSystem.Name='" & strComputer & "'")
+
+Wscript.echo("### STARTING ###")
+Wscript.echo("Trying to join the local computer to the AD domain using an RODC...")
+Wscript.echo("")
+ReturnValue = objComputer.JoinDomainOrWorkGroup(strDomain & "" & strRODC, strPassword, NULL, NULL, JOIN_DOMAIN+MACHINE_PASSWORD_PASSED+NETSETUP_JOIN_READONLY)
+
+' List of 'system error codes' (http://msdn.microsoft.com/en-us/library/ms681381.aspx) and
+' List of 'network management error codes' (http://msdn.microsoft.com/en-us/library/aa370674(VS.85).aspx)
+
+Select Case ReturnValue
+    Case 0 strErrDescr = "The operation completed successfully"
+    Case 5 strErrDescr = "Access is denied"
+    Case 87 strErrDescr = "The parameter is incorrect"
+    Case 1326 strErrDescr = "Logon failure: unknown username or bad password"
+    Case 1355 strErrDescr = "The specified domain either does not exist or could not be contacted"
+    Case 2691 strErrDescr = "The machine is already joined to the domain"
+End Select
+
+Wscript.echo("FQDN AD Domain : '" & strDomain & "'")
+Wscript.echo("FQDN RODC : '" & strRODC & "'")
+Wscript.echo("Local Computer Name : '" & strComputer & "." & strDomain & "'")
+Wscript.echo("Domain Join Result Code : '" & ReturnValue & "'")
+Wscript.echo("Domain Join Result Text : '" & strErrDescr & "'")
+Wscript.echo("")
+Wscript.echo("### FINISHED ###")

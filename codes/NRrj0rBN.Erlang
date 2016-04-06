@@ -1,0 +1,10 @@
+parse_line(Sock, [User,"PRIVMSG",Channel,?nickname|_]) ->
+    io:format("I saw my name!"),
+    Nick = lists:nth(1, string:tokens(User, "!")),
+    irc_privmsg(Sock, Channel, "You talkin to me, " ++ Nick ++ "?");
+parse_line(Sock, [_,"376"|_]) ->
+    send_line(Sock, "JOIN :" ++ ?channel ++ "\r\n");
+parse_line(Sock, ["PING"|Rest]) ->
+    send_line(Sock, "PONG " ++ Rest ++ "\r\n");
+parse_line(_, _) ->
+    0.

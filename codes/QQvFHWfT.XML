@@ -1,0 +1,12 @@
+
+<!-- 	Server Jersey REST	 -->
+    <servlet>
+        <servlet-name>JerseyRestServer</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JerseyRestServer</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+<!-- 	Server Jersey REST	 -->

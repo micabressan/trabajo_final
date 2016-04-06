@@ -1,0 +1,23 @@
+for y1 in range(height):
+    for x1 in range(width):
+        # We are on a node
+        if board[y1][x1] == '0':
+            # Find nodes on the right
+            x2 = -1
+            y2 = -1
+            for xx in range(x1+1, width):
+                if board[y1][xx] == '0':
+                    x2 = xx
+                    y2  = y1
+                    break
+                    
+            # Find nodes on the bottom
+            x3 = -1
+            y3 = -1
+            for yy in range(y1+1, height):
+                if board[yy][x1] == '0':
+                    x3 = x1
+                    y3  = yy
+                    break
+            
+            print '%s %s %s %s %s %s' % (x1, y1, x2, y2, x3, y3)

@@ -1,0 +1,1 @@
+public class WidgetPreviewAdapter(context: Context, var widgets: ArrayList<Pair<DataManager.WidgetData, Int>>) : ArrayAdapter<Pair<DataManager.WidgetData, Int>>(context, R.layout.widget_preview_listitem, widgets) {

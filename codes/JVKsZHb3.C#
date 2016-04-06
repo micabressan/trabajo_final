@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Joeys.Taschenrechner
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            widerholen:
+            Console.WriteLine("Das ist ein Tascheinrechner!");
+            Console.WriteLine("Unterstützte Rechungen: Mal, Minus, Plus, Geteilt.");
+            Console.WriteLine("Weiter mit beliebiger Taste...");
+
+            Console.ReadKey();
+
+            Console.WriteLine("Gebe nun die erste Zahl ein.");
+            string Zahl1 = Console.ReadLine();
+
+            int A = Convert.ToInt32(Zahl1);
+
+            Console.WriteLine("Gebe nun die Rechenoperation an: + , - , / oder *");
+            string operation = Console.ReadLine();
+
+            Console.WriteLine("Gebe nun die zweite Zahl ein.");
+            string Zahl2 = Console.ReadLine();
+
+            int B = Convert.ToInt32(Zahl2);
+
+
+            string ergebnis = "";
+
+            if (operation == "+")
+            {
+                ergebnis = (A + B).ToString();
+            }
+            else if (operation == "-")
+            {
+                ergebnis = (A - B).ToString();
+            }
+            else if (operation == "/")
+            {
+                ergebnis = (A / B).ToString();
+            }
+            else if (operation == "*")
+            {
+                ergebnis = (A * B).ToString();
+            }
+
+            Console.WriteLine("{0} {1} {2} ergibt das Ergebnis {3}", Zahl1, operation, Zahl2, ergebnis);
+
+
+            Console.ReadKey();
+            Console.Clear();
+
+            goto widerholen;
+        }
+    }
+}

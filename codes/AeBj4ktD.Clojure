@@ -1,0 +1,7 @@
+(defmacro defn! [condition name args &rest body]
+  (with-gensyms [returned]
+    `(defn ~name [~@args]
+       (setv ~returned
+         (do ~@body))
+       (assert (~condition ~returned))
+       ~returned)))

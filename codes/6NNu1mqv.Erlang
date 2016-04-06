@@ -1,0 +1,9 @@
+init(_Type, Req, Opts) ->
+		{ok, Url} = cowboy_req:url(Req),
+	  	Body = jiffy:encode([{<<"Location">>, <<Url>> },{<<"awesome">>,true}]),
+		io:format("Object: ~p~n", [jsx:decode(Body)]),
+		{ok, Req2} = cowboy_req:reply(200,
+				[{<<"content-type">>, <<"application/json">>}],
+    Body,
+        Req),
+    {upgrade, protocol, cowboy_websocket, Req2, Opts}.

@@ -1,0 +1,530 @@
+#$ ->
+$(window).load ->
+  window.PageSwitchController.get()
+  window.LocaleController.get()
+  window.MainPageController.get()
+
+class @PageSwitchController
+  instance = null
+
+  @get: ->
+    instance ?= new PrivateClass
+
+  class PrivateClass
+    constructor: ->
+      @init()
+
+    init: ->
+      @_zenna_logo = $("#gray #logo")
+      #@_is_master = true
+      @_page_slide_out_time = 300 # ms
+      @_page_slide_in_time = 300 # ms
+      @_page_scroll_up_time = 500 # ms
+
+      @init_slick_containers()
+      @bind_local_links()
+      #$('a').on 'click', (event) => @on_link_clicked(event)
+      # in-page back button
+      $("#back-button").click =>
+        @on_back_button_click_page()
+      $("#logo").click =>
+        @on_back_button_click()
+      #$("a[href='/blog']").click =>
+        #@load_slave_page("/blog", true)
+      # history back handler
+      $(window).on 'popstate', (event) =>
+        @on_pop_history_state(event)
+      @process_initial_url()
+
+      $(window).resize =>
+        @on_window_resize()
+      @on_window_resize()
+
+    # returns if current state is master (main page)
+    is_master: -> $('.content.master').is(':visible')
+
+    # returns if user device have touch-screen
+    #is_touch_device: -> 'ontouchstart' of window
+
+    update_locale_switcher: (target_url) ->
+      $("#locale-switch").attr('data-fullpath', target_url)
+
+    # performs
+    switch_to_slave: (target_url) ->
+      @push_history_state(target_url)
+      if @is_master()
+        @load_slave_page(target_url, true) # hide master
+      else
+        # already slave
+        @load_slave_page(target_url, false) # do not hide master
+
+    switch_to_master: ->
+      @update_locale_switcher('/')
+      @show_master_page()
+
+    # show fixed main menu
+    show_fixed_menu: ->
+      $(".content #menu").hide()
+      $("#logo #fixed-menu").fadeIn()
+
+    # this will hide main
+    hide_master_page: ->
+      # show gray-cover
+      #$("div#gray-cover").show()
+      @show_fixed_menu()
+
+      # fade back-button out
+      $("#back-button").fadeOut()
+
+      $(".content.master").animate
+        left: - $(window).width()
+      , @_page_slide_out_time, =>
+        $(".content.master").hide()
+
+        $("body").scrollTop 0
+        @show_slave_page()
+        @on_slave_show()
+
+        # hide gray-cover
+        #$("div#gray-cover").hide()
+
+        # correct logo x
+        white_x = $("#white2").offset().left
+        @_zenna_logo.animate left: white_x - @_zenna_logo.width() - 50
+
+        # show get-offer-fallback
+        #$("#get-offer-fallback").fadeIn()
+        #$("#back-button").removeClass("top").addClass("back").attr("title", "На главную").fadeIn()
+
+    _set_slave_mode: ->
+      # show get-offer-fallback
+      $("#get-offer-fallback").fadeIn()
+      $("#back-button").removeClass("top").addClass("back").attr("title", "На главную").fadeIn()
+
+    # this will show slave page
+    show_slave_page: ->
+      @_set_slave_mode()
+
+      $('body,html').addClass('no-scroll')
+      $(".content.slave").css("left", $(window).width()).show().animate
+        left: 0
+      , @_page_slide_in_time, =>
+        $("html,body").animate
+          scrollTop: 0
+        , @_page_scroll_up_time
+        $('body,html').removeClass('no-scroll')
+      ###
+      commented because of en localization issue
+      $("#logo #header").hide().html($('#fixed-menu ul li a[href="#services"]').html()).fadeIn()  unless $("#logo #header").is(":visible")\
+      ###
+
+    ###
+    commented because of en localization issue
+    $("#logo #header").hide().html($('#fixed-menu ul li a[href="#services"]').html()).fadeIn()  unless $("#logo #header").is(":visible")
+    ###
+
+    load_slave_page: (target_url, do_hide_master_page) ->
+      $.ajax
+        url: target_url
+        data: { part: true }
+        success: (data) =>
+          $('.content.slave').html(data)
+          @on_slave_show()
+          @hide_master_page() if do_hide_master_page
+
+    push_history_state: (url) ->
+      @update_locale_switcher(url)
+      if history and history.pushState
+        history.pushState(null, document.title, url);
+
+
+    on_pop_history_state: (event) ->
+      if (location.pathname == '/')
+        # we need to switch to master page (main)
+        #console.log 'switch_to_master'
+        @switch_to_master()
+      else
+        # we need to load another slave page
+        @switch_to_slave(location.pathname)
+      false
+
+    show_master_page: (callback) ->
+      # show gray-cover
+      #$("div#gray-cover").show()
+
+      # hide logo header
+      $("#logo #header").fadeOut()
+
+      # remove fixed main menu
+      $(".content #menu, .content #menu ul li").show().css "opacity", 1
+      $("#logo #fixed-menu").fadeOut()
+
+      # fade out back button
+      $("#back-button").fadeOut()
+
+      # slide visible slave content to the right
+      visible = $(".content.slave")
+      $('body,html').addClass('no-scroll')
+      visible.animate
+        left: $(window).width()
+      , @_page_slide_out_time, =>
+        visible.hide()
+
+        # slide master in
+        $(".content.main").show().animate
+          left: 0
+        , @_page_slide_in_time, =>
+          $('body,html').removeClass('no-scroll')
+
+          # hide gray-cover
+          #$("div#gray-cover").hide()
+          #.fadeOut()
+          $("#back-button").attr("title", "В начало").css("transform", "").attr("rotation", "").removeClass("back").addClass "top"
+
+          # emit callback
+          if callback
+            callback()
+          #else
+          #$(window).trigger "scroll"
+          @on_slave_hide()
+
+    on_back_button_click: ->
+      if $("#back-button").hasClass("top")
+        # scroll top -- only if the buttun is pointing top
+        window.PageScroller.get().do_scroll_to(0)
+
+        # back to main -- only if the buttun is pointing left
+      else
+        #history.back()  if $("#back-button").hasClass("back")
+        @push_history_state('/')
+        @switch_to_master()  if $("#back-button").hasClass("back")
+
+    on_back_button_click_page: ->
+      if $("#back-button").hasClass("top")
+        window.PageScroller.get().do_scroll_to(0)
+      else if location.href.slice(-5) == "blog/"
+        @switch_to_master()
+        @push_history_state('/')
+      else if location.href.slice(-14) == "case_articles/"
+        @switch_to_master()
+        @push_history_state('/')
+      else
+        @switch_to_slave(location.href.replace(/^(([^\/]*\/){4,4}).*/,'$1'))
+        @push_history_state(location.href.replace(/^(([^\/]*\/){4,4}).*/,'$1'))
+
+    process_initial_url: ->
+      if location.pathname != '/'
+        # immediately switch to slave
+        $('.content.master').hide()
+        $('.content.slave').show()
+        @on_slave_show()
+        @_set_slave_mode()
+        @show_fixed_menu()
+
+    bind_local_links: ->
+      # filter local links only
+      $(document).on 'click', "a[href^='" + location.host + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']", (event) =>
+        target_url = $(event.target).closest('a').attr('href')
+        if target_url.indexOf('/system/case_articles/pdfs') == 0 # link to pdf-attachment
+          true
+        else if target_url.indexOf('/system/case_articles/pdf_rus') == 0 # link to pdf-attachment
+          true
+        #else if target_url == '/blog'
+          #$(".content.master").hide()
+          #@load_slave_page("/blog", true)
+          #true
+        else if target_url.indexOf('#get-offer-popup') >= 0
+          window.show_get_offer_popup()
+          false
+        else if target_url != "/blog"
+          window.MainPageController.get().hide_get_offer_popup()
+          window.PageScroller.get().do_scroll_to(0, true)
+          @switch_to_slave(target_url)
+          false
+
+      $(".content #menu ul li a[href=\"#services\"]").click ->
+        window.PageScroller.get().do_scroll_to($("div#services").offset().top)
+        false
+
+      #$(".content #menu ul li a[href=\"/blog\"]").click ->
+        #@load_slave_page("/blog", true)
+        #false
+
+      $(".content #menu ul li a[href=\"#clients\"]").click ->
+        window.PageScroller.get().do_scroll_to($("div#clients").offset().top)
+        false
+
+      $(".content #menu ul li a[href=\"#cases\"]").click ->
+        window.PageScroller.get().do_scroll_to($('div#cases').offset().top)
+        false
+
+      $(".content #menu ul li a[href=\"#about\"]").click ->
+        window.PageScroller.get().do_scroll_to($("div#about").offset().top - 300)
+        false
+
+      $("#logo #fixed-menu ul li a[href=\"#services\"]").click =>
+        window.PageScroller.get().do_scroll_to(0, true)
+        @show_master_page ->
+          window.PageSwitchController.get().push_history_state('/')
+          $(".content #menu ul li a[href=\"#services\"]").trigger "click"
+
+      $("#logo #fixed-menu ul li a[href=\"#cases\"]").click =>
+        window.PageScroller.get().do_scroll_to(0, true)
+        @show_master_page ->
+          window.PageSwitchController.get().push_history_state('/')
+          $(".content #menu ul li a[href=\"#cases\"]").trigger "click"
+
+      $("#logo #fixed-menu ul li a[href=\"#about\"]").click =>
+        window.PageScroller.get().do_scroll_to(0, true)
+        @show_master_page ->
+          window.PageSwitchController.get().push_history_state('/')
+          $(".content #menu ul li a[href=\"#about\"]").trigger "click"
+      $("#logo #fixed-menu ul li a[href=\"/blog\"]").click =>
+        #window.PageScroller.get().do_scroll_to(0, true)
+        @load_slave_page("/blog", true)
+
+
+      # configure zopim live chat
+      ls = $('#locale-switch')
+      if ls.hasClass 'rus'
+        $zopim.livechat.setLanguage('ru');
+        $zopim.livechat.concierge.setName("Онлайн Поддержка");
+        $zopim.livechat.concierge.setTitle("Давайте общаться!");
+        $zopim.livechat.offlineForm.setGreetings("На данный момент мы офлайн. Оставьте нам сообщение и мы свяжемся с вами как можно скорее.");
+        $zopim.livechat.setGreetings
+          'online': 'Мы здесь!',
+          'offline': 'Оставьте нам сообщение'
+      else if ls.hasClass 'eng'
+        $zopim.livechat.setLanguage('en');
+        $zopim.livechat.concierge.setName("Sales Support");
+        $zopim.livechat.concierge.setTitle("I'm here to help!");
+        $zopim.livechat.offlineForm.setGreetings("Sorry, we aren't online at the moment. Leave a message and we'll get back to you as soon as possible.");
+        $zopim.livechat.setGreetings
+          'online': 'We are here!',
+          'offline': 'Leave us a message'
+
+      $('footer#main a#show-livechat').click =>
+        $zopim.livechat.window.show();
+        return false;
+
+    on_window_resize: ->
+      slave = $('div.content.slave')
+      if slave.is(':visible')
+        slave.css
+          minHeight: $(window).innerHeight() - parseInt(slave.css('marginTop'))
+
+    on_slave_show: ->
+      slave = $('div.content.slave')
+      if slave.find('#services-container').hasClass('case-article')
+        $('#always-with-you').hide()
+      @on_window_resize()
+      PageScroller.get().on_window_resize()
+
+    on_slave_hide: ->
+      $('#always-with-you').show()
+      $(document).attr('title', $('body').data('main-title'))
+      PageScroller.get().on_window_resize()
+
+    init_slick_containers: ->
+      $('.slick-container').slick
+        dots: false
+        arrows: true
+        customPaging: (slider, i) ->
+          '<div></div>'
+
+class @LocaleController
+  instance = null
+
+  @get: ->
+    instance ?= new PrivateClass
+
+  class PrivateClass
+    @ls
+
+    constructor: ->
+      @init()
+
+    init: ->
+      @ls = $("#locale-switch")
+      @ls.click => @ls_handle()
+      @ls.on "touchstart", (e) =>
+        e.preventDefault()
+        @ls_handle()
+
+    ls_handle: ->
+      if @ls.hasClass("rus")
+        @ls.find("div").animate
+          left: 28
+        , 100, =>
+          @ls.toggleClass "rus eng"
+          # reload to eng
+          window.location = @ls.data('host-eng') + @ls.data('fullpath')
+      else
+        @ls.find("div").animate
+          left: 5
+        , 100, =>
+          @ls.toggleClass "rus eng"
+          # reload to rus
+          window.location = @ls.data('host-rus') + @ls.data('fullpath')
+
+class @MainPageController
+  instance = null
+
+  @get: ->
+    instance ?= new PrivateClass
+
+  @is_initialized: ->
+    instance != null
+
+  class PrivateClass
+    @zl = null
+    @spline = null
+    @zl_init_pos = null
+    @last_scroll_pos = 0
+
+    constructor: ->
+      @init()
+
+    init: ->
+      @zl = $("#gray2 #logo")
+      @init_spline()
+      @init_dom()
+      setInterval =>
+        @refresh()
+      , 300
+
+    init_spline: ->
+      # calculate spline for logo on main page
+      sp_x = []
+      sp_y = []
+      sp_x.push(0)
+      sp_y.push(0)
+      sp_x.push $("#services-container div#services").offset().top
+      sp_y.push 0
+      sp_x.push $("#services-container div#square-holder").offset().top
+      sp_y.push -50
+      sp_x.push $("#services-container div#square-holder").offset().top + $("#services-container div#square-holder").height()
+      sp_y.push -50
+      sp_x.push $("#cases-container").offset().top
+      sp_y.push -75
+      sp_x.push $("#cases-container #smartphone").offset().top
+      sp_y.push -100
+      sp_x.push $("#cases-container #smartphone").offset().top + $("#cases-container #smartphone").height()
+      sp_y.push -100
+      sp_x.push $("#cases-container #smartphone").offset().top + $("#cases-container #smartphone").height() + 100
+      sp_y.push 0
+      sp_x.push 10000
+      sp_y.push 0
+      @spline = new MonotonicCubicSpline(sp_x, sp_y)
+
+    init_dom: ->
+      @zl_init_pos = @zl.position()
+      @zl_init_pos.right = @zl.parent().width() - @zl_init_pos.left - @zl.width()
+      @zl.css
+        position: 'absolute'
+        top: @zl_init_pos.top
+        right: @zl_init_pos.right # @zl_init_pos.left
+      $("#icons #get-offer, #get-offer-fallback, #icons .icon-pink .do-audit, .order input, input.order").click => @show_get_offer_popup()
+      $("#get-offer-popup #cross, #get-offer-popup-cloak").click => @hide_get_offer_popup()
+      $(window).on 'hashchange', => @on_location_change()
+      @on_location_change()
+
+    refresh: ->
+      @move_handler(@last_scroll_pos)
+
+    move_handler: (scroll_pos) ->
+      @last_scroll_pos = scroll_pos
+      if $("#logo #header").is(":visible")
+        terminator = scroll_pos + @zl_init_pos.top + 100 # logo with header
+        terminator_offset = @zl.offset().top + 100
+      else
+        terminator = scroll_pos + @zl_init_pos.top + 60 # logo without header
+        terminator_offset = @zl.offset().top + 60
+
+      if $(".content.main").is(":visible")
+        # update logo position
+        spline_x = @spline.interpolate(terminator)
+        white_x = document.getElementById("white2").getBoundingClientRect().left
+        @zl.css
+          #'left': white_x - @zl.width() + spline_x
+          right: @zl_init_pos.right - spline_x
+          top: @zl_init_pos.top + scroll_pos
+
+        # hide some items
+        hideables = ".content #menu ul li, #icons #get-offer"
+        $(hideables).each (index, el) ->
+          el = $(el)
+          el_top = el.offset().top
+          if terminator_offset > el_top
+            el.stop().animate opacity: 0
+            #$("div#gray #get-offer-fallback").fadeIn()  if el.attr("id") is "get-offer" # show fallback link
+          else
+            el.stop().animate opacity: 1
+            #$("div#gray #get-offer-fallback").fadeOut()  if el.attr("id") is "get-offer" # hide fallback link
+
+        # do magnet
+        moveables = "#services-container div#services, #cases-container div#cases, #about-container div#about, #blog-container div#blog , #clients-container div#clients "
+        current = null
+        $(moveables).each (index, el) ->
+          el = $(el)
+          el_top = el.offset().top
+          if terminator_offset > el_top
+            el.stop().css opacity: 0
+            current = el
+          else
+            el.stop().css opacity: 1
+        if current
+          # make ghost
+          $("div#gray2 #logo #ghost").html($("div#gray2 #logo #header").html()).show().fadeOut()  if $("div#gray2 #logo #header").is(":visible") and not $("div#gray2 #logo #ghost").is(":visible")
+          $("div#gray2 #logo #header").html(current.html()).show() # logo header
+        else
+          $("div#gray2 #logo #header").hide()
+
+        # back-button
+        if terminator > 400
+          $("div#back-button").fadeIn()
+        else
+          $("div#back-button").fadeOut()
+
+      #if $(".content.slave").is(":visible")
+        # update logo x
+        #white_x = document.getElementById("white2").getBoundingClientRect().left
+        #@zl.css
+        #  left: white_x - @zl.width() - 50
+
+      if $("#get-offer-popup").is(":visible")
+        @position_get_offer_popup()
+
+    position_get_offer_popup: ->
+      # reposition popup (for viewport orientation change)
+      dlg = $("#get-offer-popup")
+      dlg.css
+        top: Math.round(($(window).height() - dlg.height() + 1) / 2)
+        left: Math.round(($(window).width() - dlg.width() + 1) / 2)
+
+    show_get_offer_popup: ->
+      @position_get_offer_popup()
+      dlg = $("#get-offer-popup")
+      $("#get-offer-popup-cloak").css(
+        position: "absolute"
+        top: "0px"
+        height: $(document).height()
+      ).fadeIn()
+      dlg.fadeIn()
+      dlg.find("form #offer_name").prop("value", "").focus()
+      #dlg.find("form #offer_phone").prop "value", ""
+      dlg.find("form #offer_email").prop "value", ""
+      #dlg.find("form #offer_notes").prop "value", ""
+      dlg.find(".stage1").show()
+      dlg.find(".stage2").hide()
+      false
+
+    hide_get_offer_popup: ->
+      $("#get-offer-popup-cloak").fadeOut()
+      $("#get-offer-popup").fadeOut()
+      false
+
+    on_location_change: ->
+      if window.location.hash == '#get-offer-popup'
+        @show_get_offer_popup()
+        window.location.hash = ''

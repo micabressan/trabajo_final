@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ch3ex5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int firstNumber, secondNumber, thirdNumber, fourthNumber;
+            int fifthNumber;
+
+            fifthNumber = firstNumber + secondNumber + thirdNumber + fourthNumber;
+
+            string userName;
+            Console.WriteLine("Enter your name:");
+            userName = Console.ReadLine();
+            Console.WriteLine("Welcome {0}!", userName);
+            Console.WriteLine("Now give me a number:");
+            firstNumber = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Now give me another number:");
+            secondNumber = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Give me another number:");
+            thirdNumber = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Give me another number:");
+            fourthNumber = Convert.ToInt32(Console.ReadLine());
+
+
+            Console.WriteLine("The sum is {0}", fifthNumber);
+         
+            Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,39 @@
+extends Sprite
+
+var speed = 64
+var TILE_SIZE = 32
+
+var to_pos
+
+func _ready():
+	set_centered(false)
+	var pos = get_pos()
+	pos = Vector2(floor(pos.x/TILE_SIZE),floor(pos.y/TILE_SIZE)) * TILE_SIZE 
+	set_pos(pos)
+	to_pos = pos
+	set_process_input(true)
+
+func _input(ev):
+	if get_pos() == to_pos:
+		var actions = {"ui_right":Vector2(1,0),"ui_left":Vector2(-1,0),"ui_up":Vector2(0,-1),"ui_down":Vector2(0,1)}
+		for action in actions:
+			if ev.is_action(action):
+				if ev.is_pressed() and !ev.is_echo():
+					Move(actions[action])
+				break
+
+func Move(val):
+	var pos = get_pos()
+	pos = Vector2(floor(pos.x/TILE_SIZE),floor(pos.y/TILE_SIZE)) * TILE_SIZE
+	pos += val*TILE_SIZE
+	to_pos = pos
+	set_process(true)
+
+func _process(d):
+	var motion = d * speed
+	if motion >= get_pos().distance_to(to_pos):
+		set_pos(to_pos)
+		set_process(false)
+	else:
+		motion = (to_pos-get_pos()).normalized() * motion
+		set_pos( get_pos() + motion )

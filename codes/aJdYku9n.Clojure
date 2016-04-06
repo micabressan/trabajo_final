@@ -1,0 +1,17 @@
+; second example, this one doesn't work
+
+(ns foo            
+	(:require [org.apache.commons.io.FilenameUtils :as FileNameUtils])
+)
+
+(defn print-extension
+	[path]		
+	(println
+		(FilenameUtils/getExtension path
+	))
+)
+
+;;invocation below
+;lein repl
+; (load-file "/home/john/get-extension.clj")
+;it  gives me "CompilerException java.io.FileNotFoundException: Could not locate org/apache/commons/io/FilenameUtils__init.class or org/apache/commons/io/FilenameUtils.clj on classpath: , compiling:(/home/varnie/thrash/get-extension.clj:1:1) "

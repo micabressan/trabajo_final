@@ -1,0 +1,25 @@
+-module(txnd_dir_poll_hdl).
+-behaviour(gen_event).
+
+-record(state,{manager}).
+        
+init(Manager) ->
+        {ok, #state{manager = Manager}).
+handle_event({file, _Path} = Msg, #state{manager = Manager} = State) ->
+        gen_server:cast(Manager, Msg),
+        {ok, State};
+handle_event({droped, _Path} = Msg, #state{manager = Manager} = State) ->
+        gen_server:cast(Manager, Msg),
+        {ok, State};
+handle_event(_Event, #state{} = State) ->
+        {ok, State}.
+handle_call(Request, #state{} = State) ->
+        error_logger:info_msg("Unknown call in txnd_dir_poll_hdl:handle_call ~p~n", [Request]),
+        {ok, ok, State}.
+handle_info(Info, #state{} = State) ->
+        error_logger:info_msg("Unknown info in txnd_dir_poll_hdl:handle_info ~p~n", [Info]),
+        {ok, State}.
+terminate(_Arg, #state{} = State) ->
+        ok.
+code_change(_OldVsn, #state{} = State, _Extra) ->
+        {ok, State}.

@@ -1,0 +1,64 @@
+  extract : ($, cb) ->
+    impressions_total = 0
+    revenue_total = 0
+    clicks_total = 0
+    requests_total = 0
+    detailed = []
+    if ($ '.size').length == 1
+      fill_rate_total = str_parser.toFloat(($ '.convs_rate').text()) 
+    else
+      fill_rate_total = str_parser.toFloat((total '.convs_rate')[0].children[0].data)     
+    $('.size').each (index) ->
+      try
+        publisher_tags = "size:" +($ '.size')[index].children[0].data + "," + " " + "placement:" + ($ '.placement')[index].children[0].data.split(' ')[0]
+      catch error
+        publisher_tags = null
+      try
+        website =  ($ '.site')[index].children[0].data.split(' ')[0]
+      catch error
+        website = null  
+      try
+        clicks = str_parser.toInt(($ '.clicks')[index].children[0].data)
+      catch error
+        clicks = null
+      try
+        impressions = str_parser.toInt(($ '.imps_total')[index].children[0].data)
+      catch error
+        impressions = null
+      try
+        revenue = str_parser.toFloat(($ '.publisher_revenue')[index].children[0].data.replace('$', ''))
+      catch error
+        revenue = null
+      try
+        requests = 0
+      catch error
+        requests = null
+      try
+        fill_rate = str_parser.toFloat(($ '.convs_rate')[index].children[0].data)
+      catch error
+        fill_rate = null 
+
+      detailed.push
+        ad_tag: publisher_tags
+        website: website
+        clicks: clicks
+        impressions: impressions
+        revenue: revenue
+        fill_rate: fill_rate
+        currency:'USD'
+
+      impressions_total += +impressions
+      revenue_total  += +revenue
+      clicks_total += +clicks
+      requests_total = 0
+  
+    reportData =            
+      impressions: impressions_total
+      clicks: clicks_total
+      revenue: revenue_total
+      requests: requests_total
+      fill_rate: fill_rate_total
+      currency:'USD' 
+      detailed: detailed
+    console.log reportData 
+    cb reportData

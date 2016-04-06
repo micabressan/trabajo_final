@@ -1,0 +1,22 @@
+| v circle ex1 ex2 line retweets reach diameter radious  origin |
+
+diameter := 60.
+origin := (100@100).
+radious := diameter / 2.
+v := RTView new.
+
+circle := (RTEllipse new size: diameter; borderColor: Color black; color: Color transparent) element.
+ex1 := RTBox element.
+ex2 := RTBox element.
+circle translateTo: origin.
+ex1 translateTo: ((radious negated @ 0) + circle center).
+ex2 translateTo: (radious @ 0) + circle center.
+line := (RTLine new; color: Color black) edgeFrom: ex1 to: ex2.
+v add: circle; add: line.
+
+retweets := (RTLabel text: 5) element.
+reach := (RTLabel text: '3.1k') element.
+v add: retweets; add: reach. 
+retweets translateTo: (0 @ -12) + circle center.
+reach translateTo: (0 @ 12) + circle center.
+v.

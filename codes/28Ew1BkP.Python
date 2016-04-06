@@ -1,0 +1,139 @@
+def do_stuff(a, d):
+	'''
+		The purpose of this module is to provide a basic framework upon which
+		stuff can be done.
+		Additional modules called by this one will be custom depending on the
+		end-user's implementation. 
+	'''
+	d_bonus = d_mods(d)
+	a_bonus = a_mods(a)
+	tnum = calc_tnum + d_bonus
+	num = random() + a_bonus					# sys_func
+	if num >= tnum:
+		msg = gen_msg("success")				# sys_func
+		dam_amt = calc_dam(a)
+		apply_dam(d, dam_amt)
+	else:
+		msg = gen_msg("failure")				# sys_func
+	if (is_human(a)) or (is_human(d)):			# sys_func
+		send_msg(msg)							# sys_func
+	update_pos()								# sys_func?
+	swap(a, d)									# sys_func
+
+	
+def a_mods(a):
+	'''
+		# CUSTOM
+		"a" is the acting object passed
+		This module will be custom depending on the end-user's implementation.
+		Returning values will be ADDED to tnum, so good/bonus values should be 
+		positive and bad/penalty values negative.
+	'''
+	mod = 0
+	
+	# bonuses first
+	mod += mod
+	
+	# penalties second
+	mod -= mod
+	
+	return mod
+
+	
+def d_mods(d):
+	'''
+		# CUSTOM
+		"d" is the acted upon object passed
+		This module will be custom depending on the end-user's implementation.
+		Returning values will be ADDED to tnum, so good/bonus values should be 
+		positive and bad/penalty values negative.
+	'''
+	mod = 0
+	
+	# bonuses first
+	mod += mod
+	
+	# penalties second
+	mod -= mod
+	
+	return mod
+	
+	
+# SYS_FUNC
+def gen_msg(msg):
+	'''
+		Input: msg is text passed from calling function
+		Output: formatted_msg sent to screen
+		Summary: this function formats the width, etc. of the input and
+		returns the value
+	'''
+	formatted_msg = ''
+	if msg is not None:
+		# do stuff
+	else:
+		log_error('Blank message sent to gen_msg')
+		
+	return formatted_msg
+
+	
+def is_human(obj):
+	'''
+		Input: obj
+		Output: result
+		Summary: returns TRUE if obj is a human being
+			this could probably just be an obj attribute instead...
+	'''
+	result = FALSE
+	if obj.type = 'human':
+		result = TRUE
+	
+	return result
+	
+	
+def send_msg(input):
+	'''
+		Input: 
+		Output: 
+		Summary: 
+	'''
+	
+	return output
+	
+	
+def update_pos(obj):
+	'''
+		Input: obj
+		Output: N/A
+		Summary: this function updates obj.pos based upon its status.
+		obj.pos is checked for before various actions can be performed.
+	'''
+	if obj.status = '1':
+		obj.pos = 'one'
+	elif obj.status = '2':
+		obj.pos = 'two'
+	else:
+		log_error('Unknown status passed to update_pos')
+	
+	
+def swap(input1, input2):
+	'''
+		Input: input1, input2 (2 values)
+		Output: list?
+		Summary: this function swaps one input with the other
+	'''
+	tmp = input1
+	input1 = input2
+	input2 = tmp
+	output(input1, input2)
+	
+	return output
+	
+	
+def example(input):
+	'''
+		Input: 
+		Output: 
+		Summary: 
+	'''
+	
+	return output

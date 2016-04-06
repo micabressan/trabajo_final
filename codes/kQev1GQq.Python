@@ -1,0 +1,3 @@
+import pyodbc
+con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (dsn, user, password, database)
+cnxn = pyodbc.connect(con_string)

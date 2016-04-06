@@ -1,0 +1,30 @@
+.menuknoppen {
+    position: fixed;
+    top: 50%;
+    top: calc(50% - 99px);
+    right: 5px;
+    z-index: 1000;
+    padding: 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.5);
+    border-radius: 5px;
+   }
+
+   
+
+   .menuknoppen a{
+    width:23px;
+    height:22px;
+    display: block;
+
+    float: right;
+    clear:right;
+    margin-top:10px;
+    background-image: url('Assets/menuknop.png');
+    background-size: contain;
+   }
+
+   .menuknoppen a:hover{
+        background-image: url('Assets/menuknophover.png');
+
+   }

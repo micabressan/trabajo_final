@@ -1,0 +1,19 @@
+pub struct BatchFactory<'a> {
+    batch_vertex_arrays: &'a mut Vec<Vec<Vertex>>,
+    batch_index_arrays: &'a mut Vec<Vec<u32>>,
+    num_layers: u32,
+}
+
+impl<'a> BatchFactory<'a> {
+    pub fn new() -> BatchFactory<'a> {
+        BatchFactory{
+            batch_vertex_arrays: & mut  Vec::new(),
+            batch_index_arrays: & mut Vec::new(),
+            num_layers: 0,
+        }
+    }
+}
+
+error: borrowed value does not live long enough batch_vertex_arrays: & mut  Vec::new()
+
+note: reference must be valid for the lifetime 'a as defined on the block at ...

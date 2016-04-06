@@ -1,0 +1,112 @@
+using UnityEngine;
+using System.Collections;
+
+// Simplyfies interface of Charater
+public class CharacterFacade : MonoBehaviour
+{
+	#region Inspector
+	public CustomizableCharacter m_characterPrefab;
+	#endregion
+
+	public event System.Action CharacterReady;
+
+	protected CustomizableCharacter m_character;
+	protected ConstraintApplier m_constraintApplier;
+
+	private CustomizationComponentLibrary m_componentLibrary;
+	private Transform m_moveableCharacterPart;
+	private Transform m_moveableCharacterRoot;
+
+	public Vector3 Position
+	{
+		get { return m_moveableCharacterPart.position; }
+	}
+
+	// for reading root of the skeleton
+	// root is a transform on the floor
+	// that is moving with constant speed
+	// good for camera tracking on the model
+	public Vector3 Root
+	{
+		get { return m_moveableCharacterRoot.position; }
+	}
+
+	public void CreateModel(Vector3 position, Quaternion rotation)
+	{
+		if (m_character != null)
+			return;
+
+		m_componentLibrary = OutfitManager.Instance.CustomizationComponents;
+
+		m_character = (CustomizableCharacter)Instantiate(m_characterPrefab);
+		m_character.transform.localScale = Vector3.one;
+		m_character.transform.rotation = rotation;
+		m_character.Initialize(m_componentLibrary.Components, true);
+
+		//CustomizationOptions outfitConfiguration = OutfitConfigurationContainer.Catwalk == null ?
+		//	m_componentLibrary.GetDefaultConfiguration() :
+		//	OutfitConfigurationContainer.Catwalk;
+		var configuration = m_componentLibrary.GetDefaultConfiguration();
+
+		m_character.ConfigurationApplied += HandleConfigurationApplied;
+		m_character.Create(configuration);
+
+		m_constraintApplier = new ConstraintApplier(m_componentLibrary, m_character);
+		foreach (var wi in Player.Instance.CurrentOutfit)
+		{
+			m_constraintApplier.Apply(wi);
+		}
+	}
+
+	#region Messages
+	#endregion
+
+	#region Event handlers
+	private void HandleConfigurationApplied()
+	{
+		m_moveableCharacterPart = GetMoveableCharacterPart();
+
+		// find root part in skeleton
+		// root is on the floor and is moving with constant speed without giggling
+		m_moveableCharacterRoot = GetMoveableCharacterRoot();
+
+		if (CharacterReady != null)
+			CharacterReady();
+	}
+	#endregion
+
+	private Transform GetMoveableCharacterRoot()
+	{
+		const string BottonSubName = "BOTTOM";
+		const string BottonRootName = "Root";
+
+		Transform[] transforms = m_character.GetComponentsInChildren<Transform>();
+		Transform movebleCharacterPart = System.Array.Find(transforms, (Transform t) =>
+		{
+			return t.name.Contains(BottonSubName);
+		});
+
+		if (movebleCharacterPart != null)
+			movebleCharacterPart = movebleCharacterPart.FindChild(BottonRootName);
+		else
+			Debug.LogError("Couldn't find " + BottonSubName + " node");
+
+		if (movebleCharacterPart != null)
+			return movebleCharacterPart;
+		else
+			return GetMoveableCharacterPart();
+	}
+
+	private Transform GetMoveableCharacterPart()
+	{
+		const string HeadSubName = "TM_Head";
+
+		Transform[] transforms = m_character.GetComponentsInChildren<Transform>();
+		Transform movebleCharacterPart = System.Array.Find(transforms, (Transform t) =>
+		{
+			return t.name.Contains(HeadSubName);
+		});
+
+		return movebleCharacterPart;
+	}
+}

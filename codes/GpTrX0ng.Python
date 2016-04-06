@@ -1,0 +1,45 @@
+import random
+
+def possMove(a, b):
+    mo = [[0, 1], [1, 0], [1, 1], [2, 0], [0, 2]]
+    r = []
+    for m in mo:
+        if m[0] > a[0] or m[1] > a[1]: #can't send more than have
+            continue
+        if check(b, m) or check(a, map(lambda x: -x, m)):
+            continue
+        r.append(m)
+
+    return r
+
+def check(a, m):
+    k = map(lambda x, y: x + y, a, m)
+    if k[0] > k[1] and k[1] > 0:
+        return True
+    return False
+
+def doMove(a, b, m):
+    a = map(lambda x, y: x - y, a, m)
+    b = map(lambda x, y: x + y, a, m)
+
+def reset():
+    return [3, 3], [0, 0]
+
+def find():
+    a, b = reset()
+    while b != [3, 3]:
+        #send
+        m = possMove(a, b)
+        if m == []:
+            a, b = reset()
+            continue
+        doMove(a, b, m[random.randrange(len(m))])
+        #rec
+        m = possMove(b, a)
+        if m == []:
+            a, b = reset()
+            continue
+        doMove(b, a, m[random.randrange(len(m))])
+    print "done"
+
+find()

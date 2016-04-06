@@ -1,0 +1,22 @@
+one_line_obj => a:1, b:2
+
+Circle =>
+    construct:
+        fun(radius) ->
+            circle = Object.construct(this)
+            circle.radius = radius
+            return circle
+    radius: null
+    area: () -> return 3.14 * radius * radius
+
+a = Circle.construct(10)
+print(a.area)  // 314
+
+b = Circle.construct(5)
+print(b.area)  // 78.5
+
+Some things to note:
+    => denotes a new object definition
+    -> denotes a new function definition
+    : separates a property name and value
+    prototypal inheritance

@@ -1,0 +1,96 @@
+ul.enlarge{
+	list-style-type:none;
+	margin-left:0;
+	display:inline-block;
+}		
+		
+ul.enlarge li{
+	display:inline-block;		/* places the image in a line */
+	position: relative;		/* allows precise positioning of the popup image when use position:abloslute */
+	z-index: 0;			/* reset the stack order of the list items */
+	margin:10px 40px 0 20px;	/* space between the images */
+}
+
+ul.enlarge div{
+	position:absolute;
+	left: -9999px;			 /*moves the div off the page, effectivly hidding it from view */
+	/*display:none;*/
+}
+
+ul.enlarge img{
+	/* give the thumbnails a frame */
+	background-color:#eae9d4;	/* frame color */
+	padding: 6px;			/* frame size */
+	/* add a drop shadow to the frame */
+	-webkit-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+	-moz-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+	-o-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+	box-shadow: 0 0 6px rgba(132,132,132,.75);
+	/* and give the corners a small curve*/
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+}
+
+ul.enlarge li:hover{
+	z-index:50;
+	cursor:pointer;
+}
+
+ul.enlarge li:hover div{
+	top: +30px;
+	left:+20px;
+}
+
+/* to make it look neater we used :ntd-child to set a different left distance for each image */
+/* Dit zijn childeren van de li, dus als hij er 5 maakt gaat hij na de 1,2,3de -100px left, bij 
+ * de 1,2,3,4 gaat hij -200px left.
+ */
+ul.enlarge li:hover:nth-child(2) div{
+	left:-100px;
+}
+
+ul.enlarge li:hover:nth-child(3) div{
+	left:-200px;
+}
+
+
+/* override the styling of image set in "ul.enlarge img" to make the frame smaller and the background darker */
+ul.enlarge div img{
+	padding: 2px;
+	background: #ccc;
+}
+
+/* style the <div> contianing the framed images and caption */
+ul.enlarge div{
+	position:absolute;
+/* Style the frame */
+	padding: 5px;
+	background:#eae9d4;
+/* add a drop shadow to the frame */
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.75);
+	-moz-box-shadow: 0 0 20px rgba(0,0,0 .75);
+	-o-box-shadow: 0 0 20px rgba(0,0,0 .75);
+	box-shadow: 0 0 20px rgba(0,0,0,.75);
+/* give the corners a curve */
+	-webkit-border-radius: 8px;
+	-moz-border-radius:8px;
+	-o-border-radius:8px;
+	border-radius:8px;
+/* style the caption */
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 7pt;
+	text-align:center;
+	color:#495a62;
+	pointer-events:none;
+}
+/* probeer de link onder het plaatje te krijgen */
+
+a{
+	display:inline;
+}
+
+a:hover{
+	pointer-events:on;
+}

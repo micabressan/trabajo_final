@@ -1,0 +1,116 @@
+from pydub import AudioSegment
+from pydub.playback import play
+import os, sys, time, re, thread
+
+SupportedFiletypes = ["mp3", "ogg", "flv", "wav", "mp4", "wma"]
+LoadedFiles = []
+LoadedFileNames = []
+PlayThread = None
+
+def getPathFiles(path, filter):
+	files = os.listdir(path)
+
+	for i in range(len(files) - 1, -1 , -1):
+		if re.search(".*\." + filter, files[i]) is None:
+			print "Removed file: " + files[i]
+			files.remove(files[i])
+		else:
+			print "Found file: " + files[i]
+
+	return files
+
+
+def openFolder():
+	path = raw_input("Path to folder:\n")
+
+	if not path.endswith(os.sep):
+		path = path + os.sep
+
+	FiletypeString = "Please choose which type of file you would like to open:\n"
+
+	for i in range(0, len(SupportedFiletypes)):
+		FiletypeString = FiletypeString + "[ " + str(i) + " ] " + SupportedFiletypes[i] + "\n"
+
+
+	filetype = SupportedFiletypes[input(FiletypeString)]
+	files = getPathFiles(path, filetype)
+
+	for i in range(0, len(files)):
+
+		print "Loading files percentage done:\t", ((i * 100) / (len(files)))
+
+		LoadedFiles.append(AudioSegment.from_file(path + str(files[i]), filetype))
+		LoadedFileNames.append(files[i])
+
+def openFile():
+	path = raw_input("Path to file:\n")
+
+	print "path: ", path
+
+	for i in range(0, len(SupportedFiletypes)):
+		print "checking filetype: ", SupportedFiletypes[i]
+
+		if path.endswith(SupportedFiletypes[i]):
+			LoadedFiles.append(AudioSegment.from_file(path, SupportedFiletypes[i]))
+
+			PathList = path.split(os.sep)
+			LoadedFileNames.append(PathList[len(PathList) - 1].replace(os.sep, ""))
+			print "File loaded, filetype: [" + SupportedFiletypes[i] + "]"
+
+			break
+		elif i >= len(SupportedFiletypes) - 1:
+			print "Filetype not supported!"
+
+def playFileThread(ThreadName, Segment):
+	
+	play(Segment)
+
+def playFile():
+
+	print "What would you like to hear?\n"
+	
+	for i in range(0, len(LoadedFileNames)):
+		print "[ " + str(i) + " ] - " + LoadedFileNames[i]
+
+	index = input("NUM: ")
+
+	try:
+		PlayThread = thread.start_new_thread(playFileThread, ("PlayThread", LoadedFiles[index]))
+	except:
+		print "Error cannot create new thread!"
+
+	print "Playing: " + LoadedFileNames[index]
+
+def printUsageInfo():
+	print "To open a file type 'openfile'.\nTo open a folder type 'openfolder'."
+	print "To play a loaded file type 'playfile'."
+	print "To exit type 'exit'.\n\n\t###Type 'help' to see this message again.###\n\n"
+
+Running = True
+FirstRun = True
+
+while Running:
+
+	if FirstRun:
+		print "Welcome to Devil's awesome music player!\n\n"
+		printUsageInfo()
+		FirstRun = False
+	else:
+
+		try:
+			command = raw_input("Enter command: ")
+
+			if command == "openfile":
+				openFile()
+			elif command == "openfolder":
+				openFolder()
+			elif command == "playfile":
+				playFile()
+			elif command == "help":
+				printUsageInfo()
+			elif command == "exit":
+				Running = False
+			else:
+				print "Unkown command: " + command
+		except KeyboardInterrupt:
+			print "Canceld\n"

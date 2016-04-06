@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+
+import random
+
+hunter_cards = [
+  {'cost': 9, 'damage': 8, 'spell': False},
+  {'cost': 7, 'damage': 5, 'spell': False},
+  {'cost': 7, 'damage': 0, 'spell': False},
+  {'cost': 7, 'damage': 0, 'spell': False},
+  {'cost': 6, 'damage': 0, 'spell': True},
+  {'cost': 6, 'damage': 0, 'spell': False},
+  {'cost': 6, 'damage': 6, 'spell': True},
+  {'cost': 6, 'damage': 5, 'spell': True},
+  {'cost': 5, 'damage': 0, 'spell': False},
+  {'cost': 5, 'damage': 0, 'spell': False},
+  {'cost': 5, 'damage': 0, 'spell': False},
+  {'cost': 5, 'damage': 0, 'spell': False},
+  {'cost': 4, 'damage': 3, 'spell': True},
+  {'cost': 4, 'damage': 0, 'spell': False},
+  {'cost': 4, 'damage': 0, 'spell': False},
+  {'cost': 4, 'damage': 3, 'spell': False},
+  {'cost': 3, 'damage': 4.0 / 3.0, 'spell': True},
+  {'cost': 3, 'damage': 0, 'spell': True},
+  {'cost': 3, 'damage': 5, 'spell': True},
+  {'cost': 3, 'damage': 2, 'spell': True},
+  {'cost': 3, 'damage': 1, 'spell': True},
+  {'cost': 3, 'damage': 0, 'spell': False},
+  {'cost': 3, 'damage': 0, 'spell': False},
+  {'cost': 3, 'damage': 0, 'spell': False},
+  {'cost': 2, 'damage': 2, 'spell': False},
+  {'cost': 2, 'damage': 0, 'spell': True, 'draw': True},
+  {'cost': 2, 'damage': 2, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': True, 'draw': True},
+  {'cost': 2, 'damage': 0, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': True, 'lnl': True},
+  {'cost': 2, 'damage': 0, 'spell': True},
+  {'cost': 2, 'damage': 3, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': True},
+  {'cost': 2, 'damage': 0, 'spell': False},
+  {'cost': 2, 'damage': 0, 'spell': False},
+  {'cost': 2, 'damage': 0, 'spell': False},
+  {'cost': 1, 'damage': 2, 'spell': True},
+  {'cost': 1, 'damage': 0, 'spell': True, 'draw': True},
+  {'cost': 1, 'damage': 0, 'spell': False},
+  {'cost': 1, 'damage': 0, 'spell': False},
+  {'cost': 1, 'damage': 0, 'spell': False},
+  {'cost': 0, 'damage': 3, 'spell': True}
+]
+
+def random_card():
+  return hunter_cards[random.randint(0, len(hunter_cards) - 1)]
+
+def simulate(free_cards, mana):
+  lnl_depth = 1
+  drawn = 0
+  damage = 0
+  did_anything = True
+  cards = [random_card() for x in xrange(free_cards)]
+  while did_anything:
+    did_anything = False
+    spells = [x for x in cards if x['spell']]
+    if len(spells) > 0:
+      cheapest_spell = sorted(spells, key = lambda x: x['cost'])[0]
+      if cheapest_spell['cost'] <= mana:
+        did_anything = True
+        mana -= cheapest_spell['cost']
+        cards.remove(cheapest_spell)
+        newly_drawn = lnl_depth + (1 if 'draw' in cheapest_spell else 0)
+        drawn += newly_drawn
+        cards.extend(random_card() for x in xrange(newly_drawn))
+        cards = cards[:10]
+        damage += cheapest_spell['damage']
+        lnl_depth += 1 if ('lnl' in cheapest_spell) else 0
+  #TODO?: damage knapsack
+  return drawn
+
+SIMULATIONS = 10000
+
+def average(fn):
+  return float(sum(fn() for x in xrange(SIMULATIONS))) / SIMULATIONS
+
+def build_grid():
+  return [[average(lambda: simulate(cards, mana)) for cards in xrange(10)] for mana in xrange(10)]
+
+def reddit_format(grid):
+  return "\n".join("|".join(str(x) for x in row) for row in grid)
+
+if __name__ == "__main__":
+  print reddit_format(build_grid())

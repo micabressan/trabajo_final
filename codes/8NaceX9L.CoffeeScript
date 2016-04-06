@@ -1,0 +1,8 @@
+# bluebird do notation (RedNifre)
+
+Promise.do [
+	read(tracePath)
+	_.map Trace.toString
+	_.join '\n\n'
+	console.log
+]

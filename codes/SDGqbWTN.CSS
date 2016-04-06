@@ -1,0 +1,113 @@
+ 
+.one-menu-fw img { position: absolute; top: 25px; left: 10px; }
+.one-menu { position:relative; }
+.one-menu li { padding: 0!important; }
+.login-area { position: absolute; top: 38px; right: 70px; }
+.login-area a { font-family: 'Lato';font-weight: 300;}
+.login-area a:hover { font-family: 'Lato';font-weight: 300; }
+ 
+.one-menu-fw{
+    position: fixed;
+    width: 100%;
+    font-size: 18px;
+    background-color: #FF9016;
+    font-family: 'Lato';
+    font-weight: 300;
+    font-size: 20px;
+}
+.one-menu-fw .one-menu {
+    display: flex;
+    display: -webkit-box;
+    /*display: inline-flex;*/
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    padding: 0px 200px;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #FF9016;
+}
+.one-menu-fw .one-menu{
+    color: #fff;
+    text-decoration: none;
+}
+.one-menu-fw .one-menu .menu{
+    display: flex;
+    display: -webkit-box;
+    display: inline-flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    list-style-type: none;
+    position:absolute;
+    right: 200px; top: 15px;
+}
+.one-menu-fw .one-menu .menu .item{
+    margin-right: 5px;
+}
+.one-menu-fw .one-menu .menu .submenu{
+    position: absolute;
+    list-style-type: none;
+    display: none;
+    padding-top: 10px;
+    color: #000;
+    top: 25px;
+    border-radius: 3px;
+}
+.one-menu-fw .one-menu .menu .item-content{
+    padding: 10px;
+}
+.one-menu-fw .one-menu .menu .item:hover .item-content{
+    background-color: #fff;
+    color: #FF9016;
+    border-radius: 3px;
+    padding: 10px;
+}
+.one-menu-fw .one-menu .menu .item:hover a{
+    color: #000;
+}
+.one-menu-fw .one-menu .menu .item:hover .submenu{
+    display: block;
+}
+.one-menu-fw .one-menu .menu .item:hover .submenu .subitem:hover{
+    display: block;
+    color: #FF9016;
+}
+.one-menu-fw .one-menu .menu .subitem{
+    background-color: #FFF;
+    padding: 10px 10px 10px;
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.20);
+}
+.one-menu-fw .one-menu .menu .submenu li:first-child .subitem{
+    border-radius: 3px 3px 0px 0px;
+}
+.one-menu-fw .one-menu .menu .submenu li:last-child .subitem{
+    border-radius: 0px 0px 3px 3px;
+}
+.one-menu-fw .one-menu .login-area a{
+    margin-right: 10px;
+    border-radius: 3px;
+}
+.one-menu-fw .one-menu .login-area .sign-up{
+    padding: 10px;
+    background-color: #E08728;
+}
+.one-menu-fw .one-menu .active{
+    color: #FF9016;
+ 
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+}
+.box-shadow-menu{
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.20);
+}
+.one-menu-fw .one-menu a{
+    color: inherit;
+    text-decoration: inherit;
+}
+.one-menu-fw .one-menu ul{
+    padding-left: 0px;
+}
+ 
+ 
+.login-area .menu ul {     display: relative;right: -70px;top: -24px; }

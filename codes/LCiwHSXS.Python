@@ -1,0 +1,14 @@
+import urllib2
+from bs4 import BeautifulSoup as bs
+url=urllib2.urlopen("http://www.advfn.com/nasdaq/nasdaq.asp").read()
+soup=bs(url)
+tbl=soup.find('table',{'class':'market tab1'})
+
+#print tbl
+tr=tbl.findAll('tr')
+for i in range(len(tr)):
+	try:
+		tdl=tr[i].findAll('td')
+		print tdl[1].getText()
+	except:
+		pass

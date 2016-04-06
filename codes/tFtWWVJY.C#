@@ -1,0 +1,9 @@
+var actions = obj.GetComponents<IInteractable>();
+var menu = Instantiate(menu);
+foreach (var action in actions)
+{
+	var button = Instantiate(menuButton);
+	menuButton.text = action.Text;
+	menuButton.OnClick += action.action;
+	menuButton.Transform.SetParent(menu);
+}

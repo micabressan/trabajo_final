@@ -1,0 +1,9 @@
+            <customer_save_before>
+                <observers>
+                    <euvat_customer_save_before>
+                        <type>singleton</type>
+                        <class>Pisc_Euvat_Model_Observer</class>
+                        <method>eventCustomerSaveBefore</method>
+                    </euvat_customer_save_before>
+                </observers>
+            </customer_save_before>

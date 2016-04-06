@@ -1,0 +1,14 @@
+  (defn f [x*]
+    (let [tmp* (atom nil)]
+      (swap! x* (fn [old-x]
+                  (let [i (count old-x)
+                        new-x (conj old-x i)]
+                    (Thread/sleep 5000)
+                    (reset! tmp* i)
+                    new-x)))
+      (println @tmp*)))
+  (def a* (atom []))
+  (do
+    (future (f a*))
+    (Thread/sleep 1000)
+    (reset! a* [1 2 3]))

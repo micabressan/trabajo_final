@@ -1,0 +1,6 @@
+>>> from pwn import *
+>>> buff = cyclic(25)
+>>> buff
+'aaaabaaacaaadaaaeaaafaaag'
+>>> cyclic_find('baaa')
+4

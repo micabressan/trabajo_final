@@ -1,0 +1,4 @@
+(test_app@computer)70> {ok, P1} = gun:open("api.cryptsy.com/api/v2", 443).          
+{ok,<0.410.0>}
+(test_app@computer)71> flush().
+ok

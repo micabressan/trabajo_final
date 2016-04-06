@@ -1,0 +1,122 @@
+<div style="width:100%; background:#27a9c1; margin-bottom:30px; min-width:400px;"class="navbar navbar-default">
+  	<a href="#" data-activates="slide-out" class="button-collapse"><i style="padding-top:22px;color:#fff;font-size:25px;"class="glyphicon glyphicon-list"></i></a>
+ 			
+ 		<div style="float:left; margin-left:15px; padding-top:20px; "class="video" >
+    		<ul id="slide-out" class="side-nav full">
+ 					
+ 				<div class="logo">
+      				<img src="images/olivemedialogo.png">    
+      		 	</div>  
+				 
+				<div class="form-group">
+	
+				        <div style="float:left"class="checkbox checkbox-primary">
+		                    <label style="font-size:14px;color:#000">
+		                        <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> Videos
+		                    </label>
+		                </div> 
+		                
+
+		                <div style="display:inline;" class="checkbox checkbox-primary">
+		                    <label style="font-size:14px; margin-top:9px; margin-left:20px; color:#000">
+		                        <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> Playlists
+		                    </label>
+		                </div> 
+		        </div>
+
+    				<ul>
+
+        				<li><a href="#" class="nav_head"> Induction</a></li>
+        				<li><a href="#" class="nav_head">Safety</a></li>
+        				<li><a href="#" class="nav_head"> Media</a></li>
+        				<li><a href="#" class="nav_head"> Tech</a></li>
+        				<li><a href="#" class="nav_head"> Entertainment</a></li>
+        				<li><a href="#" class="nav_head"> 3D</a></li>
+        				<li><a href="#" class="nav_head"> e-Response</a></li>
+        				<li><a href="#" class="nav_head"> HiHo</a></li>
+        				<li><a href="#" class="nav_head"> AcademyHQ</a></li>
+        				<li><a href="#" class="nav_head"> Citadel BMS</a></li>
+            		</ul>
+
+            </ul>
+
+    	</div>
+
+
+  		
+  		<div style="float:right"class="header_right">
+
+  			<form style="display:inline; float:left;">
+          		<input type="search"><span style="padding-top:25px; margin-right:20px; color:#fff"class="material-icons" >search</span>
+        	</form>
+
+			<div style="margin-right:15px;padding-top:25px; padding-bottom:10px;float:right;"class="dropdown">
+        		<a href="http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+        			<img style="border-radius:50%; width:35px; margin-bottom:5px; "src="images/member.png">
+        			<b style="color:#fff;font-size:25px;" class="mdi-navigation-more-vert"></b>
+        		</a>
+       				
+       				<ul style="left:auto"class="dropdown-menu pull-right">
+          				<li><a href="#">Account Settings</a></li>
+          				<li style="background-color:#BFBDBD;" class="divider"></li>
+          				<li><a href="#">Logout</a></li>
+          			</ul>	
+      		</div>
+
+      	</div>
+
+</div>
+
+
+<style type="text/css">
+
+.side-nav{
+ 	overflow: hidden;
+  	position: fixed;
+  	left: 0;
+  	top: 0;
+  	bottom: 0;
+  	width: 250px;
+  	height: 100%;
+  	background: #fff;
+  	padding: 0px;
+}
+
+.side-nav .nav_head{
+	padding-top: 5px;
+}
+
+.logo img{
+	width: 180px;
+	height: 180px;
+	background-color: #fff;
+	margin-left: 35px;
+}
+
+.side-nav li{
+	background: #FFF;
+  	color: #000;
+  	padding: 0px;
+}
+
+.side-nav a {
+  	/*text-transform: uppercase;*/
+ 	color: #000;
+  	width: 100%;
+  	display: block;
+  	padding: 1em;
+  	font-size: 15px;
+}
+
+.side-nav a:hover {
+  	background:#27b79b;
+  	color:#000;
+  	text-decoration: none;
+}
+</style>
+
+
+<script type="text/javascript">
+  // Initialize collapse button
+  $(".button-collapse").sideNav();
+</script>

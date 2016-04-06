@@ -1,0 +1,22 @@
+diff --git a/etc/launchd/daemons/Makefile.am b/etc/launchd/daemons/Makefile.am
+index 5df34a6..3118e33 100644
+--- a/etc/launchd/daemons/Makefile.am
++++ b/etc/launchd/daemons/Makefile.am
+@@ -2,11 +2,12 @@ AUTOMAKE_OPTIONS = subdir-objects
+ 
+ include $(top_srcdir)/etc/launchd/daemons/launchd-daemons.am
+ 
+-EXTRA_DIST = \
+-	$(top_srcdir)/etc/launchd/daemons/org.openzfsonosx.zconfigd.plist.in \
+-	$(top_srcdir)/etc/launchd/daemons/org.openzfsonosx.zed.plist.in \
+-	$(top_srcdir)/etc/launchd/daemons/org.openzfsonosx.zpool-import-all.plist.in \
+-	$(top_srcdir)/etc/launchd/daemons/org.openzfsonosx.InvariantDisks.plist.in
++DEMON_DIR = $(top_srcdir)/etc/launchd/daemons
++
++$(DEMON_DIR)/org.openzfsonosx.zconfigd.plist: $(DEMON_DIR)/org.openzfsonosx.zconfigd.plist.in
++$(DEMON_DIR)/org.openzfsonosx.zed.plist: $(DEMON_DIR)/org.openzfsonosx.zed.plist.in
++$(DEMON_DIR)/org.openzfsonosx.zpool-import-all.plist: $(DEMON_DIR)/org.openzfsonosx.zpool-import-all.plist.in
++$(DEMON_DIR)/org.openzfsonosx.InvariantDisks.plist: $(DEMON_DIR)/org.openzfsonosx.InvariantDisks.plist.in
+ 
+ $(launchddaemon_DATA):
+ 	-$(SED) -e 's,@bindir\@,$(bindir),g' \

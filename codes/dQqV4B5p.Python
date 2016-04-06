@@ -1,0 +1,175 @@
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.lang import Builder
+from kivy.clock import Clock
+from kivy.properties import ObjectProperty, ReferenceListProperty, NumericProperty
+from kivy.vector import Vector
+import math, random
+
+Builder.load_string("""
+<CircOne>:
+    canvas:
+        Color:
+            rgb: 1,0,0
+        Ellipse:
+            size: self.size
+            pos: self.pos
+<CircTwo>:
+    canvas:
+        Color:
+            rgb: 1,0,1
+        Ellipse:
+            size: self.size
+            pos: self.pos
+<Root>:
+    c1: c1
+    c2: c2
+    CircOne:
+        id: c1
+        center: root.center
+    CircTwo:
+        id: c2
+        pos: root.center_x, 0
+""")
+
+class CircOne(Widget):
+    vel_x = NumericProperty(4)
+    vel_y = NumericProperty(0)
+    velocity = ReferenceListProperty(vel_x, vel_y)
+
+    def __init__(self, **kwargs):
+        super(CircOne, self).__init__(**kwargs)
+        self.angle = 0
+        self.speed = 10
+        self.radius = self.width / 2
+        self.elasticity = 1
+        self.gravity = (math.pi, 0.002)
+        self.drag = 0.999
+
+    def on_touch_move(self, touch):
+        self.pos = touch.pos
+
+
+class CircTwo(Widget):
+    vel_x = NumericProperty(0)
+    vel_y = NumericProperty(4)
+    velocity = ReferenceListProperty(vel_x, vel_y)
+
+    def __init__(self, **kwargs):
+        super(CircTwo, self).__init__(**kwargs)
+        self.angle = 0
+        self.speed = 10
+        self.radius = self.width / 2
+        self.elasticity = 1
+        self.gravity = (math.pi, 0.002)
+        self.drag = 0.999
+
+    def update(self):
+        (self.angle, self.speed) = addVectors((self.angle, self.speed), self.gravity)
+        self.x += math.sin(self.angle) * self.speed
+        self.y -= math.cos(self.angle) * self.speed
+        self.speed *= self.drag
+
+        if self.x > self.parent.width - self.radius:
+            self.x = 2 * (self.parent.width - self.radius) - self.x
+            self.angle = -self.angle
+            self.speed *= self.elasticity
+        elif self.x < 0:
+            self.x = 2 * self.radius - self.x
+            self.angle = -self.angle
+            self.speed *= self.elasticity
+        if self.y > self.parent.height - self.height:
+            self.y = 2 * (self.parent.height - self.height) - self.y
+            self.angle = math.pi - self.angle
+            self.speed *= self.elasticity
+        elif self.y <= 0:
+            self.y -= -1
+            print self.y
+            self.angle = math.pi - self.angle
+            self.speed *= self.elasticity
+
+
+
+
+class Root(Widget):
+    c1 = ObjectProperty(None)
+    c2 = ObjectProperty(None)
+
+    def update(self, dt):
+        #self.c1.update()
+        self.c2.update()
+        self.collide(self.c1, self.c2)
+
+    def collide(self, p1, p2):
+        dx = p1.x - p2.x
+        dy = p1.y - p2.y
+
+        p1_radius = p1.width / 2
+        p2_radius = p2.width / 2
+
+        distance = math.hypot(dx, dy)
+        if distance < p1_radius + p2_radius:
+            tangent = math.atan2(dy, dx)
+            angle = 0.5 * math.pi + tangent
+
+            angle1 = 2*tangent - p1.angle
+            angle2 = 2*tangent - p2.angle
+            speed1 = p2.speed * p1.elasticity
+            speed2 = p1.speed * p2.elasticity
+
+            (p1.angle, p1.speed) = (angle1, speed1)
+            (p2.angle, p2.speed) = (angle2, speed2)
+            print 'angle', p1.angle, p2.angle
+            p1.x += math.sin(angle)
+            p1.y -= math.cos(angle)
+            p2.x += math.sin(angle)
+            p2.y -= math.cos(angle)
+            if p1.x == p2.x:
+                p2.x += math.sin(angle)
+            elif p1.y == p2.y:
+                p2.y -= math.cos(angle)
+
+
+class CircleApp(App):
+    def build(self):
+        root = Root()
+        Clock.schedule_interval(root.update, 1.0/60.0)
+        return root
+
+def collide(p1, p2):
+    dx = p1.x - p2.x
+    dy = p1.y - p2.y
+
+    p1_radius = p1.width / 2
+    p2_radius = p2.width / 2
+
+    distance = math.hypot(dx, dy)
+    if distance < p1_radius + p2_radius:
+        tangent = math.atan2(dy, dx)
+        angle = 0.5 * math.pi + tangent
+
+        angle1 = 2*tangent - p1.angle
+        angle2 = 2*tangent - p2.angle
+        speed1 = p2.speed * self.elasticity
+        speed2 = p1.speed * self.elasticity
+
+        (p1.angle, p1.speed) = (angle1, speed1)
+        (p2.angle, p2.speed) = (angle2, speed2)
+
+        p1.x += math.sin(angle)
+        p1.y -= math.cos(angle)
+        p2.x += math.sin(angle)
+        p2.y -= math.cos(angle)
+
+
+def addVectors((angle1, length1), (angle2, length2)):
+    x  = math.sin(angle1) * length1 + math.sin(angle2) * length2
+    y  = math.cos(angle1) * length1 + math.cos(angle2) * length2
+
+    angle = 0.5 * math.pi - math.atan2(y, x)
+    length  = math.hypot(x, y)
+
+    return (angle, length)
+
+if __name__=='__main__':
+    CircleApp().run()

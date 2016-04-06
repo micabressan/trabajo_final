@@ -1,0 +1,20 @@
+"Commands"
+{
+	"PlayerCommands"
+	{
+		"Smash"
+		{
+			"cmd"			"sm_smash #1"
+			"admin"			"sm_ban"
+			"execute"		"player"
+			"1"
+			{
+				"type" 		"player"
+				"method"	"name"
+				"title"		"Player to smash"
+ 
+			}
+ 
+		}
+	}
+}

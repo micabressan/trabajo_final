@@ -1,0 +1,8 @@
+user> (def guys-name-map
+  {:f-name "Guy" :m-name "Lewis" :l-name "Steele"})
+
+#'user/guys-name-map
+user> (let [{f-name :f-name, :as whole-name} guys-name-map]
+  whole-name)
+{:f-name "Guy", :m-name "Lewis", :l-name "Steele"}
+user>

@@ -1,0 +1,5 @@
+saldo = data.H2M(rec(posSaldo), "HHMM")) 'Glijtijdsaldo in minuten
+cycle = data.H2M(rec(posCycleTime), "HHMM")) 'Standaardtijd uit cyclus in minuten, 480 of 408
+cycle = cycle \ 2 'Gehele deling om halve dagen uit te rekenen
+tDays = saldo \ cycle
+tRest = MOD(saldo, cycle)

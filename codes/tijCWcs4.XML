@@ -1,0 +1,18 @@
+<xxxIPPhoneDirectory>
+<DirectoryEntry>
+<Name>Test1</Name>
+<Telephone>525001</Telephone>
+<Telephone>525002</Telephone>
+</DirectoryEntry>
+
+<DirectoryEntry>
+<Name>Test2</Name>
+<Telephone>625005</Telephone>
+<Telephone>625010</Telephone>
+</DirectoryEntry>
+
+<SoftKeyItem>
+<Name>0</Name>
+<URL> http://192.168.0.18:8000/Test1.xml </URL>
+</SoftKeyItem>
+</xxxIPPhoneDirectory>

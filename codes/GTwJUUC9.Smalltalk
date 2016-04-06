@@ -1,0 +1,108 @@
+variables:
+	# Axeman
+	{quests::axeman::name} = "§aAxeman"
+	{quests::axeman::lname} = "axeman"
+	{quests::axeman::requirements::1} = "Collect a stack of wood."
+	{quests::axeman::progress::*::1} = 64
+	{quests::axeman::slot} = 0
+	
+	# Farmer
+	{quests::farmer::name} = "§aFarmer"
+	{quests::farmer::lname} = "farmer"
+	{quests::farmer::requirements::1} = "Collect a stack of wheat."
+	{quests::farmer::progress::*::1} = 64
+	{quests::farmer::slot} = 1
+	
+	# Monster Killer
+	{quests::monsterkiller::name} = "§aMonster Killer"
+	{quests::monsterkiller::lname} = "monsterkiller"
+	{quests::monsterkiller::requirements::1} = "Kill 20 zombies."
+	{quests::monsterkiller::requirements::2} = "Kill 20 Skeletons."
+	{quests::monsterkiller::requirements::3} = "Kill 20 Creepers."
+	{quests::monsterkiller::progress::*::1} = 20
+	{quests::monsterkiller::progress::*::2} = 20
+	{quests::monsterkiller::progress::*::3} = 20
+	{quests::monsterkiller::slot} = 2
+	
+	{quests::*::active::*} = false
+	{quests::*::complete::*} = false
+
+command /activatequest <text> <player>:
+	trigger:
+		if {quests::%arg-1%::complete::%arg-2%} is false:
+			set {quests::%arg-1%::active::%arg-2%} to true
+		else:
+			message "§4Error: §cYou have already completed this quest!"
+
+command /quests:
+	trigger:
+		open chest with 1 row named "§6Quests" to player
+		wait 1 tick
+		loop {quests::*}:
+			set {q} to loop-value
+			set {qlore} to ""
+			loop {q::requirements::*}:
+				add "||§c" + loop-value to {qlore}
+			
+			set {qitem} to mushroom
+			
+			if {q::active::$%player%} is false:
+				if {q::complete::%player%} is false:
+					set {qitem} to book
+				else:
+					set {qitem} to paper
+			else:
+				set {qitem} to enchanted book
+			
+			format slot {q::slot} of player with {qitem} named {q::axeman::name} with lore {qlore} to run "activatequest %{q::lname}% %player%"
+
+on pickup of all wood:
+	if {quests::axeman::active::%player%} is true:
+		subtract 1 from {quests::progress::1::%player%}
+		if {quests::axeman::progress::%player%::1} is 0:
+			set {quests::farmer::active::%player%} to false
+			set {quests::farmer::complete::%player%} to true
+			message "§2Congratz! §aYou've completed the §6Axeman §a Quest!"
+
+on pickup of wheat:
+	if {quests::farmer::active::%player%} is true:
+		subtract 1 from {quests::progress::1::%player%}
+		if {quests::farmer::progress::%player%::1} is 0:
+			set {quests::farmer::active::%player%} to false
+			set {quests::farmer::complete::%player%} to true
+			message "§2Congratz! §aYou've completed the §6Farmer §a Quest!"
+
+on death of zombie:
+	if {quests::monsterkiller::active::%player%} is true:
+		subtract 1 from {quests::monsterkiller::progress::%player%::1}
+	if {quests::monsterkiller::progress::%player%::1} is less than 1:
+		if {quests::monsterkiller::progress::%player%::2} is less than 1:
+			if {quests::monsterkiller::progress::%player%::3} is less than 1:
+				set {quests::monsterkiller::active::%player%} to false
+				set {quests::monsterkiller::complete::%player%} to true
+				message "§2Congratz! §aYou've completed the §6Monster Killer §a Quest!"
+		
+
+on death of skeleton:
+	if {quests::monsterkiller::active::%player%} is true:
+		subtract 1 from {quests::monsterkiller::progress::%player%::2}
+	if {quests::monsterkiller::active::%player%} is true:
+		subtract 1 from {quests::monsterkiller::progress::%player%::1}
+	if {quests::monsterkiller::progress::%player%::1} is less than 1:
+		if {quests::monsterkiller::progress::%player%::2} is less than 1:
+			if {quests::monsterkiller::progress::%player%::3} is less than 1:
+				set {quests::monsterkiller::active::%player%} to false
+				set {quests::monsterkiller::complete::%player%} to true
+				message "§2Congratz! §aYou've completed the §6Monster Killer §a Quest!"
+
+on death of creeper:
+	if {quests::monsterkiller::active::%player%} is true:
+		subtract 1 from {quests::monsterkiller::progress::%player%::3}
+	if {quests::monsterkiller::active::%player%} is true:
+		subtract 1 from {quests::monsterkiller::progress::%player%::1}
+	if {quests::monsterkiller::progress::%player%::1} is less than 1:
+		if {quests::monsterkiller::progress::%player%::2} is less than 1:
+			if {quests::monsterkiller::progress::%player%::3} is less than 1:
+				set {quests::monsterkiller::active::%player%} to false
+				set {quests::monsterkiller::complete::%player%} to true
+				message "§2Congratz! §aYou've completed the §6Monster Killer §a Quest!"

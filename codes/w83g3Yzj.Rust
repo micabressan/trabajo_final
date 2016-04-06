@@ -1,0 +1,16 @@
+fn main() {
+    println!("Hello, world!");
+
+    loop {
+        let mut input = String::new();
+
+        io::stdin().read_line(&mut input)
+            .ok()
+            .expect("Failed to read line");
+
+        let input_command = match parse_command(&input) {
+            Ok(command) => command,
+            Err(_) => continue,
+        };
+    }
+}

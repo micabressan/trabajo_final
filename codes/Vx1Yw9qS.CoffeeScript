@@ -1,0 +1,15 @@
+APP.config ($routeProvider, $locationProvider) ->
+
+	$locationProvider.html5Mode true
+
+	$routeProvider.when "/", 
+		templateUrl : "/page/index.html"
+		controller  : "PageIndexController"
+
+	$routeProvider.when "/dashboard", 
+		templateUrl : "/page/dashboard.html"
+		controller  : "PageDashboardController"
+
+	$routeProvider.when "/dashboard/security",
+		templateUrl : "/page/dashboard/security.html"
+		controller 	: "PageDashboardSecurityController"

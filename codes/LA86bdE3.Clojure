@@ -1,0 +1,18 @@
+(ns fizzbuzz.core)
+
+(defn remainder-of-three? [number]
+  (= 0 (rem number 3)))
+
+(defn remainder-of-five? [number]
+  (= 0 (rem number 5)))
+
+(defn remainder-of-three-and-five? [number]
+  (and (remainder-of-three? number) (remainder-of-five? number)))
+
+
+(defn fizzbuzz [number]
+  (cond
+    (remainder-of-three-and-five? number) "fizz buzz"
+    (remainder-of-three? number) "fizz"
+    (remainder-of-five? number) "buzz"
+    :else ""))

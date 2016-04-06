@@ -1,0 +1,1 @@
+\\rx\bin$\psexec -s \\r01example "perl.exe" \\minerfiles.mst.edu\dfs\Software\appserv\firefox.esr.40.fix\forceesr.pl

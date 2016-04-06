@@ -1,0 +1,1 @@
+sytem_stm32f4xx.c(564): error:  #20: identifier "HSI_VALUE" is undefined

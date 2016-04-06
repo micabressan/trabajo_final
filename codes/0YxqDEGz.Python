@@ -1,0 +1,10 @@
+import sys
+
+if( len( sys.argv ) ) != 5:
+	raise Exception('É necessário a matriz completa.')
+listNumbers = sys.argv
+listNumbers.pop()
+castInt = lambda x : int(x)
+listNumbers = [ castInt(x) for x in range(len(listNumbers)) ]
+result = ( listNumbers[0] * listNumbers[3] ) - ( listNumbers[1] * listNumbers[2] )
+print( result )

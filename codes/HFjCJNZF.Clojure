@@ -1,0 +1,6 @@
+(def list-of-items
+  (atom {:items [{:item "program in clojure"} {:item "finish web app"} {:item "solve euler problems"}]}))
+
+;; doesn't work!
+;(swap! list-of-items assoc-in  :item "yolo") 
+;(swap! list-of-items assoc-in [id :item] "yolo")

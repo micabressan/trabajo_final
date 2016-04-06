@@ -1,0 +1,1 @@
+def find[A](boxes: Set[Box[_]], f: Box[A] => Boolean): Option[Box[A]] = boxes.view collect { case b: Box[A] => b } find f

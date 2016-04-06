@@ -1,0 +1,45 @@
+rednet.open("top")
+mon = peripheral.wrap("back")
+mon.setTextScale(2)
+mon.setTextColor(colors.lime)
+mon.setCursorPos(1,1)
+mon.write("FåA9licitations!")
+mon.setCursorPos(1,2)
+mon.setTextColor(colors.white)
+mon.write("Click ici pour")
+mon.setCursorPos(1,3)
+mon.write("enregistrer ta")
+mon.setCursorPos(1,4)
+mon.write("progression")
+mon.setCursorPos(4,5)
+mon.setTextColor(colors.gray)
+mon.write("<------")
+while true do
+  local player = os.pullEvent("player")
+  mon.setCursorPos(1,6)
+  mon.setTextColor(colors.gray)
+  mon.write(" Patientez... ")
+  rednet.send(989, player)
+  local id, message = rednet.receive(3)
+  if id == 989 then
+    if message == "ok" then
+      mon.setTextColor(colors.lime)
+      mon.setCursorPos(1,6)
+      mon.write("   ValidåA9 !   ")
+      sleep(2)
+      os.reboot()
+    elseif message == "skip" then
+      mon.setTextColor(colors.red)
+      mon.setCursorPos(1,6)
+      mon.write(" Etape sautåA9e ")
+      sleep(2)
+      os.reboot()
+    end
+  else
+    mon.setCursorPos(1,6)
+    mon.setTextColor(colors.red)
+    mon.write("   Erreur !   ")
+    sleep(2)
+    os.reboot()
+  end
+end

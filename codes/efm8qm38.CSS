@@ -1,0 +1,55 @@
+.itemGrid {
+	float:left;
+	background-image:url(../images/blacksmith/weapongrid.gif);
+	height:34px;
+	width:34px;
+	min-height:34px;
+	min-width:34px;
+}
+#listItem0 {background-position:0px 0px;}
+#listItem0:hover {background-position:0px -68px;}
+
+#listItem1 {background-position:-34px 0px;}
+#listItem1:hover {background-position:-34px -68px;}
+
+#listItem2 {background-position:-68px 0px;}
+#listItem2:hover {background-position:-68px -68px;}
+
+#listItem3 {background-position:-102px 0px;}
+#listItem3:hover {background-position:1px -68px;}
+
+#listItem4 {background-position:-136px 0px;}
+#listItem4:hover {background-position:1px -68px;}
+
+#listItem5 {background-position:-170px 0px;}
+#listItem5:hover {background-position:1px -68px;}
+
+#listItem6 {background-position:-204px 0px;}
+#listItem6:hover {background-position:1px -68px;}
+
+#listItem7 {background-position:-238px 0px;}
+#listItem7:hover {background-position:1px -68px;}
+
+#listItem8 {background-position:-272px 0px;}
+#listItem8:hover {background-position:1px -68px;}
+
+#listItem9 {background-position:-306px 0px;}
+#listItem9:hover {background-position:1px -68px;}
+
+#listItem10 {background-position:-340px 0px;}
+#listItem10:hover {background-position:1px -68px;}
+
+#listItem11 {background-position:-px 0px;}
+#listItem11:hover {background-position:1px -68px;}
+
+#listItem12 {background-position:-px 0px;}
+#listItem12:hover {background-position:1px -68px;}
+
+#listItem13 {background-position:-px 0px;}
+#listItem13:hover {background-position:1px -68px;}
+
+#listItem14 {background-position:-px 0px;}
+#listItem14:hover {background-position:1px -68px;}
+
+#listItem15 {background-position:-px 0px;}
+#listItem15:hover {background-position:1px -68px;}

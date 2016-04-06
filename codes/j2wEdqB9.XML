@@ -1,0 +1,391 @@
+    <Window.Resources>
+        <Style x:Key="ChartStyleCPU" TargetType="{x:Type chartingToolkit:Chart}">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Palette">
+                <Setter.Value>
+                    <visualizationToolkit:ResourceDictionaryCollection>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFB9D6F7"/>
+                                            <GradientStop Color="#FF284B70" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFB9D6F7"/>
+                                <GradientStop Color="#FF284B70" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFFBB7B5"/>
+                                            <GradientStop Color="#FF702828" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFFBB7B5"/>
+                                <GradientStop Color="#FF702828" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFB8C0AC"/>
+                                            <GradientStop Color="#FF5F7143" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFB8C0AC"/>
+                                <GradientStop Color="#FF5F7143" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFFDE79C"/>
+                                            <GradientStop Color="#FFF6BC0C" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFFDE79C"/>
+                                <GradientStop Color="#FFF6BC0C" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFA9A3BD"/>
+                                            <GradientStop Color="#FF382C6C" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFA9A3BD"/>
+                                <GradientStop Color="#FF382C6C" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFB1A1B1"/>
+                                            <GradientStop Color="#FF50224F" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFB1A1B1"/>
+                                <GradientStop Color="#FF50224F" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FF9DC2B3"/>
+                                            <GradientStop Color="#FF1D7554" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FF9DC2B3"/>
+                                <GradientStop Color="#FF1D7554" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFB5B5B5"/>
+                                            <GradientStop Color="#FF4C4C4C" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFB5B5B5"/>
+                                <GradientStop Color="#FF4C4C4C" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FF98C1DC"/>
+                                            <GradientStop Color="#FF0271AE" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FF98C1DC"/>
+                                <GradientStop Color="#FF0271AE" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFC1C0AE"/>
+                                            <GradientStop Color="#FF706E41" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFC1C0AE"/>
+                                <GradientStop Color="#FF706E41" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFADBDC0"/>
+                                            <GradientStop Color="#FF446A73" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFADBDC0"/>
+                                <GradientStop Color="#FF446A73" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FF2F8CE2"/>
+                                            <GradientStop Color="#FF0C3E69" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FF2F8CE2"/>
+                                <GradientStop Color="#FF0C3E69" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="Gainsboro"/>
+                                            <GradientStop Color="#FF757575" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="Gainsboro"/>
+                                <GradientStop Color="#FF757575" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFF4F4F4"/>
+                                            <GradientStop Color="#FFB7B7B7" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFF4F4F4"/>
+                                <GradientStop Color="#FFB7B7B7" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                            <GradientStop Color="#FFF4F4F4"/>
+                                            <GradientStop Color="#FFA3A3A3" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <RadialGradientBrush x:Key="Background" Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                                <GradientStop Color="#FFF4F4F4"/>
+                                <GradientStop Color="#FFA3A3A3" Offset="1"/>
+                            </RadialGradientBrush>
+                        </ResourceDictionary>
+                    </visualizationToolkit:ResourceDictionaryCollection>
+                </Setter.Value>
+            </Setter>
+            
+            
+            <Setter Property="PlotAreaStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush EndPoint="0.457,0.296" StartPoint="0.459,1.296">
+                                    <GradientStop Color="#FFCBCBCB"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:Chart}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Margin="0" Grid.RowSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Primitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                                        <Grid Style="{TemplateBinding PlotAreaStyle}" Panel.ZIndex="-1" Background="Transparent"/>
+                                        <Border BorderBrush="#FF919191" BorderThickness="1" Panel.ZIndex="10"/>
+                                    </Primitives:EdgePanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ProgressBarStyle1" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="#00000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Themes:ClassicBorderDecorator x:Name="TemplateRoot" BorderThickness="{TemplateBinding BorderThickness}" BorderStyle="ThinPressed" Background="#34FFFFFF">
+
+                            <DockPanel x:Name="PART_Track" LastChildFill="False" Margin="-1,-1,1,1">
+                                <Rectangle x:Name="PART_Indicator" Fill="#64FFFFFF"/>
+                            </DockPanel>
+                        </Themes:ClassicBorderDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AreaDataPointStyle1" TargetType="{x:Type chartingToolkit:AreaDataPoint}">
+        	<Setter Property="Background" Value="Orange"/>
+        	<Setter Property="BorderBrush" Value="Gray"/>
+        	<Setter Property="BorderThickness" Value="1"/>
+        	<Setter Property="IsTabStop" Value="False"/>
+        	<Setter Property="Width" Value="4"/>
+        	<Setter Property="Height" Value="4"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="{x:Type chartingToolkit:AreaDataPoint}">
+        				<Grid x:Name="Root" Opacity="0">
+        					<Grid.ToolTip>
+        						<ContentControl Content="{TemplateBinding FormattedDependentValue}"/>
+        					</Grid.ToolTip>
+        					<Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}"/>
+        					<Ellipse RenderTransformOrigin="0.661,0.321">
+        						<Ellipse.Fill>
+        							<RadialGradientBrush GradientOrigin="0.681,0.308">
+        								<GradientStop Color="Transparent"/>
+        								<GradientStop Color="Transparent" Offset="1"/>
+        							</RadialGradientBrush>
+        						</Ellipse.Fill>
+        					</Ellipse>
+        					<Ellipse x:Name="SelectionHighlight" Fill="Red" Opacity="0"/>
+        					<Ellipse x:Name="MouseOverHighlight" Fill="White" Opacity="0"/>
+        				</Grid>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+        
+
+    </Window.Resources>
+
+
+<chartingToolkit:Chart Height="133" Style="{DynamicResource ChartStyleCPU}"  HorizontalAlignment="Left" Margin="10,0,0,39" Background="Transparent"  VerticalAlignment="Bottom" Width="261" Grid.Row="1" Foreground="White"  >
+            <chartingToolkit:Chart.LegendStyle>
+                <Style TargetType="Control">
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="Height" Value="0"/>
+                </Style>
+
+            </chartingToolkit:Chart.LegendStyle>
+            <chartingToolkit:Chart.Axes>
+                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="100" >
+                    <chartingToolkit:LinearAxis.AxisLabelStyle>
+                        <Style TargetType="chartingToolkit:AxisLabel">
+                            <Setter Property="StringFormat" Value="{}{0}%"/>
+                        </Style>
+                    </chartingToolkit:LinearAxis.AxisLabelStyle>
+                </chartingToolkit:LinearAxis>
+                <chartingToolkit:LinearAxis Orientation="X" Visibility="Collapsed" >
+                   
+                </chartingToolkit:LinearAxis>
+                
+                
+
+            </chartingToolkit:Chart.Axes>
+            
+            <chartingToolkit:AreaSeries x:Name="CPU_Chart"  ItemsSource="{Binding}" DependentValuePath="Value" IndependentValuePath="Key" DataPointStyle="{DynamicResource AreaDataPointStyle1}" >
+             
+				<chartingToolkit:AreaSeries.LegendItemStyle>
+					<Style TargetType="Control">
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="Height" Value="0"/>
+                </Style>
+				</chartingToolkit:AreaSeries.LegendItemStyle>
+			</chartingToolkit:AreaSeries>
+        </chartingToolkit:Chart>

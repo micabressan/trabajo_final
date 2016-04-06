@@ -1,0 +1,24 @@
+    void AxisAsButtons()
+    {
+        if (Input.GetAxisRaw("BattleJumpForward") < 0)
+        {
+            if (yAxisUseForward == false)
+            {
+                // Call your event function here.
+                yAxisUseForward = true;
+            }
+        }
+        if (Input.GetAxisRaw("BattleJumpForward") > 0)
+        {
+            if (yAxisUseBack == false)
+            {
+                // Call your event function here.
+                yAxisUseBack = true;
+            }
+        }
+        if (Input.GetAxisRaw("BattleJumpForward") == 0)
+        {
+            yAxisUseForward = false;
+            yAxisUseBack = false;
+        }    
+    }

@@ -1,0 +1,11 @@
+void ToggleFullscreen()
+{
+	if(Screen.fullScreen){
+		Screen.SetResolution(PlayerSettings.defaultScreenWidth, PlayerSettings.defaultScreenHeight, false);
+		Cursor.lockState = CursorLockMode.None;
+	}
+	else{
+		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+		Cursor.lockState = CursorLockMode.Confined;
+	} 
+}

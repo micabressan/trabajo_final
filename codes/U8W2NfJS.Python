@@ -1,0 +1,28 @@
+class Bot:
+    def __init__(self, token):
+        self.api = "https://api.telegram.org/bot%s/" % token
+    def makeRequest(self, method, data = None):
+        from urllib.request import urlopen
+        from urllib.parse import urlencode
+        from json import loads
+        try:
+            if data is not None:
+                data = bytes(urlencode(data), "utf-8")
+            response = urlopen(self.api + method, data, timeout = 90)
+            result = loads(response.read().decode("utf-8"))
+            if "ok" not in result.keys():
+                raise ApiError("bad response")
+            elif not result["ok"]:
+                raise ApiError(result["description"])
+            else:
+                return result
+        except KeyboardInterrupt:
+            raise KeyboardInterrupt()
+        except Exception as e:
+            raise ApiError("loading failed: " + str(e))
+
+class ApiError(Exception):
+    def __init__(self, message):
+        self.message = message
+    def __str__(self):
+        return self.message

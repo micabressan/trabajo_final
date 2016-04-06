@@ -1,0 +1,1 @@
+account.transactions.where(status: 'close', type: ['buy', 'sell']).pluck(:size).sum.to_f

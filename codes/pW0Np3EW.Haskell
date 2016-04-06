@@ -1,0 +1,16 @@
+type Function = Double -> Double
+-- ^ Type alias for Real-valued functions of a Real variable.
+
+leftRiemannSum :: Function -> Double -> Double -> Integer -> Double
+-- ^ Returns Riemann sum using left endpoints.
+leftRiemannSum f a b n = sum [ f(x i) * dx | i <- [0..(n-1)] ]
+  where
+    dx  = (b - a) / fromInteger n
+    x i = a + fromInteger i * dx
+
+rightRiemannSum :: Function -> Double -> Double -> Integer -> Double
+-- ^ Returns Riemann sum using right endpoints.
+rightRiemannSum f a b n = sum [ f(x i) * dx | i <- [1..n] ]
+  where
+    dx  = (b - a) / fromInteger n
+    x i = a + fromInteger i * dx

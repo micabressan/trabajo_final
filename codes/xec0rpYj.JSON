@@ -1,0 +1,41 @@
+{
+	"always_show_minimap_viewport": true,
+	"caret_style": "phase",
+	"close_windows_when_empty": true,
+	"color_scheme": "Packages/User/SublimeLinter/Afterglow-monokai (SL).tmTheme",
+	"copy_with_empty_selection": false,
+	"dictionary": "Packages/Language - English/en_GB.dic",
+	"draw_minimap_border": true,
+	"draw_white_space": "all",
+	"ensure_newline_at_eof_on_save": true,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".hg",
+		"CVS",
+		".sass-cache",
+		".git"
+	],
+	"font_face": "Consolas",
+	"font_size": 16,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"original_color_scheme": "Packages/User/Monokai Extended (SL).tmTheme",
+	"overlay_scroll_bars": true,
+	"rulers":
+	[
+		80,
+		120
+	],
+	"shift_tab_unindent": true,
+	"show_encoding": true,
+	"show_full_path": true,
+	"status_bar_brighter": true,
+	"tabs_medium": true,
+	"theme": "Afterglow-orange.sublime-theme",
+	"translate_tabs_to_spaces": false,
+	"trim_trailing_white_space_on_save": true
+}

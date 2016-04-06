@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	cout << "*** Pancake Glutton! ***\n";
+
+	int person [10] = {};
+
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "\n How many pancakes did person " << person[i] << " eat? \n";
+		cin >> person[i];
+	}
+
+	cout << "Results: \n";
+	
+	for (int j = 0; j < 10; j++)
+	{
+		cout << " Person "<< person[j] << " ate " << endl;
+	}
+
+	
+
+
+
+	system("Pause");
+	return 0;
+}

@@ -1,0 +1,112 @@
+#![feature(tcp)]
+
+use std::thread;
+use std::io::prelude::*;
+use std::net::{TcpStream, ToSocketAddrs};
+use std::sync::{Arc, Mutex};
+use std::cell::RefCell;
+
+#[derive(Clone)]
+pub struct Socket {
+	stream  : Arc<Mutex<TcpStream>>,
+	reading : Arc<Mutex<bool>>,
+	ended   : Arc<Mutex<bool>>,
+	read_cb : Arc<Mutex<Vec<Box<Fn(&Socket, &[u8]) + Send>>>>,
+	end_cb  : Arc<Mutex<Vec<Box<Fn(&Socket) + Send>>>>
+}
+
+impl Socket {
+	pub fn new<A: ToSocketAddrs>(address: A) -> Socket {
+		let stream = TcpStream::connect(address).unwrap();
+        stream.set_nodelay(true).unwrap();
+		Socket {
+			stream  : Arc::new(Mutex::new(stream)),
+			reading : Arc::new(Mutex::new(false)),
+			ended   : Arc::new(Mutex::new(false)),
+			read_cb : Arc::new(Mutex::new(Vec::new())),
+			end_cb  : Arc::new(Mutex::new(Vec::new()))
+		}
+	}
+
+    pub fn from_stream(stream: TcpStream) -> Socket {
+		Socket {
+			stream  : Arc::new(Mutex::new(stream)),
+			reading : Arc::new(Mutex::new(false)),
+			ended   : Arc::new(Mutex::new(false)),
+			read_cb : Arc::new(Mutex::new(Vec::new())),
+			end_cb  : Arc::new(Mutex::new(Vec::new()))
+		}
+	}
+
+	pub fn write(&self, data: &[u8]) {
+		let ended = self.ended.lock().unwrap();
+		if !*ended {
+			let mut stream = self.stream.lock().unwrap();
+			let _ = stream.write(data);			
+		}
+	}
+	
+	pub fn onread<F>(&self, callback: F) where F: Fn(&Socket, &[u8])+Send+'static {
+		let mut read_cb = self.read_cb.lock().unwrap();
+		let mut reading = self.reading.lock().unwrap();
+		read_cb.push(Box::new(callback));
+		if !*reading {
+			*reading = true;
+			self.read_internal();
+		}
+	}
+	
+	pub fn onend<F>(&self, callback: F) where F: Fn(&Socket)+Send+'static {
+		let mut end_cb = self.end_cb.lock().unwrap();
+		let mut reading = self.reading.lock().unwrap();
+		end_cb.push(Box::new(callback));
+		if !*reading {
+			*reading = true;
+			self.read_internal();
+		}
+	}	
+	
+	fn read_internal(&self) {
+		let stream = self.stream.lock().unwrap();
+        let this   = self.clone();
+		match stream.try_clone() {
+			Ok(stream) => {
+				let mut stream = stream;
+				let read_cb = self.read_cb.clone();
+				let end_cb  = self.end_cb.clone();
+				let ended   = self.ended.clone();
+				thread::spawn(move || {
+					let mut buffer = [0; 65536];
+					loop {
+						let read = stream.read(&mut buffer).unwrap();
+						if read > 0 {
+							let read_cb = read_cb.lock().unwrap();
+							for callback in read_cb.iter() {
+								callback(&this, &buffer[0..read]);
+							}						
+						} else {
+							let mut ended = ended.lock().unwrap();
+							if !*ended {
+								let end_cb = end_cb.lock().unwrap();
+								*ended = true;
+								for callback in end_cb.iter() {
+									callback(&this);
+								}								
+							}
+						}
+					}
+				});
+			},
+			Err(error) => { println!("{}", error); }
+		}
+	}
+}
+
+impl Drop for Socket {
+	fn drop(&mut self) {
+		
+		//while self.threads.len() > 0 {
+		//	self.threads.remove(0).join().unwrap();
+		//}
+	}
+}

@@ -1,0 +1,12 @@
+import clr
+clr.AddReference('DSCoreNodes')
+import DSCore
+clr.ImportExtensions(DSCore)
+from DSCore import *
+
+a = IN[0]
+b = IN[1]
+
+c = List.Join(a,b)
+
+OUT = c

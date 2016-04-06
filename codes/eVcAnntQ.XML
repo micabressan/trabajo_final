@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cut.it.short</groupId>
+    <artifactId>cutitshort_client</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <packaging>swf</packaging>
+
+    <properties>
+        <flex.sdk.version>4.5.1.21328</flex.sdk.version>
+        <project.finalName>CutItShort</project.finalName>
+        <robotlegs.version>1.5.2</robotlegs.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <compile.debug>false</compile.debug>
+            </properties>
+        </profile>
+        <profile>
+            <id>debug</id>
+            <activation>
+                <property>
+                    <name>debug</name>
+                </property>
+            </activation>
+            <properties>
+                <compile.debug>true</compile.debug>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <finalName>${project.finalName}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>4.0-RC2</version>
+                <extensions>true</extensions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>libs</groupId>
+            <artifactId>robotlegs</artifactId>
+            <version>${robotlegs.version}</version>
+            <type>swc</type>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>flex-mojos-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>flex-mojos-plugin-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

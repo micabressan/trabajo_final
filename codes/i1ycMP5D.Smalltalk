@@ -1,0 +1,53 @@
+Object subclass: Interval [
+	|a b|
+
+	a [
+		^a.
+	]
+
+	b [
+		^b.
+	]
+	
+	init: xa init: xb [
+	 a := xa.
+	 b := xb.
+	 ^self.
+	]
+
+	printNl [
+		'[' display. a display.
+		',' display. b display.
+    ']' displayNl.
+	]
+
+	hossz [
+    |ret|
+		(a < b) ifTrue:  [ ret := (b-a). ]
+            ifFalse: [ ret := (a-b). ].
+    ^ret.
+	]
+  
+	* masik[
+    |newA newB|
+	  newA := ((((a* (masik a)) min: (a*(masik b))) min: (b*(masik a))) min: (b*(masik b))).
+    newB := ((((a*(masik a)) max: (a*(masik b))) max: (b*(masik a))) max: (b*(masik b))).
+    ^ (Interval new: newA new: newB).
+	]
+]
+
+Interval class extend [
+	new: a new: b [
+		|obj| obj := super new.
+		obj init: a init: b.
+		^obj.
+	]
+]
+
+|r1 r2|
+r1 := Interval new: 3 new: 4.
+r2 := Interval new: 5 new: 2.
+
+r1 printNl.
+(r1 * r2) printNl.
+!

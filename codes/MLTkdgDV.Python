@@ -1,0 +1,31 @@
+	if product_price:
+                    brdcrms = list()
+
+                    nodes = product.browse_nodes
+                    while(nodes):
+                        node = nodes.pop()
+                        if node.name not in brdcrms:
+                            brdcrms.append(str(node.name))
+                        nodes.extend(node.ancestors)
+
+                    product_dict['brdcrm'] = brdcrms
+                    product_dict['title'] = product.title
+                    product_dict['mrp_price'] = str(product.mrp_price)
+                    product_dict['selling_price'] = str(product.lowest_price)
+                    product_dict['img'] = product.large_image_url
+
+                    specs = list()
+
+                    specs.append(('brand',product.brand))
+                    specs.append(('color',product.color))
+                    specs.append(('ean',product.ean))
+                    specs.append(('upc',product.upc))
+                    specs.append(('feaures',product.features))
+                    specs.append(('label',product.label))
+                    specs.append(('manufacturer',product.manufacturer))
+                    specs.append(('publisher',product.publisher))
+                    specs.append(('creators',product.creators))
+                    specs.append(('isbn',product.isbn))
+                    specs.append(('binding',product.binding))
+
+                    product_dict['spec'] = specs

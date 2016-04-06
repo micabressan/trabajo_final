@@ -1,0 +1,132 @@
+#coding:utf-8
+import requests
+import json
+import time
+import random
+
+#author - SymbiSoft
+#email - stalkernya.1@gmail.com
+#telegram - @SymbiSof
+#vkontakte - SymbiSoft
+
+users = {}
+URL = 'https://api.telegram.org/bot'
+TOKEN = "97127596:AAHSmI__vLXCnoONxt1gjxLThXNcCLHT7GU"
+
+log = open('bot.log', 'w')#Сюда пишется лог
+  
+def sendMessage(to, text): #Функция отправки СМСок
+  log.write("sendMessage: to = {0}, text = {1}\n".format(to, text))
+  log.flush()
+  request = requests.post(URL + TOKEN + "/sendMessage", data = {'text': text, 'chat_id': to})
+  if not request.status_code == 200:
+    log.write("error {0}\n".format(request.status_code))
+    log.flush()
+    return False
+  return True
+
+offset = 0
+def checkUpdates():
+  global offset
+  try:
+    request = requests.post(URL + TOKEN + '/getUpdates', data = {
+      'offset': offset + 1,
+      'limit': 100,
+      'timeout': 0
+    })
+  except Exception as e:
+    log.write("exception {0}\n".format(e))
+    log.flush()
+    return False
+  
+  if not request.status_code == 200:
+    log.write("request error {0}\n".format(request.status_code))
+    log.flush()
+ 
+  result = request.json()
+ 
+  if not result['ok']:
+    log.write("invalid response: {0}\n".format(json.dumps(result)))
+    log.flush()
+ 
+  for update in result['result']:
+    offset = update['update_id']
+    message = update['message']
+    log.write("message text: {0}\n".format(message['text']))
+    log.flush()
+    uid = message['from']['id']
+    file = open('users.json', 'r')
+    users = json.loads(file.read())
+    file.close()
+    if users.get(str(uid)) is None:
+      lang = 'ua' # язык по умолчанию, можно поменять
+      users[str(uid)] = lang
+      file = open('users.json', 'w')
+      file.write(json.dumps(users))
+      file.close()
+    else:
+      lang = users[str(uid)]
+    if message['text'].startswith('/lang@KryvyiRih_bot'): # команды для смена языка: /lang@{имябота} ru
+      lang = message['text'][20:].lower() # {X} замени на длину строки /lang@{имябота} плюс 1
+      users[str(uid)] = lang
+      file = open('users.json', 'w')
+      file.write(json.dumps(users))
+      file.close()  
+    if lang == 'ru':
+      if '/start' in message['text']:
+        sendMessage(message['chat']['id'], "Привет!, я робот-помошник для жильцев и гостей Кривого Рогу.\r\n/help - Помощь и про бота про бота\r\n/weather - погода в Кривому Розу\r\n/gimn - Гимн Кривого Рога.\r\n/symbol - Городские символи Кривого Рогу\r\n/about_name_city - Про названия города Кривой Рог\r\n/legend_about_city - Легенда создания Кривого Рогу")
+      
+
+    elif lang == 'ua':
+      if '/start' in message['text']:
+        sendMessage(message['chat']['id'], "Привіт!, я робот-помічник для жителів та гостів Кривого Рогу.\r\n/help - Допомога і також про бота\r\n/weather - погода в Кривому Розі\r\n/gimn - Гімн Кривого Рога.\r\n/symbol - Міські символи Криго Рогу\r\n/about_name_city - Про назву міста Кривий Ріг\r\n/legend_about_city - Легенда створення Кривого Рогу")
+      
+      elif '/about_name_city' in message['text']:#Работает!
+        sendMessage(message['chat']['id'], "Згідно легенді, перше поселення (зимівник) у цій місцевості заснував кривий (без одного ока) козак Ріг. Можливо, основою для створення легенди послужило існування реальної особи - козака Івана Рога, який в 60 - 70 роки ХVII в. вибирався кошовим отаманом Запорізької Січі.\r\n\r\nУ документах Запорізького Коша урочище Кривий Ріг значилося ще до того, як виникло постійне поселення під цією назвою. Це була місцевість, де слиття річок Саксагані і Інгульця створювало довгий кривий мис, або “ріг”.\r\n\r\nСаму легенду вы також можете прочитати - /legend_about_city")
+      
+      elif '/legend_about_city' in message['text']:#Работает!
+        sendMessage(message['chat']['id'], "Легенди Криворіжжя\r\n")
+
+      elif '/gimn' in message['text']:#Работает!
+        sendMessage(message['chat']['id'], "Гімн Кривого Рогу\r\nУ 2002 році як гімн Кривого Рогу визнана пісня “Кривий Ріг – моє місто”.\r\n\r\nСлова:\r\n\r\nРідний мій Кривий Ріг - моє місто невтомне,\r\nВ світі інших таких не зустрінеш ніде.\r\nНа просторих майданах, у шахтах і домнах\r\nВсе кипить, все міняється, стрімко росте!\r\n\r\nПриспів:\r\n\r\nКривий Ріг - моє місто,\r\nЦе тобі моя пісня,\r\nХай летить вона в небо високе твоє.\r\nТи - перлина держави,\r\nЇї гордість і слава, \r\nЯ вклоняюся долі, що ти в мене є!\r\n\r\nНе коривсь, Кривий Ріг, ворогам ти ніяким, \r\nСкільки б землю твою не топтали вони.\r\nПереможну весну принесли в сорок п'ятім \r\nТвої віддані дочки і мужні сини!\r\n\r\nПриспів.4\r\n\r\nДе навічно злились Інгулець з Саксаганню, \r\nПолонить ніжно душу святе почуття. \r\nКривий Ріг, ти моє незрадливе кохання, \r\nВірю я у щасливе твоє майбуття!\r\n\r\nПриспів.\r\n\r\nhttp://kryvyirih.dp.ua/ua/osximage/name/171109155920410_s_1o/hymn.gif.gif")
+        r = requests.post(URL + TOKEN + "/sendChatAction", data = {'chat_id': message['chat']['id'], 'action': 'upload_audio'})    
+        r = requests.get("http://kryvyirih.dp.ua/ua/osxmusic/name/171109155920410_s_1o/rand/1615822009/1711091559204101.mp3")
+        r2 = requests.post(URL + TOKEN + "/sendAudio", data = {'chat_id': message['chat']['id']}, files = {'audio': ('Гімн Кривого Рогу.mp3', r.content)})
+
+
+  
+
+
+
+
+
+
+
+
+"""
+#Так выполняются комманды с ключем. Например: "/weather_in_zone ЧАЭС" - param будет равен - ЧАЭС
+#  elif message['text'].startswith('/weather_in_zone'):
+#    param = message['text'][9:]
+
+
+  elif '/photo_zone' in message['text']: #Рандомные фотки из пабликов в вк
+    group_stalker_photo = random.choice(photo_about_stalker)#Тут он по рандомчику выбирает нашу жертву)
+    r = requests.get("https://api.vk.com/method/photos.get?owner_id=-"+group_stalker_photo+"&album_id=wall")#Запрос ссылок на фото
+    result = r.json()
+    photo = random.choice(result["response"])
+    url2 = photo["src_big"]
+    sendMessage(message['chat']['id'], url2)
+"""
+
+
+
+
+
+
+while True:
+  try:
+    checkUpdates()
+  except Exception as e:
+    log.write("exception {0}\n".format(e))
+    log.flush()
+  time.sleep(0.3)

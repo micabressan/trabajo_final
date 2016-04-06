@@ -1,0 +1,47 @@
+#region Dragon Punch
+                                case 12240:
+                                    {
+                                        if (CanUseSpell(spell, attacker.Owner))
+                                        {
+                                            PrepareSpell(spell, attacker.Owner);
+                                            InLineAlgorithm ila = new InLineAlgorithm(attacker.X, X, attacker.Y, Y, (byte)spell.Range, InLineAlgorithm.Algorithm.DDA);
+                                            SpellUse suse = new SpellUse(true);
+                                            suse.Attacker = attacker.UID;
+                                            suse.SpellID = SpellID;
+                                            suse.SpellLevel = attacker.Owner.Spells[SpellID].Level;
+                                            suse.X = X;
+                                            suse.Y = Y;
+                                            foreach (Interfaces.IMapObject _obj in attacker.Owner.Screen.Objects)
+                                            {
+                                                if (_obj == null) continue;
+                                                if (_obj.MapObjType == MapObjectType.Monster || _obj.MapObjType == MapObjectType.Player)
+                                                {
+                                                    attacked = _obj as Entity;
+                                                    if (ila.InLine(attacked.X, attacked.Y))
+                                                    {
+                                                        if (!CanAttack(attacker, attacked, spell, attack.AttackType == Attack.Melee)) continue;
+                                                        attack.Effect1 = Attack.AttackEffects1.None;
+                                                        uint damage = Game.Attacking.Calculate.Melee(attacker, attacked, spell, ref attack);
+                                                        suse.Effect1 = attack.Effect1;
+                                                        ReceiveAttack(attacker, attacked, attack, ref damage, spell);
+                                                        suse.AddTarget(attacked, damage, attack);
+                                                    }
+                                                }
+                                                else if (_obj.MapObjType == MapObjectType.SobNpc)
+                                                {
+                                                    attackedsob = _obj as SobNpcSpawn;
+                                                    if (CanAttack(attacker, attackedsob, spell))
+                                                    {
+                                                        attack.Effect1 = Attack.AttackEffects1.None;
+                                                        uint damage = Game.Attacking.Calculate.Melee(attacker, attackedsob, ref attack);
+                                                        suse.Effect1 = attack.Effect1;
+                                                        ReceiveAttack(attacker, attackedsob, attack, damage, spell);
+                                                        suse.AddTarget(attackedsob, damage, attack);
+                                                    }
+                                                }
+                                            }
+                                            attacker.Owner.SendScreen(suse, true);
+                                        }
+                                        break;
+                                    }
+                                #endregion

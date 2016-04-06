@@ -1,0 +1,111 @@
+-module(sliding_window_mnesia).
+
+-behaviour(sliding_window).
+
+-include_lib("stdlib/include/qlc.hrl").
+-include_lib("include/sliding_window.hrl").
+
+-define(TABLE_NAME, event).
+
+-record(event, {id, added_time, event}).
+
+-export([new/1, add/2, events/1, event_info/2, reset/1]).
+
+% API
+new(Size) ->
+    % Create the schema
+    mnesia:create_schema([node()]),
+    % Start Mnesia
+    mnesia:start(),
+    Attrs = {attributes, record_info(fields, event)},
+    % Only store table in ram on one node
+    mnesia:create_table(?TABLE_NAME, [Attrs, {type, ordered_set}, {ram_copies, [node()]}]),
+    {Size, 1, ?TABLE_NAME}.
+
+add({Size, Id, Window}, Event) ->
+    % Remove old events as some might still exist in the table
+    remove_old_events(Size, Window),
+    % Add a new event to the table and return the event id.
+    EventRecord = #event{id=Id, added_time=sliding_window:timestamp(), event=Event},
+    {atomic, _} = mnesia:transaction(fun() ->
+                               ok = mnesia:write(EventRecord)
+                       end),
+    {{Size, Id+1, Window}, Id}.
+
+events({Size, Id, Window}) ->
+    % Remove old events as some might still exist in the table
+    remove_old_events(Size, Window),
+
+    % Match all events in the table and map them to tuples. Return all events.
+    Result = do(qlc:q([X || X <- mnesia:table(Window)])),
+    TupleResults = lists:map(fun({event, EventId, TimeAdded, Event}) ->
+                      {EventId, TimeAdded, Event}
+              end, Result),
+    {{Size, Id, Window}, TupleResults}.
+
+event_info({Size, Id, Window}, EventId) ->
+    % Remove old events as some might still exist in the table
+    remove_old_events(Size, Window),
+
+    % Find the event in the ETS table
+    Result = do(qlc:q([{CurrentEventId, EventTimeAdded, Event} || #event{id=CurrentEventId, added_time=EventTimeAdded, event=Event} <- mnesia:table(Window),
+                                                  CurrentEventId =:= EventId
+             ])),
+    case Result of
+        [{EventId, EventTimeAdded, Event}] ->
+            % If event exists return it along with the time remaining in the
+            % window and the time elapsed. Also return the new window state.
+            TimeElapsed = timer:now_diff(sliding_window:timestamp(), EventTimeAdded) / ?MEGA,
+            TimeRemaining = timer:now_diff(EventTimeAdded, sliding_window:window_end_timestamp(Size)) / ?MEGA,
+            {{Size, Id, Window}, {EventId, EventTimeAdded, TimeElapsed, TimeRemaining, Event}};
+        [] ->
+            % Return none if the event is not found
+            {{Size, Id, Window}, none}
+    end.
+
+reset({Size, Id, Window}) ->
+    % Empty the database
+    mnesia:clear_table(Window),
+
+    % Stop mnesia
+    mnesia:stop(),
+    {{Size, Id, Window}, ok}.
+
+% Private Functions
+remove_old_events(Size, Window) ->
+    % Remove events that are outside the window of time
+    WindowEndTime = sliding_window:window_end_timestamp(Size),
+               % The last event is the oldest, so we start with it
+               Key = mnesia:dirty_first(Window),
+               old_events_in_table(WindowEndTime, Window, Key, []).
+
+old_events_in_table(_WindowEndTime, _Window, '$end_of_table', OldEventKeys) ->
+    OldEventKeys;
+old_events_in_table(WindowEndTime, Window, Key, OldEventKeys) ->
+    % Lookup the event in the ETS table and check the time it was added.
+    case mnesia:dirty_read(Window, Key) of
+        [{_, TimeAdded, _}] = [Event] ->
+            case TimeAdded > WindowEndTime of
+                true ->
+                    % If the oldest event is inside the window of time we can
+                    % return. We know all events from here on are newer.
+                    ok;
+                false ->
+                    % Remove the event from the table and invoke
+                    % remove_old_events_from_table again to check the next event
+                    {atomic, NewKey} = mnesia:transaction(fun() ->
+                                               NewKey = mnesia:next(Window, Key),
+                                               mnesia:delete_object(Event),
+                                               NewKey
+                                       end),
+                    old_events_in_table(WindowEndTime, Window, NewKey, [Key|OldEventKeys])
+            end;
+        _ ->
+            % We are at the end of the set. Return
+            OldEventKeys
+    end.
+
+do(Q) ->
+    F = fun() -> qlc:e(Q) end,
+    {atomic, Val} = mnesia:transaction(F),
+    Val.

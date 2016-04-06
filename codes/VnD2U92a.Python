@@ -1,0 +1,8 @@
+__author__ = 'n.denizhenko'
+from htmldom import htmldom
+
+dom = htmldom.HtmlDom("http://www.last.fm/user/slb4712").createDom()
+artist = dom.find(".chartlist-name .link-block-target")[0].nodeList[0].children[0].text
+track = dom.find(".chartlist-name .chartlist-artists a")[0].nodeList[0].children[0].text
+
+print(artist + " - " + track)

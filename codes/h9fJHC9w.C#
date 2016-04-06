@@ -1,0 +1,60 @@
+	    string ThrLink = "http://2ch.pm/b/res/" + PostNum + ".html";
+            string Res = @"/b/src/"+ PostNum + @"/";
+
+//Качаю тред в html
+            string code, link;
+            System.Net.WebRequest reqGET = System.Net.WebRequest.Create(ThrLink);
+            System.Net.WebResponse resp = reqGET.GetResponse();
+            System.IO.Stream stream = resp.GetResponseStream();
+            System.IO.StreamReader sr = new System.IO.StreamReader(stream, Encoding.Default);
+            code = sr.ReadToEnd();
+//Сохраняю как txt чтобы...
+            System.IO.File.WriteAllText(@"html.txt", code);
+//...прочитать как массив строк
+            String[] lines = System.IO.File.ReadAllLines(@"html.txt");
+
+//Считаю количество строк, содержащих ссылку на webm
+            int i, ii=1;
+            for (i=0; i<lines.Length; i++)
+            {
+                if (lines[i].Contains(Res))
+                {
+                    link = Regex.Match(lines[i], Res + @"(.*).webm").Groups[0].Value;
+                    if (link.Contains(".webm"))
+                    {
+                        ii++;
+                    }
+                }
+            }
+
+//Создаю массив строк, количество элементов в котором равно количеству строк, содержащих Res + @"(.*).webm (номера вебмок)
+            String[] Links = new String[ii];
+//Еще раз ищу те же строки и заношу в массив ссылок
+            ii = 1;
+            for (i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Contains(Res))
+                {
+                    link = Regex.Match(lines[i], Res + @"(.*).webm").Groups[0].Value;
+                    if (link.Contains(".webm"))
+                    {
+                        Links[ii] = link;
+                        ii++;
+                    }
+                }
+            }
+//возвращаю номера вебмок
+            return Links;
+
+Вывод:
+/b/src/99943716/14397195248010.webm">14397195248010.webm
+/b/src/99943716/14397195248010.webm" target="_blank" name="expandfunc" onclick="return expand('99943716-b7369a3db42c41ec722cc95b1e5f1cf9','/b/src/99943716/14397195248010.webm
+/b/src/99943716/14397195249101.webm">14397195249101.webm
+/b/src/99943716/14397195249101.webm" target="_blank" name="expandfunc" onclick="return expand('99943716-ac167a06ea0dca63bc5dfdb27d942346','/b/src/99943716/14397195249101.webm
+И т.д.
+
+Мне нужно:
+14397195248010
+14397195248010
+14397195249101
+14397195249101

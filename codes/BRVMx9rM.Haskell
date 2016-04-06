@@ -1,0 +1,175 @@
+module Main(main) where
+
+import Parser
+import Data.Char
+import Data.List
+import Data.Maybe
+import Control.Applicative
+import Control.Monad
+
+(<++>) = liftA2 (++)
+
+data Filetype = Full | Grid | Solution deriving (Eq,Ord,Show)
+
+data THeader = THeader { title::String, filetype::Filetype, variables::[String] } deriving (Eq,Show)
+
+data Zonetype = Ordered
+              | FELineseg
+              | FETriangle
+              | FEQuadrilateral
+              | FETetrahedron
+              | FEBrick
+              | FEPolygon
+              | FEPolyhedral 
+    deriving (Eq,Ord,Show)
+  
+data ZoneParam = TitleParam { str::String }
+               | TypeParam  { tp::Zonetype }
+               | IParam  { ip::Integer }
+               | JParam  { jp::Integer }
+               | KParam  { kp::Integer }
+               | SParam  { sp::Integer }
+               | PackParam  { pp::Packing }
+               
+isTitle (TitleParam _) = True
+isTitle _              = False
+isType  (TypeParam _)  = True
+isType  _              = False
+isI     (IParam _)     = True
+isI     _              = False
+isJ     (JParam _)     = True
+isJ     _              = False
+isK     (KParam _)     = True
+isK     _              = False
+isS     (SParam _)     = True
+isS     _              = False
+isPack  (PackParam _)  = True
+isPack  _              = False
+
+data Packing = Point | Block deriving(Eq,Ord,Show)
+  
+data ZoneHeader = ZoneHeader {
+        zonetitle::String,
+        zonetype::Zonetype,
+        zonei::Maybe Integer,
+        zonej::Maybe Integer,
+        zonek::Maybe Integer,
+        zones::Maybe Integer,
+        dataPacking::Packing } deriving (Eq,Show)
+        
+data ZoneContent = PointContent { content::[[Double]] }
+                 | BlockContent { content::[[Double]] } deriving (Eq,Show)
+
+data TZone = TZone { zoneheader::ZoneHeader, zonecontent::ZoneContent } deriving (Eq,Show)
+
+data TFile = TFile { tHeader::THeader, tZones::[TZone]} deriving (Eq,Show)
+
+bracedString = between (char '"') (char '"') $ many $ bracedChar
+    where bracedChar = noneOf "\\\"\n" <|> try (string "\\\"" *> pure '\"')
+
+word = some $ check isAlphaNum
+
+newLine = try (string "\n\r") <|> try (string "\r\n") <|> string "\r" <|> string "\n"
+
+comment = char '#' *> skipMany(noneOf "\n\r") <* newLine
+
+blanks = skipMany $ comment <|> (space *> pure ())
+
+separator = blanks *> optional (char ',') <* blanks
+
+tFile = do
+    theader <- header
+    tzones  <- someSep (optional header) (zone $ length $ variables theader)
+    return $ TFile theader tzones
+
+header = do
+    blanks
+    title <- titleP
+    blanks
+    filetype <- option Full filetypeP
+    blanks
+    variables <- variablesP
+    return $ THeader title filetype variables
+    where titleP = do
+            string "TITLE" >> blanks >> char '=' >> blanks 
+            title <- bracedString <|> word
+            return title
+          filetypeP = do
+            string "FILETYPE" >> blanks >> char '=' >> blanks
+            strType <- string "FULL" <|> string "GRID" <|> string "SOLUTION"
+            let Just filetype = lookup strType [("FULL",Full),("GRID",Grid),("SOLUTION",Solution)]
+            return filetype
+          variablesP = do
+            string "VARIABLES" >> blanks >> char '=' >> blanks
+            variables <- someEnd (separator) (bracedString)
+            return variables
+
+zone vars = do
+    blanks
+    string "ZONE" >> blanks
+    header <- zoneHeader
+    blanks
+    let points = ( maybe 1 id $ zonei header ) * ( maybe 1 id $ zonej header ) * ( maybe 1 id $ zonek header )
+    content <- case dataPacking header of
+        Point -> zonePointContent vars points
+        Block -> zoneBlockContent vars points
+    return $ TZone header content
+    where zonePointContent vars points = PointContent <$> count points (count vars   (floating <* separator))
+          zoneBlockContent vars points = PointContent <$> count vars   (count points (floating <* separator))
+          zoneHeader = do
+            params <- manyEnd blanks (choice [zoneTitle,zoneType,zoneI,zoneJ,zoneK,zoneS,zonePack])
+            let rparams   = reverse params
+            let zonetitle = maybe "Zone"  str $ find isTitle rparams
+            let zonetype  = maybe Ordered tp  $ find isType rparams
+            let zonepack  = maybe Point   pp  $ find isPack rparams
+            let zonei     = ip <$> find isI rparams
+            let zonej     = jp <$> find isJ rparams
+            let zonek     = kp <$> find isK rparams
+            let zones     = sp <$> find isS rparams
+            assert (zonetype==Ordered) "unsupported zone type"
+            assert (isJust zonei) "no I specified"
+            assert (not (isJust zonek) || isJust zonej) "K specified while J not"
+            return $ ZoneHeader zonetitle zonetype zonei zonej zonek zones zonepack
+          zoneVar name cons = do
+            string name *> blanks *> char '=' *> blanks
+            i <- integer
+            return $ cons i
+          zoneI = zoneVar "I" IParam
+          zoneJ = zoneVar "J" JParam
+          zoneK = zoneVar "K" KParam
+          zoneS = zoneVar "STRANDID" SParam
+          zoneTitle = do
+            try(string "TITLE") <|> string "T"
+            blanks *> char '=' *> blanks
+            zonetitle <- bracedString <|> word
+            return $ TitleParam zonetitle
+          zoneType = do
+            string "ZONETYPE" *> blanks *> char '=' *> blanks
+            strType <- string "ORDERED" <|>
+                       string "FE" <++> (
+                            string "LINESEG" <|>
+                            string "BRICK" <|>
+                            string "QUADRILATERAL" <|>
+                            try(string "TRIANGLE") <|>
+                            string "TETRAHEDRON" <|>
+                            try(string "POLYHEDRAL") <|>
+                            string "POLYGON"
+                       )
+            let Just zonetype = lookup strType typeTable
+            return $ TypeParam zonetype
+          zonePack = do
+            string "DATAPACKING" *> blanks *> char '=' *> blanks
+            strPack <- string "BLOCK" <|>
+                       string "POINT" 
+            let Just zonepack = lookup strPack [("BLOCK",Block),("POINT",Point)]
+            return $ PackParam zonepack
+          typeTable =
+                [ ("ORDERED",Ordered)
+                , ("FELINESEG",FELineseg)
+                , ("FEBRICK",FEBrick)
+                , ("FEQUADRILATERAL",FEQuadrilateral)
+                , ("FETRIANGLE",FETriangle)
+                , ("FETETRAHEDRON",FETetrahedron)
+                , ("FEPOLYHEDRAL",FEPolyhedral)
+                , ("FEPOLYGON",FEPolygon)
+                ]

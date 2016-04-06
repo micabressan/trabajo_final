@@ -1,0 +1,70 @@
+/// <summary>
+    /// Сущность продаваемого лота, в аукционе
+    /// </summary>
+    public interface ILot
+    {
+        /// <summary>
+        /// Айди продукта который выставлен на аукционе
+        /// </summary>
+        Id <IProduct> ProductId { get; set; }
+
+        /// <summary>
+        /// Кол-во продоваемого товара
+        /// </summary>
+        int Amount { get; set; }
+
+        /// <summary>
+        /// Текущая цена (ставка) лота
+        /// </summary>
+        int CurrentPrice { get; set; }
+
+        /// <summary>
+        /// Цена выкупа лота
+        /// </summary>
+        int BuyoutPrice { get; set; }
+
+        /// <summary>
+        /// Сколько осталось до завершения лота
+        /// </summary>
+        float CurrentLotTime { get; set; } // Datatime
+
+        /// <summary>
+        /// На сколько времени был установлен лот
+        /// </summary>
+        ILotMaxTime LotMaxTime { get; set; }
+
+        /// <summary>
+        /// Айди игрока установившего лот
+        /// </summary>
+        Id<IPlayerProfile> UserOwnerId { get; set; }
+
+        /// <summary>
+        /// Айди игрока сделавшего ставку сейчас
+        /// </summary>
+        Id<IPlayerProfile> UserBetId { get; set; }
+
+        /// <summary>
+        /// Словарь ай-ди юзеров, их ставки на этот лот
+        /// </summary>
+        Dictionary<Id<IPlayerProfile>, int> UsersBets { get; set; }
+
+    }
+
+
+
+
+ /// <summary>
+    /// Данные игрока о аукционе
+    /// </summary>
+    public interface IUserAuctionData
+    {
+        /// <summary>
+        /// Лоты игрока
+        /// </summary>
+        List<ILot> UserLots { get; set; }
+
+        /// <summary>
+        /// Ставки игрока
+        /// </summary>
+        List<ILot> UserBets { get; set; }
+    }

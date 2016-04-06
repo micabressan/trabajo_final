@@ -1,0 +1,11 @@
+
+pub mod voxel {
+  pub use ::voxel::impls::surface_vertex::*;
+
+  pub mod tree {
+    pub use ::voxel::tree::TreeBody::*;
+    pub type T = ::voxel::tree::T<super::T>;
+    pub type TreeBody = ::voxel::tree::TreeBody<super::T>;
+    pub type Branches = ::voxel::tree::Branches<super::T>;
+  }
+}

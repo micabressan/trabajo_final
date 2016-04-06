@@ -1,0 +1,24 @@
+{
+  id: 2164562990,
+  handle: 'POPropertyEd',
+  realName: 'PO PropertyEdinburgh',
+  location: 'Edinburgh',
+  description: 'Award winning residential sales team, with expertise in the Edinburgh market. For a free property market update or home valuation call us today on 0131 539 3333',
+  picture: 'http://pbs.twimg.com/profile_images/378800000756808476/6f51d827bff359edf88ebee7b28cba55_normal.jpeg',
+  url: 'http://t.co/mKzuGsnmzD',
+  verified: false,
+  language: 'en-gb',
+  followersCount: 465,
+  followingCount: 1024,
+  registered: '2013-10-30T11:00:24+00:00',
+  gender: { name: 'po', gender: 'male', probability: 100 },
+  locationLatLng: {
+    locationId: 238,
+    name: 'edinburgh',
+    lat: 55.918209,
+    long: -3.274618,
+    normalisedName: 'City of Edinburgh',
+    type: 'place',
+    confidence: 0.99
+  }
+}

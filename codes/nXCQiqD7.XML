@@ -1,0 +1,1464 @@
+Java classpath:  [ '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/gson-2.2.4.jar',
+  '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/java-api-0.0.5.jar',
+  '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/logback-classic-1.1.2.jar',
+  '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/logback-core-1.1.2.jar',
+  '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/sapbydesign-0.0.3-SNAPSHOT.jar',
+  '/app/node_modules/components/node_modules/sdk-components/3/sapbydesign/lib/slf4j-api-1.7.6.jar',
+  '/app/node_modules/components/node_modules/java-bridge/node_modules/java/commons-lang3-node-java.jar',
+  '/app/node_modules/components/node_modules/java-bridge/node_modules/java/src-java' ]
+About to execute component 'sapbydesign', function 'create_order'
+Creating executor for  io.elastic.sap.bydesign.actions.order.CreateOrderAndUpdatePrices
+INFO  i.e.a.Executor - Instantiating component io.elastic.sap.bydesign.actions.order.CreateOrderAndUpdatePrices
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - Enabling logging of the incoming and outgoing SOAP messages
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - No customer info found. Try to create customer from address information
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - Found customer data in shipping address
+INFO  i.e.s.b.a.o.GuestCustomerOrderUtils - Payment data for guest cutomer found
+INFO  i.e.s.b.a.o.GuestCustomerOrderUtils - Sales arrangement data found.
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - Trying to create customer from data found in addresses
+INFO  i.e.s.b.AbstractSapComponent - Enriching the request context.
+INFO  i.e.s.b.a.c.CreateCustomerUtils - Preparing customer addresses for request.
+INFO  i.e.s.b.a.c.CreateCustomerUtils - Adding address information to request. {"address":{"emailURI":{"value":"test102@christophh.net"},"postalAddress":{"countryCode":"IT","regionCode":{},"cityName":"test","streetPostalCode":"04211","poBoxPostalCode":"04211","streetName":"test","houseID":"1","poBoxDeviatingRegionCode":{},"poBoxIndicator":true},"telephone":[{"formattedNumberDescription":"1234","mobilePhoneNumberIndicator":false}],"telephoneListCompleteTransmissionIndicator":true},"actionCode":"01","addressUsageListCompleteTransmissionIndicator":true}
+INFO  i.e.s.b.a.c.CreateCustomerUtils - Address information: {"addressUsage":[{"addressUsageCode":{"value":"XXDEFAULT"},"actionCode":"04"}],"address":{"emailURI":{"value":"test102@christophh.net"},"postalAddress":{"countryCode":"IT","regionCode":{},"cityName":"test","streetPostalCode":"04211","poBoxPostalCode":"04211","streetName":"test","houseID":"1","poBoxDeviatingRegionCode":{},"poBoxIndicator":true},"telephone":[{"formattedNumberDescription":"1234","mobilePhoneNumberIndicator":false}],"telephoneListCompleteTransmissionIndicator":true},"actionCode":"01","addressUsageListCompleteTransmissionIndicator":true} is DEFAULT
+---[HTTP request - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managecustomerin1?sap-vhost=my333146.sapbydesign.com]---
+Content-type: text/xml;charset="utf-8"
+Soapaction: "http://sap.com/xi/A1S/Global/ManageCustomerIn/MaintainBundle_V1Request"
+Accept: text/xml, multipart/related, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+
+<?xml version="1.0" ?>
+<S:Envelope
+    xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns5:CustomerBundleMaintainRequest_sync_V1
+            xmlns:ns2="http://sap.com/xi/AP/Common/Global"
+            xmlns:ns3="http://sap.com/xi/AP/Globalization"
+            xmlns:ns4="http://sap.com/xi/AP/CustomerExtension/BYD/A0014"
+            xmlns:ns5="http://sap.com/xi/SAPGlobal20/Global">
+            <Customer textListCompleteTransmissionIndicator="false" paymentDataListCompleteTransmissionIndicator="true" contactPersonListCompleteTransmissionIndicator="false" generalProductTaxExemptionListCompleteTransmissionIndicator="false" taxNumberListCompleteTransmissionIndicator="false" salesArrangementListCompleteTransmissionIndicator="true" relationshipListCompleteTransmissionIndicator="false" paymentCardDetailsListCompleteTransmissionIndicator="false" operatingHoursInformationListCompleteTransmissionIndicator="false" directResponsibilityListCompleteTransmissionIndicator="false" communicationArrangementListCompleteTransmissionIndicator="false" bankDetailsListCompleteTransmissionIndicator="true" addressInformationListCompleteTransmissionIndicator="true" actionCode="01">
+                <CategoryCode>1</CategoryCode>
+                <ProspectIndicator>false</ProspectIndicator>
+                <CustomerIndicator>true</CustomerIndicator>
+                <LifeCycleStatusCode>2</LifeCycleStatusCode>
+                <Person>
+                    <FormOfAddressCode/>
+                    <FamilyName>Papa Jones</FamilyName>
+                </Person>
+                <VerbalCommunicationLanguageCode>EN</VerbalCommunicationLanguageCode>
+                <AddressInformation addressUsageListCompleteTransmissionIndicator="true" actionCode="01">
+                    <AddressUsage actionCode="04">
+                        <AddressUsageCode>XXDEFAULT</AddressUsageCode>
+                    </AddressUsage>
+                    <Address telephoneListCompleteTransmissionIndicator="true">
+                        <EmailURI>test102@christophh.net</EmailURI>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <RegionCode/>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <POBoxPostalCode>04211</POBoxPostalCode>
+                            <StreetName>test</StreetName>
+                            <HouseID>1</HouseID>
+                            <POBoxDeviatingRegionCode/>
+                            <POBoxIndicator>true</POBoxIndicator>
+                        </PostalAddress>
+                        <Telephone>
+                            <FormattedNumberDescription>1234</FormattedNumberDescription>
+                            <MobilePhoneNumberIndicator>false</MobilePhoneNumberIndicator>
+                        </Telephone>
+                    </Address>
+                </AddressInformation>
+                <SalesArrangement actionCode="01">
+                    <SalesOrganisationID>DE11000</SalesOrganisationID>
+                    <DistributionChannelCode>01</DistributionChannelCode>
+                    <CompleteDeliveryRequestedIndicator>true</CompleteDeliveryRequestedIndicator>
+                    <CurrencyCode>EUR</CurrencyCode>
+                </SalesArrangement>
+                <PaymentData paymentFormListCompleteTransmissionIndicator="true" actionCode="01">
+                    <CompanyID>DE10000</CompanyID>
+                    <AccountDeterminationDebtorGroupCode>4020</AccountDeterminationDebtorGroupCode>
+                    <AccountDebtorExternalID>unknown</AccountDebtorExternalID>
+                </PaymentData>
+            </Customer>
+        </ns5:CustomerBundleMaintainRequest_sync_V1>
+    </S:Body>
+</S:Envelope>--------------------
+---[HTTP response - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managecustomerin1?sap-vhost=my333146.sapbydesign.com - 200]---
+null: HTTP/1.1 200 OK
+Sap-srt_server_info_ext: 0
+Content-type: text/xml; charset=utf-8
+Content-length: 864
+Sap-srt_server_info: HNZ_105,8075 ,http://sap.com/xi/A1S/Global,ManageCustomerIn,CustomerBundleMaintainRequest_sync_V1,8026
+Sap-srt_id: 20150819/085511/v1.00_final_6.40/00163E0E24E11EE591C9FFF5297D43C9
+Set-cookie: sap-usercontext=sap-client=105; path=/
+Accept: text/xml
+
+<soap-env:Envelope
+    xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header/>
+    <soap-env:Body>
+        <n0:CustomerBundleMaintainConfirmation_sync_V1
+            xmlns:n0="http://sap.com/xi/SAPGlobal20/Global"
+            xmlns:prx="urn:sap.com:proxy:HNZ:/1SAI/TAE6F3228CC6D723FF1823E:804">
+            <Customer>
+                <ReferenceObjectNodeSenderTechnicalID></ReferenceObjectNodeSenderTechnicalID>
+                <ChangeStateID>                 20150819085504.3956060</ChangeStateID>
+                <InternalID>150966</InternalID>
+                <UUID>00163e0e-24e1-1ee5-91c9-ff64001663c9</UUID>
+            </Customer>
+            <Log>
+                <MaximumLogItemSeverityCode>2</MaximumLogItemSeverityCode>
+                <Item>
+                    <TypeID>001(/YMKXICYQY_0DB803A0AB/)</TypeID>
+                    <CategoryCode>INC.BOI</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>Die Lieferpriorität ist nicht auf 'sofort' gesetzt.</Note>
+                </Item>
+            </Log>
+        </n0:CustomerBundleMaintainConfirmation_sync_V1>
+    </soap-env:Body>
+</soap-env:Envelope>--------------------
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - Adding new customer information to incoming order data.
+INFO  i.e.s.b.AbstractSapComponent - Enriching the request context.
+---[HTTP request - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managesalesorderin5?sap-vhost=my333146.sapbydesign.com]---
+Content-type: text/xml;charset="utf-8"
+Soapaction: "http://sap.com/xi/A1S/Global/ManageSalesOrderIn/MaintainBundleRequest"
+Accept: text/xml, multipart/related, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+
+<?xml version="1.0" ?>
+<S:Envelope
+    xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns3:SalesOrderBundleMaintainRequest_sync
+            xmlns:ns2="http://sap.com/xi/AP/Common/Global"
+            xmlns:ns3="http://sap.com/xi/SAPGlobal20/Global">
+            <SalesOrder actionCode="01" businessTransactionDocumentReferenceListCompleteTransmissionIndicator="true" itemListCompleteTransmissionIndicator="true">
+                <Name languageCode="DE">WebShop-Order</Name>
+                <DataOriginTypeCode>4</DataOriginTypeCode>
+                <ReleaseCustomerRequest>true</ReleaseCustomerRequest>
+                <ReleaseAllItemsToExecution>false</ReleaseAllItemsToExecution>
+                <FinishFulfilmentProcessingOfAllItems>false</FinishFulfilmentProcessingOfAllItems>
+                <SalesAndServiceBusinessArea actionCode="04">
+                    <DistributionChannelCode>01</DistributionChannelCode>
+                </SalesAndServiceBusinessArea>
+                <BillToParty actionCode="04" partyContactPartyListCompleteTransmissionIndicator="false">
+                    <PartyID>150966</PartyID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                        </Email>
+                        <Telephone>
+                            <FormattedNumberDescription>1234</FormattedNumberDescription>
+                        </Telephone>
+                        <Telephone>
+                            <FormattedNumberDescription></FormattedNumberDescription>
+                            <MobilePhoneNumberIndicator>true</MobilePhoneNumberIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName>Papa Jones</FormattedName>
+                        </DisplayName>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <StreetName>test</StreetName>
+                            <BuildingID>1</BuildingID>
+                        </PostalAddress>
+                    </Address>
+                </BillToParty>
+                <AccountParty actionCode="04">
+                    <PartyID>150966</PartyID>
+                </AccountParty>
+                <ProductRecipientParty actionCode="04" partyContactPartyListCompleteTransmissionIndicator="false">
+                    <PartyID>150966</PartyID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                        </Email>
+                        <Telephone>
+                            <FormattedNumberDescription>1234</FormattedNumberDescription>
+                        </Telephone>
+                        <Telephone>
+                            <FormattedNumberDescription></FormattedNumberDescription>
+                            <MobilePhoneNumberIndicator>true</MobilePhoneNumberIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName>Papa Jones</FormattedName>
+                        </DisplayName>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <StreetName>test</StreetName>
+                            <BuildingID>1</BuildingID>
+                        </PostalAddress>
+                    </Address>
+                </ProductRecipientParty>
+                <EmployeeResponsibleParty actionCode="04">
+                    <PartyID/>
+                </EmployeeResponsibleParty>
+                <SalesUnitParty>
+                    <PartyID>AT11000</PartyID>
+                </SalesUnitParty>
+                <DeliveryTerms>
+                    <DeliveryPriorityCode>3</DeliveryPriorityCode>
+                </DeliveryTerms>
+                <PricingTerms actionCode="04">
+                    <CurrencyCode>EUR</CurrencyCode>
+                    <PriceDateTime timeZoneCode="CET">2015-08-19T10:55:13.243+02:00</PriceDateTime>
+                    <GrossAmountIndicator>true</GrossAmountIndicator>
+                </PricingTerms>
+                <Item actionCode="04" itemScheduleLineListCompleteTransmissionIndicator="false">
+                    <ItemProduct actionCode="04">
+                        <ProductID>DI6A</ProductID>
+                        <UnitOfMeasure>ea</UnitOfMeasure>
+                    </ItemProduct>
+                    <ItemScheduleLine>
+                        <Quantity>1</Quantity>
+                    </ItemScheduleLine>
+                    <ItemTextCollection actionCode="01">
+                        <Text actionCode="01">
+                            <TypeCode listID="10296">10011</TypeCode>
+                            <ContentText>76fa89ea-cb38-4b82-ab5d-a6133eccbbce</ContentText>
+                        </Text>
+                    </ItemTextCollection>
+                </Item>
+                <CashDiscountTerms actionCode="04">
+                    <Code>Z009</Code>
+                </CashDiscountTerms>
+                <TextCollection/>
+            </SalesOrder>
+        </ns3:SalesOrderBundleMaintainRequest_sync>
+    </S:Body>
+</S:Envelope>--------------------
+---[HTTP response - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managesalesorderin5?sap-vhost=my333146.sapbydesign.com - 200]---
+null: HTTP/1.1 200 OK
+Sap-srt_server_info_ext: 0
+Content-type: text/xml; charset=utf-8
+Content-length: 1518
+Sap-srt_server_info: HNZ_105,4652 ,http://sap.com/xi/A1S/Global,ManageSalesOrderIn,SalesOrderBundleMaintainRequest_sync,4619
+Sap-srt_id: 20150819/085517/v1.00_final_6.40/00163E0E24E11EE591CA005934B323C9
+Set-cookie: sap-usercontext=sap-client=105; path=/
+Accept: text/xml
+
+<soap-env:Envelope
+    xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header/>
+    <soap-env:Body>
+        <n0:SalesOrderBundleMaintainConfirmation_sync
+            xmlns:n0="http://sap.com/xi/SAPGlobal20/Global"
+            xmlns:prx="urn:sap.com:proxy:HNZ:/1SAI/TAE88DF3AA925C3E49C60CC:804">
+            <SalesOrder>
+                <ChangeStateID>                 20150819085516.9088530</ChangeStateID>
+                <UUID>00163e0e-24e1-1ee5-91ca-000fb82cc3c9</UUID>
+                <ID>60465</ID>
+            </SalesOrder>
+            <Log>
+                <MaximumLogItemSeverityCode>2</MaximumLogItemSeverityCode>
+                <Item>
+                    <TypeID>017(/CL_CDA_ORGPT/)</TypeID>
+                    <CategoryCode>INC.BOI</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>1 additional sales areas exist for organizational unit AT11000 (AT - GF)</Note>
+                </Item>
+                <Item>
+                    <TypeID>151(/CL_CDA_DOCIT/)</TypeID>
+                    <CategoryCode>ENV.CBM</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>Net volume for product missing</Note>
+                </Item>
+                <Item>
+                    <TypeID>094(/AP_ESI_COMMON/)</TypeID>
+                    <CategoryCode>SEI.FSI</CategoryCode>
+                    <SeverityCode>1</SeverityCode>
+                    <Note>Action RELEASE_CUSTOMER_REQUEST not possible; action is disabled</Note>
+                </Item>
+                <Item>
+                    <TypeID>089(//PAPR/PARTY_ADMIN/)</TypeID>
+                    <CategoryCode>SEI.FSI</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>Financial data for seller AT10000 missing in master data of account 150966</Note>
+                </Item>
+                <Item>
+                    <TypeID>021(//PAPR/PARTY_ADMIN/)</TypeID>
+                    <CategoryCode>SEI.FSI</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>Party with role Employee Responsible missing</Note>
+                </Item>
+            </Log>
+        </n0:SalesOrderBundleMaintainConfirmation_sync>
+    </soap-env:Body>
+</soap-env:Envelope>--------------------
+INFO  i.e.s.b.a.o.CreateOrderAndUpdatePrices - Order with id 60465 created.
+INFO  i.e.s.b.AbstractSapComponent - Enriching the request context.
+---[HTTP request - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/querysalesorderin3?sap-vhost=my333146.sapbydesign.com]---
+Content-type: text/xml;charset="utf-8"
+Soapaction: "http://sap.com/xi/A1S/Global/QuerySalesOrderIn/FindByElementsRequest"
+Accept: text/xml, multipart/related, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+
+<?xml version="1.0" ?>
+<S:Envelope
+    xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns3:SalesOrderByElementsQuery_sync
+            xmlns:ns2="http://sap.com/xi/AP/Common/Global"
+            xmlns:ns3="http://sap.com/xi/SAPGlobal20/Global">
+            <SalesOrderSelectionByElements>
+                <SelectionByID>
+                    <IntervalBoundaryTypeCode>1</IntervalBoundaryTypeCode>
+                    <LowerBoundaryID>60465</LowerBoundaryID>
+                </SelectionByID>
+            </SalesOrderSelectionByElements>
+        </ns3:SalesOrderByElementsQuery_sync>
+    </S:Body>
+</S:Envelope>--------------------
+---[HTTP response - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/querysalesorderin3?sap-vhost=my333146.sapbydesign.com - 200]---
+null: HTTP/1.1 200 OK
+Sap-srt_server_info_ext: 0
+Content-type: text/xml; charset=utf-8
+Content-length: 40413
+Sap-srt_server_info: HNZ_105,1567 ,http://sap.com/xi/A1S/Global,QuerySalesOrderIn,SalesOrderByElementsQuery_sync,1514
+Sap-srt_id: 20150819/085520/v1.00_final_6.40/00163E0E24E11EE591CA008ED5C863C9
+Set-cookie: sap-usercontext=sap-client=105; path=/
+Accept: text/xml
+
+<soap-env:Envelope
+    xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header/>
+    <soap-env:Body>
+        <n0:SalesOrderByElementsResponse_sync
+            xmlns:n0="http://sap.com/xi/SAPGlobal20/Global"
+            xmlns:prx="urn:sap.com:proxy:HNZ:/1SAI/TAS2142CBBBE38C4CDD98BB:804">
+            <SalesOrder>
+                <ID>60465</ID>
+                <UUID>00163e0e-24e1-1ee5-91ca-000fb82cc3c9</UUID>
+                <PostingDate>2015-08-19T08:55:13Z</PostingDate>
+                <Name languageCode="DE">WebShop-Order</Name>
+                <ChangeStateID>                 20150819085516.9088530</ChangeStateID>
+                <DataOriginTypeCode>4</DataOriginTypeCode>
+                <Status>
+                    <PaymentAuthorisationStatusCode>4</PaymentAuthorisationStatusCode>
+                    <PaymentAuthorisationStatusName languageCode="EN">Authorization not Required</PaymentAuthorisationStatusName>
+                    <ItemListCancellationStatusCode>1</ItemListCancellationStatusCode>
+                    <ItemListCancellationStatusName languageCode="EN">Not Canceled</ItemListCancellationStatusName>
+                    <ItemListCustomerOrderLifeCycleStatusCode>4</ItemListCustomerOrderLifeCycleStatusCode>
+                    <ItemListCustomerOrderLifeCycleStatusName languageCode="EN">In Preparation</ItemListCustomerOrderLifeCycleStatusName>
+                    <ItemListFulfilmentProcessingStatusCode>1</ItemListFulfilmentProcessingStatusCode>
+                    <ItemListFulfilmentProcessingStatusName languageCode="EN">Not Started</ItemListFulfilmentProcessingStatusName>
+                    <ItemListPlanningReleaseStatusCode>6</ItemListPlanningReleaseStatusCode>
+                    <ItemListPlanningReleaseStatusName languageCode="EN">Not Relevant</ItemListPlanningReleaseStatusName>
+                    <ItemListExecutionReleaseStatusCode>6</ItemListExecutionReleaseStatusCode>
+                    <ItemListExecutionReleaseStatusName languageCode="EN">Not Relevant</ItemListExecutionReleaseStatusName>
+                    <ConfirmationIssuingStatusCode>1</ConfirmationIssuingStatusCode>
+                    <ConfirmationIssuingStatusName languageCode="EN">Not Issued</ConfirmationIssuingStatusName>
+                    <ItemListInvoiceProcessingStatusCode>1</ItemListInvoiceProcessingStatusCode>
+                    <ItemListInvoiceProcessingStatusName languageCode="EN">Not Started</ItemListInvoiceProcessingStatusName>
+                    <ApprovalStatusCode>1</ApprovalStatusCode>
+                    <ApprovalStatusName languageCode="EN">Not Started</ApprovalStatusName>
+                    <ItemListProductAvailabilityConfirmationStatusCode>1</ItemListProductAvailabilityConfirmationStatusCode>
+                    <ItemListProductAvailabilityConfirmationStatusName languageCode="EN">Confirmation Pending</ItemListProductAvailabilityConfirmationStatusName>
+                    <ConsistencyStatusCode>2</ConsistencyStatusCode>
+                    <ConsistencyStatusName languageCode="EN">Inconsistent</ConsistencyStatusName>
+                    <GeneralDataCompletenessStatusCode>3</GeneralDataCompletenessStatusCode>
+                    <GeneralDataCompletenessStatusName languageCode="EN">Complete</GeneralDataCompletenessStatusName>
+                    <InvoicingBlockingStatusCode>1</InvoicingBlockingStatusCode>
+                    <InvoicingBlockingStatusName languageCode="EN">Not Blocked</InvoicingBlockingStatusName>
+                    <FulfilmentBlockingStatusCode>1</FulfilmentBlockingStatusCode>
+                    <FulfilmentBlockingStatusName languageCode="EN">Not Blocked</FulfilmentBlockingStatusName>
+                    <CustomerRequestReleaseStatusCode>6</CustomerRequestReleaseStatusCode>
+                    <CustomerRequestReleaseStatusName languageCode="EN">Not Relevant</CustomerRequestReleaseStatusName>
+                    <ReleaseStatusCode>1</ReleaseStatusCode>
+                    <ReleaseStatusName languageCode="EN">Not Released</ReleaseStatusName>
+                </Status>
+                <SalesAndServiceBusinessArea>
+                    <SalesOrganisationID>AT11000</SalesOrganisationID>
+                    <DistributionChannelCode>01</DistributionChannelCode>
+                </SalesAndServiceBusinessArea>
+                <BillToParty>
+                    <PartyID>150966</PartyID>
+                    <StandardID schemeAgencyID=" ">AT69ZZZ000000</StandardID>
+                    <AddressHostUUID>00163e0e-24e1-1ee5-91ca-000fb82aa3c9</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Telephone>
+                            <Number>
+                                <SubscriberID>1234</SubscriberID>
+                                <CountryCode>IT</CountryCode>
+                                <CountryDiallingCode>+39</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+39 1234</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                        </Telephone>
+                        <Telephone>
+                            <DefaultMobilePhoneNumberIndicator>true</DefaultMobilePhoneNumberIndicator>
+                            <MobilePhoneNumberIndicator>true</MobilePhoneNumberIndicator>
+                            <SMSEnabledIndicator>true</SMSEnabledIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName>Papa Jones</FormattedName>
+                        </DisplayName>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <StreetName>test</StreetName>
+                            <BuildingID>1</BuildingID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </BillToParty>
+                <AccountParty>
+                    <PartyID>150966</PartyID>
+                    <StandardID schemeAgencyID=" ">AT69ZZZ000000</StandardID>
+                    <AddressHostUUID>00163e0e-24e1-1ee5-91c9-ff640026c3c9</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Telephone>
+                            <Number>
+                                <SubscriberID>1234</SubscriberID>
+                                <CountryCode>IT</CountryCode>
+                                <CountryDiallingCode>+39</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+39 1234</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName languageCode="EN">Papa Jones</FormattedName>
+                        </DisplayName>
+                        <Name>
+                            <Name>
+                                <FirstLineName>Papa Jones</FirstLineName>
+                            </Name>
+                        </Name>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <POBoxPostalCode>04211</POBoxPostalCode>
+                            <StreetName>test</StreetName>
+                            <HouseID>1</HouseID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </AccountParty>
+                <PayerParty>
+                    <PartyID>150966</PartyID>
+                    <StandardID schemeAgencyID=" ">AT69ZZZ000000</StandardID>
+                    <AddressHostUUID>00163e0e-24e1-1ee5-91c9-ff640026c3c9</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Telephone>
+                            <Number>
+                                <SubscriberID>1234</SubscriberID>
+                                <CountryCode>IT</CountryCode>
+                                <CountryDiallingCode>+39</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+39 1234</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName languageCode="EN">Papa Jones</FormattedName>
+                        </DisplayName>
+                        <Name>
+                            <Name>
+                                <FirstLineName>Papa Jones</FirstLineName>
+                            </Name>
+                        </Name>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <POBoxPostalCode>04211</POBoxPostalCode>
+                            <StreetName>test</StreetName>
+                            <HouseID>1</HouseID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </PayerParty>
+                <ProductRecipientParty>
+                    <PartyID>150966</PartyID>
+                    <StandardID schemeAgencyID=" ">AT69ZZZ000000</StandardID>
+                    <AddressHostUUID>00163e0e-24e1-1ee5-91ca-000fb82a83c9</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>test102@christophh.net</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Telephone>
+                            <Number>
+                                <SubscriberID>1234</SubscriberID>
+                                <CountryCode>IT</CountryCode>
+                                <CountryDiallingCode>+39</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+39 1234</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                            <SMSEnabledIndicator>true</SMSEnabledIndicator>
+                        </Telephone>
+                        <Telephone>
+                            <DefaultMobilePhoneNumberIndicator>true</DefaultMobilePhoneNumberIndicator>
+                            <MobilePhoneNumberIndicator>true</MobilePhoneNumberIndicator>
+                            <SMSEnabledIndicator>true</SMSEnabledIndicator>
+                        </Telephone>
+                        <DisplayName>
+                            <FormattedName>Papa Jones</FormattedName>
+                        </DisplayName>
+                        <PostalAddress>
+                            <CountryCode>IT</CountryCode>
+                            <CityName>test</CityName>
+                            <StreetPostalCode>04211</StreetPostalCode>
+                            <StreetName>test</StreetName>
+                            <BuildingID>1</BuildingID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </ProductRecipientParty>
+                <SellerParty>
+                    <PartyID>AT10000</PartyID>
+                    <StandardID schemeAgencyID=" ">AT69ZZZ000000</StandardID>
+                    <AddressHostUUID>00163e03-0f5f-1ee2-998d-b7f42b7bb694</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>office@promedico.at</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Facsimile>
+                            <Number>
+                                <SubscriberID>0DW</SubscriberID>
+                                <ExtensionID>6</ExtensionID>
+                                <CountryCode>AT</CountryCode>
+                                <CountryDiallingCode>+43</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+43 DW-6</FormattedNumberDescription>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Facsimile>
+                        <Telephone>
+                            <Number>
+                                <AreaID>0316</AreaID>
+                                <SubscriberID>262633</SubscriberID>
+                                <CountryCode>AT</CountryCode>
+                                <CountryDiallingCode>+43</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+43 (316) 262633</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                        </Telephone>
+                        <Web>
+                            <URI>http://www.promedico.at/</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Web>
+                        <DisplayName>
+                            <FormattedName languageCode="EN">pro medico HandelsGmbH</FormattedName>
+                        </DisplayName>
+                        <Name>
+                            <Name>
+                                <FirstLineName>pro medico HandelsGmbH</FirstLineName>
+                            </Name>
+                        </Name>
+                        <PostalAddress>
+                            <CountryCode>AT</CountryCode>
+                            <CityName>Graz</CityName>
+                            <StreetPostalCode>8054</StreetPostalCode>
+                            <StreetName>Kärntner Straße</StreetName>
+                            <HouseID>294</HouseID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </SellerParty>
+                <SalesUnitParty>
+                    <PartyID>AT11000</PartyID>
+                    <AddressHostUUID>00163e03-0f61-1ed2-92a0-dda1dfa950e1</AddressHostUUID>
+                    <Address>
+                        <Email>
+                            <URI>office@promedico.at</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Email>
+                        <Facsimile>
+                            <Number>
+                                <SubscriberID>0316 262633 6</SubscriberID>
+                                <CountryCode>AT</CountryCode>
+                                <CountryDiallingCode>+43</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+43 316 262633 6</FormattedNumberDescription>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Facsimile>
+                        <Telephone>
+                            <Number>
+                                <SubscriberID>0316 262633</SubscriberID>
+                                <CountryCode>AT</CountryCode>
+                                <CountryDiallingCode>+43</CountryDiallingCode>
+                            </Number>
+                            <FormattedNumberDescription>+43 316 262633</FormattedNumberDescription>
+                            <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                        </Telephone>
+                        <Web>
+                            <URI>http://www.promedico.at/</URI>
+                            <DefaultIndicator>true</DefaultIndicator>
+                        </Web>
+                        <DisplayName>
+                            <FormattedName languageCode="EN">AT - GF</FormattedName>
+                        </DisplayName>
+                        <Name>
+                            <Name>
+                                <FirstLineName>pro medico HandelsGmbH</FirstLineName>
+                            </Name>
+                        </Name>
+                        <PostalAddress>
+                            <CountryCode>AT</CountryCode>
+                            <CityName>Graz</CityName>
+                            <StreetPostalCode>8054</StreetPostalCode>
+                            <StreetName>Kärntner Straße</StreetName>
+                            <HouseID>294</HouseID>
+                            <TimeZoneCode>CET</TimeZoneCode>
+                        </PostalAddress>
+                    </Address>
+                </SalesUnitParty>
+                <RequestedFulfillmentPeriodPeriodTerms>
+                    <StartDateTime timeZoneCode="UTC">2015-08-21T00:00:00Z</StartDateTime>
+                    <EndDateTime timeZoneCode="UTC">2015-08-22T00:00:00Z</EndDateTime>
+                </RequestedFulfillmentPeriodPeriodTerms>
+                <DeliveryTerms>
+                    <DeliveryPriorityCode>3</DeliveryPriorityCode>
+                    <PartialDeliveryControlCode>1</PartialDeliveryControlCode>
+                </DeliveryTerms>
+                <PricingTerms>
+                    <CurrencyCode>EUR</CurrencyCode>
+                    <PriceDateTime timeZoneCode="CET">2015-08-19T08:55:13Z</PriceDateTime>
+                    <GrossAmountIndicator>true</GrossAmountIndicator>
+                </PricingTerms>
+                <InvoiceTerms>
+                    <ProposedInvoiceDate>2015-08-19</ProposedInvoiceDate>
+                </InvoiceTerms>
+                <Item>
+                    <ID>10</ID>
+                    <ProcessingTypeCode>TAN</ProcessingTypeCode>
+                    <PostingDate>2015-08-19T08:55:13Z</PostingDate>
+                    <Description languageCode="EN"></Description>
+                    <Status>
+                        <ConsistencyStatusCode>2</ConsistencyStatusCode>
+                        <ConsistencyStatusName languageCode="EN">Inconsistent</ConsistencyStatusName>
+                        <ProductAvailabilityConfirmationStatusCode>1</ProductAvailabilityConfirmationStatusCode>
+                        <ProductAvailabilityConfirmationStatusName languageCode="EN">Confirmation Pending</ProductAvailabilityConfirmationStatusName>
+                        <FulfilmentDataCompletenessStatusCode>3</FulfilmentDataCompletenessStatusCode>
+                        <FulfilmentDataCompletenessStatusName languageCode="EN">Complete</FulfilmentDataCompletenessStatusName>
+                        <InvoicingDataCompletenessStatusCode>3</InvoicingDataCompletenessStatusCode>
+                        <InvoicingDataCompletenessStatusName languageCode="EN">Complete</InvoicingDataCompletenessStatusName>
+                        <PricingDataCompletenessStatusCode>3</PricingDataCompletenessStatusCode>
+                        <PricingDataCompletenessStatusName languageCode="EN">Complete</PricingDataCompletenessStatusName>
+                        <GeneralDataCompletenessStatusCode>3</GeneralDataCompletenessStatusCode>
+                        <GeneralDataCompletenessStatusName languageCode="EN">Complete</GeneralDataCompletenessStatusName>
+                        <FulfilmentProcessingStatusCode>1</FulfilmentProcessingStatusCode>
+                        <FulfilmentProcessingStatusName languageCode="EN">Not Started</FulfilmentProcessingStatusName>
+                        <InvoiceProcessingStatusCode>1</InvoiceProcessingStatusCode>
+                        <InvoiceProcessingStatusName languageCode="EN">Not Started</InvoiceProcessingStatusName>
+                        <CustomerOrderLifeCycleStatusCode>4</CustomerOrderLifeCycleStatusCode>
+                        <CustomerOrderLifeCycleStatusName languageCode="EN">In Preparation</CustomerOrderLifeCycleStatusName>
+                        <CancellationStatusCode>1</CancellationStatusCode>
+                        <CancellationStatusName languageCode="EN">Not Canceled</CancellationStatusName>
+                        <ApprovalStatusCode>1</ApprovalStatusCode>
+                        <ApprovalStatusName languageCode="EN">Not Started</ApprovalStatusName>
+                        <ReleaseStatusCode>1</ReleaseStatusCode>
+                        <ReleaseStatusName languageCode="EN">Not Released</ReleaseStatusName>
+                    </Status>
+                    <ItemProduct>
+                        <ProductID>DI6A</ProductID>
+                        <ProductInternalID>DI6A</ProductInternalID>
+                        <ProductStandardID schemeAgencyID=" ">766298114866</ProductStandardID>
+                        <UnitOfMeasure>EA</UnitOfMeasure>
+                    </ItemProduct>
+                    <ItemDeliveryTerms>
+                        <DeliveryPriorityCode>3</DeliveryPriorityCode>
+                        <PartialDeliveryControlCode>1</PartialDeliveryControlCode>
+                    </ItemDeliveryTerms>
+                    <ItemScheduleLine>
+                        <ID>1</ID>
+                        <TypeCode>1</TypeCode>
+                        <Quantity unitCode="EA">1.0</Quantity>
+                        <QuantityTypeCode>EA</QuantityTypeCode>
+                        <QuantityTypeName languageCode="EN">each</QuantityTypeName>
+                        <MeasureUnitName languageCode="EN">Each</MeasureUnitName>
+                        <MeasureUnitCommonName languageCode="EN">ea</MeasureUnitCommonName>
+                        <DateTimePeriod>
+                            <StartDateTime timeZoneCode="UTC">2015-08-21T00:00:00Z</StartDateTime>
+                            <EndDateTime timeZoneCode="UTC">2015-08-22T00:00:00Z</EndDateTime>
+                        </DateTimePeriod>
+                    </ItemScheduleLine>
+                    <ProductRecipientItemParty>
+                        <PartyID>150966</PartyID>
+                        <AddressHostUUID>00163e0e-24e1-1ee5-91ca-000fb82a83c9</AddressHostUUID>
+                        <Address>
+                            <Email>
+                                <URI>test102@christophh.net</URI>
+                                <DefaultIndicator>true</DefaultIndicator>
+                            </Email>
+                            <Telephone>
+                                <Number>
+                                    <SubscriberID>1234</SubscriberID>
+                                    <CountryCode>IT</CountryCode>
+                                    <CountryDiallingCode>+39</CountryDiallingCode>
+                                </Number>
+                                <FormattedNumberDescription>+39 1234</FormattedNumberDescription>
+                                <DefaultConventionalPhoneNumberIndicator>true</DefaultConventionalPhoneNumberIndicator>
+                                <SMSEnabledIndicator>true</SMSEnabledIndicator>
+                            </Telephone>
+                            <Telephone>
+                                <DefaultMobilePhoneNumberIndicator>true</DefaultMobilePhoneNumberIndicator>
+                                <MobilePhoneNumberIndicator>true</MobilePhoneNumberIndicator>
+                                <SMSEnabledIndicator>true</SMSEnabledIndicator>
+                            </Telephone>
+                            <DisplayName>
+                                <FormattedName>Papa Jones</FormattedName>
+                            </DisplayName>
+                            <PostalAddress>
+                                <CountryCode>IT</CountryCode>
+                                <CityName>test</CityName>
+                                <StreetPostalCode>04211</StreetPostalCode>
+                                <StreetName>test</StreetName>
+                                <BuildingID>1</BuildingID>
+                                <TimeZoneCode>CET</TimeZoneCode>
+                            </PostalAddress>
+                        </Address>
+                    </ProductRecipientItemParty>
+                    <ItemTextCollection>
+                        <Text>
+                            <TypeCode>10011</TypeCode>
+                            <ContentText>76fa89ea-cb38-4b82-ab5d-a6133eccbbce</ContentText>
+                        </Text>
+                    </ItemTextCollection>
+                    <PriceAndTaxCalculationItem>
+                        <Status>
+                            <CalculationStatusCode>3</CalculationStatusCode>
+                        </Status>
+                        <CountryCode>IT</CountryCode>
+                        <TaxationCharacteristicsCode listID="IT">501</TaxationCharacteristicsCode>
+                        <TaxationCharacteristicsDeterminationMethodCode>2</TaxationCharacteristicsDeterminationMethodCode>
+                        <WithholdingTaxationCharacteristicsCode listID="IT"></WithholdingTaxationCharacteristicsCode>
+                        <WithholdingTaxationCharacteristicsDeterminationMethodCode>2</WithholdingTaxationCharacteristicsDeterminationMethodCode>
+                        <ItemMainTotal>
+                            <Description languageCode="EN">Total Item Gross Value</Description>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">0.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemMainTotal>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda8c3c9</UUID>
+                            <Description languageCode="EN">Cost</Description>
+                            <MajorLevelOrdinalNumberValue>130</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <TypeCode listID="2">0008</TypeCode>
+                            <CategoryCode>1</CategoryCode>
+                            <PurposeCode>4110</PurposeCode>
+                            <Rate>
+                                <DecimalValue>8.77</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">8.77</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <ManuallyChangedIndicator>true</ManuallyChangedIndicator>
+                            <OriginCode>2</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda903c9</UUID>
+                            <Description languageCode="EN">Total Item Gross Value</Description>
+                            <MajorLevelOrdinalNumberValue>60</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">0.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda923c9</UUID>
+                            <Description languageCode="EN">Total Gross Value</Description>
+                            <MajorLevelOrdinalNumberValue>100</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">0.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda943c9</UUID>
+                            <Description languageCode="EN">&lt;TE&gt; (%)</Description>
+                            <MajorLevelOrdinalNumberValue>110</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <TypeCode listID="2">1TTE</TypeCode>
+                            <CategoryCode>4</CategoryCode>
+                            <PurposeCode>5100</PurposeCode>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <MeasureUnitCode>P1</MeasureUnitCode>
+                            </Rate>
+                            <CalculationBasis>
+                                <BaseCode>8</BaseCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <GroupedIndicator>true</GroupedIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda963c9</UUID>
+                            <Description languageCode="EN">Net Total Value</Description>
+                            <MajorLevelOrdinalNumberValue>120</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <TypeCode listID="2">1NTV</TypeCode>
+                            <CategoryCode>3</CategoryCode>
+                            <PurposeCode>1000</PurposeCode>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda983c9</UUID>
+                            <Description languageCode="EN">Net Profit Margin</Description>
+                            <MajorLevelOrdinalNumberValue>140</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>-8.77</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">-8.77</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda9a3c9</UUID>
+                            <Description languageCode="EN">Net Profit Margin (%)</Description>
+                            <MajorLevelOrdinalNumberValue>141</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <MeasureUnitCode>P1</MeasureUnitCode>
+                            </Rate>
+                            <CalculationBasis>
+                                <BaseCode>1</BaseCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">-8.77</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda9c3c9</UUID>
+                            <Description languageCode="EN">Gross Total</Description>
+                            <MajorLevelOrdinalNumberValue>150</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002deda9e3c9</UUID>
+                            <Description languageCode="EN">Gross Item Discounts</Description>
+                            <MajorLevelOrdinalNumberValue>160</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002dedaa03c9</UUID>
+                            <Description languageCode="EN">Gross Header Discounts</Description>
+                            <MajorLevelOrdinalNumberValue>170</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <CurrencyCode>EUR</CurrencyCode>
+                                <BaseDecimalValue>1.0</BaseDecimalValue>
+                                <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                            </Rate>
+                            <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                            <CalculationBasis>
+                                <BaseCode>3</BaseCode>
+                                <Quantity unitCode="EA">1.0</Quantity>
+                                <QuantityTypeCode>EA</QuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-002dedaa23c9</UUID>
+                            <Description languageCode="EN">Gross Total Given Discounts (%)</Description>
+                            <MajorLevelOrdinalNumberValue>180</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                            <Rate>
+                                <DecimalValue>0.0</DecimalValue>
+                                <MeasureUnitCode>P1</MeasureUnitCode>
+                            </Rate>
+                            <CalculationBasis>
+                                <BaseCode>1</BaseCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>3</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemPriceComponent>
+                            <UUID>00163e0e-24e1-1ee5-91ca-005934ab03c9</UUID>
+                            <Description languageCode="EN">VAT (%)</Description>
+                            <MajorLevelOrdinalNumberValue>110</MajorLevelOrdinalNumberValue>
+                            <MinorLevelOrdinalNumberValue>2</MinorLevelOrdinalNumberValue>
+                            <TypeCode listID="2">IT1</TypeCode>
+                            <CategoryCode>4</CategoryCode>
+                            <PurposeCode>5100</PurposeCode>
+                            <Rate>
+                                <DecimalValue>22.0</DecimalValue>
+                                <MeasureUnitCode>P1</MeasureUnitCode>
+                            </Rate>
+                            <CalculationBasis>
+                                <BaseCode>8</BaseCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                            </CalculationBasis>
+                            <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                            <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                            <EffectiveIndicator>true</EffectiveIndicator>
+                            <OriginCode>1</OriginCode>
+                        </ItemPriceComponent>
+                        <ItemProductTaxDetails>
+                            <UUID>00163e0e-24e1-1ee5-91ca-005934aae3c9</UUID>
+                            <ProductTax>
+                                <CountryCode>IT</CountryCode>
+                                <EventTypeCode listID="IT">310</EventTypeCode>
+                                <TypeCode listID="IT">1</TypeCode>
+                                <RateTypeCode listID="IT1||2|1">1</RateTypeCode>
+                                <BaseAmount currencyCode="EUR">0.0</BaseAmount>
+                                <Percent>22.0</Percent>
+                                <BaseQuantity unitCode="EA">1.0</BaseQuantity>
+                                <BaseQuantityTypeCode>EA</BaseQuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                                <InternalAmount currencyCode="EUR">0.0</InternalAmount>
+                                <DueCategoryCode>1</DueCategoryCode>
+                            </ProductTax>
+                            <TransactionCurrencyProductTax>
+                                <CountryCode>IT</CountryCode>
+                                <EventTypeCode listID="IT">310</EventTypeCode>
+                                <TypeCode listID="IT">1</TypeCode>
+                                <RateTypeCode listID="IT1||2|1">1</RateTypeCode>
+                                <BaseAmount currencyCode="EUR">0.0</BaseAmount>
+                                <Percent>22.0</Percent>
+                                <BaseQuantity unitCode="EA">1.0</BaseQuantity>
+                                <BaseQuantityTypeCode>EA</BaseQuantityTypeCode>
+                                <Amount currencyCode="EUR">0.0</Amount>
+                                <InternalAmount currencyCode="EUR">0.0</InternalAmount>
+                                <DueCategoryCode>1</DueCategoryCode>
+                            </TransactionCurrencyProductTax>
+                        </ItemProductTaxDetails>
+                        <ItemTaxationTerms>
+                            <SellerCountryCode>IT</SellerCountryCode>
+                            <SellerTaxID schemeID=" ">IT00160709994</SellerTaxID>
+                            <SellerTaxIdentificationNumberTypeCode listID="IT">1</SellerTaxIdentificationNumberTypeCode>
+                            <TaxDate>2015-08-19</TaxDate>
+                        </ItemTaxationTerms>
+                    </PriceAndTaxCalculationItem>
+                </Item>
+                <CashDiscountTerms>
+                    <Code>Z009</Code>
+                </CashDiscountTerms>
+                <PaymentControl>
+                    <PaymentProcessingCompanyUUID>00163e03-0f61-1ed2-928a-d478f9a2a60b</PaymentProcessingCompanyUUID>
+                    <PaymentProcessingCompanyID>AT10000</PaymentProcessingCompanyID>
+                    <PaymentProcessingBusinessPartnerUUID>00163e0e-24e1-1ee5-91c9-ff64001663c9</PaymentProcessingBusinessPartnerUUID>
+                    <PaymentProcessingBusinessPartnerID>150966</PaymentProcessingBusinessPartnerID>
+                    <PropertyMovementDirectionCode>2</PropertyMovementDirectionCode>
+                </PaymentControl>
+                <PriceAndTaxCalculation>
+                    <MainTotal>
+                        <Description languageCode="EN">Total Item Gross Value</Description>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </MainTotal>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ab23c9</UUID>
+                        <Description languageCode="EN">Total Item Gross Value</Description>
+                        <MajorLevelOrdinalNumberValue>60</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>1</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ab43c9</UUID>
+                        <Description languageCode="EN">Total Gross Value</Description>
+                        <MajorLevelOrdinalNumberValue>100</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>2</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ab63c9</UUID>
+                        <Description languageCode="EN">&lt;TE&gt; (%)</Description>
+                        <MajorLevelOrdinalNumberValue>110</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>3</MinorLevelOrdinalNumberValue>
+                        <TypeCode listID="2">1TTE</TypeCode>
+                        <TypeName languageCode="EN">Tax</TypeName>
+                        <CategoryCode>4</CategoryCode>
+                        <CategoryName languageCode="EN">Tax</CategoryName>
+                        <PurposeCode>5100</PurposeCode>
+                        <PurposeName languageCode="EN">Tax</PurposeName>
+                        <Rate>
+                            <DecimalValue>0.0</DecimalValue>
+                            <MeasureUnitCode>P1</MeasureUnitCode>
+                        </Rate>
+                        <CalculationBasis>
+                            <BaseCode>8</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Percent (included in hundred)</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <GroupedIndicator>true</GroupedIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ab83c9</UUID>
+                        <Description languageCode="EN">VAT (%)</Description>
+                        <MajorLevelOrdinalNumberValue>110</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>4</MinorLevelOrdinalNumberValue>
+                        <TypeCode listID="2">IT1</TypeCode>
+                        <TypeName languageCode="EN">VAT (%)</TypeName>
+                        <CategoryCode>4</CategoryCode>
+                        <CategoryName languageCode="EN">Tax</CategoryName>
+                        <PurposeCode>5100</PurposeCode>
+                        <PurposeName languageCode="EN">Tax</PurposeName>
+                        <Rate>
+                            <DecimalValue>22.0</DecimalValue>
+                            <MeasureUnitCode>P1</MeasureUnitCode>
+                        </Rate>
+                        <CalculationBasis>
+                            <BaseCode>8</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Percent (included in hundred)</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934aba3c9</UUID>
+                        <Description languageCode="EN">Net Total Value</Description>
+                        <MajorLevelOrdinalNumberValue>120</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>5</MinorLevelOrdinalNumberValue>
+                        <TypeCode listID="2">1NTV</TypeCode>
+                        <TypeName languageCode="EN">Net Total Value</TypeName>
+                        <CategoryCode>3</CategoryCode>
+                        <CategoryName languageCode="EN">Surcharge</CategoryName>
+                        <PurposeCode>1000</PurposeCode>
+                        <PurposeName languageCode="EN">General</PurposeName>
+                        <Rate>
+                            <DecimalValue>0.0</DecimalValue>
+                            <CurrencyCode>EUR</CurrencyCode>
+                            <BaseDecimalValue>1.0</BaseDecimalValue>
+                            <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                        </Rate>
+                        <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                        <RateBaseQuantityTypeName languageCode="EN">each</RateBaseQuantityTypeName>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Quantity unitCode="EA">1.0</Quantity>
+                            <QuantityTypeCode>EA</QuantityTypeCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculationBasisQuantityTypeName languageCode="EN">each</CalculationBasisQuantityTypeName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934abc3c9</UUID>
+                        <Description languageCode="EN">Cost</Description>
+                        <MajorLevelOrdinalNumberValue>130</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>6</MinorLevelOrdinalNumberValue>
+                        <TypeCode listID="2">0008</TypeCode>
+                        <TypeName languageCode="EN">Cost</TypeName>
+                        <CategoryCode>1</CategoryCode>
+                        <CategoryName languageCode="EN">Price</CategoryName>
+                        <PurposeCode>4110</PurposeCode>
+                        <PurposeName languageCode="EN">Inventory Valuation</PurposeName>
+                        <Rate>
+                            <DecimalValue>8.77</DecimalValue>
+                            <CurrencyCode>EUR</CurrencyCode>
+                            <BaseDecimalValue>1.0</BaseDecimalValue>
+                            <BaseMeasureUnitCode>EA</BaseMeasureUnitCode>
+                        </Rate>
+                        <RateBaseQuantityTypeCode>EA</RateBaseQuantityTypeCode>
+                        <RateBaseQuantityTypeName languageCode="EN">each</RateBaseQuantityTypeName>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Quantity unitCode="EA">1.0</Quantity>
+                            <QuantityTypeCode>EA</QuantityTypeCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculationBasisQuantityTypeName languageCode="EN">each</CalculationBasisQuantityTypeName>
+                        <CalculatedAmount currencyCode="EUR">8.77</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <ManuallyChangedIndicator>true</ManuallyChangedIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934abe3c9</UUID>
+                        <Description languageCode="EN">Net Profit Margin</Description>
+                        <MajorLevelOrdinalNumberValue>140</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>7</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">-8.77</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ac03c9</UUID>
+                        <Description languageCode="EN">Net Profit Margin (%)</Description>
+                        <MajorLevelOrdinalNumberValue>141</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>8</MinorLevelOrdinalNumberValue>
+                        <Rate>
+                            <DecimalValue>0.0</DecimalValue>
+                            <MeasureUnitCode>P1</MeasureUnitCode>
+                        </Rate>
+                        <CalculationBasis>
+                            <BaseCode>1</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Percentage (of one hundred)</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">-8.77</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ac23c9</UUID>
+                        <Description languageCode="EN">Gross Total</Description>
+                        <MajorLevelOrdinalNumberValue>150</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>9</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ac43c9</UUID>
+                        <Description languageCode="EN">Gross Item Discounts</Description>
+                        <MajorLevelOrdinalNumberValue>160</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>10</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ac63c9</UUID>
+                        <Description languageCode="EN">Gross Header Discounts</Description>
+                        <MajorLevelOrdinalNumberValue>170</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>11</MinorLevelOrdinalNumberValue>
+                        <CalculationBasis>
+                            <BaseCode>3</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Quantity</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <PriceComponent>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ac83c9</UUID>
+                        <Description languageCode="EN">Gross Total Given Discounts (%)</Description>
+                        <MajorLevelOrdinalNumberValue>180</MajorLevelOrdinalNumberValue>
+                        <MinorLevelOrdinalNumberValue>12</MinorLevelOrdinalNumberValue>
+                        <Rate>
+                            <DecimalValue>0.0</DecimalValue>
+                            <MeasureUnitCode>P1</MeasureUnitCode>
+                        </Rate>
+                        <CalculationBasis>
+                            <BaseCode>1</BaseCode>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                        </CalculationBasis>
+                        <CalculationBasisBaseName languageCode="EN">Percentage (of one hundred)</CalculationBasisBaseName>
+                        <CalculatedAmount currencyCode="EUR">0.0</CalculatedAmount>
+                        <RoundingDifferenceAmount currencyCode="EUR">0.0</RoundingDifferenceAmount>
+                        <EffectiveIndicator>true</EffectiveIndicator>
+                        <OriginCode>3</OriginCode>
+                    </PriceComponent>
+                    <ProductTaxDetails>
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934aac3c9</UUID>
+                        <TaxationCharacteristicsCode listID="IT">501</TaxationCharacteristicsCode>
+                        <TransactionCurrencyProductTax>
+                            <CountryCode>IT</CountryCode>
+                            <EventTypeCode listID="IT">310</EventTypeCode>
+                            <TypeCode listID="IT">1</TypeCode>
+                            <RateTypeCode listID="IT1||2|1">1</RateTypeCode>
+                            <BaseAmount currencyCode="EUR">0.0</BaseAmount>
+                            <Percent>22.0</Percent>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                            <InternalAmount currencyCode="EUR">0.0</InternalAmount>
+                            <DueCategoryCode>1</DueCategoryCode>
+                        </TransactionCurrencyProductTax>
+                        <ProductTax>
+                            <CountryCode>IT</CountryCode>
+                            <EventTypeCode listID="IT">310</EventTypeCode>
+                            <TypeCode listID="IT">1</TypeCode>
+                            <RateTypeCode listID="IT1||2|1">1</RateTypeCode>
+                            <BaseAmount currencyCode="EUR">0.0</BaseAmount>
+                            <Percent>22.0</Percent>
+                            <Amount currencyCode="EUR">0.0</Amount>
+                            <InternalAmount currencyCode="EUR">0.0</InternalAmount>
+                            <DueCategoryCode>1</DueCategoryCode>
+                        </ProductTax>
+                    </ProductTaxDetails>
+                    <TaxationTerms>
+                        <SellerCountryCode>IT</SellerCountryCode>
+                        <SellerTaxID schemeID=" ">IT00160709994</SellerTaxID>
+                        <SellerTaxIdentificationNumberTypeCode listID="IT">1</SellerTaxIdentificationNumberTypeCode>
+                        <TaxDate>2015-08-19</TaxDate>
+                    </TaxationTerms>
+                </PriceAndTaxCalculation>
+                <n1:EXTHerkunftskanal00163E030F5F1ED28FDC3646BE2A82E4
+                    xmlns:n1="http://sap.com/xi/AP/CustomerExtension/BYD/A04HF">WEB
+                </n1:EXTHerkunftskanal00163E030F5F1ED28FDC3646BE2A82E4>
+            </SalesOrder>
+            <ProcessingConditions>
+                <ReturnedQueryHitsNumberValue>1</ReturnedQueryHitsNumberValue>
+                <MoreHitsAvailableIndicator>false</MoreHitsAvailableIndicator>
+                <LastReturnedObjectID>00163E0E24E11EE591CA000FB82CC3C9</LastReturnedObjectID>
+            </ProcessingConditions>
+        </n0:SalesOrderByElementsResponse_sync>
+    </soap-env:Body>
+</soap-env:Envelope>--------------------
+INFO  i.e.s.b.AbstractSapComponent - Enriching the request context.
+---[HTTP request - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managesalesorderin5?sap-vhost=my333146.sapbydesign.com]---
+Content-type: text/xml;charset="utf-8"
+Soapaction: "http://sap.com/xi/A1S/Global/ManageSalesOrderIn/MaintainBundleRequest"
+Accept: text/xml, multipart/related, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+
+<?xml version="1.0" ?>
+<S:Envelope
+    xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns3:SalesOrderBundleMaintainRequest_sync
+            xmlns:ns2="http://sap.com/xi/AP/Common/Global"
+            xmlns:ns3="http://sap.com/xi/SAPGlobal20/Global">
+            <SalesOrder actionCode="04">
+                <ID>60465</ID>
+                <Item>
+                    <ID>10</ID>
+                    <PriceAndTaxCalculationItem itemPriceComponentListCompleteTransmissionIndicator="false">
+                        <ItemMainPrice>
+                            <Rate>
+                                <DecimalValue>34.9</DecimalValue>
+                            </Rate>
+                        </ItemMainPrice>
+                    </PriceAndTaxCalculationItem>
+                </Item>
+                <PriceAndTaxCalculation actionCode="02" withholdingTaxDetailsListCompleteTransmissionIndicator="false" productTaxDetailsListCompleteTransmissionIndicator="false" priceComponentListCompleteTransmissionIndicator="false">
+                    <PriceComponent actionCode="02">
+                        <UUID>00163e0e-24e1-1ee5-91ca-005934ab63c9</UUID>
+                        <TypeCode listID="2">8PR8</TypeCode>
+                        <Rate>
+                            <DecimalValue>10</DecimalValue>
+                        </Rate>
+                    </PriceComponent>
+                </PriceAndTaxCalculation>
+            </SalesOrder>
+        </ns3:SalesOrderBundleMaintainRequest_sync>
+    </S:Body>
+</S:Envelope>--------------------
+---[HTTP response - https://my333146.sapbydesign.com/sap/bc/srt/scs/sap/managesalesorderin5?sap-vhost=my333146.sapbydesign.com - 200]---
+null: HTTP/1.1 200 OK
+Sap-srt_server_info_ext: 0
+Content-type: text/xml; charset=utf-8
+Content-length: 995
+Sap-srt_server_info: HNZ_105,1999 ,http://sap.com/xi/A1S/Global,ManageSalesOrderIn,SalesOrderBundleMaintainRequest_sync,1954
+Sap-srt_id: 20150819/085523/v1.00_final_6.40/00163E0E24E11EE591CA00DD2D23E3CA
+Set-cookie: sap-usercontext=sap-client=105; path=/
+Accept: text/xml
+
+<soap-env:Envelope
+    xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header/>
+    <soap-env:Body>
+        <n0:SalesOrderBundleMaintainConfirmation_sync
+            xmlns:n0="http://sap.com/xi/SAPGlobal20/Global"
+            xmlns:prx="urn:sap.com:proxy:HNZ:/1SAI/TAE88DF3AA925C3E49C60CC:804">
+            <Log>
+                <MaximumLogItemSeverityCode>3</MaximumLogItemSeverityCode>
+                <Item>
+                    <TypeID>118(/AP_ESI_COMMON/)</TypeID>
+                    <CategoryCode>INC.BOI</CategoryCode>
+                    <SeverityCode>3</SeverityCode>
+                    <Note>Changing Price Component not possible; field is read-only</Note>
+                </Item>
+                <Item>
+                    <TypeID>089(//PAPR/PARTY_ADMIN/)</TypeID>
+                    <CategoryCode>SEI.FSI</CategoryCode>
+                    <SeverityCode>2</SeverityCode>
+                    <Note>Financial data for seller AT10000 missing in master data of account 150966</Note>
+                </Item>
+                <Item>
+                    <TypeID>021(//PAPR/PARTY_ADMIN/)</TypeID>
+                    <CategoryCode>SEI.FSI</CategoryCode>
+                    <SeverityCode>3</SeverityCode>
+                    <Note>Party with role Employee Responsible missing</Note>
+                </Item>
+            </Log>
+        </n0:SalesOrderBundleMaintainConfirmation_sync>
+    </soap-env:Body>
+</soap-env:Envelope>--------------------
+ERROR i.e.a.Executor - Component execution failed
+java.lang.RuntimeException: Order price update request failed. Service response: {"salesOrder":[],"log":{"maximumLogItemSeverityCode":"3","item":[{"typeID":"118(/AP_ESI_COMMON/)","categoryCode":{"value":"INC.BOI"},"severityCode":"3","note":"Changing Price Component not possible; field is read-only"},{"typeID":"089(//PAPR/PARTY_ADMIN/)","categoryCode":{"value":"SEI.FSI"},"severityCode":"2","note":"Financial data for seller AT10000 missing in master data of account 150966"},{"typeID":"021(//PAPR/PARTY_ADMIN/)","categoryCode":{"value":"SEI.FSI"},"severityCode":"3","note":"Party with role Employee Responsible missing"}]}}
+	at io.elastic.sap.bydesign.actions.order.CreateOrderAndUpdatePrices.execute(CreateOrderAndUpdatePrices.java:103) ~[sapbydesign-0.0.3-SNAPSHOT.jar:na]
+	at io.elastic.api.Executor.execute(Executor.java:52) ~[java-api-0.0.5.jar:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.6.0_35]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.6.0_35]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.6.0_35]
+	at java.lang.reflect.Method.invoke(Method.java:622) ~[na:1.6.0_35]
+DONE!!!
+Finished execution of component 'sapbydesign', function 'create_order'

@@ -1,0 +1,32 @@
+// game loop
+        while (true)
+        {
+            int remainingTurns = int.Parse(Console.ReadLine());
+            
+            int thorX = initialTX;
+            int thorY = initialTY;
+            String directionX;
+            String directionY;
+            Console.Error.Read(thorX);
+            Console.Error.WriteLine(directionX);
+            if(thorX < lightX){
+                directionX = Console.WriteLine("E");
+                thorX = thorX + 1;
+            }
+            else if(thorX > lightX){
+                directionX = Console.WriteLine("W");
+                thorX = thorX - 1;
+            }
+            
+            if(thorY < lightY){
+                directionY = Console.WriteLine("S");
+                thorY = thorY + 1;
+            }
+            else if(thorY > lightY){
+                directionY = Console.WriteLine("N");
+                thorY = thorY - 1;
+            }
+
+            Console.WriteLine(directionX);
+            Console.WriteLine(directionY);
+        }

@@ -1,0 +1,19 @@
+{
+  "ssids":[
+    {
+      "ssid":"FreeWifi", 
+      "state":"open", 
+      "level":100 
+    },
+    {
+      "ssid":"Pretty fly for a WiFi", 
+      "state":"close",
+      "level":50 
+    },
+    {
+      "ssid":"Abraham Linksys",
+      "state":"kept",
+      "level":0
+    }
+  ]
+}

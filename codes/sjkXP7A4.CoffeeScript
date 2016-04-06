@@ -1,0 +1,14 @@
+savePriorityItems = ->
+  for index of $scope.lesson.items
+    $scope.lesson.items[index].priority = parseInt(index)
+  itemsTmp = ''
+  itemsTmp = $scope.lesson.items.map((i) ->
+    i.id + ':' + i.priority
+  ).join(',')
+  properties = itemsTmp.split(',')
+  obj = {}
+  properties.forEach (property) ->
+    tup = property.split(':')
+    obj[tup[0]] = tup[1]
+    return
+  itemsService.changePrioritiItems priorities

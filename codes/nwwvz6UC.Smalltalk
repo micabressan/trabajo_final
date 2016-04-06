@@ -1,0 +1,63 @@
+"
+1.	Definiálj egy Intervallum osztályt Smalltalk-ban intervallumok reprezentálására, és tárold benne az intervallum alsó (a) és felső (b) végpontját. Írd meg az alábbi metódusokat:
+•	new: kétparaméteres konstruktor
+•	init: kétparaméteres inicializáló üzenet
+•	a: az alsó végpont getter üzenete
+•	b: a felső végpont getter üzenete
+•	printNl: kiírja az intervallum adatait [a, b] formában egy sortöréssel a végén
+•	hossz: üzenet az intervallum hosszának meghatározásához
+•	*: szorzás üzenet, amely két intervallum objektumot szoroz össze
+•	           [a,b] * [c,d] = [min (ac, ad, bc, bd), max (ac, ad, bc, bd)]
+"
+Number subclass: Intervallum [
+	|also felso|
+
+	init: a init: b [
+		 also := a.
+		 felso := b.
+		 ^self.
+]
+
+also [
+	^also.
+]
+
+felso [
+	^felso.
+]
+
+printNl [
+	$[ display. also display. $, display. felso display. $]
+	displayNl.
+]
+
+hossz [
+	 |h|
+	 h := felso - also.
+	 ^h.
+]
+
+* masik [
+	 |er a b|
+	 a := (also * masik also) min: ((also * masik felso) min: ((felso * masik also) min: (felso * masik felso))).
+	 b := (also * masik also) max: ((also * masik felso) max: ((felso * masik also) max: (felso * masik felso))).
+	 er := Intervallum new: a new: b.
+	 ^er.
+]
+]
+
+Intervallum class extend [
+	new: a new: b [
+		|obj| obj := super new.
+		obj init: a init: b.
+		^obj.
+	]
+]
+
+|r1 r2|
+r1 := Intervallum new: 2 new: 3.
+r2 := Intervallum new: 5 new: 9.
+(r1) printNl.
+(r2) printNl.
+(r1 * r2) printNl.
+!

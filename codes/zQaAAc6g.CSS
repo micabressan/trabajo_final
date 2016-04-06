@@ -1,0 +1,407 @@
+@-moz-document domain("vk.com") {
+/*---------------------------------
+| Name: VK Plus                    |
+| Author: Jo?o                     |
+| Contact: http://vk.com/joao_joao |
+| License: CC BY-NC-ND             |
+ ---------------------------------*/
+  #page_header.p_head1 #top_logo_down:before {
+    font-weight: 600;
+    content: "VK";
+    color: white !important;
+    font-size: 25px;
+    font-family: "Tahoma";
+  }
+  #ac_play.playing:before {
+    font-size: 25px;
+    content: "❚❚";
+    color: white;
+  }
+    #ac_play:before {
+    font-size: 25px;
+    content: "▶";
+    color: white;
+  }
+    .audio .play_new.playing:before {
+    font-size: 13px;
+    content: "❚❚";
+    color: white;
+  }
+    .audio .play_new:before {
+    font-size: 13px;
+    content: "▶";
+    color: white;
+  }
+  .audio .play_new {
+    background: none !important;
+  }
+  #ac_prev:before {
+    font-size: 15px;
+    content: "⏪";
+    color: white;
+  }
+    #ac_next:before {
+      font-size: 15px;
+    content: "⏩";
+    color: white;
+  }
+  .audio_remove:before {
+    font-weight: 600;
+    font-size: 11px;
+    content: "✖";
+      color:white;
+  }
+  .audio_add:before {
+    font-size:10px;
+    content: "➕";
+      font-weight: 600;
+    color:white;
+  }
+  #page_header.p_head1 #top_logo_down {
+    background: none !important;
+  }
+  #side_bar .left_label {padding: 2px 0px;}
+  #page_header, #ac {background-color: rgba(0,0,0,0.7)!important;}
+  a._reply_lnk {color: white!important;}
+#page_header .left, #page_header .right, body:not(.dev) #pageHeader .header_right {display: none !important}
+body:not(.dev) #page_header .back {border-radius: 0 0 9px 9px !important; width: 1023px !important}
+body:not(.dev) #pageHeader, body:not(.dev) #pageLayout {width: 1023px !important}
+body:not(.dev) #pageHeader .header_left {border-bottom-left-radius: 9px !important}
+body:not(.dev) #page_header, body:not(.dev) #pageHeader .header_back {border-radius: 0 0 9px 9px !important}
+#page_header #top_logo_down, #page_header #logo_img {visibility: visible !important; transform: scale(0.8,0.8) !important; width: 40px !important; background-position: -11px -8px !important}
+#page_header #top_logo_down.tld_d {background-position: -11px -7px !important}
+#page_header #ts_wrap {margin-top: -5px !important; display: block !important; opacity: 1 !important; left: 45px !important}
+#page_header #top_back_link {background-position: -8px -92px !important; margin-left: 165px !important; padding-left: 15px !important; max-width: 346px !important; padding-right: 5px !important}
+#page_header .top_back_link_td {min-width: 531px !important}
+#page_header #top_back_link.active {background-position: -8px -91px !important}
+body:not(.dev) #page_header, body:not(.dev) #page_header .back, #page_header .content, #page_header #top_logo_down, #page_header #top_nav, #page_header #top_links, #page_header #logo_img {height: 25px !important}
+#page_header #top_links a:not(#top_switch_lang):not(#top_reg_link) {padding-top: 4px !important; padding-bottom: 6px !important}
+body:not(.firefox) #page_header #top_links a:not(#top_switch_lang):not(#top_reg_link) {padding-top: 5px !important; padding-bottom: 5px !important}
+#page_header #top_switch_lang, #page_header #top_reg_link {padding-top: 3px !important; padding-bottom: 7px !important; margin-top: 1px !important}
+#page_header #top_switch_lang.active, #page_header #top_reg_link.active {padding-top: 4px !important; padding-bottom: 6px !important}
+#page_header #top_links a:not(.head_play_down):not(#top_switch_lang):not(#top_reg_link).active {padding-top: 5px !important; padding-bottom: 5px !important}
+body:not(.firefox) #page_header #top_links a:not(.head_play_down):not(#top_switch_lang):not(#top_reg_link).active {padding-top: 6px !important; padding-bottom: 4px !important}
+#page_header .top_home_link {height: 15px !important; width: 40px !important; left: 6px !important}
+#page_header .top_home_link[href="/"] {height: 25px !important}
+#page_header #head_play_btn {margin-top: -8px !important; transform: scale(0.96,0.7) !important}
+#page_header #ts_input {padding-bottom: 3px !important}
+#page_header .ts_input_wrap2 {margin-top: -1px !important; margin-right: 33px !important}  
+#stl_text {height: 14px !important}
+#fmenu, #apps .apps_search_wrap.fixed .top_shadow, #side_bar .more_div, #sideBar .moreDiv {display: none !important}
+#blst_cont .blst_other {padding-bottom: 1px !important}
+.summary_tab3, .t_bar.tabs .tab_word {height: 15px !important}  
+#group_contacts .people_extra {min-width: 150px !important}
+.bp_text .mem_link[mention^="bp-"]:before {content: url(http://g0.gstatic.com/orkut/img/smiley/quoteInline.png) " " !important}
+.bp_text .mem_link[mention^="bp-"] {font-weight: bold !important; margin-left: 5px !important; white-space: nowrap !important}
+#friends [id^="delete_row"]:not([style="background-color: rgb(196, 210, 225);"]):not([style="background-color: rgb(107, 141, 177);"]) {opacity: 0 !important}
+#side_bar, #sideBar {position: fixed !important; border-radius: 4px !important; margin-top: 5px !important; padding-bottom: 5px !important}
+#sideBar #myprofile {border-top-left-radius: 4px !important}
+#sideBar #myprofile_edit {border-top-right-radius: 4px !important}
+#side_bar ol, #sideBar ol {margin-bottom: 0 !important; margin-right: 2px !important; margin-left: -2px !important}
+#im_dialogs .dialogs_row {padding: 0 10px 0 7px !important}
+#search_content .three_col_row .info {min-width: 160px !important}    
+body:not(.dev) #page_layout {width: 1023px !important}
+body:not(.dev) #page_body, #wk_layer #wk_box, #wk_layer #wk_box #wk_content, #wk_layer .wl_reply_form_wrap.wl_reply_form_fixed, #wk_layer .wl_reply_form_wrap .wl_reply_form_sh, body:not(.dev) #pageBody {width: 860px !important}
+#wk_layer .reply_form .reply_field {width: 720px !important}
+#flash_audio.fixed #player {width: 0 !important}
+body.font_medium, body.font_medium #group_topics .info.fl_l small, body.font_medium #group_links .group_desc, body.font_medium #group_wall .post_like_link, body.font_medium #page_wall_posts .rel_date, body.font_medium #page_wall_posts .reply_link, body.font_medium #page_wall_posts ._reply_lnk, body.font_medium #group_videos .info small, body.font_medium #group_contacts .people_extra, body.font_medium #feed_search_bar .selector_input, body.font_medium .dialogs_date, body.font_medium #friends .selector_input, body.font_medium #profile .info small, body.font_medium #profile_wide .post_like_link, body.font_medium #profile .group_desc, body.font_medium #group_wall .reply_info .like_link.fl_l, body.font_medium #top_links #top_reg_link, body.font_medium #quick_login #quick_login_button, body.font_medium #quick_login #quick_reg_button button, body.font_medium #top_links #top_switch_lang, body.font_medium #page_body #header #title, body.font_medium #page_body .content p, body.font_medium #page_body .content .listing, body.font_medium #page_body .content .input_back_content, body.font_medium #page_body .content .selector_input, body.font_medium #page_body .content .ij_with_arr, body.font_medium #page_body .content .index_fb_l, body.font_medium #page_body .content .index_or_s, body.font_medium #quick_login #quick_email.text, body.font_medium #quick_login #quick_pass.text, body.font_medium #invite_popup_box small, body.font_medium #invite_popup_box #invite_send_btn, body.font_medium #search_content .input_back_content, body.font_medium #search_content .selector_input, body.font_medium #group_audios .info .duration, body.font_medium #profile_audios .info .duration, body.font_medium .audio .area .info .duration, body.font_medium #profile_counts .fans .fl_r, body.font_medium .audio .title_wrap small, body.font_medium #audio_search_info .audio_friend_now, body.font_medium #audio_search_filters .selector_input, body.font_medium #settings_panel .labeled small, body.font_medium #settings_panel .selector_input, body.font_medium #profile .wide_column #profile_full_info .fl_r, body.font_medium #group_edit_subject .selector_container .selector input, body.font_medium #stats_cont .listing span, body.font_medium #stats_cont #visitors_graph, body.font_medium #stats_cont #sex_age_chart_graph, body.font_medium #stats_cont #members_graph, body.font_medium #stats_cont #sections_graph, body.font_medium #stats_cont #reach_graph, body.font_medium #stats_cont #feedback_graph, body.font_medium #stats_cont #activity_graph, body.font_medium #public #group_wide .post_info .post_like_link, body.font_medium #feed_rows .feedback_row_t .rel_date_needs_update, body.font_medium #public_edit_contact_info #public_contact_memlink_tip, body.font_medium .module_body .people_cell .name_field small, body.font_medium #public #group_wide .rel_date, body.font_medium #public #group_narrow .group_desc, body.font_medium #public #group_narrow small, body.font_medium #public #public_contacts .people_desc, body.font_medium #public #public_contacts .people_extra, body.font_medium #pad_audio_search_info .audio_friend_status, body.font_medium #pad_audio_search_filters .audio_search_filter .selector_input, body.font_medium #pad_controls .duration, body.font_medium #audio .duration, body.font_medium #public_wall .replies .like_link, body.font_medium #group #group_contacts .people_desc, body.font_medium #group #group_contacts .people_extra, body.font_medium #page_wall_posts .replies .reply_to, body.font_medium #im_stickers_buy_header_wrap .im_stickers_act_done, body.font_medium #im_stickers_buy_header_wrap .button_big, body.font_medium .fans_box .button_big, body.font_medium #profile_idols .desc_info .people_desc, body.font_medium #profile_editor .selector_input, body.font_medium #profile_editor .result_list li span, body.font_medium .wall_posts .reply_link_wrap .rel_date, body.font_medium .wall_posts .post_like_link, body.font_medium .wall_posts .post_share_count, body.font_medium .wall_posts .post_like_count, body.font_medium #group_topics small, body.font_medium #group_events .group_desc, body.font_medium #profile_gifts #gifts_module_count, body.font_medium #feed_rows .rel_date, body.font_medium #wk_content .wk_view_footer_a, body.font_medium .wall_module .wall_text .flat_button span, body.font_medium #pv_box .pv_commdate, body.font_medium #pv_box .like_link, body.font_medium #pv_box .like_count, body.font_medium #page_wall_posts .like_link, body.font_medium #page_wall_posts .like_count, body.font_medium .flat_button, body.font_medium .settings_privacy_saved, body.font_medium .fc_msgs_date, body.font_medium #ba_media_preview .duration, body.font_medium #wk_box .apps_standalone_availability, body.font_medium #ads_page .selector_input.selected, body.font_medium #ads_page .ads_param_title_remain_wrap, body.font_medium #ads_page .ads_param_description_remain_wrap, body.font_medium #ads_page .ads_ad_domain, body.font_medium #ads_page #ads_edit_ad_row_subcategory1_id #ads_param_category_more a, body.font_medium .t_bar.settings_tabs .tab_word, body.font_medium .photos_comments #photos_container .pv_commdate, body.font_medium .photos_comments #photos_container .pv_commdate .like_wrap, body.font_medium #video_content .review_comment .review_commdata .fl_l, body.font_medium #pad_side_filters .audio_popular_owner_cnt, body.font_medium .box_layout #audio_extra_link a, body.font_medium .audio .title_wrap .user, body.font_medium #profile_narrow .counts_module .photos .fl_r, body.font_medium .box_layout #choose_video_rows .video_row_info_name, body.font_medium #mv_box .mv_commdata, body.font_medium #mv_box .like_wrap,  body.font_medium #video_content.video_compact_view .video_list .video_row_info_name, body.font_medium .group_edit .group_edit_print_link_wrap, body.font_medium #side_bar #left_friends .left_friend_all_lnk, body.font_medium #sideBar #left_friends .left_friend_all_lnk {font-size: 12px !important}#page_wrap:after, #pageContainer:after {position: fixed !important; bottom: 3px !important; left: 10px !important; text-shadow: 1px -1px 0 rgba(255, 255, 255, 0.5) !important; color: rgba(0, 0, 0, 0.5) !important; font-size: 12px !important; font-family: tahoma !important; font-weight: bold !important}#content .post_info, #content .wall_text, .reply_info, .info_no_actions, .apps_featured_wrap, #app_search_scroll, #apps_grossing_rows_scroll, #apps_featured_inner, .tickets_new_wrap, .wide_wall_module .group_share .info, .apps_featured_scroll, .tabs.t_bar ul.t0, #friends #sections_block, #friends #sections_block a, .bp_post, #ba_post, #ba_text, #profile_wide #profile_photos, #group_wide #group_topics .info, .im_rows .wrapped, #group_wide .wide_column .topics_module .info, .reply_form .reply_field, #groups_list_groups .group_row_labeled, #groups_list_admin .group_row_labeled, #groups_list_search_cont .group_row_labeled, #group h4.simple .top_header, #group .group_wiki_wrap .wk_text, #page_current_info, #pad_cont #pad_rows, #pad_cont .pad_msga, #pad_cont .pad_msg_name, #pad_cont .pad_msg_text, #pad_cont .pad_nws_cont, #pad_cont .pad_nws_name, #pad_cont .pad_nws_text, #pad_cont .pad_nws_date, #pad_cont .pad_nws_data, .bp_tt_content .bp_info, #pad_cont .pad_fr_info, #feed_rows .feedback_row_content, #feed_rows .post_info .wall_text_name, #pages #pages_buttons_panel, #pages .pages_draft_info, #tickets_content #tickets_post_field_wrap, #box_layer #mail_box_editable, #fw_post .fw_post_info, #fw_replies_rows .fw_reply_text, #docs_list_cont .docs_item, .box_layout #audio_attach_search, .box_layout #video_attach_search, .box_layout #photos_attach_search, .box_layout #docs_attach_search, #photos_albums #photos_add_bar, #photos_albums #photos_go_to_album, #photos_albums .photos_add_upl_row, #wk_likes_content .post_info, #wk_likes_content .post_info .wall_text, #group.page_fixed_wide #group_wide.wide_column, #group.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info, #group.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info .wall_text, #group.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info .wall_post_text, #public.page_fixed_wide #group_wide.wide_column, #public.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info, #public.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info .wall_text, #public.page_fixed_wide #group_wide.wide_column .wall_fixed .post_info .wall_post_text, .box_layout .gifts_box .gifts_section_scroll, .box_layout .flist_search_cont, #wk_box .bd_calendar, .box_layout .gedit_admbox_info, .box_layout .gedit_admbox_desc, .box_layout #im_stickers_my_wrap .sort_helper, #content #photos_add_bar, #content .photos_go_to_album {width: auto !important}
+#main_class, #main_class table, .index_fbb, .audio, .im_rows .im_log_body, .box_layout #flash_camera, .box_layout .flist_cell, #wk_box .bd_day_table {width: 100% !important}
+#feed_rows .feedback_row_date, #feed_rows .feedback_row_text {max-width: none !important; width: 100% !important}
+#feed_rows .feedback_row_date, #pad_side_filters .audio_popular_row_data {white-space: normal !important}
+#feed_rows .feedback_like_wrap, #feed_rows .feedback_del_wrap, #feed_rows .feedback_expand_wrap {margin-left: 810px !important}
+#bt_rows .post_media.wall_audio {max-width: 710px !important}
+#bt_rows .post_media.wall_audio .title_wrap {width: auto !important; max-width: 630px !important}
+#profile_wide .profile_info .labeled, #group_wide .group_info .labeled, #group_wide .public_info .labeled_text {width: 470px !important}
+#group_wide .top_header {white-space: normal !important; height: auto !important}
+#results .info .flat_button {font-size: 12px !important; margin-top: 0 !important}
+#bt_rows .post_media.wall_audio .title_wrap b {max-width: 340px !important}
+.bp_text, .wall_text, .wall_post_text, #pad_wrap[style*="left: 318px;"] #pad_cont .pad_nwsa, .box_layout .cell_wrap .info_wide {width: auto !important; max-width: 700px !important}
+.im_msg_text, #pad_wrap[style*="left: 318px;"] #pad_cont .pad_msga, #pad_wrap[style*="left: 318px;"] #pad_cont .pad_nws_cont, .tickets_reply_content, .tickets_reply_text, .bp_post .bp_author_wrap {max-width: 700px !important}
+.wall_reply_text, .reply_text {width: auto !important; max-width: 650px !important}
+.feedback_row_answer_wrap {max-width: 750px !important}
+.bnt_wrap #bnt_text, .bnt_wrap #bnt_title, #feed_search_bar #feed_search, .box_layout .common_friends_box .common_info, #pad_wrap[style*="left: 318px;"] #pad_cont, .box_layout #pv_sett_desc {width: 756px !important}
+#settings_panel .settings_section, #settings_panel .setbal_section {width: 700px !important}
+.group_edit #group_edit_desc, #settings_panel .frow .labeled, #audios_list .audio .info, #audios_list .audio .title_wrap, .audio_results .audio .title_wrap, .summary_tabs #board_q, .box_layout .audio_search #choose_audio_content .audio_content .title_wrap {width: 500px !important}
+#search_content .three_col_row .labeled {width: auto !important; max-width: 570px !important}  
+#box_layer .fans_box, #box_layer .popup_box_container {width: 860px !important; right: 220px !important}
+.box_layout #im_stickers_my_wrap .im_stickers_my_row {width: 822px !important}
+#box_layer .box_body {margin-top: 0 !important}
+#wk_layer .wk_cont {top: 0 !important}
+#ba_post.board_post_open.fixed, #group_l_rows .group_l_row {width: 825px !important}
+#ba_post_border, #ba_post_sh, #im_top_sh, #im_bottom_sh, #apps_search_wrap {width: 856px !important}
+#ba_post #ba_text, .big_wall_post #submit_post_box #post_field {width: 810px !important}
+#public #group_wide .reply_box_open .reply_field, #group #group_wide .reply_box_open .reply_field, #profile #profile_wide .reply_box_open .reply_field, .wide_wall_module .reply_box_open .reply_field, #fw_post_wrap #fwr_text, .box_layout #like_share_text {width: 96.2% !important}
+#wk_layer .wk_cont_t #pb_text {width: 96.5% !important}
+#ba_post.board_post_open #ba_text, #feed_wall .feedback_reply_row .feedback_reply_field, #apps_search #s_search {width: 728px !important}
+#wall_fixed #wall_fixed_comments .reply_form .reply_field {width: 740px !important; height: auto !important; min-height: 20px !important}
+#fw_post_wrap #fwr_form.fixed {width: 749px !important}
+#tickets_title, #tickets_text, #tickets_links, #tickets_content #tickets_reply, #tickets_content .tickets_reply_content, #tickets_content .tickets_reply_text, #tickets_content .tickets_edit_reply, .bp_info #bpe_text, #tickets_content #tickets_detailed_form {width: 728px !important; padding-right: 7px !important}
+#friends .user_block .actions {width: 141px !important; height: 70px !important; margin-top: 1px !important; margin-bottom: -1px !important}
+.friends_act {margin-top: -5px !important; margin-bottom: 1px !important}    
+.feed_row .post, .post_info {padding: 0 !important}
+.wall_text {padding-top: 1px !important}
+.replies_wrap {padding-top: 0 !important}
+.wide_wall_module .reply, #results .three_col_row, #friends .user_block {padding: 4px 0 !important}
+#search_content .people_row.three_col_row .img, #friends .user_block .img, .friends_bigph {transform: scale(0.7, 0.7) !important}
+#search_content .people_row.three_col_row .search_bigph_wrap, #search_content .people_row.three_col_row .friends_bigph_wrap, #friends_list .friends_bigph_wrap, #friends_search_cont .img {margin: -15px !important}
+#search_content .groups_row.three_col_row .img {transform: scale(0.7,0.7) !important; margin: -15px !important}
+#groups_list_tab_groups .groups_row_img, #groups_list_admin .groups_row_img {transform: scale(0.5,0.5) !important; margin: -25px !important}
+body.font_default #groups_list_tab_groups .group_row_photo, body.font_default #groups_list_admin .group_row_photo {margin-top: -1px !important}
+.search_bigph_wrap:hover .search_bigph {margin-top: 65px !important}
+.friends_bigph_wrap:hover .friends_bigph {margin-top: 58px !important; z-index: 1 !important}    
+.box_layout #choose_video_rows .video_row, .box_layout #choose_video_rows .video_image_div, .box_layout #choose_video_rows .video_row_thumb, .box_layout #choose_video_rows .video_row_info_name, #video_content.video_compact_view .video_list .video_row, #video_content.video_compact_view .video_list .video_image_div, #video_content.video_compact_view .video_list .video_row_thumb, #video_content.video_compact_view .video_list .video_row_info_name, #likes_video_content .fave_video_item, #likes_video_content .fave_video_thumb, #likes_video_content .fave_video_duration_cont {width: 265px !important}
+#likes_video_content .fave_video_info {width: 253px !important}
+#likes_photo_content {margin-left: 5px !important}
+#likes_photo_content .fave_photo_item_wrap {padding: 9px 5px !important}
+.box_layout #choose_video_rows .video_row,  #video_content.video_compact_view .video_list .video_row {height: auto !important}
+#mv_layer_wrap.mv_minimized {margin-left: -20px !important}	
+#video_content .video_playlist_button {margin-top: -5px !important}
+.video_results .video_row_info, #video_content:not(.video_compact_view) .video_list .video_row_info {width: 600px !important}
+.video_results .video_row_info_name, #video_content:not(.video_compact_view) .video_list .video_row_info_name {max-width: 600px !important}
+.ij_form .index_or {margin-left: 295px !important}      
+#feed_search_bar .feed_searchext_param {padding-right: 60px !important}
+#feed_news_bar .summary_tab, #feed_news_bar .summary_tab_sel {padding: 0 21px 0 5px !important}
+.t_bar li, .t_bar #new_link, #tickets_content #summary {margin-top: -5px !important}
+.summary_wrap #bt_pages, #fw_summary_wrap #fw_pages, #fw_post_wrap #fw_pages, #video_content #video_comments_link {margin-top: -9px !important}    
+#feed_summary_wrap #feed_summary, #feed_summary_wrap #feed_progress, #feed_summary_wrap #feed_edit_hidden, #feed_summary_wrap #feed_menu_toggle, #search_content #summary, .summary_wrap .summary {padding-top: 0 !important; margin-top: -5px !important}
+#friends_search, #feed_bar, #groups_list_search_wrap {padding: 5px 10px !important}
+#video_search {padding: 5px 10px 7px !important}  
+.friends_find_summary .summary {padding-bottom: 1px !important}
+#friends_req_tabs #friends_hide_all {margin-top: 3px !important}
+#friends_req_tabs #friends_hide_all button {padding: 3px 16px 4px !important}
+#friends_req_tabs .summary_tab, #friends_req_tabs .summary_tab_sel {padding: 4px 5px 5px !important} 
+#apps_featured_inner {max-width: 600px !important; height: auto !important}  
+#pg_fixed .pg_fixed_pages {padding: 1px 2px 4px !important}
+#pg_fixed .pg_flnk, #pg_fixed .pg_flnk_rd, #pg_fixed .pg_flnk_sel {padding-left: 4px !important; padding-right: 4px !important}
+#pg_fixed .pg_flnk_nb {padding: 0 1px 1px !important}  
+.summary_tabs {padding-top: 1px !important; padding-bottom: 0px !important}
+#audio_search {padding-bottom: 8px !important}  
+.bt_header {padding-top: 2px !important; padding-bottom: 3px !important}
+#content .tabs.t_bar ~ .bt_header #bt_title {padding-bottom: 1px !important; max-width: 800px !important}
+#im_bar, #im_tabs {padding-top: 0px !important; padding-bottom: 0px !important}  
+#profile #profile_wide, #group #group_wide, #public #group_wide {width: 618px !important}
+.profile_rate_warning .label, .profile_rate_warning .plus, .narrow_column .audio .title_wrap, .narrow_column .audio .title_wrap b, #pad_audio_search_info .audio_friend_status, #pad_audio_search_info .audio_friend_name_now, #pad_audio_friends_list .audio_friend_name, #audio_wrap .audio_friend_name_now, #audio_wrap .audio_friend_name {white-space: normal !important}
+.wide_column .audio .title_wrap {width: 85% !important}
+.wide_column .audio .title_wrap b {max-width: 50% !important}
+.profile_rate_warning .warning_row {display: table !important}
+body.font_default .profile_rate_warning .warning_row .plus {margin-left: 6px !important}
+body.font_medium .profile_rate_warning .warning_row .plus {margin-left: 5px !important}
+#pad_audio_friends_list .audio_friend_name, #audio_wrap .audio_friend_name {line-height: 15px !important}
+#pad_audio_search_info .audio_friend_now, #audio_search_info .audio_friend_now {float: right !important}  
+#pad_audio_search_info .audio_friend, #pad_audio_search_info .audio_friend_now, #pad_audio_search_info .audio_friend_name_now, #pad_audio_friends_list .audio_friend, #audio_wrap .audio_friend, #audio_wrap .audio_friend_now, #audio_wrap .audio_friend_name_now, #audio_wrap .audio_friend {height: auto !important}
+#pad_search_list .title_wrap, #pad_search_list .duration, #pad_search_list .play_btn_wrap, #pad_playlist .title_wrap, #pad_playlist .duration, #pad_playlist .play_btn_wrap, #audios_list .title_wrap, #audios_list .duration, #audios_list .play_btn_wrap, .results.audio_results .title_wrap, .results.audio_results .duration, .results.audio_results .play_btn_wrap, .post_media .audio .title_wrap, .post_media .audio .duration, .post_media .audio .play_btn_wrap, .audios_module .audio .title_wrap, .audios_module .audio .duration, .audios_module .audio .play_btn_wrap {padding-top: 5px !important; padding-bottom: 5px !important}
+.results.audio_results .audio .area, .post_media .audio .area, .audios_module .audio .area {margin-bottom: 0 !important} 
+#pad_playlist .audio_add_wrap, #pad_search_list .audio_add_wrap, #audios_list .audio_add_wrap, .results.audio_results .audio_add_wrap, #im_dialogs .dialogs_del {margin-top: 2px !important}
+#profile_wide #post_field, #group_wide #post_field {width: 590px !important}
+#docs_search_bar .tdd_wrap, #fave_likes_tabs #fave_new_link {width: 470px !important}
+#profile_wall.wide_wall_module {margin-left: -210px !important}    
+#group_wall.wide_wall_module, #public_wall.wide_wall_module {width: 828px !important}
+#audio #ac, #im_controls_wrap, #im_nav_wrap, #ac .shadow div {width: 856px !important}
+#im_controls_wrap {bottom: 0 !important}
+#audios_list .audio .title_wrap b, .audio_results .audio .title_wrap b, .box_layout .audio_search #choose_audio_content .audio_content .title_wrap b {max-width: 50% !important}
+#audios_list .audio .info, .audio_results .audio .info {width: 100% !important; max-width: 600px !important}
+#im_write_form .im_editable {width: 570px !important}
+#audio_search_info span.audio_friend_now, #audio_search_info a.audio_friend_name_now {overflow: visible !important; white-space: normal !important; height: auto !important}
+#audio_search_info .audio_friend {height: auto !important}
+.settings_privacy .settings_privacy_h {width: 120% !important}
+#apps_search_cat_wrap.apps_scroll_wrap, #apps_cat_grossing {padding: 6px 15px 0 !important}
+#apps_search_cat_wrap {padding: 6px 7px 0 !important}  
+#apps .apps_cat_row {margin: 5px 6px 14px !important}
+#groups_list_groups .group_row_photo, #groups_list_search_cont .group_row_photo, #groups_list_admin .group_row_photo {height: 54px !important; width: 54px !important}
+#groups_list_groups .group_list_row, #groups_list_admin .group_list_row, #groups_list_search_cont .group_list_row {padding-top: 6px !important; padding-bottom: 0 !important}
+#groups_list_groups .group_row_info, #groups_list_admin .group_row_info, #groups_list_search_cont .group_row_info {width: 770px !important}
+#groups_list_search_cont .groups_list_search_summary {border-top: 1px solid #444 !important}
+.gle_invites_list .groups_list_last_row {border-bottom: 1px solid #444 !important}
+#search_content .three_col_row .info {width: auto !important; max-width: 590px !important}
+.summary_tabs #board_q {padding-bottom: 4px !important}
+#group h4.simple .top_header.page_name {max-width: 600px !important}
+.blst_row {padding: 0 !important}
+.blst_thumb {margin: 3px !important}
+.blst_other, #group_topics .info small {padding-top: 2px !important}  
+.blst_mem, .blst_date {width: 200px !important; padding: 3px 0 0 2px !important}
+.blst_last {width: 246px !important; padding-right: 0 !important; margin-top: 2px !important; margin-bottom: 2px !important}
+body.font_default .blst_mem, body.font_default .blst_date {width: 180px !important; padding: 3px 0 0 2px !important}
+body.font_default .blst_last {width: 226px !important; padding-right: 0 !important; margin-top: 2px !important; margin-bottom: 2px !important}
+.blst_info {padding: 3px 15px 0 5px !important; width: auto !important}
+.wide_column .topics_module .topic_row {padding: 4px 8px 4px 5px !important}
+#bt_rows .bp_post {padding-top: 5px !important}
+#bt_rows .bp_post .bp_bottom {padding-bottom: 4px !important}
+#bt_rows .bp_post .bp_author_wrap {padding-bottom: 2px !important}
+body.font_medium #bt_rows .bp_post .bp_thumb_td {padding-bottom: 3px !important}
+body.font_default #bt_rows .bp_post .bp_thumb_td {padding-bottom: 5px !important}
+#bt_rows .bp_post .bp_text {padding-bottom: 3px !important} 
+#bt_rows .bp_post .bp_online {padding-top: 1px !important}
+#bt_rows .bp_info .bp_text a[target="_blank"] {margin-left: 1px !important}  
+.group_row_info {padding-top: 1px !important; margin-top: -1px !important}
+body.font_medium #search_content .three_col_row .info .labeled {margin-bottom: 1px !important}
+body.font_default #search_content .three_col_row .info .labeled {margin-bottom: 2px !important}
+#search_content .three_col_row .info .labeled.name, #search_content .three_col_row .info .labeled.title {margin-top: -1px !important}
+body.font_medium #friends #friends_list .friends_field {margin-top: -2px !important; margin-bottom: -1px !important}
+body.font_default #friends #friends_list .friends_field {margin-top: -1px !important; margin-bottom: -1px !important}
+#results .three_col_row .info {padding-top: 3px !important; margin-top: -3px !important}
+#results .three_col_row .info .labeled.title, #results .three_col_row .info .labeled.name {padding-right: 1px !important}
+#friends_req_tabs ~ #main_class .info_no_actions .controls, .friends_find_summary ~ .friends_find_list .info_no_actions .controls {padding-bottom: 0 !important}
+.im_log_t td.im_log_act {padding-left: 0 !important; padding-right: 0 !important}
+.im_log_author {padding-right: 5px !important}
+.im_log_t td {border-top-width: 1px !important}
+.im_log_t {border-bottom: 1px solid #444 !important}
+body.font_medium .im_log_t td {padding-bottom: 2px !important}
+.wall_module .reply_link_wrap {padding-top: 2px !important}
+.wall_module .post_info .post_full_like_wrap ~ .replies .reply_link_wrap, .wall_module .post_info .post_like_wrap ~ .replies .reply_link_wrap  {margin-bottom: 2px !important}
+.wall_module .info_footer {padding-top: 2px !important}
+.bp_tt_content, .wall_tt .content, #pad_wrap[style*="left: 318px;"] #pad_cont .pad_msg_text, #pad_wrap[style*="left: 318px;"] #pad_cont .pad_msg_data {max-width: 650px !important}
+.bp_tt_content .bp_post, .wall_tt .fw_reply_text {max-width: 632px !important; width: auto !important} 
+#pad_cont .pad_nws_data {margin-right: 20px !important}
+.wide_column .topics_module .module_body {padding: 0 1px 10px !important}
+#rb_box_fc_clist #fc_contacts {height: auto !important; max-height: 316px !important}
+#profile_wide.wide_column #submit_post_box #post_field[style*="padding-right: 35px;"] {width: 558px !important}
+#gedit_users_members .gedit_user_thumb img, #gedit_users_rows_admins .gedit_user_thumb img {transform: scale(0.7,0.7) !important}
+#gedit_users_members .gedit_user_thumb, #gedit_users_rows_admins .gedit_user_thumb {margin: -15px !important}
+#gedit_users_members .gedit_user_bigph_wrap, #gedit_users_rows_admins .gedit_user_bigph_wrap {height: 70px !important; width: 80px !important}
+#gedit_users_members .gedit_user, #gedit_users_rows_admins .gedit_user {height: 70px !important; padding: 5px 0 !important}
+#gedit_users_members .gedit_user_bigph_wrap:hover .gedit_bigph, #gedit_users_rows_admins .gedit_user_bigph_wrap:hover .gedit_bigph {margin-top: 43px !important; z-index: 1 !important; transform: scale(0.7,0.7) !important; margin-left: -15px !important}
+#stats_tabs #stats_export_link {padding-top: 6px !important}
+#stats_tabs .progress {margin-bottom: 0 !important; margin-top: 6px !important}  
+#stats_tabs .summary_tab_sel {padding-bottom: 3px !important}
+#stats_tabs{margin-top: 0 !important}
+#gedit_users_search_wrap {padding-top: 4px !important; margin-bottom: -3px !important}
+.photos_edit_album .checkbox.disabled, #ads_page .ads_edit_link_type_item {opacity: 1 !important}
+.module_body .people_cell .name_field {width: auto !important; margin: 0 !important}
+#group_recom_wrap .group_recom_photo .group_recom_img, #audios_list #audio_performers .audio_owner_img, #feed_recom_rows .feed_recom_photo .feed_recom_img, #pad_playlist #pad_audio_performers .audio_owner_img {transform: scale(0.8,0.8) !important; margin-top: -6px !important}
+#audios_list #audio_performers .audio_owner_name, #pad_playlist #pad_audio_performers .audio_owner_name {transform: scale(0.8,0.8) !important; bottom: 6px !important}
+#group_recom_wrap .group_recom {padding: 0 10px !important; line-height: 10px !important; margin-top: 4px !important}
+#feed_recom_rows .feed_recom {padding: 0 5px !important; line-height: 10px !important}
+#feed_recom_rows {padding-bottom: 0 !important; margin-bottom: -6px !important}
+#group_recom_wrap .group_recom .group_recom_photo, #feed_recom_rows .feed_recom_photo {height: 80px !important}
+#group_recom_wrap .group_recom .group_recom_btn, #feed_recom_rows .feed_recom .feed_recom_btn {margin-top: 1px !important}
+#audios_list #audio_performers .audio_owner, #pad_playlist #pad_audio_performers .audio_owner {margin-bottom: 0 !important}
+#pad_playlist_panel #pad_audio_search {margin-bottom: 5px !important}
+#audio .audio_search {padding-bottom: 5px !important}
+.friends_find_cont .friends_import_row {width: auto !important; min-width: 385px !important}
+body.font_default .friends_find_cont .friends_import_row {padding: 3px 13px 10px !important}
+body.font_medium .friends_find_cont .friends_import_row {padding: 3px 13px 7px !important}
+.friends_find_cont .friends_import_cont {height: auto !important}
+.friends_find_cont {padding: 5px 10px 0 !important}
+#pg_fixed {margin-left: 231px !important; margin-top: -10px !important}
+#feed_search_bar #feed_query_reset {left: 205px !important}
+#search_query_wrap #search_query, #gedit_users_search_wrap #gedit_users_search_inp, #friends_search #s_search, #groups_list_search_wrap #groups_list_search, #ac .info, #group_bl_bar #group_bl_search, #group_l_bar #group_l_search, #im_bar #im_filter, #wall_search_bar #wall_search, #settings_bl_bar #settings_bl_search, #fave_new_link {width: 600px !important}
+#search_query_wrap .result_list {width: 662px !important}
+#video_search #v_search, #video_content .video_search_input_wrap .result_list {width: 565px !important}
+.audio_search .s_search {width: 450px !important}
+.audio_list .area, .audio_list .audio {width: 100% !important; max-width: 653px !important}
+.audio_search_results .area, .audio_search_results .audio {width: 653px !important}
+#pad_playlist_panel .wall_module .post_info {width: 364px !important}
+#friends_search #friends_reset_search, #friends_search #friends_loading {left: 475px !important}
+#groups_list_search_wrap #groups_reset_search, #groups_list_search_wrap #groups_loading {left: 440px !important}
+#gedit_users_search_wrap #gedit_reset_search {left: 300px !important}
+#gedit_users_search_wrap #gedit_reset_search[class=""] {left: 380px !important}
+.t_bar #add_album_link, .t_bar #video_tabs_link, .t_bar #groups_list_tabs .t_r, .t_bar #group_edit_filters .t_r, .full_wall_tabs.t_bar .t_r, #video_tabs #video_tabs_progress, .t_bar.photos_tabs .t_r {position: relative !important; left: 220px !important}
+#feed_menu_wrap {margin-left: 229px !important}
+#box_layer .photos_edit_data, #box_layer #new_album_title, #box_layer #new_album_description, #box_layer #video_album_edit_title, #box_layer #video_upload_title, #box_layer #video_upload_description, #box_layer #video_external_link, #box_layer #group_create_title, .box_layout #video_external_title, .box_layout #video_external_description {width: 800px !important}
+#im_rows #imw_editable {width: 620px !important}
+#friends #list_content div:not(:first-child) .user_block:first-child {border-top: 1px solid #444 !important}
+.im_unread_bar_tr .im_unread_bar {border-bottom: none !important}
+#footer_wrap {width: 890px !important}
+body.firefox:not(.layers_shown) #page_wrap, body.firefox:not(.layers_shown) #page_body {overflow: visible !important}
+#apps .apps_collection_rows_scroll, #apps #apps_friends_rows_scroll, #apps .apps_genre_rows_scroll {width: 780px !important}
+#apps .app_search_genre {padding: 22px 5px 5px 10px !important}
+#video_search_controls {width: 830px !important}
+#video_tabs.t_bar #video_comments_link {position: relative !important; left: 220px !important}
+#video_search .video_extended_search_toggle {margin-left: 80px !important}
+#video_search .video_reset_search, #video_search .video_loading_cont {right: 80px !important}
+#video_search .video_search_cont {width: auto !important}
+#video_search .video_search_cont .video_search_control_wrap {margin-right: 60px !important}
+.video_length {position: relative !important; left: 220px !important}	
+#side_bar, #wrap1, #header, #sideBar {box-shadow: 1px 1px 3px rgba(7, 19, 35, 0.3) !important}
+.wide_wall_module .group_share .info {max-width: 660px !important}
+#im_footer_filler {margin-right: -7px !important; margin-left: -4px !important}
+#im_footer_sh {margin-left: 0 !important; margin-right: 0 !important}
+#ba_post #ba_post_sh {height: 1px !important; margin-top: -2px !important}
+#im_bottom_sh {height: 1px !important; margin-top: -1px !important}
+#im_top_sh {height: 1px !important; margin-top: 0 !important}
+body.font_medium #im_dialogs .dialogs_info {width: 160px !important}
+body.font_default #im_dialogs .dialogs_info {width: 145px !important}
+.group_recom, .feed_recom {width: 400px !important}
+.group_recom_info, .group_recom_name, .group_recom_desc, .group_recom_size, .feed_recom_info, .feed_recom_name, .feed_recom_desc, .feed_recom_size {width: 295px !important}
+.group_recom_name a, .feed_recom_name a {max-width: 295px !important}
+body.font_medium .wide_wall_module a.reply_image {top: -5px !important}
+body.font_default .wide_wall_module a.reply_image {top: -7px !important}
+.wall_module a.post_image {margin-top: -2px !important}
+.box_layout .docs_choose_info {width: 100% !important; max-width: 756px !important}
+.box_layout .photos_choose_album_link, .box_layout .photos_choose_album_row {width: 266px !important}
+.box_layout .photos_choose_album_img {max-width: 266px !important}
+.box_layout .photos_choose_row, .box_layout .photo_row_img {max-width: 128px !important}
+.box_layout .photos_choose_upload_area_cont, .box_layout .top_shadow, .box_layout #video_attach_search_cont, .box_layout #docs_choose_upload_area_cont, .box_layout #docs_choose_upload_area, .box_layout #audio_attach_search_cont {width: 100% !important; max-width: 860px !important}
+.box_layout #docs_choose_upload_area {width: 100%; max-width: 828px !important}
+.box_layout .photos_choose_upload_area {width: 100% !important; max-width: 750px !important}
+.box_layout .photos_choose_upload_area_cont.fixed #photos_attach_search {height: 25px !important}
+#im_rows #im_friends_sel_wrap .input_back_content {max-width: 150px !important}
+#photos_albums_container .photo_row, #photos_albums_container .img_link, #photos_albums_container .photo_album_title  {max-width: 256px !important}
+#photos_albums_container .ge_photos_album {max-width: 190px !important}
+#photos_container .photo_row_img, #photos_container .photo_row, #photos_container .photo_row a {max-width: 118px !important}
+.photos_comments #photos_container .pv_comm, .photos_comments #photos_container .pv_commtext, #video_content .review_comment .mv_commtext, .box_layout .audio_search #choose_audio_content .audio_content {width: 650px !important}
+#video_content .review_comment {width: 820px !important}
+.box_layout .fans_idol_row {max-width: 260px !important}
+.box_layout .fans_idol_info, .box_layout .fans_idol_name {max-width: 150px !important}
+.box_layout .flist_left_col {width: 420px !important}
+.box_layout #flist_right_col {left: 440px !important; width: 390px !important}
+#pad_playlist .audio, .pad_audio_search .audio {width: 100% !important; max-width: 424px !important}
+.audio .duration {max-width: 45px !important}
+#audios_list .audio .actions {top: -3px !important}
+#audios_list .audio .audio_add {top: 4px !important}
+#audios_list .audio:not(:last-child), .audio_results .audio:not(:last-child), #pad_playlist .audio:not(:last-child), .pad_audio_search .audio:not(:last-child), .box_layout .choose_audio_row:not(:last-child) {border-bottom: 1px solid #444 !important}
+.box_layout .choose_audio_row {height: auto !important; min-height: 30px !important}
+.box_layout .choose_audio_row .audio .title_wrap {padding-bottom: 8px !important}
+.box_layout .choose_audio_row .audio .area {margin-bottom: 0 !important}
+.box_layout .audio_edit_row, .box_layout #mv_title_text, .box_layout #mv_desc_text, .box_layout #mv_desc_text ~ .selector_container, .box_layout #mv_desc_text ~ .selector_container .result_list, .box_layout .docs_edit_text, .box_layout .tdd_control, .box_layout .tdd_input  {width: 710px !important}
+.box_layout .audio_edit_input, .box_layout .audio_edit_input .selector_container, .box_layout .audio_edit_input .result_list {width: 610px !important}
+.box_layout .audio_edit_input input, .box_layout .audio_edit_input #audio_text_edit {width: 598px !important}
+#photos_edit .photo_edit_caption, #photos_edit .photo_edit_data {width: 600px !important}
+#pad_wrap[style*="left: 318px;"] {position: fixed !important; margin-left: 2px !important}
+body.font_medium #layer #pv_box #pv_wide #pv_add_place .divider, body.font_medium #layer #pv_box #pv_wide #pv_add_place ~ .divider {padding: 0 2px !important}
+body.font_medium #layer #pv_box #pv_wide #pv_add_place ~ #pv_like_wrap #pv_like_icon {margin-left: 2px !important; margin-right: 2px !important}
+body.font_medium #layer #pv_box #pv_wide #pv_add_place ~ #pv_like_wrap #pv_like_count {margin-right: -4px !important}
+#layer #pv_box .video_row_info {width: 550px !important}
+.box_layout .im_sticker_bl, .box_layout .im_sticker_bl_demo_thumb {width: 264px !important}
+#profile_photos .profile_sized_photos, #group_photos .profile_sized_photos {display: none !important}
+#profile_photos .profile_sized_photos.profile_wide_sized_photos {display: block !important}
+#group_photos .profile_sized_photos.profile_wide_sized_photos {display: inline !important}
+.group_edit #group_edit_addr_print_text, .group_edit_field {width: auto !important; max-width: 360px !important}
+#content .photos_add_upl_row, #content .photos_add_upl_table, #content .photos_add_s_caption {width: 100% !important; max-width: 830px !important}
+.wall_module .media_desc .lnk.lnk_mail {border-left: none !important; padding-left: 0 !important}
+.rb_box_wrap.fc_fixed:not(#rb_box_fc_clist) .fc_tab, .rb_box_wrap.fc_tobottom:not(#rb_box_fc_clist) .fc_tab, #rb_box_fc_clist.rb_box_wrap .fc_ctab {border-bottom: 1px solid #D7DADE !important}	
+.rb_box_wrap .fc_tab_wrap:not(#fc_clist) .fc_msgs {max-width: none !important}
+.rb_box_wrap .fc_tab_wrap:not(#fc_clist) .fc_msg {max-width: none !important}
+.rb_box_wrap .fc_tab_wrap:not(#fc_clist) .fc_msgs_date {clear: both !important; padding-top: 0 !important}
+.box_layout .place_map {width: auto !important}
+.rb_box_wrap.fc_fixed {right: 62px !important}
+#chat_onl_wrap {width: 42px !important}
+.chat_onl_height .chat_tab_imgcont, .chat_onl_height .chat_tab_wrap {padding: 1px !important}
+.chat_tab_wrap .chat_onl_cont {padding: 12px 0 !important}
+.chat_tab_wrap {max-height: 40px !important; border-radius: 3px !important; margin-top: 2px !important}
+#chat_onl_wrap .chat_tab_info_wrap {right: 52px !important}
+.group_list_row:nth-child(2n), #groups_list_search_cont .groups_list_search_summary ~ .group_list_row:not(:nth-child(2n)) {background-color: #222 !important}
+ #groups_list_search_cont .groups_list_search_summary ~ .group_list_row:nth-child(2n) {background-color: #151515 !important}
+body, #im_footer_filler {background-color: #D9E6F7 !important}
+#stl_left.over #stl_bg {background-color: rgba(0, 0, 0, 0.1) !important}
+.dev_footer_copy, .dev_footer_lang {color: #151515 !important}
+#wrap1, #side_bar, #side_bar a:not(:hover), .tabs.t_bar, .summary_wrap, #bt_rows, .bp_post, [class*="t_bar"] li:not([class~="active_link"]) a:not(:hover), [class*="t_bar"] li a:not(:hover) .tl1, [class*="t_bar"] li:not([class*="active_link"]) a:not(:hover) .tl2, #main_feed .wall_module, #results, #apps_search, #sections_block .side_filter:not(.cur_section):not(:hover), .simple.page_top, #profile_editor, #education_tabs, #add_album_link a, .photos_save_changes, .photos_edit_wall_album, .photos_no_content, .im_write, #profile_wide .reply.reply_dived, #video_tabs #video_tabs_link, #settings_panel, .settings_privacy, #group_wide .reply.reply_dived, #group_wall .wall_posts.all, #profile_wall #page_wall_posts, .big_wall_post #wall_search_bar, .wall_wrap .big_wall.wide_wall_module, .big_wall.wide_wall_module .reply.reply_dived, #group_wall #page_wall_posts, .bnt_wrap, #docs_search_bar, .docs_layout .docs_empty, .docs_side_panel, #docs_search_bar .docs_add_new, .group_edit, #gedit_users_search_wrap, #group_bl_bar, #group_l_bar, .apps_feed_info_str, #tickets_name, #new_ticket, #im_content .im_unread_bar_wrap, #audio #audio_search, .index_fbb .index_or_s, #audio_search_info .audio_friend:not(:hover), #side_bar #left_blocks .left_box, #fc_contacts, .fc_clist_filter_wrap, #pad_cont, #pad_filters_panel, #audio_wrap #audio_friends_list .audio_friend:not(:hover), #pad_audio_friends .audio_friend:not(:hover), #pad_footer, #invite_popup_box, .reply_box, .dark_box_cont, #tabs_filters, .wall_tt .wrap, #custom_menu_wrap .add_media_items a, #choose_video_content, #video_attach_search, #photos_choose_upload_area, .web_cam_photo, .photos_choose_album_rows, .photos_choose_rows, #audio_attach_search, #choose_audio_rows, #docs_choose_upload_area, .docs_choose_empty, .chat_tab_wrap, #photos_add_list, .photos_go_to_album_cont, .mail_box_cont, .friends_dd_item, #wk_box, #flist_cont, .box_controls, .flist_search_cont, #profile_bottom_actions a:not(:hover), #im_peer_controls_wrap, #im_resizer_wrap, #im_sound_controls, #ba_post, .tickets_side_tt.tt_toup .tt_text, .preq_friend, .olist_scroll_wrap, .dd_menu_rows a, .im_submit_side_tt.fixed .tt_text, #feed_menu, #profile_full_info .fl_r, #profile_full_info b, #profile_actions a, .popup_box_container.box_dark .box_body, #privacy_dropdown .rows .item, .tabbed_box .summary_tabs, .rich.wall_tt .bp_tt_content, .rich.wall_tt .bp_post, #settings_panel .settings_view_as_text, .settings_view_as_text, #sms_reply_block .msg, .settings_section .msg, .labeled.fl_l .text, .pedit_side_name_tt .tt_text, #group_narrow #page_actions a:not(:hover), .reply_multiline_tt.rich .tt_text, .bp_info #bpe_text, #pages_cont_cache_edit .wk_text.pages_wiki_content,  #pages_cont_cache_edit .pages_edit_title_cont, #pages_cont_cache_history, #pages_cont_cache_view, .rich.board_tt .bp_tt_content, .rich.board_tt .bp_post, .tt.tt_toup .tt_text, .fans_box .fans_rows, .fans_box .tb_tabs, #public_contacts_list .actions, #group_wide #page_current_info .editor, #pv_box, #wall_datesearch_cal_div .day, #tickets_content #tickets_post_field, .fans_box .fans_no_rows, .audio_status_tt .tt_text, .friends_tt .tt_text, #mv_layer #mv_controls, .replies .reply.reply_dived.reply_replieable, #feed_rows #feedback_unread_bar, .apps_blacklist_wrap .olist_empty, #privacy_lists .l_item, #wk_box #wl_post_body_wrap, #public #group_wide .info_table, .tt.preq_tt .preq_content, .tt.preq_tt #profile_fr_add_friends, .gifts_box .gifts_section, .popup_box_container .box_body, #page_wrap #profile_view_as, .fc_tab_wrap .fc_tab_log, .emoji_tt_wrap .emoji_block_cont, .emoji_tt_wrap .emoji_tab_sel, .emoji_tt_wrap .emoji_tabs, #friends_list #not_found, #group_l_rows .group_l_row, #pv_photo_wrap .pvs_dd .pvs_act, .dark_box_cont .wdd_lwrap .wddi, #tickets_content .tickets_edit_reply, #public #group_wide #page_wall_posts, #wk_layer #wk_likes_content #wk_likes_rows, #wk_layer #wk_likes_content .reply.reply_dived, #public #group_wide #page_fixed_more_text, #public #group_narrow .like_module, #public .wall_posts, #public .wall_posts, #fw_post_wrap #fw_post, #fw_post_wrap #fwr_form, .full_wall_tabs.t_bar, .fans_box .im_stickers_my_row, #ts_cont_wrap, .t_bar .t_r a, #pad_audio_search_info .audio_friend:not(:hover), #groups_list_content .groups_no_list, #feed_rows .wr_header.wrh_all:not(:hover), #page_wall_posts .wr_header.wrh_all:not(:hover), #friends #list_content div:nth-child(odd) .user_block:nth-child(odd) .friends_act:not(:hover), #friends #list_content div:nth-child(even) .user_block:nth-child(even) .friends_act:not(:hover), #friends #list_content div:nth-child(odd) .user_block:nth-child(odd) .actions, #friends #list_content div:nth-child(even) .user_block:nth-child(even) .actions, #docs_side_filter .side_filter:not(.cur_section), #likes_video .wide_wall_module, #settings_result, .app_tabs.t_bar, #pv_box .pv_comment, .box_layout #photos_attach_search, .box_layout #docs_attach_search, #wk_box .apps_layer_body_wrapper, #wk_layer .wl_replies, #wk_layer .wl_replies .reply.reply_dived, #group.page_fixed_wide #group_wide.wide_column .wall_fixed .wall_posts, #public.page_fixed_wide #group_wide.wide_column .wall_fixed .wall_posts, #group_wide #page_wall_posts .post, .tt.profile_gift_side_tt #gift_tt, #wk_box #wk_history_wall, #im_datesearch_cal_div .cal_table tbody tr .day:not(.today), .photos_comments #photos_container .pv_comment, .tt.verified_tt .verified_tt_wrap, #profile_wide .post, #profile_wide .page_post_queue_narrow, #profile_wide .page_post_queue_wide, #layer_wrap .idd_popup .idd_items_content, .box_layout .im_stickerpack_list, .box_layout #graffiti_topbar, .box_layout #graffiti_bottombar, #mv_box #idd_mv_more .idd_items_content, #mv_box .idd_popup .idd_items_content, .box_layout .like_share_tab_wrap, #group_narrow #group_actions_wrap, #sideBar, #sideBar a:not(:hover), #sideBar #left_blocks .left_box, #profile_narrow #friend_status #ddreq_wrap, #group_narrow .like_module #public_actions_wrap, .box_layout #im_stickers_my_wrap .im_stickers_my_row, .wall_module .wall_text .wall_text_name ~ [id^="wpt"][style*="background-color: rgb(255, 255, 255);"], #wk_box #print_content, #page_body .photos_edit_album, .eltt {background-color: #151515 !important}
+.blst_row:nth-child(2n), #friends #friends_req_tabs:not([style*="display: block"]) ~ #main_class #list_content div:nth-child(odd) .user_block:nth-child(even), #friends #friends_req_tabs:not([style*="display: block"]) ~ #main_class #list_content div:nth-child(even) .user_block:nth-child(odd), #friends #list_content div:nth-child(odd) .user_block:nth-child(even) .friends_act:not(:hover), #friends #list_content div:nth-child(even) .user_block:nth-child(odd) .friends_act:not(:hover), #friends #list_content div:nth-child(odd) .user_block:nth-child(even) .actions, #friends #list_content div:nth-child(even) .user_block:nth-child(odd) .actions, #im_rows .im_out, #group_wide_topics .topic_row:nth-child(2n), #gedit_users_members .gedit_user:nth-child(2n), #gedit_users_admins .gedit_user:nth-child(2n), .dialogs_row:nth-child(2n):not(:hover), #audios_list .audio:not([style^="z-index: 100;"]):nth-child(2n), .audio_results .audio:not([style^="z-index: 100;"]):nth-child(2n), #audios_list .audio[style^="z-index: 100;"]:nth-child(4n), .audio_results .audio[style^="z-index: 100;"]:nth-child(4n), #pad_playlist .audio[style^="z-index: 100;"]:nth-child(4n), #pad_playlist .audio:not([style^="z-index: 100;"]):nth-child(2n), .pad_audio_search .audio[style^="z-index: 100;"]:nth-child(4n), .pad_audio_search .audio:not([style^="z-index: 100;"]):nth-child(2n), .box_layout .choose_audio_row:nth-child(2n) {background-color: #222 !important}
+.rb_box_wrap .fc_tab_wrap:not(#fc_clist) .fc_msgs.fl_l {background-color: #f2f2f2 !important}
+#footer_wrap a:hover, #bFooter a:hover, .group_list_row, .chat_onl_wrap {background-color: transparent !important}
+#friends .user_block, .gedit_users_rows .gedit_user {border-top-color: #DAE1E8 !important}
+.pg_lnk_sel {border-bottom-color: #f7f7f7 !important}
+#pg_fixed .pg_flnk:not(:hover),  #pg_fixed .pg_flnk_rd:not(:hover) {border-bottom-color: transparent !important}  
+[class*="t_bar"] li .tl1, [class*="t_bar"] li .tl2, .settings_privacy_control, .group_edit_labeled, #box_layer .photos_privacy_control, #content .photos_add_upl_row {border-color: #f7f7f7 !important}
+.photos_edit .photo_edit_row {border-left-color: transparent !important; border-right-color: transparent !important}
+#page_body #header_wrap1 {border-color: rgba(100, 100, 100, 0.08) !important}
+#group_wide .group_wiki_hider {border-color: #E8EBEE !important}
+.im_log_t td, #im_dialogs .dialogs_row, .group_list_row {border-color: #DAE1E8 !important}
+#im_footer_sh {border-bottom-color: #BFCADB !important}
+#profile_online_lv, #profile_time_lv {color: #607387 !important}
+.module_header .header_top .right_link, .bp_text .mem_link[mention^="bp-"] {color: #45688E !important}
+.ba_info .ba_text_cont *, .online, .reply_link_wrap small, .reply_link_wrap small *, .info_footer, .info_footer *, .wall_text_name span, #all_shown, .desc, .media_desc a, .duration.fl_r, .bp_online, .bp_date, .dialogs_online, .dialogs_date, .desc_info .people_extra, .friends_added_text, .group_row_labeled, .group_info .label.fl_l, #group_topics .p_header_bottom, #group_topics .topic_date, #group_links .group_desc, #group_videos .info small, #group_wide #current_info span, .blst_info .blst_pages, #feed_rows .feed_group_explain, .post_info .input_back_content, .post_info .reply_fakebox, #feed_search_bar .input_back_content, #feed_search_bar .selector_input, #feed_rows .feedback_row_date, #feed_rows .feedback_row_group_names, #groups_list_search_wrap .input_back_content, #im_nav_wrap .input_back_content, #im_rows .im_date_link, #im_rows .im_lastact, #im_controls_wrap .input_back_content, #pad_rows .pad_msg_date, #pad_rows .pad_nws_date, #audio_wrap .input_back_content, #video_content .input_back_content, #friends_search .input_back_content, #friends .selector_input, #friends_list .common_friends_label, #profile_wide #current_info span, #profile_wide .profile_info .label.fl_l, #profile_wide .input_back_content, #profile .p_header_bottom, #profile .info small, #profile .friend_status_info, #profile .group_desc, #group_wide .input_back_content, #group .p_header_bottom, #submit_post_box .input_back_content, .big_wall_post .input_back_content, #page_wall_posts .published_by_date, #profile .profile_label_link, .summary_tabs .input_back_content, #page_body .content .input_back_content, #page_body .content .selector_input, #apps #apps_recent_list, #apps #no_apps, #tickets_content .tickets_reply_actions, #tickets_content .input_back_content, #invite_popup_box small, #invite_popup_box .label, #im_content .im_unread_bar_wrap, #im_content #im_friends_none, #blst_cont .blst_closed, #search_content .input_back_content, #search_content .selector_input, #apps_search_wrap .input_back_content, .index_fbb .index_or_s, #apps_search .input_back_content, span.audio_friend_now a, #settings_panel .labeled small, .groups_row .info .labeled, #region_filters .selector .placeholder_content, #school_filter .selector .placeholder_content, .feed_row .post_info .page_media_poll_desc, #friends_search_cont .friends_online, #friends_search_cont .friends_searchrow_info, #main_feed #feed_empty, .bp_tt_content .bp_bottom, #pad_cont .pad_fr_addinfo, #pad_cont .pad_fr_done, #mv_layer #mv_controls #mv_date_wrap, #mv_layer #mv_controls .mv_info, #mv_layer #mv_controls .input_back_content, #search_content .three_col_row .info .labeled, #profile .wide_column #profile_full_info .fl_r, #profile .wide_column .profile_info .labeled, #feed_rows .rel_date, #settings_panel .setbal_section .setbal_label, #group_recom_rows .group_recom_desc, #group_recom_rows .group_recom_size, .box_layout #video_share_error, #feed_recom_rows .feed_recom_desc, #feed_recom_rows .feed_recom_size, #docs_search_bar .input_back_content, #settings_bl_search_wrap .input_back_content, #settings_panel .settings_label, #pad_footer_wrap .audio_album_length, #pad_playlist_panel .input_back_content, #rb_box_fc_clist .input_back_content, #rb_box_fc_clist .fc_clist_empty, #group_l_bar .input_back_content, #group_l_rows #group_l_no, #group_bl_bar .input_back_content, .group_edit .group_edit_label, #gedit_users_members .gedit_user_online, #feed_rows .feedback_unread_bar, #stats_export_box .label, #gedit_users_search_wrap .input_back_content, #gedit_users_rows_admins .gedit_user_online, .apps_blacklist_wrap .olist_empty, .apps_blacklist_filter_wrap .input_back_content, #activity_history_box .cur_session, #activity_history_box .history_ip, .settings_privacy .settings_privacy_disabled, #group_narrow .group_like_enter_desc, #group_wide #page_no_wall, #wk_box .wl_owner_head_date, #pad_cont .pad_fr_online, .popup_box_container .groups_edit_board_label, #pv_box #pv_narrow .pv_info, #pv_box .input_back_content, .popup_box_container .like_share_about, .popup_box_container .wdd_text, .tt.preq_tt .input_back_content, #profile_view_as #view_as_inp, #public #group_narrow .p_header_bottom, .fc_tab_wrap .fc_log_empty, #pad_wrap .pad_none, .im_stickers_buy_header .im_stickerpack_author, .im_stickers_buy_header .im_stickerpack_desc, #bt_rows .bp_edited_by, #im_content #im_rows_none, #search_content #no_results, #results_wrap .selector .placeholder_content, #results_wrap #filter_form .text, #friends_list #not_found_text, #flist_cont #flist_info, .flist_search_cont .input_back_content, #pad_content_wrap #pad_audio_friends_search_btn, #video_content .video_empty, #settings_bl_list_wrap .settings_bl_label, #settings_bl_empty, .login_mobile_promo .login_mobile_about_sms, #photos_choose_wrap .photos_choose_empty, #bt_rows .bp_deleted_td, #left_blocks .left_box h4, .box_layout .fans_box .fans_no_rows, .box_layout .fans_box .fans_idol_size, #group_wide #page_wall_posts .dld, #public_edit_contact_info .label, #public_edit_contact_info #public_contact_memlink_tip, .docs_layout .docs_empty, #group_bl_rows #group_bl_no, #box_layer .choose_no_rows, #box_layer .input_back_content, .photos_album_page .photos_no_content, #profile_wide #page_no_wall, #pv_photo_wrap #pv_rotate, #photos_edit .photo_edit_result, .popup_box_container .bte_label, .popup_box_container #bap_poll_delete, .wke_link_info .placeholder_content, #lb .wke_setup_text, .bp_info .wpe_auth, .bp_info .wpe_auth .wpe_auth_lnk, #tickets_content .tickets_reply_actions .tickets_rated, #public #group_narrow .group_desc, #public #group_narrow small, #public #public_contacts .people_desc, #public #public_contacts .people_extra, #public #public_contacts .people_extra_lnk, #public #page_no_suggests, .group_edit #group_edit_about_addr, #wk_layer #wk_likes_content .published_by_date, #public_contacts_list .extra_info a, #wk_layer .wk_cont_t #pb_club_inp, #pad_playlist #not_found, #pad_playlist #audio_listeners_not_found, #audios_list #not_found, #audios_list #audio_listeners_not_found, #profile_wide #profile_info .profile_deleted, #profile_wide #profile_info .profile_deleted_text, #group #group_contacts .people_desc, #group #group_contacts .people_extra, #group #group_contacts .people_extra_lnk, #public .public_info .label, .wall_module .page_media_poll_desc, .wall_module .explain, #im_controls_wrap .im_status_holder, #fw_post_wrap #fwr_warn, .wall_wrap #wall_empty, #fw_post_wrap .fw_post_date, #fw_post_wrap .rel_date, #fwr_wrap .input_back_content, .fw_reply_tt .rel_date, .wall_posts #wall_fixed_input_hint, #im_stickers_buy_header_wrap .im_stickers_act_done, .fans_box .im_stickers_desc, .fans_box .im_sticker_bl_desc, #feed_rows .published_by_date, #group_narrow .topic_row small, #profile_idols .desc_info .people_desc, #profile_editor .pedit_interests_details, #profile_editor .pedit_interests_label, #profile_editor .pedit_general_label, #profile_editor .pedit_label, #profile_editor .label, #profile_editor .selector .placeholder_content, #profile_editor .result_list li span, #bt_rows #b_no_content, #group_docs .page_doc_date, .friends_find_cont .friends_import_cont, #im_rows .im_typing, .ts_contact_info, #profile_wall .dld, .bnt_wrap .bnt_disabled, .page_list_app .people_desc, #group_events .group_desc, #blst_cont #b_no_content, #feed_wall #feed_error_wrap, #groups_list_content .groups_no_list, #gedit_users_wrap .gedit_users_none, #box_layer .groups_create_about, .group_edit .selector .placeholder_content, #page_wall_posts .page_media_link_addr, #video_content .video_info_msg, #wk_content #wk_date_wrap, #wk_content #wk_extpage_views_wrap, #empty_links, #empty_users, #apps .app_type_label, #apps .apps_empty_cat, #docs_list_cont .docs_item_date, #side_bar #myprofile_edit span, .tt_toup .bp_edited_by, #pv_box #pv_album_name a, #pv_box .pv_commdate, #pv_box #pv_date_wrap, #pv_box .pv_reply_to, #group_recom_preload .group_recom_desc, #group_recom_preload .group_recom_size, .settings_privacy_saved, .fc_msgs_date, #pv_box #pv_album_name, #pv_box .pv_desc_edit, .box_layout .docs_choose_empty, .box_layout .docs_choose_row:not(:hover) .docs_choose_date, .attach_label, .box_layout .video_upload_title, .box_layout .video_upload_separator_text, .box_layout .video_upload_share_descr, .photos_edit_wall_album .checkbox, .box_layout #docs_file_type span[style="color:#777"], .box_layout .docs_tags_desc, #wk_box .app_layer_summary, #wk_box .apps_access_item, #wk_box .apps_i_policy, #wk_box .apps_standalone_availability, #wk_box .apps_ss_playing, .box_layout .apps_access_item_info, #ads_page .ads_edit_link_type_item_description, #ads_page .selector_input.selected, #ads_page .ads_param_title_remain_wrap, #ads_page .ads_param_description_remain_wrap, #ads_page .selector .placeholder_content, #ads_page .ads_edit_targeting_group_hider_info, #ads_page .ads_ad_domain, .settings_privacy_row, #wk_layer #wl_post .input_back_content, #feed_rows .feed_ignore_label, #im_rows .im_none, #wk_box #wk_history_empty, #im_rows #im_friends_sel_wrap #im_friends_sel_count, #im_rows #im_friends_sel_wrap .input_back_content, #im_datesearch_cal_div .cal_table tbody tr .daysofweek, #im_datesearch_cal_div .cal_table tbody tr .day, .photos_comments #photos_container .pv_commdate, .photos_comments #photos_container .pv_commdate .pv_reply_to, #video_content .review_comment .review_commdata .fl_l, #video_content .review_comment .review_commdata .fl_l .mv_reply_to, .page_media_thumbed_link .page_media_link_addr, .box_layout .gedit_admbox_desc_other, .box_layout .common_friends_box .common_uni, #pad_side_filters .audio_popular_owner_cnt, .box_layout .checkbox_label, .photos_comments .photos_no_content, #pad_cont .pad_ap_list_info, #apps .apps_feed_cont, #layer_wrap #pv_caption_warn, #layer #pv_box .dld, .photos_edit_wall_album .photos_edit_label, #photos_albums .photos_period, #im_rows .dialogs_msg_body, #group_wide .group_info_private, .box_layout .gifts_box .gift_bottom, #layer #pv_box .video_row_info_vat, #layer #pv_box .mem_link, .box_layout .im_sticker_bl_desc, .wall_module .medadd_c_poll .medadd_c_polladd, .video_results .video_row_info_vat, .box_layout #choose_video_rows .video_row_info_vat, #mv_box #mv_tags, #mv_box .mv_commdata, #mv_box .mv_reply_fakebox, #mv_box .mv_recom_views, #mv_box .mv_reply_to, #video_content .video_row_info_vat, .gle_invites_list .groups_inv_info_l, .gle_invites_list .group_inv_status, #feed_rows .post_video_views_count, #bt_rows .post_video_views_count, .wall_module .post_video_views_count, #ba_post #ba_warn, #mv_box .mv_views_count_number, #group_narrow #public_help .module_body, #tickets_reply_warn, #tickets_links_warn, #tickets_text_warn, #ads_page_simple .ads_intro_subsection_text, #sideBar #myprofile_edit, form#edit .label, #wk_box .bd_label, .box_layout .im_stickers_my_tip, .box_layout .im_stickers_desc, .group_edit .group_edit_print_link_wrap, #wk_box #print_content .print_links, #content .photo_edit_result, .wall_module .media_desc .lnk.lnk_mail .lnk_mail_domain, .settings_deact_page .input_back_content, #side_bar #left_friends .left_friend_all_lnk, #sideBar #left_friends .left_friend_all_lnk {color: #bbb !important}
+#wk_layer #wk_content .replies .like_link, #wk_layer #wk_content .replies .like_count, #feed_wall .replies .like_link, #feed_wall .replies .like_count, #group_wall .replies .like_link, #group_wall .replies .like_count, #public_wall .replies .like_link, #public_wall .replies .like_count, .wall_wrap .replies .like_link, .wall_wrap .replies .like_count, .wall_posts .like_link, .wall_posts .like_count, #wk_layer .wl_replies .like_link, #wk_layer .wl_replies .like_count, #video_content .review_comment .review_commdata .like_link, #video_content .review_comment .review_commdata .like_count {color: #2f5879 !important}
+#blst_cont .blst_date, #im_dialogs .dialogs_msg_text, #profile_counts .fans .fl_r, #profile_narrow .rate_line .rate_text, .profile_rate_warning .fl_r.plus, .post_like_link, .replies .wrh_text, .post_share_link, .post_share_count, .post_like_count, .wall_post_more, .wall_reply_more, #pad_cont .pad_msga_date, .replies .replies_open, #wk_layer #wk_content .replies ._reply_lnk, #feed_wall .replies ._reply_lnk, #group_wall .replies ._reply_lnk, #public_wall .replies ._reply_lnk, .wall_wrap ._reply_lnk, .wall_posts ._reply_lnk, #wk_layer .wl_replies ._reply_lnk {color: #2b587a !important}
+#profile_narrow #friend_status .profile_frdd_text {color: #5F6D7A !important; background-position: right -26px !important}
+}

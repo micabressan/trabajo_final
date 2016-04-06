@@ -1,0 +1,20 @@
+{
+	payment_type: "bca_klikpay",
+	item_details: [
+		{
+			quantity: 1,
+			price: 100000,
+			name: "Baju Robek",
+			id: "0"
+		}
+	],
+	bca_klikpay: {
+		misc_fee: 0,
+		description: "Pembelian Barang",
+		type: 1
+	},
+	transaction_details: {
+		gross_amount: 100000,
+		order_id: "10HSJD78D"
+	}
+}

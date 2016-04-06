@@ -1,0 +1,2 @@
+        List<int> firstNumbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+        List<int> secondNumbers = Console.ReadLine().Split().Select(int.Parse).ToList();

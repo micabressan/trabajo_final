@@ -1,0 +1,100 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+namespace Siege
+{
+    //TODO: перенести 
+    public enum TeamRole
+    {
+        DEF,
+        ATK
+    }
+
+    #region ССЫЛКИ НА УИ
+    //как абстрагироваться от гуи решения?
+    [System.Serializable]
+    public class TeamView_uGUI //типа реализует какой-то интерфейс?
+    {
+        public Text score;
+        public Text playerCount;
+        public Text role;
+
+        public Image[] opIcons;
+
+        public string ScoreView
+        {
+            get;
+            set;
+        }
+
+        public string PlayerCountView
+        {
+            get;
+            set;
+        }
+
+        public string RoleView
+        {
+            get;
+            set;
+        }
+    }
+    #endregion
+
+    #region тут только данные
+    [System.Serializable]
+    public class TeamData
+    {
+        public TeamRole team_role;
+        
+        [HideInInspector]
+        public int max_player = 5;
+    }
+    #endregion
+
+    //контроллер для работы с одной конкретной командой
+    public class TeamViewController : MonoBehaviour
+    {
+        void Start()
+        {
+        
+        }
+
+        //обьект со ссылками на уи
+        public TeamView team_view;
+
+        //обьект с данными
+        public TeamData team_data;
+
+        #region геттеры-сеттеры для работы с контроллером (сейчас привязаны к уи-решению)
+        public void SetIcon(int index, Sprite icon)
+        {
+            team_view.opIcons[index].sprite = icon;
+        }
+
+        public int Score
+        {
+            get;
+            set;
+        }
+
+        public int PlayerCount
+        {
+            get;
+            set;
+        }
+
+        public int Role
+        {
+            get;
+            set;
+        }
+
+        public int MaxPlayers
+        {
+            get;
+        }
+        #endregion
+    }
+}

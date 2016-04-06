@@ -1,0 +1,50 @@
+// Documents:
+{
+    "name":        "WestGroup Research",
+    "slug":        "westgroup-research",
+    "directories": { // nested
+        "sourcebook": { // nested
+            "is_active":   true,
+            "specialties": [ // nested
+                {
+                    "_id":  3008,
+                    "type": "specialty",
+                    "name": "Advertising Research",
+                    "slug": "advertising-research"
+                },
+                {
+                    "_id":  3451,
+                    "type": "specialty",
+                    "name": "Software-Mobile Surveys",
+                    "slug": "software-mobile-surveys"
+                }
+            ]
+        }
+    },
+    "location":    "Phoenix, AZ",
+    "updated_at":  "2015-08-13T19:10:15+0000"
+}
+
+// Attempted Query
+{
+    "filter": {
+        "nested": {
+            "path":   "directories",
+            "filter": {
+                "nested": {
+                    "path":   "directories.sourcebook",
+                    "filter": {
+                        "nested": {
+                            "path":   "directories.sourcebook.specialties",
+                            "filter": {
+                                "term": {
+                                    "directories.sourcebook.specialties.slug": "advertising-research"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

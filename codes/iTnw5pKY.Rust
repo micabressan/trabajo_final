@@ -1,0 +1,11 @@
+#[derive(Hash)]
+struct ShaderParams {
+    pixel_params: Vec<Floatf>,
+    vertex_params: Vec<Floatf>
+}
+
+#[derive(Hash)]
+struct Floatf(f32);
+
+
+error: the trait `core::hash::Hash` is not implemented for the type `f32` [E0277] struct Floatf(f32);

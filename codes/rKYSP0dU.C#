@@ -1,0 +1,28 @@
+//Sum of diagonal elements from a square 2d matrix
+#include<iostream>
+using namespace std;
+int main()
+{
+    const unsigned short m_size = 100;
+    unsigned short actual_size;
+    int matrix[m_size][m_size];
+    long sum_diag_one = 0, sum_diag_two = 0;
+    cin>>actual_size;
+    while(actual_size>m_size)
+    {
+        cout<<"Please enter a number lower than 100 and higher than 2."<<'\n';
+        cin>>actual_size;
+    }
+    cout<<"Enter the matrix elements."<<'\n';
+    for(unsigned short line_index = 0;line_index<actual_size;++line_index)          // Read matrix
+        for(unsigned short column_index = 0;column_index<actual_size;++column_index)
+            cin>>matrix[line_index][column_index];
+
+    for(unsigned short index = 0;index<actual_size;++index)
+    {
+       sum_diag_one+=matrix[index][index]; // That's the first diagonal
+       sum_diag_two+=matrix[actual_size-index-1][index]; //That's the second column
+    }
+    cout<<sum_diag_one<<'\n'<<sum_diag_two;
+    return 0;
+}

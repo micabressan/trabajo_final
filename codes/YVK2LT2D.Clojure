@@ -1,0 +1,18 @@
+(ns backwards-prime.core)
+
+(defn reverse-number [n]
+  (read-string (clojure.string/join (reverse (clojure.string/split (str n) #"")))))
+
+(defn prime?
+  ([n] (prime? n 5))
+  ([n certainty] (.isProbablePrime (BigInteger/valueOf n) certainty)))
+
+(defn prime-and-reverse-prime? [n]
+  (if (and (prime? n) (prime? (reverse-number n)) (not (= (reverse-number n) n)))
+    true
+    false))
+
+(defn backwards-prime [start stop]
+  (->> (range start (inc stop))
+       (filter prime-and-reverse-prime?)
+       (filter (complement nil?))))

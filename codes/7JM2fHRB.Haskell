@@ -1,0 +1,36 @@
+import Control.Monad.Par
+import System.Random
+import System.CPUTime
+import Text.Printf
+import System.IO.Unsafe
+
+qsortp :: (NFData a, Ord a) => [a] -> [a]
+qsortp [] = []
+qsortp [x] = [x]
+qsortp (x:xs) = runPar $ do
+    lx <- spawnP $ qsort [a | a <- xs, a <= x]
+    gx <- spawnP $ qsort [b | b <- xs, b > x]
+    l <- get lx
+    g <- get gx
+    return $ l ++ [x] ++ g
+
+qsort :: (Ord a) => [a] -> [a]
+qsort [] = []
+qsort [x] = [x]
+qsort (x:xs) = l ++ [x] ++ g
+  where l = [a | a <- xs, a <= x]
+        g = [b | b <- xs, b > x]
+
+time :: IO t -> IO t
+time a = do
+    start <- getCPUTime
+    v <- a
+    end <- getCPUTime
+    let diff = (fromIntegral (end - start)) / (10^12)
+    printf "Computation time: %0.10f sec\n" (diff :: Double)
+    return v
+
+main = do
+    let test = unsafePerformIO $ sequence $ replicate 2500000 (randomRIO (0, 100) :: IO Int)
+    time $ qsort test `seq` return ()
+    time $ qsortp test `seq` return ()

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:SportradarData fileName="Soccer.Russia.PFLCenter.1516.PFLCenter1516.7617088" generatedAt="2015-08-22T20:09:12.068+02:00" serviceId="9" serviceName="schedulesandresult" updateType="delta" xmlns:ns2="http://xmlexport.scoreradar.com/V1">
+    <Sport id="1" name="Soccer">
+        <Translation key="name">
+            <TranslatedValue lang="ru" value="Футбол"/>
+        </Translation>
+        <Category id="21" name="Russia">
+            <Translation key="name">
+                <TranslatedValue lang="ru" value="Россия"/>
+            </Translation>
+            <Tournament id="21208" name="PFL, Center" stageType="Main stage of tournament" uniqueTournamentId="1095">
+                <Translation key="name">
+                    <TranslatedValue lang="ru" value="ПФЛ, Центр"/>
+                </Translation>
+                <Season end="2016-06-02T23:59:00+02:00" id="10704" name="PFL, Center 15/16" start="2015-07-18T00:00:00+02:00" year="15/16">
+                    <Translation key="name">
+                        <TranslatedValue lang="ru" value="ПФЛ, Центр 15/16"/>
+                    </Translation>
+                </Season>
+                <UniqueTournament description="Third division in the Russian football league" name="PFL, Center" id="1095">
+                    <Translation key="name">
+                        <TranslatedValue lang="ru" value="ПФЛ, Центр"/>
+                    </Translation>
+                </UniqueTournament>
+                <Leagues>
+                    <League description="PFL, Center 15/16" end="2016-06-02T23:59:00+02:00" numberofteams="14" presentationId="0" round="0" seasondescription="Main stage of tournament" seasontype="21" start="2015-07-18T00:00:00+02:00" tableId="18140" tournamentid="21208"/>
+                </Leagues>
+                <Matches>
+                    <Match dateOfMatch="2015-08-22T16:00:00+02:00" id="7617088" neutralGround="false" toBeConfirmed="false">
+                        <Roundinfo round="6"/>
+                        <Teams>
+                            <Team gender="M" name="Lokomotiv Liski" betradarTeamId="526171" type="1" id="75185">
+                                <Translation key="name">
+                                    <TranslatedValue lang="ru" value="Локомотив Лиски"/>
+                                </Translation>
+                            </Team>
+                            <Team gender="M" name="Arsenal-2 Tula" betradarTeamId="7315369" type="2" id="163324"/>
+                        </Teams>
+                        <Result canceled="false" postponed="false">
+                            <Score orderById="0" type="FT" value="5:0"/>
+                        </Result>
+                    </Match>
+                </Matches>
+            </Tournament>
+        </Category>
+    </Sport>
+</ns2:SportradarData>

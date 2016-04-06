@@ -1,0 +1,43 @@
+/*moves entire left side (with the chat and such) down*/
+ #dashboard .mid-side-container{
+     margin-top:12px;
+     border-radius:2px;
+ }
+
+/*moves chat itself up & rounds the corners a bit to align it with user list*/
+#main_chat_area .chat_container {
+    margin-top:-29px;
+    border-radius:2px;
+}
+
+/*edits over in the match container*/
+.play_match_container{
+     margin-top:5px;
+ }
+
+/*chat tabs*/
+#chat_tabs .chat_tab:not(.control_tab){
+       background-color:#E5E8EF;
+   }
+
+	/*active tab*/
+#chat_tabs .chat_tab.active {
+    background: none repeat scroll 0% 0% rgb(150, 0, 0);
+    padding-right: 18px;
+}
+    /*hovered*/
+#chat_tabs .chat_tab:hover {
+    cursor: pointer;
+    background-color: #000;
+}
+	/*new messages*/
+#chat_tabs .chat_tab.has_new_messages {
+    background-color: #8A8A8A;
+    color: #FFF;
+}
+	/*gives every tab black text*/
+#chat_tabs .chat_tab a{
+      overflow:hidden;
+      display: inline;
+      color:black;
+  }

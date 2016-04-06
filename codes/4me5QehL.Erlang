@@ -1,0 +1,9 @@
+{ok, P1} = gun:open("echo.websocket.org", 443).
+{ok,<0.249.0>}
+(test@computer)2> flush().
+Shell got {gun_up,<0.249.0>,http}
+ok
+(test@computer)3> R1 = gun:ws_upgrade(P1, "").
+#Ref<0.0.2.831>
+(test@computer)4> 22:11:15.590 [error] CRASH REPORT Process <0.249.0> with 0 neighbours crashed with reason: call to undefined function ranch_ssl:secure()
+22:11:15.591 [error] Supervisor gun_sup had child undefined started with {gun,start_link,undefined} at <0.249.0> exit with reason undef in context child_terminated

@@ -1,0 +1,13 @@
+Settings/res/xml/music_headset_settings.xml
+
+<PreferenceCategory android:title="@string/miuipolska_viper">
+    <Preference android:title="@string/music_viper" android:summary="@string/music_viper_summary" />
+        <intent android:targetPackage="com.vipercn.viper4android_v2" android:action="com.android.settings.VIPER" />
+    </Preference>
+</PreferenceCategory>
+
+@miuipolska_viper - string, tytuł kategorii jak napis SŁUCHAWKI czy OPCJE DŹWIĘKU (można bez PreferenceCategory)
+@music_viper - string, nazwa opcji
+@music_viper_summary - string, opisówka
+
+ja bym dodał pomiędzy liniami #8 i #9

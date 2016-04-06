@@ -1,0 +1,61 @@
+using System;
+
+class Sections
+{
+		static void Main()
+	{
+		/* int [] section = new int [];
+		int [] students = new int [];
+		string names = new string[];
+
+		Console.Write("Enter number of Sections: ");
+		int SecNum = int.Parse(Console.ReadLine());
+		section = new int[SecNum];
+		for(int i = 0; i < SecNum; i++)
+		{
+		Console.Write("Enter number of Students in Section" + (i+1) + ": ");	
+		int num = int.Parse(Console.ReadLine());
+		students = new int[num]
+		}
+		for(int j = 0; j < num; j++)
+		{
+		Console.Write("Enter name: ");
+		names[j] = Console.ReadLine();
+		
+		}
+	    */
+		
+		//2d jagged array
+		string[][] section;
+		
+		Console.Write("Enter number of Sections: ");
+		int SecNum = int.Parse(Console.ReadLine());
+		//				 row     column (leave blank)
+		section = new string[SecNum][];
+		
+		for (int i = 0; i < SecNum; i++) {
+			Console.Write("Enter number of Students in Section" + (i+1) + ": ");
+			int num = int.Parse(Console.ReadLine());
+			section[i] = new string[num];
+		}
+		
+		for (int j = 0; j < SecNum; j++) {
+			Console.WriteLine("Section #" + j + 1);
+			for (int k = 0; k < section[j].Length; k++) {
+				Console.Write("Enter name: ");
+				section[j][k] = Console.ReadLine();
+			}
+		}
+		
+		for (int m = 0; m < SecNum; m++) {
+			Console.WriteLine("Section #" + j + 1);
+			for (int o = 0; o < section[m].Length; o++) {
+				Console.WriteLine("Name: " + section[m][o]);
+			}
+			Console.WriteLine();
+		}
+		
+	
+		}
+		
+}

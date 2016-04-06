@@ -1,0 +1,8 @@
+s = '*% //6;!<+(;+&?:"0'
+flags = []
+for i in range(0, 255):
+	t = ''
+	for j in s:
+	        t += chr(ord(j) ^ i)
+   	flags.append(t)
+print(flags)

@@ -1,0 +1,4 @@
+savePriorityItems = ->
+  item_ids = _.pluck($scope.lesson.items, 'id')
+  priorities = _.extend {}, item_ids
+  itemsService.changePrioritiItems priorities

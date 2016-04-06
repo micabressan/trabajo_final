@@ -1,0 +1,183 @@
+/* ----------General Settings and Background---------- */
+body {
+overflow: hidden;
+background-image: url("img/bg12.jpg");
+background-repeat: no-repeat;
+background-size:100% 100%;
+background-attachment:fixed;
+font-size:100%;
+padding:0em;
+margin:0em;
+}
+
+#bgimg {
+z-index: 1;
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center top;
+}
+
+/* ----------Settings for the links---------- */
+a {
+color: #fff;
+text-decoration: none;
+letter-spacing: 1px;
+line-height: 30px;
+display: block;
+margin: -5px 0px;
+padding: 0 10px;
+border-radius: 1px
+}
+
+a:hover {
+background-color: #ffffff;
+color: #2a2a2a; text-decoration: none; opacity: 1.0;
+transition: 0.4s ease-out;
+}
+
+.content {
+font-family: "Ubuntu";
+margin: 0 1px 0;
+line-height: 12px;
+font-size: 12px;
+}
+
+ /* ----------------------- */
+#container {
+width: 100%;
+display: table;
+}
+
+#cell {
+display: table-cell;
+vertical-align: middle;
+text-align: center;
+}
+
+/* ----------Settings for the Squares---------- */
+.sqr {
+display: inline-block;
+width: 150px;
+height: 75px;
+margin: 40px 10px;
+background-color: #0F0F0F;  opacity: 0.2;
+overflow: hidden;
+box-shadow:0em 0em 0.2em 0em #000000;
+-moz-transition: all .25s ease-in-out;
+-webkit-transition: all .25s ease-in-out;
+-o-transition: all .25s ease-in-out;
+transition: all .30s ease;
+vertical-align: top;
+border-radius: 1px;
+}
+
+.sqr:hover {
+color: #fff; 
+text-decoration: none; opacity: 1.0;
+background-color: #0F0F0F;
+}
+
+/* ----------Headlines of .sqr---------- */
+span {
+color: #fff;
+width: inherit;
+height: inherit;
+line-height: 75px;
+text-transform: uppercase;
+}
+
+/* ----------Settings for Clock and Greetings - To change the greetings go to main.js---------- */
+#clock, #greeting {
+text-align: center;
+width: 100%;
+color: #0F0F0F;
+}
+
+#clock {
+font-size: 55px;
+height: 5px;
+margin: 40px 0 0 0;
+letter-spacing: 0px;
+font-weight: 200;
+font-family: "lucida fax";
+}
+
+#greeting {
+font-size: 30px;
+height: 0px;
+margin: 55px 0 -75px 0;
+letter-spacing: 2px;
+font-family: "Ubuntu";
+}
+
+/* ----------Settings Searchbars---------- */
+.searchContainer {
+text-align: center;
+margin: 150px 0 0 0;
+}
+
+.searchForm {
+display: inline-block;
+margin: 0 10px;
+}
+
+.searchBar::-webkit-input-placeholder {
+transition: color 3s;
+}
+
+.searchBar {
+width: 25px;
+height: 25px;
+padding: 0;
+font-size: 12px;
+background-repeat: no-repeat;
+background-size: 25px 25px;
+background-position: right center;
+border-width: 1px;
+border-style: solid;
+outline: 0;
+opacity: 0.4;
+transition: all 0.5s;
+color: rgba(0,0,0,0);
+border-color: lightgrey;
+}
+
+.searchBar:hover {
+cursor: pointer;
+transition: all 0.5s;
+background-position: right center;
+opacity: 1;
+box-shadow: 0 0 3px black;
+border-color: grey;
+}
+
+.searchBar::-webkit-input-placeholder { color: rgba(0,0,0,0); }
+.searchBar:-moz-placeholder           { color: rgba(0,0,0,0); opacity: 1; } /* Fx 4-18 */
+.searchBar::-moz-placeholder          { color: rgba(0,0,0,0); opacity: 1; } /* Fx 19+ */
+.searchBar:-ms-input-placeholder      { color: rgba(0,0,0,0); } /* IE 10+ */
+
+.searchBar:focus::-webkit-input-placeholder { color: rgba(100,100,100,1); }
+.searchBar:focus:-moz-placeholder           { color: rgba(100,100,100,1); opacity: 1; } /* Fx 4-18 */
+.searchBar:focus::-moz-placeholder          { color: rgba(100,100,100,1); opacity: 1; } /* Fx 19+ */
+.searchBar:focus:-ms-input-placeholder      { color: rgba(100,100,100,1); } /* IE 10+ */
+/* Specyfing opacity for Fx is only resetting the defaults. Alpha from rgba will still work. */
+
+
+
+.searchBar:focus {
+cursor: text;
+width: 100px;
+padding: 0 25px 0 5px;
+opacity: 1;
+color: rgba(100,100,100,1);
+}
+
+.search_google {
+background-image: url('images/icons/google.png');
+}
+.search_youtube {
+background-image: url('images/icons/youtube.png');
+}
+.search_wikipedia {
+background-image: url('images/icons/wikipedia.jpg');
+}

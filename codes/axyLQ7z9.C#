@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace H6_E__5
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnBereken_Click(object sender, EventArgs e)
+        {
+           int jaar;
+            if (int.TryParse(txtJaar.Text, out jaar) == true)
+            {
+                if (jaar % 4 == 0)
+                {
+                    MessageBox.Show("Het is een schrikkeljaar.");
+
+                }
+                else
+                    MessageBox.Show("Het is geen schrikkeljaar.");
+
+            }
+            else
+            {
+                MessageBox.Show("Ongeldige input");
+
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog;
+            dialog = MessageBox.Show("zeker dat je wilt weggaan?", "",  MessageBoxButtons.YesNo);
+
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                txtJaar.Focus();
+            }
+        }
+    }
+}

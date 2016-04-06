@@ -1,0 +1,11 @@
+def index(conn, _params) do
+    key = "Account.index:all"
+    case Redis.get(key) do
+      :undefined ->
+        accounts = Repo.all(Account)
+        Redis.set(key, :erlang.term_to_binary(accounts))
+      cache ->
+        accounts = :erlang.binary_to_term(cache)
+    end
+    render conn, "index.json", %{data: accounts, params: _params}
+  end

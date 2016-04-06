@@ -1,0 +1,25 @@
+Vector3 originPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+				Ray ray2 = new Ray(originPosition, Vector3.forward);
+				Ray ray3 = new Ray(originPosition, Vector3.down);
+
+				RaycastHit hit1;
+				int pillowType = Random.Range (0, pillows.Length);
+				clonePillow = Instantiate (pillows[pillowType], Vector3.zero, Quaternion.identity) as GameObject;
+				if (Physics.Raycast (ray2, out hit1, 100f)) {
+					if (hit1.collider.tag == "Pillow"){
+
+						if (Camera.main.GetComponent<RotateCamera>().topview == true){
+							move = hit1.collider.bounds.extents.y + hit1.transform.position.y;
+						}
+						else{
+							move = hit1.collider.bounds.extents.z + hit1.transform.position.z;
+							Debug.DrawRay(ray2.origin, ray2.direction * 1000, Color.green, 1.0f);
+						}
+						mousePosition.z = 10.25f + hit1.transform.position.z - hit1.transform.localScale.z - clonePillow.transform.localScale.z + 0.1f;
+					}
+					else{
+						mousePosition.z = 10.25f;
+					}
+				}
+				clonePillow.transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
+				usePillow = true;

@@ -1,0 +1,30 @@
+static internal bool IsUndefinedUnicodeCharacter(char c)
+{
+    /*if ((unicode >= '\U00000001' && unicode <= '\U00000008') ||
+        (unicode >= '\U0000000B' && unicode <= '\U0000000C') ||
+        (unicode >= '\U0000000E' && unicode <= '\U0000001F') ||
+        (unicode >= '\U0000007F' && unicode <= '\U00000084') ||
+        (unicode >= '\U00000086' && unicode <= '\U0000009F') ||
+        (unicode >= '\U0000FDD0' && unicode <= '\U0000FDDF') ||
+        (unicode >= '\U0001FFFE' && unicode <= '\U0001FFFF') ||
+        (unicode >= '\U0002FFFE' && unicode <= '\U0002FFFF') ||
+        (unicode >= '\U0003FFFE' && unicode <= '\U0003FFFF') ||
+        (unicode >= '\U0004FFFE' && unicode <= '\U0004FFFF') ||
+        (unicode >= '\U0005FFFE' && unicode <= '\U0005FFFF') ||
+        (unicode >= '\U0006FFFE' && unicode <= '\U0006FFFF') ||
+        (unicode >= '\U0007FFFE' && unicode <= '\U0007FFFF') ||
+        (unicode >= '\U0008FFFE' && unicode <= '\U0008FFFF') ||
+        (unicode >= '\U0009FFFE' && unicode <= '\U0009FFFF') ||
+        (unicode >= '\U000AFFFE' && unicode <= '\U000AFFFF') ||
+        (unicode >= '\U000BFFFE' && unicode <= '\U000BFFFF') ||
+        (unicode >= '\U000CFFFE' && unicode <= '\U000CFFFF') ||
+        (unicode >= '\U000DFFFE' && unicode <= '\U000DFFFF') ||
+        (unicode >= '\U000EFFFE' && unicode <= '\U000EFFFF') ||
+        (unicode >= '\U000FFFFE' && unicode <= '\U000FFFFF') ||
+        (unicode >= '\U0010FFFE' && unicode <= '\U0010FFFF'))
+    {
+        return true;
+    }*/
+    
+    return false;
+}

@@ -1,0 +1,26 @@
+import cv2
+import sys
+from matplotlib import pyplot as plt
+
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye = cv2.CascadeClassifier('haarcascade_eye.xml')
+def detector(frame):
+    img = frame.copy()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = faceCascade.detectMultiScale(gray,scaleFactor=1.1,minNeighbors=5,minSize=(30, 30),flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
+    eye_pos = []
+    eye_templates = []
+    for (x, y, w, h) in faces:
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_img = img[y:y+h, x:x+w]
+        eyes = eye.detectMultiScale(roi_gray,scaleFactor = 1.1, minNeighbors = 10, minSize = (20, 20),flags = cv2.cv.CV_HAAR_SCALE_IMAGE)
+        eye_pos.extend((x+w/2, y-h/2) for x,y,w,h in eyes )
+        eye_templates.extend(roi_color[ey:ey+eh, ex:ex+ew] for ex,ey,ew,eh in eyes)
+    return eye_pos, eye_templates
+
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    img = frame.copy()
+    roi,temp = detector(frame)

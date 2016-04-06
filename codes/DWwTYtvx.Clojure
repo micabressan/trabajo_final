@@ -1,0 +1,4 @@
+(while true
+  (let [t (timeout 1000)]
+    (process-message queue)
+    (<!! t)))

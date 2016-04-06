@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Change the information here
+            Console.WriteLine("=================================================================");
+            Console.WriteLine("ContiCheck V1.0, thanks to e4stwood,Kong Continental");
+        
+
+            //Change the information here
+           
+            Console.WriteLine("Need help? PM on HF/MPGH or LF. HF=Continental LF=Kong");
+            Console.WriteLine("=================================================================");
+            Console.WriteLine("1. Place your preferred Usernames in the .txt file.");
+            Console.WriteLine("2. Startup this Progam, now the usernames will check automatic.");
+            Console.WriteLine("3. Avaible Usernames are stored back in the .txt files!");
+            Console.WriteLine("4. Done!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            List<string> accounts = new List<string>();
+            using (StreamReader read = new StreamReader(Environment.CurrentDirectory + "/" + "accounts.txt"))
+            {
+                var Count = File.ReadLines(Environment.CurrentDirectory + "/" + "accounts.txt").Count();
+                for (int i = 0; i < Count; i++)
+                {
+                    string temp = read.ReadLine();
+                    accounts.Add(temp);
+                }
+                Console.WriteLine("There are " + Count + " accounts to check");
+            }
+
+            WebClient web = new WebClient();
+            using (StreamWriter write = new StreamWriter(Environment.CurrentDirectory + "/" + "accounts.txt"))
+            {
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    try
+                    {
+                        string source = web.DownloadString("https://www.instagram.com/" + accounts[i] + "/");
+                        Console.WriteLine(accounts[i] + " :Sorry, this one is being used.");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine(accounts[i] + " :This one is usable!");
+                        write.WriteLine(accounts[i]);
+                    }
+                }
+                write.Close();
+            }
+            //Change this to if you want.
+            Console.WriteLine("Completed");
+            Console.WriteLine("File Saved");
+            Console.ReadLine();
+            Console.WriteLine("Thanks for using ContiCheck! Make sure to leave a vouch!");
+        }
+
+        private static void WriteFullLine(string v)
+        {
+           
+
+
+
+
+
+ throw new NotImplementedException();
+        }
+    }
+}

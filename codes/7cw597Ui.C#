@@ -1,0 +1,11 @@
+            NetworkStream netstream = new NetworkStream(null);
+            FileStream fs = new FileStream("tonfichier", FileMode.Create);
+            int i;
+
+            while (true)
+            {
+                i = netstream.ReadByte();
+                if (i == -1)
+                    break;
+                fs.WriteByte((byte)i);
+            }

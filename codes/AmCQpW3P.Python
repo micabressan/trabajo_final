@@ -1,0 +1,16 @@
+while 1:
+
+        bezokaserver = api.request("tag", 'entries', ["bezokaserver",], {"appkey": "Hm4Oo3wjEt"})
+
+
+        for i in range (3):
+                if bezokaserver['items'][2-i]['id'] > old_id:
+                        old_id = bezokaserver['items'][2-i]['id']
+                        #comment = api.add_entry_comment(old_id, "@" + bezokaserver['items'][2-i]['author'] + " on", embed=file)
+
+
+                        api.request('entries', 'addcomment', [old_id], post_params={'body': "@" + bezokaserver['items'][2-i]['author'] + " on"}, file_params={'embed': file})
+
+
+                        print 2-i
+        time.sleep(30)

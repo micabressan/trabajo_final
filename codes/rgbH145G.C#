@@ -1,0 +1,6 @@
+If (!Addressbox1.Text.Contains(".")) {
+                        If (My.Settings.SE = "Google") 
+                            Addressbox1.Text = Addressbox1.Text.Replace(Addressbox1.Text, "www.google.com/#q=" + Addressbox1.Text);
+                            webcontrol1.Load(Addressbox1.Text);
+                        }
+}

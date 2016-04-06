@@ -1,0 +1,18 @@
+(defn get-time []
+  (js/Date.now))
+
+(defonce then (get-time))
+(defonce fps 60)
+(defonce interval (/ 1000 fps))
+
+
+(defn game-loop [fun]
+  (let [now (get-time)
+        delta (- now then)
+        update (fn [f] (animation-frame f))]
+    (loop [dt delta]
+      (when (> dt interval) 
+        fun
+        (update #(- now (mod delta interval)))))))
+
+(game-loop #(js/console.log "hello world"))

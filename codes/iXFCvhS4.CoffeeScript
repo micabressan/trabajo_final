@@ -1,0 +1,34 @@
+timestamp = (new Date()).getTime()
+
+avatar =
+    "_id" : "AMHKSA8mFHeAmJReR"
+    "original" :
+      "name" : "profile-3.png"
+      "updatedAt" : timestamp
+      "size" : 134012
+      "type" : "image/png"
+    "uploadedAt" : timestamp
+    "copies" :
+      "avatar-o" :
+        "name" : "profile-3.png"
+        "type" : "image/png"
+        "size" : 134012
+        "key" : "avatar/AMHKSA8mFHeAmJReR-profile-3.png"
+        "updatedAt" : timestamp
+        "createdAt" : timestamp
+      "avatar-s" :
+        "name" : "profile-3.png"
+        "type" : "image/png"
+        "size" : 16814
+        "key" : "avatar/AMHKSA8mFHeAmJReR-profile-3.png"
+        "updatedAt" : timestamp
+        "createdAt" : timestamp
+      "avatar-m" :
+        "name" : "profile-3.png"
+        "type" : "image/png"
+        "size" : 480790
+        "key" : "avatar/AMHKSA8mFHeAmJReR-profile-3.png"
+        "updatedAt" : timestamp
+        "createdAt" : timestamp
+
+ProfileAvatars.insert(avatar)

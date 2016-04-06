@@ -1,0 +1,35 @@
+; Applies f to the result of g until f returns nil, then returns a seq of f's return values
+; g should take a list of outputs from f and return the value that will be input into f
+; Returns nil if no results were found
+(defn find-all-subseq [f g]
+    (loop [output (f (g nil))
+           results []]
+      (if (some? output)
+        (do
+            (recur (f (g (conj results output)))
+                   (conj results output)))
+        (not-empty results))))
+
+; Does the same thing as find-verts, but the collection it returns may be empty
+; and it contains the sequence's index positions in the parsed hfloat array (instead of the byte locations in the reader-stream)
+(defn ^:private find-verts-unadjusted [reader seq]
+  (let [fsm          (fsm/compile seq)
+        get-hfloat   (repeatedly #(proto/read-hfloat-le reader))
+        coll         (take-while some? get-hfloat)
+        ; If result is found, returns element index, otherwise nil
+        find         #(let [result (fsm/find fsm nil %)]
+                       (if (:accepted? result)
+                         (:start-index result)
+                         nil))
+        ; Drops the number of elements from coll equal to the sum of the list. Drops zero elements when passed nil
+        make-subset (fnil #(drop (+ (count %) (reduce + %)) coll) (list))]
+        (find-all-subseq find make-subset)))
+
+; Given the reader and a sequence of floats, finds those floats in the file by reading hfloats
+; Returns a list of all found positions of the sequence, or nil if none were found
+; NOTE: Because I'm using the brute force approach of turning the entire file into hfloats
+;       This function performs terribly. Refactor if necessary
+(defn find-verts [reader seq]
+  (-<> (find-verts-unadjusted reader seq)
+       (map #(* 2 %) <>)
+       (reductions + <>)))

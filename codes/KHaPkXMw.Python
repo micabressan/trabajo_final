@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+
+import random
+import copy
+import math
+
+def GenCorelationMatrix(letters):
+    ''' Assume all letters are same length 
+        The main diagon filled with zeros'''
+    oneLetterLen = len(letters[0][0])
+    matrix = [[0 for x in xrange(oneLetterLen)] for x in xrange(oneLetterLen)]
+    for col1 in range(oneLetterLen-1):
+        matrix[col1][col1] = 0
+        for col2 in range(col1+1,oneLetterLen):
+            value = 0
+            for row in letters:
+                for letter in row:
+                    if letter[col1] == letter[col2]:
+                        value += 1
+                    else:
+                        value -= 1
+                    matrix[col1][col2] = value
+                    matrix[col2][col1] = value
+    return matrix
+
+
+
+def recoverLetter(HopfieldMatrix, corruptedletter, bipolarMode=False):
+    recovered = list(copy.deepcopy(corruptedletter))
+    allPositionsAgrees = False
+    while not allPositionsAgrees:
+        allPositionsAgrees = True
+        indexes = range(len(recovered))
+        random.shuffle(indexes)
+        for pos in indexes:
+            lastBit = recovered[pos]
+            recovered[pos] = '0' 
+            newValue = 0
+            for i in range(len(recovered)):
+                newValue += HopfieldMatrix[i][pos]*int(recovered[i])
+                if bipolarMode and 0==int(recovered[i]):
+                    newValue -= HopfieldMatrix[i][pos]
+            if newValue >= 0:
+                recovered[pos] = '1'
+            if lastBit != recovered[pos]:
+                allPositionsAgrees = False
+    return "".join(recovered)
+
+
+def Test0():
+    letters = [['01','10']]
+    hopfieldMatrix = GenCorelationMatrix(letters)
+    print "matrix:"
+    for row in hopfieldMatrix:
+        print row
+    print "training: %s"%str(letters)
+    for i in range(2**2):
+        x = str(bin(i)[2:])
+        test = '0'*(2-len(x))+x
+        rec = recoverLetter(hopfieldMatrix, test)
+        print "%s --> %s "%(test, rec)
+
+if __name__ == "__main__":
+    Test0()

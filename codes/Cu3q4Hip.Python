@@ -1,0 +1,169 @@
+import pandas as pd
+import numpy as np
+import pylab as pl
+import matplotlib
+from sklearn.svm import SVC
+from sklearn.pipeline import Pipeline
+from sklearn.datasets import make_classification
+from sklearn import cross_validation, metrics
+from sklearn.preprocessing import scale
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_regression
+from sklearn.linear_model import RandomizedLasso
+from sklearn.metrics import roc_auc_score
+
+df = pd.read_csv('test_task.csv', header=None)
+
+result = set()
+
+d = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    d[site] = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_id = df.iloc[i][5]
+    d[site][(user_id, click_time // (60 * 60))] = 0
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_id = df.iloc[i][5]
+    d[site][(user_id, click_time // (60 * 60))] += 1
+    
+mean_for_site = dict()
+for site in d:
+    sum = 0
+    cnt = 0
+    for key, value in d[site].iteritems():
+        sum += value
+        cnt += 1
+    mean_for_site[site] = float(sum) / cnt
+
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_id = df.iloc[i][5]
+    pair = (user_id, click_time // (60 * 60))
+    if  d[site][pair] > mean_for_site[site] * 1.1:
+        click_id = df.iloc[i][0]
+        result.add(click_id)
+    
+print len(result)
+
+d = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    d[site] = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    ad_id = df.iloc[i][2]
+    d[site][(ad_id, click_time // (60 * 60))] = 0
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    ad_id = df.iloc[i][2]
+    d[site][(ad_id, click_time // (60 * 60))] += 1
+    
+mean_for_site = dict()
+for site in d:
+    sum = 0
+    cnt = 0
+    for key, value in d[site].iteritems():
+        sum += value
+        cnt += 1
+    mean_for_site[site] = float(sum) / cnt
+
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    ad_id = df.iloc[i][2]
+    pair = (ad_id, click_time // (60 * 60))
+    if  d[site][pair] > mean_for_site[site] * 1.1:
+        click_id = df.iloc[i][0]
+        result.add(click_id)
+
+d = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    d[site] = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_ip = df.iloc[i][6]
+    d[site][(user_ip, click_time // (60 * 60))] = 0
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_ip = df.iloc[i][6]
+    d[site][(user_ip, click_time // (60 * 60))] += 1
+    
+mean_for_site = dict()
+for site in d:
+    sum = 0
+    cnt = 0
+    for key, value in d[site].iteritems():
+        sum += value
+        cnt += 1
+    mean_for_site[site] = float(sum) / cnt
+
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    click_time = df.iloc[i][1]
+    user_ip = df.iloc[i][6]
+    pair = (user_ip, click_time // (60 * 60))
+    if  d[site][pair] > mean_for_site[site] * 1.1:
+        click_id = df.iloc[i][0]
+        result.add(click_id)
+
+print len(result)
+
+d = dict()
+for i in xrange(df.shape[0]):
+    user_id = df.iloc[i][5]
+    click_time = df.iloc[i][1]
+    site = df.iloc[i][4]
+    triple = (user_id, click_time // (60 * 60), site)
+    if  d.has_key(triple):
+        d[triple] += 1
+    else:
+        d[triple] = 0
+for i in xrange(df.shape[0]):
+    user_id = df.iloc[i][5]
+    click_time = df.iloc[i][1]
+    site = df.iloc[i][4]
+    triple = (user_id, click_time // (60 * 60), site)
+    if  d[triple] > 1:
+        click_id = df.iloc[i][0]
+        result.add(click_id)
+
+print len(result)
+
+d = dict()
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    user_id = df.iloc[i][5]
+    click_time = df.iloc[i][1]
+    triple = (site, user_id, click_time // (60 * 15))
+    if  d.has_key(triple):
+        d[triple] += 1
+    else:
+        d[triple] = 0
+        
+for i in xrange(df.shape[0]):
+    site = df.iloc[i][4]
+    user_id = df.iloc[i][5]
+    click_time = df.iloc[i][1]
+    triple = (site, user_id, click_time // (60 * 15))
+    if  d[triple] > 1:
+        click_id = df.iloc[i][0]
+        result.add(click_id)        
+
+
+print len(result)
+
+outfile = open('output.txt', 'w')
+for click_id in result:
+    outfile.write(str(click_id) + "\n")
+outfile.close()

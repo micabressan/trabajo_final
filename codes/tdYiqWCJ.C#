@@ -1,0 +1,24 @@
+using UnityEngine;
+using UnityEngine.UI;
+using NCalc;
+
+public class Calculus : MonoBehaviour {
+
+    //Texto onde o resultado vai ser mostrado
+    public Text result;
+
+    //Função que faz a conta, a string que pede é a conta
+    //Tu vai ter que colocar essa função no Input Field > EndEdit()
+    public void Calculate(string s) {
+        try {
+            //Cria a expressão e resolve ela
+            var exp = new Expression(s);
+            //Coloca o resultado no texto
+            result.text = exp.Evaluate().ToString();
+        }
+        catch {
+            //Caso o usuario coloque uma letra ou uma conta impossivel vai dar erro
+            result.text = "Impossível calcular";
+        }
+    }
+}

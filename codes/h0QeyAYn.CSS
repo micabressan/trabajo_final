@@ -1,0 +1,24 @@
+#menu_toggle {
+    position: relative;
+    color: #999;
+    width: 200px;
+    padding: 10px;
+    margin: auto;
+    text-align: center;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+#menu_toggle:after {
+    position: absolute;
+    top: -15px;
+    left: 95px;
+    content: "";
+    display: block;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid white;
+}

@@ -1,0 +1,62 @@
+extern crate rand;
+use rand::Rng;
+
+/*
+fn print_deck(deck:&Vec<i32>){
+    for i_dx in 0..deck.len(){
+        print!("{} ",deck[i_dx]);
+            if i_dx%13 == 0{
+                println!("");
+            }
+    }
+}
+*/
+
+fn main() {
+
+    let deck:Vec<i32> = (0..53).collect();
+    let max_iter = 10;
+
+//   print_deck(&deck);
+     let mut iterations = vec![vec![]];
+     for iter in 0..max_iter{
+        let mut deck_copy = deck.clone();
+        let mut iteration = vec! [];
+
+        while !deck_copy.is_empty(){
+
+            let i_dx = rand::thread_rng().gen_range(0, deck_copy.len());
+            let test = deck_copy.swap_remove(i_dx);
+            iteration.push(test);
+
+        }
+
+        //print_deck(&iteration);
+        iterations.push(iteration);
+        //            println!("");
+        //            println!("");
+
+     }             
+
+     let mut results = vec![0i32; 53];
+
+     for iter in iterations{
+
+        for i_dx in 0..iter.len(){
+    
+            results[i_dx] = results[i_dx] + iter[i_dx];
+
+        }
+     }
+
+               
+
+    let mapped  = results.iter().map(|x| x / max_iter);
+
+    for i in mapped{
+
+        print!("{} ",i);
+
+    }
+
+}

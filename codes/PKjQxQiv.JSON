@@ -1,0 +1,61 @@
+[
+  {
+    "data": {
+      "status": "document.draft",
+      "name": "PandaDoc Integration - New",
+      "recipients": [
+        {
+          "first_name": "Serge",
+          "last_name": "Barysiuk",
+          "email": "serge@pandadoc.com",
+          "role": "",
+          "recipient_type": "CC",
+          "has_completed": false,
+          "id": "36XqaDqfwuFJHFQvkSDCGe"
+        }
+      ],
+      "date_modified": "2015-08-24T13:17:01.256295Z",
+      "fields": [
+        
+      ],
+      "tokens": [
+        {
+          "PricingTable1.Discount": "$0.00"
+        },
+        {
+          "PricingTable1.Total": "$0.00"
+        },
+        {
+          "Owner.Username": "serge@94demo.com"
+        },
+        {
+          "Owner.LastLogin": null
+        },
+        {
+          "Account.BillingAddress": "dasda"
+        },
+        {
+          "Amount": "1000"
+        },
+        {
+          "Name": "PandaDoc Integration - New"
+        },
+        {
+          "LeadSource": "Web"
+        },
+        {
+          "OrderNumber": null
+        }
+      ],
+      "products": [
+        
+      ],
+      "date_created": "2015-08-24T13:17:01.256258Z",
+      "id": "9H3qXc7xbd6toguhaUcdi3",
+      "metadata": {
+        "salesforce.opportunity_id": "006j000000KpjzpAAB"
+      }
+    },
+    "event": "created"
+  }
+]

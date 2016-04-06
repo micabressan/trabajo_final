@@ -1,0 +1,15 @@
+use std::io;
+use std::fmt;
+
+fn main() {
+        // Values unlikely to change soon
+        let inchesPerFoot = 12;
+        let cmPerInch = 2.54;
+ 
+        // Loop'n write
+        for feet in 5..7 {
+                for inches in 0..inchesPerFoot {
+                        println!("{}'{}\"\t", feet, inches);
+                }
+        }
+}

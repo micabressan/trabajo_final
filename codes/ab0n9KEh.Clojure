@@ -1,0 +1,8 @@
+(def total-money (atom 100))
+
+
+;; -------------------------
+;; Views
+
+(defn home-page []
+   [:div [:h3 "You have a total of " ++ @total-money ++ " dollars"]])

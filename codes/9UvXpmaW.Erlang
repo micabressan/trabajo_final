@@ -1,0 +1,11 @@
+def show(conn, %{"id" => id}) do
+    key = "Account.show:" <> id
+    case Redis.get(key) do
+      cache ->
+        account = :erlang.binary_to_term(cache)
+      _ ->
+        account = Repo.get!(Account, id)
+        Redis.set(key, :erlang.term_to_binary(account))
+    end
+    render conn, "show.json", %{data: account}
+  end

@@ -1,0 +1,33 @@
+#!/usr/bin/python
+# A script to download images from rule34.paheal.net
+
+
+import sys, getopt
+
+print ( 'Number of args: %s arguments.' % len(sys.argv) )
+print ( 'Argument list: %s' % str(sys.argv) )
+
+def main(argv):
+	rss = ""
+	page = ""
+	tags = ""
+	try:
+		opts, args = getopt.getopt(argv[1:],"hr:p:t:",["help","rss=","page=","tag="])
+	except getopt.GetoptError:
+		print ("paheal-downloader.py: Unrecognized option, try '--help' for more information")
+		sys.exit(2)
+        print ( "hello" )
+	for opt, arg in opts:
+                if opt == "-h" or opt == "--help":
+                
+			print ("Usage: paheal-downloader.py -hrpt")
+			print ("Download batch images from the site rule34.paheal.net")
+			print (" ")
+			print ("-h, --help	Lists this help.")
+			print ("-r, --rss=<link>	RSS link for this script to pull image links from (to be used by itself). (Example: http://rule34.paheal.net/rss/images/Amy_Rose/1)")
+			print ("-t, --tag=<tag>	Tag to be used, used together with -p. (example: Amy_Rose)")
+			print ("-p, --page=<num> Page number to be used, used together with -t.")
+
+
+if __name__ == "__main__":
+    main(sys.argv)

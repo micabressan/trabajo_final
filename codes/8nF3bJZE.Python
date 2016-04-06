@@ -1,0 +1,34 @@
+#testgdb-gdb.py
+import sys;
+sys.path.append("/home/duckz/deleme");
+
+import gdb;
+import testgdb;
+testgdb.register_printers(gdb.current_objfile());
+
+
+#testgdb.py
+import gdb;
+import re;
+
+class PrintB:
+	def __init__(self, val):
+		self.val = val;
+
+	def to_string(self):
+		tag = str(self.val.type.tag);
+		num = str(self.val['m_num']);
+		sz = str(self.val['m_floats'].template_argument(1));
+		return "{0}: num: ({1})<{2}>".format(tag, sz, num);
+
+def get_class_for_type(val):
+	t = val.type.tag;
+	if None == t:
+		return None;
+
+	if "B" == t:
+		return PrintB(val);
+	return None;
+
+def register_printers(objfile):
+	objfile.pretty_printers.append(get_class_for_type);

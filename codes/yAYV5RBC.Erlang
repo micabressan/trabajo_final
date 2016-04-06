@@ -1,0 +1,29 @@
+%I think, after Prolog, it becomes really easy
+
+%exercise one (the size of the string)
+
+-module(size_of_str).
+-export([the_size/1]).
+
+the_size([_]) -> 1;
+the_size([_|Tail]) -> 1 + the_size(Tail).
+
+%exercise two (count until ten)
+
+-module(count_to).
+-export([to_ten/0, count_to_ten/1]).
+
+
+count_to_ten(1) -> io:format("~p~n", [1]);
+count_to_ten(N) -> count_to_ten(N-1), io:format("~p~n", [N]).
+
+
+to_ten() -> count_to_ten(10).
+
+%exercise three (success and error message)
+
+-module(error_or_success).
+-export([print/1]).
+ 
+print(success) -> "success";
+print({error, Msg}) -> "error: " ++ Msg.

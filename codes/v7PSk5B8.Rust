@@ -1,0 +1,6 @@
+enum Direction { NORTH, SOUTH, EAST, WEST }
+static DIRECTIONS: [Direction, ..4] = [NORTH, SOUTH, EAST, WEST];
+
+for dir in DIRECTIONS.iter() {
+    println!("{:?}", dir);
+}

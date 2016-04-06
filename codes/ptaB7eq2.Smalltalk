@@ -1,0 +1,14 @@
+[Use trigger "ColumnSelect" on 2-column v_slow_table]
+(~v_slow_table/stationList getSelectedColHeader == 0)
+ifTrue: [
+	~v_slow_table/stationList setOrderBy: "description";
+        ]
+ifFalse: [
+	(~v_button/ms isPressed)
+	ifTrue: [
+		~v_slow_table/stationList setOrderBy: "number";
+	        ]
+	ifFalse: [
+		~v_slow_table/stationList setOrderBy: "name";
+	         ]
+]

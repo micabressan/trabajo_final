@@ -1,0 +1,1 @@
+printf '%06d\n' $(bc <<< "ibase=10; obase=2; $(date +%S)") | sed -e 's/0/\${color} •/g' -e 's/1/${color1} •/g'

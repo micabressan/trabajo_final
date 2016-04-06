@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections;
+
+public class InfiniteScrolling : MonoBehaviour {
+
+	public bool isClone;
+
+	private Renderer rend;
+	
+	void Start () {
+
+		// Get Components
+		rend = GetComponent<Renderer>();
+
+		// Make a clone! So I don't have to put them in manually!
+		if (!isClone) {
+			InfiniteScrolling clone = Instantiate (this.gameObject, new Vector2 (transform.position.x + GetComponent<Renderer>().bounds.size.x, transform.position.y), transform.rotation) as InfiniteScrolling;
+			clone.isClone = true;
+		}
+	}
+	
+	void Update () {
+		
+		// Leapfrog the two objects over each other!
+		if (transform.position.x <= CameraScript.mainCamera.xMin -rend.bounds.size.x) {
+			Vector3 newPosition = transform.position;
+			newPosition.x += rend.bounds.size.x * 2;
+			transform.position = newPosition;
+		}
+
+	}
+}

@@ -1,0 +1,20 @@
+{
+    "event": "getFollowers",
+    "body": {
+        "result": 1,
+        "followers": [
+            {
+                "userId": 25,
+                "source": "vk",
+                "remoteId": 13010366,
+                "firstName": "Вавилен",
+                "lastName": "Татарский",
+                "photo": "http://vk.com/1.jpg",
+                "rating": 0,
+                "followsCnt": 2,
+                "followersCnt": 1,
+                "_sV": 0
+            }
+        ]
+    }
+}

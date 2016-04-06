@@ -1,0 +1,61 @@
+> db.crosspromo_userdata.find({'loyalty_history.bbirds4': {$exists:true}}).pretty()
+{
+	"_id" : ObjectId("55d4707228e4098daefe8e33"),
+	"loyalty_history" : {
+		"muffinquest" : 0,
+		"bbirds4" : 210,
+		"fruitquest" : -350,
+		"lilquest" : 1500
+	},
+	"loyalty" : 0,
+	"bank" : {
+		"muffinquest" : 7000,
+		"bbirds4" : 26973,
+		"fruitquest" : 1650,
+		"lilquest" : 3500
+	},
+	"aliases" : {
+		"facebook" : {
+			"alias_name" : "1631423033800597"
+		},
+		"anonymous" : {
+			"alias_name" : [
+				"1AD027D9-32D2-446B-AF54-93B18C59600A"
+			]
+		}
+	},
+	"readed_actions" : [
+		ObjectId("5548ae9848254916f02cd57c"),
+		ObjectId("5548ae9848254916f02cd57b")
+	],
+	"references" : {
+		"fruitquest" : "bbirds4"
+	},
+	"available_actions" : [
+		ObjectId("55c208ecbc66e925518a73a5"),
+		ObjectId("5548ae9848254916f02cd57c")
+	]
+}
+{
+	"_id" : ObjectId("55d4763928e4098daefe8e89"),
+	"loyalty_history" : {
+		"bbirds4" : 272,
+		"lilquest" : 0,
+		"fruitquest" : 0,
+		"colorquest" : 0,
+		"muffinquest" : 0
+	},
+	"loyalty" : 0,
+	"bank" : {
+		"bbirds4" : 522,
+		"lilquest" : 2000,
+		"fruitquest" : 2000,
+		"colorquest" : 25000,
+		"muffinquest" : 7000
+	},
+	"aliases" : {
+		"anonymous" : {
+			"alias_name" : "5810CCB5-FE7A-4B8F-AB85-1B1D5D72AB95"
+		}
+	}
+}

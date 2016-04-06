@@ -1,0 +1,30 @@
+static mut l_debug_message: extern fn(Context: *mut libc::c_void,
+                                             level:   libc::c_int,
+                                             Message: *const libc::c_char) = ();
+
+#[no_mangle]
+pub extern "C"
+fn PluginStartup( CoreLibHandle: m64p::DynlibHandle,
+                  Context:       *mut libc::c_void,
+                  DebugCallback: Option<extern fn(Context: *mut libc::c_void,
+                                           level:   libc::c_int,
+                                           Message: *const libc::c_char)>)
+                  -> m64p::Error {
+    l_debug_message = match DebugCallback {
+        Some(f) => f,
+        None    => (),
+    };
+    unsafe {
+        l_debug_context = Some(Context);
+    }
+    return m64p::Error::Success;
+}
+
+Error:
+
+ expected `extern "C" fn(*mut libc::types::common::c95::c_void, i32, *const i8)`,
+    found `()`
+(expected fn pointer,
+    found ()) [E0308]
+src/lib.rs:54                                              Message: *const libc::c_char) = ();
+                                                                                           ^~

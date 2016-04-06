@@ -1,0 +1,29 @@
+class LinSpace v where
+  (.+.) :: v -> v -> v
+  abs2  :: v -> a
+ 
+data Vector a = Vector a a a deriving(Show)
+ 
+instance (Num a, Floating a) => LinSpace (Vector a) where
+ Vector x y z .+. Vector x2 y2 z2 = Vector (x+x2) (y+y2) (z+z2)
+ abs2 (Vector x y z) = x--sqrt (x*x + y*y + z*z)
+ 
+--
+--to co mi hlasi kompilator:
+--
+--sandbox.hs:28:25:
+--    Could not deduce (a ~ a1)
+--    from the context (Num a, Floating a)
+--      bound by the instance declaration at sandbox.hs:26:10-51
+--      ‘a’ is a rigid type variable bound by
+--          the instance declaration at sandbox.hs:26:10
+--      ‘a1’ is a rigid type variable bound by
+--           the type signature for abs' :: Vector a -> a1 at sandbox.hs:28:3
+--    Relevant bindings include
+--      z :: a (bound at sandbox.hs:28:20)
+--      y :: a (bound at sandbox.hs:28:18)
+--      x :: a (bound at sandbox.hs:28:16)
+--      abs' :: Vector a -> a1 (bound at sandbox.hs:28:3)
+--    In the expression: x
+--    In an equation for ‘abs'’: abs' (Vector x y z) = x
+--Failed, modules loaded: none.

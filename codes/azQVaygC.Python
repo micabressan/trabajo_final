@@ -1,0 +1,95 @@
+from datetime import datetime
+
+scale = 15
+labels = ["H", "H", "M", "M", "S", "S"]
+# set up a blank 'face'
+image = makeEmptyPicture(13*scale, 10*scale, black)
+
+def main():
+  tags(scale)
+  while true:
+    # continue until somebody says 'enough'
+    clock()
+      
+def digit(d, offset):
+  # display 'bit' according to time digit
+  if d == 1:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, red)
+  elif d == 2:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, red)
+    square(offset, 8*scale, black)
+  elif d == 3:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, red)
+    square(offset, 8*scale, red)
+  elif d == 4:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, red)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, black)
+  elif d == 5:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, red)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, red)
+  elif d == 6:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, red)
+    square(offset, 6*scale, red)
+    square(offset, 8*scale, black)
+  elif d == 7:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, red)
+    square(offset, 6*scale, red)
+    square(offset, 8*scale, red)
+  elif d == 8:
+    square(offset, 2*scale, red)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, black)
+  elif d == 9:
+    square(offset, 2*scale, red)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, red)
+  else:
+    square(offset, 2*scale, black)
+    square(offset, 4*scale, black)
+    square(offset, 6*scale, black)
+    square(offset, 8*scale, black)
+  
+def clock():
+  # get time from system clock
+  t = datetime.today()
+  # separate into individual digits
+  h1 = t.strftime("%I")[0]
+  h2 = t.strftime("%I")[1]
+  m1 = t.strftime("%M")[0]
+  m2 = t.strftime("%M")[1]
+  s1 = t.strftime("%S")[0]
+  s2 = t.strftime("%S")[1]
+  # call 'digit' function with parameters
+  digit(int(h1), 1*scale)
+  digit(int(h2), 3*scale)
+  digit(int(m1), 5*scale)
+  digit(int(m2), 7*scale)
+  digit(int(s1), 9*scale)
+  digit(int(s2), 11*scale)
+  
+def square(row, col, color):
+  # draw a 'bit' in the right place
+  addRectFilled(image, row, col, 1*scale, 1*scale, color)
+  repaint(image)
+  
+def tags(scale):
+  column = 1
+  style = makeStyle("ARIAL", plain, int(scale/1.5))
+  for name in range(0, len(labels)):
+    addTextWithStyle(image, (column * scale)+ scale/6, int(9.75 * scale), str(labels[name]), style, red)
+    column += 2

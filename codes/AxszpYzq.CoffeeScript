@@ -1,0 +1,12 @@
+class Header
+    constructor: (@element, @time) ->
+        @element.find '.dropdown'
+            .click (event) =>
+                if (!@element.hasClass 'dropped')
+                    height = @element.find '.items'
+                        .actual 'outerHeight'
+
+                    @element.stop().animate {height: height}, @time
+                else
+                    @element.stop().animate {height: 0}, @time
+module.exports = Header

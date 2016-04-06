@@ -1,0 +1,14 @@
+use std::ffi::CString;
+fn debug_message(level: m64p::MsgLevel, msg: &str) {
+
+    let c_msg = match CString::new(msg) {
+        CString(m) => m,
+        NulError   => return,
+    };
+}
+
+Error:
+
+src/lib.rs:46:9: 46:16 error: unresolved enum variant, struct or const `CString`
+src/lib.rs:46         CString(m) => m,
+                      ^~~~~~~

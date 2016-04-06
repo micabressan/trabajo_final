@@ -1,0 +1,124 @@
+// things that are missing from winapi-rs
+#![cfg(target_os = "windows")]
+#![allow(dead_code)]
+#![allow(non_snake_case)]
+
+use winapi::*;
+
+pub const DT_CENTER: UINT = 0x00000001;
+pub const DT_VCENTER: UINT = 0x00000004;
+pub const DT_SINGLELINE: UINT = 0x00000020;
+
+pub const LR_DEFAULTCOLOR:     UINT = 0x00000000;
+pub const LR_MONOCHROME:       UINT = 0x00000001;
+pub const LR_LOADFROMFILE:     UINT = 0x00000010;
+pub const LR_LOADTRANSPARENT:  UINT = 0x00000020;
+pub const LR_DEFAULTSIZE:      UINT = 0x00000040;
+pub const LR_LOADMAP3DCOLORS:  UINT = 0x00001000;
+pub const LR_CREATEDIBSECTION: UINT = 0x00002000;
+pub const LR_SHARED:            UINT = 0x00008000;
+
+pub const IMAGE_ICON: UINT = 1;    // Loads an icon.
+pub const IMAGE_BITMAP: UINT = 0;  // Loads a bitmap.
+pub const IMAGE_CURSOR: UINT = 2;  // Loads a cursor.
+
+pub const SB_LINEUP: c_int = 0;
+pub const SB_LINELEFT: c_int = 0;
+pub const SB_LINEDOWN: c_int = 1;
+pub const SB_LINERIGHT: c_int = 1;
+pub const SB_PAGEUP: c_int = 2;
+pub const SB_PAGELEFT: c_int = 2;
+pub const SB_PAGEDOWN: c_int = 3;
+pub const SB_PAGERIGHT: c_int = 3;
+pub const SB_THUMBPOSITION: c_int = 4;
+pub const SB_THUMBTRACK: c_int = 5;
+pub const SB_TOP: c_int = 6;
+pub const SB_LEFT: c_int = 6;
+pub const SB_BOTTOM: c_int = 7;
+pub const SB_RIGHT: c_int = 7;
+pub const SB_ENDSCROLL: c_int = 8;
+
+pub const SW_ERASE: UINT = 0x0004;
+pub const SW_INVALIDATE: UINT = 0x0002;
+pub const SW_SCROLLCHILDREN: UINT = 0x0001;
+pub const SW_SMOOTHSCROLL: UINT = 0x0010;
+
+pub const SIF_RANGE: UINT = 0x0001;
+pub const SIF_PAGE: UINT = 0x0002;
+pub const SIF_POS: UINT = 0x0004;
+pub const SIF_DISABLENOSCROLL: UINT = 0x0008;
+pub const SIF_TRACKPOS: UINT = 0x0010;
+pub const SIF_ALL: UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
+
+pub const WHITE_BRUSH:  c_int = 0;
+pub const LTGRAY_BRUSH: c_int = 1;
+pub const GRAY_BRUSH:   c_int = 2;
+pub const DKGRAY_BRUSH: c_int = 3;
+pub const BLACK_BRUSH:  c_int = 4;
+pub const NULL_BRUSH:   c_int = 5;
+pub const HOLLOW_BRUSH: c_int = 5;
+pub const WHITE_PEN:    c_int = 6;
+pub const BLACK_PEN:    c_int = 7;
+pub const NULL_PEN:     c_int = 8;
+pub const OEM_FIXED_FONT:  c_int = 10;
+pub const ANSI_FIXED_FONT: c_int = 11;
+pub const ANSI_VAR_FONT:   c_int = 12;
+pub const SYSTEM_FONT:     c_int = 13;
+pub const DEVICE_DEFAULT_FONT: c_int = 14;
+pub const DEFAULT_PALETTE:     c_int = 15;
+pub const SYSTEM_FIXED_FONT:   c_int = 16;
+
+pub const TA_NOUPDATECP: UINT = 0x0000;
+pub const TA_UPDATECP: UINT = 0x0001;
+pub const TA_LEFT: UINT = 0x0000;
+pub const TA_RIGHT: UINT = 0x0002;
+pub const TA_CENTER: UINT = 0x0006;
+pub const TA_TOP: UINT = 0x0000;
+pub const TA_BOTTOM: UINT = 0x0008;
+pub const TA_BASELINE: UINT = 0x0018;
+
+pub const TMPF_FIXED_PITCH: BYTE = 0x01;
+pub const TMPF_VECTOR: BYTE = 0x02;
+pub const TMPF_DEVICE: BYTE = 0x08;
+pub const TMPF_TRUETYPE: BYTE = 0x04;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TEXTMETRICW {
+    pub tmHeight: LONG,
+    pub tmAscent: LONG,
+    pub tmDescent: LONG,
+    pub tmInternalLeading: LONG,
+    pub tmExternalLeading: LONG,
+    pub tmAveCharWidth: LONG,
+    pub tmMaxCharWidth: LONG,
+    pub tmWeight: LONG,
+    pub tmOverhang: LONG,
+    pub tmDigitizedAspectX: LONG,
+    pub tmDigitizedAspectY: LONG,
+    pub tmFirstChar: WCHAR,
+    pub tmLastChar: WCHAR,
+    pub tmDefaultChar: WCHAR,
+    pub tmBreakChar: WCHAR,
+    pub tmItalic: BYTE,
+    pub tmUnderlined: BYTE,
+    pub tmStruckOut: BYTE,
+    pub tmPitchAndFamily: BYTE,
+    pub tmCharSet: BYTE,
+}
+pub type PTEXTMETRICW = *mut TEXTMETRICW;
+pub type NPTEXTMETRICW = *mut TEXTMETRICW;
+pub type LPTEXTMETRICW = *mut TEXTMETRICW;
+#[link(name = "gdi32")]
+extern "system" {
+    pub fn GetTextMetricsW(hdc: HDC, lptm: LPTEXTMETRICW) -> BOOL;
+    pub fn SetTextAlign(hdc: HDC, fMode: UINT) -> UINT;
+    pub fn SetScrollInfo(hwnd: HWND, fnBar: c_int, lpsi: LPCSCROLLINFO, fRedraw: BOOL) -> c_int;
+    pub fn GetScrollInfo(hwnd: HWND, fnBar: c_int, lpsi: LPCSCROLLINFO) -> BOOL;
+}
+
+pub fn GET_WHEEL_DELTA_WPARAM(wparam: WPARAM) -> c_short {
+    HIWORD(wparam as DWORD) as c_short
+}
+pub fn GET_KEYSTATE_WPARAM(wparam: WPARAM) -> c_int {
+    LOWORD(wparam as DWORD) as c_short as c_int
+}

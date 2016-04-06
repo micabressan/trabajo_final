@@ -1,0 +1,16 @@
+{-# LANGUAGE OverloadedStrings #-}
+import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 (ByteString)
+
+fizzBuzz :: Int -> ByteString
+fizzBuzz x
+    | mod3 && mod5 = "FizzBuzz"
+    | mod3 = "Fizz"
+    | mod5 = "Buzz"
+    | otherwise = B.pack $ show x
+    where
+        mod3 = x `mod` 3 == 0
+        mod5 = x `mod` 5 == 0
+
+main :: IO ()
+main = B.putStr $ B.intercalate "\n" $ map fizzBuzz [1..100]

@@ -1,0 +1,6 @@
+if (spaceX == 3){
+                Console.WriteLine("FIRE");
+            }
+            else{
+                Console.WriteLine("HOLD");
+            }

@@ -1,0 +1,16 @@
+(ldb/db-rel mothero parent child)
+(ldb/db-rel fathero parent child)
+
+(defn parento [parent child]
+  (l/conde [(fathero parent child)]
+           [(mothero parent child)]))
+
+(defn ancestoro [ancestor child]
+  (l/conde [(parento ancestor child)]
+
+           ;; FIXME: this blows the stack
+           ;; NOTE: this is an XOR rather than an inclusive OR
+           ;;       maybe conde is not the right one?
+           [(l/fresh [a]
+              (ancestoro a child)
+              (parento ancestor a))]))

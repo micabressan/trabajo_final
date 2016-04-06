@@ -1,0 +1,10 @@
+Main
+
+While not queue.empty and elapsed time<19:
+    Wait
+Item = queue.get
+
+Worker
+
+Queue.put()
+Notifyall()

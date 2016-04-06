@@ -1,0 +1,51 @@
+#chat_box {
+  -webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  display: inline-block;
+  position: absolute;
+  width: 300px;
+  height: 100px;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-animation-name: fadeout;
+  -webkit-animation-duration: 5s; /* 10 = 5 visible + 5 fading */
+  animation-name: fadeout;
+  animation-duration: 10s;
+}
+::-webkit-scrollbar {
+  visibility: hidden;
+}
+body {
+  background:rgba(0,0,0,0.95);
+  margin: 0px;
+  overflow: hidden;
+  
+}
+#adDisplay { display: none; }
+img {
+  width: 100%;
+}
+.chat_line {
+  font-size: 15px;
+  line-height: 18px;
+  opacity: .9 !important;
+}
+.chat_line .nick {
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #000;
+}
+.chat_line .message {
+  color: #fff;
+  word-break: break-word !important;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+@-webkit-keyframes fadeout {
+    0% {opacity: 1;} /* show chat for 5 seconds */
+    75% {opacity: 1;} /* fade for 5 seconds */
+    100% {opacity: 0;} /* hidden */
+} 
+@keyframes fadeout {
+    0% {opacity: 1;} /* show chat for 5 seconds */
+    75% {opacity: 1;} /* fade for 5 seconds */
+    100% {opacity: 0;} /* hidden */
+}

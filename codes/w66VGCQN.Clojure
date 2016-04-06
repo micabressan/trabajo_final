@@ -1,0 +1,8 @@
+(defn insert! [t args n & [keys]]
+    (let [val     (n args)
+	  new-ins {n val}
+          prepared-values     (destruct-args new-ins args keys)]
+	    (jdbc/query db-spec (sql/select * t (sql/where {n val})) 
+	     :result-set-fn #(if (empty? %1) 
+                                 (jdbc/insert! db-spec t prepared-values)
+                                 (jdbc/update! db-spec t prepared-values [(str (name n) " = ?") val])))))

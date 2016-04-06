@@ -1,0 +1,15 @@
+    public class JQueryNotAnimatingPageLoadingWait : IPageLoadingItem
+    {
+        public bool IsLoadingComplete()
+        {
+            try
+            {
+                return (bool)UIEnvironment.WebDriverAs<IJavaScriptExecutor>().ExecuteScript("return $('div:animated').length == 0;");
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (ex.Message.Contains("jQuery is not defined")) return true;
+                throw;
+            }
+        }
+    }

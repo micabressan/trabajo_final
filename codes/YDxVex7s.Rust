@@ -1,0 +1,28 @@
+extern crate ssh2;                                                       
+
+use ssh2::{ Session, Channel };                                          
+use std::net::TcpStream;                                                 
+                                                                         
+pub struct SSHBackend<'a> {                                              
+    sess: Box<Session>,                                                  
+    chan: Channel<'a>,                                                   
+    tcp: TcpStream,                                                      
+}                                                                        
+                                                                         
+impl<'a> SSHBackend<'a> {                                                
+    pub fn new(host: &str) -> SSHBackend<'a> {                           
+        let mut session = Box::new(Session::new().unwrap());             
+        let stream = TcpStream::connect(host).unwrap();                  
+        session.handshake(&stream);                                      
+        session.userauth_password("roblabla", "robin9112");              
+        {                                                                
+            let mut channel = session.channel_session().unwrap();        
+            channel.request_pty("xterm-256color", None, None).unwrap();  
+            SSHBackend { sess: session, chan: channel, tcp: stream }     
+        }                                                                
+    }                                                                    
+}                                                                        
+                                                                         
+fn main() {                                                              
+    SSHBackend::new("127.0.0.1:22");                                     
+}

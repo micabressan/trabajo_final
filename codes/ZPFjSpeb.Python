@@ -1,0 +1,7 @@
+    def _dvr_external_network_removed(self, port):
+        snat_interface = self.get_snat_int_device_name(port['id'])
+        ns_name = self.snat_namespace.name
+        prefix = dvr_snat_ns.SNAT_INT_DEV_PREFIX
+        if ip_lib.device_exists(snat_interface, namespace=ns_name):
+            self.driver.unplug(snat_interface, namespace=ns_name,
+                               prefix=prefix)

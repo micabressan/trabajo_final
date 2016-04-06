@@ -1,0 +1,57 @@
+#region MonsterItems 
+                case 721278: // By HaMaDa ShaDow :) TorNaDo TeaM xD
+                    {
+                        if (client.Entity.MapID == 1002 || client.Map.BaseID == 1020 || client.Entity.MapID == 1000 || client.Entity.MapID == 1011 || client.Entity.MapID == 1015 || client.Entity.MapID == 1762 || client.Entity.MapID == 2056)
+                        {
+
+
+                            Database.MonsterInformation monster = new HarryPotter.Database.MonsterInformation();
+                            // monster.Boss = true;
+                            monster.Hitpoints = 50000000; // بص هنـا
+                            monster.Level = 200;
+                            monster.Mesh = 208;
+                            monster.Name = "SnowBanshee";  // هنا هغير اسم الوحش 
+                            monster.MaxAttack = 1000;
+                            monster.AttackRange = 10;
+                            monster.AttackType = 2;
+                            monster.SpellID = 10304;
+                            monster.AttackSpeed = 3000;
+                            monster.ViewRange = 5;
+                            monster.MoveSpeed = 500;
+                            monster.RunSpeed = 500;
+                            monster.MinAttack = 1000;
+
+                            Game.Entity entity = new Game.Entity(Game.EntityFlag.Monster, false);
+                            entity.MapObjType = Game.MapObjectType.Monster;
+                            entity.MonsterInfo = monster;
+                            entity.MonsterInfo.Owner = entity;
+                            entity.Name = "SnowBanshee"; // وهنا كمان 
+                            entity.MinAttack = monster.MinAttack;
+                            entity.MaxAttack = entity.MagicAttack = monster.MaxAttack;
+                            entity.Hitpoints = entity.MaxHitpoints = monster.Hitpoints;
+                            entity.Body = monster.Mesh;
+                            entity.Level = monster.Level;
+                            entity.Defence = 20000;
+                            entity.X = (ushort)(client.Entity.X - 2);
+                            entity.Y = (ushort)(client.Entity.Y - 2);
+                            entity.EntityFlag = HarryPotter.Game.EntityFlag.Monster;
+                            entity.UID = (uint)Kernel.Random.Next(500060, 500110);
+                            entity.MapID = client.Entity.MapID;
+                            entity.SendUpdates = true;
+                            client.Map.RemoveEntity(entity);
+                            Network.GamePackets._String stringPacket = new HarryPotter.Network.GamePackets._String(true);
+                            stringPacket.UID = monster.ID;
+                            stringPacket.Type = Network.GamePackets._String.Effect;
+                            stringPacket.Texts.Add("MBStandard");
+                            client.Map.AddEntity(entity);
+
+                            client.Inventory.Remove(item, Enums.ItemUse.Remove);
+                            break;
+                        }
+                        else
+                        {
+                            client.Send(new HarryPotter.Network.GamePackets.Message("You Can't open here", System.Drawing.Color.Red, 0x7dc));
+                            return;
+                        }
+                    }
+                #endregion

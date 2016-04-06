@@ -1,0 +1,1 @@
+document.cookie = a + "=" + textToBase64(b) + "; expires=" + (c ? c.toGMTString() : "") + "; path=/"

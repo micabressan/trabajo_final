@@ -1,0 +1,11 @@
+cts = new CancellationTokenSource();
+task = Task.Run(async () =>
+{
+    var token = cts.Token;
+    while (!token.IsCancellationRequested)
+    {
+        var delay = Task.Delay(period);
+        PublishMessages(token);
+        await delay;
+    }
+}, cts.Token);

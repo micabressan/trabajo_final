@@ -1,0 +1,7 @@
+method Trigger onmsg: msg
+begin
+
+   System spawn: "spawn_detach SR32Sys12h.exe /i /d /pE:\\Progra~1\\Telvent\\DNA\\XOS\\xos_elements\\displays\\custom\\Transco\\*.dxf";
+
+   ^true
+end

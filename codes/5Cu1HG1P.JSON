@@ -1,0 +1,3825 @@
+{
+ "displayFieldName": "DC_DIST",
+ "fieldAliases": {
+  "DC_DIST": "DC_DIST",
+  "SECTOR": "SECTOR",
+  "DISPATCH_DATE_TIME": "DISPATCH_DATE_TIME",
+  "DISPATCH_DATE": "DISPATCH_DATE",
+  "DISPATCH_TIME": "DISPATCH_TIME",
+  "DC_KEY": "DC_KEY",
+  "LOCATION_BLOCK": "LOCATION_BLOCK",
+  "UCR_GENERAL": "UCR_GENERAL",
+  "OBJECTID": "OBJECTID",
+  "TEXT_GENERAL_CODE": "TEXT_GENERAL_CODE",
+  "POINT_X": "POINT_X",
+  "POINT_Y": "POINT_Y",
+  "HOUR": "HOUR",
+  "ORIG_FID": "ORIG_FID"
+ },
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4269,
+  "latestWkid": 4269
+ },
+ "fields": [
+  {
+   "name": "DC_DIST",
+   "type": "esriFieldTypeString",
+   "alias": "DC_DIST",
+   "length": 2
+  },
+  {
+   "name": "SECTOR",
+   "type": "esriFieldTypeString",
+   "alias": "SECTOR",
+   "length": 1
+  },
+  {
+   "name": "DISPATCH_DATE_TIME",
+   "type": "esriFieldTypeDate",
+   "alias": "DISPATCH_DATE_TIME",
+   "length": 8
+  },
+  {
+   "name": "DISPATCH_DATE",
+   "type": "esriFieldTypeString",
+   "alias": "DISPATCH_DATE",
+   "length": 30
+  },
+  {
+   "name": "DISPATCH_TIME",
+   "type": "esriFieldTypeString",
+   "alias": "DISPATCH_TIME",
+   "length": 30
+  },
+  {
+   "name": "DC_KEY",
+   "type": "esriFieldTypeString",
+   "alias": "DC_KEY",
+   "length": 12
+  },
+  {
+   "name": "LOCATION_BLOCK",
+   "type": "esriFieldTypeString",
+   "alias": "LOCATION_BLOCK",
+   "length": 45
+  },
+  {
+   "name": "UCR_GENERAL",
+   "type": "esriFieldTypeString",
+   "alias": "UCR_GENERAL",
+   "length": 50
+  },
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID"
+  },
+  {
+   "name": "TEXT_GENERAL_CODE",
+   "type": "esriFieldTypeString",
+   "alias": "TEXT_GENERAL_CODE",
+   "length": 255
+  },
+  {
+   "name": "POINT_X",
+   "type": "esriFieldTypeDouble",
+   "alias": "POINT_X"
+  },
+  {
+   "name": "POINT_Y",
+   "type": "esriFieldTypeDouble",
+   "alias": "POINT_Y"
+  },
+  {
+   "name": "HOUR",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "HOUR"
+  },
+  {
+   "name": "ORIG_FID",
+   "type": "esriFieldTypeInteger",
+   "alias": "ORIG_FID"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437390360000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "11:06:00",
+    "DC_KEY": "201535061156",
+    "LOCATION_BLOCK": "5700 BLOCK N 20TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 151,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.154021810000003,
+    "POINT_Y": 40.042490870000002,
+    "HOUR": null,
+    "ORIG_FID": 125125678
+   },
+   "geometry": {
+    "x": -75.154021809999961,
+    "y": 40.042490874000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438769040000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "10:04:00",
+    "DC_KEY": "201517037554",
+    "LOCATION_BLOCK": "1400 BLOCK S BANCROFT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 156,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171897790000003,
+    "POINT_Y": 39.932300929999997,
+    "HOUR": null,
+    "ORIG_FID": 125126526
+   },
+   "geometry": {
+    "x": -75.171897786999978,
+    "y": 39.932300927000028
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438476120000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "00:42:00",
+    "DC_KEY": "201517036928",
+    "LOCATION_BLOCK": "1400 BLOCK S 16TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 160,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171383969999994,
+    "POINT_Y": 39.932274339999999,
+    "HOUR": null,
+    "ORIG_FID": 125127123
+   },
+   "geometry": {
+    "x": -75.171383971999944,
+    "y": 39.93227433800007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437575700000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "14:35:00",
+    "DC_KEY": "201517034699",
+    "LOCATION_BLOCK": "2200 BLOCK CROSS ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 169,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.182862740000004,
+    "POINT_Y": 39.932839999999999,
+    "HOUR": null,
+    "ORIG_FID": 125128143
+   },
+   "geometry": {
+    "x": -75.182862735999947,
+    "y": 39.932840003000081
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437582780000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "16:33:00",
+    "DC_KEY": "201525059902",
+    "LOCATION_BLOCK": "2900 BLOCK N PHILIP ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 170,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.134731630000005,
+    "POINT_Y": 39.994661069999999,
+    "HOUR": null,
+    "ORIG_FID": 125128145
+   },
+   "geometry": {
+    "x": -75.134731626999951,
+    "y": 39.994661070000063
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437757020000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "16:57:00",
+    "DC_KEY": "201502047820",
+    "LOCATION_BLOCK": "1100 BLOCK ENGLEWOOD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 172,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.072505939999999,
+    "POINT_Y": 40.053730829999999,
+    "HOUR": null,
+    "ORIG_FID": 125128155
+   },
+   "geometry": {
+    "x": -75.072505939999985,
+    "y": 40.053730832000042
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437557160000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "09:26:00",
+    "DC_KEY": "201507021207",
+    "LOCATION_BLOCK": "11000 BLOCK GREINER RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 190,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.033437849999999,
+    "POINT_Y": 40.118686480000001,
+    "HOUR": null,
+    "ORIG_FID": 125129072
+   },
+   "geometry": {
+    "x": -75.033437852999953,
+    "y": 40.118686480000065
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437638100000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "07:55:00",
+    "DC_KEY": "201517034810",
+    "LOCATION_BLOCK": "1300 BLOCK S MOLE ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 192,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.170394380000005,
+    "POINT_Y": 39.934021909999998,
+    "HOUR": null,
+    "ORIG_FID": 125129079
+   },
+   "geometry": {
+    "x": -75.170394374999944,
+    "y": 39.934021905000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438043040000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "00:24:00",
+    "DC_KEY": "201512059498",
+    "LOCATION_BLOCK": "6000 BLOCK BUIST AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 194,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.222657170000005,
+    "POINT_Y": 39.925059990000001,
+    "HOUR": null,
+    "ORIG_FID": 125129097
+   },
+   "geometry": {
+    "x": -75.222657165999976,
+    "y": 39.925059988000044
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "06",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438500600000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "07:30:00",
+    "DC_KEY": "201506036168",
+    "LOCATION_BLOCK": "300 BLOCK S CAMAC ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 197,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.162121409999997,
+    "POINT_Y": 39.945594149999998,
+    "HOUR": null,
+    "ORIG_FID": 125129113
+   },
+   "geometry": {
+    "x": -75.162121405999983,
+    "y": 39.94559415100008
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438678980000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "09:03:00",
+    "DC_KEY": "201519077790",
+    "LOCATION_BLOCK": "1700 BLOCK N CREIGHTON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 201,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.223222019999994,
+    "POINT_Y": 39.981388510000002,
+    "HOUR": null,
+    "ORIG_FID": 125129224
+   },
+   "geometry": {
+    "x": -75.223222016999955,
+    "y": 39.981388509000055
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438882440000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "17:34:00",
+    "DC_KEY": "201519078705",
+    "LOCATION_BLOCK": "5500 BLOCK LANSDOWNE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 205,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.231965410000001,
+    "POINT_Y": 39.976884370000001,
+    "HOUR": null,
+    "ORIG_FID": 125129243
+   },
+   "geometry": {
+    "x": -75.231965405999972,
+    "y": 39.976884366000036
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437583680000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "16:48:00",
+    "DC_KEY": "201526036718",
+    "LOCATION_BLOCK": "2600 BLOCK FRANKFORD AVE 1",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 219,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.123851040000005,
+    "POINT_Y": 39.985398439999997,
+    "HOUR": null,
+    "ORIG_FID": 125130942
+   },
+   "geometry": {
+    "x": -75.123851034999973,
+    "y": 39.985398437000072
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437451020000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "03:57:00",
+    "DC_KEY": "201502046901",
+    "LOCATION_BLOCK": "2200 BLOCK COTTMAN AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 222,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.061658390000005,
+    "POINT_Y": 40.048699730000003,
+    "HOUR": null,
+    "ORIG_FID": 125131280
+   },
+   "geometry": {
+    "x": -75.061658393999949,
+    "y": 40.048699727000042
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438720740000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "20:39:00",
+    "DC_KEY": "201502050404",
+    "LOCATION_BLOCK": "7400 BLOCK OXFORD AVE 2",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 235,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.083464149999998,
+    "POINT_Y": 40.063912420000001,
+    "HOUR": null,
+    "ORIG_FID": 125131785
+   },
+   "geometry": {
+    "x": -75.083464144999937,
+    "y": 40.063912422000044
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438952100000,
+    "DISPATCH_DATE": "2015-08-07",
+    "DISPATCH_TIME": "12:55:00",
+    "DC_KEY": "201502051081",
+    "LOCATION_BLOCK": "2400 BLOCK HARTEL AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 239,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.050950520000001,
+    "POINT_Y": 40.053313860000003,
+    "HOUR": null,
+    "ORIG_FID": 125131794
+   },
+   "geometry": {
+    "x": -75.050950521999937,
+    "y": 40.053313863000028
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "05",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437499020000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "17:17:00",
+    "DC_KEY": "201505012488",
+    "LOCATION_BLOCK": "7800 BLOCK RIDGE AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 260,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.236052409999999,
+    "POINT_Y": 40.053757619999999,
+    "HOUR": null,
+    "ORIG_FID": 125132907
+   },
+   "geometry": {
+    "x": -75.236052410999946,
+    "y": 40.053757615000052
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439134860000,
+    "DISPATCH_DATE": "2015-08-09",
+    "DISPATCH_TIME": "15:41:00",
+    "DC_KEY": "201514064098",
+    "LOCATION_BLOCK": "300 BLOCK W JOHNSON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 264,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.187876209999999,
+    "POINT_Y": 40.04032445,
+    "HOUR": null,
+    "ORIG_FID": 125132922
+   },
+   "geometry": {
+    "x": -75.187876207999977,
+    "y": 40.040324448000035
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437889860000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "05:51:00",
+    "DC_KEY": "201526037363",
+    "LOCATION_BLOCK": "2000 BLOCK FRANKFORD AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 266,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.130378089999994,
+    "POINT_Y": 39.97860275,
+    "HOUR": null,
+    "ORIG_FID": 125133378
+   },
+   "geometry": {
+    "x": -75.13037808699994,
+    "y": 39.978602746000035
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437429240000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "21:54:00",
+    "DC_KEY": "201517034393",
+    "LOCATION_BLOCK": "1600 BLOCK S ROSEWOOD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 917,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.169325790000002,
+    "POINT_Y": 39.929724159999999,
+    "HOUR": null,
+    "ORIG_FID": 125125681
+   },
+   "geometry": {
+    "x": -75.169325787999981,
+    "y": 39.929724157000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "18",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437322800000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "16:20:00",
+    "DC_KEY": "201518046212",
+    "LOCATION_BLOCK": "4200 BLOCK BALTIMORE AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 943,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.207448139999997,
+    "POINT_Y": 39.949739510000001,
+    "HOUR": null,
+    "ORIG_FID": 125128131
+   },
+   "geometry": {
+    "x": -75.207448143999954,
+    "y": 39.94973950800005
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439228280000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "17:38:00",
+    "DC_KEY": "201515078604",
+    "LOCATION_BLOCK": "3200 BLOCK KNORR ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 946,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.052517010000003,
+    "POINT_Y": 40.03323821,
+    "HOUR": null,
+    "ORIG_FID": 125128242
+   },
+   "geometry": {
+    "x": -75.052517008999985,
+    "y": 40.033238212000072
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438479900000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "01:45:00",
+    "DC_KEY": "201514061815",
+    "LOCATION_BLOCK": "200 BLOCK W TULPEHOCKEN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 954,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.185156500000005,
+    "POINT_Y": 40.037225560000003,
+    "HOUR": null,
+    "ORIG_FID": 125128958
+   },
+   "geometry": {
+    "x": -75.185156501999984,
+    "y": 40.03722556300005
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437537300000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "03:55:00",
+    "DC_KEY": "201503045048",
+    "LOCATION_BLOCK": "1100 BLOCK WINTON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 959,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.164647000000002,
+    "POINT_Y": 39.922966539999997,
+    "HOUR": null,
+    "ORIG_FID": 125129070
+   },
+   "geometry": {
+    "x": -75.164646994999941,
+    "y": 39.922966540000061
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437685560000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "21:06:00",
+    "DC_KEY": "201515071805",
+    "LOCATION_BLOCK": "3200 BLOCK LONGSHORE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 960,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.052132459999996,
+    "POINT_Y": 40.034927260000003,
+    "HOUR": null,
+    "ORIG_FID": 125129081
+   },
+   "geometry": {
+    "x": -75.052132459999939,
+    "y": 40.034927262000053
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438527960000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "15:06:00",
+    "DC_KEY": "201512061165",
+    "LOCATION_BLOCK": "6300 BLOCK REEDLAND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 968,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.228878300000005,
+    "POINT_Y": 39.924068570000003,
+    "HOUR": null,
+    "ORIG_FID": 125129218
+   },
+   "geometry": {
+    "x": -75.228878303999977,
+    "y": 39.924068570000031
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437130200000,
+    "DISPATCH_DATE": "2015-07-17",
+    "DISPATCH_TIME": "10:50:00",
+    "DC_KEY": "201503044080",
+    "LOCATION_BLOCK": "1600 BLOCK E PASSYUNK AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 974,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.164036839999994,
+    "POINT_Y": 39.929454300000003,
+    "HOUR": null,
+    "ORIG_FID": 125129526
+   },
+   "geometry": {
+    "x": -75.164036840999984,
+    "y": 39.929454302000067
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438730340000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "23:19:00",
+    "DC_KEY": "201515076513",
+    "LOCATION_BLOCK": "3400 BLOCK TYSON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 977,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.04736613,
+    "POINT_Y": 40.034103270000003,
+    "HOUR": null,
+    "ORIG_FID": 125129773
+   },
+   "geometry": {
+    "x": -75.047366130999933,
+    "y": 40.03410327000006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439020920000,
+    "DISPATCH_DATE": "2015-08-08",
+    "DISPATCH_TIME": "08:02:00",
+    "DC_KEY": "201525065054",
+    "LOCATION_BLOCK": "2900 BLOCK N HOWARD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 979,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.131234250000006,
+    "POINT_Y": 39.994130429999998,
+    "HOUR": null,
+    "ORIG_FID": 125130287
+   },
+   "geometry": {
+    "x": -75.131234246999952,
+    "y": 39.994130426000027
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437577260000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "15:01:00",
+    "DC_KEY": "201522065489",
+    "LOCATION_BLOCK": "1500 BLOCK N 16TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 986,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.161501549999997,
+    "POINT_Y": 39.977182759999998,
+    "HOUR": null,
+    "ORIG_FID": 125130941
+   },
+   "geometry": {
+    "x": -75.161501553999983,
+    "y": 39.977182762000041
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437678180000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "19:03:00",
+    "DC_KEY": "201515071750",
+    "LOCATION_BLOCK": "4300 BLOCK PRINCETON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 987,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.042122559999996,
+    "POINT_Y": 40.031786920000002,
+    "HOUR": null,
+    "ORIG_FID": 125130943
+   },
+   "geometry": {
+    "x": -75.042122561999975,
+    "y": 40.03178691800008
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437212280000,
+    "DISPATCH_DATE": "2015-07-18",
+    "DISPATCH_TIME": "09:38:00",
+    "DC_KEY": "201524067174",
+    "LOCATION_BLOCK": "2200 BLOCK E TIOGA ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 988,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.100736260000005,
+    "POINT_Y": 39.993755530000001,
+    "HOUR": null,
+    "ORIG_FID": 125131154
+   },
+   "geometry": {
+    "x": -75.100736254999958,
+    "y": 39.993755533000069
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438511460000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "10:31:00",
+    "DC_KEY": "201524072633",
+    "LOCATION_BLOCK": "3400 BLOCK ARAMINGO AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 991,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.099341899999999,
+    "POINT_Y": 39.992124410000002,
+    "HOUR": null,
+    "ORIG_FID": 125131331
+   },
+   "geometry": {
+    "x": -75.099341900999946,
+    "y": 39.992124406000073
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437308760000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "12:26:00",
+    "DC_KEY": "201514057529",
+    "LOCATION_BLOCK": "5900 BLOCK GREENE ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 994,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.180412829999995,
+    "POINT_Y": 40.036496030000002,
+    "HOUR": null,
+    "ORIG_FID": 125131638
+   },
+   "geometry": {
+    "x": -75.180412828999977,
+    "y": 40.036496026000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438590900000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "08:35:00",
+    "DC_KEY": "201515075821",
+    "LOCATION_BLOCK": "7400 BLOCK EDMUND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1008,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.030965510000001,
+    "POINT_Y": 40.03022447,
+    "HOUR": null,
+    "ORIG_FID": 125131995
+   },
+   "geometry": {
+    "x": -75.030965511999966,
+    "y": 40.03022446500006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438603620000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "12:07:00",
+    "DC_KEY": "201514062128",
+    "LOCATION_BLOCK": "5900 BLOCK GERMANTOWN AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1010,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.176797199999996,
+    "POINT_Y": 40.038163109999999,
+    "HOUR": null,
+    "ORIG_FID": 125131999
+   },
+   "geometry": {
+    "x": -75.176797201999989,
+    "y": 40.03816310600007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439194980000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "08:23:00",
+    "DC_KEY": "201514064301",
+    "LOCATION_BLOCK": "6200 BLOCK WAYNE AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1013,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.187389089999996,
+    "POINT_Y": 40.036627619999997,
+    "HOUR": null,
+    "ORIG_FID": 125132232
+   },
+   "geometry": {
+    "x": -75.187389087999975,
+    "y": 40.036627620000047
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438680660000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "09:31:00",
+    "DC_KEY": "201524073205",
+    "LOCATION_BLOCK": "3500 BLOCK CEDAR ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1019,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.096640629999996,
+    "POINT_Y": 39.992865090000002,
+    "HOUR": null,
+    "ORIG_FID": 125132309
+   },
+   "geometry": {
+    "x": -75.096640628999978,
+    "y": 39.992865089000077
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437380160000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "08:16:00",
+    "DC_KEY": "201502046660",
+    "LOCATION_BLOCK": "1000 BLOCK TYSON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1679,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.078541060000006,
+    "POINT_Y": 40.051424539999999,
+    "HOUR": null,
+    "ORIG_FID": 125128134
+   },
+   "geometry": {
+    "x": -75.07854105499996,
+    "y": 40.051424541000074
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437126660000,
+    "DISPATCH_DATE": "2015-07-17",
+    "DISPATCH_TIME": "09:51:00",
+    "DC_KEY": "201517033611",
+    "LOCATION_BLOCK": "1300 BLOCK S CHADWICK ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1688,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171897329999993,
+    "POINT_Y": 39.934241810000003,
+    "HOUR": null,
+    "ORIG_FID": 125128850
+   },
+   "geometry": {
+    "x": -75.171897332999947,
+    "y": 39.934241814000075
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437269100000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "01:25:00",
+    "DC_KEY": "201514057455",
+    "LOCATION_BLOCK": "200 BLOCK W JOHNSON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1689,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.187308110000004,
+    "POINT_Y": 40.04101533,
+    "HOUR": null,
+    "ORIG_FID": 125128941
+   },
+   "geometry": {
+    "x": -75.187308108999957,
+    "y": 40.041015325000046
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437693540000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "23:19:00",
+    "DC_KEY": "201515071861",
+    "LOCATION_BLOCK": "2800 BLOCK GLENVIEW ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1694,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.058737219999998,
+    "POINT_Y": 40.037654379999999,
+    "HOUR": null,
+    "ORIG_FID": 125129082
+   },
+   "geometry": {
+    "x": -75.05873722399997,
+    "y": 40.037654384000064
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437844800000,
+    "DISPATCH_DATE": "2015-07-25",
+    "DISPATCH_TIME": "17:20:00",
+    "DC_KEY": "201502048057",
+    "LOCATION_BLOCK": "7100 BLOCK KINDRED ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1695,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.066064940000004,
+    "POINT_Y": 40.047078409999997,
+    "HOUR": null,
+    "ORIG_FID": 125129091
+   },
+   "geometry": {
+    "x": -75.066064936999965,
+    "y": 40.047078405000036
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438214520000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "00:02:00",
+    "DC_KEY": "201517036300",
+    "LOCATION_BLOCK": "1600 BLOCK S CARLISLE ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1699,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.16976339,
+    "POINT_Y": 39.929783389999997,
+    "HOUR": null,
+    "ORIG_FID": 125129205
+   },
+   "geometry": {
+    "x": -75.169763393999972,
+    "y": 39.929783385000064
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438650540000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "01:09:00",
+    "DC_KEY": "201512061582",
+    "LOCATION_BLOCK": "6300 BLOCK REEDLAND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1702,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.229074429999997,
+    "POINT_Y": 39.923817630000002,
+    "HOUR": null,
+    "ORIG_FID": 125129223
+   },
+   "geometry": {
+    "x": -75.229074429999969,
+    "y": 39.923817633000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437575100000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "14:25:00",
+    "DC_KEY": "201519072601",
+    "LOCATION_BLOCK": "5500 BLOCK LANSDOWNE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1704,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.232036930000007,
+    "POINT_Y": 39.976876699999998,
+    "HOUR": null,
+    "ORIG_FID": 125129537
+   },
+   "geometry": {
+    "x": -75.232036932999961,
+    "y": 39.976876699000059
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439226840000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "17:14:00",
+    "DC_KEY": "201517038714",
+    "LOCATION_BLOCK": "1600 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1712,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.172248339999996,
+    "POINT_Y": 39.935279909999998,
+    "HOUR": null,
+    "ORIG_FID": 125129793
+   },
+   "geometry": {
+    "x": -75.172248335999939,
+    "y": 39.935279910000077
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438335000000,
+    "DISPATCH_DATE": "2015-07-31",
+    "DISPATCH_TIME": "09:30:00",
+    "DC_KEY": "201522068291",
+    "LOCATION_BLOCK": "1400 BLOCK N 15TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1726,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.160342330000006,
+    "POINT_Y": 39.975014969999997,
+    "HOUR": null,
+    "ORIG_FID": 125131651
+   },
+   "geometry": {
+    "x": -75.160342330999981,
+    "y": 39.97501496600006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438384800000,
+    "DISPATCH_DATE": "2015-07-31",
+    "DISPATCH_TIME": "23:20:00",
+    "DC_KEY": "201514061381",
+    "LOCATION_BLOCK": "600 BLOCK PARK LA",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1731,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.191966239999999,
+    "POINT_Y": 40.034233329999999,
+    "HOUR": null,
+    "ORIG_FID": 125131777
+   },
+   "geometry": {
+    "x": -75.191966238999953,
+    "y": 40.034233330000063
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438156680000,
+    "DISPATCH_DATE": "2015-07-29",
+    "DISPATCH_TIME": "07:58:00",
+    "DC_KEY": "201525061957",
+    "LOCATION_BLOCK": "3300 BLOCK ROSEHILL ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1739,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.123823889999997,
+    "POINT_Y": 40.00009644,
+    "HOUR": null,
+    "ORIG_FID": 125131988
+   },
+   "geometry": {
+    "x": -75.123823892999951,
+    "y": 40.000096443000075
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439219880000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "15:18:00",
+    "DC_KEY": "201525065752",
+    "LOCATION_BLOCK": "3400 BLOCK N 02ND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1744,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.132490020000006,
+    "POINT_Y": 40.002304129999999,
+    "HOUR": null,
+    "ORIG_FID": 125132233
+   },
+   "geometry": {
+    "x": -75.132490015999963,
+    "y": 40.002304130000027
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439112360000,
+    "DISPATCH_DATE": "2015-08-09",
+    "DISPATCH_TIME": "09:26:00",
+    "DC_KEY": "201509034047",
+    "LOCATION_BLOCK": "2300 BLOCK FAIRMOUNT AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1757,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.175440739999999,
+    "POINT_Y": 39.967397679999998,
+    "HOUR": null,
+    "ORIG_FID": 125132734
+   },
+   "geometry": {
+    "x": -75.175440735999985,
+    "y": 39.967397679000044
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439377620000,
+    "DISPATCH_DATE": "2015-08-12",
+    "DISPATCH_TIME": "11:07:00",
+    "DC_KEY": "201522072263",
+    "LOCATION_BLOCK": "1400 BLOCK N 15TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1762,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.160288030000004,
+    "POINT_Y": 39.975287399999999,
+    "HOUR": null,
+    "ORIG_FID": 125132924
+   },
+   "geometry": {
+    "x": -75.160288032999972,
+    "y": 39.975287395000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438500600000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "07:30:00",
+    "DC_KEY": "201508029398",
+    "LOCATION_BLOCK": "12400 BLOCK MC NULTY RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1764,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -74.979087329999999,
+    "POINT_Y": 40.108002130000003,
+    "HOUR": null,
+    "ORIG_FID": 125133334
+   },
+   "geometry": {
+    "x": -74.979087327999935,
+    "y": 40.108002131000035
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438297920000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "23:12:00",
+    "DC_KEY": "201517036499",
+    "LOCATION_BLOCK": "1700 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 1768,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.172535789999998,
+    "POINT_Y": 39.935319509999999,
+    "HOUR": null,
+    "ORIG_FID": 125133725
+   },
+   "geometry": {
+    "x": -75.172535792999952,
+    "y": 39.935319510000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437472560000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "09:56:00",
+    "DC_KEY": "201507021093",
+    "LOCATION_BLOCK": "1000 BLOCK FOSTER ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2378,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.0211635,
+    "POINT_Y": 40.10844049,
+    "HOUR": null,
+    "ORIG_FID": 125128139
+   },
+   "geometry": {
+    "x": -75.021163495999986,
+    "y": 40.108440492000057
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "39",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437680280000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "19:38:00",
+    "DC_KEY": "201539059749",
+    "LOCATION_BLOCK": "1700 BLOCK W ALLEGHENY AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2380,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.159184859999996,
+    "POINT_Y": 40.00237757,
+    "HOUR": null,
+    "ORIG_FID": 125128152
+   },
+   "geometry": {
+    "x": -75.159184858999936,
+    "y": 40.002377566000064
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439114460000,
+    "DISPATCH_DATE": "2015-08-09",
+    "DISPATCH_TIME": "10:01:00",
+    "DC_KEY": "201522071374",
+    "LOCATION_BLOCK": "1900 BLOCK W GIRARD AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2383,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.168180640000003,
+    "POINT_Y": 39.972559670000003,
+    "HOUR": null,
+    "ORIG_FID": 125128233
+   },
+   "geometry": {
+    "x": -75.168180641999982,
+    "y": 39.972559665000063
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437208560000,
+    "DISPATCH_DATE": "2015-07-18",
+    "DISPATCH_TIME": "08:36:00",
+    "DC_KEY": "201535060523",
+    "LOCATION_BLOCK": "1800 BLOCK W ALBANUS ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2389,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.153812000000002,
+    "POINT_Y": 40.029479569999999,
+    "HOUR": null,
+    "ORIG_FID": 125128852
+   },
+   "geometry": {
+    "x": -75.153812001999938,
+    "y": 40.029479569000046
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437541800000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "05:10:00",
+    "DC_KEY": "201507021194",
+    "LOCATION_BLOCK": "10100 BLOCK VERREE RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2399,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.027131659999995,
+    "POINT_Y": 40.107985290000002,
+    "HOUR": null,
+    "ORIG_FID": 125129071
+   },
+   "geometry": {
+    "x": -75.027131657999973,
+    "y": 40.107985288000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437741120000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "12:32:00",
+    "DC_KEY": "201503045576",
+    "LOCATION_BLOCK": "1400 BLOCK S CLARION ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2400,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.166413349999999,
+    "POINT_Y": 39.932402490000001,
+    "HOUR": null,
+    "ORIG_FID": 125129085
+   },
+   "geometry": {
+    "x": -75.166413353999985,
+    "y": 39.932402490000072
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438596420000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "10:07:00",
+    "DC_KEY": "201515075834",
+    "LOCATION_BLOCK": "4700 BLOCK OAKMONT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2406,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.030312989999999,
+    "POINT_Y": 40.032583850000002,
+    "HOUR": null,
+    "ORIG_FID": 125129118
+   },
+   "geometry": {
+    "x": -75.030312986999945,
+    "y": 40.032583845000033
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438719480000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "20:18:00",
+    "DC_KEY": "201515076450",
+    "LOCATION_BLOCK": "3000 BLOCK LONGSHORE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2408,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.054305139999997,
+    "POINT_Y": 40.036024830000002,
+    "HOUR": null,
+    "ORIG_FID": 125129230
+   },
+   "geometry": {
+    "x": -75.054305135999982,
+    "y": 40.036024834000045
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438025640000,
+    "DISPATCH_DATE": "2015-07-27",
+    "DISPATCH_TIME": "19:34:00",
+    "DC_KEY": "201503046399",
+    "LOCATION_BLOCK": "1200 BLOCK GERRITT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2414,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.164566620000002,
+    "POINT_Y": 39.9320211,
+    "HOUR": null,
+    "ORIG_FID": 125129762
+   },
+   "geometry": {
+    "x": -75.164566621999938,
+    "y": 39.932021101000032
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438030500000,
+    "DISPATCH_DATE": "2015-07-27",
+    "DISPATCH_TIME": "20:55:00",
+    "DC_KEY": "201517035784",
+    "LOCATION_BLOCK": "1400 BLOCK S HICKS ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2415,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.170171080000003,
+    "POINT_Y": 39.932607410000003,
+    "HOUR": null,
+    "ORIG_FID": 125129763
+   },
+   "geometry": {
+    "x": -75.170171083999946,
+    "y": 39.932607412000038
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437496860000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "16:41:00",
+    "DC_KEY": "201509031050",
+    "LOCATION_BLOCK": "800 BLOCK N BROAD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2420,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.159886110000002,
+    "POINT_Y": 39.969658600000002,
+    "HOUR": null,
+    "ORIG_FID": 125129877
+   },
+   "geometry": {
+    "x": -75.159886104999941,
+    "y": 39.969658600000059
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437818940000,
+    "DISPATCH_DATE": "2015-07-25",
+    "DISPATCH_TIME": "10:09:00",
+    "DC_KEY": "201508028270",
+    "LOCATION_BLOCK": "4300 BLOCK BYBERRY RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2421,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -74.964763180000006,
+    "POINT_Y": 40.082301409999999,
+    "HOUR": null,
+    "ORIG_FID": 125130286
+   },
+   "geometry": {
+    "x": -74.964763182999945,
+    "y": 40.082301414000028
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437988320000,
+    "DISPATCH_DATE": "2015-07-27",
+    "DISPATCH_TIME": "09:12:00",
+    "DC_KEY": "201524070345",
+    "LOCATION_BLOCK": "3000 BLOCK RICHMOND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2428,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.103956539999999,
+    "POINT_Y": 39.981714349999997,
+    "HOUR": null,
+    "ORIG_FID": 125131352
+   },
+   "geometry": {
+    "x": -75.103956543999971,
+    "y": 39.981714349000072
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438260300000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "12:45:00",
+    "DC_KEY": "201522068025",
+    "LOCATION_BLOCK": "1400 BLOCK N 17TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2433,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.163530499999993,
+    "POINT_Y": 39.975259199999996,
+    "HOUR": null,
+    "ORIG_FID": 125131649
+   },
+   "geometry": {
+    "x": -75.163530496999954,
+    "y": 39.975259204000054
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438277160000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "17:26:00",
+    "DC_KEY": "201508029017",
+    "LOCATION_BLOCK": "10800 BLOCK ELLICOTT RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2434,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -74.978972729999995,
+    "POINT_Y": 40.07176578,
+    "HOUR": null,
+    "ORIG_FID": 125131650
+   },
+   "geometry": {
+    "x": -74.978972728999963,
+    "y": 40.071765780000078
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439436060000,
+    "DISPATCH_DATE": "2015-08-13",
+    "DISPATCH_TIME": "03:21:00",
+    "DC_KEY": "201522072518",
+    "LOCATION_BLOCK": "1200 BLOCK VALLEY FORGE PL",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2447,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.156143599999993,
+    "POINT_Y": 39.971637989999998,
+    "HOUR": null,
+    "ORIG_FID": 125131865
+   },
+   "geometry": {
+    "x": -75.15614360099994,
+    "y": 39.971637994000048
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438596900000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "10:15:00",
+    "DC_KEY": "201526039017",
+    "LOCATION_BLOCK": "N DELAWARE AV / E MONTGOMERY AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2449,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.126040889999999,
+    "POINT_Y": 39.969512260000002,
+    "HOUR": null,
+    "ORIG_FID": 125131996
+   },
+   "geometry": {
+    "x": -75.126040890999946,
+    "y": 39.969512257000076
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437145440000,
+    "DISPATCH_DATE": "2015-07-17",
+    "DISPATCH_TIME": "15:04:00",
+    "DC_KEY": "201525058417",
+    "LOCATION_BLOCK": "3400 BLOCK N AMERICAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2453,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.133899830000004,
+    "POINT_Y": 40.00381943,
+    "HOUR": null,
+    "ORIG_FID": 125132299
+   },
+   "geometry": {
+    "x": -75.133899833999976,
+    "y": 40.003819425000074
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439199180000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "09:33:00",
+    "DC_KEY": "201512063334",
+    "LOCATION_BLOCK": "2300 BLOCK S 62ND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 2468,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.229008999999991,
+    "POINT_Y": 39.926798089999998,
+    "HOUR": null,
+    "ORIG_FID": 125133336
+   },
+   "geometry": {
+    "x": -75.229008995999948,
+    "y": 39.926798088000055
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437849660000,
+    "DISPATCH_DATE": "2015-07-25",
+    "DISPATCH_TIME": "18:41:00",
+    "DC_KEY": "201535062939",
+    "LOCATION_BLOCK": "6100 BLOCK N 17TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3143,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.147780010000005,
+    "POINT_Y": 40.047381540000003,
+    "HOUR": null,
+    "ORIG_FID": 125125692
+   },
+   "geometry": {
+    "x": -75.147780006999938,
+    "y": 40.047381538000025
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "39",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438651380000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "01:23:00",
+    "DC_KEY": "201539062992",
+    "LOCATION_BLOCK": "3200 BLOCK N MARSTON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3146,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.174546309999997,
+    "POINT_Y": 40.005936179999999,
+    "HOUR": null,
+    "ORIG_FID": 125125705
+   },
+   "geometry": {
+    "x": -75.174546307999947,
+    "y": 40.005936179000059
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439467020000,
+    "DISPATCH_DATE": "2015-08-13",
+    "DISPATCH_TIME": "11:57:00",
+    "DC_KEY": "201535069624",
+    "LOCATION_BLOCK": "5600 BLOCK N 19TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3154,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.152851699999999,
+    "POINT_Y": 40.039503510000003,
+    "HOUR": null,
+    "ORIG_FID": 125126544
+   },
+   "geometry": {
+    "x": -75.152851702999953,
+    "y": 40.039503514000046
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439484660000,
+    "DISPATCH_DATE": "2015-08-13",
+    "DISPATCH_TIME": "16:51:00",
+    "DC_KEY": "201503050263",
+    "LOCATION_BLOCK": "900 BLOCK WINTON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3165,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.16158274,
+    "POINT_Y": 39.92246462,
+    "HOUR": null,
+    "ORIG_FID": 125128460
+   },
+   "geometry": {
+    "x": -75.161582740999961,
+    "y": 39.922464621000074
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437408120000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "16:02:00",
+    "DC_KEY": "201507020995",
+    "LOCATION_BLOCK": "600 BLOCK PARLIN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3169,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.027622649999998,
+    "POINT_Y": 40.110427170000001,
+    "HOUR": null,
+    "ORIG_FID": 125128943
+   },
+   "geometry": {
+    "x": -75.02762265299998,
+    "y": 40.110427173000062
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438514580000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "11:23:00",
+    "DC_KEY": "201507022361",
+    "LOCATION_BLOCK": "15000 BLOCK BARCALOW ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3180,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.011521979999998,
+    "POINT_Y": 40.134464260000001,
+    "HOUR": null,
+    "ORIG_FID": 125129217
+   },
+   "geometry": {
+    "x": -75.011521980999987,
+    "y": 40.134464257000047
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "39",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437923880000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "15:18:00",
+    "DC_KEY": "201539060573",
+    "LOCATION_BLOCK": "2800 BLOCK N WOODSTOCK ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3189,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.164316159999998,
+    "POINT_Y": 39.996891460000001,
+    "HOUR": null,
+    "ORIG_FID": 125129754
+   },
+   "geometry": {
+    "x": -75.164316157999963,
+    "y": 39.996891457000061
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438103580000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "17:13:00",
+    "DC_KEY": "201502048816",
+    "LOCATION_BLOCK": "7100 BLOCK KINDRED ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3192,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.066397339999995,
+    "POINT_Y": 40.04662304,
+    "HOUR": null,
+    "ORIG_FID": 125129766
+   },
+   "geometry": {
+    "x": -75.066397341999959,
+    "y": 40.046623035000039
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438879200000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "16:40:00",
+    "DC_KEY": "201515077098",
+    "LOCATION_BLOCK": "6700 BLOCK HEGERMAN ST 1",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3193,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.044432499999999,
+    "POINT_Y": 40.023841560000001,
+    "HOUR": null,
+    "ORIG_FID": 125129779
+   },
+   "geometry": {
+    "x": -75.044432498999981,
+    "y": 40.023841563000076
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437931200000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "17:20:00",
+    "DC_KEY": "201515072934",
+    "LOCATION_BLOCK": "3300 BLOCK FRIENDSHIP ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3210,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.047736920000006,
+    "POINT_Y": 40.037211390000003,
+    "HOUR": null,
+    "ORIG_FID": 125131645
+   },
+   "geometry": {
+    "x": -75.047736917999941,
+    "y": 40.03721138700007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438513140000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "10:59:00",
+    "DC_KEY": "201535065764",
+    "LOCATION_BLOCK": "5600 BLOCK OGONTZ AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3218,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.150080610000003,
+    "POINT_Y": 40.039005490000001,
+    "HOUR": null,
+    "ORIG_FID": 125131779
+   },
+   "geometry": {
+    "x": -75.15008060599996,
+    "y": 40.039005493000047
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439005140000,
+    "DISPATCH_DATE": "2015-08-08",
+    "DISPATCH_TIME": "03:39:00",
+    "DC_KEY": "201535067903",
+    "LOCATION_BLOCK": "2100 BLOCK W CHEW AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3219,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.156028989999996,
+    "POINT_Y": 40.041245420000003,
+    "HOUR": null,
+    "ORIG_FID": 125131847
+   },
+   "geometry": {
+    "x": -75.156028985999967,
+    "y": 40.041245417000027
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439231880000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "18:38:00",
+    "DC_KEY": "201512063493",
+    "LOCATION_BLOCK": "6300 BLOCK REEDLAND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3221,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.229074429999997,
+    "POINT_Y": 39.923817630000002,
+    "HOUR": null,
+    "ORIG_FID": 125131855
+   },
+   "geometry": {
+    "x": -75.229074429999969,
+    "y": 39.923817633000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439314500000,
+    "DISPATCH_DATE": "2015-08-11",
+    "DISPATCH_TIME": "17:35:00",
+    "DC_KEY": "201508030717",
+    "LOCATION_BLOCK": "11100 BLOCK DRAKE DR",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3223,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -74.97571653,
+    "POINT_Y": 40.078292269999999,
+    "HOUR": null,
+    "ORIG_FID": 125131860
+   },
+   "geometry": {
+    "x": -74.975716526999975,
+    "y": 40.078292265000073
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438455960000,
+    "DISPATCH_DATE": "2015-08-01",
+    "DISPATCH_TIME": "19:06:00",
+    "DC_KEY": "201517036844",
+    "LOCATION_BLOCK": "2000 BLOCK REED ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3224,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.178064300000003,
+    "POINT_Y": 39.934290789999999,
+    "HOUR": null,
+    "ORIG_FID": 125131991
+   },
+   "geometry": {
+    "x": -75.178064303999975,
+    "y": 39.934290790000034
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439600820000,
+    "DISPATCH_DATE": "2015-08-15",
+    "DISPATCH_TIME": "01:07:00",
+    "DC_KEY": "201517039695",
+    "LOCATION_BLOCK": "1600 BLOCK S 21ST ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3234,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.179991799999996,
+    "POINT_Y": 39.931464779999999,
+    "HOUR": null,
+    "ORIG_FID": 125132624
+   },
+   "geometry": {
+    "x": -75.17999180299995,
+    "y": 39.931464777000031
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438944600000,
+    "DISPATCH_DATE": "2015-08-07",
+    "DISPATCH_TIME": "10:50:00",
+    "DC_KEY": "201502051027",
+    "LOCATION_BLOCK": "1900 BLOCK COTTMAN AV 1",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3235,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.066482210000004,
+    "POINT_Y": 40.051387239999997,
+    "HOUR": null,
+    "ORIG_FID": 125132732
+   },
+   "geometry": {
+    "x": -75.066482205999989,
+    "y": 40.051387244000068
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438992960000,
+    "DISPATCH_DATE": "2015-08-08",
+    "DISPATCH_TIME": "00:16:00",
+    "DC_KEY": "201524074715",
+    "LOCATION_BLOCK": "3400 BLOCK CORAL ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3236,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.105194979999993,
+    "POINT_Y": 39.9951589,
+    "HOUR": null,
+    "ORIG_FID": 125132733
+   },
+   "geometry": {
+    "x": -75.105194983999979,
+    "y": 39.995158902000071
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "06",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438125180000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "23:13:00",
+    "DC_KEY": "201506035367",
+    "LOCATION_BLOCK": "400 BLOCK S FRONT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3239,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.143898010000001,
+    "POINT_Y": 39.941977600000001,
+    "HOUR": null,
+    "ORIG_FID": 125133321
+   },
+   "geometry": {
+    "x": -75.143898012999955,
+    "y": 39.941977601000076
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437465360000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "07:56:00",
+    "DC_KEY": "201503044828",
+    "LOCATION_BLOCK": "1100 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3871,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.163577129999993,
+    "POINT_Y": 39.933959620000003,
+    "HOUR": null,
+    "ORIG_FID": 125125682
+   },
+   "geometry": {
+    "x": -75.16357712699994,
+    "y": 39.933959619000063
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437675060000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "18:11:00",
+    "DC_KEY": "201509031434",
+    "LOCATION_BLOCK": "700 BLOCK N RINGGOLD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3872,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.177082389999995,
+    "POINT_Y": 39.969586470000003,
+    "HOUR": null,
+    "ORIG_FID": 125125687
+   },
+   "geometry": {
+    "x": -75.177082391999988,
+    "y": 39.96958647200006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438643700000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "23:15:00",
+    "DC_KEY": "201503048005",
+    "LOCATION_BLOCK": "2600 BLOCK S MARSHALL ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3874,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.158760009999995,
+    "POINT_Y": 39.915621479999999,
+    "HOUR": null,
+    "ORIG_FID": 125125704
+   },
+   "geometry": {
+    "x": -75.158760008999934,
+    "y": 39.915621477000059
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437152700000,
+    "DISPATCH_DATE": "2015-07-17",
+    "DISPATCH_TIME": "17:05:00",
+    "DC_KEY": "201519070777",
+    "LOCATION_BLOCK": "5400 BLOCK WOODBINE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3887,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.234341360000002,
+    "POINT_Y": 39.991944889999999,
+    "HOUR": null,
+    "ORIG_FID": 125128122
+   },
+   "geometry": {
+    "x": -75.234341358999984,
+    "y": 39.991944885000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437558780000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "09:53:00",
+    "DC_KEY": "201524068501",
+    "LOCATION_BLOCK": "3300 BLOCK FRANKFORD AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3892,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.106426920000004,
+    "POINT_Y": 39.994909110000002,
+    "HOUR": null,
+    "ORIG_FID": 125128140
+   },
+   "geometry": {
+    "x": -75.106426923999948,
+    "y": 39.994909108000058
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "06",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437945660000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "21:21:00",
+    "DC_KEY": "201506034987",
+    "LOCATION_BLOCK": "600 BLOCK LOMBARD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3903,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.152428700000002,
+    "POINT_Y": 39.943114250000001,
+    "HOUR": null,
+    "ORIG_FID": 125128949
+   },
+   "geometry": {
+    "x": -75.152428694999969,
+    "y": 39.943114253000033
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437915600000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "13:00:00",
+    "DC_KEY": "201535063164",
+    "LOCATION_BLOCK": "6500 BLOCK N BOUVIER ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3905,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.147190600000002,
+    "POINT_Y": 40.054289740000002,
+    "HOUR": null,
+    "ORIG_FID": 125128981
+   },
+   "geometry": {
+    "x": -75.147190603999945,
+    "y": 40.054289744000073
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437593640000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "19:34:00",
+    "DC_KEY": "201502047334",
+    "LOCATION_BLOCK": "2000 BLOCK HARTEL AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3909,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.059113030000006,
+    "POINT_Y": 40.057824089999997,
+    "HOUR": null,
+    "ORIG_FID": 125129074
+   },
+   "geometry": {
+    "x": -75.059113026999967,
+    "y": 40.057824092000033
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437741180000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "12:33:00",
+    "DC_KEY": "201512058378",
+    "LOCATION_BLOCK": "5300 BLOCK UPLAND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3911,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.219806829999996,
+    "POINT_Y": 39.938570730000002,
+    "HOUR": null,
+    "ORIG_FID": 125129086
+   },
+   "geometry": {
+    "x": -75.219806827999946,
+    "y": 39.938570727000069
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438635420000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "20:57:00",
+    "DC_KEY": "201515076074",
+    "LOCATION_BLOCK": "6800 BLOCK DITMAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3917,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.045639359999996,
+    "POINT_Y": 40.026306169999998,
+    "HOUR": null,
+    "ORIG_FID": 125129119
+   },
+   "geometry": {
+    "x": -75.045639363999953,
+    "y": 40.02630616600004
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438761480000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "07:58:00",
+    "DC_KEY": "201517037540",
+    "LOCATION_BLOCK": "1800 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3918,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.173980040000004,
+    "POINT_Y": 39.935517949999998,
+    "HOUR": null,
+    "ORIG_FID": 125129121
+   },
+   "geometry": {
+    "x": -75.173980040999936,
+    "y": 39.935517954000034
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438701360000,
+    "DISPATCH_DATE": "2015-08-04",
+    "DISPATCH_TIME": "15:16:00",
+    "DC_KEY": "201519077874",
+    "LOCATION_BLOCK": "5400 BLOCK WOODBINE AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3924,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.233762150000004,
+    "POINT_Y": 39.992213130000003,
+    "HOUR": null,
+    "ORIG_FID": 125129228
+   },
+   "geometry": {
+    "x": -75.233762148999972,
+    "y": 39.99221312700007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438798860000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "18:21:00",
+    "DC_KEY": "201515076764",
+    "LOCATION_BLOCK": "7100 BLOCK EDMUND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3925,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.035488560000005,
+    "POINT_Y": 40.027827260000002,
+    "HOUR": null,
+    "ORIG_FID": 125129236
+   },
+   "geometry": {
+    "x": -75.035488558999987,
+    "y": 40.027827259000048
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438809840000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "21:24:00",
+    "DC_KEY": "201524073808",
+    "LOCATION_BLOCK": "3100 BLOCK ARAMINGO AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3926,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.107353880000005,
+    "POINT_Y": 39.987945320000001,
+    "HOUR": null,
+    "ORIG_FID": 125129237
+   },
+   "geometry": {
+    "x": -75.107353883999963,
+    "y": 39.987945318000072
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438982520000,
+    "DISPATCH_DATE": "2015-08-07",
+    "DISPATCH_TIME": "21:22:00",
+    "DC_KEY": "201502051171",
+    "LOCATION_BLOCK": "7600 BLOCK SUMMERDALE AV 1",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3928,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.066681020000004,
+    "POINT_Y": 40.059499250000002,
+    "HOUR": null,
+    "ORIG_FID": 125129247
+   },
+   "geometry": {
+    "x": -75.066681015999961,
+    "y": 40.05949925300007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437989280000,
+    "DISPATCH_DATE": "2015-07-27",
+    "DISPATCH_TIME": "09:28:00",
+    "DC_KEY": "201509031974",
+    "LOCATION_BLOCK": "600 BLOCK N SYDENHAM ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3932,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.163224990000003,
+    "POINT_Y": 39.966112350000003,
+    "HOUR": null,
+    "ORIG_FID": 125129756
+   },
+   "geometry": {
+    "x": -75.163224988999957,
+    "y": 39.966112352000039
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438165260000,
+    "DISPATCH_DATE": "2015-07-29",
+    "DISPATCH_TIME": "10:21:00",
+    "DC_KEY": "201525061974",
+    "LOCATION_BLOCK": "3400 BLOCK G ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3933,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.114541560000006,
+    "POINT_Y": 40.001278309999996,
+    "HOUR": null,
+    "ORIG_FID": 125129768
+   },
+   "geometry": {
+    "x": -75.114541561999943,
+    "y": 40.001278311000078
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439042700000,
+    "DISPATCH_DATE": "2015-08-08",
+    "DISPATCH_TIME": "14:05:00",
+    "DC_KEY": "201509033942",
+    "LOCATION_BLOCK": "600 BLOCK N 16TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3936,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.16397594,
+    "POINT_Y": 39.96633637,
+    "HOUR": null,
+    "ORIG_FID": 125129785
+   },
+   "geometry": {
+    "x": -75.163975935999986,
+    "y": 39.966336367000054
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437623280000,
+    "DISPATCH_DATE": "2015-07-23",
+    "DISPATCH_TIME": "03:48:00",
+    "DC_KEY": "201515071514",
+    "LOCATION_BLOCK": "6900 BLOCK TORRESDALE AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3937,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.043252190000004,
+    "POINT_Y": 40.026004550000003,
+    "HOUR": null,
+    "ORIG_FID": 125130257
+   },
+   "geometry": {
+    "x": -75.043252189999976,
+    "y": 40.02600454800006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437581340000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "16:09:00",
+    "DC_KEY": "201524068611",
+    "LOCATION_BLOCK": "3500 BLOCK ARAMINGO AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3943,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.099265790000004,
+    "POINT_Y": 39.992265860000003,
+    "HOUR": null,
+    "ORIG_FID": 125131337
+   },
+   "geometry": {
+    "x": -75.099265786999979,
+    "y": 39.992265856000074
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438175160000,
+    "DISPATCH_DATE": "2015-07-29",
+    "DISPATCH_TIME": "13:06:00",
+    "DC_KEY": "201522067781",
+    "LOCATION_BLOCK": "1400 BLOCK N 16TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3957,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.161976210000006,
+    "POINT_Y": 39.974943369999998,
+    "HOUR": null,
+    "ORIG_FID": 125131773
+   },
+   "geometry": {
+    "x": -75.161976213999935,
+    "y": 39.974943365000058
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "14",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438532220000,
+    "DISPATCH_DATE": "2015-08-02",
+    "DISPATCH_TIME": "16:17:00",
+    "DC_KEY": "201514061942",
+    "LOCATION_BLOCK": "200 BLOCK W TULPEHOCKEN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3958,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.185156500000005,
+    "POINT_Y": 40.037225560000003,
+    "HOUR": null,
+    "ORIG_FID": 125131780
+   },
+   "geometry": {
+    "x": -75.185156501999984,
+    "y": 40.03722556300005
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439357460000,
+    "DISPATCH_DATE": "2015-08-12",
+    "DISPATCH_TIME": "05:31:00",
+    "DC_KEY": "201503049925",
+    "LOCATION_BLOCK": "2300 BLOCK S 08TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3967,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.160393839999998,
+    "POINT_Y": 39.920353720000001,
+    "HOUR": null,
+    "ORIG_FID": 125131862
+   },
+   "geometry": {
+    "x": -75.160393837999948,
+    "y": 39.920353715000033
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437991560000,
+    "DISPATCH_DATE": "2015-07-27",
+    "DISPATCH_TIME": "10:06:00",
+    "DC_KEY": "201515073163",
+    "LOCATION_BLOCK": "6700 BLOCK NEW STATE RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3968,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.040205990000004,
+    "POINT_Y": 40.020609929999999,
+    "HOUR": null,
+    "ORIG_FID": 125131984
+   },
+   "geometry": {
+    "x": -75.040205987999968,
+    "y": 40.020609926000077
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439511900000,
+    "DISPATCH_DATE": "2015-08-14",
+    "DISPATCH_TIME": "00:25:00",
+    "DC_KEY": "201515079677",
+    "LOCATION_BLOCK": "3300 BLOCK LONGSHORE AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3980,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.049719390000007,
+    "POINT_Y": 40.033584140000002,
+    "HOUR": null,
+    "ORIG_FID": 125132623
+   },
+   "geometry": {
+    "x": -75.049719391999986,
+    "y": 40.033584143000041
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437399300000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "13:35:00",
+    "DC_KEY": "201508027570",
+    "LOCATION_BLOCK": "3100 BLOCK COMLY RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3986,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -74.987250739999993,
+    "POINT_Y": 40.092479410000003,
+    "HOUR": null,
+    "ORIG_FID": 125132905
+   },
+   "geometry": {
+    "x": -74.987250735999964,
+    "y": 40.092479410000067
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438107300000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "18:15:00",
+    "DC_KEY": "201502048847",
+    "LOCATION_BLOCK": "800 BLOCK COTTMAN AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3987,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.086551009999994,
+    "POINT_Y": 40.063034309999999,
+    "HOUR": null,
+    "ORIG_FID": 125132911
+   },
+   "geometry": {
+    "x": -75.086551012999962,
+    "y": 40.063034307000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438339080000,
+    "DISPATCH_DATE": "2015-07-31",
+    "DISPATCH_TIME": "10:38:00",
+    "DC_KEY": "201515074700",
+    "LOCATION_BLOCK": "3000 BLOCK PRINCETON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 3994,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.053367120000004,
+    "POINT_Y": 40.039396330000002,
+    "HOUR": null,
+    "ORIG_FID": 125133569
+   },
+   "geometry": {
+    "x": -75.053367115999947,
+    "y": 40.039396328000066
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437728700000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "09:05:00",
+    "DC_KEY": "201503045537",
+    "LOCATION_BLOCK": "1100 BLOCK S 12TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4611,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.163517900000002,
+    "POINT_Y": 39.935479639999997,
+    "HOUR": null,
+    "ORIG_FID": 125125690
+   },
+   "geometry": {
+    "x": -75.163517896999963,
+    "y": 39.93547964000004
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438879800000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "16:50:00",
+    "DC_KEY": "201526039744",
+    "LOCATION_BLOCK": "2200 BLOCK E BOSTON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4617,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.125874999999994,
+    "POINT_Y": 39.980488360000003,
+    "HOUR": null,
+    "ORIG_FID": 125126532
+   },
+   "geometry": {
+    "x": -75.125874998999961,
+    "y": 39.980488361000027
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437296940000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "09:09:00",
+    "DC_KEY": "201535060879",
+    "LOCATION_BLOCK": "1800 BLOCK W ALBANUS ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4631,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.154606670000007,
+    "POINT_Y": 40.029582849999997,
+    "HOUR": null,
+    "ORIG_FID": 125128127
+   },
+   "geometry": {
+    "x": -75.154606670999954,
+    "y": 40.029582848000075
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438121100000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "22:05:00",
+    "DC_KEY": "201502048897",
+    "LOCATION_BLOCK": "1800 BLOCK OAKMONT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4644,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.065862850000002,
+    "POINT_Y": 40.056879680000002,
+    "HOUR": null,
+    "ORIG_FID": 125128994
+   },
+   "geometry": {
+    "x": -75.065862846999948,
+    "y": 40.056879679000076
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437417780000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "18:43:00",
+    "DC_KEY": "201525059414",
+    "LOCATION_BLOCK": "2700 BLOCK N PHILIP ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4645,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.135403780000004,
+    "POINT_Y": 39.991529079999999,
+    "HOUR": null,
+    "ORIG_FID": 125129066
+   },
+   "geometry": {
+    "x": -75.135403778999944,
+    "y": 39.991529082000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438623900000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "17:45:00",
+    "DC_KEY": "201508029633",
+    "LOCATION_BLOCK": "3000 BLOCK BYBERRY RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4653,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -74.981220840000006,
+    "POINT_Y": 40.101809109999998,
+    "HOUR": null,
+    "ORIG_FID": 125129220
+   },
+   "geometry": {
+    "x": -74.981220836999967,
+    "y": 40.101809105000029
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "39",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437235860000,
+    "DISPATCH_DATE": "2015-07-18",
+    "DISPATCH_TIME": "16:11:00",
+    "DC_KEY": "201539058211",
+    "LOCATION_BLOCK": "2500 BLOCK W ALLEGHENY AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4657,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171638290000004,
+    "POINT_Y": 40.003968489999998,
+    "HOUR": null,
+    "ORIG_FID": 125129531
+   },
+   "geometry": {
+    "x": -75.171638290999965,
+    "y": 40.00396849200007
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438592160000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "08:56:00",
+    "DC_KEY": "201535066074",
+    "LOCATION_BLOCK": "5800 BLOCK OLD YORK RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4665,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.144534120000003,
+    "POINT_Y": 40.041215209999997,
+    "HOUR": null,
+    "ORIG_FID": 125130259
+   },
+   "geometry": {
+    "x": -75.144534123999961,
+    "y": 40.041215212000054
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438111560000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "19:26:00",
+    "DC_KEY": "201512059756",
+    "LOCATION_BLOCK": "6200 BLOCK WOODLAND AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4673,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.230758940000001,
+    "POINT_Y": 39.928029729999999,
+    "HOUR": null,
+    "ORIG_FID": 125130949
+   },
+   "geometry": {
+    "x": -75.230758936999962,
+    "y": 39.928029730000048
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437237600000,
+    "DISPATCH_DATE": "2015-07-18",
+    "DISPATCH_TIME": "16:40:00",
+    "DC_KEY": "201515069864",
+    "LOCATION_BLOCK": "7300 BLOCK FRANKFORD AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4676,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.038546260000004,
+    "POINT_Y": 40.037658749999999,
+    "HOUR": null,
+    "ORIG_FID": 125131360
+   },
+   "geometry": {
+    "x": -75.038546258999986,
+    "y": 40.037658748000069
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "22",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438298400000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "23:20:00",
+    "DC_KEY": "201522068212",
+    "LOCATION_BLOCK": "1400 BLOCK N BROAD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4677,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.158662939999999,
+    "POINT_Y": 39.97484832,
+    "HOUR": null,
+    "ORIG_FID": 125131375
+   },
+   "geometry": {
+    "x": -75.158662939999942,
+    "y": 39.974848316000077
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "19",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437600540000,
+    "DISPATCH_DATE": "2015-07-22",
+    "DISPATCH_TIME": "21:29:00",
+    "DC_KEY": "201519072792",
+    "LOCATION_BLOCK": "5600 BLOCK W BERKS ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4683,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.237031119999997,
+    "POINT_Y": 39.984942770000004,
+    "HOUR": null,
+    "ORIG_FID": 125131642
+   },
+   "geometry": {
+    "x": -75.237031120999973,
+    "y": 39.984942768000053
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438257540000,
+    "DISPATCH_DATE": "2015-07-30",
+    "DISPATCH_TIME": "11:59:00",
+    "DC_KEY": "201509032508",
+    "LOCATION_BLOCK": "2300 BLOCK GREEN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4688,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.175804429999999,
+    "POINT_Y": 39.965674819999997,
+    "HOUR": null,
+    "ORIG_FID": 125131774
+   },
+   "geometry": {
+    "x": -75.175804425999956,
+    "y": 39.965674823000029
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439240880000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "21:08:00",
+    "DC_KEY": "201507023258",
+    "LOCATION_BLOCK": "100 BLOCK BROOKSHIRE WAY",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4691,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.005637519999993,
+    "POINT_Y": 40.13180655,
+    "HOUR": null,
+    "ORIG_FID": 125131798
+   },
+   "geometry": {
+    "x": -75.005637522999962,
+    "y": 40.131806552000057
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437918780000,
+    "DISPATCH_DATE": "2015-07-26",
+    "DISPATCH_TIME": "13:53:00",
+    "DC_KEY": "201524070134",
+    "LOCATION_BLOCK": "3100 BLOCK E THOMPSON ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4695,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.103901809999996,
+    "POINT_Y": 39.984212530000001,
+    "HOUR": null,
+    "ORIG_FID": 125131982
+   },
+   "geometry": {
+    "x": -75.103901810999957,
+    "y": 39.984212534000051
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438597740000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "10:29:00",
+    "DC_KEY": "201507022454",
+    "LOCATION_BLOCK": "10800 BLOCK NANDINA WAY",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4715,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.037124890000001,
+    "POINT_Y": 40.118935970000003,
+    "HOUR": null,
+    "ORIG_FID": 125132912
+   },
+   "geometry": {
+    "x": -75.037124889999973,
+    "y": 40.118935971000042
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437304980000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "11:23:00",
+    "DC_KEY": "201515070131",
+    "LOCATION_BLOCK": "RAWLE ST / VANDIKE ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4718,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.045192749999998,
+    "POINT_Y": 40.024193850000003,
+    "HOUR": null,
+    "ORIG_FID": 125133230
+   },
+   "geometry": {
+    "x": -75.045192752999981,
+    "y": 40.024193848000039
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "05",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439115720000,
+    "DISPATCH_DATE": "2015-08-09",
+    "DISPATCH_TIME": "10:22:00",
+    "DC_KEY": "201505013743",
+    "LOCATION_BLOCK": "8500 BLOCK HENRY AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4720,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.238669169999994,
+    "POINT_Y": 40.063243399999998,
+    "HOUR": null,
+    "ORIG_FID": 125133383
+   },
+   "geometry": {
+    "x": -75.238669166999955,
+    "y": 40.063243399000044
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437469380000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "09:03:00",
+    "DC_KEY": "201503044829",
+    "LOCATION_BLOCK": "1100 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4721,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.16323672,
+    "POINT_Y": 39.934000169999997,
+    "HOUR": null,
+    "ORIG_FID": 125133718
+   },
+   "geometry": {
+    "x": -75.163236721999965,
+    "y": 39.934000171000037
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438982700000,
+    "DISPATCH_DATE": "2015-08-07",
+    "DISPATCH_TIME": "21:25:00",
+    "DC_KEY": "201515077594",
+    "LOCATION_BLOCK": "7900 BLOCK LEXINGTON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 4725,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.04152741,
+    "POINT_Y": 40.05183727,
+    "HOUR": null,
+    "ORIG_FID": 125133736
+   },
+   "geometry": {
+    "x": -75.041527413999972,
+    "y": 40.051837269000032
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437332940000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "19:09:00",
+    "DC_KEY": "201517034133",
+    "LOCATION_BLOCK": "1400 BLOCK S BANCROFT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5343,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171767680000002,
+    "POINT_Y": 39.932898360000003,
+    "HOUR": null,
+    "ORIG_FID": 125125676
+   },
+   "geometry": {
+    "x": -75.171767683999974,
+    "y": 39.932898357000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438419540000,
+    "DISPATCH_DATE": "2015-08-01",
+    "DISPATCH_TIME": "08:59:00",
+    "DC_KEY": "201535065368",
+    "LOCATION_BLOCK": "5600 BLOCK N 19TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5345,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.15265599,
+    "POINT_Y": 40.0398955,
+    "HOUR": null,
+    "ORIG_FID": 125125701
+   },
+   "geometry": {
+    "x": -75.152655986999946,
+    "y": 40.039895502000036
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438772340000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "10:59:00",
+    "DC_KEY": "201515076634",
+    "LOCATION_BLOCK": "3000 BLOCK FANSHAWE ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5349,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.057405970000005,
+    "POINT_Y": 40.033104389999998,
+    "HOUR": null,
+    "ORIG_FID": 125126528
+   },
+   "geometry": {
+    "x": -75.057405967999955,
+    "y": 40.033104393000031
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "17",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438853820000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "09:37:00",
+    "DC_KEY": "201517037758",
+    "LOCATION_BLOCK": "1600 BLOCK S 16TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5352,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.171704700000006,
+    "POINT_Y": 39.930320629999997,
+    "HOUR": null,
+    "ORIG_FID": 125126531
+   },
+   "geometry": {
+    "x": -75.171704695999949,
+    "y": 39.930320626000025
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "18",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439345220000,
+    "DISPATCH_DATE": "2015-08-12",
+    "DISPATCH_TIME": "02:07:00",
+    "DC_KEY": "201518052410",
+    "LOCATION_BLOCK": "4400 BLOCK CHESTNUT ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5354,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.211235950000003,
+    "POINT_Y": 39.956797280000004,
+    "HOUR": null,
+    "ORIG_FID": 125126540
+   },
+   "geometry": {
+    "x": -75.211235946999977,
+    "y": 39.956797282000025
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437330720000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "18:32:00",
+    "DC_KEY": "201525059118",
+    "LOCATION_BLOCK": "2900 BLOCK N PHILIP ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5370,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.134731630000005,
+    "POINT_Y": 39.994661069999999,
+    "HOUR": null,
+    "ORIG_FID": 125128132
+   },
+   "geometry": {
+    "x": -75.134731626999951,
+    "y": 39.994661070000063
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437410580000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "16:43:00",
+    "DC_KEY": "201535061231",
+    "LOCATION_BLOCK": "1700 BLOCK WIDENER PL",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5371,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.148731710000007,
+    "POINT_Y": 40.044212389999998,
+    "HOUR": null,
+    "ORIG_FID": 125128137
+   },
+   "geometry": {
+    "x": -75.14873171399995,
+    "y": 40.044212392000077
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "07",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438108140000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "18:29:00",
+    "DC_KEY": "201507021876",
+    "LOCATION_BLOCK": "100 BLOCK BYBERRY RD I12",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5378,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.024344830000004,
+    "POINT_Y": 40.128849950000003,
+    "HOUR": null,
+    "ORIG_FID": 125128952
+   },
+   "geometry": {
+    "x": -75.024344828999972,
+    "y": 40.128849949000028
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "35",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437382020000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "08:47:00",
+    "DC_KEY": "201535061129",
+    "LOCATION_BLOCK": "6400 BLOCK LIMEKILN PIKE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5382,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.152885100000006,
+    "POINT_Y": 40.052343399999998,
+    "HOUR": null,
+    "ORIG_FID": 125129064
+   },
+   "geometry": {
+    "x": -75.152885097999956,
+    "y": 40.052343404000055
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "39",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437505740000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "19:09:00",
+    "DC_KEY": "201539059168",
+    "LOCATION_BLOCK": "2800 BLOCK N RINGGOLD ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5383,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.170796710000005,
+    "POINT_Y": 39.998770499999999,
+    "HOUR": null,
+    "ORIG_FID": 125129069
+   },
+   "geometry": {
+    "x": -75.170796704999987,
+    "y": 39.998770498000056
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437724320000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "07:52:00",
+    "DC_KEY": "201515071928",
+    "LOCATION_BLOCK": "6800 BLOCK EDMUND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5387,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.042977769999993,
+    "POINT_Y": 40.023956470000002,
+    "HOUR": null,
+    "ORIG_FID": 125129084
+   },
+   "geometry": {
+    "x": -75.042977772999961,
+    "y": 40.023956465000026
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437768060000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "20:01:00",
+    "DC_KEY": "201503045672",
+    "LOCATION_BLOCK": "2000 BLOCK S 13TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5388,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.167438610000005,
+    "POINT_Y": 39.924531880000004,
+    "HOUR": null,
+    "ORIG_FID": 125129087
+   },
+   "geometry": {
+    "x": -75.167438608999987,
+    "y": 39.924531884000032
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438795500000,
+    "DISPATCH_DATE": "2015-08-05",
+    "DISPATCH_TIME": "17:25:00",
+    "DC_KEY": "201512061996",
+    "LOCATION_BLOCK": "5400 BLOCK EASTWICK TER",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5395,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.215403390000006,
+    "POINT_Y": 39.931137249999999,
+    "HOUR": null,
+    "ORIG_FID": 125129235
+   },
+   "geometry": {
+    "x": -75.215403386999981,
+    "y": 39.931137253000031
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "15",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437319200000,
+    "DISPATCH_DATE": "2015-07-19",
+    "DISPATCH_TIME": "15:20:00",
+    "DC_KEY": "201515070177",
+    "LOCATION_BLOCK": "4700 BLOCK PRINCETON AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5396,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.038413680000005,
+    "POINT_Y": 40.027552829999998,
+    "HOUR": null,
+    "ORIG_FID": 125129532
+   },
+   "geometry": {
+    "x": -75.038413682999987,
+    "y": 40.027552832000026
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "02",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439201880000,
+    "DISPATCH_DATE": "2015-08-10",
+    "DISPATCH_TIME": "10:18:00",
+    "DC_KEY": "201502051697",
+    "LOCATION_BLOCK": "1700 BLOCK LONEY ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5400,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.061874439999997,
+    "POINT_Y": 40.0630691,
+    "HOUR": null,
+    "ORIG_FID": 125129790
+   },
+   "geometry": {
+    "x": -75.061874441999976,
+    "y": 40.063069098000028
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438824540000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "01:29:00",
+    "DC_KEY": "201526039617",
+    "LOCATION_BLOCK": "400 BLOCK E GIRARD AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5402,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.129601690000001,
+    "POINT_Y": 39.970541269999998,
+    "HOUR": null,
+    "ORIG_FID": 125130261
+   },
+   "geometry": {
+    "x": -75.129601692999984,
+    "y": 39.970541266000055
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438449420000,
+    "DISPATCH_DATE": "2015-08-01",
+    "DISPATCH_TIME": "17:17:00",
+    "DC_KEY": "201526038713",
+    "LOCATION_BLOCK": "2500 BLOCK SEPVIVA ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5417,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.123559529999994,
+    "POINT_Y": 39.982052680000002,
+    "HOUR": null,
+    "ORIG_FID": 125131652
+   },
+   "geometry": {
+    "x": -75.123559528999976,
+    "y": 39.982052682000074
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "26",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438078860000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "10:21:00",
+    "DC_KEY": "201526037732",
+    "LOCATION_BLOCK": "2300 BLOCK E CUMBERLAND ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5430,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.122643400000001,
+    "POINT_Y": 39.979563419999998,
+    "HOUR": null,
+    "ORIG_FID": 125131985
+   },
+   "geometry": {
+    "x": -75.122643401999937,
+    "y": 39.979563422000069
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438156260000,
+    "DISPATCH_DATE": "2015-07-29",
+    "DISPATCH_TIME": "07:51:00",
+    "DC_KEY": "201524071069",
+    "LOCATION_BLOCK": "2400 BLOCK E ALLEGHENY AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5431,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.105587619999994,
+    "POINT_Y": 39.987751809999999,
+    "HOUR": null,
+    "ORIG_FID": 125131987
+   },
+   "geometry": {
+    "x": -75.105587621999973,
+    "y": 39.987751807000052
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438576980000,
+    "DISPATCH_DATE": "2015-08-03",
+    "DISPATCH_TIME": "04:43:00",
+    "DC_KEY": "201508029537",
+    "LOCATION_BLOCK": "11000 BLOCK KNIGHTS RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5433,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -74.974617719999998,
+    "POINT_Y": 40.083530979999999,
+    "HOUR": null,
+    "ORIG_FID": 125131993
+   },
+   "geometry": {
+    "x": -74.974617720999959,
+    "y": 40.08353098300006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438851960000,
+    "DISPATCH_DATE": "2015-08-06",
+    "DISPATCH_TIME": "09:06:00",
+    "DC_KEY": "201508029966",
+    "LOCATION_BLOCK": "11000 BLOCK KNIGHTS RD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5436,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -74.974617719999998,
+    "POINT_Y": 40.083530979999999,
+    "HOUR": null,
+    "ORIG_FID": 125132227
+   },
+   "geometry": {
+    "x": -74.974617720999959,
+    "y": 40.08353098300006
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "18",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437386640000,
+    "DISPATCH_DATE": "2015-07-20",
+    "DISPATCH_TIME": "10:04:00",
+    "DC_KEY": "201518046374",
+    "LOCATION_BLOCK": "1000 BLOCK S 49TH ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5438,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.21704373,
+    "POINT_Y": 39.944678750000001,
+    "HOUR": null,
+    "ORIG_FID": 125132301
+   },
+   "geometry": {
+    "x": -75.217043732999969,
+    "y": 39.944678749000047
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "12",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438076940000,
+    "DISPATCH_DATE": "2015-07-28",
+    "DISPATCH_TIME": "09:49:00",
+    "DC_KEY": "201512059583",
+    "LOCATION_BLOCK": "6600 BLOCK ELMWOOD AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5440,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.231932979999996,
+    "POINT_Y": 39.921138640000002,
+    "HOUR": null,
+    "ORIG_FID": 125132306
+   },
+   "geometry": {
+    "x": -75.231932982999979,
+    "y": 39.921138639000048
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "25",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1439346240000,
+    "DISPATCH_DATE": "2015-08-12",
+    "DISPATCH_TIME": "02:24:00",
+    "DC_KEY": "201525066137",
+    "LOCATION_BLOCK": "100 BLOCK E ALLEGHENY AV",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5442,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.129234420000003,
+    "POINT_Y": 39.998587479999998,
+    "HOUR": null,
+    "ORIG_FID": 125132312
+   },
+   "geometry": {
+    "x": -75.129234421999968,
+    "y": 39.998587475000079
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "08",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1438306020000,
+    "DISPATCH_DATE": "2015-07-31",
+    "DISPATCH_TIME": "01:27:00",
+    "DC_KEY": "201508029078",
+    "LOCATION_BLOCK": "200 BLOCK FRANKLIN MILLS BLVD",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5457,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -74.965751839999996,
+    "POINT_Y": 40.091592890000001,
+    "HOUR": null,
+    "ORIG_FID": 125133232
+   },
+   "geometry": {
+    "x": -74.965751843999954,
+    "y": 40.091592888000037
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "24",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437818640000,
+    "DISPATCH_DATE": "2015-07-25",
+    "DISPATCH_TIME": "10:04:00",
+    "DC_KEY": "201524069681",
+    "LOCATION_BLOCK": "2800 BLOCK E TIOGA ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5458,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.094046829999996,
+    "POINT_Y": 39.98616183,
+    "HOUR": null,
+    "ORIG_FID": 125133332
+   },
+   "geometry": {
+    "x": -75.094046832999936,
+    "y": 39.986161834000029
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "09",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437470040000,
+    "DISPATCH_DATE": "2015-07-21",
+    "DISPATCH_TIME": "09:14:00",
+    "DC_KEY": "201509030970",
+    "LOCATION_BLOCK": "2300 BLOCK FAIRMOUNT AVE",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5459,
+    "TEXT_GENERAL_CODE": "Burglary Non-Residential",
+    "POINT_X": -75.175440739999999,
+    "POINT_Y": 39.967397679999998,
+    "HOUR": null,
+    "ORIG_FID": 125133376
+   },
+   "geometry": {
+    "x": -75.175440735999985,
+    "y": 39.967397679000044
+   }
+  },
+  {
+   "attributes": {
+    "DC_DIST": "03",
+    "SECTOR": "3",
+    "DISPATCH_DATE_TIME": 1437726960000,
+    "DISPATCH_DATE": "2015-07-24",
+    "DISPATCH_TIME": "08:36:00",
+    "DC_KEY": "201503045527",
+    "LOCATION_BLOCK": "1100 BLOCK TITAN ST",
+    "UCR_GENERAL": "500",
+    "OBJECTID": 5461,
+    "TEXT_GENERAL_CODE": "Burglary Residential",
+    "POINT_X": -75.162431870000006,
+    "POINT_Y": 39.933894610000003,
+    "HOUR": null,
+    "ORIG_FID": 125133720
+   },
+   "geometry": {
+    "x": -75.162431873999935,
+    "y": 39.93389460800006
+   }
+  }
+ ]
+}

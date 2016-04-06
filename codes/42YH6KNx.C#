@@ -1,0 +1,13 @@
+void Main()
+{
+}
+
+public void First()
+{
+	Func<int, string, bool> bla = (int x, string s) => s.Length > x;
+}
+
+public void Second()
+{
+	Func<int, string, bool> bla = (int x, string s) => s.Length > x;
+}
