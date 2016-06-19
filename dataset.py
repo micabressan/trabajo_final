@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+import os, string
 from sklearn.feature_extraction.text import CountVectorizer
 
 
@@ -21,18 +21,25 @@ for files in files_list:
     languaje.append(files.split(".")[-1])
     content.append(code.read())
 
-print content[1]
-#print languaje[0]
-
-
 
 def my_tokenizer(content):
+
+    character = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+                'y', 'z', ',', '/', '=', '+', '<', '>', '{', '}', '(', ')',
+                ';', '|', '"', '.', '[', ']', ':', "'", '!', '@', '#', '%',
+                '&', '*']
+
+    for letter in content:
+        if letter not in character:
+            content.replace(letter, '')
+
     return content.split()
 
 
 vectorizer = CountVectorizer(tokenizer=my_tokenizer)
 vectorizer.fit_transform(content)
-print vectorizer.vocabulary_
+print set(vectorizer.vocabulary_)
 
 
 
