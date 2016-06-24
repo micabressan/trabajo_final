@@ -40,7 +40,3 @@ def my_tokenizer(content):
 vectorizer = CountVectorizer(tokenizer=my_tokenizer)
 vectorizer.fit_transform(content)
 print set(vectorizer.vocabulary_)
-
-
-
-
