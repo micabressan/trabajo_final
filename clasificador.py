@@ -4,8 +4,18 @@ from sklearn.svm import LinearSVC
 from sklearn.pipeline import make_pipeline
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import accuracy_score
+import re
 from sklearn.linear_model import SGDClassifier
 from sklearn.decomposition import TruncatedSVD
+
+
+def preprocessor(x):
+    x = re.sub('\d+', 'NUMBER', x)
+    x = re.sub('\".*?\"', 'STRING', x)
+    x = re.sub('\#.*', 'COMMENT', x)
+    x = re.sub('\//.*', 'COMMENT', x)
+    x = re.sub('\--.*', 'COMMENT', x)
+    return x
 
 
 def load_data():
@@ -24,13 +34,14 @@ if __name__ == '__main__':
 
     pipe = make_pipeline(
         CountVectorizer(ngram_range=(1, 1),
-                        token_pattern='(?u)\\b\\w\\w+\\b|\:|\;|\"|\'|#'),
+                        token_pattern='(?u)\\b\\w\\w+\\b|\:|\;|\"|\'|#|{|}|[|]',
+                        preprocessor=preprocessor),
         LinearSVC()
         # TruncatedSVD(),
         # SGDClassifier()
     )
 
-    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1)
     pipe.fit(X_train, y_train)
 
     p = pipe.predict(X_val)

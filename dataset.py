@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, string
+import os
 from sklearn.feature_extraction.text import CountVectorizer
 
 

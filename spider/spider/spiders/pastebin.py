@@ -15,13 +15,18 @@ class TrabajoFinalSpider(Spider):
         "http://pastebin.com/archive/clojure/",
         "http://pastebin.com/archive/coffeescript/",
         "http://pastebin.com/archive/css/",
+        "https://pastebin.com/archive/d",
         "http://pastebin.com/archive/diff/",
         "http://pastebin.com/archive/erlang/",
+        "https://pastebin.com/archive/go",
+        "https://pastebin.com/archive/groovy",
         "http://pastebin.com/archive/haskell/",
         "http://pastebin.com/archive/java/",
         "http://pastebin.com/archive/javascript/",
         "http://pastebin.com/archive/json/",
         "http://pastebin.com/archive/lua/",
+        "https://pastebin.com/archive/markdown",
+        "https://pastebin.com/archive/nginx",
         "http://pastebin.com/archive/php/",
         "http://pastebin.com/archive/perl/",
         "http://pastebin.com/archive/python/",
@@ -32,6 +37,7 @@ class TrabajoFinalSpider(Spider):
         "http://pastebin.com/archive/sql/",
         "http://pastebin.com/archive/vbscript/",
         "http://pastebin.com/archive/xml/",
+        "https://pastebin.com/archive/yaml",
     ]
 
     def parse(self, response):
