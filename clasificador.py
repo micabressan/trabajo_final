@@ -11,10 +11,49 @@ from sklearn.decomposition import TruncatedSVD
 
 def preprocessor(x):
     x = re.sub('\d+', 'NUMBER', x)
-    x = re.sub('\".*?\"', 'STRING', x)
-    x = re.sub('\#.*', 'COMMENT', x)
-    x = re.sub('\//.*', 'COMMENT', x)
-    x = re.sub('\--.*', 'COMMENT', x)
+    x = re.sub('\".*?\"', 'STRING', x)  # string with ""
+    x = re.sub('\'.*?\'', 'STRING', x)  # string with ''
+    x = re.sub('\#.*', 'COMMENT', x)    # comment with #
+    x = re.sub('\//.*', 'COMMENT', x)   # comment with //
+    x = re.sub('\--.*', 'COMMENT', x)   # comment with --
+    x = re.sub('\/*.*', 'COMMENT', x)   # comment with /*
+    x = re.sub('\;.*', 'COMMENT', x)    # comment with ;
+    x = re.sub('\/+.*', 'COMMENT', x)   # comment with /+
+    x = re.sub('\%.*', 'COMMENT', x)    # comment with %
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with <!-
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with (comment)
+    x = re.sub('\""".*', 'COMMENT', x)  # comment with """ """
+    x = re.sub('\'''.*', 'COMMENT', x)  # comment with ''' '''
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with ###
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with {- -}
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with --[[ ]]
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =cut
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =end
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with /***/
+    return x
+
+
+def preprocessor(x):
+    x = re.sub('\d+', 'NUMBER', x)
+    x = re.sub('\".*?\"', '""' + 'STRING', x)  # string with ""
+    x = re.sub('\'.*?\'', "''" + 'STRING', x)  # string with ''
+    x = re.sub('\#.*', '#' + 'COMMENT', x)     # comment with #
+    x = re.sub('\//.*', '//' + 'COMMENT', x)   # comment with //
+    x = re.sub('\--.*', '--' + 'COMMENT', x)   # comment with --
+    x = re.sub('\/*.*', '/*' + 'COMMENT', x)   # comment with /*
+    x = re.sub('\;.*', ';' + 'COMMENT', x)     # comment with ;
+    x = re.sub('\/+.*', 'COMMENT', x)   # comment with /+
+    x = re.sub('\%.*', 'COMMENT', x)    # comment with %
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with <!-
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with (comment)
+    x = re.sub('\""".*', 'COMMENT', x)  # comment with """ """
+    x = re.sub('\'''.*', 'COMMENT', x)  # comment with ''' '''
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with ###
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with {- -}
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with --[[ ]]
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =cut
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =end
+    x = re.sub('\<!-.*', 'COMMENT', x)  # comment with /***/
     return x
 
 
