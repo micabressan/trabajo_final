@@ -1,4 +1,5 @@
 import os
+from util import load_data
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.pipeline import make_pipeline
@@ -56,25 +57,14 @@ def preprocessor(x):
     x = re.sub('\<!-.*', 'COMMENT', x)  # comment with /***/
     return x
 
-
-def load_data():
-    "returns a (X, y) readed from codes folder"
-    X = []
-    y = []
-    for f in os.listdir('codes'):
-        text = open(os.path.join('codes', f)).read()
-        syntax = f.split('.')[-1]
-        X.append(text)
-        y.append(syntax.lower())
-    return (X, y)
-
 if __name__ == '__main__':
     X, y = load_data()
 
     pipe = make_pipeline(
-        CountVectorizer(ngram_range=(1, 1),
-                        token_pattern='(?u)\\b\\w\\w+\\b|\:|\;|\"|\'|#|{|}|[|]',
-                        preprocessor=preprocessor),
+        CountVectorizer(#ngram_range=(1, 1),
+                        #token_pattern='(?u)\\b\\w\\w+\\b|\:|\;|\"|\'|#|{|}|[|]',
+                        #preprocessor=preprocessor
+                        ),
         LinearSVC()
         # TruncatedSVD(),
         # SGDClassifier()
