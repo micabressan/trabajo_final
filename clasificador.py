@@ -9,6 +9,13 @@ import re
 from sklearn.linear_model import SGDClassifier
 from sklearn.decomposition import TruncatedSVD
 
+def string(text):
+    comment_characters = ['\'', '"']
+    for character in comment_characters:
+        regular_expresion = character + '.*'
+        text = re.sub(regular_expresion, 'STRING', text)
+    return text
+
 def one_line_comment(text):
     #agregar todos los caracteres de comentario
     comment_characters = ['#', '//', '--', '\*', '%']
@@ -28,7 +35,8 @@ def multiline_comment(text):
 
 
 def preprocessor(x):
-    return one_line_comment(multiline_comment(x))
+    x = re.sub('\d+', 'NUMBER', x)
+    return string(one_line_comment(multiline_comment(x)))
     '''
     x = re.sub('\d+', 'NUMBER', x)
     x = re.sub('\".*?\"', 'STRING', x)  # string with ""
