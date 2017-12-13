@@ -9,8 +9,27 @@ import re
 from sklearn.linear_model import SGDClassifier
 from sklearn.decomposition import TruncatedSVD
 
+def one_line_comment(text):
+    #agregar todos los caracteres de comentario
+    comment_characters = ['#', '//', '--', '\*', '%']
+    for character in comment_characters:
+        regular_expresion = character + '.*'
+        text = re.sub(regular_expresion, 'COMMENT', text)
+    return text
+
+def multiline_comment(text):
+    #agregar todos los pares de caracteres de comentario
+    comment_characters = [('/\*', '\*/'),('<!--', '-->')]
+    for begin, end in comment_characters:
+        regular_expresion = begin + '([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*' + end
+        print regular_expresion
+        text = re.sub(regular_expresion, 'COMMENT', text)
+    return text
+
 
 def preprocessor(x):
+    return one_line_comment(multiline_comment(x))
+    '''
     x = re.sub('\d+', 'NUMBER', x)
     x = re.sub('\".*?\"', 'STRING', x)  # string with ""
     x = re.sub('\'.*?\'', 'STRING', x)  # string with ''
@@ -32,8 +51,8 @@ def preprocessor(x):
     x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =end
     x = re.sub('\<!-.*', 'COMMENT', x)  # comment with /***/
     return x
-
-
+    '''
+'''
 def preprocessor(x):
     x = re.sub('\d+', 'NUMBER', x)
     x = re.sub('\".*?\"', '""' + 'STRING', x)  # string with ""
@@ -56,8 +75,30 @@ def preprocessor(x):
     x = re.sub('\<!-.*', 'COMMENT', x)  # comment with =begin =end
     x = re.sub('\<!-.*', 'COMMENT', x)  # comment with /***/
     return x
-
+'''
 if __name__ == '__main__':
+
+    text = '''
+
+    /*hola
+    hola
+    hola
+    */
+
+    fbdg
+
+    <!--
+    fdggh
+    fdjfh
+    djf
+    -->
+
+    con asterisco * f,nkgdsgn
+
+    '''
+    print multiline_comment(text)
+
+    '''
     X, y = load_data()
 
     pipe = make_pipeline(
@@ -76,3 +117,4 @@ if __name__ == '__main__':
     p = pipe.predict(X_val)
 
     print(accuracy_score(p, y_val))
+    '''

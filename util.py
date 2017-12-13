@@ -35,12 +35,14 @@ def load_data_language(folder, languages):
 def languages(folder):
     return set([file_name.split('.')[-1] for file_name in os.listdir(folder)])
 
-def languages_file_frecuency(folder):
+def languages_file_frecuency(folder, language=None):
+    if language:
+        frecuency = len(fnmatch.filter(os.listdir(folder), '*.' + language))
+        print language, frecuency
+        return abs
     for language in languages(folder):
         frecuency = len(fnmatch.filter(os.listdir(folder), '*.' + language))
         print language, frecuency
 
 if __name__ == '__main__':
-    print languages_file_frecuency('codes')
-
-    print 'abstract assert boolean break byte case catch char class const continue default do double else enum extends final finally float for goto if implements import instanceof int interface long native new package private protected public return short static strictfp super switch synchronized this throw throws transient try void volatile while'.split(' ')
+    languages_file_frecuency('codes')

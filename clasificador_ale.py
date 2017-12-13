@@ -43,7 +43,8 @@ def preprocessor(text):
 #http://scikit-learn.org/stable/modules/feature_extraction.html
 
 if __name__ == '__main__':
-    X, y = load_data_language('codes', ['Python', 'Java', 'C'])
+    #X, y = load_data_language('codes', ['JavaScript', 'CoffeeScript'])
+    X, y = load_data('codes')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
