@@ -30,6 +30,8 @@ def my_tokenizer(content):
                 ';', '|', '"', '.', '[', ']', ':', "'", '!', '@', '#', '%',
                 '&', '*']
 
+    character = ['COMMENT', 'STRING', 'NUMBER']
+
     for letter in content:
         if letter not in character:
             content.replace(letter, '')

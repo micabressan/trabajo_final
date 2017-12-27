@@ -31,20 +31,39 @@ def tokenizer(text):
 
     return rr
 
+def string(text):
+    comment_characters = ['\'', '"'] #Ver que se cierran esas comillas
+    for character in comment_characters:
+        regular_expresion = character + '.*?' + character
+        text = re.sub(regular_expresion, 'STRING', text)
+    return text
+
+def one_line_comment(text):
+    comment_characters = ['#', '//', '--', '\*', '%']
+    for character in comment_characters:
+        regular_expresion = character + '.*'
+        text = re.sub(regular_expresion, 'COMMENT', text)
+    return text
+
+def multiline_comment(text):
+    #agregar todos los pares de caracteres de comentario
+    comment_characters = [('/\*', '\*/'),('<!--', '-->'), ('/\+', '\+/'), ('"""', '"""'), ('\'\'\'', '\'\'\''), ('{-', '-}'), ('--\[\[', '\]\]'), ('###', '###'), ('\(comment', '\)')]
+    for begin, end in comment_characters:
+        regular_expresion = begin + '([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*' + end
+        text = re.sub(regular_expresion, 'COMMENT', text)
+    return text
+
 def preprocessor(text):
-    text = re.sub('\d+', 'NUMBER',
-                  re.sub('\".*?\"', 'STRING',
-                         re.sub('\'.*?\'', 'STRING', text)))
-    text = re.sub('\#.*', 'COMMENT', text)
-    text = re.sub('\//.*', 'COMMENT', text)
+    text = re.sub('\d+', 'NUMBER', text)
+    return string(one_line_comment(multiline_comment(text)))
 
     return text
 
 #http://scikit-learn.org/stable/modules/feature_extraction.html
 
 if __name__ == '__main__':
-    #X, y = load_data_language('codes', ['JavaScript', 'CoffeeScript'])
-    X, y = load_data('codes')
+    X, y = load_data_language('codes', ['Python', 'Java'])
+    #X, y = load_data('codes')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
