@@ -1,0 +1,143 @@
+2017-12-15 15:12:08.088 debug integrations/next-terra/send-request.js request to next-terra {"url":"http://www.gl-net.com/traXis/WSGLN/Shipping.php","headers":{"Content-Type":"text/xml; charset=utf-8"},"body":"
+<env:Envelope
+	xmlns:ns1=\"http://www.gl-net.com/traXis/WSGLN/Shipping.php\"
+	xmlns:ns2=\"http://xml.apache.org/xml-soap\"
+	xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
+	xmlns:enc=\"http://www.w3.org/2003/05/soap-encoding\"
+	xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\"
+	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t
+	<env:Header
+		xmlns:rpc=\"http://www.w3.org/2003/05/soap-rpc\">\n\t\t
+		<AuthHeader>\n\t\t\t
+			<key>ADZPI2QICL4</key>\n\t\t\t
+			<user>testWS_001</user>\n\t\t\t
+			<password>@SPAR#$kD</password>\n\t\t
+		</AuthHeader>\n\t
+	</env:Header>\n\t
+	<env:Body>\n\t\t
+		<ns1:requestOrder>\n\t\t\t
+			<param0 xsi:type=\"ns2:Map\">\n\t\t\t\t
+				<item>\n\t\t\t\t\t
+					<key xsi:type=\"xsd:string\">Receiver</key>\n\t\t\t\t\t
+					<value xsi:type=\"ns2:Map\">\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">City</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\"></value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Phone</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\"></value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Street</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\"></value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Contact</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\"></value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Country</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">fr</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Zipcode</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\"></value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t
+					</value>\n\t\t\t\t
+				</item>\n\t\t\t\t
+				<item>\n\t\t\t\t\t
+					<key xsi:type=\"xsd:string\">Service</key>\n\t\t\t\t\t
+					<value xsi:type=\"ns2:Map\">\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">COD</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">4444</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Agent</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">FR-COLISSIMO</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Code</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">ECO-DOMEX</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t
+					</value>\n\t\t\t\t
+				</item>\n\t\t\t\t
+				<item>\n\t\t\t\t\t
+					<key xsi:type=\"xsd:string\">Shipment</key>\n\t\t\t\t\t
+					<value xsi:type=\"ns2:Map\">\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Account</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">TEST</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Reference</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">12224445745555</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t\t
+						<item>\n\t\t\t\t\t\t\t
+							<key xsi:type=\"xsd:string\">Dutiable</key>\n\t\t\t\t\t\t\t
+							<value xsi:type=\"xsd:string\">0</value>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t
+					</value>\n\t\t\t\t
+				</item>\n\t\t\t\t
+				<item>\n\t\t\t\t\t
+					<key xsi:type=\"xsd:string\">SKU</key>\n\t\t\t\t\t
+					<value xsi:type=\"enc:array\" enc:arrayType=\"ns2:Map[1]\">\n\t\t\t\t\t\t
+						<item xsi:type=\"ns2:Map\">\n\t\t\t\t\t\t\t
+							<item>\n\t\t\t\t\t\t\t\t
+								<key xsi:type=\"xsd:string\">Quantity</key>\n\t\t\t\t\t\t\t\t
+								<value xsi:type=\"xsd:string\">7</value>\n\t\t\t\t\t\t\t
+							</item>\n\t\t\t\t\t\t\t
+							<item>\n\t\t\t\t\t\t\t\t
+								<key xsi:type=\"xsd:string\">Code</key>\n\t\t\t\t\t\t\t\t
+								<value xsi:type=\"xsd:string\">ABCD</value>\n\t\t\t\t\t\t\t
+							</item>\n\t\t\t\t\t\t\t
+							<item>\n\t\t\t\t\t\t\t\t
+								<key xsi:type=\"xsd:string\">Location</key>\n\t\t\t\t\t\t\t\t
+								<value xsi:type=\"xsd:string\">CDG</value>\n\t\t\t\t\t\t\t
+							</item>\n\t\t\t\t\t\t
+						</item>\n\t\t\t\t\t
+					</value>\n\t\t\t\t
+				</item>\n\t\t\t
+			</param0>\n\t\t
+		</ns1:requestOrder>\n\t
+	</env:Body>\n
+</env:Envelope>","method":"POST"} ended with code 200 and body 
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+	xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:ns1="Shipping.php"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns2="http://xml.apache.org/xml-soap"
+	xmlns:enc="http://www.w3.org/2003/05/soap-encoding">
+	<env:Body
+		xmlns:rpc="http://www.w3.org/2003/05/soap-rpc">
+		<ns1:requestOrderResponse env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+			<rpc:result>return</rpc:result>
+			<return xsi:type="ns2:Map">
+				<item>
+					<key xsi:type="xsd:string">Authorized</key>
+					<value xsi:type="xsd:int">1</value>
+				</item>
+				<item>
+					<key xsi:type="xsd:string">Error</key>
+					<value xsi:type="xsd:string"></value>
+				</item>
+				<item>
+					<key xsi:type="xsd:string">Response</key>
+					<value xsi:type="ns2:Map">
+						<item>
+							<key xsi:type="xsd:string">Success</key>
+							<value xsi:type="xsd:int">1</value>
+						</item>
+						<item>
+							<key xsi:type="xsd:string">Reference</key>
+							<value xsi:type="xsd:string">12224445745555</value>
+						</item>
+					</value>
+				</item>
+			</return>
+		</ns1:requestOrderResponse>
+	</env:Body>
+</env:Envelope>

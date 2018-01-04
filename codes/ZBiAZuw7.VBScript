@@ -1,0 +1,66 @@
+MAIN FORM:
+Private Sub ClosePromoBookButton_Click()
+    If Not Nz(Me.PROMO_MAIN_SUBFORM.SourceObject, "") = "" Then
+        If Forms("PROMO_MAIN").Controls("PROMO_MAIN_SUBFORM").Form.bWriteLock = 1 Then Exit Sub
+		'If Me!PROMO_MAIN_SUBFORM.Form.bWriteLock = 1 Then Exit Sub
+	End If
+    DoCmd.Close acForm, Me.Name
+End Sub
+
+SUBFORM:
+Private Sub EditItemEntry_Click()
+    If Me.bWriteLock = 1 Then Exit Sub
+    Me.bWriteLock = 1
+
+    Dim iItem As Long: iItem = Nz(Me.HistoryCmb.Column(0, Me.HistoryCmb.ItemsSelected), 0)
+    If Not iItem > 0 Then
+        MsgBox "no item selected"
+        Me.bWriteLock = 0
+        Exit Sub
+    End If
+ 
+'TODO: require edit promo event item Feature Access. Implement *here*
+ 
+    Dim sInvoice: sInvoice = Trim(Nz(Me.HistoryCmb.Column(8, Me.HistoryCmb.ItemsSelected), ""))
+
+    If Not sInvoice = "" Then
+        MsgBox ("CANNOT EDIT ITEM: Item already processed to Invoice# " & sInvoice)
+        Me.bWriteLock = 0
+        Exit Sub
+    End If
+    
+    Dim sORDER_NO: sORDER_NO = Nz(Me.HistoryCmb.Column(7, Me.HistoryCmb.ItemsSelected), "")
+    Dim dbs As DAO.Database
+    
+    'Confirm Historical Order Number exists
+    If Not SalesOrderNumberExists(sORDER_NO) Then
+        'retrieve INVOICE from *BV_DB* (note: in case local ACCESS_DB was out of sync)
+        sInvoice = GET_INVOICE_NUMBER(sORDER_NO)
+
+        If Not sInvoice = "" Then
+            'Local DB was out of sync and didn't know this Order had been processed to invoice.
+            'Sync local DB for this orders items: update INVOICE of all items with this ORDER_NO
+            Set dbs = CurrentDb
+            dbs.Execute _
+                " UPDATE MB_ITEMS " & _
+                " SET INVOICE_NUMBER = '" & SafeSQL(sInvoice) & "' " & _
+                " WHERE HISTORICAL_ORDER_NUMBER = '" & SafeSQL(sORDER_NO) & "'"
+            dbs.Close
+            Set dbs = Nothing
+            Me.HistoryCmb.Requery
+            MsgBox "CANNOT REMOVE ITEM: Item already processed to Invoice#" & sInvoice
+
+        Else
+            Dim iGarbage: iGarbage = MsgBox( _
+            "ERROR: Item ORDER# " & sORDER_NO & " MISSING FROM BV! (REQUIRES: REBUILD/RECOVER)" & vbCrLf & _
+            "Please write down (Order#, ItemCode) and inform an Administrator", vbCritical, "ERROR: Order# Missing from BV!")
+        End If
+        Me.bWriteLock = 0
+        Exit Sub
+    End If
+   Me.bWriteLock = 0
+    Forms("PROMO_MAIN").Controls("PROMO_MAIN_SUBFORM").SourceObject = "PROMO_EVENTS_EDITITEM"
+    Forms("PROMO_MAIN").Controls("PROMO_MAIN_SUBFORM").Controls("Original_ItemId") = iItem
+    Forms("PROMO_MAIN").Controls("PROMO_MAIN_SUBFORM").Form.PublicFormLoad
+   
+End Sub

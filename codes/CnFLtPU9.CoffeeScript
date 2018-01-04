@@ -1,0 +1,9 @@
+extendStart = (func)->
+  func?=()->
+Function::extendEnd = (args...)=>
+
+prev_jsAChidePopup = extendStart Drupal.jsAC::hidePopup
+
+Drupal.jsAC::hidePopup = (keycode)->
+  prev_jsAChidePopup.extendEnd keycode
+  Drupal.jsAC::filterPhotosByTags.apply this, [keycode]

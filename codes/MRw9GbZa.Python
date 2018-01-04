@@ -1,0 +1,53 @@
+import random
+
+
+def test(operation, lhs, rhs, expectedResult):  # TODO: Find better name
+    while True:
+        userInput = input(' '.join([str(lhs), operation, str(rhs), '= ']))
+        if float(userInput) == expectedResult:
+            print("Brawo! Rozwiązałeś zadanie!\n")
+            break
+        else:
+            print("Spróbuj jeszcze raz")
+
+
+def addition(lhs, rhs):
+    test("+", lhs, rhs, lhs + rhs)
+
+
+def multiplication(lhs, rhs):
+    test("*", lhs, rhs, lhs * rhs)
+
+
+def subtraction(lhs, rhs):
+    test("-", lhs, rhs, lhs - rhs)
+
+
+def division(lhs, rhs):
+    test("/", lhs, rhs, lhs / rhs)
+
+
+def switch(choice):
+    return {
+        '1': addition,
+        '2': subtraction,
+        '3': multiplication,
+        '4': division,
+        '5': lambda x, y: exit(0)
+    }.get(choice, 9)
+
+
+startScreen = """###################
+# KURS MATEMATYKI #
+###################
+
+1. Dodawanie
+2. Odejmowanie
+3. Mnożenie
+4. Dzielenie
+5. Wyjście
+
+Wybierz działanie:"""
+
+while True:
+    switch(input(startScreen))(random.randint(1, 101), random.randint(1, 101))

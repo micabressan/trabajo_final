@@ -1,0 +1,17 @@
+[user@localhost idris]$ idris formattest.idr 
+     ____    __     _                                          
+    /  _/___/ /____(_)____                                     
+    / // __  / ___/ / ___/     Version 1.0
+  _/ // /_/ / /  / (__  )      http://www.idris-lang.org/      
+ /___/\__,_/_/  /_/____/       Type :? for help               
+
+Idris is free software with ABSOLUTELY NO WARRANTY.            
+For details type :warranty.
+*formattest> :let x = strFind "test a b" 0 (== ' ')
+*formattest> :t x
+x : Maybe Int
+*formattest> x
+if intToBool (prim__eqChar (strIndex "test a b" 1) ' ')
+  then Just 1
+  else strFind "test a b" 2 (\ARG => intToBool (prim__eqChar ARG ' ')) : Maybe Int
+*formattest>

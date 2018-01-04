@@ -1,0 +1,43 @@
+---
+name: myCrawler
+config:
+  logger: mylogger
+  sentryDSN: asdf
+  remoteLoggerDSN: ''
+sources:
+- name: MyRouter
+  type: IP
+  config:
+    addr: 127.0.0.1
+    port: 9000
+input:
+  type: rest
+  config:
+    httpMethod: GET
+    httpType: json
+    httpHeaders:
+      header1: "$VAR$"
+      header2: value2
+    data: my=ad5a&asdf=asdf
+extractors: []
+model:
+  name: my_model_1
+  fields:
+  - name: url
+    type: text
+    key: true
+  - name: description
+    type: text
+  mappers:
+  - database:
+      name: my_database
+      host: 127.0.0.1
+      port: '27017'
+      user: user
+      database: db
+      collection: collection
+      password: password
+hooks:
+- type: slack
+  config:
+    url: SLACK_URL

@@ -1,0 +1,13 @@
+import System.Random  
+import Control.Monad.State  
+  
+randomSt :: (RandomGen g, Random a) => State g a  
+randomSt = State random  
+
+
+
+• Data constructor not in scope:
+    State :: (g0 -> (a0, g0)) -> State g a
+• Perhaps you meant one of these:
+    ‘StateT’ (imported from Control.Monad.State),
+    variable ‘state’ (imported from Control.Monad.State)

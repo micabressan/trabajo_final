@@ -1,0 +1,28 @@
+assert_eq!(first.col_num, other.row_num);
+	let mut result = Matr::new(first.row_num, other.col_num);
+
+	let mut n: usize = first.col_num;
+	let b: usize = n/2 as usize;
+	let f = first.clone();
+	let o = other.clone();
+
+	let row_factor = thread::spawn(move || {
+		let mut row_factor = vec![0f32; f.row_num];
+		for i in 0..f.row_num {
+			for j in 0..b {
+				row_factor[i] += f.data[i][j*2] * f.data[i][j*2 + 1];
+			}
+		}
+		row_factor
+	}).join().unwrap();
+
+
+	let column_factor = thread::spawn(move || {
+		let mut column_factor = vec![0f32; o.col_num];
+		for i in 0..o.col_num {
+			for j in 0..b {
+				column_factor[i] += o.data[j*2 + 1][i] * o.data[j*2][i];
+			}
+		}
+		column_factor
+	}).join().unwrap();

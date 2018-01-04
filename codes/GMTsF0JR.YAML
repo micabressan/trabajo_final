@@ -1,0 +1,30 @@
+
+service: managers
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+  stage: dev
+  region: eu-west-1
+
+
+functions:
+  hello:
+    handler: handler.hello
+
+resources:
+  Resources:
+    ManagersDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ManagersDynamoDBTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

@@ -1,0 +1,18 @@
+
+(defn nursery [ evaluation-fn training-fn n-groups adepts ]
+	(map peek
+	       (reduce
+	         (fn [buckets x]
+	           (let [b (first buckets), b2 (training-fn (b 2) x)]
+	             (conj (disj buckets b) [(apply evaluation-fn b2) (b 1) b2])))
+	         (apply sorted-set (for [i (range n-groups)] [0 i []]))
+	         	(reverse (sort-by evaluation-fn adepts)))))
+
+
+(nursery + conj
+		5 [ 1 2 34  54 12 23 5  2 3  1 2 12 11 12 32 67 ] )
+
+
+(nursery (fn [ & a ]  (- (apply + a) 10) )
+		#(conj %1 (* 10 %2)) 
+		5 [ 1 2 34  54 12 23 5  2 3  1 2 12 11 12 32 67 ] )

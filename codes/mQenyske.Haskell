@@ -1,0 +1,13 @@
+flip runReaderT 1 $ do
+    ask >>= liftIO . print
+    local (+ 1) $ ask >>= liftIO . print
+    ask >>= liftIO . print
+
+-- This should print 1, 2, 1. And now StateT:
+
+flip runStateT 1 $ do
+    get >>= liftIO . print
+    modify (+1) >> (get >>= liftIO . print)
+    get >>= liftIO . print
+
+-- This prints 1, 2, 2

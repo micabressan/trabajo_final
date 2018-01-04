@@ -1,0 +1,146 @@
+<UserControl
+    x:Class="MVVMStarterTemplate.Views.TopBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MVVMStarterTemplate.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="525"
+    Height="73"
+    d:DesignWidth="300"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+    TextElement.FontSize="14"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
+
+    <materialDesign:ColorZone
+        Padding="16"
+        Background="#FF232323"
+        Mode="PrimaryMid">
+        <DockPanel>
+            <materialDesign:PopupBox
+                Margin="0"
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Right"
+                Foreground="#FFD6D6D6"
+                PopupMode="Click"
+                StaysOpen="True">
+                <Grid Width="300" Margin="8,8,8,8">
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="CheckBox">
+                            <Setter Property="Margin" Value="8,8,10,8" />
+                        </Style>
+                        <Style BasedOn="{StaticResource MaterialDesignTextBox}" TargetType="TextBox">
+                            <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
+                            <Setter Property="Margin" Value="8,8,8,8" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="8,8,8,16"
+                        Style="{StaticResource MaterialDesignTitleTextBlock}">
+                        OPTIONS
+                    </TextBlock>
+
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        materialDesign:HintAssist.Hint="Choose Download Folder"
+                        Text="{Binding TxtPathContent}" />
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        materialDesign:HintAssist.Hint="Auto Download"
+                        IsReadOnly="True"
+                        Text="Read Clipboard and Auto Download" />
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        materialDesign:HintAssist.Hint="Auto Download"
+                        IsReadOnly="True"
+                        Text="Dark Mode" />
+
+                    <CheckBox
+                        IsChecked="{Binding AutodownloadBinding}"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        VerticalAlignment="Bottom" />
+                    <CheckBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        VerticalAlignment="Bottom" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        Padding="0"
+                        VerticalAlignment="Bottom"
+                        Panel.ZIndex="0"
+                        Command="{Binding ChooseFolderCommand}"
+                        Style="{DynamicResource MaterialDesignToolForegroundButton}">
+                        <materialDesign:PackIcon Kind="FolderPlus" />
+                    </Button>
+                </Grid>
+            </materialDesign:PopupBox>
+            <StackPanel materialDesign:RippleAssist.IsCentered="True" Orientation="Horizontal">
+                <materialDesign:ColorZone
+                    Margin="16,0,0,0"
+                    Padding="15,4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Background="#FF121212"
+                    CornerRadius="2"
+                    Mode="Standard">
+                    <Grid Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" MinWidth="301" />
+                            <ColumnDefinition Width="Auto" MinWidth="45" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox
+                            Grid.Column="1"
+                            Height="25"
+                            MinWidth="200"
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            materialDesign:HintAssist.Hint="Enter Youtube URL or Video ID"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                            BorderThickness="0"
+                            Foreground="#FFD6D6D6"
+                            Text="{Binding TxtUrlBinding}" />
+                        <Button
+                            Grid.Column="2"
+                            Width="25"
+                            Height="Auto"
+                            Margin="20,0,0,0"
+                            HorizontalAlignment="Left"
+                            Panel.ZIndex="0"
+                            Command="{Binding BtnClickBinding}"
+                            Style="{DynamicResource MaterialDesignToolForegroundButton}">
+                            <materialDesign:PackIcon Kind="Send" />
+                        </Button>
+                    </Grid>
+                </materialDesign:ColorZone>
+            </StackPanel>
+        </DockPanel>
+    </materialDesign:ColorZone>
+</UserControl>

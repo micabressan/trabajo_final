@@ -1,0 +1,34 @@
+node setup--------------
+Control>
+	Wheel (instanced)
+	main tex> (sprite)
+		Wtween
+		Warning> (tween)
+			warning (sprite)
+	back (button)
+--------------------------
+
+func _set_wheels(count, tex):
+	if tex == "car":
+		create_wheel("w1", Vector2(100, 100), Vector2(100, 0), Vector2(0.5, 0.5))
+		create_wheel("w2", Vector2(100, 200), Vector2(200, 0), Vector2(0.5, 0.5))
+		create_wheel("w3", Vector2(100, 300), Vector2(300, 0), Vector2(0.5, 0.5))
+		create_wheel("w4", Vector2(100, 400), Vector2(400, 0), Vector2(0.5, 0.5))
+		
+	
+func create_wheel(name, pos, off, scale):
+	var wheel = create_new_instance()
+	wheel.set_name(name)
+	self.add_child(wheel)
+	_set_object_pos_offset_scale(self.get_node(name), Vector2(100, 100), Vector2(100, 0), Vector2(0.5, 0.5))
+	
+
+func create_new_instance():
+	var wheel_res = preload("res://Wheel.tscn")
+	var wheel_in = wheel_res.instance()
+	return wheel_in
+
+func _set_object_pos_offset_scale(objectT, pos, off, scale):
+	objectT.set("transform/scale", scale)
+	objectT.set("transform/pos", pos)
+	objectT.set("offset", off)

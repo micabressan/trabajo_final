@@ -1,0 +1,18 @@
+# routes.coffee
+path     = require 'path'
+resource = require path.join(__dirname, 'lib', 'resources')
+
+exports.apply = (app) ->
+	app.resources_path(path.join(__dirname, 'resources'))
+
+	app.root 'sessions'
+	app.resource 'sessions'
+	app.resource 'test', (test) ->
+		test.resource 'subtest'
+
+# Resulting mappings:
+# 1 apanek@thinkpad ~/Projects/ease/sso (git)-[master] % coffee app
+# /: sessions (/home/apanek/Projects/ease/sso/resources/sessions)
+# /sessions: sessions (/home/apanek/Projects/ease/sso/resources/sessions)
+# /test: test (/home/apanek/Projects/ease/sso/resources/test)
+# /test/subtest: test/subtest (/home/apanek/Projects/ease/sso/resources/test/subtest)

@@ -1,0 +1,60 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* only needed once in userChrome.css */
+
+/* Show Bookmarks toolbar on hover                       [ chrome://browser/content/browser.xul -> F12 -> inspect id ] */
+
+.bookmark-item{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important; 
+}
+
+toolbarbutton.bookmark-item .toolbarbutton-text{
+  margin-right: 4px !important;
+}
+
+toolbarbutton.bookmark-item .toolbarbutton-icon{
+  margin-left: 4px !important;
+}
+
+
+/* comment to show icons */
+/*
+toolbarbutton.bookmark-item .toolbarbutton-icon{
+  display: none !important;
+}
+#PlacesToolbarItems > .bookmark-item > .toolbarbutton-icon{
+  display: none !important;
+}
+#bookmarks-view > .bookmark-item > .toolbarbutton-icon{
+  display: none !important;
+}
+*/
+
+/* uncomment to hide labels */
+/*
+toolbarbutton.bookmark-item .toolbarbutton-text{
+  display: none !important;
+}
+*/
+
+
+#PersonalToolbar{
+  height: 1px !important;
+  min-height: 1px !important;
+  max-height: 1px !important;
+  padding:0;
+}
+
+#navigator-toolbox:hover > #PersonalToolbar {
+      height: 2em !important;
+  min-height: 2em !important;
+  max-height: 2em !important;  
+}
+/*
+#titlebar-buttonbox:hover > #PersonalToolbar {
+      height: 2em !important;
+  min-height: 2em !important;
+  max-height: 2em !important;  
+}
+*/

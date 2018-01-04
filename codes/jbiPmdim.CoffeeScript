@@ -1,0 +1,29 @@
+#coffee script for new question
+new_question = ->
+  $('body').on 'click', '.ask_question', (e) ->
+    e.preventDefault()
+    $(this).hide()
+    new_question_form = JST["templates/new_question_form"]({})
+	# add form before/above exists questions table
+    $(new_question_form).insertBefore('.exists_questions')
+    $('form.new_question').on 'click', '.create_question', (e) ->
+      $('form.new_question')
+        .bind 'ajax:success', (e, data, status, xhr) ->
+          $('#errors_alert').remove()
+          question = $.parseJSON(xhr.responseText)
+          new_question = JST["templates/new_question_template"] ({ question: question })
+          $('.exists_questions > tbody:last').append(new_question)
+		  # remove form, show link
+          $('.new_question').remove()
+          $('.ask_question').show()
+
+        .bind 'ajax:error', (e, xhr, status, error) ->
+          $('#errors_alert').remove()
+          response = $.parseJSON(xhr.responseText)
+          errors = JST["templates/errors"]({ title: response.title, resourse_id: response.resource.id, errors: response.errors })
+          $(errors).insertBefore('form.new_question')
+    # 'cancel creating question' button actions
+    $('.cancel_create_question').click (cancel) ->
+      cancel.preventDefault()
+      $('.new_question').remove()
+      $('.ask_question').show()

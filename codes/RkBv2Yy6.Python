@@ -1,0 +1,18 @@
+lista=[]
+
+def adiciona(x):
+	if numero<5:
+		print('tem que ser maior que cinco')
+		return False
+	else:
+		lista.append(numero)
+		return True
+
+
+teste=0
+
+while teste<5:
+	numero=eval(input('introduza um numero maior que 5:'))
+	if adiciona(numero):
+		teste+=1
+		print(lista)

@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class Timer : MonoBehaviour
+{
+    public Text timerLabel;
+
+    private float time;
+
+    private void Start()
+    {
+        time = 10;
+    }
+
+    void Update()
+    {
+        time -= Time.deltaTime;
+
+        timerLabel.text = string.Format("Preostalo {0:000} sekundi" , time);
+
+
+
+        if (time <= 0.0f)
+        {
+            Debug.Log("GAME OVER");
+            timerLabel.text = string.Format("VREME ISTEKLO");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Healthbar>().GameOver();
+        }
+
+    }
+}

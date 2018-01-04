@@ -1,0 +1,5 @@
+shuffle(List) ->
+    Length = length(List),
+    Zipped = [{random:uniform(Length), Elem} || Elem <- List],
+    Sorted = lists:keysort(1, Zipped),
+    [Elem || {_, Elem} <- Sorted].

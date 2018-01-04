@@ -1,0 +1,14 @@
+data FixedQueryParam (sym :: Symbol) (a :: Symbol)
+    deriving Typeable
+
+instance (KnownSymbol sym, KnownSymbol a, HasClient m api)
+      => HasClient m (FixedQueryParam sym a :> api) where
+
+    type Client m (FixedQueryParam sym a :> api) =
+        Client m api
+
+    clientWithRoute pm Proxy req =
+        clientWithRoute pm (Proxy :: Proxy api)
+                        (appendToQueryString paramname (Just paramtext) req)
+        where paramname = pack $ symbolVal (Proxy :: Proxy sym)
+              paramtext = pack $ symbolVal (Proxy :: Proxy a)

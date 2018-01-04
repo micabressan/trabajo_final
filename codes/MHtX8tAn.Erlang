@@ -1,0 +1,42 @@
+-module(bin).
+
+%% API
+-export([toDecimal/2]).
+
+%% Принимает два аргумента: число и его систему счисления. Переводит в десятичную
+%% Вызывается функция от трех переменных, последний аргумент - итоговое число
+toDecimal(Num, Base) -> toDecimal(splitNums(Num), Base, 0).
+
+
+%% Проверка для выхода из рекурсии
+toDecimal(Num, Base, NewNum) when Num == [] -> NewNum;
+
+%% См. правила перевода десятичную сс
+%% Если запрещено использовать встроенный length(), заменить на listLength()
+toDecimal([Head|Tail], Base, NewNum) ->
+  Temp = NewNum + math:pow(Base, length(Tail)) * Head,
+  toDecimal(Tail, Base, Temp).
+
+
+%% Разбивает число на массив, состоящий из цифр этого числа
+splitNums(Num) -> splitByNums(Num, []).
+
+
+%% Проверка на выход из рекурссии
+splitByNums(Num, Mas) when Num == 0 -> Mas;
+
+%% Основное тело функции
+splitByNums(Num, Mas) ->
+  Temp = (round(Num) rem 10), %% Берем остаток от деления на 10
+  NewMas = [Temp | Mas], %% Вставляется в начало массива
+  NewNum = (Num - Temp) / 10, %% У числа убираем последнюю цифру
+  splitByNums(NewNum, NewMas).
+
+
+listLength(List) -> listLength(List, 0).
+
+listLength(List, Count) when not is_list(List) -> error("not a list");
+listLength(List, Count) when List == [] -> Count;
+listLength([Head|Tail], Count) when is_list(Head) -> listLength(Head, Count) + listLength(Tail, Count);
+listLength([Head|Tail], Count) when Tail == [] ->  Count+1;
+listLength([Head|Tail], Count) -> listLength(Tail, Count+1).

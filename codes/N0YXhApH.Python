@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import sys
+import time
+from queue import Queue
+
+
+def main():
+    if len(sys.argv) != 3:
+        print("Use like this:")
+        print("{} <fromdir> <destdir>".format(sys.argv[0]))
+        return 1
+
+    indir = sys.argv[1]
+    outdir = sys.argv[2]
+
+    # Test to see if ffmpeg is installed
+    if subprocess.call(["ffmpeg", "-version"]) == 0:
+        converter = "ffmpeg"
+    else:
+        print("Install either avconv or ffmpeg")
+        return 1
+
+    print("Converting files from", indir)
+    print("Placing results in", os.path.join(outdir))
+
+    filequeue = Queue()
+
+    artists = os.scandir(indir)
+    for artist in artists:
+        if artist.is_dir():
+            albums = os.scandir(artist)
+            for album in albums:
+                if album.is_dir():
+                    songs = os.scandir(album)
+                    for song in songs:
+                        if os.path.splitext(song)[1] in ['.flac', '.mp3', '.ogg', '.m4a']:
+                            if not os.path.isfile(os.path.join(outdir, artist.name, album.name, os.path.splitext(song.name)[0] + ".opus.ogg")):
+                                filequeue.put((artist.name, album.name, song.name))
+    runners = list()
+    while not filequeue.empty():
+        if len(runners) >= 4:
+            time.sleep(0.1)
+            runners = [runner for runner in runners if runner.poll() is None]
+        else:
+            artist, album, song = filequeue.get()
+            subprocess.call(["mkdir", "-p", os.path.join(outdir, artist, album)])
+            runners.append(subprocess.Popen([converter, "-i", os.path.join(indir, artist, album, song), "-vn", "-acodec", "libopus", "-b:a", "96k", os.path.join(outdir, artist, album, os.path.splitext(song)[0] + ".opus.ogg")]))
+
+    while len(runners) > 0:
+        runners = [runner for runner in runners if runner.poll() is None]
+
+if __name__ == '__main__':
+    sys.exit(main())

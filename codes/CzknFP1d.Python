@@ -1,0 +1,14 @@
+number = str(input('What is your number? \n'))
+number = list(map(int, str(number)))
+total = 0
+pos = -1
+for i in number[0:(int(len(number)/2))]:
+    pos += 1
+    if i == number[pos + (int(len(number)/2))]:
+        total += i
+pos = (int(len(number)/2)) - 1
+for i in number[(int(len(number)/2)):len(number)]:
+    pos +=1
+    if i == number[pos - (int(len(number)/2))]:
+        total += i
+print(total)

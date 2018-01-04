@@ -1,0 +1,73 @@
+class Optimization:
+
+    def __init__(self, rod_length):
+        self.costs = [1, 5, 8, 9, 10, 16, 17, 20, 24, 26]
+        self.lengths = list(range(1, 11))
+        self.solution = [None] * 10
+        self.solution_value = None
+        self.size = 10
+        self.yrange = rod_length + 1
+        self.decisions = []
+        for index in range(self.size):
+            self.decisions.append(list([None] * self.yrange))
+        self.functions = []
+        for index in range(self.size):
+            self.functions.append(list([None] * self.yrange))
+
+    def step(self, iteration):
+        # Iterations should go DOWNwards
+        if iteration == self.size - 1:
+            for y in range(self.yrange):
+                self.decisions[iteration][y] = int(y / self.lengths[iteration])
+                self.functions[iteration][y] = self.decisions[iteration][y] * self.costs[iteration]
+        # print(self.decisions)
+        # print(self.functions)
+        elif iteration == 0:
+            y = self.yrange - 1
+            possible_decisions = []
+            for x in range(self.yrange):
+                if y - x * self.lengths[iteration] >= 0:
+                    possible_decisions.append(x)
+            max_value = -1
+            for x in range(len(possible_decisions)):
+                temp_value = self.functions[iteration + 1][y - possible_decisions[x] * self.lengths[iteration]] + \
+                             possible_decisions[x] * self.costs[iteration]
+                if x == 0 or temp_value > max_value:
+                    max_value = temp_value
+                    best_decision = possible_decisions[x]
+            self.decisions[iteration][y] = best_decision
+            self.functions[iteration][y] = max_value
+        else:
+            for y in range(self.yrange):
+                possible_decisions = []
+                for x in range(self.yrange):
+                    if y - x * self.lengths[iteration] >= 0:
+                        possible_decisions.append(x)
+                max_value = -1
+                for x in range(len(possible_decisions)):
+                    temp_value = self.functions[iteration + 1][y - possible_decisions[x] * self.lengths[iteration]] + possible_decisions[x] * self.costs[iteration]
+                    if x == 0 or temp_value > max_value:
+                        max_value = temp_value
+                        best_decision = possible_decisions[x]
+                self.decisions[iteration][y] = best_decision
+                self.functions[iteration][y] = max_value
+
+    def execute_algorithm(self):
+        for iteration in range(self.size - 1, -1, -1):
+            self.step(iteration)
+        matching_y = self.yrange - 1
+        for i in range(self.size):
+            if i == 0:
+                self.solution[i] = self.decisions[i][matching_y]
+                self.solution_value = self.functions[i][matching_y]
+            else:
+                new_y = matching_y - self.solution[i - 1] * self.lengths[i - 1]
+                self.solution[i] = self.decisions[i][new_y]
+                matching_y = new_y
+        print('Max value: ' + str(self.solution_value))
+        print('Solution: ' + str(self.solution))
+
+
+if __name__ == '__main__':
+    O = Optimization(31)
+    O.execute_algorithm()

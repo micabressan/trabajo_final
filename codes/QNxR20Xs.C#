@@ -1,0 +1,60 @@
+		public static void Main(string[] args)
+		{
+			int [,] a = new int [,]
+			{
+   				{0, 1, 13, 3} ,   /*  initializers for row indexed by 0 */
+   				{4, 11, 6, 7} ,   /*  initializers for row indexed by 1 */
+   				{5, 1, 2, 5} ,   /*  initializers for row indexed by 0 */
+   				{0, 7, 2, 2} ,   /*  initializers for row indexed by 0 */
+   				{4, 1, 2, 11} ,   /*  initializers for row indexed by 0 */
+   				{0, 8, 2, 1} ,   /*  initializers for row indexed by 0 */
+   				{8, 9, 10, 11}   /*  initializers for row indexed by 2 */
+			};
+			
+			Console.WriteLine("initial array");
+			for(int row = 0; row < a.GetLength(0); row++)
+			{
+				for(int column = 0; column < a.GetLength(1); column++)
+				{
+					Console.Write(a[row, column].ToString() + " ");
+				}
+				Console.WriteLine();
+			}
+			Console.WriteLine("---------------------------------");
+
+			bool swapPerformed = true;
+
+			while(swapPerformed)
+			{
+				swapPerformed = false;
+				// с первой до предполледней строки
+				for(int row = 0; row < a.GetLength(0) - 1; row++)
+				{
+					// сравниваем последние элементы 
+					if(a[row, a.GetLength(1) - 1] > a[row + 1, a.GetLength(1) - 1])
+					{
+						// swap the rows
+						for(int column = 0; column < a.GetLength(1); column++)
+						{
+							int tempInt = a[row, column];
+							a[row, column] = a[row + 1, column];
+							a[row + 1, column] = tempInt;
+						}
+						swapPerformed = true; // stay in the loop
+						Console.WriteLine("swap performed");
+					}
+				}
+			} // 
+			Console.WriteLine("---------------------------------");
+			Console.WriteLine("resulting array");
+			for(int row = 0; row < a.GetLength(0); row++)
+			{
+				for(int column = 0; column < a.GetLength(1); column++)
+				{
+					Console.Write(a[row, column].ToString() + " ");
+				}
+				Console.WriteLine();
+			}
+			Console.Write("Press any key to continue . . . ");
+			Console.ReadKey(true);
+		}

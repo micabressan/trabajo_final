@@ -1,0 +1,146 @@
+
+#wrapper{
+    margin: 0 auto;
+    height: 780px;
+    }
+    
+    
+    a{
+        display: block;
+        text-decoration: none;
+        color: black;
+    }
+    
+    
+    a:hover,a::selection{
+        text-decoration: none;
+        color: black;
+    }
+    
+    h1.med{
+        text-align: center;
+        padding-top: 10%;
+        padding-bottom: 5%;
+        font-size: 50px;
+    }
+    
+    .fontMed{
+        font-size: 30px;
+        position: absolute;
+        left:40%;
+    }
+    
+    .circle{
+        position:relative;
+        left: 5%;
+        border-radius:50%;
+        width: 40px;
+        height: 40px;
+        border: black solid 1px;
+        display: inline-block;
+    }
+    
+    .button{
+        left:66%;
+        color: black;
+        width:27%;
+        position: relative;
+        font-size: 100%;
+        text-align: center;
+    }
+    
+    .center{
+        margin-left:45%;
+    }
+
+ .medPic{
+        position:relative;
+        display: inline-block;
+        left:30%;
+        top:10%;
+		height:60%;
+        width:30%;
+    }
+
+    .profilePic{
+        left: 10%;
+        top: 10%;
+        box-shadow: -3px 3px grey;
+        display: inline-block;
+        position: relative;
+		height:80%;
+        width:40%;
+    }
+     .medText{
+        position:relative;
+        display: inline-block;
+        width: 250px;
+        left:10%;
+        top:20%;
+        font-size: 25px;
+    }
+    
+    .profileText{
+        position:relative;
+        display: inline-block;
+        left:20%;
+        top:20%;
+        font-size: 25px;
+    }
+    .idText{
+        display: block;
+        font-size: 17px;
+        padding-left: 10%;
+    }
+    .boxMedText{
+    	font-size:20px;
+    }
+    
+    .box{
+    	width: 80%;
+    	height: 25%;
+    	border-bottom: solid 1px black;
+    	margin: 0 auto;
+    }
+    
+    
+    @media screen and (max-width: 480px) {
+        body {
+            width: 100%;
+        }
+        .box{
+            width: 100%;
+        }
+        .circle{
+            width: 35px;
+            height: 35px;
+        }
+    
+        .navbar{
+            width: 100%;
+        }
+        h1.med{
+            font-size: 35px;
+        }
+    
+        .fontMed{
+            font-size: 25px;
+            left:42%;
+        }
+        .idText{
+        	font-size:12px;
+        }
+        .profileText{
+        	left:15%;
+        	font-size: 18px;
+        }
+        .profile{
+        	left:5%;
+        }
+    }
+    
+    @media screen and (min-width: 480px) {
+    .profilePic{
+    	width:180px;
+    }
+    }

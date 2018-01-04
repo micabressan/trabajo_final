@@ -1,0 +1,99 @@
+2017-12-27 21:19:34.215 Info, Node006, Value::Set - COMMAND_CLASS_THERMOSTAT_MODE - Mode - 0 - 1 - Heat
+2017-12-27 21:19:34.215 Detail, Node006, Queuing (Send) ThermostatModeCmd_Set (Node=6): 0x01, 0x0a, 0x00, 0x13, 0x06, 0x03, 0x40, 0x01, 0x01, 0x25, 0x0f, 0x89
+2017-12-27 21:19:34.216 Detail, Node006, Queuing (Send) ThermostatModeCmd_Get (Node=6): 0x01, 0x09, 0x00, 0x13, 0x06, 0x02, 0x40, 0x02, 0x25, 0x10, 0x96
+2017-12-27 21:19:34.216 Detail, 
+2017-12-27 21:19:34.217 Info, Node006, Sending (Send) message (Callback ID=0x0f, Expected Reply=0x13) - ThermostatModeCmd_Set (Node=6): 0x01, 0x0a, 0x00, 0x13, 0x06, 0x03, 0x40, 0x01, 0x01, 0x25, 0x0f, 0x89
+2017-12-27 21:19:34.225 Detail, Node006,   Received: 0x01, 0x04, 0x01, 0x13, 0x01, 0xe8
+2017-12-27 21:19:34.225 Detail, Node006,   ZW_SEND_DATA delivered to Z-Wave stack
+2017-12-27 21:19:34.243 Detail, Node006,   Received: 0x01, 0x07, 0x00, 0x13, 0x0f, 0x00, 0x00, 0x02, 0xe6
+2017-12-27 21:19:34.249 Detail, Node006,   ZW_SEND_DATA Request with callback ID 0x0f received (expected 0x0f)
+2017-12-27 21:19:34.249 Info, Node006, Request RTT 32 Average Request RTT 29
+2017-12-27 21:19:34.249 Detail,   Expected callbackId was received
+2017-12-27 21:19:34.249 Detail,   Expected reply was received
+2017-12-27 21:19:34.249 Detail,   Message transaction complete
+2017-12-27 21:19:34.250 Detail, 
+2017-12-27 21:19:34.250 Detail, Node006, Removing current message
+2017-12-27 21:19:34.250 Detail, 
+2017-12-27 21:19:34.250 Info, Node006, Sending (Send) message (Callback ID=0x10, Expected Reply=0x04) - ThermostatModeCmd_Get (Node=6): 0x01, 0x09, 0x00, 0x13, 0x06, 0x02, 0x40, 0x02, 0x25, 0x10, 0x96
+2017-12-27 21:19:34.259 Detail, Node006,   Received: 0x01, 0x04, 0x01, 0x13, 0x01, 0xe8
+2017-12-27 21:19:34.259 Detail, Node006,   ZW_SEND_DATA delivered to Z-Wave stack
+2017-12-27 21:19:34.276 Detail, Node006,   Received: 0x01, 0x07, 0x00, 0x13, 0x10, 0x00, 0x00, 0x02, 0xf9
+2017-12-27 21:19:34.276 Detail, Node006,   ZW_SEND_DATA Request with callback ID 0x10 received (expected 0x10)
+2017-12-27 21:19:34.276 Info, Node006, Request RTT 25 Average Request RTT 27
+2017-12-27 21:19:34.276 Detail,   Expected callbackId was received
+2017-12-27 21:19:36.303 Detail, Node006,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x06, 0x03, 0x20, 0x03, 0xff, 0x2b
+2017-12-27 21:19:36.304 Detail, 
+2017-12-27 21:19:36.304 Info, Node006, Response RTT 2053 Average Response RTT 1927
+2017-12-27 21:19:36.304 Info, Node006, Received Basic report from node 6: level=255
+2017-12-27 21:19:36.323 Detail, Node006,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x06, 0x03, 0x40, 0x03, 0x01, 0xb5
+2017-12-27 21:19:36.324 Detail, 
+2017-12-27 21:19:36.324 Info, Node006, Response RTT 2073 Average Response RTT 2000
+2017-12-27 21:19:36.324 Detail, Node006, Refreshed Value: old value=4, new value=1, type=list
+2017-12-27 21:19:36.324 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:36.325 Info, Node006, Received thermostat mode: Heat
+2017-12-27 21:19:36.325 Detail, Node006,   Expected reply and command class was received
+2017-12-27 21:19:36.325 Detail, Node006,   Message transaction complete
+2017-12-27 21:19:36.325 Detail, 
+2017-12-27 21:19:36.325 Detail, Node006, Removing current message
+2017-12-27 21:19:36.326 Detail, Node006, Notification: ValueChanged
+2017-12-27 21:19:36.354 Detail, Node006,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x06, 0x03, 0x40, 0x03, 0x01, 0xb5
+2017-12-27 21:19:36.354 Detail, 
+2017-12-27 21:19:36.355 Detail, Node006, Refreshed Value: old value=1, new value=1, type=list
+2017-12-27 21:19:36.355 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:36.355 Info, Node006, Received thermostat mode: Heat
+2017-12-27 21:19:36.355 Detail, Node006, Notification: ValueChanged
+2017-12-27 21:19:36.381 Detail, Node006,   Received: 0x01, 0x0c, 0x00, 0x04, 0x00, 0x06, 0x06, 0x43, 0x03, 0x01, 0x2a, 0x02, 0x9e, 0x00
+2017-12-27 21:19:36.382 Detail, 
+2017-12-27 21:19:36.387 Detail, Node006,   Received: 0x01, 0x0c, 0x00, 0x04, 0x00, 0x06, 0x06, 0x43, 0x03, 0x02, 0x2a, 0x02, 0xf8, 0x65
+2017-12-27 21:19:36.387 Detail, 
+2017-12-27 21:19:36.387 Detail, Node006, Refreshed Value: old value=76.0, new value=76.0, type=decimal
+2017-12-27 21:19:36.388 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:36.388 Info, Node006, Received thermostat setpoint report: Setpoint Cooling 1 = 76.0F
+2017-12-27 21:19:36.388 Detail, Node006, Notification: ValueChanged
+2017-12-27 21:19:36.409 Detail, Node006,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x06, 0x03, 0x42, 0x03, 0x01, 0xb7
+2017-12-27 21:19:36.409 Detail, 
+2017-12-27 21:19:36.409 Detail, Node006, Refreshed Value: old value=Idle, new value=Heating, type=string
+2017-12-27 21:19:36.409 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:36.409 Info, Node006, Received thermostat operating state: Heating
+2017-12-27 21:19:36.409 Detail, Node006, Notification: ValueChanged
+
+2017-12-27 21:19:48.137 Info, Node006, Value::Set - COMMAND_CLASS_THERMOSTAT_SETPOINT - Cooling 1 - 2 - 1 - 72
+2017-12-27 21:19:48.147 Detail, Node006, Queuing (Send) ThermostatSetpointCmd_Set (Node=6): 0x01, 0x0c, 0x00, 0x13, 0x06, 0x05, 0x43, 0x01, 0x02, 0x09, 0x48, 0x25, 0x11, 0xd6
+2017-12-27 21:19:48.147 Detail, Node006, Queuing (Send) ThermostatSetpointCmd_Get (Node=6): 0x01, 0x0a, 0x00, 0x13, 0x06, 0x03, 0x43, 0x02, 0x02, 0x25, 0x12, 0x97
+2017-12-27 21:19:48.147 Detail, 
+2017-12-27 21:19:48.147 Info, Node006, Sending (Send) message (Callback ID=0x11, Expected Reply=0x13) - ThermostatSetpointCmd_Set (Node=6): 0x01, 0x0c, 0x00, 0x13, 0x06, 0x05, 0x43, 0x01, 0x02, 0x09, 0x48, 0x25, 0x11, 0xd6
+2017-12-27 21:19:48.157 Detail, Node006,   Received: 0x01, 0x04, 0x01, 0x13, 0x01, 0xe8
+2017-12-27 21:19:48.157 Detail, Node006,   ZW_SEND_DATA delivered to Z-Wave stack
+2017-12-27 21:19:48.174 Detail, Node006,   Received: 0x01, 0x07, 0x00, 0x13, 0x11, 0x00, 0x00, 0x02, 0xf8
+2017-12-27 21:19:48.179 Detail, Node006,   ZW_SEND_DATA Request with callback ID 0x11 received (expected 0x11)
+2017-12-27 21:19:48.180 Info, Node006, Request RTT 30 Average Request RTT 28
+2017-12-27 21:19:48.180 Detail,   Expected callbackId was received
+2017-12-27 21:19:48.180 Detail,   Expected reply was received
+2017-12-27 21:19:48.180 Detail,   Message transaction complete
+2017-12-27 21:19:48.180 Detail, 
+2017-12-27 21:19:48.181 Detail, Node006, Removing current message
+2017-12-27 21:19:48.181 Detail, 
+2017-12-27 21:19:48.181 Info, Node006, Sending (Send) message (Callback ID=0x12, Expected Reply=0x04) - ThermostatSetpointCmd_Get (Node=6): 0x01, 0x0a, 0x00, 0x13, 0x06, 0x03, 0x43, 0x02, 0x02, 0x25, 0x12, 0x97
+2017-12-27 21:19:48.190 Detail, Node006,   Received: 0x01, 0x04, 0x01, 0x13, 0x01, 0xe8
+2017-12-27 21:19:48.190 Detail, Node006,   ZW_SEND_DATA delivered to Z-Wave stack
+2017-12-27 21:19:48.207 Detail, Node006,   Received: 0x01, 0x07, 0x00, 0x13, 0x12, 0x00, 0x00, 0x03, 0xfa
+2017-12-27 21:19:48.208 Detail, Node006,   ZW_SEND_DATA Request with callback ID 0x12 received (expected 0x12)
+2017-12-27 21:19:48.209 Info, Node006, Request RTT 26 Average Request RTT 27
+2017-12-27 21:19:48.209 Detail,   Expected callbackId was received
+2017-12-27 21:19:50.236 Detail, Node006,   Received: 0x01, 0x0c, 0x00, 0x04, 0x00, 0x06, 0x06, 0x43, 0x03, 0x02, 0x2a, 0x02, 0xd0, 0x4d
+2017-12-27 21:19:50.236 Detail, 
+2017-12-27 21:19:50.236 Info, Node006, Response RTT 2054 Average Response RTT 2027
+2017-12-27 21:19:50.237 Detail, Node006, Refreshed Value: old value=76.0, new value=72.0, type=decimal
+2017-12-27 21:19:50.237 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:50.237 Info, Node006, Received thermostat setpoint report: Setpoint Cooling 1 = 72.0F
+2017-12-27 21:19:50.237 Detail, Node006,   Expected reply and command class was received
+2017-12-27 21:19:50.237 Detail, Node006,   Message transaction complete
+2017-12-27 21:19:50.238 Detail, 
+2017-12-27 21:19:50.238 Detail, Node006, Removing current message
+2017-12-27 21:19:50.238 Detail, Node006, Notification: ValueChanged
+2017-12-27 21:19:50.261 Detail, Node006,   Received: 0x01, 0x0c, 0x00, 0x04, 0x00, 0x06, 0x06, 0x43, 0x03, 0x02, 0x2a, 0x02, 0xd0, 0x4d
+2017-12-27 21:19:50.262 Detail, 
+2017-12-27 21:19:50.262 Detail, Node006, Refreshed Value: old value=72.0, new value=72.0, type=decimal
+2017-12-27 21:19:50.262 Detail, Node006, Changes to this value are not verified
+2017-12-27 21:19:50.263 Info, Node006, Received thermostat setpoint report: Setpoint Cooling 1 = 72.0F
+2017-12-27 21:19:50.263 Detail, Node006, Notification: ValueChanged

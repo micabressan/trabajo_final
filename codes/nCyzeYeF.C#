@@ -1,0 +1,56 @@
+
+чтобы ты у меня не слямзил и сам продумал прорисовку - кину тебе кусок кода с пятиугольниками
+/// <summary> 
+/// метод отрисовки одного пятиугольника 
+/// </summary> 
+/// <param name="side">длина</param> 
+/// <param name="x0">Х координата центра</param> 
+/// <param name="y0">У координата центра</param> 
+private void DrawPentagon(Graphics g, int side, double x0, double y0) 
+{ 
+double x, y, x1 = x0 + side * Math.Cos(0), y1 = y0 + side * Math.Sin(0); 
+//отрисовка в цикле по одной стороне 
+for (int count = 0; count < 6; count++) 
+{ 
+x = x0 + side * Math.Cos((2 * Math.PI * (count)) / 5); 
+y = y0 + side * Math.Sin((2 * Math.PI * (count)) / 5); 
+g.DrawLine(new Pen(Brushes.Black, 1), new Point((int)Math.Round(x1), (int)Math.Round(y1)), 
+new Point((int)Math.Round(x), (int)Math.Round(y))); 
+x1 = x; 
+y1 = y; 
+} 
+} 
+
+/// <summary> 
+/// основной метод отрисовки 
+/// </summary> 
+private void Draw() 
+{ 
+int positionX = (int)Math.Round(starSet.MaxSide()) + 10; //Х координата пятиугольника 
+int positionY = positionX; //У координата пятиугольника 
+int kx = (int)Math.Round(Math.Sqrt(starSet.Size)) + 1; //количество элементов по длине 
+int ky = kx - 1; //количество элементов по высоте 
+Bitmap myBitmap = new Bitmap(kx * 2 * (int)Math.Round(starSet.MaxSide()) + 20 * kx + 20, 
+ky * 2 * (int)Math.Round(starSet.MaxSide()) + 20 * ky + 20); //генерация изображения 
+Graphics g = Graphics.FromImage(myBitmap); //подключение отрисовки к изображению 
+g.Clear(Color.White); //очищение изображения 
+int numbers = 0; //количество отрисованных пятиугольников 
+for (int count1 = 0; count1 < ky; count1++) 
+{ 
+int positionX1 = positionX; //Х координата пятиугольника в данной линиии 
+for (int count2 = 0; count2 < kx; count2++) 
+{ 
+if (numbers == starSet.Size) //все пятиугольники отрисованы 
+break; 
+//номер пятиугольника 
+g.DrawString((numbers+1).ToString(), new Font("Arial", 8), 
+new SolidBrush(Color.Black), new Point(positionX1, positionY)); 
+//отрисовка пятиугольника 
+DrawPentagon(g, (int)Math.Round(starSet[numbers].Side), positionX1, positionY); 
+positionX1 += (int)Math.Round(starSet.MaxSide())*2 + 10; //изменение координаты Х 
+numbers++; 
+} 
+positionY += (int)Math.Round(starSet.MaxSide()) *2 + 10; //изменение координаты У 
+} 
+pictureBox1.Image = myBitmap; 
+}

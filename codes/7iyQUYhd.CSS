@@ -1,0 +1,114 @@
+.sibl_left{
+	float:left;
+	width:25%;
+}
+.sibl_right{
+	float:right;
+	width:75%;
+}
+
+
+#menu-menyu-v-kategorii{
+	padding:0 15px;
+}
+#menu-menyu-v-kategorii>li>a{
+	color: #FFF;
+	/*background: url('left_menu_li_bg.png')!important;*/
+	padding:10px 20px;
+	display:block;
+	height:44px;
+	font:15px/24px "Open Sans",Arial,sans-serif;
+	border-bottom:1px solid #fff;
+	background-color:#0C6AD4;
+}
+
+#menu-menyu-v-kategorii > li.active > a{
+	/*background: url('left_menu_li_bg_active.png')!important;*/
+	background-color:#2881E6;
+}
+
+#menu-menyu-v-kategorii .second-menu{
+	padding: 0!important;
+	background: #f1f9fb!important;
+}
+
+#menu-menyu-v-kategorii .second-menu > li{
+	margin-bottom: 0!important;
+}
+
+#menu-menyu-v-kategorii .second-menu > li > a {
+    display: block;
+    padding: 12px 0;
+    font: 14px "Open Sans",Arial,sans-serif;
+    border-bottom: 1px dotted #b2b2b2;
+    margin: 0 30px;
+    color: #0288c1;
+}
+
+#menu-menyu-v-kategorii .second-menu > li:last-child > a{
+	border: none;
+}
+
+#menu-menyu-v-kategorii .second-menu > li:hover{
+	background: #d12222;
+}
+
+#menu-menyu-v-kategorii .second-menu > li:hover > a{
+	color: #FFF;
+	text-decoration: none!;
+	border-color: #d12222;
+}
+
+#menu-menyu-v-kategorii > li{
+	position:relative;
+}
+#menu-menyu-v-kategorii > li.menu-item-has-children > a:before {
+    content: '\203A';
+	right: 0;
+	position: absolute;
+	font-size: 38px;
+	letter-spacing: 7px;
+	line-height: 17px;
+}
+
+
+
+#menu-menyu-v-kategorii li.menu-item-has-children .second-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    z-index: 1;
+    visibility: hidden;
+    transition: all linear 0.2s;
+    border: 1px solid #eeeeee;
+    box-shadow: 3px 3px 4px #eeeeee;
+    padding-right: 10px;
+    padding-top: 0;
+    opacity: 0;
+}
+#menu-menyu-v-kategorii li.menu-item-has-children:hover .second-menu {
+    visibility: visible;
+    opacity: 1;
+}
+#menu-menyu-v-kategorii .second-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #f1f9fb;
+}
+
+
+#menu-menyu-v-kategorii > li.active > a, #menu-menyu-v-kategorii > li > a:hover, #menu-menyu-v-kategorii > li > a:focus {
+    background: #0088cc;
+    color: white;
+}
+#menu-menyu-v-kategorii ul.second-menu.dropdown {
+    position: static;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+#menu-menyu-v-kategorii ul.second-menu > li.active > a {
+    color: #4b5357;
+}

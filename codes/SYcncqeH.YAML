@@ -1,0 +1,10 @@
+name: ElementalKit
+version: 1.0
+main: me.celmore123.kit.Kit
+description: Kits
+
+commands:
+    kit:
+        usage: /<command> 
+        aliases: [getkit]
+        description: get a kit.

@@ -1,0 +1,94 @@
+return model =
+  name: 'Settler'
+  level: 5
+  model: 4
+  size: 1.6
+  specs:
+    shield:
+      capacity: [175,250]
+      reload: [4,10]
+    generator:
+      capacity: [75,150]
+      reload: [25,40]
+    ship:
+      mass: 325
+      speed: [80,120]
+      rotation: [45,85]
+      acceleration: [60,115]
+  bodies:
+    main:
+      section_segments: 10
+      offset:
+        x: 0
+        y: -120
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0]
+        y: [0,5,22,70,100,105,110,150,170,220,235]
+        z: [15,15,15,20,20,20,20,30,43,75,75]
+      width: [0,15,30,38,40,45,47,40,35,15,0]
+      height: [5,35,60,70,70,75,77,70,55,15,0]
+      texture: [4,10,1,1,4,4,2,4,3,63]
+    enginea:
+      section_segments: 6
+      offset:
+        x: 37
+        y: -80
+        z: 30
+      position:
+        x: [-5.7,3,-4,-3,0,0,0]
+        y: [0,40,70,75,122,131,120]
+        z: [-33,-10,-5,-5,0,0,5,5,0]
+      width: [0,20,25,20,24,20,0]
+      height: [0,30,40,35,38,34,0]
+      texture: [1,11,13,63,13,13]
+      propeller: true
+    cockpit:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -119
+        z: 50
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,0,9,21,38,52]
+        z: [-20,-15,0,12,18,17]
+      width: [2,8,14,19,17,10]
+      height: [0,2,14,16,13,2]
+      texture: [9]
+    laser:
+      section_segments: 6
+      offset:
+        x: 42
+        y: -68
+        z: 35
+      position:
+        x: [0,0,0,0,-10]
+        y: [-8,5,0,5,40]
+        z: [0,0,0,0,0]
+      width: [0,5,5,8,15]
+      height: [0,5,5,10,15]
+      texture: [17,13]
+      angle: 1
+      laser:
+        damage: [8,12]
+        rate: 4
+        type: 1
+        speed: [110,140]
+        number: 1
+        error: 0
+  wings:
+    wings:
+      offset:
+        x: 20
+        y: 35
+        z: 70
+      length: [30,10]
+      width: [80,60,25]
+      angle: [-15,-20]
+      position: [0,30,70]
+      texture: [11,13]
+      bump:
+        position: 0
+        size: 10
+      doubleside: true

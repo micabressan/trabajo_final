@@ -1,0 +1,26 @@
+    public Transform camera;
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+
+        Vector3 desiredMove = (camera.transform.forward * Input.GetAxis("Vertical") + camera.transform.right * Input.GetAxis("Horizontal")) * Time.deltaTime * 10   ;
+
+        Vector3 pos = transform.position;
+
+        //pos.z += -Input.GetAxis("Horizontal") * transform.forward.z * Time.deltaTime * 2;
+        pos.x += Input.GetAxis("Vertical") *  Time.deltaTime * 2;
+
+        transform.position += desiredMove;
+
+        transform.eulerAngles += new Vector3(0, Input.GetAxis("Twist"), 0) * Time.deltaTime * 30;
+
+        print(Input.GetAxis("Twist"));
+
+    }
+}

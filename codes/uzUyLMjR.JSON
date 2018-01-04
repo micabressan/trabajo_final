@@ -1,0 +1,43 @@
+{
+  "id_observation": 457,
+  "location": "Soumagne",
+  "temperature": 0,
+  "date": "2017-12-14 17:59:29",
+  "nbBirds": "1",
+  "bird": {
+    "id_bird": 252,
+    "name": "Perdrix grise",
+    "url": "http://www.natagora.be/DQ/oiseaux/photos_especes/perdrix_JMP.jpg",
+    "attributes": [
+      
+    ]
+  },
+  "longitude": "5.72684267",
+  "latitude": "50.60619831",
+  "commentaire": "Test",
+  "session": {
+    "id_session": 457,
+    "date_begin": "2017-12-14 17:58:58",
+    "date_end": "2017-12-14 18:00:02",
+    "id_user": 58,
+    "sessionConformity": {
+      "name": "non valide",
+      "id_session_conformity": 1
+    },
+    "observationList": null
+  },
+  "medias": [
+    {
+      "id_media": 23,
+      "url": "https://www.dropbox.com/s/txhjlc35eamfrnd/NATAMOBILE_1513270784385.mp4?dl=1",
+      "mediaType": {
+        "id_media_type": 2,
+        "name": "video"
+      },
+      "mediaConformity": {
+        "id_media_conformity": 2,
+        "name": "nok"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+use std::collections::HashMap;
+use opengl_graphics::{ Texture, TextureSettings };
+
+struct TextureCache {
+    textures: HashMap<String, Texture>
+}
+
+impl TextureCache {
+    fn new() -> TextureCache {
+        TextureCache {
+            textures: HashMap::new()
+        }
+    }
+
+    fn get_texture(&mut self, name: &str) -> &Texture {
+        let cached_texture = self.textures.get(name.to_string());
+        cached_texture.get(name).or_else({
+            let tex = Texture::from_path(Path::new(name), &TextureSettings::new()).unwrap();
+            self.textures.insert(name, tex);
+            tex
+        })
+    }
+}

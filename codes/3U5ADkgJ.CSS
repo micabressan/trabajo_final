@@ -1,0 +1,35 @@
+CSS:  /* Downloaded from https://www.codeseek.co/ */
+body {background-color:#ffffff; margin:0px; font-family:Century Gothic, sans-serif; font-size:11px; color:#444444;}a{color:#9f9f9f; text-decoration:none; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s;}a:hover{color:#d47790; text-decoration:none; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s;}h1{font-family: 'Open Sans', sans-serif; font-size:15px;}#source{position:fixed; bottom:10px; right:10px; font-size:15px;}#sbbg{position:fixed; bottom:0px; left:0px; opacity:.7; z-index:-1;}#sbbg img{max-width:500px; height:auto;}#sidebar{position:fixed; margin-left:500px; margin-top:100px; width:250px; text-align:center;}#sidebarimg{width:240px; text-align:center; margin-top:0px; padding:5px; border:3px double #9f9f9f;}#sidebarimg img{max-width:235px;height:auto;}#title{padding-top:10px; font-family: 'Bad Script', cursive; font-size:18px; color:#ff8d8d; text-shadow: 1px 1px #9f9f9f;}#description{margin-top:-5px;font-size:9px;}#links{position:fixed; margin-top:120px; margin-left:756px;}#links a{display:inline-block; text-align:right; width:70px; height:12px; margin-top:2px; padding:2px; background:#ffe4e4;}#links a:hover {width:90px; color:#fff; background:#d47790; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s;
+
+
+
+HTML: <!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>𝓢𝓸𝓵</title>
+   
+   
+   
+      <link rel="stylesheet" href="css/style.css">
+ 
+   
+</head>
+ 
+<body>
+  <div id="source"><a href="http://xat.me/hauntzer">T</a></div>
+ 
+<div id="sbbg"><img src="http://i65.tinypic.com/333e9tg.jpg" /></div>
+ 
+<div id="sidebar"><div id="sidebarimg">
+<img src="http://i67.tinypic.com/4q6dlh.jpg" /></div>
+ 
+<div id="title" style="font-style:italics;">𝓢𝓸𝓵</div>
+ 
+<div id="denopeion"><br />𝗇𝖺̃𝗈 𝖽𝖾𝗂𝗑𝖾 𝗊𝗎𝖾 𝖺 𝗍𝗋𝗂𝗌𝗍𝖾𝗓𝖺 𝖽𝗈 𝗉𝖺𝗌𝗌𝖺𝖽𝗈 𝖾 𝗈 𝗆𝖾𝖽𝗈 𝖽𝗈 𝖿𝗎𝗍𝗎𝗋𝗈 𝖺𝖼𝖺𝖻𝖾 𝖼𝗈𝗆 𝖺 𝖿𝖾𝗅𝗂𝖼𝗂𝖽𝖺𝖽𝖾 𝖽𝗈 𝗆𝗈𝗆𝖾𝗇𝗍𝗈.</div></div>
+ 
+  <div id="links"><a href="http://xat.me/iNeverSanis">𝓐𝓶𝓸𝓻</a><br /><a href="http://xat.me/BreziinhaGatinha">𝓑𝓻e</a><br /><a href="http://xat.me/G4BR13L1995">𝓑𝓲𝓮𝓵</a>
+   
+   
+</body>
+</html>

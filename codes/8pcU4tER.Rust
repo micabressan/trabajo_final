@@ -1,0 +1,24 @@
+#[allow(non_snake_case)]
+
+extern crate nalgebra;
+
+macro_rules! dump(
+	($($a:expr),*) => {
+		println!(concat!("[", file!(), ":", line!(), "]\n", $("\t", stringify!($a), ": {:?}\n "),*), $($a),*);
+	}
+);
+
+use nalgebra::{Isometry2, Vector2, Real};
+
+fn main() {
+    let V = Vector2::new(1.,-2.);
+    let A = Vector2::new(5.,0.);
+    let rc = 4.;
+    let E = Vector2::new(rc + A[0], A[1]);
+    let F = E + V;
+    let FmA = F - A;
+    let rd = FmA.norm();
+    let e = FmA[1].atan2(FmA[0]);
+
+    dump!(V, A, rc, E, F, FmA, rd, e, e/f64::pi() * 180.);
+}

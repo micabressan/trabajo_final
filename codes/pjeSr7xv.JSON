@@ -1,0 +1,484 @@
+{
+    "result": "ok",
+    "content": {
+        "type1": [],
+        "type2": [
+            {
+                "id": 1,
+                "alias_id": 37,
+                "name": "یک تخته استاندارد",
+                "alter_name": "Sng",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [
+                    {
+                        "id": 3,
+                        "name": "تست3",
+                        "price": null,
+                        "percent": 5,
+                        "type": 1,
+                        "price_percent": 0,
+                        "description": null,
+                        "created_at": "1510384446",
+                        "updated_at": "1510384446",
+                        "deleted_at": null,
+                        "pivot": {
+                            "room_id": 1,
+                            "room_package_id": 3
+                        }
+                    }
+                ],
+                "capacity": 0,
+                "bed": {
+                    "adult": 1,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 2,
+                "alias_id": 69,
+                "name": "یک تخته اکونومی",
+                "alter_name": "Sng.e",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 1,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 3,
+                "alias_id": 37,
+                "name": "دو تخته استاندارد",
+                "alter_name": "DB",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [
+                    {
+                        "id": 1,
+                        "name": "تست",
+                        "price": 100000,
+                        "percent": null,
+                        "type": 1,
+                        "price_percent": 1,
+                        "description": null,
+                        "created_at": "1510383596",
+                        "updated_at": "1510383596",
+                        "deleted_at": null,
+                        "pivot": {
+                            "room_id": 3,
+                            "room_package_id": 1
+                        }
+                    }
+                ],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 4,
+                "alias_id": 67,
+                "name": "دو تخته اکونومی",
+                "alter_name": "DBe",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [
+                    {
+                        "id": 2,
+                        "name": "تست ۲",
+                        "price": 3000000,
+                        "percent": null,
+                        "type": 0,
+                        "price_percent": 1,
+                        "description": null,
+                        "created_at": "1510383760",
+                        "updated_at": "1510384250",
+                        "deleted_at": null,
+                        "pivot": {
+                            "room_id": 4,
+                            "room_package_id": 2
+                        }
+                    }
+                ],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 5,
+                "alias_id": 40,
+                "name": "سه تخته استاندارد",
+                "alter_name": "TR",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 3,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 6,
+                "alias_id": 70,
+                "name": "سه تخته اکونومی",
+                "alter_name": "Tr.e",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 3,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 7,
+                "alias_id": 64,
+                "name": "چهار تخته اسناندارد",
+                "alter_name": "4BD",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 8,
+                "alias_id": 72,
+                "name": "چهار تخته اکونومی",
+                "alter_name": "4BD.e",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 9,
+                "alias_id": 39,
+                "name": "سوييت فصل استاندارد",
+                "alter_name": "S.SU",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 2
+                }
+            },
+            {
+                "id": 10,
+                "alias_id": 50,
+                "name": "کوئین",
+                "alter_name": "Q.R",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 11,
+                "alias_id": 55,
+                "name": "اتاق امپریال",
+                "alter_name": "Imp",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 3,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 12,
+                "alias_id": 53,
+                "name": "سوئیت امپریال",
+                "alter_name": "Imp.S",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 2
+                }
+            },
+            {
+                "id": 13,
+                "alias_id": 63,
+                "name": "اتاق آينده",
+                "alter_name": "FEU",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 14,
+                "alias_id": 58,
+                "name": "پنت هاوس اسپا",
+                "alter_name": "P.Spa",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 15,
+                "alias_id": 59,
+                "name": "پنت هوس رم",
+                "alter_name": "Rom",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 16,
+                "alias_id": 62,
+                "name": "پرزيدنتال",
+                "alter_name": "Prs",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 17,
+                "alias_id": 60,
+                "name": "دوبلكس عرب",
+                "alter_name": "Ar",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 18,
+                "alias_id": 54,
+                "name": "دوبلكس چین",
+                "alter_name": "CHN",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 19,
+                "alias_id": 61,
+                "name": "دوبلكس هند",
+                "alter_name": "Ind",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 20,
+                "alias_id": 56,
+                "name": "دوبلكس ایران باستان",
+                "alter_name": "Ol.IR",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 21,
+                "alias_id": 57,
+                "name": "دوبلكس ایران اسلام",
+                "alter_name": "Is.IR",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 22,
+                "alias_id": 52,
+                "name": "دوبلكس مصر",
+                "alter_name": "EGY",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 4,
+                    "exadult": 1
+                }
+            },
+            {
+                "id": 23,
+                "alias_id": 71,
+                "name": "سوييت فصل اكونومي",
+                "alter_name": "S.Su.e",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 2
+                }
+            },
+            {
+                "id": 24,
+                "alias_id": 41,
+                "name": "توئین استاندارد",
+                "alter_name": "TW",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 25,
+                "alias_id": 68,
+                "name": "توئین اکونومی",
+                "alter_name": "TW.e",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            }
+        ]
+    }
+}

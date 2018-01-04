@@ -1,0 +1,174 @@
+-- Aufgabenblatt 5 Aufgabe 1 & 2 & 3
+--Braun, Helena & Hamacher, Marcel (Kristin Knorr, Gruppe 6)
+import Data.Char 
+--Aufgabe 1 Uhrzeiten 
+
+type Zeit = (Int, Int)
+
+--(a)
+
+addStd :: Zeit -> Int -> Zeit 
+addStd (a, b) x 
+    | (checkZeit a b) && ((a + x) < 24) = (a+x, b) 
+    | (checkZeit a b) && ((a + x) == 24) = (0, b) 
+    | (checkZeit a b) && ((a + x) > 24)  = (a+x-24, b)
+    | otherwise = error "Kein gültiges Uhrzeitformat (h,m)!"
+
+
+-- 1. Wenn die Stunden kleiner als 24 sind, können die zu addierenden Stunden einfach addiert werden.
+-- 2. Wenn sie gleich 24 sind, soll für die Stunden 0 angegeben werden.
+-- 3. Wenn sie größer als 24 sind, sollen von der Summe 24 abgezogen werden, um den Mitternachtsumschlag zu berücksichtigen. 
+-- Es wird zunächst immer überprüft, ob das Uhrzeitformat korrekt ist. Wenn nicht, wird eine Fehlermeldung ausgegeben
+
+addMin :: Zeit -> Int -> Zeit 
+addMin (a, b) x  
+    | (checkZeit a b) && (b + x) < 60 = (a, b + x)
+    | (checkZeit a b) && (b + x) == 60 && ((calculateStd (a, b) x) < 24) = (a+1, 0)
+    | (checkZeit a b) && (b + x) == 60 && ((calculateStd (a, b) x) == 24) = (0, 0)
+    | (checkZeit a b) && (b + x) == 60 && ((calculateStd (a, b) x) > 24) = (a-24, 0)
+    | (checkZeit a b) && (b + x) > 60 && ((calculateStd (a, b) x) < 24) = ((calculateStd (a, b) x), (calculateMin (a, b) x)) 
+    | (checkZeit a b) && (b + x) > 60 && ((calculateStd (a, b) x) == 24) = (0, (calculateMin (a, b) x))
+    | (checkZeit a b) && (b + x) > 60 && ((calculateStd (a, b) x) > 24) = ((((calculateStd (a, b) x))-24), (calculateMin (a, b) x))  
+    | otherwise = error "Kein gültiges Uhrzeitformat (h,m)!"
+
+-- 1. Wenn die Minuten unter einer Stunde sind, können sie einfach addiert werden.
+-- 2. Wenn die Minuten genau eine Stunde ergeben und der Mitternachtsumschlag nicht beachtet werden muss, soll eine Stunde addiert werden. Die Minuten sind = 0.
+-- 3. Wenn die Minuten genau eine Stunde ergeben und es Mitternacht ist, soll (0, 0) ausgegeben werden.
+-- 4. Wenn die Minuten genau eine Stunde ergeben und der Mitternachtsumschlag beachtet werden muss, sollen 24 Stunden abgezogen werden. Die Minuten sind = 0.
+-- 5. Wenn die Minuten über eine Stunde gehen und der Mitternachtsumschlag nicht beachtet werden muss, soll die Uhrzeit nach (calculateStd, calculateMin) berechnet werden. 
+-- 6. Wenn die Minuten über eine Stunde gehen und es Mitternacht ist, soll für die Stunde 0 angegeben werden und die Minuten nach calculateMin berechnet werden.
+-- 7. Wenn die Minuten über eine Stunde gehen und der Mitternachtsumschlag beachtet werden muss, soll die Uhrzeit nach ((calculateStd)-24, calculateMin) berechnet werden. 
+-- Es wird zunächst immer überprüft, ob das Uhrzeitformat korrekt ist. Wenn nicht, wird eine Fehlermeldung ausgegeben
+
+-- Berechnen der Zeit von 5. -7. durch: 
+-- 1. Minuten werden durch 60 geteilt und zu Stunden addiert. 
+calculateStd :: Zeit -> Int -> Int
+calculateStd (e, f) y = e+((f+y)`div`60)
+
+-- 2. Stunden mit 60 multipliziert, Minuten Addiert und `mod`60 ausgegeben. 
+calculateMin :: Zeit -> Int -> Int
+calculateMin (g, h) z = (g*60+h+z)`mod`60
+
+
+--Prüft, ob die Eingabe ein gültiges Uhrzeitformat ist.
+
+checkZeit::Int->Int->Bool
+checkZeit h m
+            | h >= 0 && h <24 && m >= 0 && m <60 = True
+            | otherwise = False
+
+
+----------------------------------------------------------------
+
+--(b)
+dauer :: Zeit -> Zeit -> Zeit 
+dauer (a, b) (c, d) 
+    | a == c && b == d = (0, 0) 
+    | (checkZeit a b) && (checkZeit c d) && a >= c = calculatetupel (calculatemin (c+24, d) - calculatemin (a,b))
+    | (checkZeit a b) && (checkZeit c d) && calculatemin (c, d) > calculatemin (a,b) = calculatetupel (calculatemin (c, d) - calculatemin (a,b))
+    | otherwise = error "Kein gültiges Uhrzeitformat (h,m)!"
+
+-- 1. Bei gleicher Zeit wird das Ergebnis (0, 0) ausgegeben. 
+-- 2. Prüft das Uhrzeitformat und beachtet den Umschlag um Mitternacht (z.B. a = 23 & Uhr c = 01 Uhr sind 2 Stunden und nicht 22.
+-- Um das zu berücksichtigen, werden zu c 24 Stunden addiert.)
+-- 3. Prüft das Uhrzeitformat und berechnet die Differenz ohne Mitternachtsumschlag. 
+-- 4. Wenn das Uhrzeitformat nicht gültig ist, wird Fehlermeldung ausgegeben.
+
+-- Berechnung der Differenz in zwei Schritten: 
+-- 1. rechnet Zeittupel in Minuten um 
+calculatemin :: Zeit -> Int
+calculatemin (e, f) = e*60+f
+
+-- 2. rechnet Minuten in Zeittupel um
+calculatetupel :: Int -> Zeit
+calculatetupel g = (div g 60, mod g 60)
+
+
+----------------------------------------------------------------
+
+-- (c) Wandelt Uhrzeit Tupel in String um 
+anzeige :: Zeit -> String 
+anzeige (h, m)
+    | m >= 10 = show h ++ ":" ++ show m ++ "Uhr"
+    | otherwise = show h ++ ":0" ++  show m ++ " Uhr"
+
+----------------------------------------------------------------
+
+--Aufgabe 2 Vollkommene Zahlen 
+-- (a) Berechnet Liste aller positiven Teiler einer Zahl 
+teiler :: Int -> [Int]
+teiler n = [y | y <- [1..n], (n`mod`y == 0)]
+
+----------------------------------------------------------------
+
+-- (b) 	
+
+-- Berechnet die Summe aller ihrer VERSCHIEDENEN Teiler einer Zahl
+
+teilerVerschieden :: Int -> [Int]
+teilerVerschieden n = [y | y <- [1..n], (n`mod`y == 0), y /= n]
+summe :: Int -> Int
+summe n = sum (teilerVerschieden n)
+
+-- ..., bei der die Summe GRÖßER ist als die Zahl selbst.
+
+summeGroesser :: [Int]
+summeGroesser = [y | y <- [1..1000], y < summe y]
+
+----------------------------------------------------------------
+
+-- (c)
+
+-- ..., bei der die Summe GLEICH ist als die Zahl selbst.
+
+summeGleich :: [Int]
+summeGleich = [y | y <- [1..1000], y == summe y]
+
+---------------------------------------------------------------
+--Aufgabe 3 Cäsar-Chiffre 
+
+-- (a)
+-- kodiert einen Char gemäß der allgemeinen Cäsar-Kodierung
+kodiereChar :: Int -> Char -> Char
+kodiereChar n c
+   | isLower c = chr (ord 'a' + (ord c - ord 'a' + n)`mod`26)
+   | isUpper c = chr (ord 'A' + (ord c - ord 'A' + n)`mod`26) -- Damit auch Großbuchstaben erlaubt sind
+   | otherwise = c
+
+-- kodiert einen String gemäß der allgemeinen Cäsar-Kodierung
+kodiere :: Int -> String -> String
+kodiere _ [] = []
+kodiere n (c:cs) = kodiereChar n c : kodiere n cs
+
+caesar :: String -> String
+caesar cs = kodiere 3 cs
+
+-- dekodiert einen String gemäß der allgemeinen Cäsar-Kodierung
+dekodiere :: Int -> String -> String
+dekodiere n cs = kodiere (-n) cs
+
+---------------------------------------------------------------
+-- (b)
+
+-- kodiert einen tuple (schlüssel) und einen String zu einem String
+kodiereSubst :: [(Char, Char)] -> String -> String
+kodiereSubst keys str = map (ers keys) str where
+  ers [] char = char
+  ers ((a,b):c) char
+    | a == char = b
+    | otherwise = ers c char
+
+-- dekodiert einen tuple (schlüssel) und einen String zu einem String
+dekodiereSubst :: [(Char, Char)] -> String -> String
+dekodiereSubst keys str = map (ers keys) str where
+  ers [] char = char
+  ers ((b,a):c) char
+    | a == char = b
+    | otherwise = ers c char
+
+---------------------------------------------------------------
+-- (c)
+
+-- erzeugt einen Schlüssel gemäss der Caeasar Chiffre mithilfe der Funktion kodiereChar (es muss ein Int Wert angegeben werden)
+erzeugeSchluessel:: Int -> [(Char, Char)]
+erzeugeSchluessel n = map (\c -> (c, kodiereChar n c)) (['a'..'z']++['A'..'Z'])

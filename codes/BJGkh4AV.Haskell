@@ -1,0 +1,16 @@
+-- removeAt 3 [1..5] = (3, [1, 2, 4, 5])
+removeAt :: Int -> [a] -> (a, [a])
+removeAt n lst = removeAt' n lst []
+
+removeAt' :: Int -> [a] -> [a] -> (a, [a])
+removeAt' _ [] acc = error "out of range"
+removeAt' 1 (x:xs) acc = (x, (reverse acc) ++ xs)
+removeAt' n (x:xs) acc = removeAt' (n - 1) xs (x:acc)
+
+rnd_select :: [a] -> Int -> [a]
+rnd_select _ 0 = []
+rnd_select [] _ = []
+rnd_select lst n = (fst result) : rnd_select (snd result) (n - 1)
+    where result = removeAt rand lst
+
+-- How do I get rand??

@@ -1,0 +1,14 @@
+from datetime import datetime, timedelta
+
+import docker
+
+client = docker.from_env()
+
+seven_days = datetime.now() - timedelta(days=7)
+
+for container in client.containers.list():
+    container_created = datetime.strptime(container.attrs['Created'].split('.')[0], '%Y-%m-%dT%H:%M:%S')
+
+    if container_created < seven_days:
+        container.stop()
+        print('Stopped \t', container.name)

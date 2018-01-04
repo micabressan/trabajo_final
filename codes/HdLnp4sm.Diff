@@ -1,0 +1,237 @@
+gitCode Review / gstreamer / gstreamer-vaapi.git / commitdiff
+ ? search: 
+ re
+summary | shortlog | log | commit | commitdiff | review | tree
+raw | patch | inline | side by side (parent: 3bee15c)
+vaapisink: Use vecima-place protocol to position wayland sink surface (adding vecima...
+author	Louis-Francis Ratté-Boulianne <lfrb@collabora.com>	
+Tue, 24 Mar 2015 13:26:04 -0600 (15:26 -0400)
+committer	Faham Negini <Faham.Negini@vecima.com>	
+Wed, 14 Jun 2017 15:37:59 -0600 (15:37 -0600)
+Change-Id: I8b13f96df5ec27ea7063fdd9e8802da78cd5b226
+
+configure.ac		patch | blob | history
+gst-libs/gst/vaapi/Makefile.am		patch | blob | history
+gst-libs/gst/vaapi/gstvaapidisplay_wayland.c		patch | blob | history
+gst-libs/gst/vaapi/gstvaapidisplay_wayland_priv.h		patch | blob | history
+gst-libs/gst/vaapi/gstvaapiwindow_wayland.c		patch | blob | history
+gst-libs/gst/vaapi/vecima-place.xml	[new file with mode: 0644]	patch | blob
+gst/vaapi/gstvaapisink.c		patch | blob | history
+diff --git a/configure.ac b/configure.ac
+index ce1424a..de91fe8 100644 (file)
+--- a/configure.ac
++++ b/configure.ac
+@@ -474,6 +474,7 @@ if test "x$enable_wayland" = "xyes"; then
+       saved_CPPFLAGS="$CPPFLAGS"
+       CPPFLAGS="$CPPFLAGS $WAYLAND_CFLAGS"
+       AC_CHECK_HEADERS([wayland-client.h], [], [USE_WAYLAND=0])
++      AC_PATH_PROG([wayland_scanner], [wayland-scanner])
+       CPPFLAGS="$saved_CPPFLAGS"
+     ], [:])
+ fi
+diff --git a/gst-libs/gst/vaapi/Makefile.am b/gst-libs/gst/vaapi/Makefile.am
+index dd3aed5..2637217 100644 (file)
+--- a/gst-libs/gst/vaapi/Makefile.am
++++ b/gst-libs/gst/vaapi/Makefile.am
+@@ -322,11 +322,13 @@ libgstvaapi_egl_source_priv_h =                   \
+ libgstvaapi_wayland_source_c =                 \
+        gstvaapidisplay_wayland.c               \
+        gstvaapiwindow_wayland.c                \
++       vecima-place-protocol.c                 \
+        $(NULL)
+ 
+ libgstvaapi_wayland_source_h =                 \
+        gstvaapidisplay_wayland.h               \
+        gstvaapiwindow_wayland.h                \
++       vecima-place-client-protocol.h          \
+        $(NULL)
+ 
+ libgstvaapi_wayland_source_priv_h =            \
+@@ -570,4 +572,19 @@ CLEANFILES = \
+        $(PKG_VERSION_FILE)     \
+        $(NULL)
+ 
++# Autogenerate Wayland protocol definitions from XML.
++%-protocol.c : %.xml
++       $(wayland_scanner) code < $< > $@
++
++%-client-protocol.h : %.xml
++       $(wayland_scanner) client-header < $< > $@
++
++CLEANFILES += vecima-place-client-protocol.h
++
++BUILT_SOURCES += vecima-place-protocol.c
++BUILT_SOURCES += vecima-place-client-protocol.h
++
++# Extra clean files so that maintainer-clean removes *everything*
++MAINTAINERCLEANFILES = Makefile.in
++
+ -include $(top_srcdir)/git.mk
+diff --git a/gst-libs/gst/vaapi/gstvaapidisplay_wayland.c b/gst-libs/gst/vaapi/gstvaapidisplay_wayland.c
+index a41c116..bf76a8a 100644 (file)
+--- a/gst-libs/gst/vaapi/gstvaapidisplay_wayland.c
++++ b/gst-libs/gst/vaapi/gstvaapidisplay_wayland.c
+@@ -148,6 +148,8 @@ registry_handle_global (void *data,
+         wl_registry_bind (registry, id, &wl_subcompositor_interface, 1);
+   else if (strcmp (interface, "wl_shell") == 0)
+     priv->shell = wl_registry_bind (registry, id, &wl_shell_interface, 1);
++  else if (strcmp (interface, "vecima_place") == 0)
++    priv->place = wl_registry_bind (registry, id, &vecima_place_interface, 1);
+   else if (strcmp (interface, "wl_output") == 0) {
+     priv->output = wl_registry_bind (registry, id, &wl_output_interface, 1);
+     wl_output_add_listener (priv->output, &output_listener, priv);
+diff --git a/gst-libs/gst/vaapi/gstvaapidisplay_wayland_priv.h b/gst-libs/gst/vaapi/gstvaapidisplay_wayland_priv.h
+index 60a3424..e47bb5e 100644 (file)
+--- a/gst-libs/gst/vaapi/gstvaapidisplay_wayland_priv.h
++++ b/gst-libs/gst/vaapi/gstvaapidisplay_wayland_priv.h
+@@ -26,6 +26,7 @@
+ 
+ #include <gst/vaapi/gstvaapidisplay_wayland.h>
+ #include "gstvaapidisplay_priv.h"
++#include "vecima-place-client-protocol.h"
+ 
+ G_BEGIN_DECLS
+ 
+@@ -63,6 +64,7 @@ struct _GstVaapiDisplayWaylandPrivate
+   struct wl_subcompositor *subcompositor;
+   struct wl_shell *shell;
+   struct wl_output *output;
++  struct vecima_place *place;
+   struct wl_registry *registry;
+   guint width;
+   guint height;
+diff --git a/gst-libs/gst/vaapi/gstvaapiwindow_wayland.c b/gst-libs/gst/vaapi/gstvaapiwindow_wayland.c
+index 086bfa9..80fd058 100644 (file)
+--- a/gst-libs/gst/vaapi/gstvaapiwindow_wayland.c
++++ b/gst-libs/gst/vaapi/gstvaapiwindow_wayland.c
+@@ -36,6 +36,7 @@
+ #include "gstvaapiutils.h"
+ #include "gstvaapifilter.h"
+ #include "gstvaapisurfacepool.h"
++#include "vecima-place-client-protocol.h"
+ 
+ #define DEBUG 1
+ #include "gstvaapidebug.h"
+@@ -330,6 +331,8 @@ gst_vaapi_window_wayland_create (GstVaapiWindow * window,
+ 
+   GST_VAAPI_OBJECT_LOCK_DISPLAY (window);
+   priv->surface = wl_compositor_create_surface (priv_display->compositor);
++  priv->opaque_region = wl_compositor_create_region (priv_display->compositor);
++  wl_region_add (priv->opaque_region, 0, 0, *width, *height);
+   GST_VAAPI_OBJECT_UNLOCK_DISPLAY (window);
+   if (!priv->surface)
+     return FALSE;
+@@ -408,16 +411,18 @@ gst_vaapi_window_wayland_move (GstVaapiWindow * window,
+ {
+   GstVaapiWindowWaylandPrivate *const priv =
+       GST_VAAPI_WINDOW_WAYLAND_GET_PRIVATE (window);
+-    GST_ERROR("subsurface is %p", priv->subsurface);
++  GstVaapiDisplayWaylandPrivate *const priv_display =
++      GST_VAAPI_DISPLAY_WAYLAND_GET_PRIVATE (GST_VAAPI_OBJECT_DISPLAY (window));
+ 
+   if (priv->subsurface) {
+     struct wl_surface *surface = GST_VAAPI_OBJECT_ID (window);
+     wl_subsurface_set_sync (priv->subsurface);
+     wl_subsurface_set_position (priv->subsurface, x, y);
+-    GST_ERROR("wl_subsurface_set_position %i,%i", x, y);
+     wl_surface_commit (surface);
+     wl_subsurface_set_desync (priv->subsurface);
+     return TRUE;
++  } else {
++    vecima_place_set_position(priv_display->place, priv->surface, x, y);
+   }
+ 
+   return FALSE;
+diff --git a/gst-libs/gst/vaapi/vecima-place.xml b/gst-libs/gst/vaapi/vecima-place.xml
+new file mode 100644 (file)
+index 0000000..ff04379
+--- /dev/null
++++ b/gst-libs/gst/vaapi/vecima-place.xml
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="vecima_place">
++
++  <copyright>
++    Copyright Vecima Networks Inc. as an unpublished work.
++    All Rights Reserved.
++
++    The information contained herein is confidential property of
++    Vecima Networks Inc. The use, copying, transfer or disclosure of
++    such information is prohibited except by express written agreement
++    with Vecima Networks Inc.
++  </copyright>
++
++  <interface name="vecima_place" version="1">
++    <description summary="force position of surfaces">
++      This interface allows clients to set a specific
++      position for their surfaces.
++    </description>
++
++    <request name="set_position">
++      <description summary="set surface position">
++        Move a surface to the given position instead of a random one.
++      </description>
++      <arg name="surface" type="object" interface="wl_surface"/>
++      <arg name="x" type="int" summary="the x position to place the surface at"/>
++      <arg name="y" type="int" summary="the y position to place the surface at"/>
++    </request>
++  </interface>
++</protocol>
+diff --git a/gst/vaapi/gstvaapisink.c b/gst/vaapi/gstvaapisink.c
+index 9c926cf..c8e3d72 100644 (file)
+--- a/gst/vaapi/gstvaapisink.c
++++ b/gst/vaapi/gstvaapisink.c
+@@ -590,11 +590,7 @@ gst_vaapisink_video_overlay_set_render_rectangle (GstVideoOverlay * overlay,
+   display_rect->height = height;
+   sink->force_rect = 1;
+ 
+-  GST_DEBUG ("render rect (%d,%d):%ux%u",
+-      display_rect->x, display_rect->y,
+-      display_rect->width, display_rect->height);
+   if (sink->window && sink->foreign_window) {
+-      GST_WARNING("SET POSITION %i %i", x, y);
+       display_rect->x = 0;
+       display_rect->y = 0;
+       gst_vaapi_window_set_position (sink->window, x, y);
+@@ -1102,6 +1098,7 @@ gst_vaapisink_ensure_window_size (GstVaapiSink * sink, guint * width_ptr,
+     guint * height_ptr)
+ {
+   GstVaapiDisplay *const display = GST_VAAPI_PLUGIN_BASE_DISPLAY (sink);
++  GstVaapiRectangle *const display_rect = &sink->display_rect;
+   GstVideoRectangle src_rect, dst_rect, out_rect;
+   guint num, den, display_width, display_height, display_par_n, display_par_d;
+   gboolean success, scale;
+@@ -1119,6 +1116,12 @@ gst_vaapisink_ensure_window_size (GstVaapiSink * sink, guint * width_ptr,
+     return;
+   }
+ 
++  if (display_rect->width > 0 && display_rect->height > 0) {
++    *width_ptr  = display_rect->width;
++    *height_ptr = display_rect->height;
++    return;
++  }
++
+   gst_vaapi_display_get_pixel_aspect_ratio (display,
+       &display_par_n, &display_par_d);
+ 
+@@ -1351,6 +1354,7 @@ gst_vaapisink_set_caps (GstBaseSink * base_sink, GstCaps * caps)
+   GstVaapiPluginBase *const plugin = GST_VAAPI_PLUGIN_BASE (base_sink);
+   GstVaapiSink *const sink = GST_VAAPISINK_CAST (base_sink);
+   GstVideoInfo *const vip = GST_VAAPI_PLUGIN_BASE_SINK_PAD_INFO (sink);
++  GstVaapiRectangle *display_rect = &sink->display_rect;
+   GstVaapiDisplay *display;
+   guint win_width, win_height;
+ 
+@@ -1392,6 +1396,11 @@ gst_vaapisink_set_caps (GstBaseSink * base_sink, GstCaps * caps)
+     gst_vaapi_window_set_fullscreen (sink->window, sink->fullscreen);
+     gst_vaapi_window_show (sink->window);
+     gst_vaapi_window_get_size (sink->window, &win_width, &win_height);
++
++    gst_vaapi_window_set_position (sink->window, display_rect->x, display_rect->y);
++    display_rect->x = 0;
++    display_rect->y = 0;
++
+     gst_vaapisink_set_event_handling (sink, sink->handle_events);
+   }
+   sink->window_width = win_width;
+RSSAtom

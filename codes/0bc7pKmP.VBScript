@@ -1,0 +1,16 @@
+Function internetExplorer()
+
+ Set ie = CreateObject("InternetExplorer.Application")
+    With ie
+        .navigate "https://de.wikipedia.org/wiki/VfB_Stuttgart"
+        .Visible = True
+    End With
+    Do Until Not ie.Busy And ie.readyState = 4
+        DoEvents
+    Loop
+
+Debug.Print ie.document.getelementsbyclassname("firstHeading")(0).innertext
+
+Range("A1").Value = ie.document.getelementsbyclassname("firstHeading")(0).innertext
+
+End Function

@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE XMI SYSTEM "UMLX13.dtd">
+<XMI xmi.version="1.0" timestamp="2018-01-01 09:04:09">
+	<XMI.header>
+		<XMI.documentation>
+			<XMI.exporter>Enterprise Architect</XMI.exporter>
+			<XMI.exporterVersion>3.1</XMI.exporterVersion>
+		</XMI.documentation>
+		<XMI.metamodel xmi.name="UML" xmi.version="1.3"/>
+	</XMI.header>
+	<XMI.content>
+		<Model_Management.Model xmi.id="MX_EAID_46C3D161_22F7_49f1_A5CB_8EED1BC62521">
+			<Foundation.Core.ModelElement.name>EA Model</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Core.Namespace.ownedElement>
+				<Foundation.Core.Class xmi.id="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+					<Foundation.Core.ModelElement.name>EARootClass</Foundation.Core.ModelElement.name>
+					<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+					<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+					<Foundation.Core.GeneralizableElement.isRoot xmi.value="true"/>
+					<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+					<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+					<Foundation.Core.Class.isActive xmi.value="false"/>
+				</Foundation.Core.Class>
+				<Model_Management.Package xmi.id="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521">
+					<Foundation.Core.ModelElement.name>Model</Foundation.Core.ModelElement.name>
+					<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+					<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+					<Foundation.Core.GeneralizableElement.isRoot xmi.value="true"/>
+					<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+					<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+					<Foundation.Core.Namespace.ownedElement>
+						<Model_Management.Package xmi.id="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391">
+							<Foundation.Core.ModelElement.name>Designs</Foundation.Core.ModelElement.name>
+							<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+							<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+							<Foundation.Core.GeneralizableElement.isRoot xmi.value="true"/>
+							<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+							<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+							<Foundation.Core.Namespace.ownedElement>
+								<Model_Management.Package xmi.id="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75">
+									<Foundation.Core.ModelElement.name>State</Foundation.Core.ModelElement.name>
+									<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+									<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+									<Foundation.Core.GeneralizableElement.isRoot xmi.value="true"/>
+									<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+									<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+									<Foundation.Core.Namespace.ownedElement>
+										<Behavioral_Elements.Activity_Graphs.ActivityGraph xmi.id="EAID_FCE69E67_7994_4904_B3C8_00B17D361A75_ActivityModel">
+											<Foundation.Core.ModelElement.name>State/ActivityModel</Foundation.Core.ModelElement.name>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+											<Behavioral_Elements.State_Machines.StateMachine.context>
+												<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+											</Behavioral_Elements.State_Machines.StateMachine.context>
+											<Behavioral_Elements.State_Machines.StateMachine.top>
+												<Behavioral_Elements.State_Machines.CompositeState xmi.id="EAID_FCE69E67_7994_4904_B3C8_00B17D361A75_Activity_Top">
+													<Foundation.Core.ModelElement.name>{top}</Foundation.Core.ModelElement.name>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.CompositeState.isConcurrent xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.CompositeState.subvertex>
+														<Behavioral_Elements.State_Machines.Pseudostate xmi.id="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB">
+															<Foundation.Core.ModelElement.name>Initial</Foundation.Core.ModelElement.name>
+															<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+															<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+															<Behavioral_Elements.State_Machines.Pseudostate.kind xmi.value="initial"/>
+															<Behavioral_Elements.State_Machines.StateVertex.outgoing>
+																<Behavioral_Elements.State_Machines.Transition xmi.idref="EAID_604C96F5_0DA2_4ebd_97F5_5ADECB6A2B78"/>
+															</Behavioral_Elements.State_Machines.StateVertex.outgoing>
+														</Behavioral_Elements.State_Machines.Pseudostate>
+														<Behavioral_Elements.State_Machines.SimpleState xmi.id="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1">
+															<Foundation.Core.ModelElement.name>State1</Foundation.Core.ModelElement.name>
+															<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+															<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+															<Foundation.Core.ModelElement.namespace>
+																<Model_Management.Package xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+															</Foundation.Core.ModelElement.namespace>
+														</Behavioral_Elements.State_Machines.SimpleState>
+														<Behavioral_Elements.State_Machines.SimpleState xmi.id="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962">
+															<Foundation.Core.ModelElement.name>State2</Foundation.Core.ModelElement.name>
+															<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+															<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+															<Foundation.Core.ModelElement.namespace>
+																<Model_Management.Package xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+															</Foundation.Core.ModelElement.namespace>
+														</Behavioral_Elements.State_Machines.SimpleState>
+														<Behavioral_Elements.State_Machines.Pseudostate xmi.id="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510">
+															<Foundation.Core.ModelElement.name>Choice</Foundation.Core.ModelElement.name>
+															<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+															<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+															<Behavioral_Elements.State_Machines.StateVertex.outgoing>
+																<Behavioral_Elements.State_Machines.Transition xmi.idref="EAID_17347704_F2AC_45b8_811B_799CD37938D1"/>
+																<Behavioral_Elements.State_Machines.Transition xmi.idref="EAID_60595E7A_8EAE_4a7c_9B7D_92E9C52A4901"/>
+															</Behavioral_Elements.State_Machines.StateVertex.outgoing>
+															<Behavioral_Elements.State_Machines.StateVertex.incoming>
+																<Behavioral_Elements.State_Machines.Transition xmi.idref="EAID_AD19B062_0074_4d82_922C_11C19BFE0A19"/>
+															</Behavioral_Elements.State_Machines.StateVertex.incoming>
+														</Behavioral_Elements.State_Machines.Pseudostate>
+													</Behavioral_Elements.State_Machines.CompositeState.subvertex>
+												</Behavioral_Elements.State_Machines.CompositeState>
+											</Behavioral_Elements.State_Machines.StateMachine.top>
+											<Behavioral_Elements.State_Machines.StateMachine.transitions>
+												<Behavioral_Elements.State_Machines.Transition xmi.id="EAID_604C96F5_0DA2_4ebd_97F5_5ADECB6A2B78">
+													<Foundation.Core.ModelElement.name/>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.Transition.source>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+													</Behavioral_Elements.State_Machines.Transition.source>
+													<Behavioral_Elements.State_Machines.Transition.target>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+													</Behavioral_Elements.State_Machines.Transition.target>
+												</Behavioral_Elements.State_Machines.Transition>
+												<Behavioral_Elements.State_Machines.Transition xmi.id="EAID_67ED728A_9712_4a30_A3AB_CCC0C61CD424">
+													<Foundation.Core.ModelElement.name/>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.Transition.source>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+													</Behavioral_Elements.State_Machines.Transition.source>
+													<Behavioral_Elements.State_Machines.Transition.target>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+													</Behavioral_Elements.State_Machines.Transition.target>
+												</Behavioral_Elements.State_Machines.Transition>
+												<Behavioral_Elements.State_Machines.Transition xmi.id="EAID_17347704_F2AC_45b8_811B_799CD37938D1">
+													<Foundation.Core.ModelElement.name/>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.Transition.source>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+													</Behavioral_Elements.State_Machines.Transition.source>
+													<Behavioral_Elements.State_Machines.Transition.target>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+													</Behavioral_Elements.State_Machines.Transition.target>
+												</Behavioral_Elements.State_Machines.Transition>
+												<Behavioral_Elements.State_Machines.Transition xmi.id="EAID_AD19B062_0074_4d82_922C_11C19BFE0A19">
+													<Foundation.Core.ModelElement.name/>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.Transition.source>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+													</Behavioral_Elements.State_Machines.Transition.source>
+													<Behavioral_Elements.State_Machines.Transition.target>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+													</Behavioral_Elements.State_Machines.Transition.target>
+												</Behavioral_Elements.State_Machines.Transition>
+												<Behavioral_Elements.State_Machines.Transition xmi.id="EAID_60595E7A_8EAE_4a7c_9B7D_92E9C52A4901">
+													<Foundation.Core.ModelElement.name/>
+													<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+													<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+													<Behavioral_Elements.State_Machines.Transition.source>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+													</Behavioral_Elements.State_Machines.Transition.source>
+													<Behavioral_Elements.State_Machines.Transition.target>
+														<Behavioral_Elements.State_Machines.StateVertex xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+													</Behavioral_Elements.State_Machines.Transition.target>
+												</Behavioral_Elements.State_Machines.Transition>
+											</Behavioral_Elements.State_Machines.StateMachine.transitions>
+										</Behavioral_Elements.Activity_Graphs.ActivityGraph>
+									</Foundation.Core.Namespace.ownedElement>
+								</Model_Management.Package>
+							</Foundation.Core.Namespace.ownedElement>
+						</Model_Management.Package>
+						<Model_Management.Package xmi.id="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E">
+							<Foundation.Core.ModelElement.name>Requirements</Foundation.Core.ModelElement.name>
+							<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+							<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+							<Foundation.Core.GeneralizableElement.isRoot xmi.value="true"/>
+							<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+							<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+							<Foundation.Core.Namespace.ownedElement>
+								<Behavioral_Elements.Collaborations.Collaboration xmi.id="EAID_55B3B504_6A45_47cd_B3E6_38E950B56D3E_Collaboration">
+									<Foundation.Core.ModelElement.name>Collaborations</Foundation.Core.ModelElement.name>
+									<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+									<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+									<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+									<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+									<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+									<Foundation.Core.Namespace.ownedElement>
+										<Foundation.Core.Comment xmi.id="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_61873FCD_5289_4c70_A929_84485F50A31F">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_02538091_F727_44c7_8513_A962E523CEBD">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_A73EF935_726C_4123_9068_54A92EAC2537">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+										<Foundation.Core.Comment xmi.id="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924">
+											<Foundation.Core.ModelElement.name/>
+											<Foundation.Core.ModelElement.visibility xmi.value="public"/>
+											<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+										</Foundation.Core.Comment>
+									</Foundation.Core.Namespace.ownedElement>
+									<Behavioral_Elements.Collaborations.Collaboration.interaction/>
+								</Behavioral_Elements.Collaborations.Collaboration>
+							</Foundation.Core.Namespace.ownedElement>
+						</Model_Management.Package>
+					</Foundation.Core.Namespace.ownedElement>
+				</Model_Management.Package>
+			</Foundation.Core.Namespace.ownedElement>
+		</Model_Management.Model>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>ea_package_id</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>17/04/2012</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>17/04/2012</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>iscontrolled</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>isprotected</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>usedtd</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>logxml</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_46C3D161_22F7_49f1_A5CB_8EED1BC62521"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>parent</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>EAID_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>iscontrolled</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>lastloaddate</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>2018-01-01 07:31:10</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>isprotected</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>usedtd</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>logxml</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>complexity</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>ea_package_id</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>2</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>parent</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>EAID_55B3B504_6A45_47cd_B3E6_38E950B56D3E</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>iscontrolled</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>isprotected</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>usedtd</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>logxml</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>complexity</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:20:29 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:30:37 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:20:34 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:30:34 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:20:39 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:30:35 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:20:44 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:30:36 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Diagramming.Diagram xmi.id="EAID_ECC586CF_0451_4674_B613_FEFAB392F3D4">
+			<Diagramming.Diagram.name>Designs</Diagramming.Diagram.name>
+			<Diagramming.Diagram.toolName>Rational Rose 98</Diagramming.Diagram.toolName>
+			<Diagramming.Diagram.diagramType>StateDiagram</Diagramming.Diagram.diagramType>
+			<Diagramming.Diagram.style>Doc:</Diagramming.Diagram.style>
+			<Diagramming.Diagram.owner>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_FCE69E67_7994_4904_B3C8_00B17D361A75"/>
+			</Diagramming.Diagram.owner>
+			<Diagramming.Diagram.element>
+				<Diagramming.DiagramElement xmi.id="EAID_3B96ED99_F0D3_4bcd_9FE6_50E2F349A653">
+					<Diagramming.DiagramElement.geometry>1082,917,91,119,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_BD4E0FB0_6F2C_4ff2_8FC8_7C7FD5834510"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_E18CC385_DBB6_4576_980A_CD491AE78F5C">
+					<Diagramming.DiagramElement.geometry>1792,473,420,210,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_B671958A_C3F2_4577_B0DF_8E74A79AB962"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_7859C8D6_4D7A_4418_8A26_886A525CA34E">
+					<Diagramming.DiagramElement.geometry>998,476,420,210,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_8BC9210C_AF88_455f_A334_A6B0407B68E1"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_6F50BA93_B776_46b4_A055_F4B2CDEF6EAF">
+					<Diagramming.DiagramElement.geometry>1026,172,70,70,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_B279A09C_CF83_40b3_80C4_854ECAAC12BB"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="eaxmiid0">
+					<Diagramming.DiagramElement.geometry>0,0,0,0,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_60595E7A_8EAE_4a7c_9B7D_92E9C52A4901"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="eaxmiid1">
+					<Diagramming.DiagramElement.geometry>0,0,0,0,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_17347704_F2AC_45b8_811B_799CD37938D1"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="eaxmiid2">
+					<Diagramming.DiagramElement.geometry>0,0,0,0,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_AD19B062_0074_4d82_922C_11C19BFE0A19"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="eaxmiid3">
+					<Diagramming.DiagramElement.geometry>0,0,0,0,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_67ED728A_9712_4a30_A3AB_CCC0C61CD424"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="eaxmiid4">
+					<Diagramming.DiagramElement.geometry>0,0,0,0,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_604C96F5_0DA2_4ebd_97F5_5ADECB6A2B78"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+			</Diagramming.Diagram.element>
+		</Diagramming.Diagram>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>parent</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>EAID_E71EE9DE_F4D8_4128_B5AF_E77C0F44F391</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>iscontrolled</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>isprotected</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>usedtd</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>logxml</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>FALSE</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>complexity</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>ea_package_id</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>3</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Setup</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid5">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:18:56 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 9:00:41 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Then This</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid6">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:06 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 9:00:58 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>And Then This</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid7">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:11 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:29:57 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Finish Here</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid8">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:17 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:23 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Deployment</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid9">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:29 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:29:53 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_A73EF935_726C_4123_9068_54A92EAC2537"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Why is this not simple?</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid10">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:36 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:31:31 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_D8EB60AC_88CC_4521_BBF3_8EF66CE9DFCB"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>requirement</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>It's probably me and my package/model setup with no view?</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.Stereotype xmi.id="eaxmiid11">
+			<Foundation.Core.ModelElement.name>requirement</Foundation.Core.ModelElement.name>
+			<Foundation.Core.ModelElement.visibility xmi.value="private"/>
+			<Foundation.Core.ModelElement.isSpecification xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isRoot xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isLeaf xmi.value="false"/>
+			<Foundation.Core.GeneralizableElement.isAbstract xmi.value="false"/>
+			<Foundation.Extension_Mechanisms.Stereotype.icon/>
+			<Foundation.Extension_Mechanisms.Stereotype.baseClass>ClassifierRole</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+			<Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+		</Foundation.Extension_Mechanisms.Stereotype>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>version</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_created</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:19:41 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>date_modified</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1/01/2018 7:30:19 AM</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>phase</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>1.0</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>author</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>mathe</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>status</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>Proposed</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Foundation.Extension_Mechanisms.TaggedValue>
+			<Foundation.Extension_Mechanisms.TaggedValue.tag>style</Foundation.Extension_Mechanisms.TaggedValue.tag>
+			<Foundation.Extension_Mechanisms.TaggedValue.value>BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;</Foundation.Extension_Mechanisms.TaggedValue.value>
+			<Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+				<Foundation.Core.ModelElement xmi.idref="EAID_0FBF1232_A78D_4a5c_9A88_190C28F94924"/>
+			</Foundation.Extension_Mechanisms.TaggedValue.modelElement>
+		</Foundation.Extension_Mechanisms.TaggedValue>
+		<Diagramming.Diagram xmi.id="EAID_444CC59A_986A_45a4_AA32_22C93A2A9E30">
+			<Diagramming.Diagram.name>Requirements</Diagramming.Diagram.name>
+			<Diagramming.Diagram.toolName>Rational Rose 98</Diagramming.Diagram.toolName>
+			<Diagramming.Diagram.diagramType>CustomDiagram</Diagramming.Diagram.diagramType>
+			<Diagramming.Diagram.style>Doc:</Diagramming.Diagram.style>
+			<Diagramming.Diagram.owner>
+				<Foundation.Core.ModelElement xmi.idref="EAPK_55B3B504_6A45_47cd_B3E6_38E950B56D3E"/>
+			</Diagramming.Diagram.owner>
+			<Diagramming.Diagram.element>
+				<Diagramming.DiagramElement xmi.id="EAID_9E50C3F5_C982_43e5_898C_0BFE2C4B5FC8">
+					<Diagramming.DiagramElement.geometry>1932,903,560,105,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_18AF5B79_16CE_4004_95A8_61E9C4944FDC"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_2153E1AE_4DE7_4257_9EF4_BF5140E608BD">
+					<Diagramming.DiagramElement.geometry>1918,672,560,105,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_02538091_F727_44c7_8513_A962E523CEBD"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_03FD7DAB_374A_4347_9A07_446155DF3EBC">
+					<Diagramming.DiagramElement.geometry>1897,448,560,105,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_61873FCD_5289_4c70_A929_84485F50A31F"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+				<Diagramming.DiagramElement xmi.id="EAID_12CF79FC_BAF3_47c3_ABFD_3A71DECE77E7">
+					<Diagramming.DiagramElement.geometry>1204,455,560,105,</Diagramming.DiagramElement.geometry>
+					<Diagramming.DiagramElement.style>Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,</Diagramming.DiagramElement.style>
+					<Foundation.Core.PresentationElement.subject>
+						<Foundation.Core.ModelElement xmi.idref="EAID_9F5957C0_C623_40e7_86FE_DD819A4754B9"/>
+					</Foundation.Core.PresentationElement.subject>
+				</Diagramming.DiagramElement>
+			</Diagramming.Diagram.element>
+		</Diagramming.Diagram>
+	</XMI.content>
+	<XMI.difference/>
+	<XMI.extensions xmi.extender="Enterprise Architect 2.5"/>
+</XMI>

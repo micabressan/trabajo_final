@@ -1,0 +1,56 @@
+import numpy as np
+from neupy import algorithms, layers
+import pandas as pd
+from neupy import plots
+
+#x_train = np.array([[1, 2], [3, 4]])
+
+#y_train = np.array([[1], [0]])
+
+y_index = 13  #index Y
+x_c = 13
+y_c = 1
+
+#
+df = pd.read_csv('wine.dat', sep=',', header=None)
+
+x_train = np.array(df)
+x_train = np.delete(x_train, np.s_[x_c], axis=1) # usuwam kolumnę Y
+x_train = np.delete(x_train, np.s_[x_c:y_index], axis=1) # usuwam nadmiarowe cechy
+#print(x_train)
+
+y_train = np.array(df)
+y_train = np.delete(y_train, np.s_[0:y_index], axis=1) # usuwam dane uczace
+#print(y_train)
+
+x_test = x_train[140:]
+y_test = y_train[140:]
+
+x_train = x_train[:139]
+y_train = y_train[:139]
+
+#print(y_train)
+
+lmnet = algorithms.LevenbergMarquardt(
+    # [
+    #     layers.Input(x_c),
+		# layers.Sigmoid(15),
+		# layers.Sigmoid(15),
+    #     layers.Sigmoid(1)
+    # ],
+	#(13, 15, 5, 1)
+	(layers.Input(x_c) > layers.Linear(4) > layers.Linear(4)  > layers.Relu(1))
+)
+
+lmnet.verbose = True
+lmnet.shuffle_data = True
+lmnet.train(x_train, y_train, x_test, y_test, epochs=100)
+8
+
+#plots.error_plot(lmnet)
+
+x_test = np.array([[13.56, 1.71, 2.31, 16.2, 117, 3.15, 3.29, .34, 2.34, 6.13, .95, 3.38, 795]])
+y_test = np.array([[2]])
+
+y_predicted = lmnet.predict(x_test)
+print(y_predicted)

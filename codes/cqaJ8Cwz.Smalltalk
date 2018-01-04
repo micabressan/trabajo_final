@@ -1,0 +1,37 @@
+CPU
+
+Clase
+crearCpu: unModelo 
+^(super new) iniciarCpu: unModelo
+
+Instancia
+iniciarCpu: unModelo
+ "inicializa un Cpu"
+ modelo:= unModelo.
+colprocesos := OrderedCollection new.
+colprocesosmod := OrderedCollection new.
+
+
+agregarProceso:unProceso
+"agrega un proceso a la cola de procesos"
+colprocesos add: unProceso.
+
+
+eliminarProceso:unProceso
+"elimina un proceso de la cola de procesos"
+colprocesos remove: unProceso.
+
+
+existeProceso: unProceso
+"muestra si existe un proceso"
+^colprocesos includes: unProceso
+
+
+recuperarPos: unaPos
+"recupera una posicion"
+^colprocesos at: unaPos.
+
+
+verColProc
+"muestra la coleccion de procesos"
+^colprocesos

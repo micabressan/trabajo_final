@@ -1,0 +1,7 @@
+(let [full-db-spec {:connection-uri "jdbc:sqlserver://host;instanceName=sqlexpress;integratedSecurity=false;databaseName=barnet;user=user;password=password"
+                    :classname "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                    :type "day"}
+      prepared-statement (-> full-db-spec
+                             (jdbc/get-connection)
+                             (jdbc/prepare-statement sql_query {:return-keys false :fetch-size 5}))]
+  (jdbc/query full-db-spec [prepared-statement] {:as-arrays? false :result-set-fn first}))

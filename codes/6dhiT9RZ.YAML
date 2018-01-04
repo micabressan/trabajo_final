@@ -1,0 +1,27 @@
+Item:
+  id: iron_leggings
+  name: "&2Slime Leggings"
+  lore:
+    - "&7Equip to gain"
+    - "&7speed"
+armorequip: #This is the when. You can compress more than one when at the item by splitting them with a ","
+  Action:
+    player:
+      - addPotion: type:speed,duration:1000000,level:2
+armorunequip:
+  Action:
+    player:
+      - removePotion: speed
+Crafting:
+  type: shaped
+  shape:
+    - asa
+    - sis
+    - asa
+  material:
+    a: air:0
+    i: iron_leggings:0
+    s: slime_block:0
+Condition:
+  player:
+    - permission: value:hopeitems.slimeleggings.use,message:&cYou do not have permission.

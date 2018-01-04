@@ -1,0 +1,10 @@
+(()->
+  d = new Date()
+  day = d.getDate()
+  month = d.getMonth()
+  chaine_chif = "d®ÂºÀ¬¬¢¼´¶¢´"
+  for char, key in chaine_chif
+    do (char, key)->
+      out = String.fromCharCode (parseInt(char.charCodeAt(0)/2) + day - month)
+      console.log out
+)()

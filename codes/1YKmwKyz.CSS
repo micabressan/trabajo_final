@@ -1,0 +1,26 @@
+#baner{
+	background-color: #9A6000;
+	color: white;
+	font-size: 180%;
+	text-align: center;
+	height: 100px;
+	margin-top: 20px;
+}
+#panellewy{
+	width: 60%;
+	height: 600px;
+	float: left;
+}
+#panelprawy{
+	background-color: #C47A00;
+	color: white;
+	width: 40%;
+	height: 600px;
+	float: right;
+}
+h3{
+	text-align: center;
+}
+ul{
+	margin: 10px;
+}

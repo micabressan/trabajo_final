@@ -1,0 +1,18 @@
+--Cards can be either a dragon, a ranked card, or a flower.
+--Dragons only have a colour
+--Ranked cards have a colour and a rank
+--Flowers have nothing, they're just flowers :)
+
+data Rank = One | Two | Three | Four | Five | Six | Seven | Eight | Nine
+data Colour  = Red | Green | Black
+data Card = Ranked Colour Rank | Dragon Colour | Flower
+
+colourOf :: Card -> Colour
+colourOf (Ranked x _) = x
+colourOf (Dragon x) = x
+colourOf (Flower) = error "No colour of flower!"
+
+rankOf :: Card -> Rank
+rankOf (Ranked _ x) = x
+rankOf (Dragon _) = error "No rank of dragon!"
+rankOf (Flower) = error "No rank of flower!"

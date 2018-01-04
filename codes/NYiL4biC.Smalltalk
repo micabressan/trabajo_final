@@ -1,0 +1,10 @@
+| dic |
+
+dic := Dictionary new.
+
+ContratacaoDePonto todos do: [ :contratoDePonto |
+	contratoDePonto pontosFisicos do: [ :pontoFisico |
+		dic at: pontoFisico put: pontoFisico equipamentos.
+	].
+].
+dic out.

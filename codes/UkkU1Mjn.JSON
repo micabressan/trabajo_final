@@ -1,0 +1,37 @@
+    {
+        "id": 1,
+        "user_id": "0",
+        "name": "Первая тренирока",
+        "train_type": "free",
+        "train_type_display": "Тренировка",
+        "notification_type": "audio",
+        "notification_type_display": "Аудиозапись",
+        "status": "open",
+        "status_display": "Открыта",
+        "timestamp_create": "2017-12-03T01:32:01.377904Z",
+        "timestamp_finished": null,
+        "due_date": null,
+        "products_list": [
+            {
+                "uuid": "213",
+                "name": "Шоколад"
+            },
+            {
+                "uuid": "16",
+                "name": "Киви"
+            }
+        ],
+        "products_amount": null,
+        "results": [
+            {
+                "product_id": "16",
+                "time_spend": 30,
+                "fails": 2
+            },
+            {
+                "product_id": "213",
+                "time_spend": 5,
+                "fails": 0
+            }
+        ]
+    }

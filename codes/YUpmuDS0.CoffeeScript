@@ -1,0 +1,21 @@
+"*":
+  core:
+    telemetryConsent: "limited"
+  editor:
+    fontSize: 16
+    preferredLineLength: 130
+    scrollPastEnd: true
+    scrollSensitivity: 80
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+    tabType: "soft"
+  "exception-reporting":
+    userId: "95316240-b7d2-468c-b9dd-0dc2334ced19"
+  "linter-ui-default":
+    showPanel: true
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+  welcome:
+    showOnStartup: false

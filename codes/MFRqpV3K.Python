@@ -1,0 +1,174 @@
+    def get_weather(modifier="",location="lon=-122.3147&lat=47.54548"):
+        
+        #silverkeep location = "lon=-114.8797074&lat=39.2482046" #actual location
+        #location = "lat=39.5939&lon=-116.0077" #temp location
+       
+        url = "http://forecast.weather.gov/MapClick.php?" + location + "&FcstType=json"
+
+        friendly_weather = {"fair":"clear skies"," light snow":"light snow","lt snow":"light snow","partly cloudy":"partly cloudy skies","overcast":"overcast skies","mostly cloudy":"mostly cloudy skies","lt snow, fog":"light snow, fog","na":"clear skies","lt rain":"light rain","lt rain, fog":"light rain, fog","mod rain, fog":"moderate rain, fog"}
+        friendly_wind_direction=["north","north-northeast","northeast","east-northeast","east","east-southeast", "southeast", "south-southeast","south","south-southwest","southwest","west-southwest","west","west-northwest","northwest","north-northwest"]
+        output=""
+        f = urlopen(url)
+        json_string = f.read().decode('utf8')
+        parsed_json = json.loads(json_string)
+        f.close()
+        
+        weather = parsed_json['currentobservation']['Weather'].lower()
+        percipitation_stage = 1
+        
+        try: 
+            weather = friendly_weather[weather]
+        except Exception as e:
+            print("No matching friendly weather found for "+weather+". Using given value.")
+        
+        if weather == "clear skies":
+            percipitation_stage = 1
+        if weather == "partly cloudy skies":
+            percipitation_stage = 2
+        if weather=="foggy" or weather=="overcast skies" or weather == "mostly cloudy skies":
+            percipitation_stage = 3
+        if weather == "light snow" or weather == "light rain" or weather == "light snow, fog" or weather == "light rain" or weather == "light rain, fog" or weather == "moderate rain, fog":
+            percipitation_stage = 4
+        
+        
+        real_temp = parsed_json['currentobservation']['Temp']
+        temp = (round(int(real_temp)/5)*5)
+        temp_c = str(int((int(real_temp)-32)*(5/9)))
+        temperature_stage=1
+        qual_temprature=""
+        
+        if temp <= 0: 
+            qual_temprature = "dangerously cold"
+            temperature_stage = 6
+        elif temp < 40: 
+            qual_temprature = "cold"
+            temperature_stage = 5
+        elif temp < 50: 
+            qual_temprature = "cool"
+            temperature_stage = 4
+        elif temp < 80: 
+            qual_temprature = "warm"
+            temperature_stage = 3
+        elif temp < 100: 
+            qual_temprature = "hot"
+            temperature_stage = 2
+        else:
+            qual_temprature = "unbearably hot"
+            temperature_stage = 1
+        
+        temp = str(temp)
+        
+        wind_speed = parsed_json['currentobservation']['Winds']
+        if wind_speed == "NA":
+            wind_speed = 0
+        else:
+            wind_speed = int(wind_speed)
+        
+        wind_stage = 0
+        
+        real_wind_speed = str(wind_speed)
+        
+        if wind_speed < 1: 
+            wind_speed = "calm winds"
+            wind_stage = 1
+        elif wind_speed < 7: 
+            wind_speed = "light breeze"
+            wind_stage = 1
+        elif wind_speed < 24: 
+            wind_speed = "moderate breeze"
+            wind_stage = 2
+        elif wind_speed < 31: 
+            wind_speed = "strong breeze"
+            wind_stage = 2
+        elif wind_speed < 38: 
+            wind_speed = "strong wind"
+            wind_stage = 3
+        elif wind_speed < 46: 
+            wind_speed = "gale"
+            wind_stage = 4
+        elif wind_speed < 54: 
+            wind_speed = "severe gale"
+            wind_stage = 5
+        else: 
+            wind_speed = "hurricane force winds"
+            wind_stage = 5
+        
+        wind_gusts = parsed_json['currentobservation']['Gust']
+        wind_val = parsed_json['currentobservation']['Windd']
+        if wind_val == "NA":
+            wind_val = "0"
+        else:
+            wind_val = int((int(wind_val)/22.5)+.5)
+        wind_direction = friendly_wind_direction[wind_val%16]
+        
+        extreme_cold="```A creature exposed to the cold must succeed on a DC 10 Constitution saving throw at the end of each hour or gain one level of exhaustion. Creatures with resistance or immunity to cold damage automatically succeed on the saving throw, as do creatures wearing cold weather gear (thick coats, gloves, and the like), and creatures naturally adapted to cold climates.```"
+        extreme_heat="```A creature exposed to the heat and without access to drinkable water must succeed on a Constitution saving throw at the end of each hour or gain one level of exhaustion. The DC is 5 for the first hour and increases by 1 for each additional hour. Creatures wearing medium or heavy armor, or who are clad in heavy clothing, have disadvantage on the saving throw. Creatures with resistance or immunity to fire damage automatically succeed on the saving throw, as do creatures naturally adapted to hot climates.```"
+        strong_wind="```A strong wind imposes disadvantage on ranged weapon attack rolls and Wisdom (Perception) checks that rely on hearing. A strong wind also extinguishes open flames, disperses fog, and makes flying by nonmagical means nearly impossible. A flying creature in strong wind must land at the end of its turn or fall.```"
+        heavy_percipitation="```Everything within an area of heavy rain or heavy snowfall is lightly obscured, and creatures in the area have disadvantage on Wisdom (Perception) checks that rely on sight. Heavy rain also extinguishes open flames and imposes disadvantage on Wisdom (Perception) checks that rely on hearing.```"
+        
+        if modifier=="control" or modifier=="stage" or modifier=="stages":
+            wind_stage = str(wind_stage)
+            temperature_stage = str(temperature_stage)
+            percipitation_stage = str(percipitation_stage)
+            return "\n**Weather Stages:** " + wind_stage + " Wind, " + temperature_stage + " Temperature, " + percipitation_stage + " Percipitation."
+
+        if modifier=="actual":
+            weather_string = "```Weather: " + weather + "\nTemperature: " + real_temp +"°F ("+temp_c+"°C)\nWind: " + real_wind_speed + " MPH " +wind_direction + "```"
+            return weather_string
+        
+        if modifier=="short":
+            if Utils.manual_weather == "":
+                weather_string = temp + "°, " + weather + ". " + real_wind_speed + " mph " + wind_direction + " wind."
+            else:
+                weather_string = Utils.manual_weather
+            return weather_string
+        
+        if modifier=="metric":
+            if Utils.manual_weather == "":
+                weather_string = str(int((int(temp)-32)*(5/9))) + "°C, " + weather + ". " + str(int(int(real_wind_speed) * 1.60934)) + " kph " + wind_direction + " wind."
+            else:
+                weather_string = Utils.manual_weather
+            return weather_string
+            
+        weather_string = "***The weather in Neverwinter is currently " + qual_temprature + ", with " + weather + ", and a temperature of around " + temp +" degrees."
+        if wind_speed=="calm winds":
+            weather_string+=" The wind is currently calm"
+        else:
+            weather_string += " There is a " + wind_speed + " out of the " + wind_direction
+        weather_string += ".***"
+        
+        if wind_stage >= 3:
+            weather_string+=strong_wind
+        if temperature_stage==6:
+            weather_string+=extreme_cold
+        if temperature_stage==1:
+            weather_string+=extreme_heat
+        if percipitation_stage >= 5:
+            weather_string += heavy_percipitation
+
+        return weather_string
+    
+    @commands.command(pass_context=True)
+    async def weather(self, ctx, modifier="get",manual_weather_string="",duration=1):
+        try:
+            await self.bot.delete_message(ctx.message)
+        except:
+            pass
+        if modifier=="get" and not Utils.manual_weather=="" and not modifier=="control" and not modifier == "stage" and not modifier == "stages":
+            weather = Utils.manual_weather
+            await self.bot.say(weather)
+        elif modifier=="set" and ctx.message.author.id in dm_ids:
+            weather = "***" + manual_weather_string + "***"
+            Utils.manual_weather = weather
+            await self.bot.say(weather)
+            await self.bot.change_presence(game=discord.Game(name=weather))
+            
+        elif modifier=="clear" and ctx.message.author.id in dm_ids:
+            weather =""
+            Utils.manual_weather=""
+            await self.bot.say("The manually set weather conditions have been cleared.")
+            await self.bot.change_presence(game=discord.Game(name=Utils.get_weather("short")))
+        else:
+            weather = Utils.get_weather(modifier)
+            await self.bot.say(weather)
+            await self.bot.change_presence(game=discord.Game(name=Utils.get_weather("short")))

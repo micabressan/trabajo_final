@@ -1,0 +1,16 @@
+-module(server1).
+-compile(export_all).
+
+start() ->
+    register(srvpid, spawn(fun() -> loop() end)).
+		       
+loop() ->
+    receive
+	stop ->
+	    loop()
+    end.
+
+test() ->
+    start(),
+    srvpid ! stop,
+    ok.

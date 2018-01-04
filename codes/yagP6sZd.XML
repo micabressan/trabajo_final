@@ -1,0 +1,40 @@
+<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Calendar" Height="250" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1" Grid.Row="0" Content="Добавить" Command="{Binding Insertevent}"/>
+            <Button Grid.Column="1" Grid.Row="1" Content="Удалить" Command="{Binding Deletevent}"/>
+            <Button Grid.Column="1" Grid.Row="2" Content="Изменить" Command="{Binding Updatevent}"/>
+            <Button Grid.Column="1" Grid.Row="3" Content="События месяца" Command="{Binding Monthevent}"/>
+            <Button Grid.Column="1" Grid.Row="4" Content="Все события" Command="{Binding Allevent}"/>
+
+        </Grid>
+        <Calendar Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ListView Grid.Column="0" ItemsSource="{Binding Events}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="150" Header="Событие" DisplayMemberBinding="{Binding EventTitle}"/>
+                    <GridViewColumn Width="70" Header="Дата" DisplayMemberBinding="{Binding Date}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

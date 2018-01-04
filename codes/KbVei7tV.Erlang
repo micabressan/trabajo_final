@@ -1,0 +1,11 @@
+219> c(comptest).                                                       
+{ok,comptest}
+220> comptest:go("WyBierZ jaKaS OpcjE z Menu Glownego 0123456789 '-0"). 
+Input: 400 bits
+Packed binary is 300 bits
+Byte align 4
+Packed: <<85,96,137,21,21,216,40,18,193,73,131,208,12,161,88,93,131,69,57,70,7,
+          48,245,78,20,115,216,137,150,155,113,215,159,130,22,24,98,32>> (304 bits)
+Packing difference is 96 bits
+Unpacked: "wybierz jakas opcje z menu glownego 0123456789   0"
+ok

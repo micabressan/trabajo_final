@@ -1,0 +1,36 @@
+input_boolean:
+  notify_home:
+    name: are we home
+    initial: off
+    icon: mdi:home  
+    
+    
+    
+    
+automation:
+  alias: Arriving home
+  trigger:
+    platform: state
+    entity_id: device_tracker.yourdevice
+    to: 'home'
+  condition: []
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.notify_home 
+
+
+
+automation2:
+  alias: leaving home
+  trigger:
+    platform: state
+    entity_id: device_tracker.yourdevice
+    to: 'not_home'
+    for:
+      hours: 24
+  condition: []
+  action:
+    service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.notify_home

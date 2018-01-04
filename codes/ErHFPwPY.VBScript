@@ -1,0 +1,26 @@
+Sub AAAA()
+
+
+ThisWorkbook.Sheets("Foglio2").Select
+
+    iRowA = 37
+    
+    iRowB = 1
+  
+    Do Until Cells(iRowA, 1).Value = "TOTAL"
+    
+    If Cells(iRowA, 1).Value <> "" Then
+    
+    Sheets("Foglio2").Cells(iRowA, 1).Copy
+    Sheets("Foglio3").Activate
+    CellsRange(iRowB, 1).Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    
+    End If
+    
+    iRow = iRow + 1
+    
+    Loop
+
+End Sub

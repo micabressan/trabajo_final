@@ -1,0 +1,39 @@
+Item:
+  id: iron_chestplate
+  name: "&6Farmer Tunic"
+  lore:
+    - "&7Will feed you when:"
+    - "&7- Equipping it"
+    - "&7- Unequipping it"
+    - "&7- Attacking mobs"
+armorequip: #This is the when. You can compress more than one when at the item by splitting them with a ","
+  Action:
+    player:
+      - setFood: 20
+  Condition:
+    player:
+      - permission: value:hopeitems.farmertunic.use,message:&cYou do not have permission.
+armorunequip:
+  Action:
+    player:
+      - setFood: 20
+  Condition:
+    player:
+      - permission: value:hopeitems.farmertunic.use,message:&cYou do not have permission.
+attackself:
+  Action:
+    player:
+      - setFood: 20
+  Condition:
+    player:
+      - permission: value:hopeitems.farmertunic.use,message:&cYou do not have permission.
+Crafting:
+  type: shaped
+  shape:
+    - aga
+    - gig
+    - aga
+  material:
+    a: air:0
+    i: iron_chestplate:0
+    g: golden_apple:0

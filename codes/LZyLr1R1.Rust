@@ -1,0 +1,11 @@
+	let print_row = |row| {
+		let id: i32 = row["id"];
+		println!("{}", id);
+	};
+
+// error is:
+error[E0619]: the type of this value must be known in this context
+  --> src/crawler.rs:15:17
+   |
+15 |   let id: i32 = row["id"];
+   |

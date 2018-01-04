@@ -1,0 +1,4 @@
+(fn keyValueIsNil [kw hashmap]
+  (if (= (get hashmap kw) nil)
+      true
+    false))

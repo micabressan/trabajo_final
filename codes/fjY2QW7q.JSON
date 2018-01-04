@@ -1,0 +1,254 @@
+{
+   "childrens": {
+       "1": [
+           [
+               {
+                   "lastname": "Васильева",
+                   "secondname": "Евгеньевна",
+                   "name": "Анастасия",
+                   "people_parent_id": "1",
+                   "people_children_id": "2",
+                   "relation_type_id": "1"
+               },
+               {
+                   "lastname": "Сын",
+                   "secondname": "Сынович",
+                   "name": "Сын",
+                   "people_parent_id": "1",
+                   "people_children_id": "45",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Дочь",
+                   "secondname": "Дочевна",
+                   "name": "Дочь",
+                   "people_parent_id": "1",
+                   "people_children_id": "46",
+                   "relation_type_id": "2"
+               }
+           ]
+       ],
+       "2": [
+           [
+               {
+                   "lastname": "Сын",
+                   "secondname": "Сынович",
+                   "name": "Сын",
+                   "people_parent_id": "2",
+                   "people_children_id": "45",
+                   "relation_type_id": "3"
+               },
+               {
+                   "lastname": "Дочь",
+                   "secondname": "Дочевна",
+                   "name": "Дочь",
+                   "people_parent_id": "2",
+                   "people_children_id": "46",
+                   "relation_type_id": "3"
+               }
+           ],
+           [
+               {
+                   "lastname": "Внук",
+                   "secondname": "Внукевич",
+                   "name": "Внук",
+                   "people_parent_id": "45",
+                   "people_children_id": "47",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Внучка",
+                   "secondname": "Внучковна",
+                   "name": "Внучка",
+                   "people_parent_id": "45",
+                   "people_children_id": "48",
+                   "relation_type_id": "2"
+               }
+           ],
+           [
+               {
+                   "lastname": "Внучка по дочке",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "46",
+                   "people_children_id": "59",
+                   "relation_type_id": "0"
+               }
+           ]
+       ],
+       "3": [
+           [
+               {
+                   "lastname": "Внук",
+                   "secondname": "Внукевич",
+                   "name": "Внук",
+                   "people_parent_id": "45",
+                   "people_children_id": "47",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Внучка",
+                   "secondname": "Внучковна",
+                   "name": "Внучка",
+                   "people_parent_id": "45",
+                   "people_children_id": "48",
+                   "relation_type_id": "2"
+               }
+           ],
+           [
+               {
+                   "lastname": "Внучка по дочке",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "46",
+                   "people_children_id": "59",
+                   "relation_type_id": "0"
+               }
+           ],
+           [
+               {
+                   "lastname": "Правнук",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "47",
+                   "people_children_id": "57",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Правнучка",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "47",
+"people_children_id": "58",
+                   "relation_type_id": "2"
+               }
+           ],
+           [
+               {
+                   "lastname": "Правнук по дочке1",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "61",
+                   "relation_type_id": "0"
+               },
+               {
+                   "lastname": "Правнук по дочке2",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "62",
+                   "relation_type_id": "0"
+               },
+               {
+                   "lastname": "Правнучка по дочке",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "63",
+                   "relation_type_id": "0"
+               }
+           ]
+       ],
+       "4": [
+           [
+               {
+                   "lastname": "Правнук",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "47",
+                   "people_children_id": "57",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Правнучка",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "47",
+                   "people_children_id": "58",
+                   "relation_type_id": "2"
+               }
+           ],
+           [
+               {
+                   "lastname": "Правнук по дочке1",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "61",
+                   "relation_type_id": "0"
+               },
+               {
+                   "lastname": "Правнук по дочке2",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "62",
+                   "relation_type_id": "0"
+               },
+               {
+                   "lastname": "Правнучка по дочке",
+                   "secondname": null,
+                   "name": null,
+                   "people_parent_id": "59",
+                   "people_children_id": "63",
+                   "relation_type_id": "0"
+               }
+           ]
+       ]
+   },
+   "parents": {
+       "-1": [
+           [
+               {
+                   "lastname": "Отец",
+                   "secondname": "Отецович",
+                   "name": "Отец",
+                   "people_parent_id": "49",
+                   "people_children_id": "1",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Мать",
+                   "secondname": "Матевна",
+                   "name": "Мать",
+                   "people_parent_id": "50",
+                   "people_children_id": "1",
+                   "relation_type_id": "3"
+               }
+           ]
+       ],
+       "-2": [
+           [
+               {
+                   "lastname": "Дед",
+                   "secondname": "Дедов",
+                   "name": "Дед",
+                   "people_parent_id": "51",
+                   "people_children_id": "49",
+                   "relation_type_id": "2"
+               }
+           ]
+       ],
+       "-3": [
+           [
+               {
+                   "lastname": "Прадед",
+                   "secondname": "Прадедович",
+                   "name": "Прадед",
+                   "people_parent_id": "53",
+                   "people_children_id": "51",
+                   "relation_type_id": "2"
+               },
+               {
+                   "lastname": "Прабабка",
+"secondname": "Прабабовна",
+                   "name": "Прабабка",
+                   "people_parent_id": "54",
+                   "people_children_id": "51",
+                   "relation_type_id": "3"
+               }
+           ]
+       ]
+   }
+}

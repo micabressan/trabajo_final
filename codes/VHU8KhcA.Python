@@ -1,0 +1,6 @@
+import os
+
+for f in os.listdir("."):
+    newf=f[7:]
+    if not os.path.exists(newf):
+         os.rename(f,newf)

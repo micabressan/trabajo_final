@@ -1,0 +1,15 @@
+term.setBackgroundColor(colors.white)
+term.setTextColor(colors.black)
+term.clear()
+term.setBackgroundColor(colors.gray)
+term.setTextColor(colors.white)
+term.setCursorPos(1,1)
+print("              Mordapan Reciever                      ")
+term.setBackgroundColor(colors.white)
+term.setTextColor(colors.black)
+term.setCursorPos(1,2)
+while true do
+rednet.open("back")
+id,msg=rednet.receive()
+print("ID:",id,"|Sprava:",msg)
+end

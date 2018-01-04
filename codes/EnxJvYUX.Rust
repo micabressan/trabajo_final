@@ -1,0 +1,79 @@
+extern crate piston_window;
+extern crate find_folder;
+
+use piston_window::*;
+
+
+struct WindowMeta {
+    resx: u32,
+    resy: u32,
+    fps: u32,
+    title: &'static str,
+}
+
+struct Window {
+    target: PistonWindow,
+}
+
+struct Image{
+    tex: G2dTexture,
+}
+
+struct GameData{
+    image: Image,
+}
+
+struct Game {
+    windowmeta: WindowMeta,
+    window: Window,
+    data: GameData,
+}
+
+impl Game {
+    pub fn init() -> Game {
+        let windowmeta_: WindowMeta = WindowMeta {resx: 1400, resy: 900, fps: 144, title: "Test"};
+        let opengl = OpenGL::V3_2;
+        let size: Size = Size {width: windowmeta_.resx, height: windowmeta_.resy};
+        let mut window_: PistonWindow =
+            WindowSettings::new(windowmeta_.title, size)
+            .exit_on_esc(true)
+            .opengl(opengl)
+            .build()
+            .unwrap();
+        window_.set_lazy(true);
+        
+
+        let assets = find_folder::Search::ParentsThenKids(3, 3)
+            .for_folder("assets").unwrap();
+        let rust_logo = assets.join("rust.png");
+        let rust_logo: G2dTexture = Texture::from_path(
+                &mut window_.factory,
+                &rust_logo,
+                Flip::None,
+                &TextureSettings::new()
+        ).unwrap();
+
+        let mut g: Game = Game {
+            windowmeta: windowmeta_,
+            window: Window {target: window_},
+            data: GameData {image: Image {tex: rust_logo}},
+        };
+        return g;
+    }
+
+    pub fn mainloop(mut game: Game) {
+
+        while let Some(e) = game.window.target.next() {
+            game.window.target.draw_2d(&e, |c, g| { // ?
+                clear([1.0; 4], g);
+                image(&game.data.image.tex, c.transform, g);
+            });
+        }
+    }
+}
+
+
+fn main() {
+    let mut game: Game = Game::init();
+    //game.mainloop();
+}

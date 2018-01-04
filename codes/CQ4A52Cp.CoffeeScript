@@ -1,0 +1,63 @@
+# Custom jquery-mobile only with touch events:
+#= require jquery-mobile/js/ns
+#= require jquery-mobile/js/defaults
+#= require jquery-mobile/js/data
+#= require jquery-mobile/js/support/touch
+#= require jquery-mobile/js/vmouse
+#= require jquery-mobile/js/events/touch
+
+# Don't call .preventDefault for swipes, because of chrome warnings.
+# And we don't want prevent scroll anyway.
+$.event.special.swipe.scrollSupressionThreshold = 10000
+
+# This class handles multiple offcanvas events makes it smooth
+# and prevents from reopenning/-closing.
+PluginManager.add 'offcanvas', class
+  @SWIPEOUT_THRESHOSD = 20
+
+  constructor: (@toggle) ->
+    @constructor.instance = @
+    @sidebar = $('.offcanvas-sidebar')
+    @toggle.click (e) =>
+      e.preventDefault()
+      @animated => @sidebar.toggleClass('active')
+    if $.mobile.support.touch
+      $(@sidebar).on 'swiperight', => @autohide(true)
+
+  # Don't run block if animating.
+  animated: (block) ->
+    return if @animating
+    @animating = true
+    block()
+    setTimeout (=> @animating = false), 0.5
+
+  # Set @justOpened to true, so touch end for this swipe will not close sidebar.
+  show: ->
+    @animated =>
+      @justOpened = true
+      @sidebar.addClass('active')
+
+  # Hides unless clicked inside sidebar or on dropdown.
+  autohide: (e) ->
+    return if @animating || !@sidebar.hasClass('active')
+    return if e != true && !@shouldAutohide(e)
+    @animated => @sidebar.removeClass('active')
+
+  shouldAutohide: (e) ->
+    return if e.target == @toggle[0] || @toggle.find(e.target).length
+    if e.type == 'touchend' && @justOpened
+      @justOpened = false
+      return
+    $target = $(e.target)
+    if $target.closest(@sidebar).length
+      link = $target.closest('a')
+      return if !link.length || e.type == 'touchend' || link.data('toggle')
+    true
+
+  $ -> $('[data-toggle="offcanvas"]').offcanvas()
+  $(document).on 'click touchend', (e) => @instance?.autohide(e)
+  # Enable swiping menu only on mobile devices.
+  if $.mobile.support.touch
+    $(document).on 'swipeleft', (e) =>
+      if $(window).width() - e.swipestart.coords[0] < @SWIPEOUT_THRESHOSD
+        @instance?.show(e)

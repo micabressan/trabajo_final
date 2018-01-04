@@ -1,0 +1,12 @@
+(fn [some-seq]
+  (let [removed
+        (reduce
+         (fn [new-seq item]
+           (if (= item (first (take-last 1 new-seq)))
+             new-seq
+             (conj new-seq item)))
+         []
+         some-seq)]
+    (if (= java.lang.String  (type some-seq))
+      (apply str removed)
+      removed)))

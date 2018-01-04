@@ -1,0 +1,34 @@
+import requests
+import datetime
+ 
+airport = 'EHAM'
+airporturl = 'http://api.vateud.net/online/pilots/{0}.json'.format(airport)
+incount = 0
+outcount = 0
+ 
+r = requests.get(airporturl).json()
+print ' '
+ 
+for flight in r:
+    cidflight = flight['cid']
+    userurl = 'http://api.vateud.net/members/id/{0}.json'.format(cidflight)
+    userjson = requests.get(userurl).json()
+    reg = datetime.datetime.strptime(userjson['reg_date'], '%Y-%m-%d %H:%M:%S')  
+    now = datetime.datetime.now()
+    since = now - reg
+    totalreg =+ since
+ 
+    if flight['origin'] != 'EHAM':
+        incount = incount + 1
+        print 'inbound ', flight['callsign'], flight['cid'], userjson['firstname'], userjson['lastname'], since
+ 
+    if flight['destination'] != 'EHAM':
+        outcount = outcount + 1
+        print 'outbound ', flight['callsign'], flight['cid'], userjson['firstname'], userjson['lastname'], since
+       
+print ' '
+print 'total =', len(r)
+print 'outbounds =', outcount
+print 'inbounds =', incount
+averagereg = totalreg / len(r)
+print averagereg

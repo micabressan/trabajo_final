@@ -1,0 +1,35 @@
+<DataTrigger Binding="{Binding GetAnimation}" Value="false">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation Duration="0:0:0.5" 
+                                                    From="0" 
+                                                    To="700 0 -700 0" 
+                                                    DecelerationRatio="0.9"
+                                                    Storyboard.TargetProperty="Margin" />
+                                <DoubleAnimation Duration="0:0:0.5"
+                                     From="1"
+                                     To="0"
+                                     Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding GetAnimation}" Value="true">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation Duration="0:0:0.5" 
+                                                    From="700 0 -700 0" 
+                                                    To="0" 
+                                                    DecelerationRatio="0.9"
+                                                    Storyboard.TargetProperty="Margin" />
+                                <DoubleAnimation Duration="0:0:0.5"
+                                     From="0"
+                                     To="1"
+                                     Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>

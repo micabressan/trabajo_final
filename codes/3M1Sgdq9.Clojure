@@ -1,0 +1,48 @@
+(ns risk)
+
+(defn roll [] (+ 1 (rand-int 6)))
+
+(defn fight-round [attackers defenders]
+  (assert (and (> attackers 0) (> defenders 0)))
+  (let [a (min attackers 3)
+        d (min defenders 2)
+        attack-rolls (sort > (take a (repeatedly roll)))
+        defense-rolls (sort > (take d (repeatedly roll)))
+        results (map - defense-rolls attack-rolls)]
+    {:attackers (- attackers (count (filter #(>= % 0) results)))
+     :defenders (- defenders (count (filter neg? results)))}))
+
+(defn fight-battle [attackers defenders]
+  (assert (and (> attackers 1) (> defenders 0)))
+  (loop [a (dec attackers) d defenders]
+    (cond (<= a 0) {:attackers a :defenders d :result :defenders-win}
+          (<= d 0) {:attackers a :defenders d :result :attackers-win}
+          :else (let [{an :attackers dn :defenders} (fight-round a d)]
+                  (recur an dn)))))
+
+(defn simulate
+  "return an infinite series of battle results"
+  [attackers defenders]
+  (repeatedly #(fight-battle attackers defenders)))
+
+(defn compute-stats
+  "compute win % and avg remaining soldiers given a list of results"
+  [results]
+  (let [win-counts (frequencies (map :result results))
+        remaining-attackers (reduce + (map :attackers results))
+        remaining-defenders (reduce + (map :defenders results))]
+    {:win-ratio (/ (:attackers-win win-counts) (count results))
+     :avg-attackers (/ remaining-attackers (:attackers-win win-counts))}))
+
+(defn main []
+  (let [results (take 10000 (simulate 9 9))
+        stats (compute-stats results)]
+    (printf "attackers win %.2f%% of the time"
+            (double (* 100 (:win-ratio stats))))
+    (printf " with %.4f soldiers remaining on average"
+            (double (:avg-attackers stats)))))
+
+======================================
+Output:
+risk> (main)
+attackers win 0.47% of the time with 3.9868 soldiers remaining on average

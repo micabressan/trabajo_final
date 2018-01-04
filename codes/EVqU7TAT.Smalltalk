@@ -1,0 +1,11 @@
+turtle := Pen new.
+side := 100.
+step := 10.
+10 timesRepeat: [
+	2 timesRepeat: [
+		turtle
+			go:side;
+			turn:90.
+	].
+	side := side - step.
+].

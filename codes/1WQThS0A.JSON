@@ -1,0 +1,27 @@
+<script type="application/ld+json">
+	{
+  	"@context": "http://schema.org",
+  	"@type": "LocalBusiness",
+  	"address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Genova",
+    "addressRegion": "Italy",
+    "postalCode":"16121",
+    "streetAddress": "Via Ceccardo Roccatagliata Ceccardi 32R"
+  	},
+  	"description": "Centro di riparazione Iphone a Genova",
+  	"name": "iPhonExpert",
+	"hasMap": "https://goo.gl/maps/QuXKyYSHccm",
+  	"telephone": "(0039) 0108593865",
+	"url": "https://www.iphonexpert.it/",
+  	"openingHours": "Mo,Tu,We,Th,Fr,St 09:00-20:00",
+  	"geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "44.405946",
+    "longitude": "8.936267"
+ 		},
+"image": "http://d9hhrg4mnvzow.cloudfront.net/www.iphonexpert.it/ca9607c0-iphonexpert-con-indirizzo-trasparente_0ab02y0ab02y000000.png",
+ 	"sameAs" : [ "https://www.facebook.com/iPhonExpertGenova/",
+    "https://instagram.com/iphonexpert.it/"]
+	}
+</script>

@@ -1,0 +1,60 @@
+extensions: 
+  - set
+  - rholang
+  - json
+capabilities: 
+  - network_state
+  - gps
+  - push
+  - vibrate
+name: mobi.Work
+wp:
+  productid: 9f6db020-6915-012e-9078-00188b1f822f
+bbver: 6.0
+android:
+  version: 2.1
+  emulator: rhoAndroid
+  mapping: yes
+  apikey: 04H7raxMWxaKkzWCKlpW1RAgvf9LsHaz6QhtnTw
+  extensions: ["digest", "digest-md5", "rexml", "timeout", "net-http", "uri"]
+applog: rholog.txt
+build: debug
+sdk: "" #this is now set in the Rakefile from the RHO_HOME environment variable
+wmsdk: Windows Mobile 6 Professional SDK (ARMV4I)
+version: 1
+vendor: Pointserve Inc
+sdkversion: 3.1.0
+iphone:
+  BundleURLScheme: mobiwork
+  provisionprofile: C24E5EF9-7727-4EFE-8CC9-DFD8B32DD2D3
+  BundleIdentifier: com.mobicorp.mobile
+  sdk: iphonesimulator4.3
+  entitlements: 
+  codesignidentity: "iPhone Distribution: Pointserve, Inc."
+  configuration: Debug
+  extensions: ["digest", "digest-md5", "rexml", "timeout", "net-http", "uri"]
+bb:
+  extensions: ["rhoxml"]
+  use_sqlite: 0
+excludedirs:
+  all:
+    - "**/.*.swo"
+    - "**/.*.swn"
+    - "**/.DS_Store"
+    - "**/.svn*"
+    - app/test*
+  iphone:
+    - public/css/android*
+    - public/css/windows*
+    - public/css/blackberry*
+    - public/images/android*  
+  android:
+    - public/css/iphone*
+    - public/css/windows*
+    - public/css/blackberry*
+    - public/images/iphone*      
+  bb6:
+    - public/css/iphone*
+    - public/css/windows*
+    - public/images/android*
+    - public/images/iphone*

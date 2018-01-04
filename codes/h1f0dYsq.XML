@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>py.com.personal.bc</groupId>
+        <artifactId>abonado-middleware</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>abonado-middleware-services</artifactId>
+    <packaging>war</packaging>
+    <name>abonado-middleware-services</name>
+
+    <properties>
+    	<version.shared-modules>5.0.0</version.shared-modules>
+        <version.is-common-util>2.1-SNAPSHOT</version.is-common-util>
+        <version.javaee-api>6.0</version.javaee-api>
+        <version.resteasy-jaxrs>3.0.4.Final</version.resteasy-jaxrs>
+        <version.guava>20.0</version.guava>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <version.compiler.plugin>3.1</version.compiler.plugin>
+        <version.javadoc.plugin>2.9.1</version.javadoc.plugin>
+        <version.is-common-exceptions>2.0.1</version.is-common-exceptions>
+        <version.is-testingse>1.0-SNAPSHOT</version.is-testingse>
+        <version.war.plugin>2.1.1</version.war.plugin>
+        <version.cdi-api>1.2</version.cdi-api>
+        <version.weld-se>2.4.0.Final</version.weld-se>
+        <version.is-common-transactions>3.1.2-SNAPSHOT</version.is-common-transactions>
+        <version.grupo-business>1.0.2-SNAPSHOT</version.grupo-business>
+        <version.grupo-model>1.0.2-SNAPSHOT</version.grupo-model>
+        <version.contadores-model>1.2.1-SNAPSHOT</version.contadores-model>
+        <version.reservas-model>1.0.1-SNAPSHOT</version.reservas-model>
+        <version.is-voltdb-utils>3.0.0</version.is-voltdb-utils>
+        <version.is-common-validation>1.1.0-SNAPSHOT</version.is-common-validation>
+        <version.auditoria>1.0.3-SNAPSHOT</version.auditoria>
+        <version.is-mybatis-utils>2.0.0</version.is-mybatis-utils>
+        <version.is-common-utils-ee>3.2.1</version.is-common-utils-ee>
+        <version.is-common-units>1.1.2-SNAPSHOT</version.is-common-units>
+        <version.is-common-cache>1.0.0-SNAPSHOT</version.is-common-cache>
+        <version.voltdbclient>7.3</version.voltdbclient>
+        <version.is-eventos-core>1.1.0-SNAPSHOT</version.is-eventos-core>
+        <version.notificaion>2.0.0-SNAPSHOT</version.notificaion>
+        <version.is-common-constants>1.0.0-SNAPSHOT</version.is-common-constants>
+        <version.jackson>2.4.3</version.jackson>
+        <version.packs>1.0.0-SNAPSHOT</version.packs>
+        <version.is-messaging>3.1.2-SNAPSHOT</version.is-messaging>
+        <version.is-messaging-voltdb>1.1.1-SNAPSHOT</version.is-messaging-voltdb>
+        <version.mensajes-recarga>2.0.0-SNAPSHOT</version.mensajes-recarga>
+        <version.shared-modules-voltdb>6.3-SNAPSHOT</version.shared-modules-voltdb>
+    </properties>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!-- <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.war.plugin}</version>
+                <configuration>
+                    Java EE 6 doesn't require web.xml, Maven needs to catch up!
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin> -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.9.Final</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+    
+	    <dependency>
+	      <groupId>py.com.personal.bc</groupId>
+	      <artifactId>shared-modules-model</artifactId>
+	      <version>${version.shared-modules}</version>
+	    </dependency>
+    
+    	<dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>shared-modules-voltdb</artifactId>
+            <version>${version.shared-modules-voltdb}</version>
+        </dependency>
+    
+    	<dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>mensajes-recarga</artifactId>
+            <version>${version.mensajes-recarga}</version>
+        </dependency>
+
+
+    	<dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>packs-model</artifactId>
+            <version>${version.packs}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>packs-business</artifactId>
+            <version>${version.packs}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-recarga-core</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>movimientos-acreditaciones-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>movimientos-acreditaciones-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>nodos-externos-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>nodos-externos-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+      	<dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>ordenes-modificacion-model</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>ordenes-modificacion-business</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>is-common-constants</artifactId>
+            <version>${version.is-common-constants}</version>
+        </dependency>
+
+        
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>saldo-compartido-middleware-business</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>planes-tarifarios-middleware-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>servicio-middleware-business</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-common-units</artifactId>
+            <version>${version.is-common-units}</version>
+
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>contadores-model</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>contadores-business</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.voltdb</groupId>
+            <artifactId>voltdbclient</artifactId>
+            <version>7.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>abonado-business</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>abonado-model</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>grupo-business</artifactId>
+            <version>${version.grupo-business}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>grupo-model</artifactId>
+            <version>${version.grupo-model}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>planes-tarifarios-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>planes-tarifarios-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>saldo-model</artifactId>
+            <version>1.5.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>saldo-business</artifactId>
+            <version>1.5.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>reservas-model</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>reservas-business</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-idspaces</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>is-voltdb-utils</artifactId>
+            <version>${version.is-voltdb-utils}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>saldo-compartido-model</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>saldo-compartido-business</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>servicio-model</artifactId>
+            <version>2.4.2-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>servicio-business</artifactId>
+            <version>2.4.2-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>calendario-business</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>calendario-model</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>interfaz-rc-mensajes</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+
+        <!--  <dependency>
+             <groupId>py.com.personal.bc</groupId>
+             <artifactId>is-reglas</artifactId>
+             <version>1.2.1-SNAPSHOT</version>
+         </dependency> -->
+
+         <!-- Utileria para transacciones -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>is-common-transactions</artifactId>
+            <version>${version.is-common-transactions}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-eventos-core</artifactId>
+            <version>${version.is-eventos-core}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>notificacion</artifactId>
+            <version>${version.notificaion}</version>
+        </dependency>
+
+
+        <!-- Excepciones basicas -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>is-common-exceptions</artifactId>
+            <version>${version.is-common-exceptions}</version>
+        </dependency>
+
+
+        <!-- Implementacion CDI -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se</artifactId>
+            <version>${version.weld-se}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-common-utils</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${version.cdi-api}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-common-validation</artifactId>
+            <version>${version.is-common-validation}</version>
+        </dependency>
+
+        <!-- Hasta aca es igual a business -->
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>abonado-middleware-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+            <version>${version.javaee-api}</version>
+        </dependency>
+
+        <!-- Utilerías de exepciones y mensajes -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- RestEasy : Implementación de JAX-RS 1.1 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${version.resteasy-jaxrs}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--common cache-->
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-common-cache</artifactId>
+            <version>${version.is-common-cache}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>is-mybatis-utils</artifactId>
+            <version>${version.is-mybatis-utils}</version>
+        </dependency>
+
+        <!-- Dependencias para auditoria -->
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-auditoria-business</artifactId>
+            <version>${version.auditoria}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.is</groupId>
+            <artifactId>is-common-utils-ee</artifactId>
+            <version>${version.is-common-utils-ee}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>3.0.8.Final</version>
+
+
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.5.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>1.5.17</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${version.guava}</version>
+        </dependency>
+
+
+
+        <!-- Integracion con acreditacion -->
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>operaciones-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>operaciones-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>sos-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>promociones-business</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-messaging</artifactId>
+            <version>${version.is-messaging}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>py.com.personal.bc</groupId>
+            <artifactId>is-messaging-voltdb</artifactId>
+            <version>${version.is-messaging-voltdb}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

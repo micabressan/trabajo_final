@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Rextester
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            int length = Convert.ToInt32(Console.ReadLine());
+            int[] arr = new int[length];
+            string[] s = Console.ReadLine().Split(' ');
+            for (int i = 0; i < length; i++)
+                arr[i] = Convert.ToInt32(s[i]);
+            Console.WriteLine(GetNum(arr));
+        }
+        
+        static int GetNum(int[] arr)
+        {
+          int prevSum = 0;
+          int arrSum = 0;
+          int count = 0;
+            
+          for (int i = 0; i < arr.Length - 1; i++)
+          {
+             arrSum += arr[i];
+          }
+            
+          for (int i = 0; i < arr.Length - 2; i++)
+          {
+             prevSum += arr[i];
+             if (prevSum == arrSum - prevSum)
+                 count++;
+          }
+            return count;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+Classy.Editable = SC.View.extend
+  value: ""
+  
+  classNames: ['classy-editable']
+    
+  defaultTemplate: (context) -> context.value
+    
+  attributeBindings: ['contenteditable']
+  
+  contenteditable: true

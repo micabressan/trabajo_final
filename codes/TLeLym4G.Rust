@@ -1,0 +1,66 @@
+use std::fmt;
+
+struct LinearFunction {
+    a: f64,
+    b: f64,
+}
+
+impl LinearFunction {
+    fn new(a: f64, b: f64) -> LinearFunction {
+        LinearFunction {
+            a: a,
+            b: b,
+        }
+    }
+
+    fn feed(&self, x: f64) -> f64 {
+        self.a * x + self.b
+    }
+
+    fn learn(&mut self, input: f64, target_output: f64, learning_rate: f64) -> f64 {
+        let error = target_output - self.feed(input);
+        
+        self.a -= error * -input * learning_rate;
+        self.b -= error * -1.0 * learning_rate;
+        
+        return error;
+    }
+}
+
+impl fmt::Display for LinearFunction {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "f(x) = {} * x + {}", self.a, self.b)
+    }
+}
+
+fn main() {
+    let mut fun = LinearFunction::new(0.0, 0.0);
+    
+    println!("Before");
+    
+    let data_list = [
+        (0.0, 1.0),
+        (1.0, 3.0),
+        (2.0, 5.0),
+        (3.0, 7.0),
+    ];
+    
+    let learning_rate = 0.01 / data_list.len() as f64;
+    
+    for epoch in 0..10000 {
+        let mut mse = 0_f64;
+    
+        for data in data_list.iter() {
+            let error = fun.learn(data.0, data.1, learning_rate);
+            mse += error * error;
+        }
+        
+        if epoch % 1000 == 0 {
+            println!("{}", fun);
+            println!("Error : {}", mse / data_list.len() as f64);
+        }
+    }
+    
+    println!("After");
+    println!("{}", fun);
+}

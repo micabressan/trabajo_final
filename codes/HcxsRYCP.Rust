@@ -1,0 +1,19 @@
+fn main() {
+    use std::io::{stdin,stdout,Write};
+    let mut s = String::new();
+    let mut arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    print!("Please enter captcha: ");
+    let _= stdout().flush();
+    stdin().read_line(&mut s).expect("Did not enter a correct captcha");
+    s.pop();
+
+    for c in s.chars() {
+		// QUESTION: the trait `std::slice::SliceIndex<[{integer}]>` is not implemented for `std::option::Option<u32>`
+		// Can someone help convert char to appropriate type?
+        arr[c.to_digit(10)] += 1;
+    }
+
+    for (i, j) in arr.iter_mut().enumerate() {
+        println!("{} {}", i, j);
+    }
+}

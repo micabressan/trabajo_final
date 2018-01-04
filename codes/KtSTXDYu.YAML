@@ -1,0 +1,19 @@
+ios:
+
+device_tracker:
+  - platform: bluetooth_tracker
+    track_new_devices: no
+  - platform: nmap_tracker
+    hosts: 192.168.1.202
+
+sensor:    
+  - platform: template
+    sensors: 
+      micke:
+        friendly_name: "Micke"
+        value_template: >-
+          {% if is_state('device_tracker.danell', 'home') or is_state('device_tracker.danell_2', 'home´') or is_state('device_tracker.danelllan', 'home') %}
+            Hemma
+          {% else %}
+            Borta
+          {% endif %}

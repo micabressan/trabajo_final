@@ -1,0 +1,127 @@
+#!/usr/bin/env run-cargo-script
+// cargo-deps: lazy_static, regex, euclid
+extern crate euclid;
+use euclid::{Vector3D,vec3};
+
+#[macro_use] extern crate lazy_static;
+extern crate regex;
+use regex::Regex;
+
+use std::str::FromStr;
+use std::error::Error;
+use std::io::{stdin,BufRead};
+
+type Vec3 = Vector3D<i64>;
+
+use std::collections::HashSet;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+struct Particle {
+    p: Vec3,
+    v: Vec3,
+    a: Vec3,
+}
+
+impl FromStr for Particle {
+    type Err = Box<Error>;
+
+    fn from_str(input: &str) -> Result<Self, Self::Err> {
+        lazy_static! {
+            static ref PARSER: Regex =
+                Regex::new(r"^p=<(-?\d+),(-?\d+),(-?\d+)>, v=<(-?\d+),(-?\d+),(-?\d+)>, a=<(-?\d+),(-?\d+),(-?\d+)>$").unwrap();
+        };
+
+        let mut captures_iter = PARSER.captures_iter(input);
+        let captures = captures_iter.next().ok_or("Input does not match format")?;
+        let position = vec3(captures[1].parse()?, captures[2].parse()?, captures[3].parse()?);
+        let velocity = vec3(captures[4].parse()?, captures[5].parse()?, captures[6].parse()?);
+        let accel = vec3(captures[7].parse()?, captures[8].parse()?, captures[9].parse()?);
+        Ok(Particle {p: position, v: velocity, a: accel })
+    }
+}
+
+impl Particle {
+    pub fn update(self) -> Self {
+        let new_v = self.v + self.a;
+        let new_p = self.p + new_v;
+        Particle {p: new_p, v: new_v, a: self.a}
+    }
+
+    pub fn l1_pos(&self) -> i64 {
+        self.p.x.abs() + self.p.y.abs() + self.p.z.abs()
+    }
+
+}
+
+fn update_system(system: &mut Vec<Particle>) {
+    for p in system {
+        *p = p.update()
+    }
+}
+
+const STABILITY_TIMEOUT: usize = 1000;
+fn solve_a(system_a: &mut Vec<Particle>) -> usize {
+    let mut min_coord = system_a.len() + 1;
+    let mut stable_iters = 0;
+    loop {
+        if let Some((idx, _)) = system_a.iter().enumerate().min_by_key(|&(_, p)| p.l1_pos()) {
+            if idx != min_coord {
+                stable_iters = 0;
+                min_coord = idx
+            }
+            if stable_iters > STABILITY_TIMEOUT {
+                break;
+            }
+            stable_iters += 1;
+        }
+        else {
+            panic!("No minima");
+        }
+        update_system(system_a);
+    }
+    min_coord
+}
+
+fn solve_b(system_b: &mut Vec<Particle>) {
+    let mut collisions = HashSet::<Particle>::new();
+    let mut no_collision_count = 0;
+    loop {
+        for (idx_i, i) in system_b.iter().enumerate() {
+            if idx_i == 0 { continue; }
+            for j in &system_b[..idx_i] {
+                if i.p == j.p {
+                    collisions.insert(i.clone());
+                    collisions.insert(j.clone());
+                }
+            }
+        }
+
+        if collisions.len() != 0 {
+            no_collision_count = 0;
+        }
+
+        if no_collision_count > STABILITY_TIMEOUT {
+            break;
+        }
+
+        system_b.retain(|p| !collisions.contains(p));
+        collisions.clear();
+        no_collision_count += 1;
+
+        update_system(system_b);
+    }
+}
+
+fn main() {
+    let stdin = stdin();
+    let handle = stdin.lock();
+
+    let mut system_a: Vec<Particle> = handle.lines().map(|l| l.expect("I/O error")
+                                                         .parse().expect("Parse error")).collect();
+    let mut system_b = system_a.clone();
+
+    println!("Long term minimum is {}", solve_a(&mut system_a));
+
+    solve_b(&mut system_b);
+    println!("Uncollided particles count: {}", system_b.len());
+}

@@ -1,0 +1,15 @@
+  defp compare([h1|l1], [h2|l2], acc) when h1 !== h2 do
+    compare(l1, l2, [1|acc])
+  end
+
+  defp compare([h1|l1], [h2|l2], acc) when h1 === h2 do
+    compare(l1, l2, acc)
+  end
+
+  defp compare(_, _, acc) do
+    acc
+  end
+
+  def compare(l1, l2) do
+    compare(l1, l2, [])
+  end

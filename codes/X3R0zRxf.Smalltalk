@@ -1,0 +1,276 @@
+'From Squeak4.2 of 18 August 2011 [latest update: #11636] on 30 September 2011 at 9:56:42 pm'!
+OGLMorphTutorial subclass: #OGLShipMorphTutorial
+	instanceVariableNames: 'aTimeCollection aTimeCounter aTimeOlde aTimeNew aTimeDiff'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'OpenGL-Tutorial'!
+!OGLShipMorphTutorial commentStamp: 'LDE 9/30/2011 19:53' prior: 0!
+An OGLShipMorphTutorial is xxxxxxxxx.
+
+"To experiment, evaluate the following in a workspace:
+|myTest|
+myTest := (OGLShipMorphTutorial new) openInWindow; yourself."
+"to turn, press left arrow key or right arrow key ."
+"to go in direction ship points, press up arrow key."
+
+"to reset location evaluate:
+myTest aShip currentLocation x:0 y:0 z:-5."
+
+"to reset ship rotation evaluate:
+myTest currentRotation: 0."
+
+
+Instance Variables
+	aTimeCollection:		<Object>
+	aTimeCounter:		<Object>
+	aTimeDiff:		<Object>
+	aTimeNew:		<Object>
+	aTimeOlde:		<Object>
+
+aTimeCollection
+	- xxxxx
+
+aTimeCounter
+	- xxxxx
+
+aTimeDiff
+	- xxxxx
+
+aTimeNew
+	- xxxxx
+
+aTimeOlde
+	- xxxxx
+!
+]style[(109 193 6 1 6 15 1 50 6 22 247),f1,,f1,cblack;,c000000125,c125000125,f1,,f1,!
+
+
+
+!OGLShipMorphTutorial methodsFor: 'ships' stamp: 'LDE 9/17/2011 22:36'!
+
+
+!OGLShipMorphTutorial methodsFor: 'lessons' stamp: 'LDE 9/30/2011 21:50'!
+aShipRender
+
+| aLoc  axis rotation |
+
+aLoc := aShip currentLocation.
+axis := aShip currentRotationAxis.
+rotation:= aShip currentRotation.
+
+ogl 
+	
+	glPushMatrix;
+	glMatrixMode: GLModelview;
+	glLoadIdentity;
+	"glRotatef: rotation with: axis x with:  axis y with: axis z ;"
+	glTranslatef: aLoc x with: aLoc y with: -5.
+	
+	
+self drawShip: aShip.
+	
+ogl glPopMatrix.
+! !
+
+!OGLShipMorphTutorial methodsFor: 'lessons' stamp: 'LDE 9/30/2011 20:22'!
+renderScene
+
+	self clearScreen.
+	self setupView.
+	"ogl beginFrame."
+	self startTiming.
+	self doLesson.
+	self endTiming.
+	"ogl endFrame."
+	self forceToScreen.
+	self incrementFrames.! !
+
+
+
+!OGLShipMorphTutorial methodsFor: 'openGLgraphics' stamp: 'LDE 9/30/2011 18:35'!
+setupView
+	| angle myBounds near far |
+	angle := 30.
+	myBounds := 0@0 extent: self extent.
+	near := 1.
+	far := 100.
+	ogl initFrustum: angle bounds: myBounds zNear: near zFar: far.! !
+
+
+!OGLShipMorphTutorial methodsFor: 'initialization' stamp: 'LDE 9/30/2011 20:25'!
+initialize
+super initialize.
+okToStartTiming:= false.
+okToEndTiming := false.
+defaultLesson:= #aShipRender.
+
+"self initializeShipStuff."
+aShip := Ship new.
+
+aTimeCollection := OrderedCollection new.
+aTimeCounter := 0.
+aTimeOlde := 0.
+aTimeNew :=0.
+
+! !
+
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/17/2011 22:36'!
+aShip
+	"Answer the value of aShip"
+
+	^ aShip! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/17/2011 22:36'!
+aShip: anObject
+	"Set the value of aShip"
+
+	aShip := anObject! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 15:42'!
+aTimeCollection
+	"Answer the value of aTimeCollection"
+
+	^ aTimeCollection! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 15:42'!
+aTimeCollection: anObject
+	"Set the value of aTimeCollection"
+
+	aTimeCollection := anObject! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 15:42'!
+aTimeCounter
+	"Answer the value of aTimeCounter"
+
+	^ aTimeCounter! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 15:42'!
+aTimeCounter: anObject
+	"Set the value of aTimeCounter"
+
+	aTimeCounter := anObject! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 20:26'!
+myShips
+	"Answer the value of myShips"
+
+	^ nil! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 20:26'!
+myShips: anObject
+	"Set the value of myShips"
+
+	"myShips := anObject"! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 20:26'!
+myShipsLoc
+	"Answer the value of myShipsLoc"
+
+	^ nil! !
+
+!OGLShipMorphTutorial methodsFor: 'accessing' stamp: 'LDE 9/30/2011 20:26'!
+myShipsLoc: anObject
+	"Set the value of myShipsLoc"
+
+	"myShipsLoc := anObject"! !
+
+
+!OGLShipMorphTutorial methodsFor: 'event handling' stamp: 'LDE 9/30/2011 16:25'!
+accelerateShip
+
+	|loc|
+
+loc := self aShip currentLocation.
+self aShip currentLocation: (loc x:loc x y:loc y + 0.01 z:loc z).
+! !
+
+!OGLShipMorphTutorial methodsFor: 'event handling' stamp: 'LDE 9/18/2011 03:32'!
+handlesKeyboard: evt
+
+	^true! !
+
+!OGLShipMorphTutorial methodsFor: 'event handling' stamp: 'LDE 9/30/2011 16:20'!
+keyStroke: evt 
+
+	| asc |
+		aTimeCounter := 1+ aTimeCounter//500 .
+		aTimeNew := Time   millisecondClockValue.
+		aTimeDiff := aTimeNew - aTimeOlde.
+	aTimeCollection add: aTimeDiff.
+	aTimeOlde :=aTimeNew. 
+	asc := evt keyCharacter asciiValue.
+	asc = 28 ifTrue: [^self rotateShipLeft].
+	asc = 29 ifTrue: [^self rotateShipRight].
+	asc = 30 ifTrue: [^self accelerateShip].
+
+
+	! !
+
+!OGLShipMorphTutorial methodsFor: 'event handling' stamp: 'LDE 9/18/2011 04:06'!
+rotateShipLeft
+
+
+
+
+self aShip currentRotationAxis: ((Vector3 new) x: 0 y: 0 z:1).
+self aShip currentRotation: self aShip currentRotation +1.! !
+
+!OGLShipMorphTutorial methodsFor: 'event handling' stamp: 'LDE 9/21/2011 01:34'!
+rotateShipRight
+
+
+
+
+self aShip currentRotationAxis: ((Vector3 new) x: 0 y: 0 z:1).
+self aShip currentRotation: self aShip currentRotation -1.! !
+
+
+!OGLShipMorphTutorial methodsFor: 'as yet unclassified' stamp: 'LDE 9/30/2011 19:25'!
+drawShip: aShip
+
+
+
+|  aShipShape shipVa shipVb shipVc shipVd  |
+
+aShipShape:=  aShip shipShape.
+
+shipVa := aShipShape at: 1. shipVb := aShipShape at: 2. shipVc := aShipShape at: 3. shipVd := aShipShape at: 4.
+
+
+ogl	
+
+	 glBegin: GLTriangles;
+		glColor3f: 1 with: 0 with: 0;
+		glVertex3f: shipVa x with: shipVa y with: shipVa z;
+		glColor3f: 0 with: 1 with: 0;
+		glVertex3f: shipVb x with: shipVb y with: shipVb z;
+		glColor3f: 0 with: 0 with: 1;
+		glVertex3f: shipVc x with: shipVc y with: shipVc z;
+		
+		glColor3f: 1 with: 0 with: 0;
+		glVertex3f: shipVa x with: shipVa y with: shipVa z;
+		glColor3f: 0 with: 0 with: 1;
+		glVertex3f: shipVc x with: shipVc y with: shipVc z;
+		glColor3f: 0 with: 1 with: 0;
+		glVertex3f: shipVd x with: shipVd y with: shipVd z;
+		
+		glColor3f: 1 with: 0 with: 0;
+		glVertex3f: shipVa x with: shipVa y with: shipVa z;
+		glColor3f: 0 with: 1 with: 0;
+		glVertex3f: shipVd x with: shipVd y with: shipVd z;
+		glColor3f: 0 with: 0 with: 1;
+		glVertex3f: shipVb x with: shipVb y with: shipVb z;
+		
+		glColor3f: 1 with: 0 with: 0;
+		glVertex3f: shipVb x with: shipVb y with: shipVb z;
+		glColor3f: 0 with: 0 with: 1;
+		glVertex3f: shipVc x with: shipVc y with: shipVc z;
+		glColor3f: 0 with: 1 with: 0;
+		glVertex3f: shipVd x with: shipVd y with: shipVd z;
+	glEnd.	
+
+
+	
+
+! !

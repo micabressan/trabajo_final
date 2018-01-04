@@ -1,0 +1,58 @@
+-module(zad1).
+-compile([export_all]).
+
+producent() ->
+    FP2 = spawn(zad1, posrednik, []),
+    receive
+        {_, N, agh} -> 
+            L=[rand:uniform(5000)+100 || _ <- lists:seq(1, N)],
+            print({printxy,2,5, producent, L}),
+            print({gotoxy,1,25}),
+            timer:sleep(1000),
+            FP2!{self(), L, agh}
+    end.
+
+posrednik() ->
+    FP3 = spawn(zad1, konsument, []),
+    receive
+        {_, L, agh} -> 
+            print({printxy,2,6, posrednik, L}),
+            print({gotoxy,1,25}),
+            timer:sleep(1000),
+            FP3!{self(), L, agh}
+    end.
+
+konsument() ->
+    receive
+        {_, L, agh} ->
+            print({printxy,2,8, konsument, L}),
+            print({gotoxy,1,25})
+    end.
+
+fmain(N) ->
+    print({clear}),
+    FP1 = spawn(zad1, producent, []),
+    FP1!{self(), N, agh},
+    io:format("").
+
+print({gotoxy,X,Y}) ->
+   io:format("\e[~p;~pH",[Y,X]);
+print({printxy,X,Y,Msg}) ->
+   io:format("\e[~p;~pH~p",[Y,X,Msg]);  
+print({printxy,X,Y,Msg,Msg2}) ->
+   io:format("\e[~p;~pH~p ~p",[Y,X,Msg,Msg2]);  
+print({clear}) ->
+   io:format("\e[2J",[]);
+print({tlo}) ->
+  print({printxy,2,4,1.2343}),  
+  io:format("",[])  .
+   
+printxy({X,Y,Msg}) ->
+   io:format("\e[~p;~pH~p~n",[Y,X,Msg]).    
+main()->
+  print({clear}),
+  print({printxy,1,20, "Ada"}),
+  print({printxy,10,20, 2012}),
+  
+  print({tlo}),
+  print({gotoxy,1,25}).

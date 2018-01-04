@@ -1,0 +1,167 @@
+{
+    "SERVER": {
+        "IP": "0,0,0,0",
+        "PORT": 6000
+    },
+    "VIDEO": {
+        "WIDTH": 1024,
+        "HEIGHT": 768,
+        "COLORBITS": 32,
+        "FULLSCREEN": false,
+        "GAMMA": 255,
+        "REFLECTION": false,
+        "LIGHTMAP": false,
+        "DYNAMICLIGHT": false,
+        "SHADER": false,
+        "CHARACTORTEXTURELEVEL": 0,
+        "MAPTEXTURELEVEL": 0,
+        "EFFECTLEVEL": 0,
+        "TEXTUREFORMAT": 1,
+        "NHARDWARETNL": false
+    },
+    "AUDIO": {
+        "BGM_ENABLED": true,
+        "BGM_VOLUME": 0.7972999811172485,
+        "EFFECT_VOLUME": 0.9865000247955322,
+        "BGM_MUTE": true,
+        "EFFECT_MUTE": false,
+        "A8BITSOUND": false,
+        "INVERSESOUND": true,
+        "HWMIXING": true,
+        "HITSOUND": true
+    },
+    "MOUSE": {
+        "SENSITIVITY": 1.0,
+        "INVERT": false
+    },
+    "JOYSTICK": {
+        "SENSITIVITY": 1.0
+    },
+    "KEYBOARD": {
+        "FORWARD": {
+            "KEY1": 17,
+            "KEY2": -1
+        },
+        "BACK": {
+            "KEY1": 31,
+            "KEY2": -1
+        },
+        "LEFT": {
+            "KEY1": 30,
+            "KEY2": -1
+        },
+        "RIGHT": {
+            "KEY1": 32,
+            "KEY2": -1
+        },
+        "MELEEWEAPON": {
+            "KEY1": 2,
+            "KEY2": -1
+        },
+        "PRIMARYWEAPON": {
+            "KEY1": 3,
+            "KEY2": -1
+        },
+        "SECONDARYWEAPON": {
+            "KEY1": 4,
+            "KEY2": -1
+        },
+        "ITEM1": {
+            "KEY1": 5,
+            "KEY2": -1
+        },
+        "ITEM2": {
+            "KEY1": 6,
+            "KEY2": -1
+        },
+        "PREVOUSWEAPON": {
+            "KEY1": 16,
+            "KEY2": 257
+        },
+        "NEXTWEAPON": {
+            "KEY1": 18,
+            "KEY2": 256
+        },
+        "RELOAD": {
+            "KEY1": 19,
+            "KEY2": -1
+        },
+        "JUMP": {
+            "KEY1": 57,
+            "KEY2": -1
+        },
+        "SCORE": {
+            "KEY1": 15,
+            "KEY2": -1
+        },
+        "MENU": {
+            "KEY1": 1,
+            "KEY2": -1
+        },
+        "TAUNT": {
+            "KEY1": 41,
+            "KEY2": -1
+        },
+        "BOW": {
+            "KEY1": 7,
+            "KEY2": -1
+        },
+        "WAVE": {
+            "KEY1": 8,
+            "KEY2": -1
+        },
+        "LAUGH": {
+            "KEY1": 9,
+            "KEY2": -1
+        },
+        "CRY": {
+            "KEY1": 10,
+            "KEY2": -1
+        },
+        "DANCE": {
+            "KEY1": 11,
+            "KEY2": -1
+        },
+        "SCREENSHOT": {
+            "KEY1": 88,
+            "KEY2": -1
+        },
+        "RECORD": {
+            "KEY1": 87,
+            "KEY2": -1
+        },
+        "DEFENCE": {
+            "KEY1": 42,
+            "KEY2": 259
+        },
+        "TOGGLECHAT": {
+            "KEY1": 47,
+            "KEY2": -1
+        },
+        "USEWEAPON": {
+            "KEY1": 29,
+            "KEY2": 258
+        }
+    },
+    "MACRO": {
+        "F1": "",
+        "F2": "",
+        "F3": "",
+        "F4": "",
+        "F5": "",
+        "F6": "",
+        "F7": "",
+        "F8": ""
+    },
+    "ETC": {
+        "NETWORKPORT1": 7700,
+        "NETWORKPORT2": 7800,
+        "BOOST": false,
+        "REJECT_NORMALCHAT": false,
+        "REJECT_TEAMCHAT": false,
+        "REJECT_CLANCHAT": false,
+        "REJECT_WHISPER": false,
+        "REJECT_INVITE": false,
+        "CROSSHAIR": 0
+    }
+}

@@ -1,0 +1,31 @@
+
+2011-10-01 18:20:36 [SEVERE] java.lang.OutOfMemoryError: Java heap space
+2011-10-01 18:20:39 [SEVERE] at net.minecraft.server.NBTTagByteArray.a(SourceFile:21)
+2011-10-01 18:20:39 [SEVERE] at net.minecraft.server.NBTBase.b(SourceFile:64)
+2011-10-01 18:20:41 [SEVERE] at net.minecraft.server.NBTTagCompound.a(SourceFile:24)
+2011-10-01 18:20:41 [SEVERE] at net.minecraft.server.NBTBase.b(SourceFile:64)
+2011-10-01 18:20:43 [SEVERE] at net.minecraft.server.NBTTagCompound.a(SourceFile:24)
+2011-10-01 18:20:43 [SEVERE] at net.minecraft.server.NBTBase.b(SourceFile:64)
+2011-10-01 18:20:46 [SEVERE] at net.minecraft.server.CompressedStreamTools.a(SourceFile:75)
+2011-10-01 18:20:51 [SEVERE] at net.minecraft.server.ChunkRegionLoader.a(SourceFile:29)
+2011-10-01 18:20:57 [SEVERE] at net.minecraft.server.ChunkProviderServer.loadChunk(ChunkProviderServer.java:124)
+2011-10-01 18:21:10 [SEVERE] at net.minecraft.server.ChunkProviderServer.getChunkAt(ChunkProviderServer.java:67)
+2011-10-01 18:21:10 [SEVERE] at net.minecraft.server.PlayerInstance.<init>(PlayerInstance.java:31)
+2011-10-01 18:21:12 [SEVERE] at net.minecraft.server.PlayerManager.a(PlayerManager.java:45)
+2011-10-01 18:21:12 [SEVERE] at net.minecraft.server.PlayerManager.movePlayer(PlayerManager.java:141)
+2011-10-01 18:21:15 [SEVERE] at net.minecraft.server.ServerConfigurationManager.d(ServerConfigurationManager.java:146)
+2011-10-01 18:21:16 [SEVERE] at net.minecraft.server.NetServerHandler.a(NetServerHandler.java:374)
+2011-10-01 18:21:16 [SEVERE] at net.minecraft.server.Packet10Flying.a(SourceFile:126)
+2011-10-01 18:21:19 [SEVERE] at net.minecraft.server.NetworkManager.b(NetworkManager.java:226)
+2011-10-01 18:21:19 [SEVERE] at net.minecraft.server.NetServerHandler.a(NetServerHandler.java:92)
+2011-10-01 18:21:19 [SEVERE] at net.minecraft.server.NetworkListenThread.a(SourceFile:108)
+2011-10-01 18:21:20 [SEVERE] at net.minecraft.server.MinecraftServer.h(MinecraftServer.java:464)
+2011-10-01 18:21:20 [SEVERE] at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:374)
+2011-10-01 18:21:23 [SEVERE] at net.minecraft.server.ThreadServerApplication.run(SourceFile:417)
+2011-10-01 18:21:25 [SEVERE] Exception in thread "Timer-0"
+2011-10-01 18:21:40 [INFO] Stopping server
+2011-10-01 18:21:42 [SEVERE] Exception in thread "Listen thread"
+2011-10-01 18:21:42 [INFO] |=============== [ BadBlocks V0.7 ] ===============|
+2011-10-01 18:21:42 [SEVERE] java.lang.OutOfMemoryError: Java heap space
+2011-10-01 18:21:44 [INFO]
+2011-10-01 18:21:44 [INFO] Plugin is created by: Dexy aka DexoD, Last edit: 27.9.2011

@@ -1,0 +1,17 @@
+use std::fmt;
+use std::fmt::Display;
+
+struct A<T: Display> {
+    value: T
+}
+
+impl<T> fmt::Display for A<T> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "I have the value {}", self.value);
+    }
+}
+
+fn main() {
+    let a = A { value: 55 };
+    println!("{}", a);
+}

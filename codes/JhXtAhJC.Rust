@@ -1,0 +1,24 @@
+for cur_th in 0..threads_num {
+	let f = first.clone();
+	let o = other.clone();
+	let rf = row_factor.clone();
+	let cf = column_factor.clone();
+	let mut res = result.clone();
+	let answ = thread::spawn(move || {
+		let mut i: usize = cur_th;
+		while i < f.row_num {
+			for j in 0..o.col_num {
+				let mut sum: f32 = -rf[i] - cf[j];
+				for k in 0..b {
+					let k2 = k * 2 as usize;
+					sum += (f.data[i][k2+1] + o.data[k2][j])*
+								(f.data[i][k2] + o.data[k2+1][j]);
+				}
+				res.data[i][j] = sum;
+			} 
+			i += threads_num;
+		}
+		res
+	}).join().unwrap();
+	result.data[cur_th] = answ.data[cur_th].clone();
+}

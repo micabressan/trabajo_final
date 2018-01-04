@@ -1,0 +1,133 @@
+// ConsoleApplication4.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+
+class OutputManager
+{
+public:
+	virtual void Print(const std::string & thingToPrint) const
+	{
+		std::cout << thingToPrint;
+	}
+};
+
+class InputManager
+{
+public:
+	int GetNumber(const std::string &inStr, OutputManager *output) const
+	{
+		int result = 0;
+
+		output->Print(inStr + "\n");
+
+		std::cin >> result;
+
+		return result;
+	}
+};
+
+class FileOutputManager : public OutputManager
+{
+	virtual void Print(const std::string & thingToPrint) const override
+	{
+		std::ofstream stream;
+
+		stream.open("test.txt", std::ios::app);
+
+		stream << thingToPrint;
+
+		stream.close();
+	}
+};
+
+class CombinedOutputManager : public OutputManager
+{
+	OutputManager *first;
+	OutputManager *second;
+
+public:
+	CombinedOutputManager(OutputManager *infirst, OutputManager *insecond) : first(infirst), second(insecond)
+	{
+
+	}
+
+	virtual void Print(const std::string & thingToPrint) const override
+	{
+		first->Print(thingToPrint);
+		second->Print(thingToPrint);
+	}
+
+};
+
+class Game
+{
+private:
+	int pile;
+	int maxItemsToGet;
+
+	bool isFirstPlayerTurn = true;
+
+	InputManager * input;
+	OutputManager * output;
+public:
+
+	Game(InputManager *inManager, OutputManager *inOutputManager) : input(inManager), output(inOutputManager)
+	{
+
+	}
+
+	void Init()
+	{
+		pile			= input->GetNumber("Enter the amount of items in the pile", output);
+		maxItemsToGet	= input->GetNumber("Ether the max amount of items to get in turn", output);
+	}
+
+	bool MakeTurn()
+	{
+		output->Print("Amount of items in pile is equal to " + std::to_string(pile) + "\n");
+
+		std::string playerTurnString = (std::string)(isFirstPlayerTurn ? "First player" : "Second player") + ", please enter the amount of items you want to get!";
+		int amountToGet = 0;
+		while (true)
+		{
+			amountToGet = input->GetNumber(playerTurnString, output);
+			if (amountToGet > 0 && amountToGet <= maxItemsToGet && amountToGet <= pile)
+				break;
+			else
+				output->Print("You entered wrong value! Burn in hell!\n");
+		}
+
+		pile -= amountToGet;
+
+		if (pile != 0)
+			isFirstPlayerTurn = !isFirstPlayerTurn;
+		else
+			output->Print((std::string)(isFirstPlayerTurn ? "Second" : "First") + " player won!\n");
+
+		return pile == 0;
+	}
+};
+
+int main()
+{
+	std::cout << "Would you like to write to the file instead of the screen? 1/0" << std::endl;
+
+	bool val = false;
+	std::cin >> val;
+
+	OutputManager *manager = val ? new FileOutputManager() : new OutputManager();
+
+	Game game(new InputManager(), manager);
+
+	game.Init();
+
+	while (!game.MakeTurn());
+
+	while (true);
+
+	return 0;
+}

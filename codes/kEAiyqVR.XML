@@ -1,0 +1,47 @@
+<TextView
+        android:id="@+id/playerone"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/imagescore"
+        android:gravity="center"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/playertwo"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/playerone"
+        android:gravity="center"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/playerthree"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/playertwo"
+        android:gravity="center"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/playertwo"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/playerfour"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="TextView" />

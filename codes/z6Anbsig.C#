@@ -1,0 +1,224 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+
+using Postman.Views.Controls;
+
+using Windows.UI.Xaml.Data;
+
+namespace Postman.ComponentModel
+{
+    // TODO: Add support of data virtualization. 
+    public sealed class TreeViewCollection : IList<TreeNode>, INotifyCollectionChanged, INotifyPropertyChanged /*, IItemsRangeInfo, ISelectionInfo*/
+    {
+        #region Fields
+        private readonly List<TreeNode> _nodes = new List<TreeNode>();
+        private readonly Func<List<TreeNode>> _function;
+        #endregion
+
+
+        public TreeViewCollection(Func<List<TreeNode>> function) =>
+            _function = function ?? throw new ArgumentNullException(nameof(_function));
+
+
+        #region INotifyCollectionChanged implementation
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        #endregion
+
+        #region INotifyPropertyChanged implementation 
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+
+        #region IList implementation
+        public TreeNode this[int index]
+        {
+            get => _nodes[index];
+            set => _nodes[index] = value;
+        }
+
+        public int Count => _nodes.Count;
+
+        public bool IsReadOnly => ((IList)_nodes).IsReadOnly;
+
+        public void Add(TreeNode item)
+        {
+            _nodes.Add(item);
+            SubscribeNode(item);
+
+            UpdateCollection(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+        }
+
+        public void Clear()
+        {
+            foreach (var node in _nodes)
+            {
+                UnsubscribeNode(node);
+            }
+
+            _nodes.Clear();
+            UpdateCollection(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+        }
+
+        public bool Contains(TreeNode item) => _nodes.Contains(item);
+
+        public int IndexOf(TreeNode item) => _nodes.IndexOf(item);
+
+        public void Insert(int index, TreeNode item)
+        {
+            _nodes.Insert(index, item);
+            UpdateCollection(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+        }
+
+        public bool Remove(TreeNode item) => RemoveItem(IndexOf(item), item);
+
+        public void RemoveAt(int index) => RemoveItem(index, this[index]);
+
+        public IEnumerator<TreeNode> GetEnumerator() => _nodes.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => _nodes.GetEnumerator();
+
+
+        #region Non-implemented methods
+        void ICollection<TreeNode>.CopyTo(TreeNode[] array, int arrayIndex) => throw new NotImplementedException();
+        #endregion
+
+        #endregion
+
+
+        #region DataVirtualization methods
+
+        #region IItemsRangeInfo implementation
+        public void RangesChanged(ItemIndexRange visibleRange, IReadOnlyList<ItemIndexRange> trackedItems)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+
+        #region ISelectionInfo implementation
+        public void SelectRange(ItemIndexRange itemIndexRange)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeselectRange(ItemIndexRange itemIndexRange)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSelected(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyList<ItemIndexRange> GetSelectedRanges()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+
+        #endregion
+
+
+        #region Public methods
+        public void ExpandNode(TreeNode node)
+        {
+            if (!node.IsExpand)
+            {
+                node.IsExpand = true;
+            }
+        }
+
+        public void CollapseNode(TreeNode node)
+        {
+            if (node.IsExpand)
+            {
+                node.IsExpand = false;
+            }
+        }
+        #endregion
+
+
+        #region Private methods
+        private void NodeCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+
+            }
+
+            CollectionChanged?.Invoke(this, e);
+        }
+
+        private bool RemoveItem(int index, TreeNode node)
+        {
+            return default;
+        }
+
+        private void NodePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var targetNode = ((TreeNode)sender);
+            if (e.PropertyName == nameof(TreeNode.IsExpand))
+            {
+                if (((TreeNode)sender).IsExpand)
+                {
+                    // TODO: Add item and descadents to view. 
+                }
+                else
+                {
+                    // TODO: Remove item and descadents from view. 
+                }
+            }
+        }
+
+        private void RemoveNodeAndDescadentsFromView(TreeNode node)
+        {
+
+        }
+
+        private int AddNodeDescadentsToView(TreeNode node, int index)
+        {
+            Insert(index, node);
+            int offset = 0;
+
+            foreach (var childrenNode in node)
+            {
+                SubscribeNode(childrenNode);
+                offset++;
+                offset += AddNodeDescadentsToView(childrenNode, index + offset);
+            }
+
+            return offset;
+        }
+
+        private void SubscribeNode(TreeNode node)
+        {
+            node.PropertyChanged += NodePropertyChanged;
+            node.CollectionChanged += NodeCollectionChanged;
+        }
+
+        private void UnsubscribeNode(TreeNode node)
+        {
+            node.PropertyChanged -= NodePropertyChanged;
+            node.CollectionChanged -= NodeCollectionChanged;
+        }
+
+        private void UpdateCollection(NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChanged?.Invoke(this, e);
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+        }
+        #endregion
+    }
+}

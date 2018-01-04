@@ -1,0 +1,10 @@
+
+#region AutoSkills And Promotion 
+                if (client != null)  
+                {  
+                    if (client.Spells != null)  
+                    {  
+                        MsgAutoGiveMagic.Check(client);  
+                    }  
+                }  
+                #endregion

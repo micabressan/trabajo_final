@@ -1,0 +1,35 @@
+div#header {
+  width:100%;
+  height:80px;
+  margin:0;
+  position:relative;
+  background:#242424;
+}
+div#header div.logo {
+  width:100%;
+  height:50px;
+  border-bottom:1px solid black;
+}
+div#header div.taskbar {
+  width:100%;
+  height:30px;
+  border-bottom:1px solid black;
+  color:#fff;
+}
+div#header div.taskbar div.left {
+  width:9%;
+  height:30px;
+  float:left;
+  border-right:1px solid black;
+}
+div#header div.taskbar div.center {
+  width:59%;
+  height:30px;
+  float:left;
+  border-right:1px solid black;
+}
+div#header div.taskbar div.right {
+  width:9%;
+  float:right;
+  height:30px;
+}

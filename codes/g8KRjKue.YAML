@@ -1,0 +1,17 @@
+- name: lsyncd configuration for RBD data replications
+  copy:
+    content: |
+      settings {
+          logfile       =       "/var/log/{{ ceph_nfs_lsyncd }}/{{ item.value }}:{{ item.key }}.log",
+          statusFile    =       "/var/log/{{ ceph_nfs_lsyncd }}/{{ item.value }}:{{ item.key }}.status",
+          maxProcesses  =       {{ ceph_nfs_lsyncd_max_proc }},
+      }
+
+      sync {
+          default.rsync,
+          source        =   "/mnt/{{ item.value }}:{{ item.key }}",
+          target        =   "{{ ceph_nfs_backup_root }}/{{ item.value }}:{{ item.key }}",
+          delay         =   {{ ceph_nfs_lsyncd_delay }},
+          {% if ceph_nfs_lsyncd_opts[item.value + ":" + item.key] | default() %}{{ ceph_nfs_lsyncd_opts[item.value + ":" + item.key] }}{% endif %}
+
+      }  -- Don'r remove prevous empty line in template! Jinja2 is bullshit!

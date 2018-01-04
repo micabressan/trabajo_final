@@ -1,0 +1,6 @@
+ackfib n = if n > 0
+           then ackfibHelp n 0 1
+           else 0
+
+ackfibHelp 1 a b = b
+ackfibHelp n a b = ackfibHelp (n-1) b (a+b)

@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms;
+namespace KDZ
+{
+    class MyFunction
+    {
+        public double minx = -20, maxx = 20, step = 0.05;
+        public bool net = true;
+        private int A;
+        private double dx;
+        private Chart MainChart;
+
+        public int SetA
+        {
+            set
+            {
+                A = value;
+            }
+        }
+        public double SetDx
+        {
+            set
+            {
+                dx = value;
+            }
+        }
+        public Chart SetChart
+        {
+            set
+            {
+                MainChart = value;
+            }
+        }
+        public bool SetNet
+        {
+            set
+            {
+                net = value;
+            }
+        }
+
+        public double F(double x) //функция
+        {
+            return 1 / (A * x * x) + 1 / (x - 1) + 1 / (x + 2);
+        }
+        public double FD(double x) //производная функции
+        {
+            return ((F(x + dx) - F(x)) / dx);
+        }
+        public void DrawMain() //отрисовка функции
+        {
+            double f = new double();
+            MainChart.Series[0].Points.Clear();
+            for (double x = minx; x < maxx; x += step)
+            {
+                f = F(x);
+                if (f < -2 || f > 2) //ограничение по у, чтобы график не уходил в огромные значения
+                {
+                    MainChart.Series[0].Points.AddXY(x, f);
+                    MainChart.Series[0].Points[MainChart.Series[0].Points.Count - 1].IsEmpty = true;
+                    continue;
+                }
+                MainChart.Series[0].Points.AddXY(x, f);
+            }
+        }
+        public void DrawDerivative() //отрисовка производной
+        {
+            double f = new double();
+            for (double x = minx; x < maxx; x += step)
+            {
+                f = FD(x);
+                if (f < -2 || f > 2) //ограничение по у, чтобы график не уходил в огромные значения
+                {
+                    MainChart.Series[1].Points.Add(x, f);
+                    MainChart.Series[1].Points[MainChart.Series[1].Points.Count - 1].IsEmpty = true;
+                    continue;
+                }
+                MainChart.Series[1].Points.AddXY(x, f);
+            }
+        }
+        public void HighlightGraph()
+        {
+            for (int i = 0; i < MainChart.Series[1].Points.Count; i++)
+            {
+                if (MainChart.Series[0].Points[i].YValues[0] >= 0 && MainChart.Series[1].Points[i].YValues[0] >= 0)
+                {
+                    if (MainChart.Series[0].Points[i].YValues[0] < 1.5)
+                    {
+                        MessageBox.Show("" + MainChart.Series[0].Points[i].YValues[0] + " " + MainChart.Series[1].Points[i].YValues[0], "Предупреждение", MessageBoxButtons.OK);
+                        MainChart.Series[2].Points.AddXY(MainChart.Series[0].Points[i].XValue, 0);
+                    }
+                }
+            }
+        }
+    }
+}

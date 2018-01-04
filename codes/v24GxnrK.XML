@@ -1,0 +1,103 @@
+<BoardInfo>
+	<DTAppend name="model" type="string" parentlabel="" val="Terasic DE-1 SoC"/>
+	<DTAppend name="compatible" parentlabel="" >
+		<val type="string">altr,socfpga-cyclone5</val>
+		<val type="string">altr,socfpga</val>
+	</DTAppend>
+	
+	<Chosen>
+		<Bootargs val="console=ttyS0,115200" />
+	</Chosen>
+
+	<DTAppend name="next-level-cache" type="phandle" parentlabel="hps_0_arm_a9_0" val="hps_0_L2"/>
+	<DTAppend name="next-level-cache" type="phandle" parentlabel="hps_0_arm_a9_1" val="hps_0_L2"/>
+
+	<DTAppend name="cache-unified" type="bool" parentlabel="hps_0_L2" val="true"/>
+	<DTAppend name="arm,tag-latency" parentlabel="hps_0_L2">
+		<val type="number">1</val>
+		<val type="number">1</val>
+		<val type="number">1</val>
+	</DTAppend>
+	<DTAppend name="arm,data-latency" parentlabel="hps_0_L2">
+		<val type="number">2</val>
+		<val type="number">1</val>
+		<val type="number">1</val>
+	</DTAppend>
+	
+	<DTAppend name="cpu1-start-addr" type="hex" parentlabel="hps_0_sysmgr" val="0xffd080c4"/>
+	
+	<DTAppend name="#address-cells" type="number" parentlabel="hps_0_sdmmc" val="1"/>
+	<DTAppend name="#size-cells" type="number" parentlabel="hps_0_sdmmc" val="0"/>
+	<DTAppend name="supports-highspeed" parentlabel="hps_0_sdmmc"/>
+	<DTAppend name="broken-cd" type="bool" parentlabel="hps_0_sdmmc" val="true"/>
+	<DTAppend name="altr,dw-mshc-ciu-div" type="number" parentlabel="hps_0_sdmmc" val="3"/>
+	<DTAppend name="altr,dw-mshc-sdr-timing" parentlabel="hps_0_sdmmc" >
+		<val type="number">0</val>
+		<val type="number">3</val>
+	</DTAppend>
+	<DTAppend name="slot@0" type="node" parentlabel="hps_0_sdmmc" newlabel="slot_0"/>
+	<DTAppend name="reg" type="number" parentlabel="slot_0" val="0"/>
+	<DTAppend name="bus-width" type="number" parentlabel="slot_0" val="4"/>
+	
+	<DTAppend name="leds" type="node" parentlabel="sopc0" newlabel="soc_leds"/>
+	<DTAppend name="compatible" type="string" parentlabel="soc_leds" val="gpio-leds"/>
+		<DTAppend name="hps_led0" type="node" parentlabel="soc_leds" newlabel="hps_led0"/>
+		<DTAppend name="label" type="string" parentlabel="hps_led0" val="hps_led0"/>
+		<DTAppend name="gpios" parentlabel="hps_led0" >
+			<val type="phandle">hps_0_gpio1</val>
+			<val type="number">0</val>
+			<val type="number">0</val>
+		</DTAppend>
+		<DTAppend name="linux,default-trigger" type="string" parentlabel="hps_led0" val="cpu0"/>
+		
+		<DTAppend name="hps_led1" type="node" parentlabel="soc_leds" newlabel="hps_led1"/>
+		<DTAppend name="label" type="string" parentlabel="hps_led1" val="hps_led1"/>
+		<DTAppend name="gpios" parentlabel="hps_led1" >
+			<val type="phandle">hps_0_gpio1</val>
+			<val type="number">1</val>
+			<val type="number">0</val>
+		</DTAppend>
+		<DTAppend name="linux,default-trigger" type="string" parentlabel="hps_led1" val="cpu1"/>
+		
+		<DTAppend name="hps_led2" type="node" parentlabel="soc_leds" newlabel="hps_led2"/>
+		<DTAppend name="label" type="string" parentlabel="hps_led2" val="hps_led2"/>
+		<DTAppend name="gpios" parentlabel="hps_led2" >
+			<val type="phandle">hps_0_gpio1</val>
+			<val type="number">2</val>
+			<val type="number">0</val>
+		</DTAppend>
+		<DTAppend name="linux,default-trigger" type="string" parentlabel="hps_led2" val="default-on"/>
+		
+		<DTAppend name="hps_led3" type="node" parentlabel="soc_leds" newlabel="hps_led3"/>
+		<DTAppend name="label" type="string" parentlabel="hps_led3" val="hps_led3"/>
+		<DTAppend name="gpios" parentlabel="hps_led3" >
+			<val type="phandle">hps_0_gpio1</val>
+			<val type="number">3</val>
+			<val type="number">0</val>
+		</DTAppend>
+		<DTAppend name="linux,default-trigger" type="string" parentlabel="hps_led3" val="heartbeat"/>
+	
+	<DTAppend name="pmu0" type="node" parentlabel="sopc0" newlabel="pmu"/>
+	<DTAppend name="#address-cells" type="number" parentlabel="pmu" val="1"/>
+	<DTAppend name="#size-cells" type="number" parentlabel="pmu" val="1"/>
+	<DTAppend name="compatible" type="string" parentlabel="pmu" val="arm,cortex-a9-pmu"/>
+	<DTAppend name="interrupt-parent" type="phandle" parentlabel="pmu" val="hps_arm_gic_0"/>
+	<DTAppend name="interrupts" parentlabel="pmu">
+		<val type="number">0</val>
+		<val type="number">176</val>
+		<val type="number">4</val>
+		<val type="number">0</val>
+		<val type="number">177</val>
+		<val type="number">4</val>
+	</DTAppend>
+	<DTAppend name="ranges" type="bool" parentlabel="pmu" val="true"/>
+
+	<DTAppend name="dmas" parentlabel="hps_0_uart0">
+		<val type="phandle">hps_0_dma</val>
+		<val type="number">28</val>
+	</DTAppend>
+	<DTAppend name="dmas" parentlabel="hps_0_uart0">
+		<val type="phandle">hps_0_dma</val>
+		<val type="number">29</val>
+	</DTAppend>
+</BoardInfo>

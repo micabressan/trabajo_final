@@ -1,0 +1,44 @@
+Index: wp-includes/query.php
+===================================================================
+--- wp-includes/query.php	(revision 18662)
++++ wp-includes/query.php	(working copy)
+@@ -715,6 +715,22 @@
+ 	return $wp_query->is_404();
+ }
+ 
++/**
++ * Is the query the main loop?
++ *
++ * @since 3.3.0
++ *
++ * @param WP_Query Query object. Optional, defaults to the $wp_query global.
++ * @return bool
++ */
++function is_main_loop( $query ) {
++		global $wp_the_query, $wp_query;
++		if ( null === $query )
++			return $wp_the_query === $wp_query;
++
++		return $wp_the_query === $query;
++}
++
+ /*
+  * The Loop.  Post loop control.
+  */
+@@ -3467,6 +3483,18 @@
+ 	function is_404() {
+ 		return (bool) $this->is_404;
+ 	}
++
++	/**
++	 * Is the query the main loop?
++	 *
++	 * @since 3.3.0
++	 *
++	 * @return bool
++	 */
++	function is_main_loop() {
++		global $wp_the_query;
++		return $wp_the_query === $this;
++	}
+ }

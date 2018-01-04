@@ -1,0 +1,28 @@
+import System.IO
+import Data.Char (digitToInt)
+
+arrayRotatedByOne :: [Int] -> [Int]
+arrayRotatedByOne (x:xs) = xs ++ [x]
+
+arrayRotatedByHalf :: [Int] -> [Int]
+arrayRotatedByHalf x = (drop n x) ++ (take n x)
+	where n = (length x) `div` 2
+
+elementIfElementsAreSame :: (Int, Int) -> Int
+elementIfElementsAreSame (x, y) = if x == y then x else 0
+
+accFunction acc a = acc + elementIfElementsAreSame a
+
+solution1 :: [Int] -> Int
+solution1 x = foldl accFunction 0 zippedArray
+	where zippedArray = (zip x $ arrayRotatedByOne x)
+
+solution2 :: [Int] -> Int
+solution2 x = foldl accFunction 0 zippedArray
+	where zippedArray = (zip x $ arrayRotatedByHalf x)
+
+main = do
+	contents <- readFile "day01.txt"
+	let digits = map digitToInt contents
+	putStrLn $ show $ solution1 digits
+	putStrLn $ show $ solution2 digits

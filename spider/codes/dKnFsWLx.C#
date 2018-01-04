@@ -1,0 +1,165 @@
+using System.Linq;
+using Turbo.Plugins.Default;
+using System.Collections.Generic;
+
+namespace Turbo.Plugins.One
+{
+	public class DarkeningOfTristram : BasePlugin, IInGameWorldPainter
+	{
+		public WorldDecoratorCollection DarkeningOfTristramDecorator { get; set; }
+		public WorldDecoratorCollection DarkeningOfTristramUniqueDecorator { get; set; }
+		public WorldDecoratorCollection DarkeningOfTristramOrderDecorator { get; set; }
+		
+		private HashSet<uint> _actorSnoList = new HashSet<uint>();
+		private HashSet<uint> _uniqueSnoList = new HashSet<uint>();
+		private HashSet<uint> _orderSnoList = new HashSet<uint>();
+
+		public DarkeningOfTristram()
+		{
+			Enabled = true;
+		}
+
+		public override void Load(IController hud)
+		{
+			base.Load(hud);
+			
+			DarkeningOfTristramDecorator = new WorldDecoratorCollection(
+				new MapShapeDecorator(Hud)
+                {
+                    ShapePainter = new RotatingTriangleShapePainter(Hud),
+                    Brush = Hud.Render.CreateBrush(160, 255, 128, 0, 10),
+                    ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                    Radius = 2,
+                },
+                new GroundCircleDecorator(Hud)
+                {
+                    Brush = Hud.Render.CreateBrush(150, 255, 128, 0, 0),
+                    Radius = 1.125f,
+                }
+			);
+			
+			DarkeningOfTristramOrderDecorator = new WorldDecoratorCollection(
+				new MapShapeDecorator(Hud)
+                {
+                    ShapePainter = new RotatingTriangleShapePainter(Hud),
+                    Brush = Hud.Render.CreateBrush(160, 255, 128, 0, 10),
+                    ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                    Radius = 2,
+                },
+                new GroundLabelDecorator(Hud)
+                {
+                    BackgroundBrush = Hud.Render.CreateBrush(255, 0, 255, 0, 0),
+                    BorderBrush = Hud.Render.CreateBrush(255, 255, 0, 0, 1),
+                    TextFont = Hud.Render.CreateFont("tahoma", 15f, 255, 255, 0, 0, true, false, false),
+                }
+			);
+			
+			DarkeningOfTristramUniqueDecorator = new WorldDecoratorCollection(
+				new MapShapeDecorator(Hud)
+                {
+                    ShapePainter = new RotatingTriangleShapePainter(Hud),
+                    Brush = Hud.Render.CreateBrush(160, 255, 128, 0, 25),
+                    ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                    Radius = 1,
+                },
+                new GroundCircleDecorator(Hud)
+                {
+                    Brush = Hud.Render.CreateBrush(150, 255, 128, 0, 0),
+                    Radius = 3f,
+                }
+			);
+			
+			_orderSnoList.Add(456066); //	p43_AD_OldTristram_AdriaCellar_Cauldron	Cauldron
+			_orderSnoList.Add(455885); //	p43_AD_Corpse_Griswold	Griswold's Corpse
+			_orderSnoList.Add(455887); //	p43_AD_Corpse_Farnham	Farnham's Corpse
+			_orderSnoList.Add(455884); //	p43_AD_Corpse_Ogden	Ogden's Corpse
+			_orderSnoList.Add(455886); //	p43_AD_Corpse_Pepin	Pepin's Corpse
+			
+			_actorSnoList.Add(455696); // Cultist's Page 1
+			_actorSnoList.Add(455712); // Cultist's Page 2
+			_actorSnoList.Add(455713); // Cultist's Page 3
+			_actorSnoList.Add(455714); // Cultist's Page 4
+			_actorSnoList.Add(455715); // Cultist's Page 5
+			_actorSnoList.Add(455716); // Cultist's Page 6
+			_actorSnoList.Add(455717); // Cultist's Page 7
+			_actorSnoList.Add(455664); // 43_AD_TriuneSummoner_WestMCultist_Lore	Temporal Priest
+			
+			_actorSnoList.Add(454492);	//	p43_AD_trOut_NewTristram_Adria_BlackMushroom	Black Mushroom
+			_actorSnoList.Add(454794);	//	Unique_Gem_022_x1	Red Soul Shard
+			_actorSnoList.Add(162311);	//	A1_BlackMushroom	Black Mushroom
+			_actorSnoList.Add(457032);	//	p43_AD_WirtsLeg_01	Witch's Brew
+			_actorSnoList.Add(457033);	//	p43_AD_WirtsLeg_02	Drunkard's Debt
+			_actorSnoList.Add(457049);	//	p43_AD_WirtsLeg_03	Garda's Letter
+			_actorSnoList.Add(457050);	//	p43_AD_WirtsLeg_04	Healer's Prescription
+			_actorSnoList.Add(456333);	//	p43_AD_TabletOfLazarus	Book of Lazarus
+			_actorSnoList.Add(456335);	//	p43_AD_TabletOfLazarus_Lazarus	Book of Lazarus
+			
+			_uniqueSnoList.Add(454392);	// p43_d1_Triune_Summonable_1_Unique_Shadowbite	Shadowbite
+			_uniqueSnoList.Add(454393);	// p43_d1_ZombieSkinny_1_Unique_Rotfeast	Rotfeast the Hungry
+			_uniqueSnoList.Add(454398);	// p43_d1_Skeleton_3_Unique_Madeye	Madeye the Dead
+			_uniqueSnoList.Add(454395);	// p43_d1_Shield_Skeleton_3_Unique_Brokenhead	Brokenhead Bangshield
+			_uniqueSnoList.Add(454396);	// p43_d1_Goatman_Melee_1_Unique_Gharbad	Gharbad the Weak
+			_uniqueSnoList.Add(454394);	// p43_d1_FallenGrunt_4_Unique_Snotspill	Snotspill
+			_uniqueSnoList.Add(454399);	// p43_d1_SkeletonArcher_3_Unique_Blacklash	Blacklash the Burning
+			_uniqueSnoList.Add(454404);	// p43_d1_Goatman_Ranged_1_Unique_Bloodskin	Bloodskin Darkbow
+			_uniqueSnoList.Add(454406);	// p43_d1_FleshPitFlyer_3_Unique_Foulwing	Foulwing
+			_uniqueSnoList.Add(454403);	// p43_d1_FallenGrunt_4_Unique_Shadowcrow	Shadowcrow
+			_uniqueSnoList.Add(455321);	// p43_d1_Goatman_Melee_2_Unique_Deathshade	Deathshade Fleshmaul
+			_uniqueSnoList.Add(454408);	// p43_d1_FallenChampion_1_Unique_Bilefroth	Bilefroth the Pit Master
+			_uniqueSnoList.Add(454407);	// p43_d1_Goatman_Melee_3_Unique_Bloodgutter	Bloodgutter
+			_uniqueSnoList.Add(454410);	// p43_d1_Goatman_Melee_4_Unique_Blighthorn	Blighthorn Steelmace
+			_uniqueSnoList.Add(454411);	// p43_d1_Goatman_Ranged_4_Unique_Gorestone	Gorestone
+			_uniqueSnoList.Add(454412);	// p43_d1_Bloodhawk_2_Unique_Nightwing	Nightwing the Cold
+			_uniqueSnoList.Add(454413);	// p43_d1_sandMonster_1_Unique_Firewound	Firewound the Grim
+			_uniqueSnoList.Add(454672);	// p43_d1_Mage_1_Unique_ZharTheMad	Zhar the Mad
+			_uniqueSnoList.Add(455327);	// p43_d1_FallenChampion_2_Unique_BaronSluge	Baron Sludge
+			_uniqueSnoList.Add(454417);	// p43_d1_MoleMutant_Melee_2_Unique_Mud	Breakspine
+			_uniqueSnoList.Add(454418);	// p43_d1_TerrorDemon_1_Unique_Brokenstorm	Brokenstorm
+			_uniqueSnoList.Add(454595);	// p43_d1_FallenChampion_3_Unique_Oozedrool	Oozedrool
+			_uniqueSnoList.Add(455325);	// p43_d1_TerrorDemon_2_Unique_TheFlayer	The Flayer
+			_uniqueSnoList.Add(454421);	// p43_d1_Bloodhawk_3_Unique_Bloodclaw	Goldblight of the Flame
+			_uniqueSnoList.Add(454422);	// p43_d1_MoleMutant_Melee_4_Unique_Blackstorm	Blackstorm
+			_uniqueSnoList.Add(454424);	// p43_d1_MoleMutant_Melee_3_Unique_Bluehorn	Bluehorn
+			_uniqueSnoList.Add(454425);	// p43_d1_snakeMan_Melee_1_Unique_Fangspeir	Fangspeir
+			_uniqueSnoList.Add(454649);	// p43_d1_snakeMan_Melee_2_Unique_Viperflame	Viperflame
+			_uniqueSnoList.Add(454426);	// p43_d1_Bloodhawk_4_Unique_DeathWing	Viletouch
+			_uniqueSnoList.Add(454427);	// p43_d1_Shield_Skeleton_Westmarch_1_Unique_Lionskull	Lionskull
+			_uniqueSnoList.Add(454430);	// p43_d1_Shield_Skeleton_Westmarch_3_Unique_WarlordOfBlood	Warlord of Blood
+			_uniqueSnoList.Add(454429);	// p43_d1_Shield_Skeleton_Westmarch_2_Unique_Rustweaver	Rustweaver
+			_uniqueSnoList.Add(454431);	// p43_d1_Succubus_2_Unique_Witchmoon	Witchmoon
+			_uniqueSnoList.Add(454433);	// p43_d1_Shield_Skeleton_Westmarch_3_Unique_Steelskull	Steelskull the Hunter
+			_uniqueSnoList.Add(454432);	// p43_d1_Shield_Skeleton_Westmarch_2_Unique_Graywar	Graywar the Slayer
+			_uniqueSnoList.Add(454434);	// p43_d1_Succubus_3_Unique_Stareye	Stareye the Witch
+			_uniqueSnoList.Add(454558);	// p43_d1_Mage_3_Unique_TheVizier	The Vizier
+			_uniqueSnoList.Add(454654);	// p43_d1_Succubus_3_Unique_RedVex	Red Vex
+			_uniqueSnoList.Add(454435);	// p43_d1_Succubus_3_Unique_Blackjade	Blackjade
+			_uniqueSnoList.Add(454437);	// p43_d1_Shield_Skeleton_Westmarch_4_Unique_SirGorash	Sir Gorash
+			
+		}
+
+		public void PaintWorld(WorldLayer layer)
+		{
+			var actors = Hud.Game.Actors.Where(actor => actor.DisplayOnOverlay && _actorSnoList.Contains(actor.SnoActor.Sno));
+			foreach (var actor in actors)
+            {
+                DarkeningOfTristramDecorator.Paint(layer, actor, actor.FloorCoordinate, "");
+            }
+			
+			var unique = Hud.Game.Actors.Where(actor => actor.DisplayOnOverlay && _uniqueSnoList.Contains(actor.SnoActor.Sno));
+			foreach (var actor in unique)
+            {
+                DarkeningOfTristramUniqueDecorator.Paint(layer, actor, actor.FloorCoordinate, "");
+            }
+			
+			var order = Hud.Game.Actors.Where(actor => actor.DisplayOnOverlay && _orderSnoList.Contains(actor.SnoActor.Sno));
+			foreach (var actor in order)
+            {
+                if (actor.SnoActor.Sno == 456066) DarkeningOfTristramOrderDecorator.Paint(layer, actor, actor.FloorCoordinate, "1");
+                if (actor.SnoActor.Sno == 455887) DarkeningOfTristramOrderDecorator.Paint(layer, actor, actor.FloorCoordinate, "2");
+                if (actor.SnoActor.Sno == 455884) DarkeningOfTristramOrderDecorator.Paint(layer, actor, actor.FloorCoordinate, "3");
+                if (actor.SnoActor.Sno == 455886) DarkeningOfTristramOrderDecorator.Paint(layer, actor, actor.FloorCoordinate, "4");
+                if (actor.SnoActor.Sno == 455885) DarkeningOfTristramOrderDecorator.Paint(layer, actor, actor.FloorCoordinate, "5");
+            }
+		}
+	}
+}

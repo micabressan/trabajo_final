@@ -1,0 +1,77 @@
+from scrappa import *
+from scrappa.captcha import recaptcha_challenge_exists, solve_recaptcha
+
+START_URL = 'https://www.commerce.alaska.gov/cbp/main/search/entities'
+ROOT_URL = 'https://www.commerce.alaska.gov'
+
+SETTINGS = {
+    'live_search': True,
+    'periodic': False,
+    'frequency': None,
+    'from_date': None,
+}
+
+SCHEMA = Schema(
+    'businessregs_alaska',
+    String('type'),
+    String('file_number', key_field=True),
+    String('entity_name', url='detail_url'),
+    String('status'),
+
+    Date('incorporated'),
+    String('principal_address'),
+    String('registered_agent_name'),
+    String('registered_agent_address'),
+
+    URL('detail_url'),
+)
+
+
+@crawler(is_browser=True, use_chrome=True, load_images=True)
+def run(qr, cr):
+    cr.get(START_URL)
+    cr.input('//input[@id="EntityName"]',qr.string)
+    cr.click('//input[@type="submit"]')
+    TABLE = '//table[@class="dccedGrid"]/tbody/tr'
+    FIELDS = {
+        SCHEMA.type: 'td[1]',
+        SCHEMA.file_number: 'td[2]/a',
+        SCHEMA.entity_name: 'td[3]',
+        SCHEMA.status: 'td[5]',
+        SCHEMA.detail_url: 'td[2]/a/@href',
+    }
+    # yield from rows_iter.transform(post_process(scrape.rows_iter(cr, TABLE, FIELDS)), crawl_details)
+    records = post_process(scrape.rows_iter(cr, TABLE, FIELDS))
+    for record in records:
+        cr.get(record[SCHEMA.detail_url])
+        print(cr.url)
+        # print(recaptcha_challenge_exists(cr))
+    # for _ in paginate(cr, next_page_button=NEXT_PAGE):
+    #     yield from scrape.rows_iter(cr, RESULTS, FIELDS)
+    return records
+
+# def crawl_details(record, cr):
+    # cr.get(record[SCHEMA.detail_url])
+    # ROOT = '//*[@id="dnn_ContentPane"]'
+    # FIELDS = {
+    #     SCHEMA.incorporated: 'dl[1]/dd[4]',
+    #     SCHEMA.principal_address: 'dl[1]/dd[9]',
+    #     SCHEMA.registered_agent_name: 'dl[2]/dd[1]',
+    #     SCHEMA.registered_agent_address: 'dl[2]/dd[3]',
+    # }
+    # record.update(scrape.values(cr, ROOT, FIELDS))
+    # return record
+
+def post_process(records):
+    return columns_iter.prefix(records, 'detail_url', ROOT_URL)
+
+
+if __name__ == '__main__':
+    # run(Query(entity="enterprise"))
+    count = 0
+    for record in run(Query(entity="enterprise")):
+        count += 1
+        # print(count, '-', record_from_schema(SCHEMA, record).format())
+        # print('~~~~~~~~~~~')
+        break
+    # print('Total: ', count)

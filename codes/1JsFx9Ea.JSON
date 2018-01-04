@@ -1,0 +1,21 @@
+{
+	"id": 1231241124,
+	"rewardTypeId": 1,
+	"isValidFrom": "2017-12-30T22:00:00.000Z" || null,
+	"name": "Kek",
+	"description": "LUL3D",
+	"loyaltyProgramLevelId": 123,
+	"expirationTimeInDays": 30,
+	"rewardSettings": [
+		{
+			"id": 123,
+			"rewardSettingTypeId": 3,
+			"value": "1000"
+		},
+		{
+			"id": 123,
+			"rewardSettingTypeId": 4,
+			"value": "2000"
+		}
+	]
+}

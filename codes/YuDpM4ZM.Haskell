@@ -1,0 +1,20 @@
+tpp :: (Ix n, Show n) => Graph n -> n -> Maybe (Path n)
+tpp g n | ls == [] = Nothing
+        |otherwise = Just (head (getShortest ls))
+                 where ls = (filterCycle g (cycles g n))
+
+
+filterCycle :: (Eq n, Ix n) => Graph n -> [Path n] -> [Path n]
+filterCycle _ [] = []
+filterCycle g ((P w p):xs) = if (length p == ((numNodes g)+1)) then (P w p) : filterCycle g xs
+    else filterCycle g xs
+
+     
+getShortest :: (Show n, Ix n) => [Path n] -> [Path n]
+getShortest p | p == [] = []
+              | length p == 1 = p
+              | (getCost (head p)) < (getCost (head (tail p))) = getShortest ((head p): (tail (tail p)))
+              |otherwise = getShortest (tail p)
+
+getCost :: (Show n, Ix n) => Path n -> Integer
+getCost (P c _) = c

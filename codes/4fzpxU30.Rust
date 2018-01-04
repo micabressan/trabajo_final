@@ -1,0 +1,33 @@
+pub struct Rng
+{
+    pub m_z: usize,
+    pub m_w: usize,
+}
+
+impl Rng {
+    pub fn new() -> Rng {
+        Rng {
+            m_z: 362436069usize,
+            m_w: 521288629usize,
+        }
+    }
+
+    pub fn nextFloat(&mut self) -> f32 {
+        let i: f32 = self.nextUInt32() as f32;
+        i * 2.328306e-10f32
+    }
+
+    pub fn nextUInt32(&mut self) -> i32 {
+        self.m_z = 36969 * (self.m_z & 65535) + (self.m_z >> 16);
+        self.m_w = 18000 * (self.m_w & 65535) + (self.m_w >> 16);
+        ((self.m_z << 16) + self.m_w) as i32
+    }
+}
+
+fn main() {
+    let mut rng = Rng::new();
+    for i in 0..100 {
+        println!("{:?}",rng.nextFloat());
+    }
+    println!("Hello, world!");
+}

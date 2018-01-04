@@ -1,0 +1,11 @@
+Dim t As Integer       
+        Dim sayilar() As Integer = {4, 7, 9, 11, 15, 9, 6, 45, 1, 11, 10, 12}       
+        For Each sayi As Integer In sayilar              
+        If sayi >= 10 And sayi <= 15 Then               
+        Continue For           
+        End If           
+        t = t + sayi           
+        If sayi = 45 Then               
+        Exit For           
+        End If      
+        Next

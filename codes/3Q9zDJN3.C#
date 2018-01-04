@@ -1,0 +1,29 @@
+using SharpTrooper.Core;
+using SharpTrooper.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World");
+
+
+            SharpTrooperCore core = new SharpTrooperCore();
+            SharpEntity ent = core.GetPlanet("1");
+            People ppl = core.GetPeople("1");
+            string eyeColor  = ppl.eye_color;
+            Console.WriteLine(eyeColor);
+             
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+        }
+    }
+}

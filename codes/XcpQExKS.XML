@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Cool Payload</name>
+<version>1.0.0</version>
+<objective>Short description about the maps objective.</objective>
+<!-- Major map authors. -->
+<authors>
+    <author>_3Each</author>
+</authors>
+<teams>
+   <team id="red-team" color="dark red" max="50" max-overfill="70">Red</team>
+   <team id="blue-team" color="blue" max="50" max-overfill="70">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red">
+        <regions yaw="90">
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <regions yaw="-90">
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </regions>
+    </default>
+</spawns>
+</map>

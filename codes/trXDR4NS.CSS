@@ -1,0 +1,124 @@
+@-moz-document url(chrome://browser/content/browser.xul) {}
+
+#urlbar {
+	max-height: 21px !important;
+	 font-family: Calibri !important;
+	 background-color: #e7edf6 !important;
+	 color: black !important;
+}
+
+#identity-box{
+	 background: transparent !important;
+	 background-image: transparent !important;
+    }
+
+#star-button.urlbar-icon {
+	display:none !important;
+}
+
+#TabsToolbar {
+	max-height: 22px !important;
+	 font-family: Calibri !important;
+	 font-size: 8pt !important;
+}
+
+.tabs-newtab-button {
+	background-image: white !important;
+	 opacity:0.9;
+	 max-width: 18px !important;
+	 margin-top: 7px !important;
+	 margin-bottom: 1px !important;
+ 	 margin-left: -0.5px !important;
+	 padding: 0px !important;
+}
+
+.tabbrowser-tabs .tab-icon-image {
+	 max-height: 14px !important;
+	 max-width: 14px !important; 
+}
+
+.tabs-newtab-button:hover {
+	background-image: white !important;
+	 opacity:0.6 !important;
+}
+
+:-moz-any(.tabs-newtab-button)> .toolbarbutton-icon  {
+  	margin: 0 !important;
+ 	width: 12px !important;
+ 	height: 12px !important;
+}
+
+.tabbrowser-tabs:not([drag=detach]) > .tabbrowser-tab:not([pinned])[fadein] {
+	 min-width: 60px !important;
+	 max-width: 220px !important;
+}
+
+#nav-bar {
+	min-height: 22px !important; 
+	 max-height: 25px !important;
+	 padding: 2px !important;
+}
+
+.titlebar-placeholder[type="caption-buttons"] {
+	margin-left: 10px !important;
+}
+}
+#nav-bar .toolbarbutton-icon {
+  	margin: 1px !important;
+  	width: 18px !important;
+  	height: 18px !important;
+}
+
+:-moz-any(#forward-button, #home-button, #stop-button, #reload-button, #bookmarks-menu-button, #print-button, #downloads-button, #history-button, #new-window-
+
+button, #cut-button, #copy-button, #paste-button, #fullscreen-button, #zoom-out-button, #zoom-in-button, #sync-button, #feed-button, #alltabs-button, #tabview-button) > 
+
+.toolbarbutton-icon {
+	margin: 0 !important;
+ 	width: 12px !important;
+ 	height: 12px !important;
+}
+
+:-moz-any(#back-button)> .toolbarbutton-icon  {
+  	margin: 0 !important;
+ 	width: 20px !important;
+ 	height: 20px !important;
+}
+
+#back-button {
+ 	margin: 0 0 0 1px !important;
+ 	-moz-image-region: rect(0, 18px, 18px, 0);
+ 	padding: 1px !important;
+ 	height: 18px !important;
+}
+
+#appmenu-button dropmarker { 
+	 margin: 2px !important;
+}
+
+#appmenu-button{
+	background: transparent !important;
+ 	border: 1px solid rgba(0,0,0,0.3) !important;
+ 	border-top: 1px solid rgba(131,131,131,0.3) !important;
+ 	border-left: 1px solid rgba(131,131,131,0.3) !important;
+ 	padding: 2px !important;
+ 	margin: 1px !important;
+}
+
+#appmenu-button:hover:not(:active):not([open]) {
+ 	background: transparent !important;
+ 	border: 1px solid rgba(0,0,0,0.3) !important;
+ 	padding: 2px !important;
+ 	margin: 1px !important;
+}
+
+#appmenu-button:hover:active,
+#appmenu-button[open]{
+	background: transparent !important;
+ 	border-top: 1px solid rgba(131,131,131,0.3) !important;
+ 	border-left: 1px solid rgba(131,131,131,0.3) !important;
+ 	border-right: 1px solid rgba(131,131,131,0.3) !important;
+ 	border-bottom: 1px solid rgba(131,131,131,0.3) !important;
+ 	padding: 2px !important;
+ 	margin: 1px !important;
+}

@@ -1,0 +1,21 @@
+var Singleton, ns;
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+ns = {};
+Singleton = (function() {
+  function Singleton() {
+    Singleton = __bind(function() {
+      return this;
+    }, this);
+  }
+  return Singleton;
+})();
+alert(new Singleton === new Singleton);
+ns.Singleton = (function() {
+  function Singleton() {
+    ns.Singleton = __bind(function() {
+      return this;
+    }, this);
+  }
+  return Singleton;
+})();
+alert(new ns.Singleton === new ns.Singleton);

@@ -1,0 +1,3 @@
+(defn yay_clojure
+  ([x] (do (println x) (conj x (count x))))
+  ([] (yay_clojure [0])))

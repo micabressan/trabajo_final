@@ -1,0 +1,10 @@
+Appconfig
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+   <appSettings>
+    <add key="myconnection" value="Data Source=DESKTOP-F9INLJK\MANISH;Integrated Security=True;Initial Catalog=ShopDb"/>
+  </appSettings>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+</configuration>

@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+
+  HelloEBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      Description: AWS Elastic Beanstalk Sample Application
+
+  HelloEBApplicationVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName:
+        Ref: HelloEBApplication
+      Description:
+        Description: AWS Elastic Beanstalk Sample Application Version
+      SourceBundle:
+#       S3Bucket: ???
+#       S3Key: ???
+
+  HelloEBConfigurationTemplate:
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+    Properties:
+      ApplicationName:
+        Ref: HelloEBApplication
+      Description: AWS ElasticBeanstalk Sample Configuration Template
+      OptionSettings:
+      - Namespace: aws:autoscaling:asg
+        OptionName: MinSize
+        Value: '2'
+      - Namespace: aws:autoscaling:asg
+        OptionName: MaxSize
+        Value: '6'
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      SolutionStackName: 64bit Amazon Linux 2017.09 v2.6.1 running Java 8
+
+  HelloEBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName:
+        Ref: HelloEBEnvironment
+      Description: AWS ElasticBeanstalk Sample Environment
+      TemplateName:
+        Ref: HelloEBConfigurationTemplate
+      VersionLabel:
+        Ref: HelloEBApplicationVersion

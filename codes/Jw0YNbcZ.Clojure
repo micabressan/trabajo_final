@@ -1,0 +1,22 @@
+;;(= (__ [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+
+(defn indexes-to-remove
+  [some-seq rm-idx]
+    (loop [x (- rm-idx 1)
+          result []]
+      (if (< x (count some-seq))
+        (let []
+          (recur (+ x rm-idx) (conj result x)))
+        result)))
+      
+(defn indexes-removed
+  [indexes-to-remove]
+  (keep-indexed 
+    (fn
+      [index item]
+      (if (contains? indexes-to-remove index)
+          nil
+          item) 
+    indexes-to-remove)))
+
+(indexes-removed (indexes-to-remove [1 2 3 4 5 6 7 8] 3))

@@ -1,0 +1,57 @@
+def cmp_to_key(mycmp):
+    class K:
+        def __init__(self, obj, *args):
+            self.obj = obj
+        def __lt__(self, other):
+            return mycmp(self.obj, other.obj) < 0
+        def __gt__(self, other):
+            return mycmp(self.obj, other.obj) > 0
+        def __eq__(self, other):
+            return mycmp(self.obj, other.obj) == 0
+        def __le__(self, other):
+            return mycmp(self.obj, other.obj) <= 0
+        def __ge__(self, other):
+            return mycmp(self.obj, other.obj) >= 0
+        def __ne__(self, other):
+            return mycmp(self.obj, other.obj) != 0
+    return K
+
+def get_input(a,b):
+    print("1: {}".format(a))
+    print("2: {}".format(b))
+    x = input(">> ")
+    try:
+        x = int(x,"10")
+    except:
+        pass
+    return -1 if x == 1 else 1
+
+ls = [
+"The National Anthem",
+"15 Million Merits",
+"The Entire History of You",
+"Be Right Back",
+"White Bear",
+"The Waldo Moment",
+"White Christmas",
+"Nosedive",
+"Playtest",
+"Shut Up and Dance",
+"San Junipero",
+"Men Against Fire",
+#"Hated in the Nation",
+"USS Callister",
+"Arkangel",
+"Crocodile",
+"Hang the DJ",
+"Metalhead",
+"Black Museum",
+]
+
+
+import random
+
+random.shuffle(ls)
+ls = sorted(ls, key=cmp_to_key(get_input))
+for i in range(len(ls)):
+    print("{}: {}".format(i, ls[i]))

@@ -1,0 +1,167 @@
+<!DOCTYPE rdf:RDF [ 
+	<!ENTITY xsl  	"http://www.w3.org/1999/XSL/Transform">
+	<!ENTITY rdf 	"http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs 	"http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY dc   	"http://purl.org/dc/elements/1.1/">
+	<!ENTITY foaf  	"http://xmlns.com/foaf/0.1/">
+	<!ENTITY rep 	"http://www.alunos.dcc.fc.up.pt/~up201405219/"> 
+]>
+
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="&xsl;"
+	xmlns:rdf="&rdf;" xmlns:rdfs="&rdfs;" 
+	xmlns:dc="&dc;" xmlns:foaf="&foaf;"
+	xmlns:rep="&rep;" xml:base="&rep;">
+
+	<xsl:template match="/">
+		<rdf:RDF xmlns:rdf="&rdf;" xmlns:rdfs="&rdfs;" 
+				xmlns:dc="&dc;" xmlns:foaf="&foaf;"
+				xmlns:rep="&rep;" xml:base="&rep;">
+					
+			<rdfs:Class rdf:about="parte">
+				<rdfs:subClassOf rdf:resource="indice"/>
+			</rdfs:Class>
+			
+			<rdfs:Class rdf:about="secção">
+				<rdfs:subClassOf rdf:resource="indice"/>
+			</rdfs:Class>
+			
+			<rdfs:Class rdf:about="subsecção">
+				<rdfs:subClassOf rdf:resource="indice"/>
+				<rdfs:subClassOf rdf:resource="secção"/>
+			</rdfs:Class>
+			
+			<rdfs:Class rdf:about="receita">
+				<rdfs:subClassOf rdf:resource="indice"/>
+				<rdfs:subClassOf rdf:resource="parte"/>
+				<rdfs:subClassOf rdf:resource="secção"/>
+				<rdfs:subClassOf rdf:resource="subsecção"/>				
+			</rdfs:Class>
+
+			<rdfs:Class rdf:about="ingredientes">
+				<rdfs:subClassOf rdf:resource="receita"/>
+			</rdfs:Class>
+
+			<rdfs:Class rdf:about="passos">
+				<rdfs:subClassOf rdf:resource="receita"/>
+			</rdfs:Class>
+			
+			<rdfs:Property rdf:about="nome">
+				<rdfs:domain rdf:resource="coleção"/>
+				<rdfs:range rdf:resource="&rdfs;Literal"/>
+			</rdfs:Property>
+			
+			<rdfs:Property rdf:about="indice">
+				<rdfs:domain rdf:resource="coleção"/>
+				<rdfs:range rdf:resource="coleção"/>
+			</rdfs:Property>	
+			
+			<rdf:Description rdf:about="coleção/cabeçalho/titulo">
+				<rdf:type rdf:resource="coleção"/>
+				<xsl:apply-templates select="coleção/cabeçalho"/>
+				<rep:indice>
+					<xsl:apply-templates select="coleção/parte" />
+					<xsl:apply-templates select="coleção/secção" />
+					<xsl:apply-templates select="coleção/receita" />
+				</rep:indice>
+			</rdf:Description>	
+
+		</rdf:RDF>
+	</xsl:template>
+	
+	<xsl:template match="cabeçalho">
+		<dc:title>
+			<xsl:value-of select="titulo" />
+		</dc:title>
+
+		<dc:description>
+			<xsl:value-of select="resumo" />
+		</dc:description>
+		
+		<dc:date>
+				<xsl:value-of select="data" />
+		</dc:date>
+		
+		<xsl:for-each select="autor">
+			<dc:creator>
+				<xsl:value-of select="." />
+			</dc:creator>
+			<foaf:name>
+				<xsl:value-of select="." />
+			</foaf:name>
+		</xsl:for-each>
+
+	</xsl:template>
+
+	
+	<xsl:template match="parte">
+		<rep:parte>
+			<rep:nome>
+				<xsl:value-of select="titulo" />
+			</rep:nome>
+	
+			<xsl:for-each select="secção">
+				<xsl:apply-templates select="." />
+			</xsl:for-each>
+
+			<xsl:for-each select="receita">
+				<xsl:apply-templates select="." />
+			</xsl:for-each>		
+		</rep:parte>
+	</xsl:template>
+
+	<xsl:template match="secção">
+		<rep:secção>
+			<rep:nome>
+				<xsl:value-of select="titulo" />
+			</rep:nome>
+	
+			<xsl:for-each select="subsecção">
+				<xsl:apply-templates select="." />
+			</xsl:for-each>
+
+			<xsl:for-each select="receita">
+				<xsl:apply-templates select="." />
+			</xsl:for-each>		
+		</rep:secção>
+	</xsl:template>
+
+	<xsl:template match="subsecção">
+		<rep:subsecção>
+			<rep:nome>
+				<xsl:value-of select="titulo" />
+			</rep:nome>
+	
+			<xsl:for-each select="receita">
+				<xsl:apply-templates select="." />
+			</xsl:for-each>		
+		</rep:subsecção>	
+	</xsl:template>
+
+	<xsl:template match="receita">
+		<dc:title>
+			<xsl:value-of select="titulo" />
+		</dc:title>
+			
+		<rep:ingredientes>
+			<rdf:Bag>
+				<xsl:for-each select="ingredientes/ingrediente">
+					<foaf:name>
+						<xsl:value-of select="titulo" />
+					</foaf:name>
+				</xsl:for-each>
+			</rdf:Bag>
+		</rep:ingredientes>
+		
+		<rep:passos>
+			<rdf:Seq>
+				<xsl:for-each select="passos/passo">
+					<dc:description>
+						<xsl:apply-templates />
+					</dc:description>
+				</xsl:for-each>
+			</rdf:Seq>
+		</rep:passos>
+	</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,23 @@
+import time
+import hashlib
+import random
+import requests
+import pprint
+
+apikey = "xxx"
+secret = "xxx"
+
+curTime = int(round(time.time()))
+rand = random.randint(100000, 900000)
+api = "http://codeforces.com/api/"
+method = "contest.standings?"
+contestId = "216244"
+
+_hash = "%s/%sapiKey=%s&contestId=%s&count=5&from=1&time=%s#%s" % (rand, method, apikey, contestId, curTime, secret)
+_hash = hashlib.sha512(("%s" % _hash)).hexdigest()
+
+arg = "contestId=%s&apiKey=%s&count=5&from=1&time=%s&apiSig=%s%s" % (contestId, apikey, curTime, rand, _hash)
+
+req = requests.get(api + method + arg)
+
+pprint.pprint(req.json())

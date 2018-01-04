@@ -1,0 +1,13 @@
+{-# LANGUAGE FlexibleContexts #-}
+
+import           Control.Monad.Reader
+
+tomIO :: (MonadReader String m, MonadIO m) => m String
+tomIO = do
+    x <- ask
+    runReader tom <$> x
+
+tom :: Reader String String
+tom = do
+    env <- ask
+    return (env ++ ": This is tom")

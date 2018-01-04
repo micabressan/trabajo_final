@@ -1,0 +1,177 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/*================================*/
+/* Merge Nav-bar+Tabs */
+#navigator-toolbox {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+}
+#TabsToolbar
+{
+  margin-right: 30px !important;
+  min-width: 60% !important;
+  flex-basis: auto !important;
+  white-space: nowrap !important;
+}
+#tabbrowser-tabs {
+    width: 100% !important;
+}
+#nav-bar {
+    margin-left: 65px !important;
+    order: -1 !important;
+    flex: 1 !important;
+    width: 100% !important;
+    min-width: 350px !important;
+    white-space: nowrap !important;
+  flex-basis: 40% !important;
+  display: flex !important;
+}
+#nav-bar-customization-target {
+    width: 100% !important;
+    display: flex !important;
+}
+#urlbar-container {
+    width: 100% !important;
+    flex-grow: 1 !important;
+    flex-basis: 90% !important;
+    min-width: 0px !important;
+}
+#urlbar {
+    width: 100% !important;
+    min-width: 0px !important;
+
+}
+.titlebar-placeholder[type="pre-tabs"]
+{
+  width: 0px !important;
+}
+.titlebar-placeholder[type="post-tabs"] {
+    width: 40px !important;
+}
+#PanelUI-button {
+    position: fixed !important;
+    right: 0px !important;
+    top: 0px !important;
+}
+/*================================*/
+
+
+/*================================*/
+/* VivaldiFox Color Fix */
+#browser-panel,
+#TabsToolbar {
+  background-color: var(--theme-accent-background) !important;
+}
+#titlebar
+{
+  background-color: var(--theme-accent-background) !important;
+}
+
+/* Chage tab background */
+/* Change Color of Active tab */
+.tab-background{ -moz-appearance: none !important;
+background-image: none !important; }
+
+.tab-background[selected="true"] {
+background-color: var(--theme-accent-background) !important;
+color: var(--theme-accent-background) !important;
+background-image: none !important;
+}
+
+/* Change Color of Normal Tabs */
+.tab-background:not([selected="true"]) {
+background-color: rgba(200,200,200,0.5) !important;
+color: var(--theme-accent-colour) !important;
+background-image: none !important;
+ }
+
+/*.tab-background:not([selected=true]) {
+  background-color: rgba(200,200,200,0.5);
+}*/
+#browser-panel,
+#TabsToolbar {
+  background-color: var(--theme-accent-background) !important;
+} 
+
+#navigator-toolbox > toolbar:not(#TabsToolbar):not(#toolbar-menubar)
+{
+  background-image:none;
+  background-color: var(--theme-accent-background) !important;
+}
+.tabbrowser-tab[visuallyselected]:not(:-moz-window-inactive) .tab-background-middle,
+#navigator-toolbox:not(:-moz-window-inactive) > toolbar:not(#TabsToolbar):not(#toolbar-menubar) {
+  transition: background 0.1s;
+}
+
+/*================================*/
+
+
+/*================================*/
+/* X on Left */
+#TabsToolbar .tab-close-button { 
+    -moz-box-ordinal-group: 0 !important; 
+    margin-left: -6px !important;
+    border-radius: 2px !important;
+    transition: opacity 200ms !important;
+}
+
+#TabsToolbar .tab-icon-image:not([pinned])
+{
+  margin-left: 2px;
+}
+/*================================*/
+
+/*================================*/
+/* Safari style Auto-Expand Tabs */
+#TabsToolbar .tabbrowser-tab[fadein]:not([pinned]) { 
+    flex-grow: 1 !important;
+    max-width: -moz-available !important;
+}
+/*================================*/
+
+/* Extra */
+#arrowscrollbox-scrollbox,
+#TabsToolbar,
+#tabbrowser-tabs
+{
+        z-index: 0 !important;
+}
+.autocomplete-richlistbox
+{
+     max-width: 800px;   
+}
+
+#TabsToolbar .scrollbutton-up,
+#TabsToolbar .scrollbutton-down,
+#TabsToolbar .arrowscrollbox-overflow-start-indicator, 
+#TabsToolbar .arrowscrollbox-overflow-end-indicator,
+#TabsToolbar .tabs-alltabs-button
+{ 
+    display: none !important;
+    visibility: hidden !important;
+}
+
+toolbarbutton[disabled="true"],
+toolbarbutton[disabled="true"]:hover,
+toolbarbutton[disabled="true"]:hover:active,
+toolbarbutton[disabled="true"][open="true"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+#back-button[disabled=”true”]
+{ 
+  display: none !important;
+  visibility: hidden !important;
+}
+#forward-button[disabled=”true”]
+{ 
+  display: none !important;
+  visibility: hidden !important;
+}
+#identity-icon-labels {
+    display: none !important;
+    visibility: hidden !important;
+}
+/*===========*/

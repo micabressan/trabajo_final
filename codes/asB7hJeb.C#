@@ -1,0 +1,20 @@
+  public void HighlightGraph()
+        {
+            int checker = 0; //переменная для проверки наличия точек, соответствующих условию задачи
+            for (int i = 0; i < MainChart.Series[0].Points.Count; i++)
+            {
+                if (!MainChart.Series[0].Points[i].IsEmpty && !MainChart.Series[1].Points[i].IsEmpty) //ограничение проверки по оси Y
+                {
+                    if (MainChart.Series[0].Points[i].YValues[0] <= maxf && MainChart.Series[1].Points[i].YValues[0] <= maxf) //ограничение проверки по оси Y
+                    {
+                        if (MainChart.Series[0].Points[i].YValues[0] >= 0 && MainChart.Series[1].Points[i].YValues[0] >= 0)
+                        {
+                            checker++;
+                            MainChart.Series[2].Points.AddXY(MainChart.Series[0].Points[i].XValue, 0);
+                        }
+                    }
+                }
+            }
+            if (checker == 0)
+                MessageBox.Show("Промежутков, соответствующих условию, не существует.", "Ошибка!", MessageBoxButtons.OK);
+        }

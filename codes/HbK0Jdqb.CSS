@@ -1,0 +1,147 @@
+.message-group .mentioned .message-text { -webkit-animation: mentionpulse 2s infinite; animation: mentionpulse 2s infinite; }
+
+@-webkit-keyframes mentionpulse { 0% { box-shadow: 0 0 0 0 var(--main-color); }
+  70% { box-shadow: 0 0 5px 5px var(--hover-color); opacity: 0.7; }
+  to { box-shadow: 0 0 0 0 var(--hover-color);opacity: 0.4; } }
+/* Loading Theme Animation */
+ 
+body::Before{display: none;}
+ 
+#app-mount::before {
+    content: "";
+    background: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9998;
+    pointer-events: none;
+    -webkit-animation: rotate-hue-bg 5.8s ease-in-out;
+    animation: rotate-hue-bg 5.8s ease-in-out;
+}
+@keyframes rotate-hue-bg {
+    0% {
+        background-color: #4453b5;
+        -webkit-filter: hue-rotate();
+        filter: hue-rotate();
+    }
+    87% {
+        -webkit-filter: hue-rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+    96% {
+        background-color: #4453b5;
+    }
+    100% {
+        -webkit-filter: hue-rotate(110deg);
+        filter: hue-rotate(110deg);
+        background-color: transparent;
+    }
+}
+#app-mount::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 100vh;
+    opacity: 0;
+    z-index: 9999;
+    pointer-events: none;
+    -webkit-animation: initialize-bg 7s ease-out;
+    animation: initialize-bg 7s ease-out;
+}
+@keyframes initialize-bg {
+    0% {
+        content: "Welcome, Dylan";
+        -webkit-transform: scale(.7);
+        transform: scale(.7);
+    }
+    10% {
+        opacity: 0;
+        -webkit-transform: scale(.7);
+        transform: scale(.7);
+    }
+    15% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    25% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    29% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    34% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    40% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    55% {
+        content: "Welcome, Dylan";
+        opacity: 0;
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+    59% {
+        content: "BetterDiscord using " var(--theme-name) " theme V" var(--version-content);
+        opacity: 0;
+        -webkit-transform: scale(.7);
+        transform: scale(.7);
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    65% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    77% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+    83% {
+        opacity: 0;
+    }
+    100% {
+            content: "BetterDiscord using " var(--theme-name) " theme V" var(--version-content);
+        opacity: 0;
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+}
+ 
+/* End Loading Theme Animation */
+:root{
+--main-color:#696563 !important;
+--hover-color:%#00ffcc !important;
+}
+/* Circular Avatars - Pout, cube_guy, Dingus */
+
+[class*="avatar-"], .status, [class*="avatarStatus"], .image-EVRGPw{border-radius: 50% !important;}
+.guilds [class*="avatar-"]{border-radius: 0 !important;}
+.mask-2vyqAW{border-radius: 50% !important;}
+.card-3cnrFh{border-radius:50%!important;}
+.ui-call-avatar.video, .ui-call-avatar.video .wrapper-2G6bx_ > canvas {
+    border-radius: 50% !important;
+}

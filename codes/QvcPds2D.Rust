@@ -1,0 +1,9 @@
+fn checksum_file(path: &str) -> Sha256 {
+    let fbuffer = FileBuffer::open(&path).expect("failed to open file");
+    let mut hasher = Sha256::new();
+    let mut chunks = fbuffer.chunks(1024);
+    for chunk in chunks {
+      hasher.input(&chunk);
+    }
+    hasher
+}

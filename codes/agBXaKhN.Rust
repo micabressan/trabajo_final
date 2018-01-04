@@ -1,0 +1,117 @@
+#!/usr/bin/env run-cargo-script
+// cargo-deps: itertools
+#![feature(inclusive_range_syntax)]
+extern crate itertools;
+use itertools::Itertools;
+
+use std::io::{stdin};
+
+fn reverse_circular<T>(array: &mut [T], from: usize, to: usize) {
+    // To can be over the length of the array, indexing is mod len
+    if to <= from {
+        return;
+    }
+    let to = to - 1;
+    let n_swaps = (to - from)/2 + 1;
+    for delta in 0..n_swaps {
+        let idx_a = (from + delta) % array.len();
+        let idx_b = (to - delta) % array.len();
+        array.swap(idx_a, idx_b);
+    }
+}
+
+const EXTRA_LENGTHS: [usize; 5] = [17, 31, 73, 47, 23];
+fn sparse_hash(lengths: &[usize], n_rounds: usize) -> Vec<u8> {
+    let mut skip_length = 0;
+    let mut current_position = 0;
+
+    let mut data: Vec<u8> = (0..=255).into_iter().collect();
+    for _ in 0..n_rounds {
+        for length in lengths.iter().chain(EXTRA_LENGTHS.iter()) {
+            reverse_circular(&mut data, current_position, current_position + length);
+            current_position = (current_position + length + skip_length) % data.len();
+            skip_length += 1;
+        }
+    }
+    data
+}
+
+const BLOCK_SIZE: usize = 16;
+fn dense_hash(data: &[u8]) -> Vec<u8> {
+    data.chunks(BLOCK_SIZE)
+                .map(|b| b.iter().cloned()
+                     .fold1(|x, y| x ^ y).expect("Empty block"))
+        .collect()
+}
+
+const N_ROUNDS: usize = 64;
+const SQUARE_DIM: usize = 128;
+
+fn propogate_region(matrix: &mut[usize], i: usize, j: usize, ld: usize,
+                    region_id: usize) -> bool {
+
+    let idx = j + i * ld;
+    if matrix[idx] != 1 {
+        return false;
+    }
+
+    matrix[idx] = region_id;
+    if i > 0 {
+        propogate_region(matrix, i - 1, j, ld, region_id);
+    }
+    if i + 1 < ld {
+        propogate_region(matrix, i + 1, j, ld, region_id);
+    }
+
+    if j > 0 {
+        propogate_region(matrix, i, j - 1, ld, region_id);
+    }
+    if j + 1 < ld {
+        propogate_region(matrix, i, j + 1, ld, region_id);
+    }
+
+    return true;
+}
+
+fn solve(input: &str) -> (usize, usize) {
+    let mut part_a = 0;
+
+    let mut matrix: [usize; SQUARE_DIM * SQUARE_DIM] = [0; SQUARE_DIM * SQUARE_DIM];
+
+    for i in 0..SQUARE_DIM {
+        let data = format!("{}-{}", input, i);
+        let lengths: Vec<usize> = data.bytes().map(|x| x as usize).collect();
+        let sparse = sparse_hash(&lengths, N_ROUNDS);
+        let dense = dense_hash(&sparse);
+
+        let popcount: usize = dense.iter().map(|x| x.count_ones() as usize).sum();
+        part_a += popcount;
+
+        for (j, byte) in dense.iter().enumerate() {
+            for k in 0..8 {
+                matrix[i + (j * 8 + k) * SQUARE_DIM] = ((byte >> (7 - k)) & 1) as usize;
+            }
+        }
+    }
+
+    let mut next_id = 2;
+    for i in 0..SQUARE_DIM {
+        for j in 0..SQUARE_DIM {
+            if propogate_region(&mut matrix, i, j,
+                                SQUARE_DIM, next_id) {
+                next_id += 1;
+            }
+        }
+    }
+
+    // next_id being 2 means 0 regions were found, so adjust
+    let part_b = next_id - 2;
+    (part_a, part_b)
+}
+fn main() {
+    let mut line: String = String::new();
+    stdin().read_line(&mut line).expect("Error reading input");
+
+    let answer = solve(&line.trim());
+    println!("{:?}", answer);
+}

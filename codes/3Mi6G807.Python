@@ -1,0 +1,8 @@
+def find_centers(X, K):
+    oldmu = random.sample(X, K)
+    mu = random.sample(X, K)
+    while not has_converged(mu, oldmu):
+        oldmu = mu
+        clusters = cluster_points(X, mu)
+        mu = reevaluate_centers(oldmu, clusters)
+    return(mu, clusters)

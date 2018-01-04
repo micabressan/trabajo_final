@@ -1,0 +1,68 @@
+body {
+    background-image: url("../design/images/background-dark.jpg");
+    font-size: 62.5%;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 300px;
+}
+
+.header-space {
+    width:100%;
+    margin-top: 20px;
+}
+
+.button-holder {
+    margin-top: 15px;
+    vertical-align: middle;
+    padding-left: 25px;
+    width: 30%;
+}
+
+.blue-strip {
+    box-shadow: 0px -5px #024959;
+}
+
+.green-strip {
+    box-shadow: 0px -5px #F2C777;
+}
+
+.red-strip {
+    box-shadow: 0px -5px #B53D3B;
+}
+
+.main-button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    font-size: 1.1rem;
+    font-family: 'bebas';
+    color: #1f1f1f;
+    background-color: #f0f0f0;
+    transition: color .1s ease-in-out, box-shadow .1s ease-in-out;
+}
+
+.main-button:hover {
+    box-shadow: 0px -2px white;
+    color: #949494;
+    cursor: pointer;
+}
+
+.main-button:active {
+    font-size: 1rem;
+}
+
+.main-button:focus {
+    outline: none;
+}
+
+@media screen and (min-width: 1025px) {
+    .header-space {
+        margin-top: 300px;
+    }
+
+    .button-holder {
+        margin-top: 50px;
+    }
+}

@@ -1,0 +1,55 @@
+module Day10 where
+
+import System.IO as IO
+import Data.Char as C
+import Data.List
+import Data.Bits (xor)
+
+import Utils
+
+type Position       = Int
+type SkipCnt        = Int
+type Configuration  = [Int]
+type State          = (Configuration, Position, SkipCnt)
+type HexString      = String
+type Input          = String
+
+reverseAndFix :: Configuration -> Position -> Int -> SkipCnt -> State
+reverseAndFix string p n sk =
+    let l               = length string
+        (pr, i, tr, rest, lpre, linv, ltra, lrst) = Utils.getSubstring string p n
+        reversedStr     = reverse (tr ++ pr)
+    in (concat [drop ltra reversedStr, i, take ltra reversedStr, rest] 
+        , mod (p + (mod (n + sk) l)) l, sk + 1)
+
+hash :: State ->  [Int] -> State
+hash (inp, pos, skip) alist =
+    foldl (\(st, p, sk) x -> reverseAndFix st p x sk) (inp, pos, skip) $ alist
+
+getSparseHash :: Input  -> Bool -> State
+getSparseHash rawlist forKnotting = 
+    let hashSize    = 256            
+        lengthlist  = if forKnotting
+                        then (map ord rawlist) ++ ([17, 31, 73, 47, 23])
+                        else Utils.stringsToInts . Utils.stringSplit ',' $ rawlist
+        rounds      = if forKnotting then 64 else 1
+        in foldl (\a _ -> hash a lengthlist)
+                                ([0..hashSize-1], 0, 0) [0..rounds-1]
+
+getDenseHash :: Configuration -> Configuration
+getDenseHash  []             = []
+getDenseHash sprslist  =    
+    (foldr1 (xor) (take 16 sprslist)):((getDenseHash . drop 16) sprslist)
+
+getKnothash :: Input  -> HexString
+getKnothash string   = 
+    let (res, _, _) = getSparseHash string  True
+        dns     = ( getDenseHash   res) 
+    in concat . map (Utils.integerToHex . toInteger) $ dns
+
+main = do
+    input <- Utils.retrieve "input10"
+    let part1 = let (a:b:_,_,_) = getSparseHash input  False in a*b
+    let part2 = getKnothash input
+    print part1
+    print part2

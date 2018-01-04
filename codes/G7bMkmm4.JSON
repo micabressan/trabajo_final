@@ -1,0 +1,8 @@
+what i want:
+[ txt, [ txt, txt ], key-val, btn, radio(m/f) ]
+
+bandwidth-saving
+["hello",["",["hi","bye"]],["x",7],["Click Me"],["choose",[["m"],["f"]],{"select":1}]]
+
+more human-readable?
+["hello",["hi","bye"],{"#":"x","=":7},{"opt":"Click Me"},{"#":"choose","=":[{"opt":"m"},{"opt":"f"}],"select":1}]

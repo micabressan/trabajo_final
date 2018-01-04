@@ -1,0 +1,153 @@
+Request URL:http://pead.tokenlab.com.br:8080/workingGroup/updateWorkingGroups
+Request Method:PUT
+Status Code:500 
+Remote Address:5.189.187.240:8080
+Referrer Policy:no-referrer-when-downgrade
+Response Headers
+view source
+Access-Control-Allow-Credentials:true
+Access-Control-Allow-Origin:http://localhost:4200
+Connection:close
+Content-Language:pt-BR
+Content-Type:application/json;charset=UTF-8
+Date:Fri, 15 Dec 2017 18:32:13 GMT
+Transfer-Encoding:chunked
+Vary:Origin
+X-Application-Context:application:production
+Request Headers
+view source
+Accept:application/json, text/plain, */*
+Accept-Encoding:gzip, deflate
+Accept-Language:pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7
+authority:ADMIN
+Connection:keep-alive
+Content-Length:2818
+Content-Type:application/json
+DNT:1
+environmentName:learning
+Host:pead.tokenlab.com.br:8080
+Origin:http://localhost:4200
+Referer:http://localhost:4200/learning/3/manage/groups/12
+schoolClassId:3
+token:eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMzMzYzMDksInN1YiI6ImFuZHJlbWlzc2FnbGlhQHRva2VubGFiLmNvbS5iciIsImV4cCI6MTUxMzQyMjcwOX0.EITrHOyg588fR6NXG3__IUHfYX7lGkPOSQyRXInx6qg
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Request Payload
+view parsed
+{
+  "levelFiveId": 12,
+  "schoolClassId": 3,
+  "workingGroups": [
+    {
+      "name": "Limitadissímos",
+      "id": 63,
+      "initialDate": 1513134000000,
+      "offerOccupations": [
+        {
+          "offerOccupationId": 6,
+          "individualPeople": [
+            {
+              "individualPersonId": 60,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 47,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 48,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 44,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 59,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 53,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 49,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 50,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 45,
+              "workingSubgroupId": null
+            }
+          ]
+        },
+        {
+          "offerOccupationId": 5,
+          "individualPeople": [
+            {
+              "individualPersonId": 51,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 42,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 52,
+              "workingSubgroupId": null
+            }
+          ]
+        }
+      ],
+      "workingSubgroups": [
+        {
+          "name": "bla",
+          "initialDate": 1513134000000
+        }
+      ]
+    },
+    {
+      "name": "Limitadíssimos também",
+      "id": 64,
+      "initialDate": 1513134000000,
+      "offerOccupations": [
+        {
+          "offerOccupationId": 6,
+          "individualPeople": [
+            {
+              "individualPersonId": 54,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 43,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 58,
+              "workingSubgroupId": null
+            }
+          ]
+        },
+        {
+          "offerOccupationId": 5,
+          "individualPeople": [
+            {
+              "individualPersonId": 1,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 51,
+              "workingSubgroupId": null
+            },
+            {
+              "individualPersonId": 46,
+              "workingSubgroupId": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

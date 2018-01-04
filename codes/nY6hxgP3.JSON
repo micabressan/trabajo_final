@@ -1,0 +1,102 @@
+groups:
+  default:
+    options:
+      rank: '1000'
+      default: true
+      prefix: '&1[BOT]&f '
+    permissions:
+    - modifyworld.chat
+    - loginsecurity.login
+    - loginsecurity.login
+    - loginsecurity.register
+    - loginsecurity.changepassword
+    - loginsecurity.logout
+    - essentials.ban.notify
+    - essentials.kick.notify
+    - essentials.help
+    - groupmanager.notify.self
+    - groupmanager.notify.other
+  Plebs:
+    permissions:
+    - modifyworld.*
+    - essentials.sethome
+    - essentials.delhome
+    - essentials.tpa
+    - essentials.tpaccept
+    - essentials.tpdeny
+    - essentials.help
+    - essentials.msg
+    - essentials.nick
+    - essentials.nick.color
+    - essentials.nick.format
+    - essentials.ban.notify
+    - essentials.home.bed
+    - essentials.sethome.multiple.[3]
+    - eseentials.warp
+    - eseentials.warp.list
+    - essentials.chat.color
+    - essentials.chat.format
+    - essentials.protect.alerts
+    - essentials.signs.color
+    - essentials.weather
+    - essentials.spawn
+    - essentials.tpahere
+    - essentials.kick.notify
+    - essentials.msg.color
+    - essentials.msg.format
+    - essentials.afk
+    - essentials.afk.auto
+    - loginsecurity.login
+    - loginsecurity.register
+    - loginsecurity.changepassword
+    - loginsecurity.logout
+
+    options:
+      rank: '900'
+      prefix: '&b[Plebs]&f '
+  Gracz:
+    permissions:
+    - modifyworld.*
+    - essentials.sethome
+    - essentials.delhome
+    - essentials.tpa
+    - essentials.tpaccept
+    - essentials.tpdeny
+    - essentials.help
+    - essentials.msg
+    - essentials.nick
+    - essentials.nick.color
+    - essentials.nick.format
+    - essentials.ban.notify
+    - essentials.home.bed
+    - essentials.sethome.multiple.5
+    - eseentials.warp
+    - eseentials.warp.list
+    - essentials.chat.color
+    - essentials.chat.format
+    - essentials.protect.alerts
+    - essentials.signs.color
+    - essentials.weather
+    - essentials.spawn
+    - essentials.tpahere
+    - essentials.kick.notify
+    - essentials.msg.color
+    - essentials.msg.format
+    - essentials.afk
+    - essentials.afk.auto
+    - loginsecurity.login
+    - loginsecurity.register
+    - loginsecurity.changepassword
+    - loginsecurity.logout
+    
+    options:
+      rank: '800'
+      prefix: '&6[Gracz]&f'
+
+  Admin:
+    permissions:
+    - "*"
+    options:
+      rank: '1'
+      prefix: '&c[Admin]&f'
+schema-version: 1

@@ -1,0 +1,66 @@
+{
+  "updated": 1507658989.495195,
+  "nfacts": 0,
+  "cc": "",
+  "ip": "",
+  "ipr": 3240685841,
+  "nudpFacts": 0,
+  "udpFacts": {},
+  "facts": {},
+  "org": "",
+  "reverse": {
+    "when": 1504775200.672873,
+    "ptr": ""
+  },
+  "dns": [],
+  "asnum": "",
+  "ntcpFacts": 2,
+  "tcpFacts": {
+    "80": {
+      "cc": "",
+      "when": 1507640033,
+      "host": "",
+      "reason": "Banner grabber",
+      "ftype": "tcp",
+      "facts": {
+        "status": 200,
+        "url": "http://",
+        "reason": "OK",
+        "data": "<html>\PPP          \n</font></pre>\t\n\n\n</html>",
+        "server": "Apache/2.2.15 (CentOS)"
+      },
+      "port": "80"
+    },
+    "443": {
+      "cc": "",
+      "when": 1504774506,
+      "reason": "Banner grabber",
+      "facts": {
+        "status": 200,
+        "title": " - Authentication",
+        "url": "https://",
+        "server": "",
+        "reason": "OK",
+        "data": "<!DOCTYPE HTML PUBLIC</html>"
+      },
+      "host": "",
+      "ftype": "tcp",
+      "port": "443"
+    }
+  },
+  "tcpPorts": [
+    {
+      "state": "open",
+      "when": 1507639223,
+      "port": 80
+    },
+    {
+      "state": "open",
+      "when": 1504773827,
+      "port": 443
+    }
+  ],
+  "when": 1504768137.536037,
+  "pageRank": 0,
+  "asname": ""
+}

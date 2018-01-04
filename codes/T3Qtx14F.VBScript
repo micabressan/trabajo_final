@@ -1,0 +1,74 @@
+'*****
+'VBA - Populating an array from an SQL query
+'https://www.experts-exchange.com/questions/20743236/VBA-Populating-an-array-from-an-SQL-query.html
+'*****
+Private Sub Form_Open(Cancel As Integer)
+
+   Dim strSQL As String
+   Dim rs As DAO.Recordset
+   Dim DataArray As Variant
+
+   'populate div list box with all division names and IDs
+   strSQL = "SELECT DivID, DivName FROM tblDiv ORDER BY SortOrder"
+   Set rs = CurrentDb.OpenRecordset(strSQL)
+   rs.MoveLast
+   rs.MoveFirst
+
+   DataArray = rs.GetRows(rs.RecordCount)
+   
+   MsgBox DataArray(1, 2)
+   
+   'cleanup
+   rs.Close
+   Set rs = Nothing
+   
+End Sub
+
+'the reference required is Microsoft DAO 3.6 Object Library
+'I know that this works for 3.5 also.
+'The first dimension in the array field index
+'The second dimension in the array is the record index
+
+
+'*******************
+Dim dbs As Database, rst  As Recordset
+    Dim recnum, i, j As Integer
+    Dim SQLSTRING, DATESTRING, fillstring As String
+    Dim myArray (3) As Variant 'Type depending on your data 
+    SQLSTRING = "SELECT field1,field2,field3 FROM table1 WHERE ((..... ));"
+    Set dbs = CurrentDb
+    Set rst = dbs.OpenRecordset(SQLSTRING)
+    rst.MoveLast
+    rst.MoveFirst
+    recnum = rst.RecordCount
+    For i = 1 To recnum - 1
+      myArray(1) = rst.Fields(0)
+      myArray(2) = rst.Fields(1)
+      myArray(3) = rst.Fields(2)
+       rst.MoveNext
+    Next i
+      myArray(1) = rst.Fields(0)
+      myArray(2) = rst.Fields(1)
+      myArray(3) = rst.Fields(2)
+
+'******************
+Dim dbs As Database, rst  As Recordset
+   Dim recnum, i, j As Integer
+   Dim SQLSTRING, DATESTRING, fillstring As String
+   'Dim myArray(3) As Variant  'Type depending on your data
+    SQLSTRING = "SELECT STOCKS.BIN, STOCKS.LOCATION, STOCKS.PARTCODE, STOCKS.STOCK_DATE, STOCKS.STOCK_TIME, STOCKS.UNCOMMITTED, STOCKS.GRN_NUMBER_OF_STOCKS FROM STOCKS WHERE (((STOCKS.LOCATION)='30') AND ((STOCKS.PARTCODE) Like 'M*' And (STOCKS.PARTCODE) Like '*.*'));"
+
+   Set dbs = CurrentDb
+   Set rst = dbs.OpenRecordset(SQLSTRING)
+   rst.MoveLast
+   rst.MoveFirst
+   recnum = rst.RecordCount
+   MsgBox recnum
+   ReDim myArray(recnum) As Variant
+   For i = 1 To recnum
+     myArray(i) = rst.Fields(0)
+     myArray(i) = rst.Fields(1)
+MsgBox myArray(i)
+      rst.MoveNext
+   Next i
+'****************************

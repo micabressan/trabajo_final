@@ -1,0 +1,44 @@
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ToBuy.ToBuy" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="14" />
+	<application android:allowBackup="true" android:label="@string/app_name" android:theme="@style/AppTheme" android:icon="@drawable/ic_launcher">
+    <activity android:name=".EditItemActivity" android:windowSoftInputMode="adjustResize"/>
+  </application>
+</manifest>
+
+Styles.xml
+
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorControlNormal">@color/divider</item>
+    <item name="colorControlActivated">@color/progress</item>
+    <item name="colorControlHighlight">@color/divider</item>
+    <item name="android:windowBackground">@color/icons</item>
+  </style>
+  <style name="ToolbarStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:elevation">4dp</item>
+    <item name="android:background">@color/primary</item>
+  </style>
+</resources>
+
+values-v21/Styles.xml
+
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorControlNormal">@color/divider</item>
+    <item name="colorControlActivated">@color/progress</item>
+    <item name="colorControlHighlight">@color/divider</item>
+    <item name="android:windowBackground">@color/icons</item>
+    <item name="android:statusBarColor">@color/primary_dark</item>
+  </style>
+</resources>

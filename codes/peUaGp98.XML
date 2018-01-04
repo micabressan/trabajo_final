@@ -1,0 +1,13 @@
+	<spawn name="[giran05_2421_01]">
+		<mesh>
+			<vertex x="135505" y="113767" minz="-3748" maxz="-3548" />
+			<vertex x="135809" y="113732" minz="-3748" maxz="-3548" />
+			<vertex x="135719" y="115107" minz="-3748" maxz="-3548" />
+			<vertex x="135385" y="114998" minz="-3748" maxz="-3548" />
+			<vertex x="135133" y="114652" minz="-3748" maxz="-3548" />
+			<vertex x="135107" y="114176" minz="-3748" maxz="-3548" />
+		</mesh>
+		<npc id="21084" count="3" respawn="250" respawn_rand="175" />
+		<npc id="20620" count="2" respawn="250" respawn_rand="175" />
+		<npc id="20621" count="3" respawn="250" respawn_rand="175" />
+	</spawn>

@@ -1,0 +1,128 @@
+# #!/usr/bin/python
+# # -*- coding: utf-8 -*-
+# import numpy as np
+# import cv2
+# from matplotlib import pyplot as plt
+#
+# img1 = cv2.imread('Image1.jpg',0)
+# img2 = cv2.imread('Image2.jpg',0)
+#
+# # Sukuriamas SURF objektas
+# sift = cv2.xfeatures2d.SURF_create(4000)
+#
+# # surandami reikšmingieji taškai ir deskriptoriai
+# kp1, des1 = sift.detectAndCompute(img1,None)
+# kp2, des2 = sift.detectAndCompute(img2,None)
+#
+# # Sukuriamas BFMatcher objektas
+# bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+#
+# # Deskriptorių palyginimas.
+# matches = bf.match(des1,des2)
+#
+# # Palyginimo rezultatų surikiavimas pagal atstumą.
+# matches = sorted(matches, key = lambda x:x.distance)
+#
+# # Pirmų 20 geriausių sutapimų atvaizdavimas.
+# img3 = cv2.drawMatches(img1,kp1,img2,kp2,matches[:5],outImg=None, flags=2)
+#
+# plt.imshow(img3),plt.show()
+
+
+
+# ORB masinos paieska
+# import numpy as np
+# import cv2
+# from matplotlib import pyplot as plt
+#
+# img1 = cv2.imread('Image2.jpg',0)          # queryImage
+# img2 = cv2.imread('blue_car.jpg',0)       # trainImage
+#
+# # Sukuriamas ORB objektas
+# orb = cv2.ORB_create(5000)
+#
+# # surandami reikšmingieji taškai ir deskriptoriai
+# kp1, des1 = orb.detectAndCompute(img1,None)
+# kp2, des2 = orb.detectAndCompute(img2,None)
+#
+# # Sukuriamas BFMatcher objektas
+# bf = cv2.BFMatcher(cv2.NORM_HAMMING2, crossCheck=True)
+#
+# # Deskriptorių palyginimas.
+# matches = bf.match(des1,des2)
+#
+# # Palyginimo rezultatų surikiavimas pagal atstumą.
+# matches = sorted(matches, key = lambda x:x.distance)
+#
+# # Pirmų 5 geriausių sutapimų atvaizdavimas.
+# img3 = cv2.drawMatches(img1,kp1,img2,kp2,matches[:5],outImg=None, flags=2)
+#
+# cv2.imwrite('orb_match.jpg', img3)
+#
+# plt.imshow(img3),plt.show()
+
+# SIFT/SURF
+# import numpy as np
+# import cv2
+# from matplotlib import pyplot as plt
+#
+# img1 = cv2.imread('Image2.jpg',0)          # queryImage
+# img2 = cv2.imread('blue_car.jpg',0)       # trainImage
+#
+# # Sukuriamas SURF objektas
+# orb = cv2.xfeatures2d.SIFT_create(1000)
+#
+# # surandami reikšmingieji taškai ir deskriptoriai
+# kp1, des1 = orb.detectAndCompute(img1,None)
+# kp2, des2 = orb.detectAndCompute(img2,None)
+#
+# # Sukuriamas BFMatcher objektas
+# bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+#
+# # Deskriptorių palyginimas.
+# matches = bf.match(des1,des2)
+#
+# # Palyginimo rezultatų surikiavimas pagal atstumą.
+# matches = sorted(matches, key = lambda x:x.distance)
+#
+# # Pirmų 5 geriausių sutapimų atvaizdavimas.
+# img3 = cv2.drawMatches(img1,kp1,img2,kp2,matches[:5],outImg=None, flags=2)
+#
+# plt.imshow(img3),plt.show()
+
+
+# FLANN vs BFMatcher
+
+import cv2
+import time
+
+
+img1 = cv2.imread('Image.jpg',0)          # queryImage
+img2 = cv2.imread('gray_car.jpg',0) # trainImage
+
+# Sukuriamas SIFT objektas
+sift = cv2.xfeatures2d.SIFT_create(1000)
+
+# surandami reikšmingieji taškai ir deskriptoriai
+kp1, des1 = sift.detectAndCompute(img1,None)
+kp2, des2 = sift.detectAndCompute(img2,None)
+
+# FLANN parametrai
+FLANN_INDEX_KDTREE = 0
+index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
+search_params = dict(checks=50)
+# search_params = dict()   # arba tuščias dict()
+
+flann = cv2.FlannBasedMatcher(index_params,search_params)
+bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+
+
+t1 = time.time()
+fln_matches = flann.match(des1,des2)
+t2 = time.time()
+print 'FLANN trukmė' , t2-t1, 'sek'
+
+t1 = time.time()
+bf_matches = bf.match(des1,des2)
+t2 = time.time()
+print 'BFMatcher trukmė' , t2-t1, 'sek'

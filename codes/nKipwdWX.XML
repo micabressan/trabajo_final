@@ -1,0 +1,43 @@
+<UserControl x:Class="PTRCPriceCalculator.InputBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PTRCPriceCalculator"
+			 xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="300">
+
+	<Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+		<!-- Inner texbox -->
+		<TextBox 	HorizontalContentAlignment="{Binding HorizontalContentAlignment}" 
+				 	VerticalContentAlignment="{Binding VerticalContentAlignment}"
+					Background="{Binding Background}"
+					Foreground="{Binding Foreground}"
+					FontFamily="{Binding FontFamily}"
+					FontSize="{Binding FontSize}"
+					Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+					BorderThickness="0"
+					x:Name="textbox"/>
+
+		<!-- Place holder -->
+		<TextBlock 	IsHitTestVisible="false"
+					VerticalAlignment="{Binding VerticalContentAlignment}"
+					HorizontalAlignment="{Binding HorizontalContentAlignment}"
+					FontFamily="{Binding FontFamily}"
+					FontSize="{Binding FontSize}"
+					Padding="{Binding Padding}" 
+					Text="{Binding local:InputBox.PlaceHolder}"
+					x:Name="textBlock">
+			<TextBlock.Style>
+				<Style TargetType="{x:Type TextBlock}">
+					<Setter Property="Visibility" Value="Hidden"/>
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Text}" Value="{x:Static system:String.Empty}">
+							<Setter Property="Visibility" Value="Visible"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+		</TextBlock>
+	</Grid>
+</UserControl>

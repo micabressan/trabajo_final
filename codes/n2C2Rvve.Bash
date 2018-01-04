@@ -1,1 +1,0 @@
-max_depth=$((`find $root -type d -printf '%d\n' | sort -n | tail -1`+1))

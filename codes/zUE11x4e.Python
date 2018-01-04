@@ -1,0 +1,15 @@
+s = input()
+val = 0
+a_before = 0
+val_a_before = 1
+for i in range(len(s)):
+    if s[i] == "a":
+        a_before+=1
+        val_a_before*=2
+        val_a_before %=(10**9 + 7)
+        
+    if s[i] == "b":
+        val += val_a_before - 1
+        val %=(10**9 + 7)
+        
+print(val)

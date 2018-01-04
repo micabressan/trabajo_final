@@ -1,0 +1,18 @@
+use std::collections::HashMap;
+
+fn get_from_map<'a, 'b>(map: &'a mut HashMap<&str, u32>, key: &'b str) -> Option<&'a mut u32> {
+    map.get_mut(key)
+}
+
+fn main() {
+    let mut map: HashMap<&str, u32> = HashMap::new();
+
+    map.insert("a", 4);
+
+    match get_from_map(&mut map, "a") {
+        Some(x) => { *x = 12; }
+        None => {}
+    }
+
+    println!("{:?}", map);
+}

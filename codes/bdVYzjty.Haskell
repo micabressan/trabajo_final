@@ -1,0 +1,31 @@
+module KGram where
+
+import Data.List
+import System.Environment
+
+main :: IO ()
+main = do
+  [filename, key] <- getArgs
+  text <- readFile filename
+  print $ solve key (lines text)
+
+solve :: String -> [String] -> Maybe (Int, String)
+solve key words =
+  let m = length key
+  in find (match key) $ concatMap (candidates words m) (factors m)
+
+match :: String -> (Int, String) -> Bool
+match key (k, word) = kgramAnagram k word \\ key == []
+
+candidates :: [String] -> Int -> Int -> [(Int, String)]
+candidates words m k =
+  let n = m `div` k + k - 1
+  in [(k, x) | x <- words, length x == n]
+
+kgramAnagram :: Int -> String -> String
+kgramAnagram k xs
+  | length xs < k = []
+  | otherwise = take k xs ++ kgramAnagram k (tail xs)
+
+factors :: Int -> [Int]
+factors n = [x | x <- [1 .. n - 1], n `mod` x == 0]

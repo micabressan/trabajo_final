@@ -1,0 +1,20 @@
+newtype Input = Input (Map Int { name :: String, duration :: Int, platforms :: Array String })
+derive instance newtypeInput :: Newtype Input _
+instance decodeJsonInput :: DecodeJson Input where
+  decodeJson json = do
+    case (toObject json) of
+      Nothing -> Left "Error decoding input"
+      Just obj -> do
+        Input <$> SM.fold (\acc key val -> insert <$> (read' key) <*> (decodeJson' val) <*> acc) (Right empty) obj
+      where
+
+        read' key = case fromString key of
+          Nothing -> Left "Error decoding key"
+          Just a -> Right a
+
+        decodeJson' val = do
+          obj <- decodeJson val
+          name <- obj .? "name"
+          duration <- obj .? "duration"
+          platforms <- obj .? "platforms"
+          pure { name, duration, platforms }

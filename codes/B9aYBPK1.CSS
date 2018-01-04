@@ -1,0 +1,165 @@
+html {
+	font-family:Arial, sans-serif;
+}
+
+td {
+ font-size:13pt;
+ color:#000000;
+}
+
+.mnbdy {
+ padding:1px;
+ margin:0px;
+-moz-user-select: none;
+ -khtml-user-select: none;
+ -webkit-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+}
+
+.fmbdy {
+ user-select: none padding:1px;
+ margin:0px;
+}
+
+A:link {
+ text-decoration:none;
+ font-size:14pt;
+ color:#7E57C2;
+ float: right;
+ margin: 0px 0px 0px 3px;
+}
+
+A:visited {
+ text-decoration:none;
+ color:#7E57C2;
+}
+
+A:active {
+ text-decoration:underline;
+ color:#7E57C2;
+}
+
+A:hover {
+ text-decoration:underline;
+ color:#5E35B1;
+}
+
+.hbtbl {
+ table-layout:fixed;
+ word-wrap:break-word;
+ overflow:hidden;
+}
+
+.stxt {
+border-bottom: #B39DDB 2px solid;
+color:#5E35B1;
+background-color:#D1C4E9;
+}
+
+.stxt2 {
+border-bottom:#B39DDB 2px solid;
+color:#5E35B1;
+background-color:#D1C4E9;
+}
+
+.dtxt {
+ text-align:right;
+ color:#7E57C2;
+ font-size:8pt;
+}
+
+.dtxt2 {
+ text-align:right;
+ color:#7E57C2;
+ font-size:8pt;
+}
+
+.msgSticky {
+	 text-align:center;
+	padding : 10px;
+}
+
+.pn_std {
+/* color:#339966; */
+color:#6A1B9A;
+padding : 0 5px 0 0px; 
+text-shadow:0px 5px 10px #000000;
+}
+
+.pn_reg {
+/*  color:#141CEE; */
+ color:#651FFF;
+ padding : 0 5px 0 0px;
+ text-shadow:0px 5px 10px #000000;
+}
+.pn_mod {
+ color:#CA1E1E;
+padding : 0 5px 0 0px; 
+text-shadow:0px 5px 10px #000000;
+}
+.pn_adm {
+color:#EF4AB2;
+padding : 0 5px 0 0px;
+text-shadow:0px 5px 10px #000000;
+}
+
+.cfrm {
+ margin-bottom:0px;
+}
+
+.frmtb {
+ border-radius:40px;
+ -moz-border-radius:30px;
+ width:83px;
+ height:60px;
+ padding-left:1px;
+ background-color:#fff;
+ padding-right:6px;
+ font-size:14pt;
+ border:2px solid #7E57C2;
+ color:#7E57C2;
+margin: 1px 1px 5px 5px;
+box-shadow:0px 5px 15px #000000;
+}
+
+.frmbtn {
+ border-radius:40px;
+ border:1px solid #7E57C2;
+ width:30%;
+ height:60px;
+ font-size:14pt;
+ background-color:#7E57C2;
+ color:#fff;
+ padding-left:06px;
+ padding-right:06px;
+ vertical-align:top;
+ margin: 1px 1px 1px 1px;
+ box-shadow:0px 5px 15px #000000;
+}
+
+.lnk {
+ color:#7E57C2;
+}
+
+.pic {
+width:70px;
+height:70px;
+border: 2px #7E57C2 solid;
+border-radius: 40px;
+float:left;
+box-shadow:0px 5px 10px #000000;
+margin: 5px;
+}
+
+audio {
+	box-shadow:0px 5px 15px #000000;
+}
+
+.status {
+float: right;
+}
+
+.msg.Private.Sent .status:after {
+	content:   \2714 ;
+}

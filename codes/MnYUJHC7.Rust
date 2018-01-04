@@ -1,0 +1,16 @@
+    pub fn fetch(cur: &str) -> Result<BAH, String> {
+        let url = format!("{}/BAH/{}", API, cur);
+        reqwest::get(url.as_str())
+            .map_err(|err| err.to_string())
+            .and_then(|mut resp| {
+                let mut content = String::new();
+                resp.read_to_string(&mut content)
+                    .map_err(|err| err.to_string())
+                    .map(|_| content)
+            })
+            .and_then(|content| {
+                debug!("{}", content);
+                serde_json::from_str(content.as_str())
+                    .map_err(|err| err.to_string())})
+                    .map(|tick| tick)
+    }

@@ -1,0 +1,37 @@
+# Цель - парсинг названий файлов
+# Например
+# 2017003000010_BA-71_20A_26.10.17-16.23.48.avi -->
+# BA-71, 20A, 26.10.17, 16, 23, 48
+
+import os
+import csv
+UPLOAD_DIR = '\\\\192.168.1.52\\Video\\.video\\'
+FILE = 'ParsedData.csv'
+files = []
+
+# Getting a full list of the files in the directory with files to be uploaded
+local_dir = os.listdir(UPLOAD_DIR)
+
+# Making a list of files to be uploaded
+files = [x.split('_') for x in local_dir if not x.startswith('.')]
+print('\nFiles found: ', len(files))
+# for item in files:
+#     print(item)
+
+with open(FILE, 'w', newline='', encoding='utf-8-sig') as csvfile:
+    writer = csv.writer(csvfile, dialect='excel', delimiter=';')
+    writer.writerow(('Модель', 'Ток', 'Дата', 'Час', 'Минута', 'Секунда', 'Проверка'))
+    i = 0
+    for file in files:
+        if len(file) == 4:
+            writer.writerow((
+					file[1],
+					file[2], 
+					file[3].split('-')[0], 
+					file[3].split('-')[1].split('.')[0],
+					file[3].split('-')[1].split('.')[1],
+					file[3].split('-')[1].split('.')[2], 
+					file[3]))
+					i += 1
+
+    print('Rows added: ', i)

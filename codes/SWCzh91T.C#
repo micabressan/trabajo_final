@@ -1,0 +1,68 @@
+    public class Tournament
+    {
+        public void GenerateMatches(int playerNumber)
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamWriter wr;
+            int realPlayers = playerNumber;
+            if (playerNumber % 2 == 1)
+            {
+                playerNumber++;
+            }
+            int separator = playerNumber / 2;
+            int battleNumber = 2;
+            int RoundMult = 0;
+            int[] players = new int[playerNumber];
+
+            for (int i = 1; i <= playerNumber; i++)
+            {
+                players[i - 1] = i;
+            }
+
+            for (int bo = 0; bo < battleNumber; bo++)
+            {
+                for (int rounds = 0; rounds < playerNumber - 1; rounds++)
+                {
+                    wr = new StreamWriter($"Round_{rounds + 1 + RoundMult}.txt");
+                    sb.Append($"Round {rounds + 1 + RoundMult}:\n\r");
+                    sb.Append(Environment.NewLine);
+                    for (int i = 0; i < separator; i++)
+                    {
+                        int player1 = players[separator - i - 1];
+                        int player2 = players[separator + i];
+
+                        if (realPlayers != playerNumber && (player1 == playerNumber || player2 == playerNumber)) continue;
+                        if (bo % 2 == 0)
+                        {
+                            sb.Append($"{player1} vs {player2}\n\r");
+                            sb.Append(Environment.NewLine);
+                        }
+                        else
+                        {
+                            sb.Append($"{player2} vs {player1}\n\r");
+                            sb.Append(Environment.NewLine);
+                        }
+
+                    }
+                    RotatePlayers(players);
+                    PrintRoundLayout(wr, sb);
+                    sb.Clear();
+                }
+                RoundMult += (playerNumber - 1);
+            }
+        }
+        public void RotatePlayers(int[] players)
+        {
+            int temp = players[players.Length - 2];
+            for (int i = players.Length - 2; i > 0; i--)
+            {
+                players[i] = players[i - 1];
+            }
+            players[0] = temp;
+        }
+        public void PrintRoundLayout(StreamWriter sw, StringBuilder sb)
+        {
+            sw.WriteLine(sb);
+            sw.Close();
+        }
+    }

@@ -1,0 +1,21 @@
+#Config.yaml
+#################################################
+automation: !include_dir_merge_list automations
+
+
+#\\Config\automations här dumpar du en automation per fil, 
+#test1.yaml
+- alias: '008: Overvaningen barnen off'
+  id: '008'
+  trigger:
+    - platform: time
+      at: '21:00'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.drivhusslingan_alarm
+    state: disarmed
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: 
+          - group.Lampor1

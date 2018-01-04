@@ -1,0 +1,30 @@
+(ns kotitehtava3.core
+  (:gen-class))
+
+(declare q0 q1 q2 q3 q4 q5 q6 q7)
+
+(defn state [state-inputs]
+  (fn [input]
+    (let [first-char (str (first input))]
+      (let [next-state (get state-inputs (keyword first-char))]
+        (if (nil? next-state)
+          false
+          (next-state (rest input)))))))
+
+(defn q8 [input]
+  (if (empty? input)
+    true ; this is final state
+    ((state {:a #'q7, :b #'q6}) input)))
+
+(def q7 (state {:a #'q8, :b #'q3}))
+(def q6 (state {:a #'q3, :b #'q8}))
+(def q5 (state {:a #'q2, :b #'q6}))
+(def q4 (state {:a #'q7, :b #'q1}))
+(def q3 (state {:a #'q6, :b #'q7}))
+(def q2 (state {:a #'q5, :b #'q3}))
+(def q1 (state {:a #'q3, :b #'q4}))
+(def q0 (state {:a #'q2, :b #'q1}))
+
+(defn -main
+  [& args]
+  (println (str (q0 (first args)))))

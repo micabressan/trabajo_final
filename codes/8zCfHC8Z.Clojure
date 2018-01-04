@@ -1,0 +1,5 @@
+(fn flat [[h & rest]]
+  (when h
+    (if (sequential? h)
+      (concat (flat h) (flat rest))
+      (cons h (flat rest)))))

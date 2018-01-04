@@ -1,0 +1,75 @@
+include "../layout.js"
+my_test_project.layout.main = ->
+  uki 
+    view: "HSplitPane"
+    rect: "1000 600"
+    anchors: "left top right bottom"
+    handlePosition: 200
+    rightMin: 500
+    handleWidth: 1
+    id: "top"
+    throttle: 42
+    leftPane: 
+      background: "red"
+      
+    rightChildViews: 
+        view: "HSplitPane"
+        rect: "799 600"
+        anchors: "left top right bottom"
+        id: "second"
+        handlePosition: 300
+        autogrowRight: true
+        autogrowLeft: false
+        leftMin: 200
+        rightMin: 300
+        handleWidth: 1
+        
+        leftPane: 
+          background: "blue"
+          
+          childViews: [ 
+            view: "Button"
+            rect: "10 566 280 24"
+            anchors: "bottom left right"
+            text: "middle pane"
+            focusable: false
+           ] # leftpane childviews
+          
+          rightChildViews: [ 
+            view: "VSplitPane"
+            rect: "498 600"
+            anchors: "left top right bottom"
+            
+            topChildViews: [ 
+              view: "Button"
+              rect: "10 10 280 24"
+              anchors: "top left"
+              text: "top pane 1"
+            , 
+              view: "Button"
+              rect: "209 160 280 24"
+              anchors: "bottom right"
+              text: "top pane 2"
+            ] # leftpane topChildViews
+            
+            bottomPane: 
+              background: "#FFF"
+              
+              childViews: [ 
+                view: "Box"
+                rect: "0 0 499 40"
+                anchors: "top right left"
+                background: "cssBox(background:#EDF3FE;border-bottom:2px solid #999)"
+              , 
+                view: "Slider"
+                rect: "10 50 473 24"
+                anchors: "top right left"
+              , 
+                view: "Label"
+                rect: "10 80 479 300"
+                anchors: "top left right bottom"
+                multiline: true
+                html: "Sample content oooo "
+                id: "workpane"
+               ] # bottom pane childviews
+           ] # leftpane rightChildViews

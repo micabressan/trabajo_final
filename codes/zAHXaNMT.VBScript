@@ -1,0 +1,70 @@
+Sub Tier_Determination()
+
+
+Dim rowNum
+Dim helpNum
+
+Dim tierNum
+
+'Set row number to avoid crashes
+rowNum = 1
+
+'Clear all tier sheets
+    Worksheets("Tier 1").Cells.Clear
+    Worksheets("Tier 2").Cells.Clear
+    Worksheets("Tier 3").Cells.Clear
+    Worksheets("Tier 4").Cells.Clear
+
+
+
+ 'Determine number of tiers
+    If (Round(teamNum / 3) > PlayerNum) Then
+        tierNum = 1
+    ElseIf (Round(teamNum / 3) > Round(PlayerNum / 2)) Then
+        tierNum = 2
+    ElseIf (Round(teamNum / 3) > Round(PlayerNum / 3)) Then
+        tierNum = 3
+    ElseIf (Round(teamNum / 3) > Round(PlayerNum / 4)) Then
+        tierNum = 4
+   
+    End If
+    
+    'Set a reference number of players per tier, assumed to be the maximum
+    TierPlayerNum = Round(PlayerNum / tierNum)
+    
+    Worksheets("Macro Assistant").Select
+    Range("B5").Value = TierPlayerNum
+    
+    helpNum = Round(PlayerNum / tierNum) + 1
+    
+'Set the tier lists for 1 tier
+    Worksheets("Players").Select
+    Range(Cells(1, 3), Cells(helpNum, 3)).Copy (Worksheets("Tier 1").Range("A1"))
+
+'Add a 2nd tier if necessary
+    If (tierNum > 1) Then
+        Range(Cells(helpNum + 1, 3), Cells(2 * (PlayerNum / tierNum), 3)).Copy (Worksheets("Tier 2").Range("A1"))
+    End If
+
+'Add a 3rd tier if necessary
+    'If (tierNum > 2) Then
+   '     Range(Cells(2 * (PlayerNum / tierNum) + 1, 3), Cells(3 * (PlayerNum / tierNum), 3)).Copy (Worksheets("Tier 3").Range("A1"))
+   ' End If
+ 
+'Add a 4th tier if REALLY necessary
+   ' If (tierNum > 3) Then
+   ' Range(Cells(3 * (PlayerNum / tierNum) + 1, 3), Cells(4 * (PlayerNum / tierNum), 3)).Copy (Worksheets("Tier 4").Range("A1"))
+   ' End If
+    
+    Worksheets("Tier 1").Select
+    List_Placement
+
+    Worksheets("Tier 2").Select
+    List_Placement
+    
+   ' Worksheets("Tier 3").Select
+    'List_Placement
+    
+   ' Worksheets("Tier 4").Select
+   ' List_Placement
+End Sub

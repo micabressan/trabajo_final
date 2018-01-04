@@ -1,0 +1,6 @@
+(defn get-states
+  [character]
+  (map first (filter (fn [[name func]] (func character) )
+                     {"AURA"         aura-like-laura?
+                      "DEATHRATTLE"  battle-with-a-rattle?
+                      "STEALTH"      stealth-or-not?})))

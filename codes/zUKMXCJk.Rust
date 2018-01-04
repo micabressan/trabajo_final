@@ -1,0 +1,29 @@
+    pub fn step(&mut self, chip8_ref: &mut Chip8) 
+    {
+        let opcode = self.fetch_opcode(chip8_ref);
+        let instruction = self.decode_opcode(chip8_ref, opcode);
+        self.execute_opcode(chip8_ref, instruction);
+        self.update_timer();
+    }
+
+    pub fn fetch_opcode(&mut self, chip8_ref: &mut Chip8) -> Opcode {
+        let mut opcode: Opcode = 0x0;
+        opcode = chip8_ref.memory.read_byte(chip8_ref.cpu.reg_pc) as u16;
+        opcode = (opcode << 8) | chip8_ref.memory.read_byte(chip8_ref.cpu.reg_pc + 1) as u16;
+        println!("{:?}", opcode);
+        opcode
+    }
+
+    pub fn decode_opcode(&mut self, chip8_ref: &mut Chip8, opcode: Opcode) -> asm {
+        match opcode {
+            _ => panic!("Error: Illegal Instruction\n{:x} is not a Chip-8 Instruction.")
+        }
+    }
+
+    pub fn execute_opcode(&mut self, chip8_ref: &mut Chip8, instruction: asm) {
+
+    }
+
+    pub fn update_timer(&mut self) {
+        self.timer_update_flag = (self.timer_update_flag + 1) % 9
+    }

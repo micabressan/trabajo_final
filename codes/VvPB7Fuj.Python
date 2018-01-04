@@ -1,0 +1,172 @@
+#!/usr/bin/env python
+# -*- coding: latin-1 -*-
+
+from Tkinter import *
+import RPi.GPIO as GPIO
+from time import sleep
+
+GPIO.setmode(GPIO.BOARD)   ##je prefere la numerotation BOARD plutot que BCM
+
+servo_pin = 36  # gpio16
+
+Moteur1A = 16      ## premiere sortie du premier moteur, pin 16
+Moteur1B = 18      ## deuxieme sortie de premier moteur, pin 18
+Moteur1E = 22      ## enable du premier moteur, pin 22
+
+Moteur2A = 29      ## premiere sortie du deuxieme moteur, pin 29
+Moteur2B = 31      ## deuxieme sortie de deuxieme moteur, pin 31
+Moteur2E = 33      ## enable du deuxieme moteur, pin 33
+
+GPIO.setwarnings(False)
+GPIO.setup(Moteur1A,GPIO.OUT)  ## ces 6 pins du Raspberry Pi sont des sorties
+GPIO.setup(Moteur1B,GPIO.OUT)
+GPIO.setup(Moteur1E,GPIO.OUT)
+GPIO.setup(Moteur2A,GPIO.OUT) 
+GPIO.setup(Moteur2B,GPIO.OUT)
+GPIO.setup(Moteur2E,GPIO.OUT)
+
+GPIO.setup(servo_pin, GPIO.OUT)  # pin configurée en sortie
+
+#init speed pelleteuse
+pwm = GPIO.PWM(servo_pin, 50)  # pwm à une fréquence de 50 Hz
+depart = 2.45 #limite servo
+arrivee = 5.5 #limite servo
+
+
+#init speed duty cycle motors
+pwm1 = GPIO.PWM(Moteur1E,50)   ## pwm de la pin 22 a une frequence de 50 Hz
+pwm1.start(0)   ## on commemnce avec un rapport cyclique de 100%
+
+pwm2 = GPIO.PWM(Moteur2E,50)   ## pwm de la pin 23 a une frequence de 50 Hz
+pwm2.start(0)   ## on commemnce avec un rapport cyclique de 100%
+
+#personnalisation de la fenetre
+fenetre = Tk() #creation de l interface
+fenetre.title('Wysiwyg') #titre de la fenetre
+fenetre.geometry('630x450+650+600') #taille de la fenetre
+fenetre['bg']='lightgrey' #couleur arriere plan de la fenetre
+
+#definitions des Frames
+Frame_ctrl = Frame(fenetre, borderwidth=2, relief=GROOVE)
+Frame_ctrl.grid(row=9,column=3)
+
+Frame_pelle = Frame(fenetre, borderwidth=2, relief=GROOVE)
+Frame_pelle.grid(row=9,column=4)
+
+Frame_scale = Frame(fenetre, borderwidth=2, relief=GROOVE)
+Frame_scale.grid(row=9,column=0)
+    
+#Frame speed motors
+Label(Frame_scale,text='Speed motors').grid(row=0,column=0)
+speed_motor=DoubleVar()
+scale=Scale(Frame_scale,variable=speed_motor)
+scale.grid(row=1,column=0)
+
+#Frame controle Wysiwyg 
+message=Label(Frame_ctrl,text='Controle Wysiwyg').grid(row=0,column=1)
+
+pic_forward=PhotoImage(file="forward.png")
+pic_back=PhotoImage(file="down.png")
+pic_left=PhotoImage(file="left.png")
+pic_right=PhotoImage(file="right.png")
+pic_stop=PhotoImage(file="stopwalle.png")
+
+def forward():
+	pwm1.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	pwm2.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	GPIO.output(Moteur1A,GPIO.HIGH)
+	GPIO.output(Moteur1B,GPIO.LOW)
+	GPIO.output(Moteur1E,GPIO.HIGH)
+	GPIO.output(Moteur2A,GPIO.LOW)
+	GPIO.output(Moteur2B,GPIO.HIGH)
+	GPIO.output(Moteur2E,GPIO.HIGH)
+	
+def left():
+	pwm1.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	pwm2.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	#a modif GPIO.output(Moteur1A,GPIO.HIGH)
+	#a modif GPIO.output(Moteur1B,GPIO.LOW)
+	#a modif GPIO.output(Moteur1E,GPIO.HIGH)
+	#a modif GPIO.output(Moteur2A,GPIO.HIGH)
+	#a modif GPIO.output(Moteur2B,GPIO.LOW)
+	#a modif GPIO.output(Moteur2E,GPIO.HIGH)
+	
+def stop():
+	GPIO.output(Moteur1E,GPIO.LOW)
+	GPIO.output(Moteur2E,GPIO.LOW)	
+
+	
+def right():
+	pwm1.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	pwm2.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	#a modif GPIO.output(Moteur1A,GPIO.HIGH)
+	#a modif GPIO.output(Moteur1B,GPIO.LOW)
+	#a modif GPIO.output(Moteur1E,GPIO.HIGH)
+	#a modif GPIO.output(Moteur2A,GPIO.HIGH)
+	#a modif GPIO.output(Moteur2B,GPIO.LOW)
+	#a modif GPIO.output(Moteur2E,GPIO.HIGH)
+
+def back():
+	pwm1.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	pwm2.ChangeDutyCycle(speed_motor.get())  ## modification du rapport cyclique
+	GPIO.output(Moteur1A,GPIO.LOW)
+	GPIO.output(Moteur1B,GPIO.HIGH)
+	GPIO.output(Moteur1E,GPIO.HIGH)
+	GPIO.output(Moteur2A,GPIO.HIGH)
+	GPIO.output(Moteur2B,GPIO.LOW)
+	GPIO.output(Moteur2E,GPIO.HIGH)
+
+
+buttonup=Button(Frame_ctrl,image=pic_forward, command=forward)
+buttonup.grid(row=1, column=1)
+buttonleft=Button(Frame_ctrl,image=pic_left, command = left)
+buttonleft.grid(row=2, column=0)
+buttonstop=Button(Frame_ctrl,image=pic_stop, command = stop)
+buttonstop.grid(row=2,column=1)
+buttonright=Button(Frame_ctrl,image=pic_right, command = right)
+buttonright.grid(row=2,column=2) 
+buttondown=Button(Frame_ctrl,image=pic_back, command = back)
+buttondown.grid(row=3,column=1)
+ 
+
+#Frame controle pelleteuse 
+message=Label(Frame_pelle,text='Controle pelleteuse').grid(row=0,column=1)
+
+pelle_up=PhotoImage(file="uppelleteuse.png")
+pelle_down=PhotoImage(file="downpelleteuse.png")
+pelle_stop=PhotoImage(file="stoppelle.png")
+
+position = depart
+pwm.start(depart) 
+
+def down(position):
+	if position >=arrivee:
+		position = 5.5
+	else:
+		position = position + 1
+	return position
+	
+
+def stoppelleteuse():
+	pwm.ChangeDutyCycle(float(0))
+
+def up(position):
+	if position <=depart:
+		position = 2.45
+	else:
+		position = position - 1	
+	return position
+
+buttonup=Button(Frame_pelle,image=pelle_up, command=up(position))
+buttonup.grid(row=1, column=1)
+buttonstop=Button(Frame_pelle,image=pelle_stop, command=stoppelleteuse)
+buttonstop.grid(row=2,column=1)
+buttondown=Button(Frame_pelle,image=pelle_down, command=down(position))
+buttondown.grid(row=3,column=1)  
+     
+      
+bouton_quitter=Button(fenetre, text="Quitter", command=fenetre.quit)
+bouton_quitter.grid(row=10,column=3) 
+
+fenetre.mainloop()
+fenetre.destroy()

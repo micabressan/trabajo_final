@@ -1,0 +1,88 @@
+worker_processes  1;
+env TERM;
+env BACK_SERVICE;
+env HOSTNAME;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include mime.types;
+
+    sendfile             on;
+    keepalive_timeout    65;
+    client_max_body_size 5M;
+
+    gzip on;
+    gzip_disable "msie6";
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    # Block alihack
+    deny 23.27.103.106/32;
+
+    server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        if ($request_method = 'OPTIONS') {
+          return 200;
+        }
+
+        # ensure https; see https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
+       add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+        root /var/www/html;
+
+        index index.html;
+
+        location / {
+            etag on;
+            expires 30m;
+            gzip_static on;
+            # ensure https; see https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
+            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+            add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+            add_header X-SIA "pis";
+            add_header X-IRN "IRN-66929";
+            try_files $uri /index.html;
+            break;
+        }
+
+        location ~* \.(eot|otf|ttf|woff|woff2)$ {
+          # ensure https; see https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
+            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+            add_header Access-Control-Allow-Origin *;
+        }
+
+        location /management {
+            proxy_pass http://api:8080/paris-api/management;
+            proxy_set_header X-SIA "pis";
+            proxy_set_header X-IRN "IRN-66929";
+        }
+
+        location /api {
+            proxy_pass http://api:8080/paris-api/api;
+            proxy_set_header X-SIA "pis";
+            proxy_set_header X-IRN "IRN-66929";
+        }
+
+        location /paris-api {
+            proxy_pass http://api:8080/paris-api;
+            proxy_set_header X-SIA "pis";
+            proxy_set_header X-IRN "IRN-66929";
+        }
+
+        location /health-check {
+          return 200;
+          access_log off;
+        }
+    }
+
+}

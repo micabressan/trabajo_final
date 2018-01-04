@@ -1,0 +1,16 @@
+    fn _find<'a>(&self, current: &'a mut Link<T>, data: &T) -> &'a mut Link<T>{
+    
+        
+        match *current {
+            None => current,
+            Some(ref mut n) => {
+                if n.data > *data { 
+                    self._find(&mut n.left, data)
+                } else if n.data < *data {
+                    self._find(&mut n.right, data)
+                } else {
+                    current
+                }
+            }   
+        }
+	}

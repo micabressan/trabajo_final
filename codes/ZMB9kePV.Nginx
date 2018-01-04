@@ -1,0 +1,17 @@
+
+    location /navis {
+        root /static_pages/svis;
+    }
+
+    location /svis_ocean_env {
+        root /static_pages/svis;
+    }
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://www.svis.com:8010;
+    }

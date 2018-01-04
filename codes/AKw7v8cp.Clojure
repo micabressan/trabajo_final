@@ -1,0 +1,14 @@
+;produce fn that tests if input is a palindrome
+;(false? (__ '(1 2 3 4 5)))
+
+(defn reverse-seq [some-seq]
+  (reduce,
+  (fn [new-vec curr]
+  	(cons curr new-vec)),
+  [],
+  some-seq))
+ 
+(defn is-palindrome [some-seq]
+ (= some-seq (reverse-seq some-seq))
+  
+(is-palindrome '(1 2 3 4 5))

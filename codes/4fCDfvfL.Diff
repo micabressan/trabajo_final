@@ -1,0 +1,318 @@
+Index: binaries/data/mods/public/gui/lobby/lobby.js
+===================================================================
+--- binaries/data/mods/public/gui/lobby/lobby.js	(revision 19922)
++++ binaries/data/mods/public/gui/lobby/lobby.js	(working copy)
+@@ -1085,7 +1085,7 @@
+ 	}
+ 
+ 	Engine.PushGuiPage("page_gamesetup_mp.xml", {
+-		"multiplayerGameType": "join",
++		"multiplayerGameType": Engine.GetGUIObjectByName("useCustomJoin").checked ? "join-custom" : "join",
+ 		"ip": ip,
+ 		"port": port,
+ 		"name": g_Username,
+@@ -1115,7 +1115,7 @@
+ function hostGame()
+ {
+ 	Engine.PushGuiPage("page_gamesetup_mp.xml", {
+-		"multiplayerGameType": "host",
++		"multiplayerGameType": Engine.GetGUIObjectByName("useCustomJoin").checked ? "host-custom" : "host",
+ 		"name": g_Username,
+ 		"rating": g_UserRating
+ 	});
+Index: binaries/data/mods/public/gui/lobby/lobby.xml
+===================================================================
+--- binaries/data/mods/public/gui/lobby/lobby.xml	(revision 19922)
++++ binaries/data/mods/public/gui/lobby/lobby.xml	(working copy)
+@@ -187,6 +187,26 @@
+ 				<translatableAttribute id="caption">Main Menu</translatableAttribute>
+ 				<action on="Press">returnToMainMenu();</action>
+ 			</object>
++				<object name="useCustomJoin"
++					enabled="true"
++					type="checkbox"
++					checked="false"
++					style="ModernTickBox"
++					size="100%-20 100%-25 100% 100%"
++					font="sans-bold-13"
++					tooltip_style="default">
++					<translatableAttribute id="tooltip">Enable custom name and rating.</translatableAttribute>
++					<action on="Press">
++						Engine.ConfigDB_CreateValue("user", "lobby.usecustomjoin.enabled", String(this.checked));
++						Engine.ConfigDB_WriteValueToFile("user", "lobby.usecustomjoin.enabled", String(this.checked), "config/user.cfg");
++
++					</action>
++					<action on="Load">
++						this.checked = Engine.ConfigDB_GetValue("user", "lobby.usecustomjoin.enabled") == "true";
++
++					</action>
++				</object>
++
+ 		</object>
+ 
+ 		<!-- Middle panel: Filters, game list, chat box. -->
+Index: binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.js
+===================================================================
+--- binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.js	(revision 19922)
++++ binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.js	(working copy)
+@@ -28,6 +28,8 @@
+  */
+ var g_StunEndpoint;
+ 
++var g_attribs;
++
+ function init(attribs)
+ {
+ 	g_UserRating = attribs.rating;
+@@ -34,6 +36,13 @@
+ 
+ 	switch (attribs.multiplayerGameType)
+ 	{
++	case "join-custom":
++	{
++		g_attribs = attribs;
++		switchSetupPage("pageCustomJoin")
++
++		break;
++	}
+ 	case "join":
+ 	{
+ 		if (Engine.HasXmppClient())
+@@ -45,6 +54,22 @@
+ 			switchSetupPage("pageJoin");
+ 		break;
+ 	}
++	case "host-custom":
++	{
++		Engine.GetGUIObjectByName("hostSTUNWrapper").hidden = !Engine.HasXmppClient();
++		g_attribs = attribs;
++		if (Engine.HasXmppClient())
++		{
++			Engine.GetGUIObjectByName("hostPlayerName2").caption = attribs.name;
++			Engine.GetGUIObjectByName("hostServerName2").caption =
++				sprintf(translate("%(name)s's game"), { "name": attribs.name });
++
++			Engine.GetGUIObjectByName("useSTUN2").checked = Engine.ConfigDB_GetValue("user", "lobby.stun.enabled") == "true";
++		}
++
++		switchSetupPage("pageCustomHost");
++		break;
++	}
+ 	case "host":
+ 	{
+ 		Engine.GetGUIObjectByName("hostSTUNWrapper").hidden = !Engine.HasXmppClient();
+@@ -103,6 +128,15 @@
+ 		if (startJoin(joinPlayerName, joinServer, getValidPort(joinPort), false))
+ 			switchSetupPage("pageConnecting");
+ 	}
++	else if (!Engine.GetGUIObjectByName("pageCustomJoin").hidden)
++	{
++		let joinPlayerName = Engine.GetGUIObjectByName("customName").caption;
++		let joinPlayerRating = Engine.GetGUIObjectByName("customRating").caption;
++
++		if (startJoin(joinPlayerName, g_attribs.ip, getValidPort(g_attribs.port), g_attribs.useSTUN, g_attribs.hostJID, joinPlayerRating))
++			switchSetupPage("pageConnecting");
++
++	}
+ 	else if (!Engine.GetGUIObjectByName("pageHost").hidden)
+ 	{
+ 		let hostPlayerName = Engine.GetGUIObjectByName("hostPlayerName").caption;
+@@ -128,6 +162,32 @@
+ 		if (startHost(hostPlayerName, hostServerName, getValidPort(hostPort)))
+ 			switchSetupPage("pageConnecting");
+ 	}
++	else if (!Engine.GetGUIObjectByName("pageCustomHost").hidden)
++	{
++		let hostPlayerName = Engine.GetGUIObjectByName("customName2").caption;
++		let hostPlayerRating = Engine.GetGUIObjectByName("customRating2").caption;
++		let hostServerName = Engine.GetGUIObjectByName("hostServerName2").caption;
++		let hostPort = Engine.GetGUIObjectByName("hostPort2").caption;
++
++		if (!hostServerName)
++		{
++			Engine.GetGUIObjectByName("hostFeedback").caption = translate("Please enter a valid server name.");
++			return;
++		}
++
++		if (getValidPort(hostPort) != +hostPort)
++		{
++			Engine.GetGUIObjectByName("hostFeedback").caption = sprintf(
++				translate("Server port number must be between %(min)s and %(max)s."), {
++					"min": g_ValidPorts.min,
++					"max": g_ValidPorts.max
++				});
++			return;
++		}
++
++		if (startHost(hostPlayerName, hostServerName, getValidPort(hostPort), hostPlayerRating))
++			switchSetupPage("pageConnecting");
++	}
+ }
+ 
+ function startConnectionStatus(type)
+@@ -272,10 +332,13 @@
+ 		if (page.name.substr(0,4) == "page")
+ 			page.hidden = true;
+ 
++        Engine.GetGUIObjectByName("multiplayerPages").size = "50%-230 50%-150 50%+230 50%+" + (newPage == "pageCustomHost" ? 150 : newPage == "pageCustomJoin" ? 20 : 90);
++
+ 	Engine.GetGUIObjectByName(newPage).hidden = false;
+ 
+ 	Engine.GetGUIObjectByName("hostPlayerNameWrapper").hidden = Engine.HasXmppClient();
+ 	Engine.GetGUIObjectByName("hostServerNameWrapper").hidden = !Engine.HasXmppClient();
++	Engine.GetGUIObjectByName("hostServerNameWrapper2").hidden = !Engine.HasXmppClient();
+ 
+ 	Engine.GetGUIObjectByName("continueButton").hidden = newPage == "pageConnecting";
+ }
+@@ -286,7 +349,7 @@
+ 	Engine.ConfigDB_WriteValueToFile("user", "lobby.stun.enabled", enabled, "config/user.cfg");
+ }
+ 
+-function startHost(playername, servername, port)
++function startHost(playername, servername, port, playerrating = g_UserRating)
+ {
+ 	startConnectionStatus("server");
+ 
+@@ -322,8 +385,8 @@
+ 
+ 	try
+ 	{
+-		if (g_UserRating)
+-			Engine.StartNetworkHost(playername + " (" + g_UserRating + ")", port);
++		if (playerrating)
++			Engine.StartNetworkHost(playername + " (" + playerrating + ")", port);
+ 		else
+ 			Engine.StartNetworkHost(playername, port);
+ 	}
+@@ -350,11 +413,12 @@
+ /**
+  * Connects via STUN if the hostJID is given.
+  */
+-function startJoin(playername, ip, port, useSTUN, hostJID = "")
++function startJoin(playername, ip, port, useSTUN, hostJID = "", playerrating = g_UserRating)
+ {
+ 	try
+ 	{
+-		Engine.StartNetworkJoin(playername + (g_UserRating ? " (" + g_UserRating + ")" : ""), ip, port, useSTUN, hostJID);
++		Engine.StartNetworkJoin(playername + (playerrating ? " (" + playerrating + ")" : ""), ip, port, useSTUN, hostJID);
++
+ 	}
+ 	catch (e)
+ 	{
+Index: binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.xml
+===================================================================
+--- binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.xml	(revision 19922)
++++ binaries/data/mods/public/gui/gamesetup_mp/gamesetup_mp.xml	(working copy)
+@@ -119,6 +119,112 @@
+ 			</object>
+ 		</object>
+ 
++		<object name="pageCustomHost" size="0 32 100% 100%" hidden="true">
++
++			<object type="text" style="ModernLabelText" size="0 0 100% 30">
++				<translatableAttribute id="caption">Set up your server to host with custom name and rating.</translatableAttribute>
++			</object>
++
++			<object name="hostPlayerNameWrapper2" hidden="true">
++				<object type="text" size="20 36 50% 66" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Player name:</translatableAttribute>
++				</object>
++
++				<object name="hostPlayerName2" type="input" size="50%+10 40 100%-20 64" style="ModernInput">
++					<action on="Load">
++						this.caption = multiplayerName();
++					</action>
++				</object>
++			</object>
++
++			<!-- Host server name is only used on games started through the lobby. -->
++			<object name="hostServerNameWrapper2" hidden="true">
++				<object type="text" size="20 36 50% 66" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Server name:</translatableAttribute>
++				</object>
++
++				<object name="hostServerName2" type="input" size="50%+10 40 100%-20 64" style="ModernInput">
++					<action on="Load">
++						this.caption = getDefaultGameName();
++					</action>
++				</object>
++			</object>
++
++			<object>
++				<object type="text" size="20 66 50% 104" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Server Port:</translatableAttribute>
++				</object>
++
++				<object name="hostPort2" type="input" size="50%+10 80 100%-20 104" style="ModernInput">
++					<translatableAttribute id="tooltip">Leave blank to use the default port.</translatableAttribute>
++					<action on="Load">
++						this.caption = getValidPort(Engine.ConfigDB_GetValue("user", "multiplayerhosting.port"));
++					</action>
++					<action on="Press">
++						this.caption = getValidPort(this.caption);
++					</action>
++				</object>
++			</object>
++
++			<object name="hostSTUNWrapper2">
++				<object name="useSTUN2" size="120 116 152 146" type="checkbox" style="ModernTickBox">
++					<action on="Press">saveSTUNSetting(String(this.checked));</action>
++				</object>
++				<object type="text" size="146 106 100% 146" style="ModernLeftLabelText">
++					<translatableAttribute id="caption">Use STUN to work around firewalls</translatableAttribute>
++				</object>
++			</object>
++
++				<object type="text" size="20 56+100 50% 76+100" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Custom Name:</translatableAttribute>
++				</object>
++
++				<object name="customName2" type="input" size="50%+10 56+100 100%-20 76+100" style="ModernInput">
++					<action on="Load">
++						this.caption = multiplayerName();
++					</action>
++				</object>
++
++				<object type="text" size="20 80+110 50% 100+110" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Custom Rating:</translatableAttribute>
++				</object>
++
++				<object name="customRating2" type="input" size="50%+10 80+110 100%-20 100+110" style="ModernInput">
++					<action on="Load">
++						this.caption = g_UserRating ? g_UserRating : "";
++					</action>
++				</object>
++
++		</object>
++
++		<object name="pageCustomJoin" size="0 32 100% 100%" hidden="true">
++
++			<object type="text" style="ModernLabelText" size="0 0 100% 30">
++				<translatableAttribute id="caption">Join a game with custom name and rating.</translatableAttribute>
++			</object>
++
++				<object type="text" size="20 36 50% 66" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Custom Name:</translatableAttribute>
++				</object>
++
++				<object name="customName" type="input" size="50%+10 40 100%-20 64" style="ModernInput">
++					<action on="Load">
++						this.caption = multiplayerName();
++					</action>
++				</object>
++
++				<object type="text" size="20 40+20 50% 60+20" style="ModernRightLabelText">
++					<translatableAttribute id="caption">Custom Rating:</translatableAttribute>
++				</object>
++
++				<object name="customRating" type="input" size="50%+10 40+20 100%-20 60+20" style="ModernInput">
++					<action on="Load">
++						this.caption = g_UserRating ? g_UserRating : "";
++					</action>
++				</object>
++
++		</object>
++
+ 		<object name="hostFeedback" type="text" style="ModernLabelText" size="50 100%-80 100%-50 100%-50" textcolor="red"/>
+ 
+ 		<object name="continueButton" hotkey="confirm" type="button" size="50%+5 100%-45 100%-18 100%-17" style="ModernButtonRed">

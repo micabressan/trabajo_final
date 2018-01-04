@@ -1,0 +1,48 @@
+##########################################################################################
+/f list - Liệt kê tất cả bang hội trong máy chủ. (server)
+/f f (tên) - Hiện thông tin của bang / hội đó. (ví dụ: /f f RKGaming)
+/f player - Hiện thông tin của bạn như là năng lượng và số năng lượng hồi mỗi thời gian.
+/f join (tên faction / tên chủ hội) - Để gia nhập vào bang / hội.
+/f leave - Rời khỏi hội.
+/f home - Về điểm lưu (nhà) của hội.
+/f map - Coi những mảnh đất xung quanh bạn
+/f new (tên) - Tạo hội.
+/f name (tên) - Đổi tên của hội (/f name RKGaming2)
+/f description (văn bản) - Điều chỉnh miêu tả của Hội.
+/f motd (văn bản) - Thông báo hàng ngày của chủ và phó Hội.
+/f sethome - Lưu địa điểm (nhà) của Hội.
+/f unsethome - Xóa địa điểm (nhà) của Hội.
+##########################################################################################
+/f invite - Điều chỉnh chức năng mời.
+     /f i list - Danh sách những người đã được mời nhưng chưa hồi âm.
+     /f i add (tên) - Mời người chơi vào Hội.
+     /f remove (tên/all) - Xóa lời mới (all là xóa tất cả lời mồi)
+##########################################################################################
+/f kick (tên) - Đuổi thành viên ra khỏi Hội.
+/f title (tên) (văn bản) - Điểu chỉnh biệt danh trong Hội.
+/f rank (tên) - Coi chức vụ trong Hội của người đó.
+/f money (tên) - Điều chỉnh tiền của Hội.
+/f sc - Nhìn mảnh đất bạn đang đứng.
+/f tt - Tắt thông báo khi bạn vào mảnh đất của Hội khác.
+/f status - Hiện thông tin người chơi trong Hội.
+##########################################################################################
+/f claim - Điều chỉnh mua đất trong Hội.
+     /f claim o - Mua mảnh đất bạn đang đứng trên.
+     /f claim auto - Tự động mua đất khi bạn di chuyển.
+     /f claim s (số) - Mua đất theo diện tích hình vuông
+     /f claim c (số) - Mua đất theo diện tích hình tròn
+##########################################################################################
+/f unclaim - Điều chỉnh bán đất của Hội.
+     /f unclaim o - Bán mảnh đất bạn đang đứng trên.
+     /f unclaim auto - Tự động bán đất khi di chuyển.
+     /f unclaim s (số) - Bán đất theo diện tích hình vuông
+     /f unclaim c (số) - Bán đất theo diện tích hình tròn
+##########################################################################################
+/f enemy (tên hội) - Trở thành kẻ thù với Hội đó.
+/f neutral (tên) - Chuyển về thế trung lập với Hội khác.
+/f truce (tên) - Trở thành bạn với Hội đó.
+/f ally (tên) - Trở thành đồng minh với Hội đó.
+##########################################################################################
+/f Leader (tên) - Chuyển chức chủ Hội.
+/f disband (tên) - Xóa Faction
+##########################################################################################

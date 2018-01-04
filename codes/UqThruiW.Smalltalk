@@ -1,0 +1,13 @@
+n := 100.
+myRectArray := (1 to: n) collect: [:i | RectangleMorph new].
+rnd := [(-500 to: 500) atRandom].
+myGrid := PasteUpMorph new openInWorld.
+myGrid extent: 1100@1100.
+myRectArray do: [:m | myGrid addMorph: m].
+p := myGrid center.
+Transcript show: ([
+	1000 timesRepeat: [
+		myRectArray do: [:m | m center: p + (rnd value@rnd value)].
+		World doOneCycleNow].
+] timeToRun); cr.
+myGrid delete.

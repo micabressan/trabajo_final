@@ -1,0 +1,137 @@
+# Create customized commands.
+enchantment-info:
+  # Is this command enabled?
+  enabled: true
+  # Change the start of the command
+  # Use it in game: /<command> <enchantment>
+  command: /enchant
+  # Message when opening menu
+  # Set to [] to disable
+  # Use %list-of-items% for applyable materials in lore and %list-of-items-msg% for message.
+  message:
+    - "&7Information about &e%enchant% &7enchantment."
+  inventory:
+    # If not enabled, only message will be shown.
+    # You can use all variables that are used for items in the message,
+    # if you want the command to only show text.
+    enabled: true
+    # Inventory types
+    # NORMAL is chest-like inventory, HOPPER is hopper-like (has only 5 slots)
+    type: HOPPER
+    # Inventory size (9-18-27-36-45-54)
+    # Does not work with HOPPER inventory
+    size: 45
+    # Inventory name
+    name: "&e%enchant%&7 information"
+    items:
+      # Slots start from 0
+      # This number defines the inventory slot.
+      0:
+        type: STAINED_GLASS_PANE
+        id: 15
+        force-glow: false
+        name: " "
+        lore: []
+      1:
+        type: ENCHANTED_BOOK
+        id: 0
+        force-glow: false
+        name: "&7Information about &e%enchant% &7enchantment"
+        lore:
+          - "&eDisplay &7» &r%ench-colors%"
+          - "&eApplies to &7» &r%applies-to%"
+          - "&eMax Level &7» &r%max-lvl%"
+          - "&eDescription &7» &r%desc%"
+          # you can as well use %group-color% to get enchantment color
+      2:
+        type: STAINED_GLASS_PANE
+        id: 15
+        force-glow: false
+        name: " "
+        lore: []
+      3:
+        type: CHEST
+        id: 0
+        force-glow: false
+        name: "&eApplies to &7»"
+        lore:
+          - '&7%list-of-items%'
+      4:
+        type: STAINED_GLASS_PANE
+        id: 15
+        force-glow: false
+        name: " "
+        lore: []
+enchantments:
+  # Is this command enabled?
+  enabled: true
+  # Change the command
+  # Use it in game: /<command>
+  command: /enchants
+  # Message when opening menu
+  # Set to [] to disable
+  message:
+    - "&7Showing list of all enchantments..."
+  inventory:
+    # Inventory size (9-18-27-36-45-54)
+    size: 27
+    # Inventory name
+    name: "&eAll Server Enchantments"
+    items:
+      # Slots start from 0
+      # This number defines the inventory slot.
+      2:
+        type: STAINED_GLASS_PANE
+        id: 0
+        force-glow: false
+        name: " "
+        lore: []
+      3:
+        type: STAINED_GLASS_PANE
+        id: 0
+        force-glow: false
+        name: " "
+        lore: []
+      4:
+        type: STAINED_GLASS_PANE
+        id: 0
+        force-glow: false
+        name: " "
+        lore: []
+      5:
+        type: STAINED_GLASS_PANE
+        id: 0
+        force-glow: false
+        name: " "
+        lore: []
+      6:
+        type: STAINED_GLASS_PANE
+        id: 0
+        force-glow: false
+        name: " "
+        lore: []
+      12:
+        type: CHEST
+        id: 0
+        force-glow: false
+        # What enchantment group list should it open?
+        group: 'DEFAULT'
+        name: "&7List all &eDefault&7 Enchantments"
+        lore: []
+  group-enchantment-inventory:
+    name: "&7All &e%group%&7 Enchantments"
+    # Inventory size (9-18-27-36-45-54)
+    # Set to 0 for auto size.
+    size: 0
+    item:
+      type: ENCHANTED_BOOK
+      id: 0
+      force-glow: false
+      # What command should be ran when player clicks on one of the enchantments?
+      command: '/enchant %enchantment%'
+      name: "&e%enchant% &7enchantment"
+      lore:
+        - "&eDisplay &7» &r%ench-colors%"
+        - "&eApplies to &7» &r%applies-to%"
+        - "&eMax Level &7» &r%max-lvl%"
+        - "&eDescription &7» &r%desc%"

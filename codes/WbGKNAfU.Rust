@@ -1,0 +1,10 @@
+fn texture_mix(a: vec3, b: vec3) -> vec3 {
+    let back = vec4(a, 0.5);
+    let front = vec4(b, 0.5);
+ 
+    let final = vec4(0, 0, 0, back.a);
+    final.r = front.r * front.a + back.r * (1.0 - front.a);
+    final.g = front.g * front.a + back.g * (1.0 - front.a);
+    final.b = front.b * front.a + back.b * (1.0 - front.a);
+    final.xyz()
+}

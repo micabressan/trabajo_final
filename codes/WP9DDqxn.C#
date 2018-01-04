@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication15
+{
+    struct comp
+    {
+        public string team;
+        public double mark;
+        public int razn;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            comp[] c = new comp[3];
+            string[] teams = { "Sheep", "Kitty", "Hound" };
+            string[] team1 = { "Hound", "Hound", "Kitty", "Kitty", "Sheep", "Sheep" };
+            string[] team2 = { "Kitty", "Sheep", "Hound", "Sheep", "Hound", "Kitty" };
+            int[] b1 = { 5, 6, 4, 4, 3, 4 };
+            int[] b2 = { 2, 3, 5, 4, 5, 4 };
+            const int n = 3;
+            c[0].team = "Sheep"; c[1].team = "Kitty"; c[2].team = "Hound";
+            for (int i = 0; i < team1.Length; i++)
+            {
+                if (b1[i] > b2[i]) c[Array.IndexOf(teams, team1[i])].mark += 3;
+                else if (b1[i] == b2[i])
+                {
+                    c[Array.IndexOf(teams, team1[i])].mark += 1;
+                    c[Array.IndexOf(teams, team2[i])].mark += 1;
+                }
+                else c[Array.IndexOf(teams, team2[i])].mark += 3;
+                c[Array.IndexOf(teams, team1[i])].razn += b1[i] - b2[i];
+                c[Array.IndexOf(teams, team2[i])].razn += b2[i] - b1[i];
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Фамилия - {0},  Место - {1}, Результат - {2}, Разность очков - {3}", c[i].team, i+1, c[i].mark, c[i].razn);
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            double temp;
+            string t;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n - 1; j++)
+                {
+                    if (c[j].mark < c[j+1].mark)
+                    {
+                        temp = c[j].mark;
+                        t = c[j].team;
+                        c[j].mark = c[j + 1].mark;
+                        c[j].team = c[j + 1].team;
+                        c[j + 1].mark = temp;
+                        c[j + 1].team = t;
+                    }
+                    else if (c[j].mark == c[j+1].mark && c[j].razn < c[j+1].razn)
+                    {
+                        temp = c[j].mark;
+                        t = c[j].team;
+                        c[j].mark = c[j + 1].mark;
+                        c[j].team = c[j + 1].team;
+                        c[j + 1].mark = temp;
+                        c[j + 1].team = t;
+                    }
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Фамилия - {0},  Место - {1}, Результат - {2}, Разность очков - {3}", c[i].team, i + 1, c[i].mark, c[i].razn);
+            }
+        }
+    }
+}

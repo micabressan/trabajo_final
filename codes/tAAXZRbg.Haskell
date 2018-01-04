@@ -1,0 +1,8 @@
+prop_cubeFree :: [Int] -> Int -> Int -> Bool
+prop_cubeFree xs idx xsize = (test2 . take (3 * xsize) . drop idx) xs xsize
+ 
+test2 :: [Int] -> Int -> Bool
+test2 xs xsize = let (x1, xs1) = splitAt xsize xs
+                     (x2, xs2) = splitAt xsize xs1
+                     x3 = take xsize xs2
+                 in t1 == t2 == t3

@@ -1,0 +1,63 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+
+module Finance(
+  Transaction, USD
+  , decodeByName -- TEMP
+) where
+
+import qualified Money
+import Data.Monoid ((<>))
+import Control.Monad (join)
+import Data.Dates (DateTime(..))
+import qualified Data.Csv as CSV
+import Data.Csv ((.:))
+import Data.ByteString.Lazy (ByteString)
+import Data.ByteString.Lazy.Char8 (unpack)
+import Data.Vector (Vector)
+
+type USD = Money.Discrete' "USD" '(100000, 1)
+
+data Transaction 
+  = Transaction 
+  { reference_number :: Integer
+  , date :: DateTime
+  , amount :: USD
+  , description :: ByteString
+  , balance :: USD
+  } deriving Show
+
+maybeReadUSD :: String -> Maybe USD
+maybeReadUSD s = fst . Money.round
+                 <$> (Money.dense . toRational)(read s ::Double)
+
+maybeReadDate :: String -> Maybe DateTime
+maybeReadDate (m0:m1:'/':d0:d1:'/':yyyy)
+  = Just (DateTime
+      (read yyyy)
+      (read [m0,m1])
+      (read [d0,d1])
+      0 0 0
+    )
+maybeReadDate (m0:m1:'/':d:'/':yyyy) = maybeReadDate (m0:m1:'/':'0':d:'/':yyyy)
+maybeReadDate (m:'/':ddyyyy) = maybeReadDate ('0':m:'/':ddyyyy)
+maybeReadDate _ = Nothing
+
+decodeByName :: ByteString -> Either String (CSV.Header, Vector Transaction)
+decodeByName = CSV.decodeByName
+
+instance CSV.FromNamedRecord Transaction
+  where 
+  parseNamedRecord m =
+    Just . Transaction
+    <$> (<*>) . (     Just . read <$> (m .: "Reference Number"))
+    <*> (<*>) . (maybeReadDate <$> (m .: "Posting Date")    )
+    <*> (<*>) . ( maybeReadUSD <$> (m .: "Amount")          )
+    <*> (<*>) . (            Just <$> (m .: "Description")     )
+    <*> (<*>) . ( maybeReadUSD <$> (m .: "Balance")         )
+    >>= (\mt -> case mt of
+                Just t -> pure t
+                Nothing -> mempty
+                :: CSV.Parser Transaction
+    )

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="Nsongs">
+		<item quantity="other">曲（<xliff:g id="count">%d</xliff:g>）</item>
+	</plurals>
+	<plurals name="Nsongscomp">
+		<item quantity="other"><xliff:g id="total_count">%1$d</xliff:g>曲中<xliff:g id="count_for_artist">%2$d</xliff:g>曲</item>
+	</plurals>
+	<plurals name="Nalbums">
+		<item quantity="other">アルバム（<xliff:g id="count">%d</xliff:g>）</item>
+	</plurals>
+	<plurals name="NNNtracksdeleted">
+		<item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g>曲削除しました。</item>
+	</plurals>
+	<!-- 请翻译以下三个 -->
+	<plurals name="NNNlyricsdeleted">
+		<item quantity="other"> <xliff:g id="lyrics_to_delete">%d</xliff:g>曲の歌詞は削除されました</item>
+	</plurals>
+	<plurals name="NNNminutes">
+		<item quantity="other"><xliff:g id="minute" example="30">%d</xliff:g> 分</item>
+	</plurals>
+	<plurals name="NNNminutes_notif">
+		<item quantity="other"> <xliff:g id="minute" example="30">%s</xliff:g> 分後に再生を停止します</item>
+	</plurals>
+	<plurals name="NNNtrackstoplaylist">
+		<item quantity="other">プレイリストに<xliff:g id="number">%d</xliff:g>曲が追加されました。</item>
+	</plurals>
+</resources>

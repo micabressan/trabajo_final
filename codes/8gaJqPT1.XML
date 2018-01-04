@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<vetture>
+    <auto classe="A">
+        <marca>Fiat</marca>
+        <modello>Cinquecento</modello>
+        <cilindrata>1200</cilindrata>
+        <potenza>70</potenza>
+        <alimentazione>Benzina</alimentazione>
+        <numero_passeggeri>4</numero_passeggeri>
+        <volume_bagagliaio>55</volume_bagagliaio>
+        <agenzie>
+            <agenzia denominazione="Hertz porto" citta="Livorno"/>
+            <agenzia denominazione="Hertz aeroporto" citta="Pisa"/>
+        </agenzie>
+    </auto>
+    <auto classe="D">
+        <marca>Jeep</marca>
+        <modello>Grand Cherokee</modello>
+        <cilindrata>3000</cilindrata>
+        <potenza>250</potenza>
+        <alimentazione>Diesel</alimentazione>
+        <numero_passeggeri>4</numero_passeggeri>
+        <volume_bagagliaio>450</volume_bagagliaio>
+        <agenzie>
+            <agenzia denominazione="Hertz porto" citta="Livorno"/>
+            <agenzia denominazione="Hertz Toscana" citta="Firenze"/>
+        </agenzie>
+    </auto>
+</vetture>

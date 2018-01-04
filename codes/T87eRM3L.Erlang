@@ -1,0 +1,192 @@
+%%% ----------------------------------------------------------------------------
+%%% Solutions to the "nian" puzzle implemented in Erlang
+%%% @author Håkan Nilsson
+%%% ----------------------------------------------------------------------------
+
+-module(nian).
+
+-export([ solve/1
+        , generate/0
+        ]).
+
+%% Testing/benchmark
+-export([ benchmark/0
+        , benchmark_gen/0
+        , network_test/0
+        , network_test_gen/0
+        , generate/1
+        , solve/2
+        ]).
+
+-define(DICT_PATH      , "data/dict_60k.txt").
+-define(DICT_SMALL_PATH, "data/dict-test.txt").
+-define(MIN_LENGTH     , 4).
+-define(MAX_LENGTH     , 9).
+-define(MAX_PERMUTATION_ATTEMPTS, 20).
+
+%% -----------------------------------------------------------------------------
+%% External API
+
+generate() -> generate(read_dict(?DICT_PATH)).
+
+solve(Puzzle) -> solve(Puzzle, read_dict(?DICT_PATH)).
+
+%% -----------------------------------------------------------------------------
+%% Helpers for generate()
+
+generate(Dict) ->
+  PuzzleWords = [Word || Word <- Dict, length(Word) == ?MAX_LENGTH],
+  generate(PuzzleWords, Dict).
+
+generate(PuzzleWords, Dict) ->
+  init_subwords(Dict),
+  io:format("Spawning..."),
+  lists:foreach(fun spawn_find_puzzle/1, PuzzleWords),
+  io:format("Spawned ~p processes~n", [length(PuzzleWords)]),
+  receive_loop(length(PuzzleWords), []).
+
+init_subwords(Dict) ->
+  case ets:info(dict) of
+    undefined ->
+      ets:new(dict, [named_table]),
+      [ets:insert(dict, {Word}) || Word <- Dict, length(Word) =< ?MAX_LENGTH,
+                                                 length(Word) >= ?MIN_LENGTH];
+    _ -> ok
+  end.
+
+receive_loop(0, Acc) -> Acc;
+receive_loop(N, Acc) ->
+  receive
+    false                       -> receive_loop(N-1, Acc);
+    Puzzle when is_list(Puzzle) -> erlang:display({N, Puzzle}),
+                                   receive_loop(N-1, [Puzzle|Acc])
+  end.
+
+spawn_find_puzzle(Word) ->
+  Parent = self(),
+  spawn(fun () -> find_valid_puzzle(Word, Parent) end).
+
+find_valid_puzzle(Word, Parent) ->
+  find_valid_puzzle(Word, Parent, ?MAX_PERMUTATION_ATTEMPTS).
+
+find_valid_puzzle([], Parent, 0)   -> Parent ! false;
+find_valid_puzzle(Word, Parent, N) ->
+  Puzzle = shuffle(Word, []),
+  case valid_puzzle(Puzzle) of
+    false -> find_valid_puzzle(Puzzle, Parent, N-1);
+    true  -> Parent ! Puzzle
+  end.
+
+shuffle([], Acc) -> Acc;
+shuffle(L, Acc) ->
+  {A1, A2, A3} = now(),
+  random:seed(A1, A2, A3),
+  C = lists:nth(random:uniform(length(L)), L),
+  shuffle(lists:delete(C, L), [C|Acc]).
+
+valid_puzzle(Puzzle) ->
+  valid_puzzle(Puzzle, get_mandatory_char(Puzzle), ets:first(dict)).
+
+valid_puzzle(_Puzzle, _MChar, '$end_of_table') -> true;
+valid_puzzle(Puzzle, MChar, Word) ->
+  case valid_word(Word, Puzzle, MChar) andalso is_substr(Word, Puzzle) of
+    true  -> false;
+    false -> valid_puzzle(Puzzle, MChar, ets:next(dict, Word))
+  end.
+
+is_substr(Str, Word) ->
+  StrLength = length(Str),
+  lists:any(fun (N) ->
+                string:substr(Word, N, StrLength) == Str
+            end, lists:seq(1, length(Word) - StrLength + 1)).
+
+%% -----------------------------------------------------------------------------
+%% Read dict
+
+read_dict(Path) ->
+  {ok, File} = file:open(Path, [read]),
+  read_lines(File, file:read_line(File), []).
+
+read_lines(File, eof, Acc) -> file:close(File), Acc;
+read_lines(File, {ok, Line}, Acc) ->
+  read_lines(File, file:read_line(File), [strip_newline(Line)|Acc]).
+
+strip_newline(Str) -> [C || C <- Str, C =/= $\n, C =/= $\r].
+
+%% -----------------------------------------------------------------------------
+%% Helpers for solve()
+
+solve(Puzzle, Dict) ->
+  MandatoryChar = get_mandatory_char(Puzzle),
+  lists:usort([Word || Word <- Dict, valid_word(Word, Puzzle, MandatoryChar)]).
+
+get_mandatory_char(Puzzle) -> lists:nth(round(length(Puzzle) / 2), Puzzle).
+
+word_in_puzzle([], _Puzzle)             -> true;
+word_in_puzzle([Char|WordTail], Puzzle) ->
+  case lists:member(Char, Puzzle) of
+    true  -> word_in_puzzle(WordTail, lists:delete(Char, Puzzle));
+    false -> false
+  end.
+
+valid_word(Word, Puzzle, MandatoryChar) ->
+  lists:member(MandatoryChar, Word) andalso
+  length(Word) >= ?MIN_LENGTH       andalso
+  length(Word) =< ?MAX_LENGTH       andalso
+  word_in_puzzle(Word, Puzzle).
+
+%% -----------------------------------------------------------------------------
+%% Tests
+
+benchmark() ->
+  Nior = [Word || Word <- read_dict(?DICT_PATH),
+                  length(Word) == ?MAX_LENGTH],
+  Dict = read_dict(?DICT_PATH),
+  lists:sum(lists:map(
+              fun (Puzzle) ->
+                  {Time, _} = timer:tc(nian, solve, [Puzzle, Dict]),
+                  Time
+              end, Nior)).
+
+benchmark_gen() ->
+  Dict = read_dict(?DICT_PATH),
+  {Time, _} = timer:tc(nian, generate, [Dict]),
+  Time.
+
+network_test() ->
+  {ok, Socket} = gen_tcp:connect("localhost", 9234, [list]),
+  send(Socket, "name: team1"),
+  recv(Socket),
+  send(Socket, "task: 1"),
+  Puzzle = parse(recv(Socket)),
+  Solutions = solve(Puzzle),
+  [begin send(Socket, S), recv(Socket) end || S <- Solutions],
+  send(Socket, "done").
+
+
+network_test_gen() ->
+  {ok, Socket} = gen_tcp:connect("localhost", 9234, [list]),
+  send(Socket, "name: team2"),
+  recv(Socket),
+  send(Socket, "task: 2"),
+  Word = parse(recv(Socket)),
+  io:format("~p~n", [Word]),
+  [Solution] = generate([Word], read_dict(?DICT_PATH)),
+  erlang:display({solution, Solution}),
+  send(Socket, Solution).
+
+send(Socket, Str) ->
+  io:format("sending: ~p~n", [Str]),
+  gen_tcp:send(Socket, Str ++ "\r\n").
+
+recv(Socket) ->
+  receive
+    {tcp, Socket, Data} ->
+      io:format("received: ~p~n", [Data]),
+      Data
+  end.
+
+parse("solve: " ++ PuzzleRaw) ->
+  strip_newline(PuzzleRaw);
+parse("generate puzzle: " ++ WordRaw) ->
+  strip_newline(WordRaw).

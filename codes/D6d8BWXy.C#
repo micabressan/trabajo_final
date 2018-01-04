@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class JoyMove : MonoBehaviour {
+
+    public Transform camera;
+
+	void Update () {
+
+        Vector3 desiredMove = (camera.transform.forward * Input.GetAxis("Vertical") + camera.transform.right * Input.GetAxis("Horizontal")) * Time.deltaTime * 10   ;
+
+        transform.position += desiredMove;
+        transform.eulerAngles += new Vector3(0, Input.GetAxis("Twist"), 0) * Time.deltaTime * 30;
+
+    }
+}

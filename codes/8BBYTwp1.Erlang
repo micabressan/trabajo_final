@@ -1,0 +1,53 @@
+% Jorge Andres Gonzalez A01280927
+% Andres Sosa Silva A01176075
+
+-module(alumnos).
+-export([nombre/0,llama_servidor/1,registra/1,baja/0,verLista/0,ping_servidor/2]).
+
+%Nombre del servidor
+nombre() -> 'servidor@DESKTOP-LVD2GRU'.
+
+
+registra({Alumno,Matricula}) -> register(pingerID,spawn(alumnos,ping_servidor,[Alumno,Matricula])),
+                                llama_servidor({registra, {Alumno,Matricula,self()}}).
+
+
+verLista() -> llama_servidor({lista,self()}).
+
+baja() -> pingerID ! stop.
+
+llama_servidor(Msg) ->
+                    Nombre = nombre(),
+                    monitor_node(Nombre,true),
+                    {servidorID, Nombre} ! Msg,
+
+                    receive
+
+                          {nodedown, Nombre} -> io:format("Servidor Chups~n" , []);
+
+                          Respuesta ->
+                              monitor_node(Nombre, false),
+                              Respuesta
+
+                    after 5000 -> io:format("Servidor No contesto~n" , [])
+
+                    end.
+
+ping_servidor(Alumno,Matricula)->
+                  Nombre = nombre(),
+                  monitor_node(Nombre,true),
+                  {servidorID,Nombre} ! {ping,Alumno,self()},
+
+                  receive
+
+                  {ok,Alumn} -> io:format("~p pingeo servidor~n" , [Alumn]),
+                               timer:sleep(5000),
+                               ping_servidor(Alumno,Matricula);
+
+                  stop -> {servidorID, Nombre} ! {darbaja,{Alumno,Matricula}};
+
+                  {nodedown, _} -> io:format("Servidor Offline~n" , [])
+
+                  after 5000 -> io:format("Servidor No contesta~n" , [])
+
+                  end.

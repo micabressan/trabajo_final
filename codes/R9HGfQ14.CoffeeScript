@@ -1,0 +1,21 @@
+module.exports = class Transform
+    constructor: () ->
+        @identity = glm.mat4.create()
+        @translation = glm.mat4.create()
+        @rotation = glm.mat4.create()
+        @scaling = glm.mat4.create()
+
+    getTransformation: ->
+        transform = glm.mat4.create()
+        glm.mat4.mul transform, @scaling, transform
+        glm.mat4.mul transform, @rotation, transform
+        glm.mat4.mul transform, @translation, transform
+
+    translate: (direction = [0, 0, 0]) ->
+        glm.mat4.translate @translation, @identity, direction
+
+    rotate: (angle, axes = [1, 1, 1]) ->
+        glm.mat4.rotate @rotation, @identity, angle, axes
+
+    scale: (scale = [1, 1, 1]) ->
+        glm.mat4.scale @scaling, @identity, scale

@@ -1,0 +1,9 @@
+<skill id="99" name="Parasitic Bond" type="SPELL" subtype="HEX" attribute="7"  casttime="1000" recharge="2000">
+        <cost>
+                <energy>5</energy>
+        </cost>
+        <effects selected="FOE_MINION">
+		<hpdegen rate="-1" duration="20000/>
+                <hpgain target="Self" delay="20000" base="30" max="120"/>
+        </effects>
+</skill>

@@ -1,0 +1,12 @@
+ist_tautologie :: Ausdruck -> Ausdruck -> Wahrheitswert
+ist_tautologie add1 add2 = checkAllValues (Var N1) (\var -> True) add1 add2
+
+--HilfeFunktion, die probiert eine Formel in allen moeglichen Belegungen durch.
+
+checkAllValues :: Variable -> Belegung -> Ausdruck -> Ausdruck -> Wahrheitswert
+checkAllValues var@(Var N5) belegung add1 add2 = (evaluiere add1 belegung) == (evaluiere add2 belegung)
+	       	       	       	 &&(evaluiere add1 (neueBelegung belegung var)) == (evaluiere add2 (neueBelegung belegung var))
+checkAllValues var belegung add1 add2 = (evaluiere add1 belegung) == (evaluiere add2 belegung)
+	       	       	       	 &&(evaluiere add1 (neueBelegung belegung var)) == (evaluiere add2 (neueBelegung belegung var))
+			         && (checkAllValues (succ var) belegung add1 add2)
+				 && (checkAllValues (succ var) (neueBelegung belegung var) add1 add2)

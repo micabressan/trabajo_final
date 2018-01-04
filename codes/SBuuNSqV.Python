@@ -1,0 +1,9 @@
+while True:
+    if sys.platform.startswith('win'):
+        import os
+        os.system('cls')
+        break
+    if sys.platform.startswith('linux'):
+        import os
+        os.system('clear')
+        break

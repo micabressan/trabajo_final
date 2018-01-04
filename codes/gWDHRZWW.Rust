@@ -1,0 +1,17 @@
+//Returns the most frequently occurring value in a vector
+fn vector_mode(v: &Vec<i32>) -> Result<i32, &str> {
+    v.iter()
+        .fold(
+            HashMap::with_capacity(v.len()),
+            |mut value_frequencies, &value| {
+                *value_frequencies.entry(value).or_insert(0) += 1;
+                value_frequencies
+            },
+        )
+        .iter()
+        .max_by_key(|&(_, frequency)| frequency)
+        .map_or_else(
+            || Err("An empty vector has no mode"),
+            |(value, _)| Ok(*value),
+        )
+}

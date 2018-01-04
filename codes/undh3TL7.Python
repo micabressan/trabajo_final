@@ -1,0 +1,129 @@
+#### Imports
+import json
+
+#### Constants
+possible_length = 3
+
+#### Main code
+
+def generate_combinations(pos_length):
+        """
+        generate all possible combinations of
+        '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd'
+        of length up to pos_length
+
+        Keyword arguments:
+
+        pos_length -- the maximum length of a generated string
+        """
+
+        lst=[]
+        S = set(['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd'])
+
+        collect = set()
+        step = set([''])
+        while step:
+                step = set(a+b for a in step for b in S if len(a+b) <= pos_length)
+                collect |= step
+        return collect
+
+def get_common(js):
+        """
+        get the common strings used often from the json
+
+        Keyword arguments:
+
+        js -- name of the json to load
+        """
+
+        with open(js) as file2:
+                data = json.loads(file2.read())
+        return data
+
+def create_dic(json_file_name, user_name = None, street = None, name = None, last_name = None, pet_name = None,
+               birth_date = None, phone_number = None,
+               pelephone_number = None, city = None, spouse_name = None, spouse_birth_date = None,
+               children_names = None, children_birth_dates = None, company_name = None):
+        """
+
+        create the complete dictionary
+
+        Keyword arguments:
+
+
+        json_file_name -- name of the json file to load the data from
+
+        user_name -- user name of user
+
+        street -- street of user
+
+        name -- name of user
+
+        last_name -- last name of user
+
+        pet_name -- pet name of user
+
+        birth_date -- birth date of user
+
+        phone_number -- phone number of user
+
+        pelephone_number -- pelephone number of user
+
+        city -- city of residency of user
+
+        spouse_name -- the name of the spouse of user
+
+        spouse_birth_date -- the spouse's date of birth of user
+
+        children_names -- names of children of user
+
+        children_birth_dates -- children dates of birth
+
+        company_name -- company name of user
+        """
+
+        # dictionary of keyword arguments for easy traversal(we wanted to use locals() but it could have picked up plenty of other
+        #locals if it were called from another function)
+        arg_dict = {'street' : street, 'name' :name, 'last_name' :last_name, 'pet_name' :pet_name,
+                    'birth_date' :birth_date, 'phone_number' :phone_number,
+                    'pelephone_number' :pelephone_number, 'city' :city, 'spouse_name' :spouse_name, 'spouse_birth_date' :spouse_birth_date,
+                    'children_names' :children_names, 'children_birth_dates' :children_birth_dates, 'company_name' :company_name}
+
+        common_dict = get_common(json_file_name)
+
+        result_dict = list()
+
+
+        if user_name is not None:  # add pre/post fixes to the user name
+                # add user specific pre/post fixes
+                for fix in common_dict['user_name_fix']:
+                        result_dict.append(fix + user_name)
+                        result_dict.append(user_name + fix)
+
+                # add common pre/post fixes
+                for fix in common_dict['common_strings']:
+                        result_dict.append(fix + user_name)
+                        result_dict.append(user_name + fix )
+
+        for key, val in arg_dict.items():
+                if val is not None:
+                        result_dict.append(val)  # add the arguments them selves
+
+        for key, val in arg_dict.items():  # now add the arguments with pre/post fixes because they are less likely to occur
+                if val is not None:
+                        for fix in common_dict['common_strings']:
+                                result_dict.append(fix + val)
+                                result_dict.append(val + fix)
+
+
+        possible_combinations = generate_combinations(possible_length)
+
+        for key, val in arg_dict.items():
+                if val is not None:
+                        for combination in possible_combinations:
+                                result_dict.append(val + combination)
+                                result_dict.append(combination + val)
+        return result_dict
+
+for word in create_dic("ProjJson.json", user_name = "user_stuff", last_name = "last_name_stuff"):
+        print word

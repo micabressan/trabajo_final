@@ -1,0 +1,287 @@
+speed Infinity
+hide()
+
+jumpto -150, -150
+
+turnto 0
+
+pen gray, 7
+
+for [1..4]
+ 
+ fd 300
+ 
+ rt 90
+
+fill gray
+dot white, 100000
+
+
+ 
+
+ 
+
+button 'Inside', ->
+ cs()
+  
+ dot white, 100000
+ 
+ jumpto -150, -150
+ 
+ turnto 0
+ 
+ pen gray, 7
+ 
+ for [1..4]
+  
+   fd 300
+  
+   rt 90
+ 
+ fill gray
+ 
+ pu()
+ 
+ fd 230
+ 
+ pen black, 7
+ 
+ 
+ 
+ fd 70
+ 
+ rt 90
+ 
+ fd 100
+ 
+ rt 90
+ 
+ fd 70
+ 
+ rt 90
+ 
+ fd 100
+ 
+ fill grey
+ 
+ pu()
+ 
+ 
+ turnto 0
+ jumpto -14, 101
+ pen black, 7
+ rt 90
+ fd 50
+ rt 90
+ fd 70
+ rt 90
+ fd 50
+ rt 90
+ fd 70
+ fill grey
+ 
+ pu()
+ 
+ jumpto -150, -150
+ turnto 0
+ 
+ fd 300
+ 
+ rt 90
+ 
+ fd 300
+ 
+ rt 90
+ 
+ pd()
+ 
+ fd 200
+ 
+ rt 90
+ 
+ fd 100
+ 
+ rt 90
+ fd 200
+ rt 90
+ fd 100
+ 
+ rt -180
+ 
+ fd 30
+ 
+ rt -90
+ 
+ pu()
+ 
+ fd 10
+ 
+ pd()
+ 
+ fd 180
+ 
+ pu()
+ 
+ fd 10
+ 
+ fd 100
+ rt 90
+ 
+ pd()
+ 
+ fd 100
+ 
+ rt 90
+ fd 40
+ 
+ rt 90
+ fd 100
+ 
+ rt 90
+ 
+ fd 40
+ 
+ turnto 0
+ jumpto -107, -41
+ for [1..10]
+  rt 50, 50
+  
+ pd()
+ 
+ pen black, 5
+ 
+ jumpto -51, 125
+ turnto 98.9
+ fd 103.2
+ 
+ jumpto 51, 130
+ turnto -82.6
+ fd 100.8
+ 
+ jumpto -99, 81
+ turnto 170.1
+ fd 81.2
+ 
+ jumpto -60, 9
+ moveto -63, 79
+ 
+ jumpto 51, -50
+ moveto -9, -55
+ 
+ jumpto 53, -17
+ moveto -13, -23
+ 
+ pen silver, 3
+ 
+ jumpto 31, -110
+ moveto 11, 6
+ 
+ moveto -21, -5
+ moveto 11, 6
+ 
+ moveto 46, 6
+ moveto 11, 6
+ 
+ moveto -15, 45
+ moveto 11, 6
+ 
+ pen aqua, 4
+ 
+ turnto 0
+ jumpto -85, -63
+ moveto -177, -97
+ label 'Mixer'
+ 
+ jumpto -137, 91
+ moveto -177, -71
+ label 'Mix/Water Input'
+ 
+ jumpto 31, -135
+ moveto -177, -126
+ label 'Power Supply'
+ 
+ jumpto 7, 86
+ moveto 199, 126
+ label 'Control Unit'
+ 
+ jumpto 136, 70
+ moveto 199, 102
+ label 'Water Heater'
+ 
+
+
+ 
+
+button 'Outside', ->
+ cs()
+  
+ dot white, 100000
+ 
+ jumpto -150, -150
+ 
+ turnto 0
+ 
+ pen gray, 7
+ 
+ for [1..4]
+  
+   fd 300
+  
+   rt 90
+ 
+ fill gray
+ 
+ pu()
+ 
+ 
+ 
+ fd 230
+ 
+ pen gainsboro, 7
+ 
+ 
+ 
+ fd 70
+ 
+ rt 90
+ 
+ fd 100
+ 
+ rt 90
+ 
+ fd 70
+ 
+ rt 90
+ 
+ fd 100
+ 
+ fill silver
+ 
+ pu()
+ 
+ rt 180
+ 
+ 
+ 
+ jumpto -150, -150
+ 
+ turnto 0
+ 
+ 
+ 
+ jumpto -14, 101
+ pen black, 7
+ rt 90
+ fd 160
+ rt 90
+ fd 70
+ rt 90
+ fd 160
+ rt 90
+ fd 70
+ fill grey
+ 
+ jumpto -107, -41
+ for [1..10]
+  rt 50, 50
+ fill darkgrey

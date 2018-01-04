@@ -1,0 +1,19 @@
+window.save = ->
+	path = "#{project.path}/#{doc.name}"
+	if project.path != ""
+		window.fs.root.getFile path,
+			create: false,
+			(fe) ->
+				stop = false
+				writer = fe.createWriter (w) ->
+					w.onwriteend = (trunc) ->
+						unless stop
+							bb = new WebKitBlobBuilder()
+							bb.append $('#editor textarea').val()
+
+							w.write bb.getBlob('text/plain')
+							stop = true
+
+					w.seek w.length
+					w.truncate 0
+					stop = false

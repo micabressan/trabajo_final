@@ -1,0 +1,380 @@
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="MRockGamepad">
+ <CustomisationUIHeader label="MRockGamepad" description="" image="">
+  <devices>
+   <keyboard instance="1"/>
+   <mouse instance="1"/>
+   <xboxpad instance="1"/>
+  </devices>
+  <categories>
+   <category label="@ui_CCSpaceFlight"/>
+   <category label="@ui_CGLightControllerDesc"/>
+   <category label="@ui_CCFPS"/>
+   <category label="@ui_CCEVA"/>
+   <category label="@ui_CCVehicle"/>
+   <category label=""/>
+  </categories>
+ </CustomisationUIHeader>
+ <options type="keyboard" instance="1">
+  <flight_move_pitch invert="1"/>
+ </options>
+ <options type="xboxpad" instance="1"/>
+ <modifiers />
+ <actionmap name="spaceship_general">
+  <action name="v_eject">
+   <rebind input="xi1_dpad_down+start" activationMode="double_tap"/>
+  </action>
+  <action name="v_eject_cinematic">
+   <rebind input="xi1_dpad_down+start" activationMode="double_tap"/>
+  </action>
+  <action name="v_exit">
+   <rebind input="xi1_shoulderl+start"/>
+  </action>
+  <action name="v_self_destruct">
+   <rebind input="xi1_shoulderl+back" activationMode="double_tap"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_view">
+  <action name="v_view_cycle_fwd">
+   <rebind input="xi1_shoulderl+dpad_up" activationMode="press"/>
+  </action>
+  <action name="v_view_interact">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_view_look_behind">
+   <rebind input="xi1_dpad_down+shoulderl"/>
+  </action>
+  <action name="v_view_cycle_internal_fwd">
+   <rebind input="xi1_shoulderl+dpad_left"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_movement">
+  <action name="v_pitch">
+   <rebind input="xi1_thumbry"/>
+  </action>
+  <action name="v_yaw">
+   <rebind input="xi1_thumbrx"/>
+  </action>
+  <action name="v_roll">
+   <rebind input="xi1_thumblx"/>
+  </action>
+  <action name="v_throttle_zero">
+   <rebind input="xi1_thumbl_down" activationMode="double_tap"/>
+  </action>
+  <action name="v_throttle_100">
+   <rebind input="xi1_thumbl_up" activationMode="double_tap"/>
+  </action>
+  <action name="v_throttle_up">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_throttle_down">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_throttle_rel">
+   <rebind input="xi1_thumbly"/>
+  </action>
+  <action name="v_strafe_up">
+   <rebind input="xi1_dpad_up"/>
+  </action>
+  <action name="v_strafe_down">
+   <rebind input="xi1_dpad_down"/>
+  </action>
+  <action name="v_strafe_vertical">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_strafe_left">
+   <rebind input="xi1_dpad_left"/>
+  </action>
+  <action name="v_strafe_right">
+   <rebind input="xi1_dpad_right"/>
+  </action>
+  <action name="v_strafe_lateral">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_strafe_forward">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_strafe_back">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_decoupled_brake">
+   <rebind input="xi1_thumbr"/>
+  </action>
+  <action name="v_decoupled_yaw">
+   <rebind input="xi1_thumbrx"/>
+  </action>
+  <action name="v_decoupled_pitch">
+   <rebind input="xi1_thumbry"/>
+  </action>
+  <action name="v_decoupled_roll">
+   <rebind input="xi1_thumblx"/>
+  </action>
+  <action name="v_afterburner">
+   <rebind input="xi1_thumbr"/>
+  </action>
+  <action name="v_autoland">
+   <rebind input="xi1_y" activationMode="delayed_press"/>
+  </action>
+  <action name="v_ifcs_toggle_safeties">
+   <rebind input="xi1_y+shoulderl"/>
+  </action>
+  <action name="v_decoupled_strafe_up">
+   <rebind input="xi1_dpad_up"/>
+  </action>
+  <action name="v_decoupled_strafe_down">
+   <rebind input="xi1_dpad_down"/>
+  </action>
+  <action name="v_decoupled_strafe_vertical">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_decoupled_strafe_left">
+   <rebind input="xi1_dpad_left"/>
+  </action>
+  <action name="v_decoupled_strafe_right">
+   <rebind input="xi1_dpad_right"/>
+  </action>
+  <action name="v_decoupled_strafe_lateral">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_decoupled_strafe_forward">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_decoupled_strafe_back">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_decoupled_strafe_longitudinal">
+   <rebind input="xi1_thumbly"/>
+  </action>
+  <action name="v_toggle_landing_system">
+   <rebind input="xi1_shoulderl+back" activationMode="press"/>
+  </action>
+  <action name="v_toggle_qdrive_engagement">
+   <rebind input="xi1_y+shoulderr"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_targeting">
+  <action name="v_aim_yaw">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_aim_pitch">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="scan_toggle_mode">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_toggle_weapon_gimbal_lock">
+   <rebind input="kb1_ralt+l"/>
+  </action>
+  <action name="v_target_reticle_focus">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_target_cycle_all_fwd">
+   <rebind input="xi1_shoulderl+a"/>
+  </action>
+  <action name="v_target_nearest_hostile">
+   <rebind input="xi1_a"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_turret">
+  <action name="v_target_cycle_friendly_fwd">
+   <rebind input="xi1_dpad_down+b"/>
+  </action>
+  <action name="v_target_cycle_hostile_fwd">
+   <rebind input="xi1_dpad_down+x"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_weapons">
+  <action name="v_attack1_group1">
+   <rebind input="xi1_triggerr_btn"/>
+  </action>
+  <action name="v_attack1_group2">
+   <rebind input="xi1_triggerl_btn"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_missiles">
+  <action name="v_weapon_arm_missile">
+   <rebind input="xi1_b"/>
+  </action>
+  <action name="v_weapon_launch_missile">
+   <rebind input="xi1_b"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_defensive">
+  <action name="v_weapon_launch_countermeasure">
+   <rebind input="xi1_x"/>
+  </action>
+  <action name="v_weapon_cycle_countermeasure_fwd">
+   <rebind input="xi1_shoulderl+x" activationMode="delayed_tap"/>
+  </action>
+  <action name="v_shield_raise_level_up">
+   <rebind input="xi1_ " activationMode="press"/>
+  </action>
+  <action name="v_shield_raise_level_down">
+   <rebind input="xi1_ " activationMode="press"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_hud">
+  <action name="mobiglas">
+   <rebind input="xi1_back" activationMode="press"/>
+  </action>
+  <action name="v_hud_focused_cycle_mode_fwd">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_hud_focused_cycle_mode_back">
+   <rebind input="xi1_ "/>
+  </action>
+ </actionmap>
+ <actionmap name="lights_controller">
+  <action name="v_lights">
+   <rebind input="xi1_shoulderl+thumbr"/>
+  </action>
+ </actionmap>
+ <actionmap name="player">
+  <action name="v_eject">
+   <rebind input="xi1_dpad_down+start" activationMode="double_tap"/>
+  </action>
+  <action name="v_eject_cinematic">
+   <rebind input="xi1_dpad_down+start" activationMode="double_tap"/>
+  </action>
+  <action name="mobiglas">
+   <rebind input="xi1_back" activationMode="press"/>
+  </action>
+  <action name="xi_jump">
+   <rebind input="xi1_a" activationMode="delayed_tap"/>
+  </action>
+  <action name="selectpistol">
+   <rebind input="xi1_dpad_down+a" activationMode="delayed_tap"/>
+  </action>
+  <action name="selectprimary">
+   <rebind input="xi1_dpad_down+x" activationMode="delayed_tap"/>
+  </action>
+  <action name="selectsecondary">
+   <rebind input="xi1_dpad_down+b" activationMode="delayed_tap"/>
+  </action>
+  <action name="selectgadget">
+   <rebind input="xi1_dpad_down+start"/>
+  </action>
+  <action name="use">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="selectMeleeWeapon">
+   <rebind input="xi1_ " activationMode="delayed_tap"/>
+  </action>
+  <action name="nextweapon">
+   <rebind input="xi1_dpad_down" activationMode="delayed_tap"/>
+  </action>
+  <action name="inspect">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="stabilize">
+   <rebind input="xi1_thumbl"/>
+  </action>
+  <action name="toggle_flashlight">
+   <rebind input="xi1_dpad_down+thumbr"/>
+  </action>
+  <action name="thirdperson">
+   <rebind input="xi1_shoulderl+dpad_up" activationMode="press"/>
+  </action>
+  <action name="toggle_cursor_input">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="pl_hud_confirm">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="weapon_change_firemode">
+   <rebind input="xi1_dpad_down+back"/>
+  </action>
+  <action name="free_thirdperson_camera">
+   <rebind input="xi1_shoulderl+thumbr"/>
+  </action>
+  <action name="break_conversation_effects">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="ar_mode_scroll_action_up">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="ar_mode_scroll_action_down">
+   <rebind input="xi1_ "/>
+  </action>
+ </actionmap>
+ <actionmap name="zero_gravity_eva">
+  <action name="eva_brake">
+   <rebind input="xi1_ "/>
+  </action>
+ </actionmap>
+ <actionmap name="vehicle_general">
+  <action name="v_exit">
+   <rebind input="xi1_shoulderl+start"/>
+  </action>
+  <action name="v_view_cycle_fwd">
+   <rebind input="xi1_shoulderl+dpad_up" activationMode="press"/>
+  </action>
+  <action name="v_view_look_behind">
+   <rebind input="xi1_a"/>
+  </action>
+  <action name="v_attack1_group1">
+   <rebind input="xi1_triggerr_btn"/>
+  </action>
+  <action name="v_attack1_group2">
+   <rebind input="xi1_triggerl_btn"/>
+  </action>
+  <action name="mobiglas">
+   <rebind input="xi1_back" activationMode="press"/>
+  </action>
+  <action name="v_horn">
+   <rebind input="xi1_shoulderr"/>
+  </action>
+ </actionmap>
+ <actionmap name="vehicle_driver">
+  <action name="v_yaw_left">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_yaw_right">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_yaw">
+   <rebind input="xi1_thumblx"/>
+  </action>
+  <action name="v_brake">
+   <rebind input="xi1_thumbr"/>
+  </action>
+  <action name="v_move_forward">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_move_back">
+   <rebind input="xi1_ "/>
+  </action>
+  <action name="v_move">
+   <rebind input="xi1_thumbly"/>
+  </action>
+  <action name="v_attack1">
+   <rebind input="xi1_triggerr_btn"/>
+  </action>
+  <action name="v_attack2">
+   <rebind input="xi1_triggerl_btn"/>
+  </action>
+ </actionmap>
+ <actionmap name="vehicle_gunner">
+  <action name="v_attack1">
+   <rebind input="xi1_triggerr_btn"/>
+  </action>
+  <action name="v_attack2">
+   <rebind input="xi1_triggerl_btn"/>
+  </action>
+ </actionmap>
+ <actionmap name="spectator">
+  <action name="spectate_movedown">
+   <rebind input="xi1_shoulderl_thumbr_down"/>
+  </action>
+ </actionmap>
+ <actionmap name="player_choice">
+  <action name="pc_interaction_mode">
+   <rebind input="xi1_back" multiTap="2"/>
+  </action>
+  <action name="pc_zoom_in">
+   <rebind input="xi1_dpad_up"/>
+  </action>
+  <action name="pc_zoom_out">
+   <rebind input="xi1_dpad_down"/>
+  </action>
+ </actionmap>
+</ActionMaps>

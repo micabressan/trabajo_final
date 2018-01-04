@@ -1,0 +1,140 @@
+diff --git a/web/crea_cours/admin2.php b/web/crea_cours/admin2.php
+index f9a3acd..cdc05e9 100644
+--- a/web/crea_cours/admin2.php
++++ b/web/crea_cours/admin2.php
+@@ -46,7 +46,7 @@ function remetCouleur(ligne)
+         [ ':Classe' => $Classe ],
+         [ 'return_as_collection' => true ]
+     );
+-    if (count($datas) ==0) // si pas de fiches
++    if (count($datas) == 0) // si pas de fiches
+     {
+ ?>
+   <tr align="left" valign="top">
+diff --git a/web/crea_cours/carnet.php b/web/crea_cours/carnet.php
+index f575c0c..5bc1441 100644
+--- a/web/crea_cours/carnet.php
++++ b/web/crea_cours/carnet.php
+@@ -26,9 +26,9 @@
+             "select * from  `crea_notes` where ID_eleve =:ID_eleve and ID_cours =:ID_Cours LIMIT 1",
+             [ ':ID_eleve' => $data['ref'], ':ID_cours' => $ID_Cours ]
+         );
+-        $nombre = count($data2);
+-        if ($nombre!=0)
+-        { 
++
++        if (!is_null($data))
++        {
+             $Commentaire = $data2['Commentaire'];
+             $Evaluation = $data2['Evaluation'];
+             $Points  = $data2['Nombre_points'];
+@@ -37,7 +37,7 @@
+             $Note = $data2['Note'];
+         }
+ 
+-?>        
++?>
+ <?php ((is_null($___mysqli_res = mysqli_close($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res); ?>
+ <?php require_once($_SERVER['DOCUMENT_ROOT'].'/includes/apres.php'); ?>
+ 
+diff --git a/web/crea_cours/gestion_note.php b/web/crea_cours/gestion_note.php
+index 6d8231c..37bf8fd 100644
+--- a/web/crea_cours/gestion_note.php
++++ b/web/crea_cours/gestion_note.php
+@@ -33,13 +33,12 @@ if (!empty($tabcontact))
+             [ ':valeur' => $valeur, ':cours' => $cours ]
+         );
+ 
+-        $nombre = count($data);
+-        if ($nombre==0)
+-        { 
++        if (!is_null($data))
++        {
+             $StrReq    = "insert INTO `crea_notes` SET Note=0;";
+             $result = No2_SQLQuery::execute($StrReq);
+             $ref_note = $oDb->_insert_id();
+-        } else { 
++        } else {
+             $ref_note = $data['ID'];;
+         }
+         $StrReq    = "update  `crea_notes` set "; 
+diff --git a/web/crea_cours/mettre_note.php b/web/crea_cours/mettre_note.php
+index 61949ec..c87392b 100644
+--- a/web/crea_cours/mettre_note.php
++++ b/web/crea_cours/mettre_note.php
+@@ -19,8 +19,7 @@ $data = No2_SQLQuery::execute(
+     [ ':ref' => $ref ]
+ );
+ 
+-$nombre = count($data);
+-if ($nombre ==0) // si fiche n'existe pas
++if (is_null($data)) // si fiche n'existe pas
+ {
+     header("Location: admin.php");  
+     exit(); 
+@@ -116,7 +115,6 @@ malus&nbsp;</td>
+             "select * from  `crea_notes` where ID_eleve =:ID_eleve and ID_cours =:ID_cours LIMIT 1",
+             [ ':ID_eleve' => $data['ref'], ':ID_cours' => $ID_Cours ]
+         );
+-        $nombre = count($data2);
+         $Commentaire = "";
+         $Evaluation = "";
+         $Points  = "";
+@@ -127,7 +125,7 @@ malus&nbsp;</td>
+         $Note_Ecrit =""; 
+         $Note_oral =""; 
+          $Note =""; 
+-        if ($nombre!=0)
++        if (!is_null($data2))
+         { 
+             $Commentaire = $data2['Commentaire'];
+             $Groupe = $data2['Groupe'];
+@@ -146,15 +144,6 @@ malus&nbsp;</td>
+ $StrReq12    = "select * from  `crea_absences` where IDEtudiant  =".$data['ref']." and Date ='$date' and 
+ ((Matinee == 4) or (Matinee == 7) or (ApresMidi == 4) or (ApresMidi == 7))
+ "; 
+-//$req12     = mysql_query($StrReq12,$db_link) or on_bdd_error($StrReq12); 
+-//$nombre = mysql_num_rows($req12);
+-
+-if (($nombre>0) and ($Note==0))
+-{ 
+-    //$Note =1;
+-    // if ($Remarques=="") {$Remarques="Absent";}
+-}
+-
+ ?>        
+         
+         <td><input name=  "T<?php echo($data['ref']);   ?>" type="hidden" value="<?php echo($ID_Cours) ?>" size="30"></td>
+diff --git a/web/crea_cours/saisie.php b/web/crea_cours/saisie.php
+index 2742dcf..f982c16 100644
+--- a/web/crea_cours/saisie.php
++++ b/web/crea_cours/saisie.php
+@@ -10,11 +10,10 @@ if ($ref>0)
+             "SELECT * FROM  `crea_cours` where ref=:ref LIMIT 1",
+             [ ':ref' => $ref ]
+         );
+-        $nombre = count($data);
+-        if ($nombre ==0) // si fiche n'existe pas
++        if (is_null($count)) // si fiche n'existe pas
+         {
+-            header("Location: admin.php");  
+-            exit(); 
++            header("Location: admin.php");
++            exit();
+         }
+         $Nom_Cours         = $data['Nom_Cours'];
+         $ID_module         = $data['ID_module'];
+diff --git a/web/salles/liste_jour.php b/web/salles/liste_jour.php
+index 454e2bc..b6cd5e9 100644
+--- a/web/salles/liste_jour.php
++++ b/web/salles/liste_jour.php
+@@ -30,8 +30,7 @@ function donne_reservation($cours,$date1)
+         "SELECT * FROM  `crea_programme` where date_cours=:date_cours and ref=:ref LIMIT 1",
+         [ ':date_cours' => $date1, ':ref' => $cours ]
+     );
+-    if (count($data)>0) 
+-    {
++    if (!is_null($data)) {
+         $classe         = $data['classe'];
+         $classe2         = $data['classe2'];
+         $classe3         = $data['classe3'];

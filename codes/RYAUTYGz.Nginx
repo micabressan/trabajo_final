@@ -1,0 +1,31 @@
+server {
+        listen 80;
+
+charset UTF-8;
+        root /home/u36/web/testacl.yubex.ru;
+        index index.html;
+        error_log /home/u36/logs/testacl.yubex.ru/nginx.error.log;
+
+        server_name testacl.yubex.ru www.testacl.yubex.ru ;
+
+
+location / {
+        try_files \$uri \$uri/ /;
+        }
+         location ~ /\.ht {
+                deny all;
+        }
+
+        location = /.user.ini {
+        deny all;
+        }
+
+        location ~ \.php$ {
+        try_files $uri $uri/
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php7.0-vhost_71;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        include fastcgi_params;
+         }
+         }

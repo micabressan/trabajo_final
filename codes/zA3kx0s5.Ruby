@@ -1,0 +1,21 @@
+        {
+          "Physiotherapist" => '',
+          "Podiatrist" => '',
+          "Occupational Therapist" => '',
+          "Psychologist" => '',
+          "Dietitian" => '',
+          "Exercise Physiologist" => '',
+          "Speech Therapist" => '',
+          "Social Worker" => '',
+          "Doctor" => '',
+          "Registered Nurse" => '',
+          "Enrolled Nurse" => '',
+          "Case Manager" => '',
+          "Massage Therapist" => '',
+          "Myotherapist" => '',
+          "Therapy Assistant" => '',
+          "Support Worker" => '',
+          "Acupuncturist" => '',
+          "Osteopath" => '',
+          "Chiropractor" => ''
+        }

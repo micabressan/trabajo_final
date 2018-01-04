@@ -1,0 +1,9 @@
+	~env = Buffer.allocConsecutive(4, s, 1024, completionMessage: {
+				|buf, i|
+				var env, attack, release;
+				[buf, i].postln;
+				attack = 0.0625 * (i+1);
+				release = 1 - attack;
+				env = Env.perc(attack, release, 1, (i+1).neg);
+				buf.sendCollection(env.asSignal(1024));
+			});

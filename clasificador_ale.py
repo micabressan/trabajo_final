@@ -17,20 +17,21 @@ from sklearn import metrics
 import re
 from keyword import kwlist
 
-def tokenizer(text):
-    r = []
-    for i in text.split('\n'):
-        for j in i.split(' '):
-            r.append(j)
-    rr = []
-    for i in r:
-        if i in kwlist:
-            rr.append(i)
-        else:
-            rr.append('Null')
+from keywords import *
 
-    return rr
+def my_tokenizer(content):
 
+    character = list(set(Python + Java))
+
+    for element in content:
+        if element not in character:
+            content.replace(element, '')
+
+    return content.split()
+
+
+
+'''
 def string(text):
     comment_characters = ['\'', '"'] #Ver que se cierran esas comillas
     for character in comment_characters:
@@ -62,7 +63,7 @@ def preprocessor(text):
 #http://scikit-learn.org/stable/modules/feature_extraction.html
 
 if __name__ == '__main__':
-    X, y = load_data_language('codes', ['Python', 'Java'])
+    X, y = load_data_language('codes', ['Python'])
     #X, y = load_data('codes')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -86,8 +87,7 @@ if __name__ == '__main__':
     print metrics.confusion_matrix(y_test, predicted)
 
 
-
-    '''
+----
     count_vect = CountVectorizer(tokenizer=tokenizer)
 
     #tfidf_transformer = TfidfTransformer()
@@ -121,3 +121,20 @@ if __name__ == '__main__':
     #print metrics.confusion_matrix(y_test, predicted)
 
     '''
+
+if __name__ == '__main__':
+
+    content = '''
+                import sys
+
+                if( len( sys.argv ) ) != 5:
+	                raise Exception('e necessario a matriz completa.')
+                    listNumbers = sys.argv
+                    listNumbers.pop()
+                    castInt = lambda x : int(x)
+                    listNumbers = [ castInt(x) for x in range(len(listNumbers)) ]
+                    result = ( listNumbers[0] * listNumbers[3] ) - ( listNumbers[1] * listNumbers[2] )
+                    print( result )
+                '''
+
+    print my_tokenizer(content)

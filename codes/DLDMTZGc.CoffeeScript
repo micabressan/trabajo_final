@@ -1,0 +1,11 @@
+Ext.define 'CurrencyField',
+	extend: 'Ext.form.field.Number'
+	alias : 'widget.currencyfield'
+	allowDecimals: false
+	hideTrigger: true
+	keyNavEnabled: false
+	mouseWheelEnabled: false
+
+	valueToRaw: () ->
+		value = @parseValue(@callParent(arguments))
+		Ext.util.Format.currency value, '$', 2

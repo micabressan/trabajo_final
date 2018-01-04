@@ -1,0 +1,25 @@
+.slideshow-controller li.first a {
+	background-image: url(../images/controller-first.gif);
+	left: 33px;
+	width: 19px;
+}
+.slideshow-controller li.last a {
+	background-image: url(../images/controller-last.gif);
+	left: 186px;
+	width: 19px;
+}
+.slideshow-controller li.next a {
+	background-image: url(../images/controller-next.gif);
+	left: 145px;
+	width: 28px;
+}
+.slideshow-controller li.pause a {
+	background-image: url(../images/controller-pause.gif);
+	left: 109px;
+	width: 20px;
+}
+.slideshow-controller li.prev a {
+	background-image: url(../images/controller-prev.gif);
+	left: 65px;
+	width: 28px;
+}

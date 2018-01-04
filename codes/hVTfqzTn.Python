@@ -1,0 +1,32 @@
+def solution(N):
+    div_result = N
+    zeros_counter = 0
+    result = 0
+    first_one_found = False
+    zero_found = False
+    second_one_found = False
+    start = True
+
+    # get reminders
+    while div_result != 1:
+        reminder = div_result % 2
+        div_result //= 2
+        # ...1....:
+        if reminder == 1:
+            if not first_one_found:
+                first_one_found = True
+            # first one found, need to zero the zeros counter
+            # need to check if second one found
+            else:
+                # ... 1 0 .. 1 ...
+                if zero_found:
+                    result = zeros_counter
+                    zeros_counter = 0
+                    zero_found = False
+        # ... 0
+        if reminder == 0:
+            # ... 1 0 ...
+            if first_one_found:
+                zeros_counter += 1
+
+    return result

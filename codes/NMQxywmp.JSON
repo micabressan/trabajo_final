@@ -1,0 +1,596 @@
+{
+	"Saturday 2nd December 2017": {
+		"date": {
+			"date": "2017-12-02 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Chelsea v Newcastle United",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-02 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Arsenal v Man Utd",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-02 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 3rd December 2017": {
+		"date": {
+			"date": "2017-12-03 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "AFC Bournemouth v Southampton",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-03 13:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Man City v West Ham",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-03 16:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Saturday 9th December 2017": {
+		"date": {
+			"date": "2017-12-09 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "West Ham v Chelsea",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-09 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Newcastle United v Leicester City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-09 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 10th December 2017": {
+		"date": {
+			"date": "2017-12-10 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Southampton v Arsenal",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-10 12:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}, {
+			"matchdayfixture": "Liverpool v Everton",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-10 14:15:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Man Utd v Man City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-10 16:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Tuesday 12th December 2017": {
+		"date": {
+			"date": "2017-12-12 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Huddersfield Town v Chelsea",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-12 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Wednesday 13th December 2017": {
+		"date": {
+			"date": "2017-12-13 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "West Ham v Arsenal",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-13 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Saturday 16th December 2017": {
+		"date": {
+			"date": "2017-12-16 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Leicester City v Crystal Palace",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-16 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Man City v Tottenham Hotspur",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-16 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 17th December 2017": {
+		"date": {
+			"date": "2017-12-17 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "West Brom v Man Utd",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-17 14:15:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "AFC Bournemouth v Liverpool",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-17 16:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Monday 18th December 2017": {
+		"date": {
+			"date": "2017-12-18 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Everton v Swansea City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-18 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Friday 22nd December 2017": {
+		"date": {
+			"date": "2017-12-22 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Arsenal v Liverpool",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-22 19:45:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Saturday 23rd December 2017": {
+		"date": {
+			"date": "2017-12-23 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Everton v Chelsea",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-23 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Burnley v Tottenham Hotspur",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-23 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}, {
+			"matchdayfixture": "Leicester City v Man Utd",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-23 19:45:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Tuesday 26th December 2017": {
+		"date": {
+			"date": "2017-12-26 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Tottenham Hotspur v Southampton",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-26 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Liverpool v Swansea City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-26 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Wednesday 27th December 2017": {
+		"date": {
+			"date": "2017-12-27 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Newcastle United v Man City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-27 19:45:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Thursday 28th December 2017": {
+		"date": {
+			"date": "2017-12-28 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Crystal Palace v Arsenal",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-28 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Saturday 30th December 2017": {
+		"date": {
+			"date": "2017-12-30 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Man Utd v Southampton",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-30 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 31st December 2017": {
+		"date": {
+			"date": "2017-12-31 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Crystal Palace v Man City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-31 12:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}, {
+			"matchdayfixture": "Tottenham Hotspur v West Ham",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-31 14:15:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "West Brom v Arsenal",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2017-12-31 16:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Monday 1st January 2018": {
+		"date": {
+			"date": "2018-01-01 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Brighton &amp; Hove Albion v AFC Bournemouth",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-01 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Everton v Man Utd",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-01 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Tuesday 2nd January 2018": {
+		"date": {
+			"date": "2018-01-02 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Swansea City v Tottenham Hotspur",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-02 19:45:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Wednesday 3rd January 2018": {
+		"date": {
+			"date": "2018-01-03 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Arsenal v Chelsea",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-03 19:45:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Saturday 13th January 2018": {
+		"date": {
+			"date": "2018-01-13 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Tottenham Hotspur v Everton",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-13 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 14th January 2018": {
+		"date": {
+			"date": "2018-01-14 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "AFC Bournemouth v Arsenal",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-14 13:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Liverpool v Man City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-14 16:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Monday 15th January 2018": {
+		"date": {
+			"date": "2018-01-15 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Man Utd v Stoke City",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-15 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Saturday 20th January 2018": {
+		"date": {
+			"date": "2018-01-20 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Brighton &amp; Hove Albion v Chelsea",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-20 12:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}, {
+			"matchdayfixture": "Man City v Newcastle United",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-20 17:30:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Sunday 21st January 2018": {
+		"date": {
+			"date": "2018-01-21 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Southampton v Tottenham Hotspur",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-21 16:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Monday 22nd January 2018": {
+		"date": {
+			"date": "2018-01-22 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Swansea City v Liverpool",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-22 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["Sky Sports Premier League", "Sky Sports Main Event", "Sky Sports Ultra HD"]
+		}]
+	},
+	"Tuesday 30th January 2018": {
+		"date": {
+			"date": "2018-01-30 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Huddersfield Town v Liverpool",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-30 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	},
+	"Wednesday 31st January 2018": {
+		"date": {
+			"date": "2018-01-31 00:00:00.000000",
+			"timezone_type": 3,
+			"timezone": "UTC"
+		},
+		"matches": [{
+			"matchdayfixture": "Tottenham Hotspur v Man Utd",
+			"competition": "Premier League",
+			"kickofftime": {
+				"date": "2018-01-31 20:00:00.000000",
+				"timezone_type": 3,
+				"timezone": "UTC"
+			},
+			"channels": ["BT Sport 1", "BT Sport 4K UHD"]
+		}]
+	}
+}

@@ -1,0 +1,65 @@
+'====================================
+' Dec 2017 For Python Comparison.                                                                                                    Tutorial Post: excelforum:         Tutorial Post: ExcelFox:
+'http://excelpoweruser.blogspot.de/2012/04/looping-through-folders-and-files-in.html     http://www.excelforum.com/excel-programming-vba-macros/1126751-get-value-function-loop-through-all-files-in-folder-and-its-subfolders.html#post4316662    http://www.excelfox.com/forum/f5/loop-through-files-in-a-folder-using-vba-1324/
+Sub VBADoStuffInFoldersInFolderRecursion() 'Main routine to "Call" the first copy of the second routine,  VBALoopThroughEachFolderAndItsFile(
+Rem 1A) Some Worksheets and General Variables Info
+Dim Ws As Worksheet           '_-Dim: Prepares "Pointer" to a "Blue Print" (or Form, Questionaire not yet filled in, a template etc.)"Pigeon Hole" in Memory, sufficient in construction to house a piece of Paper with code text giving the relevant information for the particular Variable Type. VBA is sent to it when it passes it. In a Routine it may be given a particular “Value”, or (“Values” for Objects).  There instructions say then how to do that and handle(store) that(those). At Dim the created Paper is like a Blue Print that has some empty spaces not yet filled in. A String is a a bit tricky. The Blue Print code line Paper in the Pigeon Hole will allow to note the string Length and an Initial start memory Location. This Location well have to change frequently as strings of different length are assigned. Instructiions will tell how to do this. Theoretically a specilal value vbNullString is set to aid in quich checks.. But..http://www.mrexcel.com/forum/excel-questions/361246-vbnullstring-2.html#post4411
+ Set Ws = ThisWorkbook.Worksheets.Item(1) 'Worksheets("EFFldr") 'CHANGE TO SUIT YOUR WORKSHEET    '_- Set: Fill or partially Fill: Setting to a Class will involve the use of an extra New at this code line. I will then have an Object referred to as an instance of a Class. At this point I include information on my Pointer Pigeon hole for a distinct distinguishable usage of an Object of the Class. For the case of something such as a Workbook this instancing has already been done, and in addition some values are filled in specific memory locations which are also held as part of the information in the Pigeon Hole Pointer. We will have a different Pointer for each instance. In most excel versions we already have a few instances of Worksheets. Such instances Objects can be further used., - For this a Dim to the class will be necessary, but the New must be omitted at Set. I can assign as many variables that I wish to the same existing instance
+ Ws.Range("B3:F30").ClearContents ' This line only needed for demo code
+Dim celTL As Range: Set celTL = Ws.Range("B3") 'Top left of where Listing should go
+Rem 2A) Get Folder Info
+Dim strWB As String ' "Pointer" to a "Blue Print" (or Form, Questionaire not yet filled in, a template etc.)"Pigeon Hole" in Memory, sufficient in construction to house a piece of Paper with code text giving the relevant information for the particular Variable Type. VBA is sent to it when it passes it. In a Routine it may be given a particular “Value”, or (“Values” for Objects).  There instructions say then how to do that and handle(store) that(those). At Dim the created Paper is like a Blue Print that has some empty spaces not yet filled in. A String is a a bit tricky. The Blue Print code line Paper in the Pigeon Hole will allow to note the string Length and an Initial start memory Location. This Location well have to change frequently as strings of different length are assigned. Instructiions will tell how to do this. Theoretically a specilal value vbNullString is set to aid in quich checks.. But..http://www.mrexcel.com/forum/excel-questions/361246-vbnullstring-2.html#post44116
+ Let strWB = ThisWorkbook.Path & "\" & "EileensFldr" ' 'CHANGE TO SUIT if you store the main Folder to be looked through somewhere other than in the same Folder as this workbook in which the codes are in
+Rem 3A ) ' FileSystemObject Object
+Dim FSO As Object: Set FSO = CreateObject("Scripting.FileSystemObject") 'Late Binding
+'Dim FSO As Scripting.FileSystemObject 'Early Binding alternative  activate a reference to the Microsoft Scripting Runtime Library ( MSRL ) in the Tools References menu of VB Editor Options.
+'Set FSO = New Scripting.FileSystemObject 'Create an Instance of the Class Scripting FileSystemObject
+Dim myFolder As Object 'An Object from myFolder, can be an declared as Dim myFolder As Folder also for Early Binding
+Set myFolder = FSO.GetFolder(strWB) 'Set the selected Folder to the Object Folder using this Method which takes as arbument the Full String Path
+Rem 4A )
+Dim rCnt As Long: Let rCnt = 1: Dim CopyNumber1 As Long: Let CopyNumber1 = 1 '"Run progressin ( "down vertical" ) axis ( Row count for output ), "Down Folder chain to the right", The Count of the Copy of the called Procedue, here set to 1 for the first called copy of the second routine, which is done from this Sub( )  . Any subsequent calls of further second routine copies will be made by the current copy as it "freezes" and sets of that next copy
+celTL.Value = myFolder.Path: celTL.Offset(0, 1).Value = myFolder.Name: Ws.Columns("A:C").AutoFit 'First output Row
+'( -- Rem 5A) )
+Call LoopThroughEachFolderAndItsFile(myFolder, celTL, rCnt, CopyNumber1) 'Up until now we just got the initial Folder. Now we go to all sub folders  then all subfolders   then all subfolders.......
+' let Application.ScreenUpdating = True ' If this had been set to False earlier towards the start, as is often done, then the code might run a bit quicker by virtue of not updating the worksheet everytime an entry is made, but it is not really nacerssary unless the number of Files and Folders is massive. Even then it is probably better not to do that so that in the case of an error one has an additional way in the worksheet to see where the code stopped / errored
+MsgBox "All Excel Files processed", vbInformation
+Ws.Columns("A:H").AutoFit
+End Sub
+'Rem 5A) --
+Sub VBALoopThroughEachFolderAndItsFile(ByVal fldFldr As Object, ByRef celTL As Range, ByRef rCnt As Long, ByVal CopyNumberFroNxtLvl As Long)  'In below function we have a nested loop to iterate each files also
+Dim myFldrs As Object ''This is used continuously as the "steering" thing, that is to say each Sub Folder in Folder loops, in loops, in loops......etc   ....can be Dim myFldrs As Folder for early bindingDim CopyNumber As Long 'equivalent to clmLvl in Rudis Q code
+Dim CopyNumber As Long 'equivalent to clmLvl in Rudis Q code
+ Let CopyNumber = CopyNumberFroNxtLvl 'This variable is local to the current running or paused copy of this routine.
+    '5Ab) Doing stuff for current Folder
+    For Each myFldrs In fldFldr.SubFolders 'SubFolders collection used to get at all Sub Folders
+    ''''''''Doing stuff for each Folder, .. in this example giving '_-
+            '_- its full path including name :                 and just Flder Name                             ' -- *
+     Let rCnt = rCnt + 1 + 1 ''At each folder we always move down a line, and a dd amm extra line  as a space between Folders ( The indication of the "column" or "down" to the right comes from the Copy Number of the Sub Procedure
+     Let celTL.Cells(rCnt, 1).Value = myFldrs.Path: celTL.Cells(rCnt, CopyNumber).Offset(0, 2).Value = myFldrs.Name ' -- *                                            'Print out current Folder Path and Name in next free row.
+    ''''''''End doing stuff for each Folder
+    '5Ac) Doing stuff for current file.
+    Dim oFile As Object '  ... for early binding can Dim oFile As file
+            For Each oFile In myFldrs.Files 'Looking at all Files types initially '#####
+            ''''''''Doing Stuff for Each File
+    '            Dim Extension As String: Let Extension = Right(oFile.Name, (Len(oFile.Name) - (InStrRev(oFile.Name, ".")))) 'To get the bit just after the . dot.  #####
+    '                If Left(Extension, 3) = "xls" Then 'Check for your required File Type    #####
+                Let rCnt = rCnt + 1
+                celTL.Cells(rCnt, CopyNumber).Offset(0, 2).Value = oFile.Name ' Do your stuff here
+    '                Dim wkb As Workbook
+                     On Error GoTo ErrHdlr 'In case problem opening file for example
+    '                Set wkb = Workbooks.Open(oFile)
+    '                wkb.Close SaveChanges:=True
+    '                Else 'Do not do stuff for a Bad Extension                        ' #####
+    '                End If '                                                         #####
+            ''''''''End Doing Sttuff for Each File
+NxtoFile:   Next oFile ' Spring Point after error handler so as to go on to next File after the File action that errored
+    Call LoopThroughEachFolderAndItsFile(myFldrs, celTL, rCnt, CopyNumber + 1) 'This is an example of recursion. It is actually very simple once you understand it. But it is just incredibly difficult to put in words. It is basically a Procedure that keeps calling itself as much as necessary as it goes "along",  "down", or "to the right" of the Path "roots". Every time it goes off calling itself VBA runs a copy of that Procedure. It "Stacks" all info carefully for each "Copy" Run and continues to do this "drilling" down as far as it must, in this case finding the Next Folder, and then the next Folder in that, then the next Folder in that, then the next Folder in that...I think you get the point! Each time VBA makes a copy of the Routine and you go into that. The calling Routine then "freezes at its current state and all variable keep there values. The "Frozen" Routine then re starts when the copy finishes
+    Next
+Exit Sub 'Normal End for no Errors
+Rem 6 ) Error handler section just put here for convenience
+ErrHdlr: 'Hopefully we know why we are here, and after informing can continue ( to next file )
+MsgBox prompt:="Error " & Err.Description & " with File " & oFile & ""
+On Error GoTo -1 'This needs to be done to reset the VBA exceptional error state of being. Otherwise VBA "thinks" Errors are being handeled and will not respond again to the Error handler.
+On Error GoTo 0 ' Swiches off the current error handler. I do not really need to do this. But it is good practice so the error handler is only in place at the point where i next am expecting an error
+GoTo NxtoFile
+End Sub

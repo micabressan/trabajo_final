@@ -1,0 +1,35 @@
+#[macro_use]
+extern crate relexer;
+
+#[derive(Debug, Token)]
+enum Token {
+    #[expr="([0-9])"]
+    DIGIT(i32),
+    #[expr="[\n\r\t ]"]
+    #[skip]
+    WHITESPACE
+}
+
+use std::fs::File;
+use std::io::Read;
+fn main() {
+
+    let mut f = File::open("input.txt").expect("input file not found");
+    let mut input = String::new();
+    f.read_to_string(&mut input).expect("input file not valid utf8");
+    let mut digits: Vec<_> = relexer::scan::<Token>(&input).map(|t| {
+        match t.unwrap() {
+            Token::DIGIT(d) => d,
+            _ => {panic!()}
+        }
+    }).collect();
+    let first = digits[0];
+    digits.push(first);
+    let sum = digits.windows(2).fold(0, |mut s, d| {
+        if d[0] == d[1] {
+            s += d[0];
+        }
+        s
+    });
+    println!("{}",sum);
+}

@@ -1,0 +1,55 @@
+	pub fn set_baud_rate(&mut self, baud_rate: BaudRate)
+	{
+		// UART baudratae = APBx bus clock / [ (8 or 16) * DIVIDER ]
+		// UART divider = APBx bus clock / [ (8 or 16 Oversampling) * baud rate ]
+		// example: baud_rate = 115_200, APB clock is 84 MHz
+		//    divider = 45.5729
+		//    mantissa = 45
+		//    fraction = 16 * 0.5729 = 9.1 -> 9
+
+		// get bus (APB2 or APB1) frequency
+		let bus_clock = get_apb_freq(&self.port);
+		let oversampling =
+			match self.hw.get_oversampling()
+			{
+				Oversampling::By16 => 16,
+				Oversampling::By8  => 8,
+			};
+
+		let baud_rate = baud_rate as u32;
+		let divide_by = oversampling * baud_rate;
+		let mantissa  = bus_clock / divide_by;
+		let remainder = bus_clock % divide_by;
+		// convert fraction to "float" (multiply by 1000 and then divide)
+		let mut fraction = remainder * 1_000 / divide_by;
+		// convert back and round to integer
+		fraction = oversampling * fraction / 1_000;
+
+		self.hw.set_divider(mantissa as u16, fraction as u8);
+	}
+
+	pub fn set_baud_rate_st(&mut self, baud_rate: BaudRate)
+	{
+		// get bus (APB2 or APB1 frequency)
+		let bus_clock = get_apb_freq(&self.port);
+		let baud_rate = baud_rate as u32;
+		let integer_divider: u32;
+		let fractional_divider: u32;
+		let mut tmp_reg: u32;
+
+		match self.hw.get_oversampling()
+		{
+			Oversampling::By8  => integer_divider = (25 * bus_clock) / (2 * baud_rate),
+			Oversampling::By16 => integer_divider = (25 * bus_clock) / (4 * baud_rate),
+		}
+		tmp_reg = (integer_divider / 100) << 4;
+		fractional_divider = integer_divider - (100 * (tmp_reg >> 4));
+
+		match self.hw.get_oversampling()
+		{
+			Oversampling::By8  => tmp_reg |= (((fractional_divider * 8)  + 50) / 100) & (0x07 as u32),
+			Oversampling::By16 => tmp_reg |= (((fractional_divider * 16) + 50) / 100) & (0x0F as u32),
+		}
+
+		self.hw.BRR.write(tmp_reg);
+	}

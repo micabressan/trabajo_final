@@ -1,0 +1,169 @@
+!!map {
+  ? !!str "meteor"
+  : !!map {
+    ? !!str "hit-air-after-duration"
+    : !!bool "false",
+    ? !!str "hit-air-at-end"
+    : !!bool "false",
+    ? !!str "hit-air-during"
+    : !!bool "false",
+    ? !!str "hit-ground"
+    : !!bool "true",
+    ? !!str "hit-non-players"
+    : !!bool "true",
+    ? !!str "hit-players"
+    : !!bool "true",
+    ? !!str "hit-radius"
+    : !!float "1.5",
+    ? !!str "hit-self"
+    : !!bool "true",
+    ? !!str "max-distance"
+    : !!int "100",
+    ? !!str "max-duration"
+    : !!int "0",
+    ? !!str "particle-count"
+    : !!int "15",
+    ? !!str "particle-name"
+    : !!str "hugeexplosion",
+    ? !!str "particle-speed"
+    : !!float "0.29999999999999999",
+    ? !!str "power-affects-velocity"
+    : !!bool "true",
+    ? !!str "projectile-gravity"
+    : !!float "1.0",
+    ? !!str "projectile-horiz-offset"
+    : !!float "10.0",
+    ? !!str "projectile-spread"
+    : !!float "0.0",
+    ? !!str "projectile-velocity"
+    : !!float "20.0",
+    ? !!str "projectile-vert-offset"
+    : !!float "0.0",
+    ? !!str "render-distance"
+    : !!int "32",
+    ? !!str "special-effect-interval"
+    : !!int "0",
+    ? !!str "spell"
+    : !!str "meteorImpactMulti",
+    ? !!str "spell-class"
+    : !!str ".instant.ParticleProjectileSpell",
+    ? !!str "spell-interval"
+    : !!int "20",
+    ? !!str "start-forward-offset"
+    : !!float "1.0",
+    ? !!str "start-y-offset"
+    : !!float "10.0",
+    ? !!str "stop-on-hit-entity"
+    : !!bool "true",
+    ? !!str "stop-on-hit-ground"
+    : !!bool "true",
+    ? !!str "tick-interval"
+    : !!int "2",
+    ? !!str "vertical-hit-radius"
+    : !!float "1.5",
+  },
+  ? !!str "meteorImpactExplosion"
+  : !!map {
+    ? !!str "add-fire"
+    : !!bool "false",
+    ? !!str "damage-multiplier"
+    : !!int "1",
+    ? !!str "explosion-size"
+    : !!int "20",
+    ? !!str "prevent-animal-damage"
+    : !!bool "false",
+    ? !!str "prevent-block-damage"
+    : !!bool "false",
+    ? !!str "prevent-player-damage"
+    : !!bool "false",
+    ? !!str "simulate-tnt"
+    : !!bool "true",
+    ? !!str "spell-class"
+    : !!str ".targeted.ExplodeSpell",
+  },
+  ? !!str "meteorImpactMulti"
+  : !!map {
+    ? !!str "effects"
+    : !!map {
+      ? !!str "bigBoom"
+      : !!map {
+        ? !!str "effect"
+        : !!str "effectlib",
+        ? !!str "effectlib"
+        : !!map {
+          ? !!str "class"
+          : !!str "SphereEffect",
+          ? !!str "iterations"
+          : !!int "5",
+          ? !!str "particle"
+          : !!str "EXPLOSION_HUGE",
+          ? !!str "radius"
+          : !!int "10",
+        },
+        ? !!str "position"
+        : !!str "target",
+      },
+      ? !!str "flames"
+      : !!map {
+        ? !!str "effect"
+        : !!str "effectlib",
+        ? !!str "effectlib"
+        : !!map {
+          ? !!str "class"
+          : !!str "SphereEffect",
+          ? !!str "iterations"
+          : !!int "7",
+          ? !!str "particle"
+          : !!str "FLAME",
+          ? !!str "radius"
+          : !!int "13",
+        },
+        ? !!str "position"
+        : !!str "target",
+      },
+    },
+    ? !!str "spell-class"
+    : !!str ".TargetedMultiSpell",
+    ? !!str "spells"
+    : !!seq [
+      !!str "meteorImpactExplosion",
+      !!str "meteorImpactShockwave",
+    ],
+    ? !!str "stop-on-fail"
+    : !!bool "false",
+  },
+  ? !!str "meteorImpactShockwave"
+  : !!map {
+    ? !!str "block-type"
+    : !!str "51:15",
+    ? !!str "burn-tall-grass"
+    : !!bool "true",
+    ? !!str "effects"
+    : !!map {
+      ? !!str "spec"
+      : !!map {
+        ? !!str "effect"
+        : !!str "effectlib",
+        ? !!str "effectlib"
+        : !!map {
+          ? !!str "class"
+          : !!str "SphereEffect",
+          ? !!str "iterations"
+          : !!int "3",
+          ? !!str "particles"
+          : !!int "5",
+        },
+        ? !!str "position"
+        : !!str "special",
+      },
+    },
+    ? !!str "expanding-radius-change"
+    : !!int "1",
+    ? !!str "range"
+    : !!int "10",
+    ? !!str "spell-class"
+    : !!str ".instant.FirenovaSpell",
+    ? !!str "tick-speed"
+    : !!int "5",
+  },
+}

@@ -1,0 +1,11 @@
+<ActionBar title="My App" class="action-bar">
+</ActionBar>
+
+  <ListView [items]="listaPeluquerias" class="list-group">
+    <ng-template let-item="item">
+      <StackLayout class="page">
+      <Label [text]='item.localizacion' class="list-group-item"></Label>
+      </StackLayout>
+
+    </ng-template>
+  </ListView>

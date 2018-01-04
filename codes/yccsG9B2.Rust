@@ -1,0 +1,51 @@
+use std::io::{stdin,BufRead};
+
+#[derive(Debug,PartialEq,Eq)]
+enum State {
+    Group(u32),
+    Garbage,
+    Cancel,
+}
+
+fn score(input: &str) -> (u32, u32) {
+    use State::*;
+    let mut group_score = 0;
+    let mut garbage_count = 0;
+    let mut state = Group(0);
+    let mut stack = Vec::<State>::new();
+
+    for c in input.chars() {
+        state =
+            match (c, state) {
+                (_, Cancel) => stack.pop().unwrap(),
+                ('!', s) => {stack.push(s); Cancel},
+                ('{', Group(n)) => Group(n + 1),
+                ('}', Group(n)) => {
+                    group_score += n;
+                    Group(n - 1)
+                },
+                (',', Group(n)) => Group(n),
+                ('<', Group(n)) => {
+                    stack.push(Group(n));
+                    Garbage
+                }
+                ('>', Garbage) => stack.pop().unwrap(),
+                (_, Garbage) => {
+                    garbage_count += 1;
+                    Garbage
+                },
+                _ => panic!("Unexpected input token"),
+            };
+    }
+    (group_score, garbage_count)
+}
+
+fn main() {
+    let stdin = stdin();
+    let handle = stdin.lock();
+    let mut iter = handle.lines();
+    if let Some(Ok(line)) = iter.next() {
+        let solution = score(&line);
+        println!{"{:?}", solution};
+    }
+}

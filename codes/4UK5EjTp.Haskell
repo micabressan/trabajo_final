@@ -1,0 +1,7 @@
+firstStep vectors labels theta  = 
+    trace (multStd (Data.Matrix.transpose ((-) labels (multStd vectors theta))) ((-) labels (multStd vectors theta)) / (multStd ((-) labels (multStd vectors theta)) (multStd vectors ((-) labels (multStd vectors theta)))))
+
+    
+gradientDescent1 vectors labels theta n 
+    | (n == 15 ) = theta
+    | otherwise = gradientDescent1 vectors labels ((-) labels ((*) vectors ((+) theta (fmap (\x->x*(firstStep vectors labels theta )) labels) ) )) (n+1)

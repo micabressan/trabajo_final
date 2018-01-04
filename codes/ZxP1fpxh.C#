@@ -1,0 +1,82 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class gateScript : MonoBehaviour
+{
+
+    public bool nearDoor;
+    public bool open = false;
+    public bool close = true;
+    public float keysNeeded;
+
+    void OnTriggerEnter(Collider other)
+    {
+        nearDoor = true;
+    }
+        
+    void OnTriggerExit(Collider other)
+    {
+        nearDoor = false;
+    }
+    void Update()
+    {
+        if (nearDoor)
+        {
+            if (close)
+            {
+                if (gameVariables.keysCollected >= keysNeeded)
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+
+                        open = true;
+                        close = false;
+
+                        
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    close = true;
+                    open = false;
+                    
+                }
+            }
+        }
+        if (open)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 200);
+        }
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 200);
+        }
+    }
+    private void OnGUI()
+    {
+
+        if (nearDoor)
+        {
+            if (open)
+            {
+                GUI.Box(new Rect(0, 0, 200, 25), "Press E to close");
+            }
+            else
+            {
+                if (gameVariables.keysCollected >= keysNeeded)
+                {
+                    GUI.Box(new Rect(0, 0, 200, 25), "Press E to open");
+                }
+                else
+                {
+                    GUI.Box(new Rect(0, 0, 200, 25), "This door is locked");
+                }
+            }
+
+        }
+    }
+}

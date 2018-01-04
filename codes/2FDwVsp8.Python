@@ -1,0 +1,205 @@
+import networkx as nx
+from collections import OrderedDict
+from networkx.drawing.nx_agraph import write_dot
+import numpy as np
+import matplotlib.pyplot as plt
+import pylab
+
+
+
+f = open("E:\\input3.txt", "r")
+class State:
+    name = ''
+    input
+
+    def __init__(self, name):
+        self.name = name
+        self.input = []
+
+
+    def copynodes(self, a,b):
+        self.name = "".join(set(a.name+b.name))
+        self.name =  "".join(set(self.name))
+        self.input = []
+        for pair in a.input:
+            self.input.append(pair)
+        for pair in b.input:
+            self.input.append(pair)
+
+    def inline(self, line):
+        if self.name == line[0][0]:
+            self.input.append(line[1])
+
+    def count_states(self, a):
+        count = 0
+        for pair in self.input:
+            if pair[0] == a:
+                count+=1
+        return count
+
+    def check_pair(self,a,b,t):
+        at = 0
+        bt = 0
+        for pair in self.input:
+            if pair[0] == t:
+                if pair[1] == a:
+                    at = 1
+                if pair[1] == b:
+                    bt = 1
+        return at*bt
+
+    def get_pair(self,t):
+        o1 = 0
+        o2 = 0
+        if (self.count_states(t) > 1):
+            i=0
+            while not self.input[i][0]== t:
+                i+=1
+            o1 = self.input[i][1]
+            i+=1
+            while not self.input[i][0]== t:
+                i+=1
+            o2 = self.input[i][1]
+            return (o1,o2)
+
+    def delete_pair(self,a,b,t):
+        i = 0
+        while not self.input[i][0] == t:
+            if self.input[i][1] == a:
+                break
+            i += 1
+        self.input.remove(self.input[i])
+        while not self.input[i][0] == t:
+            if self.input[i][1] == b:
+                break
+            i += 1
+        temp = "".join(OrderedDict.fromkeys(a+b))
+        self.input[i] = (self.input[i][0],"".join(set(temp)) )
+
+    def delete_stait(self, a):
+        for pair in self.input:
+            if pair == a:
+                self.input.remove(pair)
+
+    def change_stait(self,a,b):
+        for pair in self.input:
+            if pair[1] == a:
+                pair[1] = b
+
+    def if_goes_to(self,a):
+        for line in self.input:
+            for char in a:
+                if char in line or char == line:
+                    return True
+        return False
+
+    def replacesome(self,a,b):
+        for i, line in enumerate(self.input):
+            if len(self.input[i]) > 1:
+                self.input[i] = line.replace(a,b)
+
+
+
+level = 3
+right = 1
+left = 1
+linelist = []
+term_set =  set()
+noterm_set =  set()
+for line in f:
+    if line.count("->") > 1:
+        print("Wrong syntax.")
+        quit()
+    if line.find("->") == -1:
+        print("Wrong syntax.")
+        quit()
+    line = line.replace("\n","")
+    line = line.split("->")
+    linelist.append(line)
+    print(line)
+
+    if len(line[0]) > len(line[1]):
+        level = min(level, 0)
+
+
+    if line[0].upper() != line[0]:
+        level = min(level, 1)
+    if not line[0].isalpha():
+        level = min(level, 1)
+
+    if len(line[1]) > 2:
+        level = min(level, 2)
+    if len(line[1]) < 2:
+        level = min(level, 2)
+        continue
+    if len(line[1]) == 1 & line[1].islower():
+        continue
+    if len(line[1]) == 1 & line[1].isupper():
+        level = min(level, 2)
+        continue
+    if line[1].lower() == line[1]:
+         level = min(level, 2)
+    if line[1][0].isupper():
+        left = 0
+    if line[1][1].isupper():
+        right = 0
+
+if  right + left != 1:
+    level = min(level, 2)
+
+print("Grammar level is: " + str(level))
+f.close()
+if level < 2:
+    print("Wrong level.")
+    quit()
+print(linelist)
+netermset = set()
+termset = set()
+
+f1 = open("E:\\term1.txt", "r")
+for line in f1:
+    line = line.replace("\n", "")
+    line = line.split(" ")
+    for char in line:
+        if char.isupper():
+            netermset.add(char)
+        else:
+            termset.add(char)
+
+print(termset)
+print(netermset)
+classes = []
+for neterm in netermset:
+    classes.append(State(neterm))
+for node in classes:
+    for line in linelist:
+        node.inline(line)
+print("check")
+
+for node in classes:
+    for line in node.input:
+        print(node.name+"->"+line)
+f2 = open("E:\\string.txt", "r")
+readsting = f2.readline()
+print(readsting)
+win=0
+
+
+def iteration(input,state):
+    if len(input)==0 and len(state)==0:
+        global win
+        win = 1
+        print("correct")
+        quit()
+    if len(state)==0 or len(input)==0:
+        return
+    if input[0] in termset and state[0] in termset and input[0] == state[0]:
+        iteration(input[1:],state[1:])
+    global classes
+    for cl in classes:
+        if state[0] == cl.name:
+            for line in cl.input:
+                iteration(input,line+state[1:])
+
+
+iteration(readsting,"A")

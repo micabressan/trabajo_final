@@ -1,0 +1,22 @@
+POST /v3/directline/conversations HTTP/1.1
+Host: directline.botframework.com
+Authorization: Bearer lBG0TMyVKYA.cwA.dMM.rTlLfWrdgGLo5EdRNX2_cW8ij_Vw-hnyh_JFHAn2gJM
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: afb07239-f29d-5c68-6477-093ac92090fc
+
+{
+    "type": "message",
+    "from": {
+        "id": "MobileApp"
+    },
+    "text": "новый поиск"
+}
+
+{
+    "conversationId": "HLKoxs57ptTEz5QKNIuasY",
+    "token": "lBG0TMyVKYA.dAA.SABMAEsAbwB4AHMANQA3AHAAdABUAEUAegA1AFEASwBOAEkAdQBhAHMAWQA.ZT7VQMZ_0wE.skBPutCy13c.Mg32iZTJj0yWaQb7mvGGb2Tz15eHEAM59zZ2yXDATh8",
+    "expires_in": 1800,
+    "streamUrl": "wss://directline.botframework.com/v3/directline/conversations/HLKoxs57ptTEz5QKNIuasY/stream?watermark=-&t=lBG0TMyVKYA.dAA.SABMAEsAbwB4AHMANQA3AHAAdABUAEUAegA1AFEASwBOAEkAdQBhAHMAWQA.ZVC2M8J_0wE.clI2dbtwrac.zHiJVq5J391wW2cMOkXtriY_hR5X_W4-q99QUQSqBas",
+    "referenceGrammarId": "62765c22-b130-2a5f-b909-644b5414e6fe"
+}

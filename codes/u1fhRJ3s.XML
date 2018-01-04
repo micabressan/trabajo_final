@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>date_tester</h:title>
+    <model>
+      <itext>
+        <translation default="true()" lang="default">
+          <text id="/DateTester/date_one:label">
+            <value>Date One</value>
+          </text>
+          <text id="/DateTester/date_two:label">
+            <value>Date Two</value>
+          </text>
+          <text id="/DateTester/datetime_field:label">
+            <value>DateTime</value>
+          </text>
+          <text id="/DateTester/text_one:label">
+            <value>Text</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <DateTester id="date_tester" version="1001">
+          <start/>
+          <end/>
+          <date_one/>
+          <date_two/>
+          <text_one/>
+          <datetime_field/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </DateTester>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/DateTester/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/DateTester/end" type="dateTime"/>
+      <bind nodeset="/DateTester/date_one" type="date"/>
+      <bind nodeset="/DateTester/date_two" required="true()" type="date"/>
+      <bind nodeset="/DateTester/text_one" type="string"/>
+      <bind nodeset="/DateTester/datetime_field" type="dateTime"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/DateTester/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/DateTester/date_one">
+      <label ref="jr:itext('/DateTester/date_one:label')"/>
+    </input>
+    <input ref="/DateTester/date_two">
+      <label ref="jr:itext('/DateTester/date_two:label')"/>
+    </input>
+    <input ref="/DateTester/text_one">
+      <label ref="jr:itext('/DateTester/text_one:label')"/>
+    </input>
+    <input ref="/DateTester/datetime_field">
+      <label ref="jr:itext('/DateTester/datetime_field:label')"/>
+    </input>
+  </h:body>
+</h:html>

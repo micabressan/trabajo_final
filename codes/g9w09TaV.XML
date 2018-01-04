@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_almost"
+    xmlns:pv="http://schemas.android.com/apk/res-auto">
+
+    <me.wangyuwei.particleview.ParticleView
+        android:layout_centerVertical="true"
+        android:id="@+id/splash_logo"
+        android:layout_width="wrap_content"
+        android:alpha="255"
+        android:layout_height="60dp"
+        android:background="#00FFFFFF"
+        pv:pv_background_color="@color/white"
+        pv:pv_host_text="Virtual"
+        pv:pv_particle_text="bartender"
+        pv:pv_particle_text_size="35sp"
+        pv:pv_text_color="@color/dark_blue"
+        pv:pv_text_anim_time="600"
+        pv:pv_spread_anim_time="1000"
+        pv:pv_host_text_anim_time="15000"
+        android:transitionName="transition_logo"/>
+
+</RelativeLayout>

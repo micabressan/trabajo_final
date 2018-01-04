@@ -1,0 +1,39 @@
+    {-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
+
+    module NewAgent where
+
+    import Data.Aeson
+    import Data.Text
+    import Control.Applicative
+    import Control.Monad
+    import qualified Data.ByteString.Lazy.Char8 as ByteStringLazyChar8
+    import GHC.Generics
+
+    data NewAgent =
+       NewAgent { new_agent :: !Object
+                , id' :: !Text
+                , name :: !Text
+                , primary_skillset :: ![Text]
+                , secondary_skillset :: ![Text]
+                } deriving (Show, Generic)
+
+    instance FromJSON NewAgent where
+      parseJSON (Object (object [NewAgent "new_agent" <$> object [newAgent]]) =
+         <*> newAgent .: "id"
+         <*> newAgent .: "name"
+         <*> newAgent .: "primary_skillset"
+         <*> newAgent .: "secondary_skillset"
+
+    instance ToJSON NewAgent
+
+    jsonFile :: FilePath
+    jsonFile = "input.json"
+
+    getJSON = ByteStringLazy.readFile jsonFile
+
+    main :: IO ()
+    main = do
+      decodedJson <- (eitherDecode <$> getJSON) :: IO (Either String [NewAgent])
+      case decodedJson of
+         Left err -> putStrLn err
+         Right new_agent -> print new_agent

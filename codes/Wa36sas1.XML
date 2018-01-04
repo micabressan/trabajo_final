@@ -1,0 +1,10 @@
+        <plugin>
+            <groupId>org.apache.karaf.tooling</groupId>
+            <artifactId>karaf-maven-plugin</artifactId>
+            <version>4.0.9</version>
+			<configuration>
+				<excludedArtifactIds>
+					<excludedArtifactId>slf4j-api</excludedArtifactId>
+				</excludedArtifactIds>
+			</configuration>
+        </plugin>

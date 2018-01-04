@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zad2
+{
+   abstract class Figure
+    {
+        private int x, y;
+
+
+        public Figure(int x = 0, int y = 0)
+        {
+            this.x = x;
+            this.y = y;
+
+        }
+
+        public abstract void draw();
+
+        protected int getX()
+        {
+            return x;
+        }
+
+        protected int getY()
+        {
+            return y;
+        }
+
+
+
+
+    }
+    class Triangle : Figure
+    {
+        int height, width;
+        public Triangle(int height, int width)
+            : base()
+        {
+            this.height = height;
+            this.width = width;
+        }
+
+        public Triangle(int height, int width, int x = 0, int y = 0)
+            : base(x, y)
+        {
+            this.height = height;
+            this.width = width;
+        }
+
+        public override void draw()
+        {
+            // tu rysuj trojkat
+        }
+    }
+
+    class Rectangle : Figure
+    {
+        int edgeLength;
+        public Rectangle(int edgeLength, int x = 0, int y = 0)
+            : base(x, y)
+        {
+            this.edgeLength = edgeLength;
+        }
+        public override void draw()
+        {
+            for (int a = 0; a < getY(); ++a) Console.Write("\n"); //odstep dla Y ( to samo co Console.WriteLine(); )
+            for (int a = 0; a < edgeLength; ++a)
+            {
+                for (int q = 0; q < getX(); ++q) Console.Write(" ");  // odstep dla X
+                for (int b = 0; b < edgeLength; ++b)
+                {
+ 
+                        Console.Write("#");
+                }
+                Console.WriteLine();
+            }
+        }
+
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Rectangle rec = new Rectangle(5, 2, 2);
+            rec.draw();
+
+            Rectangle rec2 = new Rectangle(5); // to samo co = new Rectangle(5, 0, 0);
+        }
+    }
+}

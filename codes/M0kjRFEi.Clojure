@@ -1,0 +1,5 @@
+(defn my-sad-map [f coll]
+	    (loop [col coll res []]
+	       (let [cur (first col)]
+		    (if (nil? cur) res
+			(recur (next col) (conj res (f cur)))))))

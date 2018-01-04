@@ -1,0 +1,34 @@
+; illustration of routes mechanics in ring/compojure
+
+(ns routes-example.core
+  (:use 
+     [ring.adapter.jetty :only [run-jetty]]
+     [compojure.core]
+     ; ...
+     ))
+
+(def adminreq {:request-method :get :uri "/admin"})
+(def userreq {:request-method :get :uri "/user"})
+
+(def adminhandler (GET "/admin" [] "admin area"))
+(def userhandler (GET "/user" [] "user area"))
+
+(def adminanduserhandler
+  (routes
+    (def adminhandler (GET "/admin" [] "admin area"))
+    (def userhandler (GET "/user" [] "user area"))
+    ))
+
+(def badhandler
+  (routes
+    (def adminhandler (GET "/admin" [] "admin area"))
+    (def userhandler (GET "/admin" [] "user area"))
+    ))
+
+(adminhandler adminreq)
+(adminhandler userreq)
+
+(adminanduserhandler adminreq)
+(adminanduserhandler userreq)
+
+(badhandler adminreq)

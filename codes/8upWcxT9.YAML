@@ -1,0 +1,435 @@
+polozka_1: #id, to samé 3x polozka{1..3}:
+  __construct: ['název'] #náhodně
+  description: 'popis' #náhodne: '<paragraph()>'
+  cost: '100' #cena kredity, náhodně'<numberBetween(10,1000)>'
+  category: '@odkazaKategorie' #prefix @, nádoně'@cat*', název mají jen kategorie nejvyšší urovně, ostatní začínají cat<číslo>
+  owner: '@odkazUzivetel' #prefix @, náhodně '@user*'
+  tags: 'tag1,tag2' #tagy, náhodně:  <words(4)>
+  #
+  #čas
+  # dva dny zpět: <(new \\DateTime('-2 days'))>
+  # dva dny od teď: <(new \\DateTime('+2 days'))>
+  # teď: <(new \\DateTime('now'))>
+  # mezi časy s okazem na jinou položku: <dateTimeBetween($createdAt, "now")>
+  # mezi časy: '<dateTimeBetween("-200 days", "now")>'
+  # přesný čas: <(new \\DateTime('24-12-2017 08:30:00'))>
+  createdAt: '<dateTimeBetween("-200 days", "now")>'
+  updatedAt: '<dateTimeBetween($createdAt, "now")>'
+  publicSince: '<dateTimeBetween("-200 days", "+2 days")>'
+  publicUntil: '<dateTimeBetween("-200 days", "+200 days")>'
+
+#seznam uzivatelu
+  superAdmin:
+  admin:
+  user1:
+  user2:
+  user3:
+
+#seznam kategorii
+  zbozi (extends base_cat):
+    __construct: ['Zboží','']
+
+  Děti (extends base_cat):
+    __construct: ['Děti','']
+    parent: '@zbozi'
+
+  cat1 (extends base_cat):
+    __construct: ['sedačky','']
+    parent: '@Děti'
+
+  cat2 (extends base_cat):
+    __construct: ['kočárky','']
+    parent: '@Děti'
+
+  cat3 (extends base_cat):
+    __construct: ['oblečení','']
+    parent: '@Děti'
+
+  cat4 (extends base_cat):
+    __construct: ['hračky','']
+    parent: '@Děti'
+
+  Sběratelé (extends base_cat):
+    __construct: ['Sběratelé','']
+    parent: '@zbozi'
+
+  cat5 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Sběratelé'
+
+  cat6 (extends base_cat):
+    __construct: ['bankovky','']
+    parent: '@Sběratelé'
+
+  cat7 (extends base_cat):
+    __construct: ['modelářství','']
+    parent: '@Sběratelé'
+
+  cat8 (extends base_cat):
+    __construct: ['filatelie','']
+    parent: '@Sběratelé'
+
+  cat9 (extends base_cat):
+    __construct: ['numismatika','']
+    parent: '@Sběratelé'
+
+  cat10 (extends base_cat):
+    __construct: ['pohlednice','']
+    parent: '@Sběratelé'
+
+  Umění (extends base_cat):
+    __construct: ['Umění','']
+    parent: '@zbozi'
+
+  cat11 (extends base_cat):
+    __construct: ['fotografie','']
+    parent: '@Umění'
+
+  cat12 (extends base_cat):
+    __construct: ['keramika','']
+    parent: '@Umění'
+
+  cat13 (extends base_cat):
+    __construct: ['sochy','']
+    parent: '@Umění'
+
+  cat14 (extends base_cat):
+    __construct: ['obrazy','']
+    parent: '@Umění'
+
+  cat15 (extends base_cat):
+    __construct: ['grafiky','']
+    parent: '@Umění'
+
+  Starožitnosti (extends base_cat):
+    __construct: ['Starožitnosti','']
+    parent: '@zbozi'
+
+  cat16 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Starožitnosti'
+
+  cat17 (extends base_cat):
+    __construct: ['sochy','']
+    parent: '@Starožitnosti'
+
+  cat18 (extends base_cat):
+    __construct: ['obrazy','']
+    parent: '@Starožitnosti'
+
+  cat19 (extends base_cat):
+    __construct: ['žehličky','']
+    parent: '@Starožitnosti'
+
+  cat20 (extends base_cat):
+    __construct: ['nábytek','']
+    parent: '@Starožitnosti'
+
+  cat21 (extends base_cat):
+    __construct: ['porcelán','']
+    parent: '@Starožitnosti'
+
+  cat22 (extends base_cat):
+    __construct: ['hodiny','']
+    parent: '@Starožitnosti'
+
+  Moda (extends base_cat):
+    __construct: ['Móda','']
+    parent: '@zbozi'
+
+  cat23 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Moda'
+
+  cat24 (extends base_cat):
+    __construct: ['prádlo','']
+    parent: '@Moda'
+
+  cat25 (extends base_cat):
+    __construct: ['obuv','']
+    parent: '@Moda'
+
+  cat26 (extends base_cat):
+    __construct: ['pánské oblečení','']
+    parent: '@Moda'
+
+  cat27 (extends base_cat):
+    __construct: ['dámské oblečení','']
+    parent: '@Moda'
+
+  modni_doplnky (extends base_cat):
+    __construct: ['Módní doplňky','']
+    parent: '@zbozi'
+
+  cat28 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@modni_doplnky'
+
+  cat29 (extends base_cat):
+    __construct: ['kabelky','']
+    parent: '@modni_doplnky'
+
+  cat30 (extends base_cat):
+    __construct: ['šperky','']
+    parent: '@modni_doplnky'
+
+  cat31 (extends base_cat):
+    __construct: ['hodinky','']
+    parent: '@modni_doplnky'
+
+  cat32 (extends base_cat):
+    __construct: ['bižuterie','']
+    parent: '@modni_doplnky'
+
+  Domácnost (extends base_cat):
+    __construct: ['Domácnost','']
+    parent: '@zbozi'
+
+  cat33 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Domácnost'
+
+  cat34 (extends base_cat):
+    __construct: ['dekorace','']
+    parent: '@Domácnost'
+
+  cat35 (extends base_cat):
+    __construct: ['nábytek','']
+    parent: '@Domácnost'
+
+  cat36 (extends base_cat):
+    __construct: ['vybavení kuchyně','']
+    parent: '@Domácnost'
+
+  zahrada_stavba (extends base_cat):
+    __construct: ['Zahrada a stavba','']
+    parent: '@zbozi'
+
+  cat37 (extends base_cat):
+    __construct: ['stavební materiál','']
+    parent: '@zahrada_stavba'
+
+  cat38 (extends base_cat):
+    __construct: ['zahradní potřeby','']
+    parent: '@zahrada_stavba'
+
+  cat39 (extends base_cat):
+    __construct: ['zahradní nábytek','']
+    parent: '@zahrada_stavba'
+
+  Elektronika (extends base_cat):
+    __construct: ['Elektronika','']
+    parent: '@zbozi'
+
+  cat40 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Elektronika'
+
+  cat41 (extends base_cat):
+    __construct: ['příslušenství','']
+    parent: '@Elektronika'
+
+  cat42 (extends base_cat):
+    __construct: ['audio video','']
+    parent: '@Elektronika'
+
+  cat43 (extends base_cat):
+    __construct: ['ledničky a pračky','']
+    parent: '@Elektronika'
+
+  cat44 (extends base_cat):
+    __construct: ['mobilní telefony','']
+    parent: '@Elektronika'
+
+  cat45 (extends base_cat):
+    __construct: ['PC','']
+    parent: '@Elektronika'
+
+  cat46 (extends base_cat):
+    __construct: ['fotoaparáty','']
+    parent: '@Elektronika'
+
+  knihy_vzdelani (extends base_cat):
+    __construct: ['Knihy a vzdělávání','']
+    parent: '@zbozi'
+
+  cat47 (extends base_cat):
+    __construct: ['učebnice','']
+    parent: '@knihy_vzdelani'
+
+  cat48 (extends base_cat):
+    __construct: ['časopisy','']
+    parent: '@knihy_vzdelani'
+
+  cat49 (extends base_cat):
+    __construct: ['knihy','']
+    parent: '@knihy_vzdelani'
+
+  cat50 (extends base_cat):
+    __construct: ['dětské knihy','']
+    parent: '@knihy_vzdelani'
+
+  hudba_film (extends base_cat):
+    __construct: ['Hudba a film','']
+    parent: '@zbozi'
+
+  cat51 (extends base_cat):
+    __construct: ['Hudba a film','']
+    parent: '@hudba_film'
+
+  cat52 (extends base_cat):
+    __construct: ['DVD','']
+    parent: '@hudba_film'
+
+  cat53 (extends base_cat):
+    __construct: ['CD','']
+    parent: '@hudba_film'
+
+  Podnikání (extends base_cat):
+    __construct: ['Podnikání','']
+    parent: '@zbozi'
+
+  cat54 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Podnikání'
+
+  cat55 (extends base_cat):
+    __construct: ['vybavení hotelů a restaurací','']
+    parent: '@Podnikání'
+
+  cat56 (extends base_cat):
+    __construct: ['stavba','']
+    parent: '@Podnikání'
+
+  cat57 (extends base_cat):
+    __construct: ['průmysl','']
+    parent: '@Podnikání'
+
+  cat58 (extends base_cat):
+    __construct: ['kancelářské potřeby','']
+    parent: '@Podnikání'
+
+  cat59 (extends base_cat):
+    __construct: ['kancelářské vybavení','']
+    parent: '@Podnikání'
+
+  cat67 (extends base_cat):
+    __construct: ['Potraviny a nápoje','']
+    parent: '@zbozi'
+
+  vouchery_poukazy (extends base_cat):
+    __construct: ['Vouchery a poukazy','']
+    parent: '@zbozi'
+
+  cat60 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@vouchery_poukazy'
+
+  cat61 (extends base_cat):
+    __construct: ['zboží','']
+    parent: '@vouchery_poukazy'
+
+  cat62 (extends base_cat):
+    __construct: ['služby','']
+    parent: '@vouchery_poukazy'
+
+  cat63 (extends base_cat):
+    __construct: ['stravování','']
+    parent: '@vouchery_poukazy'
+
+  cat64 (extends base_cat):
+    __construct: ['ubytování','']
+    parent: '@vouchery_poukazy'
+#
+# Služby
+#
+  sluzby (extends base_cat):
+    __construct: ['Služby','']
+
+  Sdílení (extends base_cat):
+    __construct: ['Sdílení','']
+    parent: '@sluzby'
+
+  cat65 (extends base_cat):
+    __construct: ['mobilita','']
+    parent: '@Sdílení'
+
+  cat66 (extends base_cat):
+    __construct: ['ubytování a rekreace','']
+    parent: '@Sdílení'
+
+  cat67 (extends base_cat):
+    __construct: ['Hlídání dětí','']
+    parent: '@sluzby'
+  cat68 (extends base_cat):
+    __construct: ['Ubytování','']
+    parent: '@sluzby'
+
+  cat69 (extends base_cat):
+    __construct: ['Domácí práce','']
+    parent: '@sluzby'
+  cat70 (extends base_cat):
+    __construct: ['Zahradní práce','']
+    parent: '@sluzby'
+  Výuka (extends base_cat):
+    __construct: ['Výuka','']
+    parent: '@sluzby'
+  cat71 (extends base_cat):
+    __construct: ['jazyky','']
+    parent: '@Výuka'
+  cat72 (extends base_cat):
+    __construct: ['doučování','']
+    parent: '@Výuka'
+  cat73 (extends base_cat):
+    __construct: ['řemesla','']
+    parent: '@Výuka'
+  cat74 (extends base_cat):
+    __construct: ['ostatní','']
+    parent: '@Výuka'
+
+  cat75 (extends base_cat):
+    __construct: ['Fotografování','']
+    parent: '@sluzby'
+  cestova_mobilita (extends base_cat):
+    __construct: ['Cestování a mobilita','']
+    parent: '@sluzby'
+  cat76 (extends base_cat):
+    __construct: ['spolujízda','']
+    parent: '@cestova_mobilita'
+  cat77 (extends base_cat):
+    __construct: ['odvoz osob','']
+    parent: '@cestova_mobilita'
+  cat78 (extends base_cat):
+    __construct: ['odvoz materiálu','']
+    parent: '@cestova_mobilita'
+
+  cat79 (extends base_cat):
+    __construct: ['Stavební práce','']
+    parent: '@sluzby'
+  cat80 (extends base_cat):
+    __construct: ['Brigády','']
+    parent: '@sluzby'
+  cat81 (extends base_cat):
+    __construct: ['Právní poradenství','']
+    parent: '@sluzby'
+  cat82 (extends base_cat):
+    __construct: ['Účetnictví','']
+    parent: '@sluzby'
+  cat83 (extends base_cat):
+    __construct: ['Úklid','']
+    parent: '@sluzby'
+  cat84 (extends base_cat):
+    __construct: ['Zemědělské práce','']
+    parent: '@sluzby'
+  cat85 (extends base_cat):
+    __construct: ['Masáže a zdraví','']
+    parent: '@sluzby'
+  cat86 (extends base_cat):
+    __construct: ['Psychologie a poradenství','']
+    parent: '@sluzby'
+  cat87 (extends base_cat):
+    __construct: ['Ostatní','']
+    parent: '@sluzby'
+  cat88 (extends base_cat):
+    __construct: ['Ostatní','']
+    parent: '@sluzby'

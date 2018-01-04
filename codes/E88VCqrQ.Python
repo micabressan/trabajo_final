@@ -1,0 +1,35 @@
+# Zip-a tworze w pamieci (RAMu jest dosc)
+class InMemoryZip(object):
+    def __init__(self):
+        self.handle = io.BytesIO()
+        self.the_file = zipfile.ZipFile(self.handle, "w", zipfile.ZIP_STORED, False)
+
+    def add(self, file_name, file_contents):
+        self.the_file.writestr(file_name, file_contents)
+
+        for zfile in self.the_file.filelist:
+            zfile.create_system = 0 
+
+    def add_directory(self, name):
+        self.the_file.write(name)
+
+    def close(self):
+        self.handle.seek(0)
+        self.the_file.close()
+
+# Buduje go
+file = InMemoryZip()
+file.add("sciezka w zipe", "zawartosci pliku") // Tu dodaje np wygenerowane w pamieci Excela
+file.close()
+
+# I wysylam w widoku DRF dziedziczonym po APIView
+filename = "report.zip"
+report = file.handle
+content_type = "application/zip"
+
+print('Report was succcesfully created')
+
+response = HttpResponse(report.getvalue(), content_type=content_type)
+response['Content-Disposition'] = "attachment; filename=%s" % filename
+response['Content-Length'] = report.tell()        
+return response

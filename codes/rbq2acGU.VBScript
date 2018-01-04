@@ -1,0 +1,27 @@
+Option Explicit
+Dim colFiles 
+Dim strStartFolder 
+Dim strDestinationfolder 
+Dim oOldestFile 
+Dim oFile 
+Dim oFSO 
+'Const OverwriteExisting = TRUE
+strStartFolder = "D:\PRova" 
+strDestinationfolder = "D:\PRova\test"  
+Set oFSO = CreateObject("Scripting.FileSystemObject") 
+Set colFiles = oFSO.GetFolder(strStartFolder).Files 
+
+Do  while oFile >=0
+  
+    For Each oFile In colFiles 
+        If Not IsObject(oOldestFile) Then 
+            Set oOldestFile = oFile 
+        Else 
+            If oFile.DateLastModified < oOldestFile.DateLastModified Then 
+                Set oOldestFile = oFile 
+            End If 
+        End If 
+    Next 
+    oOldestFile.Move strDestinationfolder & "\" & oOldestFile.Name 'OverwriteExisting
+	    Wscript.Sleep(3000)
+Loop

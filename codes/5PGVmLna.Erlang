@@ -1,0 +1,55 @@
+-module(proc).
+-export([loop/1]).
+
+
+
+loop(Setting) ->
+
+        #{uid := Uid} = Setting,
+        #{map := Map} = Setting,
+        #{logPid := LogPid} = Setting,
+
+        receive
+            {From, {To, Msg, NewMap}}  ->
+                log(Uid,LogPid, Msg),
+                case is_map_change(Map, NewMap) of 
+                    true -> log(Uid,LogPid, "Карта изменилась"), SettingNew = update_map(Uid,NewMap,LogPid);
+                    false -> log(Uid,LogPid, "Карта не изменилась"), SettingNew = Setting
+                end, 
+                case is_end_destination(Uid, To) of 
+                    true -> log(Uid,LogPid, "Пакет прибыл в место назначения");
+                    false -> log(Uid,LogPid, "Передаем пакет дальше"), 
+                    case is_process_alive(get_link(Uid, NewMap)) of 
+                        true -> get_link(Uid, NewMap) ! {From, {To, Msg, NewMap}};
+                        false -> log(Uid,LogPid, "Процесс не в сети, перестраиваем сеть"), 
+                        UpdatedMap = reMap(Uid, get_link(get_link(Uid, NewMap),NewMap),NewMap ),
+                        SettingNew = update_map(Uid,UpdatedMap, NewMap), 
+                        get_link(Uid, UpdatedMap) ! {From, {To, Msg, UpdatedMap}}
+                    end
+                end
+         end,
+        loop(SettingNew).
+
+%is_process_alive(Pid).
+
+%update current proc link and map ver.
+reMap(Uid, NewUidLink, OldMap) -> 
+        #{ver := Ver} = OldMap,
+        OldMap#{Uid => NewUidLink, ver => Ver+1}.
+
+get_link(Uid, Map) -> 
+    #{Uid := Next} = Map, Next.
+
+is_map_change(Map, NewMap) -> 
+    #{ver := Old} = Map, #{ver := New} = NewMap,
+    Old < New.
+
+%update map in Setting
+update_map(Uid, NewMap, LogPid) -> 
+    #{uid => Uid, map => NewMap, logPid => LogPid}.
+
+is_end_destination(Uid, To) -> 
+    Uid =:= To.
+    
+
+log(Uid, Pid, Msg) -> Pid ! {Uid, Msg}.

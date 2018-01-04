@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+
+
+def soundex(word):
+    codes = ("bfpv", "cgjkqsxz", "dt", "l", "mn", "r")
+    sound_dict = {ch: k+1 for k, chunk in enumerate(codes) for ch in chunk}
+    # Convert the word to the lower case
+    word = word.lower()
+
+    # Check the letters in the original word and retain only first letter
+    # if multiple letters with the same code have been found
+    preprocessed_word = ''
+    for x in word:
+        if len(preprocessed_word) == 0 or x not in sound_dict:
+            preprocessed_word += x
+        elif len(preprocessed_word) > 0 and \
+                sound_dict.get(preprocessed_word[-1]) != sound_dict.get(x):
+            preprocessed_word += x
+    word = preprocessed_word
+
+    # Get codes
+    codes_and_underscores = ''.join(
+        str(sound_dict.get(x, '_'))
+        for x in word[1:] if x not in 'hw')
+
+    # Remove duplicates and underscores
+    accum = ''
+    for x in codes_and_underscores:
+        if len(accum) == 0 or len(accum) > 0 and accum[-1] != x:
+            accum += x
+    return word[0].upper() + \
+        ''.join(x for x in accum if x != '_')[:3].ljust(3, '0')
+
+
+def lower_and_remove_punctuation(text):
+    import string
+    text = text.lower()
+    for x in string.punctuation:
+        text = text.replace(x, ' ')
+    return text
+
+
+def get_words_from_text(text):
+    text = lower_and_remove_punctuation(text)
+    words = set(text.split())
+    return words
+
+
+def save_words_to_file(words, filename='words.txt'):
+    with open(filename, 'w') as f:
+        f.write('\n'.join(words))
+
+
+def load_words_from_file(filename='words.txt'):
+    with open(filename, 'r') as f:
+        result = [x.strip() for x in f.readlines()]
+    return result
+
+
+def load_lines_from_file(filename='input.txt'):
+    with open(filename, 'r') as f:
+        result = [x.strip() for x in f.readlines()]
+    return result
+
+
+def check_text(lines, words):
+    codes = {}
+    for w in words:
+        code = soundex(w)
+        if code not in codes:
+            codes[code] = [w]
+        else:
+            codes[code].append(w)
+
+    for i, line in enumerate(lines):
+        t = lower_and_remove_punctuation(line)
+        ws = t.split()
+        for w in ws:
+            if w not in words:
+                code = soundex(w)
+                suggestions = codes.get(code, [])
+                print(
+                    'Found unknown word "%s" in line %d. '
+                    'Suggestions: %s' % (
+                        w,
+                        i+1,
+                        ', '.join(suggestions) or 'NONE'))
+
+
+def test_soundex():
+    tests = (
+        ('Robert', 'R163'),
+        ('Rupert', 'R163'),
+        ('Rubin', 'R150'),
+        ('Ashcraft', 'A261'),
+        ('Ashcroft', 'A261'),
+        ('Tymczak', 'T522'),
+        ('Pfister', 'P236'),
+        ('Honeyman', 'H555'),
+        ('Burroughs', 'B620'),
+        ('Burrows', 'B620'),
+        ('Ciondecks', 'C532'),
+        ('Ellery', 'E460'),
+        ('Euler', 'E460'),
+        ('Example', 'E251'),
+        ('Gauss', 'G200'),
+        ('Ghosh', 'G200'),
+        ('Heilbronn', 'H416'),
+        ('Hilbert', 'H416'),
+        ('Kant', 'K530'),
+        ('Knuth', 'K530'),
+        ('Ladd', 'L300'),
+        ('Lissajous', 'L222'),
+        ('Lloyd', 'L300'),
+        ('Lukasiewicz', 'L222'),
+        ('O\'Hara', 'O600'),
+        ('Soundex', 'S532'),
+        ('Wheaton', 'W350'),
+    )
+
+    for w, c in tests:
+        r = soundex(w)
+        assert r == c, \
+            'soundex("%s") returns "%s", should be "%s"' % (w, r, c)
+
+
+if __name__ == '__main__':
+    # Check the text in file
+    lines = load_lines_from_file()
+    words = load_words_from_file()
+    check_text(lines, words)

@@ -1,0 +1,6 @@
+addMorph: aBullet
+	| randX randY |
+	super addMorph: aBullet.
+	randX := (bounds origin x to: bounds corner x - aBullet width) atRandom.
+	randY := (bounds origin y to: bounds corner y - aBullet height) atRandom.
+	aBullet position: randX @ randY

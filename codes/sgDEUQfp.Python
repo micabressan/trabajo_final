@@ -1,0 +1,23 @@
+class GtoOrderForm(OrderFormBase):
+
+    class Meta:
+        model = GtoOrder
+        fields = ['customer', 'city', 'make_id', 'model',
+                  'car_number', 'vin', 'phone', 'driver_name',
+                  'mileage', 'tyres', 'manager_comment']
+        widgets = {
+            'manager_comment': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(GtoOrderForm, self).__init__(*args, **kwargs)
+        self.id = 'gto'
+
+        self._prepare_city_for_customer()
+        self._get_make_and_model()
+
+        if self.instance.id:
+            self.action = reverse('core:gto_order_save', args=[self.instance.id])
+            self._get_make_and_model_from_instance()
+        else:
+            self.action = reverse('core:add_gto_order')

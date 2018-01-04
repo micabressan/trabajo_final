@@ -1,0 +1,52 @@
+// The struct
+pub struct LuaSubsystem<'a> {
+    lua: Lua,
+    table_map: BTreeMap<usize, Table<'a>>,
+}
+
+// The function causing everything
+pub fn register_entity(&'a mut self, code: &str, entity_name: &str) -> Result<usize, String> {
+        let f: Result<Function, _> = self.lua.load(code, Some(entity_name));
+
+        match f {
+            Ok(f) => {
+                if let Ok(table) = f.call::<_, Table>(()) {
+                    let id = self.table_map.keys().fold(0, |acc, i| if &acc == i { i + 1 } else { acc });
+                    self.table_map.insert(id, table);
+
+                    Ok(id)
+                } else {
+                    Err(format!("The Lua script did not return a table for '{}'", entity_name))
+                }
+            }
+            Err(e) => {
+                Err(format!("Lua load error for '{}': {:?}", entity_name, e))
+            }
+        }
+    }
+
+// This is in fn main() and is triggering the error
+let entity_id = lua.register_entity(
+        r#"
+            return {
+                interact = function()
+                    print "hello, world"
+                end
+            }
+        "#,
+        "entity"
+    ).unwrap();
+
+// The error in question
+/*
+error[E0597]: `lua` does not live long enough
+   --> src/main.rs:233:1
+    |
+92  |     let eldric_id = lua.register_entity(
+    |                     --- borrow occurs here
+...
+233 | }
+    | ^ `lua` dropped here while still borrowed
+    |
+    = note: values in a scope are dropped in the opposite order they are created
+*/

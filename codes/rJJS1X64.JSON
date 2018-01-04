@@ -1,0 +1,522 @@
+{
+  "short_description": "Sam Test 20171227 17:03:00",
+  "description": "Sam Test 20171227 17:03:00",
+  "urgency": 3,
+  "impact": 1,
+  "sys_info": {
+    "general": {
+      "time": {
+        "current": 1514365395170,
+        "uptime": 3699.8250494,
+        "timezone": "GMT+0800",
+        "timezoneName": "Taipei Standard Time"
+      }
+    },
+    "system": {
+      "system": {
+        "manufacturer": "Micro-Star International Co., Ltd.",
+        "model": "GS70 2OD",
+        "version": "REV:1.0",
+        "serial": "FFFFFFFF",
+        "uuid": "00000000-0000-0000-0000-6C626D36927B",
+        "sku": ""
+      },
+      "bios": {
+        "vendor": "American Megatrends Inc.",
+        "version": "MSI_NB - 1072009",
+        "releaseDate": "2013-12-03",
+        "revision": ""
+      },
+      "baseboard": {
+        "manufacturer": "Micro-Star International Co., Ltd.",
+        "model": "MS-1771",
+        "version": "REV:0.B",
+        "serial": "BSS-0123456789",
+        "assetTag": ""
+      }
+    },
+    "processes": [
+      {
+        "pid": 4536,
+        "name": "MBAMService",
+        "cpu": 11,
+        "mem": {
+          "private": 257523712,
+          "virtual": 619995136,
+          "usage": 1.5064400840723529
+        }
+      },
+      {
+        "pid": 19184,
+        "name": "WmiPrvSE",
+        "cpu": 5,
+        "mem": {
+          "private": 9330688,
+          "virtual": 2199115911168,
+          "usage": 0.0545818569715743
+        }
+      },
+      {
+        "pid": 4328,
+        "name": "KillerService",
+        "cpu": 5,
+        "mem": {
+          "private": 5177344,
+          "virtual": 111226880,
+          "usage": 0.030285982094850714
+        }
+      }
+    ],
+    "cpu": {
+      "cpu": {
+        "manufacturer": "Intel®",
+        "brand": "Core™ i7-4700HQ",
+        "vendor": "GenuineIntel",
+        "family": "6",
+        "model": "60",
+        "stepping": "3",
+        "revision": "15363",
+        "speed": "2.40",
+        "speedmin": "",
+        "speedmax": "2.40",
+        "cores": 8,
+        "cache": {
+          "l1d": 0,
+          "l1i": 0,
+          "l2": 1048576,
+          "l3": 6291456
+        }
+      },
+      "cpuFlags": "de pse tsc msr mce sep mtrr mca cmov psn clfsh ds acpi mmx fxsr sse sse2 ss htt tm ia64 pbe",
+      "cpuCache": {
+        "l1d": 0,
+        "l1i": 0,
+        "l2": 1048576,
+        "l3": 6291456
+      },
+      "cpuCurrentSpeed": {
+        "min": 2.4,
+        "max": 2.4,
+        "avg": 2.4
+      },
+      "cpuTemperature": {
+        "main": -1,
+        "cores": [],
+        "max": -1
+      }
+    },
+    "memory": {
+      "memory": {
+        "total": 17094852608,
+        "free": 7777423360,
+        "used": 9317429248,
+        "active": 9317429248,
+        "available": 7777423360,
+        "buffcache": 0,
+        "swaptotal": 12348030976,
+        "swapused": 16777216,
+        "swapfree": 12331253760
+      },
+      "memoryLayout": {
+        "total": 17094852608,
+        "free": 7777550336,
+        "used": 9317302272,
+        "active": 9317302272,
+        "available": 7777546240,
+        "buffcache": 0,
+        "swaptotal": 12348030976,
+        "swapused": 16777216,
+        "swapfree": 12331253760
+      }
+    },
+    "disk": {
+      "diskLayout": [
+        {
+          "type": "HD",
+          "name": "Intel Raid 0 Volume",
+          "vendor": "(Standard disk drives)",
+          "size": 1000185822720,
+          "bytesPerSector": 512,
+          "totalCylinders": 121599,
+          "totalHeads": 255,
+          "totalSectors": 1953487935,
+          "totalTracks": 31007745,
+          "tracksPerCylinder": 255,
+          "sectorsPerTrack": 63,
+          "firmwareRevision": "1.0.",
+          "serialNum": "Volume1",
+          "interfaceType": "SCSI"
+        }
+      ]
+    },
+    "battery": {
+      "battery": {
+        "hasbattery": true,
+        "cyclecount": 0,
+        "ischarging": true,
+        "maxcapacity": 0,
+        "currentcapacity": 0,
+        "percent": 88
+      }
+    },
+    "graphics": {
+      "graphics": {
+        "controllers": [
+          {
+            "model": "Intel(R) HD Graphics 4600",
+            "vendor": "Intel Corporation",
+            "bus": "PCI",
+            "vram": 1024,
+            "vramDynamic": true
+          },
+          {
+            "model": "NVIDIA GeForce GTX 765M",
+            "vendor": "NVIDIA",
+            "bus": "PCI",
+            "vram": 2048,
+            "vramDynamic": true
+          }
+        ],
+        "displays": [
+          {
+            "model": "(Standard monitor types)",
+            "main": false,
+            "builtin": false,
+            "connection": "",
+            "resolutionx": 0,
+            "resolutiony": 0,
+            "sizex": -1,
+            "sizey": -1
+          },
+          {
+            "model": "",
+            "main": false,
+            "builtin": false,
+            "connection": "",
+            "resolutionx": 0,
+            "resolutiony": 0,
+            "sizex": -1,
+            "sizey": -1
+          }
+        ]
+      }
+    },
+    "os": {
+      "os": {
+        "platform": "Windows",
+        "distro": "Microsoft Windows 10 Home Single Language",
+        "release": "10.0.16299",
+        "codename": "Microsoft Windows 10 Home Single Language",
+        "kernel": "10.0.16299",
+        "arch": "x64",
+        "hostname": "Susanowo",
+        "logofile": "windows"
+      },
+      "versions": {
+        "kernel": "10.0.16299",
+        "openssl": "1.0.2k",
+        "node": "7.9.0",
+        "v8": "5.8.283.38",
+        "npm": "5.5.1",
+        "yarn": "",
+        "pm2": "",
+        "gulp": "",
+        "grunt": "0.1.13",
+        "git": "2.5.1.windows.1",
+        "tsc": "1.0.3.0"
+      },
+      "shell": "Not Supported",
+      "users": []
+    },
+    "fileSystem": {
+      "fsSize": [
+        {
+          "fs": "C:",
+          "type": "NTFS",
+          "size": "599233101824",
+          "used": 277075677184,
+          "use": 46.238379745813766,
+          "mount": "C:"
+        },
+        {
+          "fs": "D:",
+          "type": "NTFS",
+          "size": "384655421440",
+          "used": 207564263424,
+          "use": 53.96109137028676,
+          "mount": "D:"
+        },
+        {
+          "fs": "E:",
+          "type": "NTFS",
+          "size": "600121012224",
+          "used": 585832169472,
+          "use": 97.6190064235467,
+          "mount": "E:"
+        },
+        {
+          "fs": "F:",
+          "type": "NTFS",
+          "size": "384656470016",
+          "used": 381191979008,
+          "use": 99.09932854948316,
+          "mount": "F:"
+        }
+      ],
+      "blockDevices": [
+        {
+          "name": "C:",
+          "identifier": "C:",
+          "type": "disk",
+          "fstype": "ntfs",
+          "mount": "C:",
+          "size": "599233101824",
+          "physical": "HDD",
+          "uuid": "A5FBD4E9",
+          "label": "OS_Install",
+          "model": "",
+          "serial": "A5FBD4E9",
+          "removable": false,
+          "protocol": ""
+        },
+        {
+          "name": "D:",
+          "identifier": "D:",
+          "type": "disk",
+          "fstype": "ntfs",
+          "mount": "D:",
+          "size": "384655421440",
+          "physical": "HDD",
+          "uuid": "9810F598",
+          "label": "Data",
+          "model": "",
+          "serial": "9810F598",
+          "removable": false,
+          "protocol": ""
+        },
+        {
+          "name": "E:",
+          "identifier": "E:",
+          "type": "disk",
+          "fstype": "ntfs",
+          "mount": "E:",
+          "size": "600121012224",
+          "physical": "HDD",
+          "uuid": "B2CE6D3B",
+          "label": "OS_Install",
+          "model": "",
+          "serial": "B2CE6D3B",
+          "removable": false,
+          "protocol": ""
+        },
+        {
+          "name": "F:",
+          "identifier": "F:",
+          "type": "disk",
+          "fstype": "ntfs",
+          "mount": "F:",
+          "size": "384656470016",
+          "physical": "HDD",
+          "uuid": "DE5CADF0",
+          "label": "Data",
+          "model": "",
+          "serial": "DE5CADF0",
+          "removable": false,
+          "protocol": ""
+        }
+      ],
+      "fsStats": "Not Supported",
+      "disksIO": "Not Supported"
+    },
+    "network": {
+      "networkInterface": [
+        {
+          "iface": "Wi-Fi",
+          "ip4": "192.168.0.20",
+          "ip6": "fe80::1096:5ddd:7c7d:593d",
+          "mac": "3c:77:e6:9c:d7:83",
+          "internal": false
+        },
+        {
+          "iface": "Loopback Pseudo-Interface 1",
+          "ip4": "127.0.0.1",
+          "ip6": "::1",
+          "mac": "00:00:00:00:00:00",
+          "internal": true
+        },
+        {
+          "iface": "Local Area Connection* 15",
+          "ip4": "",
+          "ip6": "2001:0:4137:9e76:d8:bb2:7d96:3abf",
+          "mac": "00:00:00:00:00:00",
+          "internal": false
+        }
+      ],
+      "networkInterfaceDefault": "Local Area Connection* 15",
+      "networkStats": {
+        "iface": "Local Area Connection* 15",
+        "operstate": "unknown",
+        "rx": 0,
+        "tx": 0,
+        "rx_sec": -1,
+        "tx_sec": -1,
+        "ms": 0
+      },
+      "networkConnections": [
+        {
+          "protocol": "proto",
+          "localaddress": "Local",
+          "localport": "",
+          "peeraddress": "Address",
+          "peerport": "",
+          "state": "Foreign"
+        },
+        {
+          "protocol": "tcp",
+          "localaddress": "0.0.0.0",
+          "localport": "135",
+          "peeraddress": "0.0.0.0",
+          "peerport": "0",
+          "state": "LISTEN"
+        }
+      ]
+    },
+    "currentLoad": {
+      "currentLoad": {
+        "avgload": 0,
+        "currentload": 21.689556640820996,
+        "currentload_user": 10.415402321342258,
+        "currentload_system": 11.013963462850823,
+        "currentload_nice": 0,
+        "currentload_idle": 78.310443359179,
+        "currentload_irq": 0.26019085662791497,
+        "raw_currentload": 6391225,
+        "raw_currentload_user": 3069089,
+        "raw_currentload_system": 3245466,
+        "raw_currentload_nice": 0,
+        "raw_currentload_idle": 23075606,
+        "raw_currentload_irq": 76670,
+        "cpus": [
+          {
+            "load": 28.52150967814223,
+            "load_user": 11.88723706469402,
+            "load_system": 15.114338811506817,
+            "load_nice": 0,
+            "load_idle": 71.47849032185776,
+            "load_irq": 1.5199338019413917,
+            "raw_load": 1064030,
+            "raw_load_user": 443468,
+            "raw_load_system": 563859,
+            "raw_load_nice": 0,
+            "raw_load_idle": 2666593,
+            "raw_load_irq": 56703
+          },
+          {
+            "load": 15.33797003546422,
+            "load_user": 7.724400411688273,
+            "load_system": 7.457732512964458,
+            "load_nice": 0,
+            "load_idle": 84.66202996453578,
+            "load_irq": 0.1558371108114917,
+            "raw_load": 564358,
+            "raw_load_user": 284218,
+            "raw_load_system": 274406,
+            "raw_load_nice": 0,
+            "raw_load_idle": 3115125,
+            "raw_load_irq": 5734
+          },
+          {
+            "load": 27.51481036288823,
+            "load_user": 15.161666137603703,
+            "load_system": 12.283454800205968,
+            "load_nice": 0,
+            "load_idle": 72.48518963711177,
+            "load_irq": 0.06968942507856381,
+            "raw_load": 1011530,
+            "raw_load_user": 557390,
+            "raw_load_system": 451578,
+            "raw_load_nice": 0,
+            "raw_load_idle": 2664781,
+            "raw_load_irq": 2562
+          },
+          {
+            "load": 16.819832786019976,
+            "load_user": 8.439680807937904,
+            "load_system": 8.331696381202166,
+            "load_nice": 0,
+            "load_idle": 83.18016721398003,
+            "load_irq": 0.048455596879905756,
+            "raw_load": 618218,
+            "raw_load_user": 310203,
+            "raw_load_system": 306234,
+            "raw_load_nice": 0,
+            "raw_load_idle": 3057312,
+            "raw_load_irq": 1781
+          },
+          {
+            "load": 22.487870923452594,
+            "load_user": 10.648972911049087,
+            "load_system": 11.758581467848089,
+            "load_nice": 0,
+            "load_idle": 77.51212907654741,
+            "load_irq": 0.0803165445554195,
+            "raw_load": 826812,
+            "raw_load_user": 391531,
+            "raw_load_system": 432328,
+            "raw_load_nice": 0,
+            "raw_load_idle": 2849890,
+            "raw_load_irq": 2953
+          },
+          {
+            "load": 18.08170698699875,
+            "load_user": 7.99187200861763,
+            "load_system": 10.023543428853552,
+            "load_nice": 0,
+            "load_idle": 81.91829301300125,
+            "load_irq": 0.0662915495275673,
+            "raw_load": 664717,
+            "raw_load_user": 293796,
+            "raw_load_system": 368484,
+            "raw_load_nice": 0,
+            "raw_load_idle": 3011468,
+            "raw_load_irq": 2437
+          },
+          {
+            "load": 26.034990760334807,
+            "load_user": 11.932538610592658,
+            "load_system": 14.041244298488657,
+            "load_nice": 0,
+            "load_idle": 73.96500923966519,
+            "load_irq": 0.06120785125349598,
+            "raw_load": 957046,
+            "raw_load_user": 438640,
+            "raw_load_system": 516156,
+            "raw_load_nice": 0,
+            "raw_load_idle": 2718953,
+            "raw_load_irq": 2250
+          },
+          {
+            "load": 18.62117444024725,
+            "load_user": 9.516952947199645,
+            "load_system": 9.04301362514343,
+            "load_nice": 0,
+            "load_idle": 81.37882555975276,
+            "load_irq": 0.061207867904171875,
+            "raw_load": 684514,
+            "raw_load_user": 349843,
+            "raw_load_system": 332421,
+            "raw_load_nice": 0,
+            "raw_load_idle": 2991484,
+            "raw_load_irq": 2250
+          }
+        ]
+      },
+      "fullLoad": 21.689556640820996
+    }
+  },
+  "comments": "2017-12-27T09:03:27.830Z",
+  "u_call_back_number": "231313",
+  "u_line_of_business": "Both CC and RM",
+  "u_impacted_client": "1-800-Flowers",
+  "location": "Adelaide"
+}

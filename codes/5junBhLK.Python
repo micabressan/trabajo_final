@@ -1,0 +1,105 @@
+'''Coin estimator.
+This program allows users to get an estimated value of how many coin wrappers of each type they would need,
+how many coins they have and a total value of all coins.'''
+
+import math
+import sys
+
+def main():
+    while True:
+        print("Would you like to calculate in metric units or in imperial units?")
+        user_reply = input("> ")
+        if user_reply == "metric":
+            metric()
+        elif user_reply == "imperial":
+            imperial()
+        else:
+            print('Please type in "metric" or "imperial."')
+            userinput()
+
+def metric():
+    print("Please use gram as the unit.")
+    penny = float(input("Please enter total weight of pennies.\n"))
+    penny_amount = float(penny / 2.5) #Each penny is 2.5 grams
+    penny_wrapper = float(penny_amount / 50) #Each penny wrapper holds 50 coins
+    penny_total = float(penny_amount * 1) #Each penny is 1 cents
+
+    nickel = float(input("Please enter total weight of nickels.\n"))
+    nickel_amount = float(nickel / 5.0) #Each nickel is 5 grams
+    nickel_wrapper = float(nickel_amount / 40) #Each nickel wrapper holds 40 coins
+    nickel_total = float(nickel_amount * 5) #Each nickel is 5 cents
+
+    dime = float(input("Please enter total weight of dimes.\n"))
+    dime_amount = float(dime / 2.27) #Each dime is 2.27 grams
+    dime_wrapper = float(dime_amount / 40) #Each dime wrapper holds 50 coins
+    dime_total = float(dime_amount * 10) #Each dime is 10 cents
+
+    quarter = float(input("Please enter total weight of quarters.\n"))
+    quarter_amount = float(quarter / 5.67) #Each quarter is 5.67 grams
+    quarter_wrapper = float(quarter_amount / 40) #Each quarter wrapper holds 40 coins
+    quarter_total = float(quarter_amount * 25) #Each quarter is 25 cents
+
+    print("For pennies, you need " + str(math.ceil(penny_wrapper)) + " wrappers, you have " + str(math.ceil(penny_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(penny_total)) + " cents.\n"
+          "For nickels, you need " + str(math.ceil(nickel_wrapper)) + " wrappers, you have " + str(math.ceil(nickel_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(nickel_total)) + " cents.\n"
+          "For dimes, you need " + str(math.ceil(dime_wrapper)) + " wrappers, you have " + str(math.ceil(dime_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(dime_total)) + " cents.\n"
+          "For quarters, you need " + str(math.ceil(quarter_wrapper)) + " wrappers, you have " + str(math.ceil(quarter_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(quarter_total)) + " cents.\n"
+          "Total is " + str("%.1f" % (penny_total + nickel_total + dime_total + quarter_total)) + ".\n")
+
+    print("Would you like to calculate again?")
+    reply = input("> ")
+    if reply == "yes":
+        main()
+    else:
+        sys.exit(0)
+              
+
+def imperial():
+    print("Please use ounce as the unit.")
+    penny = float(input("Please enter total weight of pennies.\n"))
+    penny_amount = float(penny / 0.0881) #Each penny is 0.0881 ounces
+    penny_wrapper = float(penny_amount / 50) #Each penny wrapper hold 50 coins
+    penny_total = float(penny_amount * 1) #Each penny is 1 cents
+
+    nickel = float(input("Please enter total weight of nickels.\n"))
+    nickel_amount = float(nickel / 0.1763) #Each nickel is 0.1763 ounces
+    nickel_wrapper = float(nickel_amount / 40) #Each nickel wrapper holds 40 coins
+    nickel_total = float(nickel_amount * 5) #Each nickel is 5 cents
+
+    dime = float(input("Please enter total weight of dimes.\n"))
+    dime_amount = float(dime / 0.08007) #Each dime is 0.08007 ounces
+    dime_wrapper = float(dime_amount / 40) #Each dime wrapper holds 50 coins
+    dime_total = float(dime_amount * 10) #Each dime is 10 cents
+
+    quarter = float(input("Please enter total weight of quarters.\n"))
+    quarter_amount = float(quarter / 0.2) #Each quarter is 0.2 ounces
+    quarter_wrapper = float(quarter_amount / 40) #Each quarter wrapper holds 40 coins
+    quarter_total = float(quarter_amount * 25) #Each quarter is 25 cents
+
+    print("For pennies, you need " + str(math.ceil(penny_wrapper)) + " wrappers, you have " + str(math.ceil(penny_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(penny_total)) + " cents.\n"
+          "For nickels, you need " + str(math.ceil(nickel_wrapper)) + " wrappers, you have " + str(math.ceil(nickel_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(nickel_total)) + " cents.\n"
+          "For dimes, you need " + str(math.ceil(dime_wrapper)) + " wrappers, you have " + str(math.ceil(dime_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(dime_total)) + " cents.\n"
+          "For quarters, you need " + str(math.ceil(quarter_wrapper)) + " wrappers, you have " + str(math.ceil(quarter_amount)) +
+            " pennies in total, and your pennies' total value is " + str("%.1f"%(quarter_total)) + " cents.\n"
+          "Total is " + str("%.1f" % (penny_total + nickel_total + dime_total + quarter_total)) + ".")
+
+    print("Would you like to calculate again?")
+    reply = input("> ")
+    if reply == "yes":
+        main()
+    else:
+        sys.exit(0)
+
+print('''Enter weights of pennies, nickels, dimes and quarters seperately.\n
+Amount in a roll for each wrapper type:
+Cents: 50
+Nickels: 40
+Dimes: 50
+Quarters: 40\n''')
+main()

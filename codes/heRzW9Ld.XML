@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repository xmlns="http://www.softplan.com.br/schemas/goldengate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.softplan.com.br/schemas/goldengate ../schema/goldengate-repository-1.2.1.xsd">
+   <settings>
+      <rdb-sync-project>
+         <groupId>br.com.softplan</groupId>
+         <artifactId>adv-goldengateDev</artifactId>
+         <version>2.0.0</version>
+      </rdb-sync-project>
+   </settings>
+   <collection name="atendimento">
+      <field name="id" type="string" unique="true" />
+      <field name="deIdentificador" type="string" />
+      <field name="cdArrendatario" type="long" />
+      <field name="flAtivo" type="string" />
+      <field name="flHabilitado" type="string" />
+      <field name="dtAtendimento" type="string" />
+      <field name="nmSituacao" type="sp_phonetic" />
+      <field name="nmAssunto" type="sp_phonetic" />
+      <field name="deObservacao" type="sp_phonetic" />
+      <field name="nmPasta" type="string" />
+      <field name="nomeResponsavel" type="sp_phonetic" multi-valued="true" />
+      <field name="nmGrupo" type="sp_phonetic" multi-valued="true" />
+      <field name="nomeCliente" type="sp_phonetic" multi-valued="true" />
+      <field name="nmMarcador" type="string" multi-valued="true" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="deIdentificador,nmAssunto,nmPasta,nomeCliente,deObservacao,nmSituacao,nmMarcador" />
+      <rdb-sync ds-jndi="java:/datasources/saj_adv" update-interval="60" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>
+select
+atend.cdatendimento as id,
+atend.deidentificador as deidentificador,
+atend.cdarrendatario as cdarrendatario,
+atend.dtatendimento as dtatendimento,
+atend.nmpasta as nmpasta,
+atend.nmassunto as nmassunto,
+atend.deobservacao as deobservacao,
+atend.flativo as flativo,
+atend.flhabilitado as flhabilitado,
+ass.nmsituacao as nmsituacao
+from atendimento atend
+inner join atendimentosituacao ass on atend.cdatendimentosituacao = ass.cdatendimentosituacao
+</query>
+            <metadata>
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <table-pks name="atendimentosituacao" columns="cdatendimentosituacao" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="atendimento">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="atendimentosituacao">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="grupo">
+            <query>
+select
+atend.cdatendimento as id,
+gr.nmgrupo as nmgrupo
+from atendimento atend
+inner join reatendimentogrupo rag on atend.cdatendimento = rag.cdatendimento
+inner join grupo gr on rag.cdgrupo = gr.cdgrupo
+</query>
+            <metadata>
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <table-pks name="reatendimentogrupo" columns="cdgrupo" />
+               <table-pks name="grupo" columns="cdgrupo" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="grupo">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="pessoa">
+            <query>
+select
+atend.cdatendimento as id,
+pr.nmpessoa as nomeresponsavel
+from atendimento atend
+inner join reatendimentousuario rau on atend.cdatendimento = rau.cdatendimento
+inner join usuario ur on rau.cdusuario = ur.cdusuario
+inner join pessoa pr on ur.cdpessoa = pr.cdpessoa
+</query>
+            <metadata>
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <table-pks name="reatendimentousuario" columns="cdusuario" />
+               <table-pks name="usuario" columns="cdpessoa" />
+               <table-pks name="pessoa" columns="cdpessoa" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="usuario">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="atendimentopessoa">
+            <query>
+select
+atend.cdatendimento as id,
+pc.nmpessoa as nomecliente
+from atendimento atend
+inner join atendimentopessoa ap on atend.cdatendimento = ap.cdatendimento
+inner join pessoa pc on ap.cdpessoa = pc.cdpessoa
+</query>
+            <metadata>
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <table-pks name="atendimentopessoa" columns="cdpessoa" />
+               <table-pks name="pessoa" columns="cdpessoa" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="atendimentopessoa">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="marcador">
+            <query>
+select
+atend.cdatendimento as id,
+marc.nmmarcador as nmmarcador
+from atendimento atend
+inner join marcadorvinculomodulo marcvinc on atend.cdatendimento = marcvinc.cdregistrovinculo and (marcvinc.cdmodulo = 1)
+inner join marcador marc on marcvinc.cdmarcador = marc.cdmarcador
+</query>
+            <metadata>
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <table-pks name="marcadorvinculomodulo" columns="cdregistrovinculo,cdmarcador" />
+               <table-pks name="marcador" columns="cdmarcador" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="marcador">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="processo">
+      <field name="id" type="string" unique="true" />
+      <field name="deIdentificador" type="string" />
+      <field name="cdArrendatario" type="long" />
+      <field name="flAtivo" type="string" />
+      <field name="flHabilitado" type="string" />
+      <field name="nomePasta" type="sp_phonetic" />
+      <field name="numeroProcesso" type="text_general" />
+      <field name="nomeAssunto" type="sp_phonetic" />
+      <field name="nomeSituacao" type="sp_phonetic" />
+      <field name="nomeProcessoOrgaoExtraJudicial" type="sp_phonetic" />
+      <field name="nomeProcessoOrgaoJudicial" type="sp_phonetic" />
+      <field name="nomeUnidadeOrganizacional" type="sp_phonetic" />
+      <field name="dataInclusao" type="string" />
+      <field name="dataCitacao" type="string" />
+      <field name="dataDistribuicao" type="string" />
+      <field name="dataEncerramento" type="string" />
+      <field name="dataJulgamento" type="string" />
+      <field name="cdEstadoExtraJudicial" type="long" />
+      <field name="cdEstadoJudicial" type="long" />
+      <field name="cdAtendimento" type="long" />
+      <field name="nomeEnvolvidos" type="sp_phonetic" multi-valued="true" />
+      <field name="nmMarcador" type="string" multi-valued="true" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="deIdentificador,nomePasta,numeroProcesso,nomeAssunto,nomeSituacao,nomeProcessoOrgaoExtraJudicial,nomeProcessoOrgaoJudicial,nomeUnidadeOrganizacional,nmMarcador" />
+      <rdb-sync ds-jndi="java:/datasources/saj_adv" update-interval="60" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>
+select
+pro.cdprocesso as id,
+pro.deidentificador as deidentificador,
+pro.cdarrendatario as cdarrendatario,
+pro.flativo as flativo,
+pro.flhabilitado as flhabilitado,
+pro.nmpasta as nomepasta,
+pn.denumeroprocesso as numeroprocesso,
+pro.nmassunto as nomeassunto,
+ps.desituacao as nomesituacao,
+poej.nmorgao as nomeprocessoorgaoextrajudicial,
+poj.nmorgao as nomeprocessoorgaojudicial,
+uo.nmunidadeorganizacional as nomeunidadeorganizacional,
+pro.dtinclusao as datainclusao ,
+pro.dtcitacao as datacitacao,
+pro.dtdistribuicao as datadistribuicao,
+pro.dtencerramento as dataencerramento,
+pro.dtjulgamento as datajulgamento,
+eej.cdestado as cdestadoextrajudicial,
+ej.cdestado as cdestadojudicial,
+ate.cdatendimento as cdatendimento
+from processo pro
+left join processosituacao ps on pro.cdsituacaoprocesso = ps.cdprocessosituacao
+left join unidadeorganizacional uo on pro.cdunidadeorganizacionalatual = uo.cdunidadeorganizacional
+left join processonumero pn on pn.cdprocesso = pro.cdprocesso and pn.flprincipal = 'S' and pn.flativo = 'S'
+left join processoorgao poej on poej.cdprocessoorgao = pro.cdprocessoorgaoextrajudicial
+left join cidade cej on cej.cdcidade = poej.cdcidade
+left join estado eej on eej.cdestado = cej.cdestado
+left join processoorgao poj on poj.cdprocessoorgao  = pro.cdprocessoorgaojudicial
+left join cidade cj on cj.cdcidade = poj.cdcidade
+left join estado ej on ej.cdestado = cj.cdestado
+left join atendimento ate on pro.cdatendimento = ate.cdatendimento
+</query>
+            <metadata>
+               <table-pks name="processo" columns="cdprocesso" />
+               <table-pks name="processosituacao" columns="cdprocessosituacao" />
+               <table-pks name="unidadeorganizacional" columns="cdunidadeorganizacional" />
+               <table-pks name="processonumero" columns="cdprocessonumero" />
+               <table-pks name="processoorgao" columns="cdprocessoorgao" />
+               <table-pks name="cidade" columns="cdcidade" />
+               <table-pks name="estado" columns="cdestado" />
+               <table-pks name="atendimento" columns="cdatendimento" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="processo">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="processoenvolvido">
+            <query>
+select
+pro.cdprocesso as id,
+pep.nmpessoa as nomeenvolvidos
+from processo pro
+inner join processoenvolvido pe on pe.cdprocesso = pro.cdprocesso
+inner join pessoa pep on pep.cdpessoa = pe.cdpessoa
+</query>
+            <metadata>
+               <table-pks name="processo" columns="cdprocesso" />
+               <table-pks name="processoenvolvido" columns="cdpessoa" />
+               <table-pks name="pessoa" columns="cdpessoa" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="processo">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="processoenvolvido">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="marcador">
+            <query>
+select
+pro.cdprocesso as id,
+marc.nmmarcador as nmmarcador
+from processo pro
+inner join marcadorvinculomodulo marcvinc on pro.cdprocesso = marcvinc.cdregistrovinculo and (marcvinc.cdmodulo = 3)
+inner join marcador marc on marcvinc.cdmarcador = marc.cdmarcador
+</query>
+            <metadata>
+               <table-pks name="processo" columns="cdprocesso" />
+               <table-pks name="marcadorvinculomodulo" columns="cdregistrovinculo,cdmarcador" />
+               <table-pks name="marcador" columns="cdmarcador" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="marcador">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="pessoa" default="true">
+      <field name="id" type="string" unique="true" />
+      <field name="cdArrendatario" type="long" />
+      <field name="flAtivo" type="string" />
+      <field name="flHabilitado" type="string" />
+      <field name="nmPessoa" type="sp_phonetic" />
+      <field name="nmPessoaTexto" type="text_general" />
+      <field name="deCpf" type="string" />
+      <field name="deCnpj" type="string" />
+      <field name="flPessoaTipo" type="string" />
+      <field name="nmCidade" type="sp_phonetic" multi-valued="true" />
+      <field name="nuTelefone" type="string" multi-valued="true" />
+      <field name="deEmail" type="string" multi-valued="true" />
+      <field name="deClassificacao" type="sp_phonetic" multi-valued="true" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="nmPessoa,deCpf,deCnpj,deEmail" />
+      <rdb-sync ds-jndi="java:/datasources/saj_adv" update-interval="60" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>
+select
+pessoa.cdpessoa as id,
+pessoa.cdarrendatario as cdarrendatario,
+pessoa.flativo as flativo,
+pessoa.flhabilitado as flhabilitado,
+pessoa.nmpessoa as nmpessoa,
+pessoa.decpf as decpf,
+pessoa.decnpj as decnpj,
+pessoa.flpessoatipo as flpessoatipo
+from pessoa pessoa
+</query>
+            <metadata>
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="pessoaendereco">
+            <query>
+select
+pessoa.cdpessoa as id,
+cidade.nmcidade as nmcidade
+from pessoa pessoa
+inner join pessoaendereco pessoaend on pessoa.cdpessoa = pessoaend.cdpessoa
+inner join endereco endereco on pessoaend.cdendereco = endereco.cdendereco
+inner join cidade cidade on endereco.cdcidade = cidade.cdcidade
+</query>
+            <metadata>
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <table-pks name="pessoaendereco" columns="cdendereco" />
+               <table-pks name="endereco" columns="cdcidade" />
+               <table-pks name="cidade" columns="cdcidade" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="pessoaendereco">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="endereco">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="pessoatelefone">
+            <query>
+select
+pessoa.cdpessoa as id,
+telefone.nutelefone as nutelefone
+from pessoa pessoa
+inner join pessoatelefone pessoatel on pessoa.cdpessoa = pessoatel.cdpessoa
+inner join telefone telefone on pessoatel.cdtelefone = telefone.cdtelefone
+</query>
+            <metadata>
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <table-pks name="pessoatelefone" columns="cdtelefone" />
+               <table-pks name="telefone" columns="cdtelefone" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="pessoatelefone">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="telefone">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="pessoaemail">
+            <query>
+select
+pessoa.cdpessoa as id,
+pessoaemail.deemail as deemail
+from pessoa pessoa
+inner join pessoaemail pessoaemail on pessoa.cdpessoa = pessoaemail.cdpessoa
+</query>
+            <metadata>
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <table-pks name="pessoaemail" columns="cdpessoa" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="pessoaemail">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="pessoaclassificacao">
+            <query>
+select
+pessoa.cdpessoa as id,
+pessoaclass.declassificacao as declassificacao
+from pessoa pessoa
+inner join repessoaclasspessoa pessclassp on pessoa.cdpessoa = pessclassp.cdpessoa
+inner join pessoaclassificacao pessoaclass on pessclassp.cdpessoaclassificacao = pessoaclass.cdpessoaclassificacao
+</query>
+            <metadata>
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <table-pks name="repessoaclasspessoa" columns="cdpessoaclassificacao" />
+               <table-pks name="pessoaclassificacao" columns="cdpessoaclassificacao" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="pessoaclassificacao">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="intimacao">
+      <field name="id" type="string" unique="true" />
+      <field name="cdArrendatario" type="long" />
+      <field name="flAtivo" type="string" />
+      <field name="flHabilitado" type="string" />
+      <field name="deOrgaoPublicacao" type="sp_phonetic" />
+      <field name="deOabOrigem" type="sp_phonetic" />
+      <field name="dtDisponibilizacao" type="string" />
+      <field name="deTexto" type="sp_phonetic" />
+      <field name="deJornal" type="sp_phonetic" />
+      <field name="nmCidade" type="sp_phonetic" />
+      <field name="deNumeroProcesso" type="text_general" multi-valued="true" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="deOrgaoPublicacao,deOabOrigem,dtDisponibilizacao,deJornal,nmCidade,deNumeroProcesso" />
+      <rdb-sync ds-jndi="java:/datasources/saj_adv" update-interval="60" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>
+select
+intm.cdintimacao as id,
+intm.cdarrendatario as cdarrendatario,
+intm.flativo as flativo,
+intm.flhabilitado as flhabilitado,
+intm.deorgaopublicacao as deorgaopublicacao,
+intm.deoaborigem as deoaborigem,
+to_char(intm.dtdisponibilizacao, 'dd/mm/yyyy') as dtdisponibilizacao,
+intm.detexto as detexto,
+intm.dejornal as dejornal,
+cid.nmcidade as nmcidade
+from intimacao intm
+inner join cidade cid on intm.cdcidade = cid.cdcidade
+</query>
+            <metadata>
+               <table-pks name="intimacao" columns="cdintimacao" />
+               <table-pks name="cidade" columns="cdcidade" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="intimacao">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+         <record name="intimacaonumeroprocesso">
+            <query>
+select
+intm.cdintimacao as id,
+num.denumeroprocesso as denumeroprocesso
+from intimacao intm
+inner join intimacaonumeroprocesso num on intm.cdintimacao = num.cdintimacao
+</query>
+            <metadata>
+               <table-pks name="intimacao" columns="cdintimacao" />
+               <table-pks name="intimacaonumeroprocesso" columns="cdintimacaonumeroprocesso" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="intimacao">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="arquivo">
+      <field name="id" type="string" unique="true" />
+      <field name="cdArrendatario" type="long" />
+      <field name="flAtivo" type="string" />
+      <field name="flSigiloso" type="string" />
+      <field name="cdArquivoTipo" type="long" />
+      <field name="nmArquivoTipo" type="text_general" />
+      <field name="nmArquivoFinal" type="string" />
+      <field name="dtEnvio" type="date" />
+      <field name="nmPessoa" type="sp_phonetic" />
+      <field name="nuTamanhoArquivo" type="long" />
+      <field name="deArquivo" type="string" />
+      <field name="nmModulo" type="string" />
+      <field name="cdModulo" type="long" />
+      <field name="nmChaveModulo" type="string" />
+      <field name="cdRegistroVinculo" type="long" />
+      <field name="cdUsuarioCriador" type="long" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="nmArquivoTipo,nmArquivoFinal,dtEnvio,nmPessoa,nuTamanhoArquivo,deArquivo,nmModulo,nmChaveModulo" />
+      <rdb-sync ds-jndi="java:/datasources/saj_adv" update-interval="60" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>
+select
+arq.cdarquivo as id,
+arq.flativo as flativo,
+arq.flsigiloso as flsigiloso,
+arqtip.cdarquivotipo as cdarquivotipo,
+arqtip.nmarquivotipo as nmarquivotipo,
+arq.nmarquivofinal as nmarquivofinal,
+arq.dtenvio as dtenvio,
+pes.nmpessoa as nmpessoa,
+arq.nutamanhoarquivo as nutamanhoarquivo,
+arq.dearquivo as dearquivo,
+arq.cdarrendatario as cdarrendatario,
+mod.cdmodulo as cdmodulo,
+mod.nmmodulo as nmmodulo,
+mod.nmchavemodulo as nmchavemodulo,
+arqvinc.cdregistrovinculo as cdregistrovinculo,
+arq.cdusuariocriador as cdusuariocriador
+from arquivo arq
+inner join usuario usu on arq.cdusuariocriador = usu.cdusuario
+inner join pessoa pes on usu.cdpessoa = pes.cdpessoa
+inner join arquivotipo arqtip on arq.cdarquivotipo = arqtip.cdarquivotipo
+inner join arquivovinculomodulo arqvinc on arq.cdarquivo = arqvinc.cdarquivo and arqvinc.flprincipal = 'S'
+inner join modulo mod on mod.cdmodulo = arqvinc.cdmodulo
+</query>
+            <metadata>
+               <table-pks name="arquivo" columns="cdarquivo" />
+               <table-pks name="usuario" columns="cdusuario" />
+               <table-pks name="pessoa" columns="cdpessoa" />
+               <table-pks name="arquivotipo" columns="cdarquivotipo" />
+               <table-pks name="arquivovinculomodulo" columns="cdarquivo" />
+               <table-pks name="modulo" columns="cdmodulo" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+            <logical-exclusions>
+               <exclusion-clause table-name="arquivo">
+                  <column-exclusion column="flativo" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="usuario">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="pessoa">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+               <exclusion-clause table-name="arquivotipo">
+                  <column-exclusion column="flativo" value="N" />
+                  <column-exclusion column="flhabilitado" value="N" />
+               </exclusion-clause>
+            </logical-exclusions>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="artigofal">
+      <field name="id" type="string" unique="true" />
+      <field name="numero" type="string" />
+      <field name="capitulo" type="string" />
+      <field name="capituloDescricao" type="sp_phonetic" />
+      <field name="secao" type="string" />
+      <field name="secaoDescricao" type="sp_phonetic" />
+      <field name="livro" type="string" />
+      <field name="livroDescricao" type="sp_phonetic" />
+      <field name="titulo" type="string" />
+      <field name="tituloDescricao" type="sp_phonetic" />
+      <field name="subsecao" type="string" />
+      <field name="subsecaoDescricao" type="sp_phonetic" />
+      <field name="grupo" type="string" />
+      <field name="grupoNumeroMin" type="string" />
+      <field name="grupoNumeroMax" type="string" />
+      <field name="conteudo" type="sp_phonetic" />
+      <field name="integra" type="sp_phonetic" />
+      <field name="referenciasLegislativas" type="sp_phonetic" />
+      <field name="doutrinas" type="sp_phonetic" />
+      <field name="sumulas" type="sp_phonetic" />
+      <field name="recursosRepetitivos" type="sp_phonetic" />
+      <field name="enunciado" type="sp_phonetic" />
+      <field name="tipo" type="string" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="capituloDescricao,secaoDescricao,livroDescricao,tituloDescricao,subsecaoDescricao,conteudo,integra,referenciasLegislativas,doutrinas,sumulas,recursosRepetitivos,enunciado" />
+      <rdb-sync ds-jndi="java:/datasources/imhof_falencia" update-interval="77777" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>select
+art.id,
+art.numero,
+art.capitulo,
+art.capitulo_descricao as capitulodescricao,
+art.secao,
+art.secao_descricao as secaodescricao,
+art.livro,
+art.livro_descricao as livrodescricao,
+art.titulo,
+art.titulo_descricao as titulodescricao,
+art.subsecao,
+art.subsecao_descricao as subsecaodescricao,
+art.grupo,
+art.grupo_numero_min as gruponumeromin,
+art.grupo_numero_max as gruponumeromax,
+art.conteudo,
+art.integra,
+art.referencias_legislativas as referenciaslegislativas,
+art.doutrinas,
+art.sumulas,
+art.recursos_repetitivos as recursosrepetitivos,
+art.enunciado,
+'FALENCIA' as tipo
+from artigo art</query>
+            <metadata>
+               <table-pks name="artigo" columns="id" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="artigocpc">
+      <field name="id" type="string" unique="true" />
+      <field name="numero" type="string" />
+      <field name="capitulo" type="string" />
+      <field name="capituloDescricao" type="sp_phonetic" />
+      <field name="secao" type="string" />
+      <field name="secaoDescricao" type="sp_phonetic" />
+      <field name="livro" type="string" />
+      <field name="livroDescricao" type="sp_phonetic" />
+      <field name="titulo" type="string" />
+      <field name="tituloDescricao" type="sp_phonetic" />
+      <field name="subsecao" type="string" />
+      <field name="subsecaoDescricao" type="sp_phonetic" />
+      <field name="grupo" type="string" />
+      <field name="grupoNumeroMin" type="string" />
+      <field name="grupoNumeroMax" type="string" />
+      <field name="conteudo" type="sp_phonetic" />
+      <field name="integra" type="sp_phonetic" />
+      <field name="referenciasLegislativas" type="sp_phonetic" />
+      <field name="doutrinas" type="sp_phonetic" />
+      <field name="sumulas" type="sp_phonetic" />
+      <field name="recursosRepetitivos" type="sp_phonetic" />
+      <field name="enunciado" type="sp_phonetic" />
+      <field name="tipo" type="string" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="capituloDescricao,secaoDescricao,livroDescricao,tituloDescricao,subsecaoDescricao,conteudo,integra,referenciasLegislativas,doutrinas,sumulas,recursosRepetitivos,enunciado" />
+      <rdb-sync ds-jndi="java:/datasources/imhof_cpc" update-interval="77777" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>select
+art.id,
+art.numero,
+art.capitulo,
+art.capitulo_descricao as capitulodescricao,
+art.secao,
+art.secao_descricao as secaodescricao,
+art.livro,
+art.livro_descricao as livrodescricao,
+art.titulo,
+art.titulo_descricao as titulodescricao,
+art.subsecao,
+art.subsecao_descricao as subsecaodescricao,
+art.grupo,
+art.grupo_numero_min as gruponumeromin,
+art.grupo_numero_max as gruponumeromax,
+art.conteudo,
+art.integra,
+art.referencias_legislativas as referenciaslegislativas,
+art.doutrinas,
+art.sumulas,
+art.recursos_repetitivos as recursosrepetitivos,
+art.enunciado,
+'CPC' as tipo
+from artigo art</query>
+            <metadata>
+               <table-pks name="artigo" columns="id" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="artigocc">
+      <field name="id" type="string" unique="true" />
+      <field name="numero" type="string" />
+      <field name="capitulo" type="string" />
+      <field name="capituloDescricao" type="sp_phonetic" />
+      <field name="secao" type="string" />
+      <field name="secaoDescricao" type="sp_phonetic" />
+      <field name="livro" type="string" />
+      <field name="livroDescricao" type="sp_phonetic" />
+      <field name="titulo" type="string" />
+      <field name="tituloDescricao" type="sp_phonetic" />
+      <field name="subsecao" type="string" />
+      <field name="subsecaoDescricao" type="sp_phonetic" />
+      <field name="grupo" type="string" />
+      <field name="grupoNumeroMin" type="string" />
+      <field name="grupoNumeroMax" type="string" />
+      <field name="conteudo" type="sp_phonetic" />
+      <field name="integra" type="sp_phonetic" />
+      <field name="referenciasLegislativas" type="sp_phonetic" />
+      <field name="doutrinas" type="sp_phonetic" />
+      <field name="sumulas" type="sp_phonetic" />
+      <field name="recursosRepetitivos" type="sp_phonetic" />
+      <field name="enunciado" type="sp_phonetic" />
+      <field name="tipo" type="string" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="capituloDescricao,secaoDescricao,livroDescricao,tituloDescricao,subsecaoDescricao,conteudo,integra,referenciasLegislativas,doutrinas,sumulas,recursosRepetitivos,enunciado" />
+      <rdb-sync ds-jndi="java:/datasources/imhof_cc" update-interval="77777" dispatcher="advCollectionGlobalDispatcherEjb">
+         <record>
+            <query>select
+art.id,
+art.numero,
+art.capitulo,
+art.capitulo_descricao as capitulodescricao,
+art.secao,
+art.secao_descricao as secaodescricao,
+art.livro,
+art.livro_descricao as livrodescricao,
+art.titulo,
+art.titulo_descricao as titulodescricao,
+art.subsecao,
+art.subsecao_descricao as subsecaodescricao,
+art.grupo,
+art.grupo_numero_min as gruponumeromin,
+art.grupo_numero_max as gruponumeromax,
+art.conteudo,
+art.integra,
+art.referencias_legislativas as referenciaslegislativas,
+art.doutrinas,
+art.sumulas,
+art.recursos_repetitivos as recursosrepetitivos,
+art.enunciado,
+'CC' as tipo
+from artigo art</query>
+            <metadata>
+               <table-pks name="artigo" columns="id" />
+               <column-type alias="id" java-type="BigDecimal" />
+            </metadata>
+         </record>
+      </rdb-sync>
+   </collection>
+   <collection name="global">
+      <field name="id" type="string" unique="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="deIdentificador" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="cdArrendatario" type="long" stored="true" indexed="true" omit-norms="true" />
+      <field name="flAtivo" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="flHabilitado" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmPessoa" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="nmPessoaTexto" type="text_general" stored="false" copy-from="nmPessoa" />
+      <field name="deCpf" type="string" indexed="true" stored="true" omit-norms="true" />
+      <field name="deCnpj" type="string" indexed="true" stored="true" omit-norms="true" />
+      <field name="nmCidadePessoa" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="flPessoaTipo" type="string" indexed="true" stored="true" />
+      <field name="nuTelefone" type="string" indexed="true" stored="true" omit-norms="true" multi-valued="true" />
+      <field name="deEmail" type="string" indexed="true" stored="true" omit-norms="true" multi-valued="true" />
+      <field name="deClassificacao" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" multi-valued="true" />
+      <field name="dtAtendimento" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmSituacao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmAssunto" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="deObservacao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="nomeResponsavel" type="sp_phonetic" multi-valued="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmGrupo" type="sp_phonetic" multi-valued="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="nomeCliente" type="sp_phonetic" multi-valued="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmPasta" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="deOrgaoPublicacao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="deOabOrigem" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="dtDisponibilizacao" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="deTexto" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="deJornal" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="nmCidadeIntimacao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="deNumeroProcesso" type="string" multi-valued="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="numero" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="capitulo" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="capituloDescricao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="secao" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="secaoDescricao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="livro" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="livroDescricao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="titulo" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="tituloDescricao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="subsecao" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="subsecaoDescricao" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="grupo" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="grupoNumeroMin" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="grupoNumeroMax" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="conteudo" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="integra" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="referenciasLegislativas" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="doutrinas" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="sumulas" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="recursosRepetitivos" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="enunciado" type="sp_phonetic" stored="true" indexed="true" omit-norms="true" />
+      <field name="tipo" type="string" stored="true" indexed="true" omit-norms="true" />
+      <field name="nomePasta" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="numeroProcesso" multi-valued="true" type="string" indexed="true" stored="true" omit-norms="true" />
+      <field name="nomeAssunto" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="nomeSituacao" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="nomeProcessoOrgao" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="nomeUnidadeOrganizacional" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" />
+      <field name="dataInclusao" type="string" indexed="true" stored="true" />
+      <field name="dataCitacao" type="string" indexed="true" stored="true" />
+      <field name="dataDistribuicao" type="string" indexed="true" stored="true" />
+      <field name="dataEncerramento" type="string" indexed="true" stored="true" />
+      <field name="dataJulgamento" type="string" indexed="true" stored="true" />
+      <field name="cdEstado" type="long" indexed="true" stored="true" />
+      <field name="cdAtendimento" type="long" indexed="true" stored="true" />
+      <field name="nomeEnvolvidos" type="sp_phonetic" indexed="true" stored="true" omit-norms="true" multi-valued="true" />
+      <field name="flSigiloso" type="string" indexed="true" stored="true" />
+      <field name="cdArquivoTipo" type="long" indexed="true" stored="true" />
+      <field name="nmArquivoTipo" type="text_general" indexed="true" stored="true" />
+      <field name="nmArquivoFinal" type="sp_phonetic" indexed="true" stored="true" />
+      <field name="dtEnvio" type="date" indexed="true" stored="true" />
+      <field name="nuTamanhoArquivo" type="long" stored="true" indexed="true" />
+      <field name="deArquivo" type="sp_phonetic" indexed="true" stored="true" />
+      <field name="cdModulo" type="long" indexed="true" stored="true" />
+      <field name="nmModulo" type="string" indexed="true" stored="true" />
+      <field name="nmChaveModulo" type="string" indexed="true" stored="true" />
+      <field name="cdRegistroVinculo" type="long" indexed="true" stored="true" />
+      <field name="cdUsuarioCriador" type="long" indexed="true" stored="true" />
+      <field name="nmMarcador" type="string" multi-valued="true" stored="true" indexed="true" omit-norms="true" />
+      <field name="text" type="text_general" stored="false" multi-valued="true" copy-from="deIdentificador,nmPessoa,deCpf,deCnpj,deEmail,nmAssunto,nmPasta,nomeCliente,deObservacao,nmSituacao,deOrgaoPublicacao,deOabOrigem,dtDisponibilizacao,deJornal,nmCidadeIntimacao,deNumeroProcesso,capituloDescricao,secaoDescricao,livroDescricao,tituloDescricao,subsecaoDescricao,conteudo,integra,referenciasLegislativas,doutrinas,sumulas,recursosRepetitivos,enunciado,nomePasta,numeroProcesso,nomeAssunto,nomeSituacao,nomeProcessoOrgao,nomeUnidadeOrganizacional,nmArquivoTipo,nmArquivoFinal,nuTamanhoArquivo,deArquivo,nmModulo,nmMarcador" />
+   </collection>
+</repository>

@@ -1,0 +1,34 @@
+(ns clojure-durr.core)
+(require '[clojure.string :as s])
+
+(defn is-palindrome [n]
+  (= (str n) (s/reverse (str n)))
+)
+
+(defn even [n]
+  (= (mod n 2) 0)
+)
+
+(defn is-prime [n]
+  (if (<= n 3)
+    (not (= n 1))
+    (empty?
+      (filter 
+        (fn [x] (= (mod n x) 0))
+        (range 2 (- n 1))
+      )
+    )
+  )
+)
+
+(defn is-mirp [n]
+  (and
+    (and
+      (not (is-palindrome n))
+      (is-prime n)
+    )
+    (is-prime (. Integer parseInt (s/reverse (str n))))
+  )
+)
+
+(count (filter is-mirp (range 1000)))

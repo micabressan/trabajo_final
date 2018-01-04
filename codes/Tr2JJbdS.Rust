@@ -1,0 +1,3 @@
+    pub fn step(&mut self) {
+        self.cpu.step(self);
+    }

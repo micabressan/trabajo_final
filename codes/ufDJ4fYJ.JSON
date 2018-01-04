@@ -1,0 +1,1989 @@
+{
+  "_id": "5a4395bc451e741381dc13a9",
+  "ticket_number": "INC1407353",
+  "location": {
+    "link": "https://aloricasand.service-now.com/api/now/table/cmn_location/68549c3a50990200cf36cedbdb8da6cb",
+    "value": "68549c3a50990200cf36cedbdb8da6cb"
+  },
+  "short_description": "as\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nasd",
+  "description": "",
+  "sys_created_on": "2017-12-27 12:44:44",
+  "sys_updated_on": "2017-12-27 12:44:44",
+  "general": {
+    "time": {
+      "current": 1514378676603,
+      "uptime": 20025.1987556,
+      "timezone": "GMT-0600",
+      "timezoneName": "Central Standard Time"
+    }
+  },
+  "system": {
+    "system": {
+      "manufacturer": "Hewlett-Packard",
+      "model": "HP Compaq Pro 6305 SFF",
+      "version": "",
+      "serial": "SGH348P3VL",
+      "uuid": "40741B80-5188-11E3-A54C-1FED3AE53B6C",
+      "sku": ""
+    },
+    "bios": {
+      "vendor": "Hewlett-Packard",
+      "version": "HPQOEM - 11012011",
+      "releaseDate": "2013-08-16",
+      "revision": ""
+    },
+    "baseboard": {
+      "manufacturer": "Hewlett-Packard",
+      "model": "1850",
+      "version": "",
+      "serial": "SGH348P3VL",
+      "assetTag": ""
+    }
+  },
+  "processes": [
+    {
+      "pid": 5892,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2740224,
+        "virtual": 51118080,
+        "usage": 0.10344459683666732
+      }
+    },
+    {
+      "pid": 7520,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2560000,
+        "virtual": 51118080,
+        "usage": 0.0966410658040614
+      }
+    },
+    {
+      "pid": 6572,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 7384,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2568192,
+        "virtual": 51118080,
+        "usage": 0.0969503172146344
+      }
+    },
+    {
+      "pid": 5396,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 7244,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2940928,
+        "virtual": 52621312,
+        "usage": 0.11102125639570574
+      }
+    },
+    {
+      "pid": 5280,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 5752,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2674688,
+        "virtual": 51118080,
+        "usage": 0.10097058555208335
+      }
+    },
+    {
+      "pid": 5684,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 4544,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 5680,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2899968,
+        "virtual": 52166656,
+        "usage": 0.10947499934284076
+      }
+    },
+    {
+      "pid": 6216,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2879488,
+        "virtual": 52166656,
+        "usage": 0.10870187081640827
+      }
+    },
+    {
+      "pid": 8024,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2609152,
+        "virtual": 51118080,
+        "usage": 0.09849657426749937
+      }
+    },
+    {
+      "pid": 6320,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2854912,
+        "virtual": 51118080,
+        "usage": 0.10777411658468927
+      }
+    },
+    {
+      "pid": 7424,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2891776,
+        "virtual": 52137984,
+        "usage": 0.10916574793226774
+      }
+    },
+    {
+      "pid": 7732,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2306048,
+        "virtual": 43094016,
+        "usage": 0.08705427207629851
+      }
+    },
+    {
+      "pid": 6584,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 3289088,
+        "virtual": 52764672,
+        "usage": 0.1241644413450581
+      }
+    },
+    {
+      "pid": 8104,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 3736,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 5984,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 7880,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 6820,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 5668,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 6652,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 6816,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 7328,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 4808,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1908736,
+        "virtual": 30699520,
+        "usage": 0.07205557866350819
+      }
+    },
+    {
+      "pid": 4148,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 6580,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 7516,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 7348,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1908736,
+        "virtual": 30699520,
+        "usage": 0.07205557866350819
+      }
+    },
+    {
+      "pid": 6832,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 6536,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 2192,
+      "name": "WMIC",
+      "cpu": 0,
+      "mem": {
+        "private": 2699264,
+        "virtual": 51118080,
+        "usage": 0.10189833978380233
+      }
+    },
+    {
+      "pid": 8108,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 4160,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 4720,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1904640,
+        "virtual": 30699520,
+        "usage": 0.07190095295822167
+      }
+    },
+    {
+      "pid": 6524,
+      "name": "conhost",
+      "cpu": 0,
+      "mem": {
+        "private": 598016,
+        "virtual": 29868032,
+        "usage": 0.022575352971828742
+      }
+    },
+    {
+      "pid": 6956,
+      "name": "cmd",
+      "cpu": 0,
+      "mem": {
+        "private": 1908736,
+        "virtual": 30699520,
+        "usage": 0.07205557866350819
+      }
+    },
+    {
+      "pid": 7344,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 4927488,
+        "virtual": 48955392,
+        "usage": 0.1860147234596574
+      }
+    },
+    {
+      "pid": 5576,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 4620288,
+        "virtual": 50393088,
+        "usage": 0.17441779556317
+      }
+    },
+    {
+      "pid": 7632,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 6918144,
+        "virtual": 44310528,
+        "usage": 0.26116281622889553
+      }
+    },
+    {
+      "pid": 3168,
+      "name": "WmiApSrv",
+      "cpu": 0,
+      "mem": {
+        "private": 1425408,
+        "virtual": 24403968,
+        "usage": 0.05380974543970139
+      }
+    },
+    {
+      "pid": 5332,
+      "name": "HelpMe",
+      "cpu": 0,
+      "mem": {
+        "private": 42377216,
+        "virtual": 472453120,
+        "usage": 1.5997575468941108
+      }
+    },
+    {
+      "pid": 6824,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 22024192,
+        "virtual": 206573568,
+        "usage": 0.8314224173255009
+      }
+    },
+    {
+      "pid": 6276,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 37646336,
+        "virtual": 360341504,
+        "usage": 1.4211648572882052
+      }
+    },
+    {
+      "pid": 6804,
+      "name": "audiodg",
+      "cpu": 0,
+      "mem": {
+        "private": 15400960,
+        "virtual": 45199360,
+        "usage": 0.5813926518772333
+      }
+    },
+    {
+      "pid": 5300,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 28168192,
+        "virtual": 207925248,
+        "usage": 1.0633609752552484
+      }
+    },
+    {
+      "pid": 2780,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 33837056,
+        "virtual": 224055296,
+        "usage": 1.277362951371762
+      }
+    },
+    {
+      "pid": 4456,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 70709248,
+        "virtual": 389935104,
+        "usage": 2.669303550360819
+      }
+    },
+    {
+      "pid": 5252,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 40271872,
+        "virtual": 349392896,
+        "usage": 1.5202799343768507
+      }
+    },
+    {
+      "pid": 2944,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 61177856,
+        "virtual": 508452864,
+        "usage": 2.309489534159138
+      }
+    },
+    {
+      "pid": 2388,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 86446080,
+        "virtual": 359641088,
+        "usage": 3.263375510071545
+      }
+    },
+    {
+      "pid": 5216,
+      "name": "Greenshot",
+      "cpu": 0,
+      "mem": {
+        "private": 35422208,
+        "virtual": 287772672,
+        "usage": 1.3372030993176367
+      }
+    },
+    {
+      "pid": 468,
+      "name": "firefox",
+      "cpu": 0,
+      "mem": {
+        "private": 46342144,
+        "virtual": 444399616,
+        "usage": 1.7494352296114413
+      }
+    },
+    {
+      "pid": 3988,
+      "name": "firefox",
+      "cpu": 0,
+      "mem": {
+        "private": 63991808,
+        "virtual": 532533248,
+        "usage": 2.415717393690962
+      }
+    },
+    {
+      "pid": 4348,
+      "name": "firefox",
+      "cpu": 0,
+      "mem": {
+        "private": 45932544,
+        "virtual": 254668800,
+        "usage": 1.7339726590827915
+      }
+    },
+    {
+      "pid": 4548,
+      "name": "firefox",
+      "cpu": 0,
+      "mem": {
+        "private": 99168256,
+        "virtual": 669954048,
+        "usage": 3.7436429506914086
+      }
+    },
+    {
+      "pid": 5588,
+      "name": "HelpMe",
+      "cpu": 0,
+      "mem": {
+        "private": 33468416,
+        "virtual": 347041792,
+        "usage": 1.263446637895977
+      }
+    },
+    {
+      "pid": 2308,
+      "name": "HelpMe",
+      "cpu": 0,
+      "mem": {
+        "private": 42971136,
+        "virtual": 234790912,
+        "usage": 1.622178274160653
+      }
+    },
+    {
+      "pid": 2632,
+      "name": "HelpMe",
+      "cpu": 0,
+      "mem": {
+        "private": 26849280,
+        "virtual": 390664192,
+        "usage": 1.013571498152996
+      }
+    },
+    {
+      "pid": 2320,
+      "name": "EXCEL",
+      "cpu": 0,
+      "mem": {
+        "private": 87404544,
+        "virtual": 481153024,
+        "usage": 3.299557925108586
+      }
+    },
+    {
+      "pid": 4964,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 139665408,
+        "virtual": 573865984,
+        "usage": 5.272427298859017
+      }
+    },
+    {
+      "pid": 6032,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 244408320,
+        "virtual": 681013248,
+        "usage": 9.22651583444535
+      }
+    },
+    {
+      "pid": 5644,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 113303552,
+        "virtual": 333217792,
+        "usage": 4.277256259635114
+      }
+    },
+    {
+      "pid": 5516,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 1212416,
+        "virtual": 48746496,
+        "usage": 0.045769208764803476
+      }
+    },
+    {
+      "pid": 5484,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 1200128,
+        "virtual": 50950144,
+        "usage": 0.045305331648943986
+      }
+    },
+    {
+      "pid": 5468,
+      "name": "chrome",
+      "cpu": 0,
+      "mem": {
+        "private": 81166336,
+        "virtual": 504340480,
+        "usage": 3.064062975957249
+      }
+    },
+    {
+      "pid": 4648,
+      "name": "SCNotification",
+      "cpu": 0,
+      "mem": {
+        "private": 22929408,
+        "virtual": 225193984,
+        "usage": 0.8655946981938171
+      }
+    },
+    {
+      "pid": 3408,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 4202496,
+        "virtual": 41897984,
+        "usage": 0.1586459736239472
+      }
+    },
+    {
+      "pid": 3680,
+      "name": "wfcrun32",
+      "cpu": 0,
+      "mem": {
+        "private": 4227072,
+        "virtual": 100614144,
+        "usage": 0.15957372785566618
+      }
+    },
+    {
+      "pid": 2816,
+      "name": "SelfServicePlugin",
+      "cpu": 0,
+      "mem": {
+        "private": 16494592,
+        "virtual": 197607424,
+        "usage": 0.6226777151887284
+      }
+    },
+    {
+      "pid": 3016,
+      "name": "Receiver",
+      "cpu": 0,
+      "mem": {
+        "private": 6881280,
+        "virtual": 148033536,
+        "usage": 0.259771184881317
+      }
+    },
+    {
+      "pid": 2716,
+      "name": "ShareX",
+      "cpu": 0,
+      "mem": {
+        "private": 32190464,
+        "virtual": 245731328,
+        "usage": 1.2152034178465898
+      }
+    },
+    {
+      "pid": 212,
+      "name": "StikyNot",
+      "cpu": 0,
+      "mem": {
+        "private": 4333568,
+        "virtual": 82411520,
+        "usage": 0.16359399619311513
+      }
+    },
+    {
+      "pid": 1440,
+      "name": "lync",
+      "cpu": 0,
+      "mem": {
+        "private": 137367552,
+        "virtual": 526594048,
+        "usage": 5.185682278193291
+      }
+    },
+    {
+      "pid": 3008,
+      "name": "jusched",
+      "cpu": 0,
+      "mem": {
+        "private": 1802240,
+        "virtual": 56774656,
+        "usage": 0.06803531032605922
+      }
+    },
+    {
+      "pid": 732,
+      "name": "redirector",
+      "cpu": 0,
+      "mem": {
+        "private": 1253376,
+        "virtual": 50962432,
+        "usage": 0.04731546581766846
+      }
+    },
+    {
+      "pid": 2676,
+      "name": "concentr",
+      "cpu": 0,
+      "mem": {
+        "private": 9826304,
+        "virtual": 163414016,
+        "usage": 0.3709470669823093
+      }
+    },
+    {
+      "pid": 1220,
+      "name": "msseces",
+      "cpu": 0,
+      "mem": {
+        "private": 4435968,
+        "virtual": 77787136,
+        "usage": 0.1674596388252776
+      }
+    },
+    {
+      "pid": 2684,
+      "name": "taskhost",
+      "cpu": 0,
+      "mem": {
+        "private": 10702848,
+        "virtual": 95395840,
+        "usage": 0.40403696791361987
+      }
+    },
+    {
+      "pid": 1096,
+      "name": "explorer",
+      "cpu": 0,
+      "mem": {
+        "private": 35598336,
+        "virtual": 269582336,
+        "usage": 1.3438520046449562
+      }
+    },
+    {
+      "pid": 2892,
+      "name": "dwm",
+      "cpu": 0,
+      "mem": {
+        "private": 1843200,
+        "virtual": 42717184,
+        "usage": 0.06958156737892421
+      }
+    },
+    {
+      "pid": 3104,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 5251072,
+        "virtual": 49815552,
+        "usage": 0.19823015417729076
+      }
+    },
+    {
+      "pid": 2904,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 2080768,
+        "virtual": 25452544,
+        "usage": 0.0785498582855411
+      }
+    },
+    {
+      "pid": 4040,
+      "name": "NisSrv",
+      "cpu": 0,
+      "mem": {
+        "private": 14548992,
+        "virtual": 62169088,
+        "usage": 0.5492305051776417
+      }
+    },
+    {
+      "pid": 4016,
+      "name": "SearchIndexer",
+      "cpu": 0,
+      "mem": {
+        "private": 20860928,
+        "virtual": 100429824,
+        "usage": 0.7875087170241355
+      }
+    },
+    {
+      "pid": 3800,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 35008512,
+        "virtual": 115044352,
+        "usage": 1.3215859030837005
+      }
+    },
+    {
+      "pid": 3664,
+      "name": "CmRcService",
+      "cpu": 0,
+      "mem": {
+        "private": 25849856,
+        "virtual": 76718080,
+        "usage": 0.9758428260630904
+      }
+    },
+    {
+      "pid": 3596,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 6426624,
+        "virtual": 43401216,
+        "usage": 0.2426077315945157
+      }
+    },
+    {
+      "pid": 3508,
+      "name": "CcmExec",
+      "cpu": 0,
+      "mem": {
+        "private": 19902464,
+        "virtual": 141168640,
+        "usage": 0.7513263019870949
+      }
+    },
+    {
+      "pid": 3476,
+      "name": "svchost",
+      "cpu": 0,
+      "mem": {
+        "private": 1343488,
+        "virtual": 24961024,
+        "usage": 0.05071723133397143
+      }
+    },
+    {
+      "pid": 2468,
+      "name": "svchost",
+      "cpu": 0,
+      "mem": {
+        "private": 1351680,
+        "virtual": 27312128,
+        "usage": 0.05102648274454442
+      }
+    },
+    {
+      "pid": 2168,
+      "name": "WmiPrvSE",
+      "cpu": 0,
+      "mem": {
+        "private": 14422016,
+        "virtual": 78475264,
+        "usage": 0.5444371083137602
+      }
+    },
+    {
+      "pid": 332,
+      "name": "sqlwriter",
+      "cpu": 0,
+      "mem": {
+        "private": 1384448,
+        "virtual": 30441472,
+        "usage": 0.05226348838683641
+      }
+    },
+    {
+      "pid": 476,
+      "name": "svchost",
+      "cpu": 0,
+      "mem": {
+        "private": 712704,
+        "virtual": 11182080,
+        "usage": 0.026904872719850696
+      }
+    },
+    {
+      "pid": 1960,
+      "name": "sqlservr",
+      "cpu": 0,
+      "mem": {
+        "private": 53809152,
+        "virtual": 1627820032,
+        "usage": 2.0313178903487272
+      }
+    },
+    {
+      "pid": 1868,
+      "name": "svchost",
+      "cpu": 0,
+      "mem": {
+        "private": 4812800,
+        "virtual": 69009408,
+        "usage": 0.18168520371163543
+      }
+    },
+    {
+      "pid": 1800,
+      "name": "OfficeClickToRun",
+      "cpu": 0,
+      "mem": {
+        "private": 23826432,
+        "virtual": 147644416,
+        "usage": 0.8994577276515602
+      }
+    },
+    {
+      "pid": 1776,
+      "name": "armsvc",
+      "cpu": 0,
+      "mem": {
+        "private": 872448,
+        "virtual": 34938880,
+        "usage": 0.03293527522602412
+      }
+    }
+  ],
+  "cpu": {
+    "cpu": {
+      "manufacturer": "AMD",
+      "brand": "A6-5400B APU with Radeon(tm) HD Graphics",
+      "vendor": "AuthenticAMD",
+      "family": "21",
+      "model": "16",
+      "stepping": "1",
+      "revision": "4097",
+      "speed": "3.60",
+      "speedmin": "",
+      "speedmax": "3.60",
+      "cores": 2,
+      "cache": {
+        "l1D": 0,
+        "l1I": 0,
+        "l2": 1048576,
+        "l3": 0
+      }
+    },
+    "cpuFlags": "fpu de apic sep mtrr pge cmov psn clfsh ds acpi mmx fxsr sse sse2 ss htt tm ia64 pbe",
+    "cpuCache": {
+      "l1D": 0,
+      "l1I": 0,
+      "l2": 1048576,
+      "l3": 0
+    },
+    "cpuCurrentSpeed": {
+      "min": 3.59,
+      "max": 3.59,
+      "avg": 3.59
+    },
+    "cpuTemperature": {
+      "main": -1,
+      "cores": [],
+      "max": -1
+    }
+  },
+  "memory": {
+    "memory": {
+      "total": 2648977408,
+      "free": 855977984,
+      "used": 1792999424,
+      "active": 1792999424,
+      "available": 855977984,
+      "buffcache": 0,
+      "swaptotal": 2648702976,
+      "swapused": 805306368,
+      "swapfree": 1843396608
+    },
+    "memoryLayout": {
+      "total": 2648977408,
+      "free": 857038848,
+      "used": 1791938560,
+      "active": 1791938560,
+      "available": 857038848,
+      "buffcache": 0,
+      "swaptotal": 2648702976,
+      "swapused": 805306368,
+      "swapfree": 1843396608
+    }
+  },
+  "disk": {
+    "diskLayout": [
+      {
+        "type": "HD",
+        "name": "WDC WD5000AAKX-60U6AA0 ATA Device",
+        "vendor": "(Standard disk drives)",
+        "size": 500105249280,
+        "bytesPerSector": 512,
+        "totalCylinders": 60801,
+        "totalHeads": 255,
+        "totalSectors": 976768065,
+        "totalTracks": 15504255,
+        "tracksPerCylinder": 255,
+        "sectorsPerTrack": 63,
+        "firmwareRevision": "18.01H18",
+        "serialNum": "2020202057202d44435732435445384c39313330",
+        "interfaceType": "IDE"
+      }
+    ]
+  },
+  "battery": {
+    "battery": {
+      "hasbattery": false,
+      "cyclecount": 0,
+      "ischarging": false,
+      "maxcapacity": 0,
+      "currentcapacity": 0,
+      "percent": 0
+    }
+  },
+  "graphics": {
+    "graphics": {
+      "controllers": [
+        {
+          "model": "AMD Radeon HD 7540D",
+          "vendor": "Advanced Micro Devices, Inc.",
+          "bus": "PCI",
+          "vram": 768,
+          "vramDynamic": true
+        }
+      ],
+      "displays": [
+        {
+          "model": "(Standard monitor types)",
+          "main": false,
+          "builtin": false,
+          "connection": "",
+          "resolutionx": 1280,
+          "resolutiony": 1024,
+          "sizex": -1,
+          "sizey": -1,
+          "pixeldepth": 32
+        }
+      ]
+    }
+  },
+  "os": {
+    "os": {
+      "platform": "Windows",
+      "distro": "Microsoft Windows 7 Enterprise",
+      "release": "6.1.7601",
+      "codename": "Microsoft Windows 7 Enterprise",
+      "kernel": "6.1.7601",
+      "arch": "ia32",
+      "hostname": "MNL02S55564D1",
+      "logofile": "windows"
+    },
+    "versions": {
+      "kernel": "6.1.7601",
+      "openssl": "1.0.2k",
+      "node": "7.9.0",
+      "v8": "5.8.283.38",
+      "npm": "",
+      "yarn": "",
+      "pm2": "",
+      "gulp": "",
+      "grunt": "",
+      "git": "",
+      "tsc": ""
+    },
+    "shell": "Not Supported",
+    "users": [
+      {
+        "user": "pt004330645",
+        "tty": "console",
+        "date": "2017-12-27",
+        "time": "3:48",
+        "ip": "",
+        "command": ""
+      }
+    ]
+  },
+  "fileSystem": {
+    "fsSize": [
+      {
+        "fs": "C:",
+        "type": "NTFS",
+        "size": "500105736192",
+        "used": 47324323840,
+        "use": 9.462863633667922,
+        "mount": "C:"
+      }
+    ],
+    "blockDevices": [
+      {
+        "name": "C:",
+        "identifier": "C:",
+        "type": "disk",
+        "fstype": "ntfs",
+        "mount": "C:",
+        "size": "500105736192",
+        "physical": "HDD",
+        "uuid": "C4432BE4",
+        "label": "Default",
+        "model": "",
+        "serial": "C4432BE4",
+        "removable": false,
+        "protocol": ""
+      }
+    ],
+    "fsStats": "Not Supported",
+    "disksIo": "Not Supported"
+  },
+  "network": {
+    "networkInterface": [
+      {
+        "iface": "Local Area Connection",
+        "ip4": "10.24.195.116",
+        "ip6": "fe80::895e:15ac:acbe:b865",
+        "mac": "6c:3b:e5:3a:ed:1f",
+        "internal": false
+      },
+      {
+        "iface": "Loopback Pseudo-Interface 1",
+        "ip4": "127.0.0.1",
+        "ip6": "::1",
+        "mac": "00:00:00:00:00:00",
+        "internal": true
+      }
+    ],
+    "networkInterfaceDefault": "Local Area Connection",
+    "networkStats": {
+      "iface": "Local Area Connection",
+      "operstate": "up",
+      "rx": 124961207,
+      "tx": 31158668,
+      "rxSec": 6779.817844297482,
+      "txSec": 2419.1031442162666,
+      "ms": 34476
+    },
+    "networkConnections": [
+      {
+        "protocol": "proto",
+        "localaddress": "Local",
+        "localport": "",
+        "peeraddress": "Address",
+        "peerport": "",
+        "state": "Foreign"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "135",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "445",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "2701",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "3389",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "5985",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "47001",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "49152",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "49153",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "49154",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "59093",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "59102",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "0.0.0.0",
+        "localport": "59104",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "139",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "50604",
+        "peeraddress": "74.125.132.188",
+        "peerport": "5228",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "50649",
+        "peeraddress": "54.254.222.250",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53173",
+        "peeraddress": "13.107.18.11",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53518",
+        "peeraddress": "40.97.128.194",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53758",
+        "peeraddress": "64.142.236.24",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53907",
+        "peeraddress": "40.97.162.98",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53962",
+        "peeraddress": "52.173.194.40",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53963",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53964",
+        "peeraddress": "13.75.80.18",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53965",
+        "peeraddress": "13.75.80.18",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53966",
+        "peeraddress": "52.173.194.40",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53967",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53968",
+        "peeraddress": "52.173.194.40",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53969",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53970",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53971",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53973",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53974",
+        "peeraddress": "13.107.7.190",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53977",
+        "peeraddress": "104.18.56.159",
+        "peerport": "80",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53981",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53982",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53983",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53984",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53985",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53986",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53987",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53988",
+        "peeraddress": "52.65.73.16",
+        "peerport": "80",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53989",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53991",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53992",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53995",
+        "peeraddress": "23.111.9.35",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53996",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53997",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "53998",
+        "peeraddress": "40.97.30.162",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54000",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54001",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54002",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54003",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54004",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54005",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54006",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54007",
+        "peeraddress": "104.208.28.54",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54008",
+        "peeraddress": "52.65.73.16",
+        "peerport": "80",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54009",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54010",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54011",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54012",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54013",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54014",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "TIME_WAIT"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54015",
+        "peeraddress": "149.96.33.26",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "54016",
+        "peeraddress": "13.107.6.160",
+        "peerport": "443",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "10.24.195.116",
+        "localport": "59187",
+        "peeraddress": "10.24.248.252",
+        "peerport": "10123",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "50569",
+        "peeraddress": "0.0.0.0",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51904",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51905",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51905",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51904",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51906",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51907",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51907",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51906",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51913",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51914",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "127.0.0.1",
+        "localport": "51914",
+        "peeraddress": "127.0.0.1",
+        "peerport": "51913",
+        "state": "ESTABLISHED"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "135",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "445",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "2701",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "3389",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "5985",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "47001",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "49152",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "49153",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "49154",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "59093",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "59102",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      },
+      {
+        "protocol": "tcp",
+        "localaddress": "[::]",
+        "localport": "59104",
+        "peeraddress": "[::]",
+        "peerport": "0",
+        "state": "LISTEN"
+      }
+    ]
+  },
+  "currentLoad": {
+    "currentLoad": {
+      "avgload": 0,
+      "currentload": 47.03421987650488,
+      "currentloadUser": 30.324433405774602,
+      "currentloadSystem": 16.48038911311187,
+      "currentloadNice": 0,
+      "currentloadIdle": 52.96578012349512,
+      "currentloadIrq": 0.229397357618407,
+      "rawCurrentload": 54539,
+      "rawCurrentloadUser": 35163,
+      "rawCurrentloadSystem": 19110,
+      "rawCurrentloadNice": 0,
+      "rawCurrentloadIdle": 61417,
+      "rawCurrentloadIrq": 266,
+      "cpus": [
+        {
+          "load": 44.84229062721199,
+          "loadUser": 30.298845018386476,
+          "loadSystem": 14.408784075410457,
+          "loadNice": 0,
+          "loadIdle": 55.15770937278801,
+          "loadIrq": 0.13466153341505102,
+          "rawLoad": 25974,
+          "rawLoadUser": 17550,
+          "rawLoadSystem": 8346,
+          "rawLoadNice": 0,
+          "rawLoadIdle": 31949,
+          "rawLoadIrq": 78
+        },
+        {
+          "load": 49.22199438250651,
+          "loadUser": 30.349973291058536,
+          "loadSystem": 18.54806747884824,
+          "loadNice": 0,
+          "loadIdle": 50.77800561749349,
+          "loadIrq": 0.32395361259972777,
+          "rawLoad": 28565,
+          "rawLoadUser": 17613,
+          "rawLoadSystem": 10764,
+          "rawLoadNice": 0,
+          "rawLoadIdle": 29468,
+          "rawLoadIrq": 188
+        }
+      ]
+    },
+    "fullLoad": 12.417854941533035
+  },
+  "__v": 0
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Frame type="Frame" name="GameUI/UIContainer" file="GameUI">
+		<Frame type="Frame" name="ContainerFrame">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			
+			<Height val="600"/>
+			<Width val="800"/>
+			
+			<Frame type="Image" name="Background">
+				<Anchor relative="$parent"/>
+				
+				<Texture val="Assets/Textures/ui_ingame_tutorial_textborder_terr.dds"/>
+				<TextureType val="NineSlice"/>
+			</Frame>
+			
+			<Frame type="Label" name="Title">
+			
+				<Anchor side="Top" relative="$parent" pos="Min" offset="60"/>
+				<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+				
+				<Style val="TutorialMenuTitle"/>
+				<Width val="600"/>
+				<Text val="Choose your race"/>
+			</Frame>
+			
+			<Frame type="Button" name="ChooseProtoss" template="StandardTemplates/StandardButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="100"/>
+				<Width val="300"/>
+		
+				<Frame type="Label" name="Label">
+					<Text val="Protoss"/>
+					<Style val="LayoutDebugPanelTitle"/>
+				</Frame>
+			</Frame>
+			
+			<Frame type="Button" name="ChooseTerran" template="StandardTemplates/StandardButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="100"/>
+				<Width val="300"/>
+		
+				<Frame type="Label" name="Label">
+					<Text val="Terran"/>
+					<Style val="LayoutDebugPanelTitle"/>
+				</Frame>
+			</Frame>
+			
+			<Frame type="Button" name="ChooseZerg" template="StandardTemplates/StandardButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="100"/>
+				<Width val="300"/>
+		
+				<Frame type="Label" name="Label">
+					<Text val="Zerg"/>
+					<Style val="LayoutDebugPanelTitle"/>
+				</Frame>
+			</Frame>
+		</Frame>
+	</Frame>
+</Desc>

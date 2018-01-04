@@ -1,0 +1,19 @@
+private const string FailureMessage = "Invalid data format.";
+		private const string SuccessMessage = "Record {0} successfully imported.";
+
+		public static string ImportStations(StationsDbContext context, string jsonString)
+		{
+            using (context)
+            {
+                var jsonStations = File.ReadAllText("stations.json");
+
+                var stations = JsonConvert.DeserializeObject<Station[]>(jsonStations);
+
+                context.Stations.AddRange(stations);
+                context.SaveChanges();
+
+                var result = $"Record {stations.Length} successfully imported.";
+
+                return result;
+            }
+		}

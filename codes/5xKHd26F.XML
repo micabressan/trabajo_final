@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">FenSens</string>
+    <string name="parse_app_id" translatable="false">56d20e1dc7d8d926cdf83be99aef3a8c</string>
+    <string name="parse_server_url" translatable="false">https://fensens-2243.nodechef.com/parse</string>
+    <string name="parse_client_key" translatable="false">cc3ec0b1bd6a819aba8531ee47a82090</string>
+    <string name="facebook_app_id" translatable="false">1505204916207368</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN" translatable="false">6ec37029332bd8463848824bdce0ef33</string>
+    <string name="Facebook" translatable="false">Facebook</string>
+
+    <string name="usernamedigits" translatable="false">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789_- .@</string>
+    <string name="passworddigits" translatable="false">`!@#$%^*()+[]{};:"?>,\'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789</string>
+    <string name="emaildigits" translatable="false">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789@_-.</string>
+
+    <string name="PairFailed">The Pair failed</string>
+    <string name="IncorrectDeviceCode">Please type the correct device code.</string>
+    <string name="loading">loading data...</string>
+    <string name="loadingFail">The Sensors and Tap loading failed, Please check network status and get again.</string>
+
+    <string name="rescuetime" translatable="false">RescueTime</string>
+    <string name="mechanic" translatable="false">YourMechanic</string>
+    <string name="aaamobile" translatable="false">AAA Mobile</string>
+    <string name="google_maps" translatable="false">Google Maps</string>
+    <string name="spotify_music" translatable="false">Spotify music</string>
+    <string name="pandora_radio" translatable="false">Pandora radio</string>
+    <string name="comma" translatable="false">&#160;,&#160;</string>
+    <string name="reserved" translatable="false"><![CDATA[Copyright (c) 2017 Fensens. All rights reserved. <br/> www.fensens.com]]></string>
+    <string name="ota_tips">Upgrade Tips</string>
+    <string name="ota_msg">You have a new FenSens firmware version, please update.</string>
+    <string name="oldVersion">There is a cache in your old version, Please restart the Bluetooth cleanup cache.</string>
+    <string name="FenSensOS">FenSens OS %s</string>
+    <string name="TapButtonOS">TapButton OS %s</string>
+    <string name="CurrentVersion">Current Version %s</string>
+    <string name="submit">Submit</string>
+    <string name="registerDevice">* Register your device to prevent theft and manage account</string>
+    <string name="AcceptTermsOfUse">Please check the box to accept our Terms Of Use.</string>
+
+    <string name="gettingFacebookInformation">Getting Facebook information...</string>
+    <string name="readingComplete">The Data reading is complete</string>
+    <string name="ManageDevices">Manage Devices</string>
+
+    <string name="kNearPlateWarning">FenSens Nearby - Click This To Launch</string>
+    <string name="fensens_disconnected">FenSens is in sleep mode, connecting...</string>
+    <string name="Notice">Notice</string>
+
+
+    <!--20170909-->
+    <string name="NameEmail">Name/Email</string>
+    <string name="Add">Add</string>
+
+
+    <string name="AppVersion">App Version</string>
+    <string name="Contact_Us">Contact us</string>
+    <string name="choose_btn">Choose Button</string>
+    <string name="Skip">Skip</string>
+    <string name="Login">Login</string>
+    <string name="or">or</string>
+    <string name="create_account">Create account</string>
+    <string name="Name">Name</string>
+    <string name="Password">Password</string>
+    <string name="parking">Parking…</string>
+    <string name="Email">Email</string>
+    <string name="Devices">Devices</string>
+    <string name="log_out">Log out</string>
+    <string name="QuickLaunchButton">Tap</string>
+    <string name="AboutUs">About US</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="ResetPassWord">Reset PassWord</string>
+    <string name="Reset">Reset</string>
+    <string name="choose_fensens">Choose FenSens</string>
+    <string name="Confirm_New_Password">Confirm new password</string>
+    <string name="Enter_Email">Enter your e-mail</string>
+    <string name="Enter_Password">Enter your password</string>
+    <string name="Enter_New_Password">Enter new password</string>
+    <string name="Clearance">Clearance</string>
+    <string name="Profile">Profile</string>
+    <string name="Info">Info</string>
+    <string name="general_settings">General Settings</string>
+    <string name="LoginSettings">Login Settings</string>
+    <string name="Button">Button</string>
+    <string name="check_for_updates">Check for updates</string>
+    <string name="Settings">Settings</string>
+    <string name="NOTIFICATIONS">NOTIFICATIONS</string>
+    <string name="Notification">Notification</string>
+    <string name="Vibration">Vibration</string>
+    <string name="Bluetooth">Bluetooth</string>
+    <string name="Warning">Warning! By changing this settings you may not be informed of parking distance!</string>
+    <string name="profile_edit">Edit Profile</string>
+    <string name="Connect">Connect</string>
+    <string name="Wake_FenSens">Device not found. Shake FenSens to wake up device</string>
+    <string name="sign_out">sign out…</string>
+    <string name="log_out_failed">logout failed</string>
+    <string name="UpdateFailed">update failed</string>
+    <string name="battery">Battery %s%%</string>
+    <string name="ShareCode">Device Code %s</string>
+    <string name="DeviceCodeError">Device Code Error</string>
+    <string name="Login_Failed">login failed.</string>
+    <string name="CHECK_USERPASS">Please check your username or password</string>
+    <string name="PasswordResetFailed">Reset password failed</string>
+    <string name="ClientDisconnected">Connection failure.</string>
+    <string name="ServiceUnavailable">The service is currently unavailable.</string>
+    <string name="InternalServerError">Internal server error. No information available.</string>
+    <string name="OtherCause">An unknown error or an error unrelated to Parse occurred.</string>
+    <string name="UserEmailTaken">Email has already been used</string>
+    <string name="low_battery">Current battery low than %s.</string>
+    <string name="Configure_FenSens">Please configure your FenSens</string>
+    <string name="AddFenSens">Add new FenSens</string>
+    <string name="Login_Settings">Login Settings</string>
+    <string name="Save_changes">Save changes</string>
+    <string name="Discard_changes">Discard changes</string>
+    <string name="Delete">Delete</string>
+    <string name="AddQuickLaunchButton">Add QuickLaunch Button</string>
+    <string name="AddFenSensFailed">Add FenSens Failed</string>
+    <string name="AddTapFailed">Add Tap Failed</string>
+    <string name="Ok">Ok</string>
+    <string name="Tips">Tips</string>
+    <string name="UsernameTaken">The username has already been</string>
+    <string name="RegistrationFailed">The user registration failed</string>
+    <string name="Cancel">Cancel</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="Close"><u>Close</u></string>
+    <string name="DiscardChanges"><u>Discard changes</u></string>
+    <string name="connect_to_device">Connect to device</string>
+    <string name="Welcome">Welcome!</string>
+    <string name="welcome_txt">Thanks for purchasing FenSens!\nWe will walk you through setup.</string>
+    <string name="not_fensens"><u>I do not have a FenSens</u></string>
+    <string name="Looking_FenSens">We are looking for your FenSens.\nIt will take a few seconds</string>
+    <string name="Turn_FenSens_On">Turn FenSens On</string>
+    <string name="Install_Location_Back">I am installing FenSens on the back of\nmy vehicle</string>
+    <string name="front_or_back">Front or back?</string>
+    <string name="Install_Location_Front">I am installing FenSens on the front of\nmy vehicle</string>
+    <string name="Installation_Device">Install the device on your plate as\nshown in the photo</string>
+    <string name="FenSens_Installation">FenSens Installation</string>
+    <string name="Skip_step"><u>Skip this step</u></string>
+    <string name="MeasureSpace">Measure the space from your FenSens\nto the edge of your car (%1$s):</string>
+    <string name="TypeSharedCode">Type Device Code</string>
+    <string name="warningTxt">This is a registered device.</string>
+    <string name="connect_with_facebook">Connect With Facebook</string>
+
+    <string name="agreement">By creating an account you agree to our &#160;</string>
+    <string name="UserAgreement">User Agreement</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="WarrantyPolicy">Warranty Policy</string>
+
+    <string name="create_an_account">Create an Account</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="Connecting">Connecting…</string>
+    <string name="fensens_connected">FenSens is connected</string>
+    <string name="Front">Front</string>
+    <string name="Back">Back</string>
+    <string name="clearance_msg">Do you want to change the clearance of FenSens?</string>
+    <string name="Rear">Rear</string>
+    <string name="FenSens_Install_Direction">Please choose the FenSens installation direction</string>
+    <string name="Next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="Understood"><u>Understood</u></string>
+    <string name="failed_delete">failed to delete</string>
+    <string name="EnterYourEmail">Please type correct email</string>
+    <string name="ValidEmail">please type a valid email</string>
+    <string name="EnterYourPassword">Please type correct password</string>
+    <string name="PassSixBytes">Your password must be at least 6 characters long</string>
+    <string name="EnterPasswordVerification">please type the same password</string>
+    <string name="EnterPassword">please type the password</string>
+    <string name="EnterUserName">please type the username</string>
+    <string name="UsernameThreeBytes">Your username must be at least 3 characters long</string>
+    <string name="EnterEmail">please type the Email</string>
+    <string name="Registering">Registering...</string>
+    <string name="fensens_tips">FenSens Tips</string>
+    <string name="Bluetooth_Off">Bluetooth off, FenSens app will not work.</string>
+    <string name="AlwaysCheckSensor">Always check your surroundings and \n never solely rely on the sensor!</string>
+    <string name="Acknowledge">I acknowledge that FenSens is not a replacement for safe driving. I will not rely on FenSens in evaluating my vehicle\'s surroundings.</string>
+    <string name="SafeTips">Safe tips</string>
+    <string name="Agree">I agree</string>
+    <string name="NotNow">Not now</string>
+    <string name="DiscoverBeacons">Since location access has not been granted, this app will not be able to discover beacons when in the background.</string>
+    <string name="LocationAccess">Please grant location access so this app can detect FenSens Sensor.</string>
+    <string name="NetworkNotAvailable">The current network is not available</string>
+    <string name="FeedBack">FeedBack</string>
+
+    <string name="TurnOnBluetooth">Turn Bluetooth on so FenSens can work properly.</string>
+
+    <string name="Config_FenSens_Tips" formatted="false">This sensor is set for the %s, please set for the %s</string>
+    <string name="back">back</string>
+    <string name="front">front</string>
+    <string name="please_type_a_valid_username">please type a valid username</string>
+    <string name="upgrade_firmware_success">Upgrade firmware success!</string>
+    <string name="please_restart_bluetooth">Upgrade firmware success, please restart Bluetooth device on your phone.</string>
+    <string name="no_devices_found">No devices found. To continue the search?</string>
+
+    <string name="inches">inches</string>
+    <string name="centimeters">centimeters</string>
+    <string name="sound">Sound</string>
+    
+    <string name="faq">-Location permission;
+        \n- Click “My TAP”, select nearby TAP button, then click “Connect”;
+        \n- Your TAP button should now be connected to your device. If the “My TAP” section has a red circle, it means the button is not connected. Check to make sure it’s added (see above), if it still doesn’t appear, then hold the TAP button for at least 4 seconds to put it in pairing mode. It should now appear ready to connect in “My TAP”;
+        \n- Restart the BLE on the phone side;
+        \n- Android should launch automatically if the button is connected properly.</string>
+    <string name="press_and_hold_tap_button_about_5_second_then_find_and_add_your_tap_button">Press and hold Tap Button about 5 seconds, then swipe down to refresh and then find and add your Tap Button</string>
+    <string name="truck_version_invert_sensor">Truck version - Invert Sensor</string>
+</resources>

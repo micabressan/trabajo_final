@@ -1,0 +1,36 @@
+public class HumbleConstructorBehavior : IConstructorResolutionBehavior
+    {
+        public ConstructorInfo GetConstructor(Type implementationType)
+        {
+            var constructors = from ctor in implementationType.GetConstructors()
+                               orderby ctor.GetParameters().Length
+                               select ctor;
+            var constructorList = constructors.ToList();
+
+            if (constructorList.Count == 1)
+            {
+                return constructorList.First();
+            }
+
+            if (constructorList.Count > 1)
+            {
+                foreach (var constructorInfo in constructorList)
+                {
+                    var parameters = constructorInfo.GetParameters();
+
+                    if (parameters.Length == 0)
+                        return constructorInfo;
+
+                    if (parameters.Length == 1)
+                    {
+                        if (parameters[0].ParameterType == typeof(UmbracoContext))
+                        {
+                            return constructorInfo;
+                        }
+                    }
+                }
+            }
+
+            throw new Exception($"Could not find proper constructor to use for {implementationType}");
+        }
+    }

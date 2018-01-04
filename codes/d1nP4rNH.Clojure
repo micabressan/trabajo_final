@@ -1,0 +1,95 @@
+(ns lab1.core
+  (:require
+    [clojure.string :as str]
+    [clojure.math.numeric-tower :as math]
+    [lab1.letters :refer [ltrs-freqs]]))
+
+;Consts 
+;---------------------------------------------------
+
+(def text
+  "ЧПДШЭЗ ЖЮШ ГЮДШИП ГЯНФШЭШФ ЯГЧШЭЗБАУНПО ЕЭО ПАЮУТЮЯЫЯИПМЯЯ ШКЗУИЮП БПЕПТЯУ ЧШДШЭО Я ГФОБПТТШЦШ Г ТЯН ЯЕУТЮЯЫЯИПЮШДП ЧШЭЗБШФПЮУЭО ДПГГНПЮДЯФПУЮГО ИПИ ЕШИШБПЮУЭЗГЮФШ ЧДПФП ТП ЯГЧШЭЗБШФПТЯУ ФШБНШСТШГЮУЯ ГФОБПТТРВ Г ЕПТТРН ЯЕУТЮЯЫЯИПЮШДШН ЧШЭЗБШФПЮУЭО")
+
+(def text2 "ИКЯЭ КИУЫИПТРИ КФИЕИТЭО ВУЮБРФЮЬПКО ЫЮКУЫРПРНЭ УИН ПВ ЫЮТЗХИ ФЫИНИТЭ ПВ ИЦВ КЯИЕАИП АГЭПЗ ЫЮФТВ УЮУ Э ПВЦВ УВНА ВТ ЖПЭ КФИЕИТЭО ВПУЫРЯ ФВИТТВИ ЭКУАККПФВ")
+
+(def text3 "ЦУЖХЙСЙТТЫЙ НТЩУХСЕЪНУТТЫЙ ЧЙЬТУРУЗНН ФХЙИЦЧЕЖРДГЧ ЦУЁУО ЦУЖУПШФТУЦЧА ФХУЪЙЦЦУЖ Н СЙЧУИУЖ ЦЁУХЕ УЁХЕЁУЧПН ФХЙУЁХЕМУЖЕТНД ЬХЕТЙТНД Н ХЕЦФХЙИЙРЙТНД НТЩУХСЕЪНН Ж ВРЙПЧХУТТУС ЖНИЙ")
+
+(def text-len (count text3))
+
+;---------------------------------------------------
+
+(defn find-nearests [s n x]
+  (take n (sort-by #(math/abs (- x %)) s)))
+
+(defn comp-freqs [freqs n] 
+  (->> (vals freqs)
+       (map #(float (/ % text-len)))
+       (map (partial find-nearests (keys ltrs-freqs) n))
+       (zipmap (keys freqs))))
+
+(defn decode-symb [comp-table sym]
+  (->> sym
+       (get comp-table) 
+       (map (partial get ltrs-freqs))))    
+
+(defn make-block [comp-table freqs word]
+  (as-> word block
+        (map (partial decode-symb comp-table) block)
+        (apply map list block)
+        (conj block (seq word))))  
+
+
+;Output
+;---------------------------------------------------
+(defn sym->str [sym]
+  (format "%2s" sym))
+
+(defn line->str [line]
+  (str/join (map sym->str line)))
+
+(defn block->str [block]
+  (str/join "\n" (map line->str block)))   
+
+(defn print-blocks [blocks]
+  (println (str/join "\n\n"(map block->str blocks))))
+
+;--------------------------------------------------
+
+(defn handle-input []
+  (println """L1 swap L2""")
+  (read-line))
+
+(defn handle-swap1 [l1 l2 [line1 & lines]]
+  (conj lines (map #(case % l1 l2 l2 l1 %) line1)))
+
+(defn handle-swap [l1 l2 [line1 & lines]]
+  (conj lines (replace {l1 l2, l2 l1} line1)))
+
+(defn swap-letters [blocks]
+  (let [in (handle-input)]
+    (map (partial handle-swap (first in) (second in)) blocks)))       
+
+(defn prepare-text [text n]
+  (let [freqs (frequencies text)
+        comp-table (comp-freqs freqs n)]
+    (as-> text text
+          (str/split text #" ")
+          (map (partial make-block comp-table freqs) text))))
+
+(defn decode [text n]
+  (loop [blocks (prepare-text text n)]
+    (print-blocks blocks)
+    (recur (swap-letters blocks))))
+
+(defn pretty [coll]
+  (->> coll
+       (map (partial str/join " : "))
+       (str/join "\n"))) 
+
+(defn helper [text]
+  (let [freqs (frequencies text)]
+    (->> (vals freqs)
+         (map #(format "%.3f" (float (/ % text-len))))
+         (zipmap (keys freqs))
+         (sort-by val)
+         (pretty))))

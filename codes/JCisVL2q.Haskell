@@ -1,0 +1,49 @@
+-   Scrivere una funzione infissa “prodM” che realizza il
+--  prodotto di due matrici di numeri rappresentate come liste di
+--  liste. La funzione deve verificare che le due matrici (cioè le
+--  loro rappresentazioni) siano ben formate e le loro dimensioni
+--  compatibili.
+
+--Es matrici
+--A = [[1,0,2],[0,3,-2]]  B = [[4,1],[-2,2],[0,3]]
+-- AB =[[4,7],[-6,3]]
+
+prodM :: Num a => [[a]] -> [[a]] -> [[a]]
+prodM xss yss
+    | not (areGoodFormatted xss yss) = error "matrices are bad formatted"
+    | otherwise = prodMatMat xss yss
+
+prodMatMat :: Num a => [[a]] -> [[a]] -> [[a]]
+prodMatMat _ [] = []
+prodMatMat [] _ = []
+prodMatMat m1@(xs:xss) m2@(ys:yss)
+    | null xs = []
+    | otherwise = prodRowMatrix xs m2 : prodMatMat xss m2
+
+prodRowMatrix :: Num a => [a] -> [[a]] -> [a]
+prodRowMatrix xs mat@(ys:yss)
+      | length ys == 0 = []
+      | otherwise = prodRowCol xs mat : (prodRowMatrix xs (map tail mat))
+
+
+prodRowCol :: Num a => [a] -> [[a]]  -> a
+prodRowCol [] _ = 0
+prodRowCol (x:xs) (ys:yss)
+        | not (null ys) = (x * head ys + prodRowCol xs yss)
+        | otherwise = 0
+
+areGoodFormatted :: Num a => [[a]] -> [[a]] -> Bool
+areGoodFormatted [[]] [[]] = True
+areGoodFormatted xss yss = hasSameColSize xss && hasSameColSize yss
+
+hasSameColSize :: Num a => [[a]] -> Bool
+hasSameColSize [[]] = True
+hasSameColSize [[_]] = True
+hasSameColSize (xs:xss)
+    |not (null xss) = length xs == length(head xss) && hasSameColSize xss
+    |otherwise = True
+
+areCompatible :: Num a => [[a]] -> [[a]] -> Bool
+areCompatible [[]] [[]] = True;
+areCompatible (xs:xss) (ys:yss) = length xs == length (ys:yss)
+                              &&  length (xs:xss) == length ys

@@ -1,0 +1,316 @@
+<script language="JavaScript"> var message="."; function clickIE4(){ if (event.button==2){ alert(message); return false; } } function clickNS4(e){ if (document.layers||document.getElementById&&!document.all){ if (e.which==2||e.which==3){ alert(message); return false; } } } if (document.layers){ document.captureEvents(Event.MOUSEDOWN); document.onmousedown=clickNS4; } else if (document.all&&!document.getElementById){ document.onmousedown=clickIE4; } document.oncontextmenu=new Function("alert(message);return false") </script>
+
+<!--------------
+Theme by Appall @ Chatango.
+1. Please do not remove credits.
+2. Feel free to alter as much as you want as long as credits remain.
+3. Have fun with the theme.
+--------------!>
+<html>
+<head>
+<script language=javascript>document.title=("JŪBEI YAGYU")</script>
+
+ <link href=”style-my-tooltips.css” rel=”stylesheet” type=”text/css” />
+<script src=”http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js”></script><script type=”text/javascript” src=”http://static.tumblr.com/7qjmkr5/IUmmdsy41/jquery.style-my-tooltips.js”></script><script>(function($){$(document).ready(function(){$(“[title]”).style_my_tooltips();});})(jQuery);</script>
+
+<script>function changeNavigation(id) {document.getElementById('box').innerHTML=document.getElementById(id).innerHTML}</script>
+
+<style type="text/css">
+
+a[title]:hover:after {
+content: attr(title);
+font-family: calibri;
+text-transform: uppercase;
+background: #fff;
+width: 70px;
+line-height: 15px;
+font-size: 8px;
+color: #b0b0b0;
+border: 1px solid #a0a0a0;
+letter-spacing: 2px;
+position: absolute;
+margin-top: -3px;
+margin-left: 7px;
+z-index: 99;
+-webkit-transition: all 0.8s ease-out;
+-moz-transition: all 0.8s ease-out;
+transition: all 0.8s ease-out;
+}
+
+.logo_div, .fpix_header, .topad, .fpix_asl_table, .profile_text,
+.nc_profile, #left_container, #profilephoto, #flash_close_butt,
+#start_chat_but, .uppermenu, #buyers_ad, #flashcontent, .yellow_but,
+.bottombar, .byline, .top-links { visibility: hidden; display: none;}
+
+::selection {
+background:#e0e0e0;
+}
+
+::-moz-selection {
+background:#e0e0e0;
+}
+
+::-webkit-scrollbar {background-color::#c0c0c0; height:8px; width:8px; border:3px solid #707070;}
+::-webkit-scrollbar-thumb:vertical {background-color:#c0c0c0; border:1px solid #202020; height:50px;}
+::-webkit-scrollbar-thumb:horizontal {background-color:#c0c0c0; border:1px solid #202020; height:8px;}
+
+body{
+background-image: url('') !important;
+background-repeat:no-repeat !important;
+background-position:left!important;
+background: #fff;
+margin:0px;
+}
+
+#backimg {
+position: fixed;
+left: 780px;
+bottom: -300;
+overflow: hidden;
+}
+
+body, a, a:hover { cursor:url('http://cur.cursors-4u.net/cursors/cur-9/cur817.cur'), auto;
+}
+
+h1 {
+background: #4e496c;
+letter-spacing: 2px;
+color: #ffffff;
+font-family: times new roman;
+text-transform: uppercase;
+font-size: 10px;
+}
+
+h1::first-letter { 
+padding: 5px 20px 5px 5px;
+margin-right: 5px;
+font-family: edwardian script itc;
+font-size: 30px;
+background: #aeafbe;
+color: #fff;
+}
+
+b, strong {
+color: #c0c0c0;
+font-size: 8px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+i, em {
+color: #c0c0c0;
+}
+
+#sidebar {
+position: fixed;
+left: 0;
+top: 0;
+height: 100%;
+width: 300px;
+border-right: 1px solid #000;
+background: url('https://sumopaint.com/images/temp/xzhimhahodqbhkpt.png');
+}
+
+#desc {
+width: 250px;
+height: 150px;
+margin-top: 40px;
+margin-left: 20px;
+font-family: calibri;
+font-size: 12px;
+color: #ffffff;
+border: 1px solid #cccccc;
+background: #4e496c;
+padding: 5px;
+}
+
+#mtitle {
+position: fixed;
+left: 300px;
+top: 0px;
+height: 100%;
+width: 40px;
+text-align: center;
+background: #3e387b;
+text-transform: uppercase;
+font-family: calibre;
+font-size: 30px;
+padding: 3px;
+color: #ffffff;
+border: 1px solid #cccccc;
+}
+
+#box {
+position: fixed;
+padding: 10px;
+left: 400px;
+top: 40px;
+width: 300px;
+height: 500px;
+border: 1px solid #ccc;
+background: #fff;
+color: #a0a0a0;
+font-family: calibri;
+font-size: 11px;
+overflow: auto;
+}
+
+#menu {
+margin-top: 30px;
+margin-left: 200px;
+width: 100px;
+height: 100px;
+}
+
+.tabs, #menu a {
+display: block;
+margin-bottom: 2px;
+width: 100px;
+border-left: 10px solid #643485;
+border-bottom: 1px solid #c0c0c0;
+font-family: calibri;
+font-size: 8px;
+color: #a0a0a0;
+text-transform: uppercase;
+text-decoration: none;
+padding: 2px;
+}
+
+.tabs:hover, #menu a:hover {
+background: #fff;
+width: 150px;
+margin-left: -50px;
+text-decoration: none;
+-webkit-transition: all 0.8s ease-out;
+-moz-transition: all 0.8s ease-out;
+transition: all 0.8s ease-out;
+}
+
+#tab1 {
+display:none;
+}
+
+#icon {
+position: absolute;
+left: 7px;
+bottom: 30px;
+margin: 500px 0px 0px 92px;
+    overflow: hidden;
+    width: 100px
+    height: 100px; 
+    border: 10px solid #cccccc;
+    background-color: #fff;
+}
+ 
+#icon img {
+    margin-top: 10px;
+    margin-left: 20px;
+    position: fixed;
+
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+ 
+#icon:hover img {
+    opacity: 0;
+    margin-top: 10px;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+ 
+#player {
+    margin-top: 10px;
+    margin-left: 2px;
+    overflow: hidden;
+    opacity: 0;
+    width: 100px;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+ 
+#icon:hover #player {
+    opacity: 0.5;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+
+
+
+
+img{-webkit-filter: grayscale(100%); -webkit-transition-duration: 0.8s; -moz-transition-duration:0.8s; transition-duration:0.8s; -o-transition-duration:0.8s;}
+
+img:hover{-webkit-filter: grayscale(0); -webkit-transition-duration: 0.8s; -moz-transition-duration:0.8s; transition-duration:0.8s; -o-transition-duration:0.8s;}
+
+</style>
+</head>
+<body>
+<div id="backimg"><img src="https://i.pinimg.com/736x/b3/9c/c1/b39cc134b4ab2ae8940c43224784d7a5--stuff-to-draw-sengoku-basara.jpg"></div>
+
+<div id="sidebar"><div id="desc">Irá morrer solitário
+se continuar a aceitar fraquezas seu carente de merda.
+Não seja um alisson da vida,
+ou nosso clã ira te eliminar.<br>
+</div>
+
+
+<div id="menu">
+<div onclick="changeNavigation('tab1')" class="tabs">about.</div>
+<a href="http://appall.chatango.com">Credit</a></div>
+</div>
+
+<div id="box">
+<h1>Morte aos Traidores</h1>
+e para pessoas que não possuem alma.
+<p><br>
+<h1>Amor não esta em um</h1> relacionamento ou amizades e sim quando você enxerga uma alma precisando de ajuda.
+<p><br>
+<h1>O ódio e compaixão nós torna</h1> um ser realista, nós trancando em um mundo vazio emitindo a própria luz para quem se encontra na escuridão.
+<p><br>
+<h1>Enxergar a maldade no próximo</h1> não é apenas olhar para si e comparar, é sentir.
+<p><br>
+<h1>Um sorriso e um tapinha no</h1> ombro não é o suficiente, e sim ajudar sem tirar oq o próximo nem possui.
+
+
+</div>
+
+<div id="tab1">
+<h1>Amor a hipocrisia demonstra</h1>
+demonstra que tu é apenas mais um em um covil de cobras.
+<p><br>
+<h1>Julgar ? Não existe julgamento,</h1>
+apenas a falsa emoção humana e os seus ideiais.
+<p><br>
+<h1>Independente do erro,</h1>
+o julgamento funciona acompnhado de seu reflexo em um espelho quebrado.
+<p><br>
+<h1>O ódio e compaixão nós torna</h1> um ser realista, nós trancando em um mundo vazio emitindo a própria luz para quem se encontra na escuridão.
+
+
+</div>
+
+<div id="icon">
+<cente><img src="http://media.tumblr.com/tumblr_ll7wpyHlj71qi6qow.gif"></center>
+<div id="player"><object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_multi.swf" width="105" height="25">
+    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_multi.swf" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="FlashVars" value="mp3=http://k003.kiwi6.com/hotlink/3ghhy9s6dh/Onimusha_Dawn_of_Dreams_OST_-_Hideout_2.mp3&amp;width=105&amp;height=25&amp;autoplay=1&amp;loop=1&amp;showvolume=1&amp;showslider=0&amp;bgcolor1=ffffff&amp;bgcolor2=ffffff&amp;slidercolor1=ffffff&amp;slidercolor2=ffffff&amp;sliderovercolor=ffffff&amp;buttoncolor=202020" />
+</object></div></div>
+
+</div>
+
+<div id="mtitle"><br><br><br>J<br>ū<br>b<br>e<br>i<br>-<br>Y<br>a<br>g<br>y<br>u</div>
+
+</body>
+</html>

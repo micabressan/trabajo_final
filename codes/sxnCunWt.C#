@@ -1,0 +1,56 @@
+using System;
+using System.Linq;
+
+namespace Rainer
+{
+	class MainClass
+	{
+		public static void Main(string[] args)
+		{
+			int[] inputSequence = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+
+			int[] initialRaindropState = inputSequence.Take(inputSequence.Length - 1).ToArray();
+
+			int[] currentRaindropState = initialRaindropState.ToArray();
+
+			int currentIndex = inputSequence.Last();
+
+			bool isWet = false;
+
+			int steps = 0;
+			while (!isWet)
+			{
+				for (int i = 0; i < currentRaindropState.Length; i++)
+				{
+					currentRaindropState[i]--;
+				}
+
+				for (int i = 0; i < currentRaindropState.Length; i++)
+				{
+					if (currentRaindropState[i] == 0 && currentIndex == i)
+					{
+						isWet = true;
+						break;
+					}
+				}
+
+				if (isWet)
+				{
+					break;
+				}
+
+				for (int i = 0; i < currentRaindropState.Length; i++)
+				{
+					if (currentRaindropState[i] == 0)
+					{
+						currentRaindropState[i] = initialRaindropState[i];
+					}
+				}
+				currentIndex = int.Parse(Console.ReadLine());
+				steps++;
+			}
+			Console.WriteLine(string.Join(" ", currentRaindropState));
+			Console.WriteLine(steps);
+		}
+	}
+}

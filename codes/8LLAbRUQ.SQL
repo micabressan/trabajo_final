@@ -1,0 +1,1 @@
+SELECT entry, class, subclass, SoundOverrideSubclass, Material, displayId, inventoryType, sheath FROM item_template;

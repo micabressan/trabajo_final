@@ -1,0 +1,28 @@
+-module(rb_app).
+
+-behaviour(application).
+
+-export([start/2, stop/1]).
+
+-define(DEFAULT_LISTEN_PORT, 14001).
+
+-record(state, {lsock}).
+
+start(_StartType, _StartArgs) ->
+    Port = case application:get_env(routerbox, port) of
+                {ok, P}     -> P;
+                undefined   -> ?DEFAULT_LISTEN_PORT
+           end,
+    {ok, LSock} = gen_tcp:listen(Port, [{active, true}]),
+    
+    case rb_sup:start_link(LSock) of
+        {ok, Pid} ->
+            rb_sup:start_child(),
+            {ok, Pid, #state{lsock = LSock}};
+        Other ->
+            {error, Other}
+    end.
+
+stop(#state{lsock = LSock} = _State) ->
+    gen_tcp:close(LSock),
+    ok.

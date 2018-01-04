@@ -1,0 +1,40 @@
+# coding=utf-8
+#! /usr/bin/python
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import time
+import cv2
+import numpy as np
+import datetime
+import argparse
+import os
+import glob
+import Correo
+
+def Programa():
+        # Definir variables de la cámara
+        camera = PiCamera()
+        camera.resolution = (480, 368)
+        camera.framerate = 30
+        rawCapture = PiRGBArray(camera, camera.resolution)
+
+        #Correo y tomar fotos
+        enviar = 0
+        fotografia = 0
+        fotografia2 = 0
+
+        # Definir la creación de vídeo
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        out = cv2.VideoWriter('output.avi',fourcc, camera.framerate, camera.resolution)
+         
+        # Apertura del programa
+        print chr(27)+"[1;95m"+"ABRIÉNDOSE"
+        time.sleep(0.1)
+        print chr(27)+"[1;36m"+"EJECUTÁNDOSE"
+
+        # Instrucciones de uso
+        print chr(27)+"[1;97m"+"Pulsa [f] para GUARDAR un FOTOGRAMA"
+        print chr(27)+"[1;97m"+"Pulsa [q] para CERRAR el PROGRAMA"
+
+        #Metodo extractor de fondo 
+        fgbg = cv2.createBackgroundSubtractorMOG2()

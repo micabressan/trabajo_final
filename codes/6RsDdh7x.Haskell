@@ -1,0 +1,26 @@
+{-# LANGUAGE ViewPatterns #-}
+
+import Prelude hiding (length, filter)
+import Data.List (find)
+import Data.Sequence
+
+findMaxDifference :: Seq Int -> Int
+findMaxDifference list = maximum list - minimum list
+
+getDivisor :: Int -> Seq Int -> Maybe Int
+getDivisor dividend list = find (\item -> rem dividend item == 0) list
+
+findQuotient :: Seq Int -> Int
+findQuotient (viewl -> (dividend :< list)) = quotient
+  where quotient = case getDivisor dividend list of Just divisor -> div dividend divisor
+                                                    Nothing -> findQuotient (list |> dividend)
+
+getRow :: String -> Seq Int
+getRow = fromList . map read . words
+
+main :: IO ()
+main = do
+  contents <- readFile "input.txt"
+  let rows = map getRow $ lines contents
+  putStrLn $ "Solution 1:" ++ (show $ sum $ map findMaxDifference rows)
+  putStrLn $ "Solution 2:" ++ (show $ sum $ map findQuotient rows)

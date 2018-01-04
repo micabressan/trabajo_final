@@ -1,0 +1,201 @@
+use std::io::{stdin, BufRead};
+use std::str::FromStr;
+use std::sync::{Arc};
+use std::sync::atomic::{Ordering,AtomicBool};
+use std::sync::mpsc::{channel,Sender,Receiver};
+use std::thread;
+use std::time::Duration;
+
+type RegNum = u8;
+type RegVal = i64;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+enum RegImm {
+    Reg(RegNum),
+    Imm(RegVal),
+}
+
+fn to_regnum(reg: &str) -> RegNum {
+    const A_BYTE: u8 = 97;
+    let byte = reg.as_bytes()[0];
+    if byte < A_BYTE || byte > A_BYTE + 26 {
+        panic!("Invalid register name");
+    }
+    byte - A_BYTE
+}
+
+impl FromStr for RegImm {
+    type Err = ();
+
+    fn from_str(input: &str) -> Result<Self, Self::Err> {
+        match input.parse::<RegVal>() {
+            Ok(n) => Ok(RegImm::Imm(n)),
+            Err(_) => Ok(RegImm::Reg(to_regnum(input))),
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+enum InstrType {
+    Snd,
+    Rcv,
+    Set(RegImm),
+    Add(RegImm),
+    Mul(RegImm),
+    Mod(RegImm),
+    Jgz(RegImm),
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+struct Instr {
+    arg1: RegImm,
+    effect: InstrType,
+}
+
+impl FromStr for Instr {
+    type Err = ();
+
+    fn from_str(input: &str) -> Result<Self, Self::Err> {
+        use InstrType::*;
+        type Variant1 = fn (RegImm) -> InstrType;
+
+        let mut iter = input.split_whitespace();
+        let cmd = iter.next().expect("Must have a command");
+        let first_arg = iter.next().expect("Must have first arg").parse().expect("Valid first arg");
+        let second_arg = iter.next().map(|w| w.parse::<RegImm>().expect("Second arg must be valid"));
+        let effect = match second_arg {
+            Some(a2) =>
+                (match cmd {
+                    "set" => Set as Variant1,
+                    "add" => Add as Variant1,
+                    "mul" => Mul as Variant1,
+                    "mod" => Mod as Variant1,
+                    "jgz" => Jgz as Variant1,
+                    _ => panic!("Unknown two-arg instruction"),
+                })(a2),
+            None =>
+                (match cmd {
+                    "snd" => Snd,
+                    "rcv" => Rcv,
+                    _ => panic!("Unknown one-arg instruction"),
+                }),
+        };
+        Ok(Instr {arg1: first_arg, effect: effect })
+    }
+}
+
+struct State {
+    regs: Vec<RegVal>,
+    instrs: Vec<Instr>,
+    pc: usize,
+    send_count: usize,
+
+    recv_blocked: Arc<AtomicBool>,
+
+    my_send: Sender<RegVal>,
+    my_recv: Receiver<RegVal>,
+    other_gone: bool,
+}
+
+impl State {
+    pub fn new(program: Vec<Instr>, pid: RegVal,
+               chan_sender: Sender<RegVal>, chan_recver: Receiver<RegVal>,
+               recv_blocked: Arc<AtomicBool>) -> State {
+        let mut regs = vec![0; 26];
+        regs[15] = pid;
+        State { regs: regs,
+                instrs: program,
+                pc: 0, send_count: 0,
+                my_send: chan_sender, my_recv: chan_recver,
+                recv_blocked: recv_blocked,
+                other_gone: false,
+        }
+    }
+
+    fn get_value(&self, arg: RegImm) -> RegVal {
+        match arg {
+            RegImm::Imm(i) => i,
+            RegImm::Reg(r) => self.regs[r as usize]
+        }
+    }
+
+    fn recv_if_possible(&self) -> Option<RegVal> {
+        loop {
+           match self.my_recv.recv_timeout(Duration::from_millis(100)) {
+               Ok(v) => {
+                   self.recv_blocked.store(false, Ordering::SeqCst);
+                   return Some(v);
+               }
+               Err(_) => if self.recv_blocked.swap(true, Ordering::SeqCst) {
+                   return None;
+               }
+           }
+        }
+    }
+
+    fn step(&mut self) -> bool {
+        // boolean is halted
+        use InstrType::*;
+
+        if self.pc >= self.instrs.len() { return false; }
+        let instr = self.instrs[self.pc];
+        let reg1_val = self.get_value(instr.arg1);
+        let new_reg1_val = match instr.effect {
+            Snd => {
+                match self.my_send.send(reg1_val) {
+                    Ok(_) => { self.send_count += 1; },
+                    Err(_) => { self.other_gone = true; }
+                };
+                reg1_val
+            },
+            Rcv => {
+                if self.other_gone { return false; }
+                match self.recv_if_possible() {
+                    Some(v) => v,
+                    None => { return false; },
+                }
+            },
+            Set(arg2) => self.get_value(arg2),
+            Add(arg2) => reg1_val + self.get_value(arg2),
+            Mul(arg2) => reg1_val * self.get_value(arg2),
+            Mod(arg2) => reg1_val % self.get_value(arg2),
+            Jgz(arg2) => {
+                if reg1_val > 0 {
+                    self.pc = (self.pc as RegVal + self.get_value(arg2) - 1) as usize;
+                }
+                reg1_val
+            },
+        };
+        if let RegImm::Reg(r) = instr.arg1 {
+            self.regs[r as usize] = new_reg1_val;
+        }
+        self.pc += 1;
+        true
+    }
+
+    pub fn run(mut self) -> usize {
+        while self.step() {};
+        self.send_count
+    }
+}
+
+fn main() {
+    let stdin = stdin();
+    let handle = stdin.lock();
+    let program: Vec<Instr> = handle.lines()
+        .map(|l| l.expect("I/O error").parse().unwrap()).collect();
+
+    let recv_blocked = Arc::new(AtomicBool::new(false));
+    let (send0, recv0) = channel();
+    let (send1, recv1) = channel();
+
+    let core0 = State::new(program.clone(), 0, send0, recv1, recv_blocked.clone());
+    let core1 = State::new(program.clone(), 1, send1, recv0, recv_blocked.clone());
+
+    let thread0 = thread::spawn(move || core0.run() );
+    let thread1 = thread::spawn(move || core1.run() );
+
+    let sends0 = thread0.join().expect("Thread 0 not to crash");
+    let sends1 = thread1.join().expect("Thread 1 not to crash");
+    println!("Core 1 sent {} values (core 0 sent {})", sends1, sends0);
+}

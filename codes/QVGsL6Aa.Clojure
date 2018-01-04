@@ -1,0 +1,5 @@
+(def my-map {:a 1 :b 2 :c 3})
+;; extract the a b and c values from the keys via destructuring
+(let [{a :a c :c} my-map]
+  (println a)
+  (println c))

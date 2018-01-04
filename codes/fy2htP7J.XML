@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/editTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Edit"
+        android:layout_marginTop="20dp"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTitle"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:hint="Product name" />
+
+    <EditText
+        android:id="@+id/editProteins"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:hint="Proteins" />
+
+    <EditText
+        android:id="@+id/editCarbos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editProteins"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:hint="Carbohydrates" />
+
+    <EditText
+        android:id="@+id/editFats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editCarbos"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:hint="Fats" />
+
+    <EditText
+        android:id="@+id/editCalories"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editFats"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Calories" />
+
+    <Button
+        android:id="@+id/editCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editCalories"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/editAcceptButton"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editCalories"
+        android:layout_toRightOf="@+id/editCancelButton"
+        android:text="Accept" />
+
+
+</RelativeLayout>

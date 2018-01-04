@@ -1,0 +1,10 @@
+{
+  "collapse": {
+    "field": "error.grouping_key",
+    "inner_hits": {
+      "name": "error_groups",
+      "size": 0
+    }
+  }
+  "sort": ["inner_hits.error_groups.hits.total"]   <------ This yields an error since inner_hits is not a mapped property
+}

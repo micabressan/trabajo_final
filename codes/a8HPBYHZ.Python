@@ -1,0 +1,199 @@
+from tkinter import *
+import random
+import math
+import time
+
+def mpow(x, y):
+    if y == 1:
+        return int(x)
+    tmp = mpow(int(x), y // 2)
+    return tmp * tmp
+
+def antipow(x, y):
+    m = 0
+    x2 = x
+    while x > 0:
+        x //= 2
+        m += 1
+    n = m
+    n //= y
+    return x2 // (2 ** (m - n))
+    
+class Point:
+    def __init__(self, x, y, r):
+        self.x = x
+        self.y = y
+        self.r = r
+        self.m = r * r
+
+class Ball:
+    def __init__(self, x, y, r, color, speed=[1, 0], n=0):
+        self.x = x
+        self.y = y
+        self.r = r
+        self.m = r * r
+        self.color = color
+        self.speed = speed
+        self.n = n
+    def draw(self, canvas):
+        if self.n != -1:
+            self.color[self.n] += 1
+            if self.color[self.n] > 255:
+                self.color[self.n] = 125
+        color = "#%02x%02x%02x" % (self.color[0], self.color[1], self.color[2])
+        canvas.create_oval((self.x)/koeff - self.r + width//2,
+                           (self.y)/koeff - self.r + height//2,
+                           (self.x)/koeff + self.r + width//2,
+                           (self.y)/koeff + self.r + height//2,
+                           fill=color)
+    def rotate(self, alpha):
+        a = self.vec[0] * math.cos(alpha) - self.vec[1] * math.sin(alpha)
+        b = self.vec[0] * math.sin(alpha) + self.vec[1] * math.cos(alpha)
+    def addd(self, other):
+        self.speed[0] = (self.speed[0] * self.m + other.speed[0] * other.m) / (self.m + other.m)
+        self.speed[1] = (self.speed[1] * self.m + other.speed[1] * other.m) / (self.m + other.m)      
+        self.m += other.m
+        self.r = math.sqrt(self.m)
+        self.color = [100, 100, 100]
+        self.n = -1
+    def tick(self, others, point):
+        self.speed[0] *= kkk
+        self.speed[1] *= kkk
+        self.x += self.speed[0]
+        self.y += self.speed[1]
+        points = []
+        for elem in others + [point]:
+            if elem == self:
+                pass
+            d = self.m * elem.m
+            f = [- self.x + elem.x, - self.y + elem.y]
+            if s != 2:
+                l = antipow((mpow(f[0], s) + mpow(f[1], s)), s)
+            else:
+                l = math.sqrt(f[0] * f[0] + f[1] * f[1])
+            
+            if l > elem.r * self.r:
+                f[1] = f[1] / l
+                f[0] = f[0] / l
+                d /= l * l            
+            else:
+                f[1] = 0
+                f[0] = 0
+                if elem != point:
+                    points.append(elem)
+            self.speed[0] += f[0] * d
+            self.speed[1] += f[1] * d
+        return points
+
+root = Tk()
+width = 1000
+height = 500
+g = 0.01
+s = 2
+kkk = 1
+koeff = 100
+
+l = []
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              5,
+              [55, 255, 55],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 1))
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              5,
+              [55, 55, 255],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 2))
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              5,
+              [0, 255, 0],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 1))
+for i in range(100):
+    l.append(Ball(width // 2 + random.uniform(-10000, 10000),
+                  height // 2 + random.uniform(-10000, 10000),
+                  random.randint(5, 15),
+                  [255, 55, 255],
+                  speed=[random.uniform(-1, 1),
+                         random.uniform(-1, 1)],
+                  n = 2))
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              5,
+              [255, 255, 55],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 1))
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              5,
+              [55, 255, 255],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 2))
+l.append(Ball(width // 2 + random.uniform(-1000, 1000),
+              height // 2 + random.uniform(-1000, 1000),
+              10,
+              [255, 55, 55],
+              speed=[random.uniform(-1, 1),
+                     random.uniform(-1, 1)],
+              n = 0))
+
+canvas = Canvas(root,width=width,height=height)
+canvas.pack()
+
+point = Point(width//2, height//2, 10000)
+
+def tick():
+    global l
+    fff = []
+    for elem in l:
+        fff.append(elem.tick(l, point))
+    todel = [False] * len(l)
+    for i in range(len(fff)):
+        for elem in fff[i]:
+            for j in range(len(l)):
+                if elem == l[j]:
+                    break
+            if i < j:
+                l[i].addd(l[j])
+                todel[j] = True
+    lcopy = l
+    l = []
+    for i in range(len(lcopy)):
+        if not todel[i]:
+            l.append(lcopy[i])
+        
+
+def draw():
+    canvas.delete("all")
+    for elem in l:
+        elem.draw(canvas)
+
+mouse = [width//2, height//2]
+
+def motion(event):
+    global koeff
+    koeff = max(event.x * 10, 10)
+#    mouse[1] = event.y
+root.bind('<Motion>', motion)
+
+while True:
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    tick()
+    draw()
+    canvas.update()

@@ -1,0 +1,28 @@
+	public class InfoItem
+    {
+        public double RendaA { get; set; } //Quantia que um item irá receber do total
+        public double RendaM { get; set; } //Quantia que um item irá receber do mensa
+        public int MesesF { get; set; } //Meses faltando para comprar aquele item
+        public int Porc { get; set; } //Porcentagem mostrando a quantia que o item já tem do preço dele total
+    }
+
+		//O método que faz o cálculo
+		public InfoItem GetInfo(int position)
+        {
+            InfoItem infoItem = new InfoItem();
+
+            if (itens[position].Import != 0)
+            {
+                infoItem.RendaA = (rendaA / importT) * itens[position].Import;
+                infoItem.RendaM = (rendaM / importT) * itens[position].Import;
+                infoItem.MesesF = Convert.ToInt32(Math.Ceiling((itens[position].Preco - infoItem.RendaA) / infoItem.RendaM));
+
+                if (itens[position].Preco != 0) { infoItem.Porc = Convert.ToInt32((infoItem.RendaA * 100) / itens[position].Preco); }
+                else { infoItem.Porc = 100; }
+
+                if (infoItem.Porc > 100) { infoItem.Porc = 100; }
+            }
+            else { infoItem.Porc = 0; };
+
+            return infoItem;
+          }

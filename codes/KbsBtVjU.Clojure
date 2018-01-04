@@ -1,0 +1,61 @@
+;; workflow
+
+[[:scanner-command :ibgateway]
+ [:ibgateway :scanner-command-result]
+ [:ibgateway :scanner]]
+
+;; catalog
+
+(the-catalog:
+ [{:kafka/zookeeper zookeeper:2181,
+   :onyx/plugin :onyx.plugin.kafka/read-messages,
+   :onyx/medium :kafka,
+   :kafka/offset-reset :earliest,
+   :onyx/type :input,
+   :onyx/name :scanner-command,
+   :kafka/topic scanner-command,
+   :onyx/max-peers 1,
+   :onyx/min-peers 1,
+   :onyx/doc "Read from the 'scanner-command' Kafka topic",
+   :kafka/key-deserializer-fn
+   :com.interrupt.streaming.platform.serialization/deserialize-kafka-key,
+   :onyx/batch-size 10,
+   :kafka/deserializer-fn
+   :com.interrupt.streaming.platform.serialization/deserialize-kafka-message,
+   :kafka/wrap-with-metadata? true}
+  {:onyx/fn :com.interrupt.streaming.platform.base/local-identity,
+   :onyx/type :function,
+   :onyx/name :ibgateway,
+   :onyx/max-peers 1,
+   :onyx/min-peers 1,
+   :onyx/batch-size 10}
+  {:kafka/zookeeper zookeeper:2181,
+   :kafka/key-serializer-fn
+   :com.interrupt.streaming.platform.serialization/serialize-kafka-key,
+   :onyx/plugin :onyx.plugin.kafka/write-messages,
+   :onyx/medium :kafka,
+   :kafka/request-size 307200,
+   :onyx/type :output,
+   :onyx/name :scanner-command-result,
+   :kafka/topic scanner-command-result,
+   :kafka/serializer-fn
+   :com.interrupt.streaming.platform.serialization/serialize-kafka-message,
+   :onyx/max-peers 1,
+   :onyx/min-peers 1,
+   :onyx/doc "Writes messages to a Kafka topic",
+   :onyx/batch-size 10}
+  {:kafka/zookeeper zookeeper:2181,
+   :kafka/key-serializer-fn
+   :com.interrupt.streaming.platform.serialization/serialize-kafka-key,
+   :onyx/plugin :onyx.plugin.kafka/write-messages,
+   :onyx/medium :kafka,
+   :kafka/request-size 307200,
+   :onyx/type :output,
+   :onyx/name :scanner,
+   :kafka/topic scanner,
+   :kafka/serializer-fn
+   :com.interrupt.streaming.platform.serialization/serialize-kafka-message,
+   :onyx/max-peers 1,
+   :onyx/min-peers 1,
+   :onyx/doc "Writes messages to a Kafka topic", 
+   :onyx/batch-size 10}])

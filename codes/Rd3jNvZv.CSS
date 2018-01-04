@@ -1,0 +1,430 @@
+
+
+/* AZG 8chan CSS Theme by Fringe Wizard - Made July 2017 */
+/* 8ch.pl/azg/ */
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono|Black+Ops+One|Dancing+Script');
+
+/* Hiding default elements */
+
+@keyframes backgroundSpin{
+   from{transform: rotate(0deg);}
+   to{transform: rotate(900000000000001deg);}
+}
+
+div{
+   animation:backgroundSpin 100s linear 0s infinite;
+
+}
+
+div:hover{
+   transform: rotate(10deg);
+}
+
+header div.subtitle, h1, .watchThread, span.name, .banner, img.banner, img.board_image, #thread_stats, .new-posts, a.hide-thread-link, div.file p.fileinfo span.unimportant, .faq-message, footer, .board-settings, span.unimportant.hint, div.boardlist:nth-child(16) > span:nth-child(5), .required-field-cell, hr {
+  display: none;
+}
+
+.dice-option table td, .dice-option table {
+  border: 0px solid;
+}
+
+table tbody tr:nth-of-type(2n) {
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(2) > th:nth-child(1),
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(3) > th:nth-child(1),
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(4) > th:nth-child(1),
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(5) > th:nth-child(1),
+table.post-table:nth-child(4) > tbody:nth-child(1) > tr:nth-child(6) > th:nth-child(1),
+table.post-table-options:nth-child(5) > tbody:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
+#oekaki > th:nth-child(1),
+table.post-table-options:nth-child(5) > tbody:nth-child(1) > tr:nth-child(3) > th:nth-child(1),
+table.post-table-options:nth-child(5) > tbody:nth-child(1) > tr:nth-child(4) > th:nth-child(1),
+.post-table-options > tbody:nth-child(1) > tr:nth-child(2) > th:nth-child(1) {
+  display:none;
+}
+
+#quick-reply th .handle {
+  display: visible:
+}
+
+html.desktop-style body.8chan.is-not-moderator.active-thread div#quick-reply.ui-draggable div#post-form-inner form table.post-table tbody tr th {
+  display: visible;
+}
+
+/* Buttons / text input */
+
+form table tr th {
+  background-color:#f3d3d3;
+  text-align:right;
+}
+
+input[type="submit"], input[type="text"], input[type="password"], textarea, #user_flag, #email_selectbox, input, #spoiler{
+  color:#eee;
+  background-color: #26ff00;
+  border: 1px solid #00ffe9;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  word-spacing: normal;
+  font-size: inherit;
+  font-family: 'Ubuntu Mono', monospace, mono;
+}
+
+input[type="text"], textarea#body {
+  padding-left:4px;
+}
+
+.show-options-cell{
+  text-align: center;
+}
+
+.post-table > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) {
+  display:block;
+}
+
+#quick-reply table, tbody, tbody, form, #quick-reply > div:nth-child(1) {
+  background: rgba(0, 0, 0, 0.0);
+}
+
+input[type="submit"] {
+  padding-top:1px;
+  padding-bottom:1px;
+}
+
+#quick-reply tr td:nth-child(2) input[type="submit"] {
+  width: 300%;
+}
+
+#quick-reply th .close-btn {
+  font-size:24px;
+  font-weight:bold;
+  font-family: 'Black Ops One', cursive;
+  color: red;
+  background: #f3d3d3;
+  border: black 1px solid;
+  border-radius: 32px;
+  margin-right:2px;
+  padding: 4px 10px 3px 11px;
+}
+
+.close-btn{
+    content: "NIGGERS";
+    margin-left:217px;
+    margin-top:-10px;
+    z-index:1000;
+    position:fixed;
+}
+
+select#email_selectbox {
+  width:64px;
+}
+
+/* Styling */
+
+body {
+  background: #ff033e;
+  color: white;
+  font-family: 'Ubuntu Mono', monospace, mono;
+  font-size: 13pt;
+}
+
+div.post.reply {
+  background: #222;
+  border: 0px solid #666;
+  transform: rotate(50deg);
+}
+
+div.post.reply:hover{
+    transform: rotate(10deg);
+}
+
+div.post.reply.highlighted {
+  background: #222;
+  border: 0px solid #f66;
+}
+
+div.post.reply div.body {
+  background: #222;
+  border-right: 1px solid #666;
+  border-left: 0px solid #666;
+  border-bottom: 1px solid #666;
+  padding-left: 32px;
+}
+
+div.post.reply.highlighted div.body {
+  background: #222;
+  border-right: 1px solid #f66;
+  border-left: 0px solid #f66;
+  border-bottom: 1px solid #f66;
+  padding-left: 32px;
+}
+
+div.post p {
+    display: block;
+    margin: 0;
+    line-height: 1.16em;
+    font-size: 16px;
+    min-height: 1.16em;
+    transform: rotate(190deg);
+    color: #2bffe9;
+}
+
+a, a:visited{
+  text-decoration: none;
+  color: #00ffe9;
+}
+
+a:hover {
+  color: red;
+  text-shadow: 1px 1px 0px #fac, -1px 1px 0px #fac, 1px -1px 0px #fac, -1px -1px 0px #fac, 0px 1px 0px #fac, 0px -1px 0px #fac, -1px 0px 0px #fac, 1px 0px 0px #fac;
+ display:block;
+ position:relative;
+ animation-name: backgroundSpin;
+ animation-duration: 9000s;
+ animation-iteration-count: infinite;
+
+}
+
+div.post.reply div.body a {
+  color: #0d0;
+}
+
+div.post.reply div.body a:hover {
+  color: #0d0;
+  text-shadow: 0px 0px 0px #fff;
+}
+
+.mentioned a:hover {
+  color: #0d0;
+  text-shadow: 0px 0px 0px #fff;
+}
+
+.quote {
+  color: #148800;
+}
+
+.aa {
+  color: #148;
+}
+
+span.heading {
+  color:#ff009d;
+  font-size:50px;
+}
+
+/* Super Secret Custom Text */
+
+strong .aa {
+  color: black;
+  text-shadow: 1px 1px 0px white, -1px 1px 0px white, 1px -1px 0px white, -1px -1px 0px white, 0px 1px 0px white, 0px -1px 0px white, -1px 0px 0px white, 1px 0px 0px white, 0px 1px 9px #fff, 0px 3px 6px blue;
+}
+
+.heading strong .aa {
+  color: gold;
+  text-shadow: 1px 1px 0px red, -1px 1px 0px red, 1px -1px 0px red, -1px -1px 0px red, 0px 1px 0px red, 0px -1px 0px red, -1px 0px 0px red, 1px 0px 0px red, 0px 1px 9px #0ff, 0px 3px 6px red;
+}
+
+em .aa {
+  color: white;
+  font-size:24px;
+  font-family: 'Dancing Script', cursive;
+}
+
+.heading strong {
+  color:olive;
+  font-size:24px;
+  font-family: 'Black Ops One', cursive;
+  font-weight: normal;
+  line-height: 1.2em;
+}
+
+/* More styling */
+
+#options_div, #alert_div {
+  background-color:rgba(60,60,60,0.8);
+  color:#fff;
+  border: 1px solid black;
+  display: inline-block;
+  position: relative;
+  margin-top: 20px;
+}
+
+.options_tab_icon {
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.options_tab_icon:hover {
+  padding: 5px;
+  color: pink;
+  cursor: pointer;
+}
+
+.options_tab_icon.active, .options_tab_icon.active:hover {
+  color: red;
+}
+
+h2 {
+  color:orange;
+}
+
+div.blotter, .intro span.subject {
+  color: #689;
+}
+
+.desktop-style div.boardlist:not(.bottom) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  z-index: 30;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+  border-bottom: 1px solid #000;
+  padding-bottom: 3px;
+  background-color: #333;
+}
+
+div.pages {
+  color: pink;
+  background: orange;
+  display: inline-block;
+  padding: 8px;
+  margin: 8px 0 4px 0;
+  border: 1px solid #666;
+}
+
+div.pages a.selected {
+  color: white;
+}
+
+/* Board Pages Styling */
+
+div.module, div.ban {
+  background: blue;
+  border: 1px solid #2bffe9;
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+div.ban p.body-line.empty {
+  display: none;
+}
+
+/* Fix for imageboards (not just text-only) */
+
+#post-form-inner, #post-form-outer {
+  width: 50%;
+  margin-left:-180px;
+}
+
+textarea, .dropzone, #user_flag, .post-table, #post-form-outer{
+  margin: auto;
+  width: 360px;
+}
+
+input[name="email"], input[name="name"]{
+  width: 360px;
+}
+
+input[type="submit"] {
+  width: 133px;
+}
+
+#user_flag { width: 340px; }
+
+/* input[name="email"]  {
+  background: url("https://i.imgur.com/ZEFDMHS.png") repeat-y;
+} */
+
+.dropzone {
+  margin-left: 0px;
+}
+
+#quick-reply tr td:nth-child(2) input[type="submit"] {
+    width: 100%;
+}
+
+/* Spin Script that makes the flags spin when you hover over them. */
+
+p.intro img.flag:hover, img.flag:focus, img.flag:active {
+    animation:flaghover 0.1s linear 0s infinite;
+    -o-animation:flaghover 0.1s linear 0s infinite;
+    -moz-animation:flaghover 0.1s linear 0s infinite;
+    -webkit-animation:flaghover 0.1s linear 0s infinite;
+}
+
+@keyframes flaghover {
+    10% {
+        transform: translateZ(0);
+    }
+    20% {
+        transform: rotate(-360deg);
+    }
+    60% {
+        transform: rotate(-180deg);
+    }
+}
+
+@-o-keyframes flaghover {
+    10% {
+        transform: translateZ(0);
+    }
+    20% {
+        transform: rotate(-360deg);
+    }
+    60% {
+        transform: rotate(-180deg);
+    }
+}
+
+@-moz-keyframes flaghover {
+    10% {
+        transform: translateZ(0);
+    }
+    20% {
+        transform: rotate(-360deg);
+    }
+    60% {
+        transform: rotate(-180deg);
+    }
+}
+
+@-webkit-keyframes flaghover {
+    10% {
+        transform: translateZ(0);
+    }
+    20% {
+        transform: rotate(-360deg);
+    }
+    60% {
+        transform: rotate(-180deg);
+    }
+}
+
+/* Board Mascot */
+
+
+.desktop-style body::after{
+    content:"";
+    z-index:1000;
+    position:fixed;
+    width:636px;
+    height:920px;
+    right:0px;
+    bottom:0px;
+    background-image:url('https://i.imgur.com/3aNRJ5H.png');
+    background-repeat: no-repeat;
+    pointer-events:none;
+    background-size:636px 920px;
+    opacity: 0.16;
+    animation-name: backgroundSpin;
+    animation-duration: 9000s;
+    animation-iteration-count: infinite;
+
+}

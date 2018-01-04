@@ -1,0 +1,5 @@
+def sortuj_linie(linie):
+    linie_sort = copy.copy(linie)  #tak ladniej sie kopiuje listy :P
+    for linia in linie_sort:
+        linia.sort(key=str.lower)
+    return linie_sort

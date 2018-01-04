@@ -1,0 +1,16 @@
+runLoop :: BotState -> IO ()
+runLoop state = do
+  response <- Bot.getUpdates (token state) (params state)
+  case response of
+    Nothing -> putStrLn "RIP..."
+    Just response -> do
+      let
+        updates = fromMaybe [] (responseResult response)
+        nextOffset = getMaxOffset updates
+        newState = updateState state nextOffset
+        responses = map MP.processUpdate updates
+      putStrLn $ show responses
+      mapM_ (\response -> Bot.sendMessage (token state) response) responses
+      logState state response
+      threadDelay $ sleepTime state
+      runLoop newState

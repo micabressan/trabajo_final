@@ -1,0 +1,64 @@
+body {
+	background: #fffef3 url('background.jpg') repeat;
+	margin: 0 auto;
+	font-family: 'OFL Sorts Mill Goudy TT', Georgia, 'Times New Roman', serif;
+	color: #222;
+	font-size: 16px;
+}
+
+.header {
+	width: 950px;
+	margin-top: 30px auto 0;
+	text-align: center;
+}
+
+.header-nav {
+	float:left;
+	width:100%;
+	overflow:hidden;
+	position:relative;
+}
+
+.header-nav ul {
+	clear:left;
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:0;
+	position:relative;
+	left:50%;
+	text-align:center;
+}
+.header-nav ul li {
+	display:block;
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:0;
+	position:relative;
+	right:50%;
+}
+.header-nav ul li a {
+	display:block;
+	margin:0 0 0 1px;
+	padding:3px 10px;
+	color:#000;
+	text-decoration:none;
+	line-height:1.3em;
+}
+.header-nav ul li a:hover {
+	background:#369;
+	color:#fff;
+}
+
+
+.content {
+	width: 950px;
+	margin: 20px;
+	padding: 5px 10px 10px;
+	float: left;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	text-align: center;
+}

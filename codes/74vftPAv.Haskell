@@ -1,0 +1,53 @@
+data Dom a = Empty
+           | Full
+           | Ran a a
+           | (Dom a) :|: (Dom a)
+           | (Dom a) :&: (Dom a)
+           deriving Show
+
+exem :: Dom Int
+exem = (((Ran 1 3) :|: (Ran 2 4)) :&: ((Ran 3 5) :&: Empty))
+
+lim :: Ord a => (Dom a) -> (a, a)
+lim (Ran x y) = ((min x y), (max x y))
+lim _ = undefined
+
+instance Ord a => Eq (Dom a) where
+  Empty == Empty = True
+  Full ==  Full = True
+  (Ran a b) == (Ran c d) = (lim (Ran a b)) == (lim (Ran c d))
+
+between :: Ord a => a -> (Dom a) -> Bool
+between x Empty = False
+between x Full = True
+between x (Ran y z) = minim <= x && maxim >= x where (minim, maxim) = lim (Ran y z)
+
+exist :: Ord a => a -> (Dom a) -> Bool
+exist _ Empty = False
+exist _ Full = True
+exist x (Ran y z) = between x (Ran y z)
+exist x (mt1 :|: mt2) = (exist x mt1) || (exist x mt2)
+exist x (mt1 :&: mt2) = (exist x mt1) && (exist x mt2)
+
+overlap :: Ord a => (Dom a) -> (Dom a) -> Bool
+overlap Full _ = True
+overlap _ Full = True
+overlap Empty _ = False
+overlap _ Empty = False
+overlap (Ran x y) (Ran z w) = (x `between` (Ran z w)) || (y `between` (Ran z w))
+overlap _ _ = False
+
+-- (AUB) ∩C = (A∩C) U (B∩C)
+normalize :: (Dom a) -> (Dom a)
+normalize ((x :|: y) :&: z) = (x :&: z) :|: (y :&: z)
+
+
+newtype SDom a = SDom (Dom a)
+instance Monoid (SDom a) where
+  mempty = SDom Empty
+  (SDom x) `mappend` (SDom y) =  SDom (x :|: y)
+
+newtype PDom a = PDom (Dom a)
+instance Monoid (PDom a) where
+  mempty = PDom Full
+  (PDom x) `mappend` (PDom y) =  PDom (x :&: y)

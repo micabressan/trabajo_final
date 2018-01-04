@@ -1,0 +1,5 @@
+(defn keyValueIsNil [kw hashmap]
+  (if (= (get hashmap kw) nil)
+      true))
+
+(true?  (keyValueIsNil :a {:a nil :b 2}))

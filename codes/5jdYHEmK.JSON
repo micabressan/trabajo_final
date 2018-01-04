@@ -1,0 +1,308 @@
+{
+"swagger": "2.0",
+"info": {
+"description": "Customer journey tracking API",
+"version": "1.0.0",
+"title": "Customer journey tracking API"
+},
+"host": "inventory.dev390.com",
+"basePath": "/",
+"tags": [
+{
+"name": "frontend",
+"description": "Readonly requests for angular"
+}
+],
+"schemes": [
+"http"
+],
+"paths": {
+"/prices/{agent_domain}": {
+"get": {
+"tags": [
+"frontend"
+],
+"summary": "Get information about minumum tours prices",
+"produces": [
+"application/json"
+],
+"parameters": [
+{
+"name": "agent_domain",
+"in": "path",
+"required": true,
+"type": "string"
+}
+],
+"responses": {
+"200": {
+"description": "successful operation",
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/definitions/TourPriceShort"
+}
+}
+}
+}
+}
+},
+"/inventory/{agent_domain}/{tour_id}": {
+"get": {
+"tags": [
+"frontend"
+],
+"summary": "Get information about all tours inventory (slug use TBC)",
+"produces": [
+"application/json"
+],
+"parameters": [
+{
+"name": "tour_id",
+"in": "path",
+"description": "id of the tour",
+"required": true,
+"type": "integer"
+},
+{
+"name": "agent_domain",
+"in": "path",
+"description": "the domain of the agent to get inventry for",
+"required": true,
+"type": "string"
+},
+{
+"name": "conditions",
+"in": "body",
+"description": "Request Conditions",
+"required": true,
+"schema": {
+"$ref": "#/definitions/InventoryRequest"
+}
+}
+],
+"responses": {
+"200": {
+"description": "successful operation",
+"schema": {
+"$ref": "#/definitions/InventoryResponse"
+}
+}
+}
+}
+},
+"/inventory/{agent_domain}": {
+"get": {
+"tags": [
+"frontend"
+],
+"summary": "Get information about all tours inventory",
+"parameters": [
+{
+"name": "agent_domain",
+"in": "path",
+"description": "the domain of the agent to get inventry for",
+"required": true,
+"type": "string"
+}
+],
+"produces": [
+"application/json"
+],
+"responses": {
+"200": {
+"description": "successful operation",
+"schema": {
+"$ref": "#/definitions/InventoryResponse"
+}
+}
+}
+},
+"post": {
+"tags": [
+"frontend"
+],
+"summary": "Get information about specific tours / dates",
+"produces": [
+"application/json"
+],
+"responses": {
+"200": {
+"description": "successful operation",
+"schema": {
+"$ref": "#/definitions/InventoryResponse"
+}
+}
+},
+"parameters": [
+{
+"name": "conditions",
+"in": "body",
+"description": "Request Conditions",
+"required": true,
+"schema": {
+"$ref": "#/definitions/FilterOptions"
+}
+}
+]
+}
+}
+},
+"definitions": {
+"InventoryResponse": {
+"type": "array",
+"items": {
+"$ref": "#/definitions/InventoryItem"
+}
+},
+"InventoryRequest": {
+"type": "object",
+"required": [
+"start_date"
+],
+"properties": {
+"start_date": {
+"type": "string",
+"description": "Start of search period(cannot be before today)",
+"example": "2017-11-23"
+},
+"end_date": {
+"type": "string",
+"description": "End of search period(will be limited by some value on server)",
+"example": "2017-11-30"
+},
+"agent_domain": {
+"type": "string",
+"description": "Domain of agent",
+"example": "www.domain.com"
+}
+}
+},
+"TourPriceShort": {
+"type": "object",
+"required": [
+"tour_id",
+"price"
+],
+"properties": {
+"tour_id": {
+"type": "integer"
+},
+"price": {
+"type": "number"
+}
+}
+},
+"FilterOptions": {
+"type": "object",
+"required": [
+"start_date",
+"tours"
+],
+"properties": {
+"start_date": {
+"type": "string",
+"description": "Start of search period(cannot be before today)",
+"example": "2017-11-23"
+},
+"end_date": {
+"type": "string",
+"description": "End of search period(will be limited by some value on server)",
+"example": "2017-11-30"
+},
+"tours": {
+"type": "array",
+"items": {
+"type": "integer",
+"description": "Tours ids to filter"
+}
+}
+}
+},
+"TourInventoryItem": {
+"type": "object",
+"required": [
+"pickups",
+"range",
+"inventory",
+"expiry"
+],
+"properties": {
+"pickups": {
+"type": "array",
+"items": {
+"type": "string",
+"description": "Pickup location name",
+"example": "Victoria Coach Station"
+}
+},
+"range": {
+"type": "object",
+"required": [
+"start_date",
+"end_date"
+],
+"properties": {
+"start_date": {
+"type": "string",
+"description": "format 'yyyy-mm-dd'",
+"example": "2017-11-23"
+},
+"end_date": {
+"type": "string",
+"description": "format 'yyyy-mm-dd'",
+"example": "2017-11-30"
+}
+}
+},
+"expiry": {
+"type": "integer",
+"description": "expiration timestamp for tour data",
+"example": 1511897259276
+},
+"inventory": {
+"type": "object",
+"properties": {
+"{date}": {
+"type": "array",
+"items": {
+"type": "object",
+"required": [
+"{group}"
+],
+"properties": {
+"{group}": {
+"type": "object",
+"required": [
+"price",
+"available"
+],
+"properties": {
+"price": {
+"type": "integer"
+},
+"available": {
+"type": "integer"
+}
+}
+}
+}
+}
+}
+}
+}
+}
+},
+"InventoryItem": {
+"type": "object",
+"required": [
+"{tourID}"
+],
+"properties": {
+"{tourID}": {
+"$ref": "#/definitions/TourInventoryItem"
+}
+}
+}
+}
+}

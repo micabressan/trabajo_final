@@ -1,0 +1,16 @@
+-- problem number 21
+import Data.Tuple
+import Data.List
+
+removeDuplicates :: (Eq t, Ord t) => [t] -> [t]
+removeDuplicates n = init $ map head $ group $ sort n
+
+divisors :: Integer -> [Integer]
+divisors n = removeDuplicates $ concat [[x, n `div` x] | x <- [1..upperBound], n `mod` x == 0]
+    where 
+          upperBound = ceiling $ sqrt (fromIntegral n)
+
+main = do
+    let values    = map (\x -> (x, sum $ divisors x)) [1..10000]
+    let amicables = filter (\x -> swap x `elem` values) values
+    print $ sum $ map fst amicables

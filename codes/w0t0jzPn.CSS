@@ -1,0 +1,200 @@
+body
+{
+	margin: 0;
+	background-color: #2F3336;
+	color: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+}
+.kontaktK
+{
+	text-align: center;
+	font-size: 17px;
+	font-family: 'Open Sans', sans-serif;
+	color: #efefef;
+}
+.logo > a
+{
+	color: #efefef;
+	text-decoration: none;
+}
+.logo > a:hover
+{
+	color: lightgrey;
+	text-decoration: none;
+}
+.logo
+{
+	text-align: center;
+	font-size: 44px;
+}
+#topnav
+{
+	background-color: #1c74b2;
+	text-align: center;
+}
+.menu
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 10px;
+	font-size: 18px;
+	min-height: 38px;
+	line-height: 200%;
+}
+
+.menu > li
+{
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-right: 1px dashed #0a2b42;
+}
+
+.menu > li:first-child
+{
+	border-left: 1px dashed #0a2b42;
+}
+
+.menu a
+{
+	color: #efefef;
+	text-decoration: none;
+}
+
+.menu a:hover
+{
+	color: lightgrey;
+	text-decoration: none;
+}
+.kategorie
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 950px;
+	text-align: center;
+	padding: 0;
+}
+
+h1
+{
+	font-size: 44px;
+	font-weight: 400;
+	color: #39a5f1;
+	margin-bottom: 20px;
+}
+.f_tryg
+{
+	text-align: center;
+}
+.matma
+{
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.matma a
+{
+	opacity: 0.9;
+}
+
+.matma a:hover
+{
+	opacity: 1;
+}
+
+figure
+{
+	margin: 8px;
+	padding: 0;
+}
+
+figcaption
+{
+	margin-top: 8px;
+	padding: 0;
+}
+footer
+{
+	background-color: #1c74b2;
+	text-align: center;
+}
+.socials
+{
+	width:100%;
+	text-align: center;
+	background-color: #191d21;
+}
+
+.socialdivs
+{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fb
+{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.fb:hover
+{
+	background-color: #4668b3;
+}
+
+.yt
+{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.yt:hover
+{
+	background-color: #d94348;
+}
+
+.tw
+{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.tw:hover
+{
+	background-color: #3095d3;
+}
+
+.gplus
+{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.gplus:hover
+{
+	background-color: #d95333;
+}
+
+.info
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding: 20px;
+}
+a
+{
+	color: #efefef;
+	text-decoration: none;
+}
+a:hover
+{
+	color: lightgrey;
+	text-decoration: none;
+}

@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ComplexCalculator
+{
+    class Complex
+    {
+       public double Real { get; protected set; }
+       public double Imaginary { get; protected set; }
+
+        public Complex(double real, double imaginary)
+        {
+            this.Real = real;
+            this.Imaginary = imaginary;
+        }
+
+        public static Complex Add(Complex first, Complex second)
+        {
+            Complex result = new Complex(first.Real + second.Real, first.Imaginary + second.Imaginary);
+            return result;
+            
+        }
+        public static Complex Subtract(Complex first, Complex second)
+        {
+            Complex result = new Complex(first.Real - second.Real, first.Imaginary - second.Imaginary);
+            return result;
+
+        }
+        public static Complex Multiply(Complex first, Complex second)
+        {
+            double result_Real = (first.Real * second.Real) - (second.Imaginary * second.Imaginary);
+            double result_Imaginary = (second.Imaginary * second.Real) + (first.Real * second.Imaginary);
+            Complex result = new Complex(result_Real, result_Imaginary);
+            return result;
+
+        }
+        public static Complex Divide(Complex first, Complex second)
+        {
+            double a = first.Real;
+            double b = first.Imaginary;
+            double c = second.Real;
+            double d = second.Imaginary;
+
+            if (Math.Abs(d) < Math.Abs(c))
+            {
+                double doc = d / c;
+                return new Complex((a + b * doc) / (c + d * doc), (b - a * doc) / (c + d * doc));
+            }
+            else
+            {
+                double cod = c / d;
+                return new Complex((b + a * cod) / (d + c * cod), (-a + b * cod) / (d + c * cod));
+            }
+
+
+        }
+      
+    }
+}

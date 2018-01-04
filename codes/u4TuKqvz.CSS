@@ -1,0 +1,63 @@
+/*  _______________________________________
+
+	02 DROP DOWN MENU
+    _______________________________________  */
+
+/* Left & right aligned common styles */
+
+.menu .dropdown_1columns, 
+.menu .dropdown_2columns, 
+.menu .dropdown_3columns, 
+.menu .dropdown_4columns,
+.menu .dropdown_5columns {
+	margin:4px auto; left:-999em; position:absolute; border-top:none; padding:10px 10px; text-align:left; z-index:20; }
+.menu .dropdown_1columns {width: 220px; background: url('../images/1dropdown.gif') 0 bottom no-repeat; padding-left: 0;}
+.menu .dropdown_2columns {width: 280px; background: url('../images/2dropdown.gif') 0 bottom no-repeat;}
+.menu .dropdown_3columns {width: 435px; background: url('../images/3dropdown.gif') 0 bottom no-repeat;}
+.menu .dropdown_4columns {width: 590px; background: url('../images/4dropdown.gif') 0 bottom no-repeat;}
+.menu .dropdown_5columns {width: 745px; background: url('../images/5dropdown.gif') 0 bottom no-repeat;}
+
+/* Showing Drop Down on Mouse Hover - Left aligned */
+
+.menu li:hover .dropdown_1columns, 
+.menu li:hover .dropdown_2columns, 
+.menu li:hover .dropdown_3columns,
+.menu li:hover .dropdown_4columns,
+.menu li:hover .dropdown_5columns {
+	left:0px;
+	top:35px;
+}
+
+/* Showing Drop Down on Mouse Hover - Right aligned */
+
+.menu li .align_right {
+}
+.menu li:hover .align_right {
+	left:auto; right:0px; }
+
+/* Columns Sizes */
+
+.menu .col_1,
+.menu .col_2,
+.menu .col_3,
+.menu .col_4,
+.menu .col_5,
+.menu .col_6 {
+	display:inline;
+	float: left;
+	position: relative;
+}
+.menu .col_1 {width:auto;}
+.menu .col_2 {width:280px;}
+.menu .col_3 {width:435px;}
+.menu .col_4 {width:590px;}
+.menu .col_5 {width:745px;}
+.menu .col_6 {width:920px;}
+
+/* IMPORTANT */
+
+/* Use the firstcolumn class for the items that stick to the left edge of the dropdown */
+.menu .firstcolumn {
+	margin-left: 0; /* Clearing margin & left */
+	clear: left;
+}

@@ -1,0 +1,197 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+namespace Demo
+{
+    public class Card
+    {
+        private string name = "Default";
+        private int number = 0;
+        private int[] attacks = { 0, 0, 0, 0 }; //attacks convention => directions {NH, ET, SH, WT}
+        private string description = "Default";
+        private bool placed = false;
+        private int x, y = -1;
+        public char symbol = '0';
+
+        public void cardInfo(Card theirCard)
+        {
+            System.Console.WriteLine("{0} #{1}", theirCard.name, theirCard.number);
+            System.Console.WriteLine("    {0}", theirCard.attacks[0]);
+            System.Console.WriteLine("    ^");
+            System.Console.WriteLine("{0}<     >{1}", theirCard.attacks[3], theirCard.attacks[1]);
+            System.Console.WriteLine("    v");
+            System.Console.WriteLine("    {0}", theirCard.attacks[2]);
+            System.Console.WriteLine("{0}", theirCard.description);
+        }
+
+        public Card(string itsName, int itsNumber, int[] itsAttacks, string itsDescription, char theirSymbol)
+        {
+            name = itsName;
+            number = itsNumber;
+            attacks = itsAttacks;
+            description = itsDescription;
+            symbol = theirSymbol;
+        }
+    }
+
+
+    public class Board
+{
+    private Card[,] board = new Card[3, 3];
+    private int x, y = -1;
+
+    public void setX(int theirX) { x = theirX; }
+    public void setY(int theirY) { y = theirY; }
+
+    private static int[] defAtks = { -1, -1, -1, -1 };
+    private Card Default = new Card("Default", -1, defAtks, "Default", '0');
+
+        public int getX()
+    {
+            int x = -1;
+            Console.Write("\ncolumn: ");
+            x = Convert.ToInt32((Console.ReadLine()));
+            return x;
+    }
+
+    public int getY()
+    {
+            int y = -1;
+            Console.Write("\nrow: ");
+            y = Convert.ToInt32((Console.ReadLine()));
+            return y;
+    }
+    
+    public string moveInfo(bool isMoveValid)
+    {
+            string notValid = "Your move is invalid.";
+            string valid = "Your move is valid.";
+
+            if (isMoveValid == false)
+            {
+                return notValid;
+            }
+            else return valid;
+    }
+    
+    public bool placeCard(int x, int y, Card theirCard)
+    {
+        bool moveValid = false;
+
+        if (board[x, y] == Default)
+        {
+            moveValid = true;
+            board[x, y] = theirCard;
+        }
+        return moveValid;
+    }
+
+    public void initBoard()
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                board[i, j] = Default;
+            }
+        }
+    }
+
+    public void printBoard()
+    {
+        System.Console.WriteLine();
+        System.Console.WriteLine("  BOARD");
+        System.Console.WriteLine(" _______");
+        for (int j = 0; j < 3; j++)
+        {
+            System.Console.WriteLine();
+            for (int i = 0; i < 3; i++)
+            {
+                System.Console.Write(" {0} ", board[i, j].symbol);
+            }
+        }
+        System.Console.WriteLine("\n _______");
+        System.Console.WriteLine("\n");
+    }
+}
+
+public class Player
+{
+    private string name = "Player Name";
+    private int score = -1;
+
+    public string getName() { return name; }
+    public int getScore() { return score; }
+
+    public void playerInfo(string itsName, int itsScore)
+    {
+        System.Console.WriteLine("\n{0} has a score of {1} points.", itsName, itsScore);
+    }
+
+    public void initPlayer()
+    {
+        string tmpName = "name";
+        System.Console.Write("Please enter your name: ");
+        tmpName = System.Console.ReadLine();
+        name = tmpName;
+    }
+
+    public Player(string itsName, int itsScore)
+    {
+        name = itsName;
+        score = itsScore;
+    }
+}
+
+
+public class Menu
+{
+
+    public bool menuSelection()
+{
+    bool startGame = false;
+    ConsoleKeyInfo keyInfo;
+    keyInfo =  Console.ReadKey();
+
+    if (keyInfo.Key == ConsoleKey.DownArrow) //if down arrow key is down do..
+    {
+       Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop++);
+    }
+     return startGame;
+}
+public void printMenu()
+{
+    System.Console.WriteLine("\noO START Oo");
+    System.Console.WriteLine("\noO EXIT Oo");
+}
+}
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            Menu mainMenu = new Menu();
+            //mainMenu.printMenu();
+
+            Board board = new Board();
+            board.initBoard();
+
+            int[] warlockAttacks = { 1, 4, 1, 2 };
+            Card Warlock = new Card("Warlock", 1, warlockAttacks, "An old but powerful foe.", 'W');
+
+            Player player = new Player("Player Name", 0);
+            player.initPlayer();
+            player.playerInfo(player.getName(), player.getScore());
+
+            Console.WriteLine(board.moveInfo(board.placeCard(board.getX(), board.getY(), Warlock)));
+            board.printBoard();
+
+            Console.ReadKey();
+
+        }
+    }
+}

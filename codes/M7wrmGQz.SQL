@@ -1,0 +1,1 @@
+select codnodo from nodo a left join inpercorso b on a.codnodo = b.nodo  where a.codnodo not in (select nodoi from percorso) and a.codnodo not in (select nodof from percorso)

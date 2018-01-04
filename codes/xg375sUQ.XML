@@ -1,0 +1,683 @@
+GIANTS Engine Runtime 7.0.0 (15417) 64bit (Build Date: Oct 12 2017)
+Copyright (c) 2008-2017, GIANTS Software GmbH (giants-software.com), All Rights Reserved.
+Copyright (c) 2003-2017, Christian Ammann and Stefan Geiger, All Rights Reserved.
+Application: FarmingSimulator2017
+Main System
+  CPU: Intel(R) Core(TM) i5-6300HQ CPU @ 2.30GHz
+  Memory: 8019 MB
+  OS: Windows NT 10.0 64-bit
+Physics System
+  Version: 5.9.5
+  Thread(s): 2
+Input System
+  Keyboard enabled
+  Mouse enabled
+  Gamepad/Joystick enabled
+  Force Feedback disabled
+Audio System
+  Driver: OpenAL
+  Version: 1.1
+  Device: Generic Software
+Render System
+  Driver: Direct 3D 11
+  Card Vendor: NVIDIA Corporation
+  Renderer: NVIDIA GeForce GTX 960M
+  Version: 21.20.16.4550 (11.11.2016)
+  Revision: 162
+  Feature level: DirectX 11 ON
+Info: Effective window resolution 1920 x 1080
+Started 2 threads for threadpool 'Render threadpool'
+Hardware Profile
+  Level: Custom Medium
+  View Distance Factor: 0.800000
+  Shadow Quality: 1.000000 Size: 2048 Filter-Size: 4
+  Shader Quality: 2
+  Skip Mipmaps: 0
+  LOD Distance Factor: 0.800000
+  Terrain LOD Distance Factor: 0.800000
+  Terrain Normal Mapping: Yes
+  Foliage View Distance Factor: 0.800000
+  Max dynamic foliage View Distance Factor: 0.800000
+  Foliage Density: 0.300000
+  Volume Mesh Tessellation Factor: 0.700000
+  Tyre Tracks Segments Factor: 1.000000
+  Max. Number of Shadow Lights: 1
+  Max. Number of Lights: 512
+  Max. Number of Lights Per Cluster: 32
+  MSAA: 4
+Farming Simulator 17
+  Version: 1.5.1.0 b1583
+  Available Languages: pl cz
+  Language: pl
+  Time: 2017-12-02 16:25:43
+  Register configuration 'inputAttacherJoint'
+  Register configuration 'attacherJoint'
+  Register configuration 'frontloader'
+  Register configuration 'motor'
+  Register configuration 'baseColor'
+  Register configuration 'wheel'
+  Register configuration 'rimColor'
+  Register configuration 'design'
+  Register configuration 'designColor'
+  Register configuration 'vehicleType'
+Game vehicle types loaded
+Load dlc: pdlc_kuhnPack (Version: 1.0.0.0)
+Load mod: A_Pack_FS17 (Version: 1.4.0.0)
+Load mod: A_Pack_FS18 (Version: 1.6.0.0)
+Load mod: bigbagi (Version: 1.1)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod bigbagi to use it in multiplayer.
+Load mod: bizonek (Version: 1.0.0.0)
+Warning: Missing l10n for button wsteczny in bizonek
+Warning: Missing l10n for button anim1 in bizonek
+Warning: Missing l10n for button zwalnianie in bizonek
+Warning: Missing l10n for button INTERACTIVE_CONTROL_SWITCH in bizonek
+Load mod: Claas_Cargos_700_Pack (Version: 1.0.0.0)
+Load mod: Claas_Lexion (Version: 0.1)
+Load mod: disableVehicleCameraCollision (Version: 1.0.0.0)
+Load mod: FBM17_Meiller_Kipper (Version: 1.0.0.0)
+Load mod: Fliegl_Gigant_ASW_268_Manure (Version: 1.0.0.0)
+Load mod: Fs17ClaasLexion600_580 (Version: 1.0)
+Load mod: FS17Contest_ClaasMegaPack (Version: 1.0.0.0)
+Load mod: FS17Contest_FENDT_800_Favorit (Version: 1.0)
+Load mod: FS17Contest_Fiatagri140_90DT_Turbo (Version: 1.0.0.0)
+Warning: Missing l10n for button TXCABSUSP in FS17Contest_Fiatagri140_90DT_Turbo
+Warning: Missing l10n for button addWeight in FS17Contest_Fiatagri140_90DT_Turbo
+Warning: Missing l10n for button takeAwayWeight in FS17Contest_Fiatagri140_90DT_Turbo
+Load mod: FS17Contest_maschioGaspardoPack (Version: 1.0.1.4)
+Load mod: FS17Contest_MatrotM44D (Version: 1.0.0.1)
+Load mod: FS17Contest_Seasons (Version: 1.0.0.0)
+Load mod: FS17Contest_SMS_CV600P (Version: 1.0.0.0)
+Load mod: FS17Contest_strautmannAperion (Version: 1.0.0.0)
+Load mod: FS17Contest_terralandtn_profi (Version: 1.0.0.0)
+Load mod: FS17JohnDeere7430 (Version: 2.0.0)
+Load mod: FS17JohnDeere8RSpeciale (Version: 1.1)
+Warning: Missing l10n for button VarioGrip in FS17JohnDeere8RSpeciale
+Load mod: fs17smogory (Version: 1.0)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod fs17smogory to use it in multiplayer.
+Load mod: FS17_3050HD (Version: 1.0)
+Load mod: FS17_amazoneZGB8200_console (Version: 1.0.0.0)
+Load mod: FS17_brantnerDPW18000 (Version: 1.0.0.0)
+Load mod: FS17_BuyBales (Version: 1.17 beta)
+Load mod: FS17_CaseMagnum335Pack (Version: 1.0.0.0)
+Load mod: FS17_choppedStraw (Version: 1.0.0.5)
+Load mod: FS17_ClaasVarioCutters (Version: 0.5 BETA)
+Load mod: FS17_Claas_Scorpion_7055 (Version: 1.0.0.0)
+Load mod: FS17_DammannProfiClaas5036 (Version: 1.0.2)
+Load mod: FS17_farmtechDurus2000 (Version: 1.0.0.0)
+Load mod: FS17_Fendt900Vario_Full (Version: 1.0)
+Warning: Missing l10n for button iLight in FS17_Fendt900Vario_Full
+Load mod: FS17_fendtHarvesterPackage (Version: 1.0.0.2)
+Load mod: FS17_flieglVFW10600 (Version: 1.0.0.0)
+Load mod: FS17_FLIEGL_GL (Version: 1.0.1.1)
+Load mod: FS17_ForRealModule01_CropDestruction (Version: 1.0.2.1)
+Load mod: FS17_ForRealModule02_TireDirt (Version: 1.0.1.0)
+Load mod: FS17_ForRealModule03_GroundResponse (Version: 1.0.1.0)
+Load mod: FS17_Fortschritt_E516_E516B (Version: 1.0.0.0)
+Load mod: FS17_Fortschritt_SW71 (Version: 1.0.0)
+Load mod: FS17_fortunaFTM200_6_0 (Version: 1.0.0.0)
+Load mod: FS17_holmerTerraDosT4_30_v2 (Version: 2.0.0.0)
+Load mod: FS17_horschAgrovation (Version: 1.1.0.0)
+Load mod: FS17_horschAgrovationVehicles (Version: 1.0.0.0)
+Load mod: FS17_horschTitan34UW (Version: 1.0.0.0)
+Load mod: FS17_HTS (Version: 1.0.0 PL 1)
+Load mod: FS17_JD_9630 (Version: 1.0)
+Load mod: FS17_JohnDeere6030P (Version: 1.0)
+Load mod: FS17_JohnDeere6R_FBM (Version: 1.0.0.1)
+Load mod: FS17_John_Deere_7010_CGJ (Version: 1.0.0.0)
+Load mod: FS17_KPM10 (Version: 1.0)
+Load mod: FS17_krampeBigBody900 (Version: 1.0.0.0)
+Load mod: FS17_kuhnVB2190 (Version: 1.0.0.1)
+Load mod: FS17_LemkenJuwel8FixPack (Version: 1.0.0.0)
+Load mod: FS17_Lemken_Heliodor_9_600_KA (Version: 1.2.1.0)
+Load mod: FS17_Lexion780 (Version: 0.5 BETA)
+Load mod: FS17_manTGSagroTruck (Version: 1.0.0.0)
+Load mod: FS17_Manureshop (Version: 1.1.2.0)
+Load mod: FS17_MB3D_ClaasJaguar800 (Version: 1.0.0.0)
+Load mod: FS17_MB3D_JohnDeere7030 (Version: 1.1.0.0)
+Load mod: FS17_MetalTech_DB_Pack (Version: 1.0.0.0)
+Load mod: FS17_newHollandCR_Pack (Version: 1.1)
+Load mod: FS17_newHollandLM742 (Version: 1.0.1.0)
+Load mod: FS17_NewHollandTM175Project (Version: 1.0)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_NG/modDesc.xml'.
+Load mod: FS17_NG
+Error: Missing descVersion attribute in mod FS17_NG
+Load mod: FS17_Pack_Joskin_Wago_AUTO_BsM (Version: 1.0.0.3)
+Load mod: FS17_PHX6 (Version: 1.0.0.0)
+Load mod: FS17_placeableRefillStation (Version: 1.0.0.0)
+Load mod: FS17_PronarT680 (Version: 1.0.0.0)
+Load mod: FS17_PST_18 (Version: 1.1.0.0)
+Warning: Missing l10n for button VARIABLEBODY_change in FS17_PST_18
+Load mod: FS17_Rabe_SKE_600_Pack (Version: 1.0.1)
+Load mod: FS17_real_clock (Version: 1.0)
+Load mod: FS17_reckJumbo (Version: 1.0.0.0)
+Load mod: FS17_rsmAgriPack (Version: 1.0.0.0)
+Load mod: FS17_stoneGrip2400 (Version: 1.4.4.1)
+Load mod: FS17_strautmann_PS2201 (Version: 1.0.0.0)
+Load mod: FS17_ursus1224 (Version: 1.0.0.0)
+Load mod: FS17_ursus12245 (Version: 1.0.0.0)
+Load mod: FS17_Ursus1224_by_PatRick (Version: 1.0.0.0)
+Load mod: FS17_URSUS1614_deluxe (Version: 1.0.0.0)
+Load mod: Fs17_Ursus_1201 (Version: 1.1.0.0)
+Load mod: FS17_Ursus_1604 (Version: 1.0.0.0)
+Warning: Missing l10n for button Gaz2 in FS17_Ursus_1604
+Warning: Missing l10n for button Wajcha in FS17_Ursus_1604
+Warning: Missing l10n for button Gaz in FS17_Ursus_1604
+Warning: Missing l10n for button DrzwiP in FS17_Ursus_1604
+Warning: Missing l10n for button KlamkaP in FS17_Ursus_1604
+Warning: Missing l10n for button DrzwiL in FS17_Ursus_1604
+Warning: Missing l10n for button KlamkaL in FS17_Ursus_1604
+Warning: Missing l10n for button Szyba in FS17_Ursus_1604
+Load mod: FS17_veenhuisW400 (Version: 1.0.0.3)
+Load mod: FS17_Versatile_RT490 (Version: 1.0.0.0)
+Load mod: FS17_zetor8045 (Version: 1.0.0.0)
+Load mod: FS17_zetorCrystal12045_ (Version: 1.0.0.0)
+Load mod: FS17__Claas_Xerion (Version: 1.0.0.0)
+Load mod: FS1_FortschrittE936ASSW516 (Version: 1.0.0.0)
+Load mod: FS_17NewHollandCX (Version: 1.0)
+Load mod: HudHiderbyClodls17v101 (Version: 1.01)
+Load mod: HW_60_11_egyedi (Version: 1.0)
+Load mod: HW_60_11_magasitos (Version: 1.0)
+Load mod: HW_60_11_rozsdas (Version: 1.0)
+Load mod: HW_60_11_rozsdas_2 (Version: 1.0)
+Load mod: HW_60_11_silos (Version: 1.0)
+Error: invalid brand name 'Hw'! Only capital letters allowed!
+Load mod: JD8530_v2_FS17 (Version: 2.0)
+Load mod: JD_Gewicht (Version: 1.0.0.0)
+Load mod: JohnDeere6R (Version: 1.0.1)
+Load mod: JohnDeereT670FullPackV2 (Version: 2.0)
+Load mod: Kverneland_EG_85 (Version: 1.0.0.0)
+Load mod: lexion58000 (Version: 0.1)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod lexion58000 to use it in multiplayer.
+Load mod: MapAutosave_LS17 (Version: 2.0.1)
+Load mod: Metaltech_Trailer_Pack (Version: 1.0.0.0)
+Load mod: mr_PHX (Version: 1)
+Error: Unsupported mod description version in mod mr_PHX
+Load mod: NO_Collision_Vehicle_Camera_mp
+Load mod: Oros_Cornado_12744 (Version: 1.0)
+Load mod: Oros_Cornado_6734 (Version: 1.0)
+Load mod: Oros_Cornado_8734 (Version: 1.0)
+Load mod: Oros_Sun_1270 (Version: 1.0)
+Load mod: Oros_Sun_676 (Version: 1.0)
+Load mod: Oros_Sun_870 (Version: 1.0)
+Load mod: Panav_Bss_Ps_2_17_13 (Version: 2)
+Load mod: PlayerCamera (Version: 1.0)
+Load mod: Playerwalkspeed_ls17 (Version: 0.1)
+Warning: Missing l10n for button PLAYERCAM_MOD in Playerwalkspeed_ls17
+Load mod: Rauch_TWS_7000 (Version: 1)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/referenceMap/modDesc.xml'.
+Load mod: referenceMap
+Error: Missing descVersion attribute in mod referenceMap
+Load mod: SP_2002_v1 (Version: 1)
+Warning: Missing l10n for button rightFold in SP_2002_v1
+Warning: Missing l10n for button leftFold in SP_2002_v1
+Load mod: ss (Version: 0.5 BETA)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod ss to use it in multiplayer.
+Load mod: StrautmannSZK1402 (Version: 1.0.0.0)
+Load mod: TM_JohnDeere_8R (Version: 2)
+Load mod: TM_John_Deere_7R (Version: 1)
+Load mod: TM_John_Deere_8R (Version: BETA)
+Load mod: Vaderstad_Top_Down_700 (Version: 1.0.0.1)
+Load mod: ZetorCrystalV2 (Version: 1.0.0.0)
+Load mod: Zetor_16145 (Version: 1)
+Warning (compatibility): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Lexion780/Store/Lexion780TT.dds width or height doesn't equal 2^n.
+Warning (compatibility): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Ursus1224_by_PatRick/Tekstury/store.dds width or height doesn't equal 2^n.
+Warning (performance): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_URSUS1614_deluxe/icon_zetorCrystal.png raw format.
+Error: Can't load resource 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Ursus_1604/icon_Ursus.dds'.
+Warning (performance): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/Playerwalkspeed_ls17/store raw format.
+Error: Can't load resource 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/StrautmannSZK1402/store_metaltechDB8000.png'.
+  Register configuration 'wrappingColor'
+  Register vehicle type: pdlc_kuhnPack.subsoiler
+  Register vehicle type: pdlc_kuhnPack.sowingMachineCultivator
+  Register vehicle type: pdlc_kuhnPack.turnOnCultivator
+  Register vehicle type: pdlc_kuhnPack.windrower_workMode
+  Register vehicle type: pdlc_kuhnPack.extendedBaleWrapper
+  Register vehicle type: pdlc_kuhnPack.balerWrapper
+  Register vehicle type: A_Pack_FS18.Mbp6.5
+  Register vehicle type: A_Pack_FS18.tololap
+  Register vehicle type: bizonek.bizon
+  Register vehicle type: bizonek.heder
+  Register vehicle type: Claas_Lexion.lexion
+  Register vehicle type: Claas_Lexion.vario
+  Register vehicle type: FBM17_Meiller_Kipper.meiller
+  Register vehicle type: FS17__Claas_Xerion.Claas_Xerion
+  Register vehicle type: FS17__Claas_Xerion.Claas_Xerion_frontWeight
+  Register vehicle type: FS17_BuyBales.bale_stack
+  Register vehicle type: FS17_CaseMagnum335Pack.CaseMagnum335
+  Register vehicle type: FS17_CaseMagnum335Pack.CaseMagnum335Tracked
+  Register vehicle type: FS17_Claas_Scorpion_7055.Scorpion7055
+  Register vehicle type: FS17_Fendt900Vario_Full.fendt900new
+  Register vehicle type: FS17_Fortschritt_E516_E516B.E516
+  Register vehicle type: FS17_holmerTerraDosT4_30_v2.holmerTerraDosT4_30
+  Register vehicle type: FS17_horschAgrovationVehicles.trackedSpreader
+  Register vehicle type: FS17_horschAgrovationVehicles.augerWagonCrawler
+  Register vehicle type: FS17_horschAgrovationVehicles.seedTender
+  Register vehicle type: FS17_horschAgrovationVehicles.dragHose
+  Register vehicle type: FS17_horschAgrovationVehicles.manureBarrelCrawler
+  Register vehicle type: FS17_horschAgrovationVehicles.manureBarrelnjector
+  Register vehicle type: FS17_horschAgrovationVehicles.horschShuttle
+  Register vehicle type: FS17_horschAgrovationVehicles.horschCruiser
+  Register vehicle type: FS17_John_Deere_7010_CGJ.JD7010
+  Register vehicle type: FS17_JohnDeere6030P.JohnDeere6030
+  Register vehicle type: FS17_JohnDeere6R_FBM.JohnDeere6RFBM
+  Register vehicle type: FS17_manTGSagroTruck.Mann
+  Register vehicle type: FS17_manTGSagroTruck.Mann1
+  Register vehicle type: FS17_MetalTech_DB_Pack.MetalTechDB10
+  Register vehicle type: FS17_MetalTech_DB_Pack.MetalTechDB12
+  Register vehicle type: FS17_MetalTech_DB_Pack.MetalTechDB14
+  Register vehicle type: FS17_newHollandCR_Pack.heder
+  Register vehicle type: FS17_NewHollandTM175Project.NewHollandTM
+  Register vehicle type: FS17_Pack_Joskin_Wago_AUTO_BsM.transportTrailerUAL
+  Register vehicle type: FS17_PHX6.PHX6
+  Register vehicle type: FS17_PronarT680.pronarStandard
+  Register vehicle type: FS17_PronarT680.pronarOverload
+  Register vehicle type: FS17_PST_18.PTS18
+  Register vehicle type: FS17_Rabe_SKE_600_Pack.RabeWerk
+  Register vehicle type: FS17_Rabe_SKE_600_Pack.RabeTrailer
+  Register vehicle type: FS17_reckJumbo.SilageDistributor
+  Register vehicle type: FS17_rsmAgriPack.cutter_builtInCutterTrailer2
+  Register vehicle type: FS17_strautmann_PS2201.Strautmann
+  Register vehicle type: FS17_ursus1224.ursus1224
+  Register vehicle type: FS17_ursus12245.ursus1224
+  Register vehicle type: FS17_Ursus1224_by_PatRick.URSUS_1224_TURBO
+  Register vehicle type: FS17_URSUS1614_deluxe.Zetor12045
+  Register vehicle type: Fs17_Ursus_1201.Ursus
+  Register vehicle type: FS17_Ursus_1604.1614
+  Register vehicle type: FS17_zetor8045.Zetor8045
+  Register vehicle type: FS17_zetorCrystal12045_.Zetor12045
+  Register vehicle type: Fs17ClaasLexion600_580.ClaasLexion600
+  Register vehicle type: Fs17ClaasLexion600_580.ClaasVarios
+  Register vehicle type: FS17Contest_ClaasMegaPack.claasMega208
+  Register vehicle type: FS17Contest_FENDT_800_Favorit.fendt
+  Register vehicle type: FS17Contest_Fiatagri140_90DT_Turbo.140_90
+  Register vehicle type: FS17Contest_maschioGaspardoPack.PA1
+  Register vehicle type: FS17Contest_maschioGaspardoPack.magica
+  Register vehicle type: FS17Contest_maschioGaspardoPack.serio
+[Seasons] Loading Seasons 1.0.0.0-release_1.0.0.0_f785d5e - 1aaf29974de84a038fff590cf6e1179a
+  Register vehicle type: FS17Contest_strautmannAperion.Aperion
+  Register vehicle type: FS17Contest_terralandtn_profi.terraland_ferti
+  Register vehicle type: FS17JohnDeere7430.MB3D
+  Register vehicle type: FS17JohnDeere8RSpeciale.JohnDeere_8R
+  Register vehicle type: FS_17NewHollandCX.heder
+HUD Hider 17 V1 by Clod-http://forum.tractor-italia.net loaded
+HUD Hider 17 V1 by Clod-edit is not permitted-share only with original ADFLY link
+  Register vehicle type: JD8530_v2_FS17.JohnDeere8530
+  Register vehicle type: JD_Gewicht.implement
+  Register vehicle type: JohnDeere6R.JohnDeere6R
+  Register vehicle type: JohnDeereT670FullPackV2.JohnDeereT670i
+  Register vehicle type: JohnDeereT670FullPackV2.JohnDeere630R
+  Register vehicle type: JohnDeereT670FullPackV2.ZuernRapsProfi2
+  Register vehicle type: lexion58000.ClaasLexion
+  Register vehicle type: lexion58000.vario
+  MapAutosave V2 by derSchreiner
+  Loaded: PlayerCamera
+mod loaded: Playercam
+  Register vehicle type: TM_John_Deere_7R.JohnDeere_7R
+  Register vehicle type: TM_John_Deere_8R.JohnDeere_8R
+  Register vehicle type: TM_JohnDeere_8R.JohnDeere_8R
+  Register vehicle type: Zetor_16145.Zetor16145
+  Register vehicle type: ZetorCrystalV2.Zetor12011
+dataS/cameraPath01.i3d (0.35) ms
+dataS/cameraPath02.i3d (0.24) ms
+dataS/cameraPath03.i3d (0.18) ms
+data/sky/sky_day_night.i3d (323.93) ms
+data/sky/rain.i3d (138.24) ms
+data/sky/hail.i3d (27.65) ms
+data/sky/dust.i3d (17.97) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17Contest_Seasons/resources/environment/snow.i3d (1.15) ms
+Warning: Loading file with invalid case 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/modele/droga/modele/droga/MODELE/MODELE/models/dsa/cesty/gliniasta.dds'.
+Warning (performance): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/modele/budynki/biuro/Biuro_Smogory.png raw format.
+Warning (performance): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/modele/modele/txt2.png raw format.
+Warning (compatibility): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/modele/modele/txt2.png width or height doesn't equal 2^n.
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+PixelFormatUtil::convertPixelFormat: conversion from PF_BYTE_BGR24 to PF_BYTE_BGRA32  currently not supported
+Warning (performance): Texture C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/modele/budynki/Chlew/Chlew.png raw format.
+Error: Can't load resource 'C:/Users/BENY/Desktop/KR_Pomorze/maps/MODELE/map/Bantikow/AlteGebaeute/Fass/skin.dds'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/map01.i3d (16786.08) ms
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'.
+Error: index 'roleta' not found in AnimatedObject xml 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/animatedObjects.xml'!
+Error: Running LUA method 'AnimatedObject.onCreate'.
+dataS/scripts/objects/AnimatedObject.lua(287) : attempt to index field 'controls' (a nil value)
+*** ChoppedStraw v1.0.0.5 | register specialization
+*** ChoppedStraw v1.0.0.5 | specialization added to 14 vehicle types
+[Seasons] ssCropDestruction: Crop Destruction mod found. Modifying...
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17Contest_Seasons/resources/environment/snow_materialHolder.i3d (165.89) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17Contest_Seasons/resources/replacementTextures/replacementTexturesMaterialHolder.i3d (1087.20) ms
+Disabled withering
+*** ChoppedStraw v1.0.0.5 | config file C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/fs17smogory/maps/choppedStraw_SDK/addChoppedStraw.xml not found. ChoppedStraw not available on this map!
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_PronarT680/PronarT680.i3d (701.18) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Fendt900Vario_Full/fendt900.i3d (1379.79) ms
+  Fendt 900 ProfiPlus by STv-Modding
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_CaseMagnum335Pack/CaseMagnum335.i3d (1452.16) ms
+data/vehicles/tools/horsch/horschPronto9DC.i3d (915.18) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/A_Pack_FS18/Mbp/Mbp.i3d (338.12) ms
+  Fendt 900 ProfiPlus by STv-Modding
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_stoneGrip2400/stoneGrib2400.i3d (265.41) ms
+data/vehicles/cutters/capello/capelloDiamantHS8.i3d (410.65) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus1224/ursus1224.i3d (707.09) ms
+Warning: 3D stereo audio files are not supported. Convert 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus1224/Sound/zetorCrystal_idle.wav'.
+ to monoWarning: 3D stereo audio files are not supported. Convert 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus1224/Sound/zetorCrystal_run.wav'.
+ to monoWarning: 3D stereo audio files are not supported. Convert 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus1224/Sound/zetorCrystal_idle.wav'.
+ to monoWarning: 3D stereo audio files are not supported. Convert 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus1224/Sound/zetorCrystal_run.wav'.
+ to monoC:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/A_Pack_FS18/trailer/HW_80.i3d (239.18) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/HW_60_11_rozsdas/HW_60_11_silos.i3d (372.76) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/pdlc/kuhnPack/vehicles/tools/kuhn/kuhnEspro3000.i3d (556.63) ms
+data/vehicles/steerable/challenger/challengerMT800E.i3d (1194.33) ms
+data/vehicles/tools/amazone/amazoneCondor15001.i3d (658.81) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Versatile_RT490/RT490.i3d (562.25) ms
+data/vehicles/cutters/capello/capelloDiamantHS12.i3d (122.92) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_PST_18/PST__18.i3d (557.47) ms
+  Fendt 900 ProfiPlus by STv-Modding
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/Claas_Lexion/Lexion.i3d (588.34) ms
+data/vehicles/cutters/capello/capelloQuasarHS16.i3d (496.50) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/StrautmannSZK1402/db8000.i3d (430.55) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ursus12245/ursus1224.i3d (643.28) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/HW_60_11_egyedi/HW_60_11_silos.i3d (391.10) ms
+Warning: overlapping rotation parts for node balkar2 in tipAnimationLeft C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/HW_60_11_egyedi/HW_60_11.xml
+Warning: overlapping rotation parts for node balkar2 in tipAnimationLeft C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/HW_60_11_egyedi/HW_60_11.xml
+data/vehicles/trailers/kroeger/kroegerHKD302.i3d (491.82) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/lexion58000/Lexion.i3d (1945.93) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/Fs17ClaasLexion600_580/claasConspeed8.i3d (167.62) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/lexion58000/claastrailer.i3d (144.52) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/lexion58000/claasConspeed12_75FC.i3d (198.88) ms
+Error: Can't load resource 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/Panav_Bss_Ps_2_17_13/Bss/shared/dirt_normal.png'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/Panav_Bss_Ps_2_17_13/bss8t.i3d (271.32) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_horschAgrovationVehicles/vehicles/tools/horschTiger6DT.i3d (464.49) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_horschAgrovationVehicles/vehicles/tools/horschJoker12RT.i3d (539.30) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_horschAgrovationVehicles/vehicles/tools/horschCruiser12XL.i3d (416.97) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_manTGSagroTruck/manTGS18480.i3d (617.38) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_FLIEGL_GL/body_vis.i3d (608.29) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_John_Deere_7010_CGJ/JohnDeere7010.i3d (1597.99) ms
+Error: Can't load resource 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_John_Deere_7010_CGJ/wheels/Textures/widetire_spec.dds'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/TM_John_Deere_7R/JohnDeere_7R.i3d (786.08) ms
+  JohnDeere 7R by TechMod a.s.
+data/vehicles/trailers/fliegl/flieglDolly.i3d (218.34) ms
+data/vehicles/tools/grimme/grimmeFT300.i3d (177.51) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_NewHollandTM175Project/NewHollandTMBig.i3d (1536.41) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/A_Pack_FS17/trailer/D353.i3d (357.40) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_horschAgrovationVehicles/vehicles/tools/horschEvo12_375.i3d (775.39) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/TM_JohnDeere_8R/JohnDeere_8R.i3d (949.37) ms
+  JohnDeere 8R by TechMod a.s.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Claas_Scorpion_7055/ClaasScorpion7055.i3d (1024.22) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/bizonek/bizonZ056.i3d (1124.33) ms
+Warning: overlapping rotation parts for node g3_group in speedDisplay C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/bizonek/bizonZ056.xml
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/bizonek/bizonZ056Header.i3d (121.09) ms
+data/vehicles/tools/magsi/telehandlerShovel.i3d (144.19) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/bigbagi/bagFertilizer.i3d (47.64) ms
+data/objects/roundbales/roundbaleStraw_w112_d130.i3d (128.01) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/bigbagi/bagSeeds.i3d (47.45) ms
+data/maps/trees/oak.i3d (143.15) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_Manureshop/FS17_Manureshop.i3d (69.86) ms
+dataS2/character/player/player01.i3d (648.40) ms
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_PHX6/phx6.i3d (75.62) ms
+Error: Running LUA method 'update'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ForRealModule02_TireDirt/TireDirt.lua:115: attempt to index field 'washableNodes' (a nil value)
+Saving screenshot: C:/Users/BENY/Documents/My Games/FarmingSimulator2017/screenshots/fsScreen_2017_12_02_16_30_05.png
+Error: Running LUA method 'update'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ForRealModule02_TireDirt/TireDirt.lua:115: attempt to index field 'washableNodes' (a nil value)
+Error: Running LUA method 'update'.
+C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_ForRealModule02_TireDirt/TireDirt.lua:115: attempt to index field 'washableNodes' (a nil value)
+mod Delated: Playercam
+Physics System
+  Version: 5.9.5
+  Thread(s): 2
+Input System
+  Keyboard enabled
+  Mouse enabled
+  Gamepad/Joystick enabled
+  Force Feedback disabled
+Audio System
+  Driver: OpenAL
+  Version: 1.1
+  Device: Generic Software
+Render System
+  Driver: Direct 3D 11
+  Card Vendor: NVIDIA Corporation
+  Renderer: NVIDIA GeForce GTX 960M
+  Version: 21.20.16.4550 (11.11.2016)
+  Revision: 162
+  Feature level: DirectX 11 ON
+Info: Effective window resolution 1920 x 1080
+Started 2 threads for threadpool 'Render threadpool'
+Hardware Profile
+  Level: Custom Medium
+  View Distance Factor: 0.800000
+  Shadow Quality: 1.000000 Size: 2048 Filter-Size: 4
+  Shader Quality: 2
+  Skip Mipmaps: 0
+  LOD Distance Factor: 0.800000
+  Terrain LOD Distance Factor: 0.800000
+  Terrain Normal Mapping: Yes
+  Foliage View Distance Factor: 0.800000
+  Max dynamic foliage View Distance Factor: 0.800000
+  Foliage Density: 0.300000
+  Volume Mesh Tessellation Factor: 0.700000
+  Tyre Tracks Segments Factor: 1.000000
+  Max. Number of Shadow Lights: 1
+  Max. Number of Lights: 512
+  Max. Number of Lights Per Cluster: 32
+  MSAA: 4
+Farming Simulator 17
+  Version: 1.5.1.0 b1583
+  Available Languages: pl cz
+  Language: pl
+  Time: 2017-12-02 16:31:21
+  Register configuration 'inputAttacherJoint'
+  Register configuration 'attacherJoint'
+  Register configuration 'frontloader'
+  Register configuration 'motor'
+  Register configuration 'baseColor'
+  Register configuration 'wheel'
+  Register configuration 'rimColor'
+  Register configuration 'design'
+  Register configuration 'designColor'
+  Register configuration 'vehicleType'
+Game vehicle types loaded
+Load dlc: pdlc_kuhnPack (Version: 1.0.0.0)
+Load mod: A_Pack_FS17 (Version: 1.4.0.0)
+Load mod: A_Pack_FS18 (Version: 1.6.0.0)
+Load mod: bigbagi (Version: 1.1)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod bigbagi to use it in multiplayer.
+Load mod: bizonek (Version: 1.0.0.0)
+Warning: Missing l10n for button wsteczny in bizonek
+Warning: Missing l10n for button anim1 in bizonek
+Warning: Missing l10n for button zwalnianie in bizonek
+Warning: Missing l10n for button INTERACTIVE_CONTROL_SWITCH in bizonek
+Load mod: Claas_Cargos_700_Pack (Version: 1.0.0.0)
+Load mod: Claas_Lexion (Version: 0.1)
+Load mod: disableVehicleCameraCollision (Version: 1.0.0.0)
+Load mod: FBM17_Meiller_Kipper (Version: 1.0.0.0)
+Load mod: Fliegl_Gigant_ASW_268_Manure (Version: 1.0.0.0)
+Load mod: Fs17ClaasLexion600_580 (Version: 1.0)
+Load mod: FS17Contest_ClaasMegaPack (Version: 1.0.0.0)
+Load mod: FS17Contest_FENDT_800_Favorit (Version: 1.0)
+Load mod: FS17Contest_Fiatagri140_90DT_Turbo (Version: 1.0.0.0)
+Warning: Missing l10n for button TXCABSUSP in FS17Contest_Fiatagri140_90DT_Turbo
+Warning: Missing l10n for button addWeight in FS17Contest_Fiatagri140_90DT_Turbo
+Warning: Missing l10n for button takeAwayWeight in FS17Contest_Fiatagri140_90DT_Turbo
+Load mod: FS17Contest_maschioGaspardoPack (Version: 1.0.1.4)
+Load mod: FS17Contest_MatrotM44D (Version: 1.0.0.1)
+Load mod: FS17Contest_Seasons (Version: 1.0.0.0)
+Load mod: FS17Contest_SMS_CV600P (Version: 1.0.0.0)
+Load mod: FS17Contest_strautmannAperion (Version: 1.0.0.0)
+Load mod: FS17Contest_terralandtn_profi (Version: 1.0.0.0)
+Load mod: FS17JohnDeere7430 (Version: 2.0.0)
+Load mod: FS17JohnDeere8RSpeciale (Version: 1.1)
+Warning: Missing l10n for button VarioGrip in FS17JohnDeere8RSpeciale
+Load mod: fs17smogory (Version: 1.0)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod fs17smogory to use it in multiplayer.
+Load mod: FS17_3050HD (Version: 1.0)
+Load mod: FS17_amazoneZGB8200_console (Version: 1.0.0.0)
+Load mod: FS17_brantnerDPW18000 (Version: 1.0.0.0)
+Load mod: FS17_BuyBales (Version: 1.17 beta)
+Load mod: FS17_CaseMagnum335Pack (Version: 1.0.0.0)
+Load mod: FS17_choppedStraw (Version: 1.0.0.5)
+Load mod: FS17_ClaasVarioCutters (Version: 0.5 BETA)
+Load mod: FS17_Claas_Scorpion_7055 (Version: 1.0.0.0)
+Load mod: FS17_DammannProfiClaas5036 (Version: 1.0.2)
+Load mod: FS17_farmtechDurus2000 (Version: 1.0.0.0)
+Load mod: FS17_Fendt900Vario_Full (Version: 1.0)
+Warning: Missing l10n for button iLight in FS17_Fendt900Vario_Full
+Load mod: FS17_fendtHarvesterPackage (Version: 1.0.0.2)
+Load mod: FS17_flieglVFW10600 (Version: 1.0.0.0)
+Load mod: FS17_FLIEGL_GL (Version: 1.0.1.1)
+Load mod: FS17_ForRealModule01_CropDestruction (Version: 1.0.2.1)
+Load mod: FS17_ForRealModule02_TireDirt (Version: 1.0.1.0)
+Load mod: FS17_ForRealModule03_GroundResponse (Version: 1.0.1.0)
+Load mod: FS17_Fortschritt_E516_E516B (Version: 1.0.0.0)
+Load mod: FS17_Fortschritt_SW71 (Version: 1.0.0)
+Load mod: FS17_fortunaFTM200_6_0 (Version: 1.0.0.0)
+Load mod: FS17_holmerTerraDosT4_30_v2 (Version: 2.0.0.0)
+Load mod: FS17_horschAgrovation (Version: 1.1.0.0)
+Load mod: FS17_horschAgrovationVehicles (Version: 1.0.0.0)
+Load mod: FS17_horschTitan34UW (Version: 1.0.0.0)
+Load mod: FS17_HTS (Version: 1.0.0 PL 1)
+Load mod: FS17_JD_9630 (Version: 1.0)
+Load mod: FS17_JohnDeere6030P (Version: 1.0)
+Load mod: FS17_JohnDeere6R_FBM (Version: 1.0.0.1)
+Load mod: FS17_John_Deere_7010_CGJ (Version: 1.0.0.0)
+Load mod: FS17_KPM10 (Version: 1.0)
+Load mod: FS17_krampeBigBody900 (Version: 1.0.0.0)
+Load mod: FS17_kuhnVB2190 (Version: 1.0.0.1)
+Load mod: FS17_LemkenJuwel8FixPack (Version: 1.0.0.0)
+Load mod: FS17_Lemken_Heliodor_9_600_KA (Version: 1.2.1.0)
+Load mod: FS17_Lexion780 (Version: 0.5 BETA)
+Load mod: FS17_manTGSagroTruck (Version: 1.0.0.0)
+Load mod: FS17_Manureshop (Version: 1.1.2.0)
+Load mod: FS17_MB3D_ClaasJaguar800 (Version: 1.0.0.0)
+Load mod: FS17_MB3D_JohnDeere7030 (Version: 1.1.0.0)
+Load mod: FS17_MetalTech_DB_Pack (Version: 1.0.0.0)
+Load mod: FS17_newHollandCR_Pack (Version: 1.1)
+Load mod: FS17_newHollandLM742 (Version: 1.0.1.0)
+Load mod: FS17_NewHollandTM175Project (Version: 1.0)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/FS17_NG/modDesc.xml'.
+Load mod: FS17_NG
+Error: Missing descVersion attribute in mod FS17_NG
+Load mod: FS17_Pack_Joskin_Wago_AUTO_BsM (Version: 1.0.0.3)
+Load mod: FS17_PHX6 (Version: 1.0.0.0)
+Load mod: FS17_placeableRefillStation (Version: 1.0.0.0)
+Load mod: FS17_PronarT680 (Version: 1.0.0.0)
+Load mod: FS17_PST_18 (Version: 1.1.0.0)
+Warning: Missing l10n for button VARIABLEBODY_change in FS17_PST_18
+Load mod: FS17_Rabe_SKE_600_Pack (Version: 1.0.1)
+Load mod: FS17_real_clock (Version: 1.0)
+Load mod: FS17_reckJumbo (Version: 1.0.0.0)
+Load mod: FS17_rsmAgriPack (Version: 1.0.0.0)
+Load mod: FS17_stoneGrip2400 (Version: 1.4.4.1)
+Load mod: FS17_strautmann_PS2201 (Version: 1.0.0.0)
+Load mod: FS17_ursus1224 (Version: 1.0.0.0)
+Load mod: FS17_ursus12245 (Version: 1.0.0.0)
+Load mod: FS17_Ursus1224_by_PatRick (Version: 1.0.0.0)
+Load mod: FS17_URSUS1614_deluxe (Version: 1.0.0.0)
+Load mod: Fs17_Ursus_1201 (Version: 1.1.0.0)
+Load mod: FS17_Ursus_1604 (Version: 1.0.0.0)
+Warning: Missing l10n for button Gaz2 in FS17_Ursus_1604
+Warning: Missing l10n for button Wajcha in FS17_Ursus_1604
+Warning: Missing l10n for button Gaz in FS17_Ursus_1604
+Warning: Missing l10n for button DrzwiP in FS17_Ursus_1604
+Warning: Missing l10n for button KlamkaP in FS17_Ursus_1604
+Warning: Missing l10n for button DrzwiL in FS17_Ursus_1604
+Warning: Missing l10n for button KlamkaL in FS17_Ursus_1604
+Warning: Missing l10n for button Szyba in FS17_Ursus_1604
+Load mod: FS17_veenhuisW400 (Version: 1.0.0.3)
+Load mod: FS17_Versatile_RT490 (Version: 1.0.0.0)
+Load mod: FS17_zetor8045 (Version: 1.0.0.0)
+Load mod: FS17_zetorCrystal12045_ (Version: 1.0.0.0)
+Load mod: FS17__Claas_Xerion (Version: 1.0.0.0)
+Load mod: FS1_FortschrittE936ASSW516 (Version: 1.0.0.0)
+Load mod: FS_17NewHollandCX (Version: 1.0)
+Load mod: HudHiderbyClodls17v101 (Version: 1.01)
+Load mod: HW_60_11_egyedi (Version: 1.0)
+Load mod: HW_60_11_magasitos (Version: 1.0)
+Load mod: HW_60_11_rozsdas (Version: 1.0)
+Load mod: HW_60_11_rozsdas_2 (Version: 1.0)
+Load mod: HW_60_11_silos (Version: 1.0)
+Error: invalid brand name 'Hw'! Only capital letters allowed!
+Load mod: JD8530_v2_FS17 (Version: 2.0)
+Load mod: JD_Gewicht (Version: 1.0.0.0)
+Load mod: JohnDeere6R (Version: 1.0.1)
+Load mod: JohnDeereT670FullPackV2 (Version: 2.0)
+Load mod: Kverneland_EG_85 (Version: 1.0.0.0)
+Load mod: lexion58000 (Version: 0.1)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod lexion58000 to use it in multiplayer.
+Load mod: MapAutosave_LS17 (Version: 2.0.1)
+Load mod: Metaltech_Trailer_Pack (Version: 1.0.0.0)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Load mod: mr_PHX (Version: 1)
+Error: Unsupported mod description version in mod mr_PHX
+Load mod: NO_Collision_Vehicle_Camera_mp
+Load mod: Oros_Cornado_12744 (Version: 1.0)
+Load mod: Oros_Cornado_6734 (Version: 1.0)
+Load mod: Oros_Cornado_8734 (Version: 1.0)
+Load mod: Oros_Sun_1270 (Version: 1.0)
+Load mod: Oros_Sun_676 (Version: 1.0)
+Load mod: Oros_Sun_870 (Version: 1.0)
+Load mod: Panav_Bss_Ps_2_17_13 (Version: 2)
+Load mod: PlayerCamera (Version: 1.0)
+Load mod: Playerwalkspeed_ls17 (Version: 0.1)
+Warning: Missing l10n for button PLAYERCAM_MOD in Playerwalkspeed_ls17
+Load mod: Rauch_TWS_7000 (Version: 1)
+Error: Failed to open xml file 'C:/Users/BENY/Documents/My Games/FarmingSimulator2017/mods/referenceMap/modDesc.xml'.
+Load mod: referenceMap
+Error: Missing descVersion attribute in mod referenceMap
+Load mod: SP_2002_v1 (Version: 1)
+Warning: Missing l10n for button rightFold in SP_2002_v1
+Warning: Missing l10n for button leftFold in SP_2002_v1
+Load mod: ss (Version: 0.5 BETA)
+Warning: Only zip mods are supported in multiplayer. You need to zip the mod ss to use it in multiplayer.
+Load mod: StrautmannSZK1402 (Version: 1.0.0.0)
+Load mod: TM_JohnDeere_8R (Version: 2)
+Load mod: TM_John_Deere_7R (Version: 1)
+Load mod: TM_John_Deere_8R (Version: BETA)
+Load mod: Vaderstad_Top_Down_700 (Version: 1.0.0.1)
+Load mod: ZetorCrystalV2 (Version: 1.0.0.0)
+Load mod: Zetor_16145 (Version: 1)

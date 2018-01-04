@@ -1,0 +1,133 @@
+using Unity.Engine;
+using Unity.API;
+using System.Collections;
+
+public class TextController : MonoBehaviour {
+	
+	public Text text;
+	
+	private enum States {cell, clothes_0, toilet, notice_0, picture_frame, lock_0, lock_1, cell_picture_frame, corridor_0, vault, notice_1, stairs_0, stairs_1,
+		stairs_2, courtyard, floor, corridor_1, corridor_2, corridor_3, closet_door, in_closet};
+	private States myState;
+	
+	
+	// Use this for initialization
+	void Start () {
+		myState = States.cell;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		print (myState);
+		if (myState == States.cell)					  {cell();}
+		else if (myState == States.clothes_0) 		  {clothes_0();}
+		else if (myState == States.lock_0) 			  {lock_0();}
+		else if (myState == States.lock_1) 			  {lock_1();}
+		else if (myState == States.picture_frame)	  {picture_frame();}
+		else if (myState == States.cell_picture_frame){cell_picture_frame();}
+		else if (myState == States.corridor_0) 		  {corridor_0();}
+		else if (myState == States.vault)			  {vault();}
+		else if (myState == States.notice_0)		  {notice_0();}
+		else if (myState == States.notice_1) 		  {notice_1();}
+		else if (myState == States.toilet)			  {toilet();}
+		else if (myState == States.stairs_0)		  {stairs_0();}
+	
+		
+		
+	}
+	void stairs_0 () {
+		text.text = "You make your way towards the stairs to see if there is a way out from the roof but you hear footsteps and" +
+			" talking from what sounds like guards. You shuffle back down to the corridor and reconsider.\n\n" +
+				"Press B to go back to the corridor";
+			if (Input.GetKeyDown(KeyCode.B)) {myState = States.corridor_0;}
+	}
+	
+	void cell () {
+		text.text = "You wake up groggy and disorientated to find yourself in a small cell. Instantly you want to escape. You see some dirty" +
+			" clothes on the bed, a toilet in the corner of the room and a picture frame on the wall.  " +
+				"You check to see if the door is unlocked, but it is locked from the outside\n\n " +
+				"Press C to view the clothes, T to view the toilet, L to view the lock and P to view the picture frame. ";
+		if (Input.GetKeyDown(KeyCode.C)) 		{myState = States.clothes_0;}
+		else if (Input.GetKeyDown(KeyCode.P)) 	{myState = States.picture_frame;}
+		else if (Input.GetKeyDown(KeyCode.L)) 	{myState = States.lock_0;}
+		else if (Input.GetKeyDown (KeyCode.T))	{myState = States.toilet;}	
+	}
+	
+	void clothes_0() {
+		text.text = "You can't believe how dirty they are and want to change them for clean ones." +
+			"You never realised how bad they treat prisoners and now you pity them.\n\n  " +
+				"Press B to go back to roaming the cell. ";
+		if (Input.GetKeyDown(KeyCode.B)) {
+			myState = States.cell;
+		}
+	}
+	
+	void picture_frame() {
+		text.text = "Hmm. You notice there is something behind the picture frame. What could it be?\n\n " +
+			"Press M to move the picture frame or B to go back to roaming your cell.";
+		if (Input.GetKeyDown(KeyCode.M)) 		{myState = States.vault;}
+		else if (Input.GetKeyDown(KeyCode.B)) 	{myState = States.notice_0;}
+	}
+	
+	void notice_0() {
+		text.text = "You are STILL in the cell and STILL want to escape!" +
+			"There are some dirty clothes on the bed, a vault behind where the picture frame used to be, a toilet in the corner of the room and the pictureframe now laying on the floor." +
+				"Press C to view the clothes, V to view the vault, P to view the pictureframe, L to view that pesky lock and T to view the toilet";
+		if (Input.GetKeyDown(KeyCode.C)) {myState = States.clothes_0;}
+		else if (Input.GetKeyDown(KeyCode.V)) {myState = States.vault;}
+		else if (Input.GetKeyDown(KeyCode.P)) {myState = States.picture_frame;}
+		else if (Input.GetKeyDown(KeyCode.L)) {myState = States.lock_0;}
+		else if (Input.GetKeyDown(KeyCode.T)) {myState = States.toilet;}
+	}
+	
+	void vault() {
+		text.text = "Lucky! The vault was unlocked. Inside you find a long metal bar.\n\n" +
+			"Press U to use the bar or B to go back to roaming your cell";
+		if (Input.GetKeyDown(KeyCode.U)) {myState = States.lock_1;}
+		else if (Input.GetKeyDown(KeyCode.B)) {myState = States.notice_1;}
+	}
+	
+	
+	void notice_1 () {
+		text.text = "You are STILL trapped in the cell but now you are so close and so determined to escape!\n\n" +
+			"Press C to view the clothes, V to view the vault, P to view the picture frame, L to view that pesky lock, U to use the metal bar and T to view the toilet";
+		if (Input.GetKeyDown(KeyCode.C)) {myState = States.clothes_0;}
+		else if (Input.GetKeyDown(KeyCode.V)) {myState = States.vault;}
+		else if (Input.GetKeyDown(KeyCode.P)) {myState = States.cell_picture_frame;}
+		else if (Input.GetKeyDown(KeyCode.L)) {myState = States.lock_0;}
+		else if (Input.GetKeyDown(KeyCode.T)) {myState = States.toilet;}
+		else if (Input.GetKeyDown(KeyCode.U)) {myState = States.lock_1;}
+	}
+	
+	void cell_picture_frame () {
+		text.text = "What a nice picture. I wish I could take this with me when I escape\n\n" +
+			"Press B to go back to roaming your cell";
+		if (Input.GetKeyDown(KeyCode.B)) {myState = States.notice_1;}
+	}
+	
+	void lock_0() { 
+		text.text = "The door is locked and won't open! You notice the key is on the wall beside the door. If only you had a way to reach it...\n\n" +
+			"Press B to go back to roaming your cell";
+		if (Input.GetKeyDown(KeyCode.B)) {myState = States.cell;}
+	}
+	
+	void lock_1 () {
+		text.text = "You stick the metal bar through the bars to the wall where the keys are and after countless attempts to" +
+			" get the keys off the hook, you finally manage to get them off and put them in the door.\n\n" +
+				"Press O to open the door and leave your cell!";
+		if (Input.GetKeyDown(KeyCode.O)) {myState = States.corridor_0;}
+	}
+	
+	void corridor_0 () {
+		text.text = "Finally! You are out of the cell! But then you realise it is not over yet. You still need to escape the building.\n\n" +
+			"Press A to advance to the next level!";
+		if (Input.GetKeyDown(KeyCode.A)) {myState = States.corridor_0;}
+	}
+	
+	void toilet () {
+		text.text = "Yuck! You hate the smell of the toilet. No need to go near there again!\n\n" +
+			"Press B to go back to roaming your cell";
+		if (Input.GetKeyDown(KeyCode.B)) {myState = States.cell;}
+	}
+	
+}

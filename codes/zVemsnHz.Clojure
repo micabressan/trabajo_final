@@ -1,0 +1,7 @@
+  (defn get-integral-values-f
+    ([tr]
+      (lazy-seq (cons 0 (get-integral-values-f tr 0))))
+    ([tr prev]
+      (let [curr (first tr)
+            acc (+ prev curr)]
+        (lazy-seq (cons acc (get-integral-values-f (rest tr) acc))))))

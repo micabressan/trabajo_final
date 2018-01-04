@@ -1,0 +1,12 @@
+newtype CylindrycalCoord3 a = MkCylindrycalCoord3(a,a,a)
+newtype CartesianCoord3 a = MkCartesianCoord3(a,a,a)
+
+cartesianToCylindrycal'' :: (Floating a, Ord a) => CartesianCoord3 a -> CylindrycalCoord3 a
+cartesianToCylindrycal'' (MkCartesianCoord3 (x,y,z)) = MkCylindrycalCoord3 (p*cos phi,p*sin phi,z) 
+                        where p = sqrt(x^2+y^2)
+                              phi | x == 0 && y == 0 = 0
+                                  | x >= 0 = asin (y/p)
+                                  | x > 0 = asin (y/x)
+                                  | otherwise = -asin(y/p) + pi
+
+--Wywolanie: let (x1,y1,z1) = cartesianToCylindrical(1,1,1) ???

@@ -1,0 +1,5 @@
+move_ :: String -> State GameState ()
+move_ "w" = do
+  currentState <- get
+  put (currentState {playerPos = moveUp_ (playerPos currentState)})
+  return ()

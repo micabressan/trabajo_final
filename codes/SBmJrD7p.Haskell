@@ -1,0 +1,9 @@
+  cps (105/120)
+  let baseProg p = p || up (slow 4 $ "[<0 3> <-4 5> -5 <-2 -1>]") || speed 2
+  let chordify p = p || up "[0,<3 4>,-5]" || speed 4 || gain "0.89";
+  let arpify p = up "[7 0 :heart: 3 4 4> 0]2" || p
+  d1 $ stack [
+        s "[bd2, hh8]" # cutoff 350 || gain "1.2",
+        stut 6 (1/6) (3/2) $ chordify $ baseProg $ s "moog" || release "0.9",
+        arpify $ baseProg $ s "moog" || release "0.55"
+        ] |*| gain 0.8

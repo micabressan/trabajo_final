@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace KDZ
+{
+    public partial class MainForm : Form
+    {
+        private static MyFunction func;
+        public int A = -1;
+        public bool net = true; //сетка графика
+        public double dx;
+        public MainForm()
+        {
+            InitializeComponent();
+            func = new MyFunction();
+            FuncFiller();
+            FuncLoader();
+        }
+        private void FuncFiller()
+        {
+            func.SetChart = MainChart;
+            func.SetA = A;
+            func.SetDx = dx;
+            func.SetNet = net;
+        }
+        private void FuncLoader()
+        {
+            dx = 0.01;
+            DxNumeric.Value = (decimal)dx;
+            trackBar1.Value = A;
+            HighlightButton.Enabled = false;
+            GraphButton.Enabled = false;
+            Tracker.Text = "Значение A = " + A;
+            MainChart.ChartAreas[0].AxisX.Title = "Ox";
+            MainChart.ChartAreas[0].AxisY.Title = "Oy";
+            MainChart.ChartAreas[0].AxisY.ScaleView.Zoom(-2, 2);
+            MainChart.ChartAreas[0].AxisX.Maximum = 20;
+            MainChart.ChartAreas[0].AxisX.Minimum = -20;
+            MainChart.ChartAreas[0].AxisX.Interval = 4;
+            MainChart.ChartAreas[0].AxisY.Interval = 0.4;
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            func.DrawMain();
+        }
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            A = trackBar1.Value;
+            Tracker.Text = "Значение A = " + A;
+            A_Clear();
+            FuncFiller();
+            if (A!=0)
+                func.DrawMain();
+        }
+        private void A_Clear()
+        {
+            bool b = trackBar1.Value != 0;
+            NullLabel.Text = b ? " " : "При A = 0 график не может быть построен!";
+            MainChart.Series[0].IsVisibleInLegend = b;
+            MainChart.Series[1].IsVisibleInLegend = b;
+            MainChart.Series[2].IsVisibleInLegend = b;
+            MainChart.Series[0].Points.Clear();
+            MainChart.Series[1].Points.Clear();
+            MainChart.Series[2].Points.Clear();
+            if (trackBar1.Value != 0)
+            {
+                MainChart.Series[0].Points.AddXY(0, 0);
+                MainChart.ChartAreas[0].AxisX.Maximum = 20;
+                MainChart.ChartAreas[0].AxisX.Minimum = -20;
+            }
+        }
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Reload_Click(object sender, EventArgs e)
+        {
+            trackBar1.Value = A = -1;
+            Tracker.Text = "Значение A = " + A;
+            A_Clear();
+            FuncFiller();
+            GraphButton.Enabled = true;
+            HighlightButton.Enabled = false;
+        }
+
+        private void ColorChanger_Click_1(object sender, EventArgs e)
+        {
+            ColorDialog.ShowDialog();
+            MainChart.Series[0].Color = ColorDialog.Color;
+        }
+
+        private void DerivativeColorChanger_Click(object sender, EventArgs e)
+        {
+            DerivativeColorDialog.ShowDialog();
+            MainChart.Series[1].Color = DerivativeColorDialog.Color;
+        }
+
+        private void DerivativeButton_Click(object sender, EventArgs e)
+        {
+            if (A != 0)
+            {
+                MainChart.Series[1].Points.Clear();
+                FuncFiller();
+                func.DrawDerivative();
+                HighlightButton.Enabled = true;
+            }
+        }
+
+        private void DxNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            dx = (double)DxNumeric.Value;
+            InputChecker();
+        }
+
+        private void NetBox_CheckedChanged(object sender, EventArgs e)
+        {
+            net = NetBox.Checked;
+            FuncFiller();
+            MainChart.ChartAreas[0].AxisX.MajorGrid.Enabled = net;
+            MainChart.ChartAreas[0].AxisY.MajorGrid.Enabled = net;
+        }
+
+        private void HighlightButton_Click(object sender, EventArgs e)
+        {
+            if (A != 0)
+                func.HighlightGraph();
+        }
+
+        private void GraphButton_Click(object sender, EventArgs e)
+        {
+            if (A != 0)
+            {
+                MainChart.Series[0].Points.Clear();
+                FuncFiller();
+                func.DrawMain();
+            }
+        }
+        private void InputChecker()
+        {
+            if (dx > 0.05)
+            {
+                MessageBox.Show("Значение dx излишне большое!\nВозможно неверное отображение графика.", "Предупреждение", MessageBoxButtons.OK);
+            }
+        }
+
+        private void BothColorChanger_Click(object sender, EventArgs e)
+        {
+            BothColorDialog.ShowDialog();
+            MainChart.Series[2].Color = BothColorDialog.Color;
+        }
+    }
+}

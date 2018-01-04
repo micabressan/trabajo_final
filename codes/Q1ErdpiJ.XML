@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<objective>Cool Payload</objective>
+<!--tips and alerts-->
+<authors>
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Main builder, XML, v1.3 update"/>
+    <!-- Jexel -->
+</authors>
+<contributors>
+    <contributor uuid="27186ed2-3040-4d50-ba2e-c08866cb23f0" contribution="Builder, Pruning"/>
+    <!--Zack-->
+    <contributor uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="1.3 Update Builder"/>
+    <!--_3Each-->
+    <contributor uuid="bd12f89a-2137-4068-8f8b-ab46e248d2a7" contribution="Builder"/>
+    <!--Kitten-->
+</contributors>
+<rules>
+    <rule>
+        Don't fail at XML
+    </rule>
+    <rule>
+        amactus doesn't like cacti juice
+    </rule>
+</rules>
+<!--Keeps daylight cycle off-->
+<timelock>on</timelock>
+<!--Prevents mob spawning-->
+<difficulty>peaceful</difficulty>
+<!--Gamemode-->
+<gamemode>rage</gamemode>
+<!--No Hunger Depletion-->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<!--Reparing/removing drops-->
+<!--Team settings (Kits, teams, spawns, etc.)-->
+<teams>
+   <team id="red-team" color="dark red" kit="default" max="7" max-overfill="8">Mods</team>
+   <team id="green-team" color="green" kit="default" max="7" max-overfill="8">Overlords</team>
+   <team id="blue-team" color="blue" kit="default" max="7" max-overfill="8">Admins</team>
+   <team id="yellow-team" color="yellow" kit="default" max="7" max-overfill="8">Lifeboat</team>
+</teams>
+<kits>
+  <kit id="default">
+    <game-mode>creative</game-mode>
+  </kit>
+</kits>
+<!--Spawns-->
+<spawns>
+    <spawn team="red-team">
+        <regions yaw="-90">
+            <point>0,20,0</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team">
+        <regions yaw="0">
+            <point>0,20,0</point>
+        </regions>
+    </spawn>
+    <spawn team="green-team" yaw="180">
+        <regions yaw="180">
+            <point>0,20,0</point>
+        </regions>
+    </spawn>
+    <spawn team="yellow-team" yaw="-90">
+        <regions yaw="90">
+            <point>0,20,0</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>0,20,0</point>
+        </regions>
+    </default>
+</spawns>
+</map>

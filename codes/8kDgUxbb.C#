@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp10
+{
+    class Program
+    {
+
+        public static void generator(int n,int a,int b)
+        {
+            int[] tab = new int[n];
+            Random r = new Random();
+            Console.WriteLine("Losowane liczby: ");
+            for (int i = 0; i < n; i++)
+            {
+                tab[i] = r.Next(a, b);
+                Console.WriteLine(tab[i]+" ");
+
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            int a, b, n;
+            Console.WriteLine("Wprowadz ilosc elementow w tablicy");
+            n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Wprowadz przedzial <a,b>");
+            a = Convert.ToInt32(Console.ReadLine());
+            b = Convert.ToInt32(Console.ReadLine());
+            generator(n, a, b);
+            Console.ReadLine();
+
+
+
+
+        }
+    }
+}

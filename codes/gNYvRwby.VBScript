@@ -1,0 +1,104 @@
+Rem Attribute VBA_ModuleType=VBAModule
+Option VBASupport 1
+Global longueur As Integer
+Global longueurDate as Integer
+
+
+Sub méthode3()
+
+    effacement
+    lecture_écriture
+    codage
+    
+    
+End Sub
+
+Sub effacement()
+        Cells(3, 2).Value = ""
+
+	'On parcours toutes les cases où on écrit des choses pour les effacer
+    For i = 1 To 50
+        Cells(4, i + 1).Value = ""
+        Cells(6, i + 1).Value = ""
+        Cells(3, i + 1).Value = ""
+    Next
+
+End Sub
+
+Sub lecture_écriture()
+
+Dim phrase As String, i As Integer, cdate As String
+
+	'On demande la phrase à coder
+    phrase = UCase(InputBox("Entrez une phrase :"))
+    longueur = Len(phrase)
+    
+    'On écrit chaque lettre de la phrase dans une case
+    For i = 1 To longueur
+    	Cells(4, i + 1).Value = Mid(phrase, i, 1)
+    Next
+    
+    'On récupère la date, on suppose que l'utilisateur l'entre dans le bon format
+    cdate = UCase(InputBox("Entrez la date:"))
+    longueurDate = Len(cdate)
+    
+    'On écrit chaque chiffre de la date dans une case
+    For i = 1 to longueurDate
+    	Cells(3, 1 + i).Value = Mid(cdate, i, 1)
+    Next
+	
+
+End Sub
+
+Sub codage()
+
+'On définit les variables
+Dim lettre_phrase As String 
+Dim index_valeur as Integer
+Dim index_lettre as Integer
+Dim lettre_équivalente As String
+Dim i As Integer, j As Integer, k As Integer
+Dim valeur As Integer
+
+	index_valeur = 1
+
+    'Pour chaque lettre dans la phrase entrée
+    For i = 1 To longueur
+        
+        lettre_phrase = Cells(4, i + 1).Value
+        
+        'Si la lettre n'est pas un espace, on la traite
+        If lettre_phrase <> " " Then
+        
+        	'Recherche de l'index de la lettre de la phrase
+        	For k = 1 To 26
+        		If Cells(1, k + 1).Value = lettre_phrase Then
+        			'On soustrait 1 pour ne pas fausser le calcul plus tard
+        			index_lettre = k - 1
+        		End If
+        	Next
+        
+        	valeur = CInt(Cells(3, index_valeur + 1).Value)
+        
+        	'Si le numéro de la date est 0, on décalle pas
+        	If valeur = 0 Then
+            	    Cells(6, i + 1).Value = lettre_phrase
+        	'Sinon, on trouve la lettre au décalage correspond avec un modulo pour ne pas sortir de l'alphabet
+        	Else
+            	    Cells(6, i + 1).Value = Cells(1, ((index_lettre + valeur) Mod 26) + 2).Value
+        	End If
+        
+        	'On passe au chiffre de la date suivante
+        	index_valeur = index_valeur + 1
+        	
+        	'Si on dépasse la longueur de la date, on retourne au premier numéro
+        	If index_valeur > longueurDate Then
+        		index_valeur = 1
+        	End If
+        'Si la lettre est un espace, on écrit un espace
+        Else
+        	Cells(6, i + 1).Value = " "
+        End If
+    Next
+
+End Sub

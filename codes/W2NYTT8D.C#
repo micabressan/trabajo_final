@@ -1,0 +1,101 @@
+namespace 11_gyak
+{
+    class bevitel
+    {
+        public string name { get; private set; }
+        public string[] adatok;
+        public string kiir = "";
+        public int sütikösszesen = 0;
+        public int óraperc = 0;
+        public List<string> adatokLista = new List<string>();
+        public bevitel(string line)
+        {
+            int mentés = 0;
+            string névmentés = "";
+            string[] split = line.Split(';');
+            name = split[0];
+            adatok = split[1].Split(',');
+            for (int i = 0; i < adatok.Length; i++)
+            {
+                adatokLista.Add(adatok[i]);
+            }
+            foreach (var v in adatok)
+            {
+                string[] tmp = v.Split(' ');
+                string[] óraközött = tmp[0].Split('-');
+                string[] első = óraközött[0].Split(':');
+                string[] óra = első[0].Split(':');
+                string[] perc = első[1].Split(':');
+                string[] második = óraközött[1].Split(':');
+                string[] óra2 = második[0].Split(':');
+                string[] perc2 = második[1].Split(':');
+
+                List<int> órapercLista = new List<int>();
+                List<int> órapercLista2 = new List<int>();
+
+                foreach (var va in óra)
+                {
+                    órapercLista.Add(Convert.ToInt32(va) * 60);
+                }
+                foreach (var va in perc)
+                {
+                    órapercLista.Add(Convert.ToInt32(va));
+                }
+                foreach (var va in óra2)
+                {
+                    órapercLista2.Add(Convert.ToInt32(va) * 60);
+                }
+                foreach (var va in perc2)
+                {
+                    órapercLista2.Add(Convert.ToInt32(va));
+                }
+                List<int> kivonasLista = new List<int>();
+                for (int i = 0; i < órapercLista2.Count(); i++)
+                {
+                    kivonasLista.Add(órapercLista2[i] - órapercLista[i]);
+                }
+                foreach (var va in kivonasLista)
+                {
+                    óraperc = óraperc + va;
+                }
+                sütikösszesen += Convert.ToInt32(tmp[1]);
+                if (mentés < Convert.ToInt32(tmp[1]))
+                {
+                    kiir = tmp[0];
+                }
+                else
+                {
+                    kiir = névmentés;
+                }
+                mentés = Convert.ToInt32(tmp[1]);
+                névmentés = tmp[0];
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader bemenet = new StreamReader("input.txt");
+            StreamWriter darabkiir = new StreamWriter("darab.txt");
+            StreamWriter idokiir = new StreamWriter("ido.txt");
+
+            while (!bemenet.EndOfStream)
+            {
+                string line = bemenet.ReadLine();
+                bevitel datas = new bevitel(line);
+                Console.WriteLine();
+                Console.WriteLine("------------------" + datas.name + "------------------");
+                Console.WriteLine("Eladott: " + datas.sütikösszesen);
+                Console.WriteLine("Legtobbet szerzett: " + datas.kiir + " kozott");
+                Console.WriteLine("Eltoltott ido percben: " + datas.óraperc);
+                if (datas.sütikösszesen > 100)
+                {
+                    darabkiir.WriteLine(datas.name + ":" + datas.sütikösszesen);
+                }
+            }
+            darabkiir.Close();
+            idokiir.Close();
+        }
+    }
+}

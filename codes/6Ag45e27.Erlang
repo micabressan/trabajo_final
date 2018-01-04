@@ -1,0 +1,24 @@
+-module(prime).
+
+-export([prime/1]).
+
+prime(Num) when Num =:= 1 ->
+  check([1], 0, 0, 0);
+
+prime(Num) when is_number(Num), Num > 1 ->
+  check([2, 1], 3, 3, Num - 2);
+
+prime(_) -> error.
+
+check(List, _, _, 0) ->
+  lists:reverse(List);
+
+check(List, Prime, Div, Num) when Div * Div > Prime ->
+  %io:format("~w~n", [Prime]),
+  check([Prime | List], Prime + 2, 3, Num - 1);
+
+check(List, Prime, Div, Num) when Prime rem Div =:= 0 ->
+  check(List, Prime + 2, 3, Num);
+
+check(List, Prime, Div, Num) ->
+  check(List, Prime, Div + 2, Num).

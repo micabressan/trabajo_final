@@ -1,0 +1,269 @@
+<style>
+@import url('https://fonts.googleapis.com/css?family=Orbitron'); 
+@import url('https://fonts.googleapis.com/css?family=Audiowide'); 
+@import url('https://fonts.googleapis.com/css?family=Press Start 2P');
+
+body {
+color: #2f360b; 
+background-color:#c2e4ce;
+font-family: "Press Start 2P";
+font-color: 2f360b;
+font-size: 14px;
+}
+
+#gb {
+position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; margin: auto;
+height: 600;
+width: 370;
+z-index:1;
+}
+
+#GameboyBody {
+position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; margin: auto;
+height: 600;
+width: 370;
+background-color: #d2bdbc;
+border-radius: 15px 15px 90px 15px;
+z-index:1;
+}
+
+#ScreenFrame {
+position: fixed; left: 0px; right: 0px; top: -270px; bottom: 0px; margin: auto;
+height: 240;
+width: 315;
+background-color: #6f7072;
+border-radius: 15px 15px 50px 15px;
+z-index:2;
+}
+
+#Screen {
+position: fixed; left: 0px; right: 0px; top: -270px; bottom: 0px; margin: auto;
+height: 180;
+width: 200;
+background-color: #757e27;
+border-radius: 5px;
+z-index:3;
+}
+
+#Pic {
+position: fixed; left: 0px; right: 0px; top: -270px; bottom: 0px; margin: auto;
+height: 180;
+width: 200;
+background-color: #757e27;
+border-radius: 5px;
+border-style: solid;
+border-width: 5px;
+border-color: #2f360b;
+z-index:4;
+}
+
+#AButton {
+position: fixed; left: 0px; right: -275px; top: 0px; bottom: -185px; margin: auto;
+height: 50;
+width: 50;
+background-color: #570f31;
+border-radius: 50%;
+z-index:3;
+}
+
+#BButton {
+position: fixed; left: 0px; right: -160px; top: 0px; bottom: -240px; margin: auto;
+height: 50;
+width: 50;
+background-color: #570f31;
+border-radius: 50%;
+z-index:3;
+}
+
+#DPad1 {
+position: fixed; left: -215px; right: 0px; top: 0px; bottom: -225px; margin: auto;
+height: 35;
+width: 90;
+background-color: #0b1818;
+border-radius: 5px;
+z-index:3;
+}
+
+#DPad2 {
+position: fixed; left: -215px; right: 0px; top: 0px; bottom: -225px; margin: auto;
+height: 90;
+width: 35;
+background-color: #0b1818;
+border-radius: 5px;
+z-index:3;
+}
+
+#Select {
+position: fixed; left: -90px; right: 0px; top: 0px; bottom: -410px; margin: auto;
+height: 15;
+width: 45;
+background-color: #6f7072;
+border-radius: 25%;
+z-index:3;
+    -ms-transform: rotate(-27deg); /* IE 9 */
+    -webkit-transform: rotate(-27deg); /* Safari */
+    transform: rotate(-27deg);
+}
+
+#Start {
+position: fixed; left: 0px; right: -30px; top: 0px; bottom: -410px; margin: auto;
+height: 15;
+width: 45;
+background-color: #6f7072;
+border-radius: 25%;
+z-index:3;
+    -ms-transform: rotate(-27deg); /* IE 9 */
+    -webkit-transform: rotate(-27deg); /* Safari */
+    transform: rotate(-27deg);
+}
+
+#Light {
+position: fixed; left: -265px; right: 0px; top: -320px; bottom: 0px; margin: auto;
+height: 10;
+width: 10;
+background-color: #c5083d;
+border-radius: 50%;
+z-index:5;
+}
+
+.tab div {
+display: none;
+position: fixed; left: 0px; right: 0px; top: -270px; bottom: 0px; margin: auto;
+height: 160;
+width: 180;
+background-color: #757e27;
+border-radius: 0px;
+padding: 10px;
+z-index:5;
+overflow: auto;
+}
+
+.tab div:target {
+display: block;
+}
+
+.friendpic { 
+border: 5px solid #2f360b; 
+width: 100px; 
+height: 100px; 
+margin: 2px;
+}
+
+h1, h2, h3 {
+margin: 0;
+padding: 5;
+font-family: "Orbitron";
+font-weight: bold;
+text-align: center;
+}
+
+::-webkit-scrollbar {
+width: 5px;
+height: 1px;
+}
+	
+::-webkit-scrollbar-track {
+border-radius: 5px;
+}
+	
+::-webkit-scrollbar-thumb {
+background-image: url("https://i.imgur.com/MrIrfq7.png"); 
+}
+
+
+
+#credit {
+Position: fixed; bottom: 10px; left: 10px;
+font-family: "Audiowide";
+font-size: 14px;
+text-shadow: 2px 0 0 #4C9DCC, -2px 0 0 #4C9DCC, 0 2px 0 #4C9DCC, 0 -2px 0 #4C9DCC, 1px 1px #4C9DCC, -1px -1px 0 #4C9DCC, 1px -1px 0 #4C9DCC, -1px 1px 0 #4C9DCC;
+}
+
+a.credit:link {color:#f0f0f0;}
+a.credit:visited {color:#f0f0f0;}
+a.credit:hover {color:#6D3BB8;}
+
+</style>
+<body>
+
+<img id="Pic" src="PIC URL HERE (KEEP IT 200X180PIXELS IN SIZE)"></div>
+
+
+<div class="tab">
+<div id="Stats">
+<h2>Stats</h2>
+<b>Name:</b> INFO
+<br>
+<b>Nickname(s):</b> INFO
+<br>
+<b>Age:</b> INFO
+<br>
+<b>Birthday:</b> INFO
+<br>
+<b>Gender:</b> INFO
+<br>
+<b>Species:</b> INFO
+<br>
+<b>Height:</b> INFO
+<br>
+<b>Weight:</b> INFO
+<br>
+<b>Build:</b> INFO
+<br>
+<b>Tattoo(s):</b> Info
+<br>
+<b>Scars:</b> INFO
+<br>
+<b>Residence:</b> INFO
+<br>
+<b>Orientation:</b> INFO
+<br>
+<b>Status:</b> INFO
+</div>
+
+<div id="About">
+<h2>About</h2>
+Write a blurb about your character here.
+</div>
+
+<div id="Friends">
+<h2>Associates</h2>
+<center>
+<a target="_blank" href="https://roleplay.chat/profile.php?user=USERHERE"><img src="PICHERE" class="friendpic" title="DESCRIPTION OF FRIEND HERE"> 
+<a target="_blank" href="https://roleplay.chat/profile.php?user=USERHERE"><img src="PICHERE" class="friendpic" title="DESCRIPTION OF FRIEND HERE"></a> 
+<a target="_blank" href="https://roleplay.chat/profile.php?user=USERHERE"><img src="PICHERE" class="friendpic" title="DESCRIPTION OF FRIEND HERE"></a> 
+<a target="_blank" href="https://roleplay.chat/profile.php?user=USERHERE"><img src="PICHERE" class="friendpic" title="DESCRIPTION OF FRIEND HERE"></a> 
+<a target="_blank" href="https://roleplay.chat/profile.php?user=USERHERE"><img src="PICHERE" class="friendpic" title="DESCRIPTION OF FRIEND HERE"></a> 
+</center>
+</div>
+
+<div id="OOC">
+<h2>OOC</h2>
+OOC one.<br>
+OOC two. <br>
+OOC three. <br>
+OOC four. <br>
+OOC five.
+</div>
+
+
+
+
+
+</div>
+
+<div id="GameboyBody"></div>
+<div id="ScreenFrame"></div>
+<div id="Screen"></div>
+<div id="Light"></div>
+
+
+<a href="#Stats"><div id="DPad1"></div></a>
+<a href="#Stats"><div id="DPad2"></div></a>
+<a href="#About"><div id="AButton"></div></a>
+<a href="#Friends"><div id="BButton"></div></a>
+<a href="#OOC"><div id="Select"></div></a>
+<a href="#Reset"><div id="Start"></div></a>
+
+<div id="credit"><a class="credit" href="https://roleplay.chat/profile.php?user=Spaceman+Codes">Code by Spaceman</a></div>
+</body>

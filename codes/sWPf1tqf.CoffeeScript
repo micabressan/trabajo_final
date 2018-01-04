@@ -1,0 +1,329 @@
+Maths      = require './core/Maths'
+IKinematic = require './core/IKinematic'
+Vec2       = require './core/Vec2'
+Color      = require './core/Color'
+Bullet     = require './bullet'
+
+class Agent
+	constructor: (x = 0, y = 0, dna) ->
+		@acceleration    = new Vec2()
+		@velocity        = new Vec2 Maths.randRange(-3, 3), Maths.randRange(-3, 3)
+		@angle           = @velocity.getAngle() + Math.PI * 0.5
+		@position        = new Vec2 x, y
+		@radius          = 8
+		@maxSpeed        = 3
+		@maxForce        = 0.2
+		@health          = 1
+		@maxHealth       = 1
+		@tail            = null
+		@tailPhase       = 0
+		@tailSegments    = 16+
+		@tailSegLength   = 6
+		@team            = null
+		@color           = new Color 0, 0, 220, 1
+		@bullets         = []
+		@targetNutrition = null
+		@targetEnemy     = null
+		@shooting        = false
+		@aiming          = false
+		@seeking         = false
+
+		@maxShootDistance = 200
+		@closestTargetEnemy = Infinity
+		@closestTargetNutrition = Infinity
+
+		if dna instanceof Array
+			@dna = []
+			for i in [0 .. dna.length]
+				if Math.random() < 0.1
+					if i < 3
+						@dna[i] = dna[i] + Maths.randRange -0.2, 0.2
+					else if i == 3
+						v =  dna[i] + Maths.randRange -10, 10
+						rSq = @radius * @radius
+						v = rSq if v < rSq
+						@dna[i] = v
+					else if i == 4
+						min = Math.PI / 16
+						max = Math.PI / 2
+						v =  dna[i] + Maths.randRange min, max
+						v = min if v < min
+						@dna[i] = v
+				else
+					@dna[i] = dna[i]
+		else
+			max = 3
+			# 0: Attraction / repulsion to food
+			# 1: Attraction / repulsion to poison
+			# 2: Attraction / repulsion to enemy
+			# 3: Line of sight radius
+			# 4: Line of sight angle
+
+			@dna = [
+			    Maths.randRange(-max, max),
+			    Maths.randRange(-max, max),
+			    Maths.randRange(-max, max),
+			    Maths.randRange(@radius * @radius, @radius * @radius + @radius * @radius),
+			    Maths.randRange(Math.PI / 16, Math.PI / 2)
+			]
+		@
+
+	isDead : -> @health <= 0
+
+	reproduce: ->
+		if Math.random() < 0.001
+			agent = new Agent @position.x, @position.y, @dna
+			agent.team = @team
+			agent.color = @color
+			agent.createTail()
+			return agent
+		else
+			return null
+
+	createTail: ->
+		@tail = new IKinematic @position
+		@tail.addNode(@tailSegLength, @color) for i in [1 .. @tailSegments]
+
+	shoot: (target) ->
+		bullet = new Bullet this, @color
+		bullet.position.setX @position.x
+		bullet.position.setY @position.y
+		bullet.velocity.setLength Maths.randRange(4, 8)
+		bullet.velocity.setAngle target.position.subtract(@position).getAngle()
+		@bullets.push bullet
+
+		setTimeout =>
+			@aiming = false
+		, 1100
+
+	attack: (enemies) ->
+		@aim enemies
+
+	aim: (list) ->
+		@targetEnemy = null
+		@closestTargetEnemy = Infinity
+
+		for enemy, i in list by -1
+			dist = enemy.position.distance @position
+
+			if dist < @dna[3] and dist < @closestTargetEnemy
+				@closestTargetEnemy = dist
+				@targetEnemy = enemy
+
+		if @targetEnemy != null && !@aiming
+			if @isInSight @targetEnemy.position
+				@aiming = true
+				seek = @seek @targetEnemy
+				seek.multiply @dna[2]
+				seek.limit @maxForce
+				@applyForce seek
+				@shoot @targetEnemy
+
+	eat: (list, index) ->
+		@targetNutrition = null
+		@closestTargetNutrition = Infinity
+
+		for item, i in list by -1
+			dist = item.position.distance @position
+
+			if dist < @dna[3] and dist < @closestTargetNutrition
+				@closestTargetNutrition = dist
+				@targetNutrition = item
+
+				if dist < 9
+					@health += item.nutrition
+					list.splice i, 1
+
+		if @targetNutrition != null
+			if @isInSight @targetNutrition.position
+				seek = @seek @targetNutrition, index
+				seek.multiply @dna[index]
+				seek.limit @maxForce
+				@applyForce seek
+
+	followFlowField: (flowField) ->
+		x = Math.floor @position.x / flowField.scale
+		y = Math.floor @position.y / flowField.scale
+		i = x + y * flowField.cols
+		force = flowField.field[i]
+		@applyForce force.limit(@maxForce) if typeof force != 'undefined'
+
+	draw: (ctx) ->
+		if window.toggleTails
+			@tail.draw ctx if @tail isnt null
+
+		ctx.save()
+		@drawAimLine ctx
+		ctx.translate @position.x, @position.y
+
+
+		@angle = @velocity.getAngle() + Math.PI * 0.5
+
+		ctx.rotate @angle
+		@drawLineOfSight ctx
+
+		@debug ctx
+		@drawHealthBar ctx
+
+		@drawShape ctx
+
+		ctx.restore()
+
+	drawShape: (ctx) ->
+		ctx.beginPath()
+		ctx.ellipse 0, 0, @radius, @radius * 2, 0, 0, 2 * Math.PI
+		ctx.closePath();
+		gradient = ctx.createRadialGradient 0, 0, @radius * 1.5, 0, -@radius * 1.5, @radius / 3
+		c = Color.FromHex @color
+		c.r += 60
+		c.g += 60
+		c.b += 60
+		gradient.addColorStop 1, c.toStr()
+		gradient.addColorStop 0, @color
+		ctx.fillStyle = gradient
+		ctx.fill()
+
+	drawAimLine: (ctx) ->
+		if @targetEnemy && window.toggleAimLines
+			p = @targetEnemy.position.clone()
+			ctx.beginPath()
+			ctx.moveTo @position.x, @position.y
+			ctx.lineTo p.x, p.y
+			ctx.closePath()
+			color = Color.FromHex @color
+			ctx.lineWidth = 2
+			ctx.strokeStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, 1)"
+			ctx.stroke()
+
+	isInSight: (target) ->
+		delta = target.subtract(@position)
+		angle = delta.getAngle()
+		baseAngle = @angle - (Math.PI * 0.5)
+		los1Angle = baseAngle - (@dna[4] * 0.5)
+		los2Angle = baseAngle + (@dna[4] * 0.5)
+
+		if angle >= los1Angle && angle <= los2Angle
+			return true
+		else
+			@color = @team.color
+			return false
+
+	drawLineOfSight: (ctx) ->
+		if window.toggleSightLines
+			los1 = new Vec2()
+			los2 = new Vec2()
+			baseAngle = @angle - (Math.PI * 0.5)
+			los1Angle = baseAngle - (@dna[4] * 0.5)
+			los2Angle = baseAngle + (@dna[4] * 0.5)
+
+			ctx.save()
+			ctx.lineWidth = 0
+			ctx.rotate -@angle
+			gradient = ctx.createRadialGradient 0, 0, @dna[3] / 3, 0, 0, @dna[3]
+			c = Color.FromHex @color
+			c.a = 0.3
+			gradient.addColorStop 1, 'rgba(255,255,255,0.0)'
+			gradient.addColorStop 0, c.toStr()
+			los1.setLength @dna[3]
+			los2.setLength @dna[3]
+			los1.setAngle los1Angle
+			ctx.beginPath()
+			ctx.moveTo 0, 0
+			ctx.lineTo los1.x, los1.y
+
+			ctx.arc 0, 0,  @dna[3], los1Angle, los2Angle
+
+			los2.setAngle los2Angle
+			ctx.moveTo 0, 0
+			ctx.lineTo los2.x, los2.y
+			ctx.fillStyle = gradient
+			ctx.fill()
+
+			ctx.restore()
+
+	drawHealthBar: (ctx) ->
+		if window.toggleHealthBar
+			ctx.save()
+			ctx.rotate -@angle
+			ctx.rect -@radius * 4, 40, @radius * 8, 4
+			ctx.strokeStyle = "rgba(0,0,0,0.3)";
+			ctx.lineWidth = 2
+			ctx.stroke()
+			percent = @health / @maxHealth
+			green = new Color 0, 255, 0, 1
+			red = new Color 255, 0, 0, 1
+			ctx.fillStyle = red.blend(green, @health).toStr()
+			ctx.fillRect -@radius * 4, 40, (@radius * 8) * percent, 4
+			ctx.restore()
+
+	debug: (ctx) ->
+		if window.toggleFoodAttraction is true
+			lineFood = new Vec2()
+			lineFood.setLength @dna[0] * 60
+			lineFood.setAngle -Math.PI * 0.5
+
+			ctx.beginPath()
+			ctx.moveTo 0, 0
+			ctx.lineTo lineFood.x, lineFood.y
+			ctx.closePath()
+			ctx.strokeStyle = 'rgba(0, 255, 0, 1)'
+			ctx.lineWidth = 1
+			ctx.stroke()
+
+
+		if window.togglePoisonAttraction is true
+			linePoison = new Vec2()
+			linePoison.setLength @dna[1] * 60
+			linePoison.setAngle Math.PI * 0.5
+
+			ctx.beginPath()
+			ctx.moveTo 0, 0
+			ctx.lineTo linePoison.x, linePoison.y
+			ctx.closePath()
+			ctx.strokeStyle = 'rgba(255, 0, 0, 1)'
+			ctx.lineWidth = 1
+			ctx.stroke()
+
+	update: ->
+		if @tail isnt null
+			@tail.update()
+
+		@velocity.add @acceleration
+		@velocity.limit @maxSpeed
+		@position.add @velocity
+		@acceleration.multiplyBy 0
+		@health -= 0.0015
+		@health = @maxHealth if @health > @maxHealth
+		@health = 0 if @health < 0
+
+	applyForce: (force) ->
+		@acceleration.add force
+
+	seek: (target) ->
+		@seeking = true
+		focus = target.position.subtract @position
+		focus.setLength @maxSpeed
+		focus.subtract @velocity
+
+	boundaries: ->
+		dist = 10
+		focus = null
+
+		if @position.x  < dist
+			focus = new Vec2 @maxSpeed, @velocity.y
+		else if @position.x + dist > window.canvasWidth - dist
+			focus = new Vec2 -@maxSpeed, @velocity.y
+
+		if @position.y  < dist
+			focus = new Vec2 @velocity.x, @maxSpeed
+		else if @position.y + dist > window.canvasHeight - dist
+			focus = new Vec2 @velocity.x, -@maxSpeed
+
+		if focus isnt null
+			focus.setLength @maxSpeed
+			steer = focus.subtract @velocity
+			steer.limit @maxForce
+			@applyForce steer
+
+if typeof module != 'undefined'
+	module.exports = Agent

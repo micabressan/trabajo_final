@@ -1,0 +1,81 @@
+{
+    "size": 100,
+    "query": {
+        "bool": {
+            "must": {
+                "multi_match": {
+                    "query": "400-791",
+                    "fields": [
+                        "name",
+                        "fullNames"
+                    ],
+                    "fuzziness": 0,
+                    "type": "best_fields"
+                }
+            },
+            "should": [
+                {
+                    "term": {
+                        "articul.raw": {
+                            "value": "400-791",
+                            "boost": 1.1
+                        }
+                    }
+                },
+                {
+                    "multi_match": {
+                        "query": "400-791",
+                        "fields": [
+                            "tags",
+                            "categoryName",
+                            "articul"
+                        ],
+                        "type": "phrase"
+                    }
+                }
+            ],
+            "filter": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "enable": 1
+                            }
+                        },
+                        {
+                            "term": {
+                                "disable": 0
+                            }
+                        },
+                        {
+                            "range": {
+                                "sortPrice": {
+                                    "gt": 0
+                                }
+                            }
+                        },
+                        {
+                            "term": {
+                                "categoryId": 1
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "sort": {
+        "allowToShowWithoutPrice": {
+            "order": "asc"
+        },
+        "sortAvailability": {
+            "order": "desc"
+        },
+        "ordersAmount": {
+            "order": "desc"
+        },
+        "_score": {
+            "order": "desc"
+        }
+    }
+}

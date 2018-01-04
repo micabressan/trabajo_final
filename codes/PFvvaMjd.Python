@@ -1,0 +1,26 @@
+class AiracDeleteDocumentsTestCase(TestCase):
+    def setUp(self):
+        AiracCycle.objects.create_cycles(finish_date=date(2018, 1, 1))
+        self.country, created = Country.objects.get_or_create(name='Poland', code='EP')
+        aip_import_dates = [
+            (date(2016, 10, 13), date(2016, 11, 9)),
+            (date(2016, 11, 10), date(2016, 12, 7)),
+            (date(2016, 12, 8), date(2017, 1, 4)),
+        ]
+
+        for aip_import_date in aip_import_dates:
+            AIPFileImport.objects.get_or_create(
+                valid_from=aip_import_date[0],
+                valid_to=aip_import_date[1],
+                country=self.country,
+            )
+
+    def tearDown(self):
+        AIPFileImport.objects.all().delete()
+
+
+    def test_delete_old_aip_imports(self):
+        with patch('navi.models.date') as mock_date:
+            mock_date.today.return_value = [wczoraj, dzis, jutro]
+            mock_date.side_effect = lambda *args, **kw: date(*args, **kw)
+			# tutaj chce testować usuwanie obiektow w zaleznosci od daty

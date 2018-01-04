@@ -1,0 +1,14 @@
+      statusPollImpl: (stopCheckingFn, interval) ->
+        this.getStatus(true).then (status) =>
+          if stopCheckingFn(status)
+            return $q.when(status)
+          else
+            return $q.defer()
+
+      pollForStatusWithTimeout: (stopCheckingFn, interval, timeout) ->
+        if timeout
+          result = timeoutPromise(timeout, this.statusPollImpl(stopCheckingFn, interval))
+        else
+          result = this.statusPollImpl(stopCheckingFn, interval)
+        console.log "WTF is result", result
+        result

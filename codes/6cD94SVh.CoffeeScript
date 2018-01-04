@@ -1,0 +1,49 @@
+angular
+
+	.module "PMoney"
+
+	.directive 'emuiUploadProgressBar', [
+
+		'$rootScope',
+		'$timeout'
+
+		($rootScope, $timeout)->
+	
+			restrict: 'E'
+			
+			replace: true
+
+			controller: ($scope) ->
+
+				console.log "from progress", $scope.isEnabled
+
+				$scope.isEnabled = false
+				$scope.ngClass = {'emui__event-no-transition': $scope.isEnabled}
+				$scope.counter = 0
+				stopped = undefined
+
+				$scope.progress = ->
+					stopped = $timeout((->
+						console.log $scope.counter
+						if $scope.counter > 130
+							$scope.isEnabled = true
+							$scope.counter = 0
+						else
+							$scope.isEnabled = false
+							$scope.counter++
+
+						$scope.progress()
+						return
+					), 50)
+					return
+
+				$scope.stopProgress = ->
+					$timeout.cancel stopped
+					return
+
+			template: '
+				<div class="progress" style="height: 1px; width: 75%">
+					<div class="progress-bar" ng-class="ngClass" role="progressbar" style="width: {{counter}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			'
+	]

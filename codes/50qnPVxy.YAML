@@ -1,0 +1,80 @@
+# VoteParty 1.11.0 configuration file
+check_updates: true
+party:
+  total_votes_needed_for_party: 50
+  disabled_worlds:
+  - world_nether
+  allow_offline_votes: true
+  max_possible_rewards_per_player: 1
+  start_delay_in_seconds: 15
+  use_no_luck_commands: false
+  allow_duplicate_no_luck_commands: false
+  max_no_luck_commands: 1
+  no_luck_commands:
+  - cc give physical simple 1 {player}
+  reward_command_delay: 1
+  reward_commands:
+  - cc give physical simple 1 {player}
+  use_global_pre_party_start_commands: false
+  global_pre_party_start_commands:
+  - broadcast Party will start soon!
+  use_global_party_start_commands: false
+  global_party_start_commands:
+  - broadcast Party Starting!
+  - save-all
+effects:
+  on_vote:
+    enabled: true
+    effects:
+    - flames
+    - hearts
+  on_party_start:
+    enabled: true
+    effects:
+    - glyph
+    - hearts
+  on_party_command_execute:
+    enabled: true
+    effects:
+    - smoke
+    - hearts
+crate:
+  use_crate: true
+  material_or_id: 33
+  data: 7
+  displayname: '&b&lVote&f&lParty &7Crate'
+  lore:
+  - '&aPlace me &e:)'
+messages:
+  broadcast_vote_recieved: false
+  vote_recieved: '&8&l[&b&lVote&f&lParty&8&l] &f%player% &ajust voted for the server
+    at &f%service%&a! &f%votes% &amore votes needed until a VoteParty!'
+  broadcast_party_start: true
+  party_broadcast: '&8&l[&b&lVote&f&lParty&8&l] &bA &eVoteParty &bwill begin in &f&l%delay%
+    seconds&b!'
+  crate_added_to_inventory: '&8&l[&b&lVote&f&lParty&8&l] &bA reward crate has been
+    added to your inventory!'
+  no_reward: '&8&l[&b&lVote&f&lParty&8&l] &cAww you didn''t get any rewards this time!'
+  did_not_vote: '&8&l[&b&lVote&f&lParty&8&l] &cYou didn''t vote to be able to participate
+    in this VoteParty!'
+  reward: '&8&l[&b&lVote&f&lParty&8&l] &bYour vote rewards have been applied!'
+  crate_disabled_in_world: '&8&l[&b&lVote&f&lParty&8&l] &cYou can''t open a party
+    crate in your current world!'
+  commands:
+    voteparty: '&8&l[&b&lVote&f&lParty&8&l] &bVotes needed for party: &f%votes%'
+    give_crate: '&8&l[&b&lVote&f&lParty&8&l] &bYou just got %amount% VoteCrate(s)'
+    private_party: '&8&l[&b&lVote&f&lParty&8&l] &eEnjoy your personal VoteParty!'
+    ignore_toggle_on: '&8&l[&b&lVote&f&lParty&8&l] &7You will no longer participate
+      in VoteParties!'
+    ignore_toggle_off: '&8&l[&b&lVote&f&lParty&8&l] &aYou will now participate in
+      VoteParties!'
+per_vote_rewards:
+  enabled: false
+  max_possible_rewards: 1
+  reward_commands:
+  - eco give @p 10;0
+  - give @p steak 8;0
+on_vote_global_commands:
+  enabled: true
+  commands:
+  - broadcast Only %votes% more votes until a VoteParty!

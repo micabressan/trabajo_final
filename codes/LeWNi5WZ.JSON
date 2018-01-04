@@ -1,0 +1,28 @@
+json ='''[{
+        "type": "options",
+        "title": "Theme background color",
+        "desc": "Choosing the background color",
+        "section": "PMJ-Settings",
+        "key": "options1",
+        "options": ['Light', 'Dark', 'Pink', 'Blue', 'Indigo', 'BlueGrey', 'Brown', 'LightBlue', 'Purple', 'Grey', 'Yellow', 'LightGreen', 'DeepOrange', 'Green', 'Red', 'Teal', 'Orange', 'Cyan', 'Amber', 'DeepPurple', 'Lime']
+    },{
+        "type": "options",
+        "title": "Theme background color",
+        "desc": "Choose the background color",
+        "section": "PMJ-Settings",
+        "key": "options2",
+        "options": ["Auto", "Svenska", "Suomea", "English"]
+    },{
+        "type": "options",
+        "title": "Switch language",
+        "desc": "Your taste of language",
+        "section": "PMJ-Settings",
+        "key": "options3",
+        "options": ["Auto", "Svenska", "Suomea", "English"]
+    },{
+        "type": "bool",
+        "title": "Remember me",
+        "desc": "Stores your credentials",
+        "section": "PMJ-Settings",
+        "key": "text"
+    }]'''

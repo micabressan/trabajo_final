@@ -1,0 +1,11 @@
+        <ListBox>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBoxItem>Donuts</ListBoxItem>
+            <ListBoxItem>Coffee</ListBoxItem>
+            <ListBoxItem>Schedule</ListBoxItem>
+            <ListBoxItem>Complete</ListBoxItem>
+        </ListBox>

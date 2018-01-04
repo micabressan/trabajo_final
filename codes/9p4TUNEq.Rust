@@ -1,0 +1,58 @@
+#!/usr/bin/env run-cargo-script
+// cargo-deps: itertools
+#![feature(inclusive_range_syntax)]
+extern crate itertools;
+use itertools::Itertools;
+
+use std::io::{stdin};
+
+fn reverse_circular<T>(array: &mut [T], from: usize, to: usize) {
+    // To can be over the length of the array, indexing is mod len
+    if to <= from {
+        return;
+    }
+    let to = to - 1;
+    let n_swaps = (to - from)/2 + 1;
+    for delta in 0..n_swaps {
+        let idx_a = (from + delta) % array.len();
+        let idx_b = (to - delta) % array.len();
+        array.swap(idx_a, idx_b);
+    }
+}
+
+const EXTRA_LENGTHS: [usize; 5] = [17, 31, 73, 47, 23];
+fn sparse_hash(lengths: &[usize], n_rounds: usize) -> Vec<u8> {
+    let mut skip_length = 0;
+    let mut current_position = 0;
+
+    let mut data: Vec<u8> = (0..=255).into_iter().collect();
+    for _ in 0..n_rounds {
+        for length in lengths.iter().chain(EXTRA_LENGTHS.iter()) {
+            reverse_circular(&mut data, current_position, current_position + length);
+            current_position = (current_position + length + skip_length) % data.len();
+            skip_length += 1;
+        }
+    }
+    data
+}
+
+const BLOCK_SIZE: usize = 16;
+fn dense_hash(data: &[u8]) -> Vec<u8> {
+    data.chunks(BLOCK_SIZE)
+                .map(|b| b.iter().cloned()
+                     .fold1(|x, y| x ^ y).expect("Empty block"))
+        .collect()
+}
+
+const N_ROUNDS: usize = 64;
+
+fn main() {
+    let mut line: String = String::new();
+    stdin().read_line(&mut line).expect("Error reading input");
+    let lengths: Vec<usize> = line.trim().bytes().map(|x| x as usize).collect();
+    let data = sparse_hash(&lengths, N_ROUNDS);
+    for byte in dense_hash(&data) {
+        print!("{:02x}", byte)
+    }
+    println!("");
+}

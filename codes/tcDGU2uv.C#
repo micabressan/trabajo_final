@@ -1,0 +1,11 @@
+var products = db.Products.Where(p => p.Price >= 500 && p.Price <= 1000)
+                  .OrderBy(p => p.Price).Select(p => new
+                  {
+                      p.Name,
+                      p.Price,
+                      seller = p.Seller.Firstname + " " + p.Seller.LastName 
+                      });
+                
+                var jsonProduct = JsonConvert.SerializeObject(products , Formatting.Indented);
+                File.WriteAllText("pricesInRange.json", jsonProduct);
+            }

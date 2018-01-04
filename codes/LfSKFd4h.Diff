@@ -1,0 +1,36 @@
+--- en07Y90f.asm2       2017-11-30 10:53:00.063365771 +0100
++++ en07Y90f.asm        2017-11-30 10:55:50.990606617 +0100
+@@ -40,30 +40,9 @@
+     syscall
+
+     mov rdi, password
+-    mov rdx, password_length
+-
+-    call compare
+-
+-    cmp eax, 1
+-    jz show_invalid
+-    jnz show_valid
+-
+-    jmp _end
+-
+-compare:
+-    cmpsb
+-    jnz compare_invalid
+-
+-    dec rdx
+-    ; cmp rdx, 0 ; ten cmp mozna sobie darowac, dec tez ustawia flage jak bedzie 0
+-    jz compare_ret
+-
+-    jmp compare
+-
+-compare_invalid:
+-    mov eax, 1
+-compare_ret:
+-    ret
++    mov rcx, password_length
++    repe cmpsb
++    jz show_valid
+
+ show_invalid:
+     mov rax, 1

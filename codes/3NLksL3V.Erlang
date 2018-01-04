@@ -1,0 +1,11 @@
+-module(fib).
+
+-export([fib/1]).
+
+fib(N) -> fib(N, 1, 1).
+
+fib(0, _, _) -> ok;
+
+fib(N, F1, F2) ->
+	io:format("~w~n", [F1]),
+	fib(N - 1, F2, F1 + F2).

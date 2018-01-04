@@ -1,0 +1,11 @@
+let optional: Option<Vec<i32>> = Some(Vec::new());
+
+
+
+    if let Some(ref mut vec) = optional{
+    	println!("I exist");
+    	optional.push(5);
+    }
+    else {
+    	println!("I don't exist");
+    }

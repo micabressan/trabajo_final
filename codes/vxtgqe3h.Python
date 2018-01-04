@@ -1,0 +1,23 @@
+    def _run_container(self, image_name):
+        target = '/opt/DOCS/'#внутренняя директория контейнера (save_path)
+
+        doc_dir_into_container = target + '/' + self.dir_name + '/'
+        doc_path_into_container = doc_dir_into_container + self.basename
+
+        run_command = 'libreoffice --headless --convert-to pdf {} --outdir {}'.format(
+            doc_dir_into_container,
+            doc_path_into_container,
+            doc_dir_into_container
+        )
+
+        save_path = config_get_param('libreoffice', 'save_path')
+        volumes = {
+            save_path: {
+                'bind':target,
+                'mode':'rw'
+            }
+        }
+
+        container = self.docker_client.containers.run(image=image_name, command=run_command,
+                                                 volumes=volumes)
+        return container

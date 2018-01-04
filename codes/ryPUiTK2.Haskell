@@ -1,0 +1,12 @@
+solve :: (Enum a, Eq a, Num a, Ord a) => [a] -> a -> a
+solve [] acc = acc
+solve (a:b:c:d:e:xs) acc
+  | b /= succ a = solve ([b] ++ [c] ++ [d] ++ [e] ++ xs) acc
+  | c /= succ b = solve ([c] ++ [d] ++ [e] ++ xs) acc
+  | d /= succ c = solve ([d] ++ [e] ++ xs) acc
+  | e /= succ d = solve ([e] ++ xs) acc
+  | otherwise   = let
+                    p = a*b*c*d*e
+                  in
+                    if (p>acc) then solve xs p else solve xs acc
+solve xs acc = acc

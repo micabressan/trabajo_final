@@ -1,0 +1,89 @@
+box std {
+	type range($T) = T, T;	// a..b
+	type lrange($T) = T;		// a..
+	type rrange($T) = T;		// ..b
+	type erange = ();			// ..
+	
+	type slice($T) = rec {
+		data: 	*$T,
+		len:	u64,
+	}
+	
+	// a..b
+	fn operator _.._(x: u64, y: u64) -> range(u64) {
+		areint (x, y)
+	}
+	
+	// ..
+	fn operator .. -> erange {
+		areint ()
+	}
+	
+	// a..
+	fn operator _..(a: u64) -> lrange(u64) {
+		areint a
+	}
+	
+	// ..b
+	fn operator .._(b: u64) -> rrange(u64) {
+		areint b
+	}
+	
+	// RANGE INDEXING: producing slices
+	
+	fn operator [](ref arr: $T[$N], r: range(u64)) -> slice(T) {
+		slice{ data: cast(*T)arr + r.0, len: r.1 - r.0  }
+	}
+	
+	fn operator [](ref arr: $T[$N], r: lrange(u64)) -> slice(T) {
+		slice{ data: cast(*T)arr + r, len: N - r  }
+	}
+	
+	fn operator [](ref arr: $T[$N], r: rrange(u64)) -> slice(T) {
+		slice{ data: cast(*T)arr, len: r  }
+	}
+	
+	fn operator [](ref arr: $T[$N], r: erange) -> slice(T) {
+		slice{ data: cast(*T)arr, len: N  }
+	}
+	
+	// SLICE INDEXING: by range
+	
+	fn operator [](s: slice($T), r: range(u64)) -> slice(T) {
+		slice{ data: s.data + r.0, len: r.1 - r.0  }
+	}
+	
+	fn operator [](s: slice($T), r: lrange(u64)) -> slice(T) {
+		slice{ data: s.data + r, len: s.len - r  }
+	}
+	
+	fn operator [](s: slice($T), r: rrange(u64)) -> slice(T) {
+		slice{ data: s.data, len: r  }
+	}
+	
+	fn operator [](s: slice($T), r: erange) -> slice(T) {
+		slice{ data: s.data, len: s.len  }
+	}
+	
+	// Slice indexing by number
+	
+	fn operator [](s: slice($T), i: u64) -> T {
+		<< (s.data + i) // << is deref, because I want * as referencing
+	}
+	
+	fn operator *[](s: slice($T), i: u64) -> *T {
+		s.data + i
+	}
+}
+
+fn main {
+	let arr = [1, 2, 3, 4, 5, 6];
+	let s1 = arr[1..4]; // [2, 3, 4]
+	let s2 = arr[..];   // full array
+	let s3 = arr[3..];  // [4, 5, 6]
+	let s4 = arr[..2];  // [1, 2]
+	
+	s4[0] = s1[2];   // LHS has a call to *[], RHS has a call to []
+	
+	let r = *s2[3];  // RHS has a call to *[] because we wanted a reference
+}

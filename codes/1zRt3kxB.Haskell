@@ -1,0 +1,12 @@
+data Node = Node String [Node] deriving Show
+
+parse xs = parse' $ map makeIndex xs
+  where makeIndex xs = let (a, b) = span ('*'==) xs
+                       in (length a, b)
+        parse' [] = []
+        parse' [(_, txt)] = [Node txt []]
+        parse' (x:xs) = let f (a, _) (b, _) = a < b
+                            (subnodes,rest) = span (f x) xs
+                        in Node (snd x) (parse' subnodes):parse' rest
+
+main = interact $ show.parse.lines

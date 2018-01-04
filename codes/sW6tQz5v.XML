@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<cassonetti>
+	<cassonetto>
+		<tipo>generico</tipo>
+		<indirizzo>
+			<via>delle Fornaci</via>
+			<civico>20</civico>
+		</indirizzo>	
+		<latitudine>20.75</latitudine>
+		<longitudine>-1.5</longitudine>
+		<note>spesso spazzatura abbandonata a fianco</note>
+		<data_posizionamento>2011-01-19</data_posizionamento>
+		<dataora_svuotamento>2016-01-17T08:33:00</dataora_svuotamento>
+		<volume unita="l">1.5</volume>
+        <operatore>12</operatore>
+        <veicolo>BE334HG</veicolo>
+	</cassonetto>
+	<cassonetto>
+		<tipo>carta</tipo>
+		<indirizzo>
+			<via>di Antignano</via>
+			<civico>99</civico>
+		</indirizzo>	
+		<latitudine>20.55</latitudine>
+		<longitudine>-1.25</longitudine>
+		<note>spesso lasciato semivuoto</note>
+		<data_posizionamento>2010-11-09</data_posizionamento>
+		<dataora_svuotamento>2016-01-18T09:00:30</dataora_svuotamento>
+		<volume unita="l">2.2</volume>
+        <operatore>12</operatore>
+        <veicolo>BE334HG</veicolo>
+	</cassonetto>
+	<cassonetto>
+		<tipo>tessuti</tipo>
+		<indirizzo>
+			<via>Longi</via>
+			<civico>12</civico>
+		</indirizzo>
+		<latitudine>20.44</latitudine>
+		<longitudine>-1.23</longitudine>
+		<note>spesso rubano i vestiti</note>
+		<data_posizionamento>2010-10-09</data_posizionamento>
+		<dataora_svuotamento>2016-01-18T09:00:30</dataora_svuotamento>
+		<volume unita="l">30.0</volume>
+        <operatore>12</operatore>
+        <veicolo>BE334HG</veicolo>
+	</cassonetto>
+    <cassonetto>
+        <tipo>vetro e metallo</tipo>
+        <indirizzo>
+            <via>Matteotti</via>
+            <civico>12</civico>
+        </indirizzo>
+        <latitudine>20.50</latitudine>
+        <longitudine>-1.22</longitudine>
+        <note>spesso ci buttano vetri rotti e taglienti</note>
+        <data_posizionamento>2010-01-09</data_posizionamento>
+        <dataora_svuotamento>2016-01-18T09:00:30</dataora_svuotamento>
+        <volume unita="l">2.2</volume>
+        <operatore>12</operatore>
+        <veicolo>BE334HG</veicolo>
+    </cassonetto>
+</cassonetti>

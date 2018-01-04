@@ -1,0 +1,44 @@
+Ext.define 'SP.view.search.Search',
+  extend: 'Ext.grid.Panel'
+  requires: ['Ext.toolbar.Paging']
+  config: 
+    columns: []
+  constructor: (config) ->
+    @callParent arguments
+  initComponent: () ->
+    @store = if typeof @store is "string" then Ext.create @store
+    if @searchTypes and @searchTypes.length > 0
+      @tbar = Ext.create 'SP.view.search.SearchToolbar'
+        searchTypes: @searchTypes 
+        searchTip: @self.searchTip
+    pagingToolbar = Ext.create 'Ext.toolbar.Paging',
+      store: @store 
+      dock: 'bottom'
+      displayInfo: true
+    @dockedItems = [pagingToolbar]
+    @callParent arguments
+  initStateEvents: () ->
+    events = this.stateEvents
+    #dont save sort order
+    Ext.each ['columnresize', 'columnmove', 'columnhide', 'columnshow'], () ->
+        if Ext.Array.indexOf(events, event)
+            events.push(event)
+  listeners:
+    searchRequested:
+      fn: (searchParams) ->
+        @store.currentPage = 1
+        @store.proxy.extraParams = searchParams
+        @store.load
+          scope: @
+          callback: () ->
+            shouldSort = @store.data.getCount() < @store.pageSize
+            @allowSortable = shouldSort
+            #for column in @columns
+            #  column.sortable = shouldSort
+            #@reconfigure null, @columns
+    render: 
+      fn: () ->
+        if @ownerCt and @ownerCt.setTitle
+          @ownerCt.setTitle (@initialTitle or "")
+  width: '100%'
+  allowSortable: false

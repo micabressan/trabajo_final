@@ -1,0 +1,52 @@
+DEBUG: Rebar location: "/home/zotonic/zotonic/deps/iconv/rebar"
+DEBUG: Entering /home/zotonic/zotonic/deps/iconv
+DEBUG: Available deps: []
+DEBUG: Missing deps  : []
+DEBUG: Predirs: []
+==> iconv (compile)
+DEBUG: Matched required ERTS version: 5.7.4 -> .*
+DEBUG: Matched required OTP release: R13B03 -> .*
+DEBUG: erl_opts []
+DEBUG: Starting 3 compile worker(s)
+DEBUG: Worker exited cleanly
+Compiled src/iconv_app.erl
+DEBUG: Worker exited cleanly
+Compiled src/iconv.erl
+DEBUG: Worker exited cleanly
+Compiling c_src/iconv_drv.c
+INFO:  sh: $CC -c $CFLAGS $DRV_CFLAGS c_src/iconv_drv.c -o c_src/iconv_drv.o
+[{"BINDIR","/usr/lib/erlang/erts-5.7.4/bin"},
+ {"CC","cc"},
+ {"CXX","c++"},
+ {"DRV_CFLAGS","-g -Wall -fPIC _CFLAGS"},
+ {"DRV_LDFLAGS","-shared _LDFLAGS"},
+ {"EMU","beam"},
+ {"ERL",[]},
+ {"ERLANG_ARCH","64"},
+ {"ERLANG_TARGET","x86_64-pc-linux-gnu-64"},
+ {"ERL_CFLAGS",
+  " -I/usr/lib/erlang/lib/erl_interface-3.6.4/include -I/usr/lib/erlang/erts-5.7.4/include "},
+ {"ERL_LDFLAGS",
+  " -L/usr/lib/erlang/lib/erl_interface-3.6.4/lib -lerl_interface -lei"},
+ {"HOME","/home/zotonic"},
+ {"JAVA_HOME","/usr/lib/jvm/java-6-sun-1.6.0.24/"},
+ {"LANG","en_US.UTF-8"},
+ {"LOGNAME","zotonic"},
+ {"MAIL","/var/mail/zotonic"},
+ {"OLDPWD","/home/zotonic/zotonic/deps"},
+ {"PATH",
+  "/usr/lib/erlang/erts-5.7.4/bin:/usr/lib/erlang/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/zotonic/zotonic/bin"},
+ {"PROGNAME","erl"},
+ {"PWD","/home/zotonic/zotonic/deps/iconv"},
+ {"ROOTDIR","/usr/lib/erlang"},
+ {"SHELL","/bin/bash"},
+ {"SHLVL","1"},
+ {"TERM","xterm"},
+ {"USER","zotonic"},
+ {"XDG_SESSION_COOKIE",
+  "b0761f4c65b304b373e0b2dd0096721f-1317462784.499581-687185515"},
+ {"ZOTONIC_IP","46.21.169.102"},
+ {"ZOTONIC_PORT","80"},
+ {"_","./rebar"}]
+cc: _CFLAGS: No such file or directory
+ERROR: $CC -c $CFLAGS $DRV_CFLAGS c_src/iconv_drv.c -o c_src/iconv_drv.o failed with error: 1

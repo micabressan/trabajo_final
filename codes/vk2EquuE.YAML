@@ -1,0 +1,26 @@
+#/app/config/services.yml
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+# I tested this (without autowire)
+#    app.form.assignments:
+#        class: Empire\UniversityBundle\Form\Type\AssignmentsType
+#        arguments: ['@doctrine.orm.entity_manager']
+#        tags: [form.type]
+#    app.form.assignment:
+#        class: Empire\UniversityBundle\Form\Type\AssignmentType
+#        arguments: ['@doctrine.orm.entity_manager']
+#        tags: [form.type]
+
+#And I also tested this (with autowire)
+    Empire\UniversityBundle\:
+        resource: '../../src/Empire/UniversityBundle/*'
+        exclude: '../../src/Empire/UniversityBundle/{Entity,Repository,Tests}'
+
+    Empire\UniversityBundle\Form\Type\AssignmentsType:
+        arguments: ['@doctrine.orm.entity_manager']
+    Empire\UniversityBundle\Form\Type\AssignmentType:
+        arguments: ['@doctrine.orm.entity_manager']

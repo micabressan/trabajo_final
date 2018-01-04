@@ -1,0 +1,186 @@
+
+JackTransportClock
+{
+	classvar 
+	sync_responder, 
+	process_responder, 
+	state, 
+	old_state,
+	current_process_jack_time,
+	current_process_system_time,
+	next_process_system_time,
+	first_time,
+	z,
+	<>w = 0.001,
+	accum_time,
+	<>verbose = false,
+	<>start_callback = nil,
+	<>stop_callback = nil;
+	
+
+	
+
+	*sync_callback {
+		arg time, theResponder, message, addr;
+	}
+
+	*process_callback {
+		arg 
+		time, 
+		theResponder, 
+		message, 
+		addr; 
+
+		var 
+		frame_time, 
+		ret,
+		buffer_size, 
+		samplerate, 
+		buffer_time,
+		transport_time,
+		d,
+		msg_delay;
+
+
+		state          = message[1];
+		frame_time     = message[3];
+		samplerate     = message[4];
+		buffer_size    = message[5];
+
+		msg_delay      = message[10]/samplerate;
+
+		buffer_time    = buffer_size/samplerate;
+		transport_time = frame_time/samplerate;
+
+		if ((start_callback != nil).and(((old_state == 0).or(old_state == 1)).and(state == 2)),
+			{
+				start_callback.value;
+			});
+		
+		if ((stop_callback != nil).and((old_state == 2).and(state == 0)),
+			{
+				stop_callback.value;
+			});
+		
+		old_state = state;
+
+		if ((state == 0).or(state == 1),
+			{
+				first_time = true;
+			});
+		
+		if (first_time,
+			{
+				accum_time = 0;
+				first_time = false;
+				current_process_system_time = SystemClock.seconds - msg_delay;
+				next_process_system_time = current_process_system_time + buffer_time;
+				z = 0;
+				current_process_jack_time = transport_time;
+				^nil;
+			},
+			{
+				d = (SystemClock.seconds - msg_delay) - next_process_system_time;
+				z = z + (w * (d - z));
+				current_process_system_time = next_process_system_time;
+				next_process_system_time = next_process_system_time + z + buffer_time;
+
+
+				if (verbose == true,
+					{
+						accum_time = accum_time + buffer_time;
+						if (accum_time > 1,
+							{
+								accum_time = 0;
+								("z:     " ++ z).postln;
+								("delay: " ++ msg_delay).postln;
+								("d:     " ++ d).postln;
+								message.postln;
+							});
+					});
+
+			});
+
+		if (current_process_jack_time > transport_time,
+			{
+				"[JackTransportClock]: Sync messages out of order. Resyncing...".postln;
+				first_time = true;
+				^nil;
+			});
+		
+		current_process_jack_time = transport_time;
+	}
+
+	*init {
+		"[JackTransportClock]: Init...".postln;
+		SystemClock.clear;
+		accum_time = 0;
+		first_time = true;
+		old_state = -1;
+		z = 0.0;
+		current_process_jack_time = 0;
+		current_process_system_time = 0;
+		next_process_system_time = 0;
+
+		sync_responder = OSCresponder.new(
+			nil,
+			"/jack_transport_osc/sync_callback",
+			{
+				|time, resp, msg, addr| 
+				JackTransportClock.sync_callback(time, resp, msg, addr) 
+			}
+		);
+		sync_responder.add;
+
+		process_responder = OSCresponder.new(
+			nil, 
+			"/jack_transport_osc/process_callback", 
+			{
+				|time, resp, msg, addr| 
+				JackTransportClock.process_callback(time, resp, msg, addr)
+			}
+		);
+		process_responder.add;
+	}
+
+	*sched {
+		arg delta, function;
+
+		schedAbs([(JackTransportClock.seconds + delta), function]);
+	}
+
+	*schedAbs {
+		arg time, function;
+
+		if (state != 2, {
+			"[JackTransportClock]: Transport not ROLLING. Start transport before scheduling events..".postln;
+			^nil;
+		});
+		SystemClock.sched(time - JackTransportClock.seconds, {
+			arg system_time;
+			var ret;
+
+			ret = function.value;
+			if (ret.isKindOf(Number),
+
+				{
+					JackTransportClock.schedAbs(time + ret, function);
+				});
+
+			nil;
+		});
+	}
+
+	*clear {
+		SystemClock.clear;
+	}
+
+	*seconds {
+		if (state == 2,
+			{
+				^(current_process_jack_time + (SystemClock.seconds - current_process_system_time));
+			});
+
+		^current_process_jack_time;
+	}
+}

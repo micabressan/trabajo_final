@@ -1,0 +1,5 @@
+(mmsp@titus)1> supervisor:which_children(eventmon_sup).
+[{mgmt,<0.274.0>,worker,[mgmt]},
+ {eventmon,<0.270.0>,worker,[eventmon]}]
+(mmsp@titus)2> supervisor:terminate_child(eventmon_sup, pid(0,270,0)).
+{error,not_found}

@@ -1,0 +1,99 @@
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0"
+xmlns:media="http://search.yahoo.com/mrss/"
+xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+xmlns:atom="http://www.w3.org/2005/Atom">
+  <xsl:output method="text" encoding="utf-8" />
+  <xsl:strip-space elements="item/* atom:entry/*"/>
+  <xsl:preserve-space elements="*/summary */description */content" />
+  <xsl:param name="src_link"/>
+  <xsl:param name="current-date" />
+
+  <xsl:template match="/">
+    <xsl:apply-templates select="rss/channel/item" />
+    <xsl:apply-templates select="atom:feed/atom:entry" />
+  </xsl:template>
+<xsl:template match="item">
+  <xsl:value-of select="concat($src_link, '&#9;')"/>
+
+  <xsl:choose>
+    <xsl:when test="guid"> <xsl:value-of select="concat(guid,  '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat(link, '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>	
+    
+  <xsl:choose>
+    <xsl:when test="pubDate"> <xsl:value-of select="concat(pubDate,  '&#9;')" /> </xsl:when>
+    <xsl:when test="dc:date"> <xsl:value-of select="concat(dc:date,  '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat($current-date, '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:value-of select="concat(title, '&#9;')" />
+
+  <xsl:value-of select="concat(link, '&#9;')" />
+
+  <xsl:choose>
+    <xsl:when test="author"> <xsl:value-of select="concat(author, '&#9;')"/> </xsl:when>
+    <xsl:when test="dc:creator"> <xsl:value-of select="concat(dc:creator, '&#9;')"/> </xsl:when>
+    <xsl:when test="itunes:author"> <xsl:value-of select="concat(itunes:author, '&#9;')"/> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat('err', '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:choose>
+    <xsl:when test="itunes:summary"> <xsl:value-of select="concat(translate(itunes:summary, '&#9;&#10;', ' &#13;'), '&#9;')"/> </xsl:when>
+    <xsl:when test="description"> <xsl:value-of select="concat(translate(description, '&#9;&#10;', ' &#13;'), '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="'insert joke here&#9;'" /> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:choose>
+    <xsl:when test="enclosure"> <xsl:value-of select="concat(enclosure/@url, '&#9;')"/> </xsl:when>
+  </xsl:choose>
+  <xsl:text>
+</xsl:text>
+</xsl:template>
+<xsl:template match="atom:entry">
+  <xsl:value-of select="concat($src_link, '&#9;')"/>
+
+  <xsl:choose>
+    <xsl:when test="atom:id"> <xsl:value-of select="concat(atom:id,  '&#9;')" /> </xsl:when>
+    <xsl:when test="yt:videoId"> <xsl:value-of select="concat(yt:videoId,  '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat(atom:link, '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>	
+    
+  <xsl:choose>
+    <xsl:when test="atom:updated"> <xsl:value-of select="concat(atom:updated,  '&#9;')" /> </xsl:when>
+    <xsl:when test="atom:published"> <xsl:value-of select="concat(atom:published,  '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat($current-date, '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:value-of select="concat(atom:title, '&#9;')" />
+
+  <xsl:choose>
+    <xsl:when test="atom:link/@href"> <xsl:value-of select="concat(atom:link/@href, '&#9;')" /> </xsl:when>
+    <xsl:when test="atom:link/@self"> <xsl:value-of select="concat(atom:link/@self, '&#9;')" /> </xsl:when>
+    <xsl:when test="atom:link"> <xsl:value-of select="concat(atom:link, '&#9;')" /> </xsl:when>
+    <xsl:when test="feedburner:origLink"> <xsl:value-of select="concat(feedburner:origLink, '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat($src_link, '&#9;')"/> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:choose>
+    <xsl:when test="atom:author/atom:name"> <xsl:value-of select="concat(atom:author/atom:name, '&#9;')"/> </xsl:when>
+    <xsl:when test="atom:author"> <xsl:value-of select="concat(atom:author, '&#9;')"/> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="concat('err', '&#9;')" /> </xsl:otherwise>
+  </xsl:choose>
+
+  <xsl:choose>
+   <xsl:when test="media:group"> 
+     <xsl:value-of select="concat(translate(media:group/media:description, '&#9;&#10;', ' &#13;'), '&#9;')" /> 
+     <xsl:value-of select="concat(media:group/media:content/@url, '&#9;')"/>
+   </xsl:when>
+    <xsl:when test="atom:content"> <xsl:value-of select="concat(translate(atom:content, '&#9;&#10;', ' &#13;'), '&#9;')" /> </xsl:when>
+    <xsl:when test="atom:summary"> <xsl:value-of select="concat(translate(atom:summary, '&#9;&#10;', ' &#13;'), '&#9;')" /> </xsl:when>
+    <xsl:otherwise> <xsl:value-of select="'insert joke here&#9;'" /> </xsl:otherwise>
+  </xsl:choose>
+  <xsl:text>
+</xsl:text>
+</xsl:template>
+</xsl:stylesheet>

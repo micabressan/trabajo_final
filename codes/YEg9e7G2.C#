@@ -1,0 +1,508 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// The Shuffled grid, the swipable grid that the player should match with the puzzle.
+/// </summary>
+public class SwipeGrid : MonoBehaviour
+{
+	
+	#region Events
+
+	/// <summary>
+	/// Occurs when batch swiping.
+	/// </summary>
+	public event EventHandler BatchSwiping;
+	
+	/// <summary>
+	/// Occurs when batch swiped.
+	/// </summary>
+	public event EventHandler BatchSwiped;
+	
+	/// <summary>
+	/// Occurs when swiping.
+	/// </summary>
+	public event EventHandler Swiping;
+	
+	/// <summary>
+	/// Occurs when swiped.
+	/// </summary>
+	public event EventHandler Swiped;
+	
+	/// <summary>
+	/// Occurs when animating.
+	/// </summary>
+	public event EventHandler Animating;
+	
+	/// <summary>
+	/// Occurs when animated.
+	/// </summary>
+	public event EventHandler Animated;
+
+	#endregion
+
+	#region Fields
+
+	[SerializeField]
+	protected GridLayoutGroup gridLayoutGroup;
+	[SerializeField]
+	protected ContentSizeFitter contentSizeFitter;
+	[SerializeField]
+	protected Transform container;
+	[SerializeField]
+	protected Puzzle puzzle;
+	[SerializeField]
+	protected SwipeCell cellPrefab;
+	[SerializeField]
+	protected SwipeCellArray [] swipeCells;
+	[SerializeField]
+	protected List<SwipeCell> allCells;
+	[Header ( "Animation" )]
+	[SerializeField]
+	protected float animationDuration = 0.2f;
+	protected bool blockSwipes = false;
+	protected bool animating = false;
+	protected bool applyingSolution = false;
+	protected bool applyingSwipe = false;
+	protected bool batchApplyingSwipe = false;
+	protected IEnumerator applySwipe;
+	protected IEnumerator batchApplySwipe;
+
+	#endregion
+
+	#region Properties
+
+	/// <summary>
+	/// Gets the duration of the animation.
+	/// </summary>
+	/// <value>The duration of the animation.</value>
+	public virtual float AnimationDuration
+	{
+		get
+		{
+			return this.animationDuration;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="SwipeGrid"/> block swipes.
+	/// </summary>
+	/// <value><c>true</c> if block swipes; otherwise, <c>false</c>.</value>
+	public virtual bool BlockSwipes
+	{
+		get
+		{
+			return this.blockSwipes;
+		}
+		set
+		{
+			this.blockSwipes = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets a value indicating whether this instance is animating.
+	/// </summary>
+	/// <value><c>true</c> if this instance is animating; otherwise, <c>false</c>.</value>
+	public virtual bool IsAnimating
+	{
+		get
+		{
+			return this.animating;
+		}
+	}
+
+	/// <summary>
+	/// Gets a value indicating whether this instance is applying solution.
+	/// </summary>
+	/// <value><c>true</c> if this instance is applying solution; otherwise, <c>false</c>.</value>
+	public virtual bool IsApplyingSolution
+	{
+		get
+		{
+			return this.applyingSolution;
+		}
+	}
+
+	/// <summary>
+	/// Gets a value indicating whether this instance is applying swipe.
+	/// </summary>
+	/// <value><c>true</c> if this instance is applying swipe; otherwise, <c>false</c>.</value>
+	public virtual bool IsApplyingSwipe
+	{
+		get
+		{
+			return this.applyingSwipe;
+		}
+	}
+
+	/// <summary>
+	/// Gets a value indicating whether this instance is batch applying swipe.
+	/// </summary>
+	/// <value><c>true</c> if this instance is batch applying swipe; otherwise, <c>false</c>.</value>
+	public virtual bool IsBatchApplyingSwipe
+	{
+		get
+		{
+			return this.batchApplyingSwipe;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the <see cref="SwipeGrid"/> cell with the specified x y.
+	/// </summary>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
+	public SwipeCell this [ int x, int y ]
+	{
+		get
+		{
+			return this.swipeCells [ x ].Cells [ y ];
+		}
+		set
+		{
+			this.swipeCells [ x ].Cells [ y ] = value;
+		}
+	}
+
+	#endregion
+
+	#region Methods
+
+	/// <summary>
+	/// Initializes the Grid using the Puzzle data
+	/// </summary>
+	/// <param name="puzzle">Puzzle.</param>
+	public virtual void Init ( Puzzle puzzle )
+	{
+		this.contentSizeFitter.enabled = false;
+		this.gridLayoutGroup.enabled = false;
+		this.puzzle = puzzle;
+		this.gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+		this.gridLayoutGroup.constraintCount = this.puzzle.ShuffledData.Width;
+		this.swipeCells = new SwipeCellArray[this.puzzle.ShuffledData.Width];
+		for ( int x = 0; x < this.puzzle.ShuffledData.Width; x++ )
+		{
+			this.swipeCells [ x ] = new SwipeCellArray ( this.puzzle.ShuffledData.Height );
+		}
+		this.allCells = new List<SwipeCell> ();
+		this.container.DestroyAllChilds ();
+		for ( int x = 0; x < this.puzzle.ShuffledData.Width; x++ )
+		{
+			for ( int y = 0; y < this.puzzle.ShuffledData.Height; y++ )
+			{
+				Vector2Int position = new Vector2Int ( x, y );
+				CellData cellData = this.puzzle.ShuffledData [ x, y ];
+				SwipeCell swipeCell;
+				#if UNITY_EDITOR
+				if ( Application.isPlaying )
+				{
+					swipeCell = Instantiate<SwipeCell> ( this.cellPrefab, this.container );
+				}
+				else
+				{
+					swipeCell = ( SwipeCell )UnityEditor.PrefabUtility.InstantiatePrefab ( this.cellPrefab );
+					swipeCell.transform.SetParent ( this.container, false );
+				}
+				#else
+				swipeCell = Instantiate<SwipeCell> ( this.cellPrefab, this.container );
+				#endif
+				swipeCell.Init ( this, cellData, position );
+				this [ x, y ] = swipeCell;
+				this.allCells.Add ( swipeCell );
+			}
+		}
+		this.gridLayoutGroup.enabled = true;
+		this.contentSizeFitter.enabled = true;
+		LayoutRebuilder.ForceRebuildLayoutImmediate ( ( RectTransform )this.gridLayoutGroup.transform );
+		this.contentSizeFitter.enabled = false;
+		this.gridLayoutGroup.enabled = false;
+	}
+
+	/// <summary>
+	/// Restart the Grid from the provided Puzzle.
+	/// </summary>
+	public virtual void Restart ()
+	{
+		if ( this.puzzle != null )
+		{
+			Init ( this.puzzle );
+		}
+	}
+
+	/// <summary>
+	/// Clears the Grid, Destroys the Cells and clears the Cells information and data
+	/// </summary>
+	public virtual void Clear ()
+	{
+		this.swipeCells = new SwipeCellArray[0];
+		this.container.DestroyAllChilds ();
+		this.allCells.Clear ();
+		this.puzzle = null;
+	}
+
+	/// <summary>
+	/// Resets the Grid and all cells
+	/// </summary>
+	public virtual void Reset ()
+	{
+		for ( int x = 0; x < this.puzzle.ShuffledData.Width; x++ )
+		{
+			for ( int y = 0; y < this.puzzle.ShuffledData.Height; y++ )
+			{
+				this [ x, y ].Reset ();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Sets the Swipe Affected Cells highlighted state
+	/// </summary>
+	/// <param name="swipe">Swipe.</param>
+	/// <param name="highlighted">If set to <c>true</c> highlighted.</param>
+	public virtual void SetHighlighted ( Swipe swipe, bool highlighted )
+	{
+		List<SwipeCell> cells = GetSwipeCells ( swipe );
+		for ( int i = 0; i < cells.Count; i++ )
+		{
+			cells [ i ].Highlighted = highlighted;
+		}
+	}
+
+	/// <summary>
+	/// Applies the Puzzle Solution
+	/// </summary>
+	public virtual void ApplySolution ()
+	{
+		if ( this.applyingSolution )
+		{
+			return;
+		}
+		Restart ();
+		StartCoroutine ( "DoApplySolution" );
+	}
+
+	protected virtual IEnumerator DoApplySolution ()
+	{
+		this.applyingSolution = true;
+		this.blockSwipes = true;
+		yield return BatchApplySwipe ( this.puzzle.Solution, true );
+		this.blockSwipes = false;
+		this.applyingSolution = false;
+	}
+
+	/// <summary>
+	/// Applies a batch of swipes
+	/// </summary>
+	/// <param name="swipes">Swipes.</param>
+	public virtual void BatchApplySwipe ( Swipe [] swipes )
+	{
+		if ( this.blockSwipes )
+		{
+			return;
+		}
+		BatchApplySwipe ( swipes, true );
+	}
+
+	protected virtual Coroutine BatchApplySwipe ( Swipe [] swipes, bool animate = true )
+	{
+		if ( this.batchApplySwipe != null )
+		{
+			StopCoroutine ( this.batchApplySwipe );
+			this.batchApplyingSwipe = false;
+		}
+		this.batchApplySwipe = DoBatchApplySwipe ( swipes, animate );
+		return StartCoroutine ( this.batchApplySwipe );
+	}
+
+	protected virtual IEnumerator DoBatchApplySwipe ( Swipe [] swipes, bool animate = true )
+	{
+		while ( this.batchApplyingSwipe )
+		{
+			yield return null;
+		}
+		this.batchApplyingSwipe = true;
+		if ( BatchSwiping != null )
+		{
+			BatchSwiping ( this, EventArgs.Empty );
+		}
+		for ( int i = 0; i < swipes.Length; i++ )
+		{
+			yield return ApplySwipe ( swipes [ i ], animate );
+		}
+		this.batchApplyingSwipe = false;
+		if ( BatchSwiped != null )
+		{
+			BatchSwiped ( this, EventArgs.Empty );
+		}
+	}
+
+	/// <summary>
+	/// Applies the swipe
+	/// </summary>
+	/// <param name="swipe">Swipe.</param>
+	public virtual void ApplySwipe ( Swipe swipe )
+	{
+		if ( this.blockSwipes )
+		{
+			return;
+		}
+		ApplySwipe ( swipe, true );
+	}
+
+	protected virtual Coroutine ApplySwipe ( Swipe swipe, bool animate = true )
+	{
+		if ( this.applySwipe != null )
+		{
+			StopCoroutine ( this.applySwipe );
+			this.applyingSwipe = false;
+		}
+		this.applySwipe = DoApplySwipe ( swipe, animate );
+		return StartCoroutine ( this.applySwipe );
+	}
+
+	protected virtual IEnumerator DoApplySwipe ( Swipe swipe, bool animate )
+	{
+		while ( this.applyingSwipe )
+		{
+			yield return null;
+		}
+		this.applyingSwipe = true;
+		if ( Swiping != null )
+		{
+			Swiping ( this, EventArgs.Empty );
+		}
+		List<SwipeCell> cells = GetSwipeCells ( swipe );
+		Dictionary<SwipeCell, Vector3> positions = new Dictionary<SwipeCell, Vector3> ();
+		for ( int i = 0; i < cells.Count; i++ )
+		{
+			cells [ i ].KillTween ();
+			positions.Add ( cells [ i ], cells [ i ].transform.position );
+		}
+		for ( int i = 0; i < cells.Count; i++ )
+		{
+			SwipeCell currentCell = cells [ i ];
+			int targetIndex;
+			if ( i + swipe.Direction < 0 )
+			{
+				targetIndex = cells.Count - 1;
+			}
+			else if ( i + swipe.Direction >= cells.Count )
+			{
+				targetIndex = 0;
+			}
+			else
+			{
+				targetIndex = i + swipe.Direction;
+			}
+			SwipeCell targetCell = cells [ targetIndex ];
+			Vector2 targetPosition = positions [ targetCell ];
+			if ( swipe.Axis == Axis.Horizontal )
+			{
+				Vector2Int position = currentCell.Position;
+				position.x = targetIndex;
+				currentCell.Position = position;
+			}
+			else
+			{
+				Vector2Int position = currentCell.Position;
+				position.y = targetIndex;
+				currentCell.Position = position;
+			}
+			currentCell.MoveTo ( targetPosition, animate );
+
+			// Last cell
+			if ( i == cells.Count - 1 && animate )
+			{
+				this.animating = true;
+				if ( Animating != null )
+				{
+					Animating ( this, EventArgs.Empty );
+				}
+				currentCell.Tweener.onComplete = () =>
+				{
+					this.animating = false;
+					if ( Animated != null )
+					{
+						Animated ( this, EventArgs.Empty );
+					}
+				};
+			}
+		}
+		for ( int i = 0; i < this.allCells.Count; i++ )
+		{
+			SwipeCell cell = this.allCells [ i ];
+			this [ cell.Position.x, cell.Position.y ] = cell;
+		}
+		if ( animate )
+		{
+			while ( this.animating )
+			{
+				yield return null;
+			}
+		}
+		this.applyingSwipe = false;
+		if ( Swiped != null )
+		{
+			Swiped ( this, EventArgs.Empty );
+		}
+	}
+
+	/// <summary>
+	/// Determines whether this grid state is matching puzzle data or not.
+	/// </summary>
+	/// <returns><c>true</c> if this grid state is matching puzzle; otherwise, <c>false</c>.</returns>
+	public virtual bool IsMatchingPuzzle ()
+	{
+		return IsMatching ( this.puzzle.Data );
+	}
+
+	/// <summary>
+	/// Determines whether this grid state is matching the specified data or not.
+	/// </summary>
+	/// <returns><c>true</c> if this grid state is matching the specified data; otherwise, <c>false</c>.</returns>
+	/// <param name="data">Data.</param>
+	public virtual bool IsMatching ( GridData data )
+	{
+		bool isMatching = true;
+		for ( int x = 0; x < data.Width; x++ )
+		{
+			for ( int y = 0; y < data.Height; y++ )
+			{
+				isMatching &= this [ x, y ].Data.IsMatching ( data [ x, y ] );
+			}
+		}
+		return isMatching;
+	}
+
+	/// <summary>
+	/// Gets the swipe affected cells.
+	/// </summary>
+	/// <returns>The swipe cells.</returns>
+	/// <param name="swipe">Swipe.</param>
+	public virtual List<SwipeCell> GetSwipeCells ( Swipe swipe )
+	{
+		List<SwipeCell> cells = new List<SwipeCell> ();
+		if ( swipe.Axis == Axis.Horizontal )
+		{
+			for ( int x = 0; x < this.puzzle.ShuffledData.Width; x++ )
+			{
+				cells.Add ( this [ x, swipe.Position.y ] );
+			}
+		}
+		else
+		{
+			for ( int y = 0; y < this.puzzle.ShuffledData.Height; y++ )
+			{
+				cells.Add ( this [ swipe.Position.x, y ] );
+			}
+		}
+		return cells;
+	}
+
+	#endregion
+	
+}

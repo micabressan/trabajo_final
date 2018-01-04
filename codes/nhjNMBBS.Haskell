@@ -1,0 +1,12 @@
+intToList 0 xs = xs
+intToList n xs = intToList(n `div` 10) ((n `mod` 10):xs)
+
+headEqTail xs = if (head xs == last xs) then head xs else 0
+
+head' xs = if xs /= [] then head xs else (-1)
+
+checkSum n = loop n
+    where loop acc [] = acc
+          loop acc (x:xs) = if x == head' xs then loop(x + acc) xs else loop(acc) xs
+
+solveThat x = checkSum (headEqTail(intToList x [])) (intToList x [])

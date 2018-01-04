@@ -1,0 +1,190 @@
+nils@PIKSEL-EMBLA:~/sslbug$ diff 171230-1424/before_openssl3 171230-1424/after_openssl | tee 171230-1424/diff_openssl
+2,5c2,5
+< write to 0x2339940 [0x23399c0] (295 bytes => 295 (0x127))
+< 0000 - 16 03 01 01 22 01 00 01-1e 03 03 68 7f 5c 68 d4   ...."......h.\h.
+< 0010 - 7a b5 58 0c c9 a0 79 0f-26 0d dc 53 dc 1d 4e 8d   z.X...y.&..S..N.
+< 0020 - 42 58 ad 65 04 ba 6b 05-fa 0c 64 00 00 88 c0 30   BX.e..k...d....0
+---
+> write to 0xf63940 [0xf639c0] (295 bytes => 295 (0x127))
+> 0000 - 16 03 01 01 22 01 00 01-1e 03 03 98 0a 11 a9 98   ...."...........
+> 0010 - 70 c4 b7 ab 2d d7 a1 d8-49 59 b6 63 81 df d7 21   p...-...IY.c...!
+> 0020 - 03 45 c9 07 e6 c2 9e 43-31 2b 4e 00 00 88 c0 30   .E.....C1+N....0
+22c22
+< read from 0x2339940 [0x233ef20] (7 bytes => 7 (0x7))
+---
+> read from 0xf63940 [0xf68f20] (7 bytes => 7 (0x7))
+25,28c25,28
+< read from 0x2339940 [0x233ef2a] (57 bytes => 57 (0x39))
+< 0000 - 00 37 03 03 5a 47 98 96-a7 8b 5a 08 bf 16 d0 11   .7..ZG....Z.....
+< 0010 - 5f 27 ec 54 a5 78 b1 e5-8b 23 92 2c 70 67 1c 1a   _'.T.x...#.,pg..
+< 0020 - a1 be dc e3 00 c0 2f 00-00 0f ff 01 00 01 00 00   ....../.........
+---
+> read from 0xf63940 [0xf68f2a] (57 bytes => 57 (0x39))
+> 0000 - 00 37 03 03 5a 47 99 38-68 90 6e 62 bc da e9 69   .7..ZG.8h.nb...i
+> 0010 - 24 6b 97 d1 07 7c f4 fb-32 6a 80 e4 3b ee 82 a9   $k...|..2j..;...
+> 0020 - 7e cc 54 1c 00 c0 2f 00-00 0f ff 01 00 01 00 00   ~.T.../.........
+31c31
+< read from 0x2339940 [0x233ef23] (5 bytes => 5 (0x5))
+---
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+33c33
+< read from 0x2339940 [0x233ef28] (2479 bytes => 2479 (0x9AF))
+---
+> read from 0xf63940 [0xf68f28] (2479 bytes => 2479 (0x9AF))
+184c184
+< 0960 - bc 80 48 e9 42 76 34 97-55 69 24 0e 83 d6 a0 2d   depth=2 C = BE, O = GlobalSign nv-sa, OU = Root CA, CN = GlobalSign Root CA
+---
+> 0960 - bc 80 48 e9 42 76 34 97-55 69 24 0e 83 d6 a0 2d   ..H.Bv4.Uidepth=2 C = BE, O = GlobalSign nv-sa, OU = Root CA, CN = GlobalSign Root CA
+190c190
+< ..H.Bv4.Ui$....-
+---
+> $....-
+195c195
+< read from 0x2339940 [0x233ef23] (5 bytes => 5 (0x5))
+---
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+197,219c197,219
+< read from 0x2339940 [0x233ef28] (333 bytes => 333 (0x14D))
+< 0000 - 0c 00 01 49 03 00 17 41-04 d6 63 d9 2e 0f c9 4f   ...I...A..c....O
+< 0010 - f5 2c ea 9a e2 d3 e1 bf-95 f8 d3 1b f5 cc 99 19   .,..............
+< 0020 - 9f c3 b7 06 e0 87 19 bb-95 c1 ae 5e 6c 30 5a f5   ...........^l0Z.
+< 0030 - 47 0c 67 6f 9e f7 1b 88-b8 3e ba e8 2d ec d7 e4   G.go.....>..-...
+< 0040 - 2a d8 1c 94 9a 7d 3f a2-87 04 01 01 00 07 a7 7f   *....}?.........
+< 0050 - 48 25 83 d5 6d eb dc a2-45 7c 51 d5 ad a3 8a 8c   H%..m...E|Q.....
+< 0060 - 02 1e 75 dc 51 91 5d 45-87 8d 89 ec 55 67 79 0b   ..u.Q.]E....Ugy.
+< 0070 - bc 1c b6 a8 ca 1d 03 ac-c3 0a e5 b8 bb 29 0f 09   .............)..
+< 0080 - 5e e4 c0 3f 60 85 18 cb-6d e3 9f 8c a4 da b0 8a   ^..?`...m.......
+< 0090 - 96 c3 42 d5 71 28 cc 94-aa 81 fa 47 c5 b6 ec 83   ..B.q(.....G....
+< 00a0 - 07 e4 0b 0e 3b 22 a6 08-1b 2f 97 82 b4 63 9e 2b   ....;".../...c.+
+< 00b0 - 03 a3 72 f1 a1 39 11 c1-b6 6e b1 53 ba 41 7e ad   ..r..9...n.S.A~.
+< 00c0 - 8e e2 bc 25 3a 87 68 29-2b b0 67 dc 52 da 03 e9   ...%:.h)+.g.R...
+< 00d0 - eb 3c 63 3f 4b ac ad ee-83 a6 f5 0a 3e 52 65 73   .<c?K.......>Res
+< 00e0 - 83 2a e7 26 71 e4 89 73-27 64 df 64 72 22 c1 b3   .*.&q..s'd.dr"..
+< 00f0 - c2 c1 e5 6e 93 ea ad 1b-94 b5 59 33 89 b5 f0 06   ...n......Y3....
+< 0100 - 04 54 40 6a 01 c1 5b 6c-c0 f1 e8 1d 7c cc 46 04   .T@j..[l....|.F.
+< 0110 - f5 2f 60 c5 cd 0d 9f ed-61 d3 35 9d d7 58 7a 29   ./`.....a.5..Xz)
+< 0120 - 25 ac b4 07 9c fe 3a aa-78 a6 a9 52 08 a5 94 c6   %.....:.x..R....
+< 0130 - c3 7a 0f 4a de a4 54 ef-87 2b 0d 0c 2e b4 9e db   .z.J..T..+......
+< 0140 - d4 e5 de 27 96 dd ce 9e-a9 87 ab dd 73            ...'........s
+< read from 0x2339940 [0x233ef23] (5 bytes => 5 (0x5))
+---
+> read from 0xf63940 [0xf68f28] (333 bytes => 333 (0x14D))
+> 0000 - 0c 00 01 49 03 00 17 41-04 35 f2 3b 0a 3d d4 0f   ...I...A.5.;.=..
+> 0010 - 74 7e 9e 77 d4 57 7e f3-b9 81 ad 6c 84 d8 36 09   t~.w.W~....l..6.
+> 0020 - 35 7b 74 4d a0 fd b0 9f-9c fd 0e 1c e1 90 f5 88   5{tM............
+> 0030 - 55 e8 7d d7 be 45 fd 98-22 37 65 42 cc e0 39 61   U.}..E.."7eB..9a
+> 0040 - 81 7f 92 29 d4 9a ab 03-d8 04 01 01 00 54 9f c9   ...).........T..
+> 0050 - 5f 03 58 56 a8 c4 02 5a-2f a2 af 1a a9 86 c7 ee   _.XV...Z/.......
+> 0060 - 3d 2d 52 36 18 09 14 d3-a4 9e e2 b7 86 eb d4 b8   =-R6............
+> 0070 - da f4 3c 8d 32 2a 01 46-cd 73 19 0b 0f 6d e7 9b   ..<.2*.F.s...m..
+> 0080 - 46 52 a3 31 61 b1 92 67-bd a5 f3 c9 b2 20 b2 a2   FR.1a..g..... ..
+> 0090 - f7 ce d0 3f 09 cc 01 b2-49 27 67 90 b6 32 d7 04   ...?....I'g..2..
+> 00a0 - b9 84 4b e8 c2 59 59 84-38 4c fb 83 2c 41 e0 ff   ..K..YY.8L..,A..
+> 00b0 - ca 6d 04 d4 61 83 1c 22-79 ed a3 32 5f eb db 5c   .m..a.."y..2_..\
+> 00c0 - bd 2e 6a 80 a0 e3 b6 e4-e4 26 0a dd 93 15 1d 73   ..j......&.....s
+> 00d0 - 62 e4 ac b0 a1 4e 7c 58-0e 2d 33 fd ce 06 5a b5   b....N|X.-3...Z.
+> 00e0 - 2a 99 73 a7 8a f9 60 1b-d4 53 0d e6 28 64 f6 d0   *.s...`..S..(d..
+> 00f0 - 54 80 20 07 81 ae 88 64-77 4f 99 cf f8 40 b7 ad   T. ....dwO...@..
+> 0100 - e6 46 19 59 33 ab 61 3d-c1 6c 23 d4 17 dc 67 cc   .F.Y3.a=.l#...g.
+> 0110 - 8a 90 9c 1e 9b 1f 6c 14-10 9c 8d d1 fd b0 f9 3a   ......l........:
+> 0120 - d7 96 e7 20 ed 37 da 86-29 de 66 92 65 08 20 d3   ... .7..).f.e. .
+> 0130 - 49 25 0d 33 b8 60 19 eb-46 67 ff 8a 14 5d 67 df   I%.3.`..Fg...]g.
+> 0140 - f9 6d b3 ca 7b de b3 e2-eb 8b 64 c0 fa            .m..{.....d..
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+221c221
+< read from 0x2339940 [0x233ef28] (4 bytes => 4 (0x4))
+---
+> read from 0xf63940 [0xf68f28] (4 bytes => 4 (0x4))
+224,230c224,230
+< write to 0x2339940 [0x2348d10] (75 bytes => 75 (0x4B))
+< 0000 - 16 03 03 00 46 10 00 00-42 41 04 64 3a d0 cd dd   ....F...BA.d:...
+< 0010 - bb de 07 a5 5d 3e 27 30-9d 6e f7 94 88 26 cb ab   ....]>'0.n...&..
+< 0020 - 83 91 67 8d 45 ed 90 c6-c1 d0 58 b8 03 b7 48 06   ..g.E.....X...H.
+< 0030 - 34 92 ee 61 b3 8c e6 6b-55 f3 2f 59 c5 7f 00 06   4..a...kU./Y....
+< 0040 - 7c 14 22 8f 25 e8 e8 e5-84 c7 30                  |.".%.....0
+< write to 0x2339940 [0x2348d10] (6 bytes => 6 (0x6))
+---
+> write to 0xf63940 [0xf72d10] (75 bytes => 75 (0x4B))
+> 0000 - 16 03 03 00 46 10 00 00-42 41 04 b9 35 ea eb f6   ....F...BA..5...
+> 0010 - 12 a1 7f 9e eb b5 7f 88-87 c1 e2 f7 d8 45 32 e4   .............E2.
+> 0020 - c3 98 63 a4 8e 59 af 67-ba 78 6c df bf 4f d5 05   ..c..Y.g.xl..O..
+> 0030 - ad 65 58 ec 72 71 e7 a7-1a da d4 9f 6c 63 cd e2   .eX.rq......lc..
+> 0040 - 94 68 7f 3b 5e 5f 3b 9f-25 a0 c2                  .h.;^_;.%..
+> write to 0xf63940 [0xf72d10] (6 bytes => 6 (0x6))
+232,237c232,260
+< write to 0x2339940 [0x2348d10] (45 bytes => 45 (0x2D))
+< 0000 - 16 03 03 00 28 66 15 b9-f3 5c 1e 51 e1 6a 88 17   ....(f...\.Q.j..
+< 0010 - 18 a1 b0 5a e0 e4 5e 91-99 55 0f d9 dd d1 06 79   ...Z..^..U.....y
+< 0020 - 47 d3 b9 65 8e 0e e9 29-ad 4b 14 c5 92 140735317149344:error:140790E5:SSL routines:SSL23_WRITE:ssl handshake failure:s23_lib.c:177:
+<            G..e...).K...
+< read from 0x2339940 [0x233ef23] (5 bytes => 0 (0x0))
+---
+> write to 0xf63940 [0xf72d10] (45 bytes => 45 (0x2D))
+> 0000 - 16 03 03 00 28 3b 2f 06-cc b3 bb 3e 59 ab bc 47   ....(;/....>Y..G
+> 0010 - fc 5c 89 b3 af ab 22 e4-97 f5 96 e8 31 69 50 21   .\....".....1iP!
+> 0020 - ce 18 d1 62 33 64 7f 26-47 9b 55 88 bd            ...b3d.&G.U..
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+> 0000 - 16 03 03 00 ba                                    .....
+> read from 0xf63940 [0xf68f28] (186 bytes => 186 (0xBA))
+> 0000 - 04 00 00 b6 00 00 fd 1f-00 b0 55 17 45 7b 50 20   ..........U.E{P
+> 0010 - df c7 18 5c 1e 71 2d b5-98 8e db f1 1d 2a fe e6   ...\.q-......*..
+> 0020 - e5 eb c6 fc 42 0d 06 36-ea 34 ef 37 2c 79 cd dd   ....B..6.4.7,y..
+> 0030 - 6c 31 3f ef 85 cb b9 5f-8f 38 ec 4f eb 17 bc 9e   l1?...._.8.O....
+> 0040 - 03 bf 36 42 56 ea 48 9c-68 de e0 e7 d0 cd 2a c6   ..6BV.H.h.....*.
+> 0050 - da 6e b7 cc 8c 40 dd 05-3a 03 fb 5a 96 b3 1f 04   .n...@..:..Z....
+> 0060 - bc 0f 1b 04 64 59 f7 d2-3a 9e ed 33 68 bb 9a 37   ....dY..:..3h..7
+> 0070 - 32 9d 38 6a 35 de f7 db-04 46 26 22 3f 1c 0e bf   2.8j5....F&"?...
+> 0080 - e4 bb fc f5 df c4 2d 7b-32 3c 9a 7a 13 c7 a1 f8   ......-{2<.z....
+> 0090 - b3 1e 89 33 ac 2f c4 10-78 0f 13 c4 bc 96 d4 b2   ...3./..x.......
+> 00a0 - 79 7a 9a a8 a9 b9 8c c5-b5 a1 f4 2c df ec 10 be   yz.........,....
+> 00b0 - 6f e1 04 8f 5d 74 ca 10-f0 66                     o...]t...f
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+> 0000 - 14 03 03 00 01                                    .....
+> read from 0xf63940 [0xf68f28] (1 bytes => 1 (0x1))
+> 0000 - 01                                                .
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+> 0000 - 16 03 03 00 28                                    ....(
+> read from 0xf63940 [0xf68f28] (40 bytes => 40 (0x28))
+> 0000 - 00 00 00 00 00 00 00 00-ee ab a2 00 4e d7 ad ab   ............N...
+> 0010 - 95 c7 f7 b4 67 ae 6b 28-bc 36 94 ce 16 77 75 d8   ....g.k(.6...wu.
+> 0020 - 6a fe e0 e1 f2 6b ab ca-                          j....k..
+281c304
+< SSL handshake has read 2895 bytes and written 126 bytes
+---
+> SSL handshake has read 3137 bytes and written 421 bytes
+291c314
+<     Session-ID:
+---
+>     Session-ID: 473693ED1F4B0C4101900D3B14CB01B31ED91C8E4E2E7A81870C233ECE76DAE1
+293c316
+<     Master-Key: 3BB927B1223F11FAF451AD26837F539CA5A2BF74EABD6A6E28CDE3869AED47698D4A3EA6665F39590B12B4CB4E7C6AF1
+---
+>     Master-Key: F7F4611818241441964D56782F292A4A9708152416763AAEAB711A55C93F3EE68AAF72458A26BF4214AD8E35EB954163
+298c321,335
+<     Start Time: 1514641555
+---
+>     TLS session ticket lifetime hint: 64799 (seconds)
+>     TLS session ticket:
+>     0000 - 55 17 45 7b 50 20 df c7-18 5c 1e 71 2d b5 98 8e   U.E{P ...\.q-...
+>     0010 - db f1 1d 2a fe e6 e5 eb-c6 fc 42 0d 06 36 ea 34   ...*......B..6.4
+>     0020 - ef 37 2c 79 cd dd 6c 31-3f ef 85 cb b9 5f 8f 38   .7,y..l1?...._.8
+>     0030 - ec 4f eb 17 bc 9e 03 bf-36 42 56 ea 48 9c 68 de   .O......6BV.H.h.
+>     0040 - e0 e7 d0 cd 2a c6 da 6e-b7 cc 8c 40 dd 05 3a 03   ....*..n...@..:.
+>     0050 - fb 5a 96 b3 1f 04 bc 0f-1b 04 64 59 f7 d2 3a 9e   .Z........dY..:.
+>     0060 - ed 33 68 bb 9a 37 32 9d-38 6a 35 de f7 db 04 46   .3h..72.8j5....F
+>     0070 - 26 22 3f 1c 0e bf e4 bb-fc f5 df c4 2d 7b 32 3c   &"?.........-{2<
+>     0080 - 9a 7a 13 c7 a1 f8 b3 1e-89 33 ac 2f c4 10 78 0f   .z.......3./..x.
+>     0090 - 13 c4 bc 96 d4 b2 79 7a-9a a8 a9 b9 8c c5 b5 a1   ......yz........
+>     00a0 - f4 2c df ec 10 be 6f e1-04 8f 5d 74 ca 10 f0 66   .,....o...]t...f
+>
+>     Start Time: 1514641717
+301a339,347
+> read from 0xf63940 [0xf68f23] (5 bytes => 5 (0x5))
+> 0000 - 15 03 03 00 1a                                    .....
+> read from 0xf63940 [0xf68f28] (26 bytes => 26 (0x1A))
+> 0000 - 00 00 00 00 00 00 00 01-23 5e 00 33 4e 9b 56 90   ........#^.3N.V.
+> 0010 - 59 c1 91 09 3d 7c 06 5b-46 9d                     Y...=|.[F.
+> closed
+> write to 0xf63940 [0xf6d473] (31 bytes => 31 (0x1F))
+> 0000 - 15 03 03 00 1a 3b 2f 06-cc b3 bb 3e 5a 98 a6 0b   .....;/....>Z...
+> 0010 - 2f 01 9d 57 68 84 24 64-76 63 ab d0 22 85 26      /..Wh.$dvc..".&

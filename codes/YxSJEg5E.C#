@@ -1,0 +1,182 @@
+// using System;
+// using System.Collections.Generic;
+// using System.Text;
+// using System.Windows.Forms;
+// using System.Threading;
+
+void Main() {
+	
+	// Should basically only need to add a GUI button to call the following Sub now.
+	FillFields();
+
+}
+
+private void FillFields() {
+
+	// TODO: I left this one alone. I wasn't sure what it's looking for (if it's found in the Thaiphoon export)
+	// frequency = double.Parse(textBox222.Text.Replace(',', '.'));
+	
+	/* ----------- */
+	
+	// Fetch the source of the Thaiphoon Exported HTML file
+	string myHTML = GetSource();
+
+	// Only do something if we have something to parse
+	if (!String.IsNullOrEmpty(myHTML)) {
+
+		// Technically, you don't even need to 'clean' the HTML;
+		// you could just string handle with all tags intact, but
+		// thought I'd leave it here as an example.
+		if (myHTML != String.Empty) {
+			myHTML = (new ParseHTML()).doParsing(myHTML);
+		}
+
+		// Auto-select the Memory Type
+		// NOTE: I don't know what the combobox name is so I used cb1
+
+		string strMemType = StringInString(myHTML, "DRAM Manufacturer:", Environment.NewLine);
+
+		switch (strMemType) {
+
+			case string a when a.Contains("B-die"):
+				//cb1.SelectedIndex = 1
+				Console.WriteLine("1");
+				break;
+
+			case string b when b.Contains("Hynix"):
+				//cb1.SelectedIndex = 2
+				Console.WriteLine("2");
+				break;
+
+			/* (etc...) */
+
+			default:
+				//cb1.SelectedIndex = 0
+				Console.WriteLine("0");
+				break;
+		}
+
+		// Auto-select the rank:
+		// comboBox2.Text = StringInString(myHTML, "Ranks:", Environment.NewLine); // rank (Does this need a .Replace btw? It's a combobox w/only 1 or 2 ..)
+		// Is this better?
+		// comboBox2.SelectedIndex = (Convert.ToInt32(StringInString(myHTML, "Ranks:", Environment.NewLine)) == 2) ? 1 : 0;
+
+		/* Auto-fill the text fields:
+		  textBox4.Text = StringInString(myHTML, "(tAA):", " ns"); // tCLns
+		  textBox5.Text = StringInString(myHTML, "(tRCD):", " ns"); // tRCDRWns
+		  textBox6.Text = StringInString(myHTML, "(tRCD):", " ns"); // tRCDRDns
+		  textBox7.Text = StringInString(myHTML, "(tRP):", " ns"); // tRPns
+		  textBox8.Text = StringInString(myHTML, "(tRAS):", " ns"); // tRASns
+		  textBox9.Text = StringInString(myHTML, "(tRC):", " ns"); // tRCns
+		  textBox10.Text = StringInString(myHTML, "(tRRD_S):", " ns"); // tRRDSns
+		  metroTextBox24.Text = StringInString(myHTML, "(tRRD_L):", " ns"); // tRRDLns
+		  textBox12.Text = StringInString(myHTML, "(tFAW):", " ns"); // tFAWns
+		  textBox13.Text = StringInString(myHTML, "(tRFC1):", " ns"); // tRFCns
+		*/
+
+		// Full dump
+		// Console.WriteLine(myHTML);
+	}
+
+}
+
+private string StringInString(string strHaystack, string strStart, string strEnd) {
+/* Returns a string from within a string */
+
+	string strResult = string.Empty;
+
+	// Get the start pos and extract everything after it
+	int intStartPos = strHaystack.IndexOf(strStart) + strStart.Length;
+	string strResult1 = strHaystack.Substring(intStartPos);
+
+	// Get the end pos = length of string to extract
+	int intEndPos = strResult1.IndexOf(strEnd);
+	
+	// Get the final string
+	strResult = strResult1.Substring(0, intEndPos);
+
+	return strResult;
+}
+
+private string GetSource() {
+/*
+	Creates an OpenFileDialog allowing the user to select the exported Thaiphoon
+	HTML file, and then saves the contents to a var for returning.
+
+	Returns: (String) Raw contents of the HTML file; else empty string.
+*/
+
+	Stream myStream = null;
+	string myHTML = string.Empty;
+	
+	OpenFileDialog oFD1 = new OpenFileDialog();
+	
+	// Set Dialog Properties	
+	oFD1.Title = "Select Thaiphoon Exported Report ...";
+	oFD1.DefaultExt = "html";
+	oFD1.Filter = "HTML files (*.htm;*.html)|*.htm;*.html";
+	oFD1.CheckFileExists = true;
+	oFD1.CheckPathExists = true;
+	oFD1.Multiselect = false;	
+
+	if (oFD1.ShowDialog() == DialogResult.OK) {
+	
+		try {
+		
+			if ((myStream = oFD1.OpenFile()) != null) {
+			
+				using (myStream) {
+				
+					// Store the HTML from the file
+					var sr = new StreamReader(myStream);
+					myHTML = sr.ReadToEnd();
+					sr.Dispose();
+
+				}
+			}
+			
+		} catch (Exception ex) {
+			MessageBox.Show("Error: Could not read Thaiphoon file: " + ex.Message);
+		}
+	}
+
+	return myHTML;
+}
+
+class ParseHTML {
+/*
+	Uses WebBrowser to handle parsing HTML for us
+
+	Returns: The 'cleaned' text
+*/
+
+	public ParseHTML() {}
+	private string ReturnString;
+
+	public string doParsing(string html) {
+	
+		Thread t = new Thread(TParseMain);
+		
+		// t.ApartmentState = ApartmentState.STA; // Depreciated
+		t.SetApartmentState(ApartmentState.STA);
+		t.Start((object)html);
+		t.Join();
+		
+		return ReturnString;
+		
+	}
+
+	private void TParseMain(object html) {
+	
+		WebBrowser wbc = new WebBrowser();
+		
+		wbc.DocumentText = "dumdum text";
+		HtmlDocument doc = wbc.Document.OpenNew(true);
+		doc.Write((string)html);
+		this.ReturnString = doc.Body.InnerText;
+		
+		return;
+		
+	}
+	
+}

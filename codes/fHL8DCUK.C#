@@ -1,0 +1,23 @@
+
+//This script makes sure golems won't regen any health on resting
+
+void main()
+{
+object oSelf = OBJECT_SELF;
+int iRest = GetLastRestEventType();
+int iHP = GetCurrentHitPoints(oSelf);
+int iSavedHP = GetLocalInt(oSelf,"SAVED_REST_HP");
+
+if (iRest == REST_EVENTTYPE_REST_STARTED)
+    {
+    SetLocalInt(oSelf,"SAVED_REST_HP",iHP);
+    }
+else if (iRest == REST_EVENTTYPE_REST_CANCELLED ||
+         iRest == REST_EVENTTYPE_REST_FINISHED)
+     {
+     if (iHP > iSavedHP)
+        {
+        AssignCommand(oSelf,ApplyEffectToObject(DURATION_TYPE_INSTANT,EffectDamage(iHP-iSavedHP,DAMAGE_TYPE_MAGICAL,DAMAGE_POWER_ENERGY),oSelf));
+        }
+     }
+}

@@ -1,0 +1,35 @@
+class LinearFunction : Function
+    {
+        private double _a;
+        private double _b;
+        public LinearFunction(List<double> valuesOfX, List<double> valuesOfY)
+        {
+            CountCoefficients(valuesOfX, valuesOfY);
+        }
+        public void CountCoefficients(List<double> valuesOfX, List<double> valuesOfY)
+        {
+            double sumOfX = 0;
+            double sumOfY = 0;
+            double sumOfXY = 0;
+            double sumOfXX = 0;
+            int n = valuesOfX.Count;
+            foreach (double x in valuesOfX) sumOfX += x;
+            foreach (double y in valuesOfY) sumOfY += y;
+            foreach (double x in valuesOfX) sumOfXX += x * x;
+            for (int i = 0; i < n; i++) sumOfXY += valuesOfX[i] * valuesOfY[i];
+            _a = (sumOfX * sumOfY - n * sumOfXY) / (sumOfX * sumOfX - n * sumOfXX);
+            _b = (sumOfX * sumOfXY - sumOfXX * sumOfY) / (sumOfX * sumOfX - n * sumOfXX);
+        }
+        public string FunctionString
+        {
+            get { return "y=" + _a + "*x + " + _b; }
+        }
+        public double ValueInX(double x)
+        {
+            return _a * x + _b;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }

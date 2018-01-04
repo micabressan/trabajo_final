@@ -1,0 +1,164 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Intsys
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        List<Persoon> orgPersonen = new List<Persoon>();
+        Boot[] orgBoten = new Boot[2];
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Boot b1 = new Boot();
+            b1.Capaciteit = 400;
+            Boot b2 = new Boot();
+            b2.Capaciteit = 200;
+            orgBoten[0] = b1;
+            orgBoten[1] = b2;
+            orgPersonen.Add(new Persoon(1, 120));
+            orgPersonen.Add(new Persoon(2, 100));
+            orgPersonen.Add(new Persoon(3, 80));
+            orgPersonen.Add(new Persoon(4, 80));
+            orgPersonen.Add(new Persoon(5, 80));
+            orgPersonen.Add(new Persoon(6, 80));
+            orgPersonen.Add(new Persoon(7, 60));
+
+            Algoritme(orgBoten, orgPersonen);
+        }
+        int i = 0;
+        int bootIndex = 0;
+        int persoonIndex = 0;
+        int startBoot = 0;
+        bool Starting = true;
+        int BestPersInBoot = 0;
+        Boot[] BestBoten;
+        List<Persoon> BestopKade;
+        List<Persoon> opKade = new List<Persoon>();
+        List<Object> best = new List<object>();
+        List<Persoon> InBoot = new List<Persoon>();
+        public List<Object> Algoritme(Boot[] boten, List<Persoon> personen)
+        {
+                i++;
+
+                //If this is the first person we put in any of the boats. 
+                //Startboat is the index that tracks what boats he has been in.
+                if (Starting)
+                {
+                    //Use the original list of people and boats.
+                    personen = new List<Persoon>(orgPersonen);
+                    boten = (Intsys.Boot[])orgBoten.Clone();
+                    //Check to see if the person fits in the boat.
+                    if (boten[startBoot].Capaciteit > personen[persoonIndex].Gewicht)
+                    {
+                        //Edit the capacity so person n is now sitting in the boat.
+                        boten[startBoot].Capaciteit -= personen[persoonIndex].Gewicht;
+                        InBoot.Add(personen[persoonIndex]);
+                        //Remove the person from the list.
+                        personen.RemoveAt(persoonIndex);
+                        //Person has been placed in a boat.
+                        Starting = false;
+                    }
+                    else
+                    {
+                        //Try to put person n in the next boat.
+                        startBoot++;
+                        Starting = true;
+                    }
+                }
+                else
+                {
+                    //Check if all boats are full, or if nobody fits in any of the remaining boats anymore.
+                    if (bootIndex == boten.Length && (boten[bootIndex].Capaciteit == 0 || persoonIndex == personen.Count))
+                    {
+                        foreach (Persoon p in personen)
+                        {
+                            //Add to list - people not in boats.
+                            opKade.Add(p);
+                        }
+                        personen.Clear();
+                        //Check total people in boat.
+
+                        //If it's more than the last solution - remember this as best.
+                        //If it's less than the last solution - remmeber last as best.
+                        if (InBoot.Count() > BestPersInBoot)
+                        {
+                            BestPersInBoot = InBoot.Count();
+                            BestBoten = boten;
+                            BestopKade = opKade;
+                            opKade.Clear();
+                            InBoot.Clear();
+                        }
+                        //If person n has been in all boats and the boats have been filled without person n in it.
+                        if (startBoot == boten.Length)
+                        {
+                            best.Add(BestBoten);
+                            best.Add(BestopKade);
+                            return best;
+                        }
+                        else
+                        {
+                            //Move to the next boat to put person n in.
+                            startBoot++;
+                        }
+                        //Reset the boats to fill.
+                        bootIndex = 0;
+                        //Reset the index for people to put in boats.
+                        persoonIndex = 0;
+                        //We're starting again with filling boats, all boats are empty.
+                        Starting = true;
+                    }
+                    //If this boat is full and it's not the last boat. Move on to fill the next boat.
+                    else if (boten[bootIndex].Capaciteit == 0 || persoonIndex == personen.Count)
+                    {
+                        //Move on to the next boat.
+                        bootIndex++;
+                        //Reset the index for people to put in boats.
+                        persoonIndex = 0;
+                    }
+                    //Fill the rest of the boats.
+                    //Check if the person fits in the boat.
+                    if (boten[bootIndex].Capaciteit > personen[persoonIndex].Gewicht)
+                    {
+                        //Edit the capacity so the person is now sitting in the boat.
+                        boten[bootIndex].Capaciteit -= personen[persoonIndex].Gewicht;
+                        InBoot.Add(personen[persoonIndex]);
+                        //Remove the person from the list, since he's now sitting in a boat.
+                        personen.RemoveAt(persoonIndex);
+                    }
+                    //If the person doesn't fit in the boat, we'll leave him to try out the other boats.
+                    else
+                    {
+                        //Move on to the next person in the list.
+                        persoonIndex++;
+                    }
+                    //If we tried putting person n in all boats.
+                    if (startBoot == boten.Length - 1)
+                    {
+                        //Fill all the boats without putting person n in a boat.
+                        Starting = false;
+                        //Skip person n so he ends up outside of all the boats.
+                        persoonIndex++;
+                    }
+                }
+                Algoritme(boten, personen);
+                   
+               
+                return best;
+            }
+            
+        
+
+     
+    }
+}

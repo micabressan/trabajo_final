@@ -1,0 +1,129 @@
+{-# LANGUAGE FlexibleContexts #-}
+import Control.Monad.Error
+import Control.Monad.State
+import Data.Monoid
+import Data.List (union, (\\), group)
+
+infixl 2 :@
+infixr 3 :->
+
+type Symb = String 
+
+-- Терм
+data Expr = 
+  Var Symb 
+  | Expr :@ Expr
+  | Lam Symb Expr
+     deriving (Eq,Show)
+
+-- Тип
+data Type = 
+  TVar Symb 
+  | Type :-> Type
+    deriving (Eq,Show)
+
+-- Контекст
+newtype Env = Env [(Symb,Type)]
+  deriving (Eq,Show)
+
+-- Подстановка
+newtype SubsTy = SubsTy [(Symb, Type)]
+  deriving (Eq,Show)
+
+freeVars :: Expr -> [Symb] 
+freeVars (Var s)   = [s] 
+freeVars (f :@ a) = freeVars f `union` freeVars a 
+freeVars (Lam i e) = freeVars e \\ [i]
+
+freeTVars :: Type -> [Symb]
+freeTVars (TVar tv)     = [tv]
+freeTVars (t1 :-> t2) = freeTVars t1 `union` freeTVars t2
+
+extendEnv :: Env -> Symb -> Type -> Env
+extendEnv (Env env) s t = Env $ (s,t) : env
+
+freeTVarsEnv :: Env -> [Symb]
+freeTVarsEnv (Env c) = foldr union [] $ map (\(_,t) -> freeTVars t) c
+
+appEnv :: (MonadError String m) => Env -> Symb -> m Type
+appEnv (Env xs) v = 
+  case lookup v xs of 
+    Just t  -> return t
+    Nothing -> throwError $ 
+      "There is no variable " 
+      ++ show v 
+      ++ " in the enviroment." 
+
+appSubsTy :: SubsTy -> Type -> Type
+appSubsTy st          (t1 :-> t2)  = appSubsTy st t1 :-> appSubsTy st t2
+appSubsTy (SubsTy ss) ty@(TVar tv) = 
+  case lookup tv ss of 
+    Nothing  -> ty
+    (Just t) -> t
+
+appSubsEnv :: SubsTy -> Env -> Env
+appSubsEnv st (Env c) = Env $ map (\(x,t) -> (x,appSubsTy st t)) c
+
+composeSubsTy :: SubsTy -> SubsTy -> SubsTy
+composeSubsTy st1@(SubsTy s1) st2@(SubsTy s2) = 
+  SubsTy $ map (doSt st1 . doSt st2) support
+  where doSt st = \(x,y) -> (x, appSubsTy st y)
+        support = map (\x -> (x, TVar x)) vars
+        vars = fst (unzip s1) `union` fst (unzip s2)
+
+instance Monoid SubsTy where
+  mempty = SubsTy []
+  mappend = composeSubsTy
+
+
+unify :: (MonadError String m) => Type -> Type -> m SubsTy
+unify (TVar v1) (TVar v2) 
+  | v1 == v2  = return mempty
+  | otherwise = return $ SubsTy [(v1, TVar v2)]
+unify (TVar v) t 
+  | v `elem` freeTVars t = throwError $ "Can't unify (TVar " ++ show v ++ ") with (" ++ show t ++ ")!"
+  | otherwise            = return $ SubsTy [(v, t)]
+unify (s1 :-> s2) (TVar v) = unify (TVar v) (s1 :-> s2)
+unify (s1 :-> s2) (t1 :-> t2) = do
+  u2 <- unify s2 t2
+  u1 <- unify (appSubsTy u2 s1) (appSubsTy u2 t1)
+  return $ u1 `mappend` u2
+
+-- система уравнений на типы
+equations :: MonadError String m => Env -> Expr -> Type -> m [(Type,Type)]
+equations env e t = evalStateT (equations'' env e t) 1
+
+getFreshTVar :: MonadState Integer m => m Type
+getFreshTVar = do
+  n <- get
+  modify (+1)
+  return $ TVar $ show n
+
+equations'' :: MonadError String m => Env -> Expr -> Type -> StateT Integer m [(Type,Type)]
+equations'' env v@(Var x) t  = do
+  t' <- appEnv env x       -- тут может быть исключение!
+  return [(t, t')]
+equations'' env (m :@ n) t  = do
+  alpha <- getFreshTVar
+  meqs <- equations'' env m (alpha :-> t)
+  neqs <- equations'' env n alpha 
+  return $ meqs ++ neqs
+equations'' env (Lam v m) t  = do
+  alpha <- getFreshTVar
+  beta  <- getFreshTVar
+  meqs <- equations'' (extendEnv env v alpha) m beta
+  return $ meqs ++ [(alpha :-> beta,t)]  
+
+-- систему уравнений - в одно уравнение
+flattenEqs :: [(Type,Type)] -> (Type,Type)
+flattenEqs  = foldr1 (\(al,ar) (bl,br) -> ( al:-> bl, ar :-> br)) 
+
+-- Главная пара
+principlePair :: (MonadError String m) =>  Expr -> m (Env,Type)
+principlePair expr = do
+    let sigma0 = TVar "_"
+    let tVars0 = map (TVar . ("Ini" ++) . show) [1..]
+    let env0 = Env $ zip (freeVars expr) tVars0
+    (tl,tr) <- liftM flattenEqs $ equations env0 expr sigma0
+    subst <- unify tl tr
+    return (appSubsEnv subst env0, appSubsTy subst sigma0)

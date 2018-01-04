@@ -1,0 +1,56 @@
+struct Rng {
+    prev_val: u64,
+    factor: u64,
+    filter_modulus: u64,
+}
+
+impl Rng {
+    fn new(seed: u64, factor: u64, filter_modulus: u64) -> Self {
+        Rng { prev_val: seed, factor: factor, filter_modulus: filter_modulus }
+    }
+
+    fn rand(&mut self) -> u64 {
+        const MODULUS: u64 = 2147483647;
+        loop {
+            let next_val = (self.prev_val * self.factor) % MODULUS;
+            self.prev_val = next_val;
+            if next_val % self.filter_modulus == 0 {
+                break;
+            }
+        }
+        self.prev_val
+    }
+}
+
+fn solve(a_filter_modulus: u64,
+         b_filter_modulus: u64,
+         n_iterations: u64) -> u64 {
+    const A_SEED: u64 = 512;
+    const A_FACTOR: u64 = 16807;
+    let mut a_rng = Rng::new(A_SEED, A_FACTOR, a_filter_modulus);
+
+    const B_SEED: u64 = 191;
+    const B_FACTOR: u64 = 48271;
+    let mut b_rng = Rng::new(B_SEED, B_FACTOR, b_filter_modulus);
+
+    const COLLISION_MASK: u64 = 0xffff;
+
+    let mut n_collisions = 0;
+    for _ in 0..n_iterations {
+        let a_val = a_rng.rand() & COLLISION_MASK;
+        let b_val = b_rng.rand() & COLLISION_MASK;
+        n_collisions += (a_val == b_val) as u64;
+    }
+    n_collisions
+}
+
+fn main() {
+    const PART_A_ITERATIONS: u64 = 40_000_000;
+    let part_a = solve(1, 1, PART_A_ITERATIONS);
+
+    const A_FILTER_MODULUS: u64 = 4;
+    const B_FILTER_MODULUS: u64 = 8;
+    const PART_B_ITERATIONS: u64 = 5_000_000;
+    let part_b = solve(A_FILTER_MODULUS, B_FILTER_MODULUS, PART_B_ITERATIONS);
+    println!("{} {}", part_a, part_b);
+}

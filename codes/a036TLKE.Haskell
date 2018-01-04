@@ -1,0 +1,27 @@
+#!/usr/bin/env runhaskell
+
+import qualified System.IO as I
+
+known_friends = ["Don", "Simon", "Eduard"]
+-- This program knows them
+
+known name friends = any (== name) friends
+
+iteration friends = do
+    -- Greets someone
+    putStrLn "Please enter your name..."
+    putStr "> "
+    I.hFlush I.stdout
+    name <- getLine
+    if known name friends then
+        putStrLn ("Hello, " ++ name ++ "! How have you been?")
+    else
+        putStrLn ("Pleased to meet you, " ++ name ++ "!")
+    -- !!!!!! here i would return name, or something.
+
+loop friends = do
+    new_name <- iteration friends
+    loop new_name:friends
+
+main = loop known_friends
+-- the main program

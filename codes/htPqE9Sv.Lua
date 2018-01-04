@@ -1,0 +1,31 @@
+TEAM_41ST = DarkRP.createJob("Capitaine 41st", {
+	color = Color(28, 154, 0, 255),
+	model = {
+		"models/reizer_cgi_p2/41_cpt/41_cpt.mdl","models/player/093/41office/41_o/commander/41_officer_v1.mdl"
+		},
+	description = [[Capitaine 41st : Vous avez achevé votre formation approfondis vous avez beaucoup d'expérience, à présent vous êtes l’un des atouts les plus importants de la 41st sur le terrain , vous avez un grand potentiel ce qui explique votre grade. Continuez à diriger les troupes ainsi que d'effectuer les missions avec succès , et après une réunion des haut gradés vous passerez peut-être commandant en second.]],
+	weapons = {
+		"tfa_swch_dc15a",
+		"tfa_dc15s_ashura",
+		"weapon_rpw_binoculars_explorer",
+		"garde_a_vous1.2",
+		"csgo_flip_ddpat",
+		"weapon_rpw_binoculars_nvg",
+		"wep_jack_job_drpradio",
+		"clone_card_c1",
+		"tfa_sw_dc17dual",
+		"tfa_sw_repsnip"
+		},
+	command = "CPT41st",
+	max = 5,
+	salary = 0,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	maxpocket = 20,
+	PlayerSpawn = function(ply) GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1, GAMEMODE.Config.runspeed * 1) ply:SetHealth("100") ply:SetArmor("100") ply:SetGravity(1) return CLIENT end,
+    PlayerDeath = function(ply) GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1, GAMEMODE.Config.runspeed * 1) return CLIENT end,
+	customCheck = function(ply) return ply:CheckGroup ("TEAM_41ST") or ply:IsAdmin() end,
+    CustomCheckFailMsg = "Vous n'avez pas encore ce grade",
+	category = "41st",
+    sortOrder = 2,

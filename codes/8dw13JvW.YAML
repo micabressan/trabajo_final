@@ -1,0 +1,151 @@
+groups:
+Default:
+default: true
+info:
+prefix: '&0[&aGrunt&0]&a '
+suffix: ''
+build=true
+permissions:
+- essentials.back
+- jobs.browse
+- jobs.info
+- jobs.join
+- essentials.msg
+- essentials.msg.color
+- xp.pay
+- xp.create
+- essentials.sethome.multiple
+- essentials.spawn
+- essentials.delhome
+- essentials.home
+- essentials.tpa
+- essentials.tpahere
+- essentials.tpadeny
+- essentials.balance
+- essentials.balancetop
+- essentials.pay
+- essentials.realname
+- essentials.warp
+- essentials.warp.list
+- essentials.help
+- expbank.create
+- modifyworld.*
+- -modifyworld.blocks.interact.23
+Soldier:
+default: false
+info:
+prefix: '&0[&2Soldier&0]&2 '
+suffix: '&c'
+build: true
+inheritance:
+- Default
+permissions:
+- multiverse.teleport
+- modifyworld.*
+Commander:
+default: false
+info:
+prefix: '&0[&cCommander&0]&c'
+suffix: ''
+build: true
+inheritance:
+- Soldier
+- Default
+Admin:
+default: false
+info:
+prefix: '&a'
+suffix: ''
+build: true
+inheritance:
+- Commander
+- Soldier
+- Default
+permissions:
+- jobs.*
+- factions.*
+- essentials.*
+- nocheatplus.*
+- chestshop.*
+- worldedit.*
+HeadAdmin:
+default: false
+info:
+prefix: '&0[&cHeadAdmin&0] '
+suffix: ''
+build: true
+inheritance:
+- Admin
+- Commander
+- Soldier
+- Default
+permissions:
+- '*'
+Mod:
+default: false
+info:
+prefix: '&0[&1Mod&0]'
+suffix: ''
+build: true
+inheritance:
+- Commander
+- Default
+permissions:
+- essentials.tempban
+- essentails.kick
+- essentials.mute
+HeadMod:
+default: false
+info:
+prefix: '&0[&cHeadMod&0]&c '
+suffix: ''
+build: true
+inheritance:
+- Mod
+permissions:
+- Factions.*
+- NoCheatPlus.*
+- XPbank.*
+- ChestShop.*
+- essentials.*
+- jobs.*
+- worldedit.*
+CoOwner:
+default: false
+info:
+prefix: '&0[&8Co-Owner&0] '
+suffix: ''
+build: true
+inheritance:
+- HeadAdmin
+permissions:
+- '*'
+Owner:
+default: false
+info:
+prefix: '&0[&6O&4w&6n&4e&6r&0]&4 '
+suffix: ''
+build: true
+inheritance:
+- CoOwner
+permissions:
+- '*'
+- modifyworld.*
+HeadBuilder:
+default: false
+info:
+prefix: '&0[&6O&4w&6n&4e&6r&0]&4 '
+suffix: ''
+build: true
+inheritance:
+- HeadMod
+users:
+ThePlogger:
+group:
+- default
+
+thanesun:
+group:
+-Co-Owner
+info:
+prefix: '&29Co-Owner)&3'

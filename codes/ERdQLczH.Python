@@ -1,0 +1,338 @@
+import pygame
+import random
+import time
+
+pygame.init()
+
+display_width = 800
+display_height = 600
+
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+
+
+green = (0, 255, 0)
+grassgreen = (0, 90, 0)
+
+
+blue = (0, 0, 255)
+
+
+icon = pygame.image.load('SG.png')
+
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Survival Game')
+pygame.display.set_icon(icon)
+invenDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Inventory')
+pygame.display.set_icon(icon)
+clock = pygame.time.Clock()
+
+pygame.display.flip()
+
+playerimg = pygame.image.load('Player.png')
+playerupimg = pygame.image.load('PlayerUp.png')
+playerdownimg = pygame.image.load('PlayerDown.png')
+playerrightimg = pygame.image.load('PlayerRight.png')
+playerleftimg = pygame.image.load('PlayerLeft.png')
+treeimg = pygame.image.load('Tree.png')
+fireimg = pygame.image.load('Lava.png')
+logimg = pygame.image.load('Log.png')
+sbbimg = pygame.image.load('StrawBerryBush.png')
+bbbimg = pygame.image.load('BlueBerryBush.png')
+waterimg = pygame.image.load('Water.png')
+saltwaterimg = pygame.image.load('SaltWater.png')
+
+def player(x, y):
+	gameDisplay.blit(playerimg, (x, y))
+
+def tree(treex, treey):
+	gameDisplay.blit(treeimg, (treex, treey))
+
+def fire(firex, firey):
+	gameDisplay.blit(fireimg, (firex, firey))
+
+def log(logx,  logy):
+	gameDisplay.blit(logimg, (logx, logy))
+
+def StrawBerryBush(sbbx, sbby):
+	gameDisplay.blit(sbbimg, (sbbx, sbby))
+
+def BlueBerryBush(bbbx, bbby):
+	gameDisplay.blit(bbbimg, (bbbx, bbby))
+
+def Water(waterx, watery):
+	gameDisplay.blit(waterimg, (waterx, watery))
+
+def SaltWater(saltwaterx, saltwatery):
+	gameDisplay.blit(saltwaterimg, (saltwaterx, saltwatery))
+
+def PlayerUp(x, y):
+	gameDisplay.blit(playerupimg, (x, y))
+
+def PlayerDown(x, y):
+	gameDisplay.blit(playerdownimg, (x, y))
+
+def PlayerRight(x, y):
+	gameDisplay.blit(playerrightimg, (x, y))
+
+def PlayerLeft(x, y):
+	gameDisplay.blit(playerleftimg, (x, y))
+
+def text_objects(text, font):
+	textSurface = font.render(text, True, red)
+	return textSurface, textSurface.get_rect()
+
+def message_display(text, playerhealth, playermaxhealth):
+	largeText = pygame.font.Font('freesansbold.ttf', 30)
+	TextSurf, TextRect = text_objects(text, largeText)
+	TextRect.center = ((display_width / 3 - 155), (display_height - 20))
+	gameDisplay.blit(TextSurf, TextRect)
+	pygame.display.update()
+
+def health(playerhealth, playermaxhealth):
+	message_display('Health: %s/%s' % (playerhealth, playermaxhealth), playerhealth, playermaxhealth)
+
+def text_objects1(text, font):
+	textSurface = font.render(text, True, green)
+	return textSurface, textSurface.get_rect()
+
+def message_display1(text, playerhunger, playermaxhunger):
+	largeText = pygame.font.Font('freesansbold.ttf', 30)
+	TextSurf, TextRect = text_objects1(text, largeText)
+	TextRect.center = ((display_width / 3 - 155), (display_height - 50))
+	gameDisplay.blit(TextSurf, TextRect)
+	pygame.display.update()
+
+def hunger(playerhunger, playermaxhunger):
+	message_display1('Hunger: %s/%s' % (playerhunger, playermaxhunger), playerhunger, playermaxhunger)
+
+def text_objects2(text, font):
+	textSurface = font.render(text, True, blue)
+	return textSurface, textSurface.get_rect()
+
+def message_display2(text, playerthirst, playermaxthirst):
+	largeText = pygame.font.Font('freesansbold.ttf', 30)
+	TextSurf, TextRect = text_objects2(text, largeText)
+	TextRect.center = ((display_width / 3 - 155), (display_height - 80))
+	gameDisplay.blit(TextSurf, TextRect)
+	pygame.display.update()
+
+def thirst(playerthirst, playermaxthirst):
+	message_display2('Thirst: %s/%s' % (playerthirst, playermaxthirst), playerthirst, playermaxthirst)
+
+def text_objects3(text, font):
+	textSurface = font.render(text, True, black)
+	return textSurface, textSurface.get_rect()
+
+def message_display3(text, playerwood):
+	largeText = pygame.font.Font('freesansbold.ttf', 30)
+	TextSurf, TextRect = text_objects3(text, largeText)
+	TextRect.center = ((display_width - 700), (display_height -565))
+	gameDisplay.blit(TextSurf, TextRect)
+	pygame.display.update()
+
+def wood(playerwood):
+	message_display3('Wood: %s' % (playerwood), playerwood)
+
+def game_loop():
+	version = '0.0.1 DEVELOPERS COPY'
+
+	gameloop = 1111111111111111111111111111111111111111111111111111111111111111
+
+	x = (display_width * 0.45)
+	y = (display_height * 0.8)
+	playerwidth = (30 / 3)
+	playerheight = (30 / 3)
+	playermaxhealth = 10
+	playerhealth = playermaxhealth
+	playermaxhunger = 10
+	playerhunger = playermaxhunger
+	playerattack = 5
+	playerwood = 0
+	playerstone = 0
+	playermaxthirst = 10
+	playerthirst = playermaxthirst
+
+	treetime = 1
+	trees = True
+	treex = random.randint(0, display_width)
+	treey = random.randint(0, display_height)
+	treewidth = (30 / 3)
+	treeheight = (30 / 3)
+	treehealth = 10
+	
+	firex = random.randint(0, display_width)
+	firey = random.randint(0, display_height)
+	firewidth = (30 / 3)
+	fireheight = (30 / 3)
+	fireattack = 1
+	firetime = 3
+
+	logs = 2
+
+	sbbhealth = 10
+	sbbx = random.randint(0, display_width)
+	sbby = random.randint(0 , display_height)
+	sbbwidth = (30 / 3)
+	sbbheight = (30 / 3)
+	sbbs = 2
+	sbs = True
+	sbstime = 1
+
+	bbbhealth = 10
+	bbbx = random.randint(0, display_width)
+	bbby = random.randint(0, display_height)
+	bbbwidth = (30 / 3)
+	bbbheight = (30 / 3)
+	bbbs = 2
+	bbs = True
+	bbstime = 1
+
+	waterx = random.randint(0, display_width)
+	watery = random.randint(0, display_height)
+	waterheight = (30 / 3)
+	waterwidth = (30 / 3)
+	water = 2
+
+	saltwaterx = random.randint(0, display_width)
+	saltwatery = random.randint(0, display_height)
+	saltwaterwidth = (30 / 3)
+	saltwaterheight = (30 / 3)
+
+	x_change = 0
+	y_change = 0
+
+	gameExit = False
+
+	while not gameExit:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				gameExit = True
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_a:
+					x_change = -5
+					PlayerLeft(x, y)
+				elif event.key == pygame.K_d:
+					x_change = 5
+					PlayerRight(x, y)
+				elif event.key == pygame.K_w:
+					y_change = -5
+					PlayerUp(x, y)
+				elif event.key == pygame.K_s:
+					y_change = 5
+					PlayerDown(x, y)
+			if event.type == pygame.KEYUP:
+				if event.key == pygame.K_a or event.key == pygame.K_d:
+					x_change = 0
+				elif event.key == pygame.K_w or event.key == pygame.K_s:
+					y_change = 0
+			print(event)
+		x += x_change
+		y += y_change
+
+		gameDisplay.fill(grassgreen)
+		player(x, y)
+		tree(treex, treey)
+		StrawBerryBush(sbbx, sbby)
+		BlueBerryBush(bbbx, bbby)
+		Water(waterx, watery)
+		SaltWater(saltwaterx, saltwatery)
+		#text
+		health(playerhealth, playermaxhealth)
+		hunger(playerhunger, playermaxhunger)
+		thirst(playerthirst, playermaxthirst)
+		wood(playerwood)
+		#set up a boundary
+		if x > display_width - playerwidth or x < 0:
+			x_change = 0
+		if y > display_height - playerheight or y < 0:
+			y_change = 0
+		#Collision
+		if y < treey + treeheight:
+			if x > treex and x < treex + treewidth or x + playerwidth > treex and x + playerwidth < treex + treewidth:
+				treehealth -= playerattack
+		if y < firey + fireheight:
+			if x > firex and x < firex + firewidth or x + playerwidth > firex and x + playerwidth < firex + firewidth:
+				playerhealth -= fireattack
+		if y < sbby + sbbheight:
+			if x > sbbx and x < sbbx + sbbwidth or x + playerwidth > sbbx and x + playerwidth  < sbbx + sbbwidth:
+				sbbhealth -= playerattack
+		if y < bbby + bbbheight:
+			if x > bbbx and x < bbbx + bbbwidth or x + playerwidth > bbbx and x + playerwidth  < bbbx + bbbwidth:
+				bbbhealth -= playerattack
+		if y < watery + waterheight:
+			if x > waterx and x < waterx + waterwidth or x + playerwidth > waterx and x + playerwidth < waterx + waterwidth:
+				playerthirst += water
+		if y < saltwatery + saltwaterheight:
+			if x > saltwaterx and x < saltwaterx + saltwaterwidth or x + playerwidth > saltwaterx and x + playerwidth < saltwaterx + saltwaterwidth:
+				playerthirst -= .01
+
+		if playerhealth <= 0:
+			playerhealth = 0
+			gameExit = True
+		if playerhunger <= 0:
+			playerhunger = 0
+			playerhealth -= .01	
+		if playerthirst <= 0:
+			playerthirst = 0
+			playerhealth -= .01
+
+		if treehealth <= 0:
+			playerwood += logs
+			treex = random.randint(0, display_width)
+			treey = random.randint(0, display_height)
+			for i in range(treetime):
+				treetime -= 1
+				while trees:
+					treex = random.randint(0, display_width)
+					treey = random.randint(0, display_height)
+					if treetime == 0:
+						trees = False
+			if trees == False:
+				treetime += 1
+				treehealth = 10
+		if sbbhealth <= 0:
+			playerhunger += sbbs
+			sbbx = random.randint(0, display_width)
+			sbby = random.randint(0, display_height)
+			for i in range(sbstime):
+				sbstime -= 1
+				while sbs:
+					sbbx = random.randint(0, display_width)
+					sbby = random.randint(0, display_height)
+					if sbstime == 0:
+						sbs = False
+			if sbs == False:
+				sbstime += 1
+				sbbhealth = 10
+		if bbbhealth <= 0:
+			playerhunger += bbbs
+			bbbx = random.randint(0, display_width)
+			bbby = random.randint(0, display_height)
+			for i in range(bbstime):
+				bbstime -= 1
+				while bbs:
+					bbbx = random.randint(0, display_width)
+					bbby = random.randint(0, display_height)
+					if bbstime == 0:
+						bbs = False
+			if bbs == False:
+				bbstime += 1
+				bbbhealth = 10
+
+		if playerhunger >= 10:
+			playerhunger = 10
+		if playerthirst >= 10:
+			playerthirst = 10
+
+		playerthirst -= 0.01
+		playerhunger -= 0.01
+
+		pygame.display.update()
+		clock.tick(60)
+
+game_loop()
+pygame.quit()
+quit()

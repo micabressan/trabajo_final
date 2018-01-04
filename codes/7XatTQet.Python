@@ -1,0 +1,2 @@
+playerGroups = alldata.groupby(["PLAYER_ID"])
+teamsPerPlayer = playerGroups.agg(lambda p: len(p.drop_duplicates(subset=["TEAM_ABBREVIATION"]))).icol(0)

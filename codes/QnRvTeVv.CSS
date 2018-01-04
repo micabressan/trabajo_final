@@ -1,0 +1,64 @@
+$menu-height: 50px;
+$menu-color: #852dff;
+$menu-bg-color: complement($menu-color);
+
+$flash-types: alert notice;
+
+$flash-color: (
+  'alert': $menu-color,
+  'notice': $menu-bg-color
+);
+
+@each $type in $flash-types {
+  .flash-#{$type} {
+    color: map-get($flash-color, $type);
+    $temp-color: map-get($flash-color, $type);
+    background: complement($temp-color);
+    padding: $menu-height / 2;
+    margin: $menu-height / 3;
+    border-radius: 5px;
+    display: block;
+  }
+}
+
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+@mixin change-colors($percent: 25%, $type: "both") {
+  @if ($type == "back") {
+    background: lighten($menu-bg-color, $percent);
+  } @else if ($type == "fore") {
+    color: lighten($menu-color, $percent);
+  } @else {
+    background: lighten($menu-bg-color, $percent);
+    color: lighten($menu-color, $percent);
+  }
+
+}
+nav#top-menu {
+  height: $menu-height;
+  color: $menu-color;
+  background: $menu-bg-color;
+
+  ul {
+    display: block;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+        display: block;
+        line-height: $menu-height;
+
+        &:hover {
+          @include change-colors($type:"fore");
+        }
+      }
+    }
+  }
+}

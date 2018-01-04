@@ -1,0 +1,7 @@
+fn walk(root: &Path) {
+    WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+        let pathbuf = PathBuf::from(path.unwrap().path());
+        println!("{:?}, {:?}", path, process_file(pathbuf, &root).result_str());
+        WalkState::Continue
+    }));
+}

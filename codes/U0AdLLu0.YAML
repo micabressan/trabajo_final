@@ -1,0 +1,29 @@
+Item:
+  id: iron_chestplate
+  name: "&6Farmer Chestplate"
+  lore:
+    - "&7Will feed you when"
+    - "&7your hunger is low."
+armorequip: #This is the when. You can compress more than one when at the item by splitting them with a ","
+  Action:
+    player:
+      - setFood: 10
+      - setHealth: 10
+armorunequip:
+  Action:
+    player:
+      - setFood: 10
+      - setHealth: 10
+Crafting:
+  type: shaped
+  shape:
+    - aga
+    - gig
+    - aga
+  material:
+    a: air:0
+    i: iron_chestplate:0
+    g: golden_apple:0
+  Condition:
+    player:
+      - permission: value:hopeitems.farmertunic.use:&cYou do not have permission.

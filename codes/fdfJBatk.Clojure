@@ -1,0 +1,239 @@
+{:type :vurderingsforslag,
+ :terminer
+ {2017
+  {:vurderingsforslag-ev
+   {:delvurderinger
+    [{:entities
+      #{{:entity-type :bygning, :entity-id 5244837}
+        {:entity-type :bygning, :entity-id 4425572}
+        {:entity-type :bfe, :entity-id 7041399}
+        {:entity-type :bygning, :entity-id 4081201}
+        {:entity-type :enhed, :entity-id 2622925}},
+      :areal 184.05,
+      :modelforslag
+      {:traefsikkerhed 0.0012,
+       :vurderingsejendom-id-ice 18570025,
+       :justering-nom -2.2224,
+       :kommune-nr 530,
+       :areal-vaegte
+       [{:spec "lovlig_beboelse", :areal 166.0, :vaegt 1.0}
+        {:spec "lovlig_beboelse_i_tagetage", :areal 42.0, :vaegt -0.1}
+        {:spec "kaelderareal_ikke_beboelse", :areal 0.0, :vaegt 0.4}
+        {:spec "indbygget_garage", :areal 0.0, :vaegt 0.4}
+        {:spec "indbygget_udhus", :areal 0.0, :vaegt 0.4}
+        {:spec "garage", :areal 70.0, :vaegt 0.25}
+        {:spec "udhus", :areal 19.0, :vaegt 0.25}
+        {:spec "drivhus", :areal 0.0, :vaegt 0.25}
+        {:spec "frit_overdaekket_areal", :areal 0.0, :vaegt 0.25}
+        {:spec "frit_udestue", :areal 0.0, :vaegt 0.25}
+        {:spec "tidligere_landbrugsbygning", :areal 0.0, :vaegt 0.25}
+        {:spec "indbygget_udestue", :areal 0.0, :vaegt 0.15}
+        {:spec "indbygget_carport", :areal 0.0, :vaegt 0.1}
+        {:spec "carport", :areal 0.0, :vaegt 0.1}
+        {:spec "ikke_udnyttet_tagetage", :areal 0.0, :vaegt 0.1}],
+       :kvadratmeterpris 6175.9684,
+       :ejendoms-nr 1859,
+       :version-timestamp "2017-06-13T16:19:21Z",
+       :omraadepris 6178.1908,
+       :registrerings-tid "2017-11-02T20:28:45Z",
+       :termin 2017,
+       :virknings-tid "2017-09-01T00:00:00Z",
+       :run-tid "2017-11-02T20:28:45Z",
+       :vurderingsflag [{:flagkode "rc.0033", :kilde "model"}],
+       :vaegtet-areal 184.05,
+       :ejendomsvaerdi 1136686.9916,
+       :justering-faktor 0.9996,
+       :modelversion "2017.02",
+       :justeringer
+       [{:spec "I(pmax(pmin(enhed.antalbadevaerelser, 3), 1))",
+         :faktor 1.0169}
+        {:spec "I(pmax(pmin(enhed.antalvandskylledetoiletter, 3), 1))",
+         :faktor 1.0419}
+        {:spec "tag_kode_grp", :faktor 1.0283}
+        {:spec "byg_anvend_kode_grp", :faktor 1.0}
+        {:spec "ydervaeg_grp", :faktor 1.0014}
+        {:spec "varme_grp", :faktor 0.9987}
+        {:spec "varme_suppl_kode_grp", :faktor 0.9832}
+        {:spec
+         "s(adresse.etrs89koordinat_oest,adresse.etrs89koordinat_nord)",
+         :faktor 1.0043}
+        {:spec "s(I(pmin(bolig_alder, 100)))", :faktor 0.894}
+        {:spec "s(I(250 - pmin(afstand_kyst, 250)))", :faktor 1.0}
+        {:spec
+         "s(I(pmax(pmin(aggregering.jordstykker.registreretareal, 2000), 200)))",
+         :faktor 1.0043}
+        {:spec "s(I(pmin(bolig_areal, 250)))", :faktor 0.9002}
+        {:spec "s(I(pmin(ombyg_alder, 100)))", :faktor 1.1496}],
+       :entiteter
+       [{:entitet "enhed",
+         :entitet-id 2622925,
+         :modelsegment "pcl_byzone",
+         :del nil}
+        {:entitet "bygning",
+         :entitet-id 4081201,
+         :modelsegment nil,
+         :del nil}
+        {:entitet "bygning",
+         :entitet-id 4425572,
+         :modelsegment nil,
+         :del nil}
+        {:entitet "bygning",
+         :entitet-id 5244837,
+         :modelsegment nil,
+         :del nil}],
+       :nabo-ejendomme
+       [{:vurderingsejendom-id-ice 18581764,
+         :salg-id-ice 1618030,
+         :kommune-nr 530,
+         :ejendoms-nr 1863,
+         :salgsdato "2011-03-01",
+         :kvadratmeterpris 4931.3136,
+         :vaegt 0.1289}
+        {:vurderingsejendom-id-ice 18599559,
+         :salg-id-ice 1606160,
+         :kommune-nr 530,
+         :ejendoms-nr 1860,
+         :salgsdato "2010-11-08",
+         :kvadratmeterpris 7457.3714,
+         :vaegt 0.12}
+        {:vurderingsejendom-id-ice 18883571,
+         :salg-id-ice 1873440,
+         :kommune-nr 530,
+         :ejendoms-nr 154,
+         :salgsdato "2014-07-02",
+         :kvadratmeterpris 8264.5793,
+         :vaegt 0.1111}
+        {:vurderingsejendom-id-ice 18628541,
+         :salg-id-ice 1900599,
+         :kommune-nr 530,
+         :ejendoms-nr 2451,
+         :salgsdato "2014-12-27",
+         :kvadratmeterpris 5934.375,
+         :vaegt 0.1022}
+        {:vurderingsejendom-id-ice 18654140,
+         :salg-id-ice 1561679,
+         :kommune-nr 530,
+         :ejendoms-nr 1854,
+         :salgsdato "2010-05-21",
+         :kvadratmeterpris 8141.7875,
+         :vaegt 0.0933}
+        {:vurderingsejendom-id-ice 18631898,
+         :salg-id-ice 1863802,
+         :kommune-nr 530,
+         :ejendoms-nr 2434,
+         :salgsdato "2014-06-19",
+         :kvadratmeterpris 5773.6013,
+         :vaegt 0.0844}
+        {:vurderingsejendom-id-ice 18603117,
+         :salg-id-ice 1646291,
+         :kommune-nr 530,
+         :ejendoms-nr 2399,
+         :salgsdato "2011-05-25",
+         :kvadratmeterpris 9566.3405,
+         :vaegt 0.0756}
+        {:vurderingsejendom-id-ice 18678080,
+         :salg-id-ice 1526376,
+         :kommune-nr 530,
+         :ejendoms-nr 2443,
+         :salgsdato "2010-01-11",
+         :kvadratmeterpris 8965.7755,
+         :vaegt 0.0667}
+        {:vurderingsejendom-id-ice 18727380,
+         :salg-id-ice 1894353,
+         :kommune-nr 530,
+         :ejendoms-nr 2444,
+         :salgsdato "2014-09-15",
+         :kvadratmeterpris 1797.3033,
+         :vaegt 0.0578}
+        {:vurderingsejendom-id-ice 18819280,
+         :salg-id-ice 1959316,
+         :kommune-nr 530,
+         :ejendoms-nr 1837,
+         :salgsdato "2015-10-15",
+         :kvadratmeterpris 3714.0416,
+         :vaegt 0.0489}
+        {:vurderingsejendom-id-ice 18634854,
+         :salg-id-ice 1914996,
+         :kommune-nr 530,
+         :ejendoms-nr 1836,
+         :salgsdato "2015-04-13",
+         :kvadratmeterpris 5141.4383,
+         :vaegt 0.04}
+        {:vurderingsejendom-id-ice 18732020,
+         :salg-id-ice 1802895,
+         :kommune-nr 530,
+         :ejendoms-nr 646,
+         :salgsdato "2013-08-31",
+         :kvadratmeterpris 5272.821,
+         :vaegt 0.0311}
+        {:vurderingsejendom-id-ice 18623619,
+         :salg-id-ice 1788209,
+         :kommune-nr 530,
+         :ejendoms-nr 641,
+         :salgsdato "2013-04-16",
+         :kvadratmeterpris 8251.3756,
+         :vaegt 0.0222}
+        {:vurderingsejendom-id-ice 19757277,
+         :salg-id-ice 2120623,
+         :kommune-nr 530,
+         :ejendoms-nr 1626,
+         :salgsdato "2017-03-23",
+         :kvadratmeterpris 7473.9434,
+         :vaegt 0.0133}
+        {:vurderingsejendom-id-ice 18863308,
+         :salg-id-ice 1652731,
+         :kommune-nr 530,
+         :ejendoms-nr 1490,
+         :salgsdato "2011-08-29",
+         :kvadratmeterpris 6026.7627,
+         :vaegt 0.0044}],
+       :bfe-id-ice 7041399,
+       :beregningsmetode "parcelhusmodel"},
+      :nominel-vaerdi 1136686.9916M}],
+    :nominel-vaerdi 1136686.9916M},
+   :vurderingsforslag-gv
+   {:delvurderinger
+    [{:entities
+      #{{:entity-type :jordstykke, :entity-id 357203}
+        {:entity-type :bfe, :entity-id 7041399}},
+      :areal 1493.0,
+      :modelforslag
+      {:vurderingsejendom-id-ice 18570025,
+       :kommune-nr 530,
+       :grundvaerdi-beregninger
+       {:gvk
+        [{:grundvaerdi 230150.1221,
+          :standardiseret-gv 196390.8357,
+          :justering-faktor 1.1719,
+          :justering-nom 33759.2864,
+          :justeringer
+          [{:spec
+            "s(I(pmax(pmin(aggregering.jordstykker.registreretareal, 2000), 200)))",
+            :faktor 1.1719}],
+          :vurderingsflag [{:flagkode "rc.gv3", :kilde "model"}]}],
+        :gvr
+        [{:grundvaerdi 800000.0,
+          :opfoerelsesomkostninger 1.12E7,
+          :fiktiv-ejendomsvaerdi 1.2E7,
+          :opfoert-etagemeter 400.0,
+          :vurderingsflag []}]},
+       :ejendoms-nr 1859,
+       :version-timestamp "2017-06-13T16:19:21Z",
+       :registrerings-tid "2017-11-02T20:28:45Z",
+       :termin 2017,
+       :effektivt-grundareal 1493.0,
+       :grundvaerdi 800000.0,
+       :virknings-tid "2017-09-01T00:00:00Z",
+       :run-tid "2017-11-02T20:28:45Z",
+       :modelversion "2017.02",
+       :entiteter
+       [{:entitet "jordstykke",
+         :entitet-id 357203,
+         :modelsegment nil,
+         :del nil}],
+       :bfe-id-ice 7041399,
+       :beregningsmetode "gvr"},
+      :nominel-vaerdi 800000.0M}],
+    :nominel-vaerdi 800000.0M}}},
+ :basis-tx #uuid "8c27a130-f9a1-4921-a9dc-4a64b5a4bb96",
+ :persisted-basis-tx #uuid "8c27a130-f9a1-4921-a9dc-4a64b5a4bb96"}

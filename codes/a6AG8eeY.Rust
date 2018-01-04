@@ -1,0 +1,8 @@
+pub fn ownership() {
+    let s1 = String::from("Here we begin");
+
+    let mut s2 = s1;
+    s2.push_str(", ne'er to end.");
+
+    println!("{}", s2);
+}

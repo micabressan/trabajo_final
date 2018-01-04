@@ -1,0 +1,60 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+
+
+# My snippets
+# no space in prefix allowed!
+# indentation with tabs necessary!
+
+'.source.js':
+  'Multi-line example':
+    'prefix': 'abc'
+    'body': """
+    // this is an example$1
+    // of how to insert multi-line snippets$2
+    // $3with 3 tabulator-stops
+    """
+  'eventListener DOMContentLoaded':
+    'prefix': 'domcontent'
+    'body': """
+document.addEventListener("DOMContentLoaded", function() {
+  $1
+});
+    """
+
+
+'.text.html.basic':
+  'meta compatible IE=edge':
+    'prefix': 'ie_compatible'
+    'body': '<meta http-equiv="X-UA-Compatible" content="IE=edge" />$1'
+  'meta charset UTF-8':
+    'prefix': 'utf'
+    'body': '<meta charset="UTF-8" />$1'
+  'meta viewport':
+    'prefix': 'viewport'
+    'body': '<meta name="viewport" content="width=device-width, initial-scale=1" />$1'
+  'import css':
+    'prefix': 'import_css'
+    'body': '@import url("$1.css");'
+  'style TAGs':
+    'prefix': 'style'
+    'body': '<style>\n$1\n</style>'

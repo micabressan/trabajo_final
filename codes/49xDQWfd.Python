@@ -1,0 +1,10 @@
+import sys
+
+def multiTable(num):
+	x = range(1,num+1)
+	for a in x:
+		for b in x:
+			print unicode(a*b).rjust(3),
+		print
+
+multiTable(int(sys.argv[1]))

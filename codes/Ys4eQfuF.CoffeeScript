@@ -1,0 +1,37 @@
+mixin customFieldGroup(id)
+	.form-group.custom-field-entry(data-id=id)
+		.col-md-5
+			input.form-control(type='input')
+		.col-md-6
+			select.selectpicker.custom-field-types
+				option(value='TEXT') Text
+				option(value='CHECKBOX') Checkbox
+				option(value='DATE') Datum
+				option(value='LINE') Trennlinie
+		.col-md-1
+			button.btn.btn-sm.btn-default.fa.fa-trash.reveal-on-hover(type='button')
+
+if customField
+	if customField.type == 'LINE'
+		.hr-line-dashed.pb-5.pt-5.custom-field-entry(data-id='#{field.id}')
+	else
+		+customFieldGroup(customField.id)
+else
+	.form-group.custom-field-entry.reveal-on-hover-container
+		.col-md-5
+			input.form-control(type='input')
+		.col-md-6
+			+customFieldGroup(0)
+
+
+
+
+Uncaught TypeError: Cannot use 'in' operator to search for 'customField' in 1
+
+
+
+buf.push("<div class=\"form-group custom-field-entry reveal-on-hover-container\"><div class=\"col-md-5\"><input type=\"input\" class=\"form-control\"/></div><div class=\"col-md-6\">");
+jade_mixins["customFieldGroup"](0);
+buf.push("</div></div>");
+}}.call(this,"customField" in locals_for_with?locals_for_with.customField:typeof customField!=="undefined"?customField:undefined,"field" in locals_for_with?locals_for_with.field:typeof field!=="undefined"?field:undefined));;return buf.join("");
+};

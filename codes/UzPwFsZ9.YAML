@@ -1,0 +1,31 @@
+users:
+  krinsdeath:
+    groups:
+    - users
+
+groups:
+  users:
+    worlds:
+      creative:
+        creative.node: true
+      survival:
+        survival.node: true
+
+
+# OR YOU CAN DO THIS
+
+users:
+  krinsdeath:
+    groups:
+    - userCreative
+    - userSurvival
+
+groups:
+  userCreative:
+    worlds:
+      creative:
+        creative.node: true
+  userSurvival:
+    worlds:
+      survival:
+        survival.node: true

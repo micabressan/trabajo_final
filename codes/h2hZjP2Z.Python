@@ -1,0 +1,123 @@
+"""
+ex1.py
+returns employee details
+created by dv17534 03/12/2017
+"""
+
+
+
+# split details
+def employee(deets) :
+    split = deets.split()
+    pay = split[0]
+    salary = split[1]
+    job = split[2]
+    fname = split[3:-1]
+    sname = split[-1]
+    name2 = " ".join(fname)
+    employeeDeets = (pay, salary, job, sname, name2) #creates tuple using split list
+    return employeeDeets    
+
+
+def detailsPrint(field) :   #takes tuple and prints
+    print("{:30}" "{:6}" "{:15}" "{:7}".format(field[3] + ", " + field[4], field[0], field[2], "£" + field[1]))
+
+employeeList = []
+fname = input("Enter filename: ")
+try :
+    f = open(fname)
+    empLine = f.readline()
+    while (len(empLine) > 0) :
+        info = employee(empLine)#grabs empLine and gives to first function, gets formatted by it
+        detailsPrint(info)      #gets detailsPrint formatting, formats info to it following employee function format
+        employeeList.append(info)
+        empLine = f.readline()  #reads next line
+    f.close()
+except IOError as e :
+    print("Problem opening file")
+print("\n")
+
+#use this bit to print out the unformatted list
+'''
+print(employeeList)
+print("\n")
+'''
+
+#user wants to get a line
+#display either full details using payroll number/
+                #display all employees in specified salary range/
+                #display first and last names of all employees with specified job title/ -only first name and sname
+                #or quit the program
+
+import sys
+a = 0
+while a == 0 :
+    print("Enter a number from 1 to 3 to pick a method to use to select employees and 4 to quit the program.")
+    print("1 will allow you to select employees via payroll number")
+    print("2 will allow you to select employees via salary range")
+    print("3 will allow you to select employees via job title")
+    print("4 will quit the program")
+    f = open(fname)
+    x = False
+    try :
+        display = int(input("Enter a number: "))
+        if display == 1 :
+            paynum = input("Enter the payroll number: ")
+            for p in employeeList :
+                if p[0] == paynum :
+                    print("\n")
+                    detailsPrint(p)
+                    print("\n")
+                    x = True
+            if x == False :
+                print("No employees could be found with that number. Try again")
+
+                
+        if display == 2 :
+            x = False
+            maxSalary = 1000000
+            minpay = int(input("Enter the minimum pay: "))
+            maxpay = int(input("Enter the maximum pay: "))
+            if len(minpay) or len(maxpay) > maxSalary :
+                x = False
+                print("No employees earn over £1000000. Try again.")
+            if len(minpay) or len(maxpay) < maxSalary :
+                for s in employeeList :
+                    if s[1] >= minpay :
+                        print("\n")
+                        detailsPrint(s)
+                        print("\n")
+                        x = True
+            if x == False :
+                print("No employees could be found within that range. Try again")
+        if display == 3 :
+            jobttl = input("Enter the job title: ")
+        
+        if display == 4 :
+            print("\nByee")
+            a = 1
+            sys.exit()
+    except :
+        print("\nSomething went wrong, try again.\n")
+
+
+'''
+#print a specified line from the table
+n = empLine
+f = open("emps.txt")
+with f as inf :
+    for count, line in enumerate(inf, 2) :
+        if count == 2 :
+            print(line)
+'''
+
+'''
+12345 25000 Consultant Bartholomew Homer Simpson
+into
+Simpson, Bartholomew Homer 12345 Consultant £25000
+'''
+
+'''
+#this will format hi to occupy 30 chars, then the second varibale to 6 etc
+print("{:30}" "{:6}".format("hi", "hi2"))
+'''

@@ -1,0 +1,97 @@
+#![allow(dead_code)]
+
+struct Circle{
+	x: f64,
+	y: f64,
+	r: f64,
+}
+
+struct Builder{
+	x: f64,
+	y: f64,
+	size: f64
+}
+
+struct Square{
+	x: f64,
+	y: f64,
+	size: f64,
+}
+
+
+trait Polygon{
+	fn area(&self) -> f64;
+	fn create_concentric(&self, incerement: f64) -> Self;
+}
+
+impl Polygon for Circle{
+	fn area(&self) -> f64{
+		self.r * self.r * 3.14
+	}
+
+	fn create_concentric(&self, incerement: f64) -> Circle{
+		Circle{
+			x: self.x,
+			y: self.y,
+			r: self.r + incerement
+		}
+	}
+}
+
+impl Polygon for Square {
+	fn area(&self) -> f64{
+		self.size * self.size
+	}
+
+	fn create_concentric(&self, incerement: f64) -> Square{
+		Square{
+			x: self.x,
+			y: self.y,
+			size: self.size + incerement,
+		}
+	}
+}
+
+impl Builder{
+	fn new() -> Builder{
+		Builder{
+			x: 0.0,
+			y: 0.0,
+			size: 1.0,
+		}
+	}
+	fn size(&mut self, val: f64) -> &mut Builder{
+		self.size = val;
+		self
+	}
+
+	fn x(&mut self, val: f64) -> &mut Builder{
+		self.x = val;
+		self
+	}
+
+	fn y(&mut self, val: f64) -> &mut Builder{
+		self.y = val;
+		self
+	}
+
+	fn finalize<T>(&mut self) -> T{
+		let retVal: T =
+		Circle{           //or some other object, will be edited later
+			x: self.x,
+			y: self.y,
+			r: self.size,
+		};
+
+
+		retVal
+	}
+}
+
+fn main() {
+    let c = Builder::new().size(5.0).finalize();
+
+    let c2 = c.create_concentric(1.0).area();
+
+    println!("{:?}", c2);
+}

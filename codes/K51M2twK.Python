@@ -1,0 +1,168 @@
+#!/usr/bin/python
+
+import sys
+import pickle
+sys.path.append("../tools/")
+
+from feature_format import featureFormat, targetFeatureSplit
+from tester import dump_classifier_and_data
+import tester
+from sklearn.feature_selection import SelectKBest
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.cross_validation import StratifiedShuffleSplit, train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+
+##############################################
+### Task 1: Select what features I'll use. ###
+##############################################
+# poi = a Person of Interest
+# Starter features
+# 'email_address' is not included because it causes error due to its string values.
+features_list = ['poi','salary', 'deferral_payments', 'total_payments',
+                'loan_advances', 'bonus', 'restricted_stock_deferred',
+                'deferred_income', 'total_stock_value', 'expenses',
+                'exercised_stock_options', 'other', 'long_term_incentive',
+                'restricted_stock', 'director_fees', 'to_messages',
+                'from_poi_to_this_person', 'from_messages',
+                'from_this_person_to_poi', 'shared_receipt_with_poi']
+
+### Load the dictionary containing the dataset
+with open("final_project_dataset.pkl", "r") as data_file:
+    data_dict = pickle.load(data_file)
+
+###############################
+### Task 2: Remove outliers ###
+###############################
+
+data_dict.pop("TOTAL", 0) # Sum of values
+data_dict.pop("LOCKHART EUGENE E", 0) # It contains no values
+
+#####################################
+### Task 3: Create new feature(s) ###
+#####################################
+
+# Provides a score of how useful each feature is
+def Select_K_Best(data_dict, features_list, k):
+    data_array = featureFormat(data_dict, features_list)
+    labels, features = targetFeatureSplit(data_array)
+
+    skbest = SelectKBest(k='all') # to check all features' score
+    skbest.fit(features, labels)
+    scores = skbest.scores_
+    tuples = zip(features_list[1:], scores)
+    skbest_features = sorted(tuples, key=lambda x: x[1], reverse=True)
+
+    return skbest_features[:k] # an array of tuples
+
+print 'All features: \n', Select_K_Best(data_dict, features_list, 21)
+
+# Create new email feature and add to the dataframe and features_list
+def create_new_feature():
+    # 'poi_email_ratio'
+    features = ['from_messages', 'to_messages', 'from_poi_to_this_person',
+                'from_this_person_to_poi']
+
+    for key in data_dict:
+        person = data_dict[key]
+        is_valid = True
+        for feature in features:
+            if person[feature] == 'NaN':
+                is_valid = False
+        if is_valid:
+            total_from_poi = person['from_poi_to_this_person'] + person['from_messages']
+            total_to_poi = person['from_this_person_to_poi'] + person['to_messages']
+            to_poi_ratio = float(person['from_this_person_to_poi']) / total_to_poi
+            from_poi_ratio = float(person['from_poi_to_this_person']) / total_from_poi
+            person['poi_email_ratio'] = to_poi_ratio + from_poi_ratio
+        else:
+            person['poi_email_ratio'] = 'NaN'
+
+    # Add new feature to features_list
+    features_list.extend(['poi_email_ratio'])
+
+# Exclude low score features
+features_list = ['poi','salary', 'total_payments', 'bonus', 'deferred_income',
+                'total_stock_value', 'exercised_stock_options', 'long_term_incentive',
+                'restricted_stock', 'loan_advances', 'expenses', 'shared_receipt_with_poi']
+# Final features
+create_new_feature()
+print 'Final features_list: \n', features_list # 12 features
+
+### Store to my_dataset for easy export below.
+my_dataset = data_dict
+
+### Extract features and labels from dataset for local testing
+data = featureFormat(my_dataset, features_list, sort_keys = True)
+labels, features = targetFeatureSplit(data)
+
+print 'Top 5 useful features: \n', Select_K_Best(data_dict, features_list, 5)
+
+### Scale features to a range between 0 and 1
+scaler = MinMaxScaler()
+features = scaler.fit_transform(features)
+
+###########################################
+### Task 4: Try a varity of classifiers ###
+###########################################
+### Name your classifier clf for easy export below.
+
+def algorithm_tester(clf):
+    tester.dump_classifier_and_data(clf, my_dataset, features_list)
+    return tester.main()
+
+print "Algorithms with default parameter values \n"
+# Gaussian Naive Bayes
+# clf = GaussianNB()
+# algorithm_tester(clf)
+# # Decision tree
+# clf = DecisionTreeClassifier()
+# algorithm_tester(clf)
+# # Logistic Regression
+# clf = LogisticRegression()
+# algorithm_tester(clf)
+# # RandomForest
+# clf = RandomForestClassifier()
+# algorithm_tester(clf)
+
+###################################################################################
+### Task 5: Tune your classifier to achieve better than .3 precision and recall ###
+###################################################################################
+
+# Example starting point. Try investigating other evaluation techniques!
+features_train, features_test, labels_train, labels_test = \
+    train_test_split(features, labels, test_size=0.3, random_state=42)
+
+# By default, GridSearchCV uses the KFold cross-validation method
+# (with 3 folds i.e. 3 train/validation splits).
+# Because of the small dataset, I use StratifiedShuffleSplit, with at least 100 folds
+# to give GridSearchCV a better chance of finding a good model
+cv = StratifiedShuffleSplit(labels, 100, random_state = 11)
+
+# Create a pipeline
+rf_pipe = Pipeline([('select_features', SelectKBest(k=13)),
+                    ('classify', RandomForestClassifier())
+                    ])
+# Define parameter configuration
+rf_params = dict(select_features__k = range(1,10),
+                  classify__n_estimators=[30, 50, 70, 100],
+                  classify__min_samples_split=[2, 3, 4],
+                  classify__criterion=['gini', 'entropy'])
+# Find optimal parameters using GridSearchCV
+clf = GridSearchCV(rf_pipe, param_grid=rf_params, scoring='f1', cv = cv)
+clf.fit(features, labels)
+clf.best_params_
+
+##############################################################################
+### Task 6: Dump your classifier, dataset, and features_list so anyone can ###
+##############################################################################
+
+### check your results. You do not need to change anything below, but make sure
+### that the version of poi_id.py that you submit can be run on its own and
+### generates the necessary .pkl files for validating your results.
+
+#dump_classifier_and_data(clf, my_dataset, features_list)

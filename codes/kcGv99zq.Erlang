@@ -1,0 +1,15 @@
+deallocate({Free, Allocated}, Freq, Sender_pid) ->
+  Object = lists:keysearch(Freq, 1, Allocated),
+  case Object of
+    {value, {Freq, Pid}} ->
+      if
+        Pid == Sender_pid ->
+          unlink(Pid),
+          NewAllocated = lists:keydelete(Freq, 1, Allocated),
+          {{[Freq|Free], NewAllocated}, released};
+        true ->
+          {{Free, Allocated}, wrong_frequency}
+      end;
+    false ->
+       {{Free, Allocated}, frequency_not_found}
+  end.

@@ -1,0 +1,37 @@
+.watch-sidebar,
+.watch-main-col,
+body #footer-container,
+#masthead-positioner,
+#masthead-positioner-height-offset,
+.ytp-ce-covering-overlay,
+.ytp-endscreen-content,
+.ytp-button.ytp-endscreen-previous,
+.ytp-button.ytp-endscreen-next
+{
+    display: none;
+}
+
+.ytp-chrome-bottom {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.ytp-player-content.ytp-iv-player-content,
+.video-stream.html5-main-video,
+#placeholder-player
+{
+    display: none;
+}
+
+.player-height {
+    height: 40px;
+}
+
+/* ytp-controls alway show 
+https://greasyfork.org/en/forum/discussion/4304/disable-auto-hide-progress-bar-and-controls
+*/
+.ytp-autohide:not(.ytp-watch-controls) .ytp-chrome-bottom, 
+.ytp-chrome-bottom[aria-hidden=true] {
+    opacity: 1;
+}

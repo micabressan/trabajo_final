@@ -1,0 +1,93 @@
+{
+    "result": "ok",
+    "content": {
+        "type1": [],
+        "type2": [
+            {
+                "id": 1,
+                "alias_id": 37,
+                "name": "یک تخته استاندارد",
+                "alter_name": "Sng",
+                "overbooking": {
+                    "count": 0
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [
+                    {
+                        "id": 3,
+                        "name": "تست3",
+                        "price": null,
+                        "percent": 5,
+                        "type": 1,
+                        "price_percent": 0,
+                        "description": null,
+                        "created_at": "1510384446",
+                        "updated_at": "1510384446",
+                        "deleted_at": null,
+                        "pivot": {
+                            "room_id": 1,
+                            "room_package_id": 3
+                        }
+                    }
+                ],
+                "capacity": 0,
+                "bed": {
+                    "adult": 1,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 4,
+                "alias_id": 67,
+                "name": "دو تخته اکونومی",
+                "alter_name": "DBe",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [
+                    {
+                        "id": 2,
+                        "name": "تست ۲",
+                        "price": 3000000,
+                        "percent": null,
+                        "type": 0,
+                        "price_percent": 1,
+                        "description": null,
+                        "created_at": "1510383760",
+                        "updated_at": "1510384250",
+                        "deleted_at": null,
+                        "pivot": {
+                            "room_id": 4,
+                            "room_package_id": 2
+                        }
+                    }
+                ],
+                "capacity": 0,
+                "bed": {
+                    "adult": 2,
+                    "exadult": 0
+                }
+            },
+            {
+                "id": 5,
+                "alias_id": 40,
+                "name": "سه تخته استاندارد",
+                "alter_name": "TR",
+                "overbooking": {
+                    "count": null
+                },
+                "day": "یک شنبه",
+                "days": [],
+                "package": [],
+                "capacity": 0,
+                "bed": {
+                    "adult": 3,
+                    "exadult": 0
+                }
+            }
+        ]
+    }
+}

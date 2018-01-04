@@ -1,0 +1,300 @@
+{
+	"id": 10619837,
+	"apartment_id": "3854701",
+	"listing_ids": [],
+	"building": {
+		"id": 5555131,
+		"name": "96 Grove Street in West Village, Manhattan",
+		"address_information": {
+			"neighborhood": "West Village",
+			"borough": "Manhattan",
+			"address": "96 GROVE STREET",
+			"city": "New York",
+			"state": "NY",
+			"zip": "10014",
+			"address_formatted": "96 Grove Street"
+		},
+		"building_information": {
+			"floors": {
+				"label": "stories",
+				"value": 4
+			},
+			"year_built": {
+				"label": "built",
+				"value": 1900
+			},
+			"units": {
+				"label": "units",
+				"value": 7
+			},
+			"name": {
+				"label": "name",
+				"value": "96 GROVE STREET"
+			}
+		},
+		"available_listings_count": 0,
+		"main_image_url": "https://cdn-img3.streeteasy.com/nyc/image/3/95226903.jpg",
+		"thumb_image_url": "https://cdn-img3.streeteasy.com/nyc/image/3/95226903.jpg",
+		"show_building": false
+	},
+	"brokers_count": 0,
+	"permalink": "Studio-Grove-ST-New-York-NY-10014-aFSnZFeokKD6",
+	"borough_id": 1,
+	"neighborhood_id": 12,
+	"show_address": false,
+	"street_address": null,
+	"display_address": "Grove St",
+	"latitude": 40.73350143,
+	"longitude": -74.00170135,
+	"apartment_size_id": 1,
+	"bathrooms": 1.0,
+	"square_ft": 0,
+	"convertible": false,
+	"rent": 4000.0,
+	"amenity_ids": [],
+	"pet_id": 0,
+	"no_fee": false,
+	"partial_fee": false,
+	"partial_fee_perc": "0.0",
+	"available": "2017-12-19",
+	"revised_at": "2017-12-19T09:34:57-05:00",
+	"published_at": "2017-12-19T09:34:57-05:00",
+	"featured": false,
+	"is_exclusive": false,
+	"by_owner": false,
+	"verified": false,
+	"searchable": false,
+	"favorite": true,
+	"web_id": "10619837",
+	"hidden": false,
+	"description": "New description for this pretty apartment.",
+	"showings_available": false,
+	"showings_immediate": false,
+	"photos": [{
+		"id": 150011424,
+		"listing_id": 10619837,
+		"primary": true,
+		"floor_plan": false,
+		"position": 1,
+		"image_file_name": "photo.jpg",
+		"image_content_type": "image/jpeg",
+		"image_file_size": 167479,
+		"image_width": 2048,
+		"image_height": 1360,
+		"image_updated_at": "2017-11-07T11:48:59-05:00",
+		"original": "https://s3.amazonaws.com/nakedapartments/images/150011424/original.jpg?1510073340",
+		"styles": {
+			"medium": "https://s3.amazonaws.com/nakedapartments/images/150011424/medium.jpg?1510073340",
+			"medium_4_3": "https://s3.amazonaws.com/nakedapartments/images/150011424/medium_4_3.jpg?1510073340",
+			"thumb": "https://s3.amazonaws.com/nakedapartments/images/150011424/thumb.jpg?1510073340",
+			"large": "https://s3.amazonaws.com/nakedapartments/images/150011424/large.jpg?1510073340",
+			"mthumb": "https://s3.amazonaws.com/nakedapartments/images/150011424/mthumb.jpg?1510073340"
+		},
+		"created_at": "2017-11-07T11:49:00-05:00",
+		"updated_at": "2017-11-07T11:49:00-05:00"
+	}, {
+		"id": 150011425,
+		"listing_id": 10619837,
+		"primary": false,
+		"floor_plan": false,
+		"position": 2,
+		"image_file_name": "photo.jpg",
+		"image_content_type": "image/jpeg",
+		"image_file_size": 398197,
+		"image_width": 2048,
+		"image_height": 1366,
+		"image_updated_at": "2017-11-07T11:48:59-05:00",
+		"original": "https://s3.amazonaws.com/nakedapartments/images/150011425/original.jpg?1510073342",
+		"styles": {
+			"medium": "https://s3.amazonaws.com/nakedapartments/images/150011425/medium.jpg?1510073342",
+			"medium_4_3": "https://s3.amazonaws.com/nakedapartments/images/150011425/medium_4_3.jpg?1510073342",
+			"thumb": "https://s3.amazonaws.com/nakedapartments/images/150011425/thumb.jpg?1510073342",
+			"large": "https://s3.amazonaws.com/nakedapartments/images/150011425/large.jpg?1510073342",
+			"mthumb": "https://s3.amazonaws.com/nakedapartments/images/150011425/mthumb.jpg?1510073342"
+		},
+		"created_at": "2017-11-07T11:49:01-05:00",
+		"updated_at": "2017-11-07T11:49:02-05:00"
+	}],
+	"floor_plans": [],
+	"broker": {
+		"id": 10330,
+		"slug": "heather-klein",
+		"full_name": "Heather Klein",
+		"email": "hkleinyc@yahoo.com",
+		"phone_number": "2017419553",
+		"entity_type": "Licensed Agent",
+		"brokerage_firm": "TIMM ASSOCIATES INC",
+		"photo": "https://s3.amazonaws.com/nakedapartments/broker/photos/10330/normal.png?1477938147",
+		"rating": 4.4444,
+		"rating_count": 9
+	},
+	"transportation_stops": [{
+		"name": "Christopher St",
+		"type": null,
+		"location": [40.7334, -74.0027],
+		"distance_mi": 0.05,
+		"walking_minutes": 1,
+		"routes": [{
+			"short_name": "1",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "West 4th St",
+		"type": null,
+		"location": [40.7331, -73.9997],
+		"distance_mi": 0.11,
+		"walking_minutes": 2,
+		"routes": [{
+			"short_name": "A",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "C",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "E",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "B",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "D",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "F",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "M",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "14th St",
+		"type": null,
+		"location": [40.7374, -73.9972],
+		"distance_mi": 0.36,
+		"walking_minutes": 8,
+		"routes": [{
+			"short_name": "F",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "M",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "L",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "1",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "2",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "3",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "6th Av",
+		"type": null,
+		"location": [40.7372, -73.9967],
+		"distance_mi": 0.37,
+		"walking_minutes": 8,
+		"routes": [{
+			"short_name": "F",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "M",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "L",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "1",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "2",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "3",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "Houston St",
+		"type": null,
+		"location": [40.7285, -74.0052],
+		"distance_mi": 0.39,
+		"walking_minutes": 9,
+		"routes": [{
+			"short_name": "1",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "14th St-8th Av",
+		"type": null,
+		"location": [40.7396, -74.0024],
+		"distance_mi": 0.42,
+		"walking_minutes": 9,
+		"routes": [{
+			"short_name": "A",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "C",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "E",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "L",
+			"long_name": "",
+			"type": null
+		}]
+	}, {
+		"name": "8th St",
+		"type": null,
+		"location": [40.7306, -73.9927],
+		"distance_mi": 0.51,
+		"walking_minutes": 11,
+		"routes": [{
+			"short_name": "N",
+			"long_name": "",
+			"type": null
+		}, {
+			"short_name": "R",
+			"long_name": "",
+			"type": null
+		}]
+	}],
+	"open_houses": [],
+	"neighborhood": {
+		"name": "West Village",
+		"id": 12,
+		"image_url": "/assets/landing/hero/12.jpg",
+		"median_rent": 3450,
+		"borough_name": "Manhattan",
+		"borough_id": 1
+	},
+	"market_price_indicator_flag": null,
+	"market_price_indicator_info": null
+}

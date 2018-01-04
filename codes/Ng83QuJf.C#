@@ -1,0 +1,23 @@
+using System;
+
+
+namespace MerryChristmas
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            float budget = float.Parse(Console.ReadLine());
+            float firstPresentPrice = float.Parse(Console.ReadLine());
+            float secondPresentPrice = float.Parse(Console.ReadLine());
+            float thirdPresentPrice = float.Parse(Console.ReadLine());
+
+            float totalPrice = firstPresentPrice + secondPresentPrice + thirdPresentPrice;
+            float moneyLeft = budget - totalPrice;
+            float moneyForDonation = moneyLeft - (moneyLeft * 0.10f);
+
+            Console.WriteLine(moneyForDonation);
+               
+        }
+    }
+}

@@ -1,0 +1,2 @@
+select p1.id,p1.nome,p1.datadenascimento as data1,p2.datadenascimento as data2,p2.id,p2.nome from pessoa p1, pessoa p2
+where p1.nome=p2.nome and p1.id < p2.id and p1.pessoa_type='ALUNO' order by p1.nome,p2.nome

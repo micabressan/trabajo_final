@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _14_Populations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, Dictionary<string, long>> countries = new Dictionary<string, Dictionary<string, long>>();
+            while (true)
+            {
+                string[] input = Console.ReadLine().Split('|');
+                if (input[0] == "report")
+                {
+                    break;
+                }
+                else
+                {
+                    string country = input[0];
+                    string city = input[1];
+                    long people = long.Parse(input[2]);
+                    if (countries.ContainsKey(country))
+                    {
+                        countries[country].Add(city, people);
+                    }
+                    else
+                    {
+                        Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                        dictionary.Add(city, people);
+                        countries.Add(country, dictionary);
+                    }
+                }
+            }
+            var orderedDict = countries.OrderByDescending(pair => pair.Value.Values.Sum()).ToDictionary(x => x.Key, x => x.Value);
+            foreach (var pair in orderedDict)
+            {
+                var country = pair.Key;
+                var cities = pair.Value;
+                var orderedCities = cities
+                    .OrderByDescending(x => x.Value)
+                    .ToDictionary(x => x.Key, x => x.Value);
+
+
+                Console.WriteLine($"{country} (total population: {orderedCities.Values.Sum()})");
+
+                foreach (var nestedPair in orderedCities)
+                {
+                    var city = nestedPair.Key;
+                    var cityPopulation = nestedPair.Value;
+                    Console.WriteLine($"=>{city}: {cityPopulation}");
+                }
+            }
+        }
+    }
+}

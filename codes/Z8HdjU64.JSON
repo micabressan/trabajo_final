@@ -1,0 +1,17 @@
+POST /v1/auth/silent HTTP/1.1
+Host: api-global-ads.percycle.com
+Authorization: Basic Og==
+X-Api-Key: 8deaa40545722e469eafc99b634e9a3586ad414396f534db4ab513ce0c9f66e8,a11aa95060740db2e173aba5c61ea05bb45925da30125474cf8dc02e17dbe22c,b8003368bc3b3e24efb9bf4e1015b3cd0bad18f776bde47e1192ebf26f3bb129
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: bce20b9f-1a33-a785-1cf8-b970fc792bd8
+
+{
+"email":"test@percycle.com",
+"name":"Test User",
+"sellerIds":[
+"2345511",
+"291259"
+],
+"sellerName":"Test Store"
+}

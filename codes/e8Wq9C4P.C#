@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1._4._1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Random r = new Random();
+            int goodCount = r.Next(4, 15);
+            for(int i = 0; i < Console.WindowWidth * (Console.WindowHeight - 3); i++)
+            {
+                Console.Write('S');
+            }
+
+            return;
+            Console.BackgroundColor = ConsoleColor.Red;
+
+            int rectWidth = 10;
+            int rectHeight = 10;
+            int countInRaw = Console.WindowWidth / rectWidth;
+            for(int i = 0; i < goodCount; i++)
+            {
+                int rectLeftUpX = rectWidth * (i % countInRaw);
+                int rectLeftUpY = i / countInRaw;
+                int x = r.Next(rectLeftUpX, rectLeftUpX + rectWidth);
+                int y = r.Next(rectLeftUpY, rectLeftUpY + rectHeight);
+                Console.SetCursorPosition(x, y);
+                Console.Write('C');
+            }
+            Console.WriteLine("Сколько C вы видите?");
+            int answer = Convert.ToInt32(Console.ReadLine());
+            if(answer == goodCount)
+            {
+
+            }
+            
+            Console.ReadLine();
+
+        }
+    }
+
+}

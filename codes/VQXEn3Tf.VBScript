@@ -1,0 +1,271 @@
+' ============================
+' Title : Close All Browser v3
+' Language : VBScript
+' Author : A.Kilya
+' 22/03/2017 12:00 PM
+' ============================
+ 
+' Variables Declarations
+Dim WshShell, oExec, service, t1, t11, t2, t22, t3, t33, t4, t44, t5, t55, t6, t66, t7, t77
+Set WshShell = CreateObject("WScript.Shell")
+Dim c : c = 0
+Dim i : i = 0
+Dim f : f = 0
+Dim s : s = 0
+Dim o : o = 0
+Dim tor : tor = 0
+Dim torch : torch = 0
+ 
+' Start Loop
+Do
+    'Tasklist Commande
+    'Set oExec = WshShell.Exec("tasklist /v /fi ""imagename eq chrome.exe""")
+   
+    Set service = GetObject ("winmgmts:")
+   
+    'Close Google Chrome
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "chrome.exe" Then
+            If c = 0 And i=0 And f=0 And s=0 And o=0 And tor=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+                c = 1
+                t1 = Timer()
+            ElseIf c = 1 Then
+                t11 = Timer()
+                If t11 >= t1+1800.00 Then
+                    If Process.Name = "chrome.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+                        c = 2
+                        t1 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+            ElseIf c = 2 Then
+                t11 = Timer()
+                If t11 >= t1+1800.00 Then
+                    If Process.Name = "chrome.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+                        c = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""chrome.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Internet Explorer
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "iexplore.exe" Then
+            If i = 0 And c=0 And f=0 And s=0 And o=0 And tor=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+                i = 1
+                t2 = Timer()
+            ElseIf i = 1 Then
+                t22 = Timer()
+                If t2 >= t2+1800.00 Then
+                    If Process.Name = "iexplore.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+                        i = 2
+                        t2 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+            ElseIf i = 2 Then
+                t22 = Timer()
+                If t22 >= t2+1800.00 Then
+                    If Process.Name = "iexplore.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+                        i = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""iexplore.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Mozila Firefox
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "firefox.exe" Then
+            If f = 0 And c=0 And i=0 And s=0 And o=0 And tor=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+                f = 1
+                t3 = Timer()
+            ElseIf f = 1 Then
+                t33 = Timer()
+                If t33 >= t3+1800.00 Then
+                    If Process.Name = "firefox.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+                        f = 2
+                        t3 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+            ElseIf f = 2 Then
+                t33 = Timer()
+                If t33 >= t3+1800.00 Then
+                    If Process.Name = "firefox.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+                        f = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""firefox.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Safari
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "Safari.exe" Then
+            If s = 0 And c=0 And i=0 And f=0 And o=0 And tor=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+                s = 1
+                t4 = Timer()
+            ElseIf s = 1 Then
+                t44 = Timer()
+                If t44 >= t4+1800.00 Then
+                    If Process.Name = "Safari.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+                        s = 2
+                        t4 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+            ElseIf s = 2 Then
+                t44 = Timer()
+                If t44 >= t4+1800.00 Then
+                    If Process.Name = "Safari.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+                        s = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""Safari.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Opera
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "opera.exe" Then
+            If o = 0 And c=0 And i=0 And s=0 And f=0 And tor=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+                o = 1
+                t5 = Timer()
+            ElseIf o = 1 Then
+                t55 = Timer()
+                If t55 >= t5+1800.00 Then
+                    If Process.Name = "opera.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+                        o = 2
+                        t5 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+            ElseIf o = 2 Then
+                t55 = Timer()
+                If t55 >= t5+1800.00 Then
+                    If Process.Name = "opera.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+                        o = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""opera.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Tor Browser
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "tor.exe" Then
+            If tor = 0 And c=0 And i=0 And s=0 And o=0 And f=0 And torch=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+                tor = 1
+                t6 = Timer()
+            ElseIf tor = 1 Then
+                t66 = Timer()
+                If t66 >= t6+1800.00 Then
+                    If Process.Name = "tor.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+                        tor = 2
+                        t6 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+            ElseIf tor = 2 Then
+                t66 = Timer()
+                If t66 >= t6+1800.00 Then
+                    If Process.Name = "tor.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+                        tor = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""tor.exe"" /t")
+            End If
+        End If
+    Next
+   
+    'Close Torch Browser
+    For Each Process in Service.InstancesOf ("Win32_Process")
+        If Process.Name = "torch.exe" Then
+            If torch = 0 And c=0 And i=0 And s=0 And o=0 And tor=0 And f=0 Then
+                WScript.Sleep 1800000 ' Wait period in milliseconds
+                Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+                torch = 1
+                t7 = Timer()
+            ElseIf torch = 1 Then
+                t77 = Timer()
+                If t77 >= t7+1800.00 Then
+                    If Process.Name = "torch.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+                        torch = 2
+                        t7 = Timer()
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+            ElseIf torch = 2 Then
+                t77 = Timer()
+                If t77 >= t7+1800.00 Then
+                    If Process.Name = "torch.exe" Then
+                        WScript.Sleep 1800000 ' Wait period in milliseconds
+                        Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+                        torch = 3
+                    End If
+                End If
+                Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+            Else
+                Set oExec = WshShell.Exec("taskkill /f /im ""torch.exe"" /t")
+            End If
+        End If
+    Next
+Loop While True
+' End Loop

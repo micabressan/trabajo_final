@@ -1,0 +1,13 @@
+class App():
+    def __init__(self):
+        self.root = tk.Tk()
+        self.label = tk.Label(text="")
+        self.label.pack()
+        self.update_label()
+        self.root.mainloop()
+
+    def update_label(self):
+        self.label.configure(text=random.randint(1, 60))
+        self.root.after(1000, self.update_label)
+
+app=App()

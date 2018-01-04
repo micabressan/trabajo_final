@@ -1,0 +1,41 @@
+//логарифмическая функция
+class LogarithmicFunction : Function
+    {
+        private double _a;
+        private double _b;
+        public LogarithmicFunction(List<double> valuesOfX, List<double> valuesOfY)
+        {
+            
+            CountCoefficients(valuesOfX, valuesOfY);
+        }
+        public void CountCoefficients(List<double> valuesOfX, List<double> valuesOfY)
+        {
+            int n = valuesOfX.Count;
+            double sumOfLnX = 0;
+            double sumOfY = 0;
+            double sumOfLnXY = 0;
+            double sumOfLnXLnX = 0;
+            foreach (double x in valuesOfX)
+            {
+                if (x <= 0) throw new ArgumentException("Значения x должны соответствовать ОДЗ функции (x>0)");
+                sumOfLnX += Math.Log(x);
+            }
+            foreach (double y in valuesOfY) sumOfY += y;
+            foreach (double x in valuesOfX) sumOfLnXLnX += Math.Log(x) * Math.Log(x);
+            for (int i = 0; i < n; i++) sumOfLnXY += Math.Log(valuesOfX[i]) * valuesOfY[i];
+            _b = (n * sumOfLnXY - sumOfY * sumOfLnX) / (n * sumOfLnXLnX - sumOfLnX * sumOfLnX);
+            _a = sumOfY / n - _b / n * sumOfLnX;
+        }
+        public double ValueInX(double x)
+        {
+            return  _a + _b * Math.Log(x);
+        }
+        public string FunctionString
+        {
+            get { return "y=" + _a + " + " + _b + "*ln(x)"; }
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }

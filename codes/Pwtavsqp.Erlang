@@ -1,0 +1,20 @@
+-module(env).
+-compile(export_all).
+-include("types.hrl").
+
+
+-spec new()-> envType().
+new() ->
+    [].
+
+-spec add(envType(),atom(),valType())-> envType().
+add(Env,Key,Value) ->
+    [{Key, Value} | Env].
+
+-spec lookup(envType(),atom())-> valType().
+lookup([], Key) ->
+	exit(error);
+lookup([{Key1, Value} | _T], Key) when Key1 == Key ->
+	Value;
+lookup([{_Key1, _Value} | T], Key) ->
+	lookup(T, Key).

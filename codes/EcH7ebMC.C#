@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using bnet.protocol.presence;
+
+namespace D3Server.Services
+{
+    class D3PresenceService : PresenceService, ID3Service
+    {
+        D3ServerProvider serverProvider;
+
+        public void SetProvider(D3ServerProvider provider)
+        {
+            serverProvider = provider;
+        }
+
+        public override void Subscribe(Google.ProtocolBuffers.IRpcController controller, SubscribeRequest request, Action<bnet.protocol.NoData> done)
+        {
+            switch (request.EntityId.Low) // Change to database results
+            {
+                case 23545UL: // high 72057594037927936 - account
+                    serverProvider.sendAdditionalData = true;
+                    serverProvider.additionalData = serverProvider.HashToInternalService[3213656212].id.ToString("X2") + "01000003d7011ad401aa06d0010a1209000000000000000111f95b00000000000012270a250a0a08b3880110011801200012173a1508b3888180a0ac80800310c8d9949eb394d5b1cb01121f0a1d0a0a08ce8401100118012000120f2a0d4472657966616c20487961747412120a100a0a08ce840110011802200012021001122d0a2b0a1308ce84011001180420c6d5f4f396a2979c950112143a1209334400006201000311f56e7d6e735c3896122d0a2b0a1308ce84011001180420fbd1959e93b8d5b1c80112143a1209334400006201000311c82cc533a35463cb";
+                    break;
+                case 14655650672318688456UL: // high 216174302532224051 - toon
+                    serverProvider.toonSubscribed = true;
+                    //serverProvider.sendAdditionalData = true;
+                    //serverProvider.additionalData = serverProvider.HashToInternalService[3213656212].id.ToString("X2") + "01 00 00 09 97 02 1A 94 02 AA 06 90 02 0A 12 09 33 44 00 00 62 01 00 03 11 C8 2C C5 33 A3 54 63 CB 12 24 0A 22 0A 0A 08 B3 88 01 10 02 18 01 20 00 12 14 3A 12 08 08 10 03 18 04 20 0B 28 14 30 07 38 0B 40 04 48 01 12 16 0A 14 0A 0A 08 B3 88 01 10 03 18 01 20 00 12 06 18 B1 83 9A EA 01 12 12 0A 10 0A 0A 08 B3 88 01 10 03 18 02 20 00 12 02 18 01 12 35 0A 33 0A 0A 08 B3 88 01 10 03 18 03 20 00 12 25 3A 23 0A 02 20 00 0A 02 20 00 0A 02 20 00 0A 02 20 00 0A 05 0D D9 EB 48 05 0A 02 20 00 0A 02 20 00 0A 02 20 00 12 12 0A 10 0A 0A 08 B3 88 01 10 03 18 04 20 00 12 02 18 02 12 1F 0A 1D 0A 0A 08 CE 84 01 10 03 18 02 20 00 12 0F 2A 0D 46 65 6D 57 69 7A 61 72 64 23 37 33 36 12 12 0A 10 0A 0A 08 CE 84 01 10 03 18 03 20 00 12 02 10 00 12 14 0A 12 0A 0A 08 CE 84 01 10 03 18 09 20 00 12 04 42 02 44 33 12 12 0A 10 0A 0A 08 CE 84 01 10 03 18 0A 20 00 12 02 18 00";
+                    break;
+                case 10824503355229695733UL: // high 216174302532224051 - toon
+                    //serverProvider.sendAdditionalData = true;
+                    //serverProvider.additionalData = serverProvider.HashToInternalService[3213656212].id.ToString("X2") + "010000089c021a9902aa0695020a1209334400006201000311f56e7d6e735c389612240a220a0a08b3880110021801200012143a12080810031804200b28143007380b40044801121b0a190a0a08b38801100318012000120b18c9acaec4fcffffffff0112120a100a0a08b388011003180220001202180112320a300a0a08b3880110031803200012223a200a0220000a0220000a0220000a0220000a0220000a0220000a0220000a02200012120a100a0a08b388011003180420001202180012220a200a0a08ce840110031802200012122a10436f726e656c696f75734a442332323612120a100a0a08ce84011003180320001202100012140a120a0a08ce840110031809200012044202443312120a100a0a08ce84011003180a200012021800";
+                    break;
+                default:
+                    serverProvider.LogInfo("Unknown presence subscription: " + request.EntityId.Low);
+                    break;
+            }
+            done(bnet.protocol.NoData.DefaultInstance);
+        }
+
+        public override void Unsubscribe(Google.ProtocolBuffers.IRpcController controller, UnsubscribeRequest request, Action<bnet.protocol.NoData> done)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(Google.ProtocolBuffers.IRpcController controller, UpdateRequest request, Action<bnet.protocol.NoData> done)
+        {
+                                serverProvider.sendAdditionalData = true;
+                                serverProvider.additionalData = serverProvider.HashToInternalService[3213656212].id.ToString("X2") + "0600000a310a1209334400006201000311c82cc533a35463cb121b1a190a1544332e50617274792e53637265656e5374617475731200";
+            done(bnet.protocol.NoData.DefaultInstance);
+        }
+
+        public override void Query(Google.ProtocolBuffers.IRpcController controller, QueryRequest request, Action<QueryResponse> done)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

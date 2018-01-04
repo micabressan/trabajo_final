@@ -1,0 +1,12 @@
+;; Вот так выполняет параллельно все mock-process
+(def items [1 2 3 4 5])
+(let [futures (map (fn [item]
+                       (future (mock-process item)))
+                     items)]
+    (reduce concat (map deref futures))))
+
+;; Но так блокирует на каждый вызов mock-process и выполняет их последовательно
+(def items '(1 2 3 4 5))
+
+;; а вот так не блокирует
+(def items (map inc [1 2 3 4 5]))

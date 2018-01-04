@@ -1,0 +1,10 @@
+
+(defn partition-into [ fnc n seqinput ]
+	(let [ a (reverse (sort seqinput)) ]
+		(reduce (fn[ cubes  val ]
+			(let [ ordered-cubes (sort-by #(apply fnc val %1) cubes) ]
+				(cons (conj (first ordered-cubes) val) (rest ordered-cubes)))) 
+					(map vector (take n a)) (drop n a) )))
+
+
+(partition-into + 5 [ 1 2 34   ] )

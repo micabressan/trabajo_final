@@ -1,0 +1,18 @@
+(println "Main - Inicia")
+
+;En este momento ya se dispara el thread.
+(def objetoPromesa (promise))
+
+(defn foo []
+  (println "Thread - Inicia")
+  (Thread/sleep 5000)
+  (println "Thread - Fin")
+  100
+)
+
+(Thread/sleep 5000)
+(println "Main - Se solicita estado objetoFuturo")
+(println "Main - Hilo bloqueado hasta que el Thread disparado termine su ejecución")
+(deliver objetoPromesa (foo))
+(println "Resultado:" @objetoPromesa)
+(println "Main - Fin")

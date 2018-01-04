@@ -1,0 +1,24 @@
+  catch
+      error:Reason ->
+        io:format("errorrrrrrrrrrrrrrrrr ~p~n", [ Reason]),
+        case Reason of
+          {badmatch,{error,notfound}} ->
+
+                 ERR = #{<<"error">> => <<"not found">>, status => 404},
+                 B = jiffy:encode(ERR),
+
+                 Req0 = cowboy_req:set_resp_body(B, Req),
+                 Req2 = cowboy_req:reply(400, Req0),
+                 {stop, Req0, State};
+
+          badarg ->
+
+            ERR = #{<<"error">> => <<"no user id provided">>, status => 400},
+            B = jiffy:encode(ERR),
+            Req1 = cowboy_req:set_resp_body(B, Req),
+
+            % Set the http status code to 400
+             Req2 = cowboy_req:reply(400, Req1),
+            {stop, Req2, State}
+         end
+    end.

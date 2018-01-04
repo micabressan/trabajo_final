@@ -1,0 +1,65 @@
+//#define MAX_BARS	10
+
+enum barEnum
+{
+	Text:pb_td[3],
+	Float:bar_width,
+	Float:bar_height,
+	Float:bar_value,
+	withText
+}
+new Bar[10][barEnum];
+
+stock bar_Create(Float:x = 165.388015, Float:y = 384.416534, Float:width = 71.683731, Float:height = 10.5, color = -16777147, text[] = "", Float:value = 1.0, Float:x_diff = 0.937042, Float:y_diff = 1.166931, Float:w_diff = 1.874046, Float:h_diff = 2.333313, Float:y_diff2 = 1.86673, barid = 10)
+{
+	for(barid = 0; barid != sizeof Bar; barid++)
+	{
+		if(!Bar[barid][bar_width]) break;
+	}
+	if(barid == sizeof Bar) return -1;
+
+	new Text:texdrawid = Bar[barid][pb_td][0] = TextDrawCreate(x, y, "LD_SPAC:white");
+	TextDrawFont(texdrawid, 4);
+	TextDrawAlignment(texdrawid, 1);
+	TextDrawTextSize(texdrawid, width, height);
+	TextDrawColor(texdrawid, 69);
+	TextDrawSetShadow(texdrawid, 0);
+	TextDrawSetOutline(texdrawid, 0);
+
+	texdrawid = Bar[barid][pb_td][1] = TextDrawCreate(x + x_diff, y + y_diff, "LD_SPAC:white");
+	TextDrawFont(texdrawid, 4);
+	TextDrawAlignment(texdrawid, 1);
+	TextDrawTextSize(texdrawid, width - w_diff, height - h_diff);
+	TextDrawColor(texdrawid, color);
+	TextDrawSetShadow(texdrawid, 0);
+	TextDrawSetOutline(texdrawid, 0);
+
+	if((Bar[barid][withText] = !!text[2]))
+	{
+		texdrawid = Bar[barid][pb_td][2] = TextDrawCreate(0.1 + (width / 2) + x, y + y_diff2, text);
+		TextDrawLetterSize(texdrawid, 0.189969, 0.795);
+		TextDrawAlignment(texdrawid, 2);
+		TextDrawColor(texdrawid, 255);
+		TextDrawSetShadow(texdrawid, 0);
+		TextDrawSetOutline(texdrawid, 1);
+		TextDrawBackgroundColor(texdrawid, -235);
+		TextDrawFont(texdrawid, 1);
+		TextDrawSetProportional(texdrawid, 1);
+	}
+	Bar[barid][bar_width] = width - w_diff;
+	Bar[barid][bar_height] = height - h_diff;
+	Bar[barid][bar_value] = value;
+	return barid;
+}
+stock bar_Show(playerid, barid) Loop(slotid, 2 + Bar[barid][withText]) TextDrawShowForPlayer(playerid, Bar[barid][pb_td][slotid]);
+stock bar_Hide(playerid, barid) Loop(slotid, 2 + Bar[barid][withText]) TextDrawHideForPlayer(playerid, Bar[barid][pb_td][slotid]);
+stock bar_SetValue(barid, Float:percentage)
+{
+	if(0.0 <= percentage <= 1.0 && percentage != Bar[barid][bar_value])
+	{
+		Bar[barid][bar_value] = percentage;
+		return TextDrawTextSize(Bar[barid][pb_td][1], Bar[barid][bar_width] * percentage, Bar[barid][bar_height]), 1;
+	}
+	return 0;
+}
+stock bar_Update(playerid, barid) return TextDrawShowForPlayer(playerid, Bar[barid][pb_td][1]);

@@ -1,0 +1,11 @@
+diff --git a/src/plugins/texteditor/basefilefind.cpp b/src/plugins/texteditor/basefilefind.cpp
+index c910c07..608e7e5 100644
+--- a/src/plugins/texteditor/basefilefind.cpp
++++ b/src/plugins/texteditor/basefilefind.cpp
+@@ -195,6 +195,7 @@ void BaseFileFind::searchFinished()
+     m_currentSearch = 0;
+     m_isSearching = false;
+     m_resultLabel = 0;
++    m_watcher.setFuture(QFuture<FileSearchResultList>();
+     emit changed();
+ }

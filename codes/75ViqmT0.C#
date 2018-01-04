@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace On_Time_for_the_Exam
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+          // Coding 101 Exam - 6 March 2016
+
+            double hourExam = double.Parse(Console.ReadLine());
+            double minutesExam = double.Parse(Console.ReadLine());
+            double hourArrived = double.Parse(Console.ReadLine());
+            double minutesArived = double.Parse(Console.ReadLine());
+            
+            double totalExamTime = (hourExam * 60) + minutesExam;
+            double totalArriveedTime = (hourArrived * 60) + minutesArived;
+
+            double totalMinutesDiffirence = totalArriveedTime - totalExamTime;
+
+            string late = "Late";
+            string early= "Early";
+            string onTime = "On time";
+
+            string studentArrival = late;
+            if (totalMinutesDiffirence < -30)
+            {
+               studentArrival = early;
+            }
+
+            else if (totalMinutesDiffirence <= 30)
+            {
+                studentArrival = onTime;
+            }
+
+
+            string result = string.Empty;
+            if (totalMinutesDiffirence != 0)
+            {
+                double hoursDifference = Math.Abs(totalMinutesDiffirence / 60);
+                double minutesDifferende = Math.Abs(totalMinutesDiffirence % 60);
+               
+                if (hoursDifference > 0)
+                {
+                    result = string.Format("{0}:{1} hours",hoursDifference, minutesDifferende);
+                }
+                else
+                {
+                    result = minutesDifferende + " minutes";
+                }
+
+                if (totalMinutesDiffirence < 0)
+                {
+                    result += " before the start";
+                }
+
+                else
+                {
+                    result += " after the start";
+                }
+
+                Console.WriteLine(studentArrival);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    Console.WriteLine(result);
+                }
+            }
+        }
+        
+    }
+}

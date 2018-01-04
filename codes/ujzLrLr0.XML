@@ -1,0 +1,102 @@
+<table name="GSh-18">
+	<!--<AssetUpdates id="21064" name="asset_updates" folder_name="M1911 Standalone" provider="modworkshop"/>		-->
+    <Localization directory="Localization" default="english.txt"/>
+    <GlobalValue id="gsh18" color="Color(0.8, 0.2, 0.8)"/>
+		
+    
+    <WeaponMod id="wpn_fps_pis_gsh18_body_standard" based_on="wpn_fps_pis_ppk_body_standard" type="lower_reciever" unit="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard" drop="false" is_a_unlockable="false"/>
+    
+	<WeaponMod id="wpn_fps_pis_gsh18_m_standard" based_on="wpn_fps_pis_ppk_m_standard" type="magazine" unit="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard" drop="false" is_a_unlockable="false"/>
+    
+	<WeaponMod id="wpn_fps_pis_gsh18_b_standard" based_on="wpn_fps_pis_ppk_b_standard" type="slide" unit="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard" drop="false" is_a_unlockable="false"/>
+    
+	<WeaponMod id="wpn_fps_pis_gsh18_g_standard" based_on="wpn_fps_pis_ppk_g_standard" type="grip" unit="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard" drop="false" is_a_unlockable="false"/>
+    
+	 
+    <WeaponNew unlock_level="18">
+    <weapon id="gsh18" based_on="ppk" lock_slide="true" FIRE_MODE="single" CAN_TOGGLE_FIREMODE="false" CLIP_AMMO_MAX="18" NR_CLIPS_MAX="8" texture_bundle_folder="mods" global_value="gsh18" >
+		<fire_mode_data fire_rate="0.10"/>
+		<animations reload_name_id="ppk" recoil_steelsight="true"/>
+		<stats damage="70" concealment="24"/>
+	</weapon>
+		<factory id="wpn_fps_pis_gsh18" unit="units/mods/weapons/wpn_fps_pis_gsh18/wpn_fps_pis_gsh18">
+        <optional_types>
+            <value_node value="barrel_ext"/>
+            <value_node value="gadget"/>
+			<value_node value="sight"/>
+        </optional_types>
+        <default_blueprint>
+            <value_node value="wpn_fps_pis_gsh18_body_standard"/> 
+            <value_node value="wpn_fps_pis_gsh18_m_standard"/>
+            <value_node value="wpn_fps_pis_gsh18_b_standard"/> 
+            <value_node value="wpn_fps_pis_gsh18_g_standard"/> 
+        </default_blueprint>
+        <uses_parts>
+            <value_node value="wpn_fps_pis_gsh18_body_standard"/> 
+            <value_node value="wpn_fps_pis_gsh18_m_standard"/>
+            <value_node value="wpn_fps_pis_gsh18_b_standard"/> 
+            <value_node value="wpn_fps_pis_gsh18_g_standard"/> 
+        </uses_parts>
+		</factory>
+		<stance/>
+	</WeaponNew>
+	
+	
+    <AddFiles directory="assets">
+    <!-- This section adds specific files to the game -->
+    
+    <!-- main section -->
+	<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/barrel_df"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/barrel_nm"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/body_df"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/body_nm"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/mag_df"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/mag_nm"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/grips_df"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/grips_nm"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/slide_df"/>
+		<texture path="units/mods/weapons/wpn_fps_pis_gsh18_pts/slide_nm"/>
+        
+        <cooked_physics	 path="units/mods/weapons/wpn_fps_pis_gsh18/wpn_fps_pis_gsh18"/>
+        <model			 path="units/mods/weapons/wpn_fps_pis_gsh18/wpn_fps_pis_gsh18"/>
+        <object			 path="units/mods/weapons/wpn_fps_pis_gsh18/wpn_fps_pis_gsh18"/>
+        <unit 			 path="units/mods/weapons/wpn_fps_pis_gsh18/wpn_fps_pis_gsh18"/>
+       
+	<!-- standard slide -->
+        <cooked_physics 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard"/>
+        <model 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard"/>
+        <object 			path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard"/>
+        <unit 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_b_standard_thq"/>
+    <!-- body -->
+        <cooked_physics 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard"/>
+        <model 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard"/>
+        <object 			path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard"/>
+        <unit 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_body_standard_thq"/>
+	<!-- standard grip -->
+        <cooked_physics 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard"/>
+        <model 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard"/>
+        <object 			path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard"/>
+        <unit 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_g_standard_thq"/>
+	<!-- standard magazine -->
+        <cooked_physics 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard"/>
+        <model 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard"/>
+        <object 			path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard"/>
+        <unit 				path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard"/>
+        <material_config 	path="units/mods/weapons/wpn_fps_pis_gsh18_pts/wpn_fps_pis_gsh18_m_standard_thq"/>
+	
+    <!-- icon -->
+      	<texture path="guis/gsh18"/>
+    
+        
+    </AddFiles>
+	<Hooks directory="hooks">
+		<hook file="weaponfactorytweakdata.lua" source_file="lib/tweak_data/weaponfactorytweakdata"/>
+	</Hooks>
+</table>

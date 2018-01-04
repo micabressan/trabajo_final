@@ -1,0 +1,13 @@
+#[get("/builds")]
+fn builds(builds_rw: State<RwLock<Commits>>) -> Template {
+    let builds = builds.read().unwrap();
+    Template::render("builds", &builds)
+}
+
+error[E0599]: no method named `read` found for type `for<'r> fn(rocket::State<'r, std::sync::RwLock<builds::Commits>>) -> rocket_contrib::Template {builds}` in the current scope
+  --> src/main.rs:43:25
+   |
+43 |     let builds = builds.read().unwrap();
+   |                         ^^^^
+   |
+   = note: builds is a function, perhaps you wish to call it

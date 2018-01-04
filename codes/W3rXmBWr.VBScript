@@ -1,0 +1,56 @@
+Sub FormatRevisions()
+    Dim doc As Word.Document
+    Dim rev As Word.Revision
+    Dim bkm As Word.Bookmark
+    Dim rng As Word.Range
+    Dim revBkm As String
+    Dim revBkmCounter As Long
+    
+    revBkm = "RevMark"
+    revBkmCounter = 1
+    Set doc = ActiveDocument
+    doc.TrackRevisions = False
+    For Each rev In doc.Revisions
+        Select Case rev.Type
+            Case wdRevisionDelete
+                Set rng = rev.Range
+                rng.Font.StrikeThrough = True
+                rng.HighlightColorIndex = wdYellow
+                AddBookmark rng, revBkm, revBkmCounter
+                rev.Reject
+            Case wdRevisionInsert
+                Set rng = rev.Range
+                rng.HighlightColorIndex = wdYellow
+                AddBookmark rng, revBkm, revBkmCounter
+                rev.Accept
+        End Select
+    Next
+End Sub
+
+Private Sub AddBookmark(rng As Word.Range, bkmName As String, ByRef counter As Long)
+    rng.Bookmarks.Add bkmName & counter, rng
+    counter = counter + 1
+End Sub
+
+Sub RemoveRevFormatting()
+    Dim doc As Word.Document
+    Dim bkm As Word.Bookmark
+    Dim revBkmName As String
+    Dim rng As Word.Range
+    
+    revBkmName = "RevMark"
+    Set doc = ActiveDocument
+    For Each bkm In doc.Bookmarks
+        If Left(bkm.Name, Len(revBkmName)) = revBkmName Then
+            Set rng = bkm.Range
+            If rng.Underline = wdUnderlineSingle Then
+                rng.Underline = wdUnderlineNone
+            End If
+            If rng.Font.StrikeThrough = True Then
+                rng.Font.StrikeThrough = False
+                'rng.Delete
+            End If
+        End If
+        bkm.Delete
+    Next
+End Sub

@@ -1,0 +1,18 @@
+struct ArrayItem
+{
+int Size;
+string[] Operand;
+int[] Item;
+}
+
+ArrayItem[] myArrayItems;
+
+for (int i = 0; i < myArrayItems.Length; i++
+{
+	for (int x = 0; x < myArrayItems[i].Size; x++}
+	{
+		//myArrayItems[i].Item (value of operand) ?
+		//but need to perform all operations at same time,
+		//Doing individually in loop gives wrong result 
+	}
+}

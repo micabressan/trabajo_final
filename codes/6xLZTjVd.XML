@@ -1,0 +1,44 @@
+INDEKS PATRIOTISME & PERPADUAN NASIONAL - iPPN [MULTIPLE VULNERABILITIES]
+
+While browsing my facebook news feed. I saw a post bout' this web at UKM page. So I decided to do a "lite pentest" surprisingly this page seems vulnerable to SQL Injection.
+
+http://202.190.75.94:81/ippn/login.php
+
+Database: IPPNDB
+Tables:
+KP001JANTINA
+KP002KAUM
+KP003SESIMASUK
+KP004PROGRAM
+KP005FAKULTI
+KP006UNIV
+KP007SUBELEMEN
+KP008ELEMEN
+KP009SKALA
+KP010PPK
+KP011PERANAN
+KP012STATUSRERAYA
+DUN
+PELAJAR
+SEMTERKINI
+SAMPELPELAJAR
+SOALAN
+PELAJARMENJAWAB
+STATUSJAWAB
+KEPUTUSAN
+KEPUTUSANSUBELEMEN
+ADMIN
+RERAYA
+AKSESSISTEM
+
+
+UNCONFIGURE XAMPP.
+http://202.190.75.94:81/dashboard/
+http://202.190.75.94:81/phpmyadmin/
+
+This allows attackers to modify the web content by manipulating local xampp.
+
+UNCENSORED PHPINFO
+http://202.190.75.94:81/dashboard/phpinfo.php
+
+Sometimes this simple page could leak FTP&MYSQL DB Credentials like Username, Password, Host and etc.

@@ -1,0 +1,10 @@
+(defn load-training-data [data mem]
+  (let [training-set (TrainingSet.)]
+    (doall
+      (map
+        #(let [params (subvec data % (+ % (inc mem)))
+               ste (SupervisedTrainingElement. (double-array (take mem params))
+                                               (double-array (sequence (list (last params)))))]
+           (.addElement training-set ste))
+        (sequence (range (- (count data) mem)))))
+    training-set))

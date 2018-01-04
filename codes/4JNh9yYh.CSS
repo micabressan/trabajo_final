@@ -1,0 +1,27 @@
+/** Скрываем флудилки, если надо тыкнут **/
+/** data-list-id - peer_id **/
+[data-list-id="2000000069"], 
+[data-list-id="2000000159"],
+[data-list-id="2000000137"] { display: none; }
+
+/** FLEX-BOX для списка диалогов **/
+#im_dialogs .ui_scroll_content{
+    display: flex;
+    flex-direction: column;
+}
+
+/** border fix **/
+.nim-dialog:not(.nim-dialog_deleted).nim-dialog_selected+.nim-dialog{
+	border-top-color: transparent;
+}
+
+.nim-dialog:not(.nim-dialog_deleted).nim-dialog_selected+.nim-dialog .nim-dialog--content{
+	border-top-color: #e7e8ec;
+}
+
+/** Устанавливаем порядок, чем ниже число, тем выше пин **/
+/** box-shadow - как украшение, можно заменить **/
+[data-list-id="-131851952"]{ order: -4; box-shadow: inset 2px 0px 0px #224B7A;}
+[data-list-id="2000000172"]{ order: -3; box-shadow: inset 2px 0px 0px #224B7A;}
+[data-list-id="2000000088"]{ order: -2; box-shadow: inset 2px 0px 0px #224B7A;}
+[data-list-id="2000000093"]{ order: -1; box-shadow: inset 2px 0px 0px #224B7A;}

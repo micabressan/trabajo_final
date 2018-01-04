@@ -1,0 +1,28 @@
+public void SearchForTags(string tag)
+        {
+            sqlCon = new SqlConnection(connectionString);
+            try
+            {
+                sqlCon.Open();
+                string parancs = "SELECT Nev, Azonosito FROM Occupations WHERE Tags LIKE'" + tag + "'";
+                "SELECT Nev,Azonosito FROM Occupations WHERE Tags LIKE ','+tag+','"
+                command = new SqlCommand(parancs, sqlCon);
+            }
+            catch (Exception hiba)
+            {
+                MessageBox.Show(hiba.Message.ToString());
+            }
+            try
+            {
+                myDataReader = command.ExecuteReader();
+                while (myDataReader.Read())
+                {
+                    NameIdList.Add(myDataReader.GetString(0) + ';' + myDataReader.GetString(1));
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There is no data for this search.");
+            }
+            sqlCon.Close();
+        }

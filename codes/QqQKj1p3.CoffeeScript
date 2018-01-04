@@ -1,0 +1,22 @@
+class ColorView extends Backbone.View	
+	constructor: ->
+		super
+		@el = app.activePage()
+		@template = _.template('''
+				<ul>
+					<% colors.each(function(color){ %>
+						<li><a data-color="<%= color.getName() %>" href="#"><%= color.getName() %></a></li>
+					<% }); %>
+				</ul>
+		''')
+		@render()
+
+	events:
+		"click a" : "clk"
+
+	render: =>
+		@el.find('#colors').html(@template({colors : Colors}))
+		@delegateEvents this.events
+		
+	clk: ->
+		console.log "click"

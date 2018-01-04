@@ -1,0 +1,3 @@
+extendStart = (func)->
+  if func isnt undefined then func else ()->
+Function::extendEnd = (args...)=>

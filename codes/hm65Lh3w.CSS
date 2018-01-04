@@ -1,0 +1,33 @@
+/*yam*/
+/*borrowed from r/lounge*/
+
+a[href|="/yam"]{
+    display: block;
+    cursor: default;
+    width: 100px;
+    height: 100px;
+    background-image: url(%%yam%%) !important;
+    text-align: center;
+    color: #FFFFFF !important; 
+    font-family: Impact, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black;
+    overflow: hidden;
+    position: relative;
+    text-transform: uppercase;
+}
+
+a[href|="/yam"] em{
+    font-style: normal;
+    position: absolute;
+    bottom: 4px;
+    width: 100px;
+    left: 50%;
+    margin-left: -75px
+    }
+
+
+a[href|="/yam"]{
+    background-position: 0px 0px;
+}

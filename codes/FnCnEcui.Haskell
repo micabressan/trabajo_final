@@ -1,0 +1,123 @@
+import Network.Protocol.NetSNMP
+import System.Environment
+import Data.IP
+import Data.List
+import Network
+import Data.Time
+import Text.Printf
+import Data.Ord
+import System.IO
+
+data TopTalkerRecord = TTR { srcAddressType :: Int
+                           , srcAddress :: IP
+                           , srcAddressMask :: Int
+                           , dstAddressType :: Int
+                           , dstAddress :: IP
+                           , dstAddressMask :: Int
+                           , nhAddressType :: Int
+                           , nhAddress :: IP
+                           , srcPort :: PortNumber
+                           , dstPort :: PortNumber
+                           , srcAS :: Int
+                           , dstAS :: Int
+                           , inputIfIndex :: Int
+                           , outputIfIndex :: Int
+                           , firstSwitched :: DiffTime
+                           , lastSwitched :: DiffTime
+                           , tos :: Int
+                           , protocol :: Int
+                           , tcpFlags :: Int
+                           , samplerID :: Int
+                           , classID :: Int
+                           , flags :: Int
+                           , bytes :: Int
+                           , packets :: Int }
+                     deriving (Show)
+
+main = do
+  initialize
+  args <- getArgs
+  let host = head args
+      communityRO = args !! 1
+      output = args !! 2
+      baseOID = ".1.3.6.1.4.1.9.9.387.1.7.8"
+  snmpResults <- snmpWalk snmp_version_2c host communityRO baseOID
+  case snmpResults of
+    Left msg ->
+      print msg
+    Right srs ->
+      withFile output WriteMode $ \h -> do
+        hPrintf h "<table><tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>" "From" "To" "Bytes" "Packets"
+        -- hPrintf h "%-24s%-24s%-10s%-10s\n" "From" "To" "Bytes" "Packets"
+        mapM_ (\ttr ->
+                hPrintf h "<tr><td>%s:%s</td><td>%s:%s</td><td>%d</td><td>%d</td></tr>"
+                -- hPrintf h "%-15s:%-8s%-15s:%-8s%-10d%-10d\n"
+                          (show $ srcAddress ttr)
+                          (show $ srcPort ttr)
+                          (show $ dstAddress ttr)
+                          (show $ dstPort ttr)
+                          (bytes ttr)
+                          (packets ttr)
+              ) $ reverse $ sortBy (comparing bytes) $ map fillObject $ groupSnmpResults srs
+        hPrintf h "</table>"
+
+groupSnmpResults :: [ SnmpResult ] -> [ [ SnmpResult ] ]
+groupSnmpResults =
+  groupBy (\(SnmpResult oida _) (SnmpResult oidb _) ->
+            let oidLa = oidString2oidList oida
+                oidLb = oidString2oidList oidb
+            in
+             last oidLa == last oidLb
+          ) . sortBy (\(SnmpResult oida _) (SnmpResult oidb _) ->
+                       let oidLa = oidString2oidList oida
+                           oidLb = oidString2oidList oidb
+                       in
+                        comparing last oidLa oidLb
+                     )
+
+oidString2oidList :: String -> [ String ]
+oidString2oidList = split '.'
+
+split :: Eq a => a -> [ a ] -> [ [ a ] ]
+split e =
+  filter (/= [e]) . groupBy (\a b ->
+                              a /= e &&
+                              b /= e
+                            )
+
+fillObject :: [ SnmpResult ] -> TopTalkerRecord
+fillObject snmpRecord =
+  TTR { srcAddressType = snmpResult2Int $ head snmpRecord
+      , srcAddress = snmpResult2IP (snmpRecord !! 1)
+      , srcAddressMask = snmpResult2Int (snmpRecord !! 2)
+      , dstAddressType = snmpResult2Int (snmpRecord !! 3)
+      , dstAddress = snmpResult2IP (snmpRecord !! 4)
+      , dstAddressMask = snmpResult2Int (snmpRecord !! 5)
+      , nhAddressType = snmpResult2Int (snmpRecord !! 6)
+      , nhAddress = snmpResult2IP (snmpRecord !! 7)
+      , srcPort = snmpResult2Int (snmpRecord !! 8)
+      , dstPort = snmpResult2Int (snmpRecord !! 9)
+      , srcAS = snmpResult2Int (snmpRecord !! 10)
+      , dstAS = snmpResult2Int (snmpRecord !! 11)
+      , inputIfIndex = snmpResult2Int (snmpRecord !! 12)
+      , outputIfIndex = snmpResult2Int (snmpRecord !! 13)
+      , firstSwitched = snmpResult2DiffTime (snmpRecord !! 14)
+      , lastSwitched = snmpResult2DiffTime (snmpRecord !! 15)
+      , tos = snmpResult2Int (snmpRecord !! 16)
+      , protocol = snmpResult2Int (snmpRecord !! 17)
+      , tcpFlags = snmpResult2Int (snmpRecord !! 18)
+      , samplerID = snmpResult2Int (snmpRecord !! 19)
+      , classID = snmpResult2Int (snmpRecord !! 20)
+      , flags = snmpResult2Int (snmpRecord !! 21)
+      , bytes = snmpResult2Int (snmpRecord !! 22)
+      , packets = snmpResult2Int (snmpRecord !! 23) }
+  where
+    snmpResult2IP (SnmpResult _ (OctetString _ a)) =
+      (if length a == 4 then
+         IPv4 . toIPv4
+       else
+         IPv6 . toIPv6) $ map fromIntegral a
+    snmpResult2Int (SnmpResult _ (Integer32 a)) = fromIntegral a
+    snmpResult2Int (SnmpResult _ (Gauge32 a)) = fromIntegral a
+    snmpResult2DiffTime (SnmpResult _ (TimeTicks _ a)) =
+      picosecondsToDiffTime (fromIntegral a * 10000000000)

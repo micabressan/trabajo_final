@@ -1,0 +1,89 @@
+import requests
+import xml.etree.ElementTree as ET
+from time import sleep
+import hashlib
+
+login_id = ''  # The username you use to log into the app
+login_password = '!'  # The password you use to log into the app
+login_pin = "" # Your pin needed to start the car
+phoneId = '' # Need to pull out of the GET request when using the app
+
+def login():
+    """
+    Logs into the service, returning the authId
+    """
+    login_url = "https://control.marcs-web.com/marcs_mzd/services/LoginUncertified"
+    login_payload = {
+        'id': login_id,
+        'password': login_password,
+        'phoneId': phoneId,  # Pulled from GET request
+        'deviceType': 3,  # Pulled from GET request
+        'deviceVersion': '1.2.0',  # Pulled from GET request
+        'phoneIdUpdate': '0',  # Pulled from GET request
+        'trackingId': 'asdf'  # Tracking ID for use with GetCommandState
+    }
+
+    r = requests.get(login_url, params=login_payload)
+    root = ET.fromstring(r.text)
+    print(r.text)
+    return root.find("./responseData/authInfo").text
+
+
+authInfo = login()
+
+ecu_url = "https://control.marcs-web.com/marcs_mzd/services/GetECUInfo"
+ecu_payload = {'authInfo': authInfo, 'trackingId': 'asdf'}
+r = requests.get(ecu_url, params=ecu_payload)
+print(r.url)
+print(r.text)
+
+# update_url = "https://control.marcs-web.com/marcs_mzd/services/ReqRESInfoUpdate"
+# update_payload = {'authInfo': authInfo, 'trackingId': 'asdf'}
+# r = requests.get(update_url, params=update_payload)
+# print(r.url)
+# print(r.text)
+#
+# sleep(30)
+#
+# car_url = "https://control.marcs-web.com/marcs_mzd/services/GetCarInfo"
+# car_payload = {'authInfo': authInfo, 'trackingId': 'asdf'}
+# r = requests.get(car_url, params=ecu_payload)
+# print(r.url)
+# print(r.text)
+
+m = hashlib.sha256()
+m.update("{pin}{authInfo}".format(pin=login_pin, authInfo=authInfo).encode('ascii', 'replace'))
+nip = m.hexdigest()
+
+start_url = "https://control.marcs-web.com/marcs_mzd/services/SendCmdEngineStart"
+start_info = {
+    'authInfo': authInfo,
+    'latitude': '0',
+    'longitude': '0',
+    'acSetting': '1',
+    'distCheck': '1',
+    'trackingId': '325',
+    'defoggerState': '2',
+    'idleTime': '600',
+    'nip': nip
+}
+
+print(start_info)
+
+r = requests.get(start_url, params=start_info)
+print(r.url)
+print(r.text)
+
+update_url = "https://control.marcs-web.com/marcs_mzd/services/ReqRESInfoUpdate"
+update_payload = {'authInfo': authInfo, 'trackingId': 'asdf'}
+r = requests.get(update_url, params=update_payload)
+print(r.url)
+print(r.text)
+
+sleep(30)
+
+car_url = "https://control.marcs-web.com/marcs_mzd/services/GetCarInfo"
+car_payload = {'authInfo': authInfo, 'trackingId': 'asdf'}
+r = requests.get(car_url, params=ecu_payload)
+print(r.url)
+print(r.text)

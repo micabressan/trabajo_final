@@ -1,0 +1,4 @@
+print!("Dimmi un nome: ");
+io::stdout().flush().unwrap();
+let mut nome = String::new();
+io::stdin().read_line(&mut nome);

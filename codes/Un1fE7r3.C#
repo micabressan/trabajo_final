@@ -1,0 +1,50 @@
+/// <summary>
+    /// Добавление координаты
+    /// </summary>
+    /// <param name="add"></param>
+    void MoveToAdd(float addX, float addY)
+    {
+        float x = Mathf.Lerp(cachedTransform.position.x, cachedTransform.position.x + addX, Time.deltaTime * SPEED_TOUCH);
+        x = Mathf.Clamp(x, LEFT_BORDER, RIGHT_BORDER);
+
+        cachedTransform.position = new Vector3(x, startedPosition.y, 0);
+    }
+
+    /// <summary>
+    /// Управление
+    /// </summary>
+    private void Control()
+    {
+        isControl = false;
+        if (controllerType == ControllerType.Swipe)
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.touches[0];
+                float x, y;
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    previousPosition = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    if (touch.position.x - previousPosition.x > 0) x = speed;           // вправо если положительно
+                    else if (touch.position.x - previousPosition.x < 0) x = -speed;     // влево если отрицательно
+                    else x = 0;                                                             // скорости нет
+
+                    if (touch.position.y - previousPosition.y > 0) y = speed;           // вверх если положительно
+                    else if (touch.position.y - previousPosition.y < 0) y = -speed;     // вниз если отрицательно
+                    else y = 0;                                                             // скорости нет
+
+                    if (!isControl) MoveToAdd(x, y);
+
+                    previousPosition = touch.position;
+                }
+            }
+        }
+        else
+        {
+            Accelometer();
+        }
+    }

@@ -1,0 +1,47 @@
+nav.menu-nav ul li.btn a{
+	color: white;
+	text-decoration: none;
+	background-color: black;
+	padding: 15px;
+	font-size: 20px;
+	font-family: fantasy;	
+}
+nav.menu-nav ul li.btn{
+	text-align: center;
+	display: inline-block;
+	list-style-type: none;	
+}
+nav.menu-nav ul li.btn:hover a{
+	color: black;
+	background-color: white;
+	transition: 1s all;
+}
+p.footer{
+	text-align: center;
+	font-family: fantasy, sans-serif;
+	font-size: 15px;
+	color: white;
+	position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+    margin-top: -100px;
+}
+p.body{
+	text-align: center;
+	font-family: monospace, sans-serif;
+	font-size: 15px;
+	color: white;
+	position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+    margin-top: -100px;
+}
+body{
+	background-color: black;
+}

@@ -1,0 +1,51 @@
+Set objFSO=CreateObject("Scripting.FileSystemObject")
+
+' How to write file
+outFile="d:\Downloads\jinx\f.txt"
+Set objFile = objFSO.CreateTextFile(outFile,True)
+
+ny=CDate("01/01/2018 00:00:00")
+
+
+ddd = DateDiff("n", Now(), ny)\1440
+hhh = (DateDiff("n", Now(), ny) - (DateDiff("n", Now(), ny)\1440)*1440)\60
+mmm = DateDiff("n", Now(), ny)-(DateDiff("n", Now(), ny)\60)*60
+
+
+if ddd Mod 10 = 2 or ddd Mod 10 = 3 or ddd Mod 10 = 4 then dt = " дня"
+if ddd Mod 10 = 1  then dt = " день"
+if ddd Mod 10 = 0 or ddd Mod 10 = 5 or ddd Mod 10 = 6 or ddd Mod 10 = 7 or ddd Mod 10 = 8 or ddd Mod 10 = 9 or (ddd Mod 100 - ddd Mod 10 = 10) then dt = " дней"
+
+
+if hhh Mod 10 = 2 or hhh Mod 10 = 3 or hhh Mod 10 = 4 then ht = " часа"
+if hhh Mod 10 = 1  then ht = " час"
+if hhh Mod 10 = 0 or hhh Mod 10 = 5 or hhh Mod 10 = 6 or hhh Mod 10 = 7 or hhh Mod 10 = 8 or hhh Mod 10 = 9 or (hhh Mod 100 - hhh Mod 10 = 10) then ht = " часов"
+
+
+if mmm Mod 10 = 1  then mt = " минута"
+if mmm Mod 10 = 2 or mmm Mod 10 = 3 or mmm Mod 10 = 4 then mt = " минуты"
+if mmm Mod 10 = 0 or mmm Mod 10 = 5 or mmm Mod 10 = 6 or mmm Mod 10 = 7 or mmm Mod 10 = 8 or mmm Mod 10 = 9 or (mmm Mod 100 - mmm Mod 10 = 10) then mt = " минут"
+
+if ddd = 0 then 
+	dtt = "" 
+	tand = ""
+else 
+	dtt = ddd & dt
+	tand = " и "
+end if
+
+if hhh = 0 then 
+htt = "" 
+else 
+htt = tand & hhh & ht
+tand = " и "
+end if
+
+if mmm = 0 then mtt = "" else mtt = tand & mmm & mt
+
+str="До Нового года " & dtt & htt & mtt & "!"
+
+if DateDiff("n", Now(), ny) <=0 then str="С НОВЫМ ГОДОМ!"
+
+objFile.Write str & vbCrLf
+objFile.Close

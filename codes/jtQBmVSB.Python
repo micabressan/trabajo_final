@@ -1,0 +1,30 @@
+def check(a):
+    b = [m[i][a[i]] for i in range(len(m))]
+    tmp = 1
+    for i in b:
+        if i != 'x':
+            tmp *= i
+    ans[b.count('x')] += tmp
+
+def foo(a):
+    if len(a) == len(m):
+        check(a)
+        return
+    for i in range(len(m)):
+        if i not in a:
+            foo(a + [i])
+
+m = [[4, 4, 'x', 4, 4, 4, 4],
+     [4, 'x', 5, 5, 5, 5, 5],
+     ['x', 5, 9, 9, 9, 9, 'x'],
+     [4, 5, 9, 3, 3, 'x', 3],
+     [4, 5, 9, 3, 'x', 1, 1],
+     [4, 5, 9, 'x', 1, 4, 4],
+     [4, 5, 'x', 3, 1, 4, 5]]
+
+ans = [0 for i in range(len(m) + 1)]
+foo([])
+print(ans)
+
+# Output:
+# [65312072, 15419280, 1818856, 133444, 8259, 218, 17, 0]

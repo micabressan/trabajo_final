@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bg_quality_names">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+        <item>Disabled</item>
+    </string-array>
+    <string-array name="bg_quality_values">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>0</item>
+    </string-array>
+    <string name="opt_graphics">Graphics</string>
+    <string name="opt_beatmaps">Beatmaps</string>
+    <string name="opt_bg_title">Background quality</string>
+    <string name="opt_bg_summary">Reducing quality of background can increase performance</string>
+    <string name="opt_skin_title">Use skins</string>
+    <string name="opt_skin_summary">Load custom skin from beatmaps when it is available</string>
+    <string name="opt_largeimages_title">Show countdown</string>
+    <string name="opt_largeimages_summary">Show countdown at the beginning of song if it is set</string>
+    <string name="opt_volume_title">Sound volume</string>
+    <string name="opt_volume_summary">Percentage volume of hit sounds</string>
+    <string name="opt_offset_title">Music offset</string>
+    <string name="opt_offset_summary">Song offset time in milliseconds</string>
+    <string name="opt_special">Special</string>
+    <string name="opt_taiko_title">Load T-Aiko! songs</string>
+    <string name="opt_taiko_summary">Load songs also from T-Aiko song directory</string>
+    <string name="opt_deleteosz_title">Delete .osz</string>
+    <string name="opt_deleteosz_summary">Delete .osz file after import</string>
+    <string name="opt_directory_title">Songs directory</string>
+    <string name="opt_directory_summary">Path to directory with songs</string>
+    <string name="opt_clear_title">Clear library cache</string>
+    <string name="opt_clear_summary">Force clear cached version of song library</string>
+    <string name="opt_doublesound_title">Double hit sounds</string>
+    <string name="opt_doublesound_summary">Makes hit sounds sound like in original osu! but may cause async</string>
+    <string name="opt_sound">Sound</string>
+    <string name="opt_fps_title">Show FPS</string>
+    <string name="opt_fps_summary">Show frames per second during playtime</string>
+    <string name="opt_skipoffset_title">Skip offset</string>
+    <string name="opt_skipoffset_summary">This offset will be added when you press "Skip" button. Enter -1 for auto offset.</string>
+    <string name="opt_lowtextures_title">Reduce texture quality</string>
+    <string name="opt_lowtextures_summary">Reduce quality of all game textures</string>
+    <string name="opt_nativeplayer_title">Use custom player</string>
+    <string name="opt_nativeplayer_summary">Use custom mp3 player instead of standard android player</string>
+    <string-array name="bg_brightness_names">
+        <item>100%</item>
+        <item>80%</item>
+        <item>60%</item>
+        <item>40%</item>
+        <item>20%</item>
+    </string-array>
+    <string-array name="bg_brightness_values">
+        <item>100</item>
+        <item>80</item>
+        <item>60</item>
+        <item>40</item>
+        <item>20</item>
+    </string-array>
+    <string name="opt_bgbrightness_title">Background brightness</string>
+    <string name="opt_bgbrightness_summary">Change the brightness of background image</string>
+    <string name="opt_vbroffset_title">VBR offset</string>
+    <string name="opt_vbroffset_summary">Offset for mp3\'s with variable bitrate. For custom player only.</string>
+    <string name="opt_sliderborders_title">Draw slider borders</string>
+    <string name="opt_sliderborders_summary">Draw borders of sliders tracks. Disable for better performance.</string>
+    <string name="opt_complexanimations_title">Complex effects</string>
+    <string name="opt_complexanimations_summary">Enable complex effects like snaking sliders. Disable for better performance.</string>
+</resources>

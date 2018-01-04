@@ -1,0 +1,33 @@
+
+    use std::collections::HashMap;
+    use std::iter::Peekable;
+    use std::iter::Iterator;
+    use std::str::Chars;
+    use std::any::Any;
+    use std::hash::Hash;
+    use std::cmp::Eq;
+
+    pub struct RandomWriter<T> {
+        input: T,
+        k: u32,
+        len: u32,
+    }
+
+    impl<T> RandomWriter<T> {
+
+        pub fn new(input: T, k: u32, len: u32) -> RandomWriter<T> {
+            RandomWriter { input: input, k: k, len: len }
+        }
+        
+        fn peek_k<I>(&self, elements: &Peekable<I>) -> Vec<T>
+            where I: Iterator<Item = T>
+        {
+            let mut seed: Vec<T> = Vec::new();
+            for i in 1..self.k {
+                let next = elements.peek().unwrap();
+				// here: an error about got &T, wanted T, that goes away with *next but leads to other errors
+                seed.push(next); 
+            }
+            seed
+        }
+    }

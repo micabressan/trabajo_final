@@ -1,0 +1,116 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace LFSR.Generator.Tests
+{
+    public class SeriesTest
+    {
+        public SeriesTest()
+        {
+            InitDictionaries();
+        }
+
+        public string Test(string bits)
+        {
+            Count(bits, true, onesSeries);
+            Count(bits, false, zerosSeries);
+
+            return BuildOutputString();
+        }
+
+        public void Count(string bits, bool countBit, Dictionary<int, int> dictionary)
+        {
+            var counter = 0;
+            char sign;
+
+            if (countBit)
+            {
+                sign = '1';
+            }
+            else
+            {
+                sign = '0';
+            }
+
+            foreach (var bit in bits)
+            {
+                if (bit == sign)
+                {
+                    counter++;
+                }
+                else
+                {
+                    if(counter == 0)
+                    {
+                        continue;
+                    }
+                    if (counter <= 26)
+                    {
+                        if (counter > 6)
+                        {
+                            dictionary[6]++;
+                        }
+                        else
+                        {
+                            dictionary[counter]++;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Test failed! There is series higher than 26 ones");
+                        break;
+                    }
+                    counter = 0;
+                }
+            }
+        }
+
+        private string BuildOutputString()
+        {
+            string ones = "Ones Series: \n";
+            string zeros = "Zeros Series: \n";
+
+            foreach(var item in onesSeries)
+            {
+                ones += "Seria " + item.Key + " = " + item.Value + "\n";
+            }
+
+            foreach (var item in zerosSeries)
+            {
+                zeros += "Seria " + item.Key + " = " + item.Value + "\n";
+            }
+
+            return ones + zeros;
+        }
+
+        private void InitDictionaries()
+        {
+            onesSeries = new Dictionary<int, int>
+            {
+                {1,0},
+                {2,0},
+                {3,0},
+                {4,0},
+                {5,0},
+                {6,0},
+            };
+
+            zerosSeries = new Dictionary<int, int>
+            {
+                {1,0},
+                {2,0},
+                {3,0},
+                {4,0},
+                {5,0},
+                {6,0},
+            };
+        }
+
+        private Dictionary<int, int> onesSeries;
+        private Dictionary<int, int> zerosSeries;
+    }
+}

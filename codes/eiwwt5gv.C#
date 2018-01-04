@@ -1,0 +1,52 @@
+using System;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void qsort(int[] a, int l, int r)
+        {
+            int temp;
+            if (l == r - 1)
+            {
+                if (a[l] > a[r])
+                {
+                    temp = a[l];
+                    a[l] = a[r];
+                    a[r] = temp;
+                }
+                return;
+            }
+            int m = (l + r) / 2;
+            for (int i = 0; i < m; i++)
+            {
+                if (a[i] > a[m])
+                {
+                    temp = a[i];
+                    a[i] = a[m + 1];
+                    a[m + 1] = temp;
+                }
+            }
+            for (int i = m + 1; i < r; i++)
+            {
+                if (a[i] < a[m])
+                {
+                    temp = a[i];
+                    a[i] = a[m - 1];
+                    a[m - 1] = temp;
+                }
+            }
+            qsort(a, 0, m);
+            qsort(a, m, r);
+        }
+        static void Main(string[] args)
+        {
+            int[] sur = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            qsort(sur, 0, 9);
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(sur[i]);
+            }
+        }
+    }
+}

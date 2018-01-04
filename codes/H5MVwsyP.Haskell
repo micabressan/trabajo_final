@@ -1,0 +1,37 @@
+module Utils where
+import Data.Char
+import System.IO as IO
+
+retrieve :: IO.FilePath -> IO String
+retrieve filename = IO.readFile filename
+
+-- returns the WRAPPING substring, from ith to jth element inclusive, together with some flags
+--getSubstring :: String -> Int -> Int -> (String, String, String, String, Int, Int, Int, Int)
+getSubstring string p n =
+    let l = length string
+        trailing        = (take n) . drop p $ string
+        prevailing      = take (n - l + p) string
+        invariant       = ((drop (length prevailing)) . (take p))  string
+        rest            = drop (p + n) string
+    in (prevailing, invariant, trailing, rest, length trailing, length invariant, length trailing, length rest)
+        
+-- returns the split string at the specified character
+stringSplit :: Char -> String -> [String]
+stringSplit char =
+    words .
+    (map (\c -> if (c == char) then ' ' else c))
+
+-- A simple function that converts a list of Strings into Ints 
+stringsToInts :: [String] -> [Int]
+stringsToInts = map (\st -> read st :: Int)
+
+-- A simple Integer to Hexadecimal converter. Input must be Integer.
+integerToHex :: Integer -> String
+integerToHex n =
+    let result = (reverse . ix) n 
+    in if ((odd . length ) result)  then '0':(result) else result
+    where 
+       ix n = (intToDigit . fromInteger . mod n) 16 : 
+                (if (div n 16 == 0) 
+                    then ("") 
+                    else (ix (div n 16)))

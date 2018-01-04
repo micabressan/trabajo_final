@@ -1,0 +1,17 @@
+data Tree a = Leaf a | Node [Tree a] deriving (Show, Eq)
+
+foo :: Eq a => a -> Tree a -> [Tree a]
+
+foo n (Leaf _) = []
+
+foo n (Node ((Node z):xs)) = if length ((Node z):xs) < 2 then [] 
+                else (foo n (Node z))++(foo n (Node xs))
+
+foo n (Node ((Leaf z):y:xs)) = if length ((Leaf z):y:xs) < 2 then [] 
+                else if Leaf n == Leaf z then [y] ++ (foo n (Node (y:xs)))
+                else (foo n (Node (y:xs)))
+                
+foo _ _ = []
+                
+main = do
+  print (foo 3 (Node [Leaf 1, Leaf 3, Node [Leaf 5, Leaf 3, Leaf 6], Leaf 4, Leaf 3, Leaf 44, Leaf 3]))

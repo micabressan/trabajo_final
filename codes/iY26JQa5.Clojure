@@ -1,0 +1,25 @@
+(defn anagram? [pair]
+  (let [word1 (sort (str/split (first pair) #""))
+        word2 (sort (str/split (second pair) #""))]
+    (if (= word1 word2)
+      1 ;;anagram!
+      0)))
+
+(defn pass-ok?no [pass-pairs]
+  (map anagram? pass-pairs))
+
+(defn pairs [pass]
+  (for [x pass
+        y pass
+        :when (not= x y)]
+    [x y]))
+
+(defn pass-ok? [pass]
+  (->> pass
+       pairs
+       (map anagram?)
+       vec
+       (apply +)))
+
+(defn -main2 [input]
+  (count (filter true? (map pass-ok? (map pairs (separate-passes input))))))

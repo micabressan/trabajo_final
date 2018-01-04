@@ -1,0 +1,5 @@
+[Serializable]
+public struct CoolStruct
+{
+    public int[] coolIntegers;
+}

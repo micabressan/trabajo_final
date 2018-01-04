@@ -1,0 +1,35 @@
+import Data.Matrix
+mult = multStd
+eps = 0.000001
+A_matrix :: Matrix Double
+A_matrix = fromLists [[-0.495, 0.2, -0.2995], 
+               [-0.1, 0.49985, -0.1], 
+               [0.1, -0.2, 0.555]]
+        [0.1, -0.2, 0.561]]                                
+D_matrix :: Matrix Double
+D_matrix = fromList 3 1 [-1.38474, 0.78264, 0.4011]
+B_matrix :: Matrix Double
+B_matrix' :: Matrix Double
+B_matrix' = fromLists $ map (\(row, n) -> (map (\p -> - p/(getElem n n a )) row)) (zip (toLists a) [1..])
+B_matrix = B_matrix' - (diagonal 0 (getDiag b_matrix'))
+C_matrix :: Matrix Double
+C_matrix = fromList 3 1 (map (\(el, n) -> el/(getElem n n a )) (zip (toList d) [1..]))
+x0 :: Matrix Double
+x0 = fromList 3 1 [1.0, 0, 0]
+inaccuracyOf :: Matrix Double -> Matrix Double
+inaccuracyOf x = A_matrix `mult` x - D_matrix
+maxOf :: Matrix Double -> Double
+maxOf = maximum. (map abs) . toList
+zeidelIter :: Matrix Double -> Matrix Double
+zeidelIter x = x'
+    where 
+        (x', _) = foldl (\(y, n) row -> (calc y n (fromList 1 3 row) , n + 1) ) (x, 1) (toLists B_matrix)
+        calc y n row = setElem ((getElem 1 1 (row `mult` y)) + (getElem n 1 C_matrix)) (n, 1) y
+        
+zeidel :: Matrix Double -> Int -> (Matrix Double, Int)
+zeidel x n = if (maxOf(inaccuracyOf x) < 0.00001) then (x, n)
+    else zeidel (zeidelIter x) (n + 1)
+
+jacobi :: Matrix Double -> Int -> (Matrix Double, Int)
+jacobi x n = if (maxOf(inaccuracyOf x) < 0.00001) then (x, n)
+    else jacobi (B_matrix `mult` x + C_matrix) (n + 1)

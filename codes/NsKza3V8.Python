@@ -1,0 +1,139 @@
+#!/usr/bin/python3
+
+import os
+import io
+import csv
+import sys
+import argparse
+import requests
+
+class WpeRepository:
+    """API call to WpEngine APIs
+
+    Attributes:
+        baseUrl (str): Base Url for repository.
+
+    """
+    def  __init__(self, baseUrl: str):
+        self._url = baseUrl
+        self.response = None
+
+    def account(self, uuid: str):
+        """Get account details from API
+
+        Args:
+            uuid: The account detail from the API
+
+        Returns:
+            If api exists, return response, if it does not or the API call errors, return a None
+        """
+        apiUrl = self._url + uuid
+        accounts = requests.get(apiUrl)
+        if(accounts.status_code == 200):
+            try:
+                self.response = accounts.json()
+            except ValueError:
+                self.response = None
+
+        return self.response
+
+class CsvIngest(object):
+    """Ingest and process the CSV
+
+    Attributes:
+        inputFile (str): Input CSV to read.
+        outputFile (str): Output CSV to write
+
+    """
+    def __init__(self, inputFile: str, outputFile: str) -> None:
+        self._inputFile: str = inputFile
+        self._outputFile: str = open(outputFile, 'w')
+
+    def __del__(self):
+        self._outputFile.close()
+
+    def setApi(self, apiUrl: str) -> None:
+        """Set the API
+
+        Args:
+            apiUrl: Endpoint to set
+
+        Returns:
+            None
+        """
+        self._repository: WpeRepository = WpeRepository(apiUrl)
+
+    def ingest(self) -> None:
+        """Begins the process of writing the files
+
+        Returns:
+            None
+        """
+        with open(self._inputFile, 'r') as wpe:
+            pointer: int = wpe.tell()
+            wpeCsvHeader = io.StringIO(wpe.readline())
+            header = csv.reader(wpeCsvHeader, delimiter=',')
+            header = list(header)[0]
+            if (not 'Account ID' in header):
+                raise ValueError('CSV file requires Account ID as a header. \n')
+
+            header.append('Status')
+            header.append('Status Set On')
+
+            wpe.seek(pointer)
+            wpeCSVDict = csv.DictReader(wpe)
+            writer = csv.DictWriter(self._outputFile, fieldnames=header)
+            writer.writeheader()
+            for row in wpeCSVDict:
+                row = self.updateRow(row)
+                writer.writerow(row)
+
+    def updateRow(self, row: dict) -> dict:
+        """Update the row and add Status and Status Created based on API response
+
+        Args:
+            row (dict): Row from CSVReader to modify
+
+        Returns:
+            Modified row, if there is a None from the API, empty strings are inserted in place
+        """
+        apiResponse = self._repository.account(row['Account ID'])
+        if apiResponse == None:
+            row['Status'] = ''
+            row['Status Set On'] = ''
+            sys.stderr.write('ID %s not found. Empty value will be used instead \n' % row['Account ID'])
+        elif 'status' in apiResponse and 'created_on' in apiResponse:
+            row['Status'] = apiResponse['status']
+            row['Status Set On'] = apiResponse['created_on']
+        return row
+
+def fileValidation(fileName: str) -> str:
+    """Verify File Exists
+
+    Args:
+        fileName: Name of file to be checked
+
+    Returns:
+        If file exists, return the filename, if it does not, throw and exception
+    """
+    if not os.path.exists(fileName):
+        raise argparse.ArgumentTypeError('Input file does not Exist \n')
+    return fileName
+
+def parserSetup() -> argparse:
+    """Setup the parser
+
+    Returns:
+        If file exists, return the filename, if it does not, throw and exception
+    """
+    parser = argparse.ArgumentParser(description='Merge CSVs')
+    parser.add_argument('inputFile', metavar='FILE', type=fileValidation, nargs='+', help='Input CSV')
+    parser.add_argument('outputFile', metavar='FILE', nargs='+', help='Output CSV')
+    return parser
+
+if __name__ == '__main__':
+    parser = parserSetup()
+    args = parser.parse_args(sys.argv[1:])
+    merger = CsvIngest(inputFile=args.inputFile[0], outputFile=args.outputFile[0])
+    merger.setApi('http://interview.wpengine.io/v1/accounts/')
+    merger.ingest()

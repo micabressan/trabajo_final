@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Header>
+      <Action xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none" s:mustUnderstand="1">http://webservices.im.se/ocp/AZESP0331/AZESP0331Service/AZESP0331Request</Action>
+   </s:Header>
+   <s:Body xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <AZESP0331 xmlns="http://webservices.im.se/ocp/AZESP0331">
+         <MSG_HEAD>
+            <ESSEVENT>VENDORMAINT</ESSEVENT>
+            <MESSAGETYPE>IM0331</MESSAGETYPE>
+            <EDISENDID>MASTER</EDISENDID>
+            <SENDERIDQUAL>?</SENDERIDQUAL>
+            <EDIRCVID>AOM</EDIRCVID>
+            <RECEIVERIDQUAL>?</RECEIVERIDQUAL>
+            <TESTFLAG>0</TESTFLAG>
+            <CONTROLNUMBER>4586405</CONTROLNUMBER>
+            <DATETIME>2018-01-02T00:00:00</DATETIME>
+            <INTERFACE>AZESP0331</INTERFACE>
+         </MSG_HEAD>
+         <CTRL>
+            <EDIINTFCNULL>123456789</EDIINTFCNULL>
+            <BILL>
+               <VENDNO>8010</VENDNO>
+               <NAME1>Latplanta ASS</NAME1>
+               <STREET1>Ganibu str. 11</STREET1>
+               <STREET3>Läti</STREET3>
+               <CITY />
+               <ZIPCODE>LV2150</ZIPCODE>
+               <COUNTRYCD>LV</COUNTRYCD>
+               <CHARGE>2</CHARGE>
+               <AUTOGIRO>N</AUTOGIRO>
+               <DEBITCODE>0</DEBITCODE>
+               <MODEPAY>01</MODEPAY>
+               <TERMSPAY>451</TERMSPAY>
+               <EXPCHA>N</EXPCHA>
+               <INVCHA>N</INVCHA>
+               <VAT>V</VAT>
+               <PAYSTOP>N</PAYSTOP>
+               <INTINV>N</INTINV>
+               <INTDAYS>0</INTDAYS>
+               <PAYPRIO>99</PAYPRIO>
+               <CURRENCY>EUR</CURRENCY>
+               <COMPID>010300817</COMPID>
+               <VENDORTYPE>E</VENDORTYPE>
+               <CREDATE>2017-12-21</CREDATE>
+               <LANGUAGE>EST</LANGUAGE>
+               <VENDORID>8010</VENDORID>
+               <VENDNOTEMP>N</VENDNOTEMP>
+               <EUVATNO>LV40103008178</EUVATNO>
+            </BILL>
+            <BUY>
+               <VENDNO>8010</VENDNO>
+               <NAME1>Latplanta ASS</NAME1>
+               <STREET1>Ganibu str. 11</STREET1>
+               <STREET3>Läti</STREET3>
+               <CITY />
+               <ZIPCODE>LV2150</ZIPCODE>
+               <COUNTRYCD>LV</COUNTRYCD>
+               <PAYVENDNO>8010</PAYVENDNO>
+               <TERMSDEL1>0</TERMSDEL1>
+               <LANGUAGE>EST</LANGUAGE>
+               <TRSPMODE>VR</TRSPMODE>
+               <FREIGHTCHA>N</FREIGHTCHA>
+               <INSCHA>N</INSCHA>
+               <PURCHSTOP>N</PURCHSTOP>
+               <TERMSPRICE>L</TERMSPRICE>
+               <CHECKCD>0</CHECKCD>
+               <CREDATE>2017-12-21</CREDATE>
+               <VENDNOTEMP>N</VENDNOTEMP>
+               <SVRLSHIPHEAD>N</SVRLSHIPHEAD>
+               <ROUTINGCD>8010</ROUTINGCD>
+               <CALCMETHPOHEAD>1</CALCMETHPOHEAD>
+               <CALCMETHPOLINE>1</CALCMETHPOLINE>
+            </BUY>
+         </CTRL>
+      </AZESP0331>
+   </s:Body>
+</s:Envelope>

@@ -1,0 +1,22 @@
+import Data.List
+import System.IO
+
+
+  -- digits :: rozbicie liczby na liste jej cyfr
+digits :: Int -> [Int]
+digits 0 = []
+digits x = digits (x `div` 10) ++ [x `mod` 10]
+
+  -- powerEach :: podniesienie kazdej liczby w liscie do zadanej potegi
+powerEach :: Int -> [Int] -> [Int]
+powerEach p [] = [] -- pusta lista na wejsciu daje pusta liste na wyjsciu
+powerEach p (x:xs) = x ^ p : powerEach p xs
+
+--n = 4 -- wybrane n
+outputNumbers :: Int -> [Int]
+outputNumbers n = [x | x <- [1..100000], x == sum (powerEach n (digits x)) ]
+-- wybierz wszystkie takie x ze zbioru [1..100000],
+-- ktore sa rowne sumie n-tych poteg swoich cyfr
+
+oblicz :: Int -> Int
+oblicz n = sum (outputNumbers n)

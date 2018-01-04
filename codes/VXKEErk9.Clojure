@@ -1,0 +1,10 @@
+(def numlist '([1000 "M"] [900 "CM"] [500 "D"] [400 "CD"] [100 "C"] [90 "XC"]
+               [50 "L"] [40 "XL"] [10 "X"] [9 "IX"] [5 "V"] [4 "IV"] [1 "I"]))
+
+(defn arab2roman [n]
+  (loop [acc "", n n, [[k v] & xs :as xxs] numlist]
+    (cond (zero? n) acc
+          (<= k n) (recur (str acc v) (- n k) xxs)
+          :else (recur acc n xs))))
+
+(defn main [] (doseq [x (range 1 4001)] (println (arab2roman x))))

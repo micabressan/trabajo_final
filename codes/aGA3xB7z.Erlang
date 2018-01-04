@@ -1,0 +1,47 @@
+% Jorge Andres Gonzalez A01280927
+% Andres Sosa Silva A01176075
+
+-module(servidoralumnos).
+-export([inicio/0,servidorLogic/1,registrarUsuario/3,bajaUsuario/3,imprimeLista/2,nombre/0]).
+
+%Nombre del servidor
+nombre() -> 'servidor@DESKTOP-LVD2GRU'.
+
+inicio() -> register(servidorID,spawn(servidoralumnos, servidorLogic, [[]] )).
+
+servidorLogic(Datos) ->
+    receive
+        {registra, {Usuario, Matricula, UsuarioID}} -> UsuarioID ! {registro, ok},
+                                                servidorLogic(registrarUsuario(Datos,Usuario,Matricula));
+
+        {darbaja, {Usuario,Matricula}} -> servidorLogic(bajaUsuario(Datos,Usuario,Matricula));
+
+        {lista,AlumnoID} -> servidorLogic(imprimeLista(Datos,AlumnoID));
+
+        {ping, Alumno, ID} -> ID ! {ok, Alumno},
+                              servidorLogic(Datos);
+
+        stop -> io:format("Servidor Offline~n" , [])
+
+end.
+
+registrarUsuario(Datos,Us,Mat) ->
+                                  if
+                                      Datos == [] -> [{Mat,Us}];
+                                      element(1,hd(Datos)) == Mat -> Datos;
+                                      element(1,hd(Datos)) /= Mat -> [hd(Datos) | registrarUsuario(tl(Datos),Us,Mat)]
+
+                                 end.
+
+
+bajaUsuario(Datos,Us,Mat) ->
+
+                                  if
+                                      Datos == [] -> [];
+                                      element(1,hd(Datos)) == Mat -> tl(Datos);
+                                      element(1,hd(Datos)) /= Mat -> [hd(Datos) | bajaUsuario(tl(Datos),Us,Mat)]
+
+                                  end.
+
+imprimeLista(Datos,ID) -> ID ! Datos,
+                          Datos.

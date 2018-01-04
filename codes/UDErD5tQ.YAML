@@ -1,0 +1,13 @@
+Failed config
+  mysensors:
+    gateways: [source /config/configuration.yaml:89]
+      - baud_rate: 38400
+        device: /dev/ttyUSB0
+        presistence_file: /config/mysensors.json
+    presistence: True
+    version: 2.0
+  General Errors:
+    - Setup failed for mysensors: Invalid config.
+Successful config (partial)
+  mysensors:
+core-ssh:~#

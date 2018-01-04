@@ -1,0 +1,245 @@
+-module(iso4217).
+
+-export([
+  start_link/0,
+  stop/1,
+  convert/1,
+  convert_to_chars/1,
+  convert_to_number/1,
+  get_ccy/1
+]).
+
+%% Gen_server behaviour
+-behaviour(gen_server).
+-export([
+  init/1,
+  handle_call/3,
+  handle_cast/2,
+  handle_info/2,
+  terminate/2,
+  code_change/3
+]).
+
+-include_lib("xmerl/include/xmerl.hrl").
+
+-define(MODULE_NAME,                 ?MODULE).
+-define(SERVER,                      ?MODULE).
+
+-define(ISO4217_NUMBER_PRIMARY,      iso4217).
+%% {CcyNbr, Ccy, CcyNm, CcyMnrUnts, [CtryNm]}
+-define(ISO4217_CHARS_PRIMARY, iso4217_index).
+%% {Ccy, CcyNbr, CcyNm, CcyMnrUnts, [CtryNm]}
+
+%%%===================================================================
+%%% API
+%%%===================================================================
+
+-spec start_link() -> {ok, pid()}.
+start_link() ->
+  gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
+
+-spec stop(atom()) -> ok.
+stop(New_storage) ->
+  gen_server:cast(?SERVER, {stop, New_storage}).
+
+
+-spec convert(#{ccy_nbr := integer()}) -> #{ccy => string()}
+          ;  (#{ccy := string()}) -> #{ccy_nbr => integer()}
+          ;  (integer() | string()) -> #{ccy => string()} | #{ccy_nbr => integer()}.
+convert(CcyCode) when is_map(CcyCode) ->
+  gen_server:call(?SERVER, {convert_ccy_code, CcyCode});
+convert(CcyCode) when is_integer(CcyCode) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy_nbr => CcyCode}});
+convert(CcyCode) when is_list(CcyCode) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy => CcyCode}}).
+
+-spec convert_to_chars(#{ccy_nbr := integer()} | integer()) -> #{ccy => string()}.
+convert_to_chars(#{ccy_nbr := CcyNbr}) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy_nbr => CcyNbr}});
+convert_to_chars(CcyNbr) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy_nbr => CcyNbr}}).
+
+-spec convert_to_number(#{ccy := string()} | string()) -> #{ccy_nbr => integer()}.
+convert_to_number(#{ccy := Ccy}) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy => Ccy}});
+convert_to_number(Ccy) ->
+  gen_server:call(?SERVER, {convert_ccy_code, #{ccy => Ccy}}).
+
+-spec get_ccy(#{ccy_nbr := integer()} |
+              integer() |
+              #{ccy := string()} |
+              string()) ->
+                #{ccy => string(),
+                  ccy_nbr => integer(), 
+                  ccy_nm => string(),
+                  ccy_mnr_unts => integer() | string(),
+                  countries_list => [string()]}.
+get_ccy(#{ccy_nbr := CcyNbr}) ->
+  gen_server:call(?SERVER, {get_ccy, #{ccy_nbr => CcyNbr}});
+get_ccy(#{ccy := Ccy}) ->
+  gen_server:call(?SERVER, {get_ccy, #{ccy => Ccy}});
+get_ccy(CcyNbr) when is_integer(CcyNbr) ->
+  gen_server:call(?SERVER, {get_ccy, #{ccy_nbr => CcyNbr}});
+get_ccy(Ccy) when is_list(Ccy) ->
+  gen_server:call(?SERVER, {get_ccy, #{ccy => Ccy}}).
+
+%%%===================================================================
+%%% Gen_server callbacks
+%%%===================================================================
+
+init([]) ->
+  ?ISO4217_NUMBER_PRIMARY = ets:new(?ISO4217_NUMBER_PRIMARY, [public, named_table]),
+  ?ISO4217_CHARS_PRIMARY = ets:new(?ISO4217_CHARS_PRIMARY, [public, named_table]),
+
+  {Document, _Misc} = xmerl_scan:file("xml/iso4217/list_one.xml"),
+  Content = Document#xmlElement.content,
+  CcyTbl = getCcyTbl(Content),
+  CcyTblContent = CcyTbl#xmlElement.content,
+
+  lists:map(fun(Elem) ->
+    case is_record(Elem, xmlElement) of
+      true when Elem#xmlElement.name == 'CcyNtry' ->
+        CcyNtryContent = Elem#xmlElement.content,
+        insertCcyNtry(CcyNtryContent);
+      _ ->
+        ok
+    end
+  end, CcyTblContent),
+  {ok, null}.
+
+handle_call({convert_ccy_code, #{ccy_nbr := CcyNbr}}, _, State) ->
+  Reply = case ets:lookup(?ISO4217_NUMBER_PRIMARY, CcyNbr) of
+    [] ->
+      {error, wrong_currency_number};
+    [{_, Ccy, _, _, _}] ->
+      #{ccy => Ccy}
+  end,
+  {reply, Reply, State};
+
+handle_call({convert_ccy_code, #{ccy := Ccy}}, _, State) ->
+  Reply = case ets:lookup(?ISO4217_CHARS_PRIMARY, Ccy) of
+    [] ->
+      {error, wrong_currency_code};
+    [{_, CcyNbr, _, _, _}] ->
+      #{ccy_nbr => CcyNbr}
+  end,
+  {reply, Reply, State};
+
+handle_call({get_ccy, #{ccy_nbr := CcyNbr}}, _, State) ->
+  Reply = case ets:lookup(?ISO4217_NUMBER_PRIMARY, CcyNbr) of
+    [] ->
+      {error, wrong_currency_number};
+    [{CcyNbr, Ccy, CcyNm, CcyMnrUnts, CtrysList}] ->
+      #{ccy => Ccy,
+        ccy_nbr => CcyNbr, 
+        ccy_nm => CcyNm,
+        ccy_mnr_unts => CcyMnrUnts,
+        countries_list => CtrysList}
+  end,
+  {reply, Reply, State};
+
+handle_call({get_ccy, #{ccy := Ccy}}, _, State) ->
+  Reply = case ets:lookup(?ISO4217_CHARS_PRIMARY, Ccy) of
+    [] ->
+      {error, wrong_currency_code};
+    [{Ccy, CcyNbr, CcyNm, CcyMnrUnts, CtrysList}] ->
+      #{ccy => Ccy,
+        ccy_nbr => CcyNbr, 
+        ccy_nm => CcyNm,
+        ccy_mnr_unts => CcyMnrUnts,
+        countries_list => CtrysList}
+  end,
+  {reply, Reply, State};
+
+handle_call(_, _, State) -> {reply, ignored, State}.
+
+
+handle_cast({stop, _New_storage}, State) ->
+  {stop, normal, State};
+
+handle_cast(_, State) -> {noreply, State}.
+
+
+handle_info(_, State) -> {noreply, State}.
+
+
+terminate(_Reason, _State) ->
+  ok.
+
+
+code_change(_OldVsn, State, _Extra) ->
+  {ok, State}.
+
+
+%%%===================================================================
+%%% Internal functions
+%%%===================================================================
+
+
+getCcyTbl(Content) ->
+  [CcyTbl | Tail] = lists:filter(fun(Elem) ->
+    case is_record(Elem, xmlElement) of
+      true when Elem#xmlElement.name == 'CcyTbl' ->
+        lists:any(fun({PName, _}) -> PName == 'ISO_4217' end, Elem#xmlElement.parents);
+      _ -> false
+    end
+  end, Content),
+  if not(Tail == []) ->
+    io:format("Warning! You have more than one CcyTbl (ISO4217) in your xml file. Read first.");
+    true -> ok end,
+  CcyTbl.
+
+
+insertCcyNtry(CcyNtryContent) ->
+  CtryNm = getValue('CtryNm', CcyNtryContent),
+  CcyNm = getValue('CcyNm', CcyNtryContent),
+  Ccy = getValue('Ccy', CcyNtryContent),
+  CcyNbr = case getValue('CcyNbr', CcyNtryContent) of
+    Num when is_list(Num) ->
+      list_to_integer(Num);
+    Num ->
+      Num
+  end,
+  CcyMnrUnts = case getValue('CcyMnrUnts', CcyNtryContent) of
+    MnrUnts when is_list(MnrUnts) ->
+      try list_to_integer(MnrUnts) of
+        CcyMnrUntsRes ->
+          CcyMnrUntsRes
+      catch
+        error:badarg -> MnrUnts
+      end;
+    MnrUnts ->
+      MnrUnts
+  end,  
+  case lists:any(
+    fun(Val) -> Val == none end, [CtryNm, CcyNm, Ccy, CcyNbr, CcyMnrUnts]
+  ) of
+    true ->
+      io:format("Unexpected currency entry: ~p ~p ~p ~p ~p~n",
+        [CtryNm, CcyNm, Ccy, CcyNbr, CcyMnrUnts]);
+    false ->
+      case ets:lookup(?ISO4217_NUMBER_PRIMARY, CcyNbr) of
+        [] ->
+          ets:insert(?ISO4217_NUMBER_PRIMARY, {CcyNbr, Ccy, CcyNm, CcyMnrUnts, [CtryNm]}),
+          ets:insert(?ISO4217_CHARS_PRIMARY, {Ccy, CcyNbr, CcyNm, CcyMnrUnts, [CtryNm]});
+        [{CcyNbr, _, _, _, CtryNmList}] ->
+          ets:insert(?ISO4217_NUMBER_PRIMARY, {CcyNbr, Ccy, CcyNm, CcyMnrUnts, [CtryNm | CtryNmList]}),
+          ets:insert(?ISO4217_CHARS_PRIMARY, {Ccy, CcyNbr, CcyNm, CcyMnrUnts, [CtryNm | CtryNmList]})
+      end
+  end.
+
+getValue(Nm, Content) ->
+  lists:foldl(fun(Elem, Acc) ->
+    case Acc of
+      none ->
+        case is_record(Elem, xmlElement) of
+          true when Elem#xmlElement.name == Nm ->
+            ElemContent = Elem#xmlElement.content,
+            [Text] = ElemContent,
+            Text#xmlText.value;
+          _ -> none
+        end;
+      Value ->
+        Value
+    end
+  end, none, Content).

@@ -1,0 +1,119 @@
+        private IList<IList<long>> createFourListsSpNrsValuesWeightsVolumes(IList<Sendungsposition> sps)
+        {
+            var spnrList = new List<long>();
+            var valuesList = new List<long>();
+            var weightsList = new List<long>();
+            var volumesList = new List<long>();
+            
+            foreach (var sp in sps)
+            {
+                spnrList.Add(sp.SpNr);
+                valuesList.Add(sp.Wert * 1000);
+                weightsList.Add(Convert.ToInt64(sp.Bruttogewicht * 1000));    //mit 1000 multiplizieren um etwaige Kommastellen zu eliminieren,
+                volumesList.Add(Convert.ToInt64(sp.Volumen * 1000));          //der solver kann nur mit integer umgehen
+            }
+
+            IList<IList<long>> resultList = new List<IList<long>>();
+            resultList.Add(spnrList);
+            resultList.Add(valuesList);
+            resultList.Add(weightsList);
+            resultList.Add(volumesList);
+            return resultList;
+        }
+        
+        private long[,] createWeightsAndVolumesArray(int numberSPs, IList<long> weightsList, IList<long> volumesList)
+        {
+            long[,] weightsAndVolumes = new long[2,numberSPs];
+            long[] weights = weightsList.ToArray();
+            long[] volumes = volumesList.ToArray();
+            
+            
+            for (int x = 0; x < weightsAndVolumes.GetLength(1); x += 1)
+            {
+                weightsAndVolumes[0, x] = weights[x];    
+            }
+            
+            for (int x = 0; x < weightsAndVolumes.GetLength(1); x += 1)
+            {
+                weightsAndVolumes[1, x] = volumes[x];
+            }
+
+            return weightsAndVolumes;
+        }
+        
+        /// <summary>
+        ///     Erzeugt Frachteinheiten (TEU, FEU) für Sendungspositionen.
+        /// </summary>
+        /// <pre>sps.Count > 0</pre>
+        private List<Frachteinheit> ErzeugeFrachteinheitenFür(IList<Sendungsposition> sps, TransportplanungJob job)
+        {
+            Check.Contract(job != null);
+            Check.Contract(sps != null);
+            Check.Contract(sps.Count > 0);
+
+            var lfe = new List<Frachteinheit>();
+
+            var spsRestGewicht = sps.Sum(x => x.Bruttogewicht);
+            var spsRestVolumen = sps.Sum(x => x.Volumen);
+            List<Sendungsposition> spsRestPositionen = new List<Sendungsposition>(sps);
+            
+            var resultList = createFourListsSpNrsValuesWeightsVolumes(sps);
+
+            long[] spnrs = resultList.ElementAt(0).ToArray();
+            long[] values = resultList.ElementAt(1).ToArray();
+            long[,] weightsAndVolumes = createWeightsAndVolumesArray(sps.Count, resultList.ElementAt(2), resultList.ElementAt(3));
+
+            long[] capacityTEU = {Convert.ToInt64(TEU.VOLUME * 1000)};    //s.o.
+            long[] capacityFEU = {Convert.ToInt64(FEU.VOLUME * 1000)};
+            
+            Frachteinheit fe = null;
+            foreach (var sp in sps)
+            {
+                if (sp.Bruttogewicht > FEU.MAXZULADUNG_TONS || sp.Volumen > FEU.VOLUME)
+                {
+                    // Ware zu schwer oder zu groß; kann nicht transportiert werden.
+                    job.Meldungen.Add(new TransportplanungMeldung(
+                        TransportplanungMeldungTag.FrachteinheitenBildungNichtMöglich,
+                        "Das Bruttogewicht oder das Volumen der Sendungsposition " + sp.SpNr + " ist zu hoch."));
+                    return new List<Frachteinheit>();
+                }
+                
+                //Gewicht/Volumen aller verbleibenden SPs ist zu viel für TEU deswegen nehme FEU
+                if (spsRestGewicht > TEU.MAXZULADUNG_TONS || spsRestVolumen > TEU.VOLUME)    
+                {
+                    KnapsackSolver solver = new KnapsackSolver("KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER");
+                    
+                    solver.Init(values, weightsAndVolumes, capacityFEU);
+                    solver.Solve();
+                    
+                    var listOfChosenSPsbySpNr = new List<long>();
+                    
+                    for (int i = values.Length - 1; i >= 0; i--)
+                    {
+                        if (solver.BestSolutionContains(i))
+                        {                           
+                            listOfChosenSPsbySpNr.Add(spnrs[i]);                           
+                        }
+                    }
+
+                    fe = new Frachteinheit(FrachteinheitTyp.FEU);
+                    
+                    foreach (var chosenSoNr in listOfChosenSPsbySpNr)
+                    {
+                        var chosenSp = spsRestPositionen.Find(sendPosi => sendPosi.SpNr == chosenSoNr);
+                        fe.Sendungspositionen.Add(new SendungspositionReferenz(Convert.ToInt32(chosenSoNr)));
+                        spsRestPositionen.Remove(chosenSp);
+                    }
+                    
+                    //TODO: long Arrays neu erstellen mit Restpositionen damit verpackte SPs raus sind
+                }
+        }
+
+            // evtl. letzte erstellte Frachteinheit noch hinzunehmen
+            if (fe.Sendungspositionen.Count > 0)
+                lfe.Add(fe);
+
+            Check.Contract(lfe.Count > 0);
+
+            return lfe;
+        }

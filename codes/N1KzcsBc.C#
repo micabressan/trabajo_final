@@ -1,0 +1,205 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+
+public class Example
+{
+    public static void Printing1x2(Odds game, List<string> betType)
+    {
+        //string stats = $"||-   -|  Date/Time  |-    -||-      -|  Home  |-      -||-      -|  Away  |-      -||";
+        //Console.WriteLine(stats);
+        string line1 = $"||{game.home.PadLeft(26, ' ')}||{game.away.PadRight(26, ' ')}||{game.rawDate.PadLeft(26, ' ')}||";
+        //Console.WriteLine("||" + new string(' ', 26) + "||" + new string(' ', 26) + "||" + new string(' ', 26) + "||");
+        Console.WriteLine(line1);
+        string line2 = "";
+        if (betType.Contains("1x2"))
+        {
+            string home = $"||{$"{game.k1blue.ToString().PadRight(8, '-')}> {game.k1.ToString().PadLeft(5)}  <{game.k1red.ToString().PadLeft(8, '-')}".PadRight(22, ' ')}";
+            string draw = $"||{$"{game.kxblue.ToString().PadRight(8, '-')}> {game.kx.ToString().PadLeft(5)}  <{game.kxred.ToString().PadLeft(8, '-')}".PadRight(22, ' ')}";
+            string away = $"||{$"{game.k2blue.ToString().PadRight(8, '-')}> {game.k2.ToString().PadLeft(5)}  <{game.k2red.ToString().PadLeft(8, '-')}".PadLeft(22, ' ')}||";
+            line2 = home + draw + away;
+            Console.WriteLine(line2);
+        }
+        if (betType.Contains("bts"))
+        {
+            string bts = $"||{$"{"-".PadRight(1, '-')}> {"Both Teams To Score"} <{"-".PadLeft(2, '-')}".PadRight(22, ' ')}";
+            string yes = $"||{$"{game.ggblue.ToString().PadRight(8, '-')}> {game.gg.ToString().PadLeft(5)}  <{game.ggred.ToString().PadLeft(8, '-')}".PadRight(22, ' ')}";
+            string no = $"||{$"{game.ngblue.ToString().PadRight(8, '-')}> {game.ng.ToString().PadLeft(5)}  <{game.ngred.ToString().PadLeft(8, '-')}".PadLeft(22, ' ')}||";
+            line2 = bts + yes + no;
+            Console.WriteLine(line2);
+        }
+        if (betType.Contains("dnb"))
+        {
+            string dnb = $"||{$"{"-".PadRight(5, '-')}> {"Draw No Bet"} <{"-".PadLeft(6, '-')}".PadRight(22, ' ')}";
+            string home = $"||{$"{Math.Round(game.k1blue * (game.kxblue - 1) / game.kxblue,2).ToString().PadRight(8, '-')}> {Math.Round(game.k1 * (game.kx - 1) / game.kx,2).ToString().PadLeft(5)}  <{Math.Round(game.k1red * (game.kxred - 1) / game.kxred,2).ToString().PadLeft(8, '-')}".PadRight(22, ' ')}";
+            string away = $"||{$"{Math.Round(game.k2blue * (game.kxblue - 1) / game.kxblue,2).ToString().PadRight(8, '-')}> {Math.Round(game.k2 * (game.kx - 1) / game.kx,2).ToString().PadLeft(5)}  <{Math.Round(game.k2red * (game.kxred - 1) / game.kxred,2).ToString().PadLeft(8, '-')}".PadRight(22, ' ')}||";
+            line2 = home + dnb +away;
+            Console.WriteLine(line2);
+        }
+
+
+    }
+    public static void Main()
+    {
+        List<Odds> rawOutput = new List<Odds>();
+        List<string> input = new List<string>();
+        Dictionary<string, DetailedDatabase> db = new Dictionary<string, DetailedDatabase>();
+        List<string> breakpoints = new List<string>() { "Betfair Radio" };
+        string lastInputType = "";
+    START: string command = Console.ReadLine().ToLower();
+        if (command == "" || command==" ") goto START;
+        if (command.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray()[0] == "print")
+        {
+            int i = 1;
+            foreach (var game in rawOutput)
+            {
+                Console.WriteLine("||-->" + i.ToString().PadRight(23) + "||" + new string(' ', 26) + "||" + new string(' ', 26) + "||");
+                Printing1x2(game, command.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList());
+                
+                i++;
+            }
+            goto START;
+        }
+        string website2ndLine = Console.ReadLine().ToUpper();   //this is just temporary line used to catch the unique 2nd line for each website
+        while (true)
+        {
+            string rawInput = Console.ReadLine();
+            input.Add(rawInput);
+            if (breakpoints.Contains(rawInput)) break;
+
+            switch (rawInput) //input type
+            {
+                case "Match Odds":
+                    if (!db.Keys.Contains(rawInput)) db.Add(rawInput, new DetailedDatabase());
+                    db[rawInput].pattern = @"(.+)\n(.+)\n(.+)(\s)(.+)(\n+)([\d.]+)(\n)(.\d+)(\n+)([\d.]+)(\n)(.\d+)(\n+)([\d.]+)(\n)(.\d+)(\n+)([\d.]+)(\n)(.\d+)(\n+)([\d.]+)(\n)(.\d+)(\n+)([\d.]+)(\n)(.\d+)";
+                    db[rawInput].website = website2ndLine;
+                    db[rawInput].isActive = true;
+                    lastInputType = rawInput;
+                    break;
+                case "Both Teams to Score":
+                    if (!db.Keys.Contains(rawInput)) db.Add(rawInput, new DetailedDatabase());
+                    db[rawInput].pattern = @"(.+\d{2}:\d{2})(\s\n)(.+)(\n+)(.+)(\s+)(.+)(\n+)(\d+.\d+)(\n)(.+)(\s+)(\n+)(\d+.\d+)(\n)(.+)(\s+)(\n+)(\d+.\d+)(\n)(.+)(\s+)(\n+)(\d+.\d+)(\n)(.+)";
+                    db[rawInput].website = website2ndLine;
+                    db[rawInput].isActive = true;
+                    lastInputType = rawInput;
+                    break;
+                default:
+                    break;
+            }
+        }
+        string formattedInput = string.Join("\n", input);
+
+        if (website2ndLine == "IN-PLAY") // BETFAIR
+        {
+            switch (lastInputType)
+            {
+                case "Match Odds":
+                    foreach (Match m in Regex.Matches(formattedInput, db["Match Odds"].pattern))
+                    {
+                        Odds temp = new Odds();
+                        temp.rawDate = m.Groups[1].ToString();
+                        temp.home = m.Groups[2].ToString();
+                        temp.away = m.Groups[3].ToString();
+                        if (rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray().Length > 0 && rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray()[0].home == temp.home)
+                        {
+                            int combiner = rawOutput.IndexOf(rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray()[0]);
+                            rawOutput[combiner].k1blue = double.Parse(m.Groups[7].ToString());
+                            rawOutput[combiner].kxblue = double.Parse(m.Groups[15].ToString());
+                            rawOutput[combiner].k2blue = double.Parse(m.Groups[23].ToString());
+                            rawOutput[combiner].k1red = double.Parse(m.Groups[11].ToString());
+                            rawOutput[combiner].kxred = double.Parse(m.Groups[19].ToString());
+                            rawOutput[combiner].k2red = double.Parse(m.Groups[27].ToString());
+                            rawOutput[combiner].k1 = (rawOutput[combiner].k1blue + rawOutput[combiner].k1red) / 2;
+                            rawOutput[combiner].kx = (rawOutput[combiner].kxblue + rawOutput[combiner].kxred) / 2;
+                            rawOutput[combiner].k2 = (rawOutput[combiner].k2blue + rawOutput[combiner].k2red) / 2;
+                        }
+                        else
+                        {
+                            temp.k1blue = double.Parse(m.Groups[7].ToString());
+                            temp.k1red = double.Parse(m.Groups[11].ToString());
+                            temp.kxblue = double.Parse(m.Groups[15].ToString());
+                            temp.kxred = double.Parse(m.Groups[19].ToString());
+                            temp.k2blue = double.Parse(m.Groups[23].ToString());
+                            temp.k2red = double.Parse(m.Groups[27].ToString());
+                            temp.k1 = (temp.k1blue + temp.k1red) / 2;
+                            temp.kx = (temp.kxblue + temp.kxred) / 2;
+                            temp.k2 = (temp.k2blue + temp.k2red) / 2;
+                            rawOutput.Add(temp);
+                        }
+                    }
+                    break;
+                case "Both Teams to Score":
+                    foreach (Match m in Regex.Matches(formattedInput, db["Both Teams to Score"].pattern))
+                    {
+                        Odds temp = new Odds();
+                        temp.rawDate = m.Groups[1].ToString();
+                        temp.home = m.Groups[3].ToString();
+                        temp.away = m.Groups[5].ToString();
+                        if (rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray().Length > 0 && rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray()[0].home == temp.home)
+                        {
+                            int combiner = rawOutput.IndexOf(rawOutput.Where(k => k.home == temp.home && k.away == temp.away).ToArray()[0]);
+                            rawOutput[combiner].ggblue = double.Parse(m.Groups[9].ToString());
+                            rawOutput[combiner].ggred = double.Parse(m.Groups[14].ToString());
+                            rawOutput[combiner].ngblue = double.Parse(m.Groups[19].ToString());
+                            rawOutput[combiner].ngred = double.Parse(m.Groups[24].ToString());
+                            rawOutput[combiner].gg = (rawOutput[combiner].ggblue + rawOutput[combiner].ggred) / 2;
+                            rawOutput[combiner].ng = (rawOutput[combiner].ngblue + rawOutput[combiner].ngred) / 2;
+                        }
+                        else
+                        {
+                            temp.ggblue = double.Parse(m.Groups[9].ToString());
+                            temp.ggred = double.Parse(m.Groups[14].ToString());
+                            temp.ngblue = double.Parse(m.Groups[19].ToString());
+                            temp.ngred = double.Parse(m.Groups[24].ToString());
+                            temp.gg = (temp.ggblue + temp.ggred) / 2;
+                            temp.ng = (temp.ngblue + temp.ngred) / 2;
+                            rawOutput.Add(temp);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        goto START;
+    }
+
+}
+public class DetailedDatabase
+{
+    public string website { get; set; }
+    public string input { get; set; }
+    public bool isActive = false;
+    public string pattern { get; set; }
+    public List<Odds> tempOdds { get; set; }
+
+}
+public class Odds
+{
+    public string rawDate { get; set; }
+    public DateTime date { get; set; }
+    public string home { get; set; }
+    public string away { get; set; }
+    public double k1blue { get; set; }
+    public double kxblue { get; set; }
+    public double k2blue { get; set; }
+    public double k1red { get; set; }
+    public double kxred { get; set; }
+    public double k2red { get; set; }
+    public double k1 { get; set; }
+    public double kx { get; set; }
+    public double k2 { get; set; }
+    public double ggblue { get; set; }
+    public double ngblue { get; set; }
+    public double ggred { get; set; }
+    public double ngred { get; set; }
+    public double gg { get; set; }
+    public double ng { get; set; }
+}

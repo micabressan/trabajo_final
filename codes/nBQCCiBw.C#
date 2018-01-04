@@ -1,0 +1,101 @@
+ //======VYPOCET VRSTIEV======
+                    //======PRVA VRSTVA======
+                    foreach (Weight weight in this.network.in_weights)
+                    {
+                        weight.output_neuron.input_val = weight.output_neuron.input_val + weight.value * weight.input_data;
+                    }
+                    foreach (Neuron neuron in this.network.input_layer.neurons)
+                    {
+                        neuron.output_val = neuron.sigmoid(neuron.input_val);
+                    }
+                    //======DRUHA VRSTVA======
+                    foreach (Weight weight in this.network.first_weights)
+                    {
+                        weight.output_neuron.input_val = weight.output_neuron.input_val + weight.value * weight.input_neuron.output_val;
+                    }
+                    foreach (Neuron neuron in this.network.first_hiden_layer.neurons)
+                    {
+                        neuron.output_val = neuron.sigmoid(neuron.input_val);
+                    }
+                    //======TRETIA VRSTVA======
+                    foreach (Weight weight in this.network.second_weights)
+                    {
+                        weight.output_neuron.input_val = weight.output_neuron.input_val + weight.value * weight.input_neuron.output_val;
+                    }
+                    foreach (Neuron neuron in this.network.second_hiden_layer.neurons)
+                    {
+                        neuron.output_val = neuron.sigmoid(neuron.input_val);
+                    }
+                    //======STVRTA VRSTVA======
+                    foreach (Weight weight in this.network.out_weights)
+                    {
+                        weight.output_neuron.input_val = weight.output_neuron.input_val + weight.value * weight.input_neuron.output_val;
+                    }
+                    foreach (Neuron neuron in this.network.output_layer.neurons)
+                    {
+                        neuron.output_val = neuron.sigmoid(neuron.input_val);
+                    }
+                    //======VYPOCET DELTY PRE VRSTVY======
+                    //======VYPOCET DELTY PRE 4.VRSTVU(VYSTUPNY NEURON)
+                    foreach (Neuron neuron in this.network.output_layer.neurons)
+                    {
+                        neuron.delta = (neuron.expected_val - neuron.output_val) * neuron.der_sigmoid(neuron.input_val);
+                        this.error.Add(neuron.expected_val - neuron.output_val);
+                    }
+                    //======VYPOCET DELTY PRE 3.VRSTVU(NIE VYSTUPNY NEURON)
+                   
+                    foreach (Neuron neuron in this.network.second_hiden_layer.neurons)
+                    {
+                        neuron.delta = neuron.der_sigmoid(neuron.input_val);
+                        foreach (Weight weight in this.network.out_weights)
+                        {
+                            if (neuron.id == weight.input_neuron.id)
+                                neuron.delta = neuron.delta * weight.output_neuron.delta * weight.value;
+                        }
+                    }
+                    //======VYPOCET DELTY PRE 2.VRSTVU(NIE VYSTUPNY NEURON)
+                    foreach (Neuron neuron in this.network.first_hiden_layer.neurons)
+                    {
+                        neuron.delta = neuron.der_sigmoid(neuron.input_val);
+                        foreach (Weight weight in this.network.second_weights)
+                        {
+                            if (neuron.id == weight.input_neuron.id)
+                                neuron.delta = neuron.delta * weight.output_neuron.delta * weight.value;
+                        }
+                    }
+                    //======VYPOCET DELTY PRE 1.VRSTVU(NIE VYSTUPNY NEURON)
+                    foreach (Neuron neuron in this.network.input_layer.neurons)
+                    {
+                        neuron.delta = neuron.der_sigmoid(neuron.input_val);
+                        foreach (Weight weight in this.network.first_weights)
+                        {
+                            if (neuron.id == weight.input_neuron.id)
+                                neuron.delta = neuron.delta * weight.output_neuron.delta * weight.value;
+                        }
+                    }
+                    //======VYPOCET ZMENU VAH PRE VRSTVY======
+                    //======VYPOCET ZMENU VRAH PRE 1.VRSTVU
+                    foreach (Weight weight in this.network.in_weights)
+                    {
+                        double delta = 1 * weight.output_neuron.delta * weight.input_data;
+                        weight.value = weight.value + delta;
+                    }
+                    //======VYPOCET ZMENU VRAH PRE 2.VRSTVU
+                    foreach (Weight weight in this.network.first_weights)
+                    {
+                        double delta = 1 * weight.output_neuron.delta * weight.input_neuron.output_val;
+                        weight.value = weight.value + delta;
+                    }
+                    //======VYPOCET ZMENU VRAH PRE 3.VRSTVU
+                    foreach (Weight weight in this.network.second_weights)
+                    {
+                        double delta = 1 * weight.output_neuron.delta * weight.input_neuron.output_val;
+                        weight.value = weight.value + delta;
+                    }
+                    //======VYPOCET ZMENU VRAH PRE 2.VRSTVU
+                    foreach (Weight weight in this.network.out_weights)
+                    {
+                        double delta = 1 * weight.output_neuron.delta * weight.input_neuron.output_val;
+                        weight.value = weight.value + delta;
+                    }
+                }

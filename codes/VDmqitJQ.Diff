@@ -1,0 +1,27 @@
+Index: /usr/local/poudriere/ports/HEAD/devel/pycanberra/Makefile
+===================================================================
+--- /usr/local/poudriere/ports/HEAD/devel/pycanberra/Makefile	(revision 456206)
++++ /usr/local/poudriere/ports/HEAD/devel/pycanberra/Makefile	(working copy)
+@@ -11,7 +11,8 @@
+ LICENSE=	LGPL21
+ LICENSE_FILE=	${WRKSRC}/COPYING
+ 
+-USES=		python
++USES=		python:3.4+
++		#this is to force ibus-cangjie to build properly
+ USE_PYTHON=	autoplist distutils optsuffix
+ 
+ USE_GITHUB=	yes
+@@ -19,8 +20,9 @@
+ GH_TAGNAME=	88c53cd
+ 
+ post-patch:
+-	@(cd ${WRKSRC} && ${MKDIR} ${WRKSRC}/pycanberra && \
+-	${MV} pycanberra.py ${WRKSRC}/pycanbberra && \
+-	${TOUCH} __init__.py)
++	@(cd ${WRKSRC} &&					\
++	     ${MKDIR} ${WRKSRC}/pycanberra && 			\
++	     ${TOUCH} ${WRKSRC}/pycanberra/__init__.py && 	\
++	     ${MV} pycanberra.py ${WRKSRC}/pycanberra)
+ 
+ .include <bsd.port.mk>

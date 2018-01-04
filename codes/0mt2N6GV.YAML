@@ -1,0 +1,216 @@
+   __________  ____  ______
+  / ____/ __ \/ __ \/ ____/
+ / /   / / / / /_/ / __/   
+/ /___/ /_/ / _, _/ /___   
+\____/\____/_/ |_/_____/   
+                                                                           
+spawn-on-join: true
+auto-afk: 300
+teleport-to-center: true
+message-sound: CHICKEN_EGG_POP
+command-cooldown: 1
+disable-join-leave-messages: true
+disable-death-messages: true
+disable-weather: true
+disable-xp: true
+time: normal
+
+command-cooldown-blacklist:
+  - /msg
+  - /r
+  - /t
+  - /message
+  - /tell
+    __    _______________
+   / /   /  _/ ___/_  __/
+  / /    / / \__ \ / /   
+ / /____/ / ___/ // /    
+/_____/___//____//_/     
+                                                                         
+list:
+   Admins: founder co-founder administrator staff-manager
+   Staff: senior-moderator moderator junior-moderator architect
+   VIP: famous big-donation supporter vip
+   Players: small-donation
+   ________  _____  ______
+  / ____/ / / /   |/_  __/
+ / /   / /_/ / /| | / /   
+/ /___/ __  / ___ |/ /    
+\____/_/ /_/_/  |_/_/     
+                                       
+chat:
+  formats:
+    player:
+      priority: 0
+      name-color: "&3"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - "&a%player% &6is a &3Player&6."
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      permission: "chat.format.player"
+    architect:
+      priority: 1
+      name-color: "&6"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.architect"
+    junior-moderator:
+      priority: 2
+      name-color: "&2"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.junior.moderator"
+    moderator:
+      priority: 3
+      name-color: "&9"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.moderator"
+    senior-moderator:
+      priority: 4
+      name-color: "&5"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.senior.moderator"
+    staff-manager:
+      priority: 5
+      name-color: "&c"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.staff.manager"
+    administrator:
+      priority: 6
+      name-color: "&4"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.administrator"
+    co-founder:
+      priority: 7
+      name-color: "&4"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.co.founder"
+    founder:
+      priority: 8
+      name-color: "&4"
+      name: "%player%"
+      suffix: "&f: "
+      chat-color: "&7"
+      name-hover:
+      - ""
+      suffix-hover:
+      - ""
+      name-click-command: "/msg %player%"
+      suffix-click-command: ""
+      permission: "chat.format.founder"
+    
+  prefixes:
+    architect:
+      priority: 0
+      prefix: "&7[&6Architect&7] "
+      prefix-hover:
+      - "&a%player% &6is an Architect."
+      prefix-click-command: ""
+      permission: "chat.prefix.architect"
+    junior-moderator:
+      priority: 1
+      prefix: "&7[&2Jr&7. &2Moderator&7] "
+      prefix-hover:
+      - "&a%player% &6is a &2Junior Moderator&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.junior.moderator"
+    moderator:
+      priority: 2
+      prefix: "&7[&9Moderator&7] "
+      prefix-hover:
+      - "&a%player% &6is a &9Moderator&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.moderator"
+    senior-moderator:
+      priority: 3
+      prefix: "&7[&5Sr&7. &5Moderator&7] "
+      prefix-hover:
+      - "&a%player% &6is a &5Senior Moderator&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.senior.moderator"
+    staff-manager:
+      priority: 4
+      prefix: "&7[&cStaff&7-&cManager&7] "
+      prefix-hover:
+      - "&a%player% &6is a &cStaff&7-&cManager&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.staff.manager"
+    administrator:
+      priority: 5
+      prefix: "&7[&4Administrator&7] "
+      prefix-hover:
+      - "&a%player% &6is an &4Administrator&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.administrator"
+    co-founder:
+      priority: 6
+      prefix: "&7[&4Co&7-&4Founder&7] "
+      prefix-hover:
+      - "&a%player% &6is a &4Co&7-&4Founder&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.co.founder"
+    founder:
+      priority: 7
+      prefix: "&7[&4Founder&7] "
+      prefix-hover:
+      - "&a%player% &6is the &4Founder&6."
+      prefix-click-command: ""
+      permission: "chat.prefix.founder"

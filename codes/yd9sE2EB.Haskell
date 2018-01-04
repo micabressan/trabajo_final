@@ -1,0 +1,53 @@
+{-# LANGUAGE MultiWayIf #-}
+
+module Main where
+
+import Prelude hiding (Right,Left)
+import Data.Complex
+
+data Move = Right | Up | Left | Down deriving (Eq, Show)
+
+moveToComplex :: Num c => Move -> Complex c
+moveToComplex Right = 1 :+ 0
+moveToComplex Up = 0 :+ 1
+moveToComplex Left = (-1) :+ 0
+moveToComplex Down = 0 :+ (-1)
+
+expandSeq :: [Move] -> [Move]
+expandSeq [] = [Right, Up, Left, Left, Down, Down]
+expandSeq seq = let reversedSeq = reverse seq
+                    size = length $ takeWhile (== head reversedSeq) reversedSeq
+                in replicate (size + 1) Right ++
+                   replicate (size + 1) Up ++
+                   replicate (size + 2) Left ++
+                   replicate (size + 2) Down
+
+genSeq :: [Move] -> Int -> [Move]
+genSeq seq num
+  | num - 1 <= length seq = take (num - 1) seq
+  | otherwise = genSeq (seq ++ expandSeq seq) num
+genSeqForNum = genSeq []
+
+countMoves :: Int -> Int -> Int
+countMoves from to | (real, imag) == (1, 1) = 1
+                   | otherwise = real + imag
+                   where complex = sum $  map (moveToComplex) (drop (from-1) (genSeqForNum to))
+                         real = round $ abs . realPart $ complex
+                         imag = round $ abs . imagPart $ complex
+
+sumForPoint :: [Int] -> Int
+sumForPoint [] = 1
+sumForPoint pns = foldr (\(x,n) acc -> if
+                                         |countMoves n (length pns + 1) == 1 -> acc + x
+                                         |otherwise -> acc)
+                        0 $
+                        zip (reverse pns) [1,2..]
+
+getFirstAfterThreshold :: Int -> Int
+getFirstAfterThreshold threshold = let incrementer :: [Int] -> Int
+                                       incrementer [] = incrementer [sumForPoint []]
+                                       incrementer x
+                                                  | head x > threshold = head x
+                                                  | otherwise = incrementer $ (sumForPoint x):x
+                                   in incrementer []
+main = print $ getFirstAfterThreshold 325489

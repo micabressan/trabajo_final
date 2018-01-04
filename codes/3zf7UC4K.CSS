@@ -1,0 +1,228 @@
+/* Bottom Bar Fix */
+
+.theme-dark .channel-members::after {
+    border-top: 2px solid var(--main-color) !important;
+    opacity: 1;
+}
+
+.theme-dark .inner-3if5cm {
+    border-top: px solid var(--main-color) !important;
+    opacity: 1;
+}  
+
+.theme-dark .container-iksrDt {
+    border-top: 2px solid var(--main-color) !important;
+    opacity: 1;
+}
+
+.theme-dark .container-RYiLUQ, .theme-dark .layer, .theme-dark .layers, .theme-dark .content, .theme-dark .messages-wrapper .message-group, .theme-dark #friends, .theme-dark .popout.popout-bottom:not(.no-arrow)[style*="z-index: 1000; overflow: hidden; visibility: visible;"] {
+    background: transparent !important;
+}
+
+.chat.private .theme-dark .inner-3if5cm {
+    margin-left: -15px !important;
+}
+
+.theme-dark .chat form {
+    border-top: 2px solid var(--main-color) !important;
+    height: 93px;
+}
+
+.textArea-20yzAH {
+    max-height: 35px;
+}
+
+
+/* Top Left Notification Transparent - Pout */
+
+.app .guilds>div.guild:first-child .badge {
+    background-color: transparent;
+}
+
+.app .guilds>div.guild:first-child .badge {
+    color: #fff;
+    margin: 0px 5px 9px 0px !important;
+    padding: 20px 38px 16px 35px;
+    border-radius: 0px !important;
+    background-color: transparent;
+    border-bottom: 2px transparent;
+    transition: .2s background-color linear;
+}
+
+.app .guilds>div.guild:first-child:hover .badge {
+    background-color: transparent !important;
+}
+
+/* Hide Friends Tab Chat Bar */
+
+.theme-dark #friends .friends-table .friends-table-body::after {
+    content: "";
+    background: rgba(0, 0, 0, 0.4);
+    visibility: hidden;
+}
+
+.wordmark-2L03Wr {
+    font-size: 0;
+    left: 0;
+    opacity: .6;
+    padding: 4px 8px 3px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+}
+
+/* Seamelss Chat Bar */
+
+#app-mount .theme-dark .container-iksrDt {
+    background: transparent!important;
+}
+
+.theme-dark .channel-members::after {
+    background: rgba(0, 0, 0, 0.7)!important;
+}
+
+.theme-dark .chat form {
+    background-color: transparent!important;
+}
+
+[class*="scroller-"].channel-members {
+    height: calc(100% - 70px)!important;
+}
+
+/* Spoiler Block  */
+
+
+pointer-events: none; to .chat .content .message-group .comment .markup.spoiler:before
+.chat .content .message-group .comment .markup.spoiler,
+.chat .content .message-group .comment .markup.spoiler .mention{
+    color: transparent!important;
+    transition: color 200ms;
+}
+
+.chat .content .message-group .comment .markup.spoiler{
+    min-width: 28px;
+    position: relative;
+}
+
+.chat .content .message-group .comment .markup.spoiler:before{
+    user-select: none !important;
+    content: "SPOILER" !important;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    min-height: initial;
+    font-size: 12px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    line-height: normal;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 200ms;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.chat .content .message-group .comment .markup.spoiler:hover,
+.chat .content .message-group .comment .markup.spoiler:hover .mention{color: #e2e2e2!important;}
+
+/* Activity Feed Chat Bar */
+
+.theme-dark .activityFeed-HeiGwL::after {
+    background: rgba(0, 0, 0, 0.2)!important;
+    border-top: 2px solid rgba(0,0,0,0.3) !important;
+    visibility: hidden;
+}
+
+#app-mount .theme-dark .container-iksrDt {
+    background: transparent!important;
+    visibility:
+}
+
+
+/* Fixed Reactions - Pout */
+
+.theme-dark .reaction.reaction-me, .theme-light .reaction.reaction-me {
+    background:var(--main-color) !important;
+}
+
+.message-group .reaction::before, .message-group .reaction::after {
+    border-radius: 30%;
+    visibility: hidden;
+}
+
+.message-group .reaction, .message-group .reaction .emoji {
+    border-radius: 30%;
+}
+
+/* Status Picker Fix */
+
+.status-picker.popout-menu {
+    background: rgba(0,0,0,0.3) !important;
+     z-index: 10000 !important;
+}
+
+/* User Settings Changes */
+
+.side-2nYO0F .item-3879bf {
+    margin-top: 2px;
+}
+
+.marginBottom8-1mABJ4 {
+    margin-bottom: 2px;
+}
+
+.marginTop8-2gOa2N {
+    margin-top: 2px; 
+}
+
+.sidebar-region .sidebar .side-2nYO0F .separator-3z7STW {
+    background-color: var(--main-color);
+}
+
+.side-2nYO0F .separator-3z7STW {
+    visibility: hidden;
+    height: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.ui-standard-sidebar-view .sidebar-region .sidebar {
+    padding: 30px 30px 0px 0px;
+    width: 218px;
+    text-shadow: rgba(0, 0, 0, 0.901961) 2px 2px;
+}
+
+.side-2nYO0F .itemSelected-3XxAMf {
+    background-color: hsla(216,4%,74%,.1) !important;
+    color: #fff;
+}
+
+#bd-settings-sidebar .ui-tab-bar-header {
+    color: #72767d;
+    text-shadow: rgba(0, 0, 0, 0.901961) 2px 2px;
+    font-family: inherit;
+    padding: 4px 0px;
+    font-size: 15px;
+    line-height: 16px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+#bd-settings-sidebar .ui-tab-bar-separator {
+    background-color: var(--main-color);
+    
+}
+
+#bd-settings-sidebar .ui-tab-bar-item.selected {
+    background-color: hsla(216,4%,74%,.1) !important;
+}

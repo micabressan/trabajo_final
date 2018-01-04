@@ -1,0 +1,15 @@
+//use std::collections::HashMap;
+use std::collections::linked_list::LinkedList;
+
+fn main() {
+    //let hm : HashMap<String, String> = HashMap::new();
+    let mut ll: LinkedList<String> = LinkedList::new();
+    let mut s : String = String::new();
+
+    s.push_str("a");
+
+    for i in 1..100
+    {
+        ll.push_back("abc");
+    }
+}

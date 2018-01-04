@@ -1,0 +1,12 @@
+m = peripheral.wrap("right")
+m.clear()
+local function centerText(text)
+  x,y = m.getSize()
+  x1,y1 = m.getCursorPos()
+  m.setCursorPos((math.floor(x/2) - (math.floor(#text/2))), y1)
+  m.write(text)
+end
+m.setTextScale(4)
+m.setCursorPos(1,1)
+m.setTextColor(2)
+centerText("Ind. Smelter")

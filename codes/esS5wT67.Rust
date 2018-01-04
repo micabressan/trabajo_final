@@ -1,0 +1,67 @@
+/// Represents the legal positions for a tile
+#[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Hash)]
+#[serde(untagged)]
+pub enum LocationInfo {
+    /// Legal columns
+    Cols(Vec<usize>),
+    /// Legal rows
+    Rows(Vec<usize>),
+    /// Specific grid locations
+    Grid(Vec<(usize, usize)>)
+}
+
+/// Represents a tile for placement
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Tile {
+    /// The cell type contained in the tile
+    pub cell: String,
+    /// The count of cells which can be contained in the tile
+    #[serde(default = "default_count")]
+    pub count: usize,
+    /// The legal locations for the tile
+    pub loc: LocationInfo
+}
+
+fn default_count() -> usize {
+    1
+}
+
+/// Represents the parts of an FPGA architecture that Anansi cares about
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Architecture {
+    /// The tile types
+    pub tiles: HashMap<String, Tile>
+}
+
+impl Architecture {
+    fn new(tiles: HashMap<String, Tile>) -> Architecture {
+        Architecture {
+            tiles: tiles
+        }
+    }
+
+    pub fn from_slice(input: &[u8]) -> Result<Architecture, serde_yaml::Error> {
+        serde_yaml::from_slice(input).map(Architecture::new)
+    }
+
+    pub fn to_string(&self) -> Result<String, serde_yaml::Error> {
+        serde_yaml::to_string(&self.tiles)
+    }
+
+    pub fn to_writer(&self, writer: &mut Write) -> Result<(), serde_yaml::Error> {
+        serde_yaml::to_writer(writer, &self.tiles)
+    }
+}
+
+
+
+/* YAML input file
+clb:
+        cell: ICESTORM_LC
+        count: 8
+        cols: [1, 2, 4, 5, 6, 7, 8, 9, 11, 12]
+io:
+        cell: SB_IO
+        count: 2
+        cols: [1, 2]
+*/

@@ -1,0 +1,39 @@
+((UIComponents, $, _) ->
+  UIComponents.AutoCompletable = (input, options) ->
+    input = $(input)
+    settings = 
+      url: input.data("autoCompletableUrl")
+      autoCompletePlugin: "autocomplete"
+      dataType: "json"
+      extraParameters: input.data("autoCompletableExtraParameters")
+      extraParametersForAutoCompleter: {}
+      formatFunction: (data, i, max, value) ->
+        value
+      parseFunction: (data) ->
+        array = []
+        i = 0
+        while i < data.length
+          array[array.length] = 
+            data: data[i]
+            value: data[i].Name
+            result: data[i].Name
+          i++
+        array
+      resultInputSelector: ".results[type:hidden]"
+      resultDataValue: "Id"
+    
+    autocompleteOptions = {}
+    $.extend settings, options  unless !options
+    $.extend autocompleteOptions, 
+      dataType: settings.dataType
+      extraParams: settings.extraParameters
+      formatItem: settings.formatFunction
+      parse: settings.parseFunction
+      result: (event, data, formatted) ->
+        input
+            .trigger(input.attr("name") + ":autocomplete", [ event, data, formatted ])
+            .next(settings.resultInputSelector)
+            .val data[settings.resultDataValue]
+    , settings.extraParametersForAutoCompleter
+    input[settings.autoCompletePlugin] settings.url, autocompleteOptions  if _.isFunction(input[settings.autoCompletePlugin])
+) (window.UIComponents = window.UIComponents or {}), jQuery, _

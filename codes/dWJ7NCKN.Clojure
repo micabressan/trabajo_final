@@ -1,0 +1,38 @@
+(use '[clojure.core.match.core :only [match] ])
+
+
+; this is expected to work
+
+
+(defn rpn'[ stack symb ]
+	(match [stack symb]
+		[ [x y & z ] "*" ] (cons (* x y ) z)
+		[ [x y & z ] "+" ] (cons (+ x y ) z)
+		[ x "sum" ] [ (reduce + x) ] 
+		[ x y ] (cons (read-string y) x) 
+			))
+
+(defn calculator'[ input ]
+	(first (reduce rpn' [] (re-seq #"\S+" input))))
+
+(calculator' " 1 2 10 2 3 + * sum ")
+
+
+
+
+; like this below, but it doesn't, why?
+
+
+
+(defn rpn[ stack symb ]
+	(match [stack symb]
+		[ x "*" ] (cons (* (first x) (second x) ) (drop 2 x))
+		[ x "+" ] (cons (+ (first x) (second x) ) (drop 2 x))
+		[ x "sum" ] [ (reduce + x) ] 
+		[ x y ] (cons (read-string y) x) 
+			))
+
+(defn calculator[ input ]
+	(first (reduce rpn [] (re-seq #"\S+" input))))
+
+(calculator " 1 2 10 2 3 + * sum ")

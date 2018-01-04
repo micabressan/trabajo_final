@@ -1,0 +1,33 @@
+--ghc 7.10
+
+import Prelude hiding (Right,Left)
+import Data.Complex
+
+data Move = Right | Up | Left | Down deriving (Eq, Show)
+
+moveToComplex :: Num c => Move -> Complex c
+moveToComplex Right = 1 :+ 0
+moveToComplex Up = 0 :+ 1
+moveToComplex Left = (-1) :+ 0
+moveToComplex Down = 0 :+ (-1)
+
+expandSeq :: [Move] -> [Move]
+expandSeq [] = [Right, Up, Left, Left, Down, Down]
+expandSeq seq = let reversedSeq = reverse seq
+                    size = length $ takeWhile (== head reversedSeq) reversedSeq
+                in replicate (size + 1) Right ++ 
+                   replicate (size + 1) Up ++
+                   replicate (size + 2) Left ++
+                   replicate (size + 2) Down
+
+genSeq :: [Move] -> Int -> [Move]
+genSeq seq num
+  | num - 1 <= length seq = take (num - 1) seq
+  | otherwise = genSeq (seq ++ expandSeq seq) num
+genSeqForNum = genSeq []
+
+countMoves :: Int -> Int
+countMoves num = let complex = sum $  map (moveToComplex) (genSeqForNum num)
+                 in round $ (abs . realPart $ complex) + (abs . imagPart $ complex)
+
+main = print $ countMoves 325489

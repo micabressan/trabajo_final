@@ -1,0 +1,35 @@
+{
+	"info": {
+		"service": "esito",
+		"action": "today_chart",
+		"type": "response",
+		"error": "",
+		"status": "success"
+	},
+	"data": [{
+		"tecnici_id": "155",
+		"tecnico": "GIANNI TRAVAGLIONE",
+		"definitivo": "0",
+		"totale_giornaliero": "262.00"
+	}, {
+		"tecnici_id": "173",
+		"tecnico": "FLORIN GIGEL BOSTAN",
+		"definitivo": "0",
+		"totale_giornaliero": "252.00"
+	}, {
+		"tecnici_id": "67",
+		"tecnico": "CLAUDIO BERTOLINI",
+		"definitivo": "0",
+		"totale_giornaliero": "240.00"
+	}, {
+		"tecnici_id": "175",
+		"tecnico": "CRISTIANO DI BRANGO C.",
+		"definitivo": "0",
+		"totale_giornaliero": "220.00"
+	}, {
+		"tecnici_id": "163",
+		"tecnico": "A. ASSISTENZA A. TOSCANA",
+		"definitivo": "0",
+		"totale_giornaliero": "105.00"
+	}]
+}

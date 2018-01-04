@@ -1,0 +1,5 @@
+(defn fib-maker
+  ([] (concat [0 1] (fib 0 1)))
+  ([a b] (lazy-seq (cons b (fib b (+ a b))))))
+
+(def fib (fib-maker))

@@ -1,0 +1,11 @@
+.lefttext{width:36em;text-align:justify;margin:0px auto}
+.lefttext p{text-indent:2em }
+html.client-msie-6 .table-cell-left float:left}
+html.client-msie-6 .table-cell-right float:right}
+html.client-msie-7 .table-cell-left float:left}
+html.client-msie-7 .table-cell-right float:right}
+.table-cell-left{display:table-cell}
+.table-cell-right{display:table-cell}
+.alineanegatif{text-indent:-2em;padding-left:2em}
+.alineanegatif p{text-indent:-2em ! important}
+.indentation{text-indent:2em}

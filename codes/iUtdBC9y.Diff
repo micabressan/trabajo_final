@@ -1,0 +1,114 @@
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,296s
+user    0m0,004s
+sys     0m0,291s
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,297s
+user    0m0,004s
+sys     0m0,293s
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,306s
+user    0m0,000s
+sys     0m0,306s
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,293s
+user    0m0,000s
+sys     0m0,292s
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,299s
+user    0m0,000s
+sys     0m0,299s
+$ time cat linux-4.14.2.tar >new
+
+real    0m0,296s
+user    0m0,000s
+sys     0m0,295s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,265s
+user    0m0,000s
+sys     0m0,265s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,266s
+user    0m0,000s
+sys     0m0,265s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,273s
+user    0m0,000s
+sys     0m0,274s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,265s
+user    0m0,000s
+sys     0m0,265s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,265s
+user    0m0,000s
+sys     0m0,265s
+$ time cat2 linux-4.14.2.tar >new
+
+real    0m0,268s
+user    0m0,000s
+sys     0m0,268s
+
+$ strace cat linux-4.14.2.tar 2>&1 >new |wc -l
+12630
+
+$ strace cat2 linux-4.14.2.tar 2>&1 >new |wc -l
+42
+
+diff --git a/src/cat.c b/src/cat.c
+index a3680a3fc..06cf7a2bc 100644
+--- a/src/cat.c
++++ b/src/cat.c
+@@ -32,6 +32,10 @@
+ #endif
+ #include <sys/ioctl.h>
+ 
++#ifdef __linux__
++# include <sys/sendfile.h>
++#endif
++
+ #include "system.h"
+ #include "ioblksize.h"
+ #include "die.h"
+@@ -157,13 +161,21 @@ simple_cat (
+         call.  */
+      size_t bufsize)
+ {
+-  /* Actual number of characters read, and therefore written.  */
+-  size_t n_read;
+-
+   /* Loop until the end of the file.  */
+ 
+   while (true)
+     {
++#ifdef __linux__
++      /* maximum size transferred by sendfile() as in manpage */
++      ssize_t xfer = sendfile(STDOUT_FILENO, input_desc, NULL, 0x7ffff000);
++      if (xfer == -1)
++        return false;
++      if (xfer < 0x7ffff000)
++        return true;
++#else
++      /* Actual number of characters read, and therefore written.  */
++      size_t n_read;
++
+       /* Read a block of input.  */
+ 
+       n_read = safe_read (input_desc, buf, bufsize);
+@@ -186,6 +198,7 @@ simple_cat (
+         if (full_write (STDOUT_FILENO, buf, n) != n)
+           die (EXIT_FAILURE, errno, _("write error"));
+       }
++#endif
+     }
+ }

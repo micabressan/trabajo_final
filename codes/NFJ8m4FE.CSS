@@ -1,0 +1,337 @@
+header{
+	height: 100vh;
+}
+#logoMenu{
+	padding-top: 4px;
+}
+#logoMenu img{
+	width: 140px;
+}
+
+.smartphone {
+	/*position: relative;
+	max-width: 80%;
+	max-height: 80%;
+	height: auto;
+	z-index: 1;
+	bottom: 500px;
+	left: 40%*/
+
+	position: absolute;
+	max-width: 80%;
+	max-height: 80%;
+	height: auto;
+	z-index: 1;
+	bottom: 0px;
+	left: 65%
+
+}
+
+.navbar-custom, .navbar-custom.affix {
+	background-color: rgba(71, 101, 213, .7);
+}
+.navbar-custom .navbar-nav>.active>a:hover, .navbar-custom .navbar-nav>.active>a{
+	background-color: #FF534E;
+	color : white;
+}
+.navbar-custom .nav li a:focus, .navbar-custom .nav li a:hover, .navbar-custom .nav li a:target{
+	color: white;
+	background-color: transparent;
+}
+#mainMenu li a:visited, .active{
+	background-color: transparent;
+}
+h2{
+	color: #7087DE
+}
+.intro-text{
+	padding-top: 250px !important;
+}
+
+/*#services {
+	height: 90vh;
+
+}*/
+
+#about {
+	/* Try with 80vh (the ratio adapts with the size of the window)*/
+	height: 700px;
+	/*
+		</-- Fixed parallax scroll -->
+	background-image: url("../img/bons_plans.png");
+	height: 100%; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;*/
+}
+
+.parallax {
+    min-height: 600px;
+    background: transparent;
+}
+
+.refIcon{
+	background-color: transparent !important;
+	border: none;
+	float: left;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	padding-top: 0px !important;
+
+}
+.refIcon img{
+	max-width: 250px;
+}
+.service-heading{
+	font-family: 'Dosis', sans-serif;
+	font-weight: bolder !important;
+	color: #7087DE;
+
+}
+.featuresSubTitle {
+	font-family: 'Cabin', sans-serif;
+	font-size: 16px;
+	color: #7087DE;
+}
+.intro-text{
+	text-align: left;
+}
+.dot{
+	color: #FF534E;
+}
+.headerText{
+	font-family: 'Dosis', sans-serif;
+	font-weight: bolder;
+	font-size: 4.5em;
+}
+.headerSubText{
+	font-family: 'Cabin', sans-serif;
+	font-size: 2em;
+}
+section h2.section-heading {
+	margin-bottom: 60px !important;
+}
+.tcenter{
+	text-align: center;
+	color: #7087DE;
+	font-family: 'Cabin', sans-serif;
+	font-size: 16px;
+}
+.f20{
+	font-size: 20px;
+}
+.bold{
+	font-weight: bold;
+}
+.pb30{
+	padding-bottom: 30px;
+}
+.list-inline .quicklinks a{
+	color :#FF534E;
+}
+.text-primary, a, a.active, a:active, a:focus, a:hover {
+	color : #3454D1;
+}
+
+.btn-xl, .btn-xl:hover, .btn-xl:focus, .btn-xl:visited{
+	background-color: #3454D1;
+	border-color: #3454D1;
+	border-radius: 5px;
+	font-size: 18px;
+	padding: 20px 40px;
+	margin-top: 60px;
+}
+
+.btn-m, .btn-m:hover, .btn-m:focus, .btn-m:visited{
+	background-color: #FF534E;
+	border-color: #FF534E;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 10px 20px;
+	margin-top: -5px;
+}
+li a:visited, li a:selected, li a:focus{
+	background-color: #FF534E !important;
+}
+ul li .socialIcon {
+	background-color: #3454D1 !important;
+}
+ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover{
+	background-color: #3454D1 !important;
+}
+.navbar-custom .navbar-toggle:focus, .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle{
+	background-color: #3454D1;
+	border-color: white;
+}
+.pl0{
+	padding-left: 0px;
+}
+.navbar-custom .navbar-nav>.active>a{
+	background-color: #FF534E !important;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+	background-color: #FF534E !important;
+}
+.leftCol{
+	text-align: right;
+	margin-bottom: 30px;
+}
+.rightCol{
+	text-align: left;
+	border-left: 1px solid #7087DE;
+	margin-bottom: 30px;
+}
+.tcenter img{
+	margin: auto;
+	text-align: center;
+}
+.mailField{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	text-indent:0px;
+	background:white;
+	height: 45px;
+}
+.submitButton{
+	
+	background-color: #FF534E;
+	max-width: 145px;
+	min-width: 145px;
+	color: white;
+	border-color: #FF534E;
+	border-radius: 5px;
+	border: none;
+	vertical-align: center;
+	font-size: 16px;
+	height:45px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.submitButton:hover {
+	background:#FF7571;
+}
+.scrollButton{
+	background-color: #FF534E;
+	border-color: #FF534E;
+	color:#ffffff;
+	border-radius: 5px;
+	border: none;
+	vertical-align: center;
+	font-size: 16px;
+	height:45px;
+	margin-top: 30px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.scrollButton:hover {
+	background:#FF7571;
+	color:#ffffff;
+}
+
+.scrollButton:active {
+    color: white;
+}
+
+.scrollButton:focus {
+    color: white;
+}
+
+.featureButton{
+	background-color: #FF534E;
+	border-color: #FF534E;
+	color:#ffffff;
+	border-radius: 5px;
+	border: none;
+	vertical-align: center;
+	font-size: 16px;
+	height:35px;
+	min-width: 50%;
+	margin-top: 30px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.featureButton:hover {
+	background:#FF7571;
+	color:#ffffff;
+}
+
+.featureButton:active {
+    color: white;
+}
+
+.featureButton:focus {
+    color: white;
+}
+
+#mc_embed_signup{
+	padding-left: 0px;
+}
+
+.video {
+	position: absolute;
+	display: block;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -1;
+}
+
+.section-heading2 {
+	margin-bottom: 60px !important;
+	margin-top: 12%;
+}
+.imgInvisible {
+	position: absolute;
+	max-width: 80vh;
+	max-height: 80vh;
+	padding-top: 80%;
+	z-index: -2;
+}
+.HeaderBack {
+	background-color: black;
+}
+
+@media (max-width: 1200px) {
+	.refIcon img {
+		max-width: 230px;
+	}
+}
+@media (max-width: 768px) {
+	.refIcon img {
+		max-width: 250px;
+	}
+	.pl0{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.leftCol{
+		text-align: center;
+	}
+	.rightCol{
+		text-align: center;
+		border-left: none
+	}
+	header{
+		background-image:url(../img/header_mobile.png);
+		height: 170vh;
+		min-width: 405px !important;
+	}
+	.intro-text{
+		padding-top: 120px !important;
+	}
+	section#contact{
+		background-image:url(../img/contact_mobile.png);
+	}
+	.video{
+		display: none;
+	}
+}

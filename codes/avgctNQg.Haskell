@@ -1,0 +1,38 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+import Control.Applicative
+import qualified Data.ByteString.Internal
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.ByteString.Lazy.Search as BLS
+import Data.Csv
+import Data.Char
+import qualified Data.Vector as V
+
+lang1 :: String
+lang1 = "eng"
+
+pattern :: Data.ByteString.Internal.ByteString
+pattern = ""
+
+checkIfLang :: String -> Bool
+checkIfLang x =
+    if x == lang1
+        then True
+        else False
+
+myOptions = defaultDecodeOptions {
+      decDelimiter = fromIntegral (ord '\t')
+    }
+
+main :: IO ()
+main = do
+    sentenceCSV <- BL.readFile "sentenceData/sentences.csv"
+    linksCSV <- BL.readFile "sentenceData/links.csv"
+    case decodeWith myOptions NoHeader (BLS.replace "\"" pattern sentenceCSV) of
+        Left err -> putStrLn err
+        Right v -> V.forM_ v $ \ (id :: Int, lang :: String, sentence :: String) ->
+            if checkIfLang lang
+              then do putStrLn $ show id ++ " has lang of " ++ lang ++ "and is:"
+                      putStrLn $ sentence
+              else return ()

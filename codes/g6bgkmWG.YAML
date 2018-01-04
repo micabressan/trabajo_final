@@ -1,0 +1,20 @@
+defaults/main.yml
+zabbix_server_interfaces:
+  - "{{vars['zabbix_ipv4_interface']}}"
+zabbix_ipv4_interface:
+  type: 1
+  main: 1
+  useip: 0
+  ip: '{{ ansible_default_ipv4.address }}'
+  dns: "{{inventory_hostname}}"
+  port: 10050
+
+tasks/main.yml
+  - include_tasks: monitoring.yml interfaces={{zabbix_server_interfaces}}
+
+tasks/monitoring.yml
+- debug:
+    msg: "{{interfaces}}"
+
+- debug:
+    msg: "{{zabbix_ipv4_interface}}"

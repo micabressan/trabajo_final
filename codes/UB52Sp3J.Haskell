@@ -1,0 +1,7 @@
+func :: Int -> String -> [String]
+func baseAmt str = repeat rptAmt newStr
+  where
+    rptAmt = if baseAmt > 5 
+      then baseAmt 
+      else baseAmt + 2
+    newStr = “Hello “ ++ str

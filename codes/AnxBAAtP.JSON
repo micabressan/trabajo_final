@@ -1,0 +1,257 @@
+API call : http://platform.yourdatastories.eu/api/json-ld/model/describe.tcl?compact=1&id=http://linkedeconomy.org/resource/PublicWork/216004
+
+{
+  "success": true,
+  "message": "ok",
+  "data": {
+    "@context": {...},
+    "id": "http://linkedeconomy.org/resource/PublicWork/216004",   1. Το URL-id του έργου στο «linkedeconomy.org»
+    "type": [
+      "PublicProject",   2. Τι είδους έργο είναι
+      "PublicWork"
+    ],
+    "modified": "2016-08-04T22:13:46Z",  3. Ημερομηνία τελευταίας επεξεργασίας του έργου
+    "title": {                           4. Τίτλος του έργου στα αγγλικά & ελληνικά.
+      "en": "ROAD IMPROVEMENT ASSOCIATION KOMOTINI - KARIDIA",
+      "el": "Βελτίωση οδού σύνδεσης Κομοτηνής - Καρυδιάς Ν. Ροδόπης"
+    },
+    "description": {                     5. Περιγραφή του έργου
+      "el": "Το έργο αφορά τη βελτίωση της οδού από την πόλη της Κομοτηνής έως τη διασταύρωση Καρυδιάς. Το μήκος της οδού που θα βελτιωθεί είναι περίπου 1.834,24 μ.\nΑναλυτικά προβλέπονται οι ακόλουθες εργασίες :\n- Νέα ασφαλτόστρωση (εκσκαφή, κατασκευή υπόβασης με αμμοχάλικο, βάσης με 3Α, ασφαλτικής προεπάλειψης, ισοπεδωτικής στρώσης, συγκολλητικής επάλειψης και τάπητα κυκλοφορίας)\n- Διαμόρφωση των πεζοδρομίων (εκσκαφή, επιχωμάτωση, νέα στρώση πλακών πεζοδρομίου, κατασκευή κρασπεδόρειθρων, τοποθέτηση προστατευτικών κιγκλιδωμάτων)\n- Βελτίωση του υπάρχοντος δικτύου ομβρίων με εκσκαφή τάφρων, τοποθέτηση αγωγών και κατασκευή φρεατίων υδροσυλλογής) και\n- Φωτισμός της οδού\n"
+    },
+    "completionOfContracts": 100,          6. ????
+    "countOfRelatedDecisions": 6,          7. ????
+    "documentUrl": "http://anaptyxi.gov.gr/ergopopup.aspx?mis=216004&wnd=",      8. ????
+    "endDate": "2014-07-30T00:00:00Z",           9. Ημερομηνία λήξης του έργου ??
+    "startDate": "2010-12-22T00:00:00Z",        10. Ημερομηνία έναρξης του έργου ??
+    "projectId": "216004",                      11. Τo id του έργου.
+    "completionOfPayments": 97.6,               12. ????
+    "countOfRelatedContracts": 1,               13. ????
+    "hasContractAggregate": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Aggregate/Contract/216004",
+      "type": [
+        "Aggregate"
+      ],
+      "aggregatedAmount": 977914,               14. ????
+      "hasCurrency": {
+        "id": "http://linkedeconomy.org/resource/Currency/EUR",
+        "type": [
+          "Concept"
+        ],
+        "prefLabel": "Euro",
+        "notation": "EUR"
+      }
+    },
+    "hasOperationalCode": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/OperationalCode/09",
+      "type": [
+        "Concept"
+      ],
+      "prefLabel": {                            15. ????
+        "en": "Macedonia – Thrace",
+        "el": "Μακεδονία - Θράκη"
+      },
+      "notation": "09"
+    },
+    "hasProjectStatus": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/ProjectStatus/3",
+      "type": [
+        "Concept"
+      ],
+      "prefLabel": {                            16. ????
+        "en": "Contracted",
+        "el": "συμβασιοποιημένα"
+      },
+      "notation": "3"
+    },
+    "hasRegion": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Region/1",
+      "type": [
+        "Region"                                17. Περιφερειακή ενότητα
+      ],
+      "name": "Περιφέρεια Ανατολικής Μακεδονίας & Θράκης"
+    },
+    "hasRelatedFeature": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Feature/216004/5878",
+      "type": [
+        "Feature"
+      ],
+      "hasGeometry": {
+        "@context": {...},
+        "id": "http://linkedeconomy.org/resource/Geometry/216004/5878",
+        "type": [
+          "Geometry"
+        ],
+        "asWKT": "POINT(25.410600662231 41.112800598145)"    18. Συντεταγμένες ?;?;? Είναι σωστές;!;!
+      }
+    },
+    "buyer": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Organization/997687930/6155",
+      "type": [
+        "BusinessEntity",
+        "Organization",
+        "RegisteredOrganization"
+      ],
+      "name": {                                 19. Όνομα αγοραστή
+        "el": "ΔΗΜΟΣ ΚΟΜΟΤΗΝΗΣ"
+      },
+      "prefLabel": {
+        "el": "ΔΗΜΟΣ ΚΟΜΟΤΗΝΗΣ"
+      },
+      "vatID": "997687930",                     20. ΑΦΜ αγοραστή.
+      "translation": {
+        "en": "Municipality of Komotini"
+      },
+      "hasAddress": "http://linkedeconomy.org/resource/Address/997687930",
+      "hasUnit": [
+        "http://linkedeconomy.org/resource/OrganizationalUnit/89377",
+        "http://linkedeconomy.org/resource/OrganizationalUnit/79726",
+        "http://linkedeconomy.org/resource/OrganizationalUnit/91154"
+      ],
+      "countryIsoCode": {
+        "id": "http://linkedeconomy.org/resource/Country/GR",
+        "type": [
+          "Concept",
+          "Country",
+          "self_governing"
+        ],
+        "name": "Greece",
+        "prefLabel": "Greece",
+        "notation": [
+          "GR",
+          "GRC"
+        ],
+        "altLabel": "Hellenic Republic"
+      }
+    },
+
+
+ ----- 21. Εδώ υπάρχουν τα «σχετικά με αυτό το έργο» έργα ;;
+    "hasRelatedContract": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Contract/216004/17758",
+      "type": [
+        "Contract"
+      ],
+      "title": {
+        "el": "ΒΕΛΤΙΩΣΗ ΟΔΟΥ ΣΥΝΔΕΣΗΣ ΚΟΜΟΤΗΝΗΣ – ΚΑΡΥΔΙΑΣ"        22. Όνομα ενός σχετικού έργου
+      },
+      "countOfRelatedDecisions": 6,
+      "actualEndDate": "2014-07-30T00:00:00Z",
+      "startDate": "2010-12-22T00:00:00Z",
+      "buyer": {
+        "@context": {...},
+        "id": "http://linkedeconomy.org/resource/Organization/997687930/6155",
+        "type": [
+          "BusinessEntity",
+          "Organization",
+          "RegisteredOrganization"
+        ],
+        "name": {
+          "el": "ΔΗΜΟΣ ΚΟΜΟΤΗΝΗΣ"
+        },
+        "prefLabel": {
+          "el": "ΔΗΜΟΣ ΚΟΜΟΤΗΝΗΣ"
+        },
+        "vatID": "997687930",
+        "translation": {
+          "en": "Municipality of Komotini"
+        },
+        "hasAddress": "http://linkedeconomy.org/resource/Address/997687930",
+        "hasUnit": [
+          "http://linkedeconomy.org/resource/OrganizationalUnit/89377",
+          "http://linkedeconomy.org/resource/OrganizationalUnit/79726",
+          "http://linkedeconomy.org/resource/OrganizationalUnit/91154"
+        ],
+        "countryIsoCode": {
+          "id": "http://linkedeconomy.org/resource/Country/GR",
+          "type": [
+            "Concept",
+            "Country",
+            "self_governing"
+          ],
+          "name": "Greece",
+          "prefLabel": "Greece",
+          "notation": [
+            "GR",
+            "GRC"
+          ],
+          "altLabel": "Hellenic Republic"
+        }
+      },
+      "price": {
+        "@context": {...},
+        "id": "http://linkedeconomy.org/resource/UnitPriceSpecification/216004/17758",
+        "type": [
+          "UnitPriceSpecification"
+        ],
+        "hasCurrencyValue": 977914,
+        "valueAddedTaxIncluded": 1,
+        "hasCurrency": {
+          "id": "http://linkedeconomy.org/resource/Currency/EUR",
+          "type": [
+            "Concept"
+          ],
+          "prefLabel": "Euro",
+          "notation": "EUR"
+        }
+      }
+    },
+ ----- Τέλος των σχετικών με αυτό έργων.
+
+    
+    "countryIsoCode": {
+      "id": "http://linkedeconomy.org/resource/Country/GR",
+      "type": [
+        "Concept",
+        "Country",
+        "self_governing"
+      ],
+      "name": "Greece",
+      "prefLabel": "Greece",
+      "notation": [
+        "GR",
+        "GRC"
+      ],
+      "altLabel": "Hellenic Republic"
+    },
+    "hasBudgetAggregate": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Aggregate/Budget/216004",
+      "type": [
+        "Aggregate"
+      ],
+      "aggregatedAmount": 977914,              23. ????
+      "hasCurrency": {
+        "id": "http://linkedeconomy.org/resource/Currency/EUR",
+        "type": [
+          "Concept"
+        ],
+        "prefLabel": "Euro",
+        "notation": "EUR"
+      }
+    },
+    "hasSpendingAggregate": {
+      "@context": {...},
+      "id": "http://linkedeconomy.org/resource/Aggregate/Payment/216004",
+      "type": [
+        "Aggregate"
+      ],
+      "aggregatedAmount": 954535,           24. ????
+      "hasCurrency": {
+        "id": "http://linkedeconomy.org/resource/Currency/EUR",
+        "type": [
+          "Concept"
+        ],
+        "prefLabel": "Euro",
+        "notation": "EUR"
+      }
+    }
+  },
+  "view": []
+}

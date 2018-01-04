@@ -1,0 +1,13 @@
+$scope.bannerImageSelect = ($files) ->
+                    $scope.bannerImgUploading = true
+                    $scope.bannerImgUploadError = false
+                    return ImageService.uploadImage($files[0])
+                        .then (res) ->
+                            $scope.bannerImgUploading = false
+
+                            if res.status == 500
+                                $scope.bannerImgUploadError = true
+                                $scope.event.notifications.emailBannerUrl = ''
+
+                            else
+                                $scope.event.notifications.emailBannerUrl = res.data.Href

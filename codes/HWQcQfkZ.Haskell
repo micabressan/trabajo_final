@@ -1,0 +1,14 @@
+reverseSubList :: [Int] -> Int -> Int -> [Int]
+reverseSubList lst start len = do
+	let l =lst ++ lst
+	let p1 = take (start - 1) l
+	let p2 = reverse $ take len $ drop (start-1) l
+	let p3 =  drop (start + len - 1) l
+	let sum = p1 ++  p2 ++ p3
+	let totlen = length lst
+	let cycle = start + len - 1  - totlen
+	if cycle > 0 then 
+		(take cycle $ drop totlen sum) ++ 
+			take (totlen - cycle) (drop cycle sum)
+	else  
+		take totlen sum

@@ -1,0 +1,15 @@
+actionLinksFor: aTask on: aListElement
+	| e |
+	e := WebElement new.
+	e add: (self completeLinkFor: aTask).
+	(e addTextSmall: ' | '; addNilLinkText: 'edit')
+		class: #'todo-actionlink';
+		onClickPopup: (ToDoTaskWidget newForEdit: aTask) thenUpdate: aListElement.
+	(e addTextSmall: ' | '; addLinkTo: '#' png: #buttonDeletePng title: 'Delete this task')
+		onClickPopup: 
+			(WebDialog newConfirm 
+				text: 'Do you really want to delete that task?';
+				ifTrue: 
+					[self observee deleteTask: aTask.
+					aListElement update]<- No special messages expected ->).		
+	^e

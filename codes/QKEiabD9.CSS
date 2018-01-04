@@ -1,0 +1,33 @@
+<style type="text/css">
+ul class='top_menu'
+{
+list-style-type:none;
+}
+li
+{
+float:left;
+}
+.top_menu a
+{
+display:block;
+color:#aa9988;
+background-color:#332211;
+text-decoration:none;
+text-transform:uppercase;
+}
+.top_menu a:hover
+{
+background-color:#aa9988;
+}
+
+</style>
+
+
+
+<ul class='top_menu'>
+<li><a href="#news">War</a></li>
+<li><a href="#contact">Inventor</a></li>
+<li><a href="#about">Musician</a></li>
+<li><a href="#about">Others</a></li>
+<li><a href="/p/info.html">Info</a></li>
+</ul class='top_menu'>

@@ -1,0 +1,4 @@
+| test |
+test := OrderedCollection new.
+test add: 'a'.
+^test first.

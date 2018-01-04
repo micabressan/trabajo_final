@@ -1,0 +1,65 @@
+import os
+import logging
+from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
+import json
+import time
+import ipdb
+
+class ParserBase:
+    """ Base class for parsers """
+
+    def __init__(self):
+        """ Initialize driver for the parser """
+
+        # host = os.environ.get('PHANTOM_JS_HOST')
+        # port = os.environ.get('PHANTOM_JS_PORT')
+        # chrome_options = Options()
+        # chrome_options.add_argument("--headless")
+        # chrome_options.add_argument('--disable-web-security')
+        # chrome_options.add_argument('--allow-running-insecure-content')
+        self.driver = webdriver.PhantomJS(
+            executable_path='./node_modules/.bin/phantomjs'
+        )
+        # webdriver.Remote(
+        #     command_executor='http://{}:{}'.format(host, port),
+        #     desired_capabilities=chrome_options.to_capabilities()
+        # )
+        logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
+        self.logger = logging.getLogger()
+
+
+class LinkedinParser(ParserBase):
+    """ Class for linked in parsing """
+
+    base_url = 'http://linkedin.com'
+    search_url = 'https://www.linkedin.com/search/results/people'
+
+    def authorize(self, login, password):
+        """ Authorize user in linked in with his credentials """
+
+        try:
+            self.logger.info('Start linkedin authorization')
+            self.driver.get('http://linkedin.com')
+            parser.driver.save_screenshot('test_1.png')
+            email_field = self.driver.find_element_by_id("login-email")
+            password_field = self.driver.find_element_by_id("login-password")
+            submit_button = self.driver.find_element_by_id("login-submit")
+
+            email_field.send_keys(login)
+            password_field.send_keys(password)
+            submit_button.click()
+            self.logger.info('Succesfully complete authorization')
+        except NoSuchElementException as e:
+            error = json.loads(e.msg)
+            self.logger.error(error['errorMessage'])
+
+
+parser = LinkedinParser()
+parser.authorize(<Login>, <Password>)
+parser.driver.get('https://www.linkedin.com/search/results/people')
+parser.driver.save_screenshot('test_2.png')
+parser.driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
+parser.driver.save_screenshot('test_3.png')

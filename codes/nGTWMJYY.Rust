@@ -1,0 +1,16 @@
+
+fn day1(mut input: i64) -> i64 {
+    let mut sum = 0;
+
+    let len = (input as f64).log(10.0).floor() as u32 + 1;
+
+    for i in 0..len {
+        let num1 = input / 10i64.pow(i) % 10;
+        let num2 = input / 10i64.pow((i + 1) % 4) % 10;
+        println!("{}, {}", num1, num2);
+
+        sum += (num1 == num2) as i64 * num1;
+    }
+
+    sum
+}

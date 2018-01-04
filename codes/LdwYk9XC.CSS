@@ -1,0 +1,276 @@
+import crafttweaker.item.IIngredient;
+import crafttweaker.item.IItemStack;
+import crafttweaker.oredict.IOreDict;
+import crafttweaker.oredict.IOreDictEntry;
+
+
+print(" ¤===================================¤ ");
+ print(" ¤====== +Primal Core & BWM+ ======¤ ");
+print(" ¤===================================¤ "); 
+
+
+
+// ###### Vanilla ######
+
+    recipes.remove(<minecraft:furnace>);
+    recipes.remove(<natura:overworld_workbenches:*>);
+    recipes.remove(<natura:nether_workbenches:*>);
+    recipes.remove(<minecraft:piston>);
+    
+
+// Furnace
+    recipes.addShaped(<minecraft:furnace>, [
+        [<sonarcore:reinforcedstoneblock>,    <sonarcore:reinforcedstoneblock>,    <sonarcore:reinforcedstoneblock>], 
+        [<sonarcore:reinforcedstoneblock>,    <primal:mortar>,                     <sonarcore:reinforcedstoneblock>], 
+        [<sonarcore:reinforcedstoneblock>,    <sonarcore:reinforcedstoneblock>,    <sonarcore:reinforcedstoneblock>]
+        ]);
+
+// Piston
+    recipes.addShaped(<minecraft:piston>, [
+        [<ore:sidingWood>,    <minecraft:iron_ingot>,          <ore:sidingWood>], 
+        [<ore:cobblestone>,   <betterwithmods:urn:8>,          <ore:cobblestone>], 
+        [<ore:cobblestone>,   <betterwithmods:material:34>,    <ore:cobblestone>]
+        ]);
+
+
+
+
+// ###### Crafting Materials ######
+
+    recipes.remove(<sonarcore:reinforcedstoneblock>);
+    recipes.remove(<pickletweaks:grass_fiber>);
+
+
+// Reinforced Stone
+    recipes.addShapeless(<sonarcore:reinforcedstoneblock>, [
+        <ore:plankWood>,    <ore:cobblestone>,
+        <ore:cobblestone>,  <ore:cobblestone>                 
+        ]); 
+
+    recipes.addShapeless(<sonarcore:reinforcedstoneblock> * 3, [
+        <ore:logWood>,      <ore:cobblestone>,
+        <ore:cobblestone>,  <ore:cobblestone>                 
+        ]);
+
+// Grass Fiber 
+    recipes.addShapeless(<pickletweaks:grass_fiber>, [
+        <primal:rush_stems>, <primal:rush_stems>, 
+        <primal:rush_stems>
+        ]);
+
+
+
+
+// ###### Tools & Armor ######
+
+    recipes.remove(<minecraft:wooden_pickaxe>);
+    recipes.remove(<minecraft:wooden_shovel>);
+    recipes.remove(<minecraft:wooden_axe>);
+    recipes.remove(<minecraft:wooden_hoe>);
+    recipes.remove(<pickletweaks:wooden_paxel>);
+    recipes.remove(<roots:wood_hammer>);  
+
+    recipes.remove(<minecraft:stone_pickaxe>);
+    recipes.remove(<minecraft:stone_shovel>);
+    recipes.remove(<minecraft:stone_axe>);
+    recipes.remove(<minecraft:stone_hoe>);
+    recipes.remove(<pickletweaks:stone_paxel>);
+    recipes.remove(<roots:stone_hammer>); 
+
+    recipes.remove(<pickletweaks:iron_paxel>);
+
+    recipes.remove(<pickletweaks:golden_paxel>);
+
+
+    recipes.remove(<aroma1997sdimension:portaligniter>);
+    recipes.remove(<embers:tinker_hammer>);
+
+
+// Misc Modifiers
+
+    <minecraft:iron_pickaxe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:iron_shovel>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:iron_axe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:iron_sword>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+    <minecraft:iron_sword>.maxDamage = 1;
+
+    <minecraft:iron_hoe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+    <minecraft:iron_hoe>.maxDamage = 1;
+
+
+    <minecraft:golden_pickaxe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:golden_shovel>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:golden_axe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+
+    <minecraft:golden_sword>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+    <minecraft:golden_sword>.maxDamage = 1;
+
+    <minecraft:golden_hoe>.anyDamage().addTooltip
+    (format.red("Only for crafting!")
+        );
+    <minecraft:golden_hoe>.maxDamage = 1;
+
+
+// Mining Tool
+    recipes.addShaped(<aroma1997sdimension:portaligniter>, [
+        [<overloaded:compressed_cobblestone:3>,    <thermalfoundation:material:2049>,            <overloaded:compressed_cobblestone:3>],  
+        [null,                                     <minecraft:flint_and_steel>,                  null],  
+        [null,                                     <ore:stickWood>,                              null] 
+        ]);
+
+
+
+
+// ###### Flint Progression ######
+
+    recipes.remove(<minecraft:flint>);
+    recipes.remove(<pickletweaks:grass_mesh>);
+
+
+// Grass Fiber Mesh
+    recipes.addShapeless(<pickletweaks:grass_mesh>, [
+        <pickletweaks:grass_fiber>, <ore:stickWood>, 
+        <ore:stickWood>,            <pickletweaks:grass_fiber>
+        ]);
+
+// Flint with Grass Fiber Mesh
+    recipes.addShapeless(<minecraft:flint>, [
+        <pickletweaks:grass_mesh>.anyDamage(), <minecraft:gravel>, 
+        <minecraft:gravel>
+        ]);
+
+// Flint with Mesh
+    recipes.addShapeless(<minecraft:flint>, [
+        <pickletweaks:mesh>.anyDamage(), <minecraft:gravel>, 
+        <minecraft:gravel>
+        ]);
+
+// Flint with Reinforced Mesh
+    recipes.addShapeless(<minecraft:flint>, [
+        <pickletweaks:reinforced_mesh>.anyDamage(), <minecraft:gravel>, 
+        <minecraft:gravel>
+        ]);
+
+// Flint Block
+    recipes.addShapeless(<minecraft:flint> * 9, [
+        <betterwithmods:aesthetic:5>
+        ]);
+
+
+
+
+ // ###### Mining Resources ######
+
+    recipes.remove(<ore:cobblestone>);
+    recipes.remove(<improvedextraction:custom_cobblestone:3>);
+    recipes.remove(<improvedextraction:custom_cobblestone:6>);
+    recipes.remove(<improvedextraction:custom_cobblestone:5>);
+
+    furnace.remove(<ore:stoneMarble>);
+    furnace.remove(<ore:stoneBasalt>);
+
+    mods.thermalexpansion.RedstoneFurnace.removeRecipe(<improvedextraction:custom_cobblestone:6>);
+    mods.thermalexpansion.RedstoneFurnace.removeRecipe(<improvedextraction:custom_cobblestone:5>);
+
+
+// Cobblestone
+    recipes.addShaped(<minecraft:cobblestone> * 2, [
+        [<improvedextraction:rock>,    <improvedextraction:rock>,     <improvedextraction:rock>], 
+        [<improvedextraction:rock>,    <primal:mortar>,               <improvedextraction:rock>], 
+        [<improvedextraction:rock>,    <improvedextraction:rock>,     <improvedextraction:rock>]
+        ]);
+
+// Granite Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone> * 2, [
+        [<improvedextraction:rock:1>,    <improvedextraction:rock:1>,     <improvedextraction:rock:1>], 
+        [<improvedextraction:rock:1>,    <primal:mortar>,                 <improvedextraction:rock:1>], 
+        [<improvedextraction:rock:1>,    <improvedextraction:rock:1>,     <improvedextraction:rock:1>]
+        ]);
+
+// Diorite Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:1> * 2, [
+        [<improvedextraction:rock:2>,    <improvedextraction:rock:2>,     <improvedextraction:rock:2>], 
+        [<improvedextraction:rock:2>,    <primal:mortar>,                 <improvedextraction:rock:2>], 
+        [<improvedextraction:rock:2>,    <improvedextraction:rock:2>,     <improvedextraction:rock:2>]
+        ]);
+
+// Andesite Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:2> * 2, [
+        [<improvedextraction:rock:3>,    <improvedextraction:rock:3>,     <improvedextraction:rock:3>], 
+        [<improvedextraction:rock:3>,    <primal:mortar>,                 <improvedextraction:rock:3>], 
+        [<improvedextraction:rock:3>,    <improvedextraction:rock:3>,     <improvedextraction:rock:3>]
+        ]);
+
+// Netherrack Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:3> * 2, [
+        [<improvedextraction:rock:4>,    <improvedextraction:rock:4>,     <improvedextraction:rock:4>], 
+        [<improvedextraction:rock:4>,    <primal:mortar>,                 <improvedextraction:rock:4>], 
+        [<improvedextraction:rock:4>,    <improvedextraction:rock:4>,     <improvedextraction:rock:4>]
+        ]);
+
+// End Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:4> * 2, [
+        [<improvedextraction:rock:5>,    <improvedextraction:rock:5>,     <improvedextraction:rock:5>], 
+        [<improvedextraction:rock:5>,    <primal:mortar>,                 <improvedextraction:rock:5>], 
+        [<improvedextraction:rock:5>,    <improvedextraction:rock:5>,     <improvedextraction:rock:5>]
+        ]);
+
+// Basalt Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:5> * 2, [
+        [<improvedextraction:rock:6>,    <improvedextraction:rock:6>,     <improvedextraction:rock:6>], 
+        [<improvedextraction:rock:6>,    <primal:mortar>,                 <improvedextraction:rock:6>], 
+        [<improvedextraction:rock:6>,    <improvedextraction:rock:6>,     <improvedextraction:rock:6>]
+        ]);
+
+    furnace.addRecipe(<quark:basalt>, <improvedextraction:custom_cobblestone:5>);
+    mods.thermalexpansion.RedstoneFurnace.addRecipe(<quark:basalt>, <improvedextraction:custom_cobblestone:5>, 2000);
+
+// Marble
+    recipes.addShaped(<improvedextraction:custom_cobblestone:6> * 2, [
+        [<improvedextraction:rock:8>,    <improvedextraction:rock:8>,     <improvedextraction:rock:8>], 
+        [<improvedextraction:rock:8>,    <primal:mortar>,                 <improvedextraction:rock:8>], 
+        [<improvedextraction:rock:8>,    <improvedextraction:rock:8>,     <improvedextraction:rock:8>]
+        ]);
+
+    furnace.addRecipe(<astralsorcery:blockmarble>, <improvedextraction:custom_cobblestone:6>);
+    mods.thermalexpansion.RedstoneFurnace.addRecipe(<astralsorcery:blockmarble>, <improvedextraction:custom_cobblestone:6>, 2000);
+
+// Limestone Cobblestone
+    recipes.addShaped(<improvedextraction:custom_cobblestone:7> * 2, [
+        [<improvedextraction:rock:9>,    <improvedextraction:rock:9>,     <improvedextraction:rock:9>], 
+        [<improvedextraction:rock:9>,    <primal:mortar>,                 <improvedextraction:rock:9>], 
+        [<improvedextraction:rock:9>,    <improvedextraction:rock:9>,     <improvedextraction:rock:9>]
+        ]);
+
+// Compressed Cobblestone x1
+    recipes.addShapeless(<minecraft:cobblestone> * 9, [
+    <overloaded:compressed_cobblestone>
+    ]);
+
+// Cobblestone * 64
+    recipes.addShapeless(<minecraft:cobblestone> * 64, [
+    <twilightforest:giant_cobblestone>
+    ]);

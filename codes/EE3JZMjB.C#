@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Advent_day_3_code_1
+{
+    class Point
+    {
+        public int x;
+        public int y;
+
+        public Point(int xin, int yin)
+        {
+            this.x = xin;
+            this.y = yin;
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            int inputVal = Convert.ToInt32(Console.ReadLine());
+
+            Point p = new Point(0,0);
+            
+            int val = 1;
+            int pathLength = 1;
+            int mult = 1;
+            
+            do
+            {
+                
+                for (int i = 0; i < pathLength; i++)
+                {
+                    if (val == inputVal)
+                    {
+                        break;
+                    }
+                    p.x += mult;
+                    Console.WriteLine("The number of steps to {0} is {1}", val, (System.Math.Abs(p.x) + System.Math.Abs(p.y)));
+                    //Console.WriteLine("x: {0} y: {1} val: {2}", p.x, p.y, val);
+                    val++;
+                }
+
+                for (int i = 0; i < pathLength; i++)
+                {
+                    if (val == inputVal)
+                    {
+                        break;
+                    }
+                    p.y += mult;
+                    // Console.WriteLine("x: {0} y: {1} val: {2}", p.x, p.y, val);
+                    Console.WriteLine("The number of steps to {0} is {1}", val, (System.Math.Abs(p.x) + System.Math.Abs(p.y)));
+                    val++;
+
+                    
+                }
+
+                if (mult == 1)
+                {
+                    mult = -1;
+                }
+                else
+                {
+                    mult = 1;
+                }
+
+                pathLength++;
+                //Console.ReadLine();
+
+            } while (val != inputVal);
+
+            Console.WriteLine("x: {0} y: {1} val: {2}", p.x, p.y, val);
+            Console.WriteLine("The number of steps to {0} is {1}", val, (System.Math.Abs(p.x) + System.Math.Abs(p.y)));
+            Console.ReadLine();
+
+          }
+
+        }
+    }

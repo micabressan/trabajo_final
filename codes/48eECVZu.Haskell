@@ -1,0 +1,12 @@
+data Tree a = EmptyTree
+            | Node a (Tree a) (Tree a)
+
+leaf :: a -> Tree a
+leaf a = Node a EmptyTree EmptyTree
+
+find :: (a -> Bool) -> Tree a -> Maybe a
+find _ EmptyTree = Nothing
+find cond (Node x _ _) | cond x = Just x
+find cond (Node _ lBr rBr) = find cond lBr `comb` find cond rBr
+  where comb (Just x) _ = Just x
+        comb _ mbY = mbY

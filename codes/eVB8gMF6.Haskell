@@ -1,0 +1,106 @@
+-- {-# LANGUAGE Strict #-}
+{-# LANGUAGE MagicHash #-}
+
+import Data.Bits
+import Data.Function
+import Data.Functor.Identity
+
+import Conduit
+import Data.Conduit.Internal
+
+import Data.Int
+
+import Control.Monad.ST
+import Control.Monad
+import Data.STRef
+
+import GHC.Prim
+
+genAFactor = 16807#
+genBFactor = 48271#
+genACriteria = 4#
+genBCriteria = 8#
+genModulo = 2147483647#
+part1Iterations = 40000000#
+part2Iterations = 5000000#
+mask = 0xFFFF#
+
+-- gen start factor = (next):(gen next factor)
+--     where
+--         next = start * factor `mod` genModulo
+
+-- genCriteria start factor criteria = filter valid (gen start factor)
+--     where
+--         valid = (==0) . (`mod` criteria)
+
+-- judgeCount ga gb iterations = length $ filter ok $ take iterations $ zip ga gb
+--     where
+--         ok (a, b) = ((==) `on` (.&. mask)) a b
+
+-- p1 genAStart genBStart = judgeCount genA genB part1Iterations
+--     where
+--         genA = gen genAStart genAFactor
+--         genB = gen genBStart genBFactor
+
+-- p2 genAStart genBStart = judgeCount genA genB part2Iterations
+--     where
+--         genA = genCriteria genAStart genAFactor genACriteria
+--         genB = genCriteria genBStart genBFactor genBCriteria
+
+-- main = (print $ p1 myGenAStart myGenBStart) >> (print $ p2 myGenAStart myGenBStart)
+
+myGenAStart = 116#
+myGenBStart = 299#
+
+-- gen start factor = iterateC next $ next start
+--     where
+--         next prev = prev * factor `mod` genModulo
+
+-- p1 genAStart genBStart =
+--     runConduitPure $ values
+--                   .| takeC part1Iterations
+--                   .| lengthIfC ok
+--     where
+--         values = zipSources
+--                 (gen genAStart genAFactor)
+--                 (gen genBStart genBFactor)
+--         ok (a, b) = ((==) `on` (.&. mask)) a b
+
+-- iter :: Int -> Int -> ST s Int
+-- iter genAStart genBStart = do
+--     sum <- newSTRef (0 :: Int)
+--     av <- newSTRef genAStart
+--     bv <- newSTRef genBStart
+--     replicateM_ part1Iterations $ do
+--         modifySTRef' av (next genAFactor)
+--         modifySTRef' bv (next genBFactor)
+--         a <- readSTRef av
+--         b <- readSTRef bv
+--         when (ok a b) (modifySTRef' sum (+1))
+--         -- modifySTRef' sum (\s -> if ok a b then s + 1 else s)
+
+--     readSTRef sum
+
+--     where
+--         next prev factor = prev * factor `mod` genModulo
+--         ok = (==) `on` (.&. mask)
+
+-- main = print $ runST $ iter myGenAStart myGenBStart
+
+next :: Int# -> Int# -> Int#
+next prev factor = prev *# factor `remInt#` genModulo
+
+ok :: Int# -> Int# -> Int#
+ok a b = (a `andI#` mask) ==# (b `andI#` mask)
+
+go :: Int# -> Int# -> Int# -> Int# -> Int#
+go i count av bv = if (i `eq` 0#) then count else do
+    let !a = next genAFactor av
+    let !b = next genBFactor bv
+    let !newCount = if ((ok a b) == 1) then 1# +# count else count
+    go (i -# 1#) newCount a b
+
+p1 :: Int# -> Int# -> Int#
+p1 genAStart genBStart = go part1Iterations 0# genAStart genBStart
+
+main = print $ p1 myGenAStart myGenBStart

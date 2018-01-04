@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FormatString : MonoBehaviour {
+
+	public Text myText;
+	public float timer;
+	public float myTime;
+	public bool counting;
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update ()
+	{
+		if (counting)
+		{
+			myTime -= Time.deltaTime;
+			if (myTime == 0f) {
+				counting = false;
+			}
+		}
+
+		int minutes = Mathf.FloorToInt(myTime / 60F);
+		int seconds = Mathf.FloorToInt(myTime - minutes * 60);
+		myText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+	}
+}

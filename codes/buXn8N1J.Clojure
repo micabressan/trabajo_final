@@ -1,0 +1,44 @@
+(ns lol.core
+  (:gen-class))
+
+(defn return [value] (fn [state] (assoc state :value value)))
+
+(defn satisfy [f]
+  (fn [state]
+    (let [input (:input state)]
+      (if (empty? input)
+        {:input nil :ok false}
+        (let [c (first input)]
+          (if (f c)
+            {:input (next (:input state)) :ok true :value c}
+            {:input (:input state) :ok false}))))))
+
+(defn sym [x]
+  (satisfy (fn [c] (.equals c x))))
+
+(defn >>= [parser f]
+  (fn [state]
+    (let [result (parser state)]
+      (if (:ok result)
+        ((f (:value result)) result)
+        result))))
+
+(defn >>
+  ([p q]
+    (>>= p (fn [_] q)))
+  ([p q & more]
+    (reduce >> (list* p q more))))
+
+(defn toker [xs]
+  (fn [state]
+    (let [result ((reduce >> (map sym xs)) state)]
+      (if (:ok result)
+        result
+        (assoc result :ok false)))))
+
+(def pillu (>> (toker "muna") (return "LAPSI")))
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println "Hello, World!"))

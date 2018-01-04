@@ -1,0 +1,32 @@
+    fn get_texture(&mut self, name: &str) -> &Texture {
+        let name = name.to_string();
+        {
+            // Immutable borrow here
+            let cached_texture = self.lookup_texture(&name);
+            if let Some(texture) = cached_texture {
+                return texture
+            };
+        }
+        // Prevents mutable borrow here
+        // But shouldn't it be out of scope?
+        let textures = &mut self.textures;
+        let tex = Texture::from_path(Path::new(&name), &TextureSettings::new()).unwrap();
+        textures.insert(name.clone(), tex);
+        textures.get(&name).unwrap()
+    }
+
+//  error[E0502]: cannot borrow `self.textures` as mutable because `*self` is also borrowed as immutable
+//   --> src\render\texture_cache.rs:28:29
+//    |
+// 23 |             let cached_texture = self.lookup_texture(&name);
+//    |                                  ---- immutable borrow occurs here
+// ...
+// 28 |         let textures = &mut self.textures;
+//    |                             ^^^^^^^^^^^^^ mutable borrow occurs here
+// ...
+// 32 |     }
+//    |     - immutable borrow ends here
+//
+// error: aborting due to previous error
+//
+// error: Could not compile `educatr`.

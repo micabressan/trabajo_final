@@ -1,0 +1,663 @@
+.flair-Archers {
+background-position:-5px -5px
+}
+ 
+.flair-Archers:hover:after {
+content:"Dislikes the cold weather, and frizzy hair"
+}
+ 
+.flair-Arrows {
+background-position:-40px -5px
+}
+ 
+.flair-Arrows:hover:after {
+content:"That isn’t hail falling from the sky.."
+}
+ 
+.flair-Bats {
+background-position:-180px -82px
+}
+ 
+.flair-Bats:hover:after {
+content:"Huddle up, keep warm!"
+}
+ 
+.flair-Bomber {
+background-position:-180px -5px
+}
+ 
+.flair-Bomber:hover:after {
+content:"Actually throws pumpkins painted black"
+}
+ 
+.flair-Barbarians {
+background-position:-215px -5px
+}
+ 
+.flair-Barbarians:hover:after {
+content:"Opens presents early"
+}
+ 
+.flair-Cannon {
+background-position:-75px -5px
+}
+ 
+.flair-Cannon:hover:after {
+content:"Snowball machine"
+}
+ 
+.flair-Goblins {
+background-position:-110px -5px
+}
+ 
+.flair-Goblins:hover:after {
+content:"Worst. Elves. Ever"
+}
+ 
+.flair-GoblinGang {
+background-position:-109px -82px
+}
+ 
+.flair-GoblinGang:hover:after {
+content:"A little gang of elves"
+}
+ 
+.flair-Knight {
+background-position:-145px -5px
+}
+ 
+.flair-Knight:hover:after {
+content:"Oh holy knight"
+}
+ 
+.flair-MinionHorde {
+background-position:-5px -44px
+}
+ 
+.flair-MinionHorde:hover:after {
+content:"Who needs reindeer?"
+}
+ 
+.flair-Minions {
+background-position:-40px -44px
+}
+ 
+.flair-Minions:hover:after {
+content:"Can you spot the one with the red nose?"
+}
+ 
+.flair-Mortar {
+background-position:-75px -44px
+}
+ 
+.flair-Mortar:hover:after {
+content:"90kg snowballs"
+}
+ 
+.flair-RoyalGiant {
+background-position:-5px -83px
+}
+ 
+.flair-RoyalGiant:hover:after {
+content:"Guards the toy factory"
+}
+ 
+.flair-SpearGoblins {
+background-position:-110px -44px
+}
+ 
+.flair-SpearGoblins:hover:after {
+content:"Second worst. Elves. Ever."
+}
+ 
+.flair-Skeletons {
+background-position:-145px -44px
+}
+ 
+.flair-Skeletons:hover:after {
+content:"More of a nuisance, than an elf"
+}
+ 
+.flair-Tesla {
+background-position:-216px -44px
+}
+ 
+.flair-Tesla:hover:after {
+content:"Do not open before Xmas. Or ever"
+}
+ 
+.flair-FireSpirits {
+background-position:-40px -83px
+}
+ 
+.flair-FireSpirits:hover:after {
+content:"Lights the candles!"
+}
+ 
+.flair-FlyingMachine {
+background-position:-6px -318px
+}
+ 
+.flair-FlyingMachine:hover:after {
+content:"Snowball launcher from the sky!"
+}
+ 
+.flair-IceSpirits {
+background-position:-74px -83px
+}
+ 
+.flair-IceSpirits:hover:after {
+content:"The ghost of Christmas past"
+}
+ 
+.flair-EliteBarbarians {
+background-position:-145px -83px
+}
+ 
+.flair-EliteBarbarians:hover:after {
+content:"Keeping warm with their trusty helmets"
+}
+ 
+.flair-Zap {
+background-position:-181px -44px
+}
+ 
+.flair-Zap:hover:after {
+content:"Enjoys shocking people in cold, dry weather"
+}
+ 
+.flair-BarbarianHut {
+background-position:-5px -198px
+}
+ 
+.flair-BarbarianHut:hover:after {
+content:"Where everyone slacks off and drinks hot cocoa"
+}
+ 
+.flair-BombTower {
+background-position:-42px -198px
+}
+ 
+.flair-BombTower:hover:after {
+content:"Heavily fortified for snowball fights"
+}
+ 
+.flair-ElixirCollector {
+background-position:-77px -198px
+}
+ 
+.flair-ElixirCollector:hover:after {
+content:"Keeps Santa’s workshop running"
+}
+ 
+.flair-Fireball {
+background-position:-111px -198px
+}
+ 
+.flair-Fireball:hover:after {
+content:"Get toasty!"
+}
+ 
+.flair-GoblinHut {
+background-position:-5px -238px
+}
+ 
+.flair-GoblinHut:hover:after {
+content:"Toy factory"
+}
+ 
+.flair-Giant {
+background-position:-147px -198px
+}
+ 
+.flair-Giant:hover:after {
+content:"Helps put the star on top of your tree"
+}
+ 
+.flair-HogRider {
+background-position:-183px -198px
+}
+ 
+.flair-HogRider:hover:after {
+content:"Happy Hogdays"
+}
+ 
+.flair-InfernoTower {
+background-position:-219px -198px
+}
+ 
+.flair-InfernoTower:hover:after {
+content:"Keeps your toes warm, just don’t use it for too long"
+}
+ 
+.flair-MiniPEKKA {
+background-position:-42px -238px
+}
+ 
+.flair-MiniPEKKA:hover:after {
+content:"All he wants is pancakes, but elves can’t cook.."
+}
+ 
+.flair-Musketeer {
+background-position:-77px -238px
+}
+ 
+.flair-Musketeer:hover:after {
+content:"The best way to win a snowball fight is with bullets"
+}
+ 
+.flair-Rocket {
+background-position:-183px -238px
+}
+ 
+.flair-Rocket:hover:after {
+content:"You’ve made the naughty list."
+}
+ 
+.flair-Tombstone {
+background-position:-111px -238px
+}
+ 
+.flair-Tombstone:hover:after {
+content:"Best toy factory ever"
+}
+ 
+.flair-Valkyrie {
+background-position:-147px -238px
+}
+ 
+.flair-Valkyrie:hover:after {
+content:"Clears snow from your driveway in a few spins!"
+}
+ 
+.flair-Wizard {
+background-position:-219px -238px
+}
+ 
+.flair-Wizard:hover:after {
+content:"Who needs a jacket? The Wizard is a walking fireplace"
+}
+ 
+.flair-ThreeMusketeers {
+background-position:-183px -278px
+}
+ 
+.flair-ThreeMusketeers:hover:after {
+content:"The ultimate snowball fighting team"
+}
+ 
+.flair-Furnace {
+background-position:-77px -278px
+}
+ 
+.flair-Furnace:hover:after {
+content:"Cooks a tasty ham. We tell Hogrider it’s Turkey.."
+}
+ 
+.flair-MegaMinion {
+background-position:-112px -278px
+}
+ 
+.flair-MegaMinion:hover:after {
+content:"Those cupcakes were for Santa!"
+}
+ 
+.flair-IceGolem {
+background-position:-147px -278px
+}
+ 
+.flair-IceGolem:hover:after {
+content:"Silk hat not included"
+}
+ 
+.flair-DartGoblin {
+background-position:-5px -278px
+}
+ 
+.flair-DartGoblin:hover:after {
+content:"Shootin snowbals from his blow-gun"
+}
+ 
+.flair-BattleRam {
+background-position:-42px -278px
+}
+ 
+.flair-BattleRam:hover:after {
+content:"The perfect nose for your snow man"
+}
+ 
+.flair-BabyDragon {
+background-position:-218px -438px
+}
+ 
+.flair-BabyDragon:hover:after {
+content:"Your own personal flying heater!"
+}
+ 
+.flair-Balloon {
+background-position:-5px -478px
+}
+ 
+.flair-Balloon:hover:after {
+content:"It’s chilly up here"
+}
+ 
+.flair-Bowler {
+background-position:-5px -398px
+}
+ 
+.flair-Bowler:hover:after {
+content:"Throws boulders, not snowballs. You may need a bigger fort."
+}
+ 
+.flair-Clone {
+background-position:-147px -438px
+}
+ 
+.flair-Clone:hover:after {
+content:"When one present isn't enough"
+}
+ 
+.flair-DarkPrince {
+background-position:-42px -438px
+}
+ 
+.flair-DarkPrince:hover:after {
+content:"Uses his bucket helmet to make a snow castle"
+}
+ 
+.flair-Executioner {
+background-position:-183px -438px
+}
+ 
+.flair-Executioner:hover:after {
+content:"Professional Ice Carver"
+}
+ 
+.flair-Executioner-2 {
+background-position:-6px -518px
+}
+ 
+.flair-Executioner-2:hover:after {
+content:"Professional Ice Carver"
+}
+ 
+.flair-Freeze {
+background-position:-76px -438px
+}
+ 
+.flair-Freeze:hover:after {
+content:"Brr.. It's cold"
+}
+ 
+.flair-Golem {
+background-position:-77px -478px
+}
+ 
+.flair-Golem:hover:after {
+content:"Makes a hole in the wall for easy access. Get a chimney."
+}
+ 
+.flair-GiantSkeleton {
+background-position:-111px -478px
+}
+ 
+.flair-GiantSkeleton:hover:after {
+content:"Will make your snow fort go BOOM"
+}
+ 
+.flair-Guards {
+background-position:-147px -398px
+}
+ 
+.flair-Guards:hover:after {
+content:"Asks for new shields. Every. Single. Year."
+}
+ 
+.flair-GoblinBarrel {
+background-position:-111px -438px
+}
+ 
+.flair-GoblinBarrel:hover:after {
+content:"Flying Elves"
+}
+ 
+.flair-Heal {
+background-position:-220px -277px
+}
+ 
+.flair-Heal:hover:after {
+content:"Cannot heal your naughtiness"
+}
+ 
+.flair-Lightning {
+background-position:-183px -478px
+}
+ 
+.flair-Lightning:hover:after {
+content:"Hopefully Santa’s sleigh isn’t made out of metal."
+}
+ 
+.flair-Mirror {
+background-position:-147px -478px
+}
+ 
+.flair-Mirror:hover:after {
+content:"Santa is watching"
+}
+ 
+.flair-PEKKA {
+background-position:-42px -398px
+}
+ 
+.flair-PEKKA:hover:after {
+content:"Why build a Snowman when you can build a SnowPEKKA?"
+}
+ 
+.flair-Prince {
+background-position:-77px -398px
+}
+ 
+.flair-Prince:hover:after {
+content:"A grown man pretending candy canes are lances"
+}
+ 
+.flair-Rage {
+background-position:-112px -398px
+}
+ 
+.flair-Rage:hover:after {
+content:"How do you think Santa delivers presents in one night?"
+}
+ 
+.flair-SkeletonArmy {
+background-position:-5px -438px
+}
+ 
+.flair-SkeletonArmy:hover:after {
+content:"An undead elf army that enjoys making sp00ky toys."
+}
+ 
+.flair-SkeletonBarrel {
+background-position:-214px -82px
+}
+ 
+.flair-SkeletonBarrel:hover:after {
+content:"A snow party in the sky"
+}
+ 
+.flair-Poison {
+background-position:-219px -478px
+}
+ 
+.flair-Poison:hover:after {
+content:"Don’t eat the orange snow. Seriously."
+}
+ 
+.flair-Tornado {
+background-position:-41px -478px
+}
+ 
+.flair-Tornado:hover:after {
+content:"Picked up a few tricks from its cousin, Blizzard"
+}
+ 
+.flair-Witch {
+background-position:-183px -398px
+}
+ 
+.flair-Witch:hover:after {
+content:"Keeps the undead elves in line. Even you, Larry."
+}
+ 
+.flair-XBow {
+background-position:-218px -398px
+}
+ 
+.flair-XBow:hover:after {
+content:"Why buy arrows when you have icicles?"
+}
+ 
+.flair-CannonCart {
+background-position:-42px -518px
+}
+ 
+.flair-CannonCart:hover:after {
+content:"Snowball machine… on wheels!"
+}
+ 
+.flair-Graveyard {
+width:23px;
+height:30px;
+background-position:-251px -45px
+}
+ 
+.flair-Graveyard:hover:after {
+content:"Summons an undead elf army to build you toys"
+}
+ 
+.flair-ElectroWizard {
+width:23px;
+height:32px;
+background-position:-426px -5px
+}
+ 
+.flair-ElectroWizard:hover:after {
+content:"Powers up your christmas lights"
+}
+ 
+.flair-LavaHound {
+width:25px;
+height:30px;
+background-position:-251px -5px
+}
+ 
+.flair-LavaHound:hover:after {
+content:"A heart as warm as lava. 7 total."
+}
+ 
+.flair-Miner {
+width:25px;
+height:30px;
+background-position:-321px -5px
+}
+ 
+.flair-Miner:hover:after {
+content:"Digging coal for naughty BMers"
+}
+ 
+.flair-NightWitch {
+width:24px;
+height:30px;
+background-position:-354px -45px
+}
+ 
+.flair-NightWitch:hover:after {
+content:"Trying to stay warm with her bats"
+}
+ 
+.flair-Sparky {
+width:25px;
+height:30px;
+background-position:-286px -5px
+}
+ 
+.flair-Sparky:hover:after {
+content:"Why build a snowfort when you can have a snow tank?"
+}
+ 
+.flair-Lumberjack {
+width:25px;
+height:32px;
+background-position:-355px -5px
+}
+ 
+.flair-Lumberjack:hover:after {
+content:"Keep him away from your tree.."
+}
+ 
+.flair-Log {
+width:25px;
+height:32px;
+background-position:-390px -5px
+}
+ 
+.flair-Log:hover:after {
+content:"Yule regret this.."
+}
+ 
+.flair-IceWizard {
+width:25px;
+height:32px;
+background-position:-286px -45px
+}
+ 
+.flair-IceWizard:hover:after {
+content:"All of that snow has to come from somewhere"
+}
+ 
+.flair-Princess {
+width:25px;
+height:32px;
+background-position:-461px -5px
+}
+ 
+.flair-Princess:hover:after {
+content:"Holiday cheer from the bridge"
+}
+ 
+.flair-InfernoDragon {
+width:23px;
+height:32px;
+background-position:-496px -5px
+}
+ 
+.flair-InfernoDragon:hover:after {
+content:"Your own personal flying heater!"
+}
+ 
+.flair-Bandit {
+width:25px;
+height:32px;
+background-position:-320px -45px
+}
+ 
+.flair-Bandit:hover:after {
+content:"Dashing through the snow!"
+}
+ 
+.flair-MegaKnight {
+background-position:-390px -45px
+}
+ 
+.flair-MegaKnight:hover:after {
+content:"Look at his snowstache!"
+}
+ 
+.flair-RoyalGhost {
+background-position:-390px -45px
+}
+ 
+.flair-RoyalGhost:hover:after {
+content:"Sp00ky!"
+}

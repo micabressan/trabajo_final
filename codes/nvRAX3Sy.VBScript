@@ -1,0 +1,80 @@
+Sub wiki()
+
+Dim wb As Workbook
+
+Dim ws As Worksheet
+
+Set wb = ActiveWorkbook
+Set ws = wb.Sheets("Hoja1")
+
+Dim totalnumbers As Integer
+
+Dim nombres As Range
+Dim valores As Range
+
+Dim ArrayNombres(1 To 23) As String
+Dim ArrayValores(1 To 23) As Integer
+
+
+
+Set nombres = Range("r35:r57")
+
+totalnombres = nombres.Count
+
+Set valores = Range("s35:s57")
+
+valores.Interior.Color = RGB(255, 0, 0)
+
+
+Dim j As Integer
+Dim i As Integer
+ i = 0
+ 
+Dim auxExterno As Integer
+Dim auxInterno As Integer
+Dim indiceNombre As Integer
+
+auxExterno = 1
+auxInterno = 1
+auxNombres = 1
+
+
+
+
+For Each c In valores
+    'For j = 1 To c.Value
+    'Nuevo
+    'Next j
+    
+    i = i + 1
+    ArrayValores(i) = c.Value
+    'MsgBox ArrayValores(i)
+    'Set nombres = nombres.Offset(1, 0)
+
+Next c
+
+i = 0
+For Each n In nombres
+    i = i + 1
+    ArrayNombres(i) = n.Value
+   ' MsgBox ArrayNombres(i)
+   'MsgBox i
+Next n
+
+
+For contador = 2 To 100
+ fila = contador
+ If auxExterno < 23 Or auxNombres < 23 Then
+    If Cells(fila, 3) = Vacio And Cells(fila, 10) <> "EMPRESA" And Cells(fila, 12) = "AUDI" Then
+      If ArrayValores(auxExterno) <> 0 Then
+         Cells(fila, 3) = ArrayNombres(auxNombres): ArrayValores(auxExterno) = ArrayValores(auxExterno) - 1
+      Else
+         auxExterno = auxExterno + 1: auxNombres = auxNombres + 1
+      End If
+    End If
+ End If
+   
+Next contador
+
+
+End Sub

@@ -1,0 +1,68 @@
+#!/usr/bin/env hy
+
+(import requests
+        [goless [go]]
+        [argparse [ArgumentParser]]
+        [sys [argv stdin]]
+        [os [mkdir]]
+        [shutil [copyfileobj]]
+        [os.path [exists]]
+        [time [time]])
+
+(def API_BASE_URI "https://api.pushbullet.com/v2/")
+(def x-path "pushes")
+(def headers {"Access-Token" "o.C4xnlaTJWTy4exIwkwY7hOPZbGo9ktHi"
+               "Content-Type" "application/json"})
+(setv a-p (ArgumentParser))
+(a-p.add-argument "--no-files" :action "store_true" :dest "curl")
+(a-p.add-argument "--upload" :action "append" :dest "files")
+(a-p.add-argument "--retrieve" :dest "retrieval_count" :type int)
+
+(setv args (a-p.parse-args))
+(def enable-downloads args.curl)
+(def retrieval-count args.retrieval_count)
+(when args.files
+  (for [f args.files]
+    (requests.post API_BASE_URI :headers headers)))
+
+(defn push-file [file]
+  (setv resp (requests.post (+ API_BASE_URI "pushes") :headers headers
+        :values {"file_name" file
+                 "file_type" "*/*"}))
+  (setv uri (get (resp.json) "upload_url"))
+  (with [fp (open file)]
+    (requests.post uri :headers headers :data (fp.read))))
+
+(defn extract-push [push]
+  (setv retn "")
+  (setv t (get push "type"))
+  (+= retn
+      (cond [(= t "link") (get push "url")]
+            [(= t "file")
+             (when enable-downloads
+               (setv fname (+ x-path "/"
+                              (-> (get push "created") (int) (str))
+                              "-" (get push "file_name")))
+               (unless (exists x-path) (mkdir x-path))
+               (with [fp (open fname "wb")]
+                 (go copyfileobj
+                   (-> (requests.get :headers headers (get push "file_url")) (. raw))
+                   fp))
+               fname)]
+            [(= t "note") (if (in "title" push)
+                              (get push "title") "")]))
+  (+ retn (if (in "body" push)
+              (+ (get push "body") "\t") "")))
+
+(when retrieval-count
+  (setv resp (requests.get :headers headers (+ API_BASE_URI "pushes")))
+  (for [msg (map extract-push (-> (resp.json)
+                                  (get "pushes")
+                                  (islice retrieval-count)))]
+    (print msg))
+  (exit))
+
+(setv push {"body" (stdin.read)
+            "type" "note"})
+
+(requests.post (+ API_BASE_URI "pushes") :headers headers :json push)

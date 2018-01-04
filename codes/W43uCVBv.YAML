@@ -1,0 +1,10 @@
+#
+# XIAOMI MI ROBOT VACUUM TEMPLATES
+#
+# http://www.diyfuturism.com/index.php/2017/11/28/config-setting-up-the-xiaomi-mi-robot-vacuum-in-home-assistant/
+#
+- platform: template
+  sensors:
+    vacuum_status:
+      friendly_name: Vacuum Status
+      value_template: "{{ states.vacuum.robot.attributes.status }}"

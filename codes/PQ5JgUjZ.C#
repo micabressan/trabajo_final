@@ -1,0 +1,145 @@
+using System;
+using System.Linq;
+
+namespace Lab_16
+{
+    class MainClass
+    {
+
+        static int[] numbers;
+        static int[] qSortNumbers;
+
+        public static int[] BubbleSort(int[] arr)
+        {
+            int temp;
+            for (int i = 0; i < arr.Length; i++){
+                for (int j = i + 1; j < arr.Length; j++){
+                    if (arr[i] > arr[j])
+                    {
+                        temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        static void Swap(ref int a, ref int b)
+        {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        static void QSort(int[] array, int firstIndex = 0, int lastIndex = -1)
+        {
+            if (lastIndex < 0)
+                lastIndex = array.Length - 1;
+            if (firstIndex >= lastIndex)
+                return;
+            int middleIndex = (lastIndex - firstIndex) / 2 + firstIndex, currentIndex = firstIndex;
+            Swap(ref array[firstIndex], ref array[middleIndex]);
+            for (int i = firstIndex + 1; i <= lastIndex; ++i)
+            {
+                if (array[i] <= array[firstIndex])
+                {
+                    Swap(ref array[++currentIndex], ref array[i]);
+                }
+            }
+            Swap(ref array[firstIndex], ref array[currentIndex]);
+            QSort(array, firstIndex, currentIndex - 1);
+            QSort(array, currentIndex + 1, lastIndex);
+        }
+
+        public static int[] deleteRepetititve(int[] arr){
+            var result = arr.Distinct();
+            int[] res = result.ToArray();
+            return res;
+        }
+
+        public static void displayArray(int[] arr, String type, String arrOperation){
+            Console.WriteLine(arrOperation + "(" + type + "): ");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(arr[i]+ " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void displayMinAndMax(int[] arr){
+            int m, n;
+            try{
+                Console.WriteLine("Enter amount of mins");
+                m = Int32.Parse(Console.ReadLine()); 
+                Console.WriteLine("Enter amount of highs");
+                n = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Minimuns of array: ");
+                for (int i = 0; i <= m; i++)
+                {
+                    Console.Write(arr[i] + " ");
+                }
+                Console.WriteLine();
+                Console.WriteLine("Highs of array: ");
+                for (int i = 0; i <= n; i++)
+                {
+                    int g = arr.Length-1 - i;
+                    Console.Write(arr[g] + " ");
+                }
+            } catch (Exception e){
+                Console.WriteLine("Sorry, an error was occured: " + e);
+            }
+        }
+
+        public static void ProcessingArray(){
+            qSortNumbers = numbers;
+            QSort(qSortNumbers);
+            displayArray(BubbleSort(numbers), "Bubble sort", "Sorted array");
+            displayArray(qSortNumbers, "QSort", "Sorted array");
+            displayArray(deleteRepetititve(numbers), "", "Deleted repetitive");
+            displayMinAndMax(deleteRepetititve(qSortNumbers));
+        }
+
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Enter array size (max is 100)");
+            int size = Int32.Parse(Console.ReadLine());
+            if (size >100 | size <2){
+                Console.WriteLine("Sorry, an error was occured: ");
+                return;
+            }
+            numbers = new int[size];
+            qSortNumbers = new int[size];
+            Random random = new Random();
+            Console.WriteLine("Choose input type: 1 for auto, 2 for manual");
+            switch (Console.ReadLine()){
+                case "1":
+                    Console.WriteLine("Your array:");
+                    for (int i = 0; i < numbers.Length; i++)
+                    {
+                        numbers[i] = random.Next(-100, 101);
+                        Console.Write(numbers[i] + " ");
+                    }
+                    Console.WriteLine();
+                    ProcessingArray();
+                    break;
+                case "2":
+                    try{
+                        for (int i = 0; i < numbers.Length; i++)
+                        {
+                            numbers[i] = Int32.Parse(Console.ReadLine());
+                            Console.Write(numbers[i]);
+                        }
+                        ProcessingArray();
+                    } catch(Exception e){
+                        Console.WriteLine("Sorry, an error was occured: " + e);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Sorry, an unknown error was occured");
+                    break;
+            }
+        }
+    }
+}

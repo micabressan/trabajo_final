@@ -1,0 +1,9 @@
+if (/iphone|nexus-4|5x|6p|note/.test(myDevice)) is true or 
+Screen.height / Screen.width > 1.5
+	defaultWidth = 750 
+	defaultHeight = 1334
+
+if (/ipad|nexus-9/.test(myDevice)) is true or 
+Screen.height / Screen.width < 1.5
+	defaultWidth = 768 
+	defaultHeight = 1024

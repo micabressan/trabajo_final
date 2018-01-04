@@ -1,0 +1,36 @@
+baseURL :: URL
+baseURL = fromJust $ importURL "https://api.telegram.org"
+
+addParams :: [(String, String)] -> URL -> URL
+addParams ps url = foldl add_param url ps
+
+addToPath :: String -> URL -> URL
+addToPath s url = url { url_path = url_path url ++ s}
+
+withToken :: Token -> URL -> URL
+withToken t url = url { url_path = "bot" ++ t ++ url_path url }
+
+getUpdatesURL :: Token -> GetUpdatesParams -> URL
+getUpdatesURL t p = withToken t $
+  addParams (params p) $
+  addToPath "/getUpdates" $
+  baseURL
+
+getUpdates :: Token
+           -> GetUpdatesParams
+           -> IO (Maybe (TelegramResponse [Update]))
+getUpdates t p = makeRequest $ getUpdatesURL t p
+
+sendMessageURL :: Token -> SendMessageParams -> URL
+sendMessageURL t p = withToken t $
+  addParams (params p) $
+  addToPath "/sendMessage" $
+  baseURL
+
+sendMessage :: Token
+            -> SendMessageParams
+            -> IO (Maybe (TelegramResponse (Maybe Message)))
+sendMessage t p = makeRequest $ sendMessageURL t p
+
+makeRequest :: FromJSON a => URL -> IO (Maybe a)
+makeRequest = liftM decode . simpleHttp . exportURL

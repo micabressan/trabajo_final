@@ -1,0 +1,38 @@
+{
+"vendor" : "gce",
+
+"credential" : credential_json,
+
+"location" : { "latitude" : 8.42354, "longitude" : 3.25235},
+
+"master" :  {
+    "name" : "my_master_node",
+	"n_vcpus" : "8",
+    "mem" : "8G",
+    "image" : "my_master_image"
+},
+
+"master_init_script" : master_script_json,
+
+
+"workers" : [
+	{
+        "name" : "my_worker_node_1",
+		"n_vcpus" : "4",
+    	"mem" : "8G",
+    	"image" : "my_worker_image",
+        "params" : aux_params_json
+	},
+
+    {
+        "name" : "my_worker_node_2",
+		"n_vcpus" : "4",
+    	"mem" : "8G",
+    	"image" : "my_worker_image",
+        "params" : aux_params_json
+	}
+
+],
+
+"worker_init_script" : worker_script_json
+}

@@ -1,0 +1,20 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:kas="http://www.kasparsolutions.be" xmlns:lnx="http://schemas.datacontract.org/2004/07/LnxJeuDax.Utility.Collections" xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:lnx1="http://schemas.datacontract.org/2004/07/LnxJeuDax.WebQuest.Services">
+   <soap:Header/>
+   <soap:Body>
+      <kas:Search>
+         <!--Optional:-->
+         <kas:criteria>
+            <!--Optional:-->
+            <lnx:_dictionary>
+               <!--Zero or more repetitions:-->
+               <arr:KeyValueOfstringanyType>
+                  <arr:Key>kbo</arr:Key>
+                  <arr:Value>1</arr:Value>
+               </arr:KeyValueOfstringanyType>
+            </lnx:_dictionary>
+            <!--Optional:-->
+            <lnx1:ServiceName>?</lnx1:ServiceName>
+         </kas:criteria>
+      </kas:Search>
+   </soap:Body>
+</soap:Envelope>

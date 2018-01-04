@@ -1,0 +1,15 @@
+# Here we checking what framer.device we use. May be it's not a beutiful, weird way, but it's quite short and it works. 
+
+myDevice = Framer.Device.deviceType # Getting string like "apple-iphone-7..." and using regexp to find the name of the device. If it's matching we use screen default size accordingly. I simply use just 2 sizes for phones and tablets. 
+
+if (/iphone|nexus-4|5x|6p|note/.test(myDevice)) is true or 
+Screen.height / Screen.width > 1.5
+	defaultWidth = 750 
+	defaultHeight = 1334
+
+if (/ipad|nexus-9/.test(myDevice)) is true or 
+Screen.height / Screen.width < 1.5
+	defaultWidth = 768 
+	defaultHeight = 1024
+
+# If this is some "random" phone or tablet i simply determine it just dividing wisth / height to find the ratio 16 : 9 for phones and 4 : 3 for tablets.

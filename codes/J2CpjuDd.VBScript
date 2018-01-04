@@ -1,0 +1,102 @@
+Main()
+	
+sub Main()
+	Dim objGroups, objGroup, strComputer
+	strComputer = "."
+	
+	Set oLocator = CreateObject("wbemScripting.Swbemlocator") 'Здесь будут основные запросы
+
+	Set oSvc = oLocator.ConnectServer() 'Подключение к серверу 
+
+	Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+
+	Set users = objWMIService.ExecQuery("Select * from Win32_UserAccount")
+
+	Set xmlParser = CreateXml()
+
+	MsgBox ("Successfully")
+'Запрос на выбор всех локальных групп пользователей по указаному домену 
+ 	set xmlParser = FillXMl(xmlParser, users, oSvc, objGroups)	
+	Dim fso1
+
+	Set fso1 = WScript.CreateObject("Scripting.FileSystemObject")
+	Set oDrives = fso1.Drives
+
+	Set FSO = CreateObject("Scripting.FileSystemObject")
+	Set F = FSO.GetFile(Wscript.ScriptFullName)
+
+	path = FSO.GetParentFolderName(F)
+	xmlParser.save( path & "\lab5.xml" )
+	
+	
+	WScript.Quit 0
+end sub
+
+Function FillXMl(xmlParser, users, oSvc, objGroups)
+	For Each user in users
+		Set objGroups = oSvc.ExecQuery("ASSOCIATORS OF {Win32_UserAccount.Domain='" & user.Domain & "',Name='" & user.Name & "'} WHERE AssocClass=Win32_GroupUser")
+		For Each objGroup In objGroups
+		    If objGroup.LocalAccount Then 
+		    	set xmlParser = InsertData(xmlParser, user.name, objGroup.name)
+		    end if
+		Next 
+	Next
+
+	Set FillXMl = xmlParser
+end Function
+
+Function InsertData(xmlParser, user, group)
+	dim tag
+	for i = 1 to xmlParser.documentElement.childNodes.length
+		tag = ChoseTag(group)
+		if ( xmlParser.documentElement.childNodes(i-1).BaseName = tag )Then
+			set curretTag = xmlParser.documentElement.childNodes(i-1)
+			Set newUser = curretTag.appendChild(xmlParser.createElement("USER"))
+
+			Set userAttr = xmlParser.createAttribute("UserName")
+			userAttr.value = user
+
+			Set groupAttr = xmlParser.createAttribute("Group")
+			groupAttr.value = group
+
+			newUser.setAttributeNode(userAttr)
+			newUser.setAttributeNode(groupAttr)
+		end if
+	next 
+	Set InsertData = xmlParser
+end Function
+
+Function ChoseTag(group)
+	dim tag
+	Select case len(group)
+		case 14
+			tag = "ADMINISTRATOR"
+		case 12
+			tag = "USERS"
+		case 40
+			tag = "LOGUSERS"
+		case 43
+			tag = "GROUPS"
+		case 5
+			tag = "GUEST"
+		case else 
+			tag =  "OTHER"
+	end Select
+	ChoseTag = tag
+end Function
+
+Function CreateXml()
+	Set xmlParser = CreateObject("Msxml2.DOMDocument")
+	'Создание объявления XML
+	xmlParser.appendChild(xmlParser.createProcessingInstruction("xml", "version='1.0' encoding='utf-8'"))
+	'Создание корневого элемента
+	Set rootNode = xmlParser.appendChild(xmlParser.createElement("ROOT")) 
+	Set administratorNode = rootNode.appendChild(xmlParser.createElement("ADMINISTRATOR"))
+	Set guestNode = rootNode.appendChild(xmlParser.createElement("GUEST"))
+	Set usersNode = rootNode.appendChild(xmlParser.createElement("USERS"))
+	Set groupsNode = rootNode.appendChild(xmlParser.createElement("GROUPS"))
+	Set logusersNode = rootNode.appendChild(xmlParser.createElement("LOGUSERS"))
+	Set otherNode = rootNode.appendChild(xmlParser.createElement("OTHER"))
+
+	Set CreateXml = xmlParser
+end Function

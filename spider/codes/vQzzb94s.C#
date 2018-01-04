@@ -1,0 +1,46 @@
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Ellipse
+{
+    public partial class Form1 : Form
+    {
+        int x, y;
+        Pen pen;
+        Graphics g;
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                trackBar2.Value = trackBar1.Value;
+                trackBar1.Value = trackBar2.Value;
+            }
+        
+            x = trackBar1.Value * 17;
+            y = trackBar2.Value * 17;
+        
+            g.Clear(Color.White);
+            g.DrawEllipse(pen, (this.Height + 450) / (Convert.ToInt32(trackBar1.Value * 1.6)), (this.Width + 350) / (Convert.ToInt32(trackBar2.Value * 1.7)), x, y);
+        }
+            
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked) {
+                trackBar2.Value = trackBar1.Value;
+                trackBar2_Scroll(sender, e);
+            }            
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+            trackBar1.Value = trackBar1.Maximum / 2;
+            trackBar2.Value = trackBar2.Maximum / 2;
+
+            pen = new Pen(Color.Blue, 1);
+            g = this.CreateGraphics();
+        }
+    }
+}

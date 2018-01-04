@@ -1,0 +1,61 @@
+defmodule App.CLI do
+    def main argv do
+        default_board = [
+          a:  [a: "_", b: "_", c: "_"],
+          b:  [a: "_", b: "_", c: "_"],
+          c:  [a: "_", b: "_", c: "_"]
+        ]
+
+        #Keyword.put default_board, :a, 3
+        IO.inspect default_board
+        Agent.start_link fn -> default_board end, name: Board
+        Agent.start_link fn -> "X" end, name: Player
+        Agent.start_link fn -> [] end, name: XHistory
+        Agent.start_link fn -> [] end, name: OHistory
+        play()
+    end
+
+    def play do
+        IO.puts "Player #{Agent.get Player, fn state -> state end}'s turn"
+        currPlayer = Agent.get Player, fn state -> state end
+        newPlayer = case currPlayer do
+            "X" -> "O"
+            "O" -> "X"
+        end
+        Agent.update Player, fn state -> state = newPlayer end
+        square = IO.gets "please enter which square to fill as [xy]\n"
+        square = String.codepoints square
+        square = square -- ["\n"]
+        square_x = List.first square
+        square_y = List.last square
+        square_x = String.to_atom square_x
+        square_y = String.to_atom square_y
+        currBoard = Agent.get Board, fn state -> state end
+        updateBoard currPlayer, currBoard, square_x, square_y
+        """
+        STOPPED HERE, NEED TO RECURSE, BUT FIRST FINISH FUNCTION 'updateBoard()'
+        """
+    end
+
+    def updateBoard player, board, square_x, square_y do
+        square = Keyword.fetch(board, square_x) 
+                    |> Tuple.to_list 
+                    |> List.last 
+                    |> Keyword.fetch(square_y) 
+                    |> Tuple.to_list
+                    |> List.last
+        rop = case square do
+            "_" -> :ok
+            _ -> :nok
+        end
+
+        if rop == :ok do
+            Agent.update Board, fn state -> state = update_in board[square_x][square_y], &(&1 = player) end
+            IO.puts "Placed #{player} in box [#{square_x}, #{square_y}]"
+            newBoard = Agent.get Board, fn state -> state end
+            IO.inspect newBoard
+        else
+            IO.puts "Invalid move"
+        end
+    end
+end

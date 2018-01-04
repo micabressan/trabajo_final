@@ -1,0 +1,27 @@
+GET /v3/directline/conversations/HLKoxs57ptTEz5QKNIuasY/activities?watermark=0000000 HTTP/1.1
+Host: directline.botframework.com
+Authorization: Bearer lBG0TMyVKYA.cwA.dMM.rTlLfWrdgGLo5EdRNX2_cW8ij_Vw-hnyh_JFHAn2gJM
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: e48668a9-0f81-e351-f579-e9eda9cd1614
+
+{
+    "activities": [
+        {
+            "type": "message",
+            "id": "HLKoxs57ptTEz5QKNIuasY|0000001",
+            "timestamp": "2017-12-28T10:10:01.7453387Z",
+            "channelId": "directline",
+            "from": {
+                "id": "arbot_1",
+                "name": "arbot"
+            },
+            "conversation": {
+                "id": "HLKoxs57ptTEz5QKNIuasY"
+            },
+            "text": "Приветствую! (hi) Я помогу Вам найти авиабилеты на рейсы без пересадки. Расскажите мне: когда, куда и откуда Вы хотите полететь? (jet) (jet) (jet) Еще мне можно сказать о предпочтениях в классе обслуживания, один или компанией Вы летите, назвать валюту оплаты. Если хотите начать диалог заново, так и скажите мне: заново :)",
+            "replyToId": "{HLKoxs57ptTEz5QKNIuasY|0000000}"
+        }
+    ],
+    "watermark": "1"
+}

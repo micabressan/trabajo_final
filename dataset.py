@@ -2,6 +2,7 @@
 
 import os
 from sklearn.feature_extraction.text import CountVectorizer
+from keywords import *
 
 
 path = '/home/mica/trabajo_final/codes/'
@@ -24,16 +25,15 @@ for files in files_list:
 
 def my_tokenizer(content):
 
-    character = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-                'y', 'z', ',', '/', '=', '+', '<', '>', '{', '}', '(', ')',
-                ';', '|', '"', '.', '[', ']', ':', "'", '!', '@', '#', '%',
-                '&', '*']
+    character = list(set(Python + Java))
+    letters = []
+    for x in map(chr, range(97, 123)):
+        letters.append(x)
+    for y in map(chr, range(65, 91)):
+        letters.append(y)
 
-    character = ['COMMENT', 'STRING', 'NUMBER']
-
-    for letter in content:
-        if letter not in character:
+    for element in content:
+        if element not in character:
             content.replace(letter, '')
 
     return content.split()
@@ -41,4 +41,8 @@ def my_tokenizer(content):
 
 vectorizer = CountVectorizer(tokenizer=my_tokenizer)
 vectorizer.fit_transform(content)
-print set(vectorizer.vocabulary_)
+#print set(vectorizer.vocabulary_)
+
+if __name__ == '__main__':
+    character = list(set(Python + Java))
+    print character

@@ -1,0 +1,22 @@
+//Returns the most frequently occurring value in a vector
+fn vector_mode(v: &Vec<i32>) -> Result<i32, &str> {
+    if v.is_empty() {
+        return Err("An empty vector has no mode");
+    }
+
+    let mut value_frequencies: HashMap<i32, u32> = HashMap::with_capacity(v.len());
+
+    //Count every value
+    for value in v {
+        *value_frequencies.entry(*value).or_insert(0) += 1;
+    }
+
+    let max_value = value_frequencies.iter().max_by(
+        |&(_, ref frequency_a), &(_, ref frequency_b)| frequency_a.cmp(frequency_b).reverse(),
+    );
+
+    match max_value {
+        Some((value, _)) => Ok(*value),
+        None => Err("Failed to find maximum frequency"),
+    }
+}

@@ -1,0 +1,25 @@
+alphabet = ["a","b","c","d","e","f","g","h","i"
+            "j","k","l","m","n","o","p","q","r"
+            "s","t","u","v","w","x","y"
+            "A","B","C","D","E","F","G","H","I"
+            "J","K","L","M","N","O","P","Q","R"
+            "S","T","U","V","W","X","Y","Z"]
+
+images  = [-1, -1, -1, -1, -1]
+get_idx = () -> Math.floor Math.random() * alphabet.length
+f_durat = 2000
+
+animate = (el, idx) ->
+  duration = if images[idx] != -1 then f_durat else 0
+  a_idx = get_idx() until a_idx and $.inArray(a_idx, images) == -1
+  images[idx] = a_idx;
+  timeout = 1000 * Math.floor Math.random() * 10 + 5
+  el.animate opacity : 0, duration, () ->
+    el[0].innerHTML = alphabet[a_idx]
+    Cufon.replace el[0]
+    el.animate opacity : 0.3, duration, () ->
+      lambda = () -> animate el, idx
+      setTimeout lambda, timeout
+
+$ ->
+  $("#greek-band div").each (idx) -> animate($(@), idx)

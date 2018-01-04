@@ -1,0 +1,52 @@
+#PROGRAM StudentAutoGrader
+print("Welcome! Would you like to:")
+print("(1)Set threshold values to grade, or (2)Grade with default?")
+while True:
+    selection=input("Please Select 1,2, or 3:") 
+    if selection =='1': 
+      print("grading...")
+# collect first and surname, print full name
+      f=input("Enter Student first name")
+      s=input("Enter Student surname")
+      print ("Preparing to set boundaries...")
+      A1=input("Input Highest A percentage")
+      A2=input("Input Lowest A percentage")
+      B1=input("Input Highest B percentage")
+      B2=input("Input Lowest B percentage")
+      C1=input("Input Highest C percentage")
+      C2=input("Input Lowest C percentage")
+      D1=input("Input Highest D percentage")
+      D2=input("Input Lowest D percentage")
+      if int(A1 or B1 or C1 or D1)<0:
+        print("Error, minimum % value cannot be less than 0")
+      if int(A2 or B2 or C2 or D2)>100:
+        print("Error, maximum % value exceeds 100%")
+      (g)=input("Enter Percentage Grade")
+      print(("Student:")+(" ")+(f)+(" ")+(s))
+      if int(g)>=int(A2) and int(g)<=int(A1):
+        print("A grade")
+      if int(g)>=int(B2) and int(g)<=int(B1):
+       print("B grade")
+      if int(g)>=int(C2) and int(g)<=int(C1):
+       print("C grade")
+      if int(g)<=int(D1) and int(g)>=int(D2):
+       print("D grade")
+    elif selection == '2': 
+      print("grading...")
+# collect first and surname, print full name
+      f=input("Enter Student first name")
+      s=input("Enter Student surname")
+      (g)=input("Enter Percentage Grade")
+      print(("Student:")+(" ")+(f)+(" ")+(s))
+      if int(g)>=80:
+        print("A grade")
+      if int(g)<=79 and int(g)>=60:
+       print("B grade")
+      if int(g)<=59 and int(g)>=40:
+       print("C grade")
+      if int(g)<=39:
+       print("D grade")
+    elif selection == '3': 
+      break
+    else: 
+      print ("Unknown Option Selected, please try again!")

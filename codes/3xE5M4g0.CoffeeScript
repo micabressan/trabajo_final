@@ -1,0 +1,62 @@
+Camera = require './Camera.coffee'
+Util = require '../core/Util.coffee'
+
+module.exports = class FlyingCamera extends Camera
+    constructor: (scene, opts = {}) ->
+        super scene
+
+        @wheelSensitivity = 20
+        @position = opts.position or glm.vec3.create()
+        @rotation = opts.rotation or glm.vec3.create()
+        @positionSpeed = opts.positionSpeed or 5
+        @rotationSpeed = opts.rotationSpeed or 0.1
+        @mouse = glm.vec2.create()
+
+        @scene.engine.input.on 'mousewheel', (delta) =>
+            @positionSpeed += delta * @wheelSensitivity * @scene.engine.deltaTime;
+#            glm.mat4.perspective @projMatrix, glm.glMatrix.toRadian(@fov), @ratio, @near, @far
+
+        @scene.engine.input.on 'mousemove', (pos, delta) =>
+            @pointer delta
+
+    update: ->
+        @move()
+        @view()
+
+    move: ->
+        dir = glm.vec4.create()
+        speed = @positionSpeed * @scene.engine.deltaTime
+
+        dir[2] += speed if @keys.up
+        dir[2] -= speed if @keys.down
+        dir[0] += speed if @keys.left
+        dir[0] -= speed if @keys.right
+
+        glm.mat4.identity @viewMatrix
+        glm.mat4.rotateX @viewMatrix, @viewMatrix, @rotation[0]
+        glm.mat4.rotateY @viewMatrix, @viewMatrix, @rotation[1]
+        glm.mat4.invert @viewMatrix, @viewMatrix
+
+        FNX.Maths.mat4MulVec3 @viewMatrix, dir
+        glm.vec3.add @position, @position, dir
+
+    view: ->
+        glm.mat4.identity @viewMatrix
+        glm.mat4.rotateX @viewMatrix, @viewMatrix, @rotation[0]
+        glm.mat4.rotateY @viewMatrix, @viewMatrix, @rotation[1]
+        glm.mat4.translate @viewMatrix, @viewMatrix, @position
+
+    pointer: (delta) ->
+        glm.vec2.add @mouse, @mouse, delta
+
+        @rotation[1] += glm.glMatrix.toRadian(@mouse[0]) * @rotationSpeed
+        if(@rotation[1] < 0)
+            @rotation[1] += Util.PI_TWO
+        if(@rotation[1] >= Util.PI_TWO)
+            @rotation[1] -= Util.PI_TWO
+
+        @rotation[0] += glm.glMatrix.toRadian(@mouse[1]) * @rotationSpeed
+        if @rotation[0] < -Util.H_PI
+            @rotation[0] = -Util.H_PI
+        if @rotation[0] > Util.H_PI
+            @rotation[0] = Util.H_PI

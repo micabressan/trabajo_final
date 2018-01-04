@@ -1,0 +1,10 @@
+Eval [
+
+    | name another |
+    name := Array new .
+    name printNl
+
+    true ifTrue:[ do a. do b]
+
+    another := 45
+]

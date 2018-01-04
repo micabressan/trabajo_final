@@ -1,0 +1,100 @@
+<template>
+  <div id="app">
+    <img src="./assets/logo.png">
+    <div id="header">
+        <h1>Plant Manager</h1>
+        <h2>By Samantha, Dolapo, and Owen</h2>
+    </div>
+    <Devices/>
+  </div>
+</template>
+ 
+<script>
+import Devices from './components/Devices'
+ 
+export default {
+  name: 'app',
+  components: {
+    Devices
+  }
+}
+</script>
+ 
+<style>
+body {
+    background-color: #424242;
+}
+#app {
+  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;  
+  margin: 50px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+}
+
+#header {
+     align-content: center;
+     float: center;
+     display: inline-block;
+}
+
+.card{
+    margin: 25px;
+}
+
+#footer {
+     color: #ffffff
+     text-size: 14px;
+     text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    color: #ffffff;
+    text-size: 20pt;
+}
+
+h2{
+    font-family: 'Quicksand', sans-serif;
+    text-size: 15pt;
+    color: #ffffff;
+}
+
+h3{
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    color: #ffffff;
+    text-size: 12pt;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    text-size: 12pt;
+}
+
+.positive-status{
+    font-family: 'Roboto', sans-serif;
+    color: #acd1b5;
+    text-size: 12pt
+}
+
+.negative-status{
+    font-family: 'Roboto', sans-serif;
+    color: #c497a4;
+    text-size: 12pt
+}
+
+.water-color{
+    color: #adbcf7;
+}
+
+
+</style>

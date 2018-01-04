@@ -1,0 +1,36 @@
+(ns main)
+
+(def movement #{:+x :-x :+y :-y})
+
+(defn rand-dir
+  []
+  (->> movement shuffle (take 1) first))
+
+(defn move
+  [coords dir]
+  (let [movement (condp = dir
+                   :-y {:y -1}
+                   :+y {:y +1}
+                   :-x {:x -1}
+                   :+x {:x +1})]
+    (merge-with + coords movement)))
+
+(defn get-distance
+  [{:keys [x y]}]
+  (Math/sqrt (+ (Math/pow x 2) (Math/pow y 2))))
+
+(defn format-output
+  [moves]
+  (letfn [(move->str [idx {:keys [x y]}]
+            (format "%d move: (%d, %d)" idx x y))]
+    (conj
+          (mapv move->str (range (count moves)) moves)
+          (str (get-distance (last moves))))))
+
+(defn make-n-moves
+  [n]
+  (->> {:x 0 :y 0}
+       (iterate #(move % (rand-dir)))
+       (take n)
+       format-output
+       (map println)))

@@ -1,0 +1,35 @@
+wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 25%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+a:link, a:visited {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    position: relative;
+    line-height: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+	overflow: hidden;
+}
+a:hover{
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+text{
+	height: 100%;
+  transform: translateY(50%);
+  font-size: calc(15px + .9vw);
+  font-family: 'Open Sans', sans-serif;
+}
+body{
+  background-image: url(https://i.imgur.com/dWdLOCJ.jpg);
+}

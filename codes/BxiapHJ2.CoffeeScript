@@ -1,0 +1,73 @@
+# Defaults
+grid = [10,10]
+container = "#container"
+
+# Function to update the server with position and dimensions of .edits
+updatePosition = (evt) ->
+    self = evt.target
+    $self = $(self)
+
+    pos = $self.position()
+    xPos = pos.left
+    yPos = pos.top
+    width = $self.width()
+    height = $self.height()
+    console.log(xPos,yPos,width,height)
+
+$ ->
+    $('.edit')
+        .append('<div class="gridline gridline_x"></div><div class="gridline gridline_y"></div>')
+        .click ->
+            # This should be the only edit with class .selected
+            $('.edit.selected').removeClass('selected')
+            $(this).addClass('selected')
+            this
+        .dblclick ->
+            content_el = $(this).children('.content')
+            content = content_el.html()
+
+            # Make new instance of CKEditor -> remove current if exists.
+            editor = CKEDITOR.instances.editor
+            if editor?
+                editor.destroy
+            $('#editor').ckeditor()
+            editor = CKEDITOR.instances.editor
+
+            # Add .edits content to ckeditor, add event handler to update .edit
+            editor.setData(content)
+            editor.on 'change', -> content_el.html editor.getData()
+            this
+        .draggable(
+            grid : grid
+
+            # Snap to other .edits
+            snap: '.edit'
+            containment : container
+
+            # functions to run during drag events
+            start : (evt) -> 
+                # show gridlines
+                $(this).children('.gridline').show()
+
+            drag : (evt, ui) ->
+                # Force draggable to stay on grid
+                ui.position.left -= ui.position.left % grid[0]
+                ui.position.top -= ui.position.top % grid[1]
+
+            stop : (evt) ->
+                # hide gridlines
+                $(this).children('.gridline').hide()
+
+                updatePosition(evt, this)
+         )
+       
+        .resizable(
+            grid : grid
+            handles : 'n, e, s, w, ne, se, sw, nw '
+            containment : container
+            stop : updatePosition
+
+            resize : (evt,ui) ->
+                # Force resize to stay on grid
+                ui.size.width -= ui.size.width % grid[0]
+        )

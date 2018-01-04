@@ -1,0 +1,58 @@
+fn do_select(p : Point) -> i32 {
+        match p {
+            Point { x:1, y:2 } => 1,
+            Point { x:_, y:3 } => 2,
+            Point { x:_, y:4 } => 3,
+            Point { x:_, y:_ } => 4,
+        }
+} 
+
+
+//Wird zu ...:
+
+
+fn do_select(_1: Point) -> i32 {
+    let mut _0: i32;                     // return pointer
+    scope 1 {
+        let _2: Point;                   // "p" in scope 1 at .\src\main.rs:34:14: 34:15
+    }
+
+    bb0: {                              
+        StorageLive(_2);                 // scope 1 at .\src\main.rs:34:14: 34:15
+        _2 = _1;                         // scope 1 at .\src\main.rs:34:14: 34:15
+        switchInt((_2.0: i32)) -> [1i32: bb5, otherwise: bb6]; // scope 1 at .\src\main.rs:37:23: 37:24
+    }
+
+    bb1: {                              
+        _0 = const 1i32;                 // scope 1 at .\src\main.rs:37:35: 37:36
+        goto -> bb7;                     // scope 1 at .\src\main.rs:36:9: 42:10
+    }
+
+    bb2: {                              
+        _0 = const 2i32;                 // scope 1 at .\src\main.rs:38:35: 38:36
+        goto -> bb7;                     // scope 1 at .\src\main.rs:36:9: 42:10
+    }
+
+    bb3: {                              
+        _0 = const 3i32;                 // scope 1 at .\src\main.rs:39:35: 39:36
+        goto -> bb7;                     // scope 1 at .\src\main.rs:36:9: 42:10
+    }
+
+    bb4: {                              
+        _0 = const 4i32;                 // scope 1 at .\src\main.rs:40:35: 40:36
+        goto -> bb7;                     // scope 1 at .\src\main.rs:36:9: 42:10
+    }
+
+    bb5: {                              
+        switchInt((_2.1: i32)) -> [2i32: bb1, otherwise: bb6]; // scope 1 at .\src\main.rs:37:28: 37:29
+    }
+
+    bb6: {                              
+        switchInt((_2.1: i32)) -> [3i32: bb2, 4i32: bb3, otherwise: bb4]; // scope 1 at .\src\main.rs:38:28: 38:29
+    }
+
+    bb7: {                              
+        StorageDead(_2);                 // scope 0 at .\src\main.rs:43:2: 43:2
+        return;                          // scope 0 at .\src\main.rs:43:2: 43:2
+    }
+}

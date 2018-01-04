@@ -1,0 +1,29 @@
+original_date: yes
+directory: /home/localuser/Music
+import:
+    move: yes
+    write: yes
+plugins: fetchart lyrics lastgenre web inline duplicates embedart bpm edit ftintitle discogs
+art_filename: cover
+paths:
+    default: discographies/$albumartist/$year - $album/%if{$multidisc,Disc $disc/}$track - $title
+    singleton: singletons/$artist - $title
+    comp: compilations/$genre/$album/$track - $title 
+item_fields:
+    multidisc: 1 if disctotal > 1 else 0
+fetchart:
+    auto: yes
+    minwidth: 1000
+    enforce_ratio: 1%
+    sources: filesystem coverart itunes amazon albumart
+lyrics:
+    auto: yes
+    fallback: ''
+    sources: lyricwiki lyrics.com musixmatch genius
+embedart:
+    auto: no
+lastgenre:
+    canonical: yes
+convert:
+    auto: yes
+    embed: no

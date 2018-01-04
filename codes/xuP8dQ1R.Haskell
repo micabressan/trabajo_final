@@ -1,0 +1,4 @@
+import Char
+
+int2bin 0 = []
+int2bin n = int2bin (div n 2) ++ [intToDigit (mod n 2)]

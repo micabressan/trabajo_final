@@ -1,0 +1,160 @@
+using System;
+using System.IO;
+using System.Linq;
+
+namespace PraceSCSV
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            while (true)
+            {
+                // pro deklaraci prázdného stirngu se používá spíše string.Empty tzn:
+                // var search = string.Empty;
+                var search = "";
+                var search2 = "";
+                var search3 = "";
+                Console.WriteLine("Zadej Kategorii");
+                Console.WriteLine("1.Znacka");
+                Console.WriteLine("2.rok");
+                Console.WriteLine("3.model");
+                Console.WriteLine("4.znacka,model a rok");
+                var fag = Convert.ToInt32(Console.ReadLine());
+                if (fag == 4)
+                {
+                    Console.WriteLine("Kategorie vybrána");
+                    // toto bych si lépe nazval, ať se vtom vyznáš např brand, model, year
+                    Console.WriteLine("Zadej značku");
+                    search = Console.ReadLine();
+                    Console.WriteLine("Zadej model");
+                    search2 = Console.ReadLine();
+                    Console.WriteLine("Zadej rok");
+                    search3 = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Kategorie vybrána");
+                    Console.WriteLine("Co chceš hledat?");
+                    search = Console.ReadLine();
+                }
+
+                var cars = File.ReadAllLines("car.csv");
+                foreach (var car in cars)
+                {
+                    var columns = SplitCar(car);
+                    switch (fag)
+                    {
+                        case 1:
+                            // toto dělá to samé co kód od tebe
+                            var searchedColumns = columns.Where(column => String.Equals(column, search, StringComparison.OrdinalIgnoreCase));
+                            
+                            foreach (string collumn in searchedColumns)
+                            {
+                                // pokud máš .NET 7, tak to můžeš napsat takto:
+                                // Console.WriteLine($"{columns[0],10}|{columns[1],40}|{columns[4],20}|");
+                                Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+
+                            //nechápu tento cyklus, projíždíš jendotlivé sloupce a pro ty, které sedí výsledku vypisuješ konkrétní sloupce?
+                            // to pak bude vypisovat pořád to samé ne?
+                            // mimochodem je lepší použít foreach, kvůli čitelnosti kódu
+                            // když víš, že hledáš konkrétní věc, které je na konkrétním sloupci, tak nemusíš projíždět všechno
+                            // ale zkontrolovat jen ten požadovaný sloupec, naopak ti to může udělat problémy například ve chvíli,
+                            // kdy název auta by obsahoval číslo, které by mohlo být i rok a někdo by vyhledával podle roku takže by
+                            // pro rok 1993 vyhledalo auto které by se jmenovalo "SomeDummyCar1993" ikdyž by mělo rok výroby 2016
+                            for (var i = 0; i < columns.Length; i++)
+                                // pro porovnání case insensitive je lepší použít standardní metody:
+                                // String.Equals(column, search, StringComparison.OrdinalIgnoreCase))
+                                if (columns[i].ToUpper() == search.ToUpper())
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            break;
+                        case 2:
+                            if (search.Length < 4)
+                            {
+                                Console.WriteLine("Chyba, špatný rok");
+                                break;
+                            }
+                            for (var i = 0; i < columns.Length; i++)
+                                if (columns[i].Contains(search))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            break;
+                        case 3:
+                            for (var i = 0; i < columns.Length; i++)
+                                if (columns[i].Contains(search))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            break;
+                        case 4:
+                            // myslím si, že by mělo stačit jen:
+                            // pokud je string prázdný, tak contains vrací vždy true dle dokumentace
+                            // ostatní podmínky můžeš vklidu smazat si myslím, fungovalo mi to
+                            // if (columns[0].ToUpper().Contains(search) &&
+                            //    columns[1].ToUpper().Contains(search2) &&
+                            //    columns[4].Contains(search3))
+                            //    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+
+                            if (columns[0].ToUpper().Contains(search) && columns[1].ToUpper().Contains(search2) &&
+                                columns[4].Contains(search3))
+                                Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            if (search2 == "")
+                            {
+                                if (columns[0].ToUpper().Contains(search) && columns[4].Contains(search3))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+                            else if (search2 == "" && search3 == "")
+                            {
+                                if (columns[0].ToUpper().Contains(search))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+                            else if (search == "")
+                            {
+                                if (columns[1].ToUpper().Contains(search2) && columns[4].Contains(search3))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+                            else if (search3 == "" && search == "")
+                            {
+                                if (columns[1].ToUpper().Contains(search2))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+                            else if (search3 == "")
+                            {
+                                if (columns[1].ToUpper().Contains(search2) && columns[0].Contains(search))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+                            else if (search == "" && search2 == "")
+                            {
+                                if (columns[4].ToUpper().Contains(search3))
+                                    Console.WriteLine("{0,10}|{1,40}|{2,20}|", columns[0], columns[1], columns[4]);
+                            }
+
+
+                            break;
+                    }
+                }
+                Console.ReadLine();
+            }
+        }
+
+        private static string[] SplitCar(string car)
+        {
+            var cols = new string[12];
+            var start = 0;
+            for (var i = 0; i < 12; i++)
+            {
+                var end = car.IndexOf(',', start);
+                if (end < 0)
+
+                    end = car.Length;
+                var col = car.Substring(start, end - start);
+                if (col.StartsWith("\""))
+                {
+                    end = car.IndexOf('"', start + 1) + 1;
+                    col = car.Substring(start, end - start);
+                }
+                cols[i] = col;
+                start = end + 1;
+            }
+            return cols;
+        }
+    }
+}

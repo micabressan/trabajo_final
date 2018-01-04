@@ -1,0 +1,54 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.api.interact.unicacorp.com" xmlns:xsd="http://api.interact.unicacorp.com/xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<soap:startSession>
+			<soap:sessionID>1200155385</soap:sessionID>
+			<soap:relyOnExistingSession>True</soap:relyOnExistingSession>
+			<soap:debug>True</soap:debug>
+			<soap:interactiveChannel>CRM_1</soap:interactiveChannel>
+			<soap:audienceID>
+				<xsd:name>PROD_NUM</xsd:name>
+				<xsd:valueAsString>01200155385</xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:audienceID>
+			<soap:audienceLevel>SubscriberID</soap:audienceLevel>
+
+			<soap:parameters>
+				<xsd:name>INN</xsd:name>
+				<xsd:valueAsString>841020300333</xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:parameters>
+
+			<soap:parameters>
+				<xsd:name>PRODUCT_TYPE</xsd:name>
+				<xsd:valueAsString>CREDIT</xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:parameters>
+			<soap:parameters>
+				<xsd:name>PRODUCT_CODE</xsd:name>
+				<xsd:valueAsString>KN_ZAL</xsd:valueAsString>
+				<xsd:valueDataType>numeric</xsd:valueDataType>
+			</soap:parameters>
+			<soap:parameters>
+				<xsd:name>AMOUNT</xsd:name>
+				<xsd:valueAsNumeric >5000000</xsd:valueAsNumeric >
+				<xsd:valueDataType>numeric</xsd:valueDataType>
+			</soap:parameters>
+			<soap:parameters>
+				<xsd:name>CURRENCY</xsd:name>
+				<xsd:valueAsString>KZT</xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:parameters>
+			<soap:parameters>
+				<xsd:name>ID_CAMP</xsd:name>
+				<xsd:valueAsString>0001</xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:parameters>
+			<soap:parameters>
+				<xsd:name>TEXT</xsd:name>
+				<xsd:valueAsString></xsd:valueAsString>
+				<xsd:valueDataType>string</xsd:valueDataType>
+			</soap:parameters>
+		</soap:startSession>
+	</soapenv:Body>
+</soapenv:Envelope>

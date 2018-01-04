@@ -1,0 +1,29 @@
+(def *max-rooms* 4)
+
+(defn fill-dungeon [x y]
+  (vec (map #(vec (repeat x %)) (repeat y 1 ))))
+
+(defn add-rooms [d]
+  d)
+
+(defn connect-rooms [d]
+  d)
+
+(defn draw-dungeon [d]
+  (dotimes [x (count d)]
+    (println)
+    (dotimes [y (count (d x))]
+      (print (get-tile ((d x) y)))))
+  (println))
+
+(defn get-tile [t] 
+  (condp = t
+    0 " "
+    1 "#"
+    (str t)))
+
+(-> 
+  (fill-dungeon 80 35),
+  add-rooms,
+  connect-rooms,
+  draw-dungeon)

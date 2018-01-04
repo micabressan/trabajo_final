@@ -1,0 +1,495 @@
+#  Display (String) (No spaces or enchantment will break)
+#    Determines how will enchantment look in item lore 
+
+#  Applies-to (String)
+#    Display used in Custom Enchantment books for %description% variable
+
+#  Group (Setting)
+#    INFO: Create enchantment groups in config.yml under enchanter configuration.
+#   Enchantment groups are used for enchanter, to sell specific type books. You can group them
+#   and add a group-wide color, then obtain it with variable %group-color% (shown in example enchantments below).
+
+#  Type (Setting)
+#    Decides type of the enchantment. Types:
+#    - EFFECT_STATIC : Gives permanent potion effect (as long as armor piece is worn)
+#    - ATTACK : Effects run only when attacking another player
+#    - DEFENSE : Effects run only when being attacked
+#    - MINING : Gives effects when block is mined
+#    - HELD : Effects given when item is held
+#    - ATTACK_MOB : Gives effects when player attacks mob
+#    - KILL_MOB : Effects given when attacked mob is killed
+#    - BOW : Effects given when player is shot by another player
+#    - KILL_PLAYER : Effects given when attacker kills a player
+#    - DEATH : Runs when player dies due to another player.
+#    - RIGHT_CLICK : Runs when player right clicks held item
+
+#  Applies (Material)
+#    Determines which items will have the effects
+#    Latest Materials list: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#    NOTICE: You can use "LEATHER_ARMOR, IRON_ARMOR, CHAIN_ARMOR, GOLD_ARMOR or DIAMOND_ARMOR" to
+#    to instantly add availablity for all specific armor type pieces.
+#    Use "ALL_ARMOR" to add all armor pieces.
+#    Use "ALL_HELMET" to add all helmets
+#    Use "ALL_CHESTPLATE" to add all chestplates
+#    Use "ALL_BOOTS" to add all boots
+#    Use "ALL_SWORD" to add all swords
+#    Use "ALL_PICKAXE" to add all pickaxes
+#    Use "ALL_AXE" to add all axes
+#    And so on, but make sure to use non plural names of items!
+
+#  Levels (Numbers)
+#    Effects for each level, use as display in examples.
+
+#  Effects (Custom Effects, Potion Effects)
+#    List of effects enchantment will have
+#    Possible effects:
+#        *** POTION EFFECTS, for EFFECT_STATIC, HELD ***
+#      - FAST_DIGGING:(level) (Haste)
+#      - SPEED:(level) (Speed)
+#      - NIGHT_VISION:(level) (Night Vision)
+#      - JUMP:(level) (Jump boost)
+#      - REGENERATION:(level) (Regen)
+#      - FIRE_RESISTANCE:(level) (Fire Resistance)
+#      - DAMAGE_RESISTANCE:(level) (Damage Resistance)
+#      - WATER_BREATHING:(level) (Water Breathing, Aqua)
+#      - SATURATION:(level) (Saturation)
+#      - HEALTH_BOOST:(level) (Health Boost)
+#      - INCREASE_DAMAGE:(level) (Strength)
+#      - BLINDNESS:(level) (Blindness)
+#      - CONFUSION:(level) (Nausea)
+#      - HARM:(level) (Harm)
+#      - HUNGER:(level) (Hunger)
+#      - POISON:(level) (Poison)
+#      - SLOW:(level) (Slowness)
+#      - SLOW_DIGGING:(level) (Mining Fatigue)
+#      - WEAKNESS:(level) (Weakness)
+#      - WITHER:(level) (Wither)
+#         # You may use <POTION EFFECT>:(level):(lenght in seconds) for ATTACK, DEFENSE, ATTACK_MOB, DEATH, and KILL_MOB
+#        *** Custom Effects ***
+#      - FLY (Let player fly, used in HELD and EFFECT_STATIC)
+#      - STEAL_HEALTH:(number) (Steal health from other player, used in ATTACK, BOW and DEFENSE types)
+#      - MORE_DROPS:(number) (Multiply drops by number of times, used in KILL_MOB and MINING type)
+#      - MORE_EXP:(number) (Give more exp, number of how many more exp orbs (4 exp each), used in KILL_MOB, BOW, DEATH, KILL_PLAYER, MINING, ATTACK_MOB, ATTACK)
+#      - FLAME:(number) (Set user on fire, for number of seconds, used in ATTACK, BOW, ATTACK_MOB and DEFENSE types)
+#      - TNT (Spawn ignited tnt, used in ATTACK, BOW, DEFENSE, ATTACK_MOB, DEATH, MINING and KILL_MOB)
+#      - REPAIR (Item in hand will be fixed, used in ATTACK, DEFENSE, ATTACK_MOB, DEATH, MINING, KILL_MOB, BOW, RIGHT_CLICK)
+#      - ADD_HEALTH:(number) (Heals player for number of health, reminder: 1 = 0.5 heart. For ATTACK, BOW, DEFENSE, KILL_PLAYER, DEATH, ATTACK_MOB, MINING, KILL_MOB, RIGHT_CLICK)
+#      - CURE:(potion effect) (Removes potion effect from player. For ATTACK, KILL_PLAYER, BOW, DEFENSE, ATTACK_MOB, DEATH, MINING, KILL_MOB, RIGHT_CLICK)
+#      - SPAWN_GUARD (Spawn an iron golem which will attack player's opponent, used in ATTACK, KILL_PLAYER, DEATH, BOW, DEFENSE, RIGHT_CLICK)
+#      - PLAYER_COMMAND:(command) (Make the player execute the command, has %name% variable for player name, does not need slash before the command. For all types except HELD)
+#        * example: 'PLAYER_COMMAND:say Hi, my name is %name%'
+#      - CONSOLE_COMMAND:(command) (Execute command from console, has %name% variable for player name, does not need slash before the command. For all types except HELD)
+#      - MESSAGE:(text) (Send player a message, has %name% variable for player name. For all types except HELD)
+#      - ADD_HARM:(number) (Removes number of hearts from player, for ATTACK, BOW, DEFENSE, KILL_PLAYER, DEATH, ATTACK_MOB, MINING, KILL_MOB, RIGHT_CLICK)
+#      - LIGHTNING (Strikes a lightning upon the player, for ATTACK, BOW, DEFENSE, KILL_PLAYER, DEATH, ATTACK_MOB and KILL_MOB)
+#      - TRENCH:(number) (Mines in radius (eg. 3x3x3). Supports ODD numbers only (3, 5, 7, etc.), for MINING) 
+#        * IMPORTANT: This uses WorldGuard/Faction plugins injection for block mining.
+#      - KEEP_ON_DEATH (Keeps item on death (soulbind), works for armor only. For DEATH).
+#      - IGNORE_ARMOR (Ignores armor damage reduction, for ATTACK and BOW).
+#      - DOUBLE_DAMAGE (Deals double damage to victim, for ATTACK) and BOW.
+#      - ADD_FOOD:(number) (Lowers hunger, adds food. 1 hunger bar = 2) (For all effects except HELD and EFFECT_STATIC)
+#      - KILL_MOB (Kill mob in 1 hit) (For ATTACK_MOB)
+#      - SMELT (Smelt mined block) (For MINING)
+#      - STOP_ATTACK (Stop attack removing all damage done) (For ATTACK and DEFENSE)
+#      - GUARD:(mob type):(amount) (Spawn any type of mob that will act as a guard and attack enemy, used in ATTACK, KILL_PLAYER, DEATH, BOW and DEFENSE)
+#        List of possible entities: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#      - TP_DROPS (Teleport mined block drops to inventory) (For MINING)
+#      - PARTICLE:(TYPE):(AMOUNT):(SIZE) (Spawn particles at player's/entity's location) (For all effects except HELD, EFFECT_STATIC)
+#      - DROP_HEAD (Drops player's head) (For ATTACK, KILL_PLAYER, DEATH, DEFENSE)
+#      - EXTINGUISH (Extinguish players) (For all effects except HELD, EFFECT_STATIC)
+#      - EXTRA_DAMAGE:(number) (Deal more damage to players, 1 = 0.5 heart) (For ATTACK)
+
+#        # You can use tags <random number>x-y</random number> while x < y, it will generate a random number between two given integers. 
+#        # e.g.: STEAL_MONEY:<random number>10000-50000</random number>
+
+#        # You can put %victim-name%, %attacker-name% in MESSAGE, CONSOLE/PLAYER_COMMAND to put victim's/attacker's names.
+
+#        # You also may use %victim% or %attacker% flag to give effects to different players (in ATTACK, BOW, DEATH, KILL_PLAYER and DEFENSE types).
+#        # Example usage: - 'POISON:1:5 %attacker%', this will give Level 1 POISON potion effect to the player who attacked.
+#        # If none is provided, effects will be given to the player who had custom enchanted item.
+#        # You can add %combo% instead of numbers, to use number of combo's player has (eg. to limit combo number: '%combo% > 0 && %combo% < 5 : %continue%')
+#        # You can add %damage% instead of numbers, to use number of damage has been done (for ATTACK and DEFENSE)
+
+#  Chance (Number)
+#    Chance of effect occuring
+
+#  Cooldown (number)
+#    Number of effect cooldown, in seconds.
+
+# Conditions
+#   Conditions let you choose under what circumstances enchantment should be activated/stopped or chance increased/descreased
+#
+#   « Examples »
+#      ► '%victim health% > 5 : %stop%' (Will not activate effects if player's health is higher than 2.5 hearts (1 heart = 2)
+#      ► '%player world% = my_world : %allow%' (If player is in world called "my_world", the enchantment will activate)
+#      ► '%player y% < 30 && %player health% > 10 =  : %chance%+10' (If player's Y level is less than 30 and health is more than 5 hearts, it 7
+#      will increase chance of effects activating by 10)
+#      ► '%victim health% > %attacker health% : %force%' (If victim has more health than attacker, effects will be forced to run
+#      ignoring probability chance of it activating).
+#
+#   « Variables for conditional part »
+#    %player health%, %player food%, %player_world%, %player_name%, %player x, %player y%, %player z%, %near players% (number)
+#    You can also replace "player" with attacker/victim for ATTACK, BOW, DEATH, DEFENSE and KILL_PLAYER enchantment types.
+#    %block x%, %block y% and %block z% can be used for MINING enchantment type. %combo%, %attacker combo% and %victim combo% can
+#    be used to define how many combo's player has. You can also use %is sneaking% as well as %attacker is sneaking%, %victim is sneaking% 
+#    (eg. %is sneaking% = true : %continue%) As well as %is on fire%, can be used with %victim/attacker is on fire% (returns true/false)
+#    You can use %mob type% variable for KILL_MOB and ATTACK_MOB, to get mob in the event, e.g.: (CREEPER, CAVE_SPIDER, ZOMBIE)
+#    %block type% - Mined block type, find all block types at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#
+#   « Variables for end solution »
+#   %force% (forces effect to activate ignoring chance), %continue% (let's the effect reading continue, takes chance in consideration),
+#   %stop% (ignores all of the effects), %chance%+x (increases chance by x%), %chance-x% (decreases chance by x%)
+  
+# « Example configuration »
+#lastchance:    <-- Enchantment name
+#  display: '%group-color%Last Chance'    <-- Display in item lore
+#  description: 'Has a chance to heal when on low hearts'    <-- Enchantment Description
+#  applies-to: 'Chestplate'    <-- What applies to (display purposes)
+#  type: 'DEFENSE'    <-- Enchantment type (controls when enchantment activates)
+#  group: 'DEFAULT'    <-- Enchantment group (For enchanter and right-click random books)
+#  applies:    <-- List of items that it applies
+#    - ALL_CHESTPLATE    <-- Item(s) list
+#  levels:    < -- All Levels are under here
+#    1:     <-- Level indicator
+#      chance: 30    <-- Chance for enchantment to activate
+#      condition: '%victim health% > 5 : %stop%'    <-- Condition (read more about it at Conditions)
+#      effects:    <-- All enchantment effects
+#        - 'ADD_HEALTH:2 %victim%'    <-- Effect(s) list
+
+guardian:
+  display: '%group-color%Guardian'
+  description: 'Spawns a guard, which attacks your enemy'
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 10
+      cooldown: 10
+      effects:
+        - 'SPAWN_GUARD'
+deathbringer:
+  display: '%group-color%DeathBringer'
+  description: 'Has a chance to give Strength upon getting attacked'
+  applies-to: 'Chestplate'
+  type: 'DEFENSE'
+  group: 'DEFAULT'
+  applies:
+    - LEATHER_CHESTPLATE
+    - IRON_CHESTPLATE
+    - GOLD_CHESTPLATE
+    - DIAMOND_CHESTPLATE
+  levels:
+    1:
+      chance: 15
+      effects:
+        - 'STRENGTH:0:5'
+    2:
+      chance: 10
+      effects:
+        - 'STRENGTH:1:5'
+    3:
+      chance: 8
+      effects:
+        - 'STRENGTH:2:3'
+enlightened:
+  display: '%group-color%Enlightened'
+  description: 'Has a chance to give health upon getting attacked'
+  applies-to: 'Chestplate'
+  type: 'DEFENSE'
+  group: 'UNIQUE'
+  applies:
+    - LEATHER_CHESTPLATE
+    - IRON_CHESTPLATE
+    - GOLD_CHESTPLATE
+    - DIAMOND_CHESTPLATE
+  levels:
+    1:
+      chance: 35
+      effects:
+        - 'HEAL:1'
+    2:
+      chance: 20
+      effects:
+        - 'HEAL:3'
+glow:
+  display: '%group-color%Glow'
+  description: 'Unlimited nightvision'
+  applies-to: 'Helmet'
+  type: 'EFFECT_STATIC'
+  group: 'UNIQUE'
+  applies:
+    - LEATHER_HELMET
+    - IRON_HELMET
+    - GOLD_HELMET
+    - DIAMOND_HELMET
+  levels:
+    1:
+      effects:
+        - 'NIGHT_VISION:0'
+frozen:
+  display: '%group-color%Frozen'
+  description: 'Has a chance to temporarily freeze opponent'
+  applies-to: 'Armor'
+  type: 'DEFENSE'
+  group: 'DEFAULT'
+  applies:
+    - ALL_ARMOR
+  levels:
+    1:
+      chance: 5
+      cooldown: 20
+      effects:
+        - 'SLOW:1:5 %attacker%'
+gears:
+  display: '%group-color%Gears'
+  description: 'Eternal speed boost'
+  applies-to: 'Boots'
+  type: 'EFFECT_STATIC'
+  group: 'DEFAULT'
+  applies:
+    - LEATHER_BOOTS
+    - IRON_BOOTS
+    - GOLD_BOOTS
+    - DIAMOND_BOOTS
+  levels:
+    1:
+      effects:
+        - 'SPEED:0'
+    2:
+      effects:
+        - 'SPEED:1'
+springs:
+  display: '%group-color%Springs'
+  description: 'Eternal jump boost'
+  applies-to: 'Boots'
+  type: 'EFFECT_STATIC'
+  group: 'DEFAULT'
+  applies:
+    - LEATHER_BOOTS
+    - IRON_BOOTS
+    - GOLD_BOOTS
+    - DIAMOND_BOOTS
+  levels:
+    1:
+      effects:
+        - 'JUMP:0'
+    2:
+      effects:
+        - 'JUMP:1'
+vampire:
+  display: '%group-color%Vampire'
+  description: 'Steal health'
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 15
+      effects:
+        - 'STEAL_HEALTH:1'
+    2:
+      chance: 10
+      effects:
+        - 'STEAL_HEALTH:3'
+poison:
+  display: '%group-color%Poison'
+  description: 'Chance to poison other player'
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 20
+      cooldown: 10
+      effects:
+        - 'POISON:0:5 %victim%'
+    2:
+      chance: 10
+      cooldown: 20
+      effects:
+        - 'POISON:1:5 %victim%'
+    3:
+      chance: 7
+      cooldown: 30
+      effects:
+        - 'POISON:2:10 %victim%'
+ice:
+  display: '%group-color%Ice'
+  description: 'Chance to give other player slowness'
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 20
+      cooldown: 10
+      effects:
+        - 'SLOWNESS:2:3 %victim%'
+blind:
+  display: '%group-color%Blind'
+  description: 'Chance to blind your opponent'
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 20
+      cooldown: 10
+      effects:
+        - 'BLINDNESS:0:5 %victim%'
+inquisitive:
+  display: '%group-color%Inquisitive'
+  description: 'More exp. from mobs'
+  applies-to: 'Swords'
+  type: 'KILL_MOB'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 40
+      effects:
+        - 'MORE_EXP:1'
+    2:
+      chance: 30
+      effects:
+        - 'MORE_EXP:2'
+    3:
+      chance: 20
+      effects:
+        - 'MORE_EXP:3'
+    4:
+      chance: 15
+      effects:
+        - 'MORE_EXP:4'
+    5:
+      chance: 10
+      effects:
+        - 'MORE_EXP:5'
+boom:
+  display: '%group-color%Boom'
+  description: 'Spawn TNT when attacking other players'
+  applies-to: 'Swords'
+  type: 'ATTACK_MOB'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      chance: 20
+      cooldown: 10
+      effects:
+        - 'TNT:1'
+explosive:
+  display: '%group-color%Explosive'
+  description: 'Explosive mining'
+  applies-to: 'Pickaxes'
+  type: 'MINING'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_PICKAXE
+    - STONE_PICKAXE
+    - IRON_PICKAXE
+    - DIAMOND_PICKAXE
+    - GOLD_PICKAXE
+  levels:
+    1:
+      chance: 20
+      cooldown: 5
+      effects:
+        - 'TNT:1'
+haste:
+  display: '%group-color%Haste'
+  description: 'Haste 2 effect whilst holding the item'
+  applies-to: 'Pickaxes'
+  type: 'HELD'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_PICKAXE
+    - STONE_PICKAXE
+    - IRON_PICKAXE
+    - DIAMOND_PICKAXE
+    - GOLD_PICKAXE
+  levels:
+    1:
+      effects:
+        - 'FAST_DIGGING:1'
+fast:
+  display: '%group-color%Fast'
+  description: 'Speed effect while holding the item'
+  applies-to: 'Swords'
+  type: 'HELD'
+  group: 'DEFAULT'
+  applies:
+    - WOOD_SWORD
+    - STONE_SWORD
+    - IRON_SWORD
+    - GOLD_SWORD
+    - DIAMOND_SWORD
+  levels:
+    1:
+      effects:
+        - 'SPEED:0'
+    2:
+      effects:
+        - 'SPEED:1'
+lastchance:
+  display: '%group-color%Last Chance'
+  description: 'Has a chance to heal when on low hearts'
+  applies-to: 'Chestplate'
+  type: 'DEFENSE'
+  group: 'DEFAULT'
+  applies:
+    - ALL_CHESTPLATE
+  levels:
+    1:
+      chance: 30
+      condition: '%victim health% > 5 : %stop%'
+      effects:
+        - 'ADD_HEALTH:2 %victim%'
+souleater:
+  display: '%group-color%Soul Eater'
+  description: "Chance to give opponent wither effect\n&dRequires &n2 &dsouls"
+  applies-to: 'Swords'
+  type: 'ATTACK'
+  group: 'DEFAULT'
+  applies:
+    - ALL_SWORD
+  levels:
+    1:
+      chance: 10
+      souls: 2
+      effects:
+        - 'WITHER:5:5 %victim%'

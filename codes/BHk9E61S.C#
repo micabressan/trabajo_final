@@ -1,0 +1,31 @@
+private static void UsersAndProducts(AppContext context)
+        {
+            var users = context
+                .Users
+                .Where(u => u.SoldProducts.Any(p => p.BuyerId != null))
+                .Select(u => new
+                {
+                    firstName = u.FirstName,
+                    lastName = u.LastName,
+                    age = u.Age,
+                    soldProducts = new
+                    {
+                        count = u.SoldProducts.Count(),
+                        products = u.SoldProducts.Select(p => new
+                        {
+                            name = p.Name,
+                            price = p.Price
+                        })
+                    }
+                });
+
+            var usersFinal = new
+            {
+                usersCount = users.Count(),
+                users = users
+            };
+
+            var jsonUsers = JsonConvert.SerializeObject(usersFinal, Formatting.Indented);
+
+            File.WriteAllText("users-and-products.json", jsonUsers);
+        }

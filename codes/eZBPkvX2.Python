@@ -1,0 +1,113 @@
+# # # !/usr/bin/python
+# # # -*- coding: utf-8 -*-
+# #
+# # import numpy as np
+# # import cv2
+# #
+# # cap = cv2.VideoCapture('Traffic_small.mp4')  # nuskaitymas iš failo
+# # # cap = cv2.VideoCapture(0) # nuskaitymas iš internetinės kameros
+# #
+# # while (1):
+# #     ret, frame = cap.read()  # nuskaitomas vaizdo kadras,
+# #
+# #     if ret == True:
+# #
+# #         cv2.imshow('Video', frame)
+# #
+# #         k = cv2.waitKey(7) & 0xff
+# #         if k == 27:
+# #             break
+# #         else:
+# #             cv2.imwrite(chr(k) + ".jpg", frame)
+# #
+# #     else:
+# #         break
+# #
+# # cv2.destroyAllWindows()
+# # cap.release()
+#
+# # !/usr/bin/python
+# # -*- coding: utf-8 -*-
+#
+# import numpy as np
+# import cv2
+#
+# # cap = cv2.VideoCapture('Traffic_video.mp4')
+# cap = cv2.VideoCapture('Traffic_small.mp4')
+# ret, frame = cap.read()
+#
+# _, w, h = frame.shape[::-1]
+#
+# # Video įrašymui nurodomas kodekas ir sukuriamas VideoWriter objektas
+# fourcc = cv2.VideoWriter_fourcc(*'X264')
+# out = cv2.VideoWriter('output.avi',fourcc, 20.0, (w,h))
+#
+# while(1):
+#     ret ,frame = cap.read()
+#
+#     if ret == True:
+#         frame = cv2.flip(frame,0) # apverčiamas vaizdo kadras
+#
+#         # įrašomas apverstas kadras
+#         out.write(frame)
+#         cv2.imshow('Video',frame)
+#
+#         k = cv2.waitKey(60) & 0xff
+#         if k == 27:
+#             break
+#         else:
+#             cv2.imwrite(chr(k)+".jpg",frame)
+#
+#     else:
+#         break
+#
+# cv2.destroyAllWindows()
+# cap.release()
+# out.release()
+
+
+import numpy as np
+import cv2
+
+cap = cv2.VideoCapture('Traffic_video.mp4')
+car_cascade = cv2.CascadeClassifier('cars.xml') # nurodomas failas su Haar klasifikatoriais
+
+
+def setLabel(im, label, x,y):
+    fontface = cv2.FONT_HERSHEY_SIMPLEX
+    scale = 1
+    thickness = 1
+    baseline = 0
+
+    res = cv2.getTextSize(label, fontface, scale, thickness)
+    width = res[0][0]
+    height = res[0][1]
+    baseline = res[1]
+    cv2.rectangle(im, (x, y), (x + width, y + height), (0,0,0), -1)
+    cv2.putText(im, label, (x, y + height), fontface, scale, (255,255,255), thickness, 8)
+
+framenr = 1
+while (1):
+    ret, frame = cap.read()
+
+    if ret == True:
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        cars = car_cascade.detectMultiScale(gray)
+
+        for (x, y, w, h) in cars:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        setLabel(frame, str(framenr), 0, 0)
+        cv2.imshow('Video', frame)
+
+        k = cv2.waitKey(15) & 0xff
+        if k == 27:
+            break
+        else:
+            cv2.imwrite(chr(k) + ".jpg", frame)
+            framenr = framenr + 1
+    else:
+        break
+
+cv2.destroyAllWindows()
+cap.release()

@@ -1,0 +1,131 @@
+(12288, ?) (6, ?)
+(12288, 32) (6, 32)
+---------------------------------------------------------------------------
+InvalidArgumentError                      Traceback (most recent call last)
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in _do_call(self, fn, *args)
+   1138     try:
+-> 1139       return fn(*args)
+   1140     except errors.OpError as e:
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in _run_fn(session, feed_dict, fetch_list, target_list, options, run_metadata)
+   1120                                  feed_dict, fetch_list, target_list,
+-> 1121                                  status, run_metadata)
+   1122 
+
+/opt/conda/lib/python3.6/contextlib.py in __exit__(self, type, value, traceback)
+     88             try:
+---> 89                 next(self.gen)
+     90             except StopIteration:
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/framework/errors_impl.py in raise_exception_on_not_ok_status()
+    465           compat.as_text(pywrap_tensorflow.TF_Message(status)),
+--> 466           pywrap_tensorflow.TF_GetCode(status))
+    467   finally:
+
+InvalidArgumentError: Matrix size-incompatible: In[0]: [6,12], In[1]: [32,12288]
+	 [[Node: MatMul_2 = MatMul[T=DT_FLOAT, transpose_a=false, transpose_b=false, _device="/job:localhost/replica:0/task:0/cpu:0"](W3/read, transpose_2)]]
+
+During handling of the above exception, another exception occurred:
+
+InvalidArgumentError                      Traceback (most recent call last)
+<ipython-input-103-2c68703f194c> in <module>()
+----> 1 parameters = model(X_train, Y_train, X_test, Y_test)
+
+<ipython-input-102-042b84ddb418> in model(X_train, Y_train, X_test, Y_test, learning_rate, num_epochs, minibatch_size, print_cost)
+     75                 # Run the session to execute the "optimizer" and the "cost", the feedict should contain a minibatch for (X,Y).
+     76                 ### START CODE HERE ### (1 line)
+---> 77                 _ , minibatch_cost = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
+     78                 ### END CODE HERE ###
+     79                 print(minibatch_cost)
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in run(self, fetches, feed_dict, options, run_metadata)
+    787     try:
+    788       result = self._run(None, fetches, feed_dict, options_ptr,
+--> 789                          run_metadata_ptr)
+    790       if run_metadata:
+    791         proto_data = tf_session.TF_GetBuffer(run_metadata_ptr)
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in _run(self, handle, fetches, feed_dict, options, run_metadata)
+    995     if final_fetches or final_targets:
+    996       results = self._do_run(handle, final_targets, final_fetches,
+--> 997                              feed_dict_string, options, run_metadata)
+    998     else:
+    999       results = []
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in _do_run(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)
+   1130     if handle is None:
+   1131       return self._do_call(_run_fn, self._session, feed_dict, fetch_list,
+-> 1132                            target_list, options, run_metadata)
+   1133     else:
+   1134       return self._do_call(_prun_fn, self._session, handle, feed_dict,
+
+/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py in _do_call(self, fn, *args)
+   1150         except KeyError:
+   1151           pass
+-> 1152       raise type(e)(node_def, op, message)
+   1153 
+   1154   def _extend_graph(self):
+
+InvalidArgumentError: Matrix size-incompatible: In[0]: [6,12], In[1]: [32,12288]
+	 [[Node: MatMul_2 = MatMul[T=DT_FLOAT, transpose_a=false, transpose_b=false, _device="/job:localhost/replica:0/task:0/cpu:0"](W3/read, transpose_2)]]
+
+Caused by op 'MatMul_2', defined at:
+  File "/opt/conda/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/conda/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/__main__.py", line 3, in <module>
+    app.launch_new_instance()
+  File "/opt/conda/lib/python3.6/site-packages/traitlets/config/application.py", line 658, in launch_instance
+    app.start()
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/kernelapp.py", line 474, in start
+    ioloop.IOLoop.instance().start()
+  File "/opt/conda/lib/python3.6/site-packages/zmq/eventloop/ioloop.py", line 177, in start
+    super(ZMQIOLoop, self).start()
+  File "/opt/conda/lib/python3.6/site-packages/tornado/ioloop.py", line 887, in start
+    handler_func(fd_obj, events)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/stack_context.py", line 275, in null_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py", line 440, in _handle_events
+    self._handle_recv()
+  File "/opt/conda/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py", line 472, in _handle_recv
+    self._run_callback(callback, msg)
+  File "/opt/conda/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py", line 414, in _run_callback
+    callback(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/tornado/stack_context.py", line 275, in null_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/kernelbase.py", line 276, in dispatcher
+    return self.dispatch_shell(stream, msg)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/kernelbase.py", line 228, in dispatch_shell
+    handler(stream, idents, msg)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/kernelbase.py", line 390, in execute_request
+    user_expressions, allow_stdin)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/ipkernel.py", line 196, in do_execute
+    res = shell.run_cell(code, store_history=store_history, silent=silent)
+  File "/opt/conda/lib/python3.6/site-packages/ipykernel/zmqshell.py", line 501, in run_cell
+    return super(ZMQInteractiveShell, self).run_cell(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/IPython/core/interactiveshell.py", line 2717, in run_cell
+    interactivity=interactivity, compiler=compiler, result=result)
+  File "/opt/conda/lib/python3.6/site-packages/IPython/core/interactiveshell.py", line 2821, in run_ast_nodes
+    if self.run_code(code, result):
+  File "/opt/conda/lib/python3.6/site-packages/IPython/core/interactiveshell.py", line 2881, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "<ipython-input-103-2c68703f194c>", line 1, in <module>
+    parameters = model(X_train, Y_train, X_test, Y_test)
+  File "<ipython-input-102-042b84ddb418>", line 39, in model
+    Z3 = forward_propagation(X, parameters)
+  File "<ipython-input-82-4bead613d0d0>", line 30, in forward_propagation
+    Z3 = tf.add(tf.matmul(W3,tf.transpose(X)),b3)                                                # Z3 = np.dot(W3,Z2) + b3
+  File "/opt/conda/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py", line 1816, in matmul
+    a, b, transpose_a=transpose_a, transpose_b=transpose_b, name=name)
+  File "/opt/conda/lib/python3.6/site-packages/tensorflow/python/ops/gen_math_ops.py", line 1217, in _mat_mul
+    transpose_b=transpose_b, name=name)
+  File "/opt/conda/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py", line 767, in apply_op
+    op_def=op_def)
+  File "/opt/conda/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 2506, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/opt/conda/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1269, in __init__
+    self._traceback = _extract_stack()
+
+InvalidArgumentError (see above for traceback): Matrix size-incompatible: In[0]: [6,12], In[1]: [32,12288]
+	 [[Node: MatMul_2 = MatMul[T=DT_FLOAT, transpose_a=false, transpose_b=false, _device="/job:localhost/replica:0/task:0/cpu:0"](W3/read, transpose_2)]]

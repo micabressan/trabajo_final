@@ -1,0 +1,44 @@
+defmodule NdtlinkWeb.ApiController do
+  @moduledoc """
+    API Main Controller
+  """
+  use NdtlinkWeb, :controller
+  alias Ndtlink.Guardian
+  alias Ndtlink.Accounts
+  alias Ndtlink.Accounts.User
+
+  @doc """
+    Renders the API public status JSON response 
+  """
+  def index(conn, _params) do
+    %Plug.Conn{:remote_ip => remote_ip} = conn
+
+    app_info = %{
+      version: Application.get_env(:ndtlink, :version),
+      version_name: Application.get_env(:ndtlink, :version_name),
+      description: Application.get_env(:ndtlink, :description),
+      time: System.os_time(:seconds),
+      remote_ip: remote_ip
+    }
+
+    render conn, "index.json", app_info
+  end
+
+  # Authentication Functions
+
+  def sign_in(conn, %{username: username, password: password}) do
+
+    case Accounts.get_user!(username, password) do
+      {:ok, user} -> conn |> Guardian.Plug.sign_in(user) |> send_resp(204, "")
+      {:error, _} -> send_resp(conn, 404, "")
+    end
+    
+  end
+
+  def sign_out(conn, _params) do
+    conn
+    |> Guardian.Plug.sign_out()
+    |> send_resp(204, "")
+  end  
+
+end

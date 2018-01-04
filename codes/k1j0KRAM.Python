@@ -1,0 +1,53 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, relationship, backref
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, Numeric, String, Enum, ForeignKey
+import enum
+import somestuff
+
+my_database = 'mysql+mysqldb://root:'+ somestuff.mysql_pass +'@localhost/grocerylist'
+engine = create_engine(my_database, echo = True)
+
+connection = engine.connect()
+
+Base = declarative_base()
+session = sessionmaker(bind=engine)
+
+class MyEnum(enum.Enum):
+    szt = "szt"
+    kg = "kg"
+
+class Category(Base):
+    __tablename__ = 'category'
+    id = Column(Integer, primary_key=True)
+    category_name = Column(String(25), nullable=False)
+
+class Product(Base):
+    __tablename__ = 'product'
+    product_id = Column(Integer, primary_key=True)
+    product_name = Column(String(30), nullable=False)
+    product_quantity = Column(Integer, nullable=False)
+    product_type = Column(Enum(MyEnum), nullable=False)
+    category_id = Column(Integer, ForeignKey('category.id'))
+    product_description = Column(String(255))
+
+    categories = relationship("Category",
+                              backref=backref('product', uselist=False))
+
+Base.metadata.create_all(engine)
+
+session = session()
+
+cc_category = Category(category_name="warzywa")
+
+cc_product = Product(product_name="cucumber",
+                     product_quantity=1,
+                     product_type="kg",
+                     category_id=1,
+                     product_description="For the salad"
+                     )
+
+session.add(cc_category)
+session.add(cc_product)
+
+session.commit()

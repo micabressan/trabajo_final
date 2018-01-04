@@ -1,0 +1,15 @@
+obrot
+	"obraca figure o 90 stopni"
+	|newKwadrat x y indeks tmpwierzcholki|
+	newKwadrat:=(Kwadrat new) initialize: bok.
+	indeks:=1.
+	tmpwierzcholki:=self getWierzcholki.
+	
+	tmpwierzcholki do: [:wierzcholek|
+		x := 0-(wierzcholek y).
+		y:= wierzcholek x.
+		tmpwierzcholki at: indeks put: x@y.
+		indeks:= indeks + 1.
+	].
+	newKwadrat setWierzchołki: tmpwierzcholki.
+	^newKwadrat

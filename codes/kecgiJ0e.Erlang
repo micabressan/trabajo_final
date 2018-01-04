@@ -1,0 +1,17 @@
+defmodule S3Controller do
+  
+  ...
+
+  @bucket "bucket"
+  @config_options %{ region: "your-region" }
+  @presign_options [virtual_host: true, query_options: [{"x-amz-acl", "public-read"}]]
+
+  def get_presigned(conn, %{"objectName" => object_name}) do
+    {:ok, url} =
+      ExAws.Config.new(:s3, @config_options)
+      |> ExAws.S3.presigned_url(:put, @bucket, "/original/" <> object_name, @presign_options)
+
+    conn
+    |> render("presigned.json", url: url)
+  end
+end

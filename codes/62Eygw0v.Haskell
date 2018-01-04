@@ -1,0 +1,7 @@
+roundSqrt :: Integral -> Integral
+roundSqrt x = floor (sqrt (fromIntegral x))  
+
+
+isPrime :: Integral t => t -> Bool
+isPrime n = [i | i <- [2..k], n `mod` i == 0] == []
+	    where k =  roundSqrt(n)

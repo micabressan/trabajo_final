@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Permissions;
+using System.Text;
+using System.IO;
+
+namespace M3U_Generator
+{
+    class Program
+    {
+        private static List<string> _files = new List<string>(); 
+        static void Main(string[] args)
+        {
+            string initialDir;
+
+            while (true)
+            {
+                Console.WriteLine("Enter a folder to scan:");
+                initialDir = Console.ReadLine();
+
+                if (Directory.Exists(initialDir))
+                {
+                    break;
+                }
+                //Console.Clear();
+            }
+
+            foreach (string dir in Directory.EnumerateDirectories(initialDir))
+            {
+                if(dir.StartsWith(initialDir + "\\$")) continue;
+                if(dir == initialDir + "\\Boot") continue;
+                if (dir == initialDir + "\\System Volume Information") continue;
+                BuildFileForDirectory(dir);
+                Console.WriteLine(dir);
+            }
+
+            Console.ReadLine();
+        }
+
+        private static void BuildFileForDirectory(string dir)
+        {
+            try
+            {
+                foreach (string file in Directory.EnumerateFiles(dir))
+                {
+                    Console.WriteLine("\t" + file);
+                    if(!file.EndsWith(".mp3") && !file.EndsWith(".aac"))
+                    {
+                        File.Delete(file);
+                        continue;
+                    }
+                    
+                    
+                }
+                foreach (string d in Directory.EnumerateDirectories(dir))
+                {
+                    BuildFileForDirectory(dir);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("\tAccess Denied");
+            }
+        }
+    }
+}

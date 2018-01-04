@@ -1,0 +1,23 @@
+{-
+ - Doesn't work:
+ - You're trying to combine the list monad and the IO monad in one do block.
+ -}
+-- main = do
+--   x <- [1..100]
+--   putStrLn $ (show x) ++ " -> " ++ (show $ f x)
+
+{-
+ - Solution: Use monad transformers.
+ - Monad transformers kinda let you build up a stack of monads you can all use
+ - at the same time. Here, I'm using the ListT monad transformer (which is also
+ - a monad itself) from Control.Monad.Trans.List.
+ -}
+import Control.Monad
+import Control.Monad.Trans
+import Control.Monad.Trans.List
+
+main = void $ runListT $ do
+  x <- ListT $ mapM return [1..100]
+  lift $ putStrLn $ (show x) ++ " -> " ++ (show $ f x)
+
+f = even -- for testing

@@ -1,0 +1,8 @@
+			string test = "";
+
+            while(test != "jeden" && test != "dwa")
+            {
+                Console.WriteLine("Podaj jeden albo dwa");
+                test = Convert.ToString(Console.ReadLine());
+            }
+            Console.ReadKey();

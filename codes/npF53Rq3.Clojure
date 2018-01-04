@@ -1,0 +1,2 @@
+user> (.. net.java.games.input.ControllerEnvironment getDefaultEnvironment getControllers)
+java.lang.ClassCastException: net.java.games.input.LinuxMouse cannot be cast to net.java.games.input.LinuxAbstractController

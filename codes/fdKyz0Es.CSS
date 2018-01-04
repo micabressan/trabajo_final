@@ -1,0 +1,12 @@
+content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: url(http://www.doughreme.in/wp-content/uploads/2017/12/drm-divider-style-2.png);
+    z-index: 99999;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-position: bottom left;
+    background-size: contain;

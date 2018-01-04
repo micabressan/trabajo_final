@@ -1,0 +1,38 @@
+#CSS
+ 
+.mainBackground  img{
+  display:flex;
+  margin:auto;
+  }
+ 
+  .transbox {
+      position:absolute;
+      background:rgba(255,255,255,0.4);
+      top:60%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      padding:35px;
+      text-align:center;
+      font-family: georgia;
+}
+.transbox p{
+    font-size: 40px;
+}
+.overlay {
+    margin-bottom:10px;
+    position:relative;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+}
+.overlay:hover {
+    background:rgba(0,0,0,0.5);
+}
+.overlay p {
+    position: absolute;
+    color:#fff;
+    font:20px sans-serif;
+    width:100%;
+    top:3%;
+    text-align:center;
+}

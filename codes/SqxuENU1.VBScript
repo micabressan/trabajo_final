@@ -1,0 +1,99 @@
+Sub GetFromInbox()
+
+Dim olAccount As Account
+Dim olStore As Outlook.Store
+Dim olApp As Outlook.Application
+Dim olFldr As Outlook.Folder
+Dim olPendingFldr As Outlook.Folder
+Dim olProcessedFldr As Outlook.Folder
+Dim olMail As Variant
+Dim olNs As Namespace
+Dim i As Integer
+
+Set olApp = New Outlook.Application
+Set olNs = olApp.GetNamespace("MAPI")
+For Each olAccount In Session.Accounts
+	If olAccount = "thealmanacsystem@outlook.com" Then
+		Set olStore = olAccount.DeliveryStore
+		Set olFldr = olStore.GetRootFolder.Folders("TDALERTS")
+		Set olPendingFldr = olFldr.Folders("PENDING")
+		Set olProcessedFldr = olFldr.Folders("PROCESSED")
+	End If
+Next
+
+i = ActiveSheet.Cells(1, 10).Value
+For Each olMail In olPendingFldr.Items
+    If InStr(olMail.Subject, "Alert:") > 0 Then
+		ActiveSheet.Cells(i, 1).Value = olMail.Body
+        ActiveSheet.Cells(i, 2).Value = olMail.ReceivedTime
+		Dim body as String
+		body = olMail.Body
+		body = Trim(Replace(body, "Alert: ", ""))
+		Dim splitBody() As String
+		splitBody = Split(body, ".")
+		For Each s In splitBody
+			Dim multi as Boolean
+			multi = False
+			s = Trim(Replace(s, "New symbols: ", ""))
+			s = Trim(Replace(s, "Symbol: ", ""))
+			
+			Dim secondSplit() As String
+			Dim thirdSplit() As String
+			If InStr(s, " was added to ") Then ' Singular Add
+				secondSplit = Split(s, " was added to ")
+				ActiveSheet.Cells(i, 1).Value = olMail.Body
+				ActiveSheet.Cells(i, 2).Value = olMail.ReceivedTime
+				ActiveSheet.Cells(i, 3).Value = secondSplit(0)
+				ActiveSheet.Cells(i, 4).Value = secondSplit(1)
+				ActiveSheet.Cells(i, 5).Value = "ADDED"
+			ElseIf InStr(s, " were added to ") Then ' Multi Add
+				multi = True
+				secondSplit = Split(s, " were added to ")
+				thirdSplit = Split(secondSplit(0), ", ")
+				For Each symbol In thirdSplit
+					ActiveSheet.Cells(i, 1).Value = olMail.Body
+					ActiveSheet.Cells(i, 2).Value = olMail.ReceivedTime
+					ActiveSheet.Cells(i, 3).Value = symbol
+					ActiveSheet.Cells(i, 4).Value = secondSplit(1)
+					ActiveSheet.Cells(i, 5).Value = "ADDED"
+					i = i + 1
+				Next
+			ElseIf InStr(s, " was removed from ") Then ' Singular Remove
+				secondSplit = Split(s, " was removed from ")
+				ActiveSheet.Cells(i, 1).Value = olMail.Body
+				ActiveSheet.Cells(i, 2).Value = olMail.ReceivedTime
+				ActiveSheet.Cells(i, 3).Value = secondSplit(0)
+				ActiveSheet.Cells(i, 4).Value = secondSplit(1)
+				ActiveSheet.Cells(i, 5).Value = "REMOVED"
+			ElseIf InStr(s, " were removed from ") Then ' Multi Remove
+				multi = True
+				secondSplit = Split(s, " were removed from ")
+				thirdSplit = Split(secondSplit(0), ", ")
+				For Each symbol In thirdSplit
+					ActiveSheet.Cells(i, 1).Value = olMail.Body
+					ActiveSheet.Cells(i, 2).Value = olMail.ReceivedTime
+					ActiveSheet.Cells(i, 3).Value = symbol
+					ActiveSheet.Cells(i, 4).Value = secondSplit(1)
+					ActiveSheet.Cells(i, 5).Value = "REMOVED"
+					i = i + 1
+				Next
+			End If
+		Next
+		
+		If Not multi Then
+			i = i + 1
+		End If
+		
+		olMail.Move(olProcessedFldr)
+    End If
+Next
+
+ActiveSheet.Cells(1, 10).Value = i
+Set olAccount = Nothing
+Set olApp = Nothing
+Set olNs = Nothing
+Set olFldr = Nothing
+Set olAlertFldr = Nothing
+Set olMail = Nothing
+
+End Sub

@@ -1,0 +1,13 @@
+vcasa = float(input('Qual é o valor da casa? '))
+sal = float(input('Quanto voce ganha? '))
+anos = int(input('Em quantos anos vôce vai pagar? '))
+vezes = anos * 12
+confere = sal * 0.30
+parcela = vcasa / vezes
+if parcela > sal:
+	print('Sua margem foi excedida! ')
+	print('Sua margem maxima é de R${:.2f}.'.format(confere))
+	print('Sua parcela seria de R${:.2f}.'.format(parcela))
+else:
+	print('Sua margem foi aprovada! ')
+	print('A sua parcela será de R${:.2f}, seu limite é de R${:.2f}.'.format(parcela,confere))

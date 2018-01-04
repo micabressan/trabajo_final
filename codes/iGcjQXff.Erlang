@@ -1,0 +1,48 @@
+-module(hello).
+-export([hello_world/0,add/2,createTowers/1,displayTowers/3,fillTower/1,move/5,solve/5]).
+ 
+hello_world() -> io:fwrite("hello, world\n").
+   
+add(A,B)->
+    hello_world(),
+    A+B.
+ 
+ 
+   
+fillTower(0) -> [];
+   
+fillTower(X) when X>=1 ->
+    [X|fillTower(X-1)].
+   
+   
+createTowers(X) ->
+    List = [
+    {a,lists:seq(1,X)},
+    {b,[]},
+    {c,[]}].
+
+   
+move(X,List,From,To,Aux) when X>1 ->
+   
+    Source = proplists:get_value(From, List),
+    Dest = proplists:get_value(To, List),
+    Help = proplists:get_value(Aux, List),
+       
+    Temp1 = lists:nth(1,Source),
+    NewDest = [Temp1|Dest],
+    [Temp1 | NewSource]=Source,
+   
+    NewGame = [{From, NewSource}, {To, NewDest},{Aux ,Help}],
+    displayTowers(proplists:get_value(a,NewGame),proplists:get_value(b,NewGame),proplists:get_value(c,NewGame)),
+    NewGame.
+   
+ 
+solve(0, Game, _, _, _) ->
+    Game;
+solve(N,Game,From,To,Aux) ->
+    Game1 = move(N-1,Game,From,Aux,To),
+    Game2 = move(1,Game1,From,To,Aux),
+    solve(N-1,Game2,Aux,To,From).
+   
+displayTowers(A, B, C) ->
+    io:format("~n~s~w~n~s~w~n~s~w~n------------------------------~n", ["Tower A: ", A, "Tower B: ", B, "Tower C: ", C]).

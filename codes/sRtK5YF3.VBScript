@@ -1,0 +1,85 @@
+Private Sub cboTildelPlass_Click()
+
+
+Dim studier() As Studie
+Dim i As Long
+Dim rs As DAO.Recordset
+Dim stdset As DAO.Recordset
+Dim stdset2 As DAO.Recordset
+Dim strsql As String
+Dim strsql2 As String
+Dim Navn As String
+Dim StudieØnske As String
+Dim Poeng As Long
+Dim Prioritering As Long
+DoCmd.SetWarnings False
+
+DoCmd.RunSQL "DELETE * FROM tblStudieplass"
+
+
+Set rs = CurrentDb.OpenRecordset("tblStudier")
+
+
+With rs
+    Do While Not .EOF
+        i = i + 1
+        ReDim Preserve studier(1 To i)
+        studier(i).Navn = rs.Fields("StudieKode").Value
+        studier(i).antPlass = rs.Fields("AntallPlasser").Value
+        
+        .MoveNext
+    Loop
+End With
+
+strsql = "SELECT * FROM qStudPoeng"
+Set stdset = CurrentDb.OpenRecordset(strsql)
+strsql2 = "SELECT * FROM qStudenterStudie"
+Set stdset2 = CurrentDb.OpenRecordset(strsql2)
+
+    i = 0
+    
+With stdset
+    Do While Not .EOF
+    stdset2.MoveFirst
+    Navn = stdset.Fields("StudentID").Value
+    
+
+    With stdset2
+        Do While Not .EOF
+            If Navn = stdset2.Fields("StudentID").Value Then
+                StudieØnske = stdset2.Fields("StudieKode")
+                Poeng = stdset.Fields("Opptakspoeng")
+                Prioritering = stdset2.Fields("Prioritering")
+                        For i = LBound(studier) To UBound(studier)
+                            If studier(i).Navn = StudieØnske And studier(i).antPlass > 0 Then
+                                DoCmd.RunSQL "INSERT INTO tblStudieplass (StudentID, StudieKode, Prioritering) VALUES ('" & Navn & "','" & StudieØnske & "'," & Prioritering & ")"
+                                studier(i).antPlass = studier(i).antPlass - 1
+                                stdset2.MoveNext
+                                Exit For
+                            ElseIf studier(i).Navn = StudieØnske And studier(i).antPlass = 0 Then
+                                Exit For
+                            End If
+                        Next i
+                        
+                Exit Do
+             Else
+                .MoveNext
+            End If
+        Loop
+    End With
+    
+    
+    
+    
+    
+    .MoveNext
+        Loop
+End With
+
+
+
+
+
+Call MsgBox("Studentene har fått tildelt studieplass", vbInformation)
+
+End Sub

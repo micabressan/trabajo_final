@@ -1,0 +1,25 @@
+## All commands starting with a slash are repeating and the following ones are chain
+
+/execute as @e[name=pickmeup,nbt={HurtTime:10s}] at @s run summon armor_stand ~ ~ ~ {CustomName:bullet}
+execute as @e[name=pickmeup,nbt={HurtTime:10s}] at @s run teleport @e[name=bullet,distance=0..0] ~ ~ ~ ~ ~
+
+/scoreboard players add @e[name=bullet] tick 1
+kill @e[name=bullet,scores={tick=100..200}]
+
+/execute as @a[scores={usestick=1..1,incart=1..1}] at @s run teleport @e[name=pickmeup] ^ ^ ^3 ~ ~
+execute if entity @a[scores={usestick=1..1,incart=1..1}] as @e[name=pickmeup] at @s run tp @s ~ ~1.4 ~
+scoreboard players set @a[scores={usestick=2..20}] usestick 0
+
+/execute at @a[scores={usestick=1..1,incart=1..1}] as @a[scores={usestick=1..1,incart=1..1}] run teleport @e[name=neg1] ^ ^ ^1 ~ ~
+execute if entity @a[scores={usestick=1..1,incart=1..1}] at @e[name=neg1] as @e[name=neg1] run tp @e[name=neg1] ~ ~0.3 ~
+scoreboard players set @a[scores={usestick=2..20}] usestick 0
+scoreboard players set @a incart 0
+
+/execute as @e[name=neg1] at @s unless block ~ ~-1 ~ minecraft:air run teleport @s ~ ~1 ~
+/execute as @e[name=neg1] at @s unless block ~ ~ ~ minecraft:air run teleport @s ^ ^ ^-1
+/effect give @e[name=pickmeup] regeneration 9999 255 true
+/effect give @e[name=pickmeup] health_boost 9999 255 true
+/effect give @e[name=pickmeup] absorption 9999 255 true
+/scoreboard players set @a[nbt={RootVehicle:{Entity:{id:"minecraft:minecart"}}}] incart 1
+/execute as @e[name=bullet] at @s run tp @s ^ ^ ^1.5
+/effect give @e[name=pickmeup] resistance 9999 255 true

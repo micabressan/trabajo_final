@@ -1,0 +1,15 @@
+myHarness := CobaltHarness2 allInstances first.
+sierpinskiRef := myHarness activeIsland future new: TSierpinski.
+
+	matNorm := myHarness activeIsland future new: TMaterial.
+	matNorm future ambientColor: #(0.9 0.6 0.5 0.5).
+	matNorm future diffuseColor: #(0.9 0.6 0.5 0.5).
+
+	sierpinskiRef future material: matNorm.
+
+	spinnerRef := myHarness activeIsland future new: TSpinner.
+	spObjRef := myHarness activeIsland future new: CobaltTFrameWithMenu.
+	spObjRef future translationX: 0 y:1 z: 0.
+	spinnerRef future contents: sierpinskiRef.
+	spinnerRef future addChild: sierpinskiRef.
+	myHarness activeSpace future addChild:  spObjRef.

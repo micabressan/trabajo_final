@@ -1,0 +1,316 @@
+-module(token_server).
+
+-export([
+	start_link/0,
+	stop/1,
+	new/2,
+	new/3,
+	get/2,
+	set/3,
+	reg/2,
+	reg/3,
+	unreg/2,
+	signin/2,
+	signout/2
+]).
+
+-behaviour(gen_server).
+
+-export([
+	init/1,
+	handle_call/3,
+	handle_cast/2,
+	handle_info/2,
+	terminate/2,
+	code_change/3
+]).
+
+-define(TABLE, token).
+-define(INDEX, token_index).
+-define(TOUCH_INTERVAL, 							10). %% (seconds)
+-define(DELETE_LAST_TIME_INTERVAL, 86400). %% (seconds)
+-define(GARBAGE_COLLECTION_PERIOD, 10000). %% (milliseconds)
+
+-define(MODULE_NAME, ?MODULE).
+-define(SERVER, ?MODULE).
+
+%%%===================================================================
+%%% API
+%%%===================================================================
+
+-spec start_link() -> {ok, pid()}.
+start_link() ->
+	gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
+
+-spec stop(atom()) -> ok.
+stop(New_storage) ->
+	gen_server:cast(?SERVER, {stop, New_storage}).
+
+
+-spec new(Token :: token:uuid(), Websocket :: pid()) -> ok.
+new(Token, Websocket) ->
+	gen_server:cast(?SERVER, {new, Token, undefined, Websocket}).
+
+-spec new(Token :: token:uuid(), Id :: integer(), Websocket :: pid()) -> ok.
+new(Token, Id, Websocket) ->
+	gen_server:cast(?SERVER, {new, Token, Id, Websocket}).
+
+
+-spec get(id, #{token := token:uuid()}) -> does_not_exist | {ok, #{id => integer()}} | {ok, #{id => undefined}}
+			 ; (signed_in_websockets, #{id := integer()}) -> [] | [Websocket :: pid()]
+			 ; (websockets, #{token := token:uuid()}) -> 		 [] | [Websocket :: pid()].
+get(id, Map) ->
+	gen_server:call(?SERVER, {get, id, Map});
+get(signed_in_websockets, Map) ->
+	gen_server:call(?SERVER, {get, signed_in_websockets, Map});
+get(websockets, Map) ->
+	gen_server:call(?SERVER, {get, websockets, Map}).
+
+
+-spec signin(Token :: token:uuid(), Id :: integer()) -> ok.
+signin(Token, Id) ->
+	gen_server:cast(?SERVER, {signin, Token, Id}).
+
+-spec set(Token :: token:uuid(), Id :: integer(), Websocket :: pid()) -> ok.
+set(Token, Id, Websocket) ->
+	gen_server:cast(?SERVER, {set, Token, Id, Websocket}).
+
+
+-spec reg(Id :: integer(), Token :: token:uuid(), Websocket :: pid()) -> ok.
+reg(Id, Token, Websocket) ->
+	gen_server:cast(?SERVER, {reg, Id, Token, Websocket}).
+
+-spec reg(Token :: token:uuid(), Websocket :: pid()) -> ok.
+reg(Token, Websocket) ->
+	gen_server:cast(?SERVER, {reg, Token, Websocket}).
+
+-spec unreg(Id :: integer(), Websocket :: pid()) -> ok.
+unreg(Id, Websocket) ->
+	gen_server:cast(?SERVER, {unreg, Id, Websocket}).
+
+%% @doc Warning! Do not use directly. Use token:signout(..)
+-spec signout(Token :: token:uuid(), Id :: integer()) -> ok.
+signout(Token, Id) ->
+	gen_server:cast(?SERVER, {signout, Token, Id}).
+
+%%%===================================================================
+%%% Gen_server callbacks
+%%%===================================================================
+
+init([]) ->
+	?TABLE = ets:new(?TABLE, [public, named_table]),
+	?INDEX = ets:new(?INDEX, [public, named_table]),
+	erlang:send_after(?GARBAGE_COLLECTION_PERIOD, self(), collect_garbage),
+	{ok, unix_timestamp_s()}.
+
+
+handle_call({get, id, #{token := Token}}, _From, State) ->
+	Reply = case ets:lookup(?TABLE, Token) of
+		[] -> does_not_exist;
+		[{Token, Id, Websockets, UnixTime}] ->
+			gen_server:cast(?SERVER, {touch, Token, Id, Websockets, UnixTime}),
+			{ok, #{id => Id}}
+	end,
+	{reply, Reply, State};
+
+handle_call({get, signed_in_websockets, #{id := Id}}, _From, State) ->
+	Reply = case ets:lookup(?INDEX, Id) of
+		[] -> [];
+		[{Id, []}] -> [];
+		[{Id, Tokens}] -> lists:map(fun({_, P}) -> P end, Tokens)
+	end,
+	{reply, Reply, State};
+
+handle_call({get, websockets, #{token := Token}}, _From, State) ->
+	Reply = case ets:lookup(?TABLE, Token) of
+		[] -> [];
+		[{Token, Id, Websockets, UnixTime}] ->
+			gen_server:cast(?SERVER, {touch, Token, Id, Websockets, UnixTime}),
+			{ok, #{websockets => Websockets}}
+	end,
+	{reply, Reply, State};
+
+handle_call(_, _, State) -> {reply, ignored, State}.
+
+handle_cast({new, Token, Id, Pid}, State) when is_integer(Id) ->
+	true = ets:insert_new(?TABLE, {Token, Id, [Pid], unix_timestamp_s()}),
+	true = ets:insert_new(?INDEX, {Id, [{Token, Pid}]}),
+	{noreply, State};
+
+handle_cast({new, Token, undefined, Pid}, State) ->
+	true = ets:insert_new(?TABLE, {Token, undefined, [Pid], unix_timestamp_s()}),
+	{noreply, State};
+
+handle_cast({set, Token, Id, Pid}, State) ->
+	[{Token, undefined, Time}] = ets:lookup(?TABLE, Token),
+	ets:insert(?TABLE, {Token, Id, Time}),
+	case ets:lookup(?INDEX, Id) of
+		[] ->
+			ets:insert(?INDEX, {Id, [{Token, Pid}]});
+		[{Id, []}] ->
+			ets:insert(?INDEX, {Id, [{Token, Pid}]});
+		[{Id, Tokens}] ->
+			case lists:any(fun({T, P}) -> (T =:= Token) or (P =:= Pid) end, Tokens) of
+				true ->
+					ok;
+				false ->
+					ets:insert(?INDEX, {Id, [{Token, Pid}|Tokens]})
+			end
+	end,
+	{noreply, State};
+
+%% @doc api_signin_responce uses this
+handle_cast({signin, Token, Id}, State) ->
+	case ets:lookup(?TABLE, Token) of
+		[] ->
+			ignored;
+		[{Token, _OldId, Websockets, _UnixTime}] ->
+			ets:insert(?TABLE, {Token, Id, Websockets, unix_timestamp_s()}),
+			lists:map(fun(Pid) -> Pid ! {signed_in, Id} end, Websockets)
+	end,
+	{noreply, State};
+
+handle_cast({signout, Token, Id}, State) ->
+	case ets:lookup(?TABLE, Token) of
+		[] ->
+			ignored;
+		[{Token, _OldId, Websockets, _UnixTime}] ->
+			ets:insert(?TABLE, {Token, undefined, Websockets, unix_timestamp_s()}),
+			lists:map(fun(Pid) -> Pid ! signed_out end, Websockets)
+	end,
+	case ets:lookup(?INDEX, Id) of
+		[] ->
+			ok;
+		[{Id, Tokens}] ->
+			ets:insert(?INDEX, {Id, lists:filter(fun({T, _}) -> not (T =:= Token) end, Tokens)})
+	end,
+	{noreply, State};
+
+handle_cast({touch, Token, Id, Websockets, UnixTime}, State) ->
+	NowUnix = unix_timestamp_s(),
+	if
+    ((NowUnix - UnixTime) > ?TOUCH_INTERVAL) ->
+       ets:insert(?TABLE, {Token, Id, Websockets, NowUnix});
+    true -> ok
+	end,
+	{noreply, State};
+
+handle_cast({delete, Token}, State) ->
+	delete(Token),
+	{noreply, State};
+
+handle_cast({reg, Id, Token, Pid}, State) ->
+	case ets:lookup(?TABLE, Token) of
+		[] ->
+			ignored;
+		[{Token, Id, Websockets, _UnixTime}] ->
+			ets:insert(?TABLE, {Token, Id, [Pid | Websockets], unix_timestamp_s()})
+	end,
+	case ets:lookup(?INDEX, Id) of
+		[] ->
+			ets:insert(?INDEX, {Id, [{Token, Pid}]});
+		[{Id, []}] ->
+			ets:insert(?INDEX, {Id, [{Token, Pid}]});
+		[{Id, Tokens}] ->
+			ets:insert(?INDEX, {Id, [{Token, Pid}|Tokens]})
+	end,
+	{noreply, State};
+
+handle_cast({reg, Token, Pid}, State) ->
+	case ets:lookup(?TABLE, Token) of
+		[] ->
+			ignored;
+		[{Token, undefined, Websockets, _UnixTime}] ->
+			ets:insert(?TABLE, {Token, undefined, [Pid | Websockets], unix_timestamp_s()})
+	end,
+	{noreply, State};
+
+handle_cast({unreg, Id, Pid}, State) ->
+	case ets:lookup(?INDEX, Id) of
+		[] ->
+			ok;
+		[{Id, []}] ->
+			ok;
+		[{Id, Tokens}] ->
+			NewTokens = lists:filter(fun({_, P}) -> not(P =:= Pid) end, Tokens),
+			ets:insert(?INDEX, {Id, NewTokens})
+	end,
+	{noreply, State};
+
+handle_cast({stop, _New_storage}, State) ->
+	{stop, normal, State};
+
+handle_cast(_, State) -> {noreply, State}.
+
+
+handle_info(collect_garbage, TimeThreshold) ->
+	{ok, AllowableSize} = application:get_env(cache, token_cache_size),
+	case Size = ets:info(?TABLE,memory) * erlang:system_info(wordsize) < AllowableSize * 1024 of
+		true ->
+			erlang:send_after(?GARBAGE_COLLECTION_PERIOD, self(), collect_garbage),
+			{noreply, TimeThreshold};
+		false ->
+			io:format("~p is out of memory (~p Bytes). Try to delete old.~n", [?TABLE, Size]),
+			delete_old(TimeThreshold),
+			erlang:send_after(?GARBAGE_COLLECTION_PERIOD, self(), collect_garbage),
+			{noreply, TimeThreshold + ?DELETE_LAST_TIME_INTERVAL}
+	end;
+
+handle_info(_, State) -> {noreply, State}.
+
+
+terminate(_Reason, _State) ->
+	ets:delete(?TABLE),
+	ok.
+
+
+code_change(_OldVsn, State, _Extra) ->
+	{ok, State}.
+
+
+%%%===================================================================
+%%% Internal functions
+%%%===================================================================
+
+delete_old(TimeThreshold) ->
+	ets:safe_fixtable(?TABLE, true),
+	catch loop_delete_old(ets:first(?TABLE), TimeThreshold),
+	ets:safe_fixtable(?TABLE, false),
+	ok.
+
+loop_delete_old('$end_of_table', _TimeThreshold) ->
+	ok;
+loop_delete_old(Token, TimeThreshold) ->
+	case ets:lookup(?TABLE, Token) of
+		[{Token, _, _, UnixTime}] ->
+			if
+				UnixTime < TimeThreshold ->
+					delete(Token)
+			end;
+		_ ->
+			ok
+	end,
+	loop_delete_old(ets:next(?TABLE, Token), TimeThreshold).
+
+delete(Token) ->
+	case ets:lookup(?TABLE, Token) of
+		[{Token, undefined, _, _Time}] ->
+			ets:delete(?TABLE, Token);
+		[{Token, Id, _, _Time}] ->
+			case ets:lookup(?INDEX, Id) of
+				[] ->
+					ok;
+				[{Id, []}] ->
+					ok;
+				[{Id, Tokens}] ->
+					NewTokens = lists:filter(fun({T, _}) -> not(T =:= Token) end, Tokens),
+					ets:insert(?INDEX, {Id, NewTokens})
+			end,
+			ets:delete(?TABLE, Token);
+		[] ->
+			ok
+	end.
+
+unix_timestamp_s() ->
+  {A, B, _} = os:timestamp(),
+  (A * 1000000) + B.

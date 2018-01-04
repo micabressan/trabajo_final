@@ -1,0 +1,5 @@
+alldata = pd.read_csv("./data/alldata1980-2018.csv")
+teamYearGroups  = alldata.groupby(["YEAR","TEAM_ABBREVIATION"])
+teamExperience  = teamYearGroups.agg(lambda t: t.apply(lambda p: p.YEAR - p.FROM_YEAR, axis=1).mean())
+oldestTeam   = (teamExperience.idxmax(), teamExperience.max())
+youngestTeam = (teamExperience.idxmin(), teamExperience.min())

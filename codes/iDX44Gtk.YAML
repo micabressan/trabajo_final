@@ -1,0 +1,113 @@
+nomad:
+    - towny.command.towny.map
+    - towny.command.towny.prices
+    - towny.command.towny.top
+    - towny.command.towny.time
+    - towny.command.towny.war
+    - towny.command.town.online
+    - towny.command.town.here
+    - towny.command.town.join
+    - towny.command.town.list
+    - towny.command.plot.perm
+    - towny.command.nation.list
+    - towny.town.resident
+    - towny.town.spawn.public
+    - towny.chat.local
+    - towny.ch
+
+towns:
+    default:
+        # 'default' is the permission set which is auto assigned to any normal town member
+        - towny.command.resident.*
+        - towny.command.plot.claim
+        - towny.command.plot.unclaim
+        - towny.command.plot.forsale
+        - towny.command.plot.notforsale
+        - towny.command.plot.toggle.*
+        - towny.command.plot.set.perm
+        - towny.command.plot.set.reset
+        - towny.command.town.online
+        - towny.command.town.leave
+        - towny.command.town.deposit
+        - towny.town.spawn.town
+        - towny.chat.town
+
+    mayor:
+        # Mayors get these permissions in addition to the default set.
+        - towny.tax_exempt
+        - towny.command.towny.top
+        - towny.command.town.*
+        - towny.command.plot.*
+        - towny.claimed.owntown.*
+        - towny.command.nation.new
+        - towny.command.nation.leave
+        - towny.outlaw.jailer
+
+    ranks:
+        assistant:
+            - towny.command.town.claim.*
+            - towny.command.town.unclaim
+            - towny.command.town.outlaw
+            - towny.tax_exempt
+            - towny.command.towny.top
+            - towny.command.plot.*
+            - towny.claimed.owntown.*
+            - towny.command.nation.new
+            - towny.command.nation.leave
+            - towny.outlaw.jailer
+            - towny.command.town.here
+            - towny.command.town.list
+            - towny.command.town.leave
+            - towny.command.town.withdraw
+            - towny.command.town.deposit
+            - towny.command.town.reslist
+            - towny.command.town.set.board
+            - towny.command.town.set.homeblock
+            - towny.command.town.set.spawn
+            - towny.command.town.set.outpost
+            - towny.command.town.set.perm
+            - towny.command.town.set.taxes
+            - towny.command.town.set.plottax
+            - towny.command.town.set.shoptax
+            - towny.command.town.set.embassytax
+            - towny.command.town.set.plotprice
+            - towny.command.town.set.shopprice
+            - towny.command.town.set.embassyprice
+            - towny.command.town.set.name
+            - towny.command.town.set.tag
+            - towny.command.town.buy
+            - towny.command.town.toggle.*
+            - towny.command.town.mayor
+            - towny.command.town.add
+            - towny.command.town.kick
+            - towny.command.town.online
+
+        helper:
+            - towny.claimed.townowned.switch.*
+
+        sheriff:
+            - towny.command.town.toggle.jail
+            - towny.outlaw.jailer            
+          
+nations:
+
+    default:
+        # All nation members get these permissions.
+        - towny.command.nation.online
+        - towny.command.nation.deposit
+        - towny.town.spawn.nation
+        - towny.town.spawn.ally
+        - towny.chat.nation
+
+    king:
+        - towny.command.nation.*
+        
+    ranks:
+        assistant:
+            - towny.command.nation.rank.helper
+            - towny.command.nation.add
+            - towny.command.nation.ally
+            - towny.command.nation enemy
+
+        helper:
+            - towny.command.nation.add

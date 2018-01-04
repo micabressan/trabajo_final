@@ -1,0 +1,195 @@
+Author: OffrayLuna
+
+ByteArray(Object)>>errorSubscriptBounds:
+ByteArray(Object)>>at:
+ByteArray(SequenceableCollection)>>replaceFrom:to:with:startingAt:
+ByteArray>>replaceFrom:to:with:startingAt:
+ByteArray(SequenceableCollection)>>copyFrom:to:
+MultiByteBinaryOrTextStream(Stream)>>next:putAll:startingAt:
+MultiByteBinaryOrTextStream(WriteStream)>>next:putAll:startingAt:
+MultiByteBinaryOrTextStream>>next:putAll:startingAt:
+[ [ readDataRemaining > 0 ]
+	whileTrue: [ | chunkSize |
+		chunkSize := 32768 min: readDataRemaining.
+		buffer := decoder next: chunkSize into: buffer startingAt: 1.
+		aStream next: chunkSize putAll: buffer startingAt: 1.
+		readDataRemaining := readDataRemaining - chunkSize ] ] in ZipFileMember>>uncompressDataTo:
+BlockClosure>>on:do:
+ZipFileMember>>uncompressDataTo:
+ZipFileMember(ZipArchiveMember)>>writeDataTo:
+ZipFileMember(ZipArchiveMember)>>extractTo:
+ZipFileMember(ZipArchiveMember)>>contentStreamFromEncoding:
+[ (member contentStreamFromEncoding: 'utf8') text contents ] in MCMczReader>>contentsForMember:
+BlockClosure>>on:do:
+MCMczReader>>contentsForMember:
+MCMczReader>>extractDefinitionsFrom:
+[ :m | self extractDefinitionsFrom: m ] in MCMczReader>>loadDefinitions
+OrderedCollection>>do:
+MCMczReader>>loadDefinitions
+MCMczReader(MCVersionReader)>>definitions
+MCMczReader(MCVersionReader)>>snapshot
+[ self snapshot ] in MCMczReader(MCVersionReader)>>basicVersion
+MCVersion>>snapshot
+[ :ea | 
+ea canOptimizeLoading
+	ifTrue: [ ea patch applyTo: loader ]
+	ifFalse: [ loader updatePackage: ea package withSnapshot: ea snapshot ] ] in MCVersionLoader>>basicLoadWithNameLike:
+OrderedCollection>>do:
+MCVersionLoader>>basicLoadWithNameLike:
+[ self basicLoadWithNameLike: aString ] in MCVersionLoader>>loadWithNameLike:
+[ returnValue := aBlock value ] in [ [ returnValue := aBlock value ]
+	ensure: [ self announceLoadStop: aString ] ] in MCVersionLoader>>announceLoad:do:
+BlockClosure>>ensure:
+[ [ returnValue := aBlock value ]
+	ensure: [ self announceLoadStop: aString ] ] in MCVersionLoader>>announceLoad:do:
+BlockClosure>>ensure:
+MCVersionLoader>>announceLoad:do:
+MCVersionLoader>>loadWithNameLike:
+[ self ensurePackage: version package.
+self loadWithNameLike: version info name ] in [ | version |
+version := versions first.
+[ self ensurePackage: version package.
+self loadWithNameLike: version info name ] asJob
+	title: 'Loading ' , version info name asString;
+	run ] in MCVersionLoader>>load
+BlockClosure>>cull:
+[ ^ block cull: self ] in [ self prepareForRunning.
+CurrentJob value: self during: [ ^ block cull: self ] ] in Job>>run
+[ activeProcess psValueAt: index put: anObject.
+aBlock value ] in CurrentJob(DynamicVariable)>>value:during:
+BlockClosure>>ensure:
+CurrentJob(DynamicVariable)>>value:during:
+CurrentJob class(DynamicVariable class)>>value:during:
+[ self prepareForRunning.
+CurrentJob value: self during: [ ^ block cull: self ] ] in Job>>run
+BlockClosure>>ensure:
+Job>>run
+[ | version |
+version := versions first.
+[ self ensurePackage: version package.
+self loadWithNameLike: version info name ] asJob
+	title: 'Loading ' , version info name asString;
+	run ] in MCVersionLoader>>load
+BlockClosure>>ensure:
+RPackageSet class>>withCacheDo:
+MCVersionLoader>>load
+MetacelloGoferLoad(GoferLoad)>>execute
+[ "mcLoader preLoad: packageSpec."
+goferLoad := MetacelloGoferLoad on: aGofer.
+goferLoad addResolved: resolvedReference.
+goferLoad execute.
+MetacelloPlatform current clearCurrentVersionCache	"mcLoader postLoad: packageSpec" ] in [ | loadBlock goferLoad answers resolvedReference |
+aGofer disablePackageCache.	"for good luck:)"
+resolvedReference := self
+	resolvePackageSpec: packageSpec
+	gofer: aGofer.
+resolvedReference isNil
+	ifTrue:
+		[ "Package version already loaded into image" ^ self ].
+loadBlock := [ "mcLoader preLoad: packageSpec."
+goferLoad := MetacelloGoferLoad on: aGofer.
+goferLoad addResolved: resolvedReference.
+goferLoad execute.
+MetacelloPlatform current clearCurrentVersionCache	"mcLoader postLoad: packageSpec" ].
+(answers := packageSpec answers) notEmpty
+	ifTrue: [ loadBlock valueSupplyingMetacelloAnswers: answers ]
+	ifFalse: [ loadBlock value ].
+resolvedReference workingCopy repositoryGroup
+	addRepository: aPackageLoadDirective repository.
+Transcript
+	cr;
+	show:
+		'Loaded -> ' , resolvedReference name , ' --- '
+			, aPackageLoadDirective repository repositoryDescription , ' --- '
+			, resolvedReference repository description ] in MetacelloLoadingMCSpecLoader(MetacelloCommonMCSpecLoader)>>loadPackageDirective:gofer:
+[ | loadBlock goferLoad answers resolvedReference |
+aGofer disablePackageCache.	"for good luck:)"
+resolvedReference := self
+	resolvePackageSpec: packageSpec
+	gofer: aGofer.
+resolvedReference isNil
+	ifTrue:
+		[ "Package version already loaded into image" ^ self ].
+loadBlock := [ "mcLoader preLoad: packageSpec."
+goferLoad := MetacelloGoferLoad on: aGofer.
+goferLoad addResolved: resolvedReference.
+goferLoad execute.
+MetacelloPlatform current clearCurrentVersionCache	"mcLoader postLoad: packageSpec" ].
+(answers := packageSpec answers) notEmpty
+	ifTrue: [ loadBlock valueSupplyingMetacelloAnswers: answers ]
+	ifFalse: [ loadBlock value ].
+resolvedReference workingCopy repositoryGroup
+	addRepository: aPackageLoadDirective repository.
+Transcript
+	cr;
+	show:
+		'Loaded -> ' , resolvedReference name , ' --- '
+			, aPackageLoadDirective repository repositoryDescription , ' --- '
+			, resolvedReference repository description ] in MetacelloLoadingMCSpecLoader(MetacelloCommonMCSpecLoader)>>loadPackageDirective:gofer:
+IceMetacelloPharoPlatform(MetacelloPlatform)>>do:displaying:
+MetacelloLoadingMCSpecLoader(MetacelloCommonMCSpecLoader)>>loadPackageDirective:gofer:
+MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadPackageDirective:gofer:
+MetacelloPackageLoadDirective>>loadUsing:gofer:
+[ :directive | directive loadUsing: aLoaderDirective gofer: aGofer ] in MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadLinearLoadDirective:gofer:
+OrderedCollection>>do:
+MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadLinearLoadDirective:gofer:
+MetacelloLinearLoadDirective>>loadUsing:gofer:
+[ :directive | directive loadUsing: aLoaderDirective gofer: aGofer ] in MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadLinearLoadDirective:gofer:
+OrderedCollection>>do:
+MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadLinearLoadDirective:gofer:
+MetacelloLinearLoadDirective>>loadUsing:gofer:
+MetacelloLinearLoadDirective(MetacelloVersionLoadDirective)>>loadWithPolicy:
+MetacelloLoaderPolicy>>load
+MetacelloFetchingMCSpecLoader>>doLoad
+[ fetchLoader doLoad ] in [ | fetchLoader |
+fetchLoader := self
+	fetchRequiredFromArray: (self defaultPackageNamesToLoad: anArray).
+MetacelloPlatform current
+	do: [ fetchLoader doLoad ]
+	displaying: 'Loading ' , displayString.
+Transcript
+	cr;
+	show: '...finished ' , self versionNumber printString.
+^ fetchLoader ] in MetacelloMCVersion>>doLoadRequiredFromArray:
+IceMetacelloPharoPlatform(MetacelloPlatform)>>do:displaying:
+[ | fetchLoader |
+fetchLoader := self
+	fetchRequiredFromArray: (self defaultPackageNamesToLoad: anArray).
+MetacelloPlatform current
+	do: [ fetchLoader doLoad ]
+	displaying: 'Loading ' , displayString.
+Transcript
+	cr;
+	show: '...finished ' , self versionNumber printString.
+^ fetchLoader ] in MetacelloMCVersion>>doLoadRequiredFromArray:
+BlockClosure>>ensure:
+MetacelloMCVersion>>doLoadRequiredFromArray:
+MetacelloMCVersion>>load
+GoferMetacelloLoad>>loadConfiguration
+GoferMetacelloLoad>>execute
+Gofer>>execute:do:
+Gofer>>loadVersion:
+Gofer>>loadStable
+UndefinedObject>>DoIt
+OpalCompiler>>evaluate
+RubSmalltalkEditor>>evaluate:andDo:
+RubSmalltalkEditor>>highlightEvaluateAndDo:
+[ textMorph textArea editor highlightEvaluateAndDo: ann action.
+textMorph shoutStyler style: textMorph text ] in [ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: ann action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate:
+RubEditingArea(RubAbstractTextArea)>>handleEdit:
+[ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: ann action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate:
+WorldState>>runStepMethodsIn:
+WorldMorph>>runStepMethods
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldMorph>>doOneCycle
+WorldMorph class>>doOneCycle
+[ [ WorldMorph doOneCycle.
+Processor yield.
+false ] whileFalse: [  ] ] in MorphicUIManager>>spawnNewProcess
+[ self value.
+Processor terminateActive ] in BlockClosure>>newProcess

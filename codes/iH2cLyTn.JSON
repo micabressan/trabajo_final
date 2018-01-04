@@ -1,0 +1,31 @@
+{
+	"id":"47671", //consult id
+	"date": "November 17, 2007", //date consult was created
+	"evidenceStrength": "{very-low, low, medium, high, very-heigh}", //strength of evidence chart
+	"request": "This information is regarding the reist of seizures with antipsychotic agents, with emphasis on the long-acting depot agents (fluphenazine, haloperidol, aripiprazole, olanzapine, paliperidone, and risperidone). A 66 year-old female with a history of schizophrenia and an unspecified seizure hisotry previously treat with haloperidol decanoate was admitted for delirium and seizures. She requires therapy for her schizophrenia and the use of a long-acting depot injection is preferable.", //Constult request content
+	"summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel ex quis lobortis. Nulla eros dolor, facilisis a iaculis eu, elementum at nisi. Aenean rhoncus at metus efficitur imperdiet. Nulla mattis gravida vehicula. Fusce ligula magna, porttitor ac augue in, dapibus facilisis lacus. Nulla a elit vestibulum, imperdiet elit ac, mattis tortor. Sed vehicula finibus lorem, non condimentum ante congue ut. Duis dignissim quam odio, vitae blandit ligula auctor vel. Integer sed ex at lorem dapibus dignissim. Aenean convallis maximus ultrices. Donec quis velit sit amet nisl tincidunt placerat.", //Consult summary content
+	"support": "<p>Praesent posuere faucibus posuere. Curabitur dictum tempor ligula nec mollis. Curabitur nec nulla sodales, rutrum eros eget, ullamcorper libero. Suspendisse tempus lacinia magna, a euismod metus. Mauris et vulputate lacus. Mauris facilisis, lectus et pulvinar laoreet, est lacus molestie metus, id faucibus enim ante id lectus. Sed sem quam, gravida ut iaculis et, sodales at augue. Donec gravida feugiat est eget sollicitudin. Sed ac nunc lacus. Donec ut quam sollicitudin, hendrerit eros et, dignissim nunc. Morbi suscipit, neque at tincidunt tincidunt, sapien leo euismod nisl, eu interdum nisl lorem a sapien. Etiam aliquet venenatis metus in mattis. Praesent ac blandit eros. Vivamus tincidunt ornare mauris id congue. Donec iaculis finibus ligula non facilisis.</p>
+		<p>Proin in libero efficitur, euismod enim id, lacinia erat. Morbi auctor urna magna, at imperdiet tellus semper non. Curabitur ac nulla sed nibh finibus sagittis et ut tortor. Aliquam malesuada fringilla leo ut suscipit. Etiam laoreet aliquet sem vel cursus. Cras elementum pharetra lacinia. Aliquam erat volutpat. Curabitur consectetur velit vel volutpat pharetra. Maecenas id augue egestas, pulvinar nisl eu, sagittis lorem. Vestibulum malesuada enim quis elit convallis, ac venenatis augue fermentum. Aliquam a auctor odio. In dictum malesuada elementum. Nullam id vestibulum odio, id sollicitudin nisi. Vestibulum quis rutrum turpis. Donec blandit, eros eu egestas congue, erat est feugiat arcu, a vulputate justo augue at nibh. Donec egestas sit amet tortor sed dictum.</p>
+		<p>Vestibulum efficitur vehicula erat, sed blandit mi. Fusce orci nisi, suscipit in eros vitae, consequat pharetra velit. Praesent tempus ligula tortor, a tincidunt elit lobortis eget. Nulla ullamcorper eros ac nibh pharetra convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut tristique ligula eu quam scelerisque, eget dignissim ante ultrices. Nullam pharetra ligula id massa fringilla, non imperdiet orci semper. Aenean urna mi, dignissim quis porta ullamcorper, sollicitudin id libero.</p>
+		<p>Pellentesque sit amet quam sed nibh commodo auctor. Maecenas et sapien et massa faucibus tincidunt. Nullam nisl libero, sagittis vel semper ut, vehicula in turpis. Curabitur non ullamcorper dui, sit amet finibus ante. Fusce non purus condimentum, dapibus quam a, euismod velit. Maecenas porttitor, elit id ullamcorper placerat, metus enim tristique est, pellentesque consectetur velit dui eget massa. Aliquam dapibus tincidunt massa id finibus.</p>", //Consult support content 
+	"preparedBy": ["Jason Pennell,PharmD Candidate 2016", "OHSU Drug information Service"], //who prepared consult request
+	"reviwedBy": ["Mike Smith, PHD", "OHSU Pharmacy Lead"], //who reviewed consult request
+	"references": ["Reference One", "Reference Two", "Reference Three", "Reference Four"], //consult request references
+    "votes": { //community votes for how usefull this consult request has been for others
+        "up": "{xx}", //how many up votes
+        "down": "{xx}", //number of down votes
+        "voted": "{null|0|1}", //null = never voted, 0 = down vote, 1 = up vote
+    },
+	"comments":[ //consult requet's comments from team members and community 
+		{
+			"author":"Julie Peterson",
+			"comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel ex quis lobortis. Nulla eros dolor, facilisis a iaculis eu, elementum at nisi. Aenean rhoncus at metus efficitur imperdiet."
+		},{
+			"author":"Mike Ralley",
+			"comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel ex quis lobortis. Nulla eros dolor, facilisis a iaculis eu, elementum at nisi. Aenean rhoncus at metus efficitur imperdiet."
+		},{
+			"author":"Debbie Patterson",
+			"comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel ex quis lobortis. Nulla eros dolor, facilisis a iaculis eu, elementum at nisi. Aenean rhoncus at metus efficitur imperdiet."
+		}
+	]
+}

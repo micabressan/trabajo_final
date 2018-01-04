@@ -1,0 +1,27 @@
+            var col1 = new[]
+            {
+                new {point = "cadn1", type = 1, num = -1, p1 = 2, p2 = 4},
+                new {point = "cadn7", type = 1, num = 2, p1 = 17, p2 = 4},
+                new {point = "pos16", type = 5, num = 2, p1 = 16, p2 = 4},
+                new {point = "cadn3", type = 1, num = 6, p1 = 22, p2 = 0},
+                new {point = "ts0014", type = 2, num = 7, p1 = 33, p2 = 0}
+            };
+
+            var col2 = new[]
+            {
+                new {point = "pos16", type = 5, num = 999},
+                new {point = "ts0014", type = 2, num = 888}
+            };
+
+            // join by point+type
+            // sort by num
+
+            // результат сортировки такой:
+            var col3 = new[]
+            {
+                new{ point = "ts0014"},
+                new{ point = "pos16"},
+                new{ point = "cadn1"},
+                new{ point = "cadn7"},
+                new{ point = "cadn3"}
+            };

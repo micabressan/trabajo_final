@@ -1,0 +1,46 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Titillium Web', sans-serif;
+    color: #FFF;
+}
+
+#vid{
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#headline, #name{
+    text-align: center;
+}
+
+#alertHolder{
+    opacity: 0; /* set to 0 */
+}
+
+#headline{
+    font-size: 33px;
+    letter-spacing: 14px;
+    text-indent: 16px;
+    position: absolute;
+    top: 340px;
+    width: 100%;
+    text-transform: uppercase;
+      color: {topColor};
+}
+
+#name{
+    text-transform: uppercase;
+  letter-spacing: 5px;
+  position: absolute;
+    top: 374px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#vid {
+    filter: hue-rotate({animationHue}deg) saturate({animationSaturation}%) brightness({animationBrightness}%);
+}

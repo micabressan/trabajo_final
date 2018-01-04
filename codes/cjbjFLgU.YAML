@@ -1,0 +1,23 @@
+name       : brisk-menu
+version    : 0.5.0
+release    : 10
+source     :
+    - git|http://github.com/solus-project/brisk-menu: b2af6872d3f1598869bd66a35551548df1939206
+license    :
+    - GPL-2.0
+    - CC-BY-SA-4.0
+component  : desktop.mate
+summary    : An efficient menu for the MATE Desktop
+description: |
+    An efficient menu for the MATE Desktop, from the Solus developers.
+builddeps  :
+    - pkgconfig(gtk+-3.0)
+    - pkgconfig(libmate-menu)
+    - pkgconfig(libmatepanelapplet-4.0)
+    - pkgconfig(libnotify)
+setup      : |
+    %meson_configure
+build      : |
+    %meson_build
+install    : |
+    %meson_install

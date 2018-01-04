@@ -1,0 +1,8 @@
+#EXTM3U#
+#EXTINF:-1,ATV  
+http://193.68.62.125:1935/atvliveedge/_definst_/atvstream_2_aac/playlist.m3u
+#EXTINF:-1,FIX hd
+rtmp://video.fixhd.tv/fix/hd.stream
+#EXTINF:-1,Mor TV
+rtmp://91.82.85.41:1935/liverelay/morvtv.sdp
+#EXTINF:-1,ATV #EXTM3U#EXT-X-STREAM-INF:PROGRAM-ID=1http://193.68.62.125:1935/atvliveedge/_definst_/atvstream_2_aac/playlist.m3u8

@@ -1,0 +1,30 @@
+# test.coffee
+class Foo
+	constructor: ->
+
+	before_filter: (options...) ->
+		console.log(options)
+		options[1]
+
+
+class Test
+	constructor: ->
+
+	load_something: (new Foo).before_filter
+		only: 'show',
+		(request, response) ->
+			console.log 'booyah!'
+			':D'
+
+
+console.log 'hello!'
+
+a = new Test()
+console.log a.load_something()
+
+
+# apanek@thinkpad ~/Projects/instant-resource % coffee test
+# [ { only: 'show' }, [Function] ]
+# hello!
+# booyah!
+# :D

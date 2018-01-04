@@ -1,0 +1,29 @@
+import numpy as np
+import skfuzzy as fuzz
+from skfuzzy import control as ctrl
+
+A = [[1, 5, 2, 3], [3, 2, 1, 5], [4, 7, -6, 1], [6, 5, 3, -3]]
+B = [[1, 5, 2, 3], [3, 2, 1, 5], [4, 7, -6, 1], [6, 5, 3, -3]]
+
+def wiezien154711(poprzedniaNagroda):
+    quality = ctrl.Antecedent(np.arange(0, 7, 1), 'quality')
+    strag = ctrl.Consequent(np.arange(0, 4, 1), 'strag')
+
+    quality.automf(3)
+
+    strag['low'] = fuzz.trimf(strag.universe, [1, 1, 2])
+    strag['medium'] = fuzz.trimf(strag.universe, [1, 2, 4])
+    strag['high'] = fuzz.trimf(strag.universe, [2, 4, 6])
+    rule1 = ctrl.Rule(quality['poor'], strag['low'])
+    rule2 = ctrl.Rule(quality['average'], strag['medium'])
+    rule3 = ctrl.Rule(quality['good'], strag['high'])
+
+    game_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+    game = ctrl.ControlSystemSimulation(game_ctrl)
+    game.input['quality'] = poprzedniaNagroda
+
+    # Crunch the numbers
+    game.compute()
+    xD = int(game.output['strag']/game.output['strag']*2)
+
+    return xD

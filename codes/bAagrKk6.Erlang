@@ -1,0 +1,21 @@
+-module(prime1).
+
+-export([prime/1]).
+
+prime(Num) ->
+  check(1, 3, 1, Num).
+
+check(_, _, _, 0) -> ok;
+
+check(Prime, Div, SqRoot, Num) ->
+  if
+    Div > SqRoot ->
+      %io:format("~w~n", [P]),
+      check(Prime + 2, 3, math:sqrt(Prime + 2), Num - 1);
+    true ->
+      if Prime div Div == Prime / Div ->
+        check(Prime + 2, 3, math:sqrt(Prime + 2), Num);
+      true ->
+        check(Prime, Div + 1, SqRoot, Num)
+    end
+  end.

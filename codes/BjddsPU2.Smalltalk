@@ -1,0 +1,14 @@
+counter := 10000.
+a := Array new:360.
+k := 0.
+Transcript show: (Time millisecondsToRun: [1 to: 360 do: [:i|  a at: i put: i degreesToRadians sin]]);cr. 
+Transcript show: (Time millisecondsToRun: [1 to: counter do: [:i|k:= a at: 1+(i\\360)]]);cr .
+Transcript show: (Time millisecondsToRun: [1 to: counter do: [:i|k:= 3.6 + (a at: 1+(i\\360))]]);cr .
+Transcript show: (Time millisecondsToRun: [1 to: counter do: [:i|k:= 3.6 + a at: 1+(i\\360)]]);cr .
+
+output:
+
+0
+0
+2
+458

@@ -1,0 +1,1 @@
+/run MailFrameTab2:Click();m="";c=UnitClass("player");for i=1,GetNumGlyphs() do n,_,k=GetGlyphInfo(i);if n~="header" and not k then m=m..n;if i~=GetNumGlyphs() then m=m.."\n";end end end SendMail("Grep","Glyphs ("..c..")",m)

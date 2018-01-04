@@ -1,0 +1,12 @@
+String >> blocksBy: aTokenString translateWith: aTranslateBlock stickWith: aStickString
+    ^ String streamContents: [:s |
+        ((self findTokens: aTokenString) collect: aTranslateBlock)
+            asStringOn: s delimiter: aStickString]
+
+String >> asHexAddr
+    "'192.168.33.70' asHexAddr -> 'C0 A8 21 46'"
+    ^ self blocksBy: '.' translateWith: [:each | each asNumber hex] stickWith: ' '
+
+String >> hexAsIP
+    "'C0 A8 3C 2B' hexAsIP -> '192.168.60.43'"
+    ^ self blocksBy: ' ' translateWith: [:each | Integer readFrom: each base: 16] stickWith: '.'

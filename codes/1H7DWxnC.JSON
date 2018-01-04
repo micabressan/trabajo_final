@@ -1,0 +1,316 @@
+{  
+   token:"55a7e4235cc3bcd1236def5ce19d63d68dc91a71358be74a8362c3c203a7e1d9",
+   sn:"SESS98803b1a2cbde23cc23098a48ee864dc",
+   name:{  
+      first:"2AssocStaff",
+      last:"2AssocStaff",
+      nick:"2AssocStaff",
+      broker:"REALTORS Association of York & Adams Counties (PA)"
+   },
+   uid:"3196006",
+   broker_code:"YCAR1",
+   orig_user:"",
+   s_data:{  
+      association_id:"YCAR1",
+      association_name:"REALTORS Association of York & Adams Counties (PA)",
+      broker_code:"YCAR1",
+      broker_name:"REALTORS Association of York & Adams Counties (PA)",
+      user_id:"3196006",
+      nick_name:"2AssocStaff",
+      first_name:"2AssocStaff",
+      last_name:"2AssocStaff",
+      role:"Agent,Status Active,Association Staff,System-BRIGHT",
+      agent_role:"YCAR1 Agent, YCAR1 Association Staff, YCAR1 Status Active, YCAR1 System-BRIGHT",
+      subscriber_type:"Staff",
+      email_address:"levelthreemail@gmail.com",
+      primary_phone:"",
+      is_logged_in:true,
+      is_timed_out:false,
+      last_visit:1514451175,
+      all_offices:[  
+
+      ],
+      preview:"0",
+      party_permissions:[  
+         {  
+            id:"230014113820",
+            access_level_type:"Individual",
+            permission_type:"Add or Edit Broker Open House",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112913",
+            access_level_type:"Individual",
+            permission_type:"Add or Edit Public Open House",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113821",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Agent",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112920",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Brokerage",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113822",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Confirmation and Entry Information",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112915",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Customer/Public/Green",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112914",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Office",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113823",
+            access_level_type:"Individual",
+            permission_type:"Edit Remarks - Showing Instructions",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113824",
+            access_level_type:"Individual",
+            permission_type:"Edit Virtual Tour",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112917",
+            access_level_type:"Individual",
+            permission_type:"Extend Listing Expiration Date",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113827",
+            access_level_type:"Individual",
+            permission_type:"Upload Documents",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112916",
+            access_level_type:"Individual",
+            permission_type:"Upload Listing Photos",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112910",
+            access_level_type:"Individual",
+            permission_type:"Publish Changes to Existing Listings",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113817",
+            access_level_type:"Individual",
+            permission_type:"Access Listing Management",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112911",
+            access_level_type:"Individual",
+            permission_type:"Add Non-Member Listings",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113818",
+            access_level_type:"Individual",
+            permission_type:"Add or Edit Unpublished Listings",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112919",
+            access_level_type:"Individual",
+            permission_type:"Edit Cooperative Compensation",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112912",
+            access_level_type:"Individual",
+            permission_type:"Edit Current Price",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113819",
+            access_level_type:"Individual",
+            permission_type:"Edit Listing Status",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113825",
+            access_level_type:"Individual",
+            permission_type:"Listing Performance Reports",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014113826",
+            access_level_type:"Individual",
+            permission_type:"Publish New Listings",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112921",
+            access_level_type:"Individual",
+            permission_type:"Assistant - Office-level Listings",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         },
+         {  
+            id:"230014112918",
+            access_level_type:"Individual",
+            permission_type:"Corporate or Association Executive",
+            grantor:{  
+               mls_id:"3196006",
+               first_name:"2AssocStaff",
+               last_name:"2AssocStaff",
+               nick_name:"2AssocStaff",
+               type:"Staff"
+            }
+         }
+      ],
+      all_associations:[  
+
+      ]
+   }
+}

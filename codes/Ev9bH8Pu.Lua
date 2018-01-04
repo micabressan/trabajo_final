@@ -1,0 +1,5 @@
+monitor = peripheral.wrap("top")
+monitor.setBackgroundColor(colors.white)
+monitor.setTextColor(colors.black)
+monitor.setTextScale(2)
+print("Luis Parkplatz")

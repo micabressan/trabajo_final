@@ -1,0 +1,60 @@
+' на русском языке системы sapi не говорит по русски, поэтому селектами
+
+set sapi=CreateObject("sapi.spvoice")
+Dim wd
+Dim mon
+Dim workornot
+
+Select Case Weekday(now)
+	Case 1 
+			wd = "Sunday"
+			workornot = "it's weekend and you can chill a bit!"
+	Case 2
+			wd = "Monday"
+			workornot = "and it's time to work!"
+	Case 3
+			wd = "Tuesday"
+			workornot = "and it's time to work!"
+	Case 4
+			wd = "Wednesday"
+			workornot = "and it's time to work!"
+	Case 5
+			wd = "Thursday"
+			workornot = "and it's time to work!"
+	Case 6 
+			wd = "Friday"
+			workornot = "and it's time to work!"
+	Case 7
+			wd = "Saturday"
+			workornot = "it's weekend and you can chill a bit!"
+End Select
+
+Select Case Month(Date)
+	Case 1 
+			mon = "January"
+	Case 2
+			mon = "February"
+	Case 3
+			mon = "March"
+	Case 4
+			mon = "April"
+	Case 5
+			mon = "May"
+	Case 6 
+			mon = "June"
+	Case 7
+			mon = "July"
+	Case 8
+			mon = "August"
+	Case 9
+			mon = "September"
+	Case 10
+			mon = "October"
+	Case 11
+			mon = "November"
+	Case 12
+			mon = "December"
+End Select
+
+'MsgBox Month(Date), 5+16, "Название"
+sapi.Speak "Good morning, Antonn! Today is "&wd&" , "&Day(Date)&" , "&mon&" , "&workornot

@@ -1,0 +1,8 @@
+str = '.'
+pattern_str = '[\.{2,}*]'
+print(str)
+print(re.search(pattern_str,str))
+if re.search(pattern_str,str) is None:
+    print('В данной строке последовательность точек более одной отсутствует')
+else:
+    print('В данной строке ЕСТЬ последовательность более одной точки')

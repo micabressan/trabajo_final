@@ -1,0 +1,78 @@
+// mal 2.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdlib.h"
+
+void SeatSelection()
+{
+    int row = 0;
+    int column = 0;
+    int i, j;
+    int A[11][11] = {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0  },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+    };
+
+    int taken[11][11] = {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    };
+
+    printf("============= The Cinema ==============\n");
+    for (i = 1; i <= 10; i++)
+    {
+        for (j = 1; j <= 10; j++)
+            printf(" %d  ", A[i][j]);
+
+        printf("\n");
+    }
+    fflush(stdout);
+    do
+    {
+        printf("Choose seat: Row and Column\n");
+        fflush(stdout);
+        scanf_s("%d %d", &row, &column);
+		system("cls");
+		if ((row<1 || row>10) && (column<1 || column>10)) printf("Wrong choice, try again\n");
+        if(taken[row][column]) printf("This seat is taken, try again\n");
+        else {
+          taken[row][column] = 1;
+          printf("======== The Cinema =========\n");
+          for (i = 1; i <= 10; i++)
+          {
+              for (j = 1; j <= 10; j++) {
+                  if(taken[i][j] == 0)
+                    printf(" %d  ", A[i][j]);
+                  else
+                    printf("[%d] ", A[i][j]);
+              }
+              printf("\n");
+          }
+        }
+        fflush(stdout);
+    } while (true);
+}
+
+int main() {
+  SeatSelection();
+  return 0;
+}

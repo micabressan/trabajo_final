@@ -1,0 +1,40 @@
+# Your init script
+#
+# Atom will evaluate this file each time a new window is opened. It is run
+# after packages are loaded/activated and after the previous editor state
+# has been restored.
+#
+# An example hack to log to the console when each text editor is saved.
+#
+# atom.workspace.observeTextEditors (editor) ->
+#   editor.onDidSave ->
+#     console.log "Saved! #{editor.getPath()}"
+
+
+# MOJE FUNKCE:
+
+atom.commands.add 'atom-text-editor', 'custom:insert-br': ->
+    atom.workspace.getActiveTextEditor()?.insertText('<br />')
+
+
+wrapSelections = (editor, before, after) ->
+  after ?= before
+  cursorOffset = before.indexOf '$1'
+  if cursorOffset < 0 then cursorOffset = before.length
+
+  cursorPositions = for selection in editor.getSelections()
+    cursorPosition = selection.getBufferRange().start.translate [0, cursorOffset]
+    selectedText = selection.getText()
+    selection.insertText("#{before.replace '$1', ''}#{selectedText}#{after}")
+    cursorPosition
+
+  for cursorPosition, i in cursorPositions
+    if i == 0
+      editor.setCursorBufferPosition cursorPosition
+    else
+      editor.addCursorAtBufferPosition cursorPosition
+
+atom.commands.add 'atom-text-editor', 'custom:wrap-with-strong-tag', ->
+  editor = @getModel()
+  editor.transact ->
+    wrapSelections editor, '<strong>', '</strong>$1'

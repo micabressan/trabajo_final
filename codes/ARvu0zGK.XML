@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <Forms>
+    <UDF1 Class="TCEForm" Encoding="Ascii85">i*LV82nldAU:MM2b.}cxWeIh0Gi32eO*Ft]WMuP5%{mcIVgA6t9Fkwal+AgInNpI$=7,zGoLEqjnV-i7R=Z!snU_7Z9$b:GlFH6qUhJEhmzkScm72o9000</UDF1>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"jump_height"</Description>
+      <LastState Value="421C0000" RealAddress="7FF6B95BFA98"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>s2_mp64_ship.exe+BCFA98</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"bg_fallDamageMinHeight"</Description>
+      <LastState Value="43000000" RealAddress="7FF6B957C858"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>s2_mp64_ship.exe+B8C858</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Brightness"</Description>
+      <LastState Value="3FC00000" RealAddress="7FF6B957812C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>s2_mp64_ship.exe+B8812C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Mantle Jump Height"</Description>
+      <LastState Value="42800000" RealAddress="7FF6B957C828"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF6B957C828</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Look upside down"</Description>
+      <LastState Value="42A00000" RealAddress="7FF6B957C840"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF6B957C840</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,18 @@
+ <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Calendar Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Insert event" Command="{Binding Insertevent}"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Delete event" Command="{Binding Deletevent}"/>
+    </Grid>

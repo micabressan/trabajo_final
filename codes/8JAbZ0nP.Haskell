@@ -1,0 +1,9 @@
+delete_punctuation_mark :: String -> String
+delete_punctuation_mark s  
+    | last s == '.' = delete (last s) s
+    | last s == ';' = delete (last s) s
+    | last s == ',' = delete (last s) s
+    | last s == ':' = delete (last s) s
+    | last s == '!' = delete (last s) s
+    | last s == '?' = delete (last s) s
+    | otherwise = s

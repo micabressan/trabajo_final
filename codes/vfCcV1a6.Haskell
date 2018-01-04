@@ -1,0 +1,23 @@
+data BinTree a = EmptyBT | NodeBT a (BinTree a) (BinTree a)
+
+depthOfBT :: BinTree a -> Int
+depthOfBT EmptyBT = 0
+depthOfBT (NodeBT n lt rt) = 1 + max (depthOfBT lt) (depthOfBT rt)
+
+flattenBT :: BinTree a -> [a]
+flattenBT EmptyBT = []
+flattenBT (NodeBT n lt rt) = [n]++(flattenBT lt)++(flattenBT rt)
+
+mapBT :: (a -> b) -> BinTree a -> BinTree b
+mapBT f EmptyBT = EmptyBT
+mapBT f (NodeBT n lt rt) = NodeBT (f n) (mapBT f lt) (mapBT f rt)
+
+insert :: Ord a => a -> BinTree a -> BinTree a
+insert x EmptyBT = NodeBT x (EmptyBT) (EmptyBT)
+insert x (NodeBT n lt rt) | x < n = insert x lt
+                        | otherwise = insert x rt 
+
+list2BST :: Ord a => [a] -> BinTree a
+list2BST x = loop x EmptyBT
+            where loop [] a = a
+                  loop (x:xs) a = loop xs (insert x a)

@@ -1,0 +1,19 @@
+body {
+background-color:#eee;
+color:#33;
+font:13px/20px Verdana,Helvetica,Arial,sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family:Constantia,Georgia,Times News Roman,Times,serif;
+}
+h1 {
+text-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, rgba(0, 0, 0, 0.5) 0 -1px 0;
+}
+h3 { letter-spacing: 0.5px; }
+a {
+color:midnightBlue;
+text-decoration:none;
+}
+a:hover {
+text-decoration:underline;
+}

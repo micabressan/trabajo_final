@@ -1,0 +1,72 @@
+{-
+- Name: Dylan Sheehy
+- Number: 114435778
+- Assignment: 05
+-}
+
+--new dataType twovalued that is either One or Two
+data TwoValued = One | Two deriving (Ord, Show, Eq)
+
+-- This is an instance of Bounded for the data type TwoValued
+-- It creates a min and max bound for the TwoValued dataType
+instance Bounded TwoValued where
+  minBound = One
+  maxBound = Two
+
+--The Incremental class defines an abstract function next
+--next takes in an element a and returns and element of type a
+--the element a falls under the Ord Constraint.
+class Ord a => Incrementable a where
+  next :: a -> a
+
+
+--Is an instance of the Incremental class for the dataType TwoValued
+--It uses pattern matching to define the 'next' element for the TwoValued type
+--or undefined if it has no next element
+instance Incrementable TwoValued where
+  next One = Two
+  next Two = undefined
+
+--The testable class has one function check and takes in type a
+--check takes in a function that returns a bool applies it to elements
+--within a range and returns a bool depending on the outcome of the function
+--application.
+class (Incrementable a, Ord a) => Testable a where
+  check :: (a -> Bool) -> a -> a -> Bool
+  check f x y | x < y  && (f x) == True && (f y) == True = check f (next x) y
+              | x >= y = True
+              | otherwise = False
+
+--An instance for the testable class with the dataType TwoValued
+instance Testable TwoValued
+
+--next' is a function that taskes in a list of elements [a] and returns [a]
+--It also has the contraints Incremental,Bounded and Eq.
+--next' 1st checks is the head is equal to the maxBound if so return the
+--minBound with the results of  recursive call to next' with the tail xs
+--otherwise append the next of the head with the tail xs
+next' :: (Incrementable a, Bounded a, Eq a) => [a] -> [a]
+next' (x:xs) | x == maxBound = minBound : (next' xs)
+             | otherwise = (next x) : xs
+
+--Is an instance of the Incremental class with the conext Incremental,
+--Eq, Ord and bounded that takes a list of type [a]
+--Its defines the function next by calling next'
+instance (Incrementable a, Eq a, Ord a, Bounded a) => Incrementable [a] where
+  next = reverse . next' . reverse
+
+--An instance of the testable class with the context Testable and bounded
+--that takes in a list of type [a]
+--defined so main could run
+instance (Testable a, Bounded a,Eq a, Ord a) => Testable [a] where
+
+--main is the main thread of execution for the program
+main = do putStrLn $ show $ test ([One,Two,Two] ==)
+          putStrLn $ show $ test ([One,Two,Two] /=)
+          putStrLn $ show $ test ([One,Two,Two]  <)
+          putStrLn $ show $ test ([Two,Two,Two] >=)
+          putStrLn $ show $ test (>= [Two,Two,Two])
+     where test p = [ int p bs [Two,Two,Two] | bs <- bss ]
+           int p a a' = if check p a a' then 1 else 0
+           bs = [One,Two]
+           bss = [[a,b,c] | a <- bs, b <- bs, c <- bs ]

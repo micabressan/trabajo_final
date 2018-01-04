@@ -1,0 +1,28 @@
+** A runtime error occurred in reftr_server_to_gen
+** Arguments: [{ask_missing,true},
+               {file,"/home/dozsam13/Desktop/refactorings/refactored/server1.erl"},
+               {posrange,{57,105}}]
+** Reason: function_clause
+** Stack:
+     [{refcore_graph,data,
+                     [[{'$gn',expr,11}]],
+                     [{file,"./lib/referl_core/src/refcore_graph.erl"},
+                      {line,165}]},
+      {refcore_syntax,parent,1,
+                      [{file,"./lib/referl_core/src/refcore_syntax.erl"},
+                       {line,355}]},
+      {reftr_server_to_gen,replace,2,
+                           [{file,"/home/dozsam13/Desktop/dozsam/to_gen_server/tool/lib/referl_core/../../lib/referl_user/src/reftr_server_to_gen.erl"},
+                            {line,498}]},
+      {reftr_server_to_gen,'-prepare/1-fun-1-',5,
+                           [{file,"/home/dozsam13/Desktop/dozsam/to_gen_server/tool/lib/referl_core/../../lib/referl_user/src/reftr_server_to_gen.erl"},
+                            {line,160}]},
+      {reflib_transform,runt,1,
+                        [{file,"./lib/referl_lib/src/reflib_transform.erl"},
+                         {line,789}]},
+      {reflib_transform,runs,2,
+                        [{file,"./lib/referl_lib/src/reflib_transform.erl"},
+                         {line,779}]},
+      {reflib_transform,do_transform,4,
+                        [{file,"./lib/referl_lib/src/reflib_transform.erl"},
+                         {line,758}]}]

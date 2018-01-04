@@ -1,0 +1,185 @@
+
+------------------------------ scripts/kalata.js ------------------------------
+index 81d374e..fe631e0 100644
+@@ -10,45 +10,6 @@ $(document).ready(function () {
+         success: "valid"
+     });
+ 
+-    // Toggle for sidebar and slider based on window size.
+-    // TODO: Rewrite later with CSS media queries.
+-    var toggle_sidebar, toggleTimer;
+-    toggle_sidebar = function () {
+-        var sidebar = $('.sidebar'),
+-            sidebarBottom = $('.sidebar-bottom'),
+-            section = $('section');
+-            html = $('html');
+-        if (window.innerWidth < 769) {
+-            sidebar.hide();
+-            sidebarBottom.show();
+-            html.css('margin-left', '0');
+-            html.css('margin-right', '0');
+-            section.width("100%");
+-        } else {
+-            sidebar.show();
+-            sidebarBottom.hide();
+-            html.css('margin-left', "8.5%");
+-            html.css('margin-right', "8.5%");
+-            section.width("70%");
+-            sidebar.width("30%");
+-        }
+-    };
+-
+-    // Call of said function when screen is resized
+-    toggleTimer = false;
+-    $(window).resize(function () {
+-
+-        if (toggleTimer !== false) {
+-            clearTimeout(toggleTimer);
+-        }
+-        // time: 200 is 0.2 seconds in miliseconds
+-        toggleTimer = setTimeout(toggle_sidebar, 200);
+-    });
+-
+-    // Call of said function when the document loads
+-    toggle_sidebar();
+-
+-
+ // Call Slider function
+   $('#slider').CoinSlider();
+ 
+@@ -57,4 +18,89 @@ $(document).ready(function () {
+ 
+ 
+ // End of Kalata
+-});
+
+-------------------------- themes/riftworks/style.css --------------------------
+index 71ee875..1013a68 100644
+@@ -1,30 +1,13 @@
+ html {
++    margin-left: 8.5%;
++    margin-right: 8.5%;
+ }
+ 
+ body {
+-    line-height: 1.2;
++    line-height: 1.4;
+     font-family: Verdana, Geneva, sans-serif;
+     font-size: 100%;
+     background: url(background.jpg);
+@@ -34,10 +17,24 @@ body {
+     color: #f9f9f9;
+     padding:0;
+     border:0;
++    margin: 0;
+     width:100%;
+     min-width:320px;
+ }
+ 
++section {
++    width: 70%;
++}
++
++
++/* Extend this with more text shit */
++h1, h2, h3,
++h4, h5, h6,
++p {
++    padding: 0;
++    margin: 0;
++}
++
+ p {
+     -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+@@ -56,8 +53,6 @@ header {
+ #main {
+     background-color: #f9f9f9;
+     color: #0d0d0d;
+-    padding-top: 25px;
+-    padding-bottom: 25px;
+ }
+ 
+ br {
+@@ -175,12 +170,18 @@ opacity: 1.0;
+ ********************************************************************/
+ 
+ .sidebar {
++    -moz-box-shadow: 0 0 5px #666;
++    -webkit-box-shadow: 0 0 5px #666;
++    overflow: hidden;
+     color: #0d0d0d;
++    position: relative;
++}
++
++#sidebar {
++    background-color: #eee;
+     float:right;
+     right: 0;
+-    padding-top: 0px;
+-    padding-bottom: 0px;
+-    position: relative;
++    width: 30%;
+ }
+ 
+ .sidebar h3 {
+@@ -189,7 +190,7 @@ opacity: 1.0;
+     text-align: center;
+ }
+ 
+-.sidebar-bottom a,
++.sidebar-top a,
+ .sidebar a {
+     padding: 5px;
+     text-decoration: none;
+@@ -201,9 +202,11 @@ opacity: 1.0;
+     font-size: 0.6em;
+ }
+ 
+-.sidebar-bottom {
++#sidebar-top {
+     color: #E8E8E8;
+-    background-color: rgba(24,24,24,1);
++    background-color: rgba(1,1,1,0.6);
++    width: 100%;
++    text-align: center;
+ }
+
++/* Media Queries */
++
++@media screen and (max-width: 769px) {
++#riftworks:after {
++    position: absolute;
++content: "Touch";
++letter-spacing: 0px;
++font-size: 0.6em;
++}
++
++#sidebar-mobile {
++    display: block;
++}
++
++#sidebar-top {
++    display: block;
++}
++
++section {
++    width: 100%;
++}
++
++#sidebar,
++#slider {
++    display: none;
++}
++
++html {
++    margin: 0;
++}
++}
++
++@media screen and (max-width: 480px) {
++#riftworks:after {
++content: "Mobile";
++}
++}
++

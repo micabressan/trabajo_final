@@ -1,0 +1,81 @@
+draw = ->
+  canvas = document.getElementById 'canvas'
+  ctx = canvas.getContext '2d'
+
+  ctx.fillStyle = "rgb(200,0,0)"
+  ctx.fillRect 10, 10, 55, 50
+
+  ctx.fillStyle = "rgba(0, 0, 200, 0.5)"
+  ctx.fillRect 30, 30, 55, 50
+
+  entity = new Entity 100, 100
+  entity.draw ctx
+
+# --- Player ----------------------------------------------
+class Entity
+  constructor: (@x, @y) ->
+    @size = 3
+    @shape = [
+      0,  0
+      10, 0
+      10, 10
+      0,  10
+    ]
+    @color = "rgb(200,0,0)"
+
+  draw: (ctx) ->
+    cxt.beginPath
+    ctx.moveTo(@x, @y)
+    ctx.beginPath()
+    for x, y in @shape
+      ctx.lineTo(x * @size + @x, y * @size + @y)
+    ctx.closePath
+    ctx.strokeStyle = @color
+    ctx.stroke
+
+# --- Input -----------------------------------------------
+
+KEY = {
+  D: 68,
+  W: 87,
+  A: 65,
+  S: 83,
+  RIGHT: 39,
+  UP: 38,
+  LEFT: 37,
+  DOWN: 40,
+  Q : 81
+}
+
+input = {
+  right: false,
+  up: false,
+  left: false,
+  down: false
+}
+
+press = (event) ->
+  switch event.keyCode
+    when KEY.RIGHT, KEY.D
+      input.right = true
+    when KEY.LEFT, KEY.A
+      input.left = true
+    when KEY.UP, KEY.W
+      input.up = true
+    when KEY.DOWN, KEY.S
+      input.down = true
+
+release = (event) ->
+  switch event.keyCode
+    when KEY.RIGHT, KEY.D
+      input.right = false
+    when KEY.LEFT, KEY.A
+      input.left = false
+    when KEY.UP, KEY.W
+      input.up = false
+    when KEY.DOWN, KEY.S
+      input.down = false
+    else
+      trace('unrecognized key code:' +code)
+
+window.onload = draw

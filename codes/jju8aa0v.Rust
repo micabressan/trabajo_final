@@ -1,0 +1,8 @@
+fn main() {                                                                                                                  
+    let a = {                                                                                                                
+        let inc = |x| { x + 1 };                                                                                             
+        inc(5)                                                                                                               
+    };                                                                                                                       
+                                                                                                                             
+    println!("a = {}", a);                                                                                                   
+}

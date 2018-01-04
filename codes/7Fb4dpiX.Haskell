@@ -1,0 +1,4 @@
+lamP :: Parser Term
+--lamP = try $ between (char '(') (char ')') $
+--       Lam <$> ((char '\\') *> nameP) <* (char '.') <*> termP
+lamP = try $ Lam <$> ((char '\\') *> nameP) <* (char '.') <*> termP -- lambda term must not be in the brackets

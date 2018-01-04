@@ -1,0 +1,4 @@
+# Select every second entry
+li[::2]   # =>[1, 4]
+# Return a reversed copy of the list
+li[::-1]  # => [3, 4, 2, 1]

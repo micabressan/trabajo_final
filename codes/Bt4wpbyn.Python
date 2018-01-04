@@ -1,0 +1,81 @@
+import cam_utils
+import sys
+sys.path.append('G:/Pipeline/pipeline/maya/scripts/alembic_cache_utils')
+sys.path.append(r'G:\Pipeline\pipeline\maya\scripts\taskmaster\pub_tasks\shot')
+sys.path.append(r'G:\Pipeline\pipeline\maya\scripts\taskmaster\pub_tasks\shot\sfn')
+sys.path.append(r'G:\Pipeline\pipeline\maya\scripts\taskmaster\pub_tasks\shot\anm')
+import do_not_render_export
+import export_data_locators
+import save;reload(save);save.wip()
+import cog_locators_export
+from groom_tools import groom_io
+import assets
+import reference_log
+import anim_log
+import sf_pipe_test as sf
+import cache_utils
+import playblast
+
+cmds.currentTime(971)
+cmds.currentTime(971)
+sf.loadAllRef()
+save.wip()
+sf.bake_all_constraints()
+sf.chain_hair_locker()
+sf.saveNewVersion()
+
+
+#pipeline data exports
+reference_log.write()
+cam_utils.camera_export()
+do_not_render_export.DoNotRenderExport().run()
+export_data_locators.ExportAttrs().run()
+cogExp = cog_locators_export.COGLocator().run()
+anim_log.AnimLog().run()
+
+pbUploadList = []
+sf.preroll_it()
+sf.hwRenderGlobals(1)
+pub_playblast_path = sf.courteous_playblast()
+pbUploadList.append(pub_playblast_path)
+sf.hwRenderGlobals(0)
+
+sf.unloadAllRef()
+sf.removeAllYetis()
+
+for ref in cmds.file(q=1, r=1):
+    sf.delete_n_caches()
+    currentAss  = '_'.join(cmds.referenceQuery(ref, referenceNode=True ).split('_')[0:-1])
+    cmds.file(ref,lr=1)
+    allAssets = assets.all()
+    for a in allAssets:
+        cmds.playbackOptions( ast=971.0, minTime=971.0)
+        cache_utils.crate_cache(to_cache=a,user_attrs=['frameNumber'])
+        
+        if cmds.ls('*:*Groom*')!=[]:
+            if list(set([currentAss]).intersection(sf.apeFinder(type='refList')))!=[]:
+                sf.cache_all_n_Obj()
+                #need to do an individualized playblast for apes with fur
+                renamer_path = pub_playblast_path.split('\\')
+                renamer_file = renamer_path[-1].split('.')
+                renamer_file[-2]=a.name+'isolated_playblast'
+                renamer_path[-1]='.'.join(renamer_file)
+                newPath = '\\'.join(renamer_path)
+                pbUploadList.append(newPath)
+                sf.hwRenderGlobals(1)
+                sf.courteous_playblast(fn=newPath)
+                sf.hwRenderGlobals(0)
+
+                
+            cmds.playbackOptions( ast=1001.0, minTime=1001.0)
+            sf.importNamedYeti([a.name])
+            grmProduct = groom_io.lgt_yeti_cache(a)
+            sf.removeAllYetis()
+            sf.delete_n_caches()
+
+    cmds.file(ref,ur=1)
+
+pbUploadList.reverse()
+for pb in pbUploadList:
+    sf.uploadVersion(pb,None,msg='upload playblast'+'\n'+pb)
+sf.updateStatus('rev')

@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MoviesCrudMVC.Models
+{
+    public class BaseModel
+    {
+        public int ID { get; set; }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MoviesCrudMVC.Models
+{
+    public class Movie : BaseModel
+    {
+        public string Name { get; set; }
+        public string Genre { get; set; }
+        public int Year { get; set; }
+        public string Director { get; set; }
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MoviesCrudMVC.Models;
+using MoviesCrudMVC.Repositories;
+
+namespace MoviesCrudMVC.Controllers
+{
+    public class MoviesController : Controller
+    {
+        //
+        // GET: /Movies/
+        public ActionResult Index()
+        {
+            List<Movie> model = new List<Movie>();
+            MovieRepository repository = new MovieRepository();
+
+            model = repository.GetAll();
+            return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Movie model)
+        {
+            if (ModelState.IsValid)
+            {
+                MovieRepository repository = new MovieRepository();
+                repository.Save(model);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            MovieRepository repo = new MovieRepository();
+            Movie model = repo.GetByID(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Movie model)
+        {
+            if (ModelState.IsValid)
+            {
+                MovieRepository repo = new MovieRepository();
+                repo.Save(model);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            MovieRepository repo = new MovieRepository();
+            Movie model = repo.GetByID(id.Value  );
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                MovieRepository repo = new MovieRepository();
+                Movie model = repo.GetByID(id);
+                repo.Delete(model);
+
+                return RedirectToAction("Index");
+            }
+
+            return HttpNotFound();
+        }
+	}
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity; //Install-Package EntityFramework
+using MoviesCrudMVC.Models;
+
+namespace MoviesCrudMVC.Repositories
+{
+    public abstract class BaseRepository<T> where T : BaseModel
+    {
+        protected DbContext Context { get; set; }
+        protected IDbSet<T> DbSet { get; set; }
+
+        public BaseRepository()
+        {
+            this.Context = new MoviesContext();
+            this.DbSet = Context.Set<T>();
+        }
+
+        public virtual T GetByID(int id)
+        {
+            return DbSet.Find(id);
+        }
+
+        public virtual List<T> GetAll()
+        {
+            return DbSet.ToList();
+        }
+
+        protected virtual void Insert(T entity)
+        {
+            this.DbSet.Add(entity);
+            this.Context.SaveChanges();
+        }
+
+        protected virtual void Update(T entity)
+        {
+            this.Context.Entry(entity).State = EntityState.Modified;
+            this.Context.SaveChanges();
+        }
+
+        public virtual void Save(T entity)
+        {
+            if (entity.ID > 0)
+            {
+                Update(entity);
+            }
+            else
+            {
+                Insert(entity);
+            }
+        }
+
+        public virtual void Delete(T entity)
+        {
+            this.DbSet.Remove(entity);
+            this.Context.SaveChanges();
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
+using MoviesCrudMVC.Models;
+
+namespace MoviesCrudMVC.Repositories
+{
+    public class MoviesContext : DbContext
+    {
+        public MoviesContext() : base("MoviesDatabase")
+        {
+
+        }
+
+        public DbSet<Movie> Movies { get; set; }
+    }
+}

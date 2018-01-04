@@ -1,0 +1,18 @@
+-module(prime1).
+
+-export([prime/1]).
+
+prime(Num) ->
+  check(1, 3, Num).
+
+check(_, _, 0) -> ok;
+
+check(Prime, Div, Num) when Div * Div > Prime ->
+  %io:format("~w~n", [Prime]),
+  check(Prime + 2, 3, Num - 1);
+
+check(Prime, Div, Num) when Prime rem Div =:= 0 ->
+  check(Prime + 2, 3, Num);
+
+check(Prime, Div, Num) ->
+  check(Prime, Div + 1, Num).

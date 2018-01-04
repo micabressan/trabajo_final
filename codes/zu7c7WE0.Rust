@@ -1,0 +1,71 @@
+// Extern crates
+extern crate wincolor;
+use wincolor::{Console, Color, Intense};
+extern crate rand;
+use rand::Rng;
+
+// std modules
+use std::{thread, time};
+use std::io;
+use std::sync::mpsc::channel;
+
+// my modules
+mod bloom_filter;
+use bloom_filter::BloomFilter;
+
+const NUMBER: u32 = 3000;
+const TIME_SLEEP: u64 = 2000;
+
+fn main() {
+    let mut filter = BloomFilter::new(100, 7);
+    let allow_data = vec![15, 454, 1333, 1088, 2090, 2578];
+    for i in 0..allow_data.len() {
+    	filter.insert(&allow_data[i]);
+    }
+
+
+    let mut con = Console::stdout().unwrap();
+    println!("Bloom Filter on threads.\nError chance: {:?}",
+    	filter.error_chance());
+    con.reset().unwrap();
+    println!("Press 'Enter' to start...");
+    let mut tmp = String::new();
+    io::stdin().read_line(&mut tmp)
+        .expect("Unable to read line");
+
+
+	let (tx, rx) = channel();
+	thread::spawn(move || {
+	    for _ in 0..10000 {
+	    	let send_data = rand::thread_rng().gen_range(1, NUMBER);
+	    	tx.send(send_data).unwrap();
+	    }
+	});
+
+
+	let mut cnt = 0;
+	loop {
+		match rx.recv() {
+		 	Ok(res) => {
+		 		if filter.check(&res) == true {
+		 			if !allow_data.contains(&res) {
+		 				cnt += 1;
+		 			}
+		 			con.fg(Intense::Yes, Color::Green).unwrap();
+		 			println!("User {:?}: Access allowed.", res);
+		 			con.reset().unwrap();
+		 			println!("Waiting for user...\n");
+
+		 			thread::sleep(time::Duration::from_millis(TIME_SLEEP));
+		 		}
+		 		else {
+		 			con.fg(Intense::Yes, Color::Red).unwrap();
+		 			println!("User {:?}: Access denied.", res);
+		 			con.reset().unwrap();
+		 		}
+		 	},
+		 	Err(_) => break,
+		 };
+	}
+	println!("{:?}", cnt);
+}

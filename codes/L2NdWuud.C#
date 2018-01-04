@@ -1,0 +1,422 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+    class Image
+    {
+        public Image()
+        {
+
+        }
+        public Bitmap convertImageRed(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxRed = h.maxR;
+            int minRed = h.minR;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for(int y = 0; y < bmp.Height; y++)
+                {
+                    int pixelRed = (int)(255 * ((double)(bmp.GetPixel(x, y).R - minRed) / (maxRed - minRed)));
+                    if (pixelRed > 255)
+                    {
+                        pixelRed = 255;
+                    }
+                    if (pixelRed < 0)
+                    {
+                        pixelRed = 0;
+                    }
+                    int pixelgreen = bmp.GetPixel(x, y).G;
+                    int pixelblue = bmp.GetPixel(x, y).B;
+                    bmp.SetPixel(x,y,Color.FromArgb((int)(pixelRed),pixelgreen, pixelblue));
+                }
+            }
+            
+            return bmp;
+        }
+        public Bitmap convertImageGreen(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxGreen = h.maxG;
+            int minGreen = h.minG;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    int pixelGreen = (int)(255 * ((double)(bmp.GetPixel(x, y).G - minGreen) / (maxGreen - minGreen))); ;
+                    if (pixelGreen > 255)
+                    {
+                        pixelGreen = 255;
+                    }
+                    if (pixelGreen < 0)
+                    {
+                        pixelGreen = 0;
+                    }
+
+                    int pixelred = bmp.GetPixel(x, y).R;
+                    int pixelblue = bmp.GetPixel(x, y).B;
+                    bmp.SetPixel(x, y, Color.FromArgb(pixelred, pixelGreen, pixelblue));
+                }
+            }
+
+            return bmp;
+        }
+        public Bitmap convertImageBlue(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxBlue = h.maxB;
+            int minBlue = h.minB;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    int pixelBlue;
+                   
+                    
+                        pixelBlue = (int)(255 * ((double)(bmp.GetPixel(x, y).B - minBlue) / (maxBlue - minBlue)));
+                        if (pixelBlue > 255)
+                        {
+                            pixelBlue = 255;
+                        }
+                        if (pixelBlue < 0)
+                        {
+                            pixelBlue = 0;
+                        }
+                    
+                    
+                    int pixelred = bmp.GetPixel(x, y).R;
+                    int pixelgreen = bmp.GetPixel(x, y).G;
+                    bmp.SetPixel(x, y, Color.FromArgb(pixelred, pixelgreen, pixelBlue));
+                }
+            }
+
+            return bmp;
+        }
+        public Bitmap convertImageCyaan(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxCyaan = h.maxC;
+            int minCyaan = h.minC;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    
+
+
+                    double R = ((double)bmp.GetPixel(x, y).R) / 255f;
+                    double G = ((double)bmp.GetPixel(x, y).G) / 255f;
+                    double B = ((double)bmp.GetPixel(x, y).B) / 255f;
+                    double K;
+
+                    if (R >= G && R >= B)
+                    {
+                        K = 1 - R;
+                    }
+                    else if (B >= G && B >= R)
+                    {
+                        K = 1 - B;
+                    }
+                    else if (R == G && G == B)
+                    {
+                        K = 1;
+                    }
+                    else
+                    {
+                        K = 1 - G;
+                    }
+                    double cyaan = (1 - R - K) / (1 - K);
+                    double magenta = (1 - G - K) / (1 - K);
+                    double yellow = (1 - B - K) / (1 - K);
+
+                    int scaleCyaan = (int)(cyaan * 255);
+                    int scaleMagenta = (int)(magenta * 255);
+                    int scaleYellow = (int)(yellow * 255);
+
+
+
+
+                    double pixelCyaan = (int)(255 * ((double)(scaleCyaan - minCyaan) / (maxCyaan - minCyaan)));
+                    if (pixelCyaan > 255)
+                    {
+                        pixelCyaan = 255;
+                    }
+                    if (pixelCyaan < 0)
+                    {
+                        pixelCyaan = 0;
+                    }
+                    int RedNew = (int)(255 * (1 - (pixelCyaan/255f)) * (1 - K));
+                    int GreenNew = (int)(255 * (1 - (scaleMagenta / 255f)) * (1 - K));
+                    int BlueNew = (int)(255 * (1 - (scaleYellow / 255f)) * (1 - K));
+                    bmp.SetPixel(x, y, Color.FromArgb((RedNew), GreenNew, BlueNew));
+                }
+            }
+
+            return bmp;
+        }
+
+        public Bitmap convertImageMagenta(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxMagenta = h.maxM;
+            int minMagenta = h.minM;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+
+
+
+                    double R = ((double)bmp.GetPixel(x, y).R) / 255f;
+                    double G = ((double)bmp.GetPixel(x, y).G) / 255f;
+                    double B = ((double)bmp.GetPixel(x, y).B) / 255f;
+                    double K;
+
+                    if (R >= G && R >= B)
+                    {
+                        K = 1 - R;
+                    }
+                    else if (B >= G && B >= R)
+                    {
+                        K = 1 - B;
+                    }
+                    else if (R == G && G == B)
+                    {
+                        K = 1;
+                    }
+                    else
+                    {
+                        K = 1 - G;
+                    }
+                    double cyaan = (1 - R - K) / (1 - K);
+                    double magenta = (1 - G - K) / (1 - K);
+                    double yellow = (1 - B - K) / (1 - K);
+
+                    int scaleCyaan = (int)(cyaan * 255);
+                    int scaleMagenta = (int)(magenta * 255);
+                    int scaleYellow = (int)(yellow * 255);
+
+
+
+
+                    double pixelMagenta = (int)(255 * ((double)(scaleMagenta - minMagenta) / (maxMagenta - minMagenta)));
+                    if (pixelMagenta > 255)
+                    {
+                        pixelMagenta = 255;
+                    }
+                    if (pixelMagenta < 0)
+                    {
+                        pixelMagenta = 0;
+                    }
+                    int RedNew = (int)(255 * (1 - (scaleCyaan / 255f)) * (1 - K));
+                    int GreenNew = (int)(255 * (1 - (pixelMagenta / 255f)) * (1 - K));
+                    int BlueNew = (int)(255 * (1 - (scaleYellow / 255f)) * (1 - K));
+                    bmp.SetPixel(x, y, Color.FromArgb((RedNew), GreenNew, BlueNew));
+                }
+            }
+
+            return bmp;
+        }
+
+        public Bitmap convertImageYellow(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxYellow = h.maxY;
+            int minYellow = h.minY;
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+
+
+
+                    double R = ((double)bmp.GetPixel(x, y).R) / 255f;
+                    double G = ((double)bmp.GetPixel(x, y).G) / 255f;
+                    double B = ((double)bmp.GetPixel(x, y).B) / 255f;
+                    double K;
+
+                    if (R >= G && R >= B)
+                    {
+                        K = 1 - R;
+                    }
+                    else if (B >= G && B >= R)
+                    {
+                        K = 1 - B;
+                    }
+                    else if (R == G && G == B)
+                    {
+                        K = 1;
+                    }
+                    else
+                    {
+                        K = 1 - G;
+                    }
+                    double cyaan = (1 - R - K) / (1 - K);
+                    double magenta = (1 - G - K) / (1 - K);
+                    double yellow = (1 - B - K) / (1 - K);
+
+                    int scaleCyaan = (int)(cyaan * 255);
+                    int scaleMagenta = (int)(magenta * 255);
+                    int scaleYellow = (int)(yellow * 255);
+
+
+
+
+                    double pixelYellow = (int)(255 * ((double)(scaleYellow - minYellow) / (maxYellow - minYellow)));
+                    if (pixelYellow > 255)
+                    {
+                        pixelYellow = 255;
+                    }
+                    if (pixelYellow < 0)
+                    {
+                        pixelYellow = 0;
+                    }
+                    int RedNew = (int)(255 * (1 - (scaleCyaan / 255f)) * (1 - K));
+                    int GreenNew = (int)(255 * (1 - (scaleMagenta / 255f)) * (1 - K));
+                    int BlueNew = (int)(255 * (1 - (pixelYellow / 255f)) * (1 - K));
+                    bmp.SetPixel(x, y, Color.FromArgb((RedNew), GreenNew, BlueNew));
+                }
+            }
+
+            return bmp;
+        }
+        public Bitmap convertImageAllRGB(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxRed = h.maxR;
+            int minRed= h.minR;
+            int maxBlue = h.maxB;
+            int minBlue = h.minB;
+            int maxGreen = h.maxG;
+            int minGreen = h.minG;
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    int pixelRed  = (int)(255 * ((double)(bmp.GetPixel(x, y).R - minRed) / (maxRed - minRed)));
+                    int pixelGreen = (int)(255 * ((double)(bmp.GetPixel(x, y).G - minGreen) / (maxGreen - minGreen)));
+                    int pixelBlue = (int)(255 * ((double)(bmp.GetPixel(x, y).B - minBlue) / (maxBlue - minBlue)));
+                    if (pixelRed > 255)
+                    {
+                        pixelRed = 255;
+                    }
+                    if (pixelRed < 0)
+                    {
+                        pixelRed = 0;
+                    }
+                    if (pixelBlue > 255)
+                    {
+                        pixelBlue = 255;
+                    }
+                    if (pixelBlue < 0)
+                    {
+                        pixelBlue = 0;
+                    }
+                    if (pixelGreen > 255)
+                    {
+                        pixelGreen = 255;
+                    }
+                    if (pixelGreen < 0)
+                    {
+                        pixelGreen = 0;
+                    }
+                    
+                    Color color = Color.FromArgb(pixelRed,pixelGreen,pixelBlue);
+                    bmp.SetPixel(x, y, color);
+                }
+            }
+
+            return bmp;
+        }
+        public Bitmap convertImageAllCMY(Bitmap bmp)
+        {
+            Histogram h = new Histogram(bmp);
+            int maxYellow = h.maxY;
+            int minYellow = h.minY;
+            int maxMagenta = h.maxM;
+            int minMagenta = h.minM;
+            int maxCyaan = h.maxC;
+            int minCyaan = h.minC;
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+
+                    double R = ((double)bmp.GetPixel(x, y).R) / 255f;
+                    double G = ((double)bmp.GetPixel(x, y).G) / 255f;
+                    double B = ((double)bmp.GetPixel(x, y).B) / 255f;
+                    double K;
+
+                    if (R >= G && R >= B)
+                    {
+                        K = 1 - R;
+                    }
+                    else if (B >= G && B >= R)
+                    {
+                        K = 1 - B;
+                    }
+                    else if (R == G && G == B)
+                    {
+                        K = 1;
+                    }
+                    else
+                    {
+                        K = 1 - G;
+                    }
+                    double cyaan = (1 - R - K) / (1 - K);
+                    double magenta = (1 - G - K) / (1 - K);
+                    double yellow = (1 - B - K) / (1 - K);
+
+                    int scaleCyaan = (int)(cyaan * 255);
+                    int scaleMagenta = (int)(magenta * 255);
+                    int scaleYellow = (int)(yellow * 255);
+
+                    double pixelCyaan = (int)(255 * ((double)(scaleCyaan - minCyaan) / (maxCyaan - minCyaan)));
+                    if (pixelCyaan > 255)
+                    {
+                        pixelCyaan = 255;
+                    }
+                    if (pixelCyaan < 0)
+                    {
+                        pixelCyaan = 0;
+                    }
+                    double pixelMagenta = (int)(255 * ((double)(scaleMagenta - minMagenta) / (maxMagenta - minMagenta)));
+                    if (pixelMagenta > 255)
+                    {
+                        pixelMagenta = 255;
+                    }
+                    if (pixelMagenta < 0)
+                    {
+                        pixelMagenta = 0;
+                    }
+                    double pixelYellow = (int)(255 * ((double)(scaleYellow - minYellow) / (maxYellow - minYellow)));
+                    if (pixelYellow > 255)
+                    {
+                        pixelYellow = 255;
+                    }
+                    if (pixelYellow < 0)
+                    {
+                        pixelYellow = 0;
+                    }
+
+                    int RedNew = (int)(255 * (1 - (pixelCyaan / 255f)) * (1 - K));
+                    int GreenNew = (int)(255 * (1 - (pixelMagenta / 255f)) * (1 - K));
+                    int BlueNew = (int)(255 * (1 - (pixelYellow / 255f)) * (1 - K));
+                    
+                    Color color = Color.FromArgb(RedNew, GreenNew, BlueNew);
+                    bmp.SetPixel(x, y, color);
+                }
+            }
+
+            return bmp;
+        }
+
+    }
+}

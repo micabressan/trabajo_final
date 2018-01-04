@@ -1,0 +1,18 @@
+import requests
+
+page = "http://httpbin.org/get"
+payload = {'key1' : 'value', 'key2' : ' value2'}
+
+response = requests.get(page , stream = 'true', params = payload)
+
+response.encoding = "gzip"
+
+print  response.content
+
+for chunk in response.iter_content(chunk_size = 128):
+ 	print chunk
+	
+
+
+"""with open('securitybantaba4.html','wb') as file:
+	file.write(response.content)"""

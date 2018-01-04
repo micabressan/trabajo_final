@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ad-program>
+<ad id="ad1" type="video" title="title" description="description">
+<ad_video length="0:00" url="video url"
+type="video/x-flv" scalable="true"/>
+<destination url="destination ur"/>
+</ad>
+<spot id="preroll_spot" type="video" timing="pre"/>
+<controls show_pause="false" show_skip="false" show_mute="false" countdown_message="00s"/>
+</ad-program>

@@ -1,0 +1,24 @@
+public int GetNodModul(int val1, int val2)
+        {
+            int nod = 0;
+            if (val1 > val2)
+            {
+                for (int i = 1; i < val2; i++)
+                {
+                    if (val1 / i == val2 / i)
+                    {
+                        nod = i;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 1; i < val1; i++)
+                {
+                    if (val1 / i == val2 / i)
+                    {
+                        nod = i;
+                    }
+                }
+            }
+        }

@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _2.Deer_of_Santa
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+			//Programming Basics Exam - 16 December 2017
+
+            int days = int.Parse(Console.ReadLine());
+            int kgFood = int.Parse(Console.ReadLine());
+            double foodFirstDeer = double.Parse(Console.ReadLine());
+            double foodSecondDeer = double.Parse(Console.ReadLine());
+            double foodThirdDeer = double.Parse(Console.ReadLine());
+
+            double foodEatenFirst = days * foodFirstDeer;
+            double foodEatenSecond = days * foodSecondDeer;
+            double foodeatenThird = days * foodThirdDeer;
+
+            double totalEatenFood = foodEatenFirst + foodEatenSecond + foodeatenThird;
+
+            if (totalEatenFood <= kgFood)
+            {
+                Console.WriteLine("{0} kilos of food left.", Math.Floor(kgFood - totalEatenFood));
+            }
+
+            else
+            {
+                Console.WriteLine("{0} more kilos of food are needed.", Math.Ceiling(totalEatenFood - kgFood));
+            }
+        }
+    }
+}

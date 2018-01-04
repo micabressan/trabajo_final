@@ -1,0 +1,75 @@
+(ns advent-of-code-2017.day22
+  (:require [advent-of-code-2017.common :refer [file-lines]]))
+
+(defn get-coors [xs]
+  (letfn [(infected? [coor] (= \# (get-in xs coor)))
+          (c-product [r]    (for [x r, y r] [x y]))]
+    (->> xs
+      ((comp c-product range count))
+      (map #(when (infected? %) [% :infected]))
+      (into {}))))
+
+(defn get-input []
+  (let [input (file-lines "resources/day22.txt")
+        xs    (mapv #(vec (char-array %)) input)]
+    [xs (get-coors xs)]))
+
+(def moves
+  {[:north :right] :east
+   [:north :left]  :west
+   [:south :right] :west
+   [:south :left]  :east
+   [:west  :right] :north
+   [:west  :left]  :south
+   [:east  :right] :south
+   [:east  :left]  :north})
+
+(defn forward [dir [x y]]
+  (case dir
+    :north [(dec x) y]
+    :south [(inc x) y]
+    :west  [x (dec y)]
+    :east  [x (inc y)]))
+
+(def reversed-dir  {:north :south  :west :east
+                    :south :north  :east :west})
+
+(defn one-step [[coors [x y] dir c]]
+  (let [type (coors [x y])]
+    (if (= :infected type)
+      (let [ndir (move dir :right)]
+        [(dissoc coors [x y]) (forward ndir [x y]) ndir c])
+      (let [ndir (move dir :left)]
+        [(conj coors [[x y] :infected]) (forward ndir [x y]) ndir (inc c)]))))
+
+(defn one-step2 [[coors [x y] dir c]]
+  (case (get coors [x y])
+    :weakened (let [ncoors (assoc coors [x y] :infected)]
+                [ncoors (forward dir [x y]) dir (inc c)])
+
+    :infected (let [ndir   (get moves [dir :right])
+                    ncoors (assoc coors [x y] :flagged)]
+                [ncoors (forward ndir [x y]) ndir c])
+
+    :flagged  (let [ndir   (get reversed-dir dir)
+                    ncoors (dissoc coors [x y])]
+                [ncoors (forward ndir [x y]) ndir c])
+
+    (let [ndir   (get moves [dir :left])
+          ncoors (conj coors [[x y] :weakened])]
+      [ncoors (forward ndir [x y]) ndir c])))
+         
+
+(defn part-1
+  "Day 22 part 1 solution"
+  []
+  (let [[grid coors] (get-input)
+        c            (quot (count grid) 2)]
+    (last (nth (iterate one-step [coors [c c] :north 0]) 10000))))
+
+(defn part-2
+  "Day 22 part 2 solution"
+  []
+  (let [[grid coors] (get-input)
+        c            (quot (count grid) 2)]
+    (peek (nth (iterate one-step2 [coors [c c] :north 0]) 10000000))))

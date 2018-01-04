@@ -1,0 +1,20 @@
+-- initial p returnerer en State som den passer videre til f.
+-- f er () delen af MSM () som interp returnerer, som i princippet svarer til (State -> (a,State)).
+runMSM :: Prog -> State -- INDSAT
+runMSM p = let (MSM f) = interp 
+           in fmap snd $ f $ initial p
+
+
+-- interp har dog ingen argumenter, og er altså en partial applied funktion. 
+-- Vi kan derfor antage at den state som køres på f, kan hentes ud i getInst. 
+interp :: MSM ()
+interp = run
+    where run = do inst <- getInst
+                   cont <- interpInst inst
+                   when cont run
+
+-- Dette har jeg prøvet her, men den giver en fejl
+getInst :: Inst
+getInst = let p = \s -> s in let (MSM qq) = get in prog(snd $ qq p) !! pc(snd $ qq p)
+-- Jeg ved at nedenstående fungerer korrekt, så det er bare at finde den korrekte notation for initial p pladsen.
+-- getInst = let p = initial p42 in let (MSM qq) = get in prog(snd $ qq p) !! pc(snd $ qq p)

@@ -1,0 +1,47 @@
+
+<ArrayOfDividaAtiva>
+  <DividaAtiva>
+    <Marcado>true</Marcado>
+    <TipoDivida>Original</TipoDivida>
+    <Identificador>000136108</Identificador>
+    <NumeroPrestacao>1</NumeroPrestacao>
+    <DataVencimento>2010-07-25T00:00:00</DataVencimento>
+    <ValorDividaIntegral>5638.59</ValorDividaIntegral>
+    <ValorDividaCalculo>5638.59</ValorDividaCalculo>
+    <DataCorrecao>0001-01-01T00:00:00</DataCorrecao>
+    <ValorCorrecao>0</ValorCorrecao>
+    <ValorMinimo>150.01</ValorMinimo>
+    <DataPagamento>2018-01-02T00:00:00-02:00</DataPagamento>
+    <ValorAtualizado>0</ValorAtualizado>
+    <ValorJuros>0</ValorJuros>
+    <ValorDescontoPrincipal>0</ValorDescontoPrincipal>
+    <ValorDescontoJuros>0</ValorDescontoJuros>
+    <ValorMulta>0</ValorMulta>
+    <ValorTaxaAdministrativa>0</ValorTaxaAdministrativa>
+    <ValorEncargos>0</ValorEncargos>
+    <ValorReceita>0</ValorReceita>
+    <ValorRepasse>0</ValorRepasse>
+    <Atraso>2718</Atraso>
+    <TipoFatura>Nenhum</TipoFatura>
+    <IdCliente>275302</IdCliente>
+    <IdContrato>308695</IdContrato>
+    <IdDivida>19167000</IdDivida>
+    <IdAcordo>0</IdAcordo>
+    <IdFatura>0</IdFatura>
+    <DividaCedente>000136108</DividaCedente>
+    <HashCalculo>0</HashCalculo>
+    <IdCedente>23</IdCedente>
+    <IdDividaBloqueio>0</IdDividaBloqueio>
+    <IdUsuario>0</IdUsuario>
+    <TipoOrigemBaixa>Carga</TipoOrigemBaixa>
+    <TipoLigacaoContrato>Titular</TipoLigacaoContrato>
+    <DivBloqueadaPorAcao>false</DivBloqueadaPorAcao>
+    <PercentualDescontoPrincipal>0</PercentualDescontoPrincipal>
+    <PercentualDescontoJuros>0</PercentualDescontoJuros>
+    <NmCedente>FAST SOLUTIONS - BMG</NmCedente>
+    <idProduto>28</idProduto>
+    <NmProduto>FAST SOLUTIONS - BMG - PRODUTO 03</NmProduto>
+    <NmCedenteProduto>03</NmCedenteProduto>
+    <DataInclusao>0001-01-01T00:00:00</DataInclusao>
+  </DividaAtiva>
+</ArrayOfDividaAtiva>

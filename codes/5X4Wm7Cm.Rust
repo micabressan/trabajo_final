@@ -1,0 +1,147 @@
+use std::collections::HashMap;
+
+use regex::Regex;
+
+lazy_static! {
+    static ref LINE_REGEX: Regex = Regex::new(r"([a-z]+) (inc|dec) (-?\d+) if ([a-z]+) ([><=!]{1,2}) (-?\d+)").unwrap();
+}
+
+#[derive(Debug, Clone, Copy)]
+struct Instruction<'a> {
+    pub register: &'a str,
+    pub instruction: InstructionType,
+    pub amount: isize,
+    pub condition: Conditional<'a>,
+}
+
+impl<'a> Instruction<'a> {
+    pub fn parse(input: &'a str) -> Self {
+        let captures = LINE_REGEX.captures(input).unwrap();
+        Instruction {
+            register: captures.get(1).unwrap().as_str(),
+            instruction: InstructionType::from_str(&captures[2]),
+            amount: captures[3].parse().unwrap(),
+            condition: Conditional {
+                register: captures.get(4).unwrap().as_str(),
+                condition: Condition::from_str(&captures[5]),
+                amount: captures[6].parse().unwrap(),
+            },
+        }
+    }
+
+    pub fn apply(&self, registers: &mut HashMap<&'a str, isize>) {
+        let register = registers.entry(self.register).or_insert(0);
+        match self.instruction {
+            InstructionType::Increment => *register += self.amount,
+            InstructionType::Decrement => *register -= self.amount,
+        };
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
+enum InstructionType {
+    Increment,
+    Decrement,
+}
+
+impl InstructionType {
+    pub fn from_str(value: &str) -> Self {
+        match value {
+            "inc" => InstructionType::Increment,
+            "dec" => InstructionType::Decrement,
+            _ => unreachable!(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
+struct Conditional<'a> {
+    pub register: &'a str,
+    pub condition: Condition,
+    pub amount: isize,
+}
+
+impl<'a> Conditional<'a> {
+    pub fn is_met(&self, registers: &mut HashMap<&'a str, isize>) -> bool {
+        let register = *registers.entry(self.register).or_insert(0);
+        match self.condition {
+            Condition::EqualTo => register == self.amount,
+            Condition::GreaterThan => register > self.amount,
+            Condition::GreaterThanEqual => register >= self.amount,
+            Condition::LessThan => register < self.amount,
+            Condition::LessThanEqual => register <= self.amount,
+            Condition::NotEqual => register != self.amount,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
+enum Condition {
+    EqualTo,
+    GreaterThan,
+    GreaterThanEqual,
+    LessThan,
+    LessThanEqual,
+    NotEqual,
+}
+
+impl Condition {
+    pub fn from_str(value: &str) -> Self {
+        match value {
+            "==" => Condition::EqualTo,
+            ">" => Condition::GreaterThan,
+            ">=" => Condition::GreaterThanEqual,
+            "<" => Condition::LessThan,
+            "<=" => Condition::LessThanEqual,
+            "!=" => Condition::NotEqual,
+            _ => unreachable!(),
+        }
+    }
+}
+
+pub fn part1(input: &str) -> isize {
+    let mut registers = HashMap::new();
+    for instruction in input.lines().map(Instruction::parse) {
+        if instruction.condition.is_met(&mut registers) {
+            instruction.apply(&mut registers);
+        }
+    }
+    *registers.values().max().unwrap()
+}
+
+#[test]
+pub fn part1_example1() {
+    const INPUT: &str = "b inc 5 if a > 1
+a inc 1 if b < 5
+c dec -10 if a >= 1
+c inc -20 if c == 10";
+    assert_eq!(1, part1(INPUT));
+}
+
+pub fn part2(input: &str) -> isize {
+    let mut registers = HashMap::new();
+    let mut peak = 0;
+    for instruction in input.lines().map(Instruction::parse) {
+        if instruction.condition.is_met(&mut registers) {
+            instruction.apply(&mut registers);
+            update_peak(&registers, &mut peak);
+        }
+    }
+    peak
+}
+
+fn update_peak(registers: &HashMap<&str, isize>, peak: &mut isize) {
+    let max = *registers.values().max().unwrap();
+    if max > *peak {
+        *peak = max;
+    }
+}
+
+#[test]
+pub fn part2_example1() {
+    const INPUT: &str = "b inc 5 if a > 1
+a inc 1 if b < 5
+c dec -10 if a >= 1
+c inc -20 if c == 10";
+    assert_eq!(10, part2(INPUT));
+}

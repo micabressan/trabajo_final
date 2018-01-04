@@ -1,0 +1,10 @@
+wf:wire(my_button, #event{type=click,actions=[
+        #update{target=container, type=insert_bottom, elements=[
+                #my_custom_element{text="this_will_be_replaced_on_load",actions=[
+			%% This assumes your custom element is just an HTML object 
+			%% and you wish to set the text body.  If it's a form field
+			%% You would want to set the .val() property instead of .text()
+                        #script{script="$(obj('me')).text(obj('myInputField').value)"}
+                ]}
+        ]}
+]}).

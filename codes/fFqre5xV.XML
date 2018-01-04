@@ -1,0 +1,137 @@
+    <maps energyTime = "360">
+        <map id = "0" kitchenID = "14" locationsfrom = "0" locationsto = "13" bonusLevelFrom = "0" bonusLevelTo = "1" back = "Background14" music = "music_map">
+            <tasks id = "0,1,2"/>
+            <helps id = "0,1"/>
+			<chests id = "0,1"/>
+        </map>
+        <map id = "1" kitchenID = "0" locationsfrom = "14" locationsto = "38" bonusLevelFrom = "2" bonusLevelTo = "3" back = "Background1" music = "music_map">
+            <tasks id = "3,4,5"/>
+            <helps id = "2,3"/>
+			<chests id = "2,3"/>
+        </map>
+        <map id = "2" kitchenID = "1" locationsfrom = "39" locationsto = "68" bonusLevelFrom = "4" bonusLevelTo = "5" back = "Background2" music = "music_map">
+            <tasks id = "6,7,8"/>
+            <helps id = "4,5"/>
+			<chests id = "4,5"/>
+        </map>
+        <map id="3" kitchenID = "1" locationsfrom="69" locationsto="98" bonusLevelFrom="6" bonusLevelTo="7" back="Background3" music="music_map">
+            <tasks id="9,10,11"/>
+            <helps id = "6,7"/>
+			<chests id = "6,7"/>
+        </map>
+        <map id="4" kitchenID = "2" locationsfrom="99" locationsto="127" bonusLevelFrom="8" bonusLevelTo="9" back="Background4" music="music_map">
+            <tasks id="12,13,14"/>
+            <helps id = "8"/>
+			<chests id = "8,9"/>
+        </map>
+        <map id="5" kitchenID = "3" locationsfrom="128" locationsto="156" bonusLevelFrom="10" bonusLevelTo="11" back="Background5" music="music_map">
+            <tasks id="15,16,17"/>
+            <helps id = "9,10"/>
+			<chests id = "10,11"/>
+        </map>
+        <map id="6" kitchenID = "4" locationsfrom="157" locationsto="185" bonusLevelFrom="12" bonusLevelTo="13" back="Background6" music="music_map">
+            <tasks id="18,19,20"/>
+            <helps id = "11,12"/>
+			<chests id = "12,13"/>
+        </map>
+        <map id="7" kitchenID = "3" locationsfrom="186" locationsto="214" bonusLevelFrom="14" bonusLevelTo="15" back="Background7" music="music_map">
+            <tasks id="21,22,23"/>
+            <helps id = "13,14"/>
+			<chests id = "14,15"/>
+        </map>
+        <map id="8" kitchenID = "11" locationsfrom="215" locationsto="242" bonusLevelFrom="16" bonusLevelTo="17" back="Background8" music="music_map">
+            <tasks id="24,25,26"/>
+            <helps id = "15,16"/>
+			<chests id = "16,17"/>
+        </map>
+        <map id="9" kitchenID = "13" locationsfrom="243" locationsto="271" bonusLevelFrom="18" bonusLevelTo="19" back="Background9" music="music_map">
+            <tasks id="27,28,29"/>
+            <helps id = "17"/>
+			<chests id = "18,19"/>
+        </map>
+        <map id="10" kitchenID = "2" locationsfrom="272" locationsto="300" bonusLevelFrom="20" bonusLevelTo="21" back="Background10" music="music_map">
+            <tasks id="30,31,32"/>
+            <helps id = "18,19"/>
+			<chests id = "20,21"/>
+        </map>
+        <map id="11" kitchenID = "5" locationsfrom="301" locationsto="329" bonusLevelFrom="22" bonusLevelTo="23" back="Background11" music="music_map">
+            <tasks id="33,34,35"/>
+            <helps id = "20,21"/>
+			<chests id = "22,23"/>
+        </map>
+        <map id="12" kitchenID = "5" locationsfrom="330" locationsto="357" bonusLevelFrom="24" bonusLevelTo="25" back="Background12" music="music_map">
+            <tasks id="36,37,38"/>
+            <helps id = "22,23"/>
+			<chests id = "24,25"/>
+        </map>
+        <map id="13" kitchenID = "6" locationsfrom="358" locationsto="387" bonusLevelFrom="26" bonusLevelTo="27" back="Background13" music="music_map">
+            <tasks id="39,40,41"/>
+            <helps id = "24,25"/>
+			<chests id = "26,27"/>
+        </map>
+        <map id="14" kitchenID = "7" locationsfrom="388" locationsto="417" bonusLevelFrom="28" bonusLevelTo="29" back="Background14" music="music_map">
+            <tasks id="42,43,44"/>
+            <helps id = "26,27"/>
+			<chests id = "28,29"/>
+        </map>
+        <map id="15" kitchenID = "8" locationsfrom="418" locationsto="447" bonusLevelFrom="30" bonusLevelTo="31" back="Background15" music="music_map">
+            <tasks id="45,46,47"/>
+            <helps id = "28,29"/>
+			<chests id = "30,31"/>
+        </map>
+        <map id="16" kitchenID = "0" locationsfrom="448" locationsto="477" bonusLevelFrom="32" bonusLevelTo="33" back="Background16" music="music_map">
+            <tasks id="48,49,50"/>
+            <helps id = "30,31"/>
+			<chests id = "32,33"/>
+        </map>
+        <map id="17" kitchenID = "9" locationsfrom="478" locationsto="507" bonusLevelFrom="34" bonusLevelTo="35" back="Background17" music="music_map">
+            <tasks id = "51,52,53"/>
+            <helps id = "32,33"/>
+			<chests id = "34,35"/>
+        </map>
+        <map id="18" kitchenID = "10" locationsfrom="508" locationsto="537" bonusLevelFrom="36" bonusLevelTo="37" back="Background18" music="music_map">
+            <tasks id = "54,55,56"/>
+            <helps id = "34,35"/>
+			<chests id = "36,37"/>
+        </map>
+        <map id="19" kitchenID = "12" locationsfrom="538" locationsto="567" bonusLevelFrom="38" bonusLevelTo="39" back="Background19" music="music_map">
+            <tasks id = "57,58,59"/>
+            <helps id = "36,37"/>
+			<chests id = "38,39"/>
+        </map>
+        <map id="20" kitchenID = "15" locationsfrom="568" locationsto="597" bonusLevelFrom="40" bonusLevelTo="41" back="Background20" music="music_map">
+            <tasks id = "60,61,62"/>
+            <helps id = "38,39"/>
+			<chests id = "40,41"/>
+        </map>
+		<map id="21" kitchenID = "17" locationsfrom="598" locationsto="627" bonusLevelFrom="42" bonusLevelTo="43" back="Background21" music="music_map">
+			<tasks id = "63,64,65"/>
+			<helps id = "40,41"/>
+			<chests id = "42,43"/>
+		</map>
+		<map id="22" kitchenID = "18" locationsfrom="628" locationsto="657" bonusLevelFrom="44" bonusLevelTo="45" back="Background22" music="music_map">
+			<tasks id = "66,67,68"/>
+			<helps id = "42,43"/>
+			<chests id = "44,45"/>
+		</map>
+		<map id="23" kitchenID = "19" locationsfrom="658" locationsto="687" bonusLevelFrom="46" bonusLevelTo="47" back="Background23" music="music_map">
+			<tasks id = "69,70,71"/>
+			<helps id = "44,45"/>
+			<chests id = "46,47"/>
+		</map>
+		<map id="24" kitchenID = "20" locationsfrom="688" locationsto="717" bonusLevelFrom="48" bonusLevelTo="49" back="Background24" music="music_map">
+			<tasks id = "72,73,74"/>
+			<helps id = "46,47"/>
+			<chests id = "48,49"/>
+		</map>
+		<map id="25" kitchenID = "21" locationsfrom="718" locationsto="747" bonusLevelFrom="50" bonusLevelTo="51" back="Background25" music="music_map">
+			<tasks id = "75,76,77"/>
+			<helps id = "48,49"/>
+			<chests id = "50,51"/>
+		</map>
+		<map id="26" kitchenID = "22" locationsfrom="748" locationsto="777" bonusLevelFrom="52" bonusLevelTo="53" back="Background26" music="music_map">
+			<tasks id = "78,79,80"/>
+			<helps id = "50,51"/>
+			<chests id = "52,53"/>
+		</map>
+    </maps>

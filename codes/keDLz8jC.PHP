@@ -1,0 +1,1 @@
+<?php readfile("http://www.opineo.pl/shop/latest.php?s=52913&w=500&n=4&secured=1"); ?>

@@ -1,0 +1,34 @@
+--- Revision 8
++++ Revision 9
+@@ -1,3 +1,10 @@
++/*
++* File: jQuery loader
++* Author: Ben Frain
++* Project: MacUser
++* Detail: File changes with Subversion (SVN)
++*/
++
+ $().ready(function() {
+   $(".linksTrigger").hover(function(){ // .linksTrigger class is used on a <a href="#"> tag
+   $(this).toggleClass("switch"); // this bit adds a class of 'switch' to the trigger element so it can be styled differently than the default state
+@@ -2,4 +9,4 @@
+   $(".extraLink").toggle("fast"); // this bit finds any elements with a class of .extraLink and toggle's them
+-  $(this).text($(this).text() == 'Click for more Site Links' ? 'Click for less Site Links' : 'Click for more Site Links'); // this is the text that will toggle when clicked
+-  return false; //Prevent the browser jump to the link anchor
++  $(this).text($(this).text() == 'More Site Links' ? 'Less Site Links' : 'More Site Links'); // this is the text that will toggle when clicked
++  
+   });
+@@ -9,11 +16,12 @@
+ 
+ jQuery(document).ready(function(){
+ // Add Cufon
+-Cufon.replace('.MUHeaderCatTitle, h2, .latestnews_title');
++Cufon.replace('.MUHeaderCatTitle, h2, .latestnews_title, .p');
+ });
+ //Start slideshow cycle plugin
+ jQuery('#slideshow').cycle({
+         prev:   '#prev',
+         next:   '#next',
++        fade: 'fast'
+         timeout: 8000
+     });

@@ -1,0 +1,24 @@
+struct Example {
+    event_type: String,
+    vendor_id: i32,
+}
+
+fn decode_arg(x: &Element) -> Option<Example> {
+    let hash = match x {
+        &Element::MapElem(ref x) => x,
+        _ => return None,
+    };
+    let event_type = if let Some(elem) = hash.get("event_type") {
+        elem.to_string()
+    } else {
+        return None;
+    };
+    let vendor_id = match hash.get("vendor_id") {
+        Some(&Element::IntegerElem(x)) => x,
+        _ => return None,
+    };
+    Some(Example {
+        event_type: event_type,
+        vendor_id: vendor_id,
+    })
+}

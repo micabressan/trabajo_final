@@ -1,0 +1,175 @@
+# 
+#  MK domains and DNS generator config
+#
+
+
+# Here go the variables
+WEB1:               &WEB1 92.242.36.162
+WEB2:               &WEB2 92.242.36.163
+WEB3:               &WEB3 92.242.37.194
+WEB1_GENERIC:       92.242.36.164
+WEB2_GENERIC:       92.242.36.165
+WEB3_GENERIC:       *WEB3
+BACKUP_GENERIC:     92.242.37.195
+
+KASPER_PROTECTION:  195.8.62.24
+
+PRIMARY_CURRENT:    *WEB1
+SECONDARY_CURRENT:  *WEB2
+
+
+# Here go the domains
+domains:
+    mk:
+        main: mk.ru
+        regions:
+            standalone:
+                local: &LOCALREGIONS
+                    - mk-kaliningrad.ru
+                    - mk-kalm.ru
+                    - mk-kemerovo.ru
+                    - mk-kirov.ru
+                    - mk-kuzbass.ru
+                    - mk-pskov.ru
+                    - mk-sakhalin.ru
+                    - mk-saransk.ru
+                    - mk-smolensk.ru
+                    - mk-turkey.ru
+                    - mk-tuva.ru
+                    - mkkaluga.ru
+                    - mkchita.ru
+                    - mk-ul.ru
+                    - mkivanovo.ru
+                    
+                foreign:
+                    - vnovomsvete.com
+                    - mknews.de
+                    - mkvns.com
+                    - mk-time.com.au
+                    - mkisrael.co.il
+                    - mk-kz.kz
+                    - mk.kiev.ua
+                    - mk.kg
+                    - mk.kn.md
+                    - mkgreece.gr
+
+            subdomain:
+                - arh
+                - ast
+                - blag
+                - baikal
+                - crimea
+                - vlad
+                - volg
+                - vologda
+                - vrn
+                - eburg
+                - ivanovo
+                - kemerovo
+                - kras
+                - nn
+                - novos
+                - omsk
+                - oren
+                - perm
+                - rostov
+                - samara
+                - saratov
+                - tambov
+                - tver
+                - tula
+                - tumen
+                - ulan
+                - ufa
+                - chel
+                - chr
+                - ugra
+                - vladimir
+                - belgorod
+                - cheb
+                - yar
+                - kuban
+                - tomsk
+                - spb
+                - yaroslavl
+                - hab
+                - mrl
+                - kbr
+                - kavkaz
+                - kazan
+                - brl
+                - magadan
+                - murmansk
+                - yakutia
+                - izhevsk
+                - smolensk
+                - orel
+                - serp
+                - mkala
+                - kirov
+                - kostroma
+                - sochi
+                - ul
+                - karel
+                - kuzbass
+                - rzn
+# Here end the domains
+
+
+# Here go the zone files
+zonefiles:
+    mk.ru.db: mk.ru
+    ok.mk.ru.db: ok.mk.ru
+    mk.kiev.ua.db: mk.kiev.ua
+    regions.generic.mk.db: *LOCALREGIONS
+    web3.generic.mk.db:
+        - ohotniki.ru
+        - gusevhunting.ru
+        - avtovzglyad.ru
+        - avtovz.ru
+    web2.generic.mk.db:
+        - womanhit.ru
+    social.womanhit.db:
+        - social.womanhit.ru
+# Here end the zone files
+
+
+# Here go the DNS zones to servers binding
+bindings:
+    service:
+        nic.ru:
+            ns3:  ns3-l2.nic.ru
+            ns4:  ns4-l2.nic.ru
+            ns8:  ns8-l2.nic.ru
+            ns4c: ns4-cloud.nic.ru
+            ns8c: ns8-cloud.nic.ru
+        
+    dnslocalset: &DNSLOCALSET
+        mk1: ns1.mk.ru
+        mk2: ns2.mk.ru
+        mk3: ns3.mk.ru
+        
+    dnsmainset: &DNSMAINSET
+        <<: *DNSLOCALSET
+        nicru-mk-master: 822547-DNS-MK-MASTER@nic.ru
+
+    dnsgroups:
+        main:
+            zones:
+                - mk.ru
+                - *LOCALREGIONS
+                - ohotniki.ru
+                - womanhit.ru
+                - gusevhunting.ru
+                - avtovzglyad.ru
+                - avtovz.ru
+            servers:
+                <<: *DNSMAINSET
+        local:
+            zones:
+                - ok.mk.ru
+                - mk.kiev.ua
+                - social.womanhit.ru
+            servers:
+                <<: *DNSLOCALSET
+# Here end DNS zones to server binding

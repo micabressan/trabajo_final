@@ -1,0 +1,59 @@
+    class GlobalFilter : IFilter
+    {
+        public string Filter(Data.Message message)
+        {
+
+            if (message.Filters == null)
+                return null;
+            var hashtags = message.Filters.hashtags;
+            var titles = message.Filters.titles;
+            EventsEntities ee = new EventsEntities();
+            var hashIds = (from h in ee.hashtags
+                           where hashtags.Contains("#" + h.name)
+                           select h.id).ToList();
+
+           
+
+            var connection = (System.Data.SqlClient.SqlConnection)ee.Database.Connection;
+
+            if (connection != null && connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+
+            var dt = new DataTable();
+            var sql = "select distinct m.id,m.id_type,m.lat,m.lng,m.title,m.date_from,m.date_to,1 as filterType from markers m";
+            using (var com = new System.Data.SqlClient.SqlDataAdapter(sql + createHashtagsInSQL(hashIds)+ createTitlesSQL(titles), connection))
+            {
+                com.Fill(dt);
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+        }
+        private string createHashtagsInSQL(List<int> hashIds)
+        {
+            if (hashIds.Count == 0)
+                return "";
+            var res = " inner join marker_hashtags mh on mh.id_marker = m.id where mh.id_hashtag in (";
+            hashIds.ForEach((v) =>
+            {
+                res += v.ToString() + ",";
+            });
+            res = res.TrimEnd(',');
+            res += ")";
+            return res;
+        }
+        private string createTitlesSQL(List<string> titles)
+        {
+            if (titles.Count == 0)
+                return "";
+            var res = " and ";
+            titles.ForEach((v) =>
+            {
+                res += " m.title like '%" + v + "%' or";
+
+            });
+            res = res.TrimEnd('r');
+            res = res.TrimEnd('o');
+            return res;
+        }
+    }

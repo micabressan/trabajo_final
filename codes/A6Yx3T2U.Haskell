@@ -1,0 +1,15 @@
+nstops :: Double -> Int -> Double
+nstops p 0 = p
+nstops p n = nstops (p / 4 + 7) (n - 1)
+
+isInt :: Double -> Bool
+isInt x = x == (fromInteger (round x))
+
+try :: Double -> Bool
+try = isInt . flip nstops 3
+
+f :: Double -> Double
+f n = if try n then n else f (n + 1)
+
+
+main = do return(f 0)

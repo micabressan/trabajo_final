@@ -1,0 +1,620 @@
+{
+    "profileRevision": 89,
+    "profileId": "profile0",
+    "profileChangesBaseRevision": 89,
+    "profileChanges": [
+        {
+            "changeType": "fullProfileUpdate",
+            "profile": {
+                "_id": "5ba876cdbf3947bf9a263e91624cb632",
+                "created": "2017-11-16T09:49:15.226Z",
+                "updated": "2017-12-26T18:25:40.044Z",
+                "rvn": 89,
+                "wipeNumber": 9,
+                "accountId": "e8e7c3739dd448d49b9ddd16710f8bde",
+                "profileId": "profile0",
+                "version": "grant_collectionbook_lvl_100_reward_change_dec_2017",
+                "items": {
+                    "c598ee2c-08df-44d7-b3cc-b314f261a3a1": {
+                        "templateId": "HomebaseBannerIcon:standardbanner19",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "c5705a85-26b9-4db2-b01f-cf937ba06d69": {
+                        "templateId": "HomebaseBannerIcon:standardbanner15",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "52f46fc2-73fe-4617-a8bb-bde2eb915954": {
+                        "templateId": "HomebaseBannerIcon:standardbanner6",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "5ad50a60-4f3e-4e0b-8917-8f4731e9c73b": {
+                        "templateId": "HomebaseBannerColor:defaultcolor11",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "c8bdf128-eace-4ffe-a381-b695f7f50cbc": {
+                        "templateId": "HomebaseBannerIcon:standardbanner11",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "54f6e24e-6d98-4c23-8d48-a838a785fcc3": {
+                        "templateId": "HomebaseBannerColor:defaultcolor6",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "cb70e09c-0e0c-4a58-903f-c734f0ea47d0": {
+                        "templateId": "HomebaseBannerIcon:standardbanner28",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "7cb45063-5608-457f-9420-11c23e269191": {
+                        "templateId": "HomebaseBannerColor:defaultcolor10",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "2fc82cae-22f2-4fb9-bee8-70a293c729bd": {
+                        "templateId": "HomebaseBannerColor:defaultcolor20",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "ce7d2dad-fcc9-4fda-a789-70218d784e69": {
+                        "templateId": "HomebaseBannerIcon:standardbanner2",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "b165911a-2b09-4fec-8636-801b2a289e6c": {
+                        "templateId": "HomebaseBannerColor:defaultcolor13",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "06de75c8-aeb7-45b4-a491-8f599e8c89a2": {
+                        "templateId": "Schematic:ammo_bulletslight",
+                        "attributes": {
+                            "alteration_slots": [
+                                {
+                                    "Type": "GameplaySlot",
+                                    "NumSlots": 1
+                                },
+                                {
+                                    "Type": "AttributeSlot",
+                                    "NumSlots": 3
+                                }
+                            ],
+                            "max_level_bonus": 0,
+                            "level": 1,
+                            "item_seen": false,
+                            "alterations": [],
+                            "xp": 0,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "55d94635-76af-4e85-9f89-629f87f84572": {
+                        "templateId": "HomebaseBannerIcon:standardbanner3",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "8252d8ad-abda-42b0-b537-24271b34eb60": {
+                        "templateId": "HomebaseBannerIcon:standardbanner25",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "fc1c073e-5745-4c1e-b012-587259f24201": {
+                        "templateId": "HomebaseBannerIcon:standardbanner24",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "a46727fb-4e9c-4326-b4e7-d649aa9d2d4b": {
+                        "templateId": "HomebaseBannerIcon:standardbanner12",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "32a4a3fa-a38b-4a80-b02e-e4698ef63d24": {
+                        "templateId": "HomebaseBannerIcon:standardbanner29",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "14031333-acac-4d29-b1ac-5f141784b202": {
+                        "templateId": "HomebaseBannerIcon:standardbanner21",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "8a3a98dd-6d9d-43f9-9146-c137ad122212": {
+                        "templateId": "HomebaseBannerIcon:standardbanner16",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "03f104ff-33d0-4750-a8f4-58baf5a030e2": {
+                        "templateId": "HomebaseBannerColor:defaultcolor17",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "c07f83fe-f1da-41b8-bb04-e903b788c63a": {
+                        "templateId": "HomebaseBannerIcon:standardbanner31",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "2a8e915a-0473-41c1-a7ee-764896793c9d": {
+                        "templateId": "HomebaseBannerColor:defaultcolor14",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "66d58c8c-3276-427f-bb9b-47da2c2205f6": {
+                        "templateId": "HomebaseBannerIcon:standardbanner1",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "fa72cd57-59d3-4c9c-977e-95d7ea9689a8": {
+                        "templateId": "HomebaseBannerIcon:standardbanner14",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "0024e905-409f-41d9-b9c4-f08b630870a1": {
+                        "templateId": "HomebaseBannerIcon:standardbanner17",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "40ecb21e-7d15-4170-bab7-b905ad97cf2b": {
+                        "templateId": "HomebaseBannerIcon:standardbanner20",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "be282dab-c6cb-4dc3-b1de-bd7af9a5d4e4": {
+                        "templateId": "HomebaseBannerIcon:standardbanner18",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "a81d63bd-799d-4645-bfc1-69a66642ac9f": {
+                        "templateId": "Quest:achievement_craftfirstweapon",
+                        "attributes": {
+                            "quest_state": "Active",
+                            "last_state_change_time": "2017-11-16T09:49:15.225Z",
+                            "completion_custom_craftfirstweapon": 0,
+                            "max_level_bonus": 0,
+                            "level": -1,
+                            "item_seen": false,
+                            "xp": 0,
+                            "sent_new_notification": true,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "8274ac06-db8d-4922-ac50-7e4c1175053d": {
+                        "templateId": "HomebaseBannerColor:defaultcolor12",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "ca78fc2c-594e-412e-8d19-321c9a8854db": {
+                        "templateId": "HomebaseBannerIcon:standardbanner10",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "ccb0bce4-6dab-4c8a-8eea-81b22bb1c6d5": {
+                        "templateId": "HomebaseBannerIcon:standardbanner13",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "4831fa39-35eb-473e-8336-aa3a4ab7d8a8": {
+                        "templateId": "HomebaseBannerIcon:standardbanner30",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "116d399b-ecd6-46cd-89b5-4b14f897bcb2": {
+                        "templateId": "HomebaseBannerColor:defaultcolor7",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "9e031e95-c4bb-429d-b75b-6cb42cb0ac33": {
+                        "templateId": "HomebaseBannerIcon:standardbanner23",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "ef311fe9-482d-4c00-af89-3d096fb54f81": {
+                        "templateId": "HomebaseBannerColor:defaultcolor4",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "7e51738d-efa5-4e08-aca9-515a611f36f8": {
+                        "templateId": "Schematic:ammo_shells",
+                        "attributes": {
+                            "alteration_slots": [
+                                {
+                                    "Type": "GameplaySlot",
+                                    "NumSlots": 1
+                                },
+                                {
+                                    "Type": "AttributeSlot",
+                                    "NumSlots": 3
+                                }
+                            ],
+                            "max_level_bonus": 0,
+                            "level": 1,
+                            "item_seen": false,
+                            "alterations": [],
+                            "xp": 0,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "a3607064-e393-4623-b5d2-4f0065b76e45": {
+                        "templateId": "HomebaseBannerColor:defaultcolor16",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "355f9649-32e3-489c-a7a0-72c3837aa6dd": {
+                        "templateId": "HomebaseBannerColor:defaultcolor5",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "2fb8e1a4-b7b0-4379-a451-df15e901688f": {
+                        "templateId": "HomebaseBannerColor:defaultcolor18",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "d1b095bf-35b9-42b2-a647-a3b0b94283f1": {
+                        "templateId": "Quest:homebaseonboarding",
+                        "attributes": {
+                            "quest_state": "Active",
+                            "last_state_change_time": "2017-11-16T09:49:15.225Z",
+                            "max_level_bonus": 0,
+                            "completion_hbonboarding_namehomebase": 0,
+                            "level": -1,
+                            "completion_hbonboarding_completezone": 0,
+                            "item_seen": false,
+                            "completion_hbonboarding_watchsatellitecine": 0,
+                            "xp": 0,
+                            "sent_new_notification": true,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "b9bbee27-0bff-473f-81c2-e450e2580846": {
+                        "templateId": "Schematic:ammo_bulletsheavy",
+                        "attributes": {
+                            "alteration_slots": [
+                                {
+                                    "Type": "GameplaySlot",
+                                    "NumSlots": 1
+                                },
+                                {
+                                    "Type": "AttributeSlot",
+                                    "NumSlots": 3
+                                }
+                            ],
+                            "max_level_bonus": 0,
+                            "level": 1,
+                            "item_seen": false,
+                            "alterations": [],
+                            "xp": 0,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "6734e3d6-ac95-4efd-b2f2-693a853e95f8": {
+                        "templateId": "HomebaseBannerColor:defaultcolor8",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "7e190c60-00c0-4ec5-8fec-e857ead2006a": {
+                        "templateId": "HomebaseBannerIcon:standardbanner8",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "44491526-a2d1-4802-bbdd-404082976e1b": {
+                        "templateId": "HomebaseBannerIcon:standardbanner26",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "6e05d6cb-a4e8-436d-9ce2-178823ce0cf9": {
+                        "templateId": "HomebaseBannerColor:defaultcolor2",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "98838033-8a6e-41e5-ae83-7687ddd5fcdc": {
+                        "templateId": "HomebaseBannerIcon:standardbanner4",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "71fff3f8-4830-4f57-86ea-d3b7f9795126": {
+                        "templateId": "HomebaseBannerIcon:standardbanner22",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "6834abba-f877-4740-b27f-6c9f8a58a1f0": {
+                        "templateId": "HomebaseBannerIcon:standardbanner9",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "d511758b-7240-4326-a58b-cffc0b651b88": {
+                        "templateId": "HomebaseBannerColor:defaultcolor9",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "74b9335a-bf8b-4657-839f-76e45db67990": {
+                        "templateId": "HomebaseBannerColor:defaultcolor15",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "d68df8dd-4514-4103-b5af-e63765cf4c1e": {
+                        "templateId": "HomebaseNode:startnode_commandcenter",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "0ff0b8b1-90cf-405d-8069-c1ee1dff1b0d": {
+                        "templateId": "Schematic:ammo_bulletsmedium",
+                        "attributes": {
+                            "alteration_slots": [
+                                {
+                                    "Type": "GameplaySlot",
+                                    "NumSlots": 1
+                                },
+                                {
+                                    "Type": "AttributeSlot",
+                                    "NumSlots": 3
+                                }
+                            ],
+                            "max_level_bonus": 0,
+                            "level": 1,
+                            "item_seen": false,
+                            "alterations": [],
+                            "xp": 0,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "7d60f59c-08d1-433b-bc74-c8afa8bae646": {
+                        "templateId": "HomebaseBannerIcon:standardbanner7",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "8ed3b811-e3a3-41c7-a95b-3464f3accf72": {
+                        "templateId": "Hero:hid_commando_grenadegun_uc_t01",
+                        "attributes": {
+                            "equipped_cosmetics": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "gender": 0,
+                            "level": 1,
+                            "squad_slot_idx": 0,
+                            "item_seen": false,
+                            "portrait": "",
+                            "hero_name": "DefaultHeroName",
+                            "max_level_bonus": 0,
+                            "squad_id": "squad_combat_adventuresquadone",
+                            "mode_loadouts": [],
+                            "xp": 0,
+                            "slotted_building_id": "",
+                            "building_slot_used": -1,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "2cd60b4a-8b2d-409e-b61c-850238616859": {
+                        "templateId": "HomebaseBannerColor:defaultcolor21",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "0c240f1b-9dc0-4ff4-877c-dd4149fbcccd": {
+                        "templateId": "HomebaseBannerIcon:standardbanner5",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "b3346bf3-cd4d-41d1-a82f-81f3d1ae393a": {
+                        "templateId": "HomebaseBannerIcon:standardbanner27",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "d0fa850b-80ec-4d38-b491-f1d6fb7026f3": {
+                        "templateId": "HomebaseBannerColor:defaultcolor3",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "d80cea2e-02cc-408d-8a98-153abe2d5011": {
+                        "templateId": "HomebaseBannerColor:defaultcolor19",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    },
+                    "6d1e01f2-2467-4df7-a2ea-f9e271e51a68": {
+                        "templateId": "Schematic:sid_assault_auto_c_ore_t00",
+                        "attributes": {
+                            "alteration_slots": [
+                                {
+                                    "Type": "GameplaySlot",
+                                    "NumSlots": 1
+                                },
+                                {
+                                    "Type": "AttributeSlot",
+                                    "NumSlots": 1
+                                }
+                            ],
+                            "max_level_bonus": 0,
+                            "level": 1,
+                            "item_seen": false,
+                            "alterations": [],
+                            "xp": 0,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "f1724e8e-3cd5-468b-b3f6-45aa2ad616bb": {
+                        "templateId": "Quest:achievement_protectthesurvivors",
+                        "attributes": {
+                            "quest_state": "Active",
+                            "last_state_change_time": "2017-11-16T09:49:15.226Z",
+                            "max_level_bonus": 0,
+                            "level": -1,
+                            "item_seen": false,
+                            "xp": 0,
+                            "completion_custom_protectthesurvivors": 0,
+                            "sent_new_notification": true,
+                            "favorite": false
+                        },
+                        "quantity": 1
+                    },
+                    "b35a058b-20de-4f5d-b972-5918e67e46c8": {
+                        "templateId": "HomebaseBannerColor:defaultcolor1",
+                        "attributes": {
+                            "item_seen": false
+                        },
+                        "quantity": 1
+                    }
+                },
+                "stats": {
+                    "templateId": "profile_v2",
+                    "attributes": {
+                        "node_costs": {},
+                        "mission_alert_redemption_record": {
+                            "lastClaimedGuidPerTheater": null,
+                            "lastClaimTimesMap": null
+                        },
+                        "twitch": {},
+                        "client_settings": {},
+                        "named_counters": {
+                            "SubGameSelectCount_Campaign": {
+                                "current_count": 0
+                            },
+                            "SubGameSelectCount_Athena": {
+                                "current_count": 21,
+                                "last_incremented_time": "2017-12-26T18:25:40.044Z"
+                            }
+                        },
+                        "level": 1,
+                        "default_hero_squad_id": "",
+                        "collection_book": {},
+                        "quest_manager": {},
+                        "bans": {},
+                        "gameplay_stats": [],
+                        "inventory_limit_bonus": 0,
+                        "current_mtx_platform": "Epic",
+                        "weekly_purchases": {},
+                        "daily_purchases": {},
+                        "mode_loadouts": [],
+                        "in_app_purchases": {},
+                        "daily_rewards": {},
+                        "monthly_purchases": {},
+                        "xp": 0,
+                        "packs_granted": 0
+                    }
+                },
+                "commandRevision": 22
+            }
+        }
+    ],
+    "profileCommandRevision": 22,
+    "serverTime": "2018-01-01T17:08:49.854Z",
+    "responseVersion": 1
+}

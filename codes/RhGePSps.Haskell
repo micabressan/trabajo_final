@@ -1,0 +1,23 @@
+import Data.Char
+import Data.List (sortBy)
+import Data.List.Split (splitOn)
+
+main = print . solve =<< getLine
+ 
+solve = sum . totalScore . score . sort . prepare
+
+prepare = splitOn ","  . filter (/= '"')
+
+sort = sortBy order
+       where
+         order :: String -> String -> Ordering
+         order [] _ = LT
+         order _ [] = GT
+         order n m
+               | head n > head m = GT
+               | head n < head m = LT
+               | head n == head m = order (tail n) (tail m)
+
+score = map (foldl (\ l l' -> (ord l') - 64 + l) 0)
+
+totalScore = zipWith (*) [1..]

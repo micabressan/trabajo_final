@@ -1,0 +1,101 @@
+befaster:
+  type:
+    teams (3), size (1):
+      parties: Balhkoza, Arkhim, Derbalh
+      phase duration (s):
+        Balhkoza:
+          1: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          2: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          3: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+        Arkhim:
+          1: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          2: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          3: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+        Derbalh:
+          1: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          2: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+          3: 30
+            spec: 10
+              position corner:
+                x1: x=1, y=1, z=1 (world)
+                x2: x=1, y=1, z=1 (world)
+      Balhkoza:
+        teams named: Rouge , Bleue, Orange
+        position:
+          phase 1:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 2:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 3:
+            spec: x=1, y=1, z=1 (world)
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+      Arkhim:
+        teams named: Rouge, Bleue, Orange
+        position:
+          phase 1:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 2:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 3:
+            spec: x=1, y=1, z=1 (world)
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+      Derbalh:
+        teams named: Rouge, Bleue, Orange
+        position:
+          phase 1:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 2:
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)
+          phase 3:
+            spec: x=1, y=1, z=1 (world)
+            Rouge: x=1, y=1, z=1 (world)
+            Bleue: x=1, y=1, z=1 (world)
+            Orange: x=1, y=1, z=1 (world)

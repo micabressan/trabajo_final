@@ -1,0 +1,97 @@
+Index: src/lib/Elementary.h.in
+===================================================================
+--- src/lib/Elementary.h.in	(revision 63624)
++++ src/lib/Elementary.h.in	(working copy)
+@@ -5857,6 +5857,19 @@
+    EAPI void                elm_box_align_get(const Evas_Object *obj, double *horizontal, double *vertical) EINA_ARG_NONNULL(1);
+ 
+    /**
++    * Force the box to recalculate its children packing.
++    *
++    * If any children was added or removed, box will not calculate the
++    * values immediately rather leaving it to the next main loop
++    * iteration. While this is great as it would save lots of
++    * recalculation, whenever you need to get the position of a just
++    * added item you must force recalculate before doing so.
++    *
++    * @param obj The box object.
++    */
++   EAPI void                 elm_box_recalculate(Evas_Object *obj);
++
++   /**
+     * Set the layout defining function to be used by the box
+     *
+     * Whenever anything changes that requires the box in @p obj to recalculate
+Index: src/lib/elm_box.c
+===================================================================
+--- src/lib/elm_box.c	(revision 63624)
++++ src/lib/elm_box.c	(working copy)
+@@ -1,9 +1,16 @@
+ #include <Elementary.h>
+ #include "elm_priv.h"
+ 
+-#define SIG_CHILD_ADDED "child,added"
+-#define SIG_CHILD_REMOVED "child,removed"
++static const char SIG_CHILD_ADDED[] = "child,added";
++static const char SIG_CHILD_REMOVED[] = "child,removed";
+ 
++static const Evas_Smart_Cb_Description _signals[] = {
++  {SIG_CHILD_ADDED, ""},
++  {SIG_CHILD_REMOVED, ""},
++  {NULL, NULL}
++};
++
++
+ typedef struct _Widget_Data Widget_Data;
+ typedef struct _Transition_Animation_Data Transition_Animation_Data;
+ 
+@@ -76,6 +83,22 @@
+    return opt->obj;
+ }
+ 
++static void
++_cb_proxy_child_added(void *data, Evas_Object *o __UNUSED__, void *event_info)
++{
++   Evas_Object *box = data;
++   Evas_Object_Box_Option *opt = event_info;
++   evas_object_smart_callback_call(box, SIG_CHILD_ADDED, opt->obj);
++}
++
++static void
++_cb_proxy_child_removed(void *data, Evas_Object *o __UNUSED__, void *event_info)
++{
++   Evas_Object *box = data;
++   Evas_Object *child = event_info;
++   evas_object_smart_callback_call(box, SIG_CHILD_REMOVED, child);
++}
++
+ static Eina_Bool
+ _elm_box_focus_next_hook(const Evas_Object *obj, Elm_Focus_Direction dir, Evas_Object **next)
+ {
+@@ -350,6 +373,12 @@
+ 
+    evas_object_smart_callback_add(obj, "sub-object-del", _sub_del, obj);
+ 
++   evas_object_smart_callbacks_descriptions_set(obj, _signals);
++   evas_object_smart_callback_add
++     (wd->box, SIG_CHILD_ADDED, _cb_proxy_child_added, obj);
++   evas_object_smart_callback_add
++     (wd->box, SIG_CHILD_REMOVED, _cb_proxy_child_removed, obj);
++
+    return obj;
+ }
+ 
+@@ -650,3 +679,13 @@
+    if (!wd) return;
+    evas_object_size_hint_align_get(wd->box, horizontal, vertical);
+ }
++
++EAPI void
++elm_box_recalculate(Evas_Object *obj)
++{
++   ELM_CHECK_WIDTYPE(obj, widtype);
++   Widget_Data *wd = elm_widget_data_get(obj);
++   if (!wd) return;
++   evas_object_smart_need_recalculate_set(wd->box, EINA_TRUE);
++   evas_object_smart_calculate(wd->box);
++}

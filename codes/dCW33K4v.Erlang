@@ -1,0 +1,33 @@
+% Jorge Andres Gonzales A01280927
+% Andres Sosa Silva A01176075
+
+-module(servidor).
+-export([]).
+
+%Nombre del servidor
+%nombre() -> 'servidor@DESKTOP-LVD2GRU'
+
+inicio() -> register(servidorID,spawn(servidor, servidorLogic, [[]] )).
+
+servidorLogic(Datos) ->
+	receive
+		{registra, {Usuario, Matricula, UsuarioID}} -> UsuarioID ! {Registro, ok},
+				                    	       servidorLogic(registraUsuario(Datos,Usuario,Matricula,true));
+
+		{darbaja, {Usuario,Matricula,UsuarioID}} -> servidorLogic(bajaUsuario(Datos,Usuario,Matricula));
+
+		verLista -> imprimeLista(Datos);
+
+		stop -> io:format("Servidor Chups~n" , []) 
+
+end.
+
+registraUsuario([{Us,Matricula}|R],Usuario,Matricula,Bool) -> [{Us,Matricula}|registraUsuario(R,Usuario,Matricula,false)];
+registraUsuario([{Us,Mat}|R],Usuario,Matricula,Bool) -> [{Us,Mat}|registraUsuario(R,Usuario,Matricula,Bool)];
+registraUsuario([],Usuario,Matricula,true) -> [{Usuario,Matricula}];
+registraUsuario([],Usuario,Matricula,false) -> [[]].		
+			
+
+bajaUsuario([{Us,Matricula}|R],Usuario,Matricula) -> [registraUsuario(R,Usuario,Matricula)];
+bajaUsuario([{Us,Mat}|R],Usuario,Matricula) -> [{Us,Mat}|registraUsuario(R,Usuario,Matricula)];
+bajaUsuario([],Usuario,Matricula,false) -> [[]].

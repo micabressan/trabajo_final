@@ -1,0 +1,93 @@
+{
+   "id":1412424,
+   "type":"Trip",
+   "name":"Carribean Weekend Getaway",
+   "description":"Trip Description goes here",
+   "userData":{
+      "id":123412,
+      "fullName":"Jonatan M.",
+      "avatar":"http://take.ms/GnPqy"
+   },
+   "placesCount":2,
+   "daysCount":4,
+   "travellers":2,
+   "price":1234.56,
+   "imageUrl":"http://take.ms/GnPqy",
+   "events":{
+      "hotels":[
+         {
+            "id":1412424,
+            "type":"Hotel",
+            "name":"Roosevelt Hotel",
+            "description":"Historic Location",
+            "imageUrl":"http://take.ms/GnPqy",
+            "price":7533.89,
+            "rating":5,
+            "likesCount":277,
+            "guests":1,
+            "checkIn":"2017-12-23T18:33:00.000Z",
+            "checkOut":"2017-12-23T18:33:00.000Z"
+         }
+      ],
+      "flights":[
+         {
+            "id":1412424,
+            "type":"Flight",
+            "name":"Roosevelt Hotel",
+            "description":"Historic Location",
+            "imageUrl":"http://take.ms/GnPqy",
+            "price":7533.89,
+            "passengers":2,
+            "flights":[
+               {
+                  "company":"delta",
+                  "departure":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LAX"
+                  },
+                  "landing":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LHR"
+                  }
+               },
+               {
+                  "company":"virgin",
+                  "departure":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LAX"
+                  },
+                  "landing":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LHR"
+                  }
+               },
+               {
+                  "company":"virgin",
+                  "departure":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LAX"
+                  },
+                  "landing":{
+                     "time":"2017-12-23T18:33:00.000Z",
+                     "airportCode":"LHR"
+                  }
+               }
+            ]
+         }
+      ],
+      "restaurants":[
+         {
+            "id":1412424,
+            "type":"Restaurant",
+            "name":"Roosevelt Restaurant",
+            "description":"Fast Food",
+            "imageUrl":"http://take.ms/GnPqy",
+            "price":7533.89,
+            "guests":2,
+            "rating":5,
+            "likesCount":3472,
+            "date":"2017-12-23T18:33:00.000Z"
+         }
+      ]
+   }
+}

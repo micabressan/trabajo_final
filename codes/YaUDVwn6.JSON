@@ -1,0 +1,228 @@
+1. Order (Заказ):
+Поле									|Тип				|Описание
+==========================================================================
+Number									varchar				Номер
+Account									uniqueidentifier	Контрагент
+Date									date				Дата
+Owner									uniqueidentifier	Ответственный
+Status									uniqueidentifier	Состояние
+PaymentStatus							uniqueidentifier	Состояние оплаты
+DeliveryStatus							uniqueidentifier	Состояние поставки
+Contact									uniqueidentifier	Контакт
+DueDate									date 				Плановая дата выполнения
+ActualDate								date 				Дата выполнения
+Currency								uniqueidentifier	Валюта
+CurrencyRate							decimal				Курс 
+Amount									decimal				Итого 
+PaymentAmount							decimal				Сумма оплаты 
+PrimaryAmount							decimal				Итого, б.в.
+PrimaryPaymentAmount					decimal				Сумма оплаты, б.в
+SourceOrder								uniqueidentifier	Источник заказа
+Notes									varchar				Заметки
+Opportunity								uniqueidentifier	Продажа
+DeliveryAddress							varchar				Адрес доставки
+DeliveryType							uniqueidentifier	Тип доставки 
+PaymentType								uniqueidentifier	Тип оплаты
+ReceiverName							varchar				Имя получателя
+Comment									varchar				Комментарий 
+ContactNumber							varchar				Контактный номер
+BCLOOKUPPricelist						uniqueidentifier	Прайс-лист
+BCLOOKUPIndustry						uniqueidentifier	Отрасль
+BCLOOKUPReasonForClosing				uniqueidentifier	Причина закрытия
+BCPotrType 								uniqueidentifier	Тип потребности
+BCCasebook 								bit 				Casebook флаг
+BCCaselook								bit 				Caselook флаг
+BCCasepro								bit 				Casepro флаг
+BCCasebookLicense						int 				Количество лицензий Casebook
+BCCaselookLisence						int					Количество лицензий Caselook
+BCCaseproLisence						int					Количество лицензий Casepro
+BCOrderType								uniqueidentifier	Тип заказа
+
+2. OrderProduct (Продукт в заказе):
+Поле									|Тип				|Описание
+==========================================================================
+Name									nvarchar			Название
+Notes									ntext				Заметки
+Product									uniqueidentifier	Продукт
+CustomProduct							nvarchar			Произвольный продукт
+DeliveryDate							date				Дата доставки
+Quantity								decimal				Количество
+Unit									uniqueidentifier	Единица измерения
+PrimaryPrice							decimal				Цена, б.в.
+Price									decimal				Цена
+PrimaryAmount							decimal				Сумма, б.в.
+Amount									decimal				Сумма
+PrimaryDiscountAmount					decimal				Сумма скидки, б.в.
+DiscountAmount							decimal				Сумма скидки
+DiscountPercent							decimal				Скидка %
+Tax										uniqueidentifier	Налог
+PrimaryTaxAmount						decimal				Сумма налога, б.в.
+TaxAmount								decimal				Сумма налога
+PrimaryTotalAmount						decimal				Итого, б.в.
+TotalAmount								decimal				Итого
+DiscountTax								decimal				Налог %
+Order									uniqueidentifier	Заказ
+BaseQuantity 							decimal				Количество, б.е.
+PriceList								uniqueidentifier	Прайс-лист
+Contract								uniqueidentifier	Договор
+Currency								uniqueidentifier	Валюта
+CurrencyRate							decimal				Курс
+
+3. Product (Продукт):
+Поле									|Тип				|Описание
+==========================================================================
+Name									nvarchar			Название
+Code									nvarchar			Код
+Unit									uniqueidentifier	Единица измерения
+Currency								uniqueidentifier	Валюта
+Price									decimal				Цена
+Tax										uniqueidentifier	Налог
+Active									bit					Используется
+URL										nvarchar			Ссылка
+Type									uniqueidentifier	Тип
+Owner									uniqueidentifier	Ответственный
+Description								ntext				Описание
+ProductSource							uniqueidentifier	Источник продукта
+Notes									ntext				Заметки
+Picture									uniqueidentifier	Фото
+IsArchive								bit					Архивный
+Category								uniqueidentifier	Категория
+TradeMark								uniqueidentifier	Торговая марка
+
+4. Invoice (Счёт):
+Поле									|Тип				|Описание
+==========================================================================
+Number									nvarchar			Номер
+StartDate								date				Дата выставления
+PrimaryAmount							decimal				Сумма, б.в.
+PrimaryPaymentAmount					decimal				Сумма оплаты, б.в.
+PaymentStatus							uniqueidentifier	Состояние оплаты
+Owner									uniqueidentifier	Ответственный
+SupplierBillingInfo						uniqueidentifier	Платежные реквизиты поставщика
+RemindToOwner							bit					Напоминать ответственному
+RemindToOwnerDate						datetime2			Дата напоминания ответственному
+CustomerBillingInfo						uniqueidentifier	Платежные реквизиты клиента
+Currency								uniqueidentifier	Валюта
+CurrencyRate							decimal				Курс
+Amount									decimal				Сумма
+DueDate									date				Дата оплаты
+PaymentAmount							decimal				Сумма оплаты
+Notes									ntext				Заметки
+Account									uniqueidentifier	Контрагент
+Contact									uniqueidentifier	Контакт
+Supplier								uniqueidentifier	Поставщик
+Opportunity								uniqueidentifier	Продажа
+Order									uniqueidentifier	Заказ
+Project									uniqueidentifier	Проект
+Contract								uniqueidentifier	Договор
+AmountWithoutTax						decimal				Сумма без налога	
+PrimaryAmountWithoutTax					decimal				Сумма без налога, б.в.
+PaymentAmountWithoutTax					decimal				Сумма оплаты без налога
+PrimaryPaymentAmountWithoutTax			decimal				Сумма оплаты без налога, б.в.
+
+
+5. InvoiceProduct (Продукт в счёте):
+Поле									|Тип				|Описание
+==========================================================================
+Name									nvarchar				Название
+Notes									ntext					Заметки
+Product									uniqueidentifier		Продукт
+CustomProduct							nvarchar				Произвольный продукт
+DeliveryDate							date					Дата доставки
+Quantity								decimal					Количество
+Unit									uniqueidentifier		Единица измерения
+PrimaryPrice							decimal					Цена, б.в.
+Price									decimal					Цена
+PrimaryAmount							decimal					Сумма, б.в.
+Amount									decimal					Сумма
+PrimaryDiscountAmount					decimal					Сумма скидки, б.в.
+DiscountAmount							decimal					Сумма скидки
+DiscountPercent							decimal					Скидка, %
+Tax										uniqueidentifier		Налог
+PrimaryTaxAmount						decimal					Сумма налога, б.в.
+TaxAmount								decimal					Сумма налога
+PrimaryTotalAmount						decimal					Итого, б.в.
+TotalAmount								decimal					Итого
+DiscountTax								decimal					Налог, %
+Invoice									uniqueidentifier		Счет
+BaseQuantity							decimal					Количество, б.е.
+PriceList								uniqueidentifier		Прайс-лист
+SupplyPaymentProduct					uniqueidentifier		Продукт в шаге
+
+
+
+6. Contract (Контракт):
+Поле									|Тип				|Описание
+==========================================================================
+Number									nvarchar			Номер
+StartDate								date				Дата начала
+EndDate									date				Дата завершения
+Type									uniqueidentifier	Тип
+State									uniqueidentifier	Состояние
+Account									uniqueidentifier	Контрагент
+SupplierBillingInfo						uniqueidentifier	Наши реквизиты
+Owner									uniqueidentifier	Ответственный
+CustomerBillingInfo						uniqueidentifier	Реквизиты контрагента
+Contact									uniqueidentifier	Контакт контрагента
+Notes									ntext				Заметки
+Parent									uniqueidentifier	Родительский договор
+OurCompany								uniqueidentifier	Наша компания
+Currency								uniqueidentifier	Валюта
+CurrencyRate							decimal				Курс
+Amount									decimal				Сумма
+PrimaryAmount							decimal				Сумма, б.в.
+Order									uniqueidentifier	Заказ
+
+Пример INSERT записи:
+https://academy.terrasoft.ru/documents/technic-sdk/7-11/dataservice-sozdanie-zapisi-primer
+
+## Примечания: 
+#  Тип uniqueidentifier маппится в Lookup, кроме соответственно Id самой записи (она мапится в Guid)
+#  Тип nvarchar,ntext маппится в Text
+#  Тип decimal маппится в Float,Money 
+#  Тип bit маппится в Boolean
+#  Тип int маппится в Integer 
+
+Пример UPDATE записи:
+POST ../DataService/json/reply/UpdateQuery
+{
+    "columnValues": {
+        "items": {
+            "<Field name>": {
+                "expressionType": 2, 
+                "parameter": {
+                    "dataValueType": <Field Type>, 
+                    "value": <Field value>
+                }
+            }
+        }
+    }, 
+    "filters": {
+        "filterType": 6, 
+        "isEnabled": true, 
+        "items": {
+            "primaryColumnFilter": {
+                "comparisonType": 3, 
+                "filterType": 1, 
+                "isEnabled": true, 
+                "leftExpression": {
+                    "expressionType": 1, 
+                    "functionType": 1, 
+                    "macrosType": 34
+                }, 
+                "rightExpression": {
+                    "expressionType": 2, 
+                    "parameter": {
+                        "dataValueType": 0, 
+                        "value": "<ID сущности>"
+                    }
+                }, 
+                "trimDateTimeParameterToDate": false
+            }
+        }, 
+        "logicalOperation": 0
+    }, 
+    "isForceUpdate": true, 
+    "operationType": 2, 
+    "rootSchemaName": "<EntityName>"
+}

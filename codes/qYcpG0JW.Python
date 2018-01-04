@@ -1,0 +1,53 @@
+import urllib2
+import json
+
+b = urllib2.urlopen("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD").read()
+e = urllib2.urlopen("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD").read()
+#####################################
+##       Grab Market Price       ####
+#####################################
+btc_price = json.loads(b)['USD']
+eth_price = json.loads(e)['USD']
+
+#####################################
+##        Adjust Holdings          ##
+#####################################
+btc_holdings = 0.11231786
+eth_holdings = 3.28388112
+cash         = 1067.55
+
+#####################################
+##        Calculate Worth          ##
+#####################################
+btc_worth = btc_price * btc_holdings
+eth_worth = eth_price * eth_holdings
+
+#####################################
+##         Display Total           ##
+#####################################
+print "*****************************"
+print "\tBTC Value in USD: $",btc_price
+print "\tBTC Holdings: $",btc_holdings
+print "\tTotal BTC Value: $", btc_worth
+print "*****************************\n"
+print "\tETH Value in USD: $",eth_price
+print "\tETH Holdings: $",eth_holdings
+print "\tTotal ETH Value: $", eth_worth
+print "*****************************\n"
+print"\n\t Total: $", btc_worth+ eth_worth + cash
+
+
+
+
+###
+'''
+IG but no liking or messaging
+
+or, IG but when you view the likes its locked to further liking
+
+or, IG but comments only, if you have something to say, say it. Don't passively like it and make us want a like.
+
+
+-> i used to think social media was solved. its not. its solved for advertisers, not for consumers.
+
+'''

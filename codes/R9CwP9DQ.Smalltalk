@@ -1,0 +1,157 @@
+Object subclass: #Fuerza
+	instanceVariableNames: 'intensidadX intensidadY'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: '92235'!
+
+!Fuerza methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:13'!
+getIX
+	"Devuelve la intensidad en X de la fuerza"
+	^ intensidadX! !
+
+!Fuerza methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:13'!
+getIY
+	"Devuelve la intensidad en Y de la fuerza"
+	^ intensidadY! !
+
+!Fuerza methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:13'!
+setIntensidadX: intX ySetIntensidadY: intY
+	"Establece las intensidades de la fuerza"
+	intensidadX := intX.
+	intensidadY := intY.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+Fuerza class
+	instanceVariableNames: ''!
+
+!Fuerza class methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:13'!
+conIntensidadX: intX eIntensidadY: intY
+	"Crea una fuerza con dos intensidades, una en X y otra en Y"
+	| fuerza |
+	fuerza := Fuerza new.
+	fuerza setIntensidadX: intX ySetIntensidadY: intY.
+	^ fuerza! !
+
+
+Object subclass: #Movimiento
+	instanceVariableNames: 'velInicial posicion objeto fuerzaX fuerzaY'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: '92235'!
+
+!Movimiento methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:14'!
+agregarFuerza: f
+	"Agrega una fuerza a la fuerza del movimiento"
+	fuerzaX := fuerzaX + (f getIX).
+	fuerzaY := fuerzaY + (f getIY).
+	 ! !
+
+!Movimiento methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:15'!
+calcularPosicionYenTiempo: tiempo
+	"Dado un tiempo, calcula la posicion en Y de ese objeto"
+	| resultado |
+	resultado := ((velInicial getVY) * tiempo) + ((1 / 2) * (tiempo squared) * (fuerzaY) / (objeto getMasa) ).
+	^ resultado! !
+
+!Movimiento methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:15'!
+setFuerza
+	"Establece en cero la fuerza del movimiento"
+	fuerzaX := 0.
+	fuerzaY := 0.! !
+
+!Movimiento methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:15'!
+setObjeto: obj
+	"Establece el objeto en movimiento"
+	objeto := obj! !
+
+!Movimiento methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:15'!
+velocidadInicial: v
+	"Establece la velocidad inicial del objeto"
+	velInicial := v! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+Movimiento class
+	instanceVariableNames: ''!
+
+!Movimiento class methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:14'!
+conObjeto: objeto
+	"Crea una instancia de la clase Movimiento"
+	| mov |
+	mov := Movimiento new.
+	mov setObjeto: objeto.
+	mov setFuerza.
+	^ mov! !
+
+
+Object subclass: #Objeto
+	instanceVariableNames: 'masa radio'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: '92235'!
+
+!Objeto methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:16'!
+getMasa
+	"Devuelve la masa del objeto"
+	^ masa! !
+
+!Objeto methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:16'!
+setMasa: m
+	"Establece la masa del objeto"
+	masa := m! !
+
+!Objeto methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:16'!
+setRadio: r
+	"Establece el radio del objeto"
+	radio := r! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+Objeto class
+	instanceVariableNames: ''!
+
+!Objeto class methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:16'!
+conMasa: masa yRadio: radio
+	"Crea una instancia de la clase Objeto con un radio y una masa"
+	| obj |
+	obj := Objeto new.
+	obj setMasa: masa.
+	obj setRadio: radio.
+	^ obj! !
+
+
+Object subclass: #Velocidad
+	instanceVariableNames: 'intensidadX intensidadY'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: '92235'!
+
+!Velocidad methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:18'!
+getVX
+	"Devuelve la intensidad en X de la instancia"
+	^ intensidadX! !
+
+!Velocidad methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:18'!
+getVY
+	"Devuelve la intensidad en Y de la instancia"
+	^ intensidadY! !
+
+!Velocidad methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:18'!
+setIntensidadX: t1 ySetIntensidadY: t2 
+	"Establece las intensidades en X e Y de la velocidad"
+	intensidadX := t1.
+	intensidadY := t2! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+Velocidad class
+	instanceVariableNames: ''!
+
+!Velocidad class methodsFor: 'as yet unclassified' stamp: 'MariaInesParnisari 8/22/2011 21:17'!
+conIntensidadX: t1 eIntensidadY: t2 
+	"Crea una instancia de la clase Velocidad con una cierta intensidad"
+	| t3 |
+	t3 := Velocidad new.
+	t3 setIntensidadX: t1 ySetIntensidadY: t2.
+	^ t3! !

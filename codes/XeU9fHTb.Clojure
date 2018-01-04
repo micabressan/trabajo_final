@@ -1,0 +1,62 @@
+;TRANSACCIONES BANCARIAS CON ATOMS
+(defn transferirDinero [desde hasta cantidad]
+  (when (>= @desde cantidad)
+    (swap! desde - cantidad)
+    ;Ponemos un sleep para que la transacción sea más realista
+    (Thread/sleep (rand-int 10))
+    (swap! hasta + cantidad)
+  )
+)
+ 
+;Realiza transacciones random
+(defn transaccionesRandom [cuenta1 cuenta2 n]
+  (dotimes [_ n]
+    (let [[desde hasta] (shuffle [cuenta1 cuenta2])]
+      (transferirDinero desde hasta (rand-int @desde))
+    )
+  )
+)
+
+;Resetea cuentas
+(defn resetearCuentas! []
+  (reset! cuenta-a 50)
+  (reset! cuenta-b 50)
+)
+
+;Realiza un print del estado de las cuentas y su suma
+(defn printResultados []
+  (let [ca @cuenta-a cb @cuenta-b]
+    (println "Estado cuenta A:" ca)
+    (println "Estado cuenta B:" cb)
+    (println "Suma de Cuentas:" (+ ca cb))
+    (println "")
+  )
+)
+
+;Lanza N threads realizando M transacciones con cada uno.
+;Muestra el estado de las cuentas cada segundo.
+(defn transaccionesMultiplesThreads [nThreads nTransXThread]
+  (let [futures
+        (doall
+          (for [_ (range nThreads)]
+            (future (transaccionesRandom cuenta-a cuenta-b nTransXThread))))]
+    (while (not (every? future-done? futures))
+      ;Cada segundo se imprime el estado de las cuentas
+      (printResultados)
+      (Thread/sleep 1000)
+    )
+  )
+)
+
+;Ambas cuentas tienen inicialmente 50 pesos
+(def cuenta-a (atom 50))
+(def cuenta-b (atom 50))
+
+(println "TRANSACCIONES BANCARIAS CON ATOMOS EN UN UNICO THREAD")
+(transaccionesRandom cuenta-a cuenta-b 1000)
+(printResultados)
+
+(println "TRANSACCIONES BANCARIAS CON ATOMOS EN MULTIPLES THREADS")
+(resetearCuentas!)
+(transaccionesMultiplesThreads 5 1000)
+(printResultados)

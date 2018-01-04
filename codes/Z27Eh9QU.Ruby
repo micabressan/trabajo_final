@@ -1,0 +1,4 @@
+Hello my Crypto-sensei, i'm your youtube subscriber. first of all, thank you for your videos, they really make sense and i see a man behind is a professional, unlike many other cryptoYoutubets being like "em..here that altcoin price has gone up...and that has gone down...and bitcoin is..well it's up...and oo this one is really blown..what a news..subscribe please..buy"
+The reason i'm writing is because i would like to make a video suggestion, this might be interesting for many of your subscribers.
+I've seen some videos where you speak about altcoins like salt or vertcoin, you predict some of them rise, some of them do, some don't. basically my question is..how you do that? do you research every ICO that comes? do you have some special news source, do you analyze every CryptoCurrencie that is on coinmarketcap, are you from Iluminati? are you a human? do you know someone from rothschilds? (we still have not seen you so..)
+anyway, a video with basic suggestions about

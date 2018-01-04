@@ -1,0 +1,67 @@
+-- Paste this to http://elm-lang.org/try
+
+import Html exposing (..)
+import String
+import List
+import Color
+import Html.Attributes exposing (..)
+import Html.Events exposing (onInput)
+import Result exposing (withDefault)
+
+
+main =
+  Html.beginnerProgram
+    { model = model
+    , view = view
+    , update = update
+    }
+
+
+-- MODEL
+
+
+type alias Model =
+  { multiplier : Float
+  }
+
+
+model : Model
+model =
+  Model 0.77
+
+
+-- UPDATE
+
+
+type Msg
+    = UpdateMult String
+
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+      
+    UpdateMult mult ->
+      { model | multiplier = withDefault (model.multiplier) (String.toFloat mult) }
+
+
+
+-- VIEW
+
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ input [ type_ "text", placeholder "Multiplier", onInput UpdateMult ] []
+    , div [] [text (toString model.multiplier)]
+    , div [] (List.map (bar model.multiplier) (List.range 0 40))
+    ]
+
+bar : Float -> Int -> Html a
+bar mult n =
+  let
+    str = text (toString n)
+    hue = toFloat n * mult * 360
+    hslstr = "hsl(" ++ toString hue ++ ", 90%, 50%)"
+    sty = style [("backgroundColor", hslstr)]
+  in div [sty] [str, text " ", text hslstr]

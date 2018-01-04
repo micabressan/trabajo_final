@@ -1,0 +1,29 @@
+;; I am writing a spec for a simplified version of CSV and ran into a
+;; behavior of conform that surprised me. This is a minimal
+;; reproduction:
+(s/conform
+  (s/* (s/cat
+         :cell (s/alt
+                 :unquoted (s/* (complement #{\,}))
+                 :quoted (s/cat
+                           :begin #{\"}
+                           :data (s/* (complement #{\"}))
+                           :end #{\"}))
+         :delim #{\,}))
+  (seq "abc,\"abc,\","))
+
+;; which evaluates to
+[{:cell [:unquoted [\a \b \c]], :delim \,}
+ {:cell [:quoted {:begin \", :data [\a \b \c \,], :end \"}],
+  :delim \,}
+ {:cell [:unquoted []]}]
+
+;; I expected
+[{:cell [:unquoted [\a \b \c]], :delim \,}
+ {:cell [:quoted {:begin \", :data [\a \b \c \,], :end \"}],
+  :delim \,}]
+
+;; i.e., only two cells. I do not expect a third cell because I
+;; expected (s/cat :cell ... :delim ...) to mean that every cell
+;; should be followed by a comma. Why do I observe a third cell with
+;; no delimiter?

@@ -1,0 +1,8 @@
+#Zoom function
+zoom = (ratio) ->
+	width = $(".added:first").width()
+	height = $(".added:first").height()
+	$(this).width(width * ratio)
+	$(this).height(height * ratio)
+	$(this).parent().height(height * ratio)
+        return

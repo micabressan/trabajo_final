@@ -1,0 +1,93 @@
+
+import Data.List (intersperse)
+import qualified Data.Map as M
+import Data.Ratio ((%))
+
+import System.IO
+
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks)
+import XMonad.Hooks.ManageHelpers (doCenterFloat)
+import XMonad.Hooks.SetWMName (setWMName)
+import XMonad.Layout.ResizableTile
+import XMonad.Prompt
+import XMonad.Prompt.Shell
+import XMonad.Util.Run (spawnPipe)
+
+customLayout = avoidStruts $ ResizableTall nmaster delta ratio []
+  where nmaster = 1
+        delta = 5 % 100
+        ratio = 1 % 2
+
+customManage = composeAll rules
+    where rules = [className =? klass --> doCenterFloat | klass <- classes]
+               ++ [stringProperty "WM_WINDOW_ROLE" =? role --> doCenterFloat | role <- roles]
+          classes = [ "Ebook-viewer"
+                    , "Emacs"
+                    , "feh"
+                    , "grafx2"
+                    , "guvcview"
+                    , "MPlayer"
+                    , "Nitrogen"
+                    , "qemu-system-x86_64"
+                    , "Tinyca2"
+                    , "Wine"
+                    , "XFontSel"
+                    , "XTerm"
+                    ]
+          roles = [ "gimp-brightness-contrast-tool"
+                  , "gimp-color-balance-tool"
+                  , "gimp-colorize-tool"
+                  , "gimp-layer-new"
+                  , "gimp-levels-tool"
+                  , "gimp-measure-tool"
+                  , "gimp-toolbox-color-dialog"
+                  ]
+
+customXPConfig = defaultXPConfig
+    {
+      position = Top
+    , font = "xft:Ubuntu Mono:size=12"
+    , bgColor = "#1f1b16"
+    , fgColor = "#7b6d55"
+    , bgHLight = "#1f1b16"
+    , fgHLight = "#93794e"
+    , borderColor = "#1f1b16"
+    , promptBorderWidth = 1
+    , height = 20
+    , defaultText = ""
+    , historySize = 256
+    , autoComplete = Nothing
+    }
+
+customKeys conf = M.fromList
+    [ ((mod, xK_p), shellPrompt customXPConfig)
+    , ((mod, xK_bracketleft), spawn "ossmix jack.green.front -- -5")
+    , ((mod, xK_bracketright), spawn "ossmix jack.green.front -- +5")
+    , ((mod, xK_apostrophe), spawn "mpc toggle")
+    , ((mod .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
+    ]
+    where mod = modMask conf
+
+main = do xmobar <- spawnPipe "xmobar"
+          xmonad $ defaultConfig
+              { modMask = mod4Mask
+              , borderWidth = 1
+              , terminal = "xterm"
+              , normalBorderColor = "#1f1b16"
+              , focusedBorderColor = "#4a4947"
+              , layoutHook = customLayout
+              , manageHook = customManage <+> manageDocks
+              , logHook = dynamicLogWithPP $ xmobarPP
+                        { ppOutput = hPutStrLn xmobar
+                        , ppLayout = const ""
+                        , ppHiddenNoWindows = xmobarColor "#4a4947" ""
+                        , ppTitle = xmobarColor "#375683" "" . shorten 60
+                        , ppCurrent = xmobarColor "#8e3125" ""
+                        , ppUrgent = xmobarColor "#8e3125" ""
+                        , ppSep = "  "
+                        }
+              , startupHook = setWMName "LG3D"
+              , keys = \c -> customKeys c `M.union` keys defaultConfig c
+              }

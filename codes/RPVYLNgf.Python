@@ -1,0 +1,133 @@
+import pygame
+import random
+import time
+
+
+pygame.init()
+ 
+# Constants
+# Colors
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+FONT = pygame.font.SysFont('cambriacambriamath', 20, False, False)
+FONT2 = pygame.font.SysFont('freesansbold.ttf', 115, False, False)
+ 
+screen = pygame.display.set_mode((700, 500))
+clock = pygame.time.Clock()
+Background = pygame.image.load("Background.jpg")
+Background = pygame.transform.scale(Background, (700, 500))
+
+# variables
+running = True
+count = 0
+AmountBlocks = 2
+timeleft = 5
+score = 0
+goal = 15
+height = 500
+ 
+# classes
+class Box:
+    def __init__(self):
+        self.x = random.randint(0, 400)
+        self.y = random.randint(0, 100)
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        self.color = ((r, g, b))
+        self.speed = random.randint(5, 10)
+        self.size = random.randint(5, 15)
+ 
+ 
+def drop(cad):
+    cad.y = cad.y + cad.speed
+ 
+ 
+S = []
+i = 0
+for i in range(AmountBlocks):
+    S.append(Box())
+ 
+ 
+class Block:
+    def __init__(self, color, x, y, width, height, speed):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.speed = speed
+ 
+    def display(self):
+       pygame.draw.rect(screen, self.color, [self.x, self.y, self.width, self.height])
+
+    def move(self, direction):
+        if direction == "LEFT":
+            self.x = self.x - self.speed
+        elif direction == "RIGHT":
+            self.x = self.x + self.speed
+        elif direction == "DOWN":
+            self.y = self.y + self.speed
+        elif direction == "UP":
+            self.y = self.y - self.speed
+ 
+def Time_Up():
+    screen.fill(WHITE)
+    text1 = FONT2.render("Time's up!", True, BLACK)
+    text2= FONT.render("Press Q to quit.", True, BLACK)
+    text1_rect = text1.get_rect()
+    text2_rect = text2.get_rect()
+    text_x = screen.get_width() / 2 - text1_rect.width / 2 
+    text_y = screen.get_height() / 2 - text1_rect.height / 2 - 50
+    text_a = screen.get_width() / 2 - text2_rect.width / 2 
+    text_b = screen.get_height() / 2 - text2_rect.height / 2 + 50
+    screen.blit(text1, [text_x, text_y])
+    screen.blit(text2, [text_a, text_b])
+
+    for event in pygame.event.get():
+        if event.key == pygame.K_q:
+            exit()
+            
+def UpdateDisplay():
+    A.display()
+    textTime = FONT.render(str("Time Left: ") + str(timeleft), True, (BLACK), screen)
+    textScore = FONT.render(str("Score:  ") + str(score), True, (BLACK), screen)
+    textGoal = FONT.render(str("Goal:  ") + str(goal), True, (BLACK), screen)
+    screen.blit(textTime, (10, 10))
+    screen.blit(textScore, (10, 30))
+    screen.blit(textGoal, (10, 50))
+ 
+ 
+ 
+A = Block(RED, 250, 450, 100, 20, 10)
+ 
+while running:
+    count = count + 1
+    for j in range(AmountBlocks):
+        drop(S[j])
+        if (S[j].y > height - 50):
+            S.pop(j)
+            S.append(Box())
+        pygame.draw.rect(screen, S[j].color, pygame.Rect(S[j].x, S[j].y, S[j].size, S[j].size))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            print(event.key)
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        A.move("LEFT")
+    elif keys[pygame.K_RIGHT]:
+        A.move("RIGHT")
+    clock.tick(60)
+    if count > 60:
+        timeleft = timeleft - 1
+        count = 0
+    if timeleft < 1:
+        timeleft = 0
+        Time_Up()
+    pygame.display.flip()
+    screen.blit(Background, (0, 0))
+    UpdateDisplay()
+pygame.QUIT()

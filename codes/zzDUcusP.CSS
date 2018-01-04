@@ -1,0 +1,91 @@
+/* nav */
+.nav-area {
+	float:right;
+	padding:0 53px 0 0;
+	background:url(../images/bg-nav.png) no-repeat 100% -131px;
+}
+.nav {
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:52px 0 49px 52px;
+	background:url(../images/bg-nav.png) no-repeat;
+}
+.nav > li {
+	float:left;
+	padding:0 0 0 3px;
+	font:11px/14px 'HelveticaNeueLTStd75Bold';
+	text-transform:uppercase;
+	margin:0 -2px 0 0;
+}
+.nav > li:first-child {
+	padding-left:0;
+	background:none;
+}
+.nav > li > a {
+	display:block;
+	min-width:70px;
+	height:14px;
+	padding:9px 10px;
+	color:#f9f9f9;
+	background:url(../images/btn-nav.png) no-repeat 0 -32px;
+	text-align:center;
+	text-shadow:0 -1px 1px #2a2a2a;
+}
+.nav > li:first-child > a {background-position:0 0;}
+.nav > li:last-child > a {background-position:-50px -64px;}
+.nav > li:hover > a,
+.nav > .active > a,
+.nav > li > a:hover {
+	text-decoration:none;
+	background-position:0 -128px;
+}
+.nav > li:first-child:hover > a,
+.nav > .active:first-child > a,
+.nav > li:first-child > a:hover {background-position:0 -96px;}
+.nav > li:last-child:hover > a,
+.nav > .active:last-child > a,
+.nav > li:last-child > a:hover {background-position:-50px -160px;}
+.nav ul {
+	display:none;
+	position:absolute;
+	top:-12px;
+	left:50%;
+	width:248px;
+	list-style:none;
+	margin:0 0 0 -124px;
+	padding:0;
+	font:11px/14px 'HelveticaNeueLTStd75Bold';
+}
+.nav > li:hover {position:relative;}
+.nav > li:hover ul {display:block;}
+.nav ul li {
+	width:160px;
+	vertical-align:top;
+	padding:0 44px 0;
+	background:url(../images/bg-drop.png) no-repeat 0 -75px;
+}
+.nav ul li.first-child {
+	padding-top:45px;
+	background-position:0 0;
+}
+.nav ul li.last-child {
+	padding-bottom:44px;
+	padding-top:2px;
+	background-position:0 100%;
+}
+.nav ul li a {
+	display:block;
+	overflow:hidden;
+	height:14px;
+	padding:11px 4px 7px 17px;
+	color:#fff;
+	text-shadow:0 -1px 1px #161616;
+	background:url(../images/btn-drop.png) no-repeat -160px 0;
+}
+.nav ul li.first-child a {background-position:0 0;}
+.nav ul li.last-child a {
+	background-position:-320px 100%;
+	padding-top:9px;
+	padding-bottom:9px;
+}

@@ -1,0 +1,47 @@
+(def model (r/atom {:counter 0
+                    :loading false
+                    :text "World"}))
+
+
+(defn ->FetchData []
+  (doto model
+    (swap! assoc :loading true)
+    (swap! assoc :text (Fetch "URL..."))
+    (swap! assoc :loading false)))
+
+(defn ->GenerateRandom []
+  (doto model
+    (swap! assoc :loading true)
+    (swap! assoc :text (Random 50))
+    (swap! assoc :loading false)))
+
+(defn ->Increment []
+  (swap! model update :counter inc))
+
+(defn ->Decrement []
+  (swap! model update :counter dec))
+
+(defn ->setText [text]
+  (swap! model assoc :text text))
+
+
+
+(defn view []
+  [:div {}
+   [:p {}
+       [:button {:onClick ->Decrement} "-"]
+       (:counter model)
+       [:button {:onClick ->Increment} "+"]]
+   [:p {}
+      [:button {:onClick ->GenerateRandom} "Random"]]
+   [:h2 {} "Hello " (:text @model)]
+   [:p {}
+     [:input {:onChange #(->SetText (.. % -target -value))
+              :value (:text @model)}]]
+   [:p {}
+     (if (:loading @model)
+       "Loading..."
+       [:button {:onClick ->FetchData} "Fetch Data"])]])
+
+
+(r/render [view] (.getElementById js/document "app"))

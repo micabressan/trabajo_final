@@ -1,0 +1,105 @@
+## index.html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<title>
+			ListList
+		</title>
+		<script src="/batman/coffee-script.js" type="text/javascript"></script>
+		<script src="/batman/es5-shim.js" type="text/javascript"></script>
+		<script src="/batman/dist/batman.js" type="text/javascript"></script>
+		<script src="list_list.js" type="text/javascript"></script>
+		<style type="text/css">
+* {
+		font-family: Helvetica, Arial, sans-serif;
+		}
+
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<form data-formfor-task="controllers.tasks.emptyTask" data-event-submit="controllers.tasks.create">
+				<input placeholder="Task Name" data-bind="task.title">
+				<input placeholder="Task Description" data-bind="task.description">
+				<select data-bind="task.status">
+					<option selected value="created">
+						created
+					</option>
+					<option value="in_progress">
+						in progress
+					</option>
+					<option value="completed">
+						completed
+					</option>
+					<option value="cancelled">
+						cancelled
+					</option>
+				</select>
+				<input type="submit" value="Submit" />
+			</form>
+			<ul id="tasks">
+				<li data-foreach-task="Task.all" data-mixin="animation">
+					<p data-bind="task.title"></p>
+					<p data-bind="task.description"></p>
+					<p data-bind="task.status"></p>
+				</li>
+				<li><span data-bind="Task.all.length"></span> <span data-bind="'item' | pluralize Task.all.length"></span></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			ListList.run();
+		</script>
+	</body>
+</html>
+
+## listlist.coffee
+
+class ListList extends Batman.App  
+	# Make ListList available in the global namespace so it can be used
+	# as a namespace and bound to in views.
+	@global yes
+	@root 'tasks#index'
+	@controller 'tasks'
+	@model 'task'
+
+## app_controller.coffee
+
+class ListList.TasksController extends Batman.Controller
+	emptyTask: null
+	
+	index: ->
+		@set 'emptyTask', new Task
+		
+		Task.load (error, tasks) ->
+			throw error if error
+			if not tasks.length
+				callback = (error) -> throw error if error
+				new Task(title: 'First Task', description: 'The first task', status: 'created').save(callback)
+				new Task(title: 'Second Task', description: 'The second task', status: 'created').save(callback)
+				new Task(title: 'Third Task', description: 'The third task', status: 'created').save(callback)
+				
+		return false
+			
+	create: =>
+		@emptyTask.save (error, record) =>
+			throw error if error
+			
+			@set 'emptyTask', new Task
+				
+		return false
+
+## list_list_models.coffee
+
+class Task extends Batman.Model
+	@global yes
+	@persist Batman.LocalStorage
+	@encode 'title', 'description', 'status', 'creator', 'id'
+	@encode 'created_at', 'updated_at', 'completed at',
+		encode: (time) -> time.toISOString()
+		decode: (timeString) -> Date.parse(timeString)
+	@encode 'tags',
+		encode: (tagSet) -> tagSet.toArray().join(', ')
+		decode: (tagString) -> new Batman.Set(tagString.split(', ')...)
+	title: 'Task Title'
+	description: 'Task Description'
+	status: 'Created'

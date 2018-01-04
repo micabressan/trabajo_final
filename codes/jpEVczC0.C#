@@ -1,0 +1,5 @@
+private RegistryKey registar;
+registar = Registry.CurrentUser.OpenSubKey(@"Software\RGLauncher", true);
+                if (registar.GetValue("Version") == null) registar.SetValue("Version", "1.0.0", RegistryValueKind.String);
+                if (registar.GetValue("Path") == null) registar.SetValue("Path", Path.GetDirectoryName(Application.ExecutablePath)+@"\"+AppDomain.CurrentDomain.FriendlyName, RegistryValueKind.String);
+                if (registar.GetValue("Updater") == null) registar.SetValue("Updater", Path.GetDirectoryName(Application.ExecutablePath)+@"\Updater.exe", RegistryValueKind.String);

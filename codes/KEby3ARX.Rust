@@ -1,0 +1,22 @@
+#[macro_export]
+macro_rules! trace
+{
+    () => {
+    	#[cfg(target_os = "windows")]
+    	println!("{}:{} ", file!(), line!());
+    	
+    	#[cfg(not(target_os = "windows"))]
+     	println!("{}{}:{} {}", "\x1B[34m", file!(), line!(), "\x1B[0m");
+    };
+
+    ($x1:expr $(, $opt:expr)*) => {
+    	#[cfg(target_os = "windows")]
+    	print!("{}:{} ", file!(), line!());
+
+    	#[cfg(not(target_os = "windows"))]
+   		print!("{}{}:{} {}", "\x1B[34m", file!(), line!(), "\x1B[0m");
+
+   		println!($x1, $($opt),*);
+ 	};
+// Green = "\x1B[32m", Red = "\x1B[31m", Blue = "\x1B[34m"
+}

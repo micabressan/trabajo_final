@@ -1,0 +1,24 @@
+/*
+This is a struct containing the beginning 
+and ending points of a range.
+*/
+type range<T> = struct {
+	// This is a type determined by the type parameter
+	type iterator,
+
+	begin: 	T,
+	end: 	T,
+}
+
+// Here we determine a case for the type of iterator
+type range<u64>::iterator = u64
+	
+// Range creation operator
+fn operator ..(beg: u64, end: u64) -> range(u64) {
+	return range<u64>{ begin: beg, end: end }
+}
+
+// Defining a generic iterator access for ranges
+fn iter<T>(r: range<T>) -> range<T>::iterator {
+	return range<T>::iterator{ r.begin }
+}

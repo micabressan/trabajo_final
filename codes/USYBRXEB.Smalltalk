@@ -1,0 +1,127 @@
+Fecha
+
+Clase
+
+crearFecha: unDia mes: unMes year: unYear
+^ (super new) iniciarFecha: unDia mes:unMes year: unYear
+
+Instancia
+
+iniciarFecha: unDia mes: unMes year: unYear
+"inicializa una fecha"
+dia:= unDia.
+mes:= unMes.
+year:= unYear.
+
+
+modDia: unDia
+"modifica un dia"
+|max d|
+d:=unDia.
+(mes = 1) ifTrue: [max:=31].
+(mes = 2) ifTrue: [
+(bisiesto = 1) ifTrue: [max:=29] 
+ifFalse: [max:=28].].
+(mes = 3)ifTrue: [max:=31].
+(mes = 4)ifTrue: [max:=30].
+(mes = 5)ifTrue: [max:=31].
+(mes = 6)ifTrue: [max:=30].
+(mes = 7)ifTrue: [max:=31].
+(mes = 8)ifTrue: [max:=31].
+(mes = 9)ifTrue: [max:=30].
+(mes =10)ifTrue: [max:=31].
+(mes = 11)ifTrue: [max:=30].
+(mes = 12)ifTrue: [max:=31].
+[d > max] whileTrue: [
+
+d:=(Prompter prompt: 'Dia supera el permitido para el mes, ingrese nuevo numero')asNumber. 
+
+].
+
+dia:=d.	
+
+
+modMes: unMes
+|aux|
+aux :=unMes .
+[aux = 0] whileTrue: [
+aux := (Prompter prompt: 'El mes ingresado es 0, ingrese mes enrte 1 y 12 ')asNumber .
+].
+[aux > 12] whileTrue:[
+aux := (Prompter prompt: 'El mes ingresado supera al permitido, ingrese mes enrte 1 y 12')asNumber .
+].
+
+mes:=aux.
+
+
+modYear: unYear
+|aux salir|
+aux:=unYear.
+[aux >= 9999] whileTrue: [
+aux:=(Prompter prompt: 'anio fuera de rango, ingrese algo menor a 9999')asNumber . ]. 
+salir :=0.
+
+"si la fecha es 2016 es bisiesto"
+(aux = 2016) ifTrue: [bisiesto:=1.].
+
+"si la fecha es 2016 resto de a 4, si llego a 2016 es bisiesto, si se pasa no"
+(aux > 2016) ifTrue: [
+[salir = 0] whileTrue: [
+aux:=aux-4.
+(aux = 2016) ifTrue: [bisiesto:=1.
+salir:=1.] 
+ifFalse: [
+(aux < 2016) ifTrue: [ bisiesto:=0.
+salir:=1.].].].].
+
+"lo mismo que antes solo que en vez de restar sumo"
+(aux < 2016) ifTrue: [
+[salir = 0] whileTrue: [
+aux:=aux+4.
+(aux = 2016) ifTrue: [ bisiesto:=1.
+salir:=1. ]
+ ifFalse: [
+(aux > 2016) ifTrue: [ bisiesto:=0.
+salir:=1.].].].].
+year:=aux.
+
+
+verDia
+^dia.
+
+verFecha
+^fechatot
+
+verMes
+^mes.
+
+verYear
+^year.
+
+__________________________________________________________________________________________________________________
+Hora
+
+Clase
+
+crearHora:unaHora minuto:unMinuto segundo:unSegundo 
+^(super new)iniciarHora:unaHora minuto:unMinuto segundo:unSegundo
+
+Instancia
+
+iniciarHora: unaHora minuto: unMinuto segundo: unSegundo
+"inicializa una hora"	
+hour := unaHora.
+minuto := unMinuto.
+segundo := unSegundo.
+
+
+verHora
+^hour
+
+
+verMinuto
+^minuto
+
+
+verSegundo
+^segundo.

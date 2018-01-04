@@ -1,0 +1,9 @@
+#!/usr/bin/env escript
+%%! -name jenkins@127.0.0.1 -setcookie cvz verbose
+
+main([Node]) -> 
+    Self=net_adm:ping('jenkins@127.0.0.1'),
+    erlang:display(Self),
+    Response=net_adm:ping(list_to_atom(Node)),
+    erlang:display(Response),
+    erlang:display(application:which_applications()).

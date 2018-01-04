@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitResponse xmlns="http://freeway.freedompay.com/">
+      <SubmitResult>
+        <tokenInformation>
+          <cardExpirationYear>2020</cardExpirationYear>
+          <cardIssuerName>Visa</cardIssuerName>
+          <cardExpirationMonth>1</cardExpirationMonth>
+          <token>9071320128279321081</token>
+          <accountNumberMasked>411111XXXXXX1111</accountNumberMasked>
+          <futuretest158322483>futuretest158322483</futuretest158322483>
+        </tokenInformation>
+        <merchantReferenceCode>72030416</merchantReferenceCode>
+        <reasonCode>100</reasonCode>
+        <requestID>01Z6FVQB5S01U624M66GRENM0PS5C5F4</requestID>
+        <ccAuthReply>
+          <requestDateTime>2018-01-03T15:22:36.5176351Z</requestDateTime>
+          <amount>138.75</amount>
+          <enhancedDataEnabled>N</enhancedDataEnabled>
+          <processorResponseMessage>APPROVED</processorResponseMessage>
+          <authorizedDateTime>2018-01-03T15:22:36.5486392Z</authorizedDateTime>
+          <authorizationCode>915714</authorizationCode>
+          <partialAmount>N</partialAmount>
+          <processorResponseCode>100</processorResponseCode>
+          <processorTransactionID>40915714</processorTransactionID>
+          <reconciliationID>40915714</reconciliationID>
+          <reasonCode>100</reasonCode>
+        </ccAuthReply>
+        <networkData>
+          <network>FREEWAY</network>
+        </networkData>
+        <decision>ACCEPT</decision>
+        <tokenCreateReply>
+          <reasonCode>100</reasonCode>
+          <requestDateTime>2018-01-03T15:22:36.5486392Z</requestDateTime>
+        </tokenCreateReply>
+      </SubmitResult>
+    </SubmitResponse>
+  </soap:Body>
+</soap:Envelope>

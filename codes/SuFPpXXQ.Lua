@@ -1,0 +1,31 @@
+TEAM_41ST = DarkRP.createJob("Vice-Commandant 41st", {
+	color = Color(28, 154, 0, 255),
+	model = {
+		"models/reizer_cgi_p2/41_d6/41_d6.mdl"
+		},
+	description = [[Vice-Commandant 41st : Félicitation, vous avez largement fait vos preuves, vous êtes digne de confiance, après une réunion entre gradé, le Commandant Maréchal Gree vous a promu au rang de Commandant en second, votre but est d’assister le Commandant dans les décisions les plus importantes au sein de la Légion, bonne chance !]],
+	weapons = {
+		"tfa_swch_dc15a",
+		"tfa_dc15s_ashura",
+		"weapon_rpw_binoculars_explorer",
+		"garde_a_vous1.2",
+		"csgo_flip_ddpat",
+		"weapon_rpw_binoculars_nvg",
+		"wep_jack_job_drpradio",
+		"clone_card_c3",
+		"tfa_sw_dc17dual",
+		"tfa_sw_repsnip"
+		},
+	command = "VCMD41st",
+	max = 1,
+	salary = 0,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	maxpocket = 20,
+	PlayerSpawn = function(ply) GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1, GAMEMODE.Config.runspeed * 1) ply:SetHealth("100") ply:SetArmor("100") ply:SetGravity(1) return CLIENT end,
+    PlayerDeath = function(ply) GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1, GAMEMODE.Config.runspeed * 1) return CLIENT end,
+	customCheck = function(ply) return ply:CheckGroup ("TEAM_41ST") or ply:IsAdmin() end,
+    CustomCheckFailMsg = "Vous n'avez pas encore ce grade",
+	category = "41st",
+    sortOrder = 2,

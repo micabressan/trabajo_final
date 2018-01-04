@@ -1,0 +1,11 @@
+- alias: '102: skallarm av'
+  id: '102'
+  trigger:
+    platform: time
+    at: 06:30
+  condition: []
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        code: XXXXXX
+        entity_id: alarm_control_panel.plats_alarm

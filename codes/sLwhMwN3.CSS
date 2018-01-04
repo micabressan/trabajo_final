@@ -1,0 +1,42 @@
+body{
+    margin: 0px;
+    border: 0px;
+}
+#hero{
+    background-image: url('../IMG/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: -10;
+}
+#menu
+ul li{
+    list-style-type: none;
+    display: inline;
+    font-size: 50px;
+    /*background: #DF7401;*/
+    padding: 60px;
+    border-radius: 8px;
+    
+    
+}
+
+
+a:hover{
+    font-size: 60px;
+    
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    
+}
+
+#menu{
+    text-align: center;
+}
+
+#cabezera{

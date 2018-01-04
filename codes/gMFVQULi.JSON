@@ -1,0 +1,21 @@
+ <?php  
+ $url = 'https://serasa-private.gateway.zup.me/sbox/v1/operations/report';  
+ 
+ $restKey = 'YOUR_REST_KEY';  
+ $headers = array(  
+   "Content-Type: application/json",  
+   "X-Application-Key: 5d32f730ab9701353d7e000d3ac06d76"  
+ );  
+ $objectData = '{"planKey":"AFF-PORTAL-ACS","consultantData":{"email":"user1@gmail.com","birthDate":"1990-05-23","fullName":"Maria Silva","motherName":"Maria Silva","document":{"key":"cpf","value":"17845147567"},"phone":{"countryCode":55,"areaCode":48,"phone":987654321},"address":{"zipCode":"99999999","address":"Rua Dom Pedro II","number":"123B","complement":"Apt 406","neighborhood":"Bairro","ibgeCityCode":"4217808"}},"consulted":{"document":{"key":"cpf","value":"17845147567"}},"originIpAddress":"200.245.207.208"}';  
+ $rest = curl_init();  
+ curl_setopt($rest,CURLOPT_URL,$url);  
+ curl_setopt($rest,CURLOPT_POST,1);  
+ curl_setopt($rest,CURLOPT_POSTFIELDS,$objectData);  
+ curl_setopt($rest,CURLOPT_HTTPHEADER,$headers);  
+ curl_setopt($rest,CURLOPT_SSL_VERIFYPEER, false);  
+ curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
+ $response = curl_exec($rest);  
+ echo $response;  
+ print_r($response);  
+ curl_close($rest);  
+ ?>

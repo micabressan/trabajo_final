@@ -1,0 +1,21 @@
+{
+	"precondition": [
+		{"type": "==", "var": "have_unlock_dmt", "value": 1},
+		{"type": ">", "var": "heroin", "value": 200}
+	],
+	"question": "Sunday evening, a friend ask you if you want take 50mg heroin:",
+	"answers": [
+		{
+			"text": "Yes!",
+			"effect": ["risk_heroin++", "risk_fentanyl++]
+		},
+		{
+			"text": "Yes, but test for Fentanyl before",
+			"effect": ["risk_heroin++", "drug_safety++"]
+		},
+		{
+			"text": "No",
+			"effect": ["social--"]
+		}
+	]
+}

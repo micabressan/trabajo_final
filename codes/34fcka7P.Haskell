@@ -1,0 +1,33 @@
+simulatie :: [Boid] -> [Boid]
+simulatie b = verPos(verSnel b)
+
+verPos :: [Boid] -> [Boid]
+verPos [] = []
+verPos [x] = [{x & pos = (movePos x.Boid.vel x.Boid.pos)}]
+verPos [x:xs] = [{x & pos = (movePos x.Boid.vel x.Boid.pos)}] ++ verPos xs
+
+/*
+updatePos :: Boid Vel -> Boid
+updatePos a b = {a & pos = (movePos b a.Boid.pos )} 
+*/
+
+verSnel :: [Boid] -> [Boid]
+verSnel [] = []
+verSnel [x] = [updateSnel x (snelheid [x] x)] 
+verSnel [x:xs] = [updateSnel x (snelheid [x:xs] x)] ++ verSnel xs
+
+updateSnel :: Boid Vel -> Boid
+updateSnel a b = {a & vel = b}
+
+v1 :: [Boid] Boid -> Vel
+//v1 a b = toVel (scale (1.0/100.0) ((scale (1.0 / (toReal (length a))) sum(filter(dichtbij( b ([x.Boid.pos \\ x <- a]) viewing_distance) a)) - b.Boid.pos)))
+v1 a b = toVel (scale (1.0/100.0) ((scale (1.0 / (toReal (length a))) (sum[x.Boid.pos \\ x <- a | dist x.Boid.pos b.Boid.pos <= viewing_distance] ) - b.Boid.pos)))
+
+v2 :: [Boid] Boid -> Vel
+v2 a b = toVel (scale (1.0/8.0) ( (-) {rx = 0.0, ry = 0.0} (((sum[(x.Boid.pos - b.Boid.pos) \\ x <- a | dist x.Boid.pos b.Boid.pos <= threshhold_dist]))) ) )
+
+v3 :: [Boid] Boid -> Vel
+v3 a b = (scale (1.0/8.0) ((scale (1.0/ (toReal (length a))) (sum[x.Boid.vel \\ x <- a | dist x.Boid.pos b.Boid.pos <= viewing_distance]) - b.Boid.vel) ))
+
+snelheid :: [Boid] Boid -> Vel
+snelheid a b = (v1 a b + v2 a b + v3 a b + b.Boid.vel)

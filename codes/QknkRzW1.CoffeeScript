@@ -1,0 +1,26 @@
+When = require 'when'
+_ = require 'underscore'
+
+
+pnot = (i) ->
+  When.promise (res, rej) ->
+    i.then rej
+    i.catch res
+    
+pand = (a, b) ->
+  When.promise (res, rej) ->
+    a.then ->
+      b.then res
+      
+    a.catch rej
+    b.catch rej
+    
+foo = (a, b) ->
+  pnot pand a, b
+  
+bar = (a, b) ->
+  i = foo a, b
+  foo (foo i, a), (foo i, b)
+  
+  
+# What does bar do?

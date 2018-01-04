@@ -1,0 +1,66 @@
+%%%-------------------------------------------------------------------
+%%% @author alex
+%%%-------------------------------------------------------------------
+-module(lab4).
+-author("alex").
+
+%% API
+-export([factorial/1, lastElement/1, implication/2, negation/1, getElementOnPosition/2,
+         listLength/1]).
+
+%% done
+lastElement(List) when not is_list(List) ->
+  List;
+lastElement(List) when (length(List) == 0) ->
+  error("empty set");
+lastElement(List) when (length(List) == 1) ->
+  [Head|Tail] = List,
+  Head;
+lastElement(List) ->
+  [Head|Tail] = List,
+  lastElement(Tail).
+
+%% done
+factorial(Number) when (not is_integer(Number)) ->
+  error("argument is not integer");
+factorial(Number) when (Number == 1) or (Number == 0)->
+  1;
+factorial(Number) ->
+  Number * factorial(Number-1).
+
+%% done
+implication(Bool1, Bool2) when not is_boolean(Bool1) ->
+  error("first argument is not bool");
+implication(Bool1, Bool2) when not is_boolean(Bool2) ->
+  error("second argument is not bool");
+implication(Bool1, Bool2) when (Bool1 == true) and (Bool2 == false) ->
+  false;
+implication(_,_) -> true.
+
+%% done
+negation(true) -> false;
+negation(false) -> true;
+negation(_) -> error("argument is not bool").
+
+%% done
+getElementOnPosition(List, Position) when not is_list(List) ->
+  error("not a list");
+getElementOnPosition(List, Position)
+  when (not is_integer(Position))
+  or (Position < 0)
+  or (length(List) =< Position) ->
+    error("bad number");
+getElementOnPosition([Head|Tail], Position) when Position == 0->
+  Head;
+getElementOnPosition([Head|Tail], Position) ->
+  getElementOnPosition(Tail, Position-1).
+
+%% done
+listLength(List) -> listLength(List, 0).
+
+listLength(List, Count) when is_list(List) -> error("not a list");
+listLength([Head|Tail], Count) when Tail == [] ->  Count+1;
+listLength([Head|Tail], Count) -> listLength(Tail, Count+1).
+
+%% in progress
+listDeleteAllElements([Head|Tail], Element) when Tail == [] -> Head;

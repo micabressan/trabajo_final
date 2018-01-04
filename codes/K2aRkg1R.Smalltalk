@@ -1,0 +1,635 @@
+ ./pharo-ui Dev26/grafoscopio-dev26.image 
+computation has been terminated
+
+Segmentation fault Wed Nov 29 17:04:03 2017
+
+
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo
+Pharo VM version: 5.0-201707201942  Thu Jul 20 20:40:54 UTC 2017 gcc 4.6.3 [Production Spur 64-bit VM]
+Built from: CoInterpreter VMMaker.oscog-eem.2254 uuid: 4f2c2cce-f4a2-469a-93f1-97ed941df0ad Jul 20 2017
+With: StackToRegisterMappingCogit VMMaker.oscog-eem.2252 uuid: 2f3e9b0e-ecd3-4adf-b092-cce2e2587a5c Jul 20 2017
+Revision: VM: 201707201942 https://github.com/OpenSmalltalk/opensmalltalk-vm.git $ Date: Thu Jul 20 12:42:21 2017 -0700 $ Plugins: 201707201942 https://github.com/OpenSmalltalk/opensmalltalk-vm.git $
+Build host: Linux testing-gce-74d10329-bbfd-42e5-8995-b0e3a68c73cb 3.13.0-115-generic #162~precise1-Ubuntu SMP Fri Mar 24 16:47:06 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+plugin path: /home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942 [default: /home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/]
+
+
+C stack backtrace & registers:
+        rax 0x21e3af00 rbx 0x21e3ad90 rcx 0x21e3afb8 rdx 0x21e3ae48
+        rdi 0x21e3ab68 rsi 0x21e3ab68 rbp 0x21e3acd8 rsp 0x21e3b070
+        r8  0x21e3a5a8 r9  0x21e3a660 r10 0x21e3a718 r11 0x21e3a7d0
+        r12 0x21e3a888 r13 0x21e3a940 r14 0x21e3a9f8 r15 0x21e3aab0
+        rip 0x21e3b128
+*[0x7ffd21e3b128]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo[0x41ccd1]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo[0x41d05f]
+/lib/libpthread.so.0(+0x11da0)[0x7f50d6a2eda0]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo[0x435d61]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo(interpret+0x53d)[0x45d22d]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo[0x4694b1]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo(interpret+0x268)[0x45cf58]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo(main+0x2ab)[0x419f7b]
+/lib/libc.so.6(__libc_start_main+0xea)[0x7f50d633af6a]
+/home/offray/Programas/Pharo/6.1b/pharo-vm/lib/pharo/5.0-201707201942/pharo[0x41a265]
+[0x0]
+
+
+Smalltalk stack dump:
+    0x7ffd21e70b30 I Context>printOn: 0x20df2b0: a(n) Context
+    0x7ffd21e70b90 I Context>printDetails: 0x20df2b0: a(n) Context
+    0x7ffd21e70bf0 I Context>errorReportOn: 0x20df2b0: a(n) Context
+    0x7ffd21e70c38 M [] in SmalltalkImage>logError:inContext: 0x2db5ae8: a(n) SmalltalkImage
+    0x7ffd21e966f8 M [] in SmalltalkImage>logDuring: 0x2db5ae8: a(n) SmalltalkImage
+    0x7ffd21e96738 M BlockClosure>ensure: 0x20e0ae8: a(n) BlockClosure
+    0x7ffd21e96788 I SmalltalkImage>logDuring: 0x2db5ae8: a(n) SmalltalkImage
+    0x7ffd21e967d0 I SmalltalkImage>logError:inContext: 0x2db5ae8: a(n) SmalltalkImage
+    0x7ffd21e96810 M [] in DebugSession>logStackToFileIfNeeded 0x20df368: a(n) DebugSession
+    0x7ffd21e96840 M BlockClosure>on:do: 0x20dfd10: a(n) BlockClosure
+    0x7ffd21e96880 M BlockClosure>ifError: 0x20dfd10: a(n) BlockClosure
+    0x7ffd21e968b8 M [] in DebugSession>logStackToFileIfNeeded 0x20df368: a(n) DebugSession
+    0x7ffd21e968f8 M BlockClosure>ensure: 0x20df448: a(n) BlockClosure
+    0x7ffd21e96948 M [] in BlockClosure>valueWithin:onTimeout: 0x20df448: a(n) BlockClosure
+    0x7ffd21e96978 M BlockClosure>on:do: 0x20df7e8: a(n) BlockClosure
+    0x7ffd21e969e8 I BlockClosure>valueWithin:onTimeout: 0x20df448: a(n) BlockClosure
+    0x7ffd21e96a38 I DebugSession>logStackToFileIfNeeded 0x20df368: a(n) DebugSession
+    0x7ffd21e96a80 I MorphicUIManager>debugProcess:context:label:fullView:notification: 0x5805c28: a(n) MorphicUIManager
+    0x7ffd21e96ae8 I MorphicUIManager(UIManager)>debugProcess:context:label:fullView: 0x5805c28: a(n) MorphicUIManager
+    0x7ffd21e96b48 I Process>debug:title:full: 0x5f37368: a(n) Process
+    0x7ffd21e96ba0 I Process>debug:title: 0x5f37368: a(n) Process
+    0x7ffd21e96bf0 I INVALID RECEIVER>cannotReturn: 0x20e5bb8: a(n) bad class
+    0x7ffd21e96c30 M MCWorkingCopy class>ancestorsFromArray:cache: 0x334a980: a(n) MCWorkingCopy class
+         0x20dec90 is not a context
+         0x210b9b8 is not a context
+         0x20deb20 is not a context
+         0x2112d40 is not a context
+         0x20de9b0 is not a context
+         0x211aaa8 is not a context
+         0x20de840 is not a context
+         0x2121d78 is not a context
+         0x20de6d0 is not a context
+         0x2129a28 is not a context
+         0x20de560 is not a context
+         0x2130db0 is not a context
+         0x20de3f0 is not a context
+         0x2138b18 is not a context
+         0x20de280 is not a context
+         0x213fde8 is not a context
+         0x20de110 is not a context
+         0x2147a98 is not a context
+         0x20ddfa0 is not a context
+         0x214ed48 is not a context
+         0x20dcdb8 is not a context
+         0x2156ab0 is not a context
+         0x20dcc48 is not a context
+         0x215dd80 is not a context
+         0x20dcad8 is not a context
+         0x2165a30 is not a context
+         0x20dc968 is not a context
+         0x216cdb8 is not a context
+         0x20dc7f8 is not a context
+         0x2174b20 is not a context
+         0x20dc688 is not a context
+         0x217bd18 is not a context
+         0x20dc518 is not a context
+         0x21839c8 is not a context
+         0x20dc3a8 is not a context
+         0x218ad50 is not a context
+         0x20dc238 is not a context
+         0x2192ab8 is not a context
+         0x20dc0c8 is not a context
+         0x2199d88 is not a context
+         0x20dbf58 is not a context
+         0x21a1a38 is not a context
+         0x20dbde8 is not a context
+         0x21a8dc0 is not a context
+         0x20dbc78 is not a context
+         0x21b0b28 is not a context
+         0x20dbb08 is not a context
+         0x21b7df8 is not a context
+         0x20db998 is not a context
+         0x21bf460 is not a context
+         0x20db828 is not a context
+         0x21c6180 is not a context
+         0x20db6b8 is not a context
+         0x21cd498 is not a context
+         0x20db548 is not a context
+         0x21d3d70 is not a context
+         0x20db3d8 is not a context
+         0x21dae30 is not a context
+         0x20db268 is not a context
+         0x21e1878 is not a context
+         0x20db0f8 is not a context
+         0x21e8be8 is not a context
+         0x20daf88 is not a context
+         0x21ef4c0 is not a context
+         0x20dae18 is not a context
+         0x21f6580 is not a context
+         0x20daca8 is not a context
+         0x21fd240 is not a context
+         0x20dab38 is not a context
+         0x2204828 is not a context
+         0x20da9c8 is not a context
+         0x220b378 is not a context
+         0x20da858 is not a context
+         0x22126b0 is not a context
+         0x20da6e8 is not a context
+         0x2219370 is not a context
+         0x20da578 is not a context
+         0x2220958 is not a context
+         0x20da408 is not a context
+         0x22274a8 is not a context
+         0x20da298 is not a context
+         0x222e7e0 is not a context
+         0x20da128 is not a context
+         0x22354a0 is not a context
+         0x20d9fb8 is not a context
+         0x223ca88 is not a context
+         0x20d9e48 is not a context
+         0x22435d8 is not a context
+         0x20d9cd8 is not a context
+         0x224a910 is not a context
+         0x20d9b68 is not a context
+         0x22515d0 is not a context
+         0x20d99f8 is not a context
+         0x2258748 is not a context
+         0x20d9888 is not a context
+         0x225f598 is not a context
+         0x20d9718 is not a context
+         0x2266c58 is not a context
+         0x20d95a8 is not a context
+         0x226d9f0 is not a context
+         0x20d9438 is not a context
+         0x2275168 is not a context
+         0x20d92c8 is not a context
+         0x227be48 is not a context
+         0x20d9158 is not a context
+         0x2283508 is not a context
+         0x20d8fe8 is not a context
+         0x228a278 is not a context
+         0x20d8e78 is not a context
+         0x22919c8 is not a context
+         0x20d8d08 is not a context
+         0x1e5eab8 is not a context
+         0x20d8b98 is not a context
+         0x1e5e300 is not a context
+         0x20d8a28 is not a context
+         0x1e7be00 is not a context
+         0x20d88b8 is not a context
+         0x1e7b950 is not a context
+         0x20d8748 is not a context
+         0x1e7d198 is not a context
+         0x20d85d8 is not a context
+         0x1e7cd08 is not a context
+         0x20d8468 is not a context
+         0x1e6a7f8 is not a context
+         0x20d82f8 is not a context
+         0x1e6a318 is not a context
+         0x20d8188 is not a context
+         0x1e5fb40 is not a context
+         0x20d8018 is not a context
+         0x1e5f6d0 is not a context
+         0x20d7ea8 is not a context
+         0x1e711d8 is not a context
+         0x20d7d38 is not a context
+         0x1e70d18 is not a context
+         0x20d7bc8 is not a context
+         0x1e6f448 is not a context
+         0x20d7a58 is not a context
+         0x1e6ef60 is not a context
+         0x20d78e8 is not a context
+         0x1e6d718 is not a context
+         0x20d7778 is not a context
+         0x1e6d2a8 is not a context
+         0x20d7608 is not a context
+         0x1e7a388 is not a context
+         0x20d7498 is not a context
+         0x1e79ef8 is not a context
+         0x20d7328 is not a context
+         0x1e69140 is not a context
+         0x20d71b8 is not a context
+         0x1e68ca8 is not a context
+         0x20d7048 is not a context
+         0x1e61bf0 is not a context
+         0x20d6ed8 is not a context
+         0x1e616d8 is not a context
+         0x20d6d68 is not a context
+         0x1e6b420 is not a context
+         0x20d6bf8 is not a context
+         0x1e6ae50 is not a context
+         0x20d6a88 is not a context
+         0x1e67d30 is not a context
+         0x20d6918 is not a context
+         0x1e67890 is not a context
+         0x20d67a8 is not a context
+         0x1e67198 is not a context
+         0x20d6638 is not a context
+         0x1e66c10 is not a context
+         0x20d64c8 is not a context
+         0x1e7e1a0 is not a context
+         0x20d6358 is not a context
+         0x1e7dd20 is not a context
+         0x20d61e8 is not a context
+         0x1e7c720 is not a context
+         0x20d6078 is not a context
+         0x1e7c2a8 is not a context
+         0x20d5f08 is not a context
+         0x1e63da8 is not a context
+         0x20d5d98 is not a context
+         0x1e638c0 is not a context
+         0x20d5c28 is not a context
+         0x1e71b18 is not a context
+         0x20d5ab8 is not a context
+         0x1e71680 is not a context
+         0x20d5948 is not a context
+         0x1e6feb0 is not a context
+         0x20d57d8 is not a context
+         0x1e6f9f8 is not a context
+         0x20d5668 is not a context
+         0x1e69c48 is not a context
+         0x20d54f8 is not a context
+         0x1e69780 is not a context
+         0x20d5388 is not a context
+         0x1e608e8 is not a context
+         0x20d4aa0 is not a context
+         0x1e60450 is not a context
+         0x20d4930 is not a context
+         0x1e76b38 is not a context
+         0x20d47c0 is not a context
+         0x1e76678 is not a context
+         0x20d4650 is not a context
+         0x1e6bf18 is not a context
+         0x20d4228 is not a context
+         0x1e6baa8 is not a context
+         0x20d40b8 is not a context
+         0x1e75628 is not a context
+         0x20d3f48 is not a context
+         0x1e751b8 is not a context
+         0x20d3dd8 is not a context
+         0x1e665b0 is not a context
+         0x20d3c68 is not a context
+         0x1e66140 is not a context
+         0x20d3af8 is not a context
+         0x1e6eae8 is not a context
+         0x20d3988 is not a context
+         0x1e6e678 is not a context
+         0x20d3818 is not a context
+         0x1e63270 is not a context
+         0x20d36a8 is not a context
+         0x1e62be0 is not a context
+         0x20d3538 is not a context
+         0x1e7b370 is not a context
+         0x20d33c8 is not a context
+         0x1e7aea0 is not a context
+         0x20d3258 is not a context
+         0x1e72610 is not a context
+         0x20d30e8 is not a context
+         0x1e72198 is not a context
+         0x20d2f78 is not a context
+         0x1e75f50 is not a context
+         0x20d2e08 is not a context
+         0x1e75ad0 is not a context
+         0x20d29e0 is not a context
+         0x1e65ae0 is not a context
+         0x20d2870 is not a context
+         0x1e65658 is not a context
+         0x20d2700 is not a context
+         0x1e74410 is not a context
+         0x20d2590 is not a context
+         0x1e73f98 is not a context
+         0x20d2420 is not a context
+         0x1e7d970 is not a context
+         0x20c45a8 is not a context
+         0x1e7d590 is not a context
+         0x20c4438 is not a context
+         0x1e707b0 is not a context
+         0x20c42c8 is not a context
+         0x1e703e8 is not a context
+         0x20c4158 is not a context
+         0x1e64798 is not a context
+         0x2092ad8 is not a context
+         0x1e643d0 is not a context
+         0x2092968 is not a context
+         0x1e650d8 is not a context
+         0x20927f8 is not a context
+         0x1e64d10 is not a context
+         0x2092688 is not a context
+         0x1e77bf8 is not a context
+         0x2092518 is not a context
+         0x1e77828 is not a context
+         0x2083f70 is not a context
+         0x1e6cc08 is not a context
+         0x2083e00 is not a context
+         0x1e6c840 is not a context
+         0x2083c90 is not a context
+         0x1e7ab10 is not a context
+         0x2083b20 is not a context
+         0x1e7a748 is not a context
+         0x20839b0 is not a context
+         0x1e738f8 is not a context
+         0x2083840 is not a context
+         0x1e73528 is not a context
+         0x20754b0 is not a context
+         0x1e78320 is not a context
+         0x2075340 is not a context
+         0x1e77f58 is not a context
+         0x20751d0 is not a context
+         0x1e68740 is not a context
+         0x2074e08 is not a context
+         0x1e68378 is not a context
+         0x2074c98 is not a context
+         0x1e74e28 is not a context
+         0x2074b28 is not a context
+         0x1e74a60 is not a context
+         0x20749b8 is not a context
+         0x1e77410 is not a context
+         0x2074848 is not a context
+         0x1e77048 is not a context
+         0x20746d8 is not a context
+         0x1e62628 is not a context
+         0x2074568 is not a context
+         0x1e62260 is not a context
+         0x20743f8 is not a context
+         0x1e72ff0 is not a context
+         0x2074288 is not a context
+         0x1e72c28 is not a context
+         0x20736e0 is not a context
+         0x1e78b70 is not a context
+         0x2073570 is not a context
+         0x1e787a0 is not a context
+         0x206ba58 is not a context
+         0x1e793b8 is not a context
+         0x206b8e8 is not a context
+         0x1e78ff0 is not a context
+         0x206af10 is not a context
+         0x1e79b98 is not a context
+         0x206ada0 is not a context
+         0x1e797d0 is not a context
+         0x206ac30 is not a context
+         0x1e61038 is not a context
+         0x206aac0 is not a context
+         0x2063b50 is not a context
+         0x206a950 is not a context
+         0x206a830 is not a context
+
+Most recent primitives
+replaceFrom:to:with:startingAt:
+indexOfAscii:inString:startingAt:
+replaceFrom:to:with:startingAt:
+compare:with:collated:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+isBinary
+findFirstInString:inSet:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+primOpen:writable:
+shallowCopy
+basicIdentityHash
+wait
+basicNew:
+at:
+at:
+at:
+at:
+basicNew
+basicNew
+**StackOverflow**
+**StackOverflow**
+**StackOverflow**
+**StackOverflow**
+**StackOverflow**
+**StackOverflow**
+signal
+basicNew:
+basicNew
+class
+primSizeNoError:
+primGetPosition:
+primAtEnd:
+basicNext
+primRead:into:startingAt:count:
+primRead:into:startingAt:count:
+notNil
+notNil
+position:
+position:
+position:
+**StackOverflow**
+class
+stringHash:initialHash:
+shallowCopy
+cr
+**StackOverflow**
+**StackOverflow**
+**StackOverflow**
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+contents
+shallowCopy
+postCopy
+at:put:
+primSize:
+primGetPosition:
+primSetPosition:to:
+yourself
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+**StackOverflow**
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+**StackOverflow**
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+primUTCMicrosecondsClock
+digitMultiply:neg:
+primOffset
+**StackOverflow**
+digitCompare:
+//
+\\
+starting:
+starting:
+**StackOverflow**
+value:value:value:
+at:
+highBitOfPositiveReceiver
+highBitOfPositiveReceiver
+bitShift:
+bitShift:
+bitAnd:
+bitAnd:
+bitAnd:
+at:
+primWrite:from:startingAt:count:
+at:
+primWrite:from:startingAt:count:
+at:
+at:
+primWrite:from:startingAt:count:
+at:
+at:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+at:
+at:
+primWrite:from:startingAt:count:
+at:
+at:
+printOn:base:length:padded:
+printOn:base:length:padded:
+printOn:base:length:padded:
+//
+//
+primWrite:from:startingAt:count:
+//
+//
+//
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primUTCMicrosecondsClock
+primOffset
+primWrite:from:startingAt:count:
+class
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+class
+getSystemAttribute:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+getSystemAttribute:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+class
+getSystemAttribute:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+value:
+getSystemAttribute:
+replaceFrom:to:with:startingAt:
+value
+parameterAt:
+parameterAt:
+getSystemAttribute:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+interpreterSourceVersion
+**PrimitiveFailure**
+getSystemAttribute:
+getSystemAttribute:
+getSystemAttribute:
+getSystemAttribute:
+getSystemAttribute:
+replaceFrom:to:with:startingAt:
+getSystemAttribute:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+findFirstInString:inSet:startingAt:
+nextPutAll:
+class
+class
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+byteAt:
+byteAt:
+basicSize
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+value:
+replaceFrom:to:with:startingAt:
+byteAt:put:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+printString
+printString
+printString
+printString
+replaceFrom:to:with:startingAt:
+replaceFrom:to:with:startingAt:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+stringHash:initialHash:
+findFirstInString:inSet:startingAt:
+primWrite:from:startingAt:count:
+position
+
+stack page bytes 8192 available headroom 5576 minimum unused headroom 4688
+
+        (Segmentation fault)
+./pharo-ui: línea 11: 30202 Abortado                (`core' generado) "$DIR"/"pharo-vm/pharo" "$@"
+./pharo-ui Dev26/grafoscopio-dev26.image  19,52s user 2,58s system 14% cpu 2:37,57 total

@@ -1,0 +1,10 @@
+fn radix_step<'a, T>(data: &'a mut [T], data_swap: &'a mut [T],
+                  current_step_num: usize,
+                  counts: &mut [usize], counts_before: &mut [usize])
+where T:'a + Radix + Copy + Sync
+{
+    const PARALLEL_BATCH_COUNT: usize = <T as Radix>::HISTOGRAM_PARALLEL_BATCH_COUNT;
+    const BATCH_SIZE: usize = Radix::<T>::HISTOGRAM_BATCH_SIZE;
+    // ...
+
+}

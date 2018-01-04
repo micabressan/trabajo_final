@@ -1,0 +1,179 @@
+import sys
+import json
+import socket
+import logging
+
+logging.basicConfig(level=logging.CRITICAL)
+logger = logging.getLogger(__name__)
+
+class DataStorer(object):
+    def __init__(self, info):
+        self.source_file=info['source_file']
+    def store(self,to_store):
+        raise NotImplementedError('subclasses must override store()!')
+ 
+ 
+class SocketDataStorer(DataStorer):
+    def __init__(self,info):
+        super().__init__(info)
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client.connect((info['server'], info['port']))
+    def store(self,to_store):
+        self.client.sendall(to_store)
+ 
+ 
+ 
+class DataFinder(object):
+    def __init__(self,data_storer):
+        logger.debug("in Base CTOR\n")
+        self.server_addresses=list()
+        self.data_storer.data_storer
+    def get_data_to_find(self):
+        raise NotImplementedError('subclasses must override get_data_to_find()!')
+    def search_data(self):
+        raise NotImplementedError('subclasses must override search()!')
+    def store_data(self,to_store):
+        store_obj.store(to_store)
+ 
+ 
+class Data_Finder_With_Json(DataFinder):
+    def __init__(self, data_storer):
+
+        logger.debug("in CTOR\n")
+
+        super().__init__(data_storer)
+        self.get_data_to_find(self.data_storer.source_path)
+
+ 
+    def get_data_to_find(self,file_name):
+
+        logger.debug("-----getting data from json-----\n")
+
+        with open(file_name,'r') as json_file:
+            json_data = json.load(json_file)
+            self.server_addresses.append(json_data['server_address'])
+            json_data.pop("server_address", None)
+            num_of_attributes = len(json_data) - 1
+            self.mapping = json_data
+            self.num_of_attr = num_of_attributes
+
+            logger.debug("------got data from json-------\n")
+
+ 
+    def search_data(self,flow):
+
+        logger.debug('starting to search data')
+
+        self.flow=flow;
+        #decode req headers and put in map
+        req_headers=dict((key.decode('UTF-8'),val.decode('UTF-8')) for (key, val) in flow.request.headers)
+        if not req_headers['Host'] in self.server_addresses:
+
+            logger.debug('no host header')
+
+            return;
+        #decode res headers and put in map
+        res_headers=dict((key.decode('UTF-8'),val.decode('UTF-8')) for (key, val) in flow.response.headers)
+        for key,value in self.mapping.items():
+            self.search_in_headers(key,req_headers,res_headers, flow)
+            self.search_in_body(req_headers['Host'], key, flow)
+
+        logger.debug('finished searching data')
+ 
+    def search_in_headers(self,key,req_headers,res_headers, flow):
+
+        logger.debug('starting to search in headers')
+
+        for key_header,val_header in req_headers:
+        #exapmple: key_header: "Host", val_header: "www.exapmle.com"
+            for item in self.mapping[key].items():
+            #exapmle: key is 'substring_1',item[0]=='user_name', item[1]=='david'
+                if item[1] in val_header:
+                    self.found_data(item[0],key_header)
+        for key_header,val_header in res_headers:
+            for item in self.mapping[key].items():
+                if item[1] in val_header:
+                    self.found_data(item[0],key_header)
+
+        logger.debug('finished searching headers')
+ 
+    def search_in_body(self,host, key, flow):
+
+        logger.debug('starting to search in body')
+
+        string = flow.response.get_content()
+        if key in string:
+            self.found_data(flow, host, key, body = True)
+ 
+        string = flow.request.get_content()
+        if key in string:
+            self.found_data(flow, host, key, body = True)
+
+        logger.debug('finished searching body')
+ 
+    def found_data(self, flow, host, subs, header = False, body = False):
+
+        logger.debug('found substring %s', subs)
+
+        header_or_body = "body" if body is True else "header"
+        string = subs + "in " + header_or_body
+        js = {"host": str(host), "found": str(string) , "substring": str(subs), "response headers":str(flow.response.headers), "response body":str(flow.response.body), "request headers":str(flow.request.headers), "request body":str(flow.response.body)}
+        return js
+ 
+    def store_data(self, host, port, data)
+
+        logger.debug('storing data to %s', str(host))
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((host, port))
+        s.sendall(json.dumps(data))
+ 
+        resp = s.recv(1024)
+        if recv == "ACK":
+
+            logger.debug('server acknowledged data')
+
+            s.close()
+        else:
+
+            logger.debug('server did not acknowled data')
+
+            s.close()
+ 
+    def delimitePacket(self, flow, js = False, html = False):
+
+        logger.debug('delimiting packets')
+
+        delimit = ""
+        delimit += "text/javascript" if js is True else ""
+        delimit += "text/html" if html is True else ""
+ 
+        type = None
+        try:
+            type = flow.response.header['content-type']
+        except:
+            type = None
+        if type is None:
+
+            logger.debug('ran into exception when trying to get the content-type header from the response')
+
+            return False
+ 
+        if( "text/json" is in type ):
+
+            logger.debug('found json as content-type')
+
+            return Found_In.json
+        return Found_In.contains type in delimit
+ 
+ 
+ 
+def response(flow):
+    searcher.search_data(flow)
+ 
+def start():
+    Found_In = Enum('Found_In', 'request response header body json contains')
+    file_name=sys.argv[1]
+ 
+file_name=sys.argv[1]
+searcher = Data_Finder_With_Json(file_name)

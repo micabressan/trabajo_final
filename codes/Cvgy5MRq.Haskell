@@ -1,0 +1,25 @@
+import Data.Matrix
+mult = multStd
+eps = 0.000001
+A_matrix :: Matrix Double
+A_matrix = fromLists [[-0.493, 0.2, -0.2993], 
+               [-0.1, 0.4993, -0.1], 
+               [0.1, -0.2, 0.557]]                              
+D :: Matrix Double
+D = fromList 3 1 [-1.37824, 0.78132, 0.40314]
+B:: Matrix Double
+B' :: Matrix Double
+B' = fromLists $ map (\(row, n) -> (map (\p -> - p/(getElem n n A )) row)) (zip (toLists A) [1..])
+B= B' - (diagonal 0 (getDiag B'))
+C:: Matrix Double
+C= fromList 3 1 (map (\(el, n) -> el/(getElem n n a )) (zip (toList D) [1..]))
+x0 :: Matrix Double
+x0 = fromList 3 1 [1.0, 0, 0]
+inaccuracyOf :: Matrix Double -> Matrix Double
+inaccuracyOf x = A `mult` x - D
+maxOf :: Matrix Double -> Double
+maxOf = maximum. (map abs) . toList
+
+jacobi :: Matrix Double -> Int -> (Matrix Double, Int)
+jacobi x n = if (maxOf(inaccuracyOf x) < 0.00001) then (x, n)
+    else jacobi (B_matrix `mult` x + C_matrix) (n + 1)

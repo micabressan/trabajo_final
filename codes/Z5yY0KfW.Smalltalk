@@ -1,0 +1,85 @@
+renderContentOn: html
+
+	reload ifTrue: [ self search ].
+	
+	html form
+		id: 'lists-main';
+		with: [
+			
+			 html div id: 'stock-list'; with: [
+				
+				html label
+					id: 'recherche';
+					class: 'mobileLabel' if: ((self session navigator) = 1);
+					with: 'Contenu :'.
+				html space; space.
+				html select
+					id: 'contenu';
+					class: 'mobileSelect' if: ((self session navigator) = 1);
+					list: #( 'En Stock' 'Tout');
+					selected: (self content);
+					callback: [ :value |  self content: value];
+					beSubmitOnChange.
+				
+				html break.
+				html label
+					id: 'recherche';
+					class: 'mobileLabel' if: ((self session navigator) = 1);
+					with: 'Recherche :'.
+				html space; space.
+				
+				self renderSelectOn: html id: 'first'.
+				self renderSelectOn: html id: 'second'.
+				self renderSelectOn: html id: 'third'.
+				
+				html space; space; space.
+				html submitButton
+					class: 'mobileButton' if: ((self session navigator) = 1);
+					value: 'Reset';
+					callback: [ self reset; updateListSelect ].
+				
+				parentElement
+					ifTrue: [
+						html submitButton
+							class: 'mobileButton' if: ((self session navigator) = 1);
+							value: 'Retour';
+							callback: [ self search. parentElement := false ]
+					].
+			].
+		].
+		
+		html form: [
+				
+			html break.
+			html label
+				id: 'recherche';
+				class: 'mobileLabel' if: ((self session navigator) = 1);
+				with: 'Recherche par dÃ©signation :'.
+			html space; space.
+			html textInput
+				callback: [ :value | self descriptionSearch: value ].
+			html space; space.
+			html submitButton
+				callback: [ self searchByDescription];
+				with: 'Search'.
+				
+		].
+		
+		html break; break.
+		self createSelectOn: html.
+
+		html form
+			id: 'lists';
+			with: [	
+				html div
+					id: 'details';
+					with: [
+						
+						html div
+							id: 'details-sub';
+							class: 'generic';
+							with: [ self renderToolBoxOn: html with: mainSelected]
+						
+					]
+			
+		]

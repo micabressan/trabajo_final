@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var n = int.Parse(Console.ReadLine());
+
+            var purviRed = "|{0}|";
+            var vtoriRed = "|{0}|";
+            var tretiRed = "|{0}~~{0}|";
+
+            var posleden = "{0}\\{1})";
+            var zaposleden = new string('-', n + 2);
+            var zaposleden1 = new string('_', n * 2 + 1);
+
+            var zaTreti = new string('-', n - 1);
+            var zaPurvi = new string('-', n * 2);
+            var zaVtori = new string('*', n * 2);
+
+            var off = "{0}\\{1}\\";
+            var zaOff = new string('-', n / 2 + 1);
+            var zaOff2 = new string('.', n * 2 + 1);
+
+
+
+            Console.WriteLine(purviRed, zaPurvi);
+            Console.WriteLine(vtoriRed, zaVtori);
+            Console.WriteLine(purviRed, zaPurvi);
+            Console.WriteLine(tretiRed, zaTreti);
+
+            for (int i = 1; i <= n - 2; i++)
+            {
+                Console.Write('|');
+                Console.Write(new string('-', n - i - 1));
+                Console.Write('~');
+                Console.Write(new string('~', i * 2));
+                Console.Write('~');
+                Console.Write(new string('-', n - i - 1));
+                Console.Write('|');
+                Console.WriteLine();
+
+            }
+
+            for (int i = 1; i <= n - 2; i++)
+            {
+                Console.Write('|');
+                Console.Write(new string('-', i + 1));
+                Console.Write('~');
+                Console.Write(new string('~', (n - 2) - i));
+                Console.Write(new string('~', (n - 2) - i));
+                Console.Write('~');
+                Console.Write(new string('-', i + 1));
+                Console.Write('|');
+                Console.WriteLine();
+            }
+
+            for (int i = 1; i <= n + 2; i++)
+            {
+                var mas = "{0}\\{2}{1}{2}\\";
+                var zaMas = new string('-', n/2+2);
+                var zaMas2 = new string('.', n - 2);
+                var zaMas3 = "X-MAS";
+
+                var meri = "{0}\\{2}{1}{2}\\";
+                var zaMeri = new string('-', i - 1);
+                var zaMeri3 = new string('.', n - 2);
+                var zaMeri2 = "MERRY";
+
+
+
+                if (i == n / 2 + 1)
+                {
+                    Console.WriteLine(meri, zaMeri, zaMeri2, zaMeri3);
+                }
+                else if (i == n / 2 + 3)
+                {
+                    Console.WriteLine(mas, zaMas, zaMas3, zaMas2);
+                }
+                else
+                {
+                    Console.Write(new string('-', i - 1));
+                    Console.Write('\\');
+                    Console.Write(new string('.', n * 2 + 1));
+                    Console.Write('\\');
+                    Console.WriteLine();
+                }
+            }
+            Console.WriteLine(posleden, zaposleden, zaposleden1);
+        }
+
+    }
+}

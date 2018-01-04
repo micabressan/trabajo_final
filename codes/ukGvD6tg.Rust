@@ -1,0 +1,109 @@
+use std::ffi::{ OsStr, OsString };
+use std::os::windows::ffi::OsStrExt;
+use std::ptr;
+use std::vec::Vec;
+use std::mem;
+
+use kernel32;
+use user32;
+use winapi;
+
+#[allow(non_snake_case)]
+fn W(s: &str) -> Vec<u16> {
+    OsString::from(s).encode_wide().chain(Some(0u16).into_iter()).collect()
+}
+
+pub fn error_message_box(message: &str) {
+    unsafe { user32::MessageBoxW(ptr::null_mut(),
+                                 W(message).as_mut_ptr(),
+                                 W("Error").as_mut_ptr(),
+                                 0); }
+}
+
+unsafe extern "system" fn wnd_proc(  
+    hwnd: winapi::HWND,  
+    message: winapi::UINT,  
+    w_param: winapi::WPARAM,  
+    l_param: winapi::LPARAM
+) -> winapi::LRESULT {
+    match message {
+        winapi::WM_DESTROY => {
+            user32::PostQuitMessage(0);
+            0
+        },
+        _ => user32::DefWindowProcW(hwnd, message, w_param, l_param)
+    }
+}
+
+pub struct Window {
+    pub hinstance: winapi::HINSTANCE,
+    pub class_name: Vec<u16>,
+    pub hwnd: winapi::HWND,
+}
+
+impl Window {
+    pub fn new(w: usize, h: usize) -> Window {
+        let instance = unsafe { kernel32::GetModuleHandleW(ptr::null()) };
+
+        let class_name = W("Window class");
+        let title = W("Window test");
+
+        let wndclass = winapi::WNDCLASSEXW {
+            cbSize: mem::size_of::<winapi::WNDCLASSEXW>() as winapi::UINT,
+            style: winapi::CS_HREDRAW | winapi::CS_VREDRAW,
+            lpfnWndProc: Some(wnd_proc),
+            cbClsExtra: 0,
+            cbWndExtra: 0,
+            hInstance: instance,
+            hIcon: ptr::null_mut(),
+            hCursor: unsafe { user32::LoadCursorW(ptr::null_mut(), winapi::IDC_ARROW) },
+            hbrBackground: ptr::null_mut(),
+            lpszMenuName: ptr::null(),
+            lpszClassName: class_name.as_ptr(),
+            hIconSm: ptr::null_mut(),
+        };
+
+        if unsafe { user32::RegisterClassExW(&wndclass) } == 0 {
+            panic!("Failed to register window class");
+        }
+
+        let window = unsafe {
+            user32::CreateWindowExW(0,
+                                    class_name.as_ptr(),
+                                    title.as_ptr(),
+                                    winapi::WS_OVERLAPPEDWINDOW,
+                                    winapi::CW_USEDEFAULT,
+                                    0,
+                                    w as winapi::c_int,
+                                    h as winapi::c_int,
+                                    ptr::null_mut(),
+                                    ptr::null_mut(),
+                                    instance,
+                                    ptr::null_mut())
+        };
+
+        if window.is_null() {
+            panic!("Failed to create window, HRESULT: {:#08x}", unsafe { kernel32::GetLastError() });
+        }
+
+        unsafe {
+            user32::ShowWindow(window, winapi::SW_SHOW);
+        }
+
+        Window {
+            hinstance: instance,
+            class_name: class_name,
+            hwnd: window,
+        }
+    }
+}
+
+impl Drop for Window {
+    fn drop(&mut self) {
+        unsafe {
+            // We are sending WM_CLOSE, and our callback will process this by calling DefWindowProcW, 
+            // which in turn will send a WM_DESTROY.
+            user32::PostMessageW(self.hwnd, winapi::WM_CLOSE, 0, 0);
+        }
+    }
+}

@@ -1,0 +1,47 @@
+import Data.Map(Map(..))
+import qualified Data.Map as Map
+import Control.Monad
+import Control.Monad.Instances
+import System.Exit(exitSuccess)
+
+type Message = String
+
+getAction :: IO Message
+getAction = getLine
+
+data Game = Game { currentRoom :: Int, availableActions :: Map Message (Game -> (IO (),Game)) }
+
+processGameInput :: Message -> (Game -> IO Game)
+processGameInput input gameState = do
+    maybe (putStrLn "invalid action" >> return gameState) 
+	      (\action -> let (effects,result) = action gameState in
+    		  effects >> return result)
+		  (Map.lookup input (availableActions gameState))
+		  
+newGame :: Game -> (IO (), Game)
+newGame = const (putStrLn "starting over", startState)
+
+funge :: Game -> (IO (),Game)
+funge x = (putStrLn "funged", x { currentRoom = (currentRoom x)+1 } )
+
+blasterFunge x = if (currentRoom x < 5) then (putStrLn "can't blasterfunge here", x)
+                 else (putStrLn "blasterfunging", x { currentRoom = (currentRoom x) - 1 })
+				 
+suicide x = (putStrLn "you die", x { availableActions = Map.singleton "new game" newGame })
+
+startState = Game { currentRoom = 0, availableActions = Map.fromList [("suicide",suicide),
+                                                                     ("blasterfunge",blasterFunge), 
+																     ("funge",funge),
+																     ("new game",newGame),
+																	 ("quit",quit)] }
+
+quit :: Game -> (IO (),Game)
+quit = const (exitSuccess,undefined)
+
+runGame :: Game -> IO ()																  
+runGame currentState = do
+    input <- getAction
+    newState <- processGameInput input currentState
+    runGame newState
+	
+main = runGame startState

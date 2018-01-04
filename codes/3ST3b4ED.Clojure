@@ -1,0 +1,6 @@
+(defn mymax [a & b]
+  (if (empty? b)
+    a
+    (if (> a (first b))
+      (recur a (rest b))
+      (recur (first b) (rest b)))))

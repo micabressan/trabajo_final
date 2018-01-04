@@ -1,0 +1,6 @@
+fn checksum_file(path: &str) -> sha1::Sha1 {
+    let fbuffer = FileBuffer::open(&path).expect("failed to open file");
+    let mut hasher = Sha1::new();
+    hasher.input(&fbuffer);
+    hasher
+}

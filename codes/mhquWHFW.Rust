@@ -1,0 +1,37 @@
+// second step
+    pub fn get_lease_for(
+        &mut self,
+        client: &lease::Client<EthernetAddr>,
+        addr: Option<IPv4Addr>,
+    ) -> Option<&lease::Lease<EthernetAddr, IPv4Addr>> {
+        self.find_lease(client).or_else(|| {
+            self.get_allocation_mut(client, addr).map(|alloc| {
+                alloc.last_seen = lease::SerializeableTime(time::get_time());
+                lease::Lease::for_alloc(alloc, 7200)
+            }).map(|l| {
+                self.leases.push(l);
+                self.leases.len() - 1
+            })
+        }).and_then(move |i| self.leases.get(i))
+    }
+
+// first step
+    pub fn get_lease_for(
+        &mut self,
+        client: &lease::Client<EthernetAddr>,
+        addr: Option<IPv4Addr>,
+    ) -> Option<&lease::Lease<EthernetAddr, IPv4Addr>> {
+        self.find_lease(client).or_else(|| {
+            let mut ml = None;
+            if let Some(alloc) = self.get_allocation_mut(client, addr) {
+                alloc.last_seen = lease::SerializeableTime(time::get_time());
+                ml = Some(lease::Lease::for_alloc(alloc, 7200));
+            }
+            if let Some(l) = ml {
+                self.leases.push(l);
+                Some(self.leases.len() - 1)
+            } else {
+                None
+            }
+        }).and_then(move |i| self.leases.get(i))
+    }

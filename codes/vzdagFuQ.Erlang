@@ -1,0 +1,15 @@
+post('GET', [], Account) ->
+	{ok, [{account, Account}]};
+	
+post('POST', [], Account) ->
+	Title = Req:post_param("title"),
+	Body = Req:post_param("body"),
+	Post = post:new(id, Title, Account:id(), Body, erlang:now(), erlang:now()),
+	case Post:save() of
+		{ok, SavedPost} ->
+			boss_flash:add(SessionId, success, "Success", "Great, your new post was published."),
+			{redirect, "/account/posts"};
+		{error, ErrorMessage} ->
+			io:format("Not saved"),
+			{ok, []}
+	end.

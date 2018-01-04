@@ -1,0 +1,75 @@
+## Item in Shop
+    Items:
+     '2':
+       Item: 303
+       Data: 0
+       Amount: 1
+       Price: 2000
+       DisplayName: '&aVégtelen Lánc Páncél'
+       Lore:
+        - '&6Teljes lánc vért szett'
+        - '&6Törhetetlen'
+        - '&4Ár:2000'
+       Commands:
+        - 'give {player} minecraft:chainmail_chestplate 1 0 {Unbreakable:1,display:{Name:"Végtelen Láncing",Lore:["Shopba vásárolható"]}}'
+        - 'give {player} minecraft:chainmail_boots 1 0 {Unbreakable:1,display:{Name:"Végtelen Lánccipő",Lore:["Shopba vásárolható"]}}'
+        - 'give {player} minecraft:chainmail_helmet 1 0 {Unbreakable:1,display:{Name:"Végtelen Láncsisak",Lore:["Shopba vásárolható"]}}'
+        - 'give {player} minecraft:chainmail_leggings 1 0 {Unbreakable:1,display:{Name:"Végtelen Láncnadrág",Lore:["Shopba vásárolható"]}}'
+     '3':
+       Item: 307
+       Data: 0
+       Amount: 1
+       Price: 1000
+       DisplayName: '&aVas páncél szett'
+       Lore:
+        - '&6Teljes lánc vért szett'
+        - '&4Ár:1000'
+       Commands:
+        - 'give {player} 306 1 0'
+        - 'give {player} 307 1 0'
+        - 'give {player} 308 1 0'
+        - 'give {player} 309 1 0'
+     '4':
+       Item: 278
+       Data: 0
+       Amount: 1
+       Price: 1000
+       DisplayName: '&aVégtelen Csákány[&6LVL3&a]'
+       Lore:
+        - '&6Törhetetlen gyémánt csákány'
+        - '&4Ár:1000 XD'
+       Commands:
+        - 'give {player} minecraft:diamond_pickaxe 1 0 {Unbreakable:1,display:{Name:"Végtelen Csákány",Lore:["Shopba vásárolható"]}}'
+     '5':
+       Item: 264
+       Data: 0
+       Amount: 1
+       Price: 200
+       DisplayName: '&aGyémánt'
+       Lore:
+        - '&6Ritka érc, ami nem bányászható'
+        - '&4Ár:200'
+       Commands:
+        - 'give {player} 264 1 0'
+     '6':
+       Item: 116
+       Data: 0
+       Amount: 1
+       Price: 1000
+       DisplayName: '&aBűvölő asztal'
+       Lore:
+        - '&6Tárgyak fejlesztéséhez'
+        - '&4Ár:1000'
+       Commands:
+        - 'give {player} 116 1 0'
+     '10':
+       Item: enchanted_book
+       Data: 0
+       Amount: 1
+       Price: 100
+       DisplayName: '&aProtection IV'
+       Lore:
+        - '&6Enchant könyv'
+        - '&4Ára : 100 XD'
+       Commands:
+        - 'give {player} minecraft:enchanted_book 1 0 {display:{Name:"Protection IV",Lore:["Enchant könyv"]},StoredEnchantments:[{id:0,lvl:4}]}'

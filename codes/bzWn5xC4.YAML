@@ -1,0 +1,19 @@
+- name: Get Redis source code
+  unarchive:
+    src: "{{ redis_tarball_url }}"
+    dest: /root/
+    remote_src: yes
+    creates: /root/redis-{{ redis_version }}/src/redis-cli.c
+
+- name: Build redis from source
+  command: make
+  args:
+    chdir: /root/redis-{{ redis_version }}
+    creates: /root/redis-{{ redis_version }}/src/redis-cli.o
+  register: redis_build
+
+- name: Test redis build
+  command: make test
+  args:
+    chdir: /root/redis-{{ redis_version }}
+  when: redis_build and redis_build.rc == 0

@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ZadanieLaboratorium.Clients;
+
+namespace ZadanieLaboratorium.IoC
+{
+    class ClientMessageSender : IClientMessageSender
+    {
+        ISender sender;
+        IClientRepository cr;
+        ILogger logger;
+        public ClientMessageSender(ISender sender, IClientRepository clientRepository, ILogger logger)
+        {
+            this.sender = sender;
+            cr = clientRepository;
+            this.logger = logger;
+        }
+        public void SendMessageToDebtors(string message)
+        {
+            logger.Log($"Entering SendMessageToDebtors ({message})");
+            List<Client> clients = cr.GetClients();
+            foreach(var client in clients)
+            {
+                if(client.IsDebtor)
+                    sender.Send(client, message);
+            }
+
+            logger.Log($"Exiting SendMessageToDebtors ({message})");
+        
+        }
+
+        public void SendBirthdayMessage(string message)
+        {
+            logger.Log($"Entering SendBirhtdayMessage ({message})");
+            List<Client> clients = cr.GetClients();
+            foreach (var client in clients)
+            {
+                if(client.Birthdate.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
+                    sender.Send(client, message);
+            }
+
+            logger.Log($"Exiting SendBirhtdayMessage ({message})");
+        }
+
+    }
+}

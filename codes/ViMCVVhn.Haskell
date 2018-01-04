@@ -1,0 +1,5 @@
+prop_subseq4HasSquares :: [Int] -> Bool
+prop_subseq4HasSquares xs = if length xs < 4 then True else test1 (take 4 xs) && prop (tail xs)
+ 
+test1 :: [Int] -> Bool
+test1 (t1:t2:t3:t4:[]) = t1 == t2 || t2 == t3 || t3 == t4 || [t1,t2] == [t3,t4]

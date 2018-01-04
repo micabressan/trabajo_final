@@ -1,0 +1,11 @@
+.swatch__tooltip {
+	padding: 2px 2px !important;
+	border-radius: 0 !important;
+	top: -30px !important;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.swatch__list--item:hover .swatch__tooltip {
+	top: -60px !important;
+}

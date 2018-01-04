@@ -1,0 +1,22 @@
+# files = [ 'test.coffee',
+#  '.sessions.coffee.swp',
+#  'sessions.coffee' ]
+
+
+# 1)
+
+@resources.push(path.join(start, file)) if file.match /\.coffee$/ for file in files
+
+# Results in @resources = 
+# [ '<start>/sessions.coffee',
+#   '<start>/test/subtest.coffee' ]
+
+# 2) However, the following:
+
+for file in files
+	@resources.push(path.join(start, file)) if file.match /\.coffee$/
+
+# Correctly results in @resources = 
+# [ '/home/apanek/Projects/ease/sso/resources/test.coffee',
+#   '/home/apanek/Projects/ease/sso/resources/sessions.coffee',
+#   '/home/apanek/Projects/ease/sso/resources/test/subtest.coffee' ]

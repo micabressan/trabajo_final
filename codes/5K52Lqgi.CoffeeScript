@@ -1,0 +1,82 @@
+module.exports = class Terrain
+    SIZE: 1600
+    MIN_HEIGHT: 0
+    MAX_HEIGHT: 0.4
+    constructor: (name, x, z, heightmap, scene) ->
+        @name = name
+        @x = x
+        @z = z
+        @scene = scene
+        @mesh = null
+        @heightmap = heightmap
+        @position = glm.vec2.fromValues x * @SIZE, z * @SIZE
+        @subdivisions = 128
+        @filter = [0.3, 0.59, 0.11]
+        @getHeightmapPixels heightmap
+        @generate()
+
+    getHeightmapPixels: (heightmap) ->
+        @canvas = document.createElement 'canvas'
+        @canvas.width = heightmap.image.width
+        @canvas.height = heightmap.image.height
+        @ctx = @canvas.getContext '2d'
+        @ctx.drawImage heightmap.image, 0, 0
+
+    getPixel: (x, z) ->
+        x = (((x + @SIZE / 2) / @SIZE) * (@heightmap.image.width))
+        z =  ((1.0 - (z + @SIZE / 2) / @SIZE) * (@heightmap.image.height))
+        color = @ctx.getImageData(x, z, 1, 1).data
+        return color[0] * @filter[0] + color[1] * @filter[1] + color[2] * @filter[2]
+
+    getHeight: (x, z) ->
+        @MIN_HEIGHT + (@MAX_HEIGHT - @MIN_HEIGHT) * @getPixel(x, z)
+
+    calculateNormal: (x, z) ->
+        hL = @getHeight x - 1, z
+        hR = @getHeight x + 1, z
+        hD = @getHeight x, z - 1
+        hU = @getHeight x, z + 1
+        normal = glm.vec3.fromValues hL - hR, 2, hD - hU
+        glm.vec3.normalize normal, normal
+        return normal
+
+    clamp: (value, min, max) ->
+        Math.min Math.max(value, min), max
+
+    generate: ->
+        vertices = []
+        normals = []
+        texCoords = []
+        indices = []
+        for row in [0 .. @subdivisions]
+            for col in [0 .. @subdivisions]
+                x = (col * @SIZE) / @subdivisions  - (@SIZE / 2.0)
+                z = ((@subdivisions - row) * @SIZE) / @subdivisions  - (@SIZE / 2.0)
+                position = [x, 0, z]
+
+                position[1] = @getHeight x - 1, z + 1
+                normal = @calculateNormal x, z
+                vertices.push position[0], position[1], position[2]
+                normals.push normal[0], normal[1], normal[2]
+                texCoords.push col / @subdivisions, 1.0 - row / @subdivisions
+
+        for row in [0 .. @subdivisions - 1]
+            for col in [0 .. @subdivisions - 1]
+                indices.push col + 1 + (row + 1) * (@subdivisions + 1)
+                indices.push col + 1 + row * (@subdivisions + 1)
+                indices.push col + row * (@subdivisions + 1)
+
+                indices.push col + (row + 1) * (@subdivisions + 1)
+                indices.push col + 1 + (row + 1) * (@subdivisions + 1)
+                indices.push col + row * (@subdivisions + 1)
+
+        data =
+            vertices: vertices
+            vertexNormals: normals
+            textures: texCoords
+            indices: indices
+
+        FNX.OBJ.initMeshBuffers gl, data
+        @mesh = new FNX.Mesh @name, data, @scene
+        @scene.meshes[@name] = @mesh
+        return @mesh

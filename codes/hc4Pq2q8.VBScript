@@ -1,0 +1,61 @@
+Sub Open_File()
+
+End Sub
+Sub OpenFile()
+'
+' OpenFile Makro
+'
+    Set thisSheet = ThisWorkbook.ActiveSheet
+    Dim dataWb As Workbook
+    Dim nameFormatString As String
+    nameFormatString = "WE43-{0}-{1}-{2}.{3}.xlsx"
+'      0: behandl: fest, T4,T6 ...
+'      1: probe: fest, 3
+'      2: messung: 1-3
+'      3: xval: 1-10
+    behandl = "T4"
+    probe = 3
+    EndXval = False
+    Column = 1
+    
+    For messung = 1 To 100
+        For xval = 1 To 100
+            Dim dataPath As String
+            dataPath = nameFormatString
+            dataPath = StrFormat(dataPath, behandl, probe, messung, xval)
+            If Not IsFile(dataPath) Then
+                If xval = 1 Then
+                    GoTo ReturnLabel
+                Else
+                    Column = Column + 1
+                    GoTo NextMessung
+                End If
+            End If
+            Set dataWb = Workbooks.Open(dataPath)
+            dataWb.Activate
+            Range("G12:G999").Select
+            Selection.Copy
+            thisSheet.Cells(2, Column).PasteSpecial xlPasteAll
+            Column = Column + 1
+            Application.CutCopyMode = False
+            dataWb.Close (False)
+        Next xval
+NextMessung:
+    Next messung
+ReturnLabel:
+End Sub
+
+Public Function StrFormat(mask As String, ParamArray tokens()) As String
+    Dim i As Long
+    For i = 0 To UBound(tokens)
+        mask = Replace$(mask, "{" & i & "}", tokens(i))
+    Next
+    StrFormat = mask
+End Function
+
+Function IsFile(ByVal fName As String) As Boolean
+'Returns TRUE if the provided name points to an existing file.
+'Returns FALSE if not existing, or if it's a folder
+    On Error Resume Next
+    IsFile = ((GetAttr(fName) And vbDirectory) <> vbDirectory)
+End Function

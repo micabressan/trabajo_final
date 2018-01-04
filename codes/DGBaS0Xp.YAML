@@ -1,0 +1,8 @@
+version: '1.0'
+  steps:
+    TestVolumes:
+      image: alpine
+      commands:
+        - REPO_PATH=${{CF_VOLUME_PATH}}/${{CF_REPO_NAME}} # saving the repo path into a variable
+        - ls $REPO_PATH                                   # check if the test file is there from the previous build
+        - touch $REPO_PATH/testfile                       # create a test file

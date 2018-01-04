@@ -1,0 +1,385 @@
+/*DHL*/
+
+/* #region Body */
+body {
+    background-color: #fdca2e;
+    color: #000;
+    background-image: url("https://i.imgur.com/EqK1Khj.png"), url("https://i.imgur.com/NzIO2Up.png");
+    background-repeat: no-repeat, repeat-x;
+    background-position-x: 50%;
+    background-position-y: 100px;
+}
+
+a {
+    text-decoration: none;
+    color: #fdca2e!important;
+}
+/*#endregion*/
+
+/*#region Navigation */
+body > nav {
+    background-color: #d0131d;
+}
+    body > nav > ul > li {
+        border-right: 1px solid #fdca2e;
+    }
+    body > nav > ul > li:first-child {
+        border-left: 1px solid #fdca2e;
+    }
+
+            body > nav > ul > li > a,
+            body > nav > ul > li > ul > li > a {
+                color: #fdca2e;
+            }
+
+                body > nav > ul > li > a:hover,
+                body > nav > ul > li > ul > li > a:hover {
+                    background-color: #a10f16;
+                }
+
+            body > nav > ul > li > ul {
+                background-color: #fdca2e;
+            }
+
+    body > nav aside > label:first-child {
+        border-left: 1px solid #fdca2e;
+    }
+
+    body > nav aside > div:hover {
+        background-color: #a10f16;
+    }
+
+    body > nav > aside > label {
+        color: #fdca2e;
+        border-right: 1px solid #fdca2e;
+    }
+        body > nav > aside > label:hover {
+            background-color: #a10f16 !important;
+        }
+
+        body > nav > aside > input[type=checkbox][id=informations]:checked ~ label[for=informations],
+        body > nav > aside > input[type=checkbox][id=settings]:checked ~ label[for=settings] {
+            background-color: #b71018;
+        }
+
+    body > nav > aside > section.informations,
+    body > nav > aside > section.settings {
+        background-color: #b71018;
+        color: #000;
+        border-left: 2px solid #fdca2e;
+    }
+
+            body > nav > aside > section.informations > .container h3,
+            body > nav > aside > section.settings > .container h3 {
+                border-bottom: 1px solid #000;
+            }
+                
+                body > nav > aside > section.settings > .container > .setting select {
+                    background-color: #fdca2e;
+                    border: 1px solid #000;
+                    color: #000;
+                }
+
+                body > nav > aside > section.settings > .container > .setting > input {
+                    background: transparent;
+                    color: #000;
+                    border: 1px solid #fdca2e;
+                }
+
+                body > nav > aside > section.settings > .container > .setting > label {
+                    border: 1px solid #fdca2e;
+                }
+
+
+                    body > nav > aside > section.settings > .container > .setting > label > span {
+                        color: #000;
+                    }
+
+                        body > nav > aside > section.settings > .container > .setting > label > span:first-of-type {
+                            border-right: 1px solid #fdca2e;
+                        }
+
+                        body > nav > aside > section.settings > .container > .setting > label > span:last-of-type {
+                            background: #fdca2e;
+                        }
+
+                    body > nav > aside > section.settings > .container > .setting > label > input[type=checkbox]:checked ~ span:first-of-type {
+                        background: #fdca2e;
+                    }
+/* #endregion */
+
+/*#region Header */
+    header > h1, header > h2 {
+        display: none;
+    }
+
+
+section.post {
+    background-color: #d0131d;
+    color: #000;
+    margin-top: 200px;
+}
+
+
+        section.post table tr {
+            border-bottom: 1px solid #fdca2e;
+        }
+
+            section.post table tr:last-child {
+                border: none;
+            }
+
+        section.post table td {
+            color: #000;
+        }
+
+        section.post table th label {
+            color: #000;
+        }
+
+        section.post table td > textarea {
+            color: #000;
+        }
+
+        section.post table td > input[type=password],
+        section.post table td > input[type=text] {
+            color: #000
+        }
+
+
+            section.post table td > input[type=checkbox] + label[for] {
+                background-color: #a10f16;
+                color: #fdca2e;
+            }
+
+            section.post table td > input[type=checkbox]:checked + label[for] {
+                background-color: #fdca2e;
+                
+            }
+            section.post table td > input[type=checkbox]:checked + label[for] > svg {
+                fill: #d0131d;
+                
+            }
+
+
+        section.post table td > label[for] > svg {
+            color: #000;
+            fill: currentColor;
+        }
+
+    section.post button[type=submit][value=post] {
+        background-color: #d0131d;
+        border: none;
+        border-top: 1px solid #fdca2e;
+        color: #000;
+    }
+
+
+section.post aside.closeFast {
+    border-top: 1px solid #fdca2e;
+    color: #000;
+    border-right: 1px solid #fdca2e;
+}
+/* #endregion */
+
+
+/* Aside */
+
+    body > aside p.info {
+        background: none;
+    }
+
+div.autoreplyQueue {
+    font-size: 16px;
+    background: none;
+    text-decoration: underline;
+}
+
+/* #endregion */
+
+
+/* #region Main */
+
+
+.quotelink.active {
+    color: #d0131d!important;
+    }    
+
+
+section.reply {
+    border: none;
+    background-color: ffffff;
+    color: #000;
+}
+
+    section.op.hover, section.reply.hover {
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    section.reply::selection {
+        background: #a10f16;
+    }
+
+
+section.op > .info {
+    background-color: #d0131d;
+    color: #000;
+}
+
+section.reply > .info {
+    border-bottom: 1px solid #d0131d;
+    border-left: none;
+    color: #000;
+    background-color: #fdca2e;
+}
+section.op > .info a {
+    color: #000;
+}
+
+section.reply > .info a {
+    color: #d0131d!important;
+}
+    section.op > .info a.button:hover {
+        background-color: #a10f16;
+    }
+
+    section.op > .info > label:hover {
+        background-color: #a10f16;
+    }
+
+section.op > .info > input[type=checkbox]:checked ~ .label {
+    background-color: #a10f16;
+}
+
+section.reply > .info > label:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+section.reply > .info > input[type=checkbox]:checked ~ .label {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+section.reply > .info > input[type=checkbox][id|=options]:checked ~ .label[for|=options],
+section.reply > .info > input[type=checkbox][id|=administration]:checked ~ .label[for|=administration] {
+    background-color: rgba(0,0,0,0.2);
+}
+
+section.op > .info > input[type=checkbox][id|=options]:checked ~ label[for|=options],
+section.op > .info > input[type=checkbox][id|=administration]:checked ~ label[for|=administration] {
+    background-color: #a10f16;
+}
+
+section.op > .info > aside {
+    background-color: #fdca2e;
+    border: none;
+    color: #000!important;
+    
+}
+
+section.reply > .info > aside {
+    background-color: #d0131d;
+    border: none;
+    color: #000!important;
+}
+
+    section.op > .info > aside.options input[type="text"],
+    section.op > .info > aside.options input[type="password"] {
+        background-color: #d0131d;
+	}
+    section.reply > .info > aside.options input[type="text"],
+    section.reply > .info > aside.options input[type="password"] {
+        background-color: #fdca2e;
+    }
+
+section.op > .info > aside.options input[type="text"],
+section.op > .info > aside.options input[type="password"] {
+    border-right: 1px solid #fdca2e;
+    color: #000;
+}
+
+section.reply > .info > aside.options input[type="text"],
+section.reply > .info > aside.options input[type="password"] {
+    border-right: 1px solid #d0131d;
+    color: #000!important;
+}
+
+section.op > .info > aside.options button {
+ 	background-color:  #d0131d;
+}
+section.reply > .info > aside.options button {
+    background-color: #fdca2e;
+}
+
+section.op > .info > aside.options button {
+    color: #000;
+}
+
+section.reply > .info > aside.options button {
+    color: #000;
+}
+
+section.op > .info > aside.options button:hover {
+    background-color: #a10f16;
+}
+
+section.reply > .info > aside.options button:hover {
+    background-color: #d6ac2c;
+}
+
+.boardlink {
+    position: absolute;
+    background-color: #fdca2e;
+    border: 1px solid #000;
+}
+/* #endregion */
+
+
+/* #region Markup */
+.message code {
+    background-color: #fff;
+    color: #000;
+}
+.message spoiler {
+    padding: 1px 0px;
+    background: #d0131d!important;
+    color: #d0131d!important;
+}
+.message spoiler:hover {
+    color: #000!important;
+}
+
+.message > a {
+    color: #d0131d!important;
+}
+/* #endregion */
+
+
+/* #region Footer */
+footer {
+    background-color: #d0131d;
+    color: #000;
+    border-color: #fdca2e;
+}
+
+        footer > nav > a {
+            color: #fdca2e;
+            background-color: transparent;
+            
+        }
+
+            footer > nav > a:hover {
+                background-color: transparent;
+                color: #fdca2e;
+                border: 1px dashed #fdca2e;
+            }
+
+            footer > nav > a:not([href]) {
+                background-color: #fdca2e;
+                color: #d0131d!important;
+                font-weight: bold;
+            }
+
+    footer > aside {
+        color: #000;
+    }
+/* #endregion */

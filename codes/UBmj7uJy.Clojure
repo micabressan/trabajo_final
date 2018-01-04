@@ -1,0 +1,80 @@
+(ns lab3.core
+  (:require
+    [clojure.string :as str]))
+
+(def text "С милым рай и в шалаше")
+
+(defn padding [coll n sym right?]
+  (if right?
+      (concat coll (repeat (- n (count coll)) sym))
+      (concat (repeat (- n (count coll)) sym) coll)))
+
+(defn split-text [text]
+ (map #(padding % 2 \space true) (partition-all 2 (seq text))))
+
+(defn char->bin [ch n]
+  (padding (seq (Integer/toString (int ch) 2)) n \0 false))  
+
+(defn bin->char [s]
+  (char (Integer/parseInt (apply str s) 2)))
+
+(defn make-block [k [ch1 ch2]]
+  {:k k
+   :l (char->bin ch1 16)
+   :r (char->bin ch2 16)})
+
+(defn bit-shift-r [s n]
+  (if (zero? n) s (recur (conj (drop-last s) (last s)) (dec n))))
+
+(defn xor [s1 s2]
+  (map #(if (= %1 %2) \0 \1) s1 s2))
+
+(defn new-key [k]
+  k)
+
+(defn code-block [f {:keys [k l r]}]
+  {:k (new-key k) :l (xor (f l k) r) :r l})
+
+(defn code-last [f {:keys [k l r]}]
+  {:k (new-key k) :l l :r (xor (f l k) r)})
+
+(defn blocks->text [blocks]
+  (apply
+    str 
+    (map (fn [{:keys [_ l r]}] 
+           (str (bin->char l) (bin->char r))) 
+         blocks)))
+
+(defn swap-last [{:keys [k l r]}]
+  {:k k :l r :r l})
+
+(defn encode [text n f k]
+  (loop [n n
+         blocks (map (partial make-block k) (split-text text))
+         ks (map (fn [_] (list k)) blocks)]
+    (if (zero? n)
+        [blocks ks]
+        (let [round-res (if (= n 1)
+                            (map (partial code-last f) blocks) 
+                            (map (partial code-block f) blocks))
+              new-ks (map :k round-res)]
+          (recur
+            (dec n)
+            round-res
+            (map #(conj %1 %2) ks new-ks))))))
+
+(defn decode [f [blocks ks]]
+  (loop [n (dec (count (first ks)))
+         blocks blocks
+         ks (map reverse ks)]
+    (if (zero? n)
+        (blocks->text (map swap-last blocks))
+        (recur
+          (dec n)
+          (map (partial code-block f) blocks)
+          (map rest ks)))))       
+
+(def t1 (encode text 16 bit-shift-r 4))
+(println (blocks->text (first t1)))
+(def t2 (decode bit-shift-r t1))
+(println t2)

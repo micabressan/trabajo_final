@@ -1,0 +1,59 @@
+fn process_file(dir_entry: &DirEntry, root: &Path) -> Sha256 {
+    let fbuffer = FileBuffer::open(dir_entry.path()).expect("failed to open file");
+    let mut hasher = Sha256::new();
+    let file = Path::new("/root/test").join(dir_entry.path().strip_prefix(root).unwrap());
+    let mut buffer = File::create(file).unwrap();
+
+
+    hasher.input(&fbuffer);
+    buffer.write(&fbuffer);
+
+    hasher
+}
+
+fn walk(root: &Path) {
+    WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+        println!("{:?}, {:?}", path, process_file(&path.unwrap(), &root).result_str());
+        WalkState::Continue
+    }));
+}
+
+error[E0495]: cannot infer an appropriate lifetime due to conflicting requirements
+  --> src/main.rs:44:66
+   |
+44 |       WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+   |  __________________________________________________________________^
+45 | |         println!("{:?}, {:?}", path, process_file(&path.unwrap(), &root).result_str());
+46 | |         WalkState::Continue
+47 | |     }));
+   | |______^
+   |
+note: first, the lifetime cannot outlive the anonymous lifetime #1 defined on the function body at 43:1...
+  --> src/main.rs:43:1
+   |
+43 | / fn walk(root: &Path) {
+44 | |     WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+45 | |         println!("{:?}, {:?}", path, process_file(&path.unwrap(), &root).result_str());
+46 | |         WalkState::Continue
+47 | |     }));
+48 | | }
+   | |_^
+note: ...so that the type `[closure@src/main.rs:44:75: 47:6 root:&&std::path::Path]` will meet its required lifetime bounds
+  --> src/main.rs:44:66
+   |
+44 |       WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+   |  __________________________________________________________________^
+45 | |         println!("{:?}, {:?}", path, process_file(&path.unwrap(), &root).result_str());
+46 | |         WalkState::Continue
+47 | |     }));
+   | |______^
+   = note: but, the lifetime must be valid for the static lifetime...
+note: ...so that expression is assignable (expected std::boxed::Box<std::ops::FnMut(std::result::Result<ignore::DirEntry, ignore::Error>) -> ignore::WalkState + std::marker::Send + 'static>, found std::boxed::Box<std::ops::FnMut(std::result::Result<ignore::DirEntry, ignore::Error>) -> ignore::WalkState + std::marker::Send>)
+  --> src/main.rs:44:66
+   |
+44 |       WalkBuilder::new(root).hidden(false).build_parallel().run(|| Box::new(|path| {
+   |  __________________________________________________________________^
+45 | |         println!("{:?}, {:?}", path, process_file(&path.unwrap(), &root).result_str());
+46 | |         WalkState::Continue
+47 | |     }));
+   | |______^

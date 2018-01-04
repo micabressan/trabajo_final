@@ -1,0 +1,42 @@
+.common: &common
+  tags:
+    - eric
+
+T: &rc_branch_name rc
+F: &prod_branch_name /^v\d+\.\d+(\.\d+){0,1}$/
+
+.dev_common: &dev_common
+  only: [&dev_branch_name dev]
+
+.rc_common: &rc_common
+  only: [*rc_branch_name]
+
+.prod_common: &prod_common
+  only: [*prod_branch_name]
+
+my_dev_job:
+  <<: *common
+  <<: *dev_common
+  script:
+    - echo "Hello dev!!!"
+
+my_rc_job:
+  <<: *common
+  <<: *rc_common
+  script:
+    - echo "Hello rc!!!"
+
+my_prod_job:
+  <<: *common
+  <<: *prod_common
+  script:
+    - echo "Hello prod!!!"
+
+my_other_job:
+  <<: *common
+  except:
+    - *dev_branch_name
+    - *rc_branch_name
+    - *prod_branch_name
+  script:
+    - echo "Hello other!!!"

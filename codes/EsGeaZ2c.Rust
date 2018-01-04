@@ -1,0 +1,6 @@
+extern "C" fn cb_a_record(state: *const c_void) {
+    let state_data: &Mutex<HashMap<String, String>> = unsafe { &*(state as *const Mutex<HashMap<String, String>>) };
+
+	// This line segfaults!
+    let mut known_hosts: &HashMap<String, String> = &*state_data.lock().unwrap();
+}

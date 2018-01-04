@@ -1,0 +1,14 @@
+(require '[clojure.string :as str])
+
+(defn parse-int [s] (Integer/parseInt s))
+(def input (int-array (map parse-int (str/split (slurp "./input") #"\n"))))
+
+(defn inc-accordingly [nr]
+    (if (>= nr 3) (dec nr) (inc nr)))
+
+(loop [nrs input current-index 0 step 0]
+    (if (or (> 0 current-index) (<= (alength input) current-index))
+        step
+        (let [value (aget nrs current-index)]
+            (aset-int nrs current-index (inc-accordingly value))
+            (recur nrs (+ current-index value) (inc step)))))

@@ -1,0 +1,180 @@
+use std::io::{stdin,BufRead};
+use std::collections::HashMap;
+
+type Win2 = [bool; 4];
+type Win3 = [bool; 9];
+type Win4 = [bool; 16];
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct State {
+    even: HashMap<Win2, Win3>,
+    odd: HashMap<Win3, Win4>,
+    grid: Vec<bool>,
+    len: usize,
+}
+
+
+impl Default for State {
+    fn default() -> Self {
+        State {even: HashMap::new(), odd: HashMap::new(),
+               grid: vec![false, true, false,
+                          false, false, true,
+                          true, true, true],
+               len: 3}
+    }
+}
+
+fn char_to_grid(c: char) -> Option<bool> {
+    match c {
+        '.' => Some(false),
+        '#' => Some(true),
+        _ => None,
+    }
+}
+
+impl State {
+    pub fn new() -> Self { Default::default() }
+
+    fn add_rule_two(&mut self, line: &str) {
+        let p: Vec<bool> = line.chars().filter_map(char_to_grid).collect();
+        if p.len() != 13 { panic!("")}
+        let mut o: Win3 = [false; 9];
+        o.copy_from_slice(&p[4..]);
+
+        // coordinates are nonobvious because D_4 doesn't label how I'd like
+        let r0: Win2 = [p[0], p[1], p[2], p[3]];
+        let r1: Win2 = [p[1], p[3], p[0], p[2]];
+        let r2: Win2 = [p[3], p[2], p[1], p[0]];
+        let r3: Win2 = [p[2], p[0], p[3], p[1]];
+        let r0t: Win2 = [p[2], p[3], p[0], p[1]];
+        let r1t: Win2 = [p[3], p[1], p[2], p[0]];
+        let r2t: Win2 = [p[1], p[0], p[3], p[2]];
+        let r3t: Win2 = [p[0], p[2], p[1], p[3]];
+        let patterns = [r0, r1, r2, r3, r0t, r1t, r2t, r3t];
+        for &i in patterns.into_iter() {
+            self.even.insert(i, o.clone());
+        }
+    }
+
+    fn add_rule_three(&mut self, line: &str) {
+        let p: Vec<bool> = line.chars().filter_map(char_to_grid).collect();
+        if p.len() != 25 { panic!("Invalid 3-pattern"); }
+        let mut o: Win4 = [false; 16];
+        o.copy_from_slice(&p[9..]);
+
+        // Original is
+        // 0 1 2
+        // 3 4 5
+        // 6 7 8
+        // so, from 2-side, 0 => 0, 1 => 2, 2 => 6, 3 => 8
+        let r0: Win3 = [p[0], p[1], p[2], p[3] , p[4], p[5], p[6], p[7], p[8]];
+        let r1: Win3 = [p[2], p[5], p[8], p[1], p[4], p[7], p[0], p[3], p[6]];
+        let r2: Win3 = [p[8], p[7], p[6], p[5], p[4], p[3], p[2], p[1], p[0]];
+        let r3: Win3 = [p[6], p[3], p[0], p[7], p[4], p[1], p[8], p[5], p[2]];
+        let r0t: Win3 = [p[6], p[7], p[8], p[3], p[4], p[5], p[0], p[1], p[2]];
+        let r1t: Win3 = [p[8], p[5], p[2], p[7], p[4], p[1], p[6], p[3], p[0]];
+        let r2t: Win3 = [p[2], p[1], p[0], p[5], p[4], p[3], p[8], p[7], p[6]];
+        let r3t: Win3 = [p[0], p[3], p[6], p[1], p[4], p[7], p[2], p[5], p[8]];
+
+        let patterns = [r0, r1, r2, r3, r0t, r1t, r2t, r3t];
+        for &i in patterns.into_iter() {
+            self.odd.insert(i, o.clone());
+        }
+    }
+
+    pub fn add_rule(&mut self, line: &str) {
+        let sep_count = line.matches('/').count();
+        match sep_count {
+            3 => self.add_rule_two(line), // 1 + 2 slashes
+            5 => self.add_rule_three(line), // 2 + 3 slashes
+            0 => (), // blank line,
+            _ => panic!("Unusable number of slashes in input"),
+        }
+    }
+
+    fn update_two(&mut self) {
+        let n_windows = self.len / 2;
+        let new_len = self.len + n_windows;
+        let mut new_grid = vec![false; new_len * new_len];
+        for i in 0..n_windows {
+            for j in 0..n_windows {
+                let l = i * 2;
+                let t = j * 2;
+                let pattern = [self.grid[l + t * self.len], self.grid[l + 1 + t * self.len],
+                               self.grid[l + (t + 1) * self.len], self.grid[l + 1 + (t + 1) * self.len]];
+                match self.even.get(&pattern) {
+                    Some(rep) => {
+                        let new_l = i * 3;
+                        let new_t = j * 3;
+                        new_grid[new_l + (new_t * new_len)..(new_l + 3 + (new_t * new_len))].copy_from_slice(&rep[0..3]);
+                        new_grid[new_l + ((new_t + 1) * new_len)..(new_l + 3 + ((new_t + 1) * new_len))].copy_from_slice(&rep[3..6]);
+                        new_grid[new_l + ((new_t + 2) * new_len)..(new_l + 3 + ((new_t + 2) * new_len))].copy_from_slice(&rep[6..9]);
+                    },
+                    None => panic!("Could not find replacement rule"),
+                }
+            }
+        }
+
+        self.grid = new_grid;
+        self.len = new_len;
+    }
+
+    fn update_three(&mut self) {
+        let n_windows = self.len / 3;
+        let new_len = self.len + n_windows;
+        let mut new_grid = vec![false; new_len * new_len];
+        for i in 0..n_windows {
+            for j in 0..n_windows {
+                let l = i * 3;
+                let t = j * 3;
+                let pattern = [self.grid[l + t * self.len], self.grid[l + 1 + t * self.len], self.grid[l + 2 + t * self.len],
+                               self.grid[l + (t + 1) * self.len], self.grid[l + 1 + (t + 1) * self.len], self.grid[l + 2 + (t + 1) * self.len],
+                               self.grid[l + (t + 2) * self.len], self.grid[l + 1 + (t + 2) * self.len], self.grid[l + 2 + (t + 2) * self.len]];
+                match self.odd.get(&pattern) {
+                    Some(rep) => {
+                        let new_l = i * 4;
+                        let new_t = j * 4;
+                        new_grid[new_l + (new_t * new_len)..(new_l + 4 + (new_t * new_len))].copy_from_slice(&rep[0..4]);
+                        new_grid[new_l + ((new_t + 1) * new_len)..(new_l + 4 + ((new_t + 1) * new_len))].copy_from_slice(&rep[4..8]);
+                        new_grid[new_l + ((new_t + 2) * new_len)..(new_l + 4 + ((new_t + 2) * new_len))].copy_from_slice(&rep[8..12]);
+                        new_grid[new_l + ((new_t + 3) * new_len)..(new_l + 4 + ((new_t + 3) * new_len))].copy_from_slice(&rep[12..16]);
+                    },
+                    None => panic!("Could not find replacement rule"),
+                }
+            }
+        }
+
+        self.grid = new_grid;
+        self.len = new_len;
+    }
+
+    pub fn update(&mut self) {
+        if self.len % 2 == 0 {
+            self.update_two();
+        }
+        else if self.len % 3 == 0 {
+            self.update_three();
+        }
+        else {
+            panic!("Somehow we can't update");
+        }
+    }
+
+    pub fn n_on(&self) -> usize {
+        self.grid.iter().cloned().map(|x| x as usize).sum()
+    }
+}
+
+fn main() {
+    let stdin = stdin();
+    let handle = stdin.lock();
+
+    let mut state = State::new();
+    handle.lines().for_each(|l| state.add_rule(&l.expect("I/O error")));
+    for i in 0..18 {
+        state.update();
+        if i == 4 || i == 17 {
+            println!("{} pixels on after {} iterations", state.n_on(), i + 1);
+        }
+    }
+}

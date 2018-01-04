@@ -1,0 +1,59 @@
+import System.IO
+
+data Gift = Gift String Int deriving (Show)
+type Giftstore  = [Gift] 
+type Wishlist  = [String]
+
+getgift :: Giftstore -> String -> Gift
+getgift [] _ = Gift "not found" 0 
+getgift ((Gift name price):gs) tofind = 
+	if name == tofind 
+	then Gift name price
+	else getgift gs tofind
+
+getprice :: Gift -> Int 
+getprice (Gift name price) = price
+
+sumgifts :: [Gift] -> Int
+sumgifts gifts = sum $ map getprice gifts
+
+gifts :: Giftstore -> Wishlist -> Int -> [Gift]
+gifts gs [] budget = []
+gifts gs (g:ws) budget =
+    if (budget - (getprice giftg)) < 0
+    then withoutg
+    else if (sumgifts withg) > (sumgifts withoutg)
+         then withg
+         else withoutg
+    where giftg = getgift gs g
+          withg = giftg:(gifts gs ws (budget - (getprice (giftg))))
+          withoutg = gifts gs ws budget
+
+readGift :: String -> Gift
+readGift s = Gift name price
+    where name = unwords $ tail $ words s
+          price = read (head $ words s)
+
+readGiftstore :: String -> Giftstore
+readGiftstore content = map readGift (lines content)
+
+
+
+readWishlist :: String -> (Int, Wishlist)
+readWishlist content = (budget, gifts)
+    where budget = read $ head $ words content :: Int
+          gifts  = tail (lines content)
+
+main :: IO ()
+main = do
+    gshandle <- openFile "giftstore.txt" ReadMode
+    gscontent <- hGetContents gshandle
+    let giftstore = readGiftstore gscontent
+    wlhandle <- openFile "Edward.txt" ReadMode
+    wlcontent <- hGetContents wlhandle
+    let (budget, wishlist) = readWishlist wlcontent
+    let solution = gifts giftstore wishlist budget
+    putStrLn $ show budget
+    putStrLn $ show solution
+    putStrLn $ show $ sumgifts solution
+    return ()

@@ -1,0 +1,63 @@
+use std::collections::HashMap;
+use std::fmt::Debug;
+
+#[derive(PartialEq, Eq, Debug, Clone)]
+struct TuringMachine<S: Eq + Debug + Copy> {
+    pc: isize,
+    tape: HashMap<isize, bool>,
+    state: S,
+    transitions: fn (S, bool) -> (S, bool, isize),
+}
+
+impl<S: Eq + Debug + Copy> TuringMachine<S> {
+    pub fn new(transitions: fn(S, bool) -> (S, bool, isize),
+               start_state: S) -> Self {
+        TuringMachine { pc: 0, tape: HashMap::new(), state: start_state,
+                        transitions: transitions }
+    }
+
+    pub fn step(&mut self) {
+        let loc = self.tape.entry(self.pc);
+        let val = loc.or_insert(false);
+        let (new_state, write, delta_pc) = (self.transitions)(self.state, *val);
+        *val = write;
+        self.state = new_state;
+        self.pc += delta_pc;
+    }
+
+    pub fn checksum(&self) -> usize {
+        self.tape.values().map(|&x| x as usize).sum()
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum State { A, B, C, D, E, F }
+
+impl State {
+    pub fn step(self, read: bool) -> (Self, bool, isize) {
+        use State::*;
+        match (self, read) {
+            (A, false) => (B, true, 1),
+            (A, true) => (F, false, -1),
+            (B, false) => (C, false, 1),
+            (B, true) => (D, false, 1),
+            (C, false) => (D, true, -1),
+            (C, true) => (E, true, 1),
+            (D, false) => (E, false, -1),
+            (D, true) => (D, false, -1),
+            (E, false) => (A, false, 1),
+            (E, true) => (C, true, 1),
+            (F, false) => (A, true, -1),
+            (F, true) => (A, true, 1),
+        }
+    }
+}
+
+fn main() {
+    const N_ITERATIONS: usize = 12994925;
+    let mut tm = TuringMachine::new(State::step, State::A);
+    for _ in 0..N_ITERATIONS {
+        tm.step();
+    }
+    println!("{}", tm.checksum());
+}

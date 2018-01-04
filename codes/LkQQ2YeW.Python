@@ -1,0 +1,15 @@
+print("Welcome to the Cainalyser URL analyser!")
+print("Enter the URL cain gave you here")
+import urllib.request
+x = input('page:')
+page = urllib.request.urlopen(x)
+text = page.read().decode ("utf8")
+whilevar = 0
+while whilevar == 0:
+    print("Enter what word's here:")
+    y = input ('')
+    where = text.find(y)
+    if where > 0:
+        print("Word present")
+    else:
+        print ("Word not present")

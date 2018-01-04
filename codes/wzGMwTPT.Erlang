@@ -1,0 +1,84 @@
+-module(frequency).
+-export([start/0, stop/0, allocate/0, deallocate/1, is_running/0]).
+-export([init/0]).
+-compile([export_all]).
+
+%% START FUNCTIONS
+
+start() ->
+  register(frequency_serv, spawn(frequency, init, [])).
+
+init() -> process_flag(trap_exit, true),
+  Frequencies = {get_frequencies(), []},
+  loop(Frequencies).
+
+%% HARDCODED FUNCTIONS
+
+get_frequencies() -> [10, 11].
+
+%% CLIENT FUNCTIONS
+
+stop() -> call(stop).
+
+allocate() -> call(allocate).
+
+deallocate(Freq) -> call({deallocate, Freq}).
+
+is_running() ->
+  WhereIs = whereis(frequency_serv),
+  if
+    WhereIs /= undefined -> running;
+    true -> stopped
+  end.
+
+call(Message) -> frequency_serv ! {request, self(), Message},
+  receive
+    {reply, Reply} -> Reply
+  end.
+
+reply(Pid, Message) -> Pid ! {reply, Message}.
+
+reply_to_gui(Message, Pid, Freq) ->
+  frequency_serv_gui ! {Message, Pid, Freq}.
+
+loop(Freq) ->
+  receive
+    {request, Pid, allocate} -> {NewF, Reply} = allocate(Freq, Pid),
+      reply(Pid, Reply), reply_to_gui(allocated, Pid, Reply), loop(NewF);
+    {request, Pid, {deallocate, F}} -> {NewF, Reply} = deallocate(Freq, F, Pid),
+      reply(Pid, Reply), loop(NewF);
+    {'EXIT', Pid, _Reason} -> NewF = exited(Freq, Pid), loop(NewF);
+    {request, Pid, stop} -> reply(Pid, ok);
+    allocated_frequencies ->
+      io:format("~p~n", [Freq]),
+      loop(Freq)
+  end.
+
+allocate({[], Allocated}, _Pid) -> {{[], Allocated}, {error, no_frequencies}};
+
+allocate({[Freq|Frequencies], Allocated}, Pid) -> link(Pid),
+  {{Frequencies, [{Freq, Pid}|Allocated]}, {ok, Freq}}.
+
+deallocate({Free, Allocated}, Freq, Sender_pid) ->
+  Object = lists:keysearch(Freq, 1, Allocated),
+  case Object of
+    {value, {Freq, Pid}} ->
+      if
+        Pid == Sender_pid ->
+          unlink(Pid),
+          NewAllocated = lists:keydelete(Freq, 1, Allocated),
+          {{[Freq|Free], NewAllocated}, released};
+        true ->
+          {{Free, Allocated}, wrong_frequency}
+      end;
+    false ->
+       {{Free, Allocated}, frequency_not_found}
+  end.
+
+exited({Free, Allocated}, Pid) ->
+  unregister(frequency_serv),
+  case lists:keysearch(Pid, 2, Allocated) of
+    {value, {Freq, Pid}} -> NewAllocated = lists:keydelete(Freq, 1, Allocated),
+      {[Freq | Free], NewAllocated};
+    false -> {Free, Allocated}
+  end.

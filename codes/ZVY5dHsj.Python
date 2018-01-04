@@ -1,0 +1,7 @@
+while True:
+    a = int(input('Введите любое число: '))
+    if 0 > a or a > 10:
+        print('Вы ввели число:', str(a)+ '!', 'Для выхода введите от 1 до 9')
+    else:
+        print(a**2)
+        break

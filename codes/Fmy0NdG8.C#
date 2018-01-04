@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DemoA
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("enter number1");
+            var input1 = Console.ReadLine();
+            bool res = int.TryParse(input1, out number1);
+            if (res == false)
+
+            Console.WriteLine("enter number2");
+            var input2 = Console.ReadLine();
+            bool res = int.TryParse(input1, out number2);
+            if (res == false)
+
+            int input1First = input1[0];
+            int input2First = input2[0];
+            int num = input1First + input2First;
+            
+
+            Console.WriteLine();
+            Console.ReadKey();
+
+               
+        }
+
+         
+    }
+}

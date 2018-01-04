@@ -1,0 +1,33 @@
+import Data.List
+import System.IO
+import Data.Array
+
+collatz n
+     | mod n 2 == 0 = div n 2
+     | otherwise =  3 * n + 1
+
+collatzList n
+        | n < 1 = error "Cannot have negative number"
+        | n == 1 = [n]
+        | otherwise = let sql = n:collatzList (collatz n)
+        in sql
+
+search :: [Int] -> Int -> Int
+search (x:xs) y = if x == y then 1 else 1 + search xs y
+
+length' :: (Num b) => [a] -> b  
+length' [] = 0  
+length' (_:xs) = 1 + length' xs
+
+maximum' :: (Ord a) => [a] -> a  
+maximum' [] = error "maximum of empty list"  
+maximum' [x] = x  
+maximum' (x:xs)   
+    | x > maxTail = x  
+    | otherwise = maxTail  
+    where maxTail = maximum' xs
+
+main :: IO ()
+main = do
+n <- getLine
+print (search (map length' (map collatzList [1..(read n :: Int)])) (maximum' (map length' (map collatzList [1..(read n :: Int)]))))

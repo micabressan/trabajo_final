@@ -1,0 +1,38 @@
+struct Percentage {
+    p_digits: f64,
+    p_chars: f64,
+    n_digits: u16,
+    n_chars: u16,
+}
+
+impl Default for Percentage {
+    fn default() -> Percentage {
+        Percentage {
+            p_digits : 0.0,
+            p_chars : 0.0,
+            n_digits : 0,
+            n_chars : 0
+        }
+    }
+}
+
+fn calculate_percentage(sl: &str, p: &mut Percentage) {
+    for c in sl.chars() {
+        if c >= 'a' && c <= 'z' {
+            p.n_chars += 1;
+        } else if c >= 'A' && c <= 'Z' {
+            p.n_chars += 1;
+        } else {
+            p.n_digits += 1;
+        }
+    }
+    p.p_digits = (p.n_digits/sl.len() * 100) as f64;
+    println!("\"{}\" has {} chars and {} symbols.", sl, p.n_chars, p.n_digits);
+}
+
+fn main() {
+    let mut p: Percentage = Default::default();
+    let sl = "this is a string literal";
+
+    calculate_percentage(&sl, &mut p);
+}

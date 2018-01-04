@@ -1,0 +1,18 @@
+aString := '(<tr valign="top">
+<td class="highlight" align="center">
+						([0-9]*)
+					</td> <td class="rowcolor" nowrap="nowrap"> <a href="billionaires08_(.*)html">(.*).</a></td> <td class="rowcolor" align="left">
+						(.*)
+					</td> <td class="rowcolor" align="center">
+						(.*)
+					</td> <td class="rowcolor" align="right">
+						(.*)
+					</td> <td class="rowcolor" align="left">
+						(.*)
+					</td>
+</tr>)'.
+																																																							a := OrderedCollection new.
+matcher := RxMatcher forString: aString.																																																																																												
+matcher matchesIn: (htmlArray at: 1) .
+
+Transcript show: (matcher matchesIn: (htmlArray at: 1))

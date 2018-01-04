@@ -1,0 +1,34 @@
+## Pipeline NAF NAF:
+
+Định dạng file : cde_YYYYMMDD_nnnnnn.txt, tìm trong file item_setup.xlxs
+
+## Các bước
+### Extract
+
+- initialize
+- call
+  - tải về 
+  - unzip và delete zipfile 
+  - extract_files_from_local_folder
+    - lưu lại theo extracted_data dạng hash 
+    - CsvFileToRows cho 'csv'
+    - FixedWidthFileToRows cho 'fixed_width'
+    
+=> **ra được pipelinerow  pending**
+
+### Transform
+
+- initialize
+- call
+    -  transform_pipeline_row
+    - xử lí theo từng PipelineRow và chuyển thành transform
+    - nếu có lỗi thì trả về error 
+
+### Load
+- load_transformed_record
+  - xem có phải row transform chưa , nếu phải thì xử lí tiếp  confirm  order by  user   
+- finalize_orders
+  - kiểm tra order NAFNAF  và calculateQty 
+  - async Beper 
+- send_email_to_users
+  - dựa vào order mà có gửi mail cho từng khách hàngàng

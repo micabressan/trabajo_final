@@ -1,0 +1,40 @@
+use std::{thread, time};
+
+fn beniz<'a>(max:f32, val:f32, len:i32) -> String {
+    let mut b = String::new();
+    let v = ((val / max) * len as f32) as i32;
+    for x in -len..0 {
+        b.push(if x > v {
+            '='
+        } else if x == v {
+            'C'
+        } else {
+            ' '
+        });
+    }
+    b.push('8');
+    for x in 1..len {
+        b.push(if x < v {
+            '='
+        } else if x == v {
+            'D'
+        } else {
+            ' '
+        });
+    }
+    b
+}
+
+fn benizy<F>(max:f32, f:F, step:f32, len: i32)
+    where F: Fn(f32) -> f32 {
+    let mut val = 0f32;
+    loop {
+        println!("{}", beniz(max, f(val), len));
+        val += step;
+        thread::sleep(time::Duration::from_millis(25));
+    }
+}
+
+fn main() {
+    benizy(1.0, |x| x.sin(), 0.1, 20);
+}

@@ -1,0 +1,145 @@
+fn mul(self, other: FixedPoint<T, UT>) -> FixedPoint<T, UT>
+{
+    let bit_count = std::mem::size_of::<T>() * 8;
+    let (hi, lo) = mul_whole(self.data, other.data);//mul_whole(self.data, other.data);
+
+    let data;
+
+    if POINT == 0{ // Weird bug (in rust?) where x << bit_count gives x
+        data = lo.to_signed();
+    } else {
+        data = (lo >> POINT).to_signed() | (hi << (POINT));
+    }
+
+    FixedPoint::from_t_data(data)
+}
+
+
+
+
+
+
+
+
+pub fn mulu_whole<T>(a: T, b: T) -> (T, T)
+    where T:
+        std::ops::Shl<usize, Output=T> +
+
+        std::ops::Mul<T, Output=T> +
+        std::ops::Add<T, Output=T> +
+        std::ops::Sub<T, Output=T> +
+        std::ops::BitAnd<T, Output=T> +
+
+        std::ops::Shl<usize, Output=T> +
+        std::ops::Shr<usize, Output=T> +
+
+        std::ops::BitXor<T, Output=T> +
+        std::ops::BitOr<T, Output=T> +
+        std::ops::Not<Output=T> +
+        std::cmp::Eq +
+        std::cmp::Ord +
+        std::marker::Copy +
+        Zero +
+        One
+
+{
+
+    //a * b = 89 * 67 =>
+
+
+//  4|5
+//    5|6
+//-----------
+//a    |8|9
+//b   *|6|7
+//--------------
+//     |6|3
+//   |8|4|
+
+    let mll = lo(b) * lo(a);               //7 * 9     = 63
+    let mlh = lo(b) * hi(a);               //7 * 8     = 56
+
+    let cll = hi(mll);                        // hi(63) = 6
+    let mll = lo(mll);                        // lo(63) = 3
+
+    let clh = hi(mlh);                        // hi(56) = 5
+    let mlh = lo(mlh);                        // lo(56) = 6
+
+    //
+
+    let mhl = hi(b) * lo(a);               //6 * 9 = 54
+    let mhh = hi(b) * hi(a);               //6 * 8 = 48
+
+    let chl = hi(mhl);                        // hi(54) = 5
+    let mhl = lo(mhl);                        // lo(54) = 4
+
+    let chh = hi(mhh);                        // hi(48) = 4
+    let mhh = lo(mhh);                        // lo(48) = 8
+
+    //
+
+    let ll = mll;                                      // 3      = 3
+    let lh = cll + mlh + mhl;                      // 6+6+4  = 16
+
+    let cl = hi(lh);                            //        = 1
+    let l = append(lo(lh), ll);              // 6|+|3  = 63
+
+    let hl = cl + chl + clh + mhh;                 //1 + 5 + 5 + 8= 19
+    let hh = chh + hi(hl);                      //  4 + 1 = 5
+
+    let h = append(hh, lo(hl));
+
+    (h, l)                                     //              =5963
+}
+
+
+//Source: Signed multiplication technique by means of unsigned multiply instruction
+//        Nov 2011 S. Gry¨s, Czestochowa University of Technology
+pub fn mul_whole<T, UT>(a: T, b: T) -> (T, UT)
+    where T:
+        std::ops::Sub<T, Output=T> +
+        ToUnsigned<UT>,
+
+    UT:
+        std::ops::Shl<usize, Output=UT> +
+
+        //std::convert::From<u32> +
+        std::ops::Mul<UT, Output=UT> +
+        std::ops::Add<UT, Output=UT> +
+        std::ops::Sub<UT, Output=UT> +
+        std::ops::BitAnd<UT, Output=UT> +
+
+        std::ops::Shl<usize, Output=UT> +
+        std::ops::Shr<usize, Output=UT> +
+
+        std::ops::BitXor<UT, Output=UT> +
+        std::ops::BitOr<UT, Output=UT> +
+        std::ops::Not<Output=UT> +
+        std::cmp::Eq +
+        std::cmp::Ord +
+        //std::convert::From<UT> +
+        //std::convert::From<u32> +
+        std::marker::Copy +
+        ToSigned<T> +
+        Zero +
+        One
+{
+    let a = a.to_unsigned();
+    let b = b.to_unsigned();
+
+    let (hi, lo) = mulu_whole(a, b);
+    let mut hi = hi.to_signed();
+
+    let bit_count = std::mem::size_of::<T>() * 8;
+    let mask_msb = UT::one() << (bit_count - 1);
+
+    if (mask_msb & a) != UT::zero() {
+        hi = hi - b.to_signed();
+    }
+
+    if (mask_msb & b) != UT::zero() {
+        hi = hi - a.to_signed();
+    }
+
+    (hi, lo)
+}

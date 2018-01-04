@@ -1,0 +1,60 @@
+//use rand::Rng;
+use std::thread;
+use std::sync::mpsc::*;
+use std::time::{SystemTime};
+//use std::time::{SystemTime, Duration};
+
+//const TIME_SLEEP: u64 = 100;
+
+fn stage_a(input: Receiver<usize>, output: Sender<usize>) {
+    while let Ok(id) = input.recv() {
+        println!("|{:^9}|{:^9}|{:^9}|", id, "", "");
+		//thread::sleep(Duration::from_millis(TIME_SLEEP));
+        output.send(id).unwrap();
+    }
+}
+
+fn stage_b(input: Receiver<usize>, output: Sender<usize>) {
+    while let Ok(id) = input.recv() {
+        println!("|{:^9}|{:^9}|{:^9}|", "", id, "");
+		//thread::sleep(Duration::from_millis(TIME_SLEEP));
+        output.send(id).unwrap();
+    }
+}
+
+fn stage_c(input: Receiver<usize>) {
+    while let Ok(id) = input.recv() {
+        println!("|{:^9}|{:^9}|{:^9}|", "", "", id);
+		//thread::sleep(Duration::from_millis(TIME_SLEEP));
+    }
+}
+
+fn main() {
+    let consumer_ids: Vec<usize> = (0..1_000).map(|i| { 
+        i
+    }).collect();
+
+    let (main_out, sa_in) = channel();
+    let (sa_out, sb_in) = channel();
+    let (sb_out, sc_in) = channel();
+
+    thread::spawn(move || {stage_a(sa_in, sa_out)});
+    thread::spawn(move || {stage_b(sb_in, sb_out)});
+    let last_stage = thread::spawn(move || {stage_c(sc_in)});
+
+    let time_start = SystemTime::now();
+    // send the ids to stage A
+    for id in consumer_ids {
+        main_out.send(id).unwrap();
+    }
+
+    // close the pipe to A
+    drop(main_out);
+
+    last_stage.join().unwrap();
+    let time_in_ms = match SystemTime::now().duration_since(time_start){
+		Ok(time) => time,
+		Err(_) => panic!("Time error!"),
+	};
+    println!("Time of work: {} ns", time_in_ms.subsec_nanos());
+}

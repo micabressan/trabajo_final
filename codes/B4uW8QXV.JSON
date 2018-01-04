@@ -1,0 +1,82 @@
+// demand/supply report
+{
+    "_id": ObjectId("5a1374da29b894421b3889af"),
+    "tagId": 442852,
+    "tagName": "Cignal - DT - Large - $7.00 - (22.8.17)",
+    "entry": "watchcartoononline.io",
+    "partner": "Cignal",
+    "requests": 13417,
+    "impressions": 2,
+    "profit": 0.0025,
+    "completedViews": 0,
+    "date": ISODate("2017-11-20T00:00:00.000Z"),
+    // additions
+    "side": "demand/supply",
+    "env": "domain/bundle/app",
+    "provider": "lkqd/springserv",
+    "companyId":ObjectId("blahblahblah")
+},
+
+
+
+
+//partnerReport
+{
+    "_id": ObjectId("5a1374da29b894421b3889af"),
+    "tagId": 442852,
+    "tagName": "Cignal - DT - Large - $7.00 - (22.8.17)",
+    "partner": "Cignal",
+    "requests": 13417,
+    "impressions": 2,
+    "profit": 0.0025,
+    "completedViews": 0,
+    "CPM":1231241,
+    "date": ISODate("2017-11-20T00:00:00.000Z"),
+    // additions
+    "side": "demand/supply",
+    "env": "domain/bundle/app",
+    "provider": "lkqd/springserv",
+    "companyId":ObjectId("blahblahblah")
+},
+
+
+
+// restrictions lists
+{
+    "_id": ObjectId("5a1a99d8d0e0862a308dc77d"),
+    "createdDate": ISODate("2017-11-26T10:39:17.372Z"),
+    "processedDate":ISODate("sssss"),
+    "provider":"lkqd",
+    "sublists": [
+        {
+            "side": "demand",
+            "env": "bundle",
+            "listName": "comm_9312719_11-26",
+            "listId": 9312719,
+            "tagId": 547807,
+            "tagName": "Edge IA $1.5",
+            "type": "bl",
+            "hasToRemoveEntries": false,
+            "isProccesed": false,
+            "entries": [
+                "com.pic.mycamera",
+                "com.tool.power"
+            ]
+        },
+        {
+            "side": "supply",
+            "env": "domain",
+            "listName": "comm_9312719_11-26",
+            "listId": 9312719,
+            "tagId": 547807,
+            "tagName": "Edge IA $1.5",
+            "type": "wl",
+            "hasToRemoveEntries": false,
+            "isProccesed": false,
+            "entries": [
+                "a.com",
+                "b.power.com"
+            ]
+        }
+    ]
+}

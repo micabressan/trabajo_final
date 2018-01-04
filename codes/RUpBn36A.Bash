@@ -1,1 +1,0 @@
-Awesome Income App Review SCAM OR LEGIT? http://www.emailclickmagnet.com/awesome-income-app-review-scam-or-legit/

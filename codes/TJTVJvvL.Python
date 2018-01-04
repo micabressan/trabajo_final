@@ -1,0 +1,32 @@
+def leer_pukamones(nomarch):
+    L=[]
+    arch=open(nomarch)
+    for linea in arch:
+        linea=linea.strip().split(';')
+        linea[1]=float(linea[1])
+        linea[2]=float(linea[2])
+        L.append(tuple(linea))
+    arch.close()
+    return L
+def distancia(x,y,pos):
+    x1, y1 = pos
+    return ((x1-x)**2+(y1-y)**2)**0.5
+    
+def calcular_cercania(pos, radio, archivo):
+    d={}
+    L=leer_pukamones(archivo)
+    for poke,x,y in L:
+        d=distancia(x,y,pos)
+        if d<radio:
+            if 1 not in d:
+                d[1]=[]
+            d[1].append(poke)
+        elif d>=radio and d<2*radio:
+            if 2 not in d:
+                d[2]=[]
+                d[2].append(poke)
+        else:
+            if 3 not in d:
+                d[3]=[]
+                d[3].append(poke)
+    return d

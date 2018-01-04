@@ -1,0 +1,13 @@
+private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DbConnections con = new DbConnections();
+            DbOperations dbo = new DbOperations(con.CString());
+            string[] line = listBox1.SelectedItem.ToString().Split(';');
+            label_id.Text = line[1];
+            string[] values = dbo.Select(line[1]);
+            tb_name.Text = values[1];
+            rtb_details.Text = values[2];
+            tb_location.Text = values[3];
+            tb_email.Text = values[8];
+
+        }

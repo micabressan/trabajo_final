@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Brass4X.Common
+{
+    public class PriorityQueue<TPriority, TValue> : IEnumerable<(TPriority Priority, TValue Value)>
+    {
+        private readonly SortedDictionary<TPriority, Queue<TValue>> _sortedDictionary;
+
+        public PriorityQueue()
+        {
+            _sortedDictionary = new SortedDictionary<TPriority, Queue<TValue>>();
+        }
+
+        public PriorityQueue(IComparer<TPriority> comparer)
+        {
+            _sortedDictionary = new SortedDictionary<TPriority, Queue<TValue>>(comparer);
+        }
+
+        public PriorityQueue(Comparison<TPriority> comparison)
+        {
+            _sortedDictionary = new SortedDictionary<TPriority, Queue<TValue>>(Comparer<TPriority>.Create(comparison));
+        }
+
+        public void Enqueue(TPriority priority, TValue value)
+        {
+            if (_sortedDictionary.TryGetValue(priority, out var dictValue))
+                dictValue.Enqueue(value);
+            else
+                _sortedDictionary.Add(priority, new Queue<TValue>(new[] { value }));
+        }
+
+        public (TPriority Priority, TValue Value) Dequeue()
+        {
+            var pair = _sortedDictionary.First();
+            var value = pair.Value.Dequeue();
+            if (pair.Value.Count == 0)
+                _sortedDictionary.Remove(pair.Key);
+            return (pair.Key, value);
+        }
+
+        public (TPriority Priority, TValue Value) Peek()
+        {
+            var pair = _sortedDictionary.First();
+            var value = pair.Value.Peek();
+            return (pair.Key, value);
+        }
+
+        public bool IsEmpty => _sortedDictionary.Count == 0;
+
+        public IEnumerator<(TPriority Priority, TValue Value)> GetEnumerator()
+        {
+            return _sortedDictionary.SelectMany(pair => pair.Value, (pair, value) => (pair.Key, value)).GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
+}

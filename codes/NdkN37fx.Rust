@@ -1,0 +1,19 @@
+//functions
+fn gen_enemy_1(x: f32, y: f32, mut rng: &mut rand::isaac::Isaac64Rng) -> Prefab{
+...
+}
+fn gen_enemy_2(x: f32, y: f32, mut rng: &mut rand::isaac::Isaac64Rng) -> Prefab{
+...
+}
+//code 
+let mut funs = vec![&gen_enemy_1, gen_enemy_2];
+
+//error
+error[E0308]: mismatched types
+   --> src/level_gen.rs:705:39
+    |
+705 |     let mut funs = vec![&gen_enemy_1, gen_enemy_2];
+    |                                       ^^^^^^^^^^^ expected reference, found fn item
+    |
+    = note: expected type `&for<'r> fn(f32, f32, &'r mut rand::Isaac64Rng) -> level_gen::Prefab {level_gen::gen_enemy_1}`
+               found type `for<'r> fn(f32, f32, &'r mut rand::Isaac64Rng) -> level_gen::Prefab {level_gen::gen_enemy_2}`

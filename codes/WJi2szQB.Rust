@@ -1,0 +1,197 @@
+// Circular xor linked list in Rust.
+
+
+pub mod xor_list {
+
+
+    pub struct XorList<T,A : NodeAllocator<T>> {  // Accessor struct.
+        current: Nodeptr<T>,
+        next:  Nodeptr<T>,
+        prev: Nodeptr<T>,
+        length: usize,
+        allocator: A
+    }
+
+    type Nodeptr<T> = Option<*mut Node<T>>; // TODO: Upgrade raw pointers to Shared<> as soon as that becomes stable.
+
+    pub struct Node<T> { // Actual xorlist node.
+        elem: T,
+        prevxnext: usize,
+    }
+
+    // Total size is n*(size of T + size of usize) (nodes across heap) + size of usize + 3 * size of option<usize> (acessor on stack)
+
+
+    pub trait NodeAllocator<T> {
+        fn allocate_node(&mut self, elem: T, prevxnext: usize) -> Nodeptr<T>;
+        fn deallocate_node(&mut self, Nodeptr<T>) -> Option<T>;
+    }
+
+    pub struct DefaultNodeAllocator;  // Allocates nodes on heap as you'd expect, alternate allocators could allocate on stack or in a pool.
+
+
+    impl<T> NodeAllocator<T> for DefaultNodeAllocator {
+        fn allocate_node(&mut self,elem: T, prevxnext: usize) -> Nodeptr<T> {
+            return Some(Box::into_raw(Box::new(  // This is perfectly safe, clearly nothing shady is being done here.
+                Node {elem,prevxnext}
+            )));
+        }
+
+        fn deallocate_node(&mut self, node: Nodeptr<T>) -> Option<T> {
+            node.map(|nodeptr| {let Node {elem: val, prevxnext: _} = *unsafe{Box::from_raw(nodeptr)} ;val})
+        }
+    }
+
+
+
+    impl<T> XorList<T, DefaultNodeAllocator> {
+        pub fn new() -> Self {
+            XorList {current: None , next: None, prev: None , length: 0, allocator: DefaultNodeAllocator}
+        }
+    }
+
+    impl<T,A: NodeAllocator<T>> XorList<T,A> {
+
+        // Thou shalt not do anything unsafe with the references returned by peek,
+        // pointers to popped nodes will be invalidated.
+        pub fn peek(&self) -> Option<&T> {
+            unsafe { self.current.map(|x| &((*x).elem)  ) }
+        }
+        pub fn peek_mut(&mut self) -> Option<&mut T> {
+            unsafe { self.current.map(|x| &mut ((*x).elem)  ) }
+        }
+        pub fn peek_back(&self) -> Option<&T> {
+            unsafe { self.prev.map(|x| &((*x).elem)  ) }
+        }
+        pub fn peek_mut_back(&mut self) -> Option<&mut T> {
+            unsafe { self.prev.map(|x| &mut ((*x).elem)  ) }
+        }
+
+        pub fn is_none(&self) -> bool {self.length == 0}
+        pub fn is_some(&self) -> bool {self.length != 0}
+        pub fn len(&self) -> usize {self.length}
+
+        pub fn rotate_to_next(&mut self) {
+            if self.length == 0 {return}
+            if self.length == 1 {return}
+
+            let ptr = self.current.unwrap();
+            let nextptr = self.next.unwrap();
+
+            self.prev = self.current;
+            self.current = self.next;
+            self.next = unsafe { Some( (ptr as usize ^ (*nextptr).prevxnext) as  *mut Node<T> ) }
+        }
+
+        pub fn rotate_to_prev(&mut self) {
+            if self.length == 0 {return}
+            if self.length == 1 {return}
+
+            let ptr = self.current.unwrap();
+            let prevptr = self.prev.unwrap();
+
+            self.next = self.current;
+            self.current = self.prev;
+            self.prev = unsafe {Some( (ptr as usize ^ (*prevptr).prevxnext) as *mut Node<T>) }
+        }
+
+
+        fn push_node(&mut self, newlink: Nodeptr<T>) {
+            if newlink.is_none() {return}
+            let length = self.length;
+            self.length += 1;
+
+            if length == 0 {
+                unsafe{(*newlink.unwrap()).prevxnext = 0}
+                self.current = newlink;
+                self.next = newlink;
+                self.prev = newlink;
+                return
+            }
+
+            let prev = self.prev.unwrap();
+            let curr = newlink.unwrap();
+            let next = self.current.unwrap();
+            unsafe{
+                (*curr).prevxnext = prev as usize ^ next as usize;
+                (*prev).prevxnext = (*prev).prevxnext ^ next as usize ^ curr as usize;
+                (*next).prevxnext = (*next).prevxnext ^ prev as usize ^ curr as usize;
+            }
+            self.prev = Some(prev);
+            self.current = Some(curr);
+            self.next = Some(next);
+        }
+
+
+        pub fn push(&mut self, x: T) {
+            let newlink = self.allocator.allocate_node(x,0);
+            self.push_node(newlink)
+
+        }
+
+        fn pop_node(&mut self) -> Nodeptr<T> {
+            if self.is_none() {return None}
+            self.length -= 1;
+
+            let prev = self.prev.unwrap();
+            let curr = self.current.unwrap();
+            let next = self.next.unwrap();
+            unsafe {
+                (*prev).prevxnext = (*prev).prevxnext ^ next as usize ^ curr as usize;
+                (*next).prevxnext = (*next).prevxnext ^ prev as usize ^ curr as usize;
+            }
+                if self.length > 0 {
+                    self.prev = Some(prev);
+                    self.current = Some(next);
+                    self.next = unsafe{ Some((prev as usize ^ (*next).prevxnext) as  *mut Node<T> ) };
+                } else {
+                    self.prev = None;
+                    self.current = None;
+                    self.next = None;
+                }
+                return Some(curr)
+        }
+
+        pub fn pop(&mut self) -> Option<T> {
+            let node = self.pop_node();
+            self.allocator.deallocate_node(node)
+        }
+
+
+        pub fn push_back(&mut self, x:T) {
+            self.push(x);
+            self.rotate_to_next();
+        }
+
+        pub fn pop_back(&mut self) -> Option<T> {
+            self.rotate_to_prev();
+            self.pop()
+        }
+    }
+
+    impl<T,A: NodeAllocator<T>> Drop for XorList<T,A> {
+        fn drop(&mut self) {
+            while !self.is_none() {
+                let _ = self.pop();
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut list = xor_list::XorList::new();
+    list.push(5i64);
+    list.push(4);
+    list.push(3);
+    list.push(2);
+    list.push(1);
+    for _ in 1..6 {
+    println!("Peek: {:?}",list.peek());
+        list.rotate_to_next();
+    }
+    for _ in 1..7 {
+        println!("Peek: {:?}",list.peek());
+        println!("Pop: {:?}",list.pop());
+    }
+    println!("Length: {:?}",list.len());
+}

@@ -1,0 +1,13 @@
+fn main() {
+
+    let a = "hola";
+
+    println!("a = {}", a);
+    foo(a);
+    foo(&a);
+
+}
+
+fn foo(s: &str) -> () {
+    println!("length of s is: {}", s.len());
+}

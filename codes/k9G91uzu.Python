@@ -1,0 +1,20 @@
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description): 
+        d[col[0]] = row[idx] 
+    return d
+
+class CardsearchOutputWidget(FloatLayout):
+	    search_output = ObjectProperty()
+
+def populate(self):
+        conn = sqlite3.connect('CardLibrarySQL.db')
+        c = sqlite3.Cursor(conn)
+        card_list = []
+        for i in c.execute('SELECT * FROM cards ORDER BY Card_Name'):
+            result = c.fetchone()
+            if result is None:
+                break;
+            conn.row_factory = dict_factory(c, result)
+            newcard = CardWidget(**conn.row_factory)
+            self.search_output.add_widget(newcard)

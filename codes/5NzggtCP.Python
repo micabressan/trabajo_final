@@ -1,0 +1,26 @@
+for i in (range(1, 10)):
+    results = {}
+    bad = []
+    for idshka in tqdm(range(10000500 + 3000 * i, 10000500 + 3000 * (i + 1))):
+        try:
+            url= "http://www.banki.ru/services/responses/bank/response/{}/".format(idshka)
+            asd = BeautifulSoup(urlopen(url), 'lxml')
+            strokka = str(asd)
+            try:
+                ocenka = re.search(r'rating-grade--value-(\d)', strokka).group(1)
+            except:
+                ocenka = '-100'
+
+            mydivs = asd.findAll("div", { "class" : "article-text response-page__text markup-inside-small markup-inside-small--bullet" })
+
+            dd = mydivs[0]
+
+            stinged = str(dd)
+
+            text = stinged.split('\n')[1]
+
+            results[idshka] = [ocenka, text]
+        except:
+            bad.append(idshka)
+    with open('dannie_{}.txt'.format(i), 'w') as f:
+        json.dump(results, f)

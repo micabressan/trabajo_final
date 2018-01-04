@@ -1,0 +1,2 @@
+queens n = [x | x <- permutations [1..n], all (s . m x) [(+),(-)]]
+  where m x f = zipWith f [0..] x; s = (==) =<< nub

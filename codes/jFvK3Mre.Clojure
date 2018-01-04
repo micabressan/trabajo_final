@@ -1,0 +1,10 @@
+(defn get-states
+  [character states]
+  (filter #(case %
+             "AURA"         (aura-like-laura? character)
+             "DEATHRATTLE"  (battle-with-a-rattle? character)
+             "STEALTH"      (stealth-or-not-what-u-got? character))
+          states))
+       
+       
+       (get-states minion ["AURA" "DEATHRATTLE" "STEALTH"])

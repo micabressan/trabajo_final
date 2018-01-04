@@ -1,0 +1,11 @@
+--- /opt/Qt/Examples/Qt-5.10.0/quickcontrols/extras/dashboard/qml/TurnIndicator.qml
++++ /opt/Qt/Examples/Qt-5.10.0/quickcontrols/extras/dashboard/qml/TurnIndicator.qml
+@@ -59,7 +59,7 @@
+     property bool flashing: false
+ 
+     scale: direction === Qt.LeftArrow ? 1 : -1
+-//! [1]
++
+     Timer {
+         id: flashTimer
+         interval: 500

@@ -1,0 +1,19 @@
+(import com.cgi.efluid.* "master")
+
+(defn yml-check
+  [file] ())
+
+(defn yml-test
+  [file] ())
+
+(defn gerrit
+  ([] identityp)
+  ([handlers] blabla))
+
+(pipe
+ (pipen :par
+        (gerrit {:yml, [yml-check yml-test], :py [identity]})
+        (pipen :seq)
+        (pipen :par
+               (pipel (fn [] (println "Effectively parallel but sequenced with gerrit")))
+               (pipel (fn [] (println "Effectively parallel but sequenced with gerrit")))))))

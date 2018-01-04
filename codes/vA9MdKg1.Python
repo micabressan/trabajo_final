@@ -1,0 +1,43 @@
+from itertools import count
+
+number = 347991
+
+
+def second():
+    table = [[0 for i in range(101)] for x in range(101)]
+    table[50][50] = 1
+    x = 51
+    y = 50
+    for i in count(3, 2):
+        for j in range(i - 2):
+            table[x][y] = table[x - 1][y] + table[x - 1][y - 1] + table[x][y - 1] + table[x + 1][y] + \
+                          table[x][y + 1] + table[x + 1][y + 1] + table[x - 1][y + 1] + table[x + 1][y - 1]
+            if table[x][y] >= number:
+                for line in table:
+                    print(line)
+                return table[x][y]
+            y += 1
+        for j in range(i-1):
+            table[x][y] = table[x - 1][y] + table[x - 1][y - 1] + table[x][y - 1] + table[x + 1][y] + \
+                          table[x][y + 1] + table[x + 1][y + 1] + table[x - 1][y + 1] + table[x + 1][y - 1]
+            if table[x][y] >= number:
+                for line in table:
+                    print(line)
+                return table[x][y]
+            x -= 1
+        for j in range(i-1):
+            table[x][y] = table[x - 1][y] + table[x - 1][y - 1] + table[x][y - 1] + table[x + 1][y] + \
+                          table[x][y + 1] + table[x + 1][y + 1] + table[x - 1][y + 1] + table[x + 1][y - 1]
+            if table[x][y] >= number:
+                for line in table:
+                    print(line)
+                return table[x][y]
+            y -= 1
+        for j in range(i):
+            table[x][y] = table[x - 1][y] + table[x - 1][y - 1] + table[x][y - 1] + table[x + 1][y] + \
+                          table[x][y + 1] + table[x + 1][y + 1] + table[x - 1][y + 1] + table[x + 1][y - 1]
+            if table[x][y] >= number:
+                for line in table:
+                    print(line)
+                return table[x][y]
+            x += 1

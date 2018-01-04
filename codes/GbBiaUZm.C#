@@ -1,0 +1,55 @@
+        <form asp-route="./Api/Products" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="PostedProduct.ProductId" class="control-label"></label>
+                <input type="number" name="ProductId" class="form-control" />
+                <span asp-validation-for="PostedProduct.ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.Name" class="control-label"></label>
+                <input type="text" name="Name" class="form-control" />
+                <span asp-validation-for="PostedProduct.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.ProductCategoryId" class="control-label"></label>
+                <select name="ProductCategoryId" class="form-control">
+                    @foreach (var c in Model.Categories)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PostedProduct.ProductCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.ProductGradeId" class="control-label"></label>
+                <select name="ProductGradeId" class="form-control">
+                    @foreach (var g in Model.Grades)
+                    {
+                        <option value="@g.Id">@g.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PostedProduct.ProductGradeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.Cost" class="control-label"></label>
+                <input type="number" name="Cost" class="form-control" />
+                <span asp-validation-for="PostedProduct.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.Price" class="control-label"></label>
+                <input type="number" name="Price" class="form-control" />
+                <span asp-validation-for="PostedProduct.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostedProduct.EmployeeId" class="control-label"></label>
+                <select name="EmployeeId" class="form-control">
+                    @foreach (var e in Model.Employees)
+                    {
+                        <option value="@e.UserId">@e.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PostedProduct.EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="PostProduct" class="btn btn-default" />
+            </div>
+        </form>

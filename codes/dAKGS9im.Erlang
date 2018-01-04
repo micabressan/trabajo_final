@@ -1,0 +1,21 @@
+-module(prime2).
+
+-export([prime/1]).
+
+prime(Num) ->
+  check(Num, 3, math:sqrt(3), [3], [3]).
+
+check(Num, Prime, SqRoot, [P1 | P2], List) when P1 =< SqRoot ->
+  if
+    Prime div P1 == Prime / P1 ->
+      check(Num, Prime + 2, math:sqrt(Prime + 2), List, List);
+    true ->
+      check(Num, Prime, SqRoot, P2, List)
+  end;
+
+check(0, _, _, _, _) -> ok;
+
+check(Num, Prime, _, _, List) when Num > 0 ->
+  io:format("~w~n", [Prime]),
+  L = List ++ [Prime],
+  check(Num - 1, Prime + 2, math:sqrt(Prime + 2), L, L).

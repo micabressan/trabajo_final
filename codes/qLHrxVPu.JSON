@@ -1,0 +1,446 @@
+{
+  "hints" : {
+    "visited_nodes.average" : "8.16",
+    "visited_nodes.sum" : "204"
+  },
+  "paths" : [ {
+    "instructions" : [ {
+      "distance" : 125.67,
+      "heading" : 356.48,
+      "sign" : 0,
+      "interval" : [ 0, 2 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 10052,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 341.76359521758474,
+      "interval" : [ 2, 2 ],
+      "text" : "Waypoint 1",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 147.108,
+      "heading" : 341.76,
+      "sign" : 0,
+      "interval" : [ 2, 5 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 11768,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 320.334973679692,
+      "interval" : [ 5, 5 ],
+      "text" : "Waypoint 2",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 121.35,
+      "heading" : 320.33,
+      "sign" : 0,
+      "interval" : [ 5, 7 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 9707,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 323.1653851876382,
+      "interval" : [ 7, 7 ],
+      "text" : "Waypoint 3",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 129.786,
+      "heading" : 323.17,
+      "sign" : 0,
+      "interval" : [ 7, 10 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 10382,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 335.9423440190556,
+      "interval" : [ 10, 10 ],
+      "text" : "Waypoint 4",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 89.566,
+      "heading" : 335.94,
+      "sign" : 0,
+      "interval" : [ 10, 11 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 7165,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 335.9423440190556,
+      "interval" : [ 11, 11 ],
+      "text" : "Waypoint 5",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 96.467,
+      "heading" : 335.94,
+      "sign" : 0,
+      "interval" : [ 11, 13 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 7717,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 339.9301302731661,
+      "interval" : [ 13, 13 ],
+      "text" : "Waypoint 6",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 84.631,
+      "heading" : 339.93,
+      "sign" : 0,
+      "interval" : [ 13, 14 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 6770,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 336.50384265828376,
+      "interval" : [ 14, 14 ],
+      "text" : "Waypoint 7",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 20.518,
+      "heading" : 336.5,
+      "sign" : 0,
+      "interval" : [ 14, 15 ],
+      "text" : "Continue onto Sagamore Avenue, NH 1A",
+      "time" : 1641,
+      "street_name" : "Sagamore Avenue, NH 1A"
+    }, {
+      "distance" : 39.827,
+      "sign" : -2,
+      "interval" : [ 15, 16 ],
+      "text" : "Turn left onto South Street",
+      "time" : 4779,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 238.2473103712989,
+      "interval" : [ 16, 16 ],
+      "text" : "Waypoint 8",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 61.768,
+      "heading" : 238.25,
+      "sign" : 0,
+      "interval" : [ 16, 17 ],
+      "text" : "Continue onto South Street",
+      "time" : 7411,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 241.2381500618818,
+      "interval" : [ 17, 17 ],
+      "text" : "Waypoint 9",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 72.119,
+      "heading" : 241.24,
+      "sign" : 0,
+      "interval" : [ 17, 18 ],
+      "text" : "Continue onto South Street",
+      "time" : 8654,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 241.2381500618818,
+      "interval" : [ 18, 18 ],
+      "text" : "Waypoint 10",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 98.272,
+      "heading" : 241.24,
+      "sign" : 0,
+      "interval" : [ 18, 20 ],
+      "text" : "Continue onto South Street",
+      "time" : 11792,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 248.3256379876501,
+      "interval" : [ 20, 20 ],
+      "text" : "Waypoint 11",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 56.012,
+      "heading" : 248.33,
+      "sign" : 0,
+      "interval" : [ 20, 22 ],
+      "text" : "Continue onto South Street",
+      "time" : 6721,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 239.23279777892392,
+      "interval" : [ 22, 22 ],
+      "text" : "Waypoint 12",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 3.235,
+      "heading" : 239.23,
+      "sign" : 0,
+      "interval" : [ 22, 23 ],
+      "text" : "Continue onto South Street",
+      "time" : 388,
+      "street_name" : "South Street"
+    }, {
+      "distance" : 75.257,
+      "sign" : 3,
+      "interval" : [ 23, 24 ],
+      "text" : "Turn sharp right onto Union Street",
+      "time" : 9030,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 340.26244579434194,
+      "interval" : [ 24, 24 ],
+      "text" : "Waypoint 13",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 75.932,
+      "heading" : 340.26,
+      "sign" : 0,
+      "interval" : [ 24, 26 ],
+      "text" : "Continue onto Union Street",
+      "time" : 9111,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 343.34495873214576,
+      "interval" : [ 26, 26 ],
+      "text" : "Waypoint 14",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 69.162,
+      "heading" : 343.34,
+      "sign" : 0,
+      "interval" : [ 26, 27 ],
+      "text" : "Continue onto Union Street",
+      "time" : 8299,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 343.0584798345804,
+      "interval" : [ 27, 27 ],
+      "text" : "Waypoint 15",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 57.406,
+      "heading" : 343.06,
+      "sign" : 0,
+      "interval" : [ 27, 28 ],
+      "text" : "Continue onto Union Street",
+      "time" : 6888,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 342.0959107387606,
+      "interval" : [ 28, 28 ],
+      "text" : "Waypoint 16",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 35.613,
+      "heading" : 342.1,
+      "sign" : 0,
+      "interval" : [ 28, 29 ],
+      "text" : "Continue onto Union Street",
+      "time" : 4273,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 342.0959107387606,
+      "interval" : [ 29, 29 ],
+      "text" : "Waypoint 17",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 10.164,
+      "heading" : 342.1,
+      "sign" : 0,
+      "interval" : [ 29, 30 ],
+      "text" : "Continue onto Union Street",
+      "time" : 1219,
+      "street_name" : "Union Street"
+    }, {
+      "distance" : 6.562,
+      "sign" : 2,
+      "interval" : [ 30, 31 ],
+      "text" : "Turn right onto Lincoln Avenue",
+      "time" : 787,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 74.50170210086094,
+      "interval" : [ 31, 31 ],
+      "text" : "Waypoint 18",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 35.853,
+      "heading" : 74.5,
+      "sign" : 0,
+      "interval" : [ 31, 32 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 4302,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 74.50170210086094,
+      "interval" : [ 32, 32 ],
+      "text" : "Waypoint 19",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 48.636,
+      "heading" : 74.5,
+      "sign" : 0,
+      "interval" : [ 32, 33 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 5835,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 72.47343150609782,
+      "interval" : [ 33, 33 ],
+      "text" : "Waypoint 20",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 30.959,
+      "heading" : 72.47,
+      "sign" : 0,
+      "interval" : [ 33, 34 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 3715,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 72.47343150609782,
+      "interval" : [ 34, 34 ],
+      "text" : "Waypoint 21",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 41.9,
+      "heading" : 72.47,
+      "sign" : 0,
+      "interval" : [ 34, 35 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 5028,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 66.96730709489063,
+      "interval" : [ 35, 35 ],
+      "text" : "Waypoint 22",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 32.212,
+      "heading" : 66.97,
+      "sign" : 0,
+      "interval" : [ 35, 37 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 3865,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 59.26102475038105,
+      "interval" : [ 37, 37 ],
+      "text" : "Waypoint 23",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 39.264,
+      "heading" : 59.26,
+      "sign" : 0,
+      "interval" : [ 37, 38 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 4711,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 5,
+      "last_heading" : 57.01503019346822,
+      "interval" : [ 38, 38 ],
+      "text" : "Waypoint 24",
+      "time" : 0,
+      "street_name" : ""
+    }, {
+      "distance" : 41.285,
+      "heading" : 57.02,
+      "sign" : 0,
+      "interval" : [ 38, 39 ],
+      "text" : "Continue onto Lincoln Avenue",
+      "time" : 4954,
+      "street_name" : "Lincoln Avenue"
+    }, {
+      "distance" : 0.0,
+      "sign" : 4,
+      "last_heading" : 57.01503019346822,
+      "interval" : [ 39, 39 ],
+      "text" : "Arrive at destination",
+      "time" : 0,
+      "street_name" : ""
+    } ],
+    "descend" : 0.0,
+    "ascend" : 0.0,
+    "distance" : 1746.537,
+    "bbox" : [ -70.762727, 43.059599, -70.753683, 43.068419 ],
+    "weight" : 176.980522,
+    "points_encoded" : true,
+    "points" : "mayeGpaznLaDL_AHWJu@d@iCxCyBhCo@p@{@|@a@\\iBdAqCxAmAn@sAh@mCfAa@Rd@rAv@`C|@zC\\dAh@tCZrAPd@@F_Cx@g@RyAb@wBn@aBh@{@XQFCOOsAYqBOiAWaBK_@Oe@c@qAg@uA",
+    "transfers" : 0,
+    "legs" : [ ],
+    "details" : { },
+    "time" : 176964,
+    "snapped_waypoints" : "mayeGpaznLaFVwEjEiDzDgE`DqCxAaDxAmCfABfBv@`C|@zCfAzEl@xB}B`AaCv@wBn@aBh@{@XUGOsAYqBOiAWaB[eAc@qAg@uA"
+  } ],
+  "info" : {
+    "took" : 480,
+    "copyrights" : [ "GraphHopper", "OpenStreetMap contributors" ]
+  }
+}

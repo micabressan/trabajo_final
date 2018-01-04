@@ -1,0 +1,7 @@
+pol :: [(Int,Int)] -> [(Int,Int)] -> [(Int,Int)] -> [(Int,Int)]
+pol resultaat (x:xs) []     = resultaat ++ (x:xs)
+pol resultaat [] (y:ys)     = resultaat ++ (y:ys)
+pol resultaat [] []         = resultaat
+pol resultaat (x:xs) (y:ys) | (snd x) > (snd y)     = pol (resultaat++[x]) xs (y:ys)
+                            | (snd x) < (snd y)     = pol (resultaat++[y]) (x:xs) ys
+                            | otherwise = pol (resultaat++[((fst x)+(fst y),(snd x))]) xs ys

@@ -1,0 +1,133 @@
+use std::io::{stdin, BufRead};
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+enum MazeItem {
+    Blank,
+    Line,
+    Turn,
+    Letter(u8),
+}
+
+impl From<u8> for MazeItem {
+    fn from(byte: u8) -> MazeItem {
+        match byte as char {
+            'A'...'Z' => MazeItem::Letter(byte),
+            ' ' => MazeItem::Blank,
+            '+' => MazeItem::Turn,
+            '-' => MazeItem::Line,
+            '|' => MazeItem::Line,
+            _ => panic!("Unrecognized character in input"),
+        }
+    }
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+enum Direction {
+    Up, Down, Left, Right,
+}
+
+struct State {
+    maze: Vec<MazeItem>,
+    maze_rs: usize, // _rs is BLIS convention for "row stride", distance to next row
+    x: usize,
+    y: usize,
+    direction: Direction,
+    letters: Vec<u8>,
+}
+
+impl State {
+    pub fn new(maze: Vec<MazeItem>, maze_rs: usize) -> State {
+        let mut start_x = maze_rs;
+        for i in 0..maze_rs {
+            if maze[i] == MazeItem::Line {
+                start_x = i;
+                break;
+            }
+        }
+        State { maze: maze, maze_rs: maze_rs, x: start_x, y: 0,
+                direction: Direction::Down, letters: Vec::new() }
+    }
+
+    pub fn step(&mut self) -> bool {
+        let (dx, dy) = match self.direction {
+            Direction::Up => (0, -1),
+            Direction::Down => (0, 1),
+            Direction::Left => (-1, 0),
+            Direction::Right => (1, 0),
+        };
+        self.x = (self.x as isize + dx) as usize;
+        self.y = (self.y as isize + dy) as usize;
+
+        let idx = self.x + self.y * self.maze_rs;
+        if let MazeItem::Letter(l) = self.maze[idx] {
+            self.letters.push(l);
+        }
+
+        if self.maze[idx] == MazeItem::Blank {
+            panic!("We stepped on a blank");
+        }
+        let edge_fall = (self.x == 0 && self.direction == Direction::Left)
+            || (self.x >= self.maze_rs - 1 && self.direction == Direction::Right)
+            || (self.y == 0 && self.direction == Direction::Up)
+            || (idx + self.maze_rs >= self.maze.len() && self.direction == Direction::Down);
+        let next_idx = ((idx as isize) + dx + (dy * self.maze_rs as isize)) as usize;
+        let need_turn = edge_fall || self.maze[next_idx] == MazeItem::Blank;
+        if need_turn && self.maze[idx] == MazeItem::Turn {
+            self.direction = match self.direction {
+                Direction::Up | Direction::Down => {
+                    if (self.x > 0) && self.maze[idx - 1] != MazeItem::Blank {
+                        Direction::Left
+                    }
+                    else if (self.x + 1 < self.maze_rs) && self.maze[idx + 1] != MazeItem::Blank {
+                        Direction::Right
+                    }
+                    else {
+                        return false;
+                    }
+                },
+                Direction::Left | Direction::Right => {
+                    if (self.y > 0) && self.maze[idx - self.maze_rs] != MazeItem::Blank {
+                        Direction::Up
+                    }
+                    else if (self.y + self.maze_rs < self.maze.len())
+                        && (self.maze[idx + self.maze_rs] != MazeItem::Blank) {
+                            Direction::Down
+                        }
+                    else {
+                        return false;
+                    }
+                }
+            };
+            true
+        }
+        else if need_turn {
+            false
+        }
+        else {
+            true
+        }
+    }
+
+    pub fn letter_trace(&self) -> &str {
+        ::std::str::from_utf8(&self.letters).unwrap()
+    }
+}
+
+fn main() {
+    let stdin = stdin();
+    let handle = stdin.lock();
+    let mut maze = Vec::<MazeItem>::new();
+    let mut maze_rs = 0;
+    for line in handle.lines() {
+        let line = line.expect("I/O error");
+        if maze_rs == 0 {
+            maze_rs = line.len();
+        }
+        maze.extend(line.bytes().map(|b: u8| MazeItem::from(b)));
+    }
+    let mut state = State::new(maze, maze_rs);
+
+    let mut n_steps = 2; // start and end will not be counted by loop
+    while state.step() { n_steps += 1; }
+    println!("{} ({} steps)", state.letter_trace(), n_steps);
+}

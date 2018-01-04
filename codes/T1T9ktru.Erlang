@@ -1,0 +1,27 @@
+-module(a).
+
+-export([fib/1]).
+
+fib(N) ->
+  if
+    N < 1 ->
+      ok;
+    N == 1 ->
+      print(1, 1);
+    true ->
+      print(1, 1), print(2, 1),
+      do(3, N, 1, 1)
+  end.
+
+do(N, M, F1, F2) ->
+  if 
+    N > M ->
+      ok;
+    true ->
+      S = F1 + F2,
+      print(N, S),
+      do(N + 1, M, F2, S)
+  end.
+
+print(Num, Value) ->
+  io:format("~w: ~w~n", [Num, Value]).

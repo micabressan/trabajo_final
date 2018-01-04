@@ -1,0 +1,7 @@
+<Grid x:Name="rightBrakeBarGrid" Grid.Row="2" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" RenderTransformOrigin="1,1">
+                        <ProgressBar x:Name="rightBrakeForceBar" Height="{Binding ElementName=leftBrakeBarGrid,Path=ActualWidth,Mode=OneWay}" Width="{Binding ElementName=leftBrakeBarGrid,Path=ActualHeight,Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Value="2000" Maximum="5000" Foreground="#FF2ED4D4" Background="#4C000000" RenderTransformOrigin="0.5,0.5" Margin="2,2,2,2">
+                            <ProgressBar.RenderTransform>
+                                <CompositeTransform Rotation="-90"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                    </Grid>

@@ -1,0 +1,69 @@
+struct Cat {
+    name: &'static str,
+    stripes: bool,
+    age: u16
+}
+
+struct Dog {
+    name: &'static str,
+    barks: bool,
+    age: u16
+}
+
+trait Talkative {
+    fn say(&self) -> String;
+}
+
+trait Aged {
+    fn age(&self) -> u16;
+}
+
+impl Talkative for Cat {
+    fn say(&self) -> String {
+        String::from("miau!")
+    }
+}
+
+impl Talkative for Dog {
+    fn say(&self) -> String {
+        String::from("vau!")
+    }
+}
+
+impl Aged for Cat {
+    fn age(&self) -> u16 {
+        self.age
+    }
+}
+
+impl Aged for Dog {
+    fn age(&self) -> u16 {
+        self.age
+    }
+}
+
+fn say<T: Talkative>(t:&T) -> () {
+    println!("{}", t.say());
+}
+
+fn older<'a, T: Aged>(a0: &'a T, a1: &'a T) -> &'a T {
+    if a0.age() > a1.age() {
+        a0
+    } else {
+        a1
+    }
+}
+
+fn main() {
+    let animal0 = Cat { name: "Cirmi", stripes: false, age: 5 };
+    let animal1 = Cat { name: "Mirci", stripes: true,  age: 15 };
+    let o = older(&animal0, &animal1);
+    println!("Older cat says: '{}'", o.say()); // Why compiles? 'o' IS AN Aged but IS NOT A Talkative ...
+    // say(&o);     // this is better, it won't compile
+
+    let animal0 = Dog { name: "Morzsa", barks: false, age: 6 };
+    let animal1 = Dog { name: "Benji", barks: true,  age: 8 };
+    let o = older(&animal0, &animal1);
+    println!("Older dog says: '{}'", o.say()); // Why compiles? 'o' IS AN Aged but IS NOT A Talkative ...
+    // say(&o);    // this is better, it won't compile
+}

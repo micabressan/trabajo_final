@@ -1,0 +1,44 @@
+require('zappa') ->
+  use 'bodyParser',
+    'methodOverride',
+    app.router,
+
+  enable 'serve jquery'
+
+  configure
+    development: -> use errorHandler: {dumpExceptions: on}
+    production: -> use 'errorHandler'
+
+  view layout: ->
+    doctype 5
+    html ->
+      head ->
+        title 'nmedia - node.js media server'
+        script src: '/socket.io/socket.io.js'
+        script src: '/zappa/jquery.js'
+        script src: '/zappa/zappa.js'
+        script src: '/layout.js'
+      body ->
+        @body
+
+  view index: ->
+    h1 @foo
+    input type: 'text', name: 'shout', id: 'shouthere'
+    ul id: 'msgs'
+
+  get '/bar/:foo': ->
+    @foo += 'bar'
+    render 'index'
+
+  client '/layout.js': ->
+    at shout: ->
+      $('#msgs').append("<li>#{@text}</li>")
+
+    $('#shouthere').blur ->
+      emit("shout", { text: @value })
+      @value = ''
+
+    alert 'Sweet!'
+
+  at shout: ->
+    broadcast 'shout', {text: @text}

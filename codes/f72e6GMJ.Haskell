@@ -1,0 +1,16 @@
+--Problem 9
+-- Pack duplicates into sublists
+myCompressNest :: (Eq a) => [a] -> [[a]]
+myCompressNest [] = []
+myCompressNest [x] = [[x]]
+myCompressNest (x:xs) =
+    if x `elem` (head (myCompressNest xs))
+    then (x:(head (myCompressNest xs))):(tail (myCompressNest xs))
+    else [x]:(myCompressNest xs)
+    
+myCompressNest' :: (Eq a) => [a] -> [[a]]
+myCompressNest' [] = []
+myCompressNest' [x] = [[x]]
+myCompressNest' (x:xs)
+    | [x] == (head (myCompressNest' xs)) = (x:(head (myCompressNest' xs))):(tail (myCompressNest' xs))
+    | otherwise = [x]:(myCompressNest' xs)

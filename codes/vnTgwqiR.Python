@@ -1,0 +1,29 @@
+import socket
+
+server_socket = socket.socket(); # Create socket which the server uses in-order to communicate with any clients
+server_socket.bind(('0.0.0.0', 8820)); # Set location where the server listens
+server_socket.listen(1);
+
+(client_socket, client_address) = server_socket.accept(); # Get the socket to communicate with the client and get the client's address
+
+message = client_socket.recv(1024); # Receive message from the client
+while True:
+    if message == 'TIME':
+        client_socket.send('doesnt matter');
+
+    elif message == 'NAME':
+        client_socket.send('bla bla');
+
+    elif message == 'RAND':
+        client_socket.send('4');
+
+    elif message == 'EXIT':
+        client_socket.close();
+        break;
+
+    else:
+        client_socket.send('ERROR');
+
+    message = client_socket.recv(1024);
+
+server_socket.close();

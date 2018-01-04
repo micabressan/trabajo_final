@@ -1,0 +1,30 @@
+type Board = [[Bool]]
+type Point = (Int,Int)
+
+-- A tree node has the current board state,
+-- a list of previous board states leading up to the current,
+-- and a list of its child nodes
+data Node = Node { value    :: Board
+                 , prev     :: [Board]
+                 --, children :: [Node]
+                 } deriving (Show)
+
+search :: Board -> [Board]
+search board = if null result then [] else (prev result') ++ [(value result')]
+	where
+		result' = head result
+		result  = search' [Node { value = board, prev = [] }]
+
+search' :: [Node] -> [Node]
+search' level
+	| null level            = []
+	| (not . null) checkWin = checkWin
+	| otherwise             = nextLevel
+	where
+		checkWin  = filter (isWon . value) level
+		nextLevel = concatMap childNodes level
+
+childNodes :: Node -> [Node]
+childNodes n = map (\i -> Node {value=i, prev=getPrev}) $ childBoards $ value n
+	where
+		getPrev = (prev n) ++ [value n]

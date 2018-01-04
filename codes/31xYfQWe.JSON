@@ -1,0 +1,215 @@
+{
+   "lessons": {
+   "0": {
+       "lessonName": "Floats",
+               "lessonDesc": "This lesson is about floats.",
+               "theoryEntries": [
+       {
+           "title": "Floats",
+               "content": "Float are used in Python to represent numbers that aren't integers. Some examples of numbers that are represented as floats are 0.5 and -7.823.",
+               "code": ">>> 3/4\\n0.75\\n>>> 9.87650000\\n9.8765",
+               "tip": "Computers can't store floats perfectly accurately."
+       },
+       {
+           "title": "Floats",
+               "content": "As you saw previously, dividing any two integers produces a float. A float is also produced by running an operation on two floats, or on a float and integer.",
+               "code": ">>> 8 / 2\\n4.0\\n>>> 6 * 7.0\\n42.0\\n>>> 4 + 1.65\\n5.65",
+               "tip": "A float can be added to an integer, because Python silently converts the integer to a float."
+       }
+ ],
+       "exercises": [
+       {
+           "type": "select",
+               "content": "Which of these will not be stored as a float?",
+               "answerA": "7.0",
+               "answerB": "7",
+               "answerC": "2 / 4",
+               "answerD": "7 * 1.0",
+               "correctAnswer": "7"
+       },
+       {
+           "type": "select",
+               "content": "What will be the output of this code?",
+               "code": ">>> 1 + 2 + 3 + 4.0 + 5",
+               "answerA": "0",
+               "answerB": "12.0",
+               "answerC": "15",
+               "answerD": "15.0",
+               "correctAnswer": "15.0"
+       }
+ ]
+   },
+   "1": {
+       "lessonName": "Strings",
+               "lessonDesc": "This lesson is about strings.",
+               "theoryEntries": [
+       {
+           "title": "Strings",
+               "content": "If you want to use text in Python, you have to use a string. A string is created by entering text between two single or double quotation marks.",
+               "code": ">>> \"Python is fun!\"\\n'Python is fun!'\\n>>> 'Always look on the bright side of life'\\n'Always look on the bright side of life'"
+       },
+       {
+           "title": "Strings",
+               "content": "Some characters can't be directly included in a string. For instance, double quotes can't be directly included in a double quote string. Characters like this must be escaped by backslash before them.",
+               "code": ">>> 'Brian\\\\'s mother: He\\\\'s no the Messiah. He\\\\'s a very naughty boy!'\\n'Brian's mother: He's no the Messiah. He's a very naughty boy!'",
+               "tip": "Backslashes can also be used to escape tabs, arbitrary Unicode characters and various other things."
+       }
+ ],
+       "exercises": [
+       {
+           "type": "fill",
+               "content": "Complete the code to create a string containing \"Hello world\".",
+               "code": ">>> \"Hello ;;;;;\"\\n'Hello world'",
+               "correctAnswer": ["world"]
+       },
+       {
+           "type": "fill",
+               "content": "Complete the code to create a string containing a double quote.",
+               "code": ">>> \";;\"",
+               "correctAnswer": ["\\\""]
+       }
+ ]
+   },
+   "2": {
+       "lessonName": "if Statements",
+               "lessonDesc": "This lesson is about if statements.",
+               "theoryEntries": [
+       {
+           "title": "if Statements",
+               "content": "You can use if statements to run code if a certain condition holds. If an expression evaluates to True, some statements are carried out.",
+               "code": "if 10 > 5:\\n    print(\"10 greater than 5\")\\n\\nprint(\"program ended\")",
+               "result": ">>>\\n10 greater than 5\\nProgram ended\\n>>>",
+               "tip": "As the program contains multiple lines of code, you should create it as a separate file and run it."
+       },
+       {
+           "title": "if Statements",
+               "content": "To perform more complex checks, if statements can be nested, one inside the other. This means that the inner if statement is the statement part of the outer one.",
+               "code": "num = 12\\nif num > 5:\\n    print(\"Bigger than 5\")\\n    if num <= 47:\\n        print(\"Between 5 and 47\")",
+               "result": ">>>\\nBigger than 5\\nBetween 5 and 47\\n>>>"
+       }
+ ],
+       "exercises": [
+       {
+           "type": "select",
+               "content": "What part of an if statement should be indented?",
+               "answerA": "The first line",
+               "answerB": "All of it",
+               "answerC": "The statements within it",
+               "correctAnswer": "The statements within it"
+       },
+       {
+           "type": "select",
+               "content": "What is the output of this code?",
+               "code": "spam = 7\\nif spam > 5:\\n    print(\"five\")\\nif spam > 8:\\n    print(\"eight\")",
+               "answerA": "eight",
+               "answerB": "nothing",
+               "answerC": "five",
+               "correctAnswer": "five"
+       }
+ ]
+   },
+   "3": {
+       "lessonName": "Lists",
+               "lessonDesc": "This lesson is about lists.",
+               "theoryEntries": [
+       {
+           "title": "Lists",
+               "content": "Lists are another type of object in Python. They are used to store an indexed list of items. A list is created using square brackets with commas separating items.",
+               "code": "words = [\"Hello\", \"world\", \"!\"]\\nprint(words[0])\\nprint(words[1])\\nprint(words[2])",
+               "result": ">>>\\nHello\\nworld\\n!\\n>>>",
+               "tip": "The first list item's index is 0, rather than 1, as might be expected."
+       },
+       {
+           "title": "Lists",
+               "content": "An empty list is created with an empty pair of square brackets.",
+               "code": "empty;list = []\\nprint(empty;list)",
+               "result": ">>>\\n[]\\n>>>",
+               "tip": "Most of the time, a comma won't follow the last item in a list. However, it is perfectly valid to place one there, and it is encouraged in some cases."
+       }
+ ],
+       "exercises": [
+       {
+           "type": "type",
+               "content": "What is the result of this code?",
+               "code": "nums = [5, 4, 3, 2, 1]\\nprint(nums[1])",
+               "correctAnswer": "4"
+       },
+       {
+           "type": "type",
+               "content": "How many items are in this list?",
+               "code": "[2,]",
+               "correctAnswer": "1"
+       }
+ ]
+   },
+   "4": {
+       "lessonName": "Classes",
+               "lessonDesc": "This lesson is about classes.",
+               "theoryEntries": [
+       {
+           "title": "Classes",
+               "content": "Another very popular paradigm is object-oriented programming (OOP).\\nObjects are created using classes, which are actually the focal point of OOP.\\nThe class describes what the object will be, but is separate from the object itself. In other words, a class can be described as an object's blueprint, description, or definition. You can use the same class as a blueprint for creating multiple different objects.\\n\\nClasses are created using keyword class and an indented block, whick contains class methods (which are functions).",
+               "code": "class Cat:\\n    def ;;init;;(self, color, legs):\\n        self.color = color\\n        self.legs = legs\\n\\nfelix = Cat(\"ginger\", 4)\\nrover = Cat(\"dog-colored\", 4)\\nstumpy = Cat(\"brown\", 3)",
+               "tip": "This code defines a class named Cat, which has two attributes: color and legs.\\nThen the class is used to create 3 separate objects of that class."
+       },
+       {
+           "title": "Methods",
+               "content": "Classes can have other methods defined to add functionality to them.\\nRemember, that all methods must have self as their first parameter. These methods are accessed using the same dot syntax as attributes.",
+               "code": "class Dog:\\n    def ;;init;;(self, name, color):\\n        self.name = name\\n        self.color = color\\n\\n    def bark(self):\\n        print(\"Woof!\")\\n\\nfido = Dog(\"Fido\", \"brown\")\\nprint(fido.name)\\nfido.bark()",
+               "result": ">>>\\nFido\\nWoof!\\n>>>"
+       }
+ ],
+       "exercises": [
+       {
+           "type": "select",
+               "content": "What type of object is a method?",
+               "answerA": "Class",
+               "answerB": "Integer",
+               "answerC": "Function",
+               "correctAnswer": "Function"
+       },
+       {
+           "type": "fill",
+               "content": "Fill in the blanks to create a class and its constructor, taking one argument and assigning it to the \"name\" attribute. Then create an object of the class",
+               "code": ";;;;; Student:\\n    def ;;;;;;;;(self, name):\\n        self;;;;; = name\\ntest = Student(\"Bob\";",
+               "correctAnswer": ["class", ";;init;;", ".name", ")"]
+       }
+ ]
+   },
+   "5": {
+       "lessonName": "Inheritance",
+               "lessonDesc": "This lesson is about inheritance.",
+               "theoryEntries": [
+       {
+           "title": "Inheritance",
+               "content": "Inheritance provides a way to share functionality between classes.\\nImagine several classes, Cat, Dog, Rabbit and so on. Although they may differ in some ways (only Dog might have the method bark), they are likely to be similar in others (all having the attributes color and name). This similarity can be expressed by making them all inherit from a superclass Animal, which contains the shared functionality.",
+               "code": "class Animal:\\n    def ;;init;;(self, name, color):\\n        self.name = name\\n        self.color = color\\n\\nclass Cat(Animal):\\n    def purr(self):\\n        print(\"Purr...\")\\n\\nclass Dog(Animal):\\n    def bark(self):\\n        print(\"Woof!\")\\n\\nfido = Dog(\"Fido\", \"brown\")\\nprint(fido.color)\\nfido.bark()",
+               "result": ">>>\\nbrown\\nWoof!\\n>>>"
+       },
+       {
+           "title": "Inheritance",
+               "content": "A class that inherits from another class is called a subclass.\\nA class that is inherited from is called a superclass.\\nIf a class inherits from another with the same attributes or methods, it overrides them.",
+               "code": "class Wolf:\\n    def ;;init;;(self, name, color):\\n        self.name = name\\n        self.color = color\\n\\n    def bark(self):\\n        print(\"Grr...\")\\n\\nclass Dog(Wolf):\\n    def bark(self):\\n        print(\"Woof\")\\n\\nhusky = Dog(\"Max\", \"grey\")\\nhusky.bark()",
+               "result": ">>>\\nWoof\\n>>>",
+               "tip": "In the example above, Wolf is the superclass, Dog is the subclass."
+       }
+ ],
+       "exercises": [
+       {
+           "type": "select",
+               "content": "Which piece of code shows a new class Spam inheriting from Egg?",
+               "answerA": "class Egg(Spam):",
+               "answerB": "class Spam(Egg):",
+               "answerC": "class (Spam)Egg:",
+               "correctAnswer": "class Spam(Egg):"
+       },
+       {
+           "type": "type",
+               "content": "What is the result of this code?",
+               "code": "class A:\\n    def method(self):\\n        print(1)\\n\\nclass B(A):\\n    def method(self):\\n        print(2)\\n\\nB().method()",
+               "correctAnswer": "2"
+       }
+ ]
+   }
+}
+}

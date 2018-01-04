@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            int blankSpace = n - 1;
+            int stars = 1;
+
+            //print the upper part 
+
+            for (int i = 1; i < n; i++)
+            {
+                Console.Write(new string(' ', blankSpace));
+
+                for (int j = 0; j < stars; j++)
+                {
+                    Console.Write("* ");
+                }
+
+                Console.WriteLine(new string(' ', blankSpace));
+                blankSpace--;
+                stars++;
+            }
+
+            //print the middle part
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("* ");
+            }
+            Console.WriteLine();
+
+            //print the down part
+            blankSpace = 1;
+            stars = n - 1;
+
+            for (int i = n - 1; i >= 1; i--)
+            {
+                Console.Write(new string(' ', blankSpace));
+
+                for (int j = 0; j < stars; j++)
+                {
+                    Console.Write("* ");
+                }
+
+                Console.WriteLine(new string(' ', blankSpace));
+
+                blankSpace++;
+                stars--;
+            }
+        }
+    }
+}

@@ -1,0 +1,78 @@
+-module(getData).
+
+-behavior(gen_server).
+
+-export([start/1, stop/0, plus/0]).
+
+-export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
+
+%{ok, ListenSocket} = gen_tcp:listen(Port, [binary, {active, true}, {packet, line}])
+%Работа с текстовыми протоколами
+%Можно читать из сокета по одному байту, пока не встретится специальный байт, символизирующий конец пакета. Это может быть нулевой байт, или символ перевода строки.
+%Такой вариант характерен для текстовых протоколов (SMTP, POP3, FTP).
+%Писать свою реализацию чтения из сокета нет необходимости, все уже реализовано в gen_tcp. Нужно только указать в настройках сокета опцию {packet, line}.
+
+start(ListenSocket) -> 
+	{ok, Pid} = gen_server:start_link({local, ?MODULE}, ?MODULE, ListenSocket, []),
+	Pid.
+	
+stop() ->
+	gen_server:cast(?MODULE, stop).
+	
+init(ListenSocket) ->
+	NumOfMessInSec = 0,
+	NumSecWithoutMess = 0,
+	{ok, Socket} = gen_tcp:accept(ListenSocket), %это надо вынести из init в handle_info, сделано тут для общего понимания
+	Timer = erlang:start_timer(1000, self(), update),
+	{ok, {ListenSocket, Socket, NumOfMessInSec, NumSecWithoutMess, Timer}}.
+	
+handle_call(_Msg, _From, State) ->
+	error_logger:error_msg("Unknown msg ~p from ~p~n",[Msg,From]),
+	{noreply, State}.
+
+handle_cast(reconnect, {ListenSocket, Socket, NumOfMessInSec, NumSecWithoutMess, Timer}) ->
+	{ok, NewSocket} = gen_tcp:accept(ListenSocket)
+	{noreply, {ListenSocket, NewSocket, NumOfMessInSec, NumSecWithoutMess, Timer}}
+	end;
+	
+handle_cast(stop, State) ->
+%	io:format("Normal stop~n"),
+	{stop, normal, State};
+	
+handle_cast(_Msg, State) ->
+	error_logger:error_msg("Unknown msg ~p~n",[Msg]),
+	{noreply, State}.
+
+handle_info({timeout, Ref, update}, {ListenSocket, Socket, NumOfMessInSec, NumSecWithoutMess, OldTimer}) ->
+	if 
+		Ref /= OldTimer ->
+			erlang:cancel_timer(OldTimer),
+			{noreply, {ListenSocket, Socket, NumOfMessInSec, NumSecWithoutMess, OldTimer}};
+		true ->
+			erlang:cancel_timer(OldTimer),
+			%Если сообщений не было в течении 1 сек (NumOfMessInSec == 0) то NewNumSecWithoutMess = NumSecWithoutMess + 1
+			%Если NumSecWithoutMess == 5, то проверятем к примеру icmp ping жив ли сервер и уведомляем об этом наблюдатель
+			Timer = erlang:start_timer(1000, self(), update),
+			{noreply, {ListenSocket, Socket, NumOfMessInSec, NewNumSecWithoutMess, Timer}}
+	end;
+	
+handle_info({tcp, _MsgSocket, Msg}, {ListenSocket, Socket, NumOfMessInSec, NewNumSecWithoutMess, Timer}) ->
+%	Здесь преобразуем метрики, и отправляем форматом {тип, ip_сервера, метрика или nodata, erlang:localtime()} и отправляем на сборщик метрик с логгером
+%	если сообщение пришло  то NewNumOfMessInSec = NumOfMessInSec + 1
+	{noreply, {ListenSocket, Socket, NewNumOfMessInSec, NewNumSecWithoutMess, Timer}};
+
+handle_info({tcp_closed, _Port}, State) ->
+%	gen_server:cast(?MODULE, stop),
+%	gen_server:cast(?MODULE, reconnect),
+%	или же возвращаем процесс в пул
+	{noreply, State};
+	
+handle_info(_Msg, State) ->
+	error_logger:error_msg("Unknown msg ~p~n",[Msg]),
+	{noreply, State}.
+
+terminate(_Reason, _State) ->
+	ok.
+	
+code_change(_OldVersion, State, _Extra) ->
+	{ok, State}.

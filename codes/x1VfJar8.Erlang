@@ -1,0 +1,35 @@
+Ф%%%-------------------------------------------------------------------
+%%% @author alex
+%%% @doc
+%%%   Коллоквиум по ФРЛП
+%%% @end
+%%% Created : 20. Нояб. 2017 10:06
+%%%-------------------------------------------------------------------
+-module(main).
+
+-export([setR/1, selectOdd/1]).
+
+%% №2
+%% done
+contain(_, List) when not is_list(List) -> false;
+contain(_, List) when length(List) == 0 -> false;
+contain(Element, [Head|_]) when Element == Head -> true;
+contain(Element, [_|Tail]) -> contain(Element, Tail).
+
+setR(List) when not is_list(List) -> false;
+setR(List) when (length(List) == 1) or (length(List) == 0) -> true;
+setR([Head|Tail]) ->
+  (not contain(Head, Tail)) and setR(Tail).
+
+%% №3
+%% done
+selectOdd(List) -> selectOdd(List, []).
+
+selectOdd(List, _) when not is_list(List) -> error("not a list");
+selectOdd([Head|Tail], Result) when (Head rem 2) == 1 ->
+  NewResult = Result ++ [Head],
+  selectOdd(Tail, NewResult);
+selectOdd([Head|Tail], Result) when (Head rem 2) == 0 ->
+  selectOdd(Tail, Result);
+selectOdd(List, Result) when (length(List) == 0) -> Result;
+selectOdd(_,_) -> error("something went wrong is selectOdd").

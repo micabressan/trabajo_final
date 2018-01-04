@@ -1,0 +1,50 @@
+import requests
+import datetime
+
+starttime = datetime.datetime.now()
+incount = 0
+outcount = 0
+totalreg = datetime.timedelta(0) 
+totalregin = datetime.timedelta(0) 
+totalregout = datetime.timedelta(0) 
+airport = raw_input('Enter Airport ICAO ')
+#airport = 'EHAM'
+airporturl = 'http://api.vateud.net/online/pilots/{0}.json'.format(airport)
+
+r = requests.get(airporturl).json()
+     
+for flight in r:
+    cidflight = flight['cid']
+    userurl = 'http://api.vateud.net/members/id/{0}.json'.format(cidflight)
+    userjson = requests.get(userurl).json()
+    reg = datetime.datetime.strptime(userjson['reg_date'], '%Y-%m-%d %H:%M:%S')  
+    now = datetime.datetime.now()
+    age = now - reg
+    totalreg = totalreg + age
+     
+    if flight['origin'] != airport:
+        incount = incount + 1
+        print 'inbound ', flight['callsign'], flight['cid'], userjson['firstname'], userjson['lastname'], age
+        totalregin = totalregin + age
+    else:
+        outcount = outcount + 1
+        print 'outbound ', flight['callsign'], flight['cid'], userjson['firstname'], userjson['lastname'], age
+        totalregout = totalregout + age
+
+averagereg = totalreg / len(r)
+averageregin = totalregin / incount
+averageregout = totalregout / outcount
+
+print ' '
+print 'total =', len(r)
+print 'inbounds =', incount
+print 'outbounds =', outcount
+print ' '
+print 'average pilot age =', str(averagereg)
+print 'average inbound pilot age =', str(averageregin)
+print 'average outbound pilot age =', str(averageregout)
+print ' '
+
+endtime = datetime.datetime.now()
+running = endtime - starttime
+print 'script running time =', running

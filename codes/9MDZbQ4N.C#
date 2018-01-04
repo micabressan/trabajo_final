@@ -1,0 +1,629 @@
+using AnthonyInterfaces;  
+using AnthonyNetwork.GamePackets;  
+
+namespace AnthonyGame  
+{  
+    public unsafe class MsgAutoGiveMagic  
+    {  
+        public static bool effx = false;  
+        public static ISkill LearnableMagic(ushort MagicID)  
+        {  
+            ISkill Magic = new MsgMagicInfo(true);  
+            Magic.ID = MagicID;  
+            return Magic;  
+        }  
+        public static void Check(Client.GameState c) 
+        { 
+
+            #region Trojan Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class==10)) 
+                { 
+                    c.Player.Class = 11; 
+                } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class==11)) 
+            { 
+                c.Player.Class = 12; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 12)) 
+            { 
+                c.Player.Class = 13; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 13)) 
+            { 
+                c.Player.Class = 15; 
+            } 
+
+            #endregion 
+            #region Trojan 
+            if (c.Player.Class >= 10 && c.Player.Class <= 15)  
+            {  
+                if (c.Player.Level >= 40)  
+                { 
+
+                    if (c.Player.Class >= 11) 
+                    if (!c.Spells.ContainsKey(1110)) { c.AddSpell(LearnableMagic(1110)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1015)) { c.AddSpell(LearnableMagic(1015)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11970)) { c.AddSpell(LearnableMagic(11970)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11990)) { c.AddSpell(LearnableMagic(11990)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11980)) { c.AddSpell(LearnableMagic(11980)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1115)) { c.AddSpell(LearnableMagic(1115)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1270)) { c.AddSpell(LearnableMagic(1270)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1190)) { c.AddSpell(LearnableMagic(1190)); effx = true; }  
+                }  
+                if (c.Player.Level >= 90)  
+                {  
+                    if (!c.Spells.ContainsKey(11960)) { c.AddSpell(LearnableMagic(11960)); effx = true; }  
+                }  
+            }  
+            #endregion  
+            #region Warrior Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 20)) 
+            { 
+                c.Player.Class = 21; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 21)) 
+            { 
+                c.Player.Class = 22; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 22)) 
+            { 
+                c.Player.Class = 23; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 23)) 
+            { 
+                c.Player.Class = 25; 
+            } 
+
+            #endregion 
+            #region Warrior 
+            if (c.Player.Class >= 20 && c.Player.Class <= 25)  
+            {  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(11200)) { c.AddSpell(LearnableMagic(11200)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10470)) { c.AddSpell(LearnableMagic(10470)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1025)) { c.AddSpell(LearnableMagic(1025)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1020)) { c.AddSpell(LearnableMagic(1020)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1015)) { c.AddSpell(LearnableMagic(1015)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12770)) { c.AddSpell(LearnableMagic(12770)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12670)) { c.AddSpell(LearnableMagic(12670)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12700)) { c.AddSpell(LearnableMagic(12700)); effx = true; } 
+                    if (!c.Spells.ContainsKey(10311)) { c.AddSpell(LearnableMagic(10311)); effx = true; } 
+                    if (!c.Spells.ContainsKey(1045)) { c.AddSpell(LearnableMagic(1045)); effx = true; } 
+                    if (!c.Spells.ContainsKey(1046)) { c.AddSpell(LearnableMagic(1046)); effx = true; } 
+                }  
+                if (c.Player.Level >= 61)  
+                { 
+                    if (!c.Spells.ContainsKey(12680)) { c.AddSpell(LearnableMagic(12680)); effx = true; } 
+                    if (!c.Spells.ContainsKey(1051)) { c.AddSpell(LearnableMagic(1051)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                { 
+                    if (!c.Spells.ContainsKey(12660)) { c.AddSpell(LearnableMagic(12660)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12690)) { c.AddSpell(LearnableMagic(12690)); effx = true; } 
+                    if (!c.Spells.ContainsKey(11160)) { c.AddSpell(LearnableMagic(11160)); effx = true; }  
+                }  
+            }  
+            #endregion  
+            #region Archer Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 40)) 
+            { 
+                c.Player.Class = 41; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 41)) 
+            { 
+                c.Player.Class = 42; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 42)) 
+            { 
+                c.Player.Class = 43; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 43)) 
+            { 
+                c.Player.Class = 45; 
+            } 
+
+            #endregion 
+            #region Archer 
+            if (c.Player.Class >= 40 && c.Player.Class <= 45)  
+            {  
+                if (c.Player.Level >= 1)  
+                {  
+                    if (!c.Spells.ContainsKey(8002)) { c.AddSpell(LearnableMagic(8002)); effx = true; }  
+                }  
+                if (c.Player.Level >= 23)  
+                {  
+                    if (!c.Spells.ContainsKey(8001)) { c.AddSpell(LearnableMagic(8001)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(8000)) { c.AddSpell(LearnableMagic(8000)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {  
+                    if (!c.Spells.ContainsKey(8003)) { c.AddSpell(LearnableMagic(8003)); effx = true; }  
+                    if (!c.Spells.ContainsKey(9000)) { c.AddSpell(LearnableMagic(9000)); effx = true; }  
+                    if (!c.Spells.ContainsKey(8030)) { c.AddSpell(LearnableMagic(8030)); effx = true; }  
+                }  
+                if (c.Player.Level >= 100)  
+                {  
+
+                    if (c.Spells[8003].Level < 1)  
+                    {  
+                        ISkill spell = new MsgMagicInfo(true);  
+                        spell.ID = 8003;  
+                        spell.Level = 1;  
+                        c.AddSpell(spell);  
+                        effx = true;  
+                    }  
+
+                }  
+            }  
+            if (c.Player.Class >= 41 && c.Player.Class <= 45)  
+            {  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(11620)) { c.Send(new MsgTalk("Congratulations! You now hold the knowledge of this path!.", MsgTalk.System)); c.AddSpell(LearnableMagic(11620)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11610)) { c.AddSpell(LearnableMagic(11610)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11660)) { c.AddSpell(LearnableMagic(11660)); effx = true; }  
+                }  
+                if (c.Player.Level >= 50)  
+                {  
+                    if (!c.Spells.ContainsKey(11590)) { c.AddSpell(LearnableMagic(11590)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {  
+                    if (!c.Spells.ContainsKey(11650)) { c.AddSpell(LearnableMagic(11650)); effx = true; }  
+                }  
+                if (c.Player.Level >= 90)  
+                {  
+                    if (!c.Spells.ContainsKey(11670)) { c.AddSpell(LearnableMagic(11670)); effx = true; }  
+                }  
+                if (c.Player.Level >= 100)  
+                {  
+                    if (!c.Spells.ContainsKey(11600)) { c.AddSpell(LearnableMagic(11600)); effx = true; }  
+                }  
+            }  
+            #endregion  
+            #region Ninja Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 50)) 
+            { 
+                c.Player.Class = 51; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 51)) 
+            { 
+                c.Player.Class = 52; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 52)) 
+            { 
+                c.Player.Class = 53; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 53)) 
+            { 
+                c.Player.Class = 55; 
+            } 
+
+            #endregion 
+            #region Ninja 
+            if (c.Player.Class >= 50 && c.Player.Class <= 55)  
+            {  
+                if (c.Player.Level >= 15)  
+                {  
+                    if (!c.Spells.ContainsKey(6011)) { c.AddSpell(LearnableMagic(6011)); effx = true; }  
+                    if (!c.Spells.ContainsKey(12070)) { c.AddSpell(LearnableMagic(12070)); effx = true; }  
+                    if (!c.Spells.ContainsKey(12110)) { c.AddSpell(LearnableMagic(12110)); effx = true; }  
+                }  
+                if (c.Player.Level >= 20)  
+                {  
+                    if (!c.Spells.ContainsKey(11170)) { c.AddSpell(LearnableMagic(11170)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11180)) { c.AddSpell(LearnableMagic(11180)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40) 
+                {     
+                    if (!c.Spells.ContainsKey(6011)) { c.AddSpell(LearnableMagic(6011)); effx = true; } 
+                    if (!c.Spells.ContainsKey(6000)) { c.AddSpell(LearnableMagic(6000)); effx = true; }  
+                    if (!c.Spells.ContainsKey(12090)) { c.AddSpell(LearnableMagic(12090)); effx = true; }  
+                    if (!c.Spells.ContainsKey(12080)) { c.AddSpell(LearnableMagic(12080)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11230)) { c.AddSpell(LearnableMagic(11230)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {     
+                    if (!c.Spells.ContainsKey(6001)) { c.AddSpell(LearnableMagic(6001)); effx = true; } 
+                    if (!c.Spells.ContainsKey(6002)) { c.AddSpell(LearnableMagic(6002)); effx = true; } 
+                    if (!c.Spells.ContainsKey(6003)) { c.AddSpell(LearnableMagic(6003)); effx = true; }  
+                    if (!c.Spells.ContainsKey(6010)) { c.AddSpell(LearnableMagic(6010)); effx = true; }  
+                }  
+                if (c.Player.Level >= 110)  
+                {  
+                    if (!c.Spells.ContainsKey(6004)) { c.AddSpell(LearnableMagic(6004)); effx = true; }  
+                    if (c.Player.Reborn == 2 && c.Player.Class == 55 && c.Player.SecondRebornClass == 55 && c.Player.FirstRebornClass == 55)  
+                    {  
+                        if (!c.Spells.ContainsKey(12090)) { c.AddSpell(LearnableMagic(12090)); effx = true; }  
+                    }  
+                }  
+            }  
+            #endregion  
+            #region Monk Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 60)) 
+            { 
+                c.Player.Class = 61; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 61)) 
+            { 
+                c.Player.Class = 62; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 62)) 
+            { 
+                c.Player.Class = 63; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 63)) 
+            { 
+                c.Player.Class = 65; 
+            } 
+
+            #endregion 
+            #region Monk 
+            if (c.Player.Class >= 60 && c.Player.Class <= 65)  
+            {  
+                if (c.Player.Level >= 5)  
+                {  
+                    if (!c.Spells.ContainsKey(10490)) { c.AddSpell(LearnableMagic(10490)); effx = true; }  
+                }  
+                if (c.Player.Level >= 15)  
+                {  
+                    if (!c.Spells.ContainsKey(10390)) { c.AddSpell(LearnableMagic(10390)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10415)) { c.AddSpell(LearnableMagic(10415)); effx = true; }  
+                }  
+                if (c.Player.Level >= 20)  
+                {  
+                    if (!c.Spells.ContainsKey(10395)) { c.AddSpell(LearnableMagic(10395)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10410)) { c.AddSpell(LearnableMagic(10410)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(10381)) { c.AddSpell(LearnableMagic(10381)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10400)) { c.AddSpell(LearnableMagic(10400)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {  
+                    if (!c.Spells.ContainsKey(10425)) { c.AddSpell(LearnableMagic(10425)); effx = true; }  
+                }  
+                if (c.Player.Level >= 100)  
+                {  
+                    if (!c.Spells.ContainsKey(10420)) { c.AddSpell(LearnableMagic(10420)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10421)) { c.AddSpell(LearnableMagic(10421)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10422)) { c.AddSpell(LearnableMagic(10422)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10423)) { c.AddSpell(LearnableMagic(10423)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10424)) { c.AddSpell(LearnableMagic(10424)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10430)) { c.AddSpell(LearnableMagic(10430)); effx = true; } 
+                } 
+                if (c.Player.Level >= 140) 
+                { 
+                    if (!c.Spells.ContainsKey(12570)) { c.AddSpell(LearnableMagic(12570)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12550)) { c.AddSpell(LearnableMagic(12550)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12560)) { c.AddSpell(LearnableMagic(12560)); effx = true; }  
+                }  
+            }  
+            #endregion  
+            #region Pirate Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 70)) 
+            { 
+                c.Player.Class = 71; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 71)) 
+            { 
+                c.Player.Class = 72; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 72)) 
+            { 
+                c.Player.Class = 73; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 73)) 
+            { 
+                c.Player.Class = 75; 
+            } 
+
+            #endregion 
+            #region Pirate 
+            if (c.Player.Class >= 70 && c.Player.Class <= 75)  
+            { 
+                if (c.Player.Level >= 1) 
+                { 
+                    if (!c.Spells.ContainsKey(11030)) { c.AddSpell(LearnableMagic(11030)); effx = true; } 
+                    if (!c.Spells.ContainsKey(11050)) { c.AddSpell(LearnableMagic(11050)); effx = true; } 
+                } 
+                if (c.Player.Level >= 15)  
+                {  
+                    if (!c.Spells.ContainsKey(11140)) { c.AddSpell(LearnableMagic(11140)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(11060)) { c.AddSpell(LearnableMagic(11060)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11110)) { c.AddSpell(LearnableMagic(11110)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11130)) { c.AddSpell(LearnableMagic(11130)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11070)) { c.AddSpell(LearnableMagic(11070)); effx = true; }  
+                    if (!c.Spells.ContainsKey(11120)) { c.AddSpell(LearnableMagic(11120)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {  
+                    if (c.Player.Reborn >= 1 && c.Player.FirstRebornClass == 75)  
+                    {  
+                        if (!c.Spells.ContainsKey(11100)) { c.AddSpell(LearnableMagic(11100)); effx = true; }  
+                    } 
+                } 
+                if (c.Player.Level >= 70) 
+                { 
+                    if (c.Player.Class >= 70 && c.Player.FirstRebornClass >= 72 && c.Player.FirstRebornClass <= 75 && c.Player.SecondRebornClass >= 72 && c.Player.SecondRebornClass <= 75) 
+                    { 
+                        if (!c.Spells.ContainsKey(11040)) { c.AddSpell(LearnableMagic(11040)); effx = true; } 
+                    }  
+                }  
+            }  
+            #endregion  
+            #region Water And Fire Promotion 
+            #region Water 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 100)) 
+            { 
+                c.Player.Class = 101; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 132)) 
+            { 
+                c.Player.Class = 133; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 133)) 
+            { 
+                c.Player.Class = 135; 
+            } 
+            #endregion 
+            #region Fire 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 100)) 
+            { 
+                c.Player.Class = 101; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 142)) 
+            { 
+                c.Player.Class = 143; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 143)) 
+            { 
+                c.Player.Class = 145; 
+            } 
+            #endregion 
+            #endregion 
+            #region Taoist 
+            if (c.Player.Class >= 100 && c.Player.Class <= 101)  
+            {  
+                if (!c.Spells.ContainsKey(1000)) { c.AddSpell(LearnableMagic(1000)); effx = true; }  
+                if (!c.Spells.ContainsKey(1005)) { c.AddSpell(LearnableMagic(1005)); effx = true; }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(1195)) { c.AddSpell(LearnableMagic(1195)); effx = true; }  
+                }  
+            }  
+            #region Water 
+            if (c.Player.Class >= 132 && c.Player.Class <= 135)  
+            {  
+                if (!c.Spells.ContainsKey(1000)) { c.AddSpell(LearnableMagic(1000)); effx = true; }  
+                if (!c.Spells.ContainsKey(1005)) { c.AddSpell(LearnableMagic(1005)); effx = true; }  
+                if (!c.Spells.ContainsKey(12390)) { c.AddSpell(LearnableMagic(12390)); c.Send(new MsgTalk("Congratulations! You have learned BlessingTouch Epic Skill For Water.", MsgTalk.System)); effx = true; }  
+                if (!c.Spells.ContainsKey(12370)) { c.AddSpell(LearnableMagic(12370)); c.Send(new MsgTalk("Congratulations! You have learned AuroraLotus Epic Skill For Water.", MsgTalk.System)); effx = true; }  
+                if (c.Player.Class >= 132 && c.Player.FirstRebornClass >= 132 && c.Player.SecondRebornClass >= 132)  
+                {  
+                    if (!c.Spells.ContainsKey(30000)) { c.AddSpell(LearnableMagic(30000)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(10309)) { c.AddSpell(LearnableMagic(10309)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1195)) { c.AddSpell(LearnableMagic(1195)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1055)) { c.AddSpell(LearnableMagic(1055)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1085)) { c.AddSpell(LearnableMagic(1085)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1090)) { c.AddSpell(LearnableMagic(1090)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1095)) { c.AddSpell(LearnableMagic(1095)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1125)) { c.AddSpell(LearnableMagic(1125)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1010)) { c.AddSpell(LearnableMagic(1010)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1050)) { c.AddSpell(LearnableMagic(1050)); effx = true; }  
+                }  
+                if (c.Player.Level >= 70)  
+                {  
+                    if (!c.Spells.ContainsKey(1075)) { c.AddSpell(LearnableMagic(1075)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1100)) { c.AddSpell(LearnableMagic(1100)); effx = true; }  
+                }  
+                if (c.Player.Level >= 80)  
+                {  
+                    if (!c.Spells.ContainsKey(1175)) { c.AddSpell(LearnableMagic(1175)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10309)) { c.AddSpell(LearnableMagic(10309)); effx = true; }  
+                }  
+                if (c.Player.Level >= 94)  
+                {  
+                    if (!c.Spells.ContainsKey(1170)) { c.AddSpell(LearnableMagic(1170)); effx = true; }  
+                }  
+            }  
+            else  
+            {  
+                if (c.Spells.ContainsKey(12390)) { c.RemoveSpell(LearnableMagic(12390)); }  
+                if (c.Spells.ContainsKey(12370)) { c.RemoveSpell(LearnableMagic(12370)); }  
+            }  
+            #endregion  
+            #region Fire 
+            if (c.Player.Class >= 142 && c.Player.Class <= 145)  
+            {  
+                if (!c.Spells.ContainsKey(1125)) { c.AddSpell(LearnableMagic(1125)); effx = true; }  
+                if (!c.Spells.ContainsKey(1010)) { c.AddSpell(LearnableMagic(1010)); effx = true; }  
+                if (!c.Spells.ContainsKey(5001)) { c.AddSpell(LearnableMagic(5001)); effx = true; }  
+                if (!c.Spells.ContainsKey(1005)) { c.AddSpell(LearnableMagic(1005)); effx = true; }  
+                if (!c.Spells.ContainsKey(10310)) { c.AddSpell(LearnableMagic(10310)); effx = true; }  
+                if (!c.Spells.ContainsKey(12380)) { c.AddSpell(LearnableMagic(12380)); c.Send(new MsgTalk("Congratulations! You have learned FlameLotus Epic Skill For Fire.", MsgTalk.System)); effx = true; }  
+                if (!c.Spells.ContainsKey(12400)) { c.AddSpell(LearnableMagic(12400)); c.Send(new MsgTalk("Congratulations! You have learned BreakingTouch Epic Skill For Fire.", MsgTalk.System)); effx = true; }  
+                if (c.Player.Class >= 142 && c.Player.FirstRebornClass >= 142 && c.Player.SecondRebornClass >= 142)  
+                {  
+                    if (!c.Spells.ContainsKey(10310)) { c.AddSpell(LearnableMagic(10310)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40)  
+                {  
+                    if (!c.Spells.ContainsKey(1195)) { c.AddSpell(LearnableMagic(1195)); effx = true; }  
+                    if (!c.Spells.ContainsKey(10309)) { c.AddSpell(LearnableMagic(10309)); effx = true; }  
+                }  
+                if (c.Player.Level >= 52)  
+                {  
+                    if (!c.Spells.ContainsKey(1150)) { c.AddSpell(LearnableMagic(1150)); effx = true; }  
+                }  
+                if (c.Player.Level >= 55)  
+                {  
+                    if (!c.Spells.ContainsKey(1180)) { c.AddSpell(LearnableMagic(1180)); effx = true; }  
+                }  
+                if (c.Player.Level >= 48)  
+                {  
+                    if (!c.Spells.ContainsKey(1120)) { c.AddSpell(LearnableMagic(1120)); effx = true; }  
+                    if (!c.Spells.ContainsKey(1165)) { c.AddSpell(LearnableMagic(1165)); effx = true; }  
+                }  
+                if (c.Player.Level >= 43)  
+                {  
+                    if (!c.Spells.ContainsKey(1160)) { c.AddSpell(LearnableMagic(1160)); effx = true; }  
+                }  
+                if (c.Player.Level >= 81)  
+                {  
+                    if (c.Spells.ContainsKey(1001) && c.Spells[1001] != null && c.Spells[1001].Level == 3)  
+                    {  
+                        if (!c.Spells.ContainsKey(1002)) { c.AddSpell(LearnableMagic(1002)); effx = true; }  
+                    }  
+                }  
+            }  
+            else  
+            {  
+                if (c.Spells.ContainsKey(12380)) { c.RemoveSpell(LearnableMagic(12380)); }  
+                if (c.Spells.ContainsKey(12400)) { c.RemoveSpell(LearnableMagic(12400)); }  
+            }  
+            #endregion  
+            #endregion  
+            #region Dragon-Warrior Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 80)) 
+            { 
+                c.Player.Class = 81; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 81)) 
+            { 
+                c.Player.Class = 82; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 82)) 
+            { 
+                c.Player.Class = 83; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 83)) 
+            { 
+                c.Player.Class = 85; 
+            } 
+
+            #endregion 
+            #region Dragon-Warrior  
+            if (c.Player.Class >= 80 && c.Player.Class <= 85)  
+            {  
+                if (c.Player.Class >= 80 && c.Player.FirstRebornClass >= 85 && c.Player.SecondRebornClass >= 85)  
+                {  
+                    if (!c.Spells.ContainsKey(12300)) { c.AddSpell(LearnableMagic(12300)); effx = true; }  
+                }  
+                if (c.Player.Level >= 3)  
+                {  
+                    if (!c.Spells.ContainsKey(12290)) { c.AddSpell(LearnableMagic(12290)); effx = true; } 
+                } 
+                if (c.Player.Level >= 15) 
+                { 
+                    if (!c.Spells.ContainsKey(12320)) { c.AddSpell(LearnableMagic(12320)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12330)) { c.AddSpell(LearnableMagic(12330)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12340)) { c.AddSpell(LearnableMagic(12340)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12270)) { c.AddSpell(LearnableMagic(12270)); effx = true; }  
+                }  
+                if (c.Player.Level >= 40) 
+                {//  12280   12200  
+                    if (!c.Spells.ContainsKey(12240)) { c.AddSpell(LearnableMagic(12240)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12220)) { c.AddSpell(LearnableMagic(12220)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12210)) { c.AddSpell(LearnableMagic(12210)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12290)) { c.AddSpell(LearnableMagic(12290)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12120)) { c.AddSpell(LearnableMagic(12240)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12130)) { c.AddSpell(LearnableMagic(12220)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12140)) { c.AddSpell(LearnableMagic(12210)); effx = true; } 
+                } 
+                if (c.Player.Level >= 70) 
+                { 
+                    if (!c.Spells.ContainsKey(12160)) { c.AddSpell(LearnableMagic(12160)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12280)) { c.AddSpell(LearnableMagic(12280)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12200)) { c.AddSpell(LearnableMagic(12200)); effx = true; } 
+                } 
+                if (c.Player.Level >= 100) 
+                { 
+                    if (!c.Spells.ContainsKey(12170)) { c.AddSpell(LearnableMagic(12170)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12350)) { c.AddSpell(LearnableMagic(12350)); effx = true; }  
+                
+                }  
+            }  
+            #endregion  
+            #region WindwalkerLord Promotion 
+            if ((c.Player.Level >= 40 && c.Player.Level <= 70) && (c.Player.Class == 160)) 
+            { 
+                c.Player.Class = 161; 
+            } 
+            if ((c.Player.Level >= 70 && c.Player.Level <= 100) && (c.Player.Class == 161)) 
+            { 
+                c.Player.Class = 162; 
+            } 
+            if ((c.Player.Level >= 100 && c.Player.Level <= 110) && (c.Player.Class == 162)) 
+            { 
+                c.Player.Class = 163; 
+            } 
+            if ((c.Player.Level >= 110 && c.Player.Level <= 120) && (c.Player.Class == 163)) 
+            { 
+                c.Player.Class = 165; 
+            } 
+
+            #endregion 
+            #region WindwalkerLord 
+            if (c.Player.Class >= 160 && c.Player.Class <= 165) 
+            { 
+                if (c.Player.Level >= 1) 
+                { 
+                    if (!c.Spells.ContainsKey(12980)) { c.AddSpell(LearnableMagic(12980)); effx = true; } 
+                } 
+                if (c.Player.Level >= 3) 
+                { 
+                    if (!c.Spells.ContainsKey(12860)) { c.AddSpell(LearnableMagic(12860)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12870)) { c.AddSpell(LearnableMagic(12870)); effx = true; } 
+                } 
+                if (c.Player.Level >= 15) 
+                { 
+                    if (!c.Spells.ContainsKey(12940)) { c.AddSpell(LearnableMagic(12940)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12950)) { c.AddSpell(LearnableMagic(12950)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12890)) { c.AddSpell(LearnableMagic(12890)); effx = true; } 
+                    if (!c.Spells.ContainsKey(13090)) { c.AddSpell(LearnableMagic(13090)); effx = true; } 
+                } 
+                if (c.Player.Level >= 40) 
+                { 
+                    if (!c.Spells.ContainsKey(12930)) { c.AddSpell(LearnableMagic(12930)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12990)) { c.AddSpell(LearnableMagic(12990)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12850)) { c.AddSpell(LearnableMagic(12850)); effx = true; } 
+                } 
+                if (c.Player.Level >= 70) 
+                { 
+                    if (!c.Spells.ContainsKey(12960)) { c.AddSpell(LearnableMagic(12960)); effx = true; } 
+                    if (!c.Spells.ContainsKey(13000)) { c.AddSpell(LearnableMagic(13000)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12840)) { c.AddSpell(LearnableMagic(12840)); effx = true; } 
+                } 
+                if (c.Player.Level >= 100) 
+                { 
+                    if (!c.Spells.ContainsKey(13030)) { c.AddSpell(LearnableMagic(13030)); effx = true; } 
+                    if (!c.Spells.ContainsKey(13020)) { c.AddSpell(LearnableMagic(13020)); effx = true; } 
+                    if (!c.Spells.ContainsKey(12970)) { c.AddSpell(LearnableMagic(12970)); effx = true; } 
+                } 
+            } 
+            #endregion  
+            if (effx)  
+            {  
+                MsgName str = new MsgName(true);  
+                str.UID = c.Player.UID;  
+                str.TextsCount = 1;  
+                str.Action = MsgName.Mode.Effect;  
+                str.Texts.Add("end_task");  
+                c.SendScreen(str, true);  
+                effx = false;   
+            }  
+        }  
+    }  
+}

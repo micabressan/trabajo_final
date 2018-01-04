@@ -1,0 +1,94 @@
+        private void ReadPackets(CodedInputStream cs)
+        {
+            while (!cs.IsAtEnd)
+            {
+                byte serviceId = cs.ReadRawByte();
+                int messageId = (int) cs.ReadRawVarint32();
+                int pn = (int)(cs.ReadRawByte()) | ((int)(cs.ReadRawByte()) << 8);
+                PacketNumber = pn;
+                ulong unknownValue = cs.ReadRawVarint64();
+                int packetLength = (int) cs.ReadRawVarint32();
+
+                LogMessage(D3Server.LogMessageType.HeaderData, "Packet Header: id - 0x" +
+                            serviceId.ToString("X2") + ", msg - " + messageId + ", pn - " + pn +
+                            ", uv - " + unknownValue + ", len - " + packetLength);
+
+                ServiceDescription description;
+                if(idToExternalService.TryGetValue(serviceId, out description))
+                {
+                    IService service = description.service;
+                    if (service == null)
+                    {
+                        LogError("Error: Unimplemented service: " + description.name + " (id: 0x" + 
+                            serviceId.ToString("X2") + ").");
+                        cs.ReadRawBytes(packetLength);
+                        continue;
+                    }
+
+                    if (serviceId == 0x07)
+                    {
+                        messageId++;
+                    }
+
+                    if (serviceId == 0x12)
+                    {
+                        messageId--;
+                    }
+
+                    MethodDescriptor methodDescriptor = service.DescriptorForType.Methods[messageId-1];
+                    LogMessage(D3Server.LogMessageType.RecievedProtobufName, service.DescriptorForType.Name + " - "
+                        + methodDescriptor.Name);
+                    IMessage message = service.GetRequestPrototype(methodDescriptor);
+                    IBuilder builder = message.WeakCreateBuilderForType();
+                    message = builder.WeakMergeFrom(
+                        CodedInputStream.CreateInstance(cs.ReadRawBytes(packetLength))).WeakBuild();
+
+                    LogMessage(D3Server.LogMessageType.RecievedProtobufValue, message.ToString());
+
+                    try
+                    {
+                        service.CallMethod(methodDescriptor, null, message, (msg => SendServiceMessage(pn, msg)));
+                    }
+                    catch (NotImplementedException)
+                    {
+                        LogError("Error: Unimplemented service method: " + description.name + "." + methodDescriptor.Name + 
+                            " (id: 0x" + serviceId.ToString("X2") + ").");
+                    }
+                }
+            }
+        }
+
+        private object SendServiceMessage(int packetNumber, IMessage msg)
+        {
+            byte[] buffer = new byte[1024];
+            CodedOutputStream output = CodedOutputStream.CreateInstance(buffer);
+
+            output.WriteRawByte(SERVER_RESPONSE);
+            output.WriteRawByte(0); // Verify if always..
+            output.WriteRawByte((byte)(packetNumber & 0xFF));
+            output.WriteRawByte((byte)((packetNumber >> 8) & 0xFF));
+
+            byte[] byteMsg = msg.ToByteArray();
+
+            output.WriteRawVarint32((uint) byteMsg.Length);
+            output.WriteRawBytes(byteMsg);
+            
+            LogMessage(D3Server.LogMessageType.SentHex, "Sending packet: " + buffer.BytesToHexString(1024 - output.SpaceLeft));
+            LogMessage(D3Server.LogMessageType.SentProtobufName, "Sending msg: " + msg.DescriptorForType.Name);
+            LogMessage(D3Server.LogMessageType.SentProtobufValue, "" + msg.ToString());
+
+            if (state != null)
+            {
+                state.Write(buffer, 0, 1024 - output.SpaceLeft);
+                if (sendAdditionalData)
+                {
+                    
+                    buffer = additionalData.HexStringToBytes();
+                    LogInfo("Additional data: " + buffer.BytesToHexString());
+                    state.Write(buffer, 0, buffer.Length);
+                    sendAdditionalData = false;
+                }
+            }
+            
+            return null;
+        }

@@ -1,0 +1,4 @@
+    case machine_notation(string) do
+      {:ok, date} -> date
+      _ -> human_notation(string)
+    end

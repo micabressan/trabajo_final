@@ -1,0 +1,40 @@
+from twython import Twython, TwythonError
+import pandas as pd
+import time
+import datetime
+import keys
+
+def get_user_timeline():  
+  username = get_username()
+  twitter_oauth = Twython(keys.APP_KEY, keys.APP_SECRET, oauth_version=2)
+  ACCESS_TOKEN = twitter_oauth.obtain_access_token()
+  twitter = Twython(keys.APP_KEY, access_token = ACCESS_TOKEN)
+  datestamp = str(datetime.datetime.now().strftime("%Y-%m-%d"))
+  index = 0
+  tweetsdata = {}
+  tweets = twitter.get_user_timeline(screen_name = username, count = 2)
+  mid = tweets[1]['id_str']
+  sid = tweets[0]['id_str']
+  while sid > mid:
+    try: 
+      get_tweets = twitter.get_user_timeline(screen_name = username,  
+                                             count = 200, include_rts = True, max_id = mid)
+      for x in get_tweets:
+        tweetsdata[index] = {}
+        tweetsdata[index]['tweet_date'] = x['created_at']
+        tweetsdata[index]['screen_name'] = x['user']['screen_name']
+        tweetsdata[index]['id_str'] = x['user']['id_str']
+        tweetsdata[index]['tweet'] = x['text']
+        index = index + 1
+      mid = get_tweets[-1]['id']
+      sid = get_tweets[0]['id']
+    except:
+      remainder = (float(twitter.get_lastfunction_header(header = 'x-rate-limit-reset')) - time.time())+1
+      print(" Waiting for:", remainder/60, "minutes")
+      print("Current Time is:", time.strftime("%I:%M:%S"))
+      del twitter
+      time.sleep(remainder)
+      twitter = Twython(keys.APP_KEY, access_token = ACCESS_TOKEN)
+      continue
+  tweetsDF = pd.DataFrame.from_dict(tweetsdata, orient = "index")
+  tweetsDF.to_excel("%s-%s tweets list.xlsx" % (username, datestamp), index = False, encoding = 'utf-8')

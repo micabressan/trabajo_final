@@ -1,0 +1,23 @@
+#Old code
+callback = (res) ->
+	#do stuff
+
+#Works as expected
+FB.api '/', callback
+
+#Now I need callback to take a second arg
+callback = (res, foo) ->
+	#do stuff
+
+#The only way I can make this work looks hacky and redundant
+FB.api '/', (res, foo) -> callback(res, foo)
+
+#This won't work
+FB.api '/', callback(res, foo)
+
+#Nor does this
+FB.api '/', callback foo
+
+# This is how @bloudermilk would do it
+foo = "OHAIFB"
+FB.api "/", (res) -> callback(res, foo)

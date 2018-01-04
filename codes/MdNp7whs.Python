@@ -1,0 +1,4 @@
+def worker():
+	print('yo yo')
+	
+worker()

@@ -1,0 +1,38 @@
+//script {
+"title":"dimingLightSystem",
+"actions":[ {
+"type":"SET_DEVICE_PROPERTY",
+"data": {
+    "controllerId": "lightSystem",
+    "nodeId": "lightSystem_1",
+    "propertyId": "value",
+    "newValue": "<значение>"
+}
+}
+]
+}
+ 
+//rule {
+"status": "ENABLED",
+"conditions":[ {
+"sourceType":[
+    {
+        "HOUSE_VARIABLE":[{
+            "observableValue": "Morning",
+            "comparison":"EQ",
+            "targetValue":"true"
+        }]
+    },
+    {
+        "DEVICE_PROPERTY":[{
+            "observableValue": {
+                "controllerId":"lightDetector",
+                "nodeId":"lightDetector_1",
+                "propertyId":"value"
+            }
+            "comparison":"[LE,GE]",
+            "targetValue":"[70,90]"
+        ]}
+}
+]
+}

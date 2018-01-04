@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <Submit xmlns="http://freeway.freedompay.com/">
+      <request>
+        <merchantReferenceCode>Failed</merchantReferenceCode>
+        <pos>
+          <trackKsn>629949011C</trackKsn>
+          <tracke>jWB4vHSBh/i5sImwg3BiZ5ElbpvsglYGY/0flnbmLT3uOegJdkfORA5GlRHmxhjOSqrEtABvyRRijfpfZIiUzTY0cOp5xlj7pcZEQcrdwb0JKXpi1jB1xUGJn8A6R7tm5few1btpAvt55V+/3coOSPY6GFs69sRSKd4KFTnmd7Nx0ukJb/LGcUbL4uvtX4UN4MOSra9EP/w7gtY9YOXBsgi3algF1pPvSb2zv28LPknBT+RoAr07I6B+3DwgU4pnJqrp0QkURzoFlB8o0cgjL/rzXXsIYlTbi7Iz/zBWiFdJ4ewStM0XqQGl+YLQYy+6YWigb4cXnFyleMHvStIP4Q==</tracke>
+          <encMode>rsa</encMode>
+        </pos>
+        <type>2</type>
+        <operation>create</operation>
+        <ccAuthService run="true"/>
+        <ccCaptureService run="true"/>
+        <storeId>1458685010</storeId>
+        <terminalId>2462155012</terminalId>
+      </request>
+    </Submit>
+  </soap:Body>
+</soap:Envelope>

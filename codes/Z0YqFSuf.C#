@@ -1,0 +1,95 @@
+using System;
+using ShellDLL;
+
+namespace ShellTest
+{
+    public class Calculator : Shell
+    {
+        public double Szam { get; set; }
+
+        public Calculator()
+        {
+            AddCommand(new ExitCommand(this));
+            AddCommand(new PlusCommand(this));
+            AddCommand(new MinusCommand(this));
+        }
+
+        protected override void Init()
+        {
+            base.Init();
+            Szam = 0;
+            Format("{0:F2}", Szam);
+        }
+
+        class ExitCommand : Command
+        {
+            private Calculator shell;
+
+            public ExitCommand( Calculator shell ) : base("exit")
+            {
+                this.shell = shell;
+            }
+
+            public override bool Execute(params string[] args)
+            {
+                if (args.Length != 0)
+                    return false;
+                shell.Exit(0);
+                return true;
+            }
+        }
+
+        class PlusCommand : Command
+        {
+            private Calculator shell;
+
+            public PlusCommand(Calculator shell) : base("+")
+            {
+                this.shell = shell;
+            }
+
+            public override bool Execute(params string[] args)
+            {
+                if (args.Length != 1)
+                    return false;
+                double value;
+                if( !Double.TryParse(args[0], out value) )
+                    return false;
+                shell.Szam += value;
+                shell.Format("{0:F2}", shell.Szam);
+                return true;
+            }
+        }
+
+        class MinusCommand : Command
+        {
+            private Calculator shell;
+
+            public MinusCommand(Calculator shell) : base("-")
+            {
+                this.shell = shell;
+            }
+
+            public override bool Execute(params string[] args)
+            {
+                if (args.Length != 1)
+                    return false;
+                double value;
+                if (!Double.TryParse(args[0], out value))
+                    return false;
+                shell.Szam -= value;
+                shell.Format("{0:F2}", shell.Szam);
+                return true;
+            }
+        }
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Shell sh = new Calculator();
+            sh.ReadEvalPrint();
+        }
+    }
+}

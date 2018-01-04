@@ -1,0 +1,77 @@
+print('Hello world - Python!')
+
+s = "../mnt/.././../src/test"
+
+
+
+def normalize(s):
+    parts = s.split("/")
+    cur = []
+
+    for part in parts:
+        if part == "." or part == "":
+            pass
+        elif part == "..":
+            cur.pop()
+        else:
+            cur.append(part)
+
+    return "/" + "/".join(cur)
+'''
+print(normalize(""))
+print(normalize("/hello/world/."))
+print(normalize("../.././hello/."))
+print(normalize("../hello/./././world/"))
+print(normalize("/hello/world/../"))
+'''
+
+def sum_floats(numbers):
+    return sum(sorted(numbers, key=lambda n: abs(n)))
+
+
+arr = [2**40] + [2**(-20)]*(2**20)
+print("%.2f" % (sum_floats(arr)))
+print("%.2f"% (sum(arr)))
+
+def gen():
+    for i in range(1000):
+        yield 1000 - i
+
+def get(n):
+    return list(sorted(list(gen())[:n]))[n / 2]
+
+class Heap:
+    def __init__(self, min=True):
+        self.min = min
+        self.data = []
+
+    def pop(self):
+        x = self.get()
+        self.data = self.data[1:]
+        return x
+
+    def get(self):
+        return self.data[0]
+
+    def insert(self, x):
+        self.data.append(x)
+        self.data = sorted(self.data, reversed=not self.min)
+
+def gen2():
+    min_heap = MinHeap()
+    max_heap = MaxHeap()
+
+    def rebalance():
+        while min_heap.len() > max_heap.len():
+            max_heap.insert(min_heap.pop_min())
+
+
+    for n in gen():
+        min_heap.insert(n)
+        rebalance()
+        yield max_heap.get_max()
+
+
+print(get(1))
+print(get(2))
+print(get(3))

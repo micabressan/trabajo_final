@@ -1,0 +1,4 @@
+    - name: Check if the host has commands to execute after a reboot
+	  stat:
+       path: "/etc/ansible/roles/updates/host_vars/{{ ansible_hostname }}.yml"
+      register: test

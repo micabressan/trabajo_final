@@ -1,0 +1,23 @@
+class ListList.TasksController extends Batman.Controller
+	emptyTask: null
+	
+	index: ->
+		@set 'emptyTask', new Task
+		
+		Task.load (error, tasks) ->
+			throw error if error
+			if not tasks.length
+				callback = (error) -> throw error if error
+				new Task(title: 'First Task', description: 'The first task', status: 'created').save(callback)
+				new Task(title: 'Second Task', description: 'The second task', status: 'created').save(callback)
+				new Task(title: 'Third Task', description: 'The third task', status: 'created').save(callback)
+				
+		return false
+			
+	create: =>
+		@emptyTask.save (error, record) =>
+			throw error if error
+			
+			@set 'emptyTask', new Task
+				
+		return false

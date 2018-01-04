@@ -1,0 +1,12 @@
+paths = []
+getPaths = (parent) ->
+	fs.readdir(parent, (err, files) ->
+		files.forEach (name) ->
+			path = parent + name
+			fs.stat(path, (err, stats) ->
+				if stats.isDirectory()
+					getPaths(path + '/')
+				else if ~name.indexOf('.coffee')
+					paths.push(path)
+			)
+	)

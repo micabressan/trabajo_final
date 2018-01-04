@@ -1,0 +1,59 @@
+'
+' This script writes the game into a PGN file while moves are played.
+'
+' The script first asks for a output file. The output file is overwritten
+'
+'
+
+Dim fso,outfile,rstr(4)
+
+rstr(0) = "*"
+rstr(1) = "1-0"
+rstr(2) = "0-1"
+rstr(3) = "1/2-1/2"
+
+outfile = InputBox( "Enter the output filename:" , "Output")
+
+if outfile <> "" then
+
+' Open the output files
+'
+  on error resume next
+  Set fso = CreateObject("Scripting.FileSystemObject")
+   WriteGame
+
+  if Err.Number <> 0 then
+     MsgBox "Error reading or writing"
+  end if
+end if
+
+' this event is triggered after each move played.
+sub ENGINE_DoMove( mv )
+   WriteGame
+end sub
+
+' game has ended, just write it
+sub ENGINE_GameEnded( result )
+  WriteGame
+end sub
+
+' writes the current game as pgn
+sub WriteGame
+  on error resume next
+  dim outpgn
+  Set outpgn = fso.CreateTextFile(outfile, True) 
+
+  if Err.Number = 0 then
+    outpgn.WriteLine "[Event """ & Engine.Game.Event & """]" 
+    outpgn.WriteLine "[Site """ & Engine.Game.Site & """]" 
+    outpgn.WriteLine "[Date """ & Engine.Game.Date & """]" 
+    outpgn.WriteLine "[Round """ & Engine.Game.Round & """]" 
+    outpgn.WriteLine "[White """ & Engine.Game.White & """]" 
+    outpgn.WriteLine "[Black """ & Engine.Game.Black & """]" 
+    outpgn.WriteLine "[Result """ & rstr(Engine.Game.Result) & """]" 
+    outpgn.WriteLine ""
+    outpgn.Write Engine.Game.MoveText 
+    outpgn.close
+  end if
+
+end sub

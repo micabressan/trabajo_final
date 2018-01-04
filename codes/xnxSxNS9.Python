@@ -1,0 +1,147 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+vas33:/usr/local/sbin
+
+[TSUPP-342089]
+
+Принимает аргументами:
+        Номер отправителя
+        Номер получателя
+        Текст сообщения
+        Имя ноды
+        ID ноды
+
+Создает конфиги в папке /home/techsupp/ejbsender
+Запускает run файл(Отправляет смс)
+
+Нужен для мониторинга статуса отправки смс в базе mon_msg_sync_on_db на db16
+"""
+
+import time
+import sys                                                                                                                                                                                                                                     
+import os
+import logging
+import logging.config
+import threading
+
+"""
+logging
+"""
+if os.getenv('external_logging') == 'console':
+        logging.basicConfig(level=logging.DEBUG)
+else:
+        logging.config.fileConfig('/usr/local/sbin/logging2.ini')
+
+WRONG_ARGS = -1
+STATUS_COMPLETE = 0
+STATUS_THREAD_TIMEOUT = -2
+QUERY_TIMEOUT = 14
+WORKDIR = "/home/techsupp/ejbsender/"
+
+
+def file_exist(searchfile):
+        try:
+                os.stat(searchfile)
+        except OSError:
+                return False
+        return True
+
+
+def makeini(filename, dest, node, nid):
+        ininame = filename + ".ini"
+        iniplace = WORKDIR + ininame
+        if file_exist(iniplace) is False:
+                with open(iniplace, 'a') as f:
+                        f.write("java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory\n")
+                        f.write("java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces\n")
+                        f.write("java.naming.provider.url=b2b-messaging-ejb-proxy-01x.g01.i-free.ru:1099,b2b-messaging-ejb-proxy-01y.g01.i-free.ru:1099\n")
+                        f.write("sender.send=true\n")
+                        f.write("sender.verbose=true\n")
+                        f.write("sender.timeunit=33\n")
+                        f.write("sender.packsize=50\n")
+                        f.write("sender.speed=5\n")
+                        f.write("sender.csv.file=" + filename + ".csv\n")
+                        f.write("sender.csv.quoted=true\n")
+                        f.write("sender.csv.fields=src_number,text\n")
+                        f.write("sender.type=outbound\n")
+                        f.write("sender.default.dest_number=" + dest + "\n")
+                        f.write("sender.default.dest_node=" + node + "(" + nid + ")\n")
+                        f.write("sender.default.src_node=MSG3_lime.StreamTelecom2_Lime(30057)")
+                        f.close()
+                        logging.info('The file %s was created succesfully', ininame)
+                return True
+        else:
+                logging.info('The file %s exist', ininame)
+                return True
+
+
+def makerun(filename, run):
+        runplace = WORKDIR + run
+        if file_exist(runplace) is False:
+                with open(runplace, 'a') as f:
+                        f.write('#!/bin/bash\n')
+                        f.write('startdir=$(pwd)\n')
+                        f.write('cd /home/techsupp/ejbsender/\n')
+                        f.write('mainclass="ru.befree.upe.ejbsender.EJBSenderRun"\n')
+                        f.write('basepath=$(dirname "$0")\n')
+                        f.write('libdir="$basepath/lib"\n')
+                        f.write("libpath=$(find "+'"$libdir"'+" -follow -type f -name '*.jar' -print0 | tr '\\0' ':' | sed -r 's/:$//')\n")
+                        f.write('config=${1:-$basepath/' + filename + ".ini"'}\n')
+                        f.write('java -cp "$libpath" "$mainclass" "$config"\n')
+                        f.write('cd $startdir\n')                                                                                                                                                                                              
+                        f.close()
+                        os.chmod(runplace, 493)
+                        logging.info('The file %s was created succesfully', run)
+                return True
+        else:
+                logging.info('The file %s exist', run)
+                return True
+
+
+def makecsv(filename, send, txt):
+        csvname = filename + ".csv"
+        csvplace = WORKDIR + csvname
+                             if file_exist(csvplace) is False:
+                with open(csvplace, 'a') as f:
+                        f.write(send + ',' + txt)
+                        f.close()
+                        logging.info('The file %s was created succesfully', csvname)
+        else:
+                logging.info('The file %s exist', csvname)
+                return True
+
+
+def main():
+        if len(sys.argv) < 6:
+                print(WRONG_ARGS)
+                logging.info('Wrong arguments')
+                sys.exit(WRONG_ARGS)
+        else:
+                sendnumber = sys.argv[1]
+                destnumber = sys.argv[2]
+                text = sys.argv[3]
+                nodename = sys.argv[4]
+                nodeid = sys.argv[5]
+                filename = "%s-%s-%s-%s" % (sendnumber, destnumber, text, nodename)
+                runname = "run" + filename
+                makeini(filename, destnumber, nodename, nodeid)
+                makerun(filename, runname)
+                makecsv(filename, sendnumber, text)
+                os.popen(WORKDIR + runname)
+                logging.info('The message %s was sended succesfully', filename)
+                print(STATUS_COMPLETE)
+                sys.exit(STATUS_COMPLETE)
+
+if __name__ == "__main__":
+        """
+        timeout
+        """
+        query_thread = threading.Thread(target=main)
+        query_thread.setDaemon(True)
+        query_thread.start()
+        query_thread.join(QUERY_TIMEOUT)
+        if query_thread.isAlive():
+                logging.warn('Check timeouted after {timeout} seconds'.format(timeout=QUERY_TIMEOUT))
+                print(STATUS_THREAD_TIMEOUT)
+                sys.exit(STATUS_THREAD_TIMEOUT)

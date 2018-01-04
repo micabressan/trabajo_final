@@ -1,0 +1,31 @@
+{
+  "status" : "ok",
+  "result" : {
+    "user" : {
+      "provider_user_id" : null,
+      "instagram_token" : null,
+      "updated_at" : "2018-01-02 15:02:05",
+      "id" : 12,
+      "email" : null,
+      "name" : "",
+      "created_at" : "2018-01-02 15:02:05",
+      "nickname" : null,
+      "gender" : 0,
+      "provider" : "vkontakte",
+      "instagram_login" : null,
+      "authorization_type" : "social"
+    },
+    "token" : {
+      "device_info" : "Totemo\/1.0 (com.kirilldobryakov.Totemo; build:1; iOS 11.2.1) Alamofire\/4.6.0",
+      "id" : 20,
+      "token" : "TCILYJccXQQswcDM",
+      "updated_at" : "2018-01-02 15:07:27",
+      "created_at" : "2018-01-02 15:07:27",
+      "ip" : "37.146.197.232",
+      "user_id" : 12,
+      "is_current" : false
+    },
+    "token_updated" : false,
+    "is_newly_registered" : false
+  }
+}

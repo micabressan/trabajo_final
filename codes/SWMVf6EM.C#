@@ -1,0 +1,125 @@
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication39
+{
+    using System;
+    using System.Collections;
+    using System.Text.RegularExpressions;
+
+    class StringLengthComparer : IComparer<string>
+    {
+        public int Compare(string x, string y)
+        {
+            return y.Length - x.Length;
+        }
+    }
+
+    delegate int CompareStrings(string s1, string s2);
+
+    class NumsEnumerable : IEnumerator
+    {
+        private string sentence;
+        private List<string> sortedWords;
+        public string currentWord;
+        private int index = -1;
+
+        public NumsEnumerable(String s)
+        {
+            sentence = string.Copy(s);
+
+            var words = sentence.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            sortedWords = new List<string>();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (!sortedWords.Contains(words[i]))
+                    sortedWords.Add(words[i]);
+            }
+
+            sortedWords.Sort(new StringLengthComparer());
+        }
+
+        public bool MoveNext()
+        {
+            index++;
+            if (index == sortedWords.Count)
+            {
+                Reset();
+                return false;
+            }
+
+            currentWord = sortedWords[index];
+
+            return true;
+        }
+
+        public void Reset()
+        {
+            index = -1;
+        }
+
+        public object Current
+        {
+            get { return currentWord; }
+        }
+
+    }
+
+    class Nums : IEnumerable
+    {
+        private String str;
+        public Nums(String str)
+        {
+            this.str = str;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return new NumsEnumerable(str);
+        }
+    }
+
+    class lab_05
+    {
+        private static IEnumerable GetNums(String str)
+        {
+            var words = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var sortedWords = new List<string>();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (!sortedWords.Contains(words[i]))
+                    sortedWords.Add(words[i]);
+            }
+
+            sortedWords.Sort(new StringLengthComparer());
+
+            for (int i = 0; i < sortedWords.Count; i++)
+            {
+                yield return sortedWords[i];
+            }
+        }
+
+        static void Main(String[] args)
+        {
+            var str = Console.ReadLine();
+            foreach (var i in GetNums(str))
+            {
+                Console.Write("{0} ", i);
+            }
+
+            Console.WriteLine();
+
+            var nums = new Nums(str);
+            foreach (var i in nums)
+            {
+                Console.Write("{0} ", i);
+            }
+            Console.Read();
+        }
+    }
+}

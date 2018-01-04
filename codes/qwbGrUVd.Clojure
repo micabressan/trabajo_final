@@ -1,0 +1,25 @@
+;;http://www.4clojure.com/problem/41
+;;Write a function which drops every Nth item from a sequence.
+;;(= (__ [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+;;(= (__ [:a :b :c :d :e :f] 2) [:a :c :e])
+;;(= (__ [1 2 3 4 5 6] 4) [1 2 3 5 6])
+;;(= (__ [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+(fn
+  [base-seq remove-nth]
+  (let [g (fn
+            [base-seq remove-nth]
+            (loop [x (- remove-nth 1)
+                  result []]
+              (if (< x (count base-seq))
+                (recur (+ x remove-nth) (conj result x))
+                result)))
+        f (fn
+            [base-seq remove-nth]
+              (keep-indexed 
+                (fn
+                  [index item]
+                  (if (contains? (set remove-nth) index)
+                    nil
+                    item)) 
+                base-seq))]
+    (f base-seq (g base-seq remove-nth))))

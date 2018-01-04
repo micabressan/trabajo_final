@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<statistic>
+    <max_count>10000</max_count>
+    <printed_count>10</printed_count>
+    <available>9990</available>
+	<printed_blanks>
+		<blanks date="2017-10-01" quality="" exam-date="" ppe="">2686913482522:1,2272998127252:0</blanks>
+		<blanks date="2017-10-01" quality="" exam-date="" ppe="">2686913482522:1,2272998127252:0
+
+		// ... Вверху старые бланки без дат и ппэ. Ниже с датой и ппэ
+
+		<blanks date="2017-10-01" quality="" exam-date="2017-12-12" ppe="7">2686913482522:1,2272998127252:0</blanks>
+	</printed_blanks>
+</statistic>
+</root>

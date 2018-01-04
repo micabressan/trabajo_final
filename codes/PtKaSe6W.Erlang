@@ -1,0 +1,19 @@
+bst_insert(Bst, Key) when Bst == {} -> {Key, null, null};
+bst_insert({Root, Left, Right}, Key) when Root > Key ->
+  {Root, bst_insert(Left, Key), Right};
+bst_insert({Root, Left, Right}, Key) when Root < Key ->
+  {Root, Left, bst_insert(Right, Key)};
+bst_insert({Root, Left}, Key) -> {Root, Left, Key};
+bst_insert(Root, Key) -> {Root, Key, null}.
+
+bst_search(Bst, _) when Bst == {} -> false;
+bst_search({Root, _, _}, Key) when Root == Key -> true;
+bst_search({Root, Left, _}, Key) when Root > Key ->
+  bst_search(Left, Key);
+bst_search({Root, _, Right}, Key) when Root < Key ->
+  bst_search(Right, Key);
+bst_search(Root, Key) ->
+  if
+    Root == Key -> true;
+    Root /= Key -> false
+  end.

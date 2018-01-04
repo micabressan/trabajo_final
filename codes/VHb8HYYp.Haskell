@@ -1,0 +1,51 @@
+import Data.List
+import Data.Char
+
+data Error = ParsingError | IncompleteDataError | IncorrectDataError String
+    deriving Show
+
+data Person = Person { firstName :: String, lastName :: String, age :: Int }
+    deriving Show
+
+parsePerson :: String -> Either Error Person
+parsePerson str = case getLines str of
+    Right strs -> parseStruct strs
+    err        -> err
+
+parseStruct :: [String] -> Either Error Person
+parseStruct [str1, str2, str3] = let f1 = readField str1 "firstName"
+                                     f2 = readField str2 "lastName"
+                                     f3 = readField str3 "age"
+                                 in case f1 of
+                                     Right 
+
+stringToMInt :: String -> Maybe Int
+stringToMInt = si 0
+  where
+    si n [] = Just n
+    si n (d:ds) | isDigit d = si (n * 10 + digitToInt d) ds
+                | otherwise = Nothing
+
+findPattern :: Eq a => [a] -> [a] -> Maybe Int
+findPattern str pattern = fp 0 str
+    where
+        fp n [] = Nothing
+        fp n s@(_:ss) | isPrefixOf pattern s = Just n
+                      | otherwise            = fp (n + 1) ss
+
+getLines :: String -> Either Error [String]
+getLines str = if (length lns) < 3
+               then Left IncompleteDataError
+               else Right $ take 3 lns
+    where lns = lines str
+
+readField :: String -> String -> Either Error String
+readField str fieldName = let index = findPattern str delim
+                          in case index of
+                                 Just n -> check (take n str) (drop (n + ldelim) str)
+                                 Nothing -> Left ParsingError
+    where
+      delim = " = "
+      ldelim = length delim
+      check fName fValue | fName == fieldName = Right fValue
+                         | otherwise          = Left ParsingError

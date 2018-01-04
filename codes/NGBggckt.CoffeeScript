@@ -1,0 +1,10 @@
+<ul as-sortable='sortableOptions' ng-model='event.formFields'>
+    <li class='list-unstyled' as-sortable-item ng-repeat='field in event.formFields' style="height: 40px; padding:0;">
+        <div as-sortable-item-handle>
+            <span class='glyphicon glyphicon-move'></span>
+            &nbsp;&nbsp;{{field.name}}
+            <span class='text-warning' ng-if='field.required'>*</span>
+            <button type='button' class='close' ng-click='remove(field)'><span aria-hidden='true'>&times;</span></button>
+        </div>
+    </li>
+</ul>

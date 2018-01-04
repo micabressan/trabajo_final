@@ -1,0 +1,47 @@
+public OnPlayerSpawn(playerid)
+{
+	CommandsServidor(playerid);
+}
+
+CommandsServidor(playerid)
+{
+    new dialogrande[2500];
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}! - {BDBDBD}Envia uma mensagem para sua torcida.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}Y - {BDBDBD}Abre o menu principal.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/coins - {BDBDBD}Abre o menu da loja de coins.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/info - {BDBDBD}Exibe suas informações.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/pm - {BDBDBD}Envia uma mensagem privada para outro jogador.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/reportar(/rpt) - {BDBDBD}Envia uma denúncia aos administradores conectados.\n");
+ 	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/duvida - {BDBDBD}Envia sua dúvida para todos helper´s e administradores conectados.\n");
+  	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/chamar - {BDBDBD}Usado para chamar jogadores com cargos importantes.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/id - {BDBDBD}Usado para descobrir ID de jogadores.\n");
+  	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/admins - {BDBDBD}Exibe todos administradores conectados.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/helpers - {BDBDBD}Exibe todos helpers conectados.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/kill - {BDBDBD}Faz seu personagem se suicidar.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/skin - {BDBDBD}Usado para trocar a skin do seu personagem.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/gps - {BDBDBD}Exibe o sistema de GPS.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/pagar - {BDBDBD}Usado para dar dinheiro a outro jogador.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/minhatorcida - {BDBDBD}Exibe todos jogadores conectados da sua torcida.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/mudarluta - {BDBDBD}Usado para alterar o estilo de luta do seu personagem.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/presos - {BDBDBD}Exibe todos jogadores que estão conectados presos.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/animlist - {BDBDBD}Exibe a lista de animações.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/apostar - {BDBDBD}Envia uma proposta para um duelo apostando a camisa ou bermuda de sua torcida.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/apm - {BDBDBD}Usado para desbloquear o seu PM.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/bpm - {BDBDBD}Usado para bloquear o seu PM.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/toptorcidas - {BDBDBD}Exibe as maiores torcidas do momento.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/ajudaveh - {BDBDBD}Exibe uma lista de comandos para veiculos.\n");
+ 	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/chattorcida - {BDBDBD}Usado para bloquear o chat da sua torcida.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/meuid - {BDBDBD}Para saber o ID do seu personagem.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/djs - {BDBDBD}Exibe a lista de todos DJ´s conectados.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/mudartorcida - {BDBDBD}Exibe uma lista com todas as regioes e torcidas.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/mochila - {BDBDBD}Exibe a mochila do seu personagem.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/pular - {BDBDBD}Faz seu personagem pular,e usado para surfar e desbugar seu personagem.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/ajudaemprego - {BDBDBD}Exibe informaçoes referente a seu emprego.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/minhaconta - {BDBDBD}Exibe uma lista de mudança de nick e mudança de senha da sua conta.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/ajuda - {BDBDBD}Exibe uma lista para qualquer tipo de duvida dos jogadores.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/vips - {BDBDBD}Exibe uma lista de todos jogadores VIP´s conectados.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/bugs - {BDBDBD}Usado para reportar tipos de bugs do servidor.\n");
+	format(dialogrande, sizeof(dialogrande),"%s%s",dialogrande,"{FFFFFF}/dominios - {BDBDBD}Exibe uma lista de informaçoes sobre torcidas dominadas.\n");
+
+	return ShowPlayerDialogEx(playerid,DIALOG_MENSAGEM, DIALOG_STYLE_MSGBOX, "{FE2E2E}Lista de Comandos", dialogrande, "OK", "");
+}

@@ -1,0 +1,23 @@
+.main_header_l {
+    background-color: #ffffff;
+    background-image: url(https://i.imgur.com/3lf5iqq.jpg);
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 200px;
+    border: 0px;
+    border-collapse: collapse;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+    vertical-align: top;
+}
+
+.main_header_r {
+    background-color: #ffffff;
+    background-image: url(https://i.imgur.com/JbyvcaS.jpg);
+    background-repeat: no-repeat;
+    width: 582px;
+    height: 200px;
+    text-align: right;
+    vertical-align: top;
+}

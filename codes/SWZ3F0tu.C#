@@ -1,0 +1,27 @@
+public ActionResult List(string category, int page = 1)
+        {
+            ListViewModel model = new ListViewModel
+            {
+                Fields = new List<SelectListItem>
+                {
+                   new SelectListItem { Text = "Order By Descending", Value = "OrderByDescending" },
+                   new SelectListItem { Text = "Order By Ascending", Value = "OrderByAscending" },
+                },
+                Furnitures = repository.Furnitures
+                .Where(p => category == null || p.Category.Name == category)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList(),
+                InfoPages = new InfoPage
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = category == null ? repository.Furnitures.Count() :
+                    repository.Furnitures.Where(furniture => furniture.Category.Name == category).Count()
+                },
+                CurrentCategory = category,
+               
+            };
+
+            return View(model);
+        }

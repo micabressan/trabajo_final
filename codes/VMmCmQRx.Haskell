@@ -1,0 +1,7 @@
+makeList0 x = case x of
+                0 -> []
+                _ -> 0 : makeList0 (x - 1)
+
+makeList0 = \x -> case x of
+                    0 -> []
+                    _ -> 0 : makeList0 (x - 1)

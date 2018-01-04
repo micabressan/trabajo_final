@@ -1,0 +1,44 @@
+# HG changeset patch
+# User rualex <drobyshev83@gmail.com>
+# Date 1316173059 -14400
+# Node ID 318bcbf10272e3b28c3ebaa29bb041e2653ea57c
+# Parent  e1ca9649895e679d94ff588bdf22af6c7c8fc3aa
+Spell/Paladin: Long Arm of the Law
+
+diff -r e1ca9649895e -r 318bcbf10272 src/server/game/Spells/SpellEffects.cpp
+--- a/src/server/game/Spells/SpellEffects.cpp	Fri Sep 16 14:29:17 2011 +0400
++++ b/src/server/game/Spells/SpellEffects.cpp	Fri Sep 16 15:37:39 2011 +0400
+@@ -5994,15 +5994,27 @@
+         }
+         case SPELLFAMILY_PALADIN:
+         {
++            
+             switch (m_spellInfo->Id)
+             {
+                 case 20271:
+-                    if (m_caster && m_caster->HasAura(89901))
+-                        m_caster->CastSpell(m_caster, 89906, true);
+-                    if (m_caster && m_caster->HasAura(31878))
+-                        m_caster->CastSpell(m_caster, 31930, true);
+-                    if (m_caster && m_caster->HasAura(31876))
+-                        m_caster->CastSpell(m_caster, 57669, true);
++                    if (m_caster)
++                    {
++                        if (m_caster->HasAura(89901))
++                            m_caster->CastSpell(m_caster, 89906, true);
++                        if (m_caster->HasAura(31878))
++                            m_caster->CastSpell(m_caster, 31930, true);
++                        if (m_caster->HasAura(31876))
++                            m_caster->CastSpell(m_caster, 57669, true);
++                        
++                        if (unitTarget)
++                        {
++                            if (m_caster->HasAura(87172) && m_caster->GetExactDist2d(unitTarget) > 15.0f)
++                                m_caster->CastSpell(m_caster, 87173, true);
++                            else if (m_caster->HasAura(87168) && m_caster->GetExactDist2d(unitTarget) > 15.0f && urand(0, 1))
++                                m_caster->CastSpell(m_caster, 87173, true);
++                        }
++                    }
+                     break;
+             }
+             break;

@@ -1,0 +1,7 @@
+struct MyStruct {
+	item1: Thing1, // Implements MyTrait
+	item2: Thing2, // Implements MyTrait
+	item3: Thing3, // Implements MyTrait
+
+	items: Vec<&MyTrait> // I want item1, item2, and item3 to be stored here
+}

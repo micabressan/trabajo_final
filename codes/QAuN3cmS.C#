@@ -1,0 +1,49 @@
+	public void SaveShipPosition()
+	{
+		this.vesselNumberofMoves++;
+		if (this.vesselNumberofMoves > 39)
+		{
+			this.vesselNumberofMoves = 39;
+			this.vesselPositionHistory[0] = this.vesselPositionHistory[1];
+			this.vesselPositionHistory[1] = this.vesselPositionHistory[2];
+			this.vesselPositionHistory[2] = this.vesselPositionHistory[3];
+			this.vesselPositionHistory[3] = this.vesselPositionHistory[4];
+			this.vesselPositionHistory[4] = this.vesselPositionHistory[5];
+			this.vesselPositionHistory[5] = this.vesselPositionHistory[6];
+			this.vesselPositionHistory[6] = this.vesselPositionHistory[7];
+			this.vesselPositionHistory[7] = this.vesselPositionHistory[8];
+			this.vesselPositionHistory[8] = this.vesselPositionHistory[9];
+			this.vesselPositionHistory[9] = this.vesselPositionHistory[10];
+			this.vesselPositionHistory[10] = this.vesselPositionHistory[11];
+			this.vesselPositionHistory[11] = this.vesselPositionHistory[12];
+			this.vesselPositionHistory[12] = this.vesselPositionHistory[13];
+			this.vesselPositionHistory[13] = this.vesselPositionHistory[14];
+			this.vesselPositionHistory[14] = this.vesselPositionHistory[15];
+			this.vesselPositionHistory[15] = this.vesselPositionHistory[16];
+			this.vesselPositionHistory[16] = this.vesselPositionHistory[17];
+			this.vesselPositionHistory[17] = this.vesselPositionHistory[18];
+			this.vesselPositionHistory[18] = this.vesselPositionHistory[19];
+			this.vesselPositionHistory[19] = this.vesselPositionHistory[20];
+			this.vesselPositionHistory[20] = this.vesselPositionHistory[21];
+			this.vesselPositionHistory[21] = this.vesselPositionHistory[22];
+			this.vesselPositionHistory[22] = this.vesselPositionHistory[23];
+			this.vesselPositionHistory[23] = this.vesselPositionHistory[24];
+			this.vesselPositionHistory[24] = this.vesselPositionHistory[25];
+			this.vesselPositionHistory[25] = this.vesselPositionHistory[26];
+			this.vesselPositionHistory[26] = this.vesselPositionHistory[27];
+			this.vesselPositionHistory[27] = this.vesselPositionHistory[28];
+			this.vesselPositionHistory[28] = this.vesselPositionHistory[29];
+			this.vesselPositionHistory[29] = this.vesselPositionHistory[30];
+			this.vesselPositionHistory[30] = this.vesselPositionHistory[31];
+			this.vesselPositionHistory[31] = this.vesselPositionHistory[32];
+			this.vesselPositionHistory[32] = this.vesselPositionHistory[33];
+			this.vesselPositionHistory[33] = this.vesselPositionHistory[34];
+			this.vesselPositionHistory[34] = this.vesselPositionHistory[35];
+			this.vesselPositionHistory[35] = this.vesselPositionHistory[36];
+			this.vesselPositionHistory[36] = this.vesselPositionHistory[37];
+			this.vesselPositionHistory[37] = this.vesselPositionHistory[38];
+			this.vesselPositionHistory[38] = this.vesselPositionHistory[39];
+		}
+		this.vesselPositionHistory[this.vesselNumberofMoves].x = base.transform.position.x;
+		this.vesselPositionHistory[this.vesselNumberofMoves].y = base.transform.position.z;
+	}

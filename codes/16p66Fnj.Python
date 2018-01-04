@@ -1,0 +1,111 @@
+client
+-----
+import socket
+import os
+import struct
+import sys
+
+def receive(connection, bytes_requested):
+        data = b''
+        while len(data) != bytes_requested:
+            data += connection.recv(bytes_requested - len(data))
+        return data
+
+if __name__ == "__main__":
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    conn.connect(('localhost', 9977))
+    print("\t-->Initializing connection with a WOOF")
+    conn.sendall(b"WOOF")
+    
+    print("\t-->Sending dummy client time and client salts (!L10s)")
+    conn.sendall(struct.pack('!L10s', 1, b'client'))
+    print("\t***Waiting for response")
+    response = receive(conn, struct.calcsize('19s'))
+    print("\t<--Got: %s"%repr(response))
+    
+    print("\t***Waiting for response")
+    serverData = receive(conn, struct.calcsize('!L10s'))
+    print("\t<--servertData is %d bytes (expected %d)"%(len(serverData),struct.calcsize('!L10s')))
+
+    inp = input("Type QUIT here to fuck everything up: ")
+    if inp == "QUIT":
+        sys.exit(0)
+    
+    dummyProof = os.urandom(19)
+    print("\t2->Sending 19 random bytes (%s) to server"%(repr(dummyProof)))
+    conn.sendall(struct.pack('!19s', dummyProof))
+    
+    print("\t***Waiting for response...")
+    response = receive(conn, struct.calcsize('19s')).rstrip(b'\x00')
+    print("\t<--Got response: %s" % repr(response))
+    
+    print("I'm done.")
+
+server
+-----
+import socket
+import socketserver
+import threading
+import os
+import time
+import struct
+import datetime
+
+class serverHandler(socketserver.BaseRequestHandler):
+    def sendToSocket(self, line):
+        pass
+    def receive(self, connection, bytes_requested):
+        data = b''
+        while len(data) != bytes_requested:
+            data += connection.recv(bytes_requested - len(data))
+        return data
+    def handle(self):
+        currentThread = threading.current_thread()
+        data = self.request.recv(1024)
+        if data == b'WOOF': # Connection initiated
+            print("%s Connection initiated"%currentThread)
+            clientData = self.receive(self.request, struct.calcsize('!L10s'))
+            print("%s clientData is %d bytes (expected %d)"%(currentThread,len(clientData),struct.calcsize('!L10s')))
+            print("%s sending back a laika:OK"%currentThread)
+            self.request.sendall(struct.pack('19s', b"laika:OK"))
+            
+            print("%s sending dummy server time and server salts"%currentThread)
+            self.request.sendall(struct.pack('!L10s', 1, b'server'))
+            
+            print("%s Waiting for client to send proof"%currentThread)
+            dummyProof = self.receive(self.request, struct.calcsize('19s'))
+            print("%s client sent %s as their proof"%(currentThread, repr(dummyProof)))
+            print("%s sending back a laika:OK"%currentThread)
+            self.request.sendall(struct.pack('19s', b"laika:OK"))
+            
+            print("%s Connection finished"%currentThread)
+            return
+        print("%s Ending handler"%currentThread)
+
+class threadedServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    allow_reuse_address = True
+
+class weblog_server(object):
+    def __init__(self):
+        self.server = None
+        self.serverThread = None
+    def spawnServer(self):
+        self.server = threadedServer(('localhost', 9977), serverHandler)
+        ip, port = self.server.server_address
+        print("Starting weblog listening server on %s port %s" % (repr(ip), repr(port)))
+    def startServer(self):
+        self.spawnServer()
+        self.server_thread = threading.Thread(target=self.server.serve_forever)
+        self.server_thread.daemon = True
+        self.server_thread.start()
+        print("Weblog listening server started")
+    def stopServer(self):
+        self.server.shutdown()
+        print("Weblog listening server shut down")
+
+if __name__ == "__main__":
+    w = weblog_server()
+    w.startServer()
+    inp = input("Type QUIT to stop server: ")
+    if inp == "QUIT":
+        w.stopServer()

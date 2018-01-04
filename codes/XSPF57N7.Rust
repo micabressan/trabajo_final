@@ -1,0 +1,32 @@
+pub trait Lolable {
+    fn do_I_lol(&self) -> String;
+}
+
+struct Person {
+    abc: String,
+}
+
+impl Person {
+    fn new(abc: &str) -> Person {
+        Person {
+            abc: String::from(abc),
+        } 
+    }
+}
+
+impl Lolable for Person {
+
+    fn do_I_lol(&self) -> String {
+        let mut i_do = String::new();
+        i_do = format!("{} do lol!", self.abc);
+        i_do
+    }
+}
+
+fn main() {
+    take_lolz(Person::new("Börje"));
+}
+
+fn take_lolz<T: Lolable>(lol: T) {
+    println!("{}", lol.do_I_lol());
+}

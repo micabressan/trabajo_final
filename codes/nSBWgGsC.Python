@@ -1,0 +1,87 @@
+/home/ricardo/virtualenv/kivyinstall/bin/python3.5 /home/ricardo/PycharmProjects/virtualenv/kivy/tela.py
+[INFO   ] [Logger      ] Record log in /home/ricardo/.kivy/logs/kivy_18-01-02_33.txt
+[INFO   ] [Kivy        ] v1.10.0
+[INFO   ] [Python      ] v3.5.2 (default, Nov 23 2017, 16:37:01) 
+[GCC 5.4.0 20160609]
+[INFO   ] [Factory     ] 194 symbols loaded
+[INFO   ] [Image       ] Providers: img_tex, img_dds, img_sdl2, img_gif (img_pil, img_ffpyplayer ignored)
+[INFO   ] [OSC         ] using <multiprocessing> for socket
+[INFO   ] [Window      ] Provider: sdl2(['window_egl_rpi'] ignored)
+[INFO   ] [GL          ] Using the "OpenGL" graphics system
+[INFO   ] [GL          ] Backend used <gl>
+[INFO   ] [GL          ] OpenGL version <b'2.1 Mesa 17.0.7'>
+[INFO   ] [GL          ] OpenGL vendor <b'Intel Open Source Technology Center'>
+[INFO   ] [GL          ] OpenGL renderer <b'Mesa DRI Intel(R) G41 '>
+[INFO   ] [GL          ] OpenGL parsed version: 2, 1
+[INFO   ] [GL          ] Shading version <b'1.20'>
+[INFO   ] [GL          ] Texture max size <8192>
+[INFO   ] [GL          ] Texture max units <16>
+[INFO   ] [Window      ] auto add sdl2 input provider
+[INFO   ] [Window      ] virtual keyboard not allowed, single mode, not docked
+[INFO   ] [Text        ] Provider: sdl2
+xclip version 0.12
+Copyright (C) 2001-2008 Kim Saunders et al.
+Distributed under the terms of the GNU GPL
+[INFO   ] [Clipboard   ] Provider: xclip(['clipboard_dbusklipper', 'clipboard_gtk3'] ignored)
+[INFO   ] [CutBuffer   ] cut buffer support enabled
+[INFO   ] [Base        ] Start application main loop
+[INFO   ] [GL          ] NPOT texture support is available
+[INFO   ] [Base        ] Leaving application in progress...
+ Traceback (most recent call last):
+   File "kivy/properties.pyx", line 836, in kivy.properties.ObservableDict.__getattr__ (/tmp/pip-build-v9m1px6_/kivy/kivy/properties.c:12017)
+ KeyError: 'user'
+ 
+ During handling of the above exception, another exception occurred:
+ 
+ Traceback (most recent call last):
+   File "/home/ricardo/PycharmProjects/virtualenv/kivy/tela.py", line 35, in <module>
+     TesteApp().run()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/app.py", line 828, in run
+     runTouchApp()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/base.py", line 504, in runTouchApp
+     EventLoop.window.mainloop()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/core/window/window_sdl2.py", line 663, in mainloop
+     self._mainloop()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/core/window/window_sdl2.py", line 405, in _mainloop
+     EventLoop.idle()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/base.py", line 342, in idle
+     self.dispatch_input()
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/base.py", line 327, in dispatch_input
+     post_dispatch_input(*pop(0))
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/base.py", line 233, in post_dispatch_input
+     listener.dispatch('on_motion', etype, me)
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/core/window/__init__.py", line 1188, in on_motion
+     self.dispatch('on_touch_down', me)
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/core/window/__init__.py", line 1204, in on_touch_down
+     if w.dispatch('on_touch_down', touch):
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/screenmanager.py", line 1189, in on_touch_down
+     return super(ScreenManager, self).on_touch_down(touch)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/widget.py", line 457, in on_touch_down
+     if child.dispatch('on_touch_down', touch):
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/relativelayout.py", line 288, in on_touch_down
+     ret = super(RelativeLayout, self).on_touch_down(touch)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/widget.py", line 457, in on_touch_down
+     if child.dispatch('on_touch_down', touch):
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/widget.py", line 457, in on_touch_down
+     if child.dispatch('on_touch_down', touch):
+   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7726)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/uix/behaviors/button.py", line 151, in on_touch_down
+     self.dispatch('on_press')
+   File "kivy/_event.pyx", line 714, in kivy._event.EventDispatcher.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:7681)
+   File "kivy/_event.pyx", line 1225, in kivy._event.EventObservers.dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:13524)
+   File "kivy/_event.pyx", line 1109, in kivy._event.EventObservers._dispatch (/tmp/pip-build-v9m1px6_/kivy/kivy/_event.c:12356)
+   File "/home/ricardo/virtualenv/kivyinstall/lib/python3.5/site-packages/kivy/lang/builder.py", line 64, in custom_callback
+     exec(__kvlang__.co_value, idmap)
+   File "/home/ricardo/PycharmProjects/virtualenv/kivy/teste.kv", line 29, in <module>
+     on_press: app.root.switch_to_segundaTela()
+   File "/home/ricardo/PycharmProjects/virtualenv/kivy/tela.py", line 21, in switch_to_segundaTela
+     user = app.root.ids.user.text
+   File "kivy/properties.pyx", line 839, in kivy.properties.ObservableDict.__getattr__ (/tmp/pip-build-v9m1px6_/kivy/kivy/properties.c:12123)
+ AttributeError: 'super' object has no attribute '__getattr__'
+
+Process finished with exit code 1

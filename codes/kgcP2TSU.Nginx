@@ -1,0 +1,220 @@
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    ssl_certificate      ironhide.pem;
+    ssl_certificate_key  ironhide.key;
+
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+	
+	###########
+	#UPSTREAMS#
+	###########
+	upstream plex-upstream			{ server 192.168.2.243:32400; }
+	upstream plexpy-upstream		{ server 192.168.2.243:8181; }
+	upstream sonarr-upstream		{ server 192.168.2.243:8989; }
+	upstream radarr-upstream		{ server 192.168.2.243:7878; }
+	upstream ombi-upstream			{ server 192.168.2.243:5000; }
+	upstream sabnzbd-upstream		{ server 192.168.2.243:8085; }
+	
+    server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  localhost ironhide.media www.ironhide.media;
+
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            index  index.php index.html index.htm;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+ 
+        #pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+            root           html;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+         #deny access to .htaccess files, if Apache's document root
+         #concurs with nginx's one
+        
+        location ~ /\.ht {
+            deny  all;
+        }
+		
+		location /sabnzbd {
+			proxy_pass http://sabnzbd-upstream/sabnzbd;
+			client_max_body_size 10m;
+			client_body_buffer_size 128k;
+
+			#Timeout if the real server is dead
+			proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
+
+			# Advanced Proxy Config
+			send_timeout 5m;
+			proxy_read_timeout 240;
+			proxy_send_timeout 240;
+			proxy_connect_timeout 240;
+
+			# Basic Proxy Config
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header X-Forwarded-Proto https;
+			proxy_redirect  http://  $scheme://;
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			proxy_cache_bypass $cookie_session;
+			proxy_no_cache $cookie_session;
+			proxy_buffers 32 4k;
+
+        }
+		
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  plex.ironhide.media;
+        location /plex {
+            root   html;
+			proxy_pass http://plex-upstream;
+			include proxy.conf;
+		}
+
+        if ($http_referer ~* /plex/) {
+				rewrite ^/web/(.*) /plex/web/$1? redirect;
+		}  
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  plexpy.ironhide.media;
+        location / {
+            root   html;
+			proxy_pass http://plexpy-upstream;
+			include proxy.conf;
+		}
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  sonarr.ironhide.media;
+        location / {
+            root   html;
+			proxy_pass http://sonarr-upstream;
+			include proxy.conf;
+
+        }
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  radarr.ironhide.media;
+        location / {
+            root   html;
+			proxy_pass http://radarr-upstream;
+			include proxy.conf;
+
+        }
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  ombi.ironhide.media;
+        location /ombi {
+            root   html;
+			proxy_pass http://ombi-upstream;
+			include proxy.conf:
+			
+		}
+    }
+	
+	server {
+        listen       80;
+		listen		443 ssl http2;
+        server_name  sabnzbd.ironhide.media;
+        location / {
+            root   html;
+			proxy_pass http://sabnzbd-upstream;
+			client_max_body_size 10m;
+			client_body_buffer_size 128k;
+
+			#Timeout if the real server is dead
+			proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
+
+			# Advanced Proxy Config
+			send_timeout 5m;
+			proxy_read_timeout 240;
+			proxy_send_timeout 240;
+			proxy_connect_timeout 240;
+
+			# Basic Proxy Config
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header X-Forwarded-Proto https;
+			proxy_redirect  http://  $scheme://;
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			proxy_cache_bypass $cookie_session;
+			proxy_no_cache $cookie_session;
+			proxy_buffers 32 4k;
+
+        }
+    }
+
+}

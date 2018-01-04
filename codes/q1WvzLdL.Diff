@@ -1,0 +1,26 @@
+Spell/Paladin: Inquisition (fix Duration)
+
+diff -r aaae93771646 -r 309c073286cd src/server/game/Spells/Auras/SpellAuraEffects.cpp
+--- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp	Sat Sep 17 09:57:12 2011 +0400
++++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp	Sat Sep 17 09:59:42 2011 +0400
+@@ -5898,19 +5898,8 @@
+ 
+     if (GetSpellProto()->Id == 84963) //Inquisition
+     {
+-        switch (GetBase()->GetUnitOwner()->GetPower(POWER_HOLY_POWER))
+-        {
+-            case 0: // 1HP
+-                GetBase()->SetDuration(4000);
+-                break;
+-            case 1: // 2HP
+-                GetBase()->SetDuration(8000);
+-                break;
+-            case 2: // 3HP
+-                GetBase()->SetDuration(12000);
+-                break;
+-        }
+-    target->SetPower(POWER_HOLY_POWER, 0);
++        GetBase()->SetDuration(GetBase()->GetDuration() * (GetBase()->GetUnitOwner()->GetPower(POWER_HOLY_POWER) + 1));
++        target->SetPower(POWER_HOLY_POWER, 0);
+     }
+ }

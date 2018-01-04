@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1program
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            float  a, b, c;
+            float x;
+            Console.WriteLine("Wprowadz liczby");
+            a = Convert.ToInt32(Console.ReadLine());
+            b = Convert.ToInt32(Console.ReadLine());
+            c = Convert.ToInt32(Console.ReadLine());
+            if (a == 0)
+            { 
+                if (b == 0)
+                {
+                    if(c == 0)
+                    {
+                        Console.WriteLine("Nieskonczenie wiele rozwiazan");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Brak rozwiazan");
+                    }
+                }
+                else
+                {
+                    x = (-c / b);
+                    Console.WriteLine("x="+x);
+                    
+                }
+                Console.ReadLine();
+            }
+            else
+            {
+                float delta = b * b - 4 * a * c;
+                if (delta > 0)
+                {
+                    double x1, x2;
+                    x1 = -b + Math.Sqrt(delta) / 2 * a;
+                    x2 = -b - Math.Sqrt(delta) / 2 * a;
+                    Console.WriteLine("x1=" + x1 + " x2=" + x2);
+                }
+                if(delta == 0)
+                {
+                    Console.WriteLine("x=" + -b/2*a);
+                }
+
+                if(delta<0)
+                {
+                    Console.WriteLine("brak rozwiazan");
+                }
+                Console.ReadLine();
+            }
+        }
+    }
+}

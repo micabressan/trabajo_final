@@ -1,0 +1,149 @@
+module Main where
+import Control.Monad.State
+
+data Tree a = Leaf | Node (Tree a) a (Tree a)
+	deriving Show
+
+fromList :: [a] -> Tree a
+fromList [] = Leaf
+fromList nodes = let (left_nodes, x : right_nodes) = splitAt (length nodes `div` 2) nodes
+	in Nide (fromList left_nodes) x (fromList right_nodes)
+
+-- T(a) = 1 + a * T^2(a)
+-- T'(a) = T^2(a) + 2 * a * T(a) * T'(a)
+-- T'(a) * (1 - 2 * a * T(a)) = T^2(a)
+-- T'(a) = T^2(a) / (1 - 2 * a * T(a))
+-- T'(a) = T^2(a) / L(2 * a * T(a))
+
+data Direction = L | R
+
+data TreeZip a = TreeZip { val :: Maybe a, ltree :: Tree a, rtree :: Tree a, parents :: [(Direction, Tree a, a)] }
+
+zipFromTree :: Tree a -> TreeZip a
+zipFromTree Leaf = TreeZip { val :: Nothing, ltree :: Leaf, rtree :: Leaf, parents :: [] }
+zipFromTree (Node l x r) = TreeZip { val :: Just x, ltree :: l, rtree :: r, parents :: [] }
+
+treeAtTip :: TreeZip a -> Tree a
+treeAtTip tz@TreeZip {val = Nothing} = Leaf
+--treeAtTip (TreeZip (Just v) l r p) = Leaf
+treeAtTip tz@TreeZip {val = Just v} = Node (ltree tz) v (rtree tz)
+
+--добавить в cabal mtl, нужна state
+goLeft :: TreeZip a -> TreeZip a
+goLeft tz@(TreeZip {val = Nothing }) = tx
+goLeft tz@(TreeZip {val = Just v}) = (zipFromTree (ltree tz)) {parents = (L, rtree tz, v) : parents tz}
+
+goRight :: TreeZip a -> TreeZip a
+goRight tz@(TreeZip {val = Nothing }) = tx
+goRight tz@(TreeZip {val = Just v}) = (zipFromTree (rtree tz)) {parents = (L, ltree tz, v) : parents tz}
+
+goUp :: TreeZip a -> TreeZip a
+goUp tz@(TreeZip {parents = [] })  = tx
+goUp tz@(TreeZip {parents = (L, rtree, v) : grandparents }) =
+	TreeZip { val = Just v, ltree = ltree, rtree = treeAtTip tz, parents = grandprents}
+
+intractive :: Show a => Tree a -> IO ()
+interactive t = evalStateT go (zipFromTree t)
+  where
+		go :: SHow a => StateT (TreeZip a) IO ()
+		go = do
+			x <- liftIO $ getLine
+			case x of
+				"q" -> pure
+				"l" -> perform goLeft >> go
+				"r" -> perform goRight >> go
+				"u" -> perform goUp >> go
+				_ -> liftIO (putStrLn "Unknown command") >> go
+		perform :: Show a
+				=> (TreeZip a -> TreeZip a)
+				-> StateT (TreeZip a) IO ()
+		perform f = do
+			modify f
+			v <- val <$> get
+			liftIO (putStr "Current value: ")
+			liftIO (print v)
+
+------линзы
+
+data Person = Person { name :: String,  adress :: Adress}
+	deriving Show
+data Adress = Adress {street :: String, building :: Building}
+	deriving Show
+data Building = Building {number :: Int, litera :: Char}
+	deriving Show
+
+person :: Person
+person = Person 
+	{ name = "Name",
+		address = Address 
+		{ street = "Street", building = Building {number = 2, litera 'c'}}}
+
+setNumber :: Person -> Int -> Person
+setNumber p n = p {adress = (address p) {(building (address p)) {number = n}}}
+
+-- data Lens s a
+-- view ::  Lens s a -> s -> a --линза, путь, найди
+-- set :: Lens s a -> a -> s -> s -- сходи, поменяй
+-- compose :: Lens t a -> Lens s t -> Lens s a  -- если структура в структуре
+
+-- lAddress :: Lens Person Adress
+-- lBuilding :: Lens Adress Building
+--lNumber :: Lens Building Int
+
+setNumper' :: Person -> Int -> Person
+setNumper' p n = set (lNumber `compose` lBuilding `compose` lAdress) n p
+
+{-
+data Lens s a = Lens {view :: s -> a, set :: a -> s -> s}
+
+compose :: Lens t a -> Lens s t -> Lens s a
+compose lhs rhs = Lens {view = view lhs . view rhs, set = \v s -> set rhs ((set lhs v) (view rhs s)) s}
+
+lAddress :: Lens Person Address
+lAddress = Lens {view = adress, set = \v s -> s {adress = v}}
+
+lBuilding :: Lens Address Building
+lBuilding = Lens {view = building, set = \v s -> s {building = v}}
+
+lNumber :: Lens Building Int
+lNumber = Lens {view = number, set = \v s -> s {number = v}}
+
+over :: Lens s a -> (a -> a) -> s -> s
+over l f s = set l (f (view l s)) s
+-}
+{-
+data Lens s a = Lens 
+	{ view :: s -> a. set :: a -> s -> s, over :: (a -> a) -> s -> s, overMaybe :: (a -> Maybe a) -> s -> Maybe s,
+		overIO :: (a -> IO a) -> s -> IO s, overF :: Functor f => (a -> f a) -> s -> f s }
+-}
+--надо полключить {-# LANGUAGE RankNTypes #-} и еще Identity и еще Applicate
+type Lens s a = forall f. Functor f => (a -> f a) -> (s -> f s)
+
+over :: Kens s a -> (a -> a) -> s -> s
+over l f s = runIdentity $ l (\x -> Identity (f x)) s
+
+set :: Lens s a -> a -> s -> s
+set l x s = over l (const x) s
+
+compose :: Lens t a -> Lens s t -> Lens s a
+compose lhs rhs = rhs . lhs
+
+--data Const v a= Const v
+--getConst :: Const v a -> v
+-- instanse Functor (Const v) where
+--	fmap f (Const v) = Const v
+view :: Lens s a -> s -> a
+view l s = getConst ( l Const s)
+
+lAddress :: Lens Person Address
+lAddress f s = (\v -> s {adress = v}) <$> (f (address s))
+
+lBuilding :: Lens Address Building
+lBuilding =  (\v -> s {building = v}) <$> (f (building s))
+
+lNumber :: Lens Building Int
+lNumber =  (\v -> s {number = v}) <$> (f (number s))
+
+main :: IO ()
+main = do
+	putStrLn “hello world”

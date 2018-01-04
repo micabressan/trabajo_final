@@ -1,0 +1,163 @@
+#![feature(conservative_impl_trait)]
+use std::io::{stdin,BufRead};
+use std::collections::hash_map::{HashMap,Entry};
+
+#[derive(Clone,Debug,PartialEq,Eq)]
+struct Node {
+    pub name: String,
+    pub weight: u32,
+    // Per spec:
+    // sum_{c in children} weight[c]
+    // + if (not leaf(c)) recursive_weight[c]
+    pub recursive_weight: Option<u32>,
+    pub parent: Option<usize>,
+    pub children: Vec<usize>
+}
+
+impl Node {
+    pub fn new(name: String, weight: u32) -> Self {
+        Node { name: name, weight: weight,
+               recursive_weight: None,
+               parent: None, children: Vec::new() }
+    }
+}
+
+#[derive(Clone,Debug,PartialEq,Eq,Default)]
+struct Forest {
+    fast_lookup: HashMap<String, usize>,
+    nodes: Vec<Node>
+}
+
+impl Forest {
+    pub fn new() -> Self {
+        Default::default()
+    }
+
+    pub fn insert(&mut self, name: String, weight: u32) {
+        let node = Node::new(name.clone(), weight);
+        let node_idx = self.nodes.len();
+        self.nodes.push(node);
+        self.fast_lookup.insert(name, node_idx);
+    }
+
+    pub fn set_children(&mut self, node: &String, children: &[String]) {
+        let parent_idx = self.fast_lookup[node];
+        for child in children {
+            let child_idx = self.fast_lookup[child];
+            self.nodes[child_idx].parent = Some(parent_idx);
+            self.nodes[parent_idx].children.push(child_idx);
+        }
+    }
+
+    pub fn root(&self) -> String {
+        self.nodes.iter().filter_map(
+            |x| if x.parent.is_some() { None }
+                else { Some(x.name.clone()) }
+        ).next().unwrap()
+    }
+
+    fn recursive_weight_calc(&mut self, node: usize) {
+        let mut rec_weight = self.nodes[node].weight;
+        for child_idx in self.nodes[node].children.clone() {
+            if self.nodes[child_idx].recursive_weight.is_none() {
+                self.recursive_weight_calc(child_idx);
+            }
+            rec_weight += self.nodes[child_idx].recursive_weight.unwrap();
+        }
+        self.nodes[node].recursive_weight = Some(rec_weight);
+    }
+
+    pub fn fill_weights(&mut self, root: &String) {
+        let root_idx = self.fast_lookup[root];
+        self.recursive_weight_calc(root_idx);
+    }
+
+    fn recursive_solve(&self, node: usize,
+                       parent_canonical: Option<u32>) -> Option<u32> {
+        let mut distinct_weights = HashMap::<u32, Option<usize>>::new();
+        let mut canonical_weight: Option<u32> = None;
+        for child in self.nodes[node].children.clone() {
+            let weight = self.nodes[child].recursive_weight.expect("Weights are filled");
+            let mut entry = distinct_weights.entry(weight);
+            match entry {
+                Entry::Occupied(mut o) => if o.get().is_some() {
+                    o.insert(None);
+                    canonical_weight = Some(weight);
+                },
+                Entry::Vacant(mut v) => { v.insert(Some(child)); },
+            }
+        }
+        distinct_weights.retain(|_, v| v.is_some());
+
+        let results: HashMap<u32, u32>
+            = distinct_weights.iter().filter_map(
+                |(k, s_v)| self.recursive_solve(s_v.unwrap(), canonical_weight)
+                    .map(|x| (*k, x)))
+            .collect();
+        if results.len() == 1 {
+            Some(*results.values().next().unwrap())
+        }
+        else if results.is_empty() {
+            if distinct_weights.len() == 2 {
+                panic!("Ambiguity in the binary tree case");
+            }
+            else {
+                parent_canonical.map(
+                    |mut big_w| {
+                        for i in self.nodes[node].children.clone() {
+                            big_w -= self.nodes[i].recursive_weight.unwrap();
+                        }
+                        big_w
+                    })
+            }
+        }
+        else {
+            panic!("We didn't forsee this case");
+        }
+    }
+
+    pub fn solve(&self, root: &String) -> u32 {
+        let root_idx = self.fast_lookup[root];
+        self.recursive_solve(root_idx, None).unwrap()
+    }
+}
+
+
+fn main() {
+    let stdin = stdin();
+    let stdin = stdin.lock();
+    let mut tree = Forest::new();
+    let mut child_map = HashMap::<String, Vec<String>>::new();
+    for line in stdin.lines() {
+        let line = line.expect("Error reading stdin");
+        let mut words = line.split_whitespace();
+        let name = words.next().expect("Missing name").to_owned();
+        let weight_str = words.next().expect("Missing weight");
+        let weight: u32 = weight_str[1..weight_str.len()-1].parse()
+            .expect("Non-integer weight");
+
+        if let Some(_) = words.next() {
+            let mut child_vec = Vec::new();
+            for child in words {
+                let mut child = child.to_owned();
+                if child.ends_with(',') {
+                    child.pop();
+                }
+                child_vec.push(child);
+            }
+            child_map.insert(name.clone(), child_vec);
+        }
+
+        tree.insert(name, weight);
+    }
+
+    for (parent, children) in &child_map {
+        tree.set_children(parent, children);
+    }
+
+    let root = tree.root();
+    println!("root: {}", root);
+    tree.fill_weights(&root);
+    let new_weight = tree.solve(&root);
+    println!("new weight: {}", new_weight);
+}

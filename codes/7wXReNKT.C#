@@ -1,0 +1,42 @@
+int WorldPTR;
+int AmmoPTR;
+int ClipPTR;
+int BlipPTR;
+
+int WorldPTR_SOCIALCLUB = 0x23D1C48;
+int AmmoPTR_SOCIALCLUB = 0x1FE6F50;  //need
+int ClipPTR_SOCIALCLUB = 0xE88E74;   //need
+int BlipPTR_SOCIALCLUB = 0x1F9E750;
+int WorldPTR_STEAM = 0x23D6330;
+int AmmoPTR_STEAM = 0xE89425;        //need
+int ClipPTR_STEAM = 0xE893E0;        //need
+int BlipPTR_STEAM = 0x1FC8850;
+
+public void GAME_set_Unlimited_Ammo(bool? enabled)
+{
+    // Ammo.
+    long pointer = GetPointerAddress(BaseAddress + AmmoPTR);
+    // Magazine.
+    long pointer2 = GetPointerAddress(BaseAddress + ClipPTR);
+
+    if (enabled == true)
+    {
+                //int[] OFFSETS_Spread = new int[] { 0x8, 0x10C8, 0x20, 0x70 };                   //
+                //int[] OFFSETS_Recoil = new int[] { 0x8, 0x10C8, 0x20, 0x2A4 };                  //
+                //int[] OFFSETS_Fast_Shoot = new int[] { 0x8, 0x10C8, 0x20, 0x134 };              //
+                //int[] OFFSETS_BULLET_DMG = new int[] { 0x8, 0x10C8, 0x20, 0xB0 };               //
+                //int[] OFFSETS_Reload_Multiplier = new int[] { 0x8, 0x10C8, 0x20, 0x12C };       //
+                //int[] OFFSETS_Reload_Vehicle = new int[] { 0x8, 0x10C8, 0x20, 0x128 };          //
+                //int[] OFFSETS_Max_Ammo = new int[] { 0x8, 0x10C8, 0x20, 0x60, 0x28 };           //
+                //int[] OFFSETS_Ammo_Type = new int[] { 0x8, 0x10C8, 0x20, 0x60, 0x54 };          //
+                //int[] OFFSETS_current_Ammo = new int[] { 0x8, 0x10C8, 0x20, 0x60, 0x8, 0x0, 0x18 };     //
+
+        WriteBytes(pointer, new byte[] { 0x90, 0x90, 0x90, 0xE8 });
+        WriteBytes(pointer2, new byte[] { 0x90, 0x90, 0x90, 0x3B, 0xC8, 0x0F });
+    }
+    else
+    {
+        WriteBytes(pointer, new byte[] { 0x41, 0x2B, 0xD1, 0xE8 });
+        WriteBytes(pointer2, new byte[] { 0x41, 0x2B, 0xC9, 0x3B, 0xC8, 0x0F });
+    }
+}

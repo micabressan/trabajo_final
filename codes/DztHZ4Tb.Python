@@ -1,0 +1,6 @@
+N = int(input())
+k = int(input())
+n = (N + 4 * (k - 1)) % 30
+if n == 0:
+    n = 30
+print(n)

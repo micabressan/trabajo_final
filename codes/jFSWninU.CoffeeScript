@@ -1,0 +1,7 @@
+# apanek@thinkpad ~/Projects/instant-resource % cat test.coffee
+a = -> console.log 'foo!'
+
+class Test
+	a: a()
+# apanek@thinkpad ~/Projects/instant-resource % coffee test
+# foo!

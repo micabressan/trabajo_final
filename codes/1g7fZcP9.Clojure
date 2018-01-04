@@ -1,0 +1,48 @@
+(defn file-extension [f] ("Dude the cow didn't implemented me yet"))
+
+(defn pipe
+  ([node]
+   (let [flow (:flow node)]
+     (when (= flow "command")
+       ((println "pipel")
+        (:command node))
+       ((println "pipen " flow)
+        (pipe (:childs node)))))))
+
+(defn pipel [f]
+  {:flow "command", :command f})
+
+(defn pipen [flow pipes]
+  {:flow flow, :childs pipes})
+
+(defn yml-check [file] ())
+
+(defn yml-test [file] ())
+
+(defn gerrit
+  "Transform gerrit stages into pipe tree"
+  [stages]
+  (pipen :par
+         (map
+          (fn [stage] (pipen :seq
+                            (map
+                             pipel
+                             (:commands stage))))
+          stages)))
+
+(defn gerrit-stage [extension commands]
+  "Building stage object"
+  {:predicate (fn [f] (= (file-extension f) extension)),
+   :commands commands})
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (pipe
+   (pipen :par
+          [(gerrit [(gerrit-stage ".yml" [yml-check yml-test])
+                    (gerrit-stage ".py" [identity])])
+           (pipen :seq
+                  (pipen :par
+                         [(pipel (fn [] (println "Effectively parallel but sequenced with gerrit")))
+                          (pipel (fn [] (println "Effectively parallel but sequenced with gerrit")))]))])))

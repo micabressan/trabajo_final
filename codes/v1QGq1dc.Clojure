@@ -1,0 +1,78 @@
+(ns neurons.core)
+
+(defprotocol NEURON
+  (addInputRef [n i] [n i v])
+  (getOutputRef [n])
+  (update [n])
+  (triggerOutput [n]))
+
+(deftype Neuron [x v tmp out]
+  NEURON
+  (addInputRef 
+    [n _x] (addInputRef n _x (atom 1.0)))
+  (addInputRef 
+    [n _x _v] (reset! x (cons _x @x)) (reset! v (cons _v @v)))
+  (getOutputRef [n] out) 
+  (update [n] 
+    (let [logsig
+          (fn [x] (/ 1 (+ 1 (Math/exp (- x)))))]
+      (reset! tmp 
+              (logsig
+                (reduce + (map #(* (deref %1) (deref %2)) @x @v))))))
+  (triggerOutput [n] (reset! out @tmp))
+  )
+
+(defn make-neuron []
+  (Neuron. (atom []) (atom []) (atom 0) (atom 0)))
+
+
+
+
+; ------- usage illustration -------
+
+; first neuron
+(def input1 (atom 0))
+(def input2 (atom 1))
+(def input3 (atom 3))
+
+(def n1 (make-neuron))
+(addInputRef n1 input1)
+(addInputRef n1 input2)
+(addInputRef n1 input3)
+
+; second neuron
+(def input4 (atom 0))
+(def input5 (atom 1))
+(def input6 (atom 3))
+
+(def n2 (make-neuron))
+(addInputRef n2 input4)
+(addInputRef n2 input5)
+(addInputRef n2 input6)
+
+; interconnection between first and second neuron
+(addInputRef n2 (getOutputRef n1) (atom -10))
+(addInputRef n1 (getOutputRef n2) (atom +10))
+
+; third neuron
+(def n3 (make-neuron))
+(addInputRef n3 (getOutputRef n1))
+(addInputRef n3 (getOutputRef n2))
+
+
+; add all neurons to computation vector
+(def neurons (vector n1 n2 n3))
+
+; simulation loop
+(defn simstart [iterations]
+  (loop [n iterations]
+    (when (> n 0)
+      (do 
+        (dorun (map #(update %) neurons))
+        (dorun (map #(triggerOutput %) neurons))
+        ;(prn (deref (getOutputRef n3)))
+        (recur (dec n))))))
+
+; start computation
+;(simstart 20)
+(time (simstart 100000))

@@ -1,0 +1,4 @@
+data Entity a where
+  Origin :: (Id, [a]) -> Entity a
+  WithPosition :: (Position, a) -> Entity a
+  WithVelocity :: (Velocity, WithPosition) -> Entity a

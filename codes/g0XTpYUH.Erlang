@@ -1,0 +1,60 @@
+-module(tree).
+-export([insert/2, generate_random_tree/2, list_to_tree/1, tree_to_list_pre/1, tree_to_list_in/1, tree_to_list_post/1, search/2, search_ex/2]).
+
+-import(rand, [uniform/1]).
+
+insert(nil, Value) -> {Value, nil, nil};
+insert({Node_Value, Left, Right}, Value) when Value < Node_Value ->
+  {Node_Value, insert(Left, Value), Right};
+insert({Node_Value, Left, Right}, Value) ->
+  {Node_Value, Left, insert(Right, Value)}.
+
+generate_random_tree(Tree, 0, _) -> Tree;
+generate_random_tree(Tree, N, M) ->
+  generate_random_tree(insert(Tree, rand:uniform(M)), N-1, M).
+
+generate_random_tree(N, M) -> generate_random_tree(nil, N, M).
+
+list_to_tree([], Tree) -> Tree;
+list_to_tree([H|T], Tree) ->
+  list_to_tree(T, insert(Tree, H)).
+
+list_to_tree(L) -> list_to_tree(L, nil).
+
+tree_to_list_pre(nil, L) -> L;
+tree_to_list_pre({Value, nil, nil}, L) ->
+  L ++ [Value];
+tree_to_list_pre({Value, Left, Right}, L) ->
+  [Value] ++ tree_to_list_pre(Left, L) ++ tree_to_list_pre(Right, L).
+
+tree_to_list_pre(Tree) -> tree_to_list_pre(Tree, []).
+
+tree_to_list_in(nil, L) -> L;
+tree_to_list_in({Value, nil, nil}, L) ->
+  L ++ [Value];
+tree_to_list_in({Value, Left, Right}, L) ->
+  tree_to_list_in(Left, L) ++ [Value] ++ tree_to_list_in(Right, L).
+
+tree_to_list_in(Tree) -> tree_to_list_in(Tree, []).
+
+tree_to_list_post(nil, L) -> L;
+tree_to_list_post({Value, nil, nil}, L) ->
+  L ++ [Value];
+tree_to_list_post({Value, Left, Right}, L) ->
+  tree_to_list_post(Left, L) ++ tree_to_list_post(Right, L) ++ [Value].
+
+tree_to_list_post(Tree) -> tree_to_list_post(Tree, []).
+
+search(nil, _) -> false;
+search({Node_Value, Left, _}, Value) when Value < Node_Value ->
+  search(Left, Value);
+search({Node_Value, _, Right}, Value) when Value > Node_Value ->
+  search(Right, Value);
+search(_, _) -> true.
+
+search_ex(nil, _) -> throw("Not found");
+search_ex({Node_Value, Left, _}, Value) when Value < Node_Value ->
+  search_ex(Left, Value);
+search_ex({Node_Value, _, Right}, Value) when Value > Node_Value ->
+  search_ex(Right, Value);
+search_ex(_, _) -> throw("Found!").

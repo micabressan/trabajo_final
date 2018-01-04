@@ -1,0 +1,6 @@
+alku = int(input("anna alku "))
+for i in range(12):
+    if alku + i <= 12:
+        print(alku + i)
+    else:
+        print(alku + i - 12)

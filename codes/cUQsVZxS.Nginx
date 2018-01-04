@@ -1,0 +1,26 @@
+
+server {
+    listen 80;
+    server_name localhost;
+
+    location /media/ {
+        alias /home/www/reactTest/static;
+    }
+    location /static/ {
+        alias /home/www/reactTest/static;
+    }
+    location / {
+        uwsgi_pass unix:///home/www/reactTest/uwsgi_django.sock;
+        include uwsgi_params;
+    }
+}
+
+server {
+    listen 8080;
+    server_name localhost;
+
+    location / {
+        uwsgi_pass unix:///home/www/reactTest/uwsgi_ws.sock;
+        include uwsgi_params;
+    }
+}

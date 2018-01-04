@@ -1,0 +1,631 @@
+.DashboardLayout {
+    background: #484848;
+}
+.SiteHeader {
+    background: #000000;
+    color: #fff;
+    height: 5rem;
+}
+.DashboardHeader {
+    background: #212121;
+    padding: 2.5rem 0;
+    position: relative;
+    margin-right: calc(-1 * (100vw - 81.25em) / 2);
+    padding-right: calc((100vw - 81.25em) / 2);
+}
+html,
+body {
+    color: #ffffff;
+    font-family: hurme_no2-webfont, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 100%;
+    line-height: 1.625;
+}
+.SiteNav-menuItemTitle {
+    color: #ffffff;
+    display: inline-block;
+    margin-left: 0.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 80%;
+}
+.UIFloatedCardBackdrop {
+    background: #333;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+.UIFloatedCardBackdrop-bottom {
+    background: #212121;
+    bottom: 0;
+    height: 50%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.CreateSetPage-container {
+    background: #212121;
+}
+.site,
+.page {
+    background: #212121;
+}
+.CreateSetHeader {
+    background: #333;
+    overflow: visible;
+    padding: 1.5rem 0 2rem;
+    position: relative;
+}
+.CreateSetHeader-sticky {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #333;
+    height: 4rem;
+    transform: translateZ(0);
+}
+.UIFloatedCard--white {
+    background: #444;
+    box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.24);
+}
+.TermContent-inner {
+    background-color: #333;
+    cursor: move;
+    padding: 0.75rem 0.75rem 1.5rem 4.625rem;
+    position: relative;
+}
+.UILinkBox {
+    background-color: #222;
+    position: relative;
+    transition: all 120ms cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+.DashboardLayout-sidebar {
+    background: #222;
+    display: table-cell;
+    position: relative;
+    box-shadow: 0 0.5rem 1.25rem 0 rgba(0, 0, 0, 0.28);
+    width: 17rem;
+    z-index: 200;
+}
+.UIMenuItem .UILink:hover .UIMenuItem-inner {
+    background: #023596;
+}
+.SiteNav-menuItem--active .UIMenuItem-inner {
+    background: #282bff;
+}
+.SiteHeader-searchInner {
+    border-right: 2px solid #ffffff;
+    padding-right: 2rem;
+}
+.SetPreview.is-draft .SetPreview-cardHeaderTitle {
+    color: #949494;
+}
+.UITextarea-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #ffffff;
+    cursor: text;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    outline: none;
+    overflow: hidden;
+    padding-bottom: 0.375rem;
+    resize: vertical;
+    text-align: inherit;
+    white-space: pre-wrap;
+    width: 100%;
+    word-break: break-word;
+}
+.CreateSetHeader-permissionsLink {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.285714285714286;
+}
+.UIModal.is-white .UIModal-box {
+    background: #222;
+}
+.UIModal-box {
+    -webkit-animation: fadeOutFlyOutModal 300ms ease;
+    -moz-animation: fadeOutFlyOutModal 300ms ease;
+    -ms-animation: fadeOutFlyOutModal 300ms ease;
+    animation: fadeOutFlyOutModal 300ms ease;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    color: #ffffff;
+    left: 50%;
+    margin-bottom: 2.8125rem;
+    margin-top: 2.8125rem;
+    max-width: 100%;
+    outline: none;
+    position: relative;
+    transform: translateX(-50%);
+    box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.24);
+    width: 37.5rem;
+}
+.UIBanner--plain {
+    background-color: #111;
+    padding: 2rem;
+}
+.SetPage-menu {
+    background: #333;
+}
+.SetPage-termsWrapper,
+.SetPage-diagramWrapper {
+    background: #222;
+    margin-top: 2.1875rem;
+}
+.has-adz .SetPage-headerWrapper {
+    background: #333;
+    display: -webkit-flex;
+    display: flex;
+    min-height: 14.375rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1.25rem;
+}
+.SetPage-headerContainer {
+    background: #333;
+}
+.SetPageHeader {
+    background: #222;
+    padding-bottom: 1.25rem;
+    padding-top: 2.5rem;
+    position: relative;
+}
+.SetPageModeButton {
+    background: #222;
+    border-bottom: 0.3125rem solid #000000;
+    color: #ffffff;
+    display: inline-block;
+    float: left;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.24);
+    transition: all 120ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.UIDropdown-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    font: inherit;
+    margin: 0;
+    outline: none;
+    padding: 0.625rem 0 0.625rem 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.285714285714286;
+    transition: all 120ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    width: calc(100% + 100px);
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+.SetPageTerm-definitionText {
+    color: #ffffff;
+    display: block;
+    word-wrap: break-word;
+}
+.SetPageTerm {
+    background: #333;
+    min-height: 4.125rem;
+}
+.SetPageTerm-wordText {
+    color: #ffffff;
+    word-wrap: break-word;
+}
+.UISwitch-label {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: #333;
+    border: 0.125rem solid #000000;
+    color: #ffffff;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0.625rem 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.285714285714286;
+    transition: all 120ms cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+@media screen and (max-width: 79.9375em) index.ranTm.n.css:14 .SetPage.has-adz .SetPage-modesBottomBackground {
+    background: rgb(51, 51, 51);
+}
+.SetPage-modesBottomBackground {
+    background: #333333;
+    bottom: 0;
+    height: 4.6875rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+}
+.UIDropdown {
+    background: #333;
+    border: 0.125rem solid #000000;
+    color: #000000;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0;
+    padding-right: 2.5rem;
+    position: relative;
+    vertical-align: middle;
+    width: auto;
+}
+.AssistantCheckpointView {
+    background: #222;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.ModeLayout {
+    background-color: #111;
+    top: 5rem !important;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-height: 100%;
+    transition: max-height 0.2s ease-in;
+}
+@media screen and (min-width: 48.0625em)
+.AssistantCheckpointView-buckets {
+    background: #000000;
+}
+.AssistantCheckpointView {
+    background: #222;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.AssistantCheckpointBucketedTermButton.is-disabled .AssistantCheckpointBucketedTermButton-bucketName {
+    color: #000000;
+}
+.AssistantCheckpointBucketedTermButton {
+    background: #444;
+    border-bottom: 0.3125rem solid #666;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    padding: 1.25rem;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.08);
+    transition: all 120ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.AssistantScrollableTermViewLayout-bottomBlur {
+    background: -webkit-linear-gradient(rgba(240,240,240,0),#000000);
+    background: -moz-linear-gradient(rgba(240,240,240,0),#f0f0f0);
+    background: -ms-linear-gradient(rgba(240,240,240,0),#f0f0f0);
+    background: linear-gradient(rgba(240,240,240,0),#000000);
+    bottom: 0;
+    height: 2rem;
+    position: absolute;
+    width: 100%;
+    z-index: 200;
+}
+.AssistantScrollableViewLayout-bottomBlur {
+    bottom: 0;
+    background: -webkit-linear-gradient(rgba(255,255,255,0),#222);
+    background: -moz-linear-gradient(rgba(255,255,255,0),#fff);
+    background: -ms-linear-gradient(rgba(255,255,255,0),#fff);
+    background: linear-gradient(rgba(255,255,255,0),#222);
+}
+.AssistantScrollableViewLayout-topBlur {
+    background: -webkit-linear-gradient(#000,rgba(255,255,255,0));
+    background: -moz-linear-gradient(#fff,rgba(255,255,255,0));
+    background: -ms-linear-gradient(#fff,rgba(255,255,255,0));
+    background: linear-gradient(#000,rgba(255,255,255,0));
+    top: 0;
+}
+.AssistantScrollableViewLayout-topBlur {
+    background: -webkit-linear-gradient(#222,rgba(255,255,255,0));
+    background: -moz-linear-gradient(#fff,rgba(255,255,255,0));
+    background: -ms-linear-gradient(#fff,rgba(255,255,255,0));
+    background: linear-gradient(#222,rgba(255,255,255,0));
+    top: 0;
+}
+.AssistantScrollableViewLayout-bottomBlur {
+    bottom: 0;
+    background: -webkit-linear-gradient(rgba(255,255,255,0),#222);
+    background: -moz-linear-gradient(rgba(255,255,255,0),#fff);
+    background: -ms-linear-gradient(rgba(255,255,255,0),#fff);
+    background: linear-gradient(rgba(255,255,255,0),#222);
+}
+.ModeControls {
+    background: #222;
+    box-shadow: 0.3125rem 0 1.25rem 0 rgba(0,0,0,0.28);
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.AssistantViewController {
+    background: #222;
+    margin: 2.5rem;
+    max-height: 38rem;
+    overflow: hidden;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-weight: 400;
+    font-size: 1.875rem;
+    line-height: 1.266666666666667;
+}
+.UIToggle-option {
+    border-left: 0.125rem solid #000000;
+    display: inline-block;
+    position: relative;
+}
+.UIToggle-optionInput:checked:not(:disabled) ~ .UIToggle-optionLabel {
+    background-color: #ffffff;
+    color: #455358;
+}
+.UIToggle-optionLabel {
+    background-color: #333;
+    color: #3ccfcf;
+    display: inline-block;
+    padding: 0.625rem 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.285714285714286;
+    transition: all 120ms cubic-bezier(0.47,0,0.745,0.715);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.setting .box {
+    background: #111;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+    border-radius: 0;
+    box-shadow: none;
+    clear: none;
+    margin: 0 16px 0 25%;
+    min-height: 100px;
+    overflow: hidden;
+    padding: 16px;
+}
+.setting h2 {
+    color: #fff;
+    font: 400 21px/24px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    padding: 4px 8px;
+}
+.setting p {
+    color: #fff;
+    font: 13px/1.5 hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    padding: 4px 8px;
+}
+.Divider-label {
+    background: #111;
+    color: #fff;
+    display: inline-block;
+    padding: 0 8px;
+    -webkit-font-smoothing: antialiased;
+}
+.profile-photo-upload .the-label {
+    background: #222;
+    border-radius: 4px;
+    display: block;
+    padding: 12px 8px;
+    text-align: center;
+}
+.settings-list .app .data, .apps-list .app .data {
+    color: #fff;
+    font: 14px/21px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+.settings-list .app .label, .apps-list .app .label {
+    color: #fff;
+    display: block;
+    font: 12px/16px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.top-nav {
+    background: #000;
+    border-bottom: 0.0625rem solid #000000;
+    text-align: center;
+}
+.top-nav .pages li.is-active a {
+    border-bottom: 0.3125rem solid #222;
+}
+.top-nav .pages li a {
+    border-bottom: 0.3125rem solid #404040;
+    color: #5a6c72;
+    display: block;
+    font: 0.9375rem hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    padding: 0.875rem 1.25rem 0.625rem 1.25rem;
+}
+.HelpCenter-articleListItem a {
+    color: #fff;
+    display: block;
+    margin: 10px 24px 15px 24px;
+}
+.HelpCenterHeader {
+    background: rgba(32, 32, 32, 1);
+    border-bottom: 1px solid #000;
+}
+.main h1 {
+    border: 0 none;
+    color: #fff;
+    font: 600 28px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    margin: 0;
+    padding: 24px 24px 4px 32px;
+}
+section.main {
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+}
+.AboutContainer {
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+}
+.AboutTitleSection {
+    border-bottom: 0.0625rem solid #000000;
+    padding: 3.75rem 6.25rem;
+    text-align: center;
+}
+a.PostPreview--blog-title {
+    border-bottom: 1px solid #000000;
+    display: block;
+    font: 600 32px/1.5 hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    padding: 20px 30px 20px 30px;
+    -webkit-font-smoothing: antialiased;
+}
+.BlogNav-nav {
+    background: #333;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    display: block;
+    padding: 10px;
+}
+a.PostPreview--blog-title {
+    border-bottom: 1px solid #000000;
+    display: block;
+    font: 600 32px/1.5 hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    padding: 20px 30px 20px 30px;
+    -webkit-font-smoothing: antialiased;
+}
+.BlogFeedItem {
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+    border: 1px solid #dadee0;
+    box-shadow: none;
+    margin-bottom: 24px;
+}
+.BlogNav-nav {
+    background: #333;
+    border: 1px solid #dadee0;
+    border-radius: 4px;
+    display: block;
+    padding: 10px;
+}
+.BlogNav-nav li a {
+    color: #ffffff;
+    display: inline-block;
+    line-height: 36px;
+    padding: 0 10px;
+    width: 100%;
+}
+.BlogNav-nav li.is-active {
+    background: #222;
+}
+.AboutJobsPage-section--white {
+    background: #333;
+}
+.AboutJobsPageBackdrop {
+    background: #222;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+.AboutJobsPageBackdrop-bottom {
+    background: #222;
+    bottom: 0;
+    height: 50%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.AboutJobsBenefitCard {
+    background-color: #333;
+    padding: 1.5rem;
+    position: relative;
+    text-align: left;
+    box-shadow: 0 0.3125rem 1rem 0 rgba(0,0,0,0.08);
+}
+.MobilePage {
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+    font: 400 12px/14px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    position: relative;
+}
+.MobilePage {
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+    font: 400 12px/14px hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+    position: relative;
+}
+body.white .site, body.white .page {
+    background: #222;
+}
+.SpellModeLayout-view:not(:empty).SpellModeLayout-view--withBackground {
+    background-color: #222;
+    padding: 2.5rem;
+}
+.MatchModeQuestionScatterTile {
+    background-color: #222;
+    border: 0.125rem solid #000000;
+    cursor: move;
+    font-weight: normal !important;
+    max-width: 15.625rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: absolute;
+    transition: transform 500ms ease-in-out,background-color 120ms cubic-bezier(0.47,0,0.745,0.715),border-color 120ms cubic-bezier(0.47,0,0.745,0.715),opacity 500ms cubic-bezier(0.47,0,0.745,0.715);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.625;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    will-change: transform;
+    z-index: 100;
+}

@@ -1,0 +1,12 @@
+File "C:\Users\AlexA\Desktop\YVD10\deckbuilder.kv", line 125, in <module>
+     on_press: root.populate()
+   File "C:\Users\AlexA\Desktop\YVD10\deckbuilder.py", line 63, in populate
+     newcard = CardWidget(**conn.row_factory)
+   File "C:\Users\AlexA\AppData\Local\Programs\Python\lib\site-packages\kivy\uix\behaviors\button.py", line 121, in __init__
+     super(ButtonBehavior, self).__init__(**kwargs)
+   File "C:\Users\AlexA\AppData\Local\Programs\Python\lib\site-packages\kivy\uix\image.py", line 234, in __init__
+     super(Image, self).__init__(**kwargs)
+   File "C:\Users\AlexA\AppData\Local\Programs\Python\lib\site-packages\kivy\uix\widget.py", line 337, in __init__
+     super(Widget, self).__init__(**kwargs)
+   File "kivy\_event.pyx", line 254, in kivy._event.EventDispatcher.__init__ (kivy\_event.c:5332)
+ TypeError: object.__init__() takes no parameters

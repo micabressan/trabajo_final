@@ -1,0 +1,29 @@
+-module(simple_tcp_sup).
+
+-behaviour(supervisor).
+
+-export([start_link/0,
+         start_child/1
+        ]). 
+
+-export([init/1]).
+
+-define(SERVER, ?MODULE).
+
+start_link() ->
+    supervisor:start_link({local, ?SERVER}, ?MODULE, []).
+
+start_child({socket, Socket}) ->
+    io:fwrite("Spawning child with socket...~n"),
+    supervisor:start_child(?SERVER, [{socket, Socket}]);
+
+start_child({port, Port}) ->
+    io:fwrite("Spawning child with port...~n"),
+    supervisor:start_child(?SERVER, [{port, Port}]).
+
+init([]) ->
+    Element = {simple_tcp, {simple_tcp, start_link, []},
+               temporary, brutal_kill, worker, [simple_tcp]},
+    Children = [Element],
+    RestartStrategy = {simple_one_for_one, 0, 1}, 
+    {ok, {RestartStrategy, Children}}.

@@ -1,0 +1,359 @@
+#![recursion_limit="128"]
+
+#[macro_use] extern crate lazy_static;
+#[macro_use] extern crate error_chain;
+extern crate byteorder;
+
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::net::{TcpStream, ToSocketAddrs, IpAddr};
+use std::io::{Write, Read};
+use byteorder::{WriteBytesExt, BigEndian};
+use self::errors::*;
+
+// A thread safe counter that is used for the username:password of Socks 5 authentication.
+// Tor uses this as a stream isolation token. Each new TorClient instance increments this
+// token to ensure that its stream is isolated from previous instantiations. Eventually
+// wrap around will inhibit this, but after 2^32 or 2^64 instantiations most likely.
+lazy_static! {
+    static ref COUNTER: AtomicUsize = AtomicUsize::new(0);
+}
+
+// A list of the errors pertinent to this file.
+mod errors {
+    error_chain! {
+        foreign_links {
+            Io(::std::io::Error);
+        }
+
+        errors {
+            Socks5Unsupported {
+                description("Tor said it doesn't know Socks 5")
+            }
+
+            NoUserPassSupport {
+                description("Tor said it hasn't user:pass support")
+            }
+
+            WrongAuthVer {
+                description("Tor wanted to use a version of user:pass auth that is unsupported")
+            }
+
+            StreamIsolFailed {
+                description("Failed to use user:pass auth for stream isolation")
+            }
+
+            UrlTooLong(url: String) {
+                description("The URL is too long to encode its length in a single octet")
+                display("URL {} is too long to encode its length as a single octet (>255 bytes)", url)
+            }
+
+            SocksGenServFail {
+                description("General socks server failure")
+            }
+
+            ConNotAllowRuleSet {
+                description("Socks socket not allowed by ruleset")
+            }
+
+            NetUnreachable {
+                description("Network is unreachable")
+            }
+
+            HostUnreachable {
+                description("Host is unreachable")
+            }
+
+            ConRefused {
+                description("The socket was refused")
+            }
+
+            TtlExpired {
+                description("TTL expired")
+            }
+
+            ComUnsupported {
+                description("Command not supported")
+            }
+
+            AddrTypeUnsupported {
+                description("The address type is unsupported")
+            }
+
+            OtherSocksErr {
+                description("An unknown Socks error occurred")
+            }
+
+            InvalidValidationResponse {
+                description("The validation response from Tor was too short to be valid")
+            }
+        }
+    }
+}
+
+
+/// Intended to be used as an interface to the Tor proxy via the Socks 5 protocol.
+pub struct TorClient {
+    /// The socket associated with the TorClient connection.
+    pub socket: TcpStream,
+}
+
+// Valid responses are at least 7 bytes, though all valid responses may actually be > 7 bytes
+// [ver = 1] + [rep = 1] + [rsv = 1] + [atyp = 1] + [bnd.addr > 0] + [bnd.prt = 2]
+const MIN_RESPONSE_BYTE_COUNT          : usize = 7;
+
+// Valid responses are no more than 262 bytes
+// [ver = 1] + [rep = 1] + [rsv = 1] + [atyp = 1] + [bnd.addr <= 256] + [bnd.prt = 2]
+const MAX_EXPECTED_RESPONSE_BYTE_COUNT : usize = 262;
+
+// Addr cannot be more than 255 bytes, for one octet must represent its length
+const MAX_ADDR_LEN : usize = 255;
+
+impl TorClient {
+    /// Connect the TorClient to the Tor instance listening on the address:port identified by A.
+    pub fn connect<A: ToSocketAddrs>(server_addr: A) -> Result<Self> {
+        // Create a TCP connection to the Tor instance listening on server_addr
+        let mut connection = TorClient { socket: TcpStream::connect(server_addr)? };
+
+        // Attempt Socks 5 method negotiation over the connected socket
+        connection.method_negotiation()?;
+
+        // If all went well, return the initialized TorClient
+        Ok(connection)
+    }
+
+    /// Instruct the connected to Tor instance to connect to the URL addr on port prt.
+    pub fn url_proxy(&mut self, addr: &str, prt: u16) -> Result<()> {
+        // Determine the number of bytes addr is composed of
+        let addr_len = addr.len();
+
+        // Ensure the address length is sane
+        if addr_len > MAX_ADDR_LEN {
+            return Err(ErrorKind::UrlTooLong(addr.to_string()).into());
+        }
+
+        // Write the Socks 5 request over the socket, in accordance with rfc1928
+        //
+        //  https://www.ietf.org/rfc/rfc1928.txt
+        //
+        // +----+-----+-------+------+----------+----------+
+        // |VER | CMD |  RSV  | ATYP | DST.ADDR | DST.PORT |
+        // +----+-----+-------+------+----------+----------+
+        // | 1  |  1  | X'00' |  1   | Variable |    2     |
+        // +----+-----+-------+------+----------+----------+
+        //
+        // VER      : X'05' (Socks version 5)
+        // CMD      : X'01' (connect)
+        // RSV      : X'00' (reserved)
+        // ATYP     : X'03' (domain name)
+        // DST.ADDR : URL, first octet contains number of octets of name that follow
+        // DST.PORT : Desired desination port in network octet order
+        self.socket.write_all(&[5, 1, 0, 3, addr_len as u8])?;
+        self.socket.write_all(addr.as_bytes())?;
+        self.socket.write_u16::<BigEndian>(prt)?;
+
+        // Verify with the Tor instance that the connection was successfully established
+        self.verification()
+    }
+
+    /// Instruct the connected to Tor instance to connect to the IP addr A on port prt
+    pub fn ip_proxy<A: Into<IpAddr>>(&mut self, addr: A, prt: u16) -> Result<()> {
+        // Write the Socks 5 request over the socket, in accordance with rfc1928
+        //
+        //  https://www.ietf.org/rfc/rfc1928.txt
+        //
+        // +----+-----+-------+------+----------+----------+
+        // |VER | CMD |  RSV  | ATYP | DST.ADDR | DST.PORT |
+        // +----+-----+-------+------+----------+----------+
+        // | 1  |  1  | X'00' |  1   | Variable |    2     |
+        // +----+-----+-------+------+----------+----------+
+        //
+        // VER      : X'05' (Socks version 5)
+        // CMD      : X'01' (connect)
+        // RSV      : X'00' (reserved)
+        self.socket.write_all(&[5, 1, 0])?;
+
+        // ATYP     : IPV4 address: X'01'   || IPV6 address: X'04'
+        // DST.ADDR : IPV4 addr of 4 octets || IPV6 addr of 16 octets
+        match addr.into() {
+            IpAddr::V4(ip) => {
+                self.socket.write_all(&[1])?;
+                self.socket.write_all(&ip.octets())?;
+            }
+            IpAddr::V6(ip) => {
+                self.socket.write_all(&[4])?;
+                self.socket.write_all(&ip.octets())?;
+            }
+        }
+
+        // DST.PORT : Desired desination port in network octet order
+        self.socket.write_u16::<BigEndian>(prt)?;
+
+        // Verify with the Tor instance that the connection was successfully established
+        self.verification()
+    }
+
+    // Receive reply from the Tor instance and ascertain that the connection to destination
+    // was successfully established
+    fn verification(&mut self) -> Result<()> {
+        // Initialize a vector to receive the response from the Tor instance
+        let mut response = vec![0; MAX_EXPECTED_RESPONSE_BYTE_COUNT];
+
+        // Receive the response from the Tor instance. It should be at least
+        // MIN_RESPONSE_BYTE_COUNT bytes.
+        if self.socket.read(&mut response)? < MIN_RESPONSE_BYTE_COUNT {
+            return Err( ErrorKind::InvalidValidationResponse.into() );
+        }
+
+        // https://www.ietf.org/rfc/rfc1928.txt
+        //
+        // The SOCKS request information is sent by the client as soon as it has
+        // established a connection to the SOCKS server, and completed the
+        // authentication negotiations.  The server evaluates the request, and
+        // returns a reply formed as follows:
+        //
+        // +----+-----+-------+------+----------+----------+
+        // |VER | REP |  RSV  | ATYP | BND.ADDR | BND.PORT |
+        // +----+-----+-------+------+----------+----------+
+        // | 1  |  1  | X'00' |  1   | Variable |    2     |
+        // +----+-----+-------+------+----------+----------+
+        //
+        // VER      : X'05' (Socks 5)
+        // REP      : X'00' is success, others are error values
+        // RSV      : X'00' (reserved)
+        // ATYP     : IP V4 address: X'01' || DOMAINNAME: X'03' || IP V6 address: X'04'
+        // BND.ADDR : server bound address
+        // BND.PORT : server bound port in network octet order
+
+        // If VER is not X'05' then the Tor instance doesn't think it supports Socks 5
+        if response[0] != 5 {
+            return Err( ErrorKind::Socks5Unsupported.into() );
+        }
+
+        // Determine if the response indicates success or one of numerous potential errors
+        match response[1] {
+            // X'00' succeeded
+            0 =>  Ok(()),
+            // X'01' general SOCKS server failure
+            1 =>  Err(ErrorKind::SocksGenServFail.into()),
+            // X'02' connection not allowed by ruleset
+            2 =>  Err(ErrorKind::ConNotAllowRuleSet.into()),
+            // X'03' Network unreachable
+            3 =>  Err(ErrorKind::NetUnreachable.into()),
+            // X'04' Host unreachable
+            4 =>  Err(ErrorKind::HostUnreachable.into()),
+            // X'05' Connection refused
+            5 =>  Err(ErrorKind::ConRefused.into()),
+            // X'06' TTL expired
+            6 =>  Err(ErrorKind::TtlExpired.into()),
+            // X'07' Command not supported
+            7 =>  Err(ErrorKind::ComUnsupported.into()),
+            // X'08' Address type not supported
+            8 =>  Err(ErrorKind::AddrTypeUnsupported.into()),
+            // X'09' to X'FF' unassigned
+            _ =>  Err(ErrorKind::OtherSocksErr.into())
+        }
+    }
+
+    // Engage in the Socks 5 method negotiation protocol. Using user:pass authentication method,
+    // Tor uses the user:pass as a stream isolation token to prevent exit linkability between
+    // the circuit used by this instantiation and others.
+    fn method_negotiation(&mut self) -> Result<()> {
+        // Initialize a vector to receive the response from the Tor instance
+        let mut response: [u8; 2] = [0; 2];
+
+        // https://tools.ietf.org/html/rfc1928
+        //
+        // +----+----------+----------+
+        // |VER | NMETHODS | METHODS  |
+        // +----+----------+----------+
+        // | 1  |    1     | 1 to 255 |
+        // +----+----------+----------+
+        //
+        // VER      : X'05' (socks 5)
+        // NMETHODS : number of octets that appear in the METHODS field
+        // METHODS  : X'02' (user:pass)
+
+        // Transmit the method negotiation bytes to the connected to Tor instance
+        // and read the response.
+        self.socket.write_all(&[5, 1, 2])?;
+        self.socket.read_exact(&mut response)?;
+
+        // https://tools.ietf.org/html/rfc1928
+        //
+        // +----+--------+
+        // |VER | METHOD |
+        // +----+--------+
+        // | 1  |   1    |
+        // +----+--------+
+        //
+        // VER    : X'05' (socks 5)
+        // METHOD : X'02  (user:pass)
+
+        // Verify the response from the server to ensure it is Socks 5 and supports user:pass
+        // authentication
+        if response[0] != 5 {
+            return Err( ErrorKind::Socks5Unsupported.into() );
+        }
+        if response[1] != 2 {
+            return Err( ErrorKind::NoUserPassSupport.into() );
+        }
+
+        // Begin the user:pass sub negotiation
+        self.user_auth_sub_negotiation()
+    }
+
+    // Engage in the user:pass sub negotiation protocol. Tor uses the user:pass as a stream
+    // isolation token to prevent exit linkability between the circuit used by this instantiation
+    // and others.
+    fn user_auth_sub_negotiation(&mut self) -> Result<()> {
+        // Initialize a vector to receive the response from the Tor instance
+        let mut response: [u8; 2] = [0; 2];
+
+        // Once the SOCKS V5 server has started, and the client has selected the
+        // Username/Password Authentication protocol, the Username/Password
+        // subnegotiation begins.  This begins with the client producing a
+        // Username/Password request:
+        //
+        // +----+------+----------+------+----------+
+        // |VER | ULEN |  UNAME   | PLEN |  PASSWD  |
+        // +----+------+----------+------+----------+
+        // | 1  |  1   | 1 to 255 |  1   | 1 to 255 |
+        // +----+------+----------+------+----------+
+        //
+        // VER    : X'01' (current version of user:pass sub negotiation)
+        // ULEN   : Octet count of following username
+        // UNAME  : The username
+        // PLEN   : Octet count of following username
+        // PASSWD : The password
+
+        // Only variying the username, password is hardcoded as a u64 0. Username counter is
+        // incremented after use to provide stream isolation between instantiations.
+        self.socket.write_all(&[1, 8])?;
+        self.socket.write_u64::<BigEndian>( COUNTER.fetch_add(1, Ordering::SeqCst) as u64 )?;
+        self.socket.write_all(&[8])?;
+        self.socket.write_u64::<BigEndian>(0)?;
+
+        // Receive the response from the Tor instance
+        self.socket.read_exact(&mut response)?;
+
+        // The server verifies the supplied UNAME and PASSWD, and sends the
+        // following response:
+        //
+        // +----+--------+
+        // |VER | STATUS |
+        // +----+--------+
+        // | 1  |   1    |
+        // +----+--------+
+        //
+        // VER    : X'01' (current version of user:pass sub negotiation)
+        // STATUS : X'00' indicates success
+        if response[0] != 1 {
+            return Err( ErrorKind::WrongAuthVer.into() );
+        }
+        if response[1] != 0 {
+            return Err( ErrorKind::StreamIsolFailed.into() );
+        }
+
+        Ok(())
+    }
+}

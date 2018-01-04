@@ -1,0 +1,20 @@
+ Object subclass: ADemoAddressBook [
+	 | addresses  | 
+        <category: 'Aidaweb-Tutorial'>
+
+         initAddresses [
+             addresses := OrderedCollection new
+         ]
+
+         addresses [
+
+            addresses isNil ifTrue: [self initAddresses].
+           ^addresses
+	]
+
+         addAddress: aDemoAddress [
+        
+           self addresses add: aDemoAddress.
+           aDemoAddress parent: self
+	]
+]

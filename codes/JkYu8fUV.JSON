@@ -1,0 +1,98 @@
+{
+    "_id": ObjectId("5a2346720b1fdf3c7eb715e1"),
+    "isNew": false,
+    "createdDate": ISODate("2017-12-03T00:33:52.325Z"),
+    "dateRange": {
+        "startDate": ISODate("2017-12-02T00:00:00.000Z"),
+        "endDate": ISODate("2017-12-02T00:00:00.000Z")
+    },
+    "data": [
+        {
+            "date": "Sun, 03 Dec 2017 00:33:52 GMT",
+            "side": "demand",
+            "env": "Bundle",
+            "list_name": "comm_9312804_12-03",
+            "list_id": 9312804,
+            "deal_id": 547812,
+            "deal_name": "Edge IA $2",
+            "type": "bl",
+            "hasToRemoveDomains": false,
+            "list": [
+                "body.fitness.video.camera",
+                "com.lionmobi.flashlight",
+                "com.madebyappolis.spinrilla",
+                "com.orangeapps.piratetreasure",
+                "com.jb.video",
+                "usa.jersey.tvlistings",
+                "com.duapps.cleaner",
+                "com.karmangames.pinochle",
+                "com.cootek.smartinputv5.skin.keyboard_theme_water",
+                "com.notabasement.mangarock.android.lotus",
+                "com.lm.powersecurity"
+            ]
+        },
+        {
+            "date": "Sun, 03 Dec 2017 00:33:52 GMT",
+            "side": "demand",
+            "env": "Domain",
+            "list_name": "comm_9682435_12-03",
+            "list_id": 9682435,
+            "deal_id": 569555,
+            "deal_name": "Vidmoolah_LKQD_M/L_$6.31_14-11-2017",
+            "type": "bl",
+            "hasToRemoveDomains": false,
+            "list": []
+        },
+        {
+            "date": "Sun, 03 Dec 2017 00:33:52 GMT",
+            "side": "demand",
+            "env": "Bundle",
+            "list_name": "comm_4980286_12-03",
+            "list_id": 4980286,
+            "deal_id": 292958,
+            "deal_name": "ClubH_Inapp_2.75$",
+            "type": "bl",
+            "hasToRemoveDomains": false,
+            "list": [
+                "com.imgur.mobile",
+                "com.jiubang.alock",
+                "com.bambuna.podcastaddict",
+                "com.apalon.myclockfree",
+                "com.mgensuite.life.lockscreen"
+            ]
+        },
+        {
+            "date": "Sun, 03 Dec 2017 00:33:52 GMT",
+            "side": "demand",
+            "env": "Domain",
+            "list_name": "comm_4104208_12-03",
+            "list_id": 4104208,
+            "deal_id": 241424,
+            "deal_name": "Mindad_MP_5$_LKQD",
+            "type": "bl",
+            "hasToRemoveDomains": false,
+            "list": [
+                "sportinsider.tv",
+                "walesonline.co.uk",
+                "sparknotes.com",
+                "fanfreegames.com",
+                "thestreet.com"
+            ]
+        },
+        {
+            "date": "Sun, 03 Dec 2017 00:33:52 GMT",
+            "side": "demand",
+            "env": "Domain",
+            "list_name": "comm_6806256_12-03",
+            "list_id": 6806256,
+            "deal_id": 400368,
+            "deal_name": "Velis_$6  M/LP_7/25",
+            "type": "bl",
+            "hasToRemoveDomains": false,
+            "list": [
+                "history.com",
+                "roblox.com"
+            ]
+        }
+    ]
+}

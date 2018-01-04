@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Intsys
+{
+    public struct Boot
+    {
+       public int Capaciteit;
+       public List<Persoon> InBoot;
+    }
+}

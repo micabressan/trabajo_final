@@ -1,0 +1,39 @@
+    impl api::Api for Api {
+        fn wire(&self, router: &mut Router) {
+            let self_ = self.clone();
+            let get_wallet = move |req: &mut Request| -> IronResult<Response> {
+                let path = req.url.path();
+                let wallet_key = path.last().unwrap();
+                let snapshot = self.blockchain.snapshot();
+                let schema = Schema::new(snapshot);
+                let wallets = schema.wallets();
+                match PublicKey::from_hex(wallet_key) {
+                    Ok(public_key) => {
+                        self_.ok_response(&serde_json::to_value(wallets.get(&public_key)).unwrap())
+                    }
+                    Err(_) => {
+                        self_.ok_response(&serde_json::to_value(
+                            &wallets.iter().map(|(_, w)| w).collect::<Vec<_>>(),
+                        ).unwrap())
+                    }
+                }
+            };
+            router.get("v1/detail/:pub_key", get_wallet, "get_wallet");
+
+            let self_ = self.clone();
+            let transaction = move |req: &mut Request| -> IronResult<Response> {
+                match req.get::<bodyparser::Struct<TxRequest>>() {
+                    Ok(Some(transaction)) => {
+                        let transaction: Box<Transaction> = transaction.into();
+                        let tx_hash = transaction.hash();
+                        self_.channel.send(transaction).map_err(ApiError::Io)?;
+                        let json = TxResponse { tx_hash };
+                        self_.ok_response(&serde_json::to_value(&json).unwrap())
+                    }
+                    Ok(None) => Err(ApiError::IncorrectRequest("Empty request body".into()))?,
+                    Err(e) => Err(ApiError::IncorrectRequest(Box::new(e)))?,
+                }
+            };
+            router.post("v1/transaction", transaction, "transaction");
+        }
+    }

@@ -1,0 +1,47 @@
+server {
+    listen 80;
+
+    root /srv/www/sportus.tv;
+    index index.php index.html index.htm;
+
+    server_name sportus.tv;
+
+    access_log /var/log/nginx/sportustv.access.log;
+    error_log  /var/log/nginx/sportustv.error.log info;
+
+    location = /favicon.ico {
+    	log_not_found off;
+        access_log off;
+    }
+
+    location = /robots.txt {
+    	allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    location ~ \..*/.*\.php {
+	return 403;
+    }
+
+    location / {
+	# This is cool because no php is touched for static content
+	try_files $uri $uri/ @rewrite;
+	expires max;
+    }
+
+    location @rewrite {
+	# Some modules enforce no slash (/) at the end of the URL
+	# Else this rewrite block wouldn&#39;t be needed (GlobalRedirect)
+	rewrite ^/(.*)$ /index.php?q=$1;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}

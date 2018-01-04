@@ -1,0 +1,5 @@
+var person = db.EXT_PERSONS.ToList();
+
+var mattin = person.firstordefault(x=>x.name.equals("mattin"));
+
+if(mattin.gay) //gör nåt

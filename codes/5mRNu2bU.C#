@@ -1,0 +1,30 @@
+namespace _03.Anonymous_Vox
+{
+    using System;
+    using System.Text.RegularExpressions;
+
+    public class AnonymousVox
+    {
+        public static void Main()
+        {
+            Regex text = new Regex(@"([A-Za-z]+).+\1");
+            Regex valueRegex = new Regex(@"{(.+?)}");
+            string str = Console.ReadLine();
+            string place = Console.ReadLine();
+
+            var match = valueRegex.Matches(place);
+            int n = 0;
+
+            str = text.Replace(str, m =>
+            {
+                if (n < match.Count)
+                    return $"{m.Groups[1].Value}{match[n++].Groups[1].Value}{m.Groups[1].Value}";
+                return m.Value;
+            });
+            Console.WriteLine(str);
+
+
+
+    }
+    }
+}

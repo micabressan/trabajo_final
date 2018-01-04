@@ -1,0 +1,30 @@
+module.exports = function(grunt) 
+{
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		babel: {
+			options: {
+				sourceMap: false,
+				presets: ['env']
+			},
+			dist: {
+				files: {
+					'public/js/bootrstap.js': 'node_modules/bootrstap/js/src/index.js'
+				}
+			}
+		},
+		watch: {
+			js: {
+				files: 'sources/js/*.js',
+				tasks: ['babel']
+			}
+		}
+	});
+	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-postcss');
+	grunt.loadNpmTasks('grunt-babel');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.registerTask('default',['watch']);
+}

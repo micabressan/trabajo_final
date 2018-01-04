@@ -1,0 +1,142 @@
+upstream betapi {
+   server betsstoreapi.ru.com;
+}
+
+#upstream 1xbetapi {
+#    server http://95.169.186.74:8080/WebApi;
+#}
+
+server {
+    listen 80;
+    server_name dc.wjbets.test;
+
+   location ^~ /media {
+      alias /server/betronic-white-label/media/;
+      #autoindex off;
+   }
+
+   location ~ ^/api/remote/(.+) {
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Credentials' 'true';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+      proxy_set_header Host "betsstoreapi.ru.com";
+      proxy_set_header Origin "";
+      proxy_set_header Referer "";
+      proxy_set_header Cookie '.TOMSK1=$cookie__TOMSK1; ASP.NET_SessionId=$cookie_ASP_NET_SessionId;';
+      proxy_hide_header 'Set-Cookie';
+      proxy_pass http://95.169.186.74:8080/WebApi/WebServices/BCService.asmx/$1;
+   }
+
+
+   location ~ ^/api/bs2/remote/(.+) {
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Credentials' 'true';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+      proxy_pass http://95.169.186.74:8080/WebApi/$1;
+      proxy_set_header Host "betsstoreapi.ru.com";
+      proxy_set_header Origin "";
+      proxy_set_header Referer "";
+      proxy_set_header Cookie '.TOMSK1=$cookie__TOMSK1; ASP.NET_SessionId=$cookie_ASP_NET_SessionId;';
+      proxy_hide_header 'Set-Cookie';
+   }
+
+   location ~ ^/api/bs3/remote/(.+) {
+      proxy_pass http://95.169.186.74:8080/WebApi/Webservices/Mobile/BetsStoreService.asmx/$1;
+      proxy_set_header Host "betsstoreapi.ru.com";
+      proxy_set_header Origin "";
+      proxy_set_header Referer "";
+      proxy_set_header Cookie '.TOMSK1=$cookie__TOMSK1; ASP.NET_SessionId=$cookie_ASP_NET_SessionId;';
+      proxy_hide_header 'Set-Cookie';
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+   }
+location ~ ^/api/bs4/remote/(.+) {
+      proxy_pass http://95.169.186.74:8080/WebApi/$1;
+      proxy_set_header Host "95.169.186.74";
+      proxy_set_header Origin "";
+      proxy_set_header Referer "";
+      proxy_set_header Cookie '.TOMSK1=$cookie__TOMSK1; ASP.NET_SessionId=$cookie_ASP_NET_SessionId;';
+      proxy_hide_header 'Set-Cookie';
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+   }
+
+   location /inbet/media/
+   {
+            proxy_pass http://flashslots.s3.amazonaws.com/;
+            proxy_redirect  off;
+            proxy_set_header        X-Real-IP       $remote_addr;
+            proxy_set_header        Host            flashslots.s3.amazonaws.com;
+            proxy_set_header Authorization "";
+   }
+   location /ohr5Ae2f/api/
+   {
+            proxy_pass http://flash-api.inbet.cc:8080;
+#            access_log /usr/local/var/log/nginx/slot_api.access_log main;
+            proxy_redirect  off;
+            proxy_set_header        X-Real-IP       $remote_addr;
+   }
+   location / {
+       root /Volumes/hdd/project/wjfront/build;
+       index index.html index.htm;
+
+       location ~* \.(?:manifest|appcache|html?|xml|json)$ {
+         expires -1;
+         # access_log logs/static.log; # I don't usually include a static log
+       }
+
+       location ~* \.(?:css|js)$ {
+         try_files $uri =404;
+         expires 1y;
+         access_log off;
+         add_header Cache-Control "public";
+       }
+
+       # Any route containing a file extension (e.g. /devicesfile.js)
+       location ~ ^.+\..+$ {
+         try_files $uri =404;
+       }
+
+       # Any route that doesn't have a file extension (e.g. /devices)
+       location / {
+           try_files $uri $uri/ /index.html;
+       }
+    }
+    location ~ ^/api/auth/(?<myvar>.+)$ {
+        proxy_pass http://127.0.0.1:8888/api/user/$myvar;
+        proxy_set_header Host $http_host;
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+    }
+
+
+   location ~ ^/api/(.+) {
+      proxy_pass http://127.0.0.1:8888;
+      proxy_set_header Host $http_host;
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Credentials' 'true';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+   }
+
+    location /admin/api/ {
+        proxy_pass http://127.0.0.1:5555;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+    location /admin {
+        proxy_pass http://127.0.0.1:9000;
+        proxy_set_header Host $http_host;
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+    }
+}

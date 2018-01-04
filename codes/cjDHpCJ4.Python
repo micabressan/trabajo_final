@@ -1,0 +1,28 @@
+from kivy.lang.builder import Builder
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.image import Image
+from kivy.properties import ObjectProperty, StringProperty, NumericProperty
+
+Builder.load_file('card.kv')
+
+class ImageButton(ButtonBehavior, Image):
+    pass
+
+class CardWidget(ImageButton):
+    Card_Name = StringProperty()
+    Card_Set = StringProperty()
+    ImageFile = StringProperty()
+    MainType = StringProperty(allownone=True)
+    SubType = StringProperty()
+    Attribute = StringProperty(allownone=True)
+    Card_Level = NumericProperty(allownone=True)
+    ATK = NumericProperty(allownone=True)
+    DEF = NumericProperty(allownone=True)
+    Card_Text = StringProperty()
+
+card kv:
+
+#:kivy 1.10.0
+
+<CardWidget>:
+    source: 'Images\\' + root.ImageFile + '.jpg'

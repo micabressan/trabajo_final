@@ -1,0 +1,22 @@
+using (SpeechSynthesizer synth = new SpeechSynthesizer())
+      using (MemoryStream stream = new MemoryStream())
+      {
+
+        // Create a SoundPlayer instance to play the output audio file.
+        MemoryStream streamAudio = new MemoryStream();
+        System.Media.SoundPlayer m_SoundPlayer = new System.Media.SoundPlayer();
+
+        // Configure the synthesizer to output to an audio stream.
+        synth.SetOutputToWaveStream(streamAudio);
+
+        // Speak a phrase.
+        synth.Speak("This is sample text-to-speech output.");
+        streamAudio.Position = 0;
+        m_SoundPlayer.Stream = streamAudio;
+        m_SoundPlayer.Play();
+
+        // Set the synthesizer output to null to release the stream. 
+        synth.SetOutputToNull();
+
+        // Insert code to persist or process the stream contents here.
+      }

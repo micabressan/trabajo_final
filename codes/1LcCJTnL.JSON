@@ -1,0 +1,126 @@
+[{ & quot;shoots & quot;: [{ & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 1337,
+			& quot;name & quot;: & quot;Weapon 1 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;FULL & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 1,
+			& quot;name & quot;: & quot;Weapon 2 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;NO_CONNECTION & quot;,
+			& quot;fireMode & quot;: & quot;SAFE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 2,
+			& quot;name & quot;: & quot;Weapon 3 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_2 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 3,
+			& quot;name & quot;: & quot;Weapon 4 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_3 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 5 & quot;
+		}],
+		& quot;id & quot;: 1337,
+		& quot;name & quot;: & quot;Shoot 1 & quot;
+	}, { & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;FULL & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 1,
+			& quot;name & quot;: & quot;Weapon 2 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_2 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 7 & quot;
+		}],
+		& quot;id & quot;: 1,
+		& quot;name & quot;: & quot;Shoot 2 & quot;
+	}, { & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 1337,
+			& quot;name & quot;: & quot;Weapon 1 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;FULL & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 1,
+			& quot;name & quot;: & quot;Weapon 2 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_2 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 3,
+			& quot;name & quot;: & quot;Weapon 4 & quot;
+		}],
+		& quot;id & quot;: 2,
+		& quot;name & quot;: & quot;Shoot 3 & quot;
+	}],
+	& quot;id & quot;: 1337,
+	& quot;name & quot;: & quot;1 - Ze Zjuting sihn & quot;
+}, { & quot;shoots & quot;: [{ & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 6 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_2 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 7 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 1337,
+			& quot;name & quot;: & quot;Weapon 1 & quot;
+		}],
+		& quot;id & quot;: 3,
+		& quot;name & quot;: & quot;Shoot 4 & quot;
+	}],
+	& quot;id & quot;: 1,
+	& quot;name & quot;: & quot;22 - Robbing the bank & quot;
+}, { & quot;shoots & quot;: [{ & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;FULL & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 1,
+			& quot;name & quot;: & quot;Weapon 2 & quot;
+		}],
+		& quot;id & quot;: 4,
+		& quot;name & quot;: & quot;Shoot 5 & quot;
+	}, { & quot;weapons & quot;: [{ & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 1337,
+			& quot;name & quot;: & quot;Weapon 1 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;FULL & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 1,
+			& quot;name & quot;: & quot;Weapon 2 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_3 & quot;,
+			& quot;fireMode & quot;: & quot;SINGLE & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 5 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;BAR_1 & quot;,
+			& quot;fireMode & quot;: & quot;BURST & quot;,
+			& quot;warnings & quot;: [ & quot;This is a warning & quot;],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 6 & quot;
+		}, { & quot;connectionStatus & quot;: & quot;NO_CONNECTION & quot;,
+			& quot;fireMode & quot;: & quot;FULL_AUTO & quot;,
+			& quot;warnings & quot;: [],
+			& quot;id & quot;: 4,
+			& quot;name & quot;: & quot;weapon 8 & quot;
+		}],
+		& quot;id & quot;: 5,
+		& quot;name & quot;: & quot;Shoot 6 & quot;
+	}],
+	& quot;id & quot;: 2,
+	& quot;name & quot;: & quot;54 - The escape & quot;
+}, { & quot;shoots & quot;: [],
+	& quot;id & quot;: 1338,
+	& quot;name & quot;: & quot;test & quot;
+}]

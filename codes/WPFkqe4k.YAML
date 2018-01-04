@@ -1,0 +1,50 @@
+limits:
+  enabled: true
+  defaultLimit:
+    totalLimit: 15
+    publicLimit: 5
+    privateLimit: 10
+  configuredLimits: []
+  configured-limits:
+    default:
+      totalLimit: 2
+      publicLimit: 1
+      privateLimit: 1
+    user:
+      totalLimit: 8
+      publicLimit: 4
+      privateLimit: 4
+      affectedWorlds:
+      - test-world
+    hard_pro:
+      totalLimit: 4
+      publicLimit: 2
+      privateLimit: 2
+    hard_vip:
+      totalLimit: 6
+      publicLimit: 3
+      privateLimit: 3
+    hard_premium:
+      totalLimit: 8
+      publicLimit: 4
+      privateLimit: 4
+    hard_grief:
+      totalLimit: 8
+      publicLimit: 4
+      privateLimit: 4
+    hard_youtube:
+      totalLimit: 10
+      publicLimit: 5
+      privateLimit: 5
+    hard_elite:
+      totalLimit: 14
+      publicLimit: 7
+      privateLimit: 7
+    hard_sponsor:
+      totalLimit: 20
+      publicLimit: 10
+      privateLimit: 10
+    hard_mod:
+      totalLimit: 20
+      publicLimit: 10
+      privateLimit: 10

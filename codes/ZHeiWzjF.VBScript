@@ -1,0 +1,69 @@
+Option Compare Database
+Option Explicit
+
+Private Type Studie
+    navn As String
+    antPlass As Long
+End Type
+
+Private Sub FyllPlasser()
+    Dim studier() As Studie
+    Dim i As Long
+    Dim strsql As String
+    Dim studentNavn As String
+    Dim rs, stdSet As DAO.Recordset
+    
+    Set rs = CurrentDb.OpenRecordset("tblStudier")
+
+    With rs
+        Do While Not .EOF
+            i = i + 1
+            ReDim Preserve studier(1 To i)
+            studier(i).navn = rs.Fields("studiekode").Value
+            studier(i).antPlass = rs.Fields("antallPlasser").Value
+            .MoveNext
+        Loop
+    End With
+    rs.Close
+    
+    strsql = "SELECT DISTINCT ID, Opptakspoeng FROM qryOpptak ORDER BY Opptakspoeng DESC"
+    Set stdSet = CurrentDb.OpenRecordset(strsql)
+    
+    If stdSet.EOF Then
+        Exit Sub
+    End If
+    
+    With stdSet
+        Do While Not .EOF
+            studentNavn = !ID
+                'Hent alle records fra query med dette navnet og loop
+                strsql = "SELECT ID, studiekode, prioritering FROM qryOpptak WHERE ID = " & studentNavn & " ORDER BY prioritering ASC"
+                Set stdSet = CurrentDb.OpenRecordset(strsql)
+                'Får feilkode 3061 i linjen over med beskjed om at det forventes flere argumenter.
+                'Usikker på akkurat hva som er feil, og velger å levere det jeg har.
+                
+                With stdSet
+                    Do While Not .EOF
+                        'Sjekk om studiekode matcher og det er plasser igjen
+                        For i = LBound(studier) To UBound(studier)
+                            If !studiekode = studier(i).navn And studier(i).antPlass > 0 Then
+                                strsql = "INSERT INTO tblStudiePlass SELECT * FROM qryOpptak"
+                                CurrentDb.Execute (strsql)
+                                studier(i).antPlass = studier(i).antPlass - 1
+                                Exit Do
+                            End If
+                        Next
+                    .MoveNext
+                    Loop
+                    .Close
+                   End With
+            .MoveNext
+        Loop
+        .Close
+    End With
+End Sub
+
+
+Private Sub comFyllPlasser_Click()
+    Call FyllPlasser
+End Sub

@@ -1,0 +1,7 @@
+#function Check_PID():
+f= open("pid.txt", "w+")
+PID = os.getpid()
+print (str(PID))
+f.write(str(PID))
+f.close()
+# Start script

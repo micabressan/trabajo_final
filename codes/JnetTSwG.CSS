@@ -1,0 +1,11 @@
+@-moz-document domain("tweetdeck.twitter.com") {
+	.thread {
+		display: none;
+	}
+	.margin-l--58 {
+		margin-left: 0px !important;
+	}
+	.margin-b--10 {
+		margin-left: 0px !important;
+	}
+}

@@ -1,0 +1,32 @@
+$scope.calculatePercentage = () ->
+            if _.size($scope.paperTypeObj.percentage) > 0
+                if _.size($scope.revertPaperCombinations) is 0
+                    $scope.revertPaperCombinations = angular.copy $scope.arrangedCombination
+
+                paperCombination = angular.copy $scope.revertPaperCombinations
+                percentage       = angular.copy $scope.paperTypeObj.percentage
+
+                angular.forEach paperCombination, (paperComb, pidx) ->
+                    angular.forEach paperComb, (comb, idx) ->
+                        if idx isnt 0
+                            if percentage.indexOf('-') is 0
+                                percentageval = percentage.substr(1, _.size(percentage))
+                                if percentage.indexOf('.') is -1
+                                    compute = ( parseInt(comb.value) * parseInt(percentageval) ) / 100
+                                else
+                                    compute = ( parseInt(comb.value) * parseFloat(percentageval) )
+                                comb.value = Math.round(comb.value - compute)
+                                comb.value = $aBaseCalculatorService.getClosestRounding comb.value
+                            else
+                                if percentage.indexOf('.') is -1
+                                    compute = ( parseInt(comb.value) * parseInt(percentage) ) / 100
+                                else
+                                    compute = ( parseInt(comb.value) * parseFloat(percentage) )
+                                comb.value = Math.round(comb.value + compute)
+                                comb.value = $aBaseCalculatorService.getClosestRounding comb.value
+                            
+                $scope.arrangedCombination = paperCombination
+            else
+                if _.size($scope.revertPaperCombinations) > 0
+                    originalPaperCombination   = angular.copy $scope.revertPaperCombinations
+                    $scope.arrangedCombination = originalPaperCombination

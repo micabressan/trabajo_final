@@ -1,0 +1,171 @@
+-- | Graphs represented as immutable arrays
+module Graph where
+
+import Data.List
+import Data.Array
+
+
+-- | An edge of a 'Graph' as @(source, weight, target)@.
+type Edge  n = (n, Weight, n)
+
+-- | An 'Edge' set.
+type Edges n = [Edge n]
+
+-- | The weight of an 'Edge'.
+type Weight = Integer
+
+-- | A 'Graph' is an adjacency list. 
+-- implemented with Haslkell's immutable arrays.
+type Graph n = Array n [(Weight,n)]
+
+-- | The source of an 'Edge'
+source :: Edge n -> n
+source (n, _, _) = n
+
+target :: Edge n -> n
+target (_, _, m) = m
+
+-- | 'Edge' set for a sample graph with two Hamiltonian cycles
+-- without loops, parallel and inverse edges.
+sampleEdges :: Edges Char
+sampleEdges = 
+    [ ('a',2,'b'), ('a',3,'c'), ('a',4,'d'), ('b',1,'e')
+    , ('c',1,'d'), ('c',4,'b'), ('c',7,'e'), ('e',3,'d')
+    ]
+
+-- | 'simpleUndirected' takes a non-empty list of edges @(n,w,m)@
+--
+--     * without loops @(n, w, n)@
+--
+--     * without parallel edges @(n, w1, m)@ and @(n, w2, m)@
+--
+--     * without inverse edges @(n, w1, m)@ and @(m, w2, n)@
+--
+-- and adds the symmetric edges to form a simple undirected graph
+simpleUndirected :: (Ord n, Show n) => Edges n -> Edges n
+simpleUndirected es
+    | null es
+        = error "edge set is empty!"
+    | not $ null $ loops es
+        = error ("loop edges: " ++ show (loops es))
+    | any (not . null . snd) $ allParallels es
+        = error ("parallel edges: " ++ show (clean (allParallels es)))
+    | any (not. null . snd) $ allInverses es
+        =  error ("inverse edges: " ++ show (clean (allInverses es)))
+    | otherwise
+        = es ++ [ (m,w,n) | (n,w,m) <- es ]
+  where
+    clean :: [(a, [b])] -> [(a, b)]
+    clean pls = concatMap (\(x, xs) -> zip (repeat x) xs)
+                          (filter (not . null . snd) pls)
+
+-- | the smallest and biggest node mentioned in an 'Edge' set
+nodeRange :: Ord n => Edges n -> (n,n)
+nodeRange es = (minimum ns, maximum ns)
+  where ns = map source es ++ map target es
+
+loops :: Ord n => Edges n -> Edges n
+loops es = [ (n, w, m) | (n, w, m) <- es, n == m ]
+
+-- | Pair lists of edges with all their parallel edges.
+allParallels :: (Ord n, Show n) => Edges n -> [(Edge n, Edges n)]
+allParallels [] = []
+allParallels (e:es) = (e, parallels e es) : allParallels es
+
+-- | Pair lists of edges with all their inverse edges.
+allInverses :: (Ord n, Show n) => Edges n -> [(Edge n, Edges n)]
+allInverses [] = []
+allInverses (e:es) = (e, inverses e es) : allInverses es
+
+-- | Find alls parrallel Edges for given 'Edge'.
+parallels :: (Ord n, Show n) => Edge n -> Edges n -> Edges n
+parallels (n, _, m) es
+    = [(n', w', m') | (n', w', m') <- es, n'== n, m' == m ]
+
+-- | Find alls inverses Edges for given 'Edge'.
+inverses :: (Ord n, Show n) => Edge n -> Edges n -> Edges n
+inverses (n, _, m) es
+    = [(m', w', n') | (m', w', n') <- es, n'== n, m' == m ]
+
+-- | Transform edge sets into adjacency lists.
+adjacencyList :: Ord n => Edges n  -> [(n, [(Weight, n)])]
+adjacencyList es = map successors sources
+  where sources = nub $ map source es
+        successors n = (n, [( w, m) | (n', w, m) <- es, n' == n ])
+
+-- | Constructs a 'Grapf' from 'Edges'.
+graph :: (Ix n, Ord n, Show n) => Edges n -> Graph n
+graph es = array (nodeRange es) (adjacencyList (simpleUndirected es))
+
+-- | Extract all Edges from given 'Graph'
+edges :: (Ix n, Ord n, Show n) => Graph n -> Edges n
+edges = concatMap toEdges . assocs
+  where toEdges (s, xs) = map (\ (w, t) -> (s, w, t)) xs
+
+-- some auxiliary functions on graphs (from Rabhi/Lapalme)
+
+nodes :: Ix n => Array n a -> [n]
+nodes = indices
+
+numNodes :: Ix n => Array n a -> Int
+numNodes = length . nodes
+
+-- array selection 'g!v' yields the adjacency list [(w,n)] of a node
+
+-- paths consisting of a node sequence and the accumulated cost
+-- record syntax derives selector functions:
+--    cost:: Path n w -> w,
+--    path:: Path n w -> [n]
+data Path n = P
+  { cost :: Weight
+  , path :: [n]
+  } deriving (Eq, Ord, Show)
+
+emptyPath :: Path a
+emptyPath = P 0 []
+
+------------------------------------------------------------------------
+-- up to this point, everything shall be given
+
+add :: Path a -> Weight -> a -> Path a
+add (P cost path) w n = P (cost+w) (n:path)
+
+contains :: Eq n => Path n -> n -> Bool
+contains (P cost []) n = False
+contains (P cost (x:xs)) n = if x/=n then contains (P cost xs) n
+  else True
+
+
+cycles :: (Show n, Ix n) => Graph n -> n -> [Path n]
+cycles g n = (P 0 [n]) : traverse1 g (g!n) (P 0 [n])
+
+
+traverse1 :: Ix n => Graph n -> [(Weight,n)] -> Path n -> [Path n]
+traverse1 _ [] _ = []
+traverse1 g ((w,n):es) (P pw pn) 
+    | not (contains (P pw pn) n) = traverse1 g (g!n) (add (P pw pn) w n) ++ traverse1 g es (P pw pn)
+    | n == head pn = [ add (P pw pn) w n] ++ traverse1 g es (P pw pn)
+    | otherwise = traverse1 g es (P pw pn)
+
+
+
+tpp :: (Ix n, Show n) => Graph n -> n -> Maybe (Path n)
+tpp g n | ls == [] = Nothing
+        |otherwise = Just (head (getShortest ls))
+                 where ls = (filterCycle g (cycles g n))
+
+
+filterCycle :: (Eq n, Ix n) => Graph n -> [Path n] -> [Path n]
+filterCycle _ [] = []
+filterCycle g ((P w p):xs) = if (length p == ((numNodes g)+1)) then (P w p) : filterCycle g xs
+    else filterCycle g xs
+
+     
+getShortest :: (Show n, Ix n) => [Path n] -> [Path n]
+getShortest p | p == [] = []
+              | length p == 1 = p
+              | (getCost (head p)) < (getCost (head (tail p))) = getShortest ((head p): (tail (tail p)))
+              |otherwise = getShortest (tail p)
+
+getCost :: (Show n, Ix n) => Path n -> Integer
+getCost (P c _) = c

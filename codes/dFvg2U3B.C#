@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ZavrushtaneVMinaloto
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double Pari = double.Parse(Console.ReadLine());
+
+            double Godina = double.Parse(Console.ReadLine());
+
+            double all = 12000;
+            double M = 12000;
+            double sumH = 0;
+            double sumN = 0;
+            double o = 0;
+            double H = 0;
+            double B = 0;
+            double C = 0;
+            double a = 0;
+            double sum = 0;
+            for (double i = 1800; i <= Godina; i++)
+            {
+                double all2 = ((i - 1782) * 50) + 12000;
+
+                if (i % 2 == 0)
+                {
+                    all = 12000;
+                    B  += all;
+                }
+
+                if (i % 2 == 1)
+                {
+
+                    
+                    C += all2;
+                }
+
+
+                o = B + C;
+                H = Pari - o;
+                a =((( Pari - C-B)+all));
+
+            }
+           
+          
+            if(H>=0)
+
+            Console.WriteLine($"Yes! He will live a carefree life and will have {H:f2} dollars left.");
+           
+               else
+            {
+                sum = Math.Abs(a - M);
+                Console.WriteLine($"He will need {sum:f2} dollars to survive.");
+            }
+            Console.WriteLine();
+        }
+    }
+}

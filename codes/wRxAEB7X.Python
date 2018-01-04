@@ -1,0 +1,145 @@
+""" Antes de lerem os comentários, leiam a questão pelo menos uma vez
+A questão é essa: https://thehuxley.com/problem/36?quizId=2563
+
+Se eu fosse criar um algoritmo para responder esses perguntas seria assim:
+1 - Entender o problema (parte mais importante)
+2 - Fazer o programa receber os dados de entrada
+3 - Processar esses dados
+4 - Exibir a saída
+
+Como saber se estou fazendo cada passo desse certo?
+1 - Para conferir se entendeu o problema, depois de ler, tu deve ir nos exemplos de entrada e 
+saída (final da paǵina da questão) e compreender o porquê de ter aqueles valores na saída 
+para aquela entrada específica de dados.
+
+Exemplo:
+A questão diz que vai dar dois números inteiros (M e N) e quer que o programa retorne o maior múltiplo
+de M que seja menor ou igual a N.
+
+Entrada:    Saída:
+7           49               
+50
+
+(Questão norteadora) Por qual motivo a saída é 49 quando a entrada é 7 e 50?
+Nessa entrada, 7 é o M e 50 é o N. De acordo com a questão, qual o maior múltiplo de 7 que é menor
+que 50?
+Múltiplos de 7: 7, 14, 21, 28, 35, 42, 49, 56, 63...
+Qual desses múltiplos satisfaz a condição de ser menor ou igual a 50 e maior que os demais? 
+R: 49
+Por esse motivo a saída é 49.
+
+2 - Depois de ter entendido o que a questão pede a gente tenta codificar sempre começando com a
+leitura de dados.
+
+Formato de entrada:
+Consiste de dois inteiros positivos M e N.
+
+M = int(input())
+N = int(input())
+Até aqui metade do problema já foi resolvido
+
+3 - Essa etapa de processamento de dados é onde a maioria dos códigos ficam diferentes, cada solução
+vai depender das ferramentas que o programador conhece, ou da maneira que ele prefere tratar os dados.
+Eu vou tentar dar umas solução em português (informal) e depois mostrar como seria em python.
+
+Primeira ideia (português):
+Checar número por número no intervalo de [M, N] se é múltiplo de M e usar uma variável temporária
+para ficar sendo atualizada com o maior múltiplo encontrado.
+
+auxiliar = M # inicializei com M porque é o primeiro valor que pode ser múltiplo
+             # pensei em inicializar com 1, mas 1 é múltiplo de todo número então deixa M mesmo
+maior = -1   # inicializo com -1 porque é um valor de referência caso não existam múltiplos
+enquanto auxiliar for menor ou igual a N:
+    se auxiliar for múltiplo de M:
+        maior vai receber auxiliar
+    auxiliar vai receber auxiliar + 1 # essa incrementação no fim do loop, faz o auxiliar ter 
+                                      # um valor novo e permite que o loop continue até que a
+                                      # expressão do while seja falsa
+                            
+Percebam que no fim de cada laço, a variável 'maior' vai ter o valor do maior múltiplo encontrado
+e que seja menor que N ou vai ter o valor -1 caso não encontre nenhum múltiplo (não entre no laço
+condicional).
+O valor do 'auxiliar' vai variar de [M, N] em cada loop dado no programa 
+Valores do auxiliar(M, M+1, M+2, M+3... N, N+1), quando auxiliar assume o valor de (N+1), ele passa
+a insatisfazer a condição inicial do while e sai do laço de repetição
+
+Primeira ideia (python):
+auxiliar = M 
+maior = -1
+while auxiliar <= N: # enquanto auxiliar for menor ou igual que o número N, faça o que tiver abaixo
+    if auxiliar % M == 0: # se o resto da divisão auxiliar/M for 0, então é múltiplo
+        maior = auxiliar
+    auxiliar = auxiliar + 1 # aumenta o valor de auxiliar para testar se outro número, maior que 
+                            # o auxiliar anterior e menor que N, é múltiplo de M
+                            
+Segunda ideia (português):
+Checar número por número no intervalo de [N, M] se é múltiplo de M e armazenar numa variável o 
+primeiro número encontrado. Essa solução semelhante a anterior, mas aqui a gente checa os números
+na ordem inversa e em vez de ficar atualizando uma variável anterior toda vez que encontrar um número,
+a gente só atualiza uma vez
+
+auxiliar = N # agora auxiliar recebe o maior valor do intervalo
+maior = -1 # se essa variável continuar com -1 é porque não tem múltiplo, se receber outro valor 
+           # diferente de -1, é porque esse outro valor é o maior múltiplo
+enquanto auxiliar for maior ou igual a M:
+    se auxiliar for múltiplo de M:
+        maior vai receber auxiliar
+        break
+    auxiliar = auxiliar - 1
+        
+Dessa vez ele vai olhar do maior número para o menor e comparar se é múltiplo, se encontrar um 
+múltiplo, esse número encontrado é o maior múltiplo e será atribuído à variável 'maior'.
+A variável 'auxiliar' vai decrescendo a cada loop que não encontrar um múltiplo
+Valore de auxiliar (N, N-1, N-2, N-3... M, M-1), quando assumir o valor de (M-1), ela deixa de
+satisfazer a condição do laço de repetição e sai do loop. E se ela chegar a assumir esse valor (M-1),
+significa que não encontrou nenhum múltiplo durante as checagens e portanto o valor da variável
+'maior' continua sendo -1.
+
+Segunda ideia (python):
+
+auxiliar = N
+maior = -1
+while auxiliar >= M:
+    if auxiliar % M == 0:
+        maior = auxiliar
+        break # se achou o maior múltiplo, pega a bike e vaza do loop
+    auxiliar = auxiliar - 1
+    
+Pronto, a variável vai ter o maior múltiplo encontrado ou -1 caso não exista múltiplo nesse intervalo
+
+4 - A quarta etapa é tão simples quanto a segunda, mas exige cuidado na formatação de saída
+É necessário ter cuidado com quantas variáveis a questão exige, nesse caso apenas uma, e se deve
+imprimir a variável com alguma mensagem estática.
+A questão pede para imprimir o múltiplo caso exista ou "sem multiplos menores que N" caso contrário.
+
+
+saída (português):
+se (maior for diferente de -1):
+    imprima (valor da variável 'maior')
+senão:
+    imprima ("sem multiplos menores que N") # esse N é variável, DEPENDE DO USUÁRIO
+
+saída (python):
+if maior != -1:
+    print (maior)
+else:
+    print ("sem multiplos menores que %i", N) 
+"""
+
+
+# Código completo da segunda ideia
+
+M = int(input())
+N = int(input())
+auxiliar = N
+maior = -1
+while auxiliar >= M:
+    if auxiliar % M == 0:
+        maior = auxiliar
+        break # se achou o maior múltiplo, pega a bike e vaza do loop
+    auxiliar = auxiliar - 1
+    
+if maior != -1:
+    print (maior)
+else:
+    print ("sem multiplos menores que %i", N)

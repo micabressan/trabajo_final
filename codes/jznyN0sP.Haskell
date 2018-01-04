@@ -1,0 +1,7 @@
+module Temp where
+
+data Tree a = Branch a (Tree a) (Tree a) | EmptyTree deriving Show
+
+getListFromTreeByVal EmptyTree srchVal = []
+getListFromTreeByVal (Branch val l r) srchVal 	| (val >= srchVal) = ((getListFromTreeByVal l srchVal) ++ [val] ++ (getListFromTreeByVal r srchVal ))
+						| otherwise = ((getListFromTreeByVal l srchVal )++(getListFromTreeByVal r srchVal))

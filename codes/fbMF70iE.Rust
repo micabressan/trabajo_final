@@ -1,0 +1,25 @@
+fn main() {
+    use std::io::BufReader;
+    use std::io::BufRead;
+    use std::fs::File;
+
+    let f = File::open("input.txt").unwrap();
+    let file = BufReader::new(&f);
+    let mut vec: Vec<&str> = vec![];
+    let mut tower;
+
+    for line in file.lines() {
+        tower = line.unwrap();
+        if tower.contains("->") {
+            let mut temp = "";
+            for s in tower.split("->"){
+                // QUESTION: how to get only the second part of the splitted string?
+                temp = s;
+            }
+            vec.push(temp);
+        }
+    }
+
+    println!("{:?}", vec);
+    // QUESTION: tower doesn't live long enough?
+}

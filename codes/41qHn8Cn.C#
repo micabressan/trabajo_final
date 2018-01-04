@@ -1,0 +1,114 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Fungus;
+
+
+public class character_move : MonoBehaviour {
+
+	int MODE_FORWORD = 0;
+	int MODE_BACKWORD = 1;
+	int MODE_STOP = 2;
+	int currentMode;
+
+	int IMAGE_WALK_1 = 1;
+	int IMAGE_WALK_2 = 2;
+	int IMAGE_WALK_3 = 3;
+	int currentWalkImage = -1;
+
+	float speed = 200.0f;
+	float destination = 0;
+	bool isMoving = false;
+	string name = "";
+	Vector3 move = new Vector3();
+
+	public Sprite walk1;
+	public Sprite walk2;
+	public Sprite walk3;
+
+	// Use this for initialization
+	void Start () {
+		currentMode = MODE_STOP;
+		currentWalkImage = IMAGE_WALK_1;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		float currentX = transform.position.x;
+		if (currentMode == MODE_FORWORD) {
+			if (currentX >= destination) {
+				currentMode = MODE_STOP;
+				Flowchart.BroadcastFungusMessage ("flashingdisable_"+name);
+				currentWalkImage = IMAGE_WALK_1;
+				GetComponent<Image> ().sprite = walk1;
+			} else {
+				transform.rotation = Quaternion.Euler(0, 0, 0);
+				transform.position += move * speed * Time.deltaTime;
+				walkingAnimation ();
+			}
+		} else if (currentMode == MODE_BACKWORD) {
+			if (currentX <= destination) {
+				currentMode = MODE_STOP;
+				Flowchart.BroadcastFungusMessage ("flashingdisable_"+name);
+			} else {
+				transform.rotation = Quaternion.Euler(0, 180F, 0);
+				transform.position += move * speed * Time.deltaTime;
+			}
+		}
+		
+	}
+
+	public void move_to (Transform target, string name) {
+		float currentX = transform.position.x;
+		float targetX = target.position.x;
+		this.name = name;
+		if (currentX < targetX) {
+			currentMode = MODE_FORWORD;
+			move = new Vector3 (1, 0, 0);
+			destination = targetX - 130;
+		} else {
+			currentMode = MODE_BACKWORD;
+			move = new Vector3 (-1, 0, 0);
+			destination = targetX + 130;
+		}
+	}
+
+	float timer = 0f;
+	float delay = 0.3f;
+	int walkingCount = 0;
+
+	private void walkingAnimation () {
+		timer -= Time.deltaTime;
+		if (timer <= 0) {
+			if (walkingCount % 2 == 1) {
+				if (currentWalkImage == IMAGE_WALK_1) {
+					currentWalkImage = IMAGE_WALK_3;
+					GetComponent<Image> ().sprite = walk3;
+					timer = delay;
+					return;
+				} else if (currentWalkImage == IMAGE_WALK_3) {
+					currentWalkImage = IMAGE_WALK_1;
+					GetComponent<Image> ().sprite = walk1;
+					timer = delay;
+					walkingCount++;
+					return;
+				}
+			} else {
+				if (currentWalkImage == IMAGE_WALK_1) {
+					currentWalkImage = IMAGE_WALK_2;
+					GetComponent<Image> ().sprite = walk2;
+					timer = delay;
+					return;
+				} else if (currentWalkImage == IMAGE_WALK_2) {
+					currentWalkImage = IMAGE_WALK_1;
+					GetComponent<Image> ().sprite = walk1;
+					timer = delay;
+					walkingCount++;
+					return;
+				}
+			}
+		}
+	}
+
+}

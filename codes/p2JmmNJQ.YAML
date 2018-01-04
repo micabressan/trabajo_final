@@ -1,0 +1,55 @@
+name: default
+- bukkit.command.plugins:
+    value: false
+- bukkit.command.version:
+    value: false
+permissions:
+- prefix.50.&8[G] &f
+- towny.wild.*
+- multiverse.portal.access.*
+- towny.command.town.*
+- essentials.afk
+- essentials.afk.auto
+- essentials.balance
+- essentials.balancetop
+- essentials.compass
+- essentials.depth
+- essentials.getpos
+- essentials.help
+- essentials.helpop
+- essentials.list
+- essentials.mail
+- essentials.mail.send
+- essentials.motd
+- essentials.msg
+- essentials.pay
+- essentials.protect.pvp
+- essentials.rules
+- essentials.signs.create.protection
+- essentials.signs.use.buy
+- essentials.signs.use.enchant
+- essentials.signs.use.protection
+- essentials.signs.use.sell
+- essentials.spawn
+- essentials.tpaccept
+- essentials.tpdeny
+- essentials.warp
+- horsekeep.groups.guest
+- horsekeep.member
+- horsekeep.member.add
+- horsekeep.member.remove
+- horsekeep.protect
+- horsekeep.store
+- horsekeep.summon
+- hyperconomy.use
+- lwc.protect
+- mcmmo.commands.defaults
+- mcmmo.commands.mctop.all
+- minigame.join
+- minigame.quit
+- multiverse.access.minigamesworld
+- multiverse.access.world
+- multiverse.access.world_nether
+- multiverse.access.world_the_end
+- paintball.general
+- towny.town.resident

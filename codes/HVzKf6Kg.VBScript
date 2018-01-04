@@ -1,0 +1,11 @@
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set TargetFolder = objFSO.GetFolder("Z:\movies")
+
+Set files = TargetFolder.Files
+
+For each file in files
+	'wscript.echo file.Name
+	nameSplit = Split(file.Name, ".")
+	objFSO.CreateFolder "Z:\movies\" & nameSplit(0)
+	objFSO.MoveFile "Z:\movies\" & file.Name, "Z:\movies\" & namesplit(0) & "\"
+Next

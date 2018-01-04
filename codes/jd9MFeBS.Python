@@ -1,0 +1,35 @@
+def vp_start_gui():
+    '''Starting point when module is the main routine.'''
+    global val, w, root
+    
+    root = Tk()
+    top = New_Toplevel_1 (root)
+    bit_support.init(root, top)
+    root.mainloop()
+
+w = None
+def create_New_Toplevel_1(root, *args, **kwargs):
+    '''Starting point when module is imported by another program.'''
+    global w, w_win, rt
+    rt = root
+    w = Toplevel (root)
+    top = New_Toplevel_1 (w)
+    bit_support.init(w, top, *args, **kwargs)
+    return (w, top)
+
+def destroy_New_Toplevel_1():
+    global w
+    w.destroy()
+    w = None
+
+
+class New_Toplevel_1:
+    def __init__(self, top=None):
+
+        self.Label1 = Label(top)
+        self.Label1.place(relx=0.48, rely=0.49, height=21, width=34)
+
+        self.Label1.configure(text='''Label''')
+
+if __name__ == '__main__':
+    vp_start_gui()

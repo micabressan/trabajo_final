@@ -1,0 +1,3 @@
+(defn foo
+  ([a] (str "a is " a))
+  ([a & more] (merge [] (foo a) (apply foo more))))

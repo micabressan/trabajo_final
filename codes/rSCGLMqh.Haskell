@@ -1,0 +1,2 @@
+everyNth'' :: Int -> [a] -> [a]
+everyNth'' n xs = map (xs !!) [n-1,2*n-1..length xs]

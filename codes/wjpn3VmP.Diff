@@ -1,0 +1,192 @@
+diff --git a/src/pregmod/widgets/economyWidgets.tw b/src/pregmod/widgets/economyWidgets.tw
+index 96060dd..5e819c6 100644
+--- a/src/pregmod/widgets/economyWidgets.tw
++++ b/src/pregmod/widgets/economyWidgets.tw
+@@ -394,7 +394,7 @@
+ 		<<if State.temporary[$args[1]].toLowerCase() == "all" || "max">> 
+ 			<<set State.temporary[$args[1]] = Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))>>
+ 			<<replace `'#'+$args[0]+'AssetsPurchasing'`>> 
+-				Bought <<print Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))>> units for ¤<<print Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))*500*State.variables[$args[0]+"AssetPrice"]>>
++				Bought <<print commaNum(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500)))>> units for <<print cashFormat(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))*500*State.variables[$args[0]+"AssetPrice"])>>
+ 			<</replace>>
+ 			<<set State.variables[$args[0]+"Assets"] += (eval(parse('_Num' + $args[0]))) * 500>>
+ 			<<set $corpCash -= (eval(parse('_Num' + $args[0]))) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+@@ -414,7 +414,7 @@
+ 		<<set _DesPerc = State.temporary[$args[1]]>>
+ 		<<set State.temporary[$args[1]] = Math.floor((Math.clamp((Number.parseFloat(State.temporary[$args[1]])/100),0,1)*$corpCash)/(State.variables[$args[0]+"AssetPrice"] * 500))>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			Purchased <<print State.temporary[$args[1]]>> units (<<print (State.temporary[$args[1]]*(State.variables[$args[0]+"AssetPrice"] * 50000)/$corpCash).toFixed(2)>>% of cash, desired was _DesPerc)
++			Purchased <<print commaNum(State.temporary[$args[1]])>> units (<<print (State.temporary[$args[1]]*(State.variables[$args[0]+"AssetPrice"] * 50000)/$corpCash).toFixed(2)>>% of cash, desired was _DesPerc)
+ 		<</replace>>
+ 		<<set State.variables[$args[0]+"Assets"] += (eval(parse('_Num' + $args[0]))) * 500>>
+ 		<<set $corpCash -= (eval(parse('_Num' + $args[0]))) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+@@ -453,7 +453,7 @@
+ /* Sell all */
+ 		<<if State.temporary[$args[1]].toLowerCase() == "all" || "max">>
+ 			<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-				Sold <<print Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)>> units for ¤<<print Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)*500*State.variables[$args[0]+"AssetPrice"]>>
++				Sold <<print commaNum(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500))>> units for <<print cashFormat(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)*500*State.variables[$args[0]+"AssetPrice"])>>
+ 			<</replace>>
+ 			<<set State.temporary[$args[1]] = Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)>>
+ 			<<set State.variables[$args[0]+"Assets"] -= eval(parse('_Num' + $args[0])) * 500>>
+@@ -474,7 +474,7 @@
+ 		<<set _DesPerc = State.temporary[$args[1]]>>
+ 		<<set State.temporary[$args[1]] = Math.ceil((State.variables[$args[0]+"Assets"]-500)/500*(Math.clamp((Number.parseFloat(State.temporary[$args[1]])/100),0,1)))>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			Sold <<print State.temporary[$args[1]]>> units (<<print (State.temporary[$args[1]]*100/((State.variables[$args[0]+"Assets"]-500)/500)).toFixed(2)>>% of $args[0] assets, desired was _DesPerc)
++			Sold <<print commaNum(State.temporary[$args[1]])>> units (<<print (State.temporary[$args[1]]*100/((State.variables[$args[0]+"Assets"]-500)/500)).toFixed(2)>>% of $args[0] assets, desired was _DesPerc)
+ 		<</replace>>
+ 		<<set State.variables[$args[0]+"Assets"] -= eval(parse('_Num' + $args[0])) * 500>>
+ 		<<set $corpCash += eval(parse('_Num' + $args[0])) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+diff --git a/src/uncategorized/corporationDevelopments.tw b/src/uncategorized/corporationDevelopments.tw
+index 2df4bab..33291b0 100644
+--- a/src/uncategorized/corporationDevelopments.tw
++++ b/src/uncategorized/corporationDevelopments.tw
+@@ -18,7 +18,7 @@
+ <<set $corpValue = ($generalAssets*$generalAssetPrice)+($slaveAssets*$slaveAssetPrice)+($entrapmentAssets*$entrapmentAssetPrice)+($captureAssets*$captureAssetPrice)+($trainingAssets*$trainingAssetPrice)+($surgicalAssets*$surgicalAssetPrice)+($drugAssets*$drugAssetPrice)>>
+ <<set $corpProfit = Math.trunc($corpValue*(random(7,15)/1000))>>
+ <<set $corpCash += $corpProfit>>
+-Your corporation made a profit of ¤$corpProfit last week.
++Your corporation made a profit of <<print cashFormat($corpProfit)>> last week.
+ <<if $mercenariesHelpCorp > 0>>
+ 	The $mercenariesTitle assist it with difficult enslavement targets. Otherwise, it
+ 	<<set $slaveAssets += $mercenaries*1000>>
+@@ -47,7 +47,7 @@ Your corporation made a profit of ¤$corpProfit last week.
+ 	<<set $slaveAssets += Math.trunc(($captureAssets+$entrapmentAssets)*0.01)>>
+ 	<<set $corpPeopleEnslaved += Math.trunc(($captureAssets+$entrapmentAssets)*0.0001)>>
+ <</if>>
+-in total, the corporation has enslaved $corpPeopleEnslaved people.
++in total, the corporation has enslaved <<print commaNum($corpPeopleEnslaved)>> people.
+ <<if $slaveAssets < ($trainingAssets+$surgicalAssets+$drugAssets)>>
+ 	The corporation has enough training and medical assets to rapidly improve its human holdings.
+ 	<<set $slaveAssets = Math.trunc($slaveAssets*1.1)>>
+@@ -74,27 +74,27 @@ in total, the corporation has enslaved $corpPeopleEnslaved people.
+ <</if>>
+ <</if>>
+ <<if $corpProfit*0.6 > ($personalShares+$publicShares)*3>>
+-	Since it is incredibly profitable, a massive dividend of ¤<<print Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares))>> was paid out to stockholders; you received @@.yellowgreen;¤<<print Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares))*$personalShares>>.@@
++	Since it is incredibly profitable, a massive dividend of <<print cashFormat(Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares)))>> was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat(Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares))*$personalShares)>>.@@
+ 	<<set $cash += Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares))*$personalShares>>
+ 	<<set $corpCash -= Math.trunc(($corpProfit*0.6)/($personalShares+$publicShares))*$personalShares>>
+ <<elseif $corpProfit > ($personalShares+$publicShares)*2.4>>
+-	Since it is extremely profitable, a huge dividend of ¤2/share was paid out to stockholders; you received @@.yellowgreen;¤<<print $personalShares*2>>.@@
++	Since it is extremely profitable, a huge dividend of ¤2/share was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat($personalShares*2)>>.@@
+ 	<<set $cash += $personalShares*2>>
+ 	<<set $corpCash -= ($personalShares+$publicShares)*2>>
+ <<elseif $corpProfit > ($personalShares+$publicShares)*1.5>>
+-	Since it is highly profitable, a large dividend of ¤1/share was paid out to stockholders; you received @@.yellowgreen;¤$personalShares.@@
++	Since it is highly profitable, a large dividend of ¤1/share was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat($personalShares)>>.@@
+ 	<<set $cash += $personalShares>>
+ 	<<set $corpCash -= ($personalShares+$publicShares)>>
+ <<elseif $corpProfit > ($personalShares+$publicShares)*0.8>>
+-	Since it is very profitable, a moderate dividend of ¤0.5/share was paid out to stockholders; you received @@.yellowgreen;¤<<print $personalShares*0.5>>.@@
++	Since it is very profitable, a moderate dividend of ¤0.5/share was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat($personalShares*0.5)>>.@@
+ 	<<set $cash += Math.trunc($personalShares*0.5)>>
+ 	<<set $corpCash -= Math.trunc(($personalShares+$publicShares)*0.5)>>
+ <<elseif $corpProfit > ($personalShares+$publicShares)*0.4>>
+-	Since it is moderately profitable, a reasonable dividend of ¤0.2/share was paid out to stockholders; you received @@.yellowgreen;¤<<print $personalShares*0.2>>.@@
++	Since it is moderately profitable, a reasonable dividend of ¤0.2/share was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat($personalShares*0.2)>>.@@
+ 	<<set $cash += Math.trunc($personalShares*0.2)>>
+ 	<<set $corpCash -= Math.trunc(($personalShares+$publicShares)*0.2)>>
+ <<elseif $corpProfit > ($personalShares+$publicShares)*0.2>>
+-	Since it is acceptably profitable, a small dividend of ¤0.1/share was paid out to stockholders; you received @@.yellowgreen;¤<<print $personalShares*0.1>>.@@
++	Since it is acceptably profitable, a small dividend of ¤0.1/share was paid out to stockholders; you received @@.yellowgreen;<<print cashFormat($personalShares*0.1)>>.@@
+ 	<<set $cash += Math.trunc($personalShares*0.1)>>
+ 	<<set $corpCash -= Math.trunc(($personalShares+$publicShares)*0.1)>>
+ <</if>>
+@@ -118,19 +118,19 @@ in total, the corporation has enslaved $corpPeopleEnslaved people.
+ 	<<set $sharePrice = (Math.trunc($sharePrice*random(85,random(90,95))))/100>>
+ <</if>>
+ 
+-Shares in your corporation are trading at ¤$sharePrice:
++Shares in your corporation are trading at <<print cashFormat($sharePrice)>>:
+ 
+ <<if $oldSharePrice == $sharePrice>>
+ 	no different from last week.
+ <<elseif $oldSharePrice > $sharePrice>>
+-	down <<print Math.trunc(($oldSharePrice-$sharePrice)*100)/100>> since last week.
++	down <<print cashFormat(Math.trunc(($oldSharePrice-$sharePrice)*100)/100)>> since last week.
+ <<else>>
+-	up <<print Math.trunc(($sharePrice - $oldSharePrice)*100)/100>> since last week.
++	up <<print cashFormat(Math.trunc(($sharePrice - $oldSharePrice)*100)/100)>> since last week.
+ <</if>>
+ 
+ <<set $oldSharePrice = Math.trunc($sharePrice)>>
+ 
+-You hold $personalShares shares personally while $publicShares are publicly held.
++You hold <<print commaNum($personalShares)>> shares personally while <<print commaNum($publicShares)>> are publicly held.
+ <span id="CorpAction">
+ <br>Purchase shares from corporation:
+ <<if $cash > 1000*$sharePrice>>
+@@ -189,7 +189,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;
+ <span id="purchasing"></span>
+-<span id="cashOnHand">¤$corpCash </span>in cash on hand.
++<span id="cashOnHand"><<print cashFormat($corpCash)>></span> in cash on hand.
+ <span id="update"></span>
+ 
+ <br>
+@@ -292,7 +292,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="generalAssetsDisp">¤<<print $generalAssetPrice*$generalAssets>> (<<print $generalAssets/500>> unit<<if $generalAssets/500 > 1>>s<</if>>)</span> in general assets.
++	<span id="generalAssetsDisp"><<print cashFormat($generalAssetPrice*$generalAssets)>> (<<print commaNum($generalAssets/500)>> unit<<if $generalAssets/500 > 1>>s<</if>>)</span> in general assets.
+ 	Prices are 
+ 	<<if $generalAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $generalAssetPrice*500>>ea@@.
+@@ -384,7 +384,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="slaveAssetsDisp">¤<<print $slaveAssetPrice*$slaveAssets>> (<<print Math.floor($slaveAssets/500)>> unit<<if Math.floor($slaveAssets/500) > 1>>s<</if>>)</span> in slaves.
++	<span id="slaveAssetsDisp"><<print cashFormat($slaveAssetPrice*$slaveAssets)>> (<<print commaNum(Math.floor($slaveAssets/500))>> unit<<if Math.floor($slaveAssets/500) > 1>>s<</if>>)</span> in slaves.
+ 	Prices are 
+ 	<<if $slaveAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $slaveAssetPrice*500>>ea@@
+@@ -496,7 +496,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="entrapmentAssetsDisp">¤<<print $entrapmentAssetPrice*$entrapmentAssets>> (<<print Math.floor($entrapmentAssets/500)>> unit<<if Math.floor($entrapmentAssets/500) > 1>>s<</if>>)</span> in legal enslavement assets.
++	<span id="entrapmentAssetsDisp"><<print cashFormat($entrapmentAssetPrice*$entrapmentAssets)>> (<<print commaNum(Math.floor($entrapmentAssets/500))>> unit<<if Math.floor($entrapmentAssets/500) > 1>>s<</if>>)</span> in legal enslavement assets.
+ 	Prices are 
+ 	<<if $entrapmentAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $entrapmentAssetPrice*500>>ea@@
+@@ -608,7 +608,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="captureAssetsDisp">¤<<print $captureAssetPrice*$captureAssets>> (<<print Math.floor($captureAssets/500)>> unit<<if Math.floor($captureAssets/500) > 1>>s<</if>>)</span> in conflict zone enslavement assets.
++	<span id="captureAssetsDisp"><<print cashFormat($captureAssetPrice*$captureAssets)>> (<<print commaNum(Math.floor($captureAssets/500))>> unit<<if Math.floor($captureAssets/500) > 1>>s<</if>>)</span> in conflict zone enslavement assets.
+ 	Prices are 
+ 	<<if $captureAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $captureAssetPrice*500>>ea@@
+@@ -720,7 +720,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="trainingAssetsDisp">¤<<print $trainingAssetPrice*$trainingAssets>> (<<print Math.floor($trainingAssets/500)>> unit<<if Math.floor($trainingAssets/500) > 1>>s<</if>>)</span> of slave training assets.
++	<span id="trainingAssetsDisp"><<print cashFormat($trainingAssetPrice*$trainingAssets)>> (<<print commaNum(Math.floor($trainingAssets/500))>> unit<<if Math.floor($trainingAssets/500) > 1>>s<</if>>)</span> of slave training assets.
+ 	Prices are 
+ 	<<if $trainingAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $trainingAssetPrice*500>>ea@@
+@@ -832,7 +832,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="surgicalAssetsDisp">¤<<print $surgicalAssetPrice*$surgicalAssets>> (<<print Math.floor($surgicalAssets/500)>> unit<<if Math.floor($surgicalAssets/500) > 1>>s<</if>>)</span> in surgical assets.
++	<span id="surgicalAssetsDisp"><<print cashFormat($surgicalAssetPrice*$surgicalAssets)>> (<<print commaNum(Math.floor($surgicalAssets/500))>> unit<<if Math.floor($surgicalAssets/500) > 1>>s<</if>>)</span> in surgical assets.
+ 	Prices are 
+ 	<<if $surgicalAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $surgicalAssetPrice*500>>ea@@
+@@ -944,7 +944,7 @@ You hold $personalShares shares personally while $publicShares are publicly held
+ 		<</if>>
+ 	<</link>>
+ <<else>>
+-	<span id="drugAssetsDisp">¤<<print $drugAssetPrice*$drugAssets>> (<<print Math.floor($drugAssets/500)>> unit<<if Math.floor($drugAssets/500) > 1>>s<</if>>)</span> in pharmaceutical assets.
++	<span id="drugAssetsDisp"><<print cashFormat($drugAssetPrice*$drugAssets)>> (<<print commaNum(Math.floor($drugAssets/500))>> unit<<if Math.floor($drugAssets/500) > 1>>s<</if>>)</span> in pharmaceutical assets.
+ 	Prices are 
+ 	<<if $drugAssetPrice > 10>>
+ 		@@.yellowgreen;¤<<print $drugAssetPrice*500>>ea@@

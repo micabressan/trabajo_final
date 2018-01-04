@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  修改版 By Ley -->
+<resources>
+	<string-array name="entries_duck_attenuation">
+		<item>一時停止</item>
+		<item>何もしない</item>
+		<item>音量 -3 dB</item>
+		<item>音量 -6 dB</item>
+		<item>音量 -10 dB</item>
+		<item>音量 -15 dB</item>
+	</string-array>
+
+	<string-array name="entries_lyrics_offset">
+		<item>"1.0 秒</item>
+		<item>"0.5 秒</item>
+		<item>"0 秒</item>
+		<item>"-0.5 秒</item>
+		<item>"-1.0 秒</item>
+	</string-array>
+
+	<string-array name="entries_lyrics_charset">
+		<item>自動選択</item>
+		<item>UTF-8</item>
+		<item>ISO-8859-1</item>
+		<item>Shift-JIS</item>
+		<item>Big-5</item>
+		<item>GB18030</item>
+	</string-array>
+
+	<string-array name="entries_lyrics_refreshrate">
+		<item>200 ミリ秒</item>
+		<item>500 ミリ秒</item>
+		<item>1000 ミリ秒</item>
+	</string-array>
+
+	<string-array name="scrobble_list_names">
+		<item>無効</item>
+		<item>Simple Last.fm Scrobbler</item>
+		<item>Scrobble Droid</item>
+	</string-array>
+	
+	<string-array name="entries_albumart_size">
+		<item>オリジナル</item>
+		<item>特大 300x300</item>
+		<item>大 174x174</item>
+		<item>中 64x64</item>
+	</string-array>
+
+	<!-- 全部用片假名应该会比较好听？嗯…也许吧…  -->
+	<string-array name="entries_color_palette">
+		<item>アップルレッド</item>
+		<item>コバルトブルー</item>
+		<item>エレクトリックシアン</item>
+		<item>グラスグリーン</item>
+		<item>レモンイエロー</item>
+		<item>ミッドナイトブラック</item>
+		<item>ムーンライトシルバー</item>
+		<item>サクラピンク</item>
+		<item>シャイニングゴールド</item>
+		<item>スカイアジュア</item>
+		<item>サンセットオレンジ</item>
+		<item>バイオレットパープル</item>
+	</string-array>
+
+	<string-array name="weeklist">
+		<item>"1週間</item>
+		<item>"2週間</item>
+		<item>"3週間</item>
+		<item>"4週間</item>
+		<item>"5週間</item>
+		<item>"6週間</item>
+		<item>"7週間</item>
+		<item>"8週間</item>
+		<item>"9週間</item>
+		<item>"10週間</item>
+		<item>"11週間</item>
+		<item>"12週間</item>
+	</string-array>
+
+</resources>

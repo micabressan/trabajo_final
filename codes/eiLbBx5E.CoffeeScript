@@ -1,0 +1,22 @@
+cards = [r1, r2, r3, r4, r5, r6]
+cardsYPos = [r1.y, r2.y, r3.y, r4.y, r5.y, r6.y]
+
+print cardsYPos[1]
+
+for i in [0..5]
+	cards[i].onMouseOver ->
+		cardsYPos[i] = this.y
+		this.animate
+			shadowY: 6
+			shadowBlur: 20
+			y: this.y - 10
+			options:
+				time: 0.3
+
+	cards[i].onMouseOut ->
+		this.animate
+			shadowY: 1
+			shadowBlur: 2
+			y: cardsYPos[i]
+			options:
+				time: 0.3

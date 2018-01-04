@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<WERReportMetadata>
+	<OSVersionInformation>
+		<WindowsNTVersion>0.0</WindowsNTVersion>
+		<Build>No Build</Build>
+		<Product>Linux</Product>
+		<Edition>No Edition</Edition>
+		<BuildString>No BuildString</BuildString>
+		<Revision>0</Revision>
+		<Flavor>No Flavor</Flavor>
+		<Architecture>Unknown Architecture</Architecture>
+		<LCID>0</LCID>
+	</OSVersionInformation>
+	<ParentProcessInformation>
+		<ParentProcessId>17050</ParentProcessId>
+		<ParentProcessPath>C:\Windows\explorer.exe</ParentProcessPath>
+		<ParentProcessCmdLine>C:\Windows\Explorer.EXE</ParentProcessCmdLine>
+	</ParentProcessInformation>
+	<ProblemSignatures>
+		<EventType>APPCRASH</EventType>
+		<Parameter0>UE4-HeliumRain</Parameter0>
+		<Parameter1>4.18.1</Parameter1>
+		<Parameter2>0</Parameter2>
+		<Parameter3>Unknown Fault Module</Parameter3>
+		<Parameter4>0.0.0.0</Parameter4>
+		<Parameter5>00000000</Parameter5>
+		<Parameter6>00000000</Parameter6>
+		<Parameter7>0000000000000000</Parameter7>
+		<Parameter8>!!</Parameter8>
+		<Parameter9>++UE4+Release-4.18!/usr/local/games/steamapps/common/HeliumRain/HeliumRain/Binaries/Linux/!Game!0</Parameter9>
+	</ProblemSignatures>
+	<DynamicSignatures>
+		<Parameter1>6.1.7601.2.1.0.256.48</Parameter1>
+		<Parameter2>1033</Parameter2>
+		<DeploymentName></DeploymentName>
+		<BuildVersion>++UE4+Release-4.18-CL-0</BuildVersion>
+		<IsEnsure>0</IsEnsure>
+		<IsAssert>0</IsAssert>
+		<CrashType>Crash</CrashType>
+		<EngineModeEx>Unset</EngineModeEx>
+	</DynamicSignatures>
+	<SystemInformation>
+		<MID>11111111-2222-3333-4444-555555555555</MID>
+		<SystemManufacturer>Unknown.</SystemManufacturer>
+		<SystemProductName>Linux machine</SystemProductName>
+		<BIOSVersion>A02</BIOSVersion>
+	</SystemInformation>
+</WERReportMetadata>

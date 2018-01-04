@@ -1,0 +1,40 @@
+=ERROR REPORT==== 29-Nov-2017::14:18:04 ===
+** at node Sim-Diasca-Sim-Diasca_Smart_City_Integration_Test-root-88592741-computing-node@simulator-90764319-16nfq.org.default.svc.cluster.local **
+
+WOOPER error for PID <9288.17679.1>, constructor (class_Log:construct/4) failed (cause: error):
+
+ - with error term:
+  {badmatch,{error,etimedout}}
+
+ - stack trace was (latest calls first):
+  1. class_Log:construct/4   [defined in class_Log.erl (line 40)]
+  2. wooper:construct_and_run_synchronous/3   [defined in wooper.erl (line 542)]
+
+ - for parameters:
+  [{actor_settings,50367,{20079,35003,6019},constant_arbitrary_order},
+   "/src/mock-simulators/smart_city_model/src/../output/events.xml",
+   ["/src/mock-simulators/smart_city_model/src/../deps/amqp_client",
+    "/src/mock-simulators/smart_city_model/src/../deps/amqp_client/ebin",
+    "/src/mock-simulators/smart_city_model/src/../deps/amqp_client/include/rabbit_common/ebin"]]
+=END OF WOOPER ERROR REPORT FOR <9288.17679.1> ===
+
+
+
+=ERROR REPORT==== 29-Nov-2017::14:18:05 ===
+Error in process <9288.17679.1> on node 'Sim-Diasca-Sim-Diasca_Smart_City_Integration_Test-root-88592741-computing-node@simulator-90764319-16nfq.org.default.svc.cluster.local' with exit value:
+{{nocatch,
+     {wooper_constructor_failed,<9288.17679.1>,class_Log,4,
+         [{actor_settings,50367,{20079,35003,6019},constant_arbitrary_order},
+          "/src/mock-simulators/smart_city_model/src/../output/events.xml",
+          ["/src/mock-simulators/smart_city_model/src/../deps/amqp_client",
+           "/src/mock-simulators/smart_city_model/src/../deps/amqp_client/ebin",
+           "/src/mock-simulators/smart_city_model/src/../deps/amqp_client/include/rabbit_common/ebin"]],
+         {badmatch,{error,etimedout}}}},
+ [{wooper,trigger_error,4,[{file,"wooper.erl"},{line,760}]}]}
+{"init terminating in do_boot",{{nocatch,{wooper_constructor_failed,<9288.17679.1>,class_Log,4,[{actor_settings,50367,{20079,35003,6019},constant_arbitrary_order},"/src/mock-simulators/smart_city_model/src/../output/events.xml",["/src/mock-simulators/smart_city_model/src/../deps/amqp_client","/src/mock-simulators/smart_city_model/src/../deps/amqp_client/ebin","/src/mock-simulators/smart_city_model/src/../deps/amqp_client/include/rabbit_common/ebin"]],{badmatch,{error,etimedout}}}},[{wooper,trigger_error,4,[{file,"wooper.erl"},{line,760}]}]}}
+init terminating in do_boot ({{nocatch,{wooper_constructor_failed,<9288.17679.1>,class_Log,4,[{_},[_],[_]],{badmatch,{_}}}},[{wooper,trigger_error,4,[{_},{_}]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+Command failed, with error result 1.
+../../../sim-diasca/../traces/../wooper/../common/GNUmakerules.inc:383: recipe for target 'smart_city_run' failed

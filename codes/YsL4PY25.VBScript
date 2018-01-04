@@ -1,0 +1,33 @@
+Private Type SalgsType
+
+	Dato As Date
+	Navn As String
+	Antall As Integer
+	Pris As Currency
+
+End Type
+
+Private Sub cboTestKode_Click()
+
+	Dim Salg() As SalgsType
+	Dim i As Integer
+	Dim strsql as String
+	Dim stdset as DAO.Recordset
+
+
+
+strsql  = "SELECT linjetabell.produkt, linjetabell.antall, Produkttabell.Pris, ordretabell.dato
+FROM Kundetabell INNER JOIN ordretabell ON Kundetabell.kundenavn = ordretabell.kundenavn, Produkttabell INNER JOIN linjetabell ON Produkttabell.navn = linjetabell.produkt"
+Set stdset = currentDb.OpenRecordset(strsql)
+
+With stdset
+    Do While Not .EOF
+        i = i + 1
+        ReDim Preserve Salg(1 To i)
+        Salg(i).Navn = stdset.Fields("!produkt").Value
+        Salg(i).Antall = stdset.Fields("antall").Value
+		Salg(i).Dato = stdset.Fields("dato").Value
+		Salg(i).Pris = stdset.Fields("Pris").Value
+        .MoveNext
+    Loop
+End With

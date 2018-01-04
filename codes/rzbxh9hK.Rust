@@ -1,0 +1,9 @@
+    for layer in 0.. {
+        let diameter = (layer * 2) + 1;
+        if input <= sq(diameter) {
+            let layer_index = input - sq(diameter - 2);
+            let tangent = (layer_index % (layer * 2) - layer).abs(); // travel distance to the nearest axis
+            println!("Result (Part 1): {}", layer + tangent);
+            break
+        }
+    }

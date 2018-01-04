@@ -1,0 +1,375 @@
+# MASTER PROGRAM, WITH ALL SUBPROGRAMS
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# writes componentDict into components.txt
+# get all keys in list, sort keys in order, construct string that is written to file by concatenating stuffi
+def turnComponentDictToComponentFile(componentDict):
+    dKeys = componentDict.keys() # get all dictionary keys in a list and sort them
+    dKeys.sort()
+    # construct file object one component (key) at a time
+    fileObject = ""
+    for key in dKeys:
+        valueTuple = componentDict[key]
+        fileObject += key + "," + str(valueTuple[0]) + "," + str(valueTuple[1]) + "," + str(valueTuple[2]) + "\n" 
+    f = open("components.txt", "w")
+    f.write(fileObject)
+    f.close()
+
+# help:        
+# 'recipeDict' - {recipeName:[(componentName, concentration, unit), (anotherTuple), ...]}
+# 'componentDict' - {componentName:(molarMass, phaseInNTP, density)}
+# 'fileObject' - componentName,molarMass,phaseInNTP,density
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# reads componentDict.txt into dictionaries
+def turnComponentFileToComponentDict():
+    dictionary = {}
+    dictionaryFile = open("components.txt", "r")
+    for line in dictionaryFile:
+        line = line[:] # change 'line' to reference the string that corresponds file object read from file
+        line = line.replace("\n", "") # remove line feed
+        splitData = line.split(",")
+        name = splitData[0]         # 'componentName' in components.txt 
+        molarMass = splitData[1]    # 'molarMass' in components.txt 
+        phaseInNTP = splitData[2]   # 'phaseInNTP' in components.txt
+        density = splitData[3]      # 'density' in components.txt 
+        # change number strings to floats, does nothing to strings with other characters
+        dictionary[name] = (float(molarMass), phaseInNTP, float(density))
+    dictionaryFile.close()
+    return dictionary
+
+# help:
+# 'recipeDict': {recipeName:[(componentName, concentration, unit), (anotherTuple), ...]}
+# 'componentDict': {componentName:(molarMass, phaseInNTP, density)}
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# writes buffer recipes from dictionary to 'recipes.txt' in alphabetical order
+def turnRecipeDictToRecipeFile(recipeDict):
+    dKeys = recipeDict.keys() # key = name of a recipe
+    dKeys.sort() # sort recipe names into alphabetical order
+    fileObject = ""
+    for key in dKeys:
+        fileObject += key + ":"
+        recipeContentList = recipeDict[key] # holds current recipes list of component tuples
+        for i in recipeContentList: # i = tuple from recipes component list
+            fileObject += str(i[0]) + "," + str(i[1]) + "," + str(i[2]) + "-" # i[0] = componentName, i[1] concentration, i[2] = concentrationUnit
+        fileObject += "\n"
+    f = open("recipes.txt", "w")
+    f.write(fileObject)
+    f.close()
+
+# help
+# 'recipeDict' - {recipeName:[(componentName, concentration, unit), (anotherTuple), ...]}
+# 'componentDict' - {componentName:(molarMass, phaseInNTP, density)}
+# 'fileObject' - key:componentName,concentration,unit;componentName,concentration,unit-...\n'''repeat'''\n'''repeat'''\n
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# builds 'recipeDict' from 'recipes.txt'
+def turnRecipeFileToRecipeDict():
+    dictionary = {}
+    dictionaryFile = open("recipes.txt", "r")
+    for line in dictionaryFile:
+        line = line[:]
+        line = line.replace("\n", "")
+        splitData = line.split(":") # recipe name and component information is separated by ":"
+        recipeKey = splitData[0] # name of a recipe in file, used as key in 'dictionary'
+        allComponents = splitData[1] # all components of given recipe
+        allComponentsStringList = allComponents.split("-") # different component of given recipe are separated by "-"
+        allComponentsStringList.remove("")
+        allComponentsList = []
+        # build 'allComponentsList' which contains components as tuples
+        for i in allComponentsStringList:
+            componentInfo = i.split(",") # different component values are separated by ","
+            componentInfoTuple = (componentInfo[0], float(componentInfo[1]), componentInfo[2])
+            allComponentsList.append(componentInfoTuple)
+            
+        dictionary[recipeKey] = allComponentsList
+    dictionaryFile.close()
+    return dictionary
+
+# help
+# 'recipeDict' - {recipeName:[(componentName, concentration, unit), (anotherTuple), ...]}
+# 'componentDict' - {componentName:(molarMass, phaseInNTP, density)}
+# 'fileObject' - key:componentName,concentration,unit-componentName,concentration,unit-...\n'''repeat'''\n'''repeat'''\n
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# add missing buffer components to the 'componentDict' (and eventually to the text file)
+
+def addMissingBufferComponent(componentDict, newComponent): 
+    # ask user to give component's molar mass and validate input
+    validMolarMass = False
+    while not validMolarMass:
+        molarMass = input("Enter buffer component's molar mass: ")
+        if isinstance(molarMass, int) or isinstance(molarMass, float):
+            validMolarMass = True
+        else:
+            print "Molar mass must be an integer or floating point number. Use 'dot' as decimal separator."
+    # ask user to give component's phase in NTP conditions and validate input
+    validPhaseInNTP = False
+    while not validPhaseInNTP:
+        phaseInNTP = raw_input("Enter buffer component's phase in NTP-conditions ('solid' or 'liquid'): ")
+        if phaseInNTP == "solid" or phaseInNTP == "liquid":
+            validPhaseInNTP = True
+        else:
+            print "Enter a valid phase."
+    # ask user to give component's density and validate input
+    validDensity = False
+    while not validDensity:
+        density = input("Enter buffer component's density: ")
+        if isinstance(density, int) or isinstance(density, float):
+            validDensity = True
+        else:
+            print "Density must be an integer or floating point number. Use 'dot' as decimal separator."
+    
+    componentDict[newComponent] = (molarMass, phaseInNTP, density)
+    print "Buffer component added to database."
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# add a new user defined bufferRecipe to the 'recipeDict' (dictionary containing all user made buffer recipes)
+def newBufferRecipe(recipeDict, componentDict): 
+    # builds a 'bufferRecipeList' which contains buffer component names, concentrations and concentrationTypes in tuples: [(name, concentration, concentrationType), (name, concentration, concentrationType), ...]
+    bufferRecipeList = []
+    bufferName = raw_input("Enter a name for your buffer recipe: ") # new buffer recipes name that is used when recipe is accessed
+    newComponent = raw_input("Enter new buffer component name that is added to the new recipe or 'STOP' to finish: ") 
+    while newComponent != "STOP":
+        # check if given component exists in 'componentDict', all components that appear in recipes must exist in 'componentDict' in order for the buffer calculations to work
+        componentInComponentDict = True
+        if newComponent not in recipeDict:
+            componentInComponentDict = False # prevents loop from advancing to 'concentration' and 'concentrationType' inquiries if user given component is not found in 'componentDict'
+            print "Buffer component ", newComponent, " was not found in database."                              # component not found in dictionary -> ask user if new component should be added to the dict (NO results in...
+            editComponentDict = raw_input("Do you want to add the component to database ('YES' / 'NO'): ")      # ...new component inquiry which also covers for possible misspellings)
+            # check if user gives valid input
+            validAnswer = False
+            while not validAnswer:
+                if editComponentDict != "YES" and editComponentDict != "NO":
+                    print "Please enter a valid answer."
+                    editComponentDict = raw_input("Do you want to add the component to database ('YES' / 'NO'): ")
+                elif editComponentDict == "YES" or editComponentDict == "NO":
+                    validAnswer = True
+            # if user inputs 'YES' buffer component is added to the 'componentDict' with its molarMass and phaseNTP 
+            if editComponentDict == "YES":
+                addMissingBufferComponent(componentDict, newComponent)
+                componentInComponentDict = True
+            # if 'NO' is given the user is asked for a new buffer component (while loop starts all over because 'componentInComponentDict' == False)             
+            elif editComponentDict == "NO":
+                # check if component is already added to the new recipe ('bufferRecipeList'), if not ask if user wants to add the component to componentDict (if not proceed to ask a new input since component must be in componentDict for calculations to work, so this also covers name misspelling)
+                componentNotInRecipe = False
+                while not componentNotInRecipe: 
+                    newComponent = raw_input("Enter new buffer component name that is added to the new recipe or 'STOP' to finish: ")
+                    if newComponent in bufferRecipeList:
+                        print "Buffer component is already added to the new recipe."
+                    else:
+                        componentNotInRecipe = True
+    
+        # component concentration and concentration type are asked only if buffer component was found in 'componentDict' (because component needs to be in 'componentDict' in order for the buffer calculations to work)
+        if componentInComponentDict:
+            # user input for component concentration as a string
+            newComponentConcentration = raw_input("Enter component concentration value in 'M', 'mM', '%(v/v)' or '%(w/v)' units: ") 
+            try:
+                newComponentConcentration = float(newComponentConcentration) # string is changed to float, if this fails program enters into a while loop which executes until user input is valid
+                validConcentration = True # if conversion to float gives an error this line is NOT executed
+            except ValueError:
+                validConcentration = False
+                while not validConcentration:
+                    print "Concentration value must be an integer or a floating point number. Use 'dot' as decimal separator."
+                    newComponentConcentration = raw_input("Enter component concentration value in 'M', 'mM', '%(v/v)' or '%(w/v)' units: ")
+                    try:
+                        newComponentConcentration = float(newComponentConcentration)
+                        validConcentration = True
+                    except ValueError:
+                        validConcentration = False
+
+            
+            # user input for concentrationType, if given type is not valid program enters into a while loop which executes until user input is valid
+            concentrationType = raw_input("Enter concentration value unit type ['M' / 'mM' / '%(v/v)' / '%(w/v)']: ") 
+            if concentrationType != "M" and concentrationType != "mM" and concentrationType != "%(v/v)" and concentrationType != "%(w/v)": # type is not valid if it is equivalent to none of the given choices
+                validType = False
+                while not validType: # ask new input until user gives a valid one
+                    concentrationType = raw_input("Enter concentration value unit type ['M' / 'mM' / '%(v/v)' / '%(w/v)']: ") 
+                    if concentrationType == "M" or concentrationType == "mM" or concentrationType == "%(v/v)" or concentrationType == "%(w/v)":
+                        validType = True
+                    else:
+                        print "Please enter a valid value type."
+                    
+            bufferRecipeList.append((newComponent, newComponentConcentration, concentrationType))
+            # check if component is already added to the new recipe ('bufferRecipeList') 
+            componentNotInRecipe = False
+            while not componentNotInRecipe:
+                newComponent = raw_input("Enter new buffer component name that is added to the new recipe or 'STOP' to finish: ")
+                if newComponent in bufferRecipeList:
+                    print "Buffer component is already added to the new recipe."
+                else:
+                    componentNotInRecipe = True
+    bufferRecipeList.sort(key=lambda tup: tup[0]) # sorts tuples in 'bufferRecipeList' into alphabetical order based on buffer component names (first value in tuples)  
+    recipeDict[bufferName] = bufferRecipeList # adds the new built recipe to 'recipeDict'
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Calculates instructions for given volume of buffer recipe recived from recipeDict (each component amount is calculated with info received from componentDict)
+def calculateBufferInstructions(recipeDict, componentDict):
+    validRecipeName = False # changed to 'True' when user enters a recipe name that is found in 'recipeDict'
+    while not validRecipeName:
+        recipeName = raw_input("Enter name of the buffer recipe: ") # name of the recipe found in 'recipeDict' 
+        if recipeName in recipeDict: # name of the recipe needs to be in 'recipeDict'
+            validRecipeName = True
+        else:
+            print "Recipe not found in database."
+
+    correctVolume = False # user can validate if volume given was misspelled   
+    while not correctVolume:
+        # ask buffer volume from user and validate user input
+        validVolume = False # changed to 'True' when user enters a valid volume for buffer
+        while not validVolume:            
+            bufferVolume = raw_input("Enter buffer volume in 'l' or 'ml' units: ") 
+            try:
+                bufferVolume = float(bufferVolume)      # string is changed to float, if this fails program enters into a while loop which executes until user input is valid
+                validVolume = True                      # if conversion to float (line above) gives an error this line is NOT executed
+            except ValueError:
+                print "Volume must be an integer or a floating point number. Use 'dot' as decimal separator."
+        # ask volume unit from user and validate user input
+        validVolumeUnit = False 
+        while not validVolumeUnit:
+            volumeUnit = raw_input("Enter buffer volume unit ('l' or 'ml'): ")
+            if volumeUnit == "l" or volumeUnit == "ml":
+                validVolumeUnit = True
+            else:
+                print "Enter a valid volume unit."
+        # ask if user entered a correct volume value and validate user input
+        validAnswer = False 
+        while not validAnswer:
+            isCorrectVolume = raw_input("Did you enter the volume correctly ('YES' or 'NO'): ")
+            if isCorrectVolume == "YES" or isCorrectVolume == "NO":
+                validAnswer = True
+                if isCorrectVolume == "YES": # if user enterer 'YES' 'while not correctVolume' loop ends
+                    correctVolume = True
+            else:
+                print "Enter a valid answer."
+    
+    # loop through all components of the buffer, calculate amount of component needed with given volume and build buffer instruction file object
+    # different calculation for different concentration units ('M', 'mM', '%(v/v)', '%(w/v)')
+    # in calculations component information is taken from 'componentDict'
+    fileObject = "Volume: " + str(bufferVolume) + " " + volumeUnit + "\n\nAmount..........Component\n\n"
+    if volumeUnit == "ml": # this after fileObject so that file shows correct total volume of the buffer
+        bufferVolume = bufferVolume / 1000 # change value from 'ml' units to 'l' units for calculations
+    bufferRecipe = recipeDict[recipeName] # 'bufferRecipe' refenrences list of component tuples of the named buffer
+    for i in bufferRecipe: # i = buffer component tuple in 'recipeDict': (componentName, concentration, unit) 
+        concentration = float(i[1])
+        if i[2] == "M" or i[2] == "mM":
+            if i[2] == "mM":
+                concentration = concentration / 1000 # mM -> M
+            componentInDictionary = componentDict[i[0]] # componentInDictionary = buffer component tuple in 'componentDict': (molarMass, phaseInNTP, density), i[0] == componentName (which is a key in 'componentDict')
+            componentMassOrVolume = concentration * bufferVolume * componentInDictionary[0] # m = cVM, componentInDictionary[0] == component molarMass
+            if componentInDictionary[1] == "solid":
+                if componentMassOrVolume < 1.0:
+                    componentMassOrVolume = componentMassOrVolume * 1000 # change units from 'g' to 'mg'
+                    componentUnit = "mg"
+                else:
+                    componentUnit = "g"
+            elif componentInDictionary[1] == "liquid":
+                componentMassOrVolume = componentMassOrVolume / componentInDictionary[2] # V = m / (roo) ; kg/m^3 = g/l
+                if componentMassOrVolume < 1.0:
+                    componentMassOrVolume = componentMassOrVolume * 1000 # change units from 'l' to 'ml'
+                    componentUnit = "ml"
+                else:
+                    componentUnit = "l"
+                
+
+        elif i[2] == "%(v/v)": # in reality this case should only be with liquid so no need to consider 'phaseInNTP'
+            componentMassOrVolume = (concentration / 100) * bufferVolume
+            if componentMassOrVolume < 1.0:
+                componentMassOrVolume = componentMassOrVolume * 1000 # change units from 'l' to 'ml'
+                componentUnit = "ml"
+            else:
+                componentUnit = "l"
+                
+
+        elif i[2] == "%(w/v)": # this case is valid for both pahses so no need to consider 'phaseInNTP'
+            componentMassOrVolume = (concentration * 10) * bufferVolume
+            if componentMassOrVolume < 1.0:
+                componentMassOrVolume = componentMassOrVolume * 1000 # change units from 'g' to 'mg'
+                componentUnit = "mg"
+            else:
+                componentUnit = "g"
+
+        # FORMULAE used in calculations:    
+        # V = n / c, if component is liquid
+        # m = cVM, if component is solid
+        # %(v/v) -> always liquid
+        # %(w/v) -> always in grams (even if substance is liquid)
+        # V = m / (roo) ; kg/m^3 = g/l
+        # 1 g / 100 ml = 1 % (w/v) --> 10 g/l = 1 %
+        # m = c (g/l) * V
+
+        fileObject += str(componentMassOrVolume) + " " + componentUnit + ".........." + i[0]  +  "\n"
+
+    # create a new file named as 'recipeName'.txt and write 'fileObject' into the file
+    f = open("bufferInstructions/" + str(recipeName) + ".txt", "w")
+    f.write(fileObject)
+    f.close()
+    print "New instructions for " + recipeName + " recipe added to 'bufferInstructions' folder."
+    
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# INTERFACE
+quitProgram = False
+# program keeps looping until '4. Quit' is chocen
+while not quitProgram:
+    # print 'MENU' for user to see
+    print "MENU\n1. Buffer Recipes\n\ta. Add a new recipe\n\tb. Remove recipe\n\tc. Search for a recipe\n\td. Show all recipes\n2. Buffer Components\n\ta. Add a new component\n\tb. Remove component\n\tc. Search for a component\n\td. Show all components\n3. Calculate a new buffer instruction file\n4. Quit\n"
+    # ask user to chooce category and validate input
+    validFirstChoice = False
+    while not validFirstChoice:
+        firstChoice = raw_input("Choose a category ('1', '2', '3' or '4'): ")
+        if firstChoice == "1" or firstChoice == "2" or firstChoice == "3" or firstChoice == "4":
+            validFirstChoice = True
+        else:
+            print "Choose a valid category."
+    print ""
+    if firstChoice == "1":
+        print "a. Add a new recipe\nb. Remove recipe\nc. Search for a recipe\nd. Show all recipes"
+        # ask user to choose a subcategory and validate input
+        validSecondChoice = False
+        while not validSecondChoice:
+            secondChoice = raw_input("Choose an operation ('a', 'b', 'c' or 'd'): ")
+            if secondChoice == "a" or secondChoice == "b" or secondChoice == "c" or secondChoice == "d":
+                validSecondChoice = True
+            else:
+                print "Choose a valid subcategory."
+        print ""
+        if secondChoice == "a":
+            componentDict = turnComponentFileToComponentDict()  # get dictionary from file
+            recipeDict = turnRecipeFileToRecipeDict()           # get dictionary from file
+            newBufferRecipe(recipeDict, componentDict)          # build a new buffer recipe
+            turnRecipeDictToRecipeFile(recipeDict)              # get dictionary from file
+            turnComponentDictToComponentFile(componentDict)
+        elif secondChoice == "b":
+            pass #
+        elif secondChoice == "c":
+            pass #
+        elif secondChoice == "d":
+            pass #
+    elif firstChoice == "2":
+        print "a. Add a new component\nb. Remove component\nc. Search for a component\nd. Show all components"
+        # ask user to choose a subcategory and validate input
+        validSecondChoice = False
+        while not validSecondChoice:
+            secondChoice = raw_input("Choose an operation ('a', 'b', 'c' or 'd'): ")
+            if secondChoice == "a" or secondChoice == "b" or secondChoice == "c" or secondChoice == "d":
+                validSecondChoice = True
+            else:
+                print "Choose a valid subcategory."
+        print ""
+    elif firstChoice == "3":
+        componentDict = turnComponentFileToComponentDict()      # get dictionary from file
+        recipeDict = turnRecipeFileToRecipeDict()               # get dictionary from file
+        calculateBufferInstructions(recipeDict, componentDict)  # calculate a new buffer instruction
+    elif firstChoice == "4":
+        print "BYE!"
+        quitProgram = True

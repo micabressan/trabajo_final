@@ -1,0 +1,8 @@
+def addition(first_value, second_value) :
+	my_sum = first_value + second_value
+	return my_sum
+	
+my_sum = int(input("Entrez votre premiere valeur : "))
+my_sum2 = int(input("Entrez votre deuxieme valeur : "))
+
+print(my_sum,"+",my_sum2,"=",addition(my_sum, my_sum2))

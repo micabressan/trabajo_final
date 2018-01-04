@@ -1,0 +1,16 @@
+{
+    "_id" : ObjectId("5a421b5019f0311aa4a92aef"),
+    "_class" : "com.kn.cynk.model.Notice",
+    "title" : "Przykładowe ogłoszenie",
+    "createdDate" : ISODate("2017-12-26T09:50:08.889Z"),
+    "expireDate" : ISODate("2018-02-01T12:40:10.171Z"),
+    "active" : true,
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porta, odio non laoreet feugiat, lectus lectus laoreet ligula, id sagittis dolor dolor quis erat. Duis placerat ultrices metus, et sollicitudin nulla aliquam sed. Pellentesque neque tellus, vehicula non nulla quis, faucibus pellentesque velit. Nulla velit nunc, accumsan sit amet eros tempor, sagittis tempor odio. Morbi quis suscipit nisl, iaculis consectetur leo. Sed ullamcorper sit amet tortor eget convallis. Nulla fringilla venenatis pellentesque. Fusce accumsan at metus quis placerat. Maecenas et orci nibh. Cras lectus ante, lobortis vel dignissim in, sagittis id tellus. Proin cursus ac neque id consectetur. Cras magna velit, pretium eget faucibus nec, scelerisque nec arcu. Sed luctus justo imperdiet nisl tempus, et maximus mauris sodales. Vivamus sodales nisi sit amet sapien scelerisque tincidunt. ",
+    "price" : "dogadamy się ;)",
+    "categoryName" : "mieszkania",
+    "views" : 0,
+    "user" : {
+        "$ref" : "user",
+        "$id" : ObjectId("5a172d7f1475610b3c9330b6")
+    }
+}

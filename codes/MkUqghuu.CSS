@@ -1,0 +1,117 @@
+<style type="text/css">
+class='top_menu'
+div#container
+	{ width:740px; position:absolute; left:50%; margin:0 -380px; background:#ffffff; border:10px solid #b9121b; height:400px; }
+
+h1
+	{ width:738px; margin:1px; color:#4C1B1B; font:helvetica; font-size:24pt; overflow:hidden; padding:80px 0 0; vertical-align:middle; text-align:right; }
+p	{ margin:0; padding:1.2em; }
+p a:link,
+p a:visited,
+p a:hover,
+p a:active
+	{ font-weight:bold; color:#b9121b; }
+
+ul#navigation-1
+	{ margin:0; padding:1px 0; list-style:none; width:100%; height:21px; border-top:1px solid #b9121b; border-bottom:1px solid #b9121b; font:normal 8pt verdana, arial, helvetica;}
+ul#navigation-1 li
+	{ margin:0; padding:0; display:block; float:left; position:relative; width:148px; }
+ul#navigation-1 li a:link,
+ul#navigation-1 li a:visited
+	{ padding:4px 0; display:block; text-align:center; text-decoration:none; background:#b9121b; color:#ffffff; width:148px; height:13px; }
+ul#navigation-1 li:hover a,
+ul#navigation-1 li a:hover,
+ul#navigation-1 li a:active
+	{ padding:4px 0; display:block; text-align:center; text-decoration:none; background:#ec454e; color:#ffffff; width:146px; height:13px; border-left:1px solid #ffffff; border-right:1px solid #ffffff; }
+	
+ul#navigation-1 li ul.navigation-2
+	{ margin:0; padding:1px 1px 0; list-style:none; display:none; background:#ffffff; width:146px; position:absolute; top:21px; left:-1px; border:1px solid #b9121b; border-top:none; }
+ul#navigation-1 li:hover ul.navigation-2
+	{ display:block; }
+ul#navigation-1 li ul.navigation-2 li
+	{ width:146px; clear:left; width:146px; }
+
+ul#navigation-1 li ul.navigation-2 li a:link,
+ul#navigation-1 li ul.navigation-2 li a:visited
+	{ clear:left; background:#b9121b; padding:4px 0; width:146px; border:none; border-bottom:1px solid #ffffff; position:relative; z-index:1000; }
+ul#navigation-1 li ul.navigation-2 li:hover a,
+ul#navigation-1 li ul.navigation-2 li a:active,
+ul#navigation-1 li ul.navigation-2 li a:hover
+	{ clear:left; background:#ec454e; padding:4px 0; width:146px; border:none; border-bottom:1px solid #ffffff; position:relative; z-index:1000; }
+
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3
+	{ display:none; margin:0; padding:0; list-style:none; position:absolute; left:145px; top:-2px; padding:1px 1px 0 1px; border:1px solid #b9121b; border-left:1px solid #b9121b; background:#ffffff; z-index:900; }
+ul#navigation-1 li ul.navigation-2 li:hover ul.navigation-3
+	{ display:block; }
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:link,
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:visited
+	{ background:#b9121b; }
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li:hover a,
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:hover,
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:active
+	{ background:#ec454e; }
+ul#navigation-1 li ul.navigation-2 li a span
+	{ position:absolute; top:0; left:132px; font-size:12pt; color:#fe676f; }
+ul#navigation-1 li ul.navigation-2 li:hover a span,
+ul#navigation-1 li ul.navigation-2 li a:hover span
+	{ position:absolute; top:0; left:132px; font-size:12pt; color:#ffffff; }
+</style>
+<ul class='top_menu'>
+<div id="container">
+	<br /><br />
+	<ul id="navigation-1">
+		<li><a href="#" title="Home">Home</a></li>
+		<li><a href="#" title="Products">Products</a>
+			<ul class="navigation-2">
+				<li><a href="#" title="Electric Guitars">Electric Guitars</a></li>
+				<li><a href="#" title="Acoustic Guitars">Acoustic Guitars <span>&raquo;</span></a>
+					<ul class="navigation-3">
+						<li><a href="#" title="Six String">Six String</a></li>
+						<li><a href="#" title="Twelve String">Twelve String</a></li>
+					</ul>
+				</li>
+				<li><a href="#" title="Bass Guitars">Bass Guitars</a></li>
+				<li><a href="#" title="Accessories">Accessories <span>&raquo;</span></a>
+					<ul class="navigation-3">
+						<li><a href="#" title="Guitar Stands">Guitar Stands</a></li>
+						<li><a href="#" title="Strings">Strings</a></li>
+						<li><a href="#" title="Tuners">Tuners</a></li>
+						<li><a href="#" title="Plectrums">Plectrums</a></li>
+						<li><a href="#" title="Capos">Capos</a></li>
+						<li><a href="#" title="Cases">Cases</a></li>
+						<li><a href="#" title="Straps">Straps</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" title="Your Account">Your Account</a>
+			<ul class="navigation-2">
+				<li><a href="#" title="Log In">Log In</a></li>
+				<li><a href="#" title="Register">Register</a></li>
+			</ul>
+		</li>
+		<li><a href="#" title="Help">Help</a>
+			<ul class="navigation-2">
+				<li><a href="#" title="FAQs">FAQs</a></li>
+				<li><a href="#" title="Forum">Forum</a></li>
+				<li><a href="#" title="Contact Us">Contact Us</a></li>
+			</ul>
+		</li>
+		<li><a href="#" title="Blah">Links</a>
+			<ul class="navigation-2">
+				<li><a href="#" title="Taylor Guitars">Taylor Guitars</a></li>
+				<li><a href="#" title="AER Amplifiers">AER Amplifiers</a></li>
+				<li><a href="#" title="Shure Microphones">Shure Microphones</a></li>
+				<li><a href="#" title="International">International <span>&raquo;</span></a>
+					<ul class="navigation-3">
+						<li><a href="#" title="Musican's Friend">Musican's Friend</a></li>
+						<li><a href="#" title="Thomann Music">Thomann Music</a></li>
+						<li><a href="#" title="Turnkey">Turnkey</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	
+</div>
+</ul class='top_menu'>

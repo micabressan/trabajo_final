@@ -1,0 +1,61 @@
+Error for expression (stringListValue.Values.ForEach(membergroupname =>
+                            {
+                                int mgid = agbll.GetMemberGroupIdByMemberGroupName(membergroupname);
+                                if (mgid == 0)
+                                    Logger.Instance.LogTrace(LogType.Warning, $"MemberGroup name '{membergroupname}' could not be found.");
+                                else if (!_memberGroupIds.Contains(mgid))
+                                    _memberGroupIds.Add(mgid);
+                            });) in file MemberBatchUpdatePlugin.cs, with error: Object reference not set to an instance of an object.
+Error for expression (stringListValue.Values.ForEach(bindname =>
+                        {
+                            int mgid = agbll.GetMemberGroupIdByGroupBindName(bindname);
+                            if (mgid == 0)
+                                Logger.Instance.LogTrace(LogType.Warning, $"MemberGroup bindname '{bindname}' could not be found.");
+                            else if (!_memberGroupIds.Contains(mgid))
+                                _memberGroupIds.Add(mgid);
+                        });) in file MemberBatchUpdatePlugin.cs, with error: Object reference not set to an instance of an object.
+Error for expression (_tagDefinitions.ForEach(td =>
+            {
+                try
+                {
+                    if (tagValues.ContainsKey(td.TagName)) return;
+
+                    if (td.RequiredTags != null && td.RequiredTags.Exists(rtag => !tagValues.Keys.ToList().Exists(k => string.Compare(rtag, k, StringComparison.OrdinalIgnoreCase) == 0)) && !string.IsNullOrWhiteSpace(td.FunctionName))
+                    {
+                        postpone.Enqueue(td);
+                        return;
+                    }
+
+                    if (td.XmlNamespaces != null)
+                    {
+                        foreach (var xns in td.XmlNamespaces.Where(xns => !nsm.HasNamespace(xns.Key)))
+                        {
+                            nsm.AddNamespace(xns.Key, xns.Value);
+                        }
+                    }
+                    if (string.IsNullOrWhiteSpace(td.XPath))
+                    {
+                        if (!string.IsNullOrWhiteSpace(td.FunctionName) && td.RequiredTags?.Count > 0)
+                            postpone.Enqueue(td);
+                        return;
+                    }
+
+                    XmlNodeList nlst = infodoc.SelectNodes(td.XPath, nsm);
+                    if (nlst == null || nlst.Count == 0) return;
+                    List<string> values = (from XmlNode nod in nlst where !string.IsNullOrWhiteSpace(nod?.InnerText) select nod.InnerText).ToList();
+                    if (values.Count == 0) return;
+                    if (!string.IsNullOrWhiteSpace(td.FunctionName))
+                    {
+                        List<string> result = TagFunctions.Execute(td, values, tagValues);
+                        if (result != null) tagValues.Add(td.TagName, result);
+                    }
+                    else
+                    {
+                        tagValues.Add(td.TagName, values);
+                    }
+                }
+                catch (Exception)
+                {
+                    Logger.Instance.LogTrace(LogType.Info, $"UploadTag {td.TagName} doesn't exist in the infoDoc XML document.\n{infodoc.OuterXml}");
+                }
+            });) in file TagParser.bll.cs, with error: Object reference not set to an instance of an object.

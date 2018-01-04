@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _02.HornetArmada
+{
+    public class StartUp
+    {
+        public static void Main()
+        {
+            Dictionary<string, Dictionary<string, long>> hornetArmy = new Dictionary<string, Dictionary<string, long>>();
+            Dictionary<string, long> hornetActivity = new Dictionary<string, long>();
+            int N = int.Parse(Console.ReadLine());
+            for (int i = 0; i < N; i++)
+            {
+                var commandArgs = Console.ReadLine()
+                    .Split(new char[] { ' ', '=', ':', '>', '-' }, StringSplitOptions.RemoveEmptyEntries)
+                    .ToArray();
+                long activity = long.Parse(commandArgs[0]);
+                string legionName = commandArgs[1];
+                string soldierType = commandArgs[2];
+                long soldierCount = long.Parse(commandArgs[3]);
+                if (!hornetArmy.ContainsKey(legionName))
+                {
+                    hornetArmy.Add(legionName, new Dictionary<string, long>());
+                }
+                if (!hornetActivity.ContainsKey(legionName))
+                {
+                    hornetActivity.Add(legionName, activity);
+                }
+                if (!hornetArmy[legionName].ContainsKey(soldierType))
+                {
+                    hornetArmy[legionName].Add(soldierType, soldierCount);
+                    if (hornetActivity.ContainsKey(legionName) && hornetActivity[legionName] < activity)
+                    {
+                        hornetActivity[legionName] = activity;
+                    }
+                }
+                else
+                {
+                    hornetArmy[legionName][soldierType] += soldierCount;
+                    if (hornetActivity.ContainsKey(legionName) && hornetActivity[legionName] < activity)
+                    {
+                        hornetActivity[legionName] = activity;
+                    }
+                }
+            }
+            var printInput = Console.ReadLine()
+                .Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToArray();
+            if (printInput.Length == 2)
+            {
+                long givenActivity = long.Parse(printInput[0]);
+                string givenSoldierType = printInput[1];
+                foreach (var hornetLegion in hornetArmy.Where(y => hornetArmy[y.Key].ContainsKey(givenSoldierType)).OrderByDescending(x => x.Value[givenSoldierType]))
+                {
+                    if (hornetActivity[hornetLegion.Key] < givenActivity)
+                    {
+                        Console.WriteLine($"{hornetLegion.Key} -> {hornetLegion.Value[givenSoldierType]}");
+                    }
+                }
+            }
+            else if (printInput.Length == 1)
+            {
+                string givenSoldierType = printInput[0];
+                foreach (var activity in hornetActivity.OrderByDescending(x => x.Value))
+                {
+                    if (hornetArmy[activity.Key].ContainsKey(givenSoldierType))
+                    {
+                        Console.WriteLine($"{activity.Value} : {activity.Key}");
+                    }
+                }
+            }
+        }
+    }
+}

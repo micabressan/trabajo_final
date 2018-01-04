@@ -1,0 +1,158 @@
+Sub DellMacro()
+Dim ws As Worksheet
+Dim wsSrc As Worksheet
+Dim wsTrg As Worksheet
+Dim lRow As Integer, lRowEmpty As Integer
+Dim pRow As Integer, pRowEmpty As Integer
+Dim TrgPasteRow As Integer
+Dim TrgPasteRowEnd As Integer
+Dim foundEmpty As Boolean
+Dim i As Integer
+Dim wb As Workbook
+
+    Set wb = ActiveWorkbook
+    
+    Set wsSrc = wb.Sheets("PROJECT DATA")
+    
+    With wb
+        Set ws = .Sheets.Add
+        ws.Name = "BD_data"
+    End With
+    
+    With ws
+    'heading
+        .Range("A1") = "Target Language"
+        .Range("B1") = "Translator name"
+        .Range("C1") = "Task"
+        .Range("D1") = "Sub Description"
+        .Range("E1") = "Component"
+        .Range("F1") = "UOM"
+        .Range("G1") = "Project Name"
+        .Range("H1") = "Client Name"
+        .Range("I1") = "PO Owner"
+        .Range("J1") = "PO Contact"
+        .Range("K1") = "PM office"
+        .Range("L1") = "Start Date"
+        .Range("M1") = "Delivery Date"
+        .Range("N1") = "Start Week"
+        .Range("O1") = "Period"
+        .Range("P1") = "Project Type"
+        .Range("Q1") = "Project Status"
+        .Range("R1") = "PO Requested"
+        .Range("S1") = "Rates Type"
+        .Range("T1") = "Number of Units"
+        .Range("U1") = "MT Discount for new words in %"
+        .Range("V1") = "WWC (for reference)"
+        .Range("W1") = "Total WC excluding Perfect Matches"
+        .Range("X1") = "Organization"
+        .Range("a1").EntireRow.Font.Bold = True
+        
+        'find Language field and then assess size of the list
+                lRow = Application.Match("LANGUAGE", wb.Sheets("PROJECT DATA").Range("A1:A100"), 0)
+                
+                i = 1
+                foundEmpty = False
+                Do While (i < 31 And foundEmpty = False)
+                    If Len(Trim(wb.Sheets("PROJECT DATA").Range("A" & lRow + i))) = 0 Then
+                        lRowEmpty = lRow + i
+                        foundEmpty = True
+                    End If
+                    i = i + 1
+                Loop
+                'find job's name
+                pRow = Application.Match("JOB", wb.Sheets("PROJECT DATA").Range("A1:A100"), 0)
+        
+                'copy over data
+                TrgPasteRow = 2
+                TrgPasteRowEnd = TrgPasteRow + lRowEmpty - lRow - 2
+                
+                'lang
+                .Range("A" & TrgPasteRow & ":A" & TrgPasteRowEnd).Value = wb.Sheets("PROJECT DATA").Range("A" & lRow + 1 & ":A" & lRowEmpty - 1).Value
+                'translator
+                .Range("B" & TrgPasteRow & ":B" & TrgPasteRowEnd).Value = wb.Sheets("PROJECT DATA").Range("J" & lRow + 1 & ":J" & lRowEmpty - 1).Value
+                'GLO code
+                .Range("D" & TrgPasteRow & ":D" & TrgPasteRowEnd).Value = wb.Sheets("PROJECT DATA").Range("B" & Application.Match("LIOX GEMINI NUMBER", wb.Sheets("PROJECT DATA").Range("A1:A100"), 0)).Value
+                'client
+                .Range("H" & TrgPasteRow & ":H" & TrgPasteRowEnd).Value = "Dell"
+                'PO owner
+                .Range("I" & TrgPasteRow & ":I" & TrgPasteRowEnd).Value = "USA"
+                'PO contact
+                .Range("J" & TrgPasteRow & ":J" & TrgPasteRowEnd).Value = "Blazejova, Zuzana"
+                'Office
+                .Range("K" & TrgPasteRow & ":K" & TrgPasteRowEnd).Value = "ZLN"
+                'Start date
+                .Range("L" & TrgPasteRow & ":L" & TrgPasteRowEnd).Value = Date
+                'UOM
+                    For i = TrgPasteRow To TrgPasteRowEnd
+                        .Range("F" & i & ":F" & i).Formula = "=if(int(T" & i & ")<=1,""Hour"",""Word"")"
+                    Next
+                'Component
+                    For i = TrgPasteRow To TrgPasteRowEnd
+                        .Range("E" & i & ":E" & i).Formula = "=if(int(T" & i & ")<=1,""N/A"",""Help/Doc/XML"")"
+                    Next
+                'Task
+                    For i = TrgPasteRow To TrgPasteRowEnd
+                        .Range("C" & i & ":C" & i).Formula = "=if(int(T" & i & ")<=1,""Transl. Small Project"",if(isblank(U" & i & "),""Translation"",""MT-PE Premium""))"
+                    Next
+                'Project type
+                .Range("P" & TrgPasteRow & ":P" & TrgPasteRowEnd).Value = "Solution"
+                'Project STatus
+                .Range("Q" & TrgPasteRow & ":Q" & TrgPasteRowEnd).Value = "Production"
+                'PO Requested
+                .Range("R" & TrgPasteRow & ":R" & TrgPasteRowEnd).Value = "N"
+                'Rates Type
+                    For i = TrgPasteRow To TrgPasteRowEnd
+                        .Range("S" & i & ":S" & i).Formula = "=if(int(T" & i & ")<=1,""Standard Hourly"",if(isblank(U" & i & "),""Standard Doc/Help/html"",""MT_PE Premium Quality Doc/Help/html""))"
+                    Next
+                'HB date
+                .Range("M" & TrgPasteRow & ":M" & TrgPasteRowEnd).Value = wb.Sheets("PROJECT DATA").Range("D" & Application.Match("Date", wb.Sheets("PROJECT DATA").Range("D1:D100"), 0) + 1).Value
+                'HB date
+                .Range("N" & TrgPasteRow & ":N" & TrgPasteRowEnd).Formula = "=weeknum(today(),21)"
+                'Period
+                .Range("O" & TrgPasteRow & ":O" & TrgPasteRowEnd).Value = DateSerial(Year(Date), Month(Date), 1)
+                .Range("O" & TrgPasteRow & ":O" & TrgPasteRowEnd).NumberFormat = "mmm-yy"
+                'Job's name
+                .Range("G" & TrgPasteRow & ":G" & TrgPasteRowEnd).Value = Mid(wb.Sheets("PROJECT DATA").Range("B" & pRow).Value, 2, 6)
+                'Number of units
+                    For i = TrgPasteRow To TrgPasteRowEnd
+                        .Range("T" & i & ":T" & i).Formula = "=if(" & _
+                        wb.Sheets("PROJECT DATA").Range("C" & lRow + 1) & "*0.2+" & _
+                        wb.Sheets("PROJECT DATA").Range("D" & lRow + 1) & "*0.5+" & _
+                        wb.Sheets("PROJECT DATA").Range("E" & lRow + 1) & "*(1-U" & i & "/100)+" & _
+                        wb.Sheets("PROJECT DATA").Range("G" & lRow + 1) & "*0.2<100,0.5,if(" & _
+                        wb.Sheets("PROJECT DATA").Range("C" & lRow + 1) & "*0.2+" & _
+                        wb.Sheets("PROJECT DATA").Range("D" & lRow + 1) & "*0.5+" & _
+                        wb.Sheets("PROJECT DATA").Range("E" & lRow + 1) & "*(1-U" & i & "/100)+" & _
+                        wb.Sheets("PROJECT DATA").Range("G" & lRow + 1) & "*0.2<300,1," & _
+                        wb.Sheets("PROJECT DATA").Range("C" & lRow + 1) & "*0.2+" & _
+                        wb.Sheets("PROJECT DATA").Range("D" & lRow + 1) & "*0.5+" & _
+                        wb.Sheets("PROJECT DATA").Range("E" & lRow + 1) & "*(1-U" & i & "/100)+" & _
+                        wb.Sheets("PROJECT DATA").Range("G" & lRow + 1) & "*0.2))"
+                        
+                        'WWC for reference
+                        .Range("V" & i & ":V" & i).Formula = "=" & _
+                        wb.Sheets("PROJECT DATA").Range("C" & lRow + 1) & "*0.2+" & _
+                        wb.Sheets("PROJECT DATA").Range("D" & lRow + 1) & "*0.5+" & _
+                        wb.Sheets("PROJECT DATA").Range("E" & lRow + 1) & "*(1-U" & i & "/100)+" & _
+                        wb.Sheets("PROJECT DATA").Range("G" & lRow + 1) & "*0.2"
+                        
+                        'total WC excluding perfect matches
+                        .Range("W" & i & ":W" & i).Formula = "=" & _
+                        wb.Sheets("PROJECT DATA").Range("H" & lRow + 1) & "-" & wb.Sheets("PROJECT DATA").Range("B" & lRow + 1) & ""
+                        
+                        lRow = lRow + 1
+                    Next
+                    
+                'Organization
+                .Range("X" & TrgPasteRow & ":X" & TrgPasteRowEnd).Value = wb.Sheets("PROJECT DATA").Range("B" & Application.Match("ORGANIZATION", wb.Sheets("PROJECT DATA").Range("A1:A100"), 0)).Value
+                '.Sheets(1).Range("B" & NumOfRows & ":K" & NumOfRows + 31).PasteSpecial xlPasteFormulas
+                'TargetWb.Sheets(1).Range("B" & NumOfRows).Resize(30, 9) = .Range("A" & lRow + 1).Resize(30, 9)
+        
+'        For Each cell In TargetWb.Sheets(1).Range("L2:L" & NumOfRows)
+'            cell.Formula = "=D" & cell.Row & "*0.2+E" & cell.Row & "*0.5+F" & cell.Row & "+H" & cell.Row & "*0.2"
+'        Next cell
+
+    End With
+    
+    
+End Sub

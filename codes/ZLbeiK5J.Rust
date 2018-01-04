@@ -1,0 +1,176 @@
+
+fn main() {
+    
+    let mut stdin = String::new();
+    {
+        use std::io::Read;
+        std::io::stdin().read_to_string(&mut stdin).expect("failed to read string");    
+    }
+    let mut stdin = stdin.split_whitespace();
+    
+    macro_rules! get {
+        () => ( stdin.next().unwrap().parse().unwrap() );
+        ($t:ty) => ( stdin.next().unwrap().parse::<$t>().unwrap() );
+    }
+
+    let v = get!(usize);
+    let e = get!(u32);
+    
+    let mut table = vec![vec![0; v+1]; v+1];
+    for _ in 0..e {
+        let a = get!(usize);
+        let b = get!(usize);
+        let w = get!(u32);
+        table[a][b] = w;
+        table[b][a] = w;
+    }
+    
+    let vemb = get!(usize);
+    let s = (vemb as f64).sqrt() as usize;
+    
+    let rsz = std::cmp::min(v+s, vemb);    
+    let mut res = vec![0; rsz];
+    let mut ret = vec![0; rsz];
+    for (i, r) in (1..v+1).enumerate() {
+        res[i] = r;
+        ret[i] = r;
+    }
+    
+    macro_rules! calc { ($p:expr) => {
+            {
+                let mut tmp = 0;
+                let md = ($p+1) % s;
+                if md != 1 {
+                    if $p > 0 {
+                        tmp += table[res[$p]][res[$p-1]];
+                        if $p >= s+1 {
+                            tmp += table[res[$p]][res[$p-(s+1)]];
+                        }
+                    }
+                    if $p+(s-1) < rsz {
+                        tmp += table[res[$p]][res[$p+(s-1)]];
+                    }
+                }
+                if md != 0 {
+                    if $p+1 < rsz {
+                        tmp += table[res[$p]][res[$p+1]];
+                        if $p+(s+1) < rsz {
+                            tmp += table[res[$p]][res[$p+(s+1)]];
+                        }
+                    }
+                    if $p >= s-1 {
+                        tmp += table[res[$p]][res[$p-(s-1)]];
+                    }
+                }
+                if $p+s < rsz {
+                    tmp += table[res[$p]][res[$p+s]];
+                }
+                if $p >= s {
+                    tmp += table[res[$p]][res[$p-s]];
+                }
+                tmp
+            }
+        };
+    }
+    
+    macro_rules! dupl { ($a:expr; $b:expr) => {
+            {
+                let mut tmp = 0;
+                let (ti, tj) = if $a > $b { ($b, $a) } else { ($a, $b) };
+                let td = tj - ti;
+                if (td == 1 && tj%s != 0)
+                    || (td == s) 
+                    || (td == s-1 && ti%s != 0)
+                    || (td == s+1 && tj%s != 0) {
+                    tmp += table[res[ti]][res[tj]];
+                }
+                tmp
+            }
+        };
+    }
+    
+    let mut xsft: u64 = 88172645463325252;
+    
+    macro_rules! gen { () => {
+            {
+                xsft = xsft ^ (xsft << 13);
+                xsft = xsft ^ (xsft >> 17);
+                xsft = xsft ^ (xsft << 5);
+                xsft
+            }
+        };
+    }
+    
+    macro_rules! rand { ($md:expr) => (gen!() % $md) }
+    
+    macro_rules! total { ($r:ident) => {
+            {
+                let mut tmp = 0;
+                for i in 0..rsz {
+                    let md = (i+1) % s;
+                    if md != 0 {
+                        if i+1 < rsz {
+                            tmp += table[$r[i]][$r[i+1]];
+                            if i+(s+1) < rsz {
+                                tmp += table[$r[i]][$r[i+(s+1)]];
+                            }
+                        }
+                    }
+                    if md != 1 && i+(s-1) < rsz {
+                        tmp += table[$r[i]][$r[i+(s-1)]];
+                    }
+                    if i+s < rsz {
+                        tmp += table[$r[i]][$r[i+s]];
+                    }
+                }
+                tmp
+            }
+        };
+    }
+    
+    let mut max_score = total!(res);
+    let mut cur_score = max_score;
+    
+    let alpha = 0.8_f64;
+    let maxloop = 1000000;
+    
+    for t in 0..maxloop {
+        let i = rand!(rsz as u64) as usize;
+        let j = {
+            let mut tmp = rand!(rsz as u64) as usize;
+            while (res[tmp] == 0 && res[i] == 0) || tmp == i {
+                tmp = rand!(rsz as u64) as usize;
+            }
+            tmp
+        };
+        let old_score = calc!(i) + calc!(j) - dupl!(i; j);
+        res.swap(i, j);
+        let new_score = calc!(i) + calc!(j) - dupl!(i; j);
+        let tmp_score = cur_score - old_score + new_score;
+        if tmp_score > max_score {
+            ret.clone_from(&res);
+            max_score = tmp_score;
+            cur_score = tmp_score;
+            continue;
+        }
+        if tmp_score > cur_score {
+            cur_score = tmp_score;
+            continue;
+        }
+        let te = alpha.powf(t as f64 / maxloop as f64);
+        let ee = ((tmp_score as f64 - cur_score as f64) / te).exp();
+        let pp = gen!() as f64 / std::u64::MAX as f64;
+        if pp < ee {
+            cur_score = tmp_score;
+            continue;
+        }
+        res.swap(i, j);
+    }
+    
+    for (i, r) in ret.iter().enumerate() {
+        if *r == 0 {
+            continue;
+        }
+        println!("{} {}", r, i+1);
+    }
+}

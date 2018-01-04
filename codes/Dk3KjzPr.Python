@@ -1,0 +1,1 @@
+print(u''.join(x + u'\u0308' if x not in set([u' ', u',', u'?']) else x for x in u'у меня скрипт на питоне'))

@@ -1,0 +1,82 @@
+using System;
+using System.Text;
+using xtools;
+using System.Security.Cryptography;
+using System.Threading;
+
+namespace mgostChallenge
+{
+    class Program
+    {
+        static int count = 0;
+        static void Main(string[] args)
+        {
+            Thread t_0x01 = new Thread(() => getPsw(1));
+            Thread t_0x02 = new Thread(() => getPsw(2));
+            Thread t_0x03 = new Thread(() => getPsw(3));
+            Thread t_0x04 = new Thread(() => getPsw(4));
+            Thread t_0x05 = new Thread(() => getPsw(5));
+            Thread t_0x06 = new Thread(() => getPsw(6));
+            Thread t_0x07 = new Thread(() => getPsw(7));
+            Thread t_0x08 = new Thread(() => getPsw(8));
+            t_0x01.Start();
+            t_0x02.Start();
+            t_0x03.Start();
+            t_0x04.Start();
+            t_0x05.Start();
+            t_0x06.Start();
+            t_0x07.Start();
+            t_0x08.Start();
+            Console.ReadLine();
+        }
+
+        static void getPsw(int thread)
+        {
+            while (true)
+            {
+                int length = Between(0, 15);
+                char[] chars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                                        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                                        '(', ')', '_', '*', '-', '+' };
+                string str = "";
+                Random rnd = new Random();
+                xtools_lib xtls = new xtools_lib();
+                ASCIIEncoding ascii = new ASCIIEncoding();
+                for (int l = 0; l <= 500; l++)
+                {
+                    for (int i = 0; i <= length - 1; i++)
+                    {
+                        str += chars[Between(0, 67)];
+                    }
+                    string j = (xtls.xor_enc(str, ascii.GetString(new byte[] { 0x21 }, 0, 1)));
+                    byte[] toBytes = Encoding.ASCII.GetBytes(j);
+                    int k = 0;
+                    for (int i = 0; i <= toBytes.Length - 1; i++)
+                    {
+                        k += toBytes[i];
+                    }
+                    if (k % 568 == 0 && str != "")
+                    {
+                        count++;
+                        Console.WriteLine("psw: "+ count + " thread0x0"+thread + ": " + str);
+                    }
+                    str = "";
+                }
+            }
+        }
+
+        private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
+
+        public static int Between(int minimumValue, int maximumValue)
+        {
+            byte[] randomNumber = new byte[1];
+            _generator.GetBytes(randomNumber);
+            double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
+            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255d) - 0.00000000001d);
+            int range = maximumValue - minimumValue + 1;
+            double randomValueInRange = Math.Floor(multiplier * range);
+            return (int)(minimumValue + randomValueInRange);
+        }
+    }
+}

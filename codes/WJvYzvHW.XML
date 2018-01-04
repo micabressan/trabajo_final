@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <Submit xmlns="http://freeway.freedompay.com/">
+      <request>
+        <merchantReferenceCode/>
+        <purchaseTotals>
+          <currency>USD</currency>
+          <chargeAmount>138.75</chargeAmount>
+        </purchaseTotals>
+        <pos>
+          <trackKsn>629949011C</trackKsn>
+          <tracke>Pv9wyvkqNfsdOhsHCi/DLOlMBUR9humEDyBP9Gfo7W1sFkCYNk1iVQxwsUf+IJuLaDFfsOK9qIOOHrSjxTJMOPgIO3vi6cKoO9PTzavjyMqCc5xTVag+UdtTRcScgl+IonKXJXsdWCVaVpFh7girhbS61Kh+dvjkUw1oJDpRyF48c4ZqnlRcZZTZCuRDMR7yySHGdzy9obQEVmiszOTOrjLWtuWW83bO5mUiU6AkK1O8GRZV4cFP0zlZ8czETRtpfAGqJpjtt2SKgqWwyk6zOhj7vHaffphgckwMRdzfO6b9p7JDT6JLknd405PxkC7zC50IYFppYL84abyPNVfn/g==</tracke>
+          <encMode>rsa</encMode>
+        </pos>
+        <tokenCreateService run="true">
+          <type>1</type>
+        </tokenCreateService>
+        <ccAuthService run="true"/>
+        <ccCaptureService run="false"/>
+        <storeId>1458685010</storeId>
+        <terminalId>2462155012</terminalId>
+      </request>
+    </Submit>
+  </soap:Body>
+</soap:Envelope>

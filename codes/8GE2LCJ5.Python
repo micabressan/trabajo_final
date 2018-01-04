@@ -1,0 +1,173 @@
+class Cell:
+    def __init__(self, col, row, cell_type):
+        self.col = col
+        self.row = row
+        self.type = cell_type
+        self.init_visited = False
+
+    def __repr__(self):
+        return self.type
+
+
+class Group:
+    def __init__(self, color):
+        self.color = color
+        self.cells_list = []
+        self.possible_nearby_moves = []
+
+    def __len__(self):
+        return len(self.cells_list)
+
+    def __repr__(self):
+        return self.color
+
+
+table = [[0 for j in range(8)] for i in range(8)]
+
+with open('in.txt', 'r') as input_file:
+    inp_list = input_file.readlines()
+    inp_str = ''
+    for line in inp_list:
+        inp_str += line
+    inp_list = list(map(int, inp_str.split()))
+    offset = 0
+    current_color = 'W'
+    while True:
+        col = inp_list[2 * offset]
+        row = inp_list[2 * offset + 1]
+        offset += 1
+        if col == row == 0:
+            if current_color == 'W':
+                current_color = 'B'
+                continue
+            else:
+                break
+        cell = Cell(col, row, current_color)
+        table[row - 1][col - 1] = cell
+    a = 10
+
+not_capt_groups_w = []
+not_capt_groups_b = []
+all_groups = []
+offsets = [-1, 0, 1]
+
+
+def dfs(drow, dcol, temp_arr, color):  # выявление групп поиском в глубину
+    table[drow][dcol].init_visited = True
+    for row_offset in offsets:
+        for col_offset in offsets:
+            if (not (row_offset == 0 and col_offset == 0)) and \
+                    (col_offset == 0 or row_offset == 0) and \
+                    (0 <= drow + row_offset <= 7 and 0 <= dcol + col_offset <= 7):
+                delem = table[drow + row_offset][dcol + col_offset]
+                if not (delem == 0 or delem.type != color or delem.init_visited):
+                    temp_arr.append(delem)
+                    dfs(drow + row_offset, dcol + col_offset, temp_arr, color)
+
+
+for row in range(8):  # заполняем список групп всеми имеющимися группами, без разделения на захваченные и нет
+    for col in range(8):
+        elem = table[row][col]
+        if elem == 0:
+            continue
+        if elem.init_visited:
+            continue
+        temp_cells_list = [elem]
+        dfs(row, col, temp_cells_list, elem.type)
+        all_groups.append(Group(elem.type))
+        for e in temp_cells_list:
+            all_groups[-1].cells_list.append(e)
+
+not_capt = False  # отделяем незахваченные еще группы и для каждой заполняем возможные ходы соперника рядом
+for group in all_groups:
+    not_capt = False
+    for cell in group.cells_list:
+        for row_offset in offsets:
+            for col_offset in offsets:
+                if (not (row_offset == 0 and col_offset == 0)) and \
+                        (col_offset == 0 or row_offset == 0) and \
+                        (0 <= cell.row - 1 + row_offset <= 7 and 0 <= cell.col - 1 + col_offset <= 7):
+                    elem = table[cell.row - 1 + row_offset][cell.col - 1 + col_offset]
+                    if elem == 0:
+                        not_capt = True
+                        move = (cell.row - 1 + row_offset, cell.col - 1 + col_offset)
+                        if move not in group.possible_nearby_moves:
+                            group.possible_nearby_moves.append(move)
+    if not_capt:
+        if group.color == 'W':
+            not_capt_groups_w.append(group)
+        else:
+            not_capt_groups_b.append(group)
+
+best_white_moves = {}
+best_black_moves = {}
+
+for group_b in not_capt_groups_b:
+    success_capture = True
+    for pos_move in group_b.possible_nearby_moves:
+        # copy_table = copy.deepcopy(table)
+        table[pos_move[0]][pos_move[1]] = Cell(pos_move[1] + 1, pos_move[0] + 1, 'W')
+        for cell in group_b.cells_list:
+            if not success_capture:
+                break
+            for row_offset in offsets:
+                if not success_capture:
+                    break
+                for col_offset in offsets:
+                    if (not (row_offset == 0 and col_offset == 0)) and \
+                            (col_offset == 0 or row_offset == 0) and \
+                            (0 <= cell.row - 1 + row_offset <= 7 and 0 <= cell.col - 1 + col_offset <= 7):
+                        elem = table[cell.row - 1 + row_offset][cell.col - 1 + col_offset]
+                        if elem == 0:
+                            success_capture = False
+                            break
+        if success_capture:
+            if best_white_moves.get(pos_move) is None:
+                best_white_moves[pos_move] = len(group_b)
+            else:
+                best_white_moves[pos_move] += len(group_b)
+        table[pos_move[0]][pos_move[1]] = 0
+
+for group_w in not_capt_groups_w:
+    success_capture = True
+    for pos_move in group_w.possible_nearby_moves:
+        # copy_table = copy.deepcopy(table)
+        table[pos_move[0]][pos_move[1]] = Cell(pos_move[1] + 1, pos_move[0] + 1, 'B')
+        for cell in group_w.cells_list:
+            if not success_capture:
+                break
+            for row_offset in offsets:
+                if not success_capture:
+                    break
+                for col_offset in offsets:
+                    if (not (row_offset == 0 and col_offset == 0)) and \
+                            (col_offset == 0 or row_offset == 0) and \
+                            (0 <= cell.row - 1 + row_offset <= 7 and 0 <= cell.col - 1 + col_offset <= 7):
+                        elem = table[cell.row - 1 + row_offset][cell.col - 1 + col_offset]
+                        if elem == 0:
+                            success_capture = False
+                            break
+        if success_capture:
+            if best_black_moves.get(pos_move) is None:
+                best_black_moves[pos_move] = len(group_w)
+            else:
+                best_black_moves[pos_move] += len(group_w)
+        table[pos_move[0]][pos_move[1]] = 0
+
+to_print_w = [(k[1] + 1, k[0] + 1) for k, v in best_white_moves.items() if v == max(best_white_moves.values())]
+to_print_b = [(k[1] + 1, k[0] + 1) for k, v in best_black_moves.items() if v == max(best_black_moves.values())]
+to_print_w.sort()
+to_print_b.sort()
+
+with open('out.txt', 'w') as out_file:
+    if len(to_print_w) == 0:
+        out_file.write('N\n')
+    else:
+        for ans in to_print_w:
+            out_file.write(str(ans[0]) + ' ' + str(ans[1]) + '  ')
+        out_file.write('\n')
+    if len(to_print_b) == 0:
+        out_file.write('N')
+    else:
+        for ans in to_print_b:
+            out_file.write(str(ans[0]) + ' ' + str(ans[1]) + '  ')

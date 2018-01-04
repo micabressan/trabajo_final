@@ -1,0 +1,40 @@
+   pub fn handle_input(&mut self) {
+        for event in self.event_pump.poll_iter() {
+            use sdl2::event::Event;
+            match event {
+                Event::KeyDown { keycode: Some(key), ..} => {
+                    use sdl2::keyboard::Keycode::*;
+                    match key {
+                        Escape => self.should_quit = true,
+ 
+                        Num1 => self.set_key(1),
+                        Num2 => self.set_key(2),
+                        Num3 => self.set_key(3),
+                        Num4 => self.set_key(0xC),
+ 
+                        Q => self.set_key(4),
+                        W => self.set_key(5),
+                        E => self.set_key(6),
+                        R => self.set_key(0xD),
+ 
+                        A => self.set_key(7),
+                        S => self.set_key(8),
+                        D => self.set_key(9),
+                        F => self.set_key(0xE),
+ 
+                        Z => self.set_key(0xA),
+                        X => self.set_key(0),
+                        C => self.set_key(0xB),
+                        V => self.set_key(0xF),
+                        _ => (),
+                    }
+                }
+                Event::KeyUp { keycode: ref key @ Some(_), ..} => {
+ 
+                }
+                _ => {
+ 
+                }
+            }
+        }
+    }

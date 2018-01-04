@@ -1,0 +1,77 @@
+a { color: #4B58A6; }
+a:hover { color: #4B58A6; }
+
+label {
+	font-weight: normal;
+}
+
+#map img {
+  max-width: none;
+}
+
+.navbar .navbar-brand img {
+  max-width: 150%;
+  max-height: 150%;
+}
+
+.filter-box { 
+  height: 15px; 
+  width: 15px;  
+  display: inline-block;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box; 
+}
+
+.filter-yellow { background-color: #FBF358; }
+.filter-green { background-color: #00E13C; }
+.filter-blue { background-color: #5781FC; }
+.filter-purple { background-color: #7C54FB; }
+.filter-red { background-color: #FB6353; }
+
+.attrib-footer {
+	color: #B8B8B8;
+}
+
+.attrib-footer a {
+	color: #787878;
+}
+
+#small-print { font-size: 0.75em; }
+
+canvas {-ms-touch-action: double-tap-zoom;}
+
+#overlayFrame {
+    position: fixed;
+    display: none; 
+    width: 100%; 
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); 
+    z-index: 2; 
+    cursor: pointer; 
+}
+
+.bar {
+	fill: rgb(51, 122, 183);
+}
+
+.bar:hover {
+	fill: brown;
+}
+
+.axis--x path {
+	display: none;
+}
+
+#chart{
+	overflow-x: scroll;
+}

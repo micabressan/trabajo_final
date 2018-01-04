@@ -1,0 +1,50 @@
+module Examples where
+
+data Bit = I | O deriving (Show,Eq)
+type Binary = [Bit]
+
+-- Write 5 examples of how incrementing should work
+-- in the following list. First element of each pair
+-- is the input and the second one is the first one
+-- incremented by one.
+incrementedByOne :: [(Binary,Binary)]
+incrementedByOne = [([O,O],[I,O]), ([I,I],[O,O,I]), ([I,O,I],[O,I,I]), ([I,I,I],[O,O,O,I]), ([O,O,O,I],[I,O,O,I])]
+
+increment :: Binary -> Binary
+increment [] = [I]
+increment (x:xs)
+    | filter isOne' (x:xs) == (x:xs) = flipOff (x:xs) ++ [I]
+    | x == I = O : increment xs
+    | x == O = I : xs
+
+isOne' :: Bit -> Bool
+isOne' a
+    | a == I = True
+    | otherwise = False
+
+flipOff :: Binary -> Binary
+flipOff [] = []
+flipOff (x:xs)
+    | x == I = O : flipOff xs
+    
+
+fromBinary :: Binary -> Int
+fromBinary [] = 0
+fromBinary (x:xs) = fromBinary' 0 0 (x:xs) where
+    fromBinary' n summa [] = summa
+    fromBinary' n summa (x:xs) 
+        | x == I = fromBinary' (n + 1) (summa + 2^n) xs
+        | otherwise = fromBinary' (n + 1) summa xs
+
+toBinary :: Int -> Binary
+toBinary 0 = [O]
+toBinary luku = toBinary' luku [] where
+    toBinary' :: Int -> Binary -> Binary
+    toBinary' 0 bin = bin
+    toBinary' n bin
+        | n > 0 = toBinary' (n - 1) (increment bin)
+        | otherwise = bin
+
+-- Here is something that is just needed by the web exercise system. Please
+-- leave it alone, ok?
+isOne I=True;isOne O=False;bit True=I;bit False=O

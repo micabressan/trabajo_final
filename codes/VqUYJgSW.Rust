@@ -1,0 +1,16 @@
+use std::collections::LinkedList;
+use std::collections::linked_list;
+
+struct ListAndIter {
+    list: LinkedList<i32>,
+    iter: linked_list::Iter<???, i32>, // Conceptually what I want here is to say `Iter<"the lifetime of self.list", i32>`
+}
+
+impl ListAndIter {
+    fn new(list: LinkedList<i32>) -> ListAndIter {
+        ListAndIter {
+            iter: list.iter(),
+            list,
+        }
+    }
+}

@@ -1,0 +1,53 @@
+Sub abcd()
+
+Dim Liczby(10) As Double
+Dim Srednia As Double
+Srednia = 0
+For i = 1 To 10
+    Liczby(i) = InputBox("Podaj liczbę ", "Wprowadzanie")
+    Srednia = Srednia + Liczby(i)
+Next i
+Srednia = Srednia / 10
+Odp = msgbox("Średnia: " & Srednia, vbOKCancel, "Wynik")
+
+End Sub
+
+Sub defg()
+
+Dim Liczba As Double
+Dim Srednia As Double
+Srednia = 0#
+Ilosc = 0
+For i = 1 To 10
+    Liczba = InputBox("Podaj liczbę ", "Wprowadzanie")
+    If Liczba = -1 Then
+        Exit For
+    Else
+        Srednia = Srednia + Liczba
+    End If
+Next i
+Srednia = Srednia / (i - 1)
+Odp = msgbox("Średnia: " & Srednia & ", ilość liczb: " & (i - 1), vbOKCancel, "Wynik")
+End Sub
+
+Sub hijk()
+
+Liczba1 = InputBox("Podaj liczbę ", "Wprowadzanie")
+Liczba2 = InputBox("Podaj liczbę ", "Wprowadzanie")
+If Not IsNumeric(Liczba1) And Not IsNumeric(Liczba2) Then
+    msgbox "Obie oceny są nieprawidłowe"
+ElseIf Not IsNumeric(Liczba1) Then
+    msgbox "Ocena 1 jest nieprawidłowa"
+ElseIf Not IsNumeric(Liczba2) Then
+    msgbox "Ocena 2 jest nieprawidłowa"
+Else
+    msgbox "Oceny są prawidłowe"
+End If
+
+End Sub
+
+Sub lmno()
+
+
+
+End Sub

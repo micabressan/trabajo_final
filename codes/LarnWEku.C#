@@ -1,0 +1,80 @@
+public void CrossPMX(int[,] distArray)
+        {
+            int firstPartPoint = 0;
+            int secondPartPoint = 0;
+
+            do
+            {
+                firstPartPoint = r.Next(0, winners.Length - 1);
+                secondPartPoint = r.Next(0, winners.Length - 1);
+            } while (firstPartPoint == secondPartPoint);
+
+            int first;
+            int second;
+
+            if (firstPartPoint > secondPartPoint)
+            {
+                first = secondPartPoint;
+                second = firstPartPoint;
+            }
+            else
+            {
+                first = firstPartPoint;
+                second = secondPartPoint;
+            }
+
+            for (int i = 0; i < winners.Length; i++)
+            {
+                if (i == winners.Length - 1)
+                {
+                    continue;
+                }
+                else
+                {
+                    MainPMX(first, second, winners[i], winners[i + 1], distArray);
+                }
+            }
+        }
+
+        public void MainPMX(int firstPoint, int secondPoint, Route firstRoute, Route secondRoute, int[,] distArray)
+        {
+            Route tempFirstRoute = firstRoute;
+            Route tempSecondRoute = secondRoute;
+
+            for (int i = firstPoint; i < secondPoint; i++)
+            {
+                firstRoute.GetRouteArray()[i] = secondRoute.GetRouteArray()[i];
+                secondRoute.GetRouteArray()[i] = firstRoute.GetRouteArray()[i];
+            }
+
+            for (int i = firstPoint; i <= secondPoint; i++)
+            {
+                for (int j = 0; j < 51; j++)
+                {
+                    if ((j < firstPoint || j > secondPoint) && (firstRoute.GetRouteArray()[j] == firstRoute.GetRouteArray()[i]))
+                    {
+                        firstRoute.GetRouteArray()[j] = tempFirstRoute.GetRouteArray()[i];
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            for (int i = firstPoint; i < secondPoint; i++)
+            {
+                for (int j = 0; j < firstRoute.GetRouteArrayLength(); j++)
+                {
+                    if ((j > firstPoint || j < secondPoint) && (secondRoute.GetRouteArray()[j] == secondRoute.GetRouteArray()[i]))
+                    {
+                        secondRoute.GetRouteArray()[j] = tempSecondRoute.GetRouteArray()[i];
+                    }
+                }
+            }
+
+            firstRoute.CalculateRouteLength(distArray);
+            secondRoute.CalculateRouteLength(distArray);
+
+
+        }

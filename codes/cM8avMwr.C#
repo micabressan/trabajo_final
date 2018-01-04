@@ -1,0 +1,78 @@
+public void ChampDesPossible(int ligne, int colonne, Cellule[,] grille)
+        {
+            for (int chiffre = 1; chiffre < 10; chiffre++)
+            {
+                if (NestPasSurLigne(chiffre, grille, ligne) == false)
+                {
+                    grille[ligne, colonne].supprimeValeur(chiffre);
+                }
+                if (NestPasSurColonne(chiffre, grille, colonne) == false)
+                {
+                    grille[ligne, colonne].supprimeValeur(chiffre);
+                }
+                if (NestPasSurBloc(chiffre, grille, ligne, colonne) == false)
+                {
+                    grille[ligne, colonne].supprimeValeur(chiffre);
+                }
+            }
+        }
+        public void Algorithme2()
+        {
+            
+
+            #region Pour les lignes
+            for (int ligne = 0; ligne < 9; ligne++)
+            {
+                int[] compteur = new int[9];
+                for (int colonne = 0; colonne < 9; colonne++)
+                {
+                    ChampDesPossible(ligne, colonne, grille);
+                    for (int k = 1; k <= 9; k++)
+                    {
+                        if (grille[ligne, colonne].Possible(k)) compteur[k - 1]++;
+                    }
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if(compteur[i] == 1)
+                    {
+                        for (int colonne = 0; colonne < 9; colonne++)
+                        {
+                            if (grille[ligne, colonne].Possible(i + 1))
+                                grille[ligne, colonne].setValeur(i + 1);
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Pour les colonnes
+            for (int col = 0; col < 9; col++)
+            {
+                int[] compteur = new int[9];
+                for (int lig = 0; lig < 9; lig++)
+                {
+                    ChampDesPossible(lig, col, grille);
+                    for (int k = 1; k <= 9; k++)
+                    {
+                        if (grille[lig, col].Possible(k)) compteur[k - 1]++;
+                    }
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (compteur[i] == 1)
+                    {
+                        for (int lig = 0; lig < 9; lig++)
+                        {
+                            if (grille[lig, col].Possible(i + 1))
+                                grille[lig, col].setValeur(i + 1);
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Pour les blocs
+
+            #endregion
+        }

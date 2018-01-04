@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char name[30];
+
+    printf("Podaj wyraz: ");
+    scanf("%s", &name);
+
+    printf("%s", strrev(name));
+
+    system("pause");
+    return 0;
+}

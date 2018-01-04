@@ -1,0 +1,34 @@
+
+%% send_file_to_local_share/4
+%% ==========================
+%% This function creates a soft link on the local shared folder to the original file to be shared.
+%% LocalLinkname: full path of the local file
+%%
+async_send_file_to_local_share(ImagePathname, LocalLinkName, Destination, Id, _State) ->
+  %BaseDir = get_cwd(),
+  %ImageFullPathname = case is_target_device() of
+  % true -> ImagePathname;
+  % _ -> BaseDir ++ "/" ++ ImagePathname
+  %end,
+  %ImageFullPathname = ImagePathname,
+  %lager:debug("ImagePathname = ~s~n ImageFullPathname = ~s", [ImagePathname, ImageFullPathname]),
+
+  LocalCompleteLinkname = io_lib:format("~s/~s/~s", [get_local_share_folder_prefix(), get_local_share_folder_name(), LocalLinkName ]),
+
+  lager:notice("[SHF] Sending file to LOCAL share i.e. creating local soft link."),
+  lager:info("[SHF] ImagePathname = ~s~n ",      [ImagePathname]),
+  lager:info("[SHF] LocalLinkName = ~s",         [LocalLinkName]),
+  lager:info("[SHF] LocalCompleteLinkname = ~s", [LocalCompleteLinkname]),
+  lager:info("[SHF] Destination   = ~s",         [Destination]),
+  lager:info("[SHF] Id            = ~p",         [Id]),
+
+  %Command = io_lib:format("sudo /bin/ln -sf '~s' '~s' ", [ImagePathname, LocalCompleteLinkname]),
+  %lager:debug("Command => |~s|", [Command]),
+  %execute_export_command_and_update(Command, Id).
+
+  Pid=self(),
+  Ref=make_ref(),
+  CmdString = code:priv_dir(gsd_service) ++ lists:flatten(io_lib:format("/samba_local_create_link.sh \"~s\" \"~s\" ", [ImagePathname, LocalCompleteLinkname])),
+  lager:info("[SHF] async-send-file-to-local-share - Pid = ~p, Ref = ~p, CmdString = ~s", [Pid, Ref, CmdString]),
+  gen_server:cast(gsd_script_server, {async_command, Pid, Ref, CmdString}),
+  {shf_ok, Ref}.

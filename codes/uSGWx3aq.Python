@@ -1,0 +1,18 @@
+"""
+IDAPython script to get pseudocode comments
+"""
+
+ea = idaapi.get_screen_ea()
+cfunc = idaapi.decompile(ea)
+sv = cfunc.get_pseudocode()
+
+cmts = idaapi.restore_user_cmts(cfunc.entry_ea)
+if cmts is not None:
+  for tl, cmt in cmts.iteritems():
+    print "0x%08x: %s " % (tl.ea, str(cmt))
+
+index = 0
+for item in cfunc.treeitems:
+  if item.ea != BADADDR:
+    print index, hex(item.ea), item.index
+    index += 1

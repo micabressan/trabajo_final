@@ -1,0 +1,11 @@
+number = str(input('What is your number? \n'))
+number = list(map(int, str(number)))
+total = 0
+pos = 0
+for i in number[0:(len(number)-1)]:
+    pos += 1
+    if i == number[pos]:
+        total += i
+if number[0] == number[(len(number)-1)]:
+    total += number[0]
+print(total)

@@ -1,0 +1,248 @@
+
+/*
+Got a question or want to learn more? Try this link:
+http://myanimelist.net/clubs.php?cid=19736
+*/
+
+
+/*
+BACKGROUND IMAGE
+This is the main background image for the whole page.
+Change the image link to the background you want!
+
+If you're not seeing a background, make sure you are copied the
+entire CSS code or added any new background image codes correctly.
+Also your image link may be broken, try uploading a new background then!
+*/
+
+body {
+background-image:
+url(http://i.imgur.com/Lqz3n0a.jpg);
+background-attachment: fixed;
+}
+
+
+
+/*
+HEADER COLOR AND FONT
+These codes control the main headers' fonts and colors. Every header is above each part of your list (they say
+
+things like Currently Watching, Completed, Dropped, etc). if you don't want a solid color there, go to the line
+
+that starts with background-color and replace it the color type (blue for example) with the word "transparent" (no
+
+quotations).
+*/
+
+.header_title {
+background-color:blue;
+color:yellow;
+font-family:Lucida Calligraphy;
+font-size:30px;
+}
+
+
+
+/*
+SUB-HEADERS BACKGROUND COLOR COLOR
+Below each main header is the sub-header which says Score, Episodes, Tags, etc.
+*/
+
+.table_header {
+background-color:navy;
+}
+
+
+
+/*
+ANIME/MANGA TITLE FONTS
+This is the type and color of the anime/manga titles on your list, like Bleach, Vampire Knight, etc.
+*/
+
+.animetitle, .animetitle:visited {
+color:cyan;
+font-family:comic Sans MS;
+font-size:20px;
+}
+
+
+
+/*
+LIST FONTS
+This is the type and color for more of the numbers, links, and words on the list itself!
+*/
+
+.td1, .td2, a, a:visited, .category_totals, .table_header, #grand_totals, #copyright {
+color:white;
+font-family:Lucida Grande;
+}
+
+
+
+/*
+LIST WIDTH
+Use this to increase the width of your list!
+*/
+
+#list_surround {
+width:950px;
+}
+
+
+
+/*
+LIST COLOR
+The numbers in parenthesis below control the color of your list background itself. The first number is the amount
+
+of red, the second amount of green, third blue, and each can be set to a maximum of 255 and minimum of 0. The 4th
+
+number in parenthesis is the opacity amount, which can be set from .0 (invisible) to 1 (completely opaque).
+
+For more info on RGBA color see this tutorial:
+http://myanimelist.net/forum/?topicid=440525
+*/
+
+
+.category_totals,
+.td1,
+.td2,
+#grand_totals,
+#copyright {
+background-color: rgba(55,55,55,.5);
+}
+
+
+
+/*
+ROW HOVER COLOR
+Change the color you see on a row only when you put your cursor over it with this code, you use the same color
+
+change style as in the above code.
+*/
+
+tr:hover [class^=td] {
+background-color: rgba(80, 50, 225, 0.9) !important;
+}
+
+
+
+/*
+REPOSITION MAIN BACKGROUND
+Change the position your background starts on your screen from with the two properties after "background-position"
+
+below.
+
+You replace 'center' and '43%' with two other properties, they can be any of the following: left, top, bottom,
+
+right, or center.
+
+So if you want your background to start from the center of the screen, use "center center" after background-
+
+position in the code below, replacing "center 43%".
+If you want it to start from the top and left, use "top left"
+If you want it to start from the top and center, use "top center".
+If you want it to start from the right and top, use "right top"
+If you want it to start from the right and bottom, use "right bottom"
+and so forth...
+
+Additionally, you can change "left" to a % to determine how far left or right the background starts from. For
+
+example "30% top" will start the background from the top but 30% of the pic's width from the left of the layout.
+
+You can also change top to a % to change the amount you want to start it from the top or bottom.
+*/
+
+body{
+background-position: center 43%;}
+
+
+
+
+/*OTHER CODES
+Important codes for the layout's setup. Don't mess with these unless you know exactly what you're doing. If you
+
+want to customize more on the page, use the link at the top of this CSS, or ask in my club!
+*/
+
+body {
+font-weight: light;
+background-repeat: no-repeat;
+background-color: black;
+}
+#list_surround {
+margin:auto;
+background-image:url();
+}
+a {
+text-decoration:none;
+}
+a:visited {
+text-decoration:none;
+}
+a:hover, a:visited:hover {
+color:red;
+text-decoration:underline;
+}
+.category_totals,
+.td1,
+.td2,
+#grand_totals,
+#copyright {
+border-width:0;
+padding:2px;
+}
+
+.category_totals:HOVER,
+.td1:HOVER,
+.td2:HOVER,
+#grand_totals:HOVER,
+#copyright:HOVER {background-color:black;
+border-width:0;
+padding:2px;
+}
+#copyright:after {
+content: " Custom CSS by Shishio-kun. Google 'Shishio's Custom Lists' for more designs or info.";
+}
+.status_selected {
+background-color:black;
+padding:2px;
+color:white;
+text-decoration: blink;
+}
+.status_not_selected {
+background-color:black;
+padding:2px;
+color:white;
+}
+.status_selected a{
+color:cyan;
+}
+.status_not_selected a{
+color:white;
+}
+.thickbox {
+color:cyan;
+font-family:fantasy;
+font-size:12px;
+}
+.header_title {
+height:28px;
+padding:2px;
+}
+.table_header {
+border-width:0;
+font-weight:bold;
+padding:2px;
+}
+.category_totals {
+height:30px;
+}
+#copyright, #grand_totals {
+text-align: center;
+margin:0 auto;
+}
+tr:hover [class^=td] {
+-moz-transition: .2s linear;
+-webkit-transition: .2s linear;
+-o-transition: .2s linear;
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The core configuration file for the framework is the default (struts.xml) file
+and should reside on the classpath of the webapp (generally /WEB-INF/classes). -->
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+  <!-- devMode equals debug information and reload everything for every request -->
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.ui.theme" value="simple" />
+  <constant name="struts.action.excludePattern" value="/ws"/>
+
+  <package name="projeto" extends="struts-default" namespace="/">
+  
+  		<interceptors>
+	        <interceptor class="loginInterceptor" name="loginInterceptor">
+	        </interceptor>
+	        <interceptor-stack name="loginStack">
+	            <interceptor-ref name="loginInterceptor" />
+	            <interceptor-ref name="defaultStack" />
+	        </interceptor-stack>
+        </interceptors>
+	
+	<default-action-ref name="index" />
+
+	<!-- 'primes' action calls 'execute' in 'PrimesAction', followed by the view in 'primes.jsp' -->
+    <action name="login" class="LoginAction" method="execute">
+      <result name="success">/home.jsp</result>
+      <result name="failure">/index.jsp</result>
+    </action>
+    <action name="regist" class="registerAction" method="execute">
+    		<interceptor-ref name="loginStack" />
+    		<result name="login">index.jsp</result>
+      	<result name="success">/home.jsp</result>
+      	<result name="failure">/regist.jsp</result>
+    </action>
+    <action name="criaEleicao" class="criaEleicaoAction" method="execute">
+    		<interceptor-ref name="loginStack" />
+    		<result name="login">index.jsp</result>
+    		<result name="success">/home.jsp</result>
+      	<result name="failure">/criaEleicao.jsp</result>
+    </action>
+	<action name="gereListas" method="execute">
+      <result>/gereListas.jsp</result>
+    </action>
+    <action name="addList" method="execute">
+      <result>/adicionaLista.jsp</result>
+    </action>
+    <action name="removeList" method="execute">
+      <result>/removeLista.jsp</result>
+    </action>
+    <action name="addLista" class="adicionaListasAction" method="execute">
+    		<interceptor-ref name="loginStack" />
+    		<result name="login">index.jsp</result>
+      	<result name="success">/home.jsp</result>
+      	<result name="failure">/adicionaLista.jsp</result>
+    </action>
+    <action name="alteraEleicao" method="execute">
+      <result>/alteraEleicao.jsp</result>
+    </action>
+    <action name="alteraTextuais" method="execute">
+      <result>/alteraTextuais.jsp</result>
+    </action>
+    <action name="alteraDatas" method="execute">
+      <result>/alteraDatas.jsp</result>
+    </action>
+    <action name="detalhesEleicao" class="detalhesEleicaoAction" method="execute">
+    		<interceptor-ref name="loginStack" />
+    		<result name="login">index.jsp</result>
+    		<result name="success">/detalhesEleicao.jsp</result>
+      	<result name="failure">/detalhesEleicao.jsp</result>
+    </action>
+    <action name="localVoto" method="execute">
+      <result>/localVoto.jsp</result>
+    </action>
+  </package>

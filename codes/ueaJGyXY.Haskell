@@ -1,0 +1,69 @@
+
+ A U F G A B E  1
+
+>data Nat = Null | N Nat
+
+>instance Num Nat where
+> (N a) + (N b) = intToNat(depth a + depth b + 2)
+> Null + Null = Null
+> (N a) + Null = N a
+> Null + (N b) = N b
+> (N a) - (N b) = intToNat((zeroMax a b))
+> Null - Null = Null
+> Null - (N b) = Null
+> (N a) - Null = N a
+> (N a) * (N b) = N(intToNat(((depth a) * (depth b)) + (depth a) + (depth b)))
+> Null * Null = Null
+> (N a) * Null = Null
+> Null * (N b) = Null
+> abs (Null) = Null
+> abs (N n) = (N n)
+> signum (Null) = Null
+> signum (N n)  = (N 1)
+> fromInteger n = intToNat (fromInteger n)
+
+>instance Show Nat where
+> show Null = show 0
+> show (N x) = show (listToNum(binary(depth (N x))))
+
+>instance Eq Nat where
+> x == y = depth (x) == depth (y)
+
+>instance Enum Nat where
+> fromEnum x = depth x
+> toEnum x
+>  | x == 0 = Null
+>  | otherwise = N (toEnum (x-1))
+
+>instance Ord Nat where
+> compare a b
+>  | depth (a) == depth (b) = EQ
+>  | depth (a) > depth (b) = GT
+>  | depth (a) < depth (b) = LT
+
+>intToNat :: Int -> Nat
+>intToNat n
+>  | (n <= 0) = Null
+>  | otherwise = N (intToNat (pred n))
+   
+>zeroMax :: Nat -> Nat -> Int
+>zeroMax Null Null = 0
+>zeroMax Null (N x) = depth(N x)
+>zeroMax (N y) Null = depth(N y)
+>zeroMax (N x) (N y)
+> | (depth (N x)) - (depth (N y)) <= 0 = 0
+> | otherwise = (depth (N x)) - (depth (N y))
+
+>depth :: Nat -> Int
+>depth Null = 0
+>depth (N next) = 1 + depth next
+
+>listToNum :: [Integer] -> Integer
+>listToNum = read . concatMap show
+
+>binary 0 = [0]
+>binary n = reverse (binaryHelp n)
+
+>binaryHelp 0 = []
+>binaryHelp n | n `mod` 2 == 1 = 1 : binaryHelp (n `div` 2)
+>  | n `mod` 2 == 0 = 0 : binaryHelp (n `div` 2)

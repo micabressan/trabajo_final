@@ -1,0 +1,50 @@
+namespace triangle
+{
+    using System;
+    public class Program
+    {
+        static void Main()
+        {
+            int n = int.Parse(Console.ReadLine());
+            int width = (4 * n) + 1;
+            int height = (2 * n) + 1;
+            int dots = 1;
+            int hash = 2 * n - 1;
+            int spaces = 1;
+            Console.WriteLine(new string('#', width));
+            for (int row = 1; row <= n; row++)
+            {
+                if ((n / 2) + 1 == row) // separates the row with (@)
+                {
+                    Console.WriteLine("{0}{1}{2}(@){2}{1}{0}",
+                        new string('.', dots),   // 0 - dots
+                        new string('#', hash),   // 1 - hashes 
+                        new string(' ', (spaces - 3) / 2)); // 2 - empty spaces
+                    dots++;
+                    hash -= 2;
+                    spaces += 2;
+                }
+                else // every other row except (@)
+                {
+                    Console.WriteLine("{0}{1}{2}{1}{0}",
+                        new string('.', dots),
+                        new string('#', hash),
+                        new string(' ', spaces));
+                    dots++;
+                    hash -= 2;
+                    spaces += 2;
+                }
+            }
+            int secondHash = 2 * n - 1;
+            for (int row = 1; row <= n; row++)
+            {
+                Console.WriteLine("{0}{1}{0}",
+                    new string('.', dots), // uses last 'dots' number from last for
+                    new string('#', secondHash));
+
+                dots++;
+                secondHash -= 2;
+            }
+        }
+    }
+    }

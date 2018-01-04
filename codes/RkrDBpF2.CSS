@@ -1,0 +1,114 @@
+div {
+	float: left;
+}
+table, td, th{
+	width:100%
+	border: 1px;
+	border-style: solid;
+	border-color: green;
+}
+
+	#wrapper {height: 800px; width: 100%;}
+		#zydra {
+			background-color: lightblue;
+			height:50%;
+			width:30%;
+		}
+		
+		#zalia {
+			background-color: green;
+			height: 10%;
+			width: 70%;
+		}
+		#melyna {
+			background-color: blue;
+			height: 10%;
+			width: 35%;
+			color: white;
+		}
+		
+		@keyframes pulse {
+			0% {transform:scale(1);}
+			50% {transform:scale(1.03);}
+			100% {transform:scale(1);}
+		}
+		.pulseanim {
+			animation-name: pulse;
+			animation-duration: 3s;
+			animation-fill-mode:both;
+			animation-iteration-count: infinite;
+		}
+		#geltona {
+			background-color: yellow;
+			height: 10%;
+			width: 35%;
+		}
+		
+		#oranzine {
+			background-color: orange;
+			height: 30%;
+			width: 70%;
+		}
+		
+		#ruda {
+			background-color: brown;
+			height: 40%;
+			width: 15%;
+		}
+		 
+		#raudona {
+			background-color: red;
+			height: 40%;
+			width: 35%;
+			     
+		}
+		#raudona:hover p{
+                display: none;
+                        }
+		
+		#balta {
+			background-color: white;
+			height: 40%;
+			width: 50%;
+			
+		}
+		
+		#juoda {
+			background-color: black;
+			height: 10%;
+			width: 100%;
+			color: white;
+		}
+		
+		@media all and (max-width: 500px) {
+		
+		#zydra {
+			width: 50%;
+		}
+		
+		#zalia {
+			width: 50%;
+		}
+		
+		#melyna {
+			width: 50%;
+		}
+		
+		#geltona {
+			height: 0%;
+			width: 0%;
+		}
+		
+		#oranzine {
+			width: 50%;
+		}
+	
+		
+		#raudona {
+			width: 20%;
+		}
+		
+		#balta {
+			width: 70%;
+		}
+		}

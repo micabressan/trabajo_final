@@ -1,0 +1,35 @@
+import pygame
+pygame.init()
+
+def main():
+    screen = pygame.display.set_mode((640, 480))
+    pygame.display.set_caption("Pong")
+
+    background = pygame.Surface(screen.get_size())
+    background = background.convert()
+    background.fill((0, 0, 0))
+
+    paddle = pygame.image.load("paddle.png")
+    paddle_x = 20
+    paddle_y = 240
+    clock = pygame.time.Clock()
+    keepGoing = True
+    while keepGoing:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                keepGoing = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == K_q:
+                    keepGoing = False
+                elif event.key == K_ESCAPE:
+                    keepGoing = False
+                elif event.key == K_DOWN:
+                    paddle_y += 5
+                elif event.key == K_UP:
+                    paddle_y -= 5
+        screen.blit(background, (0, 0))
+        screen.blit(paddle, (paddle_x, paddle_y))
+        pygame.display.flip()
+if __name__ == "__main__":
+    main()
+pygame.quit()

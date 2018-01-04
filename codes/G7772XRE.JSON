@@ -1,0 +1,28 @@
+{
+    "denuncia1":{
+        "user":"usuario94",
+        "date":"2017-12-17",
+        "pruebas":{
+            "testimonios":[
+                "Quiero denunciar que...",
+                "También quisiera agregar que..."
+            ],
+            "imagenes":[
+                "http://www.01net.com//images/logiciel/130519b.jpg",
+                "https://i.imgur.com/dnY1pBo.png"
+            ],
+            "videos":[
+
+            ]
+        },
+        "estado":"Revisado",
+        "revisores":[
+            "revisora98"
+        ],
+        "chat":[
+            {"user":"usuario94", "msj":"Buenos días como va mi denuncia?"},
+            {"user":"revisora98", "msj":"Hola ya lo revisamos, no te preocupes"},
+            {"user":"usuario94", "msj":"Muchas gracias de verdad."}
+        ]
+    }
+}

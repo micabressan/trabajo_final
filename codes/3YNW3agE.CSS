@@ -1,0 +1,421 @@
+body {
+    background: #008080;
+    color: #6C006C;
+    font-family: "Courier", serif;
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+    font-weight: bold;
+}
+section.aside ul li a {
+    color: #8D008D;
+}
+
+
+main.container .container-content section {
+    background: #C0C0C0;
+    border-radius:0px;
+    margin: 0px;
+    padding:0px;
+    
+}
+
+
+main.container .container-content .aside {
+    padding:10px;
+}
+
+
+
+.breadcrumb {
+    background-color: #FFCB00;
+     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000080+0,1084d0+100 */
+    background: #000080; /* Old browsers */
+    background: -moz-linear-gradient(left, #000080 0%, #1084d0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000080 0%,#1084d0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000080 0%,#1084d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000080', endColorstr='#1084d0',GradientType=1 ); /* IE6-9 */
+	border-radius:0px;
+    border: 0px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.breadcrumb  a {
+    color: white;
+    font-weight: bold;
+}
+.breadcrumb > .active {
+    color: orange;
+    font-weight: bold;
+}
+.table-striped > tbody {
+    background: #808080;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #C0C0C0;
+}
+.table > thead {
+    background-color: #3F4447;
+    color: #e8e8e8;
+}
+a {
+    color: #000080;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover,
+a:focus {
+    color: orange;
+    text-decoration: underline;
+}
+.topics-author a {
+    color: #eee;
+}
+tr.active,
+tr.active td {
+    background: #FFCF70 !important;
+}
+.bbcodes {
+    border: 1px solid #C0C0C0;
+    boder-radius: 0px;
+    background: #FFCF70;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000080+0,1084d0+100 */
+    background: #000080; /* Old browsers */
+    background: -moz-linear-gradient(left, #000080 0%, #1084d0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000080 0%,#1084d0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000080 0%,#1084d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000080', endColorstr='#1084d0',GradientType=1 ); /* IE6-9 */
+}
+.post-content {
+    border: 0px solid #FF70FF;
+}
+.form-control {
+    color: black;
+    background-color: #ddd;
+    border: 0px solid #282826;
+    border-radius: 0px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+    color: #dddddd;
+}
+.topic-message {
+    color: black;
+}
+.topic-message {
+    background: #98FFFF;
+   /* border: 3px solid #FF70FF;*/
+    border-radius: 0px;
+    margin:0px;
+    padding:0px;
+}
+.preview {
+    border: 1px dashed #2f6fab;
+    color: black;
+    background-color: #4b4e54;
+}
+.topic-message.odd {
+    background: #FFA4FF;
+   /* border: 3px solid #00FFFF;*/
+    border-radius: 0px;
+}
+.topic-message .message-header .message-username a {
+    color: black;
+}
+.bbcodes button:hover {
+    color: #ddd;
+}
+.bbcodes button {
+    color: #888888;
+}
+.fancybox-skin {
+    background: #444444;
+    color: #dddddd;
+}
+.chat-box .chat-message {
+    color: #ddd;
+    overflow: hidden;
+}
+.chat-box .chat-message .chat-message-username a {
+    color: #ccc;
+}
+.chat-form {
+    background: #2C3A49;
+}
+.profile .profile-title,
+.profile .profile-wrapper,
+.profile .profile-footer,
+.profile .profile-biography {
+    background: #2f3136;
+}
+.profile .profile-title {
+    color: #eee;
+    color: black;
+}
+.message-content-quote {
+    background: #4CFDFD;
+    border-left: 5px solid #FFCB00;
+    color: gray;
+}
+.odd .message-content-quote {
+    background: #FE56FE;
+    color: gray;
+    border-left: 5px solid #FFCB00;
+}
+.message-content-quote i {
+    color: #000;
+    border-left: 0px dotted #795850;
+}
+.message-content-quote a {
+    color: #ddd;
+}
+.spoiler .spoiler-content {
+    color: #000;
+    background-color: #7B6B5E;
+    border-left: 5px solid #795850;
+}
+.topic-message.odd .spoiler-content {
+    color: #000;
+    background-color: #556B84;
+    border-left: 5px solid #376383;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #1a0f5a;
+    border-color: transparent;
+}
+section .pagination a {
+    color: #cccccc;
+}
+.pagination > li > a:hover,
+.pagination > li > a:focus,
+.pagination > li > span:hover,
+.pagination > li > span:focus {
+    color: #91caf4;
+    background-color: #43454a;
+    border-color: #ddd;
+}
+section .pagination a:hover {
+    background: inherit;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #13227d;
+    border-color: transparent;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #13227d;
+    border-color: transparent;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #501d0a;
+    border-color: #501d0a;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #740e0e;
+    border-color: #740e0e;
+}
+.btn-danger:focus,
+.btn-danger.focus {
+    color: #fff;
+    background-color: #740e0e;
+    border-color: #740e0e;
+}
+.spoiler .spoiler-btn {
+    color: #a7c9ff;
+    cursor: pointer;
+}
+.topic-moderation .topic-darken {
+    background: #111;
+    border-color: #111;
+}
+.topic-moderation .topic-darken:hover {
+    background: #232323;
+    border-color: #232323;
+}
+.topic-moderation .topic-darken:focus {
+    background: #232323;
+    border-color: #232323;
+}
+.bottombar ul {
+    background: rgba(140, 50, 50, 0.7);
+}
+
+/* Modifs par Sourcil (certaines marchent pas) */
+.message-date > span { 
+    color: #8D008D;
+}
+
+/* marche pas ! si ca marche la description du posts'affichera en rouge */
+.message-infos >  u {
+    color: #8D008D;
+    color: red;
+}
+
+nav {
+     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000080+0,1084d0+100 */
+    background: #000080; /* Old browsers */
+    background: -moz-linear-gradient(left, #000080 0%, #1084d0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000080 0%,#1084d0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000080 0%,#1084d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000080', endColorstr='#1084d0',GradientType=1 ); /* IE6-9 */
+	border-bottom: 3px solid #C0C0C0;
+}
+
+.glyphicon {
+    padding-top: 5px;
+    width: 32px;
+    height: 28px;
+    background: url("http://image.noelshack.com/fichiers/2018/01/3/1515011819-win98vide.png");
+    background-size: 32px 28px;
+    image-rendering: -moz-crisp-edges;
+image-rendering: -moz-crisp-edges;
+image-rendering: -o-crisp-edges;
+image-rendering: -webkit-optimize-contrast;
+-ms-interpolation-mode: nearest-neighbor;
+}
+
+.glyphicon-envelope, .glyphicon-cog, .glyphicon-off {
+    padding-left: 8px;
+}
+
+@media (max-device-width: 500px) {
+    
+    .glyphicon-envelope, .glyphicon-cog, .glyphicon-off {
+        padding-left: 0px;
+        position: relative;
+    } 
+    
+    .glyphicon-envelope::before,
+    .glyphicon-cog::before,
+    .glyphicon-off::before{
+    	position: relative;
+        top:-18px;
+    }
+    
+    
+   
+    .bottombar a > span {
+       
+    }
+    
+    .bottombar ul {
+        background: transparent;
+    }
+	
+    .bottombar {
+        box-shadow: 0px 0px 5px black;
+    }
+}
+
+.navbar-user-avatar {
+    border-radius: 0px;
+    background: gray;
+}
+
+
+/* marche pas ! */
+.navbar li.active {
+    background-color: #c0c0c0 !important;
+}
+
+.table-striped thead {
+	 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000080+0,1084d0+100 */
+    background: #000080; /* Old browsers */
+    background: -moz-linear-gradient(left, #000080 0%, #1084d0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000080 0%,#1084d0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000080 0%,#1084d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000080', endColorstr='#1084d0',GradientType=1 ); /* IE6-9 */
+	border-bottom: 3px solid #C0C0C0;
+}
+
+.message-content-quote a {
+    color: red;
+}
+
+section  {
+    background: #C0C0C0;
+}
+
+section .pagination a {
+    color: white;
+    text-shadow: 0px 1px 0px black, 0px 1px 0px black, 1px 1px 0px black, 1px 0px 0px black;
+}
+
+.pull-right:active,.pull-right:focus {
+    background: #c0c0c0;
+    background-image: none;
+}
+
+.grey-btn.btn {
+    background: #C0C0C0;
+}
+.grey-btn.btn:focus,.grey-btn.btn:active {
+    background: #C0C0C0;
+    background-image: none;
+}.right-tools:active {
+    background: #C0C0C0;
+    background-image: none;
+}
+
+.profile-title, .profile-title h2, .profile-wrapper, .profile-wrapper-left, .profile-wrapper-right {
+    background-color: #eee;
+    border: 5px solid #C0c0c0;;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+
+.profile .profile-title, .profile .profile-wrapper, .profile .profile-footer, .profile .profile-biography {
+     background: #C0c0c0;
+    border-radius: 0px;
+}
+
+.topic-moderation {
+    padding-left: 20px;
+}
+
+.pagination-topic {
+    padding-top: 10px;
+}
+
+.pagination-topic + .btn {
+    margin-left: 20px;
+}
+
+.navbar {
+    border-bottom: 0px !important;
+}
+
+.footer {
+     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000080+0,1084d0+100 */
+    background: #000080; /* Old browsers */
+    background: -moz-linear-gradient(left, #000080 0%, #1084d0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000080 0%,#1084d0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000080 0%,#1084d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000080', endColorstr='#1084d0',GradientType=1 ); /* IE6-9 */
+	border-top: 0px;
+}
+
+.post-submit {
+    margin-bottom: 80px;
+}
+
+
+.topic-message .message-header .message-username a {
+    position: relative;
+    font-weight: 900;
+}
+
+.topics-author {
+    text-shadow: 0px 1px 0px black, 0px 1px 0px black, 1px 1px 0px black, 1px 0px 0px black;
+    font-weight: 900;
+}
+
+.forum-tools .left-tools  {
+    padding-left: 20px;
+}

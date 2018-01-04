@@ -1,0 +1,2195 @@
+{
+    "syncTime": 1514472145512,
+    "workOrders": [
+        {
+            "id": 34,
+            "name": "Route test 3 (39233-19)",
+            "description": "Route test 3 (39233-19) - work order for route id 39233 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514377714088,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 34,
+                    "name": "Route test 3 (39233-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "a7693b1a-a813-4734-bce6-93dfc75fde76",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_3_39233___1514377712896",
+                            "formDefinitionTitle": "Route test 3(39233)",
+                            "title": "Route test 3(39233)",
+                            "completed": false,
+                            "createdTime": 1514377714094,
+                            "lastModified": 1514382198944,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39224": {
+                                    "answer": "1",
+                                    "lastModified": 1514382194539,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514377714094,
+                                "firstQuestionAnsweredTime": 1514381034447,
+                                "latestQuestionAnsweredTime": 1514382194539
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_3_39233___1514377712896"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 44,
+            "name": "Route test 4 (39221-19)",
+            "description": "Route test 4 (39221-19) - work order for route id 39221 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514380297414,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 44,
+                    "name": "Route TestJesper2 (39221-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "2f9f0ade-63f9-488f-9d73-de7c74929749",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_4_39221___1514380296713",
+                            "formDefinitionTitle": "Route test 4(39221)",
+                            "title": "Route test 4(39221)",
+                            "completed": false,
+                            "createdTime": 1514380297419,
+                            "lastModified": 1514382267017,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39224": {
+                                    "answer": "0",
+                                    "lastModified": 1514382264195,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514380297419,
+                                "firstQuestionAnsweredTime": 1514382264195,
+                                "latestQuestionAnsweredTime": 1514382264195
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_4_39221___1514380296713"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 45,
+            "name": "Route test 5 (39247-19)",
+            "description": "Route test 5 (39247-19) - work order for route id 39247 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514380297455,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 45,
+                    "name": "Route test 5 (39247-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "45b05d37-cf19-448e-bed2-852188f31e3a",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_5_39247___1514380296823",
+                            "formDefinitionTitle": "Route test 5(39247)",
+                            "title": "Route test 5(39247)",
+                            "completed": false,
+                            "createdTime": 1514380297459,
+                            "lastModified": 1514382330315,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39224": {
+                                    "answer": "1",
+                                    "lastModified": 1514382326248,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514380297459,
+                                "firstQuestionAnsweredTime": 1514382326248,
+                                "latestQuestionAnsweredTime": 1514382326249
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_5_39247___1514380296823"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 47,
+            "name": "Route TestRoute8 (39252-19)",
+            "description": "Route TestRoute8 (39252-19) - work order for route id 39252 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514380797437,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 47,
+                    "name": "Route TestRoute8 (39252-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "d669c41e-8423-448d-aa52-5597a3d15c47",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_TestRoute8_39252___1514380796813",
+                            "formDefinitionTitle": "Route TestRoute8(39252)",
+                            "title": "Route TestRoute8(39252)",
+                            "completed": false,
+                            "createdTime": 1514380797443,
+                            "lastModified": 1514380797443,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514380797443
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_TestRoute8_39252___1514380796813"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 55,
+            "name": "Route test 7 (39264-19)",
+            "description": "Route test 7 (39264-19) - work order for route id 39264 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514383297438,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 55,
+                    "name": "Route test 7 (39264-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "a8878269-009b-4156-bf7f-b6b4eab17b3a",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_7_39264___1514383296821",
+                            "formDefinitionTitle": "Route test 7(39264)",
+                            "title": "Route test 7(39264)",
+                            "completed": false,
+                            "createdTime": 1514383297471,
+                            "lastModified": 1514383842655,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39263": {
+                                    "answer": "1",
+                                    "lastModified": 1514383838365,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514383297471,
+                                "firstQuestionAnsweredTime": 1514383504279,
+                                "latestQuestionAnsweredTime": 1514383838365
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_7_39264___1514383296821"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 58,
+            "name": "Route test 8 (39268-19)",
+            "description": "Route test 8 (39268-19) - work order for route id 39268 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514384301645,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 58,
+                    "name": "Route test 8 (39268-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "3e2943c1-9c17-43ef-af89-475a5ee06c69",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_8_39268___1514384300999",
+                            "formDefinitionTitle": "Route test 8(39268)",
+                            "title": "Route test 8(39268)",
+                            "completed": false,
+                            "createdTime": 1514384301648,
+                            "lastModified": 1514384379931,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39263": {
+                                    "answer": "0",
+                                    "lastModified": 1514384362293,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514384301648,
+                                "firstQuestionAnsweredTime": 1514384362293,
+                                "latestQuestionAnsweredTime": 1514384362293
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_8_39268___1514384300999"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 60,
+            "name": "Route test 9 (39275-19)",
+            "description": "Route test 9 (39275-19) - work order for route id 39275 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514384803348,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 60,
+                    "name": "Route test 9 (39275-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "bff669a1-3451-4ee3-b79c-1fcc9bbe8eba",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_9_39275___1514384802715",
+                            "formDefinitionTitle": "Route test 9(39275)",
+                            "title": "Route test 9(39275)",
+                            "completed": false,
+                            "createdTime": 1514384803352,
+                            "lastModified": 1514385100507,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39278": {
+                                    "answer": "0",
+                                    "lastModified": 1514385051619,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514384803352,
+                                "firstQuestionAnsweredTime": 1514385051620,
+                                "latestQuestionAnsweredTime": 1514385051620
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_9_39275___1514384802715"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 61,
+            "name": "Route test 10 (39279-19)",
+            "description": "Route test 10 (39279-19) - work order for route id 39279 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514384803368,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 61,
+                    "name": "Route test 10 (39279-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "30e2a4c4-0ac5-4bfb-95bd-385aab4c41f9",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_test_10_39279___1514384802747",
+                            "formDefinitionTitle": "Route test 10(39279)",
+                            "title": "Route test 10(39279)",
+                            "completed": false,
+                            "createdTime": 1514384803373,
+                            "lastModified": 1514385231543,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 1,
+                            "answers": {
+                                "39278": {
+                                    "answer": "1",
+                                    "lastModified": 1514385188572,
+                                    "answeredBy": 16
+                                }
+                            },
+                            "timeTracking": {
+                                "collectionCreationTime": 1514384803373,
+                                "firstQuestionAnsweredTime": 1514385188573,
+                                "latestQuestionAnsweredTime": 1514385188573
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_test_10_39279___1514384802747"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 195,
+            "name": "Route visibilty rule (39289-19)",
+            "description": "Route visibilty rule (39289-19) - work order for route id 39289 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514450303850,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 195,
+                    "name": "Route visibilty rule (39289-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "8841ff38-0805-41a4-a12f-e8e6e6c61f0e",
+                            "userGroupId": 19,
+                            "formDefinitionId": "Route_visibilty_rule_39289___1514450303222",
+                            "formDefinitionTitle": "Route visibilty rule(39289)",
+                            "title": "Route visibilty rule(39289)",
+                            "completed": false,
+                            "createdTime": 1514450303854,
+                            "lastModified": 1514450303854,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514450303854
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "Route_visibilty_rule_39289___1514450303222"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 222,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514463303292,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 222,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "0b15cd9b-7b51-4f42-8de4-64d91cb8d162",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514463303295,
+                            "lastModified": 1514463303295,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514463303295
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 225,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514463802866,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 225,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "91532af9-fa67-4705-8770-3b6f825dbadb",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514463802869,
+                            "lastModified": 1514463802869,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514463802869
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 228,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514464303553,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 228,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "f6f76518-5cc5-469b-ae23-e3e8b8606300",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514464303556,
+                            "lastModified": 1514464303556,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514464303556
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 231,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514464797541,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 231,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "3f0284cd-fcd6-40e3-bda2-8f1fa2c71894",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514464797544,
+                            "lastModified": 1514464797544,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514464797544
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 234,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514465303194,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 234,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "6e25f468-28e1-4eb7-8121-99b587c9df9f",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514465303210,
+                            "lastModified": 1514465303210,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514465303210
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 237,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514465798301,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 237,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "e5992fff-2297-44d2-9e4e-99264593dec1",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514465798305,
+                            "lastModified": 1514465798305,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514465798305
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 240,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514466297349,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 240,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "617ad235-481e-414d-9a6c-e9d0fcecbf4c",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514466297352,
+                            "lastModified": 1514466297352,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514466297352
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 242,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514466797617,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 242,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "10a13758-dcc1-4a13-8fc9-4f228f1423bc",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514466797620,
+                            "lastModified": 1514466797620,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514466797620
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 244,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514467297690,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 244,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "20d674f7-37e6-42e4-afed-0dda6677884d",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514467297693,
+                            "lastModified": 1514467297693,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514467297693
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 246,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514467803274,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 246,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "e78613e6-f7f9-4702-ab90-3f4a1cac81d6",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514467803284,
+                            "lastModified": 1514467803284,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514467803284
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 248,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514468296889,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 248,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "92b67d66-fcf9-4915-af07-b83254da18eb",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514468296894,
+                            "lastModified": 1514468296894,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514468296894
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 250,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514468802107,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 250,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "4728dec4-6346-410c-8edd-9109c9aff624",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514468802111,
+                            "lastModified": 1514468802111,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514468802111
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 252,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514469297034,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 252,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "b7e334bd-9d28-44d3-8d46-ad174a5cf503",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514469297037,
+                            "lastModified": 1514469297037,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514469297037
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 254,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514469797189,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 254,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "d57cf55d-0f0d-428b-80cf-632f2db11cfe",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514469797193,
+                            "lastModified": 1514469797193,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514469797193
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 256,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514470303118,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 256,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "e02ea2d4-f701-4a2c-aada-ac15ec69ef4f",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514470303122,
+                            "lastModified": 1514470303122,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514470303122
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 258,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514470802286,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 258,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "53402fc0-7a50-4001-8305-3bd6d2ecb6bc",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514470802289,
+                            "lastModified": 1514470802289,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514470802289
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 260,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514471297565,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 260,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "39361d07-416b-4358-a95a-2cdd6d91c3cc",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514471297568,
+                            "lastModified": 1514471297568,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514471297568
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        },
+        {
+            "id": 264,
+            "name": "VisIssueBotest1 (39302-19)",
+            "description": "VisIssueBotest1 (39302-19) - work order for route id 39302 and group id 19",
+            "assignedToGroup": {
+                "id": 19,
+                "title": "Analyst Group - pJesper"
+            },
+            "createTime": 1514471797203,
+            "initiator": "Aptitude Analyst user",
+            "completed": false,
+            "completedTime": 0,
+            "additionalInformation": [],
+            "steps": [
+                {
+                    "id": 264,
+                    "name": "VisIssueBotest1 (39302-19)",
+                    "index": 1,
+                    "completed": false,
+                    "collections": [
+                        {
+                            "uuid": "7af9f7dd-0b59-4389-a85a-43b7e058e88a",
+                            "userGroupId": 19,
+                            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+                            "formDefinitionTitle": "VisIssueBotest1(39302)",
+                            "title": "VisIssueBotest1(39302)",
+                            "completed": false,
+                            "createdTime": 1514471797207,
+                            "lastModified": 1514471797207,
+                            "status": 0,
+                            "description": "",
+                            "nofCountedAsAnswered": 0,
+                            "answers": {},
+                            "timeTracking": {
+                                "collectionCreationTime": 1514471797207
+                            }
+                        }
+                    ],
+                    "forms": [
+                        "VisIssueBotest1_39302___1514463302620"
+                    ]
+                }
+            ],
+            "canBeDelete": true
+        }
+    ],
+    "deletedWorkOrders": [],
+    "standaloneCollections": [],
+    "deletedCollections": [],
+    "availableForms": [
+        {
+            "id": "Route_TestRoute8_39252___1514380796813",
+            "title": "Route TestRoute8(39252)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_10_39279___1514384802747",
+            "title": "Route test 10(39279)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_3_39233___1514379800999",
+            "title": "Route test 3(39233)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_4_39221___1514380296713",
+            "title": "Route test 4(39221)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_5_39247___1514380296823",
+            "title": "Route test 5(39247)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_7_39264___1514383296821",
+            "title": "Route test 7(39264)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_test_8_39268___1514384300999",
+            "title": "Route test 8(39268)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        },
+        {
+            "id": "Route_visibilty_rule_39289___1514450303222",
+            "title": "Route visibilty rule(39289)",
+            "standardSkfForm": false,
+            "inGroups": [
+                {
+                    "id": 19,
+                    "title": "Analyst Group - pJesper"
+                }
+            ]
+        }
+    ],
+    "availableSkfStandardForms": [],
+    "deletedAvailableForms": [],
+    "deletedAvailableSkfStandardForms": [],
+    "formDefinitionCapabilities": [
+        {
+            "formDefinitionId": "Route_test_10_39279___1514384802747",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_3_39233___1514377712896",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_TestRoute8_39252___1514380796813",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_7_39264___1514383296821",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_5_39247___1514380296823",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_4_39221___1514380296713",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_9_39275___1514384802715",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "VisIssueBotest1_39302___1514463302620",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_3_39233___1514379800999",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_test_8_39268___1514384300999",
+            "requiredCapabilities": []
+        },
+        {
+            "formDefinitionId": "Route_visibilty_rule_39289___1514450303222",
+            "requiredCapabilities": []
+        }
+    ],
+    "formInfos": {
+        "Route_test_10_39279___1514384802747": {
+            "id": "Route_test_10_39279___1514384802747",
+            "format": 4,
+            "title": "Route test 10(39279)",
+            "createdTime": 1514384802745,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39280",
+                    "categoryGroup": 0,
+                    "title": "TestJesper3",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 3",
+                            "questions": [
+                                {
+                                    "id": "39278",
+                                    "questionType": "singleChoice",
+                                    "title": "Running or stopped",
+                                    "question": "Is the machine running?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_7_39264___1514383296821": {
+            "id": "Route_test_7_39264___1514383296821",
+            "format": 4,
+            "title": "Route test 7(39264)",
+            "createdTime": 1514383296819,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39265",
+                    "categoryGroup": 0,
+                    "title": "TestJesper2",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 2",
+                            "questions": [
+                                {
+                                    "id": "39263",
+                                    "questionType": "singleChoice",
+                                    "title": "Sad or not",
+                                    "question": "Sad?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "VisIssueBotest1_39302___1514463302620": {
+            "id": "VisIssueBotest1_39302___1514463302620",
+            "format": 4,
+            "title": "VisIssueBotest1(39302)",
+            "createdTime": 1514463302618,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39303",
+                    "categoryGroup": 0,
+                    "title": "11BotesVIS",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "11BotesVIMachine",
+                            "questions": [
+                                {
+                                    "id": "39305",
+                                    "questionType": "multiChoice",
+                                    "title": "botestPoint",
+                                    "question": "blalala",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "no",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 2,
+                                            "label": "maybe",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "39306",
+                                    "questionType": "multiChoice",
+                                    "title": "botestpoint2",
+                                    "question": "",
+                                    "helpText": "",
+                                    "visibleRule": "q[39305] == 0",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "no",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "39307",
+                                    "questionType": "multiChoice",
+                                    "title": "botestpoint3no",
+                                    "question": "",
+                                    "helpText": "",
+                                    "visibleRule": "q[39305] == 1",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "no",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_5_39247___1514380296823": {
+            "id": "Route_test_5_39247___1514380296823",
+            "format": 4,
+            "title": "Route test 5(39247)",
+            "createdTime": 1514380296821,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39248",
+                    "categoryGroup": 0,
+                    "title": "TestJesper1",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 1",
+                            "questions": [
+                                {
+                                    "id": "39224",
+                                    "questionType": "singleChoice",
+                                    "title": "Happy or not",
+                                    "question": "Happy?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_3_39233___1514379800999": {
+            "id": "Route_test_3_39233___1514379800999",
+            "format": 4,
+            "title": "Route test 3(39233)",
+            "createdTime": 1514379800998,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39234",
+                    "categoryGroup": 0,
+                    "title": "TestJesper1",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 1",
+                            "questions": [
+                                {
+                                    "id": "39224",
+                                    "questionType": "singleChoice",
+                                    "title": "Happy or not",
+                                    "question": "Happy?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_TestRoute8_39252___1514380796813": {
+            "id": "Route_TestRoute8_39252___1514380796813",
+            "format": 4,
+            "title": "Route TestRoute8(39252)",
+            "createdTime": 1514380796812,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39253",
+                    "categoryGroup": 0,
+                    "title": "TestJesper1",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 1",
+                            "questions": [
+                                {
+                                    "id": "39224",
+                                    "questionType": "singleChoice",
+                                    "title": "Happy or not",
+                                    "question": "Happy?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_4_39221___1514380296713": {
+            "id": "Route_test_4_39221___1514380296713",
+            "format": 4,
+            "title": "Route test 4(39221)",
+            "createdTime": 1514380296710,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39222",
+                    "categoryGroup": 0,
+                    "title": "TestJesper1",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 1",
+                            "questions": [
+                                {
+                                    "id": "39224",
+                                    "questionType": "singleChoice",
+                                    "title": "Happy or not",
+                                    "question": "Happy?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_visibilty_rule_39289___1514450303222": {
+            "id": "Route_visibilty_rule_39289___1514450303222",
+            "format": 4,
+            "title": "Route visibilty rule(39289)",
+            "createdTime": 1514450303221,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39290",
+                    "categoryGroup": 0,
+                    "title": "TestJesper4",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 4",
+                            "questions": [
+                                {
+                                    "id": "39292",
+                                    "questionType": "multiChoice",
+                                    "title": "Running or not",
+                                    "question": "Is the machine running?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 2,
+                                            "label": "Broken",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "39293",
+                                    "questionType": "singleChoice",
+                                    "title": "Sound",
+                                    "question": "Sounds good?",
+                                    "helpText": "",
+                                    "visibleRule": "q[39292] == 0",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "39294",
+                                    "questionType": "singleChoice",
+                                    "title": "Not running",
+                                    "question": "Why?",
+                                    "helpText": "",
+                                    "visibleRule": "q[39292] == 1",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Not sure",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "Need to rest",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "39295",
+                                    "questionType": "singleChoice",
+                                    "title": "Broken",
+                                    "question": "Where?",
+                                    "helpText": "",
+                                    "visibleRule": "q[39292] == 2",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Pump",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "Bearing",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_9_39275___1514384802715": {
+            "id": "Route_test_9_39275___1514384802715",
+            "format": 4,
+            "title": "Route test 9(39275)",
+            "createdTime": 1514384802713,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39276",
+                    "categoryGroup": 0,
+                    "title": "TestJesper3",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 3",
+                            "questions": [
+                                {
+                                    "id": "39278",
+                                    "questionType": "singleChoice",
+                                    "title": "Running or stopped",
+                                    "question": "Is the machine running?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_8_39268___1514384300999": {
+            "id": "Route_test_8_39268___1514384300999",
+            "format": 4,
+            "title": "Route test 8(39268)",
+            "createdTime": 1514384300998,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39269",
+                    "categoryGroup": 0,
+                    "title": "TestJesper2",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 2",
+                            "questions": [
+                                {
+                                    "id": "39263",
+                                    "questionType": "singleChoice",
+                                    "title": "Sad or not",
+                                    "question": "Sad?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        },
+        "Route_test_3_39233___1514377712896": {
+            "id": "Route_test_3_39233___1514377712896",
+            "format": 4,
+            "title": "Route test 3(39233)",
+            "createdTime": 1514377712891,
+            "useCustomerProfile": false,
+            "enableTimeStampForAllQuestions": true,
+            "enableTasks": false,
+            "categoryGroups": [
+                {
+                    "frontPageButtonTitle": "FPBT",
+                    "categoriesTitle": "CGT",
+                    "questionsTitle": "QT"
+                }
+            ],
+            "categories": [
+                {
+                    "id": "39234",
+                    "categoryGroup": 0,
+                    "title": "TestJesper1",
+                    "description": "",
+                    "sections": [
+                        {
+                            "title": "Machine 1",
+                            "questions": [
+                                {
+                                    "id": "39224",
+                                    "questionType": "singleChoice",
+                                    "title": "Happy or not",
+                                    "question": "Happy?",
+                                    "helpText": "",
+                                    "mediaTypes": [
+                                        "note",
+                                        "photo",
+                                        "audio"
+                                    ],
+                                    "options": [
+                                        {
+                                            "value": 0,
+                                            "label": "Yes",
+                                            "notificationType": "None"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "label": "No",
+                                            "notificationType": "None"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "frontPageButtons": [],
+            "enableTrending": true,
+            "enableTimeTracking": true
+        }
+    },
+    "availableTexts": [],
+    "deletedTexts": []
+}

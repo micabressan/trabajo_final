@@ -1,0 +1,24 @@
+for word in cmd.redirects_or_cmd_words {
+    let word: ast::TopLevelWord<String> = match word {
+        ast::RedirectOrCmdWord::Redirect(_) => bail!("redirect in command"),
+        ast::RedirectOrCmdWord::CmdWord(word) => word,
+    };
+
+    let word: ast::DefaultWord = match word.0 {
+        ast::ComplexWord::Concat(_) => bail!("concat?"),
+        ast::ComplexWord::Single(word) => word,
+    };
+
+    let word = match word {
+        ast::Word::Simple(word) => word,
+        ast::Word::DoubleQuoted(_) => bail!("double-quoted word"),
+        ast::Word::SingleQuoted(_) => bail!("single-quoted word"),
+    };
+
+    let word: String = match word {
+        ast::SimpleWord::Literal(string) => string,
+        _ => bail!("unsupported word type"),
+    };
+
+    println!("{}", word);
+}

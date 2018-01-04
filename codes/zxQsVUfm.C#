@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Bot
+{
+    public partial class Form1 : Form
+    {
+        private static Random random = new Random();
+        int a = 0;
+        public Form1()
+        {
+            InitializeComponent();
+
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {      
+            webBrowser1.Navigate("https://www.hitradio-rtl.de/schulhofkonzerte/jetzt-voten/voting/voting/europaeische-oberschule-und-gymnasium-waldenburg-08396-waldenburg/");
+            webBrowser1.ScriptErrorsSuppressed = true;
+            webBrowser2.Navigate("https://10minutemail.com/");
+            webBrowser2.ScriptErrorsSuppressed = true;
+        }
+
+        
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static bool SearchEle(HtmlElement ele, string text)
+        {
+            foreach (HtmlElement child in ele.Children)
+            {
+                if (SearchEle(child, text))
+                    return true;
+            }
+            if (!string.IsNullOrEmpty(ele.InnerText) && ele.InnerText.Contains(text))
+            {
+                ele.ScrollIntoView(true);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string vorname, email, telefon;
+            telefon = "4915902564472";
+            vorname = RandomString(8);
+
+            email = webBrowser2.Document.GetElementById("mailAddress").GetAttribute("value");
+
+            webBrowser1.Document.GetElementById("vorname").SetAttribute("value", vorname);
+            webBrowser1.Document.GetElementById("email").SetAttribute("value", email);
+            webBrowser1.Document.GetElementById("telefon").SetAttribute("value", telefon);
+
+
+            webBrowser1.Document.GetElementById("bedingungen").InvokeMember("CLICK");
+
+            HtmlElementCollection elc = this.webBrowser1.Document.GetElementsByTagName("input");
+            foreach (HtmlElement el in elc)
+            {
+                if (el.GetAttribute("type").Equals("submit"))
+                {
+                    el.InvokeMember("Click");
+                }
+            }
+            a++;
+            label1.Text = Convert.ToString(a);
+            //webBrowser1.Navigate("https://www.hitradio-rtl.de/schulhofkonzerte/jetzt-voten/voting/voting/europaeische-oberschule-und-gymnasium-waldenburg-08396-waldenburg/");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //HtmlElementCollection links = webBrowser2.Document.GetElementsByTagName("A");
+
+            webBrowser1.Document.GetElementById("ui-id-1").InvokeMember("Click");
+
+            /*foreach (HtmlElement link in links)  // this ex is given another SO post 
+            {
+                    link.InvokeMember("Click");
+            }
+            */
+        }
+    }
+}

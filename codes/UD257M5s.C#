@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace Console_App1
+{
+    class hajó
+    {
+        public string tyűgecca { get; private set; }
+        public string felbasz = "";
+        public int eladottsütik = 0;
+        public hajó(string sor)
+        {
+            int ideiglenes = 0;
+            string tempnév = "";
+            string[] tömb;
+            string[] adat = sor.Split(';');
+            tömb = adat[1].Split(',');
+            tyűgecca = adat[0];
+            foreach (var v in tömb)
+            {
+                string[] fasz = v.Split(' ');
+                eladottsütik += int.Parse(fasz[1]);
+                if (ideiglenes < int.Parse(fasz[1]))
+                {
+                    felbasz = fasz[0];
+                }
+                else
+                {
+                    felbasz = tempnév;
+                }
+                ideiglenes = int.Parse(fasz[1]);
+                tempnév = fasz[0];
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader bemenet = new StreamReader("input.txt");
+
+            string legtobbeteladott = "";
+            while (!bemenet.EndOfStream)
+            {
+                string line = bemenet.ReadLine();
+                hajó bevitel = new hajó(line);
+                Console.WriteLine("------------------" + bevitel.tyűgecca + "------------------");
+                Console.WriteLine("Eladott: " + bevitel.eladottsütik);
+                Console.WriteLine("Legtobbet szerzett: " + bevitel.felbasz + " kozott");
+                Console.WriteLine();
+                int ideiglenes = 0;
+                string ideiglenes2 = "";
+                if (ideiglenes < bevitel.eladottsütik)
+                {
+                    legtobbeteladott = bevitel.tyűgecca;
+                }
+                else
+                {
+                    legtobbeteladott = ideiglenes2;
+                }
+                ideiglenes = bevitel.eladottsütik;
+                ideiglenes2 = bevitel.tyűgecca;
+            }
+            Console.WriteLine("Legtobbet adta el: " + legtobbeteladott);
+        }
+    }
+}

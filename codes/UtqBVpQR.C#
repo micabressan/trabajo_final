@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Rekolta
+{
+    class Harvest
+    {
+        static void Main(string[] args)
+        {
+			// Programming Basics Exam - 17 July 2016 
+			// Judge - 90/100 
+            int X = int.Parse(Console.ReadLine());
+            double Y = double.Parse(Console.ReadLine());
+            int Z = int.Parse(Console.ReadLine());
+            int workers = int.Parse(Console.ReadLine());
+
+            double percentage = X * 0.40;
+            double kg = percentage * Y;
+            double wineLiters = kg / 2.5;
+            double difference = Math.Abs(Z - wineLiters);
+            double person = (difference / workers);
+           
+            if (wineLiters < Z)
+            {
+                Console.WriteLine("It will be a tough winter! More {0} liters wine needed.", Math.Floor(difference));
+            }
+            
+            else
+            {
+                Console.WriteLine("Good harvest this year! Total wine: {0} liters.", wineLiters);
+                Console.WriteLine("{0} liters left -> {1} liters per person.", Math.Ceiling(difference), Math.Ceiling(person));
+            }
+        }
+    }
+}

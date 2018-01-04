@@ -1,0 +1,132 @@
+# -*- coding:utf-8 -*-
+
+from datetime import datetime, timedelta
+
+from jobs import _Job
+from jobs.dao import admin
+from jobs.dao import trio
+from jobs.dao import bing
+from jobs.dao import geller
+from utils import convert_to_datetime
+
+
+LOG_PORTION = 200000
+
+LOG_TYPE = {
+    'admin_manager': admin.ManagerLog,
+    'admin_error': admin.ErrorLog,
+    'bing_partner': bing.PartnerLog,
+    'bing_provider': bing.ProviderLog,
+    'bing_error': bing.ErrorLog,
+    'trio_shop': trio.ShopLog,
+    'trio_geller': trio.GellerLog,
+    'trio_bing': trio.BingLog,
+    'trio_system': trio.SystemLog,
+    'trio_error': trio.ErrorLog,
+    'trio_account': trio.AccountLog,
+    'tip_paysystem': trio.TipPaysystemLog,
+    'tip_shop': trio.TipShopLog,
+    'tip_api': trio.TipApiLog,
+    'tip_log': trio.TipLog,
+    'geller_partner': geller.PartnerLog,
+    'geller_paysystem': geller.PaysystemLog,
+    'geller_error': geller.ErrorLog
+}
+
+
+class Job(_Job):
+    """
+    Модуль для удаления логов.
+    Удаляет логи из таблицы указанной в параметре "log_types".
+    Сохраняет логи за период указанный в "save_logs_period", по умолчанию 61 день.
+    Ожидаемые параметры:
+    <b>save_logs_period</b> -> Не обязательный. Если не указывать береться 61 день.
+    <b>log_types</b> -> Обязательный. Указать список названий таблиц логов согласно схеме ниже.
+    log_types:
+    admin_manager - таблица manager_logs база admin
+    admin_error - таблица error_logs база admin
+    bing_partner - partner_logs база mbing
+    bing_provider - provider_logs база mbing
+    bing_error - error_logs база mbing
+    trio_shop - таблица shop_logs база trio
+    trio_geller - таблица geller_logs база trio
+    trio_bing - таблица bing_logs база trio
+    trio_system - таблица system_logs база trio
+    trio_error - таблица error_logs база trio
+    trio_account - таблица account_logs база trio
+    tip_paysystem - таблица tip_paysystem база trio
+    tip_shop - таблица tip_shop_logs база trio
+    tip_api - таблица tip_api_logs база trio
+    tip_log - таблица tip_logs база trio
+    geller_partner - таблица partner_logs база mgeller
+    geller_paysystem - таблица paysystem_lgos база mgeller
+    geller_error - таблица error_logs база mgeller
+    Пример конфигурации:
+    {
+    "save_logs_period": 61,
+    "log_types": ["admin_manager", "bing_partner", "geller_partner"]
+    }
+    """
+    def __init__(self):
+        super(Job, self).__init__("LogsRemoval")
+
+    def _execute(self, **kwargs):
+        delta_days = timedelta(days=kwargs.get("save_logs_period", 61))
+        log_types = kwargs.get("log_types")
+        today = convert_to_datetime(datetime.today())
+
+        if not log_types:
+            raise Exception("Invalid configuration. 'log_types' not set.")
+
+        for log_type in log_types:
+            if log_type not in LOG_TYPE:
+                raise Exception("Invalid configuration parameter 'log_types'. '%s' invalid" % log_type)
+
+        models_log = [LOG_TYPE[log_type] for log_type in log_types]
+
+        log_result = []
+        for model_log in models_log:
+            table_name = model_log._meta.db_table
+            self.log.debug("Start with table = %s, database = %s" % (table_name, model_log._meta.database.database))
+            # находим id самой старой записи
+            oldest = model_log.select(model_log.id).order_by(model_log.id).limit(1).first()
+            if not oldest:
+                self.log.warn("Table '%s' is empty." % table_name)
+                continue
+
+            oldest = oldest.id
+            self.log.debug("Oldest log id=%s" % oldest)
+
+            # находим id записи, записи старше которой должны быть удалены.
+            oldest_need = (model_log.select(model_log.id)
+                                    .where(model_log.created > (today - delta_days))
+                                    .order_by(model_log.id).limit(1).first())
+
+            # если нет записи которую нужно сохранить берем id последней записи + 1
+            if not oldest_need:
+                oldest_need = model_log.select(model_log.id).order_by(model_log.id.desc()).limit(1).first().id + 1
+            else:
+                oldest_need = oldest_need.id
+
+            self.log.debug("Oldest need log id=%s" % oldest_need)
+
+            start_time_point = datetime.now()
+            limit = oldest
+            while limit < oldest_need:
+                limit = limit + LOG_PORTION if (limit + LOG_PORTION) < oldest_need else oldest_need
+                self.log.debug("Start delete rows at=%s" % datetime.now())
+                model_log.delete().where(model_log.id < limit).execute()
+                self.log.debug("End delete rows at=%s" % datetime.now())
+
+            end_time_point = datetime.now()
+            self.log.debug("Spent time on the removal of %s rows = %s" %
+                           ((oldest_need-oldest), (end_time_point - start_time_point)))
+
+            log_result.append({
+                'database': model_log._meta.database.database,
+                'table_name': table_name,
+                'oldest_id': oldest,
+                'removed_rows': oldest_need-oldest,
+                'spent_time': str(end_time_point - start_time_point)
+            })
+        self.db_logger.result = log_result

@@ -1,0 +1,189 @@
+// Example: GET http://gn-audio-cg-dev.local/api/feature/compare/settings/sections
+
+[
+   {
+      "Title":"Connectivity",
+      "Tooltip":"Lorem ipsum dolor sit amet",
+      "Attributes":[
+         {
+            "Key":"Product_Wirelesstechnology",
+            "Title":"Technology",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"Product_Connectivity",
+            "Title":"Device Connection",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"NFC",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"Product_Certifications",
+            "Title":"EHS/RCC Support (Optimized for Mycrosoft Lync/OC/S4B)",
+            "Tooltip":"<p>Lorem ipsum</p>",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Adapter included",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"Product_Range",
+            "Title":"Range (meter)",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Range Control",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Compatible with Jabra Audio Processors",
+            "Tooltip":"Lorem ipsum",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Bluetooth Compliance",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Bluetooth Chip",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Security",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         }
+      ]
+   },
+   {
+      "Title":"Sound Quality",
+      "Tooltip":"",
+      "Attributes":[
+         {
+            "Key":"Product_Sound",
+            "Title":"Speaker",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Music optimization / Speaker frequency",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"Product_Activenoisecancellation",
+            "Title":"ANC (Active Noise Cancelling)",
+            "Tooltip":"",
+            "Map":{
+               "False":"No",
+               "True":"Yes"
+            }
+         },
+         {
+            "Key":"Product_Microphonetype",
+            "Title":"Microphone Type",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"Product_Boomarmstyle",
+            "Title":"Microphone boom arm",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         },
+         {
+            "Key":"",
+            "Title":"Music Streaming (A2DP)",
+            "Tooltip":"<p style=\"color: #495153; background-color: #ffffff; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; border: 0px;\"><strong>A2DP </strong>stands for Advanced Audio Distribution Profile. This is the Bluetooth Stereo profile which defines how high quality stereo audio can be streamed from one device to another over a Bluetooth connection - for example, music streamed from a mobile phone to wireless headphones.</p>\n<p style=\"color: #495153; background-color: #ffffff; margin: 0px 0px 10px; padding: 0px; border: 0px;\">Although many products may have Bluetooth enabled for voice calls, in order for music to be streamed from one Bluetooth device to another, both devices will need to have this <strong>A2DP </strong>profile. If both devices to do not contain this profile, you may still be able to connect using a standard Headset or Handsfree profile, however these profiles will not support stereo music.</p>",
+            "Map":{
+               "True":"Yes",
+               "False":"No"
+            }
+         }
+      ]
+   },
+   {
+      "Title":"Wearing Comfort",
+      "Tooltip":"",
+      "Attributes":[
+         {
+            "Key":"Product_Wearingstyle",
+            "Title":"Wearing Style",
+            "Tooltip":"",
+            "Map":{
+
+            }
+         }
+      ]
+   },
+   {
+      "Title":"Product Features",
+      "Tooltip":"",
+      "Attributes":[
+
+      ]
+   },
+   {
+      "Title":"Product Quality",
+      "Tooltip":"",
+      "Attributes":[
+
+      ]
+   },
+   {
+      "Title":"Miscellaneous",
+      "Tooltip":"",
+      "Attributes":[
+
+      ]
+   }
+]

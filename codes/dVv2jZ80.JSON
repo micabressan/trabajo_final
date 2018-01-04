@@ -1,0 +1,479 @@
+{
+  "Emotes": {
+    "1": [
+      {
+        "Category": 1,
+        "Probability": 1,
+        "ClassID": 30704,
+        "EmoteActions": [
+          {
+            "Type": 67,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "StandardRefuseTell"
+          }
+        ]
+      },
+      {
+        "Category": 1,
+        "Probability": 1,
+        "ClassID": 30705,
+        "EmoteActions": [
+          {
+            "Type": 67,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "StandardRefuseTell"
+          }
+        ]
+      },
+      {
+        "Category": 1,
+        "Probability": 1,
+        "ClassID": 30702,
+        "EmoteActions": [
+          {
+            "Type": 67,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "StandardRefuseTell"
+          }
+        ]
+      },
+      {
+        "Category": 1,
+        "Probability": 1,
+        "ClassID": 30703,
+        "EmoteActions": [
+          {
+            "Type": 67,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "StandardRefuseTell"
+          }
+        ]
+      },
+      {
+        "Category": 1,
+        "Probability": 1,
+        "ClassID": 30745,
+        "EmoteActions": [
+          {
+            "Type": 67,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "StandardRefuseTell"
+          }
+        ]
+      }
+    ],
+    "6": [
+      {
+        "Category": 6,
+        "Probability": 1,
+        "ClassID": 30700,
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "The Tursh Totem. If they had escaped with this object..."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You have done our Queen a great service. I am only sorry that the totem had to be destroyed in the process. Still, that is better than the alternative."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You deserve a reward for your heroic actions. Please take this replica as a show of our gratitude."
+          },
+          {
+            "Type": 49,
+            "Delay": 0,
+            "Extent": 1,
+            "Min64": 0,
+            "Max64": 1629876,
+            "Display": 0,
+            "Percent": 0.15
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30745,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30704,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          }
+        ]
+      },
+      {
+        "Category": 6,
+        "Probability": 1,
+        "ClassID": 30701,
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "The Tursh Totem. If they had escaped with this object..."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You have done our Queen a great service. I am only sorry that the totem had to be destroyed in the process. Still, that is better than the alternative."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You deserve a reward for your heroic actions. Please take this replica as a show of our gratitude."
+          },
+          {
+            "Type": 49,
+            "Delay": 0,
+            "Extent": 1,
+            "Min64": 0,
+            "Max64": 4665650,
+            "Display": 0,
+            "Percent": 0.15
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30745,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30705,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          }
+        ]
+      },
+      {
+        "Category": 6,
+        "Probability": 1,
+        "ClassID": 30697,
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "The Tursh Totem. If they had escaped with this object..."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You have done our Queen a great service. I am only sorry that the totem had to be destroyed in the process. Still, that is better than the alternative."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You deserve a reward for your heroic actions. Please take this replica as a show of our gratitude."
+          },
+          {
+            "Type": 49,
+            "Delay": 0,
+            "Extent": 1,
+            "Min64": 0,
+            "Max64": 10721025,
+            "Display": 0,
+            "Percent": 0.15
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30745,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30702,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          }
+        ]
+      },
+      {
+        "Category": 6,
+        "Probability": 1,
+        "ClassID": 30698,
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "The Tursh Totem. If they had escaped with this object..."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You have done our Queen a great service. I am only sorry that the totem had to be destroyed in the process. Still, that is better than the alternative."
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "You deserve a reward for your heroic actions. Please take this replica as a show of our gratitude."
+          },
+          {
+            "Type": 36,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "Level126Check",
+            "Min": 126,
+            "Max": 9999,
+            "Stat": 25
+          }
+        ]
+      }
+    ],
+    "7": [
+      {
+        "Category": 7,
+        "Probability": 1,
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 36,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "LevelCheck",
+            "Min": 1,
+            "Max": 39,
+            "Stat": 25
+          }
+        ]
+      }
+    ],
+    "22": [
+      {
+        "Category": 22,
+        "Probability": 1,
+        "Quest": "LevelCheck",
+        "EmoteActions": [
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "I am sorry, but we have need of adventurers more experienced than you. I am afraid there is little you can offer our queendom at this point in time."
+          }
+        ]
+      },
+      {
+        "Category": 22,
+        "Probability": 1,
+        "Quest": "Level126Check",
+        "EmoteActions": [
+          {
+            "Type": 62,
+            "Delay": 0,
+            "Extent": 1,
+            "Amount64": 24919212,
+            "HeroXP64": 0
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30745,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30703,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          }
+        ]
+      }
+    ],
+    "23": [
+      {
+        "Category": 23,
+        "Probability": 1,
+        "Quest": "LevelCheck",
+        "EmoteActions": [
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "Please, the Queen is in dire need of your assistance! A group of creatures recently assaulted one of the Queen's hidden vaults. The few guards who were able to escape told me that these creatures were after some sort of artifact."
+          },
+          {
+            "Type": 10,
+            "Delay": 1,
+            "Extent": 1,
+            "Message": "These vaults house numerous objects of immense power. Whoever these invaders are, we cannot allow them to obtain that which they seek. I need you to infiltrate the vault and repel the interlopers. If you happen upon the object they are after, return it to me."
+          },
+          {
+            "Type": 10,
+            "Delay": 1,
+            "Extent": 1,
+            "Message": "These creatures cut off surface access to the vaults. You will have to enter the sewers beneath in order to break in. Access to the sewers can be found in an old temple at 77.2N, 33.0E."
+          }
+        ]
+      },
+      {
+        "Category": 23,
+        "Probability": 1,
+        "Quest": "Level126Check",
+        "EmoteActions": [
+          {
+            "Type": 49,
+            "Delay": 0,
+            "Extent": 1,
+            "Min64": 0,
+            "Max64": 24919212,
+            "Display": 0,
+            "Percent": 0.15
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30745,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          },
+          {
+            "Type": 3,
+            "Delay": 0,
+            "Extent": 1,
+            "Item": {
+              "WCID": 30703,
+              "Palette": 0,
+              "Shade": 0,
+              "Destination": 0,
+              "StackSize": 1,
+              "TryToBond": false
+            }
+          }
+        ]
+      }
+    ],
+    "32": [
+      {
+        "Category": 32,
+        "Probability": 1,
+        "Quest": "StandardRefuseTell",
+        "EmoteActions": [
+          {
+            "Type": 12,
+            "Delay": 0,
+            "Extent": 1
+          },
+          {
+            "Type": 10,
+            "Delay": 0,
+            "Extent": 1,
+            "Message": "This is a reward for the service you have done our Queen. We are in your debt."
+          },
+          {
+            "Type": 5,
+            "Delay": 0,
+            "Extent": 1,
+            "Motion": 318767229
+          }
+        ]
+      }
+    ]
+  }
+}

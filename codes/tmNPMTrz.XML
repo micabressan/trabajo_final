@@ -1,0 +1,22 @@
+<!-- ЗАПРОС -->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.sample-package.org">
+   <SOAP-ENV:Body>
+      <ns1:RegOrder>
+         <ns1:Head>Email%,%test@test.com%,%Ложь%,%2408.0000</ns1:Head>
+         <ns1:Table>a1d1a593-18dc-11e6-a451-5254008d1282%,%Вкус%,%Pineapple-Mango%,%1%,%20.0000%,%867.0000%,%693.6000%,%867.0000%;%f357793e-5f1b-11e3-ba27-08606e6d6f28%,%1%,%20.0000%,%1120.0000%,%896.0000%,%1120.0000%;%f3577a8f-5f1b-11e3-ba27-08606e6d6f28%,%Вкус%,%Strawberry Cream%,%1%,%20.0000%,%1023.0000%,%818.4000%,%1023.0000%;%</ns1:Table>
+      </ns1:RegOrder>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<!-- ОТВЕТ СЕРВИСА-->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault>
+         <faultcode>soap:Client</faultcode>
+         <faultstring>Неизвестная ошибка. {ОбщийМодуль.ВебСервисы.Модуль(720)}: Преобразование значения к типу Число не может быть выполнено
+по причине:
+{ОбщийМодуль.ВебСервисы.Модуль(720)}: Преобразование значения к типу Число не может быть выполнено</faultstring>
+         <detail/>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,21 @@
+//Wywołanie Metody
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+        <soap:Body xmlns:m="demo">
+            <m:multiply>
+                <m:val1>3</m:val1>
+                <m:val2>2</m:val2>
+            </m:multiply>
+        </soap:Body>
+</soap:Envelope>
+//Odpowiedź
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+    <soap:Body xmlns:m="demo">
+    <m:multiplyResponse>
+        <m:result>6</m:result>
+    </m:multiplyResponse>
+    </soap:Body>
+</soap:Envelope>

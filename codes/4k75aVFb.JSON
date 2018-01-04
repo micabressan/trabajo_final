@@ -1,0 +1,111 @@
+xosan.createSR
+{
+  "template": {
+    "id": "1",
+    "version": "3.13.0",
+    "name": "xosan",
+    "description": "XOSAN RC",
+    "size": 730000000,
+    "type": "xva",
+    "data": {
+      "public": {
+        "any": "any"
+      }
+    }
+  },
+  "pif": "b31a1039-4a9f-be4c-b418-7a8ab83cc1b6",
+  "vlan": "0",
+  "srs": [
+    "14ddcad5-80ae-1a31-40e5-4fcdb9922bf4",
+    "3d8cbb2f-0f16-28c1-d8a6-e7d216ee890c",
+    "c110f81b-50e5-d886-340e-3152b28f0172"
+  ],
+  "glusterType": "replica",
+  "redundancy": 3,
+  "memorySize": 2147483648
+}
+{
+  "message": "stderr: agsize (2048 blocks) too small, need at least 4096 blocks
+Usage: mkfs.xfs
+/* blocksize */\t\t[-b log=n|size=num]
+/* metadata */\t\t[-m crc=0|1,finobt=0|1,uuid=xxx]
+/* data subvol */\t[-d agcount=n,agsize=n,file,name=xxx,size=num,
+\t\t\t    (sunit=value,swidth=value|su=num,sw=num|noalign),
+\t\t\t    sectlog=n|sectsize=num
+/* force overwrite */\t[-f]
+/* inode size */\t[-i log=n|perblock=n|size=num,maxpct=n,attr=0|1|2,
+\t\t\t    projid32bit=0|1]
+/* no discard */\t[-K]
+/* log subvol */\t[-l agnum=n,internal,size=num,logdev=xxx,version=n
+\t\t\t    sunit=value|su=num,sectlog=n|sectsize=num,
+\t\t\t    lazy-count=0|1]
+/* label */\t\t[-L label (maximum 12 characters)]
+/* naming */\t\t[-n log=n|size=num,version=2|ci,ftype=0|1]
+/* no-op info only */\t[-N]
+/* prototype file */\t[-p fname]
+/* quiet */\t\t[-q]
+/* realtime subvol */\t[-r extsize=num,size=num,rtdev=xxx]
+/* sectorsize */\t[-s log=n|size=num]
+/* version */\t\t[-V]
+\t\t\tdevicename
+<devicename> is required unless -d name=xxx is given.
+<num> is xxx (bytes), xxxs (sectors), xxxb (fs blocks), xxxk (xxx KiB),
+      xxxm (xxx MiB), xxxg (xxx GiB), xxxt (xxx TiB) or xxxp (xxx PiB).
+<value> is xxx (512 byte blocks).
+mount: wrong fs type, bad option, bad superblock on /dev/xvdb,
+       missing codepage or helper program, or other error
+
+       In some cases useful info is found in syslog - try
+       dmesg | tail or so.
+
+stdout: 
+exit: 32
+command: ssh -i /root/.ssh/id_rsa_xosan -o LogLevel=error -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@172.31.100.101 mkfs.xfs -i size=512 /dev/xvdb; mkdir -p /bricks/xosan1; echo \"/dev/xvdb /bricks/xosan1 xfs defaults 0 0\" >> /etc/fstab; mount -a",
+  "stack": "Error: stderr: agsize (2048 blocks) too small, need at least 4096 blocks
+Usage: mkfs.xfs
+/* blocksize */\t\t[-b log=n|size=num]
+/* metadata */\t\t[-m crc=0|1,finobt=0|1,uuid=xxx]
+/* data subvol */\t[-d agcount=n,agsize=n,file,name=xxx,size=num,
+\t\t\t    (sunit=value,swidth=value|su=num,sw=num|noalign),
+\t\t\t    sectlog=n|sectsize=num
+/* force overwrite */\t[-f]
+/* inode size */\t[-i log=n|perblock=n|size=num,maxpct=n,attr=0|1|2,
+\t\t\t    projid32bit=0|1]
+/* no discard */\t[-K]
+/* log subvol */\t[-l agnum=n,internal,size=num,logdev=xxx,version=n
+\t\t\t    sunit=value|su=num,sectlog=n|sectsize=num,
+\t\t\t    lazy-count=0|1]
+/* label */\t\t[-L label (maximum 12 characters)]
+/* naming */\t\t[-n log=n|size=num,version=2|ci,ftype=0|1]
+/* no-op info only */\t[-N]
+/* prototype file */\t[-p fname]
+/* quiet */\t\t[-q]
+/* realtime subvol */\t[-r extsize=num,size=num,rtdev=xxx]
+/* sectorsize */\t[-s log=n|size=num]
+/* version */\t\t[-V]
+\t\t\tdevicename
+<devicename> is required unless -d name=xxx is given.
+<num> is xxx (bytes), xxxs (sectors), xxxb (fs blocks), xxxk (xxx KiB),
+      xxxm (xxx MiB), xxxg (xxx GiB), xxxt (xxx TiB) or xxxp (xxx PiB).
+<value> is xxx (512 byte blocks).
+mount: wrong fs type, bad option, bad superblock on /dev/xvdb,
+       missing codepage or helper program, or other error
+
+       In some cases useful info is found in syslog - try
+       dmesg | tail or so.
+
+stdout: 
+exit: 32
+command: ssh -i /root/.ssh/id_rsa_xosan -o LogLevel=error -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@172.31.100.101 mkfs.xfs -i size=512 /dev/xvdb; mkdir -p /bricks/xosan1; echo \"/dev/xvdb /bricks/xosan1 xfs defaults 0 0\" >> /etc/fstab; mount -a
+    at _callee15$ (/home/pierre/Documents/vates/xo-server/dist/api/api/xosan.js:332:14)
+    at tryCatch (/home/pierre/Documents/vates/xo-server/node_modules/regenerator-runtime/runtime.js:62:40)
+    at Generator.invoke [as _invoke] (/home/pierre/Documents/vates/xo-server/node_modules/regenerator-runtime/runtime.js:296:22)
+    at Generator.prototype.(anonymous function) [as next] (/home/pierre/Documents/vates/xo-server/node_modules/regenerator-runtime/runtime.js:114:21)
+    at step (/home/pierre/Documents/vates/xo-server/node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)
+    at /home/pierre/Documents/vates/xo-server/node_modules/babel-runtime/helpers/asyncToGenerator.js:28:13
+    at run (/home/pierre/Documents/vates/xo-server/node_modules/core-js/library/modules/es6.promise.js:66:22)
+    at /home/pierre/Documents/vates/xo-server/node_modules/core-js/library/modules/es6.promise.js:79:30
+    at flush (/home/pierre/Documents/vates/xo-server/node_modules/core-js/library/modules/_microtask.js:18:9)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)"
+}

@@ -1,0 +1,25 @@
+diff -ur android-tools/core-98d0789/fastboot/fastboot.c android-tools.new/core-98d0789/fastboot/fastboot.c
+--- android-tools/core-98d0789/fastboot/fastboot.c	2013-01-21 19:16:54.000000000 +0900
++++ android-tools.new/core-98d0789/fastboot/fastboot.c	2014-05-05 09:47:09.669170022 +0900
+@@ -155,7 +155,8 @@
+ void *load_file(const char *fn, unsigned *_sz)
+ {
+     char *data;
+-    int sz;
++    off_t sz, total;
++    ssize_t res;
+     int fd;
+     int errno_tmp;
+ 
+@@ -171,7 +172,10 @@
+     data = (char*) malloc(sz);
+     if(data == 0) goto oops;
+ 
+-    if(read(fd, data, sz) != sz) goto oops;
++    for(total = 0; total < sz; total += res) {
++        res = read(fd, data + total, sz - total);
++        if(res < 0) goto oops;
++    }
+     close(fd);
+ 
+     if(_sz) *_sz = sz;

@@ -1,0 +1,50 @@
+#[repr(C)]                                                                       
+#[derive(Serialize, Deserialize)]                                                
+pub struct Transaction {                                                         
+   #[serde(serialize_with = "array_serdes::serialize_array")]                    
+   #[serde(deserialize_with = "array_serdes::a_public::deserialize_array")]      
+   sender_public_key   : [u8; secp256k1::constants::COMPRESSED_PUBLIC_KEY_SIZE], 
+   #[serde(serialize_with = "array_serdes::serialize_array")]                    
+   #[serde(deserialize_with = "array_serdes::a_public::deserialize_array")]      
+   receiver_public_key : [u8; secp256k1::constants::COMPRESSED_PUBLIC_KEY_SIZE], 
+   value               : [u8; VALUE_SIZE],                                       
+   nonce               : [u8; NONCE_SIZE],                                       
+   p_redeemability     : [u8; REDEEMABILITY_SIZE],                               
+   #[serde(serialize_with = "array_serdes::serialize_array")]                    
+   #[serde(deserialize_with = "array_serdes::a_schnorr::deserialize_array")]     
+   sender_signature    : [u8; secp256k1::constants::SCHNORR_SIGNATURE_SIZE],     
+   #[serde(serialize_with = "array_serdes::serialize_array")]                    
+   #[serde(deserialize_with = "array_serdes::a_schnorr::deserialize_array")]     
+   receiver_signature  : [u8; secp256k1::constants::SCHNORR_SIGNATURE_SIZE],     
+}                                                                                
+                                                                                 
+pub fn serialize_array<S, T>(array: &[T], serializer: S) -> Result<S::Ok, S::Error>  
+where                                                                                
+    S: Serializer,                                                                   
+    T: Serialize,                                                                    
+{                                                                                    
+    array.serialize(serializer)                                                      
+}                                                                                    
+                                                                                     
+macro_rules! deserialize_array { ($n:expr) => {                                      
+   use serde::{Deserialize, Deserializer};                                           
+   pub fn deserialize_array<'de, D, T>(deserializer: D) -> Result<[T; $n], D::Error> 
+   where D: Deserializer<'de>, T: Deserialize<'de> + 'de + Copy {                    
+      let mut result: [T; $n] = unsafe { ::std::mem::uninitialized() };              
+      let slice: Vec<T> = Deserialize::deserialize(deserializer)?;                   
+      if slice.len() != $n {                                                         
+         return Err(::serde::de::Error::custom("input slice has wrong length"));     
+      }                                                                              
+      result.copy_from_slice(&slice);                                                
+      Ok(result)                                                                     
+   }                                                                                 
+}}                                                                                   
+                                                                                     
+pub mod a_public {                                                                   
+   use super::*;                                                                     
+   deserialize_array!(secp256k1::constants::COMPRESSED_PUBLIC_KEY_SIZE);             
+}                                                                                    
+pub mod a_schnorr {                                                                  
+   use super::*;                                                                     
+   deserialize_array!(secp256k1::constants::SCHNORR_SIGNATURE_SIZE);                 
+}

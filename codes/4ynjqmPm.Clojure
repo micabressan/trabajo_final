@@ -1,0 +1,31 @@
+;palindrome check
+;(false? (__ '(1 2 3 4 5)))
+;(true? (__ "racecar"))
+
+(defn reverse-seq [some-seq]
+  (reduce,
+  (fn [new-vec curr]
+  	(cons curr new-vec)),
+  [],
+  some-seq))
+ 
+(defn is-palindrome [some-seq]
+ (= some-seq (reverse-seq some-seq)))
+  
+(is-palindrome '(1 2 3 4 5))
+
+((fn [some-seq]
+ (= 
+    some-seq 
+    (fn [some-seq]
+      (reduce,
+      (fn [new-vec curr]
+  	  (cons curr new-vec)),
+      [],
+      some-seq))
+  )
+) '(1 2 3 4 5))
+
+(is-palindrome "racecar")
+(apply str (reverse-seq "racecar"))
+(reverse-seq "racecar")

@@ -1,0 +1,77 @@
+using UnityEngine;
+
+[ExecuteInEditMode]
+[RequireComponent(typeof(LineRenderer))]
+
+public class ObjectControl : MonoBehaviour
+{
+    public int dotCount = 10;
+    public Transform cube;
+
+    private Vector3 P0;
+    private Vector3 P1;
+    private Vector3 P2;
+    private LineRenderer lineRenderer;
+
+    private void Start()
+    {
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+    }
+
+    private void Update()
+    {
+        Vector3 center = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2, 0);
+        Ray ray = Camera.main.ScreenPointToRay(center);
+        RaycastHit hit;
+        if (Physics.Raycast(ray,out hit))
+        {
+            if (hit.rigidbody)
+            {
+                cube = hit.transform;
+
+                P0 = transform.position;
+                P1 = cube.position;
+                P2 = cube.position;
+
+                lineRenderer.positionCount = dotCount;
+
+                for (int i = 0; i < dotCount; i++)
+                {
+                    float t = i * 0.1f;
+                    lineRenderer.SetPosition(i, BeziePos(t));
+                }
+                lineRenderer.enabled = true;
+            }
+            else
+            {
+                lineRenderer.enabled =false;
+            }
+        }
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        for (int i = 1; i < 50; i++)
+        {
+            float t = (i - 1f) / 49f;
+            float t1 = i / 49f;
+            Gizmos.DrawLine(BeziePos(t), BeziePos(t1));
+        }
+    }
+
+    Vector3 BeziePos(float t)
+    {
+        float t1 = 1 - t;
+        return P0 * t1 * t1 + 2 * P1 * t1 * t + P2 * t * t;
+    }
+
+    void OnGUI()
+    {
+        int size = 12;
+        float posX = Camera.main.pixelWidth / 2 - size / 4;
+        float posY = Camera.main.pixelHeight / 2 - size / 2;
+        GUI.Label(new Rect(posX, posY, size, size), "+");
+    }
+
+}

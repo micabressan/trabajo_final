@@ -1,0 +1,12 @@
+accelerateShip
+
+	|loc rot aSinDelta aCosDelta deltaD|
+
+deltaD := 0.01.
+loc := self aShip currentLocation.
+rot := self aShip currentRotation.
+aSinDelta := deltaD * rot degreesToRadians sin .
+aCosDelta := deltaD * rot degreesToRadians cos.
+
+loc x:  loc x - aSinDelta y: aCosDelta+ loc y  z: loc z.
+self aShip currentLocation: loc.

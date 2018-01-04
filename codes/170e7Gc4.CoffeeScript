@@ -1,0 +1,7 @@
+arr = [1, 2, 3, 4, 5]
+f = (i) ->
+  if i < arr.length
+    ff = f(i + 1)
+    return if arr[i] < ff then arr[i] else ff
+  else Infinity
+alert f 0

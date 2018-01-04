@@ -1,0 +1,29 @@
+extractTile :: [Tiles] -> (Int,Int) -> Tiles
+extractTile matrix (x , y) = matrix !! (x+ (div ((x+y)*(x+y+1)) 2))
+
+tileToDisp :: Int -> Int -> Int -> [(Int,Int)]
+--tileToDisp x y s = [(a,b)| a<-[x-s..x+s], b<- [y-s..y+s],a+b<=s, a>=0, b>=0]
+tileToDisp x y s = [(a,b)| a<-[min..max], b<- [min..max], a>=0, b>=0]
+                    where min = minimum [x-s,y-s,x+s,y+s]
+                          max = maximum [x-s,y-s,x+s,y+s]
+
+
+printGrid:: [[Tiles]] -> IO[()]
+printGrid grid = sequence $ map (putStrLn . textRep) grid
+
+textRep :: Show a => [a] -> String
+textRep row = foldl(\acc y -> acc ++ show(y) ++ " ")"" row
+
+displayMap :: [Tiles] -> Int ->  Int -> Int -> IO[()]
+displayMap grille x y s = do printGrid all
+   where 
+      grille' = map( extractTile grille) (tileToDisp x y s)
+      grille'' = buildSquare (sqrt' (length grille')) grille'
+      all =  reverse $ [ [ if (x ==c && y==l) then X else ((grille'' !! l)!!c) |c <- [0..(length (grille''!! l) -1)]] | l <- [0..(length grille''-1)]]
+
+
+buildSquare :: Int -> [Tiles] -> [[Tiles]]
+buildSquare n [] = []
+buildSquare n subMatrix = a :(buildSquare n b) 
+                       where a = fst (splitAt n subMatrix)
+                             b = snd (splitAt n subMatrix)

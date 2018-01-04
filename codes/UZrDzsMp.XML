@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+
+	ServerName xxx.xxx.de
+
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/THS/THSupervision/
+
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  WSGIDaemonProcess THS processes=2 threads=15 display-name=%{GROUP} python-path=/var/www/THS/THSupervision python-home=/var/www/THS/venv/libs/python3.4
+  WSGIProcessGroup THS
+  WSGIScriptAlias / /var/www/THS/THSupervision/THSupervision/wsgi.py
+
+
+	Alias /static /var/www/THS/THSupervision/supervision/static
+	<Directory /var/www/THS/THSupervision/supervision/static>
+        	Require all granted
+    	</Directory>
+
+    	# Next, add the following directory block
+    	<Directory /var/www/THS/THSupervision/THSupervision>
+        	<Files wsgi.py>
+	            	Require all granted
+        	</Files>
+    	</Directory>
+
+</VirtualHost>

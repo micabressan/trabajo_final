@@ -1,0 +1,37 @@
+TARGET = xxx
+from math import ceil, sqrt
+
+# Ulam's spiral
+def spiral(n):
+    k = ceil((sqrt(n)-1)/2)
+    t = 2*k + 1
+    m = t**2
+    t -= 1
+    if n >= (m-t):
+        return k - (m-n), -k
+    else:
+        m -= t
+    if n >= (m-t):
+        return -k, -k + (m-n)
+    else:
+        m -= t
+    if n >= (m-t):
+        return -k + (m-n), k
+    else:
+        return k, k - (m-n-t)
+
+def distance(n):
+    x, y = map(abs, spiral(n))
+    return x + y
+
+# Part 2, see
+# OEIS A141481
+# http://oeis.org/A141481/b141481.txt
+
+
+assert distance(1) == 0
+assert distance(12) == 3
+assert distance(23) == 2
+assert distance(1024) == 31
+
+print "Part 1: {}".format(distance(TARGET))

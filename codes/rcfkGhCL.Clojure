@@ -1,0 +1,13 @@
+(s/def ::symbol keyword?)
+(s/def ::lambda-expr
+  (s/cat
+    :name (s/? ::symbol)
+    :arglist (s/cat :symbols (s/* ::symbol))
+    :body ::form))
+
+;; (s/conform ::lambda-expr [:square [:x] [:* :x :x]])
+;; => :clojure.spec.alpha/invalid
+
+;; (s/explain ::lambda-expr [:square [:x] [:* :x :x]])
+;; => Success!
+;; => nil

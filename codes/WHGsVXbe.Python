@@ -1,0 +1,269 @@
+import random
+
+###Erstellt eine Matrix   length x length   mit Tuples (0, 0)
+def create_board(length):
+    board = []
+    for x in range(length):
+        zeile = []
+        for y in range(length):
+            zeile.append((0, 0))
+        board.append(zeile)
+    return board
+
+
+###Stellt das Spielfeld in der Konsole dar
+def printboard(board):
+    
+    width = len(board[0])
+    s_output = "\t"
+    for s in range(width):
+        s_output += str(s) + " "
+    print(s_output + "\n")
+
+    z = -1
+    for zeile in board:
+        z += 1
+        z_output =  "    " + str(z) + "\t"
+        for stelle in zeile:
+            stelle = stelle[0]
+            if stelle == 0: #ungetroffenes Wasser
+                stelle = "~ "
+            if stelle == 1: #ungetroffenes Schiff (für "God-Mode" Symbol ändern)
+                stelle = "~ "
+            if stelle == 2: #getroffenes Wasser
+                stelle = "x "
+            if stelle == 3: #getroffenes Schiff
+                stelle = "° "
+            if stelle == 4: #versenktes Schiff
+                stelle = "O "
+            z_output += stelle
+        print (z_output)
+
+
+###Platziert ein Schiff an einer zufälligen Stelle und überschreibt board
+###Falls kein Schiff mehr gesetzt werden kann, ist der return False
+def set_ship(board, length, ID):
+    possible_koords_w = []
+    possible_koords_s = []
+    
+    for zeile in range(10):
+        for stelle in range(10-(length-1)):
+            k = (zeile, stelle)
+            possible_koords_w.append(k)
+    for zeile in range(10-(length-1)):
+        for stelle in range(10):
+            k = (zeile, stelle)
+            possible_koords_s.append(k)
+    
+    while True:
+        l_w = len(possible_koords_w)
+        l_s = len(possible_koords_s)
+
+        if l_w * l_s != 0: #beide Listen mehr als 1 Wert
+            orientation = random.randint(0, 1)
+        if l_w + l_s == 0: #beide Listen leer
+            return False
+        if l_w == 0: 
+            orientation = 1
+        if l_s == 0:
+            orientation = 0
+
+        if orientation == 0: #waagrecht
+            k = random.choice(possible_koords_w)
+            possible_koords_w.remove(k)
+        if orientation == 1: #senkrecht
+            k = random.choice(possible_koords_s)
+            possible_koords_s.remove(k)
+
+        zeile = k[0]
+        stelle = k[1]
+        
+        #überprüft die betroffenen Felder und setzt dann das Schiff
+        if check_fields(board, zeile, stelle, length, orientation) == True:
+            if orientation == 0: #waagrecht
+                for n in range(length):
+                    board[zeile][stelle + n] = (1, ID)
+            if orientation == 1: #senkrecht
+                for n in range(length):
+                    board[zeile + n][stelle] = (1, ID)
+
+            return board
+        
+
+###Überprüft für die Funktion set_ship, ob die Felder noch frei sind
+def check_fields(board, zeile, stelle, length, orientation):
+    if orientation == 0: #waagrecht
+        for n in range(length):
+            check = board[zeile][stelle + n]
+            if check[0] != 0:
+                return False
+        return True
+    if orientation == 1: #senkrecht
+        for n in range(length):
+            check = board[zeile + n][stelle]
+            if check[0] != 0:
+                return False
+        return True
+
+
+###Überprüft anhand der ID, ob ein Schiff versenkt wurde
+def ship_sunk(board, ID):
+    if ID == 0: return False
+    for zeile in board:
+        for stelle in zeile:
+            if stelle[0] == 1:
+                if stelle[1] == ID:
+                    return False
+    return True
+
+
+###Überschreibt für ein versunkenes Schiff alle Werte zu (4, 0)
+def override(board, ID):
+    zeile = -1
+    for z in board:
+        stelle = -1
+        zeile += 1
+        for s in z:
+            stelle += 1
+            if s[1] == ID:
+                board[zeile][stelle] = (4, 0)
+    return board
+
+
+###Falls kein ungetroffenes Schiff mehr da ist, ist das Spiel vorbei
+def game_over(board):
+    for zeile in board:
+        for stelle in zeile:
+            if stelle[0] == 1:
+                return False
+    return True
+
+###Nimmmt den Input für Zeile und Stelle und markiert das Feld als getroffen
+def hit(board, zeile, stelle):
+    p = board[zeile][stelle]
+    t = p[0]
+    ID = p[1]
+
+    if t > 1: #bereits getroffen
+        input("Bereits getroffen")
+        
+    if t == 0: #Wasser
+        board[zeile][stelle] = (2, 0)
+        
+    if t == 1: #Schiff
+        board[zeile][stelle] = (3, ID)
+        if ship_sunk(board, ID) == True:
+            board = override(board, ID)
+            print("Schiff versenkt!")
+            
+    return board
+
+###Überprüft den Input value, ob er eine Zahl in der Liste possible_input ist
+###Die Liste enthalt alle Zahlen von 0 bis Länge Matrix
+def input_check(value, possible_input):
+    if value.isdigit() == False:
+        return False
+    if int(value) in possible_input:
+        return True
+    return False
+
+
+###Generiert ein Standardspielfeld mit:
+### 1x 5er  2x 4er  3x 3er  5x 2er
+def standard_setboard(board):
+    ID = 0
+
+    for ship in range(1):
+        ID += 1
+        board = set_ship(board, 5, ID)
+    for ship in range(2):
+        ID += 1
+        board = set_ship(board, 4, ID)
+    for ship in range(4):
+        ID += 1
+        board = set_ship(board, 3, ID)
+    for ship in range(6):
+        ID += 1
+        board = set_ship(board, 2, ID)
+
+    return board
+
+
+###Generiert ein persönliches Spielfeld
+def custom_setboard(board, ID):
+    while True:
+        l_ship = input("Länge des Schiffes? ")
+        while input_check(l_ship, possible_input) == False:
+            print("Ungültige Eingabe! Bitte eine Zahl von 0-9 angeben")
+            l_ship = input("Länge? ")
+    
+        n_ships = input("Anzahl " + l_ship +"er Schiffe?")
+        while input_check(n_ships, possible_input) == False:
+            print("Ungültige Eingabe! Bitte eine Zahl von 0-9 angeben")
+            n_ships = input("Anzahl?")
+        
+        l_ship = int(l_ship)
+        n_ships = int(n_ships)
+
+        for ship in range(0, n_ships):
+            ID += 1
+            p_ship = set_ship(board, l_ship, ID)
+            if p_ship == False:
+                print("Keine weiteren " + str(l_ship) + "er-Schiffe mehr möglich")
+                break
+        
+        more = input("Weitere Schiffe? y/n ")
+        if more == "n":
+            return board
+        while more != "y":
+            more = input("Weitere Schiffe? y/n ")
+            if more == "n":
+                return board
+
+    
+
+    
+board = create_board(10)
+possible_input = []
+for n in range(10):
+    possible_input.append(n)
+hit_counter = 0
+ID = 0
+print("Willkommen!")
+print("Hier geht es darum, alle gegnerischen Schiffe zu versenken.")
+input("Ich werde dir kurz die Symbole erklären. (Drücke Enter)")
+input("x = Fehltreffer")
+input("° = getroffenes, aber noch nicht versenktes Schiff")
+input("O = versenktes Schiff")
+
+print("Im Standardmodus musst du folgende Schiffe finden und versenken:")
+input("5x 2er, 3x 3er, 2x 4er, 1x 5er. (Drücke Enter)")
+print("Im Custom-Mode bestimmst du selbst über die Anzahl und Länge der Schiffe")
+
+boardtype = input("Standard (s) oder Selbstgemacht (c)? ")   
+if boardtype == "c":
+    board = custom_setboard(board, ID)
+else:
+    board = standard_setboard(board)
+
+
+while True: #Endlosloop biss alle Schiffe versenkt wurden
+    printboard(board)
+
+    if game_over(board) == True:
+        input("Gewonnen! Versuche: " + str(hit_counter))
+        exit()
+    
+    zeile = input("Welche Zeile? ")
+    while input_check(zeile, possible_input) == False:
+        print("Ungültige Eingabe! Bitte eine Zahl von 0-9 angeben")
+        zeile = input("Welche Zeile?")
+    stelle = input("Welche Stelle? ")
+    while input_check(stelle, possible_input) == False:
+        print ("Ungültige Eingabe! Bitte eine Zahl von 0-9 angeben")
+        stelle = input("Welche Stelle? ")
+    zeile = int(zeile)
+    stelle = int(stelle)
+
+    hit_counter += 1
+    board = hit(board, zeile, stelle)

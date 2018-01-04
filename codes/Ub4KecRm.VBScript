@@ -1,0 +1,17 @@
+sub Main(ByVal Parms as Object)
+
+Dim ParmArray() As String
+ParmArray = Parms.ToString.Split(",") 
+
+Dim strToParse As String = hs.DeviceString(ParmArray(0))
+Dim i As Integer = instr(strToParse,"Temperature"":")
+if i > 0 Then
+hs.WriteLog("found")
+Dim j As Integer = instr(i,strToParse,"}")
+if j > 0 Then
+Dim z As String = Trim(mid(strToParse,i+1,j-i-1))
+hs.setDeviceString (ParmArray(0),z)
+hs.WriteLog(z)
+end if
+end if
+end sub

@@ -1,0 +1,44 @@
+ /// <inheritdoc />
+        public void BeforeRun(IEnvironment environment)
+        {
+           
+            double[,] state_value = new Double[environment.Timesteps.Count + 1, (int)environment.Dams[0].Reservoir.GetMaxWaterlevel()];
+            
+            // Create a random generator that can be used each time this IAlgorithm is called for an IAction
+            for (int t = environment.Timesteps.Count - 1; t >= 0; --t)
+            {
+                for (int current_water_level = 0; current_water_level < environment.Dams[0].Reservoir.GetMaxWaterlevel() + 1; ++current_water_level)
+                {
+                    double immediate_potential_income;
+                    if (current_water_level > 0)
+                    {
+                        immediate_potential_income =
+                            environment.Dams[0].Generator.CalculateBoost(current_water_level) * environment.Timesteps.ElementAt(t-1).ElectricityPrice;
+                    } else {
+                        immediate_potential_income = 0;
+                    }                
+                                     
+                     if (t == environment.Timesteps.Count - 1) {
+                        state_value[t, current_water_level] = immediate_potential_income;
+                }
+                     else {
+                            int next_water_level_without_production = current_water_level + inflow_series(t+1);
+                        if (next_water_level_without_production > max_water_level)
+                        {
+                            next_water_level_without_production = max_water_level;
+                        }
+
+                        int next_water_level_with_production = current_water_level + inflow_series(t+1)-1;
+                        if (next_water_level_with_production > max_water_level)
+                        {
+                            next_water_level_with_production = max_water_level;
+                        }
+
+                        if (next_water_level_without_production == 0 || state_value(t+1, next_water_level_without_production) >= state_value(t+1, next_water_level_with_production) + immediate_potential_income) {
+                            state_value(t, current_water_level) = state_value(t+1, next_water_level_without_production);
+                        } else {
+                            state_value(t, current_water_level) = state_value(t+1, next_water_level_with_production) + immediate_potential_income;
+                        }
+                    }
+            }
+        }

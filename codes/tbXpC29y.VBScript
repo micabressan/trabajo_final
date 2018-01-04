@@ -1,0 +1,199 @@
+Public Class FormMain
+
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles BTN_ADD.Click
+
+        If productid.Text = "" Then
+            MsgBox("กรุณากรอกรหัสสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productname.Text = "" Then
+            MsgBox("กรุณากรอกชื่อสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productprice.Text = "" Then
+            MsgBox("กรุณากรอกราคาสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productqty.Text = "" Then
+            MsgBox("กรุณากรอกจำนวนคงเหลือสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If producttype.Text = "" Then
+            MsgBox("กรุณากรอกหมวดสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productunit.Text = "" Then
+            MsgBox("กรุณากรอกหน่วยนับสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Dim Checkdata As DataTable = executesql("SELECT Product_ID FROM TBL where Product_ID= '" & productid.Text & "'")
+        If checkdata.rows.count > 0 Then
+            MsgBox("มีรหัสสินค้าซ้ำ", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        executesql("INSERT INTO TBL(Product_ID,Product_Name,Product_Price,Product_Qty,Product_Type,Product_Unit)VALUES ('" & productid.Text & "','" & productname.Text & "','" & productprice.Text & "','" & productqty.Text & "','" & producttype.Text & "','" & productunit.Text & "')")
+        MsgBox("บันทึกข้อมูลเรียบร้อยแล้วจ้า", MsgBoxStyle.Information)
+        productid.Clear()
+        productname.Clear()
+        productprice.Clear()
+        productqty.Clear()
+        producttype.Clear()
+        productunit.Clear()
+
+        loaddatatable()
+
+    End Sub
+
+    Sub loaddatatable()
+        Dim LOADDATA As DataTable = executesql("SELECT * FROM TBL")
+        DataGridView1.DataSource = LOADDATA
+        DataGridView1.Columns(0).HeaderText = "รหัสสินค้า"
+        DataGridView1.Columns(1).HeaderText = "ชื่อสินค้า"
+        DataGridView1.Columns(2).HeaderText = "ราคาสินค้า"
+        DataGridView1.Columns(3).HeaderText = "คงเหลือสินค้า"
+        DataGridView1.Columns(4).HeaderText = "หมวดสินค้า"
+        DataGridView1.Columns(5).HeaderText = "หน่วยนับสินค้า"
+    End Sub
+
+    Private Sub productid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles productid.KeyPress
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57 ' key โค๊ด ของตัวเลขจะอยู่ระหว่าง48-57ครับ 48คือเลข0 57คือเลข9ตามลำดับ
+                e.Handled = False
+            Case 8, 13, 46 ' ปุ่ม Backspace = 8,ปุ่ม Enter = 13, ปุ่มDelete = 46
+                e.Handled = False
+
+            Case Else
+                e.Handled = True
+                MessageBox.Show("ใส่ตัวเลขเท่านั้น !!")
+        End Select
+    End Sub
+
+
+    Private Sub productid_TextChanged(sender As Object, e As EventArgs) Handles productid.TextChanged
+
+    End Sub
+
+    Private Sub productprice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles productprice.KeyPress
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57 ' key โค๊ด ของตัวเลขจะอยู่ระหว่าง48-57ครับ 48คือเลข0 57คือเลข9ตามลำดับ
+                e.Handled = False
+            Case 8, 13, 46 ' ปุ่ม Backspace = 8,ปุ่ม Enter = 13, ปุ่มDelete = 46
+                e.Handled = False
+
+            Case Else
+                e.Handled = True
+                MessageBox.Show("ใส่ตัวเลขเท่านั้น !!")
+        End Select
+    End Sub
+
+    Private Sub productprice_TextChanged(sender As Object, e As EventArgs) Handles productprice.TextChanged
+
+    End Sub
+
+    Private Sub productqty_KeyPress(sender As Object, e As KeyPressEventArgs) Handles productqty.KeyPress
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57 ' key โค๊ด ของตัวเลขจะอยู่ระหว่าง48-57ครับ 48คือเลข0 57คือเลข9ตามลำดับ
+                e.Handled = False
+            Case 8, 13, 46 ' ปุ่ม Backspace = 8,ปุ่ม Enter = 13, ปุ่มDelete = 46
+                e.Handled = False
+
+            Case Else
+                e.Handled = True
+                MessageBox.Show("ใส่ตัวเลขเท่านั้น !!")
+        End Select
+    End Sub
+
+    Private Sub productqty_TextChanged(sender As Object, e As EventArgs) Handles productqty.TextChanged
+
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
+
+    Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loaddatatable()
+        DataGridView1.Columns(2).DefaultCellStyle.Format = "N2"
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        executesql("DELETE FROM TBL WHERE PRODUCT_ID='" & DataGridView1.CurrentRow.Cells(0).Value & "'")
+        MsgBox("ลบข้อมูลเรียบร้อยแล้ว", MsgBoxStyle.Information)
+        loaddatatable()
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If productid.Text = "" Then
+            MsgBox("กรุณากรอกรหัสสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productname.Text = "" Then
+            MsgBox("กรุณากรอกชื่อสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productprice.Text = "" Then
+            MsgBox("กรุณากรอกราคาสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productqty.Text = "" Then
+            MsgBox("กรุณากรอกจำนวนคงเหลือสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If producttype.Text = "" Then
+            MsgBox("กรุณากรอกหมวดสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If productunit.Text = "" Then
+            MsgBox("กรุณากรอกหน่วยนับสินค้า", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        executesql("UPDATE TBL SET PRODUCT_NAME ='" & productname.Text & "',PRODUCT_PRICE ='" & productprice.Text & "',PRODUCT_QTY ='" & productqty.Text & "',PRODUCT_TYPE ='" & producttype.Text & "',PRODUCT_UNIT='" & productunit.Text & "'WHERE PRODUCT_ID ='" & productid.Text & "'")
+
+        productid.Clear()
+        productname.Clear()
+        productprice.Clear()
+        productqty.Clear()
+        producttype.Clear()
+        productunit.Clear()
+        MsgBox("แก้ไขข้อมูลเรียบร้อย", MsgBoxStyle.Information)
+
+        loaddatatable()
+    End Sub
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        productid.Text = DataGridView1.CurrentRow.Cells(0).Value
+        productname.Text = DataGridView1.CurrentRow.Cells(1).Value
+        productprice.Text = DataGridView1.CurrentRow.Cells(2).Value
+
+        productprice.Text = CDbl(productprice.Text).ToString("##,##0.00")
+
+        productqty.Text = DataGridView1.CurrentRow.Cells(3).Value
+        producttype.Text = DataGridView1.CurrentRow.Cells(4).Value
+        productunit.Text = DataGridView1.CurrentRow.Cells(5).Value
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+       
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        productid.Clear()
+        productname.Clear()
+        productprice.Clear()
+        productqty.Clear()
+        producttype.Clear()
+        productunit.Clear()
+        MsgBox("เคีลยร์", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Form3.ShowDialog()
+
+    End Sub
+End Class

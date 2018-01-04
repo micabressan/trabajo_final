@@ -1,0 +1,17 @@
+for (int i = 0; i < 15; i++)    //ebben a külső for ciklusban megkeressük hogy az i.-ik helyre mi kerüljön.
+            {
+                String min = nevek[i];
+                int minindex = 0;
+                for (int j = i; j < 15; j++)// itt megkeressük az i-től 15 ig számok közül a legkisebbet és megjegyezzük
+                {
+                    if (nevek[j] < min)
+                    {
+                        minindex = j;
+                        min = nevek[j];
+                    }
+                }
+                // itt helyetcserél a legkisebb elem és az i
+                int temp = nevek[i];
+                nevek[i] = nevek[minindex];
+                nevek[minindex] = temp;
+ }

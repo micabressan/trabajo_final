@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html lang="en">
+<!--
+ -
+ -   Copyright © 2010-2016 by xhost.ch GmbH
+ -
+ -   All rights reserved.
+ -
+ -->
+<head>
+    <meta content="initial-scale=1.0, width=device-width, user-scalable=yes" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="en" />
+    <link rev="made" href="mailto:info@multicraft.org">
+    <meta name="description" content="Multicraft: The Minecraft server control panel">
+    <meta name="keywords" content="Multicraft, Minecraft, server, management, control panel, hosting">
+    <meta name="author" content="xhost.ch GmbH">
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="/themes/default/css/style.css" media="screen, projection" />
+
+    <script type="text/javascript" src="/assets/5857df5d/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/5857df5d/jquery.yii.js"></script>
+<script type="text/javascript" src="/themes/default/js/theme.js"></script>
+<title>Multicraft - Home</title>
+</head>
+<body>
+<div id="page">
+    <div id="watermark-logo"></div>
+    <div id="mini">
+        
+                <div class="row" id="header">
+            <div id="logo">
+                <h1>Multicraft<small>Minecraft Server Manager</small></h1>
+            </div>
+        </div><!-- header -->        
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" id="navbar">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+                    <span class="sr-only">Toggle navigation</span>
+                    <img src="/themes/default/images/icons/bars.png" alt="" />                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-main">
+                <ul class="nav navbar-nav" id="yw0">
+<li class="active"><a href="/index.php?r=site/page&amp;view=home">Home</a></li>
+<li><a href="/index.php?r=site/report">Support</a></li>
+<li><a href="/index.php?r=site/login">Login</a></li>
+</ul>            </div>
+            <div class="notice"></div>
+        </nav>
+
+        <div class="row" id="content"><br/>
+Welcome to <b><a href="http://www.multicraft.org">Multicraft</a></b>, the Minecraft server control panel.<br/>
+
+<div class="introbar">
+    <a href="/index.php?r=site/login"><img src="/themes/default/images/icons/login_large.png" alt="" /> <span>Login</span></a><a href="http://multicraft.org/site/docs" id="yt0"><img src="/themes/default/images/icons/help_large.png" alt="" /> <span>Help</span></a><a href="/index.php?r=site/page&amp;view=about"><img src="/themes/default/images/icons/about_large.png" alt="" /> <span>About</span></a></div>
+
+</div>
+    </div>
+
+</div>
+<script src="/themes/default/js/bootstrap.min.js"></script>
+<script src="/js/multicraft.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(function($) {
+jQuery('body').on('click','#yt0',function(){if(confirm('You are leaving your control panel.\n\nYou will be forwarded to the documentation on the official Multicraft website.')) {jQuery.yii.submitForm(this,'http://multicraft.org/site/docs',{});return false;} else return false;});
+});
+/*]]>*/
+</script>
+  <div id="bitnami-banner" data-banner-id="f7ac6">  <style>#bitnami-banner {z-index:100000;height:80px;padding:0px;width:120px;background:transparent;position:fixed;right:0px;bottom:0px;border:0px solid #EDEDED;} #bitnami-banner .bitnami-corner-image-div {position:fixed;right:0px;bottom:0px;border:0px;z-index:100001;height:110px;} #bitnami-banner .bitnami-corner-image-div .bitnami-corner-image {position:fixed;right:0px;bottom:0px;border:0px;z-index:100001;height:110px;} #bitnami-close-banner-button {height:12px;width:12px;z-index:10000000000;position:fixed;right:5px;bottom:65px;display:none;cursor:pointer}</style>  <img id="bitnami-close-banner-button" src="/bitnami/images/close.png"/>  <div class="bitnami-corner-image-div">     <a href="/bitnami/index.html" target="_blank">       <img class="bitnami-corner-image" alt="Bitnami" src="/bitnami/images/corner-logo.png"/>     </a>  </div>  <script type="text/javascript" src="/bitnami/banner.js"> </script> </div>   </body>
+<!--  C o p y r i g h t   (c)   2 0 1 0 - 2 0 1 6   b y   x h o s t . c h   G m b H .   A l l   r i g h t s   r e s e r v e d .  -->
+</html>

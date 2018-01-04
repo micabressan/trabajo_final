@@ -1,0 +1,61 @@
+{
+  "aliasesMcore": [
+    "massivecore",
+    "mcore"
+  ],
+  "aliasesUsys": [
+    "usys"
+  ],
+  "aliasesMstore": [
+    "massivestore",
+    "mstore"
+  ],
+  "aliasesBuffer": [
+    "buffer"
+  ],
+  "aliasesCmdurl": [
+    "cmdurl"
+  ],
+  "versionSynchronizationEnabled": true,
+  "tabCompletionLimit": 100,
+  "recipientChatEventEnabled": true,
+  "consoleColorsEnabled": true,
+  "permissionDeniedFormats": {
+    "some.awesome.permission.node": "<b>You must be awesome to %s<b>.",
+    "some.derp.permission.node.1": "derp",
+    "some.derp.permission.node.2": "derp",
+    "some.derp.permission.node.3": "derp",
+    "derp": "<b>Only derp people can %s<b>.\n<i>Ask a moderator to become derp."
+  },
+  "permissionToTpdelay": {
+    "massivecore.notpdelay": 0,
+    "default": 10
+  },
+  "deleteFiles": [],
+  "variableBookName": "***book***",
+  "variableBookEnabled": true,
+  "variableBufferName": "***buffer***",
+  "variableBufferEnabled": true,
+  "clickSound": {
+    "soundId": "UI_BUTTON_CLICK",
+    "volume": 0.75,
+    "pitch": 1.0
+  },
+  "millisBetweenLocalPoll": 10000,
+  "millisBetweenRemotePollWithoutPusher": 10000,
+  "millisBetweenRemotePollWithPusher": 10000,
+  "warnOnLocalAlter": false,
+  "cleanTaskPeriodMillis": 86400000,
+  "cleanTaskOffsetMillis": 0,
+  "cleanTaskLastMillis": 1513519010485,
+  "catchingMongoDbErrorsOnSave": true,
+  "catchingMongoDbErrorsOnDelete": true,
+  "debugEnabled": true,
+  "sponsorUpdateMillis": 1513517819364,
+  "sponsorEnabled": false,
+  "metricsEnabled": true,
+  "loreSortOnInventoryClick": false,
+  "loreSortOnInventoryOpen": false,
+  "lorePrioritiesPrefix": {},
+  "lorePrioritiesRegex": {}
+}

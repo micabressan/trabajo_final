@@ -1,0 +1,23 @@
+{
+  "name": "testProject",
+  "version": "1.0.0",
+  "description": "test project using node.js + sockets.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "6.11.1"
+  },
+  "keywords": [
+    "sockets",
+    "p5",
+    "node"
+  ],
+  "author": "henry zhu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
+}

@@ -1,0 +1,78 @@
+-module(db).
+-behavior(gen_server).
+
+
+-export([delete/1, delete/2,delete_all_objects/1,insert/3,find/2,new/1 ]).
+-export([init/1, handle_call/3, handle_info/2, terminate/2, code_change/3]).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+-endif.
+
+%%% module API
+
+%% Создает новую таблицу (стартует процес)
+-spec new(Name :: atom()) -> ok |{error, Reason :: term()}.
+new(Name) ->
+    gen_server:start_link({Name, ?MODULE}, ?MODULE, [], []).
+
+%% Удаляет таблицу (останавливает процесс)
+-spec delete(Name :: atom()) -> ok.
+delete(Name) ->
+    exit(whereis(Name), exit).
+
+%% Удаляет запись из таблицы по ключу
+-spec delete(Name :: atom(), Key :: term()) -> ok.
+delete(Name, Key) ->
+    gen_server:call(Name, {delete, {Key}}).
+
+%% Удаляет все записи из таблицы
+-spec delete_all_objects(Name :: atom()) -> ok.
+delete_all_objects(Name) -> 
+    gen_server:call(Name, {delete_all_objects}).
+
+%% Добавляет запись в таблицу или заменяет если ключ уже существует  
+-spec insert(Name :: atom(), Key :: term(), Value :: term()) -> ok.
+insert(Name, Key, Value) -> 
+    gen_server:call(Name, {insert, {Key, Value}}).
+
+%% Ищет запись по ключу
+-spec find(Name :: atom(), Value :: term()) -> {ok, Value :: term()} | not_found.
+find(Name, Value) -> 
+    gen_server:call(Name, {find, {Value}}).
+
+%%% gen_server API
+
+init([]) ->
+    State = db_interal:new(),
+    {ok, State}.
+
+handle_call({delete, {Key}}, _From, State) ->
+    NewState = db_interal:batch_delete([Key],State),
+    {reply, ok, NewState};
+
+handle_call({delete_all_objects}, _From, State) ->
+    NewState = db_interal:new(),
+    {reply, ok, NewState};
+
+handle_call({insert, {Key, Value}}, _From, State) ->
+    NewState = db_interal:append(Key,Value,State),
+    {reply, ok, NewState};
+
+handle_call({find, {Key}}, _From, State) ->
+    Reply = db_interal:batch_read([Key],State),
+    {reply, Reply, State}.
+
+handle_info(heavy_init, State) ->
+    NewState = db_interal:new(),
+    {noreply, NewState}.
+
+
+terminate(_Reason, _State) ->
+    ok.
+
+code_change(_OldVersion, State, _Extra) ->
+    {ok, State}.
+
+-ifdef(TEST).
+-endif.

@@ -1,0 +1,280 @@
+groups:
+    guest:
+        default: false
+        info:
+            build: false
+        inheritance:
+        permissions:
+        - stealthlogin.*
+        - commandbook.spawn
+        - sortal.coords
+        - sortal.warp
+    registered:
+        default: true
+        info:
+            build: true
+        inheritance:
+        permissions:
+        - vote.voteyes.*
+        - myhome.home.soc.others
+        - vote.voteno.*
+        - commandbook.motd
+        - petition
+        - heroicrebuke.list
+        - heroicrebuke.info
+        - iConomyChestShop.shop.buy
+        - iConomyChestShop.shop.sell
+        - commandbook.rules
+        - minecraft.list
+        - MobBounty.mb
+        - lockette.user.create.*
+        - deathmessageplugin.sendmessage
+        - GiftSend.send
+        - myhome.home.basic.*
+        - mcmmo.commands.party
+        - commandbook.say.me
+        - worldguard.region.info.*
+        - worldguard.region.addmember.own.*
+        - commandbook.who
+        - commandbook.list
+        - commandbook.players
+        - commandbook.playerlist
+        - nocheat.notify
+        - worldguard.region.removemember.own.*
+        - commandhelper.alias.guest
+        - commandbook.spawn
+        - ecoCreature.Creature.*
+        - DailyBonus.get
+        - iWarning.mywarnings
+        - BetterShop.user.*
+        - slowhealth
+        - auction.start
+        - auction.bid
+        - iConomy.rank
+        - iConomy.list
+        - iConomy.payment
+        - mcmmo.chat.partychat
+        - mcmmo.skills.*
+        - mcmmo.commands.ability
+        - mcmmo.ability.*
+        - falsebook.blocks.*
+        - playerlives.canuse
+        - playerlives.checkself
+        - commandbook.msg
+        - playerlives.buy
+        - sortal.coords
+        - sortal.warp
+    trusted:
+        default: false
+        info:
+            prefix: '&a'
+            build: true
+        inheritance:
+        - registered
+        permissions:
+        - simplesign.edit
+        - simplereserve.kick.prevent
+        - bukkitvote.vote.kick
+        - iConomyChestShop.shop.create
+        - worldguard.region.flag.own.*
+        - worldguard.region.flag.flags.greeting.*
+        - worldguard.region.flag.flags.farewell.*
+        - vote.startvote.restart
+        - sa.create
+        - falsebook.ic.detection
+        - falsebook.ic.standard
+        - falsebook.ic.selftriggered
+        - torchmissile.SingleMode
+        - worldguard.region.flag.own.*
+        - worldguard.region.flag.flags.greeting.*
+        - PortableTorch.Allow
+        - commandhelper.useralias
+    donator:
+        default: false
+        info:
+            prefix: '[&5Donator&f] &5'
+            build: true
+        inheritance:
+        - trusted
+        permissions:
+        - godmode.toggle.self
+        - simplereserve.kick.prevent
+        - mobdisguise.chicken
+        - mobdisguise.pig
+        - mobdisguise.squid
+        - mobdisguise.pigzombie
+        - mobdisguise.sheep
+        - mobdisguise.cow
+        - mobdisguise.wolf
+        - commandbook.clear
+        - spyer.stopmobs.admin
+        - DailyBonus.vip
+        - nocheat.flying
+        - OpenInv.exempt
+        - nocheat.moving
+        - bukkitvote.vote.mute
+        - bukkitvote.vote.unmute
+        - DailyBonus.getVIP
+        - mywarp.warp.soc.*
+        - CommandIConomy.Free
+        - worldedit.butcher
+        - spyer.spy
+        - god
+        - essentials.tpa
+        - worldedit.navigation.thru
+        - IBICF.fly
+        - monstertamer.player.*
+        - worldguard.god
+        - worldedit.navigation.jumpto
+    supporter:
+        inheritance:
+        - donator
+        permissions:
+        - commandbook.give.*
+        - worldedit.superpickaxe
+        - falsebook.ic.mc1201
+        - bb.admin.info
+        - heroicrebuke.active
+        - commandbook.teleport
+        - commandbook.give.stacks
+        info:
+            prefix: '&4'
+        default: false
+    mod:
+        info:
+            prefix: '[Mod] &a'
+        inheritance:
+        - trusted
+        permissions:
+        - OpenInv.exempt
+        - worldguard.region.flag.flags.pvp.*
+        - herochat.admin
+        - bb.admin.info
+        - commandbook.call
+        - kiwiadmin.kick
+        - heroicrebuke.add
+        - heroicrebuke.active
+        - commandbook.kick
+        - advbans.kick
+        - petition.*
+        default: false
+    antigriefer:
+        info:
+            prefix: '[&5AntiGrief&f] '
+        inheritance:
+        - mod
+        permissions:
+        - bb.*
+        - hawkeye.*
+        - commandbook.teleport
+        - OpenInv.exempt
+        - nocheat.flying
+        - nocheat.moving
+        - commandbook.bans.*
+        - advbans.*
+        - OpenInv.openinv
+        - OpenInv.search
+        - spyer.spy
+        - petition.moderate.antigrief
+        - petition.warp-to-own-if-assigned
+        default: false
+    protector:
+        info:
+            prefix: '[Protectors] '
+        inheritance:
+        - mod
+        permissions:
+        - petition.*
+        - kyku.tower
+        - nocheat.flying
+        - nocheat.moving
+        - worldedit.wand.toggle
+        - worldguard.region.*
+        - worldedit.selection.*
+        - worldedit.wand
+        default: false
+    halfop:
+        default: false
+        info:
+            prefix: '[&9Half-Op&f] '
+            build: true
+        inheritance:
+        - mod
+        permissions:
+        - worldguard.god
+        - kyku.tower
+        - kiwiadmin.*
+        - worldguard.region.remove.*
+        - worldguard.region.delete.*
+        - worldguard.region.define
+        - deathmessageplugin.getmessage
+        - advbans.*
+        - godmode.toggle.self
+        - silence.modify
+        - iWarning.warn
+        - spyer.stopmobs.admin
+        - simplesign.edit.all
+        - chestlock.admin
+        - commandbook.slap.other
+        - kit.*
+        - CommandIConomy.Free
+        - commandbook.bans.*
+        - worldedit.wand
+        - worldedit.wand.toggle
+        - worldedit.selection.*
+        - petition.*
+        - worldguard.region.addmember.*
+        - worldguard.region.removemember.*
+        - cmdblocker.command.ixrai12345
+        - nocheat.flying
+        - nocheat.moving
+        - minecraft.kick
+        - bb.admin.info
+        - hawkeye.search
+        - weathercontrol.rainstorm
+    op:
+        default: false
+        info:
+            prefix: '[&1Op&f] '
+            build: true
+        inheritance:
+        - halfop
+        permissions:
+        - assignpermissions.add.all
+        - commandbook.bans.*
+        - simplereserve.enter.full
+        - OpenInv.override
+        - worldguard.*
+        - advbans.*
+        - minecraft.ban
+        - bb.*
+        - hawkeye.*
+        - worldguard.region.delete
+        - worldedit.*
+        - spyer.*
+        - commandbook.teleport
+        - commandbook.teleport.other
+    superop:
+        info:
+            prefix: '[&aS&bu&cp&de&er&1&2o&3p&f] '
+        permissions:
+        - '*'
+        default: false
+    god:
+        default: false
+        info:
+            build: true
+        inheritance:
+        permissions:
+        - '*'
+tracks:
+    user:
+    - guest
+    - trusted
+    mod:
+    - mod
+    - halfop
+    - op
+    - superop
+    donator:
+    - donator

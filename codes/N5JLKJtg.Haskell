@@ -1,0 +1,4 @@
+main :: IO ()
+main = do 
+    content <- readFile "input.txt"
+    let ls = lines content

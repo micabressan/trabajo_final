@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+############################################
+## This script kills the "strobe" script  ##
+############################################
+
+
+# Libraries
+#import RPi.GPIO as GPIO # Used to reset GPIO
+import os
+import sys
+import signal
+import string
+
+# Clear Active Pins
+##GPIO.setwarnings(False)
+##GPIO.cleanup()
+##GPIO.setmode(GPIO.BCM)
+##GPIO.setup(17,GPIO.OUT)
+##GPIO.setup(18,GPIO.OUT)
+
+# Read PID from pid.txt
+f=open("pid.txt", "r")
+print f.read()
+pid = f.read()
+print(pid)
+# os.kill(pid, signal.SIGTERM) #or signal.SIGKILL

@@ -1,0 +1,135 @@
+use std::io;
+use std::ops::Add;
+use std::cmp::{min, max, Eq};
+
+#[derive(Clone, Copy, Debug)]
+struct Position {
+    x:i32,
+    y:i32
+}
+
+impl Position {
+    fn taxicab_distance(&self) -> i32 {
+        self.x.abs() + self.y.abs()
+    }
+
+    fn rotate_cw(&self) -> Position {
+        Position {
+            x: -self.y,
+            y: self.x
+        }
+    }
+
+    fn indexof(&self) -> usize {
+        let mut current_pos = Position{x: 0, y: 0};
+        let mut dir = Position{x: 1, y: 0};
+        let mut bounds = Bounds{
+            bottom_left: Position{x: 0, y: 0},
+            top_right: Position{x: 0, y: 0}
+        }; 
+        let mut pos = 1;
+        loop {
+            if current_pos == *self {
+                break
+            }
+            pos += 1;
+            current_pos = current_pos + dir;
+            if bounds.is_pos_outside(current_pos) {
+                dir = dir.rotate_cw();
+                bounds = bounds.extend(current_pos)
+            }
+        };
+        pos
+    }
+}
+
+impl Add for Position {
+    type Output = Position;
+
+    fn add(self, other: Position) -> Position {
+        Position {
+            x: self.x + other.x,
+            y: self.y + other.y
+        }
+    }
+}
+
+impl PartialEq for Position {
+    fn eq(&self, other:&Self) -> bool {
+        self.x == other.x && self.y == other.y
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+struct Bounds {
+    bottom_left: Position,
+    top_right: Position
+}
+
+impl Bounds {
+    fn is_pos_outside(&self, pos: Position) -> bool {
+        return !((self.bottom_left.x <= pos.x && pos.x <= self.top_right.x)
+            && (self.bottom_left.y <= pos.y && pos.y <= self.top_right.y))
+    }
+
+    fn extend(&self, pos: Position) -> Bounds {
+        Bounds {
+            bottom_left: Position {
+                x: min(pos.x, self.bottom_left.x),
+                y: min(pos.y, self.bottom_left.y)
+            },
+            top_right: Position {
+                x: max(pos.x, self.top_right.x),
+                y: max(pos.y, self.top_right.y)
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut buf:String = String::new();
+
+    io::stdin().read_line(&mut buf)
+        .expect("Couldn't read line");
+    
+    buf.pop();
+    let num:u32 = buf.parse()
+        .expect("This is not a number!");
+
+    let mut current_pos = Position{x: 0, y: 0};
+    let mut bounds = Bounds{
+        bottom_left: Position{x: 0, y: 0},
+        top_right: Position{x: 0, y: 0}
+    }; 
+    let mut values = vec![1];
+    let mut dir = Position{x: 1, y: 0};
+
+    for n in 1..num {
+        current_pos = current_pos + dir;
+        if bounds.is_pos_outside(current_pos) {
+            dir = dir.rotate_cw();
+            bounds = bounds.extend(current_pos)
+        }
+        
+        let to_sum = [
+            Position{x: 1, y: 0},
+            Position{x: -1, y: 0},
+            Position{x: 0, y: 1},
+            Position{x: 0, y: -1},
+            Position{x: 1, y: 1},
+            Position{x: -1, y: 1},
+            Position{x: 1, y: -1},
+            Position{x: -1, y: -1},
+        ];
+        let sum = to_sum.iter().fold(0, |sum, x| {
+            let toc = *x + current_pos;
+            sum + values.get(toc.indexof() - 1).unwrap_or(&0)
+        });
+        values.push(sum);
+        if sum > num {
+            break
+        }
+    }
+
+    println!("{:?}", values.pop().unwrap())
+}

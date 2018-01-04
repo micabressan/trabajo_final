@@ -1,0 +1,134 @@
+use std::io::{stdin,BufRead};
+use std::collections::HashMap;
+use std::str::FromStr;
+use std::cmp::max;
+
+#[derive(Debug,PartialEq,Eq)]
+enum Token {
+    Reg(String),
+    Num(i32),
+    Inc,
+    Dec,
+    If,
+    Lt,
+    Gt,
+    Le,
+    Ge,
+    Eq,
+    Ne,
+}
+
+impl FromStr for Token {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if let Ok(i) = s.parse::<i32>() {
+            return Ok(Token::Num(i));
+        }
+        Ok(match s {
+            "inc" => Token::Inc,
+            "dec" => Token::Dec,
+            "if" => Token::If,
+            "<" => Token::Lt,
+            ">" => Token::Gt,
+            "<=" => Token::Le,
+            ">=" => Token::Ge,
+            "==" => Token::Eq,
+            "!=" => Token::Ne,
+            other => Token::Reg(other.to_owned()),
+        })
+    }
+}
+
+struct Instr {
+    reg: String,
+    value: i32,
+    cond_reg: String,
+    op: Token,
+    cond_val: i32,
+}
+
+impl Instr {
+    pub fn parse(mut line: Vec<Token>) -> Result<Self, &'static str> {
+        let cond_val = match line.pop().expect("Too few values") {
+            Token::Num(i) => i,
+            _ => return Err("Cond value not an int"),
+        };
+        let op = match line.pop().expect("Too few values") {
+            Token::Lt => Token::Lt, Token::Gt => Token::Gt,
+            Token::Le => Token::Le, Token::Ge => Token::Ge,
+            Token::Eq => Token::Eq, Token::Ne => Token::Ne,
+            _ => return Err("Unsupported op"),
+        };
+        let cond_reg = match line.pop().expect("Too few values") {
+            Token::Reg(s) => s,
+            _ => return Err("Non-register in cond"),
+        };
+
+        let _ = match line.pop().expect("Too few values") {
+            Token::If => (),
+            _ => return Err("expected keyword if"),
+        };
+
+        let value = match line.pop().expect("Too few values") {
+            Token::Num(i) => i,
+            _ => return Err("Inc/dec value not an int"),
+        };
+
+        let value = match line.pop().expect("Too few values") {
+            Token::Inc => value,
+            Token::Dec => -value,
+            _ => return Err("Invalid direction keyword"),
+        };
+        let reg = match line.pop().expect("Too few values") {
+            Token::Reg(s) => s,
+            _ => return Err("Initial value not a register"),
+        };
+        if !line.is_empty() {
+            return Err("Too many tokens per line");
+        }
+
+        Ok(Instr{reg: reg, value: value,
+                 cond_reg: cond_reg, op: op, cond_val: cond_val })
+    }
+}
+
+type Memory = HashMap<String, i32>;
+
+fn interpret(instr: Instr, memory: &mut Memory) {
+    let cond_reg_val = *memory.get(&instr.cond_reg).unwrap_or(&0);
+    let cond_val = instr.cond_val;
+    if match instr.op {
+        Token::Lt => cond_reg_val < cond_val,
+        Token::Gt => cond_reg_val > cond_val,
+        Token::Le => cond_reg_val <= cond_val,
+        Token::Ge => cond_reg_val >= cond_val,
+        Token::Eq => cond_reg_val == cond_val,
+        Token::Ne => cond_reg_val != cond_val,
+        _ => panic!("Unexpected op")
+    } {
+        *memory.entry(instr.reg).or_insert(0) += instr.value;
+    }
+}
+
+fn mem_max<'a>(mem: &'a Memory) -> (&'a String, &i32) {
+    mem.iter().max_by_key(|&(_, v)| v).unwrap()
+}
+
+fn main() {
+    let stdin = stdin();
+    let stdin = stdin.lock();
+    let mut memory: Memory = HashMap::new();
+    let mut all_time_high = 0;
+    for line in stdin.lines() {
+        let tokens: Vec<Token> = line.expect("Working line").split_whitespace()
+            .map(|x| x.parse().unwrap()).collect();
+        let instr = Instr::parse(tokens).unwrap();
+        interpret(instr, &mut memory);
+        let (_, &cur_max) = mem_max(&memory);
+        all_time_high = max(cur_max, all_time_high);
+    }
+    let (max_reg, max_val) = mem_max(&memory);
+    println!("{}: {}", max_reg, max_val);
+    println!("Record: {}", all_time_high);
+}

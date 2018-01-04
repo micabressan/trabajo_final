@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Intsys
+{
+   public class Persoon
+    {
+      public int id;
+      public int Gewicht;
+
+      public Persoon(int id, int gewicht) { 
+          this.id = id;
+          this.Gewicht = gewicht;
+      }
+    }
+}

@@ -1,0 +1,17 @@
+|oc pivot copies array time fullGCs incGCs |
+oc := OrderedCollection new: 1000.
+pivot := oc capacity // 2 +1.
+oc resetTo: pivot.
+pivot to: 2 by: -1 do: [:i | oc addFirst: i].
+
+copies := 10000.
+array := Array new: copies.
+1 to: copies do: [:i | array at: i put: oc copy].
+oc addFirst: 1.
+fullGCs := Smalltalk vmParameterAt: 7.
+incGCs := Smalltalk vmParameterAt: 9.
+TimeProfileBrowser onBlock: [time := [1 to: copies do: [:i | (array at: i) addFirst: i]] 
+timeToRun.].
+fullGCs := (Smalltalk vmParameterAt: 7) - fullGCs.
+incGCs := (Smalltalk vmParameterAt: 9) - incGCs. 
+{time . fullGCs. incGCs}

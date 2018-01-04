@@ -1,0 +1,22 @@
+'http://excelpoweruser.blogspot.de/2012/04/looping-through-folders-and-files-in.html     http://www.excelforum.com/excel-programming-vba-macros/1126751-get-value-function-loop-through-all-files-in-folder-and-its-subfolders.html#post4316662    http://www.excelfox.com/forum/f5/loop-through-files-in-a-folder-using-vba-1324/
+Sub VBADoStuffInFoldersInFolderRecursion() 'Main routine to "Call" the first copy of the second routine,  VBALoopThroughEachFolderAndItsFile(
+Rem 1A) Some Worksheets and General Variables Info
+Dim Ws As Worksheet: Set Ws = ThisWorkbook.Worksheets.Item(1) 'Worksheets("EFFldr") 'CHANGE TO SUIT YOUR WORKSHEET
+Rem 2A) Get Folder Info 'CHANGE TO SUIT if you store the main Folder to be looked through somewhere other than in the same Folder as this workbook in which the codes are in
+Dim strWB As String ' "Pointer" to a "Blue Print" (or Form, Questionaire not yet filled in, a template etc.)"Pigeon Hole" in Memory, sufficient in construction to house a piece of Paper with code text giving the relevant information for the particular Variable Type. VBA is sent to it when it passes it. In a Routine it may be given a particular “Value”, or (“Values” for Objects).  There instructions say then how to do that and handle(store) that(those). At Dim the created Paper is like a Blue Print that has some empty spaces not yet filled in. A String is a a bit tricky. The Blue Print code line Paper in the Pigeon Hole will allow to note the string Length and an Initial start memory Location. This Location well have to change frequently as strings of different length are assigned. Instructiions will tell how to do this. Theoretically a specilal value vbNullString is set to aid in quich checks.. But..http://www.mrexcel.com/forum/excel-questions/361246-vbnullstring-2.html#post44116
+ Let strWB = ThisWorkbook.Path & "\" & "EileensFldr"
+Rem 3A )
+Dim FSO As Object: Set FSO = CreateObject("Scripting.FileSystemObject") 'Late Binding
+'Dim FSO As Scripting.FileSystemObject 'Early Binding alternative  activate a reference to the Microsoft Scripting Runtime Library ( MSRL ) in the Tools References menu of VB Editor Options.
+'Set FSO = New Scripting.FileSystemObject 'Create an Instance of the Class Scripting FileSystemObject
+Dim myFolder As Object 'An Object from myFolder, can be an declared as Dim myFolder As Folder also for Early Binding
+Set myFolder = FSO.GetFolder(strWB) 'Set the selected Folder to the Object Folder using this Method which takes as arbument the Full String Path
+Rem 4A )
+Dim rCnt As Long, CopyNumber As Long: Let rCnt = 1: Let CopyNumber = 1 '"Run progressin ( "down vertical" ) axis ( Row count for output ), "Down Folder chain to the right", The Count of the Copy of the called Procedue
+Dim celTL As Range: Set celTL = Ws.Range("A1") 'Top left of where Licting should go
+celTL.Value = myFolder.Path: celTL.Offset(0, 1).Value = myFolder.Name: Ws.Columns("A:C").AutoFit 'First output Row
+Call LoopThroughEachFolderAndItsFile(myFolder, celTL, rCnt, CopyNumber) 'Up until now we just got the initial Folder. Now we go to all sub folders  then all subfolders   then all subfolders.......
+Application.ScreenUpdating = True
+MsgBox "All Excel Files processed", vbInformation
+Ws.Columns("A:H").AutoFit
+End Sub

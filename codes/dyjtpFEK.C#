@@ -1,0 +1,159 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Point_in_the_Figure
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var theNumber = int.Parse(Console.ReadLine());
+            var textNumber = "";
+
+            if (theNumber == 0)
+            {
+                textNumber = "zero";
+            }
+            else if (theNumber == 100)
+            {
+                textNumber = "one hundred";
+            }
+            else if (theNumber >= 10 && theNumber <= 19)
+            {
+                if (theNumber == 10)
+                {
+                    textNumber = "ten";
+                }
+                else if (theNumber == 11)
+                {
+                    textNumber = "eleven";
+                }
+                else if (theNumber == 12)
+                {
+                    textNumber = "twelve";
+                }
+                else if (theNumber == 13)
+                {
+                    textNumber = "thirteen";
+                }
+                else if (theNumber == 14)
+                {
+                    textNumber = "fourteen";
+                }
+                else if (theNumber == 15)
+                {
+                    textNumber = "fifteen";
+                }
+                else if (theNumber == 16)
+                {
+                    textNumber = "sixteen";
+                }
+                else if (theNumber == 17)
+                {
+                    textNumber = "seventeen";
+                }
+                else if (theNumber == 18)
+                {
+                    textNumber = "eighteen";
+                }
+                else if (theNumber == 19)
+                {
+                    textNumber = "nineteen";
+                }
+            }
+            else if (theNumber > 19 && theNumber <= 99 || theNumber >= 1 && theNumber <= 9)
+            {
+                var first = theNumber / 10;
+                var second = theNumber % 10;
+
+                if (first > 0)
+                {
+                    if (first == 2)
+                    {
+                        textNumber = "twenty";
+                    }
+                    else if (first == 3)
+                    {
+                        textNumber = "thirty";
+                    }
+                    else if (first == 4)
+                    {
+                        textNumber = "forty";
+                    }
+                    else if (first == 5)
+                    {
+                        textNumber = "fifty";
+                    }
+                    else if (first == 6)
+                    {
+                        textNumber = "sixty";
+                    }
+                    else if (first == 7)
+                    {
+                        textNumber = "seventy";
+                    }
+                    else if (first == 8)
+                    {
+                        textNumber = "eighty";
+                    }
+                    else if (first == 9)
+                    {
+                        textNumber = "ninty";
+                    }
+                }
+                if (first > 1 && second > 0)
+                {
+                    textNumber += " ";
+                }
+                if (second > 0)
+                {
+
+                    if (second == 1)
+                    {
+                        textNumber += "one";
+                    }
+                    else if (second == 2)
+                    {
+                        textNumber += "two";
+                    }
+                    else if (second == 3)
+                    {
+                        textNumber += "three";
+                    }
+                    else if (second == 4)
+                    {
+                        textNumber += "four";
+                    }
+                    else if (second == 5)
+                    {
+                        textNumber += "five";
+                    }
+                    else if (second == 6)
+                    {
+                        textNumber += "six";
+                    }
+                    else if (second == 7)
+                    {
+                        textNumber += "seven";
+                    }
+                    else if (second == 8)
+                    {
+                        textNumber += "eight";
+                    }
+                    else if (second == 9)
+                    {
+                        textNumber += "nine";
+                    }
+                }
+            }
+            else
+            {
+                textNumber = "invalid number";
+            }
+            Console.WriteLine(textNumber);
+        }
+    }
+}

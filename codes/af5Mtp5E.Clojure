@@ -1,0 +1,15 @@
+;; our record-like map
+(def account-map {:fname "empty"
+                  :lname "empty"
+                  :d-o-b "00/00/00"
+                  :curr-amnt 0
+                  :dep-amnt 0
+                  :with-amnt 0
+                  :new-amnt 0})
+
+;; functions to do add up all deposits, withdraws, and then
+;; calculate the new amount
+(defn deposit-withdraw-amnt [& x]
+  (+ 0 x))
+(defn new-amnt [deposit withdraw current]
+  (- (+ deposit current) withdraw))

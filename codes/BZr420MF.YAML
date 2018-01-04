@@ -1,0 +1,176 @@
+groups:
+  helper:
+    options:
+      prefix: '&8[&dHelper&8] &7'
+      rank: '8'
+      rank-ladder: staff
+    inheritance:
+    - default
+    permissions:
+    - essentials.unmute
+    - essentials.mute.offline
+    - essentials.mute
+    - essentials.mute.notify
+    - essentials.chat.ignoreexempt
+    - essentials.chat.url
+    - essentials.afk.auto
+    - -essentials.afk.kickexempt
+    - essentials.helpop.receive
+    - essentials.afk
+  mod:
+    options:
+      prefix: '&b[Mod] &b'
+      rank: '7'
+      rank-ladder: staff
+    inheritance:
+    - helper
+    permissions:
+    - essentials.jails
+    - essentials.jail
+    - essentials.togglejail.offline
+    - essentials.togglejail
+    - essentials.unjail
+    - essentials.kick
+    - essentials.kick.notify
+    - essentials.msg.url
+  super-mod:
+    options:
+      prefix: '&8[&6Super&7-&6Mod&8] &6'
+      rank: '6'
+      rank-ladder: staff
+    inheritance:
+    - mod
+    permissions:
+    - essentials.tempban
+    - essentials.tempban.offline
+    - essentials.invsee
+  admin:
+    options:
+      prefix: '&4[&cAdmin&4] &c'
+      rank: '5'
+      rank-ladder: staff
+    inheritance:
+    - super-mod
+    permissions:
+    - essentials.ban
+    - essentials.ban.offline
+    - essentials.ban.notify
+    - essentials.unban
+    - essentials.enderchest.others
+  head-admin:
+    options:
+      prefix: '&8[&5Head&f-&5Admin&8] &5'
+      rank: '4'
+      rank-ladder: staff
+    inheritance:
+    - admin
+    permissions:
+    - essentials.socialspy
+    - essentials.banip
+    - essentials.unbanip
+    - essentials.list.hidden
+    - essentials.home.others
+    - essentials.mail.sendall
+    - essentials.msg.multiple
+  operator:
+    options:
+      prefix: '&8[&4Operator&8] &2'
+      rank: '3'
+      rank-ladder: staff
+    inheritance:
+    - head-admin
+    permissions:
+    - '*'
+  co-owner:
+    options:
+      prefix: '&8[&4Co&8-&4Owner&8] &4'
+      rank: '2'
+      rank-ladder: staff
+    inheritance:
+    - operator
+    permissions:
+    - '*'
+  owner:
+    options:
+      prefix: '&8[&4Owner&8] &4'
+      rank: '1'
+      rank-ladder: staff
+    inheritance:
+    - co-owner
+    permissions:
+    - '*'
+  developer:
+    options:
+      prefix: '&8[&2Developer&8] &f'
+      rank: '2'
+    inheritance:
+    - operator
+    permissions:
+    - '*'
+  builder:
+    options:
+      prefix: '&8[&3Builder&8] &f'
+    inheritance:
+    - default
+    permissions:
+    - essentials.spawn
+  default:
+    options:
+      prefix: '&8[&3Player&8] &f'
+      rank: '1000'
+      default: true
+    permissions:
+    - autosell.create
+    - autosell.limit.1
+    - essentials.balancetop
+    - essentials.pay
+    - essentials.balance
+    - -bukkit.command.plugins
+    - essentials.warps.*
+    - essentials.warp.list
+    - essentials.ping
+    - essentials.kits.starter
+    - essentials.info
+    - essentials.ignore
+    - essentials.seen
+    - essentials.tpa
+    - essentials.kit
+    - essentials.kits.tools
+    - essentials.build.*
+    - essentials.help
+    - essentials.helpop
+    - essentials.itemdb
+    - essentials.list
+    - essentials.mail
+    - essentials.mail.send
+    - essentials.motd
+    - essentials.msg
+    - essentials.realname
+    - essentials.recipe
+    - essentials.rules
+    - essentials.signs.use.balance
+    - essentials.signs.use.buy
+    - essentials.signs.use.disposal
+    - essentials.signs.use.info
+    - essentials.signs.use.kit
+    - essentials.signs.use.protection
+    - essentials.signs.use.repair
+    - essentials.signs.use.sell
+    - essentials.signs.use.trade
+    - essentials.signs.use.warp
+    - essentials.spawn
+    - essentials.tpaccept
+    - essentials.tpdeny
+    - essentials.warp
+    - essentials.delhome
+    - essentials.home
+    - essentials.home.bed
+    - essentials.sethome.bed
+    - essentials.signs.break.disposal
+schema-version: 1
+users:
+  5c8dc120-9cfb-4b09-a666-ccaf7025b0b5:
+    options:
+      name: pinkpig3777
+    group:
+    - owner

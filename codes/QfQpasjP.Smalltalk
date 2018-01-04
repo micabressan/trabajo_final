@@ -1,0 +1,19 @@
+(* Binary tree datatype. *)
+datatype 'a btree = Leaf | Node of 'a btree * 'a * 'a btree
+
+(* A reduction function. *)
+(* btree_reduce : ('b * 'a * 'b -> 'b) -> 'b -> 'a tree -> 'b) *)
+fun btree_reduce f b bt =
+   case bt of
+      Leaf => b
+    | Node (l, x, r) => f (btree_reduce f b l, x, btree_reduce f b r)
+
+
+(* DEFINE btree_size HERE *)
+(* btree_size : 'a btree -> int *)
+fun btree_size bt =
+   let
+      fun f l a r = 1 + l + r
+   in
+      btree_reduce(f 0 bt)
+   end

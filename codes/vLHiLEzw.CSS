@@ -1,0 +1,1457 @@
+/**
+*==============================================================================
+*   CAMP HALP-BLOOD RP CSS
+*   @author /u/mang0_s
+*   @version 1.1
+*   inspired by the Big House and /u/raiskream, using one snip from their theme 'skooled'
+*   based on work by /u/-Umbrakinesis /u/mysticalchickenwing and /u/JustAPrincess
+* ==============================================================================
+*/
+
+  /*CAMPER NAMES*/
+  .author:after {
+     font-size: 14px;
+     color: blue;
+  }
+
+
+.author[href$="Arodiin"],
+.author[href$="thepasthasthumbtacks"],
+.author[href$="StrangeJelly"],
+.author[href$="Odaircube"],
+.author[href$="TheMetallicEmerald"],
+.author[href$="curvyshortcake"],
+.author[href$="little-emperor"],
+.author[href$="Chosencb2"],
+.author[href$="theo_allmighty"],
+.author[href$="agrim143"],
+.author[href$="TuliaTexan"],
+.author[href$="theactualfocks"],
+.author[href$="NinjaFrootLoop"],
+.author[href$="chosencb"],
+.author[href$="Stuttermgee66"],
+.author[href$="-luckyone"],
+.author[href$="hehekuu"],
+.author[href$="CampHalfBloodRP"],
+.author[href$="minortypo17"],
+.author[href$="strawberrysinger"],
+.author[href$="ThrombosisJones"],
+.author[href$="Ticomat2"],
+.author[href$="fargoniac"],
+.author[href$="OakArnoy"],
+.author[href$="lil_starbug"],
+.author[href$="Rumble-McSkirmish"],
+.author[href$="StarGazer_lilly"],
+.author[href$="RukiatheWaifu"],
+.author[href$="Tozapeloda77"],
+.author[href$="LordPonto"],
+.author[href$="0611242389"],
+.author[href$="ImJustAnNPC"],
+.author[href$="trippedupprincess"],
+.author[href$="ticomat"],
+.author[href$="The13thIsonzo"],
+.author[href$="MoonGodess42"],
+.author[href$="scarletreece"],
+.author[href$="Mummug"],
+.author[href$="Deathlord1"],
+.author[href$="Das_Monochrome"],
+.author[href$="easypeasymacncheesey"],
+.author[href$="Rawlottery"],
+.author[href$="Aelaesia"],
+.author[href$="Katyass"],
+.author[href$="ChocobosScience"],
+.author[href$="Megan_Marie_Jones"],
+.author[href$="rioriotbanks"],
+.author[href$="OneHitMan"],
+.author[href$="whatisbelair"],
+.author[href$="Tailtaletells"],
+.author[href$="homestuck_gal"],
+.author[href$="owendakota"],
+.author[href$="yoboiY"],
+.author[href$="OverTheGlowingHill"],
+.author[href$="Elifas_Levi"],
+.author[href$="Ragefilled_Coot"],
+.author[href$="Hemdem016"],
+.author[href$="Hereticali"],
+.author[href$="Myaccountbackoff"],
+.author[href$="deathmemer"],
+.author[href$="dartagnyan"],
+.author[href$="joggingleopards"],
+.author[href$="tntbatman"],
+.author[href$="dragonbabies84"],
+.author[href$="hahakuu"],
+.author[href$="roaringchipmunks"],
+.author[href$="dustyfoxes"],
+.author[href$="TardWarden"],
+.author[href$="ChildOfAres416"],
+.author[href$="angryllamas48"],
+.author[href$="UnsafeArea"],
+.author[href$="nix-styx"],
+.author[href$="NeoGrayhouse"],
+.author[href$="snakelettuce"],
+.author[href$="deathbysunrise"],
+.author[href$="Lazy-Nubs"],
+.author[href$="Herex53"],
+.author[href$="That_Character"],
+.author[href$="long0504"],
+.author[href$="undetrminedhorse"],
+.author[href$="itsmealicex"],
+.author[href$="mr_rainbow_jay"],
+.author[href$="hypercheetahs"],
+.author[href$="crocodilesbescary"],
+.author[href$="PyroelectricDog"],
+.author[href$="RenGarner"],
+.author[href$="Broshinsky997"],
+.author[href$="FinallyOfAge"],
+.author[href$="AAVoid"],
+.author[href$="KisoKiboko"],
+.author[href$="gerbil98"],
+.author[href$="Jlhudson"],
+.author[href$="Ariel_SR71"],
+.author[href$="DolphinDoom"],
+.author[href$="InionCogaidh"],
+.author[href$="PhoenixWrightBrother"],
+.author[href$="Pinnedclips"],
+.author[href$="Windia1"],
+.author[href$="EmilyHellqvist"],
+.author[href$="i-am-a-tree"],
+.author[href$="OctaviaBlake0416"],
+.author[href$="Dakotatwins"],
+.author[href$="Gasher1213"],
+.author[href$="GlitchThePixel"],
+.author[href$="Vaieiiy"],
+.author[href$="beagster"],
+.author[href$="animatedscreed"],
+.author[href$="ATaiga1103"],
+.author[href$="Monk_King"],
+.author[href$="SuperShyExtraFly"],
+.author[href$="APlaceCalledEden"],
+.author[href$="Strixipath"],
+.author[href$="ThreeForAll39"],
+.author[href$="Va1e11y"],
+.author[href$="Thief39"],
+.author[href$="Valelly"],
+.author[href$="avocadont_"],
+.author[href$="Kurono-neko"],
+.author[href$="Feathers3"],
+.author[href$="DiurnalKnight"],
+.author[href$="NotJinxandJawz"],
+.author[href$="mang0_s"],
+.author[href$="Popal77"],
+.author[href$="pineapple_lumps"],
+.author[href$="onlyone96"],
+.author[href$="AnotherBabyEchidna"],
+.author[href$="Sea_Stone"],
+.author[href$="ThisOneDoesNotExist"],
+.author[href$="Popal55"],
+.author[href$="KabrTheFearless"],
+.author[href$="KushimTheAccountant"],
+.author[href$="Inzult54312"],
+.author[href$="-Umbrakinesis"],
+.author[href$="Dolphin_God"],
+.author[href$="fugazzeta"],
+.author[href$="AutoModerator"]{
+   font-size: 0px
+}
+
+.author[href$="Arodiin"]:after{content:"Juzo Nakamura"}
+.author[href$="thepasthasthumbtacks"]:after{content:"Nausicaa Smith"}
+.author[href$="StrangeJelly"]:after{content:"Rin Sparks"}
+.author[href$="Odaircube"]:after{content:"Aiden McManus"}
+.author[href$="curvyshortcake"]:after{content:"Ricky Davies"}
+.author[href$="TheMetallicEmerald"]:after{content:"Aelin Isa"}
+.author[href$="little-emperor"]:after{content:"Arthur Gallard"}
+.author[href$="Chosencb2"]:after{content: "Anthony Markelle"}
+.author[href$="theo_allmighty"]:after{content: "Thomas Hervé"}
+.author[href$="agrim143"]:after{content: "Shawn Ariel"}
+.author[href$="TuliaTexan"]:after{content: "Pele Babel"}
+.author[href$="theactualfocks"]:after{content: "Jaime Cherry"}
+.author[href$="NinjaFrootLoop"]:after{content: "Phoenix Lancaster"}
+.author[href$="chosencb"]:after{content: "Taylor & Tori Gray"}
+.author[href$="Stuttermgee66"]:after{content: "James Wilhelm"}
+.author[href$="-luckyone"]:after{content: "Lucky Monroe"}
+.author[href$="hehekuu"]:after{content: "April Caracas"}
+.author[href$="minortypo17"]:after{content: "Cole Watson"}
+.author[href$="strawberrysinger"]:after{content: "Reina Harkman"}
+.author[href$="ThrombosisJones"]:after{content: "Trenna Raines"}
+.author[href$="Ticomat2"]:after{content: "Connor Matthews"}
+.author[href$="fargoniac"]:after{content: "Arius Elliott"}
+.author[href$="OakArnoy"]:after{content: "Oak Arnoy"}
+.author[href$="lil_starbug"]:after{content: "Anvia Stormspring"}
+.author[href$="Rumble-McSkirmish"]:after{content: "Barrett Cross"}
+.author[href$="StarGazer_lilly"]:after{content: "Santiago Ramirez Domingo Rodriguez"}
+.author[href$="RukiatheWaifu"]:after{content: "Diana Monroe"}
+.author[href$="Tozapeloda77"]:after{content: "Flora Bandersen"}
+.author[href$="LordPonto"]:after{content: "Axel Ochoa"}
+.author[href$="0611242389"]:after{content: "Carolee Wunderlin"}
+.author[href$="ImJustAnNPC"]:after{content: "Albert Fallen"}
+.author[href$="trippedupprincess"]:after{content: "Shula Dubhán"}
+.author[href$="ticomat"]:after{content: "Alex Borja"}
+.author[href$="The13thIsonzo"]:after{content: "Aragon Hoxha"}
+.author[href$="MoonGodess42"]:after{content: "Caitlyn Heeler"}
+.author[href$="scarletreece"]:after{content: "Scarlet Reece"}
+.author[href$="Deathlord1"]:after{content: "Damon Gardner"}
+.author[href$="Mummug"]:after{content: "Gwendolyn Prowse"}
+.author[href$="Das_Monochrome"]:after{content: "Pearl Sturm"}
+.author[href$="easypeasymacncheesey"]:after{content: "Sofia Torvald"}
+.author[href$="Rawlottery"]:after{content: "Nat Ritchie"}
+.author[href$="Aelaesia"]:after{content: "Aelastia Vera"}
+.author[href$="Katyass"]:after{content: "Katerina 'Katya' Romanov"}
+.author[href$="ChocobosScience"]:after{content: "Shitekina Kōshoku"}
+.author[href$="Megan_Marie_Jones"]:after{content: "Megan Marie Jones"}
+.author[href$="rioriotbanks"]:after{content: "Rio Benjamin"}
+.author[href$="OneHitMan"]:after{content: "Weston Mendel"}
+.author[href$="whatisbelair"]:after{content: "Cake"}
+.author[href$="Tailtaletells"]:after{content: "Kubera Leez"}
+.author[href$="homestuck_gal"]:after{content: "Michael Tux"}
+.author[href$="owendakota"]:after{content: "Owen Dakota"}
+.author[href$="yoboiY"]:after{content: "Sam Smith"}
+.author[href$="OverTheGlowingHill"]:after{content: "Abigail J. Marshall"}
+.author[href$="Elifas_Levi"]:after{content: "Hunter L. Ainsworth"}
+.author[href$="Ragefilled_Coot"]:after{content: "David Admeto"}
+.author[href$="Hemdem016"]:after{content: "Amelia Kiries"}
+.author[href$="Hereticali"]:after{content: "Crispin Sallow"}
+.author[href$="Myaccountbackoff"]:after{content: "Lemon Leofmann"}
+.author[href$="deathmemer"]:after{content: "Pete Williams"}
+.author[href$="joggingleopards"]:after{content: "Fernanda Gordon"}
+.author[href$="AAVoid"]:after{content: "Nathan"}
+.author[href$="tntbatman"]:after{content: "Jay Martin"}
+.author[href$="dragonbabies84"]:after{content: "Josephine Harris"}
+.author[href$="hahakuu"]:after{content: "Roran Riselli"}
+.author[href$="roaringchipmunks"]:after{content: "Marley Franklin-Hannon"}
+.author[href$="dustyfoxes"]:after{content: "Kyle Flores"}
+.author[href$="ChildOfAres416"]:after{content: "Nikita Hadley"}
+.author[href$="angryllamas48"]:after{content: "Mary Ellen Flores"}
+.author[href$="UnsafeArea"]:after{content: "Alice Rowe"}
+.author[href$="nix-styx"]:after{content: "Tomas Hugo Noble"}
+.author[href$="NeoGrayhouse"]:after{content: "Neo Grayhouse"}
+.author[href$="snakelettuce"]:after{content: "Bailey Walsh"}
+.author[href$="deathbysunrise"]:after{content: "Hypatia Morgenstern"}
+.author[href$="Lazy-Nubs"]:after{content: "Todd Vargas"}
+.author[href$="Herex53"]:after{content: "Stephen and Christopher Vikander"}
+.author[href$="That_Character"]:after{content: "Ryker Lamar"}
+.author[href$="long0504"]:after{content: "Long"}
+.author[href$="undetrminedhorse"]:after{content: "Camila Rojas"}
+.author[href$="itsmealicex"]:after{content: "Harlyn Matter"}
+.author[href$="mr_rainbow_jay"]:after{content: "Morgan Lynn"}
+.author[href$="hypercheetahs"]:after{content: "Rex Kipling"}
+.author[href$="crocodilesbescary"]:after{content: "Mediator: Jack Ferrum"; font-weight: bold}
+.author[href$="PyroelectricDog"]:after{content: "Ryan Harris"}
+.author[href$="RenGarner"]:after{content: "Ren Garner"}
+.author[href$="Broshinsky997"]:after{content: "John Clarke"}
+.author[href$="FinallyOfAge"]:after{content: "Alexandra Udinov "}
+.author[href$="passionatepapaya"]:after{content: "Aaron Durant "}
+.author[href$="KisoKiboko"]:after{content: "Alexis Stein "}
+.author[href$="gerbil98"]:after{content: "Aedan Nolan "}
+.author[href$="Jlhudson"]:after{content: "Nathaniel Avelynn Gray "}
+.author[href$="Ariel_SR71"]:after{content: "Head Medic: Ariel Flash "; font-weight: bold}
+.author[href$="DolphinDoom"]:after{content: "Stephen Deschain "}
+.author[href$="InionCogaidh"]:after{content: "Acilia 'Ace' D'Amore "}
+.author[href$="DoctorFlubbers"]:after{content: "Leon McSalisbury "}
+.author[href$="PhoenixWrightBrother"]:after{content: "Santiago Ponce de León "}
+.author[href$="Pinnedclips"]:after{content: "Galaxy Star "}
+.author[href$="Windia1"]:after{content: "Windia Tsukino "}
+.author[href$="EmilyHellqvist"]:after{content: "Rosetta Swan "}
+.author[href$="Sea_Stone"]:after {content: "Asta Sparrows "}
+.author[href$="i-am-a-tree"]:after{content:"Guild Master: Angelina Pierce "; font-weight: bold}
+.author[href$="fugazzeta"]:after{content: "Nate Phillips "}
+.author[href$="GlitchThePixel"]:after {content:"Ella Harbin "}
+.author[href$="OctaviaBlake0416"]:after {content:"Emily Rosewood "}
+.author[href$="Gasher1213"]:after {content: "Leon Walsh "}
+.author[href$="ATaiga1103"]:after {content: "Mayumi Shiraishi "}
+.author[href$="Dakotatwins"]:after {content: "Lance A. Frieman"}
+.author[href$="DylanNot"]:after {content: "Parker Landry "}
+.author[href$="beagster"]:after {content: "Brian Leatherby "}
+.author[href$="animatedscreed"]:after {content: "Evilly and Annily Sazui "}
+.author[href$="Monk_King"]:after {content: "Barrabas Levitt "}
+.author[href$="Feathers3"]:after {content: "Alice Grace"}
+.author[href$="fearlessgoldfish"]:after {content: "Benjamin Walters"}
+.author[href$="SuperShyExtraFly"]:after {content: "Willa 'Noelle' Klein "}
+.author[href$="APlaceCalledEden"]:after {content: "Alice Kenora"}
+.author[href$="Strixipath"]:after {content: "Andrew Vethos "}
+.author[href$="Popal77"]:after {content: "Adair MacTavish"}
+.author[href$="TheQuantumSieve"]:after {content: "Cadmus Helia";}
+.author[href$="ThreeForAll39"]:after {content: "Games Coach: Mackenzie Knoton"; font-weight: bold}
+.author[href$="Va1e11y"]:after {content: "Caleb Snowdon"}
+.author[href$="Thief39"]:after {content: "Cosette Hahli"}
+.author[href$="Valelly"]:after {content: "Alcander Keibatsu"}
+.author[href$="avocadont_"]:after {content: "Calliope Jade"}
+.author[href$="pineapple_lumps"]:after {content: "Micah Del Rio "}
+.author[href$="onlyone96"]:after {content: "Vincent Perez "}
+.author[href$="Popal55"]:after{content: "Jack Conagher " }
+.author[href$="Inzult54312"]:after{content: "Levi Barnes " }
+.author[href$="AnotherBabyEchidna"]:after{content:"Brandon Flumen "}
+
+
+  /*Special Names*/
+  .author[href$="-Umbrakinesis"]:after{content: "Fiyero "; font-size: 14px; color: black; font-weight: bold}
+  .author[href$="Dolphin_God"]:after{content: "Percy Jackson "; font-size: 14px; color: #3B9C9C; font-weight:bold}
+  .author[href$="AutoModerator"]:after{content: "Otto Moduratir "; font-size: 14px; color: lightblue; font-weight: bold;}
+  .author[href$="Vaieiiy"]:after{content: "Easton Marsh "; font-size: 14px; color: #FFFF00; font-weight: bold;}
+  .author[href$="mang0_s"]:after{content: "Alyssa Kaufman "; font-size: 14px; color: #808080; font-weight: bold;}
+  .author[href$="Kurono-neko"]:after{content: "Aria Brookes Leona Espada de Luna "; font-size: 14px; color: #483D8B; font-weight: bold;}
+  .author[href$="hahakuu"]:after{content: "Roran Riselli "; font-size: 14px; color: #333333; font-weight: bold;}
+  .author[href$="KabrTheFearless"]:after{content: "Gladiator Champion:Jay Jones "; font-size: 14px; color: #800000; font-weight: bold;}
+  .author[href$="CampHalfBloodRP"]:after{content: "Chiron "; font-size: 14px; color: #8B4513; font-weight: bold}
+
+
+
+/*HEADER AREA*/
+#header{
+  background-color: #FF993A;
+}
+#header .redditname a{font-size: 0px}
+#header .redditname a:after{
+  content: "Camp Half-Blood";
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Georgia";
+  font-family: "Century Gothic", sans-serif;
+}
+/** START TABMENU FOR SKOOLED BY /U/RAISKREAM **/
+.side,
+body > .content {
+    margin-top: 10px;
+}
+#header-bottom-left .tabmenu li a {
+    background: rgba(135, 159, 171, 0.4); /* Background color in RGBA. Do not remove the "0.4" */
+    color: #ffffff;
+    line-height: 36px;
+    padding: 10px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 14px;
+}
+#header-bottom-left .tabmenu li a:hover {
+    background: #495f69; /* color B in HEX (darker than main color) */
+}
+#header-bottom-left .tabmenu li.selected a {
+    background: #495f69; /* color B */
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+#header .tabmenu li {
+    margin: 0;
+}
+#header .tabmenu {
+    display: block;
+}
+#header {
+    border-bottom-color: #495f69; /* color B */
+    border-bottom-width: 10px;
+}
+/** END TABMENU FOR SKOOLED BY /U/RAISKREAM **/
+/** START SUBREDDIT BAR FOR SKOOLED BY /U/RAISKREAM **/
+#sr-header-area {
+    background: #495f69; /* Color B */
+    border: 0;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 10px;
+}
+.sr-bar a {
+    color: #b3c4cc; /* color C (lighter than main color) */
+    opacity: 0.4;
+}
+.sr-bar a:hover {
+    opacity : 0.8;
+}
+#sr-header-area .selected a, .RESShortcutsCurrentSub { /* RES fix */
+    color: orangered !important;
+}
+/** END SUBREDDIT BAR FOR SKOOLED BY /U/RAISKREAM **/
+/*END HEADER AREA*/
+/*BODY AREA*/
+
+/*start wiki*/
+.wiki-page-content {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+/*end wiki*/
+
+.create {
+  display: none;
+}
+/*Upvotes*/
+.arrow.up { background-image: url(%%UpNotClicked%%);
+background-position: 0px 0px;
+height: 14px; width: 15px;
+}
+.arrow.upmod {
+background-image: url(%%upvote%%);
+background-position: 0px 0px;
+height: 14px; width: 15px;
+}
+.arrow.upmod{
+    transform-origin:50% 65% 0;
+    -webkit-transform-origin:50% 65% 0;
+    -webkit-transition-duration: 0.33s;
+    transition-duration: 0.33s;
+}
+.arrow.upmod:hover{
+   -webkit-transform:rotate(-360deg);
+   transform:rotate(-360deg);
+}
+.down { display: none; }
+
+/*sticky color*/
+.stickied .title {
+    color:#8C0505!important;
+    font-size: 20px; font-weight: bold;
+}
+.stickied-tagline {
+    color:#8C0505 !important;
+}
+/*ROUDNED LINKS AND COMMENTS*/
+
+body {
+    background-color: #e0e7eb; /* background color */
+    background-image: url(%%bgvert%%);
+}
+.content {
+    margin: 5px 120px 0px 5px;
+}
+.link {
+    background: #ffffff;
+    margin-bottom: 10px;
+    margin-right: 242px;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.thing {
+    background-color: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+}
+.commentarea {
+    background: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+    padding: 10px 15px 10px 15px;
+    margin-left: 10px;
+    margin-right: 244px;
+}
+#suggested-reddits {
+    display: none;
+}
+/*END ROUNDED POSTS AND COMMENTS*/
+
+/*MAIL ICONS & DOWNVOTES*/
+
+#mail {
+    position: relative;
+    display: inline-block;
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 15px;
+    height: 15px;
+}
+#mail.havemail {
+    background:url(%%HAVEMAIL%%);
+}
+#mail.nohavemail {
+    background:url(%%NOMAIL%%);
+}
+.message-count{
+  color: #FFFFFF!important;
+    background-image: -webkit-linear-gradient(top, #ffc966, #ffc04d, #ffae1a, #ffa500, #e59400);
+    background-image:    -moz-linear-gradient(top, #ffc966, #ffc04d, #ffae1a, #ffa500, #e59400);
+    background-image:     -ms-linear-gradient(top, #ffc966, #ffc04d, #ffae1a, #ffa500, #e59400);
+    background-image:      -o-linear-gradient(top, #ffc966, #ffc04d, #ffae1a, #ffa500, #e59400);
+    background-image:         linear-gradient(top, #ffc966, #ffc04d, #ffae1a, #ffa500, #e59400);
+  }
+  /*arrows*/
+    .arrow.down{display: none}
+    .comment .arrow.down{display: none}
+/*END MAIL ICONS & DOWNVOTES*/
+/*--------END BODY AREA--------*/
+
+/*--------SIDEBAR--------*/
+
+/*nice button*/
+.submit .nub { display: none; }
+.submit-link { display: none; }
+.submit-text .morelink{width: 300px; height: 150px;background: url(%%submit1%%) no-repeat !important; font-size: 0px;border:none}
+.submit-text .morelink:hover{width: 300px; background: url(%%submit2%%)no-repeat !important; color: white !important; border:none}
+
+/*correct name on sidebar*/
+.side .redditname a{font-size: 0px}
+.side .redditname a:after{content: "Camp Half-Blood"; font-size: 20px; font-weight: bold; font-family: "Georgia"; text-align: center;}
+
+/*general sidebar code*/
+.side {
+  padding: 390px 0 0 0px;
+  background: url(%%Side%%);
+  background-repeat:no-repeat;}
+
+.sidecontentbox {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border-color: #808080;
+}
+
+/***** Sidebar headings *****/
+.titlebox blockquote {
+    border: 1px solid #AAA;
+    text-shadow: 0 1px 0 white;
+    color: #787878;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.titlebox {
+    padding: 10px;
+    background: #fff;  /*Sidebar Background color*/
+    border: 1px solid #AAA; /*Sidebar border color*/
+    color: #787878; /*Text color in sidebar*/
+    border-radius: 10px;
+    border-color: #808080;
+}
+/***** Collapsible menu *****/
+.side .titlebox .md h3 + ol {
+    margin: 0 2em;
+    padding: 3px;
+ }
+.side .titlebox .md h3, div.titlebox .md h3 a {
+    color: #eee; /*General Header text color*/
+ }
+.side .titlebox .md h3 + ol {
+    display: none;
+ }
+.side .titlebox .md h3:hover + ol,
+.side .titlebox .md h3 + ol:hover {
+    display: block;
+}
+.side .titlebox .md h3 + ol li:hover {
+    background-color: #eee;
+}
+.res-nightmode .side  .titlebox .md h3 + ol li:hover {
+    background-color: #393939;
+}
+.side .titlebox .md h3 {
+    background-color: #FF993A; /*### background color*/
+    color: #fff; /*### Text color*/
+    width: 280px;
+    line-height: 23px;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
+    padding-left: 20px;
+    margin: 4px 0 0 -11px;
+}
+.res-nightmode .side .titlebox .md h3 {
+    background-color: #7a9642; /*Nightmode background color*/
+}
+.side .titlebox .md h3:after {
+    margin-bottom: 10px;
+}
+.side .titlebox .md h3:before {
+    content: "+";
+    color: #fff; /*color of the + in ###*/
+padding-right: 5px;
+}
+.side .titlebox .md h3 + ol {
+    line-height: 1.7em
+}
+/*end roles*/
+
+
+/*BUTTONS*/
+.md a[href="#bigbutton"] + a,
+.md a[href="#button"] + a,
+.md a[href="#specialbutton"] + a,
+.md a[href="#bigspecialbutton"] + a {
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid #FF993A;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px
+    font-size: 11px;
+    font-weight: 700
+}
+.md a[href="#bigbutton"] + a,
+.md a[href="#button"] + a {
+    color: #FF993A!important
+}
+.md a[href="#bigbutton"] + a:hover,
+.md a[href="#button"] + a:hover {
+    background-color: #0080FF;
+}
+.md a[href="#specialbutton"] + a,
+.md a[href="#bigspecialbutton"] + a {
+    background: #FF993A;
+    color: #32383f!important
+}
+.md a[href="#specialbutton"] + a:hover,
+.md a[href="#bigspecialbutton"] + a:hover {
+    border: 1px solid transparent;
+    background-color: #0080FF;
+}
+.side .md a[href="#button"] + a,
+.side .md a[href="#specialbutton"] + a {
+    margin: 5px 0;
+    width: 112px;
+    padding: 11.5px 10px
+}
+.side .md a[href="#rightalign"] + a[href="#button"] + a,
+.side .md a[href="#rightalign"] + a[href="#specialbutton"] + a {
+    margin-left: 10px
+}
+.side .md a[href="#bigbutton"] + a,
+.side .md a[href="#bigspecialbutton"] + a {
+    margin: 5px 0;
+    width: 250px;
+    padding: 11.5px 10px
+}
+
+/**END BUTTONS**/
+
+.subscribers span.word,
+.users-online span.word {
+    font-size: 0px
+}
+.subscribers span.word:after {
+    content: "Campers";
+    font-size: 12px;
+
+}
+.users-online span.word:after {
+    content: "Campers Online";
+    font-size: 12px;
+    white-space: normal;
+
+}
+.titlebox .bottom {
+font-size: 0px;
+color: #FFF;
+}
+.titlebox .bottom:before {
+font-size: 10px;
+color: gray;
+content: " ";
+}
+.titlebox .bottom .age {
+font-size: 10px;
+color: gray;
+}
+/*--------END SIDEBAR--------*/
+
+/*--------GENERAL FLAIR SETTING--------*/
+
+.flair {
+  min-width: 12px;
+  max-width: 12px;
+  height: 12px;
+  line-height: 12px;
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+  padding: 0;
+  vertical-align: middle;
+  font-size: 10px !important;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+  position: relative;
+}
+
+.flair {
+  max-width: 500px;
+  padding: 0 5px;
+  color: #fff;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+/*LINK FLAIRS*/
+
+/*All flairs are: white, 12px, with rounded corners and border.*/
+.linkflairlabel {
+font-size: 12px;
+color: #fff;
+border: 2px solid: #999;
+border-radius: 3px;
+}
+
+/*flair specific background colours*/
+.linkflair-introduction .linkflairlabel { background-color: #ffcc00; }
+.linkflair-roleplay .linkflairlabel { background-color: #0073e6; }
+.linkflair-storymode .linkflairlabel { background-color: #1A1A1A; }
+.linkflair-meal .linkflairlabel { background-color: #b22c00; }
+.linkflair-campfire .linkflairlabel { background-color: #FF8508; }
+.linkflair-OOC .linkflairlabel { background-color: #ffccff; }
+.linkflair-lesson .linkflairlabel { background-color: #cc66ff; }
+.linkflair-activity .linkflairlabel { background-color: #DB0A5B; }
+.linkflair-qotd .linkflairlabel { background-color: #751975; }
+/*mod used link flairs*/
+.linkflair-plot .linkflairlabel { background-color: #8C0505; }
+.linkflair-modpost .linkflairlabel { background-color: #3ADF00; }
+.linkflair-battle .linkflairlabel { background-color: #084B8A; }
+.linkflair-signups .linkflairlabel { background-color: #585858; }
+.linkflair-location .linkflairlabel { background-color: #08DC8B; }
+
+/*END LINK FLAIRS*/
+
+/*flair colours*/
+  .flair-cream{color: #FCFBE3}
+  .flair-coffee{color: #73481D}
+  .flair-black{color: black}
+  .flair-white{color: white}
+  .flair-red{color: red}
+  .flair-yellow{color: yellow}
+  .flair-green{color: green}
+  .flair-snow{color: #FFFAFA}
+  .flair-lightgreen{color: lightgreen}
+  .flair-limegreen{color: limegreen}
+  .flair-blue{color: blue}
+  .flair-mdblue{color: midnightblue}
+  .flair-cyan{color: cyan}
+  .flair-lightblue{color: lightblue}
+  .flair-darkblue{color: darkblue}
+  .flair-purple{color: purple}
+  .flair-orchid{color: orchid}
+  .flair-orange{color: #ff8822}
+  .flair-peach{color: #ffcccc}
+  .flair-bluegreen{color: #33ff99}
+  .flair-hotpink{color: #FF69B4}
+  .flair-darkcyan{color: #007799}
+  .flair-lightpurple{color: #aaaaff}
+  .flair-olive{color: #889900}
+  .flair-gold{color: #cccc00}
+  .flair-maroon{color: #8b0000}
+  .flair-darkpurple{color: #660066}
+  .flair-pumpkin{color: #cc6600}
+  .flair-electricblue{color: #00ddff}
+  .flair-bronze{color: #665D1E}
+  .flair-neongreen{color: #00FF00}
+  .flair-darkgreen{color: #005500}
+  .flair-darkgrey{color: #666666}
+  .flair-lightgrey{color: #aaaaaa}
+  .flair-grey{color: #708090}
+  .flair-bluewhite{color: #bbffff}
+  .flair-purplewhite{color: #eeccff}
+  .flair-pinkwhite{color: #ffddff}
+  .flair-greenwhite{color: #ccffcc}
+  .flair-pink{color: #ff33aa}
+  .flair-coralpink{color: #F88379}
+  .flair-purplegrey{color: #997799}
+  .flair-swampgreen{color: #666600}
+  .flair-lightpink{color: #F9BAE3}
+  .flair-rose{color: #DF7C90}
+  .flair-iceblue{color: #56c9dc}
+  .flair-darkpink{color: #B4045F}
+  .flair-lavender{color: #B57EDC}
+  .flair-burgundy{color: #8C001A}
+  .flair-teal{color: #5F8A8B}
+  .flair-turquoise{color: #34DDDD}
+  .flair-pastelpink{color: #FFD1DC}
+  .flair-aquamarine{color: #7FFFD4}
+  .flair-aliceblue{color: #F0F8FF}
+  .flair-sunyellow{color: #FFE87C}
+  .flair-cara{color: #107213}
+  .flair-nailah{color: #F2F2F2}
+  .flair-lavender2{color: #FFF0F5}
+  .flair-plum{color: #DDA0DD}
+  .flair-brass{color: #B5A642}
+  .flair-silver{color: #BCC6CC}
+  .flair-darkorange{color: #FF5A00}
+
+  .flair-silverbg{background: #BCC6CC}
+  .flair-brassbg{background: #B5A642}
+  .flair-coffeebg{background: #73481D}
+  .flair-creambg{background: #FCFBE3}
+  .flair-plumbg{background: #DDA0DD}
+  .flair-lavender2bg{background: #FFF0F5}
+  .flair-sunyellowbg{background: #FFE87C}
+  .flair-alicebluebg{background: #F0F8FF}
+  .flair-nailahbg{background: #F78181}
+  .flair-pastelpinkbg{background: #FFD1DC}
+  .flair-turquoisebg{background: #34DDDD}
+  .flair-aquamarinebg{background: #7FFFD4}
+  .flair-tealbg{background: #5F8A8B}
+  .flair-burgundybg{background: #8C001A}
+  .flair-blackbg{background: black}
+  .flair-whitebg{background: white}
+  .flair-redbg{background: red}
+  .flair-lightyellowbg{background: #FFFF33}
+  .flair-yellowbg{background: yellow}
+  .flair-greenbg{background: green}
+  .flair-orchidbg{background: orchid}
+  .flair-orangebg{background: #ff8822}
+  .flair-lightorangebg{background: #ffb732}
+  .flair-cyanbg{background: cyan}
+  .flair-peachbg{background: #ffcccc}
+  .flair-mdbluebg{background: midnightblue}
+  .flair-bluegreenbg{background: #33ff99}
+  .flair-hotpinkbg{background: #FF69B4}
+  .flair-darkcyanbg{background: #007799}
+  .flair-lightgreenbg{background: lightgreen}
+  .flair-limegreenbg{background: limegreen}
+  .flair-bluebg{background: blue}
+  .flair-purplebg{background: purple}
+  .flair-lightpurplebg{background: #aaaaff}
+  .flair-lavenderbg{background: #B57EDC}
+  .flair-olivebg{background: #889900}
+  .flair-goldbg{background: #cccc00}
+  .flair-maroonbg{background: #8b0000}
+  .flair-darkpurplebg{background: #660066}
+  .flair-talonbg{background: #CEF6F5}
+  .flair-carabg{background: #9C1E22}
+  .flair-pumpkinbg{background: #cc6600}
+  .flair-lightbluebg{background: lightblue}
+  .flair-lightskybluebg{background: #87CEFA}
+  .flair-darkbluebg{background: darkblue}
+  .flair-electricbluebg{background: #00ddff}
+  .flair-bronzebg{background: #665D1E}
+  .flair-seafoamgreenbg{background: #00FF99}
+  .flair-neongreenbg{background: #00FF00}
+  .flair-darkgreenbg{background: #005500}
+  .flair-darkgreybg{background: #666666}
+  .flair-lightgreybg{background: #aaaaaa}
+  .flair-greybg{background: #708090}
+  .flair-bluewhitebg{background: #bbffff}
+  .flair-purplewhitebg{background: #eeccff}
+  .flair-pinkwhitebg{background: #ffddff}
+  .flair-greenwhitebg{background: #ccffcc}
+  .flair-pinkbg{background: #ff33aa}
+  .flair-coralpinkbg{background: #F88379}
+  .flair-purplegreybg{background: #997799}
+  .flair-swampgreenbg{background: #666600}
+  .flair-lightpinkbg{background: #F9BAE3}
+  .flair-rosebg{background: #DF7C90}
+  .flair-icebluebg{background: #56c9dc}
+  .flair-darkpinkbg{background: #B4045F}
+
+/*special flairs*/
+
+ .flair-zeus{
+    background-image: -webkit-linear-gradient(top, #999EB0, #7985B3, #6071B3, #465BB0);
+    background-image:    -moz-linear-gradient(top, #999EB0, #7985B3, #6071B3, #465BB0);
+    background-image:     -ms-linear-gradient(top, #999EB0, #7985B3, #6071B3, #465BB0);
+    background-image:      -o-linear-gradient(top, #999EB0, #7985B3, #6071B3, #465BB0);
+    background-image:         linear-gradient(top, #999EB0, #7985B3, #6071B3, #465BB0);
+    color: #ECFC3A;
+  }
+
+ .flair-poseidon{
+    background-image: -webkit-linear-gradient(top, #A9EAF1, #2D97AF, #1A6182, #134760);
+    background-image:    -moz-linear-gradient(top, #A9EAF1, #2D97AF, #1A6182, #134760);
+    background-image:     -ms-linear-gradient(top, #A9EAF1, #2D97AF, #1A6182, #134760);
+    background-image:      -o-linear-gradient(top, #A9EAF1, #2D97AF, #1A6182, #134760);
+    background-image:         linear-gradient(top, #A9EAF1, #2D97AF, #1A6182, #134760);
+    color: #2CF5A5;
+  }
+
+ .flair-demeter{
+    background-image: -webkit-linear-gradient(top, #B9E667, #B1D967, #A3C856, #8EAD4E);
+    background-image:    -moz-linear-gradient(top, #B9E667, #B1D967, #A3C856, #8EAD4E);
+    background-image:     -ms-linear-gradient(top, #B9E667, #B1D967, #A3C856, #8EAD4E);
+    background-image:      -o-linear-gradient(top, #B9E667, #B1D967, #A3C856, #8EAD4E);
+    background-image:         linear-gradient(top, #B9E667, #B1D967, #A3C856, #8EAD4E);
+    color: #335C33;
+  }
+
+ .flair-ares{
+    background-image: -webkit-linear-gradient(top, #CC141C, #78040D, #460702, #290401);
+    background-image:    -moz-linear-gradient(top, #CC141C, #78040D, #460702, #290401);
+    background-image:     -ms-linear-gradient(top, #CC141C, #78040D, #460702, #290401);
+    background-image:      -o-linear-gradient(top, #CC141C, #78040D, #460702, #290401);
+    background-image:         linear-gradient(top, #CC141C, #78040D, #460702, #290401);
+    color: #F5ED0F;
+  }
+
+ .flair-athena{
+    background-image: -webkit-linear-gradient(top, #EEF564, #EDF553, #d6dc5a, #bec450);
+    background-image:    -moz-linear-gradient(top, #EEF564, #EDF553, #d6dc5a, #bec450);
+    background-image:     -ms-linear-gradient(top, #EEF564, #EDF553, #d6dc5a, #bec450);
+    background-image:      -o-linear-gradient(top, #EEF564, #EDF553, #d6dc5a, #bec450);
+    background-image:         linear-gradient(top, #EEF564, #EDF553, #d6dc5a, #bec450);
+    color: #749EC2;
+  }
+
+ .flair-apollo{
+    background-image: -webkit-linear-gradient(top, #FAD457, #FACB32, #FCC81C, #FCB51C);
+    background-image:    -moz-linear-gradient(top, #FAD457, #FACB32, #FCC81C, #FCB51C);
+    background-image:     -ms-linear-gradient(top, #FAD457, #FACB32, #FCC81C, #FCB51C);
+    background-image:      -o-linear-gradient(top, #FAD457, #FACB32, #FCC81C, #FCB51C);
+    background-image:         linear-gradient(top, #FAD457, #FACB32, #FCC81C, #FCB51C);
+    color: #FCF800;
+  }
+
+ .flair-hephaestus{
+    background-image: -webkit-linear-gradient(top, #EDD207, #FF8207, #D53D0C, #880606);
+    background-image:    -moz-linear-gradient(top, #EDD207, #FF8207, #D53D0C, #880606);
+    background-image:     -ms-linear-gradient(top, #EDD207, #FF8207, #D53D0C, #880606);
+    background-image:      -o-linear-gradient(top, #EDD207, #FF8207, #D53D0C, #880606);
+    background-image:         linear-gradient(top, #EDD207, #FF8207, #D53D0C, #880606);
+    color: lightgrey;
+  }
+
+ .flair-aphrodite{
+    background-image: -webkit-linear-gradient(top, #F794AF, #F57396, #F74A79, #C21B5B);
+    background-image:    -moz-linear-gradient(top, #F794AF, #F57396, #F74A79, #C21B5B);
+    background-image:     -ms-linear-gradient(top, #F794AF, #F57396, #F74A79, #C21B5B);
+    background-image:      -o-linear-gradient(top, #F794AF, #F57396, #F74A79, #C21B5B);
+    background-image:         linear-gradient(top, #F794AF, #F57396, #F74A79, #C21B5B);
+    color: #FFC7D6;
+  }
+
+ .flair-hermes{
+    background-image: -webkit-linear-gradient(top, #0C8506, #0B7F05, #055601, #044400);
+    background-image:    -moz-linear-gradient(top, #0C8506, #0B7F05, #055601, #044400);
+    background-image:     -ms-linear-gradient(top, #0C8506, #0B7F05, #055601, #044400);
+    background-image:      -o-linear-gradient(top, #0C8506, #0B7F05, #055601, #044400);
+    background-image:         linear-gradient(top, #0C8506, #0B7F05, #055601, #044400);
+    color: #EBFA12;
+  }
+
+.flair-dionysus{
+    background-image: -webkit-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:    -moz-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:     -ms-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:      -o-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:         linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    color: #11AA00;
+  }
+
+.flair-hades{
+    background-image: -webkit-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:    -moz-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:     -ms-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:      -o-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:         linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    color: #FCFBE3;
+  }
+
+.flair-iris{
+    background-image: -webkit-linear-gradient(top, red, yellow, pink, green, purple, orange, blue);
+    background-image:    -moz-linear-gradient(top, red, yellow, pink, green, purple, orange, blue);
+    background-image:     -ms-linear-gradient(top, red, yellow, pink, green, purple, orange, blue);
+    background-image:      -o-linear-gradient(top, red, yellow, pink, green, purple, orange, blue);
+    background-image:         linear-gradient(top, red, yellow, pink, green, purple, orange, blue);
+    color: white;
+  }
+
+.flair-hypnos{
+    background-image: -webkit-linear-gradient(top, #EFF7D4, #D8ECDF, #C0DFEC, #A9D3F7, #99CCFF);
+    background-image:    -moz-linear-gradient(top, #EFF7D4, #D8ECDF, #C0DFEC, #A9D3F7, #99CCFF);
+    background-image:     -ms-linear-gradient(top, #EFF7D4, #D8ECDF, #C0DFEC, #A9D3F7, #99CCFF);
+    background-image:      -o-linear-gradient(top, #EFF7D4, #D8ECDF, #C0DFEC, #A9D3F7, #99CCFF);
+    background-image:         linear-gradient(top, #EFF7D4, #D8ECDF, #C0DFEC, #A9D3F7, #99CCFF);
+    color: #439FFC;
+  }
+
+.flair-nemesis{
+    background-image: -webkit-linear-gradient(top, white, #E9E9E9, #C9C9C9, #ADADAD, #9C9C9C, #8D8D8D);
+    background-image:    -moz-linear-gradient(top, white, #E9E9E9, #C9C9C9, #ADADAD, #9C9C9C, #8D8D8D);
+    background-image:     -ms-linear-gradient(top, white, #E9E9E9, #C9C9C9, #ADADAD, #9C9C9C, #8D8D8D);
+    background-image:      -o-linear-gradient(top, white, #E9E9E9, #C9C9C9, #ADADAD, #9C9C9C, #8D8D8D);
+    background-image:         linear-gradient(top, white, #E9E9E9, #C9C9C9, #ADADAD, #9C9C9C, #8D8D8D);
+    color: black;
+  }
+
+.flair-nike{
+    background-image: -webkit-linear-gradient(top, #FFD700, #DAA520, #B8860B);
+    background-image:    -moz-linear-gradient(top, #FFD700, #DAA520, #B8860B);
+    background-image:     -ms-linear-gradient(top, #FFD700, #DAA520, #B8860B);
+    background-image:      -o-linear-gradient(top, #FFD700, #DAA520, #B8860B);
+    background-image:         linear-gradient(top, #FFD700, #DAA520, #B8860B);
+    color: #EEE8AA;
+  }
+
+.flair-hebe{
+    background-image: -webkit-linear-gradient(top, #41FCDD, #22F5D2, #09EEC8, #03D7B4);
+    background-image:    -moz-linear-gradient(top, #41FCDD, #22F5D2, #09EEC8, #03D7B4);
+    background-image:     -ms-linear-gradient(top, #41FCDD, #22F5D2, #09EEC8, #03D7B4);
+    background-image:      -o-linear-gradient(top, #41FCDD, #22F5D2, #09EEC8, #03D7B4);
+    background-image:         linear-gradient(top, #41FCDD, #22F5D2, #09EEC8, #03D7B4);
+    color: #FC41EA;
+  }
+
+
+ .flair-tyche{
+    color: #E6DF26;
+    background-image: -webkit-linear-gradient(top, #81F235, #6EDB3F, #5BC349, #47AC52, #34945C);
+    background-image:    -moz-linear-gradient(top, #81F235, #6EDB3F, #5BC349, #47AC52, #34945C);
+    background-image:     -ms-linear-gradient(top, #81F235, #6EDB3F, #5BC349, #47AC52, #34945C);
+    background-image:      -o-linear-gradient(top, #81F235, #6EDB3F, #5BC349, #47AC52, #34945C);
+    background-image:         linear-gradient(top, #81F235, #6EDB3F, #5BC349, #47AC52, #34945C);
+  }
+
+ .flair-hecate{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #48A882, #219C85, #0C7871, #014152);
+    background-image:    -moz-linear-gradient(top, #48A882, #219C85, #0C7871, #014152);
+    background-image:     -ms-linear-gradient(top, #48A882, #219C85, #0C7871, #014152);
+    background-image:      -o-linear-gradient(top, #48A882, #219C85, #0C7871, #014152);
+    background-image:         linear-gradient(top, #48A882, #219C85, #0C7871, #014152);
+  }
+
+ .flair-nyx{
+    color: #FFEB4F;
+    background-image: -webkit-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+    background-image:    -moz-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+    background-image:     -ms-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+    background-image:      -o-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+    background-image:         linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+  }
+
+ .flair-eros{
+    color: black;
+    background-image: -webkit-linear-gradient(top, #ffcccc, #ff7f7f, #ff0000, #cc0000, #990000);
+    background-image:    -moz-linear-gradient(top, #ffcccc, #ff7f7f, #ff0000, #cc0000, #990000);
+    background-image:     -ms-linear-gradient(top, #ffcccc, #ff7f7f, #ff0000, #cc0000, #990000);
+    background-image:      -o-linear-gradient(top, #ffcccc, #ff7f7f, #ff0000, #cc0000, #990000);
+    background-image:         linear-gradient(top, #ffcccc, #ff7f7f, #ff0000, #cc0000, #990000);
+  }
+
+ .flair-phobos{
+    color: #949494;
+    background-image: -webkit-linear-gradient(top, #666666, #474747, #393939, #282828, #000000);
+    background-image:    -moz-linear-gradient(top, #666666, #474747, #393939, #282828, #000000);
+    background-image:     -ms-linear-gradient(top, #666666, #474747, #393939, #282828, #000000);
+    background-image:      -o-linear-gradient(top, #666666, #474747, #393939, #282828, #000000);
+    background-image:         linear-gradient(top, #666666, #474747, #393939, #282828, #000000);
+  }
+
+ .flair-enyo{
+    color: red;
+    background-image: -webkit-linear-gradient(top, #ad3232, #990000, #5b0000, #3d0000, #1e0000);
+    background-image:    -moz-linear-gradient(top, #ad3232, #990000, #5b0000, #3d0000, #1e0000);
+    background-image:     -ms-linear-gradient(top, #ad3232, #990000, #5b0000, #3d0000, #1e0000);
+    background-image:      -o-linear-gradient(top, #ad3232, #990000, #5b0000, #3d0000, #1e0000);
+    background-image:         linear-gradient(top, #ad3232, #990000, #5b0000, #3d0000, #1e0000);
+  }
+
+ .flair-eris{
+    color: #FF9900;
+    background-image: -webkit-linear-gradient(top, #663300, #5C2E00, #532900, #4B2500, #442100);
+    background-image:    -moz-linear-gradient(top, #663300, #5C2E00, #532900, #4B2500, #442100);
+    background-image:     -ms-linear-gradient(top, #663300, #5C2E00, #532900, #4B2500, #442100);
+    background-image:      -o-linear-gradient(top, #663300, #5C2E00, #532900, #4B2500, #442100);
+    background-image:         linear-gradient(top, #663300, #5C2E00, #532900, #4B2500, #442100);
+  }
+
+ .flair-aeolus{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #B8D0DE, #9FC2D6, #86B4CF, #73A2BD, #6792AB);
+    background-image:    -moz-linear-gradient(top, #B8D0DE, #9FC2D6, #86B4CF, #73A2BD, #6792AB);
+    background-image:     -ms-linear-gradient(top, #B8D0DE, #9FC2D6, #86B4CF, #73A2BD, #6792AB);
+    background-image:      -o-linear-gradient(top, #B8D0DE, #9FC2D6, #86B4CF, #73A2BD, #6792AB);
+    background-image:         linear-gradient(top, #B8D0DE, #9FC2D6, #86B4CF, #73A2BD, #6792AB);
+  }
+
+ .flair-notus{
+    color: #EEE8AA;
+    background-image: -webkit-linear-gradient(top, #E6A644, #E18339, #B6571D, #8C3313);
+    background-image:    -moz-linear-gradient(top, #E6A644, #E18339, #B6571D, #8C3313);
+    background-image:     -ms-linear-gradient(top, #E6A644, #E18339, #B6571D, #8C3313);
+    background-image:      -o-linear-gradient(top, #E6A644, #E18339, #B6571D, #8C3313);
+    background-image:         linear-gradient(top, #E6A644, #E18339, #B6571D, #8C3313);
+  }
+
+ .flair-boreas{
+    color: #086192;
+    background-image: -webkit-linear-gradient(top, #bdf2ed, #a7e4f2, #80b4bf, #4c6c73);
+    background-image:    -moz-linear-gradient(top, #bdf2ed, #a7e4f2, #80b4bf, #4c6c73);
+    background-image:     -ms-linear-gradient(top, #bdf2ed, #a7e4f2, #80b4bf, #4c6c73);
+    background-image:      -o-linear-gradient(top, #bdf2ed, #a7e4f2, #80b4bf, #4c6c73);
+    background-image:         linear-gradient(top, #bdf2ed, #a7e4f2, #80b4bf, #4c6c73);
+  }
+
+ .flair-deimos{
+    color: #C3B3A6;
+    background-image: -webkit-linear-gradient(top, black, #460702, #CC141C, #78040D);
+    background-image:    -moz-linear-gradient(top, black, #460702, #CC141C, #78040D);
+    background-image:     -ms-linear-gradient(top, black, #460702, #CC141C, #78040D);
+    background-image:      -o-linear-gradient(top, black, #460702, #CC141C, #78040D);
+    background-image:         linear-gradient(top, black, #460702, #CC141C, #78040D);
+  }
+
+ .flair-eirene{
+    color: #8A2BE2;
+    background-image: -webkit-linear-gradient(top, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+    background-image:    -moz-linear-gradient(top, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+    background-image:     -ms-linear-gradient(top, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+    background-image:      -o-linear-gradient(top, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+    background-image:         linear-gradient(top, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+  }
+
+ .flair-melinoe{
+    color: #B2B8B0;
+    background-image: -webkit-linear-gradient(top, #727870, #555854, #1F251D, #2B3129, #000000);
+    background-image:    -moz-linear-gradient(top, #727870, #555854, #1F251D, #2B3129, #000000);
+    background-image:     -ms-linear-gradient(top, #727870, #555854, #1F251D, #2B3129, #000000);
+    background-image:      -o-linear-gradient(top, #727870, #555854, #1F251D, #2B3129, #000000);
+    background-image:         linear-gradient(top, #727870, #555854, #1F251D, #2B3129, #000000);
+  }
+
+ .flair-asclepius{
+    color: #B20000;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #F5F5F5, #E6E8FA,  #E8E8E8);
+    background-image:    -moz-linear-gradient(top, #FFFFFF, #F5F5F5, #E6E8FA,  #E8E8E8);
+    background-image:     -ms-linear-gradient(top, #FFFFFF, #F5F5F5, #E6E8FA,  #E8E8E8);
+    background-image:      -o-linear-gradient(top, #FFFFFF, #F5F5F5, #E6E8FA,  #E8E8E8);
+    background-image:         linear-gradient(top, #FFFFFF, #F5F5F5, #E6E8FA,  #E8E8E8);
+  }
+
+
+ .flair-erebos{
+    color: #4C4C4C;
+    background-image: -webkit-linear-gradient(top, #282828, #202020, #101010, #000000);
+    background-image:    -moz-linear-gradient(top, #282828, #202020, #101010, #000000);
+    background-image:     -ms-linear-gradient(top, #282828, #202020, #101010, #000000);
+    background-image:      -o-linear-gradient(top, #282828, #202020, #101010, #000000);
+    background-image:         linear-gradient(top, #282828, #202020, #101010, #000000);
+  }
+
+/*Special Flairs*/
+
+ .flair-teaisbae{
+    color: #8A2BE2;
+    background-image: -webkit-linear-gradient(top, #eee6af, #eec6af, #d7eeaf, #eeafd7, #bde1b8);
+    background-image:    -moz-linear-gradient(top, #eee6af, #eec6af, #d7eeaf, #eeafd7, #bde1b8);
+    background-image:     -ms-linear-gradient(top, #eee6af, #eec6af, #d7eeaf, #eeafd7, #bde1b8);
+    background-image:      -o-linear-gradient(top, #eee6af, #eec6af, #d7eeaf, #eeafd7, #bde1b8);
+    background-image:         linear-gradient(top, #eee6af, #eec6af, #d7eeaf, #eeafd7, #bde1b8);
+  }
+
+.flair-captainaltvious{
+    background-image: -webkit-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:    -moz-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:     -ms-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:      -o-linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    background-image:         linear-gradient(top, #9C00DF, #850091, #6E0077, #500057);
+    color: lightblue;
+  }
+
+ .flair-automod{
+    color: #66C285;
+    background-image: -webkit-linear-gradient(top, #009933, #008A2E, #007A29, #006B24);
+    background-image:    -moz-linear-gradient(top, #009933, #008A2E, #007A29, #006B24);
+    background-image:     -ms-linear-gradient(top, #009933, #008A2E, #007A29, #006B24);
+    background-image:      -o-linear-gradient(top, #009933, #008A2E, #007A29, #006B24);
+    background-image:         linear-gradient(top, #009933, #008A2E, #007A29, #006B24);
+  }
+
+.flair-triton{
+    color: darkblue;
+    background-image: -webkit-linear-gradient(top, #438D80, #43BFC7, #3B9C9C, #43BFC7, #438D80);
+    background-image:    -moz-linear-gradient(top, #438D80, #43BFC7, #3B9C9C, #43BFC7, #438D80);
+    background-image:     -ms-linear-gradient(top, #438D80, #43BFC7, #3B9C9C, #43BFC7, #438D80);
+    background-image:      -o-linear-gradient(top, #438D80, #43BFC7, #3B9C9C, #43BFC7, #438D80);
+    background-image:         linear-gradient(top, #438D80, #43BFC7, #3B9C9C, #43BFC7, #438D80);
+  }
+
+.flair-khione{
+    color: #57829E;
+    background-image: -webkit-linear-gradient(top, #FCFFEF, #E0EDF5, #B6E0D0, #86ABC3);
+    background-image:    -moz-linear-gradient(top, #FCFFEF, #E0EDF5, #B6E0DO, #86ABC3);
+    background-image:     -ms-linear-gradient(top, #FCFFEF, #E0EDF5, #B6E0D0, #86ABC3);
+    background-image:      -o-linear-gradient(top, #FCFFEF, #E0EDF5, #B6E0D0, #86ABC3);
+    background-image:         linear-gradient(top, #FCFFEF, #E0EDF5, #B6E0D0, #86ABC3);
+  }
+
+.flair-heracles{
+    color: gold;
+    background-image: -webkit-linear-gradient(top, #892D61, #651040, #450027, #2A0018, #13000B);
+    background-image:    -moz-linear-gradient(top, #892D61, #651040, #450027, #2A0018, #13000B);
+    background-image:     -ms-linear-gradient(top, #892D61, #651040, #450027, #2A0018, #13000B);
+    background-image:      -o-linear-gradient(top, #892D61, #651040, #450027, #2A0018, #13000B);
+    background-image:         linear-gradient(top, #892D61, #651040, #450027, #2A0018, #13000B);
+  }
+
+
+.flair-zephyros{
+    color: #d9827e;
+    background-image: -webkit-linear-gradient(top, #D9F843, #FFEA45, #CFF80E, #B7DD00, #A3DF0B, #4AC800, #94B300);
+    background-image:    -moz-linear-gradient(top, #D9F843, #FFEA45, #CFF80E, #B7DD00, #A3DF0B, #4AC800, #94B300);
+    background-image:     -ms-linear-gradient(top, #D9F843, #FFEA45, #CFF80E, #B7DD00, #A3DF0B, #4AC800, #94B300);
+    background-image:      -o-linear-gradient(top, #D9F843, #FFEA45, #CFF80E, #B7DD00, #A3DF0B, #4AC800, #94B300);
+    background-image:         linear-gradient(top, #D9F843, #FFEA45, #CFF80E, #B7DD00, #A3DF0B, #4AC800, #94B300);
+  }
+
+.flair-eurus{
+    color: #8B3000;
+    background-image: -webkit-linear-gradient(top, #AB2E22, #ED7B65, #FFEA80, #F7DD5A, #DFC335, #AB653E, #85421D);
+    background-image:    -moz-linear-gradient(top, #AB2E22, #ED7B65, #FFEA80, #F7DD5A, #DFC335, #AB653E, #85421D);
+    background-image:     -ms-linear-gradient(top, #AB2E22, #ED7B65, #FFEA80, #F7DD5A, #DFC335, #AB653E, #85421D);
+    background-image:      -o-linear-gradient(top, #AB2E22, #ED7B65, #FFEA80, #F7DD5A, #DFC335, #AB653E, #85421D);
+    background-image:         linear-gradient(top, #AB2E22, #ED7B65, #FFEA80, #F7DD5A, #DFC335, #AB653E, #85421D);
+  }
+
+.flair-castor{
+    color: #FFDEAA;
+    background-image: -webkit-linear-gradient(top, #552000, #803D15, #AA6339, #AA7F39, #805715, #553500);
+    background-image:    -moz-linear-gradient(top, #552000, #803D15, #AA6339, #AA7F39, #805715, #553500);
+    background-image:     -ms-linear-gradient(top, #552000, #803D15, #AA6339, #AA7F39, #805715, #553500);
+    background-image:      -o-linear-gradient(top, #552000, #803D15, #AA6339, #AA7F39, #805715, #553500);
+    background-image:         linear-gradient(top, #552000, #803D15, #AA6339, #AA7F39, #805715, #553500);
+  }
+
+.flair-pollux{
+    color: #553500;
+    background-image: -webkit-linear-gradient(top, #AA6339, #D4926A, #FFCAAA, #FFDEAA, #D4AC6A, #AA7F39);
+    background-image:    -moz-linear-gradient(top, #AA6339, #D4926A, #FFCAAA, #FFDEAA, #D4AC6A, #AA7F39);
+    background-image:     -ms-linear-gradient(top, #AA6339, #D4926A, #FFCAAA, #FFDEAA, #D4AC6A, #AA7F39);
+    background-image:      -o-linear-gradient(top, #AA6339, #D4926A, #FFCAAA, #FFDEAA, #D4AC6A, #AA7F39);
+    background-image:         linear-gradient(top, #AA6339, #D4926A, #FFCAAA, #FFDEAA, #D4AC6A, #AA7F39);
+  }
+
+.flair-dike{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #708890, #50707A, #355A66, #50707A, #708890);
+    background-image:    -moz-linear-gradient(top, #708890, #50707A, #355A66, #50707A, #708890);
+    background-image:     -ms-linear-gradient(top, #708890, #50707A, #355A66, #50707A, #708890);
+    background-image:      -o-linear-gradient(top, #708890, #50707A, #355A66, #50707A, #708890);
+    background-image:         linear-gradient(top, #708890, #50707A, #355A66, #50707A, #708890);
+  }
+
+.flair-percyjackson{
+    color: #FFEB4F;
+    background-image: -webkit-linear-gradient(top, #00FFFF, #00FFFF, #78C7C7, #008080, #008080, #008080, #78C7C7, #78C7C7, #78C7C7);
+    background-image:    -moz-linear-gradient(top, #00FFFF, #00FFFF, #008080, #78C7C7, #008080, #78C7C7, #008080, #78C7C7, #78C7C7);
+    background-image:     -ms-linear-gradient(top, #00FFFF, #00FFFF, #008080, #008080, #78C7C7, #008080, #008080, #78C7C7, #78C7C7);
+    background-image:      -o-linear-gradient(top, #00FFFF, #00FFFF, #008080, #78C7C7, #008080, #78C7C7, #008080, #78C7C7, #78C7C7);
+    background-image:         linear-gradient(top, #00FFFF, #00FFFF, #78C7C7, #008080, #008080, #008080, #78C7C7, #78C7C7, #78C7C7);
+  }
+
+.flair-clio{
+       color: white;
+    background-image: -webkit-linear-gradient(top, #ffec9e, #ffdd8a, #e1ad6d, #d2aa77, #c99157);
+    background-image:    -moz-linear-gradient(top, #ffec9e, #ffdd8a, #e1ad6d, #d2aa77, #c99157);
+    background-image:     -ms-linear-gradient(top, #ffec9e, #ffdd8a, #e1ad6d, #d2aa77, #c99157);
+    background-image:      -o-linear-gradient(top, #ffec9e, #ffdd8a, #e1ad6d, #d2aa77, #c99157);
+    background-image:         linear-gradient(top, #ffec9e, #ffdd8a, #e1ad6d, #d2aa77, #c99157);
+  }
+
+.flair-calliope{
+    color: #ffec9e;
+    background-image: -webkit-linear-gradient(top, #dadada, #cdcdcd, #c0c0c0, #b4b4b4, #a7a7a7);
+    background-image:    -moz-linear-gradient(top, #dadada, #cdcdcd, #c0c0c0, #b4b4b4, #a7a7a7);
+    background-image:     -ms-linear-gradient(top, #dadada, #cdcdcd, #c0c0c0, #b4b4b4, #a7a7a7);
+    background-image:      -o-linear-gradient(top, #dadada, #cdcdcd, #c0c0c0, #b4b4b4, #a7a7a7);
+    background-image:         linear-gradient(top, #dadada, #cdcdcd, #c0c0c0, #b4b4b4, #a7a7a7);
+  }
+
+.flair-colt{
+    background-image: -webkit-linear-gradient(top, #EEBA30, #D3A625, #AE0001, #740001, #000000); 
+    background-image: -moz-linear-gradient(top, #EEBA30, #D3A625, #AE0001, #740001, #000000); 
+    background-image: -ms-linear-gradient(top, #EEBA30, #D3A625, #AE0001, #740001, #000000); 
+    background-image: -o-linear-gradient(top, #EEBA30, #D3A625, #AE0001, #740001, #000000); 
+    background-image: linear-gradient(top, #EEBA30, #D3A625, #AE0001, #740001, #000000); color: #FFD700; }
+
+.flair-ate{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #1C0B03, #2C2309, #52433C, #824A2E, #BD4002, #824A2E, #52433C, #2C2309, #1C0B03);
+    background-image:    -moz-linear-gradient(top, #1C0B03, #2C2309, #52433C, #824A2E, #BD4002, #824A2E, #52433C, #2C2309, #1C0B03);
+    background-image:     -ms-linear-gradient(top, #1C0B03, #2C2309, #52433C, #824A2E, #BD4002, #824A2E, #52433C, #2C2309, #1C0B03);
+    background-image:      -o-linear-gradient(top, #1C0B03, #2C2309, #52433C, #824A2E, #BD4002, #824A2E, #52433C, #2C2309, #1C0B03);
+    background-image:         linear-gradient(top, #1C0B03, #2C2309, #52433C, #824A2E, #BD4002, #824A2E, #52433C, #2C2309, #1C0B03);
+  }
+
+.flair-thalassa{
+    color: #DCEFFD;
+    background-image: -webkit-linear-gradient(top, #4F0400, #670500, #9B0800, #4F0367, #340224, #280134);
+    background-image:    -moz-linear-gradient(top, #4F0400, #670500, #9B0800, #4F0367, #340224, #280134);
+    background-image:     -ms-linear-gradient(top, #4F0400, #670500, #9B0800, #4F0367, #340224, #280134);
+    background-image:      -o-linear-gradient(top, #4F0400, #670500, #9B0800, #4F0367, #340224, #280134);
+    background-image:         linear-gradient(top, #4F0400, #670500, #9B0800, #4F0367, #340224, #280134);
+  }
+
+.flair-techne{
+    color: #FFD6AA;
+    background-image: -webkit-linear-gradient(top, #553B00, #AA8739, #AA7339, #AA4C39, #550F00);
+    background-image:    -moz-linear-gradient(top, #553B00, #AA8739, #AA7339, #AA4C39, #550F00);
+    background-image:     -ms-linear-gradient(top, #553B00, #AA8739, #AA7339, #AA4C39, #550F00);
+    background-image:      -o-linear-gradient(top, #553B00, #AA8739, #AA7339, #AA4C39, #550F00);
+    background-image:         linear-gradient(top, #553B00, #AA8739, #AA7339, #AA4C39, #550F00);
+  }
+
+.flair-momos{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #020109, #1B1425, #1C323E, #1E5256, #207171, #1E5256, #1C323E, #1B1425, #020109);
+    background-image:    -moz-linear-gradient(top, #020109, #1B1425, #1C323E, #1E5256, #207171, #1E5256, #1C323E, #1B1425, #020109);
+    background-image:     -ms-linear-gradient(top, #020109, #1B1425, #1C323E, #1E5256, #207171, #1E5256, #1C323E, #1B1425, #020109);
+    background-image:      -o-linear-gradient(top, #020109, #1B1425, #1C323E, #1E5256, #207171, #1E5256, #1C323E, #1B1425, #020109);
+    background-image:         linear-gradient(top, #020109, #1B1425, #1C323E, #1E5256, #207171, #1E5256, #1C323E, #1B1425, #020109);
+  }
+
+.flair-euterpe{
+    color: #423774;
+    background-image: -webkit-linear-gradient(top, #F3D9AB, #FFEFD4, #FFF9ED, #FFFCED, #FFF7D4, #F3E5AD);
+    background-image:    -moz-linear-gradient(top, #F3D9AB, #FFEFD4, #FFF9ED, #FFFCED, #FFF7D4, #F3E5AD);
+    background-image:     -ms-linear-gradient(top, #F3D9AB, #FFEFD4, #FFF9ED, #FFFCED, #FFF7D4, #F3E5AD);
+    background-image:      -o-linear-gradient(top, #F3D9AB, #FFEFD4, #FFF9ED, #FFFCED, #FFF7D4, #F3E5AD);
+    background-image:         linear-gradient(top, #F3D9AB, #FFEFD4, #FFF9ED, #FFFCED, #FFF7D4, #F3E5AD);
+  }
+
+ .flair-pandia{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #999999, #7A7A7A, #626262, #585858, #3E3E3E);
+    background-image:    -moz-linear-gradient(top, #999999, #7A7A7A, #626262, #585858, #3E3E3E);
+    background-image:     -ms-linear-gradient(top, #999999, #7A7A7A, #626262, #585858, #3E3E3E);
+    background-image:      -o-linear-gradient(top, #999999, #7A7A7A, #626262, #585858, #3E3E3E);
+    background-image:         linear-gradient(top, #999999, #7A7A7A, #626262, #585858, #3E3E3E);
+  }
+
+.flair-alastor{
+    color: #AD8738;
+    background-image: -webkit-linear-gradient(top, #834714, #5B2800, #381A00, #5B0000, #380000, #1A0000);
+    background-image:    -moz-linear-gradient(top, #834714, #5B2800, #381A00, #5B0000, #380000, #1A0000);
+    background-image:     -ms-linear-gradient(top, #834714, #5B2800, #381A00, #5B0000, #380000, #1A0000);
+    background-image:      -o-linear-gradient(top, #834714, #5B2800, #381A00, #5B0000, #380000, #1A0000);
+    background-image:         linear-gradient(top, #834714, #5B2800, #381A00, #5B0000, #380000, #1A0000);
+  }
+
+.flair-arke{
+    color: white;
+    background-image: -webkit-linear-gradient(top, #e5a9a9, #eae7aa, #FF90D1, #b2d6aa, #acb3ea, #d4badb);
+    background-image:    -moz-linear-gradient(top, #e5a9a9, #eae7aa, #FF90D1, #b2d6aa, #acb3ea, #d4badb);
+    background-image:     -ms-linear-gradient(top, #e5a9a9, #eae7aa, #FF90D1, #b2d6aa, #acb3ea, #d4badb);
+    background-image:      -o-linear-gradient(top, #e5a9a9, #eae7aa, #FF90D1, #b2d6aa, #acb3ea, #d4badb);
+    background-image:         linear-gradient(top, #e5a9a9, #eae7aa, #FF90D1, #b2d6aa, #acb3ea, #d4badb);
+  }
+
+.flair-plutus{
+    color: #797670;
+    background-image: -webkit-linear-gradient(top, #FF9325, #FFB66C, #FFC76C, #FFEBCA, #FFC76B, #FFD66C, #FFC125);
+    background-image:    -moz-linear-gradient(top, #FF9325, #FFB66C, #FFC76C, #FFEBCA, #FFC76B, #FFD66C, #FFC125);
+    background-image:     -ms-linear-gradient(top, #FF9325, #FFB66C, #FFC76C, #FFEBCA, #FFC76B, #FFD66C, #FFC125);
+    background-image:      -o-linear-gradient(top, #FF9325, #FFB66C, #FFC76C, #FFEBCA, #FFC76B, #FFD66C, #FFC125);
+    background-image:         linear-gradient(top, #FF9325, #FFB66C, #FFC76C, #FFEBCA, #FFC76B, #FFD66C, #FFC125);
+  }
+
+.flair-psyche{
+    color: #8e0c47;
+    background-image: -webkit-linear-gradient(top, #5f53b3, #8d83d3, #d8528f, #e883b1, #f7c5fc, #e883b1, #d8528f, #8d83d3, #5f53b3);
+    background-image:    -moz-linear-gradient(top, #5f53b3, #8d83d3, #d8528f, #e883b1, #f7c5fc, #e883b1, #d8528f, #8d83d3, #5f53b3);
+    background-image:     -ms-linear-gradient(top, #5f53b3, #8d83d3, #d8528f, #e883b1, #f7c5fc, #e883b1, #d8528f, #8d83d3, #5f53b3);
+    background-image:      -o-linear-gradient(top, #5f53b3, #8d83d3, #d8528f, #e883b1, #f7c5fc, #e883b1, #d8528f, #8d83d3, #5f53b3);
+    background-image:         linear-gradient(top, #5f53b3, #8d83d3, #d8528f, #e883b1, #f7c5fc, #e883b1, #d8528f, #8d83d3, #5f53b3);
+  }
+
+.flair-circe{
+    color: #AA5CD2;
+    background-image: -webkit-linear-gradient(top, #A19EE3, #7471CD, #524EB7, #342FAE, #1C1796, #130F7A, #0B085D);
+    background-image:    -moz-linear-gradient(top, #A19EE3, #7471CD, #524EB7, #342FAE, #1C1796, #130F7A, #0B085D);
+    background-image:     -ms-linear-gradient(top, #A19EE3, #7471CD, #524EB7, #342FAE, #1C1796, #130F7A, #0B085D);
+    background-image:      -o-linear-gradient(top, #A19EE3, #7471CD, #524EB7, #342FAE, #1C1796, #130F7A, #0B085D);
+    background-image:         linear-gradient(top, #A19EE3, #7471CD, #524EB7, #342FAE, #1C1796, #130F7A, #0B085D);
+  }
+
+.flair-styx{
+    background-image: -webkit-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:    -moz-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:     -ms-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:      -o-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:         linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    color: cyan;
+  }
+
+ .flair-achlys{
+    background-image: -webkit-linear-gradient(top, #8BC34A, #70ACB1, #70ACB1, #9D3978, #581845);
+    background-image:    -moz-linear-gradient(top, #8BC34A, #70ACB1, #70ACB1, #9D3978, #581845);
+    background-image:     -ms-linear-gradient(top, #8BC34A, #70ACB1, #70ACB1, #9D3978, #581845);
+    background-image:      -o-linear-gradient(top, #8BC34A, #70ACB1, #70ACB1, #9D3978, #581845);
+    background-image:         linear-gradient(top, #8BC34A, #70ACB1, #70ACB1, #9D3978, #581845);
+    color: #272932;
+  }
+
+ .flair-zoe{
+    background-image: -webkit-linear-gradient(top, #F2F2F2, #E5E5E5, #D9D9D9, #CCCCCC, #C0C0C0);
+    background-image:    -moz-linear-gradient(top, #F2F2F2, #E5E5E5, #D9D9D9, #CCCCCC, #C0C0C0);
+    background-image:     -ms-linear-gradient(top, #F2F2F2, #E5E5E5, #D9D9D9, #CCCCCC, #C0C0C0);
+    background-image:      -o-linear-gradient(top, #F2F2F2, #E5E5E5, #D9D9D9, #CCCCCC, #C0C0C0);
+    background-image:         linear-gradient(top, #F2F2F2, #E5E5E5, #D9D9D9, #CCCCCC, #C0C0C0);
+    color: #606060;
+  }
+
+ .flair-teacontestflair{
+    background-image: -webkit-linear-gradient(top, #70e1f5, #9aeaf8, #c5f3fb, #e2f9fd, #fff5e9, #ffe8c9, #ffdaa9, #ffd194);
+    background-image:    -moz-linear-gradient(top, #70e1f5, #9aeaf8, #c5f3fb, #e2f9fd, #fff5e9, #ffe8c9, #ffdaa9, #ffd194);
+    background-image:     -ms-linear-gradient(top, #70e1f5, #9aeaf8, #c5f3fb, #e2f9fd, #fff5e9, #ffe8c9, #ffdaa9, #ffd194);
+    background-image:      -o-linear-gradient(top, #70e1f5, #9aeaf8, #c5f3fb, #e2f9fd, #fff5e9, #ffe8c9, #ffdaa9, #ffd194);
+    background-image:         linear-gradient(top, #70e1f5, #9aeaf8, #c5f3fb, #e2f9fd, #fff5e9, #ffe8c9, #ffdaa9, #ffd194);
+    color: #4e9dab;
+  }
+
+/*nate/vaieiiy's modflair*/
+ .flair-nate{
+    background-image: -webkit-linear-gradient(top, #F62CC7, #CD55CE, #A47ED6, #7BA7DE, #52D0E6, #29FAEE);
+    background-image:    -moz-linear-gradient(top, #F62CC7, #CD55CE, #A47ED6, #7BA7DE, #52D0E6, #29FAEE);
+    background-image:     -ms-linear-gradient(top, #F62CC7, #CD55CE, #A47ED6, #7BA7DE, #52D0E6, #29FAEE);
+    background-image:      -o-linear-gradient(top, #F62CC7, #CD55CE, #A47ED6, #7BA7DE, #52D0E6, #29FAEE);
+    background-image:         linear-gradient(top, #F62CC7, #CD55CE, #A47ED6, #7BA7DE, #52D0E6, #29FAEE);
+    color: white;
+  }
+
+.flair-neko{
+    color: #AA5CD2;
+    background-image: -webkit-linear-gradient(top, #34495E, #800000, #34495E, #C0C0C0, #34495E, #800000, #641E16);
+    background-image:    -moz-linear-gradient(top, #34495E, #800000, #34495E, #C0C0C0, #34495E, #800000, #641E16);
+    background-image:     -ms-linear-gradient(top, #34495E, #800000, #34495E, #C0C0C0, #34495E, #800000, #641E16);
+    background-image:      -o-linear-gradient(top, #34495E, #800000, #34495E, #C0C0C0, #34495E, #800000, #641E16);
+    background-image:         linear-gradient(top, #34495E, #800000, #34495E, #C0C0C0, #34495E, #800000, #641E16);
+    color: gold;
+  }
+
+.flair-lyss{
+    background-image: -webkit-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:    -moz-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:     -ms-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:      -o-linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    background-image:         linear-gradient(top, #4F4F4F, #434343, #353535, #212121, #000000);
+    color: #39FF14;
+  }
+
+.flair-chiron{
+    background-image: -webkit-linear-gradient(top, #996600, #664400, #4d3300, #332200, #1a1100);
+    background-image:    -moz-linear-gradient(top, #996600, #664400, #4d3300, #332200, #1a1100);
+    background-image:     -ms-linear-gradient(top, #996600, #664400, #4d3300, #332200, #1a1100);
+    background-image:      -o-linear-gradient(top, #996600, #664400, #4d3300, #332200, #1a1100);
+    background-image:         linear-gradient(top, #996600, #664400, #4d3300, #332200, #1a1100);
+    color: white;
+  }
+
+  /*Mikey color flair*/
+  .flair.flair-mikey{
+  background-image: -webkit-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+      background-image:    -moz-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+      background-image:     -ms-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+      background-image:      -o-linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+      background-image:         linear-gradient(top, #0615A2, #061389, #05106E, #040D5A, #030B4D, #01073C, #00052A, #00031E, #000210);
+    }
+
+
+
+/*Gladiator Flair*/
+
+.flair-gladiator{
+      color: white;
+    background-image: -webkit-linear-gradient(top, #FFE10A, #EBCD00, #D7B900, #EBCD00, #FFE10A);
+    background-image:    -moz-linear-gradient(top, #FFE10A, #EBCD00, #D7B900, #EBCD00, #FFE10A);
+    background-image:     -ms-linear-gradient(top, #FFE10A, #EBCD00, #D7B900, #EBCD00, #FFE10A);
+    background-image:      -o-linear-gradient(top, #FFE10A, #EBCD00, #D7B900, #EBCD00, #FFE10A);
+    background-image:         linear-gradient(top, #FFE10A, #EBCD00, #D7B900, #EBCD00, #FFE10A);
+  }
+
+.flair-gladiator::after{
+    content: ""; 
+    margin: 0 0 0 4px; 
+    display: inline-block; 
+    background-image: url(%%wreath%%);
+    background-position: 0px 0px; 
+    width: 19px; 
+    height: 19px; 
+    vertical-align: top; 
+    }

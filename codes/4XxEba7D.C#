@@ -1,0 +1,48 @@
+        public int level100_statcalc(Poke P, Poke.Stat S)
+        {
+            int baseStat = P.baseStat[(int)S];
+            int level100_Stat = baseStat * 2;
+
+            if (S == Poke.Stat.HP)
+            {
+                level100_Stat += 41;
+            }
+            else
+            {
+                level100_Stat += 36;
+            }
+
+            level100_Stat -= (31 - P.IV[(int)S]);
+            level100_Stat += (int)(P.EVs[(int)S] / 4);
+
+            if (S == Poke.Stat.HP)
+            {
+                level100_Stat += 100;
+            }
+            else
+            {
+                if (P.HasNeutralNature()) return level100_Stat;
+                if (P.HasBeneficialNatureForStat(S))
+                {
+                    level100_Stat += (int)((baseStat * 2 + 36 - (31 - P.IV[(int)S]) + (int)(P.EVs[(int)S] / 4)) * 0.1);
+                }
+                else if (P.HasHinderingNatureForStat(S))
+                {
+                    level100_Stat -= (int)((baseStat * 2 + 36 - (31 - P.IV[(int)S]) + (int)(P.EVs[(int)S] / 4)) * 0.1);
+                }
+                else if (P.HasNeutralNature())
+                {
+                    level100_Stat += 0;
+                }
+            }
+
+            if (S == Poke.Stat.HP)
+            {
+                level100_Stat = ((level100_Stat - 10) * (Convert.ToInt32(txtLevel.Text)) / 100) + 10;
+            }
+            else
+            {
+                level100_Stat = ((level100_Stat - 5) * (Convert.ToInt32(txtLevel.Text)) / 100) + 5;
+            }
+            return level100_Stat;
+        }

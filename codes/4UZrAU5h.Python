@@ -1,0 +1,26 @@
+import time
+import ZeroSeg.led as led
+import random
+from datetime import datetime
+import RPi.GPIO as GPIO
+switch1 = 17
+switch2 = 26
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(switch1, GPIO.IN)
+GPIO.setup(switch2, GPIO.IN)
+
+device = led.sevensegment(cascaded = 2)
+GPIO.add_event_detect(switch1, GPIO.RISING)
+
+seconds1 = 900
+seconds2 = 900
+
+while True:
+    while not GPIO.event_detected(switch1):
+        device.write_text(1, str(seconds1) + " " + str(seconds2))
+        time.sleep(1)
+        seconds1 -= 1
+    while not GPIO.event_detected(switch2):
+        device.write_text(1, str(seconds1) + " " + str(seconds2))
+        time.sleep(1)
+        seconds2 -= 1

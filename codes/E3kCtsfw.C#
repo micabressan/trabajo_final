@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _4.Dwarf_Presents
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+			// Programming Basics Exam - 16 December 2017
+            int draws = int.Parse(Console.ReadLine());
+            int money = int.Parse(Console.ReadLine());
+
+            int sandClock = 0;
+            int magnet = 0;
+            int cup = 0;
+            int tShirt = 0;
+
+            for (int i = 1; i <= draws; i++)
+            {
+                string presesnt = Console.ReadLine();
+
+                if (presesnt == "sand clock")
+                {
+                    sandClock += 1;
+                }
+
+                else if (presesnt == "magnet")
+                {
+                    magnet += 1;
+                }
+
+                else if (presesnt == "cup")
+                {
+                    cup += 1;
+                }
+
+                else
+                {
+                    tShirt += 1;
+                }
+            }
+
+            double price = (2.20 * sandClock) + (1.50 * magnet) + 
+                                 (5.00 * cup) + (10.00 * tShirt);
+
+            double moneyLeft = money - price;
+
+            if (moneyLeft >= 0)
+            {
+                Console.WriteLine("Santa Claus has {0:f2} more leva left!", (money - price));
+            }
+
+            else
+            {
+                Console.WriteLine("Santa Claus will need {0:f2} more leva.", (price - money));
+            }
+        }
+    }
+}

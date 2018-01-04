@@ -1,0 +1,47 @@
+# Rewrite the area2.py program from the Examples above to have a separate function for the
+# area of a square, the area of a rectangle, and the area of a circle (3.14 * radius ** 2).
+# This program should include a menu interface.
+
+def square_area (a):
+	return a*a
+	
+def rectangle_area (a,b):
+	return a*b
+
+def circle_area (r):
+	return 3.14159 * r ** 2
+	
+eleccion=0
+while (eleccion!=4):
+
+	print "1) Square area"
+	print "2) Rectangle area"
+	print "3) Circle area"
+	print "4) Salir"
+	print ""
+	eleccion = input ("Ingrese eleccion: ")
+
+	if eleccion == 1:
+		lado_cua = input("Ingrese lado de cuadrado: ")
+		print "El area del cuadrado es: ",square_area(lado_cua)
+		eleccion=0
+		raw_input ("...Pausa...")
+
+	if eleccion == 2: 
+		lado1_rec = input ("Ingrese el lado 1: ")
+		lado2_rec = input ("Ingrese el lado 2: ")
+		print "El area del rectangulo es: ", rectangle_area (lado1_rec, lado2_rec)
+		eleccion=0
+		raw_input ("...Pausa...")
+
+	elif eleccion == 3:
+		radio_cir = input ("Ingrese el radio: ")
+		print "El area del circulo es: ", circle_area(radio_cir)
+		eleccion = 0
+		raw_input ("...Pausa...")
+
+
+	elif eleccion == 4:
+		print "Chau"
+	else:
+		print "Elija una eleccion coherente"

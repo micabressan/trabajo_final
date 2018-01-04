@@ -1,0 +1,6 @@
+dodajbaga: torba
+	"dodawanie obiektu Bag zawierajacego figury do szesciokata"
+	| nowy |
+	nowy:=Szesciokat new initialize: dlugosc_boku.
+	torba do: [:i | nowy:=(nowy + i)].
+	^nowy.

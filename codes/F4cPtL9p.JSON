@@ -1,0 +1,28 @@
+[
+  {
+    "id": "TEST1",
+    "kind": "store",
+    "title": "Test Locations",
+    "description": "Test Description Updated",
+    "address_line_1": "Glory Street 1",
+    "postal_code": "2100",
+    "coordinates": {
+      "latitude": 62.60285088760721,
+      "longitude": 29.76447343826294
+    },
+    "photos": [
+      "https://dummyimage.com/16:9x1080/",
+      "https://dummyimage.com/900x4:3/"
+    ],
+    "primary_contact": {
+      "name": "Thomas Anders",
+      "email": "thomas.anders@gmail.com",
+      "phone": "040 661 5436"
+    },
+    "area": {
+      "from": 13,
+      "to": 666
+    },
+    "prospectus_url": "https://s21.q4cdn.com/374334112/files/doc_downloads/test.pdf"
+  }
+]

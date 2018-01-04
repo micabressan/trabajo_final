@@ -1,0 +1,38 @@
+dispatch :: [(Char, Maybe Player -> Maybe Player)]  
+dispatch =  [ ('w', moveDown)  
+            , ('a', moveUp)  
+            , ('s', moveLeft)  
+            , ('d', moveRight)  
+            ]  
+play :: Maybe Player -> IO()
+play p = do
+        putStrLn "Please select and action between w a s d"
+        cmd <- getChar
+        let (Just action) = lookup cmd dispatch  
+        let p' = action p
+        if (not (Data.Maybe.isNothing p')) then do
+         putStrLn (getPosition p') 
+         play p'
+        else
+          return ()
+       
+main = do  
+   putStrLn "Please enter the following parameters in order: s m g t w p l ll"
+   args <- getArgs  
+   if(length args< 8) then do
+     putStrLn "Game Over!! Not Enough parameter!"
+     return ()
+   else   
+     putStrLn "Parameters okay"
+   let s = read (args !! 0) :: Int
+   let m = read (args !! 1) :: Int
+   let g = read (args !! 2) :: Int
+   let t = read (args !! 3) :: Float
+   let w = read (args !! 4) :: Float
+   let p = read (args !! 5) :: Float
+   let l = read (args !! 6) :: Float
+   let ll= read (args !! 7) :: Float
+   let rands = generateRands g 
+   let grille = generateMap w p l ll t rands
+   let player = basePlayer s m
+   play player

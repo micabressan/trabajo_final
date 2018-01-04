@@ -1,0 +1,985 @@
+[08:29:30] [Server thread/INFO]: Starting minecraft server version 1.12.1
+[08:29:30] [Server thread/INFO]: Loading properties
+[08:29:30] [Server thread/INFO]: Default game type: SURVIVAL
+[08:29:30] [Server thread/INFO]: This server is running CraftBukkit version git-Spigot-edd0396-2a927e8 (MC: 1.12.1) (Implementing API version 1.12.1-R0.1-SNAPSHOT)
+[08:29:30] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[08:29:30] [Server thread/INFO]: Using 4 threads for Netty based IO
+[08:29:30] [Server thread/INFO]: Debug logging is disabled
+[08:29:30] [Server thread/INFO]: Generating keypair
+[08:29:30] [Server thread/INFO]: Starting Minecraft server on skullbro.de:25565
+[08:29:30] [Server thread/INFO]: Using epoll channel type
+[08:29:31] [Server thread/INFO]: Set PluginClassLoader as parallel capable
+[08:29:31] [Server thread/INFO]: [MGHorseRacingPlus] Loading MGHorseRacingPlus v1.14.17-20170612.054317
+[08:29:31] [Server thread/INFO]: [PluginConstructorAPI] Loading PluginConstructorAPI v1.0.11
+[08:29:31] [Server thread/INFO]: [BuildersUtilities] Loading BuildersUtilities v1.2.2
+[08:29:31] [Server thread/INFO]: [CommandHelper] Loading CommandHelper v3.3.2-SNAPSHOT.3234-
+[08:29:32] [Server thread/INFO]: [CommandHelper] Running initial class discovery, this will probably take a few seconds...
+[08:29:42] [Server thread/INFO]: [CommandHelper] Loading extensions in the background...
+[08:29:42] [Server thread/INFO]: [PlaceholderAPI] Loading PlaceholderAPI v2.8.2
+[08:29:42] [Server thread/INFO]: [PlugMan] Loading PlugMan v2.1.4
+[08:29:42] [Server thread/INFO]: [Broadcaster] Loading Broadcaster v5
+[08:29:42] [Server thread/INFO]: [CPCameraStudioReborn] Loading CPCameraStudioReborn v1.4.2
+[08:29:42] [Server thread/INFO]: [TeamChat] Loading TeamChat v1.0
+[08:29:42] [Server thread/INFO]: [VoxelSniper] Loading VoxelSniper v5.171.0-SNAPSHOT
+[08:29:42] [Server thread/INFO]: [AnimationLib] Loading AnimationLib v1.6.4
+[08:29:42] [Server thread/INFO]: [dynmap] Loading dynmap v2.5-Dev201706100405
+[08:29:42] [Server thread/INFO]: [dynmap] version=git-Spigot-edd0396-2a927e8 (MC: 1.12.1)
+[08:29:42] [Server thread/INFO]: [dynmap] Mod Support API available
+[08:29:42] [Server thread/INFO]: [Wild] Loading Wild v3.10.0
+[08:29:42] [Server thread/INFO]: [HelpTickets] Loading HelpTickets v3.2
+[08:29:42] [Server thread/INFO]: [HelpTickets] Registering command: com.shortcircuit.helptickets.TicketCommand
+[08:29:42] [Server thread/INFO]: [HelpTickets] Initializing SQLite database...
+[08:29:42] [Server thread/INFO]: [HelpTickets] SQLite database initialized
+[08:29:42] [Server thread/INFO]: [HelpTickets] Registering command: com.shortcircuit.helptickets.HelpopCommand
+[08:29:42] [Server thread/INFO]: [PacketListenerApi] Loading PacketListenerApi v3.6.0-SNAPSHOT
+[08:29:42] [Server thread/INFO]: [ReflectionHelper] Version is v1_12_R1 (11201)
+[08:29:42] [Server thread/INFO]: [PacketListenerAPI] Using INChannel
+[08:29:42] [Server thread/INFO]: Injected custom channel handlers.
+[08:29:42] [Server thread/INFO]: [MapManager] Loading MapManager v1.4.0-SNAPSHOT
+[08:29:42] [Server thread/INFO]: [Votifier] Loading Votifier v2.3.5
+[08:29:42] [Server thread/INFO]: [EXPBankPlus] Loading EXPBankPlus v1.2
+[08:29:42] [Server thread/INFO]: [ItemEdit] Loading ItemEdit v1.3.0
+[08:29:42] [Server thread/INFO]: [AutoSaveWorld] Loading AutoSaveWorld v4.15
+[08:29:42] [Server thread/INFO]: [VotingPlugin] Loading VotingPlugin v5.10.0
+[08:29:42] [Server thread/INFO]: [FastAsyncWorldEdit] Loading FastAsyncWorldEdit v17.12.26-1cb4cb3-951-18.0.8
+[08:29:42] [Server thread/INFO]: [PermissionsEx] Loading PermissionsEx v1.23.4
+[08:29:42] [Server thread/INFO]: [Vault] Loading Vault v1.6.1
+[08:29:42] [Server thread/INFO]: [statuecreator] Loading statuecreator v1.5
+[08:29:42] [Server thread/INFO]: [AnimatedMenu] Loading AnimatedMenu v3.2.1
+[08:29:42] [Server thread/INFO]: [AnimatedFrames] Loading AnimatedFrames v4.5.0-SNAPSHOT
+[08:29:42] [Server thread/INFO]: [PerWorldInventory] Loading PerWorldInventory v1.11
+[08:29:42] [Server thread/INFO]: [LWC] Loading LWC v1.8.7
+[08:29:42] [Server thread/INFO]: [WorldEdit] Loading WorldEdit v6.1.8-SNAPSHOT;cd4729f
+[08:29:42] [Server thread/INFO]: [Essentials] Loading Essentials vTeamCity
+[08:29:42] [Server thread/INFO]: [BannerMaker] Loading BannerMaker v1.8.0
+[08:29:42] [Server thread/INFO]: [EssentialsChat] Loading EssentialsChat vTeamCity
+[08:29:42] [Server thread/INFO]: [LogBlock] Loading LogBlock v1.10.0
+[08:29:42] [Server thread/INFO]: [LogBlock] Connecting to Server@jdbc:mysql://localhost:3306/Server?useSSL=false...
+[08:29:42] [Server thread/WARN]: 2 [Server thread] INFO com.zaxxer.hikari.HikariDataSource - LogBlock-Connection-Pool - Starting...
+
+[08:29:42] [Server thread/WARN]: 254 [Server thread] INFO com.zaxxer.hikari.HikariDataSource - LogBlock-Connection-Pool - Start completed.
+
+[08:29:42] [Server thread/INFO]: [PlotSquared] Loading PlotSquared v17.12.09-59557cf-1945
+[08:29:42] [Server thread/INFO]: [WorldGuard] Loading WorldGuard v6.2.1;84bc322
+[08:29:42] [Server thread/INFO]: [EssentialsProtect] Loading EssentialsProtect vTeamCity
+[08:29:42] [Server thread/INFO]: [EssentialsAntiBuild] Loading EssentialsAntiBuild vTeamCity
+[08:29:42] [Server thread/INFO]: [EssentialsSpawn] Loading EssentialsSpawn vTeamCity
+[08:29:42] [Server thread/INFO]: [WorldGuardExtraFlags] Loading WorldGuardExtraFlags v2.14.2
+[08:29:42] [Server thread/INFO]: [TitleManager] Loading TitleManager v2.0.9
+[08:29:42] [Server thread/INFO]: [Multiverse-Core] Loading Multiverse-Core v2.5.0-b727
+[08:29:42] [Server thread/INFO]: [Plot2Dynmap] Loading Plot2Dynmap v3.4.0
+[08:29:42] [Server thread/INFO]: [Signs] Loading Signs v1.9.7
+[08:29:42] [Server thread/INFO]: [Multiverse-Portals] Loading Multiverse-Portals v2.5.0-b751
+[08:29:42] [Server thread/INFO]: [Holograms] Loading Holograms v2.5.0-SNAPSHOT
+[08:29:42] [Server thread/INFO]: [IslandWorld] Loading IslandWorld v7.8
+[08:29:42] [Server thread/INFO]: [CommandSigns] Loading CommandSigns v1.5.5
+[08:29:42] [Server thread/INFO]: [MinigamesLib] Loading MinigamesLib v1.14.17-20170612.052814
+[08:29:42] [Server thread/INFO]: [MGTrapdoorSpleef] Loading MGTrapdoorSpleef v1.14.17-20170612.054947
+[08:29:42] [Server thread/INFO]: [MGSplegg] Loading MGSplegg v1.14.17-20170612.054850
+[08:29:42] [Server thread/INFO]: [MGArcade] Loading MGArcade v1.3.2
+[08:29:42] [Server thread/INFO]: [MGSkyWars] Loading MGSkyWars v1.14.17-20170612.054656
+[08:29:42] [Server thread/INFO]: [MGBedWars] Loading MGBedWars v1.14.17-20170612.053900
+[08:29:42] [Server thread/INFO]: [MGSnake] Loading MGSnake v1.14.17-20170612.054720
+[08:29:42] [Server thread/INFO]: [AnimationLib] Enabling AnimationLib v1.6.4
+[08:29:42] [Server thread/INFO]: [AutoSaveWorld] Enabling AutoSaveWorld v4.15
+[08:29:42] [Server thread/INFO]: [FastAsyncWorldEdit] Enabling FastAsyncWorldEdit v17.12.26-1cb4cb3-951-18.0.8
+[08:29:43] [extensionloader/INFO]: [CommandHelper] Extension loading complete.
+[08:29:43] [Server thread/INFO]: ====== USE PAPER ======[m
+[08:29:43] [Server thread/INFO]: DOWNLOAD: https://ci.destroystokyo.com/job/PaperSpigot/[m
+[08:29:43] [Server thread/INFO]: GUIDE: https://www.spigotmc.org/threads/21726/[m
+[08:29:43] [Server thread/INFO]:  - This is only a recommendation[m
+[08:29:43] [Server thread/INFO]: ==============================[m
+[08:29:43] [Server thread/INFO]: [Vault] Enabling Vault v1.6.1
+[08:29:43] [Server thread/INFO]: [Vault] [Economy] Essentials Economy found: Waiting
+[08:29:43] [Server thread/INFO]: [Vault] [Permission] PermissionsEx found: Waiting
+[08:29:43] [Server thread/INFO]: [Vault] [Permission] SuperPermissions loaded as backup permission system.
+[08:29:43] [Server thread/INFO]: [Vault] [Chat] PermissionsEx found: Waiting
+[08:29:43] [Server thread/INFO]: [Vault] Plugin enabled (44ms)
+[08:29:43] [Server thread/INFO]: [LWC] Enabling LWC v1.8.7
+[08:29:43] [Server thread/INFO]: [LWC] Connecting to SQLite
+[08:29:43] [Server thread/INFO]: [PlotSquared] Enabling PlotSquared v17.12.09-59557cf-1945
+[08:29:43] [Server thread/INFO]: Version is PlotSquared-17.12.9-59557cf-1945
+[08:29:43] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;33;22mMetrics enabled.[m
+[08:29:43] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m [0;33;22mPlotSquared is using online UUIDs[m
+[08:29:44] [Server thread/INFO]: PlotSquared hooked into WorldEdit.[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mplot-expiry[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mkill-road-mobs[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mworlds[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mworldedit-restrictions[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mdatabase-purger[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22meconomy[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mblock-cache[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mkill-road-vehicles[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mpersistent-meta[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mban-deleter[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mupdater[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mdatabase[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mplotme-converter[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mpermission-cache[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mrating-cache[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mcomment-notifier[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mmetrics[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mchunk-processor[0;31;1m, Value: [0;33;22mfalse[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22muuid-cache[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mevents[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;31;1mKey: [0;33;22mcommands[0;31;1m, Value: [0;33;22mtrue[m
+[08:29:44] [Server thread/INFO]: [0;33;22mPlotSquared is now enabled[m
+[08:29:44] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;33;22mMetrics enabled.[m
+[08:29:44] [Server thread/INFO]: **** Beginning UUID conversion, this may take A LONG time ****
+[08:29:44] [Server thread/INFO]: Preparing level "Hauptmap"
+[08:29:44] [Server thread/INFO]: -------- World Settings For [Hauptmap] --------
+[08:29:44] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:44] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:44] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:44] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:44] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:44] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:44] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:44] [Server thread/INFO]: Structure Info Saving: true
+[08:29:44] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:44] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:44] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:44] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:44] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:44] [Server thread/INFO]: View Distance: 12
+[08:29:44] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:44] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:44] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:44] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:44] [Server thread/INFO]: -------- World Settings For [Hauptmap_nether] --------
+[08:29:44] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:44] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:44] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:44] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:44] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:44] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:44] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:44] [Server thread/INFO]: Structure Info Saving: true
+[08:29:44] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:44] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:44] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:44] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:44] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:44] [Server thread/INFO]: View Distance: 12
+[08:29:44] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:44] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:44] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:44] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:44] [Server thread/INFO]: -------- World Settings For [Hauptmap_the_end] --------
+[08:29:44] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:44] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:44] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:44] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:44] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:44] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:44] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:44] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:44] [Server thread/INFO]: Structure Info Saving: true
+[08:29:44] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:44] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:44] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:44] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:44] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:44] [Server thread/INFO]: View Distance: 12
+[08:29:44] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:44] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:44] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:44] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:44] [Server thread/INFO]: Preparing start region for level 0 (Seed: 2070558)
+[08:29:45] [Server thread/INFO]: Preparing spawn area: 36%
+[08:29:46] [Server thread/INFO]: Preparing start region for level 1 (Seed: 2070558)
+[08:29:47] [Server thread/INFO]: Preparing start region for level 2 (Seed: 2070558)
+[08:29:47] [Server thread/INFO]: [MGHorseRacingPlus] Enabling MGHorseRacingPlus v1.14.17-20170612.054317
+[08:29:47] [Server thread/INFO]: [PluginConstructorAPI] Enabling PluginConstructorAPI v1.0.11
+[08:29:47] [Server thread/INFO]: [BuildersUtilities] Enabling BuildersUtilities v1.2.2
+[08:29:47] [Server thread/INFO]: [CommandHelper] Enabling CommandHelper v3.3.2-SNAPSHOT.3234-
+[08:29:47] [Server thread/INFO]: [m
+[08:29:47] [Server thread/INFO]: 
+
+
+[40;22m     [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m                                                                [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   
+[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m        [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m     [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m     [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    
+[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m      [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m     
+[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m      [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m      
+[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m       
+[40;22m                                                                                                                                                                                                                                                                
+[40;22m                      [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m            [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m                                
+[40;22m                     [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m      [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m   
+[40;22m                    [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m        
+[40;22m                   [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m        [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m        [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m           
+[40;22m                  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m    [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m      [41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m  [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m            
+[40;22m                                         [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m                                 
+[40;22m                                        [41;22m[0;31;22m_[47;1m[0;37;22m/[40;22m                                 
+[m
+[08:29:47] [Server thread/INFO]: [0;33;22m[CommandHelper]: MethodScript files processed[m
+[08:29:47] [Server thread/INFO]: [0;31;22mCOMPILE ERROR[0;37;22m: Unexpected ClassType
+	[0;32;22m[0;37;22m:[0;33;22mUnknown Source[0;37;22m:[0;36;22m0
+[m
+[08:29:47] [Server thread/INFO]: [0;31;22mCOMPILE ERROR[0;37;22m: Expected command (/command) at start of alias. Instead, found LIT (plugins)
+	[0;32;22m[0;37;22m:[0;33;22m/hdd/root/administrator/moderator/supporter/gameserver/gsmc/sponsoring/plugins/CommandHelper/aliases.msa[0;37;22m:[0;36;22m199
+[m
+[08:29:47] [Server thread/INFO]: [0;33;22m[CommandHelper]: 48 alias(es) defined.[m
+[08:29:47] [Server thread/INFO]: [CommandHelper] CommandHelper 3.3.2-SNAPSHOT.3234- enabled
+[08:29:47] [Server thread/INFO]: [PlaceholderAPI] Enabling PlaceholderAPI v2.8.2
+[08:29:47] [Server thread/INFO]: [PlaceholderAPI] Placeholder expansion registration initializing...
+[08:29:47] [Server thread/INFO]: [PlaceholderAPI] Fetching available expansion list from extendedclip.com...
+[08:29:47] [Server thread/INFO]: [PlugMan] Enabling PlugMan v2.1.4
+[08:29:47] [Server thread/INFO]: [Broadcaster] Enabling Broadcaster v5
+[08:29:47] [Server thread/INFO]: [CPCameraStudioReborn] Enabling CPCameraStudioReborn v1.4.2
+[08:29:47] [Server thread/INFO]: [CPCameraStudioReborn] §b[§3CP§bCameraStudio] §aCPCameraStudioReborn has been enabled!
+[08:29:47] [Server thread/INFO]: [TeamChat] Enabling TeamChat v1.0
+[08:29:47] [Server thread/INFO]: TeamChat | Wurde erfolgreich aktiviert..
+[08:29:47] [Server thread/INFO]: [VoxelSniper] Enabling VoxelSniper v5.171.0-SNAPSHOT
+[08:29:48] [Server thread/INFO]: [VoxelSniper] Registered 75 Sniper Brushes with 149 handles.
+[08:29:48] [Server thread/INFO]: [VoxelSniper] Registered Sniper Listener.
+[08:29:48] [Server thread/INFO]: [dynmap] Enabling dynmap v2.5-Dev201706100405
+[08:29:48] [Server thread/INFO]: [PermissionsEx] Enabling PermissionsEx v1.23.4
+[08:29:48] [Server thread/INFO]: [PermissionsEx] Initializing file backend
+[08:29:48] [Server thread/INFO]: [PermissionsEx] Permissions file successfully reloaded
+[08:29:48] [Server thread/INFO]: [Vault][Permission] PermissionsEx hooked.
+[08:29:48] [Server thread/INFO]: [Vault][Chat] PermissionsEx_Chat hooked.
+[08:29:48] [Server thread/INFO]: [dynmap] Using PermissionsEx 1.23.4 for access control
+[08:29:48] [Server thread/INFO]: [dynmap] Opening MySQL database localhost:3306/dynmap?useSSL=false as map store
+[08:29:48] [Server thread/WARN]: [AutoSaveWorld] Plugin dynmap attempted to establish connection socket://localhost:3306 in main server thread
+[08:29:48] [Server thread/INFO]: [dynmap] Mod Support processing completed
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 23 shaders.
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 82 perspectives.
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 14 lightings.
+[08:29:49] [Server thread/INFO]: [dynmap] Web server started on address skullbro.de:8123
+[08:29:49] [Server thread/INFO]: [dynmap] version 2.5-Dev201706100405 is enabled - core version 2.5-Dev201706100401
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'Hauptmap'.
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'Hauptmap_nether'.
+[08:29:49] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'Hauptmap_the_end'.
+[08:29:49] [Server thread/INFO]: [dynmap] Enabled
+[08:29:49] [Server thread/INFO]: [Wild] Enabling Wild v3.10.0
+[08:29:49] [Server thread/INFO]: [Wild] WorldGuard hook enabled
+[08:29:49] [Server thread/INFO]: [Wild] Already Converted
+[08:29:49] [Server thread/INFO]: [Wild] Changes from version 3.9.7 to 3.9.8 include: 
+* Added Particles 
+* Added invalid subcommand message on wildtp 
+* Added this changelog feature 
+* Added ability to teleport to village with /wildtp village
+[08:29:49] [Server thread/INFO]: [HelpTickets] Enabling HelpTickets v3.2
+[08:29:49] [Server thread/INFO]: [PacketListenerApi] Enabling PacketListenerApi v3.6.0-SNAPSHOT
+[08:29:49] [Server thread/INFO]: Adding channels for online players...
+[08:29:49] [Server thread/INFO]: [MapManager] Enabling MapManager v1.4.0-SNAPSHOT
+[08:29:49] [Server thread/INFO]: [ReflectionHelper] Version is v1_12_R1 (11201)
+[08:29:49] [Server thread/INFO]: [MapManager] Vanilla Maps are allowed. Trying to discover occupied Map IDs...
+[08:29:49] [Server thread/INFO]: [MapManager] Found 79 occupied IDs.
+[08:29:49] [Server thread/INFO]: [Votifier] Enabling Votifier v2.3.5
+[08:29:49] [Server thread/INFO]: [Votifier] Loaded token for website: Minecraft-Server
+[08:29:49] [Server thread/INFO]: [Votifier] Method none selected for vote forwarding: Votes will not be received from a forwarder.
+[08:29:49] [nioEventLoopGroup-2-1/INFO]: [Votifier] Votifier enabled on socket /91.205.172.210:8192.
+[08:29:49] [Server thread/INFO]: [EXPBankPlus] Enabling EXPBankPlus v1.2
+[08:29:49] [Server thread/INFO]: [ItemEdit] Enabling ItemEdit v1.3.0
+[08:29:49] [Server thread/INFO]: [VotingPlugin] Enabling VotingPlugin v5.10.0
+[08:29:49] [Server thread/INFO]: [VotingPlugin] Successfully hooked into Vault!
+[08:29:49] [Server thread/INFO]: [VotingPlugin] Enabled VotingPlgin 5.10.0
+[08:29:49] [Server thread/INFO]: [statuecreator] Enabling statuecreator v1.5
+[08:29:49] [Server thread/INFO]: == Plugin StatueCreator enabled! ==
+[08:29:49] [Server thread/INFO]: [AnimatedMenu] Enabling AnimatedMenu v3.2.1
+[08:29:49] [Server thread/INFO]: [AnimatedFrames] Enabling AnimatedFrames v4.5.0-SNAPSHOT
+[08:29:49] [Server thread/INFO]: [PerWorldInventory] Enabling PerWorldInventory v1.11
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Registering listeners...
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Listeners registered!
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] [DEBUG] Adding group to memory. Group: default Worlds: [Hauptmap, Hauptmap_nether, Hauptmap_the_end] Gamemode: SURVIVAL
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] [DEBUG] Adding group to memory. Group: creativeplot Worlds: [CreativePlot] Gamemode: CREATIVE
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Registering commands...
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Commands registered!
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Vault found! Hooking into it...
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] Hooked into Vault!
+[08:29:50] [Server thread/INFO]: [PerWorldInventory] [DEBUG] PerWorldInventory is enabled and debug-mode is active!
+[08:29:50] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v6.1.8-SNAPSHOT;cd4729f
+[08:29:50] [Server thread/INFO]: WEPIF: PermissionsEx detected! Using PermissionsEx for permissions.
+[08:29:50] [Server thread/INFO]: [WorldEdit] Logging WorldEdit commands to /hdd/root/administrator/moderator/supporter/gameserver/gsmc/sponsoring/plugins/WorldEdit/worldedit.log
+[08:29:50] [Server thread/INFO]: [WorldEdit] Using com.sk89q.worldedit.bukkit.adapter.impl.Spigot_v1_12_R2 as the Bukkit adapter
+[08:29:50] [Server thread/INFO]: [Essentials] Enabling Essentials vTeamCity
+[08:29:50] [Server thread/INFO]: Bukkit version format changed. Version not checked.
+[08:29:50] [Server thread/INFO]: git-Spigot-edd0396-2a927e8 (MC: 1.12.1)
+[08:29:50] [Server thread/INFO]: 1.12.1-R0.1-SNAPSHOT
+[08:29:50] [Server thread/INFO]: Using locale en_US
+[08:29:50] [Server thread/INFO]: Using locale en_US
+[08:29:50] [Server thread/INFO]: [Vault][Economy] Essentials Economy hooked.
+[08:29:50] [Server thread/INFO]: Essentials: Using PermissionsEx based permissions.
+[08:29:50] [Server thread/INFO]: [BannerMaker] Enabling BannerMaker v1.8.0
+[08:29:50] [Server thread/INFO]: [BannerMaker] Language: en
+[08:29:50] [Server thread/INFO]: [BannerMaker] Vault dependency found! Enable economy supported
+[08:29:50] [Server thread/INFO]: [EssentialsChat] Enabling EssentialsChat vTeamCity
+[08:29:50] [Server thread/INFO]: [LogBlock] Enabling LogBlock v1.10.0
+[08:29:50] [Server thread/INFO]: [LogBlock] Scheduled consumer with bukkit scheduler.
+[08:29:50] [Server thread/INFO]: [WorldGuard] Enabling WorldGuard v6.2.1;84bc322
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap) TNT ignition is blocked.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap) Lighters are PERMITTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap) Lava fire is blocked.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap) All fire spread is disabled.
+[08:29:50] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Hauptmap'
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_nether) TNT ignition is PERMITTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_nether) Lighters are PERMITTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_nether) Lava fire is blocked.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_nether) Fire spread is UNRESTRICTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Hauptmap_nether'
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_the_end) TNT ignition is PERMITTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_the_end) Lighters are PERMITTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_the_end) Lava fire is blocked.
+[08:29:50] [Server thread/INFO]: [WorldGuard] (Hauptmap_the_end) Fire spread is UNRESTRICTED.
+[08:29:50] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Hauptmap_the_end'
+[08:29:50] [Server thread/INFO]: [WorldGuard] Loading region data...
+[08:29:50] [Server thread/INFO]: [EssentialsProtect] Enabling EssentialsProtect vTeamCity
+[08:29:50] [Server thread/INFO]: [EssentialsAntiBuild] Enabling EssentialsAntiBuild vTeamCity
+[08:29:50] [Server thread/INFO]: [EssentialsSpawn] Enabling EssentialsSpawn vTeamCity
+[08:29:50] [Server thread/INFO]: [WorldGuardExtraFlags] Enabling WorldGuardExtraFlags v2.14.2
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.TeleportOnEntryFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.TeleportOnExitFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.CommandOnEntryFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.CommandOnExitFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.ConsoleCommandOnEntryFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.ConsoleCommandOnExitFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.WalkSpeedFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.BlockedEffectsFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.GodmodeFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.GiveEffectsFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.FlyFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.PlaySoundsFlag
+[08:29:50] [Server thread/INFO]: [WorldGuard] Registering session handler net.goldtreeservers.worldguardextraflags.flags.handlers.GlideFlag
+[08:29:50] [Server thread/INFO]: [TitleManager] Enabling TitleManager v2.0.9
+[08:29:51] [Server thread/INFO]: [Multiverse-Core] Enabling Multiverse-Core v2.5.0-b727
+[08:29:52] [Server thread/INFO]: Could not set generator for world 'islandworld': Plugin 'IslandWorld v7.8' is not enabled[m
+[08:29:52] [Server thread/INFO]: -------- World Settings For [islandworld] --------
+[08:29:52] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:52] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:52] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:52] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:52] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:52] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:52] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:52] [Server thread/INFO]: Structure Info Saving: true
+[08:29:52] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:52] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:52] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:52] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:52] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:52] [Server thread/INFO]: View Distance: 12
+[08:29:52] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:52] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:52] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:52] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:52] [Server thread/INFO]: Preparing start region for level 3 (Seed: -5181178587882071066)
+[08:29:52] [Server thread/INFO]: [WorldGuard] (islandworld) TNT ignition is PERMITTED.
+[08:29:52] [Server thread/INFO]: [WorldGuard] (islandworld) Lighters are PERMITTED.
+[08:29:52] [Server thread/INFO]: [WorldGuard] (islandworld) Lava fire is blocked.
+[08:29:52] [Server thread/INFO]: [WorldGuard] (islandworld) Fire spread is UNRESTRICTED.
+[08:29:52] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'islandworld'
+[08:29:52] [Server thread/INFO]: Could not set generator for world 'islandworld': Plugin 'IslandWorld v7.8' is not enabled[m
+[08:29:52] [Server thread/INFO]: [dynmap] Loaded 1 maps of world 'islandworld'.
+[08:29:52] [Server thread/INFO]: -------- World Settings For [Creative] --------
+[08:29:52] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:52] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:52] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:52] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:52] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:52] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:52] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:52] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:52] [Server thread/INFO]: Structure Info Saving: true
+[08:29:52] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:52] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:52] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:52] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:52] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:52] [Server thread/INFO]: View Distance: 12
+[08:29:52] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:52] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:52] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:52] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;32;1mDetected world load for 'Creative'[m
+[08:29:52] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - generator: [0;37;22mPlotSquared>PlotSquared[m
+[08:29:52] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - plotworld: [0;37;22mcom.intellectualcrafters.plot.generator.HybridPlotWorld[m
+[08:29:52] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - manager: [0;37;22mcom.intellectualcrafters.plot.generator.HybridPlotManager[m
+[08:29:52] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - schematic: [0;37;22mfalse[m
+[08:29:52] [Server thread/INFO]: World possibly already loaded: Creative[m
+[08:29:52] [Server thread/INFO]: Preparing start region for level 4 (Seed: 3197670303513094752)
+[08:29:53] [Server thread/INFO]: [WorldGuard] (Creative) TNT ignition is PERMITTED.
+[08:29:53] [Server thread/INFO]: [WorldGuard] (Creative) Lighters are PERMITTED.
+[08:29:53] [Server thread/INFO]: [WorldGuard] (Creative) Lava fire is blocked.
+[08:29:53] [Server thread/INFO]: [WorldGuard] (Creative) Fire spread is UNRESTRICTED.
+[08:29:53] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Creative'
+[08:29:53] [Server thread/INFO]: [dynmap] Loaded 0 maps of world 'Creative'.
+[08:29:53] [Server thread/INFO]: -------- World Settings For [AE] --------
+[08:29:53] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:53] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:53] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:53] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:53] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:53] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:53] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:53] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:53] [Server thread/INFO]: Structure Info Saving: true
+[08:29:53] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:53] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:53] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:53] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:53] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:53] [Server thread/INFO]: View Distance: 12
+[08:29:53] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:53] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:53] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:53] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:53] [Server thread/INFO]: Preparing start region for level 5 (Seed: 4031384495743822299)
+[08:29:54] [Server thread/INFO]: Preparing spawn area for AE, 77%
+[08:29:54] [Server thread/INFO]: [WorldGuard] (AE) TNT ignition is PERMITTED.
+[08:29:54] [Server thread/INFO]: [WorldGuard] (AE) Lighters are PERMITTED.
+[08:29:54] [Server thread/INFO]: [WorldGuard] (AE) Lava fire is blocked.
+[08:29:54] [Server thread/INFO]: [WorldGuard] (AE) Fire spread is UNRESTRICTED.
+[08:29:54] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'AE'
+[08:29:54] [Server thread/INFO]: [dynmap] World 'AE' disabled
+[08:29:54] [Server thread/INFO]: -------- World Settings For [CreativePlot] --------
+[08:29:54] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:54] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:54] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:54] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:54] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:54] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:54] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:54] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:54] [Server thread/INFO]: Structure Info Saving: true
+[08:29:54] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:54] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:54] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:54] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:54] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:54] [Server thread/INFO]: View Distance: 12
+[08:29:54] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:54] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:54] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:55] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;32;1mDetected world load for 'CreativePlot'[m
+[08:29:55] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - schematic: [0;37;22mfalse[m
+[08:29:55] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - generator: [0;37;22mPlotSquared>PlotSquared[m
+[08:29:55] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - plotworld: [0;37;22mCreativePlot[m
+[08:29:55] [Server thread/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;36;22m - manager: [0;37;22mcom.intellectualcrafters.plot.generator.HybridPlotManager@6f01efe0[m
+[08:29:55] [Server thread/INFO]: World possibly already loaded: CreativePlot[m
+[08:29:55] [Server thread/INFO]: Preparing start region for level 6 (Seed: 7403389916437833246)
+[08:29:55] [Server thread/INFO]: [WorldGuard] (CreativePlot) TNT ignition is PERMITTED.
+[08:29:55] [Server thread/INFO]: [WorldGuard] (CreativePlot) Lighters are PERMITTED.
+[08:29:55] [Server thread/INFO]: [WorldGuard] (CreativePlot) Lava fire is blocked.
+[08:29:55] [Server thread/INFO]: [WorldGuard] (CreativePlot) Fire spread is UNRESTRICTED.
+[08:29:55] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'CreativePlot'
+[08:29:55] [Server thread/INFO]: [dynmap] Loaded 1 maps of world 'CreativePlot'.
+[08:29:56] [Server thread/INFO]: -------- World Settings For [testmap] --------
+[08:29:56] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:56] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:56] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:56] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:56] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:56] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:56] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:56] [Server thread/INFO]: Structure Info Saving: true
+[08:29:56] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:56] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:56] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:56] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:56] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:56] [Server thread/INFO]: View Distance: 12
+[08:29:56] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:56] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:56] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:56] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:56] [Server thread/INFO]: Preparing start region for level 7 (Seed: 4135024050957055022)
+[08:29:56] [Server thread/INFO]: [WorldGuard] (testmap) TNT ignition is PERMITTED.
+[08:29:56] [Server thread/INFO]: [WorldGuard] (testmap) Lighters are PERMITTED.
+[08:29:56] [Server thread/INFO]: [WorldGuard] (testmap) Lava fire is blocked.
+[08:29:56] [Server thread/INFO]: [WorldGuard] (testmap) Fire spread is UNRESTRICTED.
+[08:29:56] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'testmap'
+[08:29:56] [Server thread/INFO]: [dynmap] World 'testmap' disabled
+[08:29:56] [Server thread/INFO]: -------- World Settings For [map9] --------
+[08:29:56] [Server thread/INFO]: Mob Spawn Range: 2
+[08:29:56] [Server thread/INFO]: Max TNT Explosions: 100
+[08:29:56] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[08:29:56] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Cane Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Melon Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Vine Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[08:29:56] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16
+[08:29:56] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[08:29:56] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[08:29:56] [Server thread/INFO]: Random Lighting Updates: false
+[08:29:56] [Server thread/INFO]: Structure Info Saving: true
+[08:29:56] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Feature: 14357617 Monument: 10387313 Slime: 987234911
+[08:29:56] [Server thread/INFO]: Item Despawn Rate: 6000
+[08:29:56] [Server thread/INFO]: Item Merge Radius: 2.5
+[08:29:56] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[08:29:56] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[08:29:56] [Server thread/INFO]: View Distance: 12
+[08:29:56] [Server thread/INFO]: Experience Merge Radius: 3.0
+[08:29:56] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[08:29:56] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[08:29:56] [Server thread/INFO]: BukkitPlotGenerator does not fully support: null[m
+[08:29:56] [Server thread/INFO]: Preparing start region for level 8 (Seed: 27594263)
+[08:29:57] [Server thread/INFO]: Preparing spawn area for map9, 65%
+[08:29:58] [Server thread/INFO]: [WorldGuard] (map9) TNT ignition is PERMITTED.
+[08:29:58] [Server thread/INFO]: [WorldGuard] (map9) Lighters are PERMITTED.
+[08:29:58] [Server thread/INFO]: [WorldGuard] (map9) Lava fire is blocked.
+[08:29:58] [Server thread/INFO]: [WorldGuard] (map9) Fire spread is UNRESTRICTED.
+[08:29:58] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'map9'
+[08:29:58] [Server thread/INFO]: [dynmap] World 'map9' disabled
+[08:29:58] [Server thread/INFO]: [Multiverse-Core] 9 - World(s) loaded.
+[08:29:58] [Server thread/INFO]: [Multiverse-Core] Version 2.5.0-b727 (API v20) Enabled - By Rigby, fernferret, lithium3141, main-- and dumptruckman
+[08:29:58] [Server thread/INFO]: [Plot2Dynmap] Enabling Plot2Dynmap v3.4.0
+[08:29:58] [Server thread/INFO]: [Signs] Enabling Signs v1.9.7
+[08:29:58] [Server thread/INFO]: [Signs] Compatiblity modules loaded for lwc and worldguard[m
+[08:29:58] [Server thread/INFO]: [Multiverse-Portals] Enabling Multiverse-Portals v2.5.0-b751
+[08:29:58] [Server thread/INFO]: [Multiverse-Portals] - Version 2.5.0-b751 Enabled - By Rigby and fernferret
+[08:30:04] [Server thread/INFO]: [MVPLogging] 104 - Portals(s) loaded
+[08:30:04] [Server thread/WARN]: [Multiverse-Core] Portal dennis1 has an invalid DESTINATION!
+[08:30:04] [Server thread/INFO]: [Multiverse-Portals] Found WorldEdit. Using it for selections.
+[08:30:04] [Server thread/INFO]: [Holograms] Enabling Holograms v2.5.0-SNAPSHOT
+[08:30:04] [Server thread/INFO]: [Holograms] HologramEntityController set to: com.sainttx.holograms.nms.v1_12_R1.HologramEntityControllerImpl
+[08:30:04] [Server thread/INFO]: [IslandWorld] Enabling IslandWorld v7.8
+[08:30:04] [Server thread/INFO]: [IslandWorld] Dynmap support disabled
+[08:30:04] [Server thread/INFO]: [IslandWorld] Saved plugins/IslandWorld/messages_def.yml
+[08:30:04] [Server thread/INFO]: [IslandWorld] Worlds info: islandworld/Hauptmap[322.5/127/1729.5/0.0/0.0]
+[08:30:04] [Server thread/INFO]: [IslandWorld] Using New Schematic Manager
+[08:30:04] [Server thread/INFO]: [IslandWorld] Checking for updates
+[08:30:04] [Server thread/INFO]: [IslandWorld] ########## IslandWorld update ##########
+[08:30:04] [Server thread/INFO]: [IslandWorld] A new version of IslandWorld was found!
+[08:30:04] [Server thread/INFO]: [IslandWorld] Version found: Island World v7.9
+[08:30:04] [Server thread/INFO]: [IslandWorld] Version running: IslandWorld v7.8
+[08:30:04] [Server thread/INFO]: [IslandWorld] #####################################
+[08:30:04] [Server thread/INFO]: [IslandWorld] Loaded 9990 free islands.
+[08:30:04] [Server thread/INFO]: [IslandWorld] Loaded 10 taken islands.
+[08:30:04] [Server thread/INFO]: [IslandWorld] Loaded 0 helping players.
+[08:30:04] [Server thread/INFO]: [IslandWorld] Loaded 0 points.
+[08:30:04] [Server thread/INFO]: [IslandWorld] Plugin enabled.
+[08:30:04] [Server thread/INFO]: [CommandSigns] Enabling CommandSigns v1.5.5
+[08:30:04] [Server thread/INFO]: [CommandSigns] Plugin vault detected
+[08:30:04] [Server thread/INFO]: [CommandSigns] Vault economy linked with command signs ! 
+[08:30:04] [Server thread/INFO]: [CommandSigns] CommandSigns properly enabled !
+[08:30:04] [Server thread/INFO]: [MinigamesLib] Enabling MinigamesLib v1.14.17-20170612.052814
+[08:30:04] [Server thread/INFO]: [MinigamesLib] §c§lLoaded MinigamesAPI. We're on V1_12_R1.
+[08:30:04] [Server thread/INFO]: [MGTrapdoorSpleef] Enabling MGTrapdoorSpleef v1.14.17-20170612.054947
+[08:30:05] [Server thread/INFO]: [MGSplegg] Enabling MGSplegg v1.14.17-20170612.054850
+[08:30:05] [Server thread/INFO]: [MGArcade] Enabling MGArcade v1.3.2
+[08:30:05] [Server thread/INFO]: [MGSkyWars] Enabling MGSkyWars v1.14.17-20170612.054656
+[08:30:05] [Server thread/INFO]: [MGBedWars] Enabling MGBedWars v1.14.17-20170612.053900
+[08:30:05] [Server thread/INFO]: [MGSnake] Enabling MGSnake v1.14.17-20170612.054720
+[08:30:05] [Server thread/INFO]: [0;34;1mMGSnake is running on V1_12_R1.[m
+[08:30:05] [Server thread/INFO]: [MGSnake] Turned on 1.12 mode.
+[08:30:05] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[08:30:06] [Server thread/INFO]: Done (21.728s)! For help, type "help" or "?"
+[08:30:06] [Server thread/INFO]: Starting GS4 status listener
+[08:30:06] [Query Listener #1/INFO]: Query running on skullbro.de:25567
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m Plugin 'WorldGuard' found. Using it now.[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m Optimizing PlotSquared[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m  - QueueProvider: class com.boydti.fawe.regions.general.plot.FaweLocalBlockQueue[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m  - HybridPlotManager.REGENERATIVE_CLEAR: false[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m  - SchematicHandler: com.boydti.fawe.regions.general.plot.FaweSchematicHandler@3ffe63af[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m  - ChunkManager: com.boydti.fawe.regions.general.plot.FaweChunkManager@6020561f[m
+[08:30:06] [Server thread/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m Plugin 'PlotSquared' found. Using it now.[m
+[08:30:06] [Craft Scheduler Thread - 3/INFO]: [Vault] You are running the latest version
+[08:30:06] [Craft Scheduler Thread - 53/INFO]: [HelpTickets] Checking Spigot for updates...
+[08:30:06] [Server thread/INFO]: [AnimatedMenu] Loading menus...
+[08:30:06] [Craft Scheduler Thread - 55/INFO]: [PacketListenerApi] Plugin is up-to-date
+[08:30:06] [Craft Scheduler Thread - 52/INFO]: [Wild] There is an update available please go download it
+[08:30:06] [Craft Scheduler Thread - 56/INFO]: [MapManager] Plugin is up-to-date
+[08:30:06] [Server thread/WARN]: [AnimatedMenu] No frame specified at frame 1 in material!
+[08:30:06] [Server thread/INFO]: [AnimatedMenu] 1 menu loaded
+[08:30:07] [Craft Scheduler Thread - 64/INFO]: [Signs] Signs v1.9.7 is up to date[m
+[08:30:07] [Craft Scheduler Thread - 56/WARN]: [SpigetUpdate] Invalid SemVer versions specified [450-SNAPSHOT] [450-SNAPSHOT]
+[08:30:07] [Craft Scheduler Thread - 56/INFO]: [AnimatedFrames] The plugin is up-to-date.
+[08:30:07] [Craft Scheduler Thread - 49/INFO]: [PlugMan] No update was found.
+[08:30:07] [Craft Scheduler Thread - 48/INFO]: [PlaceholderAPI] 92 placeholder expansions are available on the cloud.
+[08:30:07] [Craft Scheduler Thread - 48/INFO]: [PlaceholderAPI] 0 expansions you use have updates.
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_logs" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_wolle1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_wolle2" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_clay1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_clay2" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_clay3" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_woodplanks" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Shop_sell" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "GB_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "DB_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Obs_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "netherr_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "souls_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "brikpl_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "sand_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "grav_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "dirt_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk1_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk2_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk3_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "kauf1_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "kauf2_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "kauf3_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "kauf4_shop" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_2" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_3" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_4" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_5" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_6" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_7" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_8" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_9" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_10" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_11" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_12" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "verk_13" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_2" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_3" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_4" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_5" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwm_6" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "tavern_gek_tier" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N1_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N1_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N2_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N2_oben" with 1 lines
+[08:30:07] [Craft Scheduler Thread - 53/INFO]: [HelpTickets] This plugin is up-to-date
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N3_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N3_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N4_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N4_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N5_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N5_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N6_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N6_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N7_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N7_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N8_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N8_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N9_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "N9_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O1_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O1_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O2_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O2_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O3_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O3_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O4_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O4_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O5_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O5_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O6_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O6_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O7_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "O7_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S1_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S1_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S2_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S2_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S3_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S3_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S4_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S4_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S5_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S5_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S6_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "S6_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W1_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W1_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W2_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W2_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W3_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W3_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W4_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W4_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W5_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W5_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W6_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W6_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W7_unten" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "W7_oben" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Pferd1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "pferd2" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "pferd3" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "schwarzmarkt" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "WestT" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "west3t" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "West7t" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Nord3T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "NordT" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Nord9T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Ost3T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Ost7T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "OstT" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "SuedT" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Sued3T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Sued6T" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "UbahnL" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "UbahnL1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Fweg1" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "EndL" with 1 lines
+[08:30:07] [Server thread/INFO]: [Holograms] Loaded hologram with "Lfreebuild" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "creaL" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spneu_shop" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spneu_minig" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spneu_skyblock" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spneu_schwarztmarkt" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spawnzuarena" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spawnzustadt" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spawnzuspawn" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "spneu_farm" with 1 lines
+[08:30:08] [Server thread/INFO]: [Holograms] Loaded hologram with "LobbyplatzzuTelehalle" with 1 lines
+[08:30:08] [User Authenticator #1/INFO]: UUID of player FandrAEl is 91cd61fe-0968-4540-9061-b309b7487dc5
+[08:30:08] [Server thread/INFO]: [PerWorldInventory] [DEBUG] Player 'FandrAEl' joining! Spawning in world 'CreativePlot'. Getting last logout location
+[08:30:08] [Server thread/INFO]: [PerWorldInventory] [DEBUG] Logout location found for player 'FandrAEl'!
+[08:30:08] [Server thread/INFO]: FandrAEl[/88.130.52.9:32695] logged in with entity id 1338 at ([CreativePlot]-126.47448885107619, 70.11600773799236, -28.171362727373356)
+[08:30:08] [Craft Scheduler Thread - 27/WARN]: [SpigetUpdate] Invalid SemVer versions specified [450-SNAPSHOT] [450-SNAPSHOT]
+[08:30:09] [Craft Scheduler Thread - 41/INFO]: [VotingPlugin] VotingPlugin has an update available! Your Version: 5.10.0 New Version: 5.12 Use /av download to get the latest update!
+[08:30:09] [Server thread/INFO]: FandrAEl issued server command: /we cui
+[08:30:09] [Craft Scheduler Thread - 41/INFO]: WorldEdit: FandrAEl (in "CreativePlot"): cui
+[08:30:09] [Server thread/INFO]: Starting UUID caching[m
+[08:30:09] [Craft Scheduler Thread - 41/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;33;22mStarting player data caching for: Hauptmap[m
+[08:30:09] [Craft Scheduler Thread - 41/INFO]: [0;32;1mFast mode UUID caching enabled![m
+[08:30:10] [Craft Scheduler Thread - 41/INFO]: [0;30;1m[[0;33;22mP2[0;30;1m] [0;37;22m[0;33;22mCached a total of: 11 UUIDs[m
+[08:30:10] [Craft Scheduler Thread - 27/INFO]: [AnimatedFrames] Loading data...
+[08:30:10] [pool-13-thread-1/INFO]: [AnimatedFrames] Loaded 31 frames.
+[08:30:10] [pool-13-thread-11/INFO]: [AnimatedFrames] Animation length for 'farm_3' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-8/INFO]: [AnimatedFrames] Animation length for 'minig_lobby_1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-30/INFO]: [AnimatedFrames] Animation length for 'spawnneu_shop' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-10/INFO]: [AnimatedFrames] Animation length for 'spawnneu_ubahn3' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-7/INFO]: [AnimatedFrames] Animation length for 'Regeln_n' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-12/INFO]: [AnimatedFrames] Animation length for 'MG_lobby_Splegg' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-14/INFO]: [AnimatedFrames] Animation length for 'regeln_l2' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-13/INFO]: [AnimatedFrames] Animation length for 'mglobby_snake' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-6/INFO]: [AnimatedFrames] Animation length for 'spawnneu_skyblocks' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-9/INFO]: [AnimatedFrames] Animation length for 'spawnneu' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-23/INFO]: [AnimatedFrames] Animation length for 'farm_1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-15/INFO]: [AnimatedFrames] Animation length for 'farm_4' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-16/INFO]: [AnimatedFrames] Animation length for 'farm_2' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-18/INFO]: [AnimatedFrames] Animation length for 'Schiff6' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-19/INFO]: [AnimatedFrames] Animation length for 'Schif5' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-20/INFO]: [AnimatedFrames] Animation length for 'spawnneu_ubahn2' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-17/INFO]: [AnimatedFrames] Animation length for 'splegg_arena' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-28/INFO]: [AnimatedFrames] Animation length for 'skyblocks1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-22/INFO]: [AnimatedFrames] Animation length for 'schiff1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-2/INFO]: [AnimatedFrames] Animation length for 'regeln_l1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-21/INFO]: [AnimatedFrames] Animation length for 'MG_lobby_Skywars' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-31/INFO]: [AnimatedFrames] Animation length for 'surv_lobby1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-32/INFO]: [AnimatedFrames] Animation length for 'ub1_lobby1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-3/INFO]: [AnimatedFrames] Animation length for 'schiff2' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-29/INFO]: [AnimatedFrames] Animation length for 'Ubahn_seite' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-4/INFO]: [AnimatedFrames] Animation length for 'ub2_lobby1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-5/INFO]: [AnimatedFrames] Animation length for 'spawnneu_ubahn1' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-24/INFO]: [AnimatedFrames] Animation length for 'skyblocks2' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-26/INFO]: [AnimatedFrames] Animation length for 'Schiff4' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-25/INFO]: [AnimatedFrames] Animation length for 'spawnneu_ubahn4' is zero. Creating non-animated image.
+[08:30:10] [pool-13-thread-27/INFO]: [AnimatedFrames] Animation length for 'Schiff3' is zero. Creating non-animated image.
+[08:30:11] [pool-13-thread-23/INFO]: [AnimatedFrames] Started 'farm_1' (1/31)
+[08:30:11] [pool-13-thread-11/INFO]: [AnimatedFrames] Started 'farm_3' (2/31)
+[08:30:11] [pool-13-thread-32/INFO]: [AnimatedFrames] Started 'ub1_lobby1' (3/31)
+[08:30:11] [pool-13-thread-16/INFO]: [AnimatedFrames] Started 'farm_2' (4/31)
+[08:30:11] [pool-13-thread-20/INFO]: [AnimatedFrames] Started 'spawnneu_ubahn2' (5/31)
+[08:30:11] [pool-13-thread-29/INFO]: [AnimatedFrames] Started 'Ubahn_seite' (6/31)
+[08:30:11] [pool-13-thread-15/INFO]: [AnimatedFrames] Started 'farm_4' (7/31)
+[08:30:11] [pool-13-thread-4/INFO]: [AnimatedFrames] Started 'ub2_lobby1' (8/31)
+[08:30:11] [pool-13-thread-28/INFO]: [AnimatedFrames] Started 'skyblocks1' (9/31)
+[08:30:11] [pool-13-thread-2/INFO]: [AnimatedFrames] Started 'regeln_l1' (10/31)
+[08:30:11] [pool-13-thread-5/INFO]: [AnimatedFrames] Started 'spawnneu_ubahn1' (11/31)
+[08:30:11] [Server thread/INFO]: [MinigamesLib] Found 5 arenas.
+[08:30:11] [pool-13-thread-27/INFO]: [AnimatedFrames] Started 'Schiff3' (12/31)
+[08:30:11] [pool-13-thread-10/INFO]: [AnimatedFrames] Started 'spawnneu_ubahn3' (13/31)
+[08:30:11] [pool-13-thread-25/INFO]: [AnimatedFrames] Started 'spawnneu_ubahn4' (14/31)
+[08:30:11] [pool-13-thread-6/INFO]: [AnimatedFrames] Started 'spawnneu_skyblocks' (15/31)
+[08:30:11] [pool-13-thread-8/INFO]: [AnimatedFrames] Started 'minig_lobby_1' (16/31)
+[08:30:11] [pool-13-thread-7/INFO]: [AnimatedFrames] Started 'Regeln_n' (17/31)
+[08:30:11] [pool-13-thread-30/INFO]: [AnimatedFrames] Started 'spawnneu_shop' (18/31)
+[08:30:11] [pool-13-thread-14/INFO]: [AnimatedFrames] Started 'regeln_l2' (19/31)
+[08:30:11] [pool-13-thread-18/INFO]: [AnimatedFrames] Started 'Schiff6' (20/31)
+[08:30:11] [pool-13-thread-21/INFO]: [AnimatedFrames] Started 'MG_lobby_Skywars' (21/31)
+[08:30:11] [pool-13-thread-31/INFO]: [AnimatedFrames] Started 'surv_lobby1' (22/31)
+[08:30:11] [pool-13-thread-3/INFO]: [AnimatedFrames] Started 'schiff2' (23/31)
+[08:30:11] [pool-13-thread-19/INFO]: [AnimatedFrames] Started 'Schif5' (24/31)
+[08:30:11] [pool-13-thread-9/INFO]: [AnimatedFrames] Started 'spawnneu' (25/31)
+[08:30:11] [pool-13-thread-26/INFO]: [AnimatedFrames] Started 'Schiff4' (26/31)
+[08:30:11] [pool-13-thread-24/INFO]: [AnimatedFrames] Started 'skyblocks2' (27/31)
+[08:30:11] [pool-13-thread-12/INFO]: [AnimatedFrames] Started 'MG_lobby_Splegg' (28/31)
+[08:30:11] [pool-13-thread-17/INFO]: [AnimatedFrames] Started 'splegg_arena' (29/31)
+[08:30:11] [pool-13-thread-13/INFO]: [AnimatedFrames] Started 'mglobby_snake' (30/31)
+[08:30:12] [pool-13-thread-22/INFO]: [AnimatedFrames] Started 'schiff1' (31/31)
+[08:30:31] [Server thread/INFO]: FandrAEl issued server command: //setlight 10
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: WorldEdit: FandrAEl (in "CreativePlot"): /setblocklight 10
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: ====== NO NMS BLOCK PLACER FOUND ======[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: FAWE couldn't find a fast block placer[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: Bukkit version: git-Spigot-edd0396-2a927e8 (MC: 1.12.1)[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: NMS label: BukkitMain[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: Fallback placer: class com.boydti.fawe.bukkit.v0.BukkitQueue_All[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: =======================================[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: Download the version of FAWE for your platform[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]:  - http://ci.athion.net/job/FastAsyncWorldEdit/lastSuccessfulBuild/artifact/target[m
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: =======================================[m
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: java.lang.NoClassDefFoundError: org/bukkit/World$ChunkLoadCallback
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.bukkit.FaweBukkit.getVersion(FaweBukkit.java:620)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.bukkit.FaweBukkit.getQueue(FaweBukkit.java:651)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.bukkit.FaweBukkit.getNewQueue(FaweBukkit.java:435)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.util.SetQueue.getNewQueue(SetQueue.java:248)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.object.FawePlayer.getFaweQueue(FawePlayer.java:368)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.object.FawePlayer.getFaweQueue(FawePlayer.java:360)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.command.RegionCommands.setlighting(RegionCommands.java:195)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.util.command.parametric.ParametricCallable.call(ParametricCallable.java:245)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.util.command.SimpleDispatcher.call(SimpleDispatcher.java:125)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.extension.platform.CommandManager.handleCommandOnCurrentThread(CommandManager.java:383)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.extension.platform.CommandManager$2$1.run(CommandManager.java:468)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.object.FawePlayer$2.run(FawePlayer.java:232)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.object.FawePlayer.queueAction(FawePlayer.java:260)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.boydti.fawe.object.FawePlayer.runAction(FawePlayer.java:307)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at com.sk89q.worldedit.extension.platform.CommandManager$2.run(CommandManager.java:465)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftTask.run(CraftTask.java:71)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:52)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.lang.Thread.run(Thread.java:748)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: Caused by: java.lang.ClassNotFoundException: org.bukkit.World$ChunkLoadCallback
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at org.bukkit.plugin.java.PluginClassLoader.findClass(PluginClassLoader.java:91)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at org.bukkit.plugin.java.PluginClassLoader.findClass(PluginClassLoader.java:86)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+[08:30:31] [Craft Scheduler Thread - 37/WARN]: 	... 24 more
+[08:30:31] [Craft Scheduler Thread - 37/INFO]: =======================================[m
+[08:30:31] [Craft Scheduler Thread - 37/ERROR]: [WorldEdit] An unexpected error occurred while handling a FAWE command
+java.lang.ClassNotFoundException: org.bukkit.World$ChunkLoadCallback
+	at org.bukkit.plugin.java.PluginClassLoader.findClass(PluginClassLoader.java:91) ~[spigot.jar:git-Spigot-edd0396-2a927e8]
+	at org.bukkit.plugin.java.PluginClassLoader.findClass(PluginClassLoader.java:86) ~[spigot.jar:git-Spigot-edd0396-2a927e8]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[?:1.8.0_151]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[?:1.8.0_151]
+	at com.boydti.fawe.bukkit.FaweBukkit.getNewQueue(FaweBukkit.java:463) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.util.SetQueue.getNewQueue(SetQueue.java:248) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.getFaweQueue(FawePlayer.java:368) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.getFaweQueue(FawePlayer.java:360) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.command.RegionCommands.setlighting(RegionCommands.java:195) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_151]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_151]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_151]
+	at com.sk89q.worldedit.util.command.parametric.ParametricCallable.call(ParametricCallable.java:245) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.util.command.SimpleDispatcher.call(SimpleDispatcher.java:125) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager.handleCommandOnCurrentThread(CommandManager.java:383) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager$2$1.run(CommandManager.java:468) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer$2.run(FawePlayer.java:232) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.queueAction(FawePlayer.java:260) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.runAction(FawePlayer.java:307) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager$2.run(CommandManager.java:465) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftTask.run(CraftTask.java:71) [spigot.jar:git-Spigot-edd0396-2a927e8]
+	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:52) [spigot.jar:git-Spigot-edd0396-2a927e8]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_151]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_151]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_151]
+[08:30:31] [Craft Scheduler Thread - 58/INFO]: [0;31;1mNo NMS placer found, see console![m
+[08:30:31] [Craft Scheduler Thread - 58/INFO]: [0;30;1m([0;31;22m[21mFAWE[0;30;1m)[m[0;37;22m [0;31;1mNo NMS placer found, see console![m
+[08:30:42] [Server thread/INFO]: FandrAEl issued server command: /fawe debugpaste
+[08:30:42] [Craft Scheduler Thread - 58/INFO]: WorldEdit: FandrAEl (in "CreativePlot"): debugpaste
+[08:31:12] [Craft Scheduler Thread - 58/ERROR]: [WorldEdit] An unexpected error occurred while handling a FAWE command
+java.io.IOException: Server returned HTTP response code: 503 for URL: https://hastebin.com/documents
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1894) ~[?:1.8.0_151]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1492) ~[?:1.8.0_151]
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:263) ~[?:1.8.0_151]
+	at com.boydti.fawe.util.HastebinUtility.upload(HastebinUtility.java:36) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.util.HastebinUtility.upload(HastebinUtility.java:66) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.util.HastebinUtility.debugPaste(HastebinUtility.java:70) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.command.WorldEditCommands.debugpaste(WorldEditCommands.java:154) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_151]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_151]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_151]
+	at com.sk89q.worldedit.util.command.parametric.ParametricCallable.call(ParametricCallable.java:245) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.util.command.SimpleDispatcher.call(SimpleDispatcher.java:125) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.util.command.SimpleDispatcher.call(SimpleDispatcher.java:125) ~[FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager.handleCommandOnCurrentThread(CommandManager.java:383) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager$2$1.run(CommandManager.java:468) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer$2.run(FawePlayer.java:232) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.queueAction(FawePlayer.java:260) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.boydti.fawe.object.FawePlayer.runAction(FawePlayer.java:307) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at com.sk89q.worldedit.extension.platform.CommandManager$2.run(CommandManager.java:465) [FastAsyncWorldEdit-bukkit0.jar:?]
+	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftTask.run(CraftTask.java:71) [spigot.jar:git-Spigot-edd0396-2a927e8]
+	at org.bukkit.craftbukkit.v1_12_R1.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:52) [spigot.jar:git-Spigot-edd0396-2a927e8]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_151]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_151]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_151]

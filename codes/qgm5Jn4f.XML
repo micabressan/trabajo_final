@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RocketPermissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DefaultGroup>default</DefaultGroup>
+  <Groups>
+    <Group>
+      <Id>default</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <ParentGroup>
+      </ParentGroup>
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+        <Permission Cooldown="0">kit</Permission>
+        <Permission Cooldown="0">kits</Permission>
+        <Permission Cooldown="0">Kit.PayCheck</Permission>
+        <Permission Cooldown="0">Kit.GPS</Permission>
+        <Permission Cooldown="0">Kit.Camp Axe</Permission>
+        <Permission Cooldown="0">warp</Permission>
+        <Permission Cooldown="0">warp RPtown</Permission>
+        <Permission Cooldown="0">warp ServerRules</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>vip</Id>
+      <DisplayName>VIP</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>FF9900</Color>
+      <Members>
+        <Member>76561198016438091</Member>
+      </Members>
+      <ParentGroup>default</ParentGroup>
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">effect</Permission>
+        <Permission Cooldown="120">heal</Permission>
+        <Permission Cooldown="30">v</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Mechanic</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Cook</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <ParentGroup />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Taxi</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <ParentGroup />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Farmer</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <ParentGroup />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Military</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>white</Color>
+      <Members />
+      <ParentGroup />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+      <Id>Swat</Id>
+      <DisplayName>Guest</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>blue</Color>
+      <Members />
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+	  <Id>Co-Owner</Id>
+      <DisplayName>Co-Owner</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>FF0000</Color>
+      <Members />
+	   <Member>76561198389878361</Member>
+      <ParentGroup>
+      </ParentGroup>
+      <Priority>100</Priority>
+      <Permissions>
+        <Permission Cooldown="0">/v</Permission>
+        <Permission Cooldown="0">/i</Permission>
+        <Permission Cooldown="0">/heal </Permission>
+        <Permission Cooldown="0">/tphere</Permission>
+        <Permission Cooldown="0">/tp</Permission>
+        <Permission Cooldown="0">/god</Permission>
+        <Permission Cooldown="0">/vanish </Permission>
+        <Permission Cooldown="0">/help </Permission>
+        <Permission Cooldown="0">/more</Permission>
+        <Permission Cooldown="0">/admin</Permission>
+        <Permission Cooldown="0">/exit</Permission>
+        <Permission Cooldown="0">/broadcast</Permission>
+        <Permission Cooldown="0">/i</Permission>
+        <Permission Cooldown="0">/heal </Permission>
+        <Permission Cooldown="0">/tphere</Permission>
+        <Permission Cooldown="0">/tp</Permission>
+        <Permission Cooldown="0">/god</Permission>
+        <Permission Cooldown="0">/vanish </Permission>
+        <Permission Cooldown="0">/help </Permission>
+        <Permission Cooldown="0">/more</Permission>
+        <Permission Cooldown="0">/admin</Permission>
+        <Permission Cooldown="0">/exit</Permission>
+        <Permission Cooldown="0">/broadcast</Permission>
+		<Permission Cooldown="0">/ban</Permission>
+		<Permission Cooldown="0">/kick</Permission>
+      </Permissions>
+    </Group>
+    <Group>
+	  <Id>Owner</Id>
+      <DisplayName>Owner</DisplayName>
+      <Prefix />
+      <Suffix />
+      <Color>0DFF00</Color>
+      <Members>
+        <Member>76561198324050211</Member>
+      </Members>
+      <ParentGroup>Owner</ParentGroup>
+      <Priority>100</Priority>
+      <Permissions>
+	    <Permission Cooldown="0">p</Permission>
+        <Permission Cooldown="0">compass</Permission>
+        <Permission Cooldown="0">rocket</Permission>
+        <Permission Cooldown="0">effect</Permission>
+        <Permission Cooldown="120">heal</Permission>
+        <Permission Cooldown="30">v</Permission>
+		<Permission Cooldown="0">/v</Permission>
+        <Permission Cooldown="0">/i</Permission>
+        <Permission Cooldown="0">/heal </Permission>
+        <Permission Cooldown="0">/tphere</Permission>
+        <Permission Cooldown="0">/tp</Permission>
+        <Permission Cooldown="0">/god</Permission>
+        <Permission Cooldown="0">/vanish </Permission>
+        <Permission Cooldown="0">/help </Permission>
+        <Permission Cooldown="0">/more</Permission>
+        <Permission Cooldown="0">/admin</Permission>
+        <Permission Cooldown="0">/exit</Permission>
+        <Permission Cooldown="0">/broadcast</Permission>
+        <Permission Cooldown="0">/i</Permission>
+        <Permission Cooldown="0">/heal </Permission>
+        <Permission Cooldown="0">/tphere</Permission>
+        <Permission Cooldown="0">/tp</Permission>
+        <Permission Cooldown="0">/god</Permission>
+        <Permission Cooldown="0">/vanish </Permission>
+        <Permission Cooldown="0">/help </Permission>
+        <Permission Cooldown="0">/more</Permission>
+        <Permission Cooldown="0">/admin</Permission>
+        <Permission Cooldown="0">/exit</Permission>
+        <Permission Cooldown="0">/broadcast</Permission>
+		<Permission Cooldown="0">/ban</Permission>
+		<Permission Cooldown="0">/kick</Permission>
+      </Permissions>
+    </Group>
+  </Groups>
+</RocketPermissions>

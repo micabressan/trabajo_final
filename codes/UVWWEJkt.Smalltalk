@@ -1,0 +1,22 @@
+Object subclass: Foo [
+    | delay1 delay2 |
+    
+
+    initialize [
+	delay1 := Delay untilMilliseconds: 20.
+	delay2 := Delay untilMilliseconds: 20.
+	[[self proc2. true] whileTrue] forkAt: Processor userSchedulingPriority.
+	[[self proc1. true] whileTrue] forkAt: Processor highIOPriority.	
+    ]
+
+    proc2 [
+	'proc 2 executed' printNl.
+	delay2 wait.
+    ]
+    
+    proc1 [
+	'proc 1 executed' printNl.
+	delay1 wait.
+	
+    ]
+]

@@ -1,0 +1,13 @@
+dopisujesz gdzieś na końcu:
+
+withSpawnedPipe cmd f = do
+    pipe <- spawnPipe cmd
+    f pipe
+    hClose pipe
+
+-- i main wygląda tak:
+main =
+    withSpawnedPipe "dzen2 -ta l -fg gray -bg black" $ \ dzenPipe -> do
+    withSpawnedPipe "dzen2 -ta l -fg gray -bg black" $ \ dzenPipe2 -> do
+    withSpawnedPipe "dzen2 -ta l -fg gray -bg black" $ \ dzenPipe3 -> do
+    -- twój normalny xmonad $ blah blah z dzenPipe jako pipe

@@ -1,0 +1,52 @@
+Correct syntax for custom multi-line server messages. Bukkit/Spigot. Minecraft.
+Color tags & + § work, unicode too. (mostly!)
+
+In spigot.yml
+messages:
+  whitelist: |
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+    &fWhat the WHAT?! The whitelist is on Huh!?!
+    &fTo get whitelisted? You need a PMC account
+    &fVisit and register at http://www.planetminecraft.com
+    &for, message one of owners on other server.
+    &fSorry for the 1 to 6 hours temporary down time!
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+  unknown-command: '&7Hah. Typed command right? "&f/help&7"'
+  server-full: |
+    &4Well well well...
+    &7Server is full!
+  outdated-client: |
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+    &fPiper uses &4MC {0} &fsince Dec 14 2017
+    &fWe had protocol support for pre 1.12 versions.
+    &fPre 1.9 clients &nonly got pre 1.12 content&r&f and it
+    &fcaused a major imbalance for gameplay including
+    &fPVP performance, item stats, mob reactions and
+    &fmissing particles, No Elytras!, wierd rubber
+    &fbandind on mobs for 1.8 clients and other crap.
+    &fSorry! Please, use a launcher profile MC 1.12.
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+  outdated-server: |
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+    &fWe now use &4{0} since Dec 14 2017.
+    &fWe had protocol support for pre &41.12&f versions.
+    &fPre 1.11 clients will only get pre 1.12 content!
+    &7░&0░&0░&8░&8░&7░&7░&f░&f░&7░&7░&8░&8░&0░&0░&7░
+  restart: |
+    §4✿§cP§6I§eP§6E§cR§4✿§r
+    §a§l⚀§c§l⚁§b§l⚂§e§l⚃§5§l⚄§4§l⚅§3§l⚄§6§l⚃§2§l⚂§d§l⚁§9§l⚀§r
+    §4♥§6Sorry about that!§4♥§r
+    §6Server §e12H §6Restart§r
+    §6This normally takes§r
+    §6from 25 to 30 sec.§r
+    §9§l⚀§d§l⚁§2§l⚂§6§l⚃§3§l⚄§4§l⚅§5§l⚄§e§l⚃§b§l⚂§c§l⚁§a§l⚀§r
+
+In bukkit.yml
+  shutdown-message: |
+    §4✿§cP§6I§eP§6E§cR§4✿§r
+    §a§l⚀§c§l⚁§b§l⚂§e§l⚃§5§l⚄§4§l⚅§3§l⚄§6§l⚃§2§l⚂§d§l⚁§9§l⚀§r
+    §4♥§6Sorry about that!§4♥§r
+    §6Server §e12H §6Restart§r
+    §6This normally takes§r
+    §6from 25 to 30 sec.§r
+    §9§l⚀§d§l⚁§2§l⚂§6§l⚃§3§l⚄§4§l⚅§5§l⚄§e§l⚃§b§l⚂§c§l⚁§a§l⚀§r

@@ -1,0 +1,8 @@
+import System.IO
+
+readLines :: FilePath -> IO [String]
+readLines filePath =
+  do
+    inH <- openFile filePath ReadMode 
+    content <- hGetContents inH
+    return $ lines content

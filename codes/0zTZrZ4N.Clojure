@@ -1,0 +1,108 @@
+(defrecord VertexInducedSubgraph [graph pred]
+  VSeq
+  (vseq-internal [this tm]
+    (filter pred
+            (vseq-internal graph tm)))
+  ESeq
+  (eseq-internal [this tm]
+    (filter #(and (member? (alpha %) (vseq-internal this pred))
+                  (member? (omega %) (vseq-internal this pred)))
+            (eseq-internal graph tm)))
+  GraphCounts
+  (vcount [this]     (count (vseq this)))
+  (vcount [this cls] (count (vseq this cls)))
+  (ecount [this]     (count (eseq this)))
+  (ecount [this cls] (count (eseq this cls)))
+  Resolving
+  (attributed-element-class [this]       (attributed-element-class graph))
+  (attributed-element-class [this qname] (attributed-element-class graph qname))
+  (m1class [elem]            (m1class graph))
+  (m1class [elem qname]      (m1class graph qname))
+  (domain [elem qname] (domain graph qname))
+  (schema [ae]         (schema graph)))
+
+(defn vsubgraph
+  "Returns an induced subgraph of g restricted by pred.
+  pred may be a predicate that is used to filter the vertices of g or a type
+  specification (see type-spec) or a collection of vertices.  The subgraph
+  contains all vertices matching the predicate, and all edges/incidences that
+  are connected to vertices that are both in the subgraph."
+  [g pred]
+  (cond
+   (fn? pred)        (VertexInducedSubgraph. g pred)
+   (type-spec? pred) (VertexInducedSubgraph. g (type-matcher g pred))
+   (coll? pred)      (VertexInducedSubgraph. g #(member? % pred))))
+
+(defrecord EdgeInducedSubgraph [graph pred]
+  VSeq
+  (vseq-internal [this tm]
+    (filter #(some (set (map normal-edge
+                             (iseq-internal % identity identity)))
+                   (eseq-internal this pred))
+            (vseq-internal graph tm)))
+  ESeq
+  (eseq-internal [this tm]
+    (filter pred
+            (eseq-internal graph tm)))
+  GraphCounts
+  (vcount [this]     (count (vseq this)))
+  (vcount [this cls] (count (vseq this cls)))
+  (ecount [this]     (count (eseq this)))
+  (ecount [this cls] (count (eseq this cls)))
+  Resolving
+  (attributed-element-class [this]       (attributed-element-class graph))
+  (attributed-element-class [this qname] (attributed-element-class graph qname))
+  (m1class [elem]            (m1class graph))
+  (m1class [elem qname]      (m1class graph qname))
+  (domain [elem qname] (domain graph qname))
+  (schema [ae]         (schema graph)))
+
+(defn esubgraph
+  "Returns an induced subgraph of g restricted by pred.
+  pred may be a predicate that is used to filter the edges of g or a type
+  specification (see type-spec) or a collection of edges.  The subgraph
+  contains all vertices matching the predicate, and all edges/incidences that
+  are connected to vertices that are both in the subgraph."
+  [g pred]
+  (cond
+   (fn? pred)        (EdgeInducedSubgraph. g pred)
+   (type-spec? pred) (EdgeInducedSubgraph. g (type-matcher g pred))
+   (coll? pred)      (EdgeInducedSubgraph. g #(member? % pred))))
+
+
+;;; Anwendung mit dem GReQL-Testgraph
+
+(deftest test-vsubgraph
+  (testing "VertexInducedSubgraph by set"
+    (let [vsg (vsubgraph (rg) (set (map #(vertex (rg) %)
+                                        [1 12 7])))]
+      (is (== 3 (vcount vsg)))
+      (is (== 2 (ecount vsg)))))
+  (testing "VertexInducedSubgraph by type"
+    (let [vsg (vsubgraph (rg) 'junctions.Airport)]
+      (is (== 2 (vcount vsg)))
+      (is (== 3 (ecount vsg)))))
+  (testing "VertexInducedSubgraph by predicate"
+    ;; Subgraph of all Locality vertices and connecting edges.
+    (let [locality? (type-matcher (rg) 'localities.Locality)
+          vsg (vsubgraph (rg) #(and (locality? %)
+                                    (> (value % :inhabitants) 10)))]
+      (is (== 9 (vcount vsg)))
+      (is (== 0 (ecount vsg))))))
+
+(deftest test-esubgraph
+  (testing "EdgeInducedSubgraph by set"
+    (let [esg (esubgraph (rg) (set (map #(edge (rg) %)
+                                        [17 22])))]
+      (is (== 3 (vcount esg)))
+      (is (== 2 (ecount esg)))))
+  (testing "VertexInducedSubgraph by type"
+    (let [esg (esubgraph (rg) 'connections.AirRoute)]
+      (is (== 2 (vcount esg)))
+      (is (== 3 (ecount esg)))))
+  (testing "VertexInducedSubgraph by predicate"
+    (let [airroute? (type-matcher (rg) 'connections.AirRoute)
+          vsg (esubgraph (rg) #(and (airroute? %)
+                                    (== (value (alpha  %) :inhabitants) 0)))]
+      (is (== 2 (vcount vsg)))
+      (is (== 1 (ecount vsg))))))

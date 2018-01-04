@@ -1,0 +1,3 @@
+(defn queens [n]
+  (filter (fn [p] (every? #(apply distinct? (map-indexed % p)) [+ -]))
+          (combo/permutations (range 1 (inc n)))))

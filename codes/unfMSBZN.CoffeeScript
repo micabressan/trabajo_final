@@ -1,0 +1,79 @@
+PMoney
+
+	.controller 'BusinessCreateEventsController', [
+
+		'$scope',
+		'$rootScope',
+		'InventoryService',
+		'Modal',
+		'$routeParams',
+		'localStorageService',
+		'$location',
+        'EventCreationService'
+
+		($scope, $rootScope, InventoryService, Modal, $routeParams, localStorageService, $location, EventCreationService) ->
+            
+            info=EventCreationService.getStoredEventInfo()
+            $scope.event=info.event
+            pages = [
+                'init',
+                'details',
+                'location',
+                'form',
+                'module'
+			]
+            $scope.nextPage = ->
+                if $scope.page 
+                    if pages.indexOf($scope.page)>-1 && (pages.indexOf($scope.page) < (pages.length-1))
+                        next = pages[ pages.indexOf($scope.page)+1 ]
+                        $location.path "businesses/#{$rootScope.id}/create-events/#{next}"
+            $scope.previousPage = ->
+                if $scope.page 
+                    if pages.indexOf($scope.page)>-1 && pages.indexOf($scope.page) > 0
+                        next = pages[ pages.indexOf($scope.page)-1 ]
+                        $location.path "businesses/#{$rootScope.id}/create-events/#{next}"
+            section = $routeParams.section 
+            if section
+                $scope.page = section
+            else
+                $scope.page = "init"
+	]PMoney
+
+	.controller 'BusinessCreateEventsController', [
+
+		'$scope',
+		'$rootScope',
+		'InventoryService',
+		'Modal',
+		'$routeParams',
+		'localStorageService',
+		'$location',
+        'EventCreationService'
+
+		($scope, $rootScope, InventoryService, Modal, $routeParams, localStorageService, $location, EventCreationService) ->
+            
+            info=EventCreationService.getStoredEventInfo()
+            $scope.event=info.event
+            pages = [
+                'init',
+                'details',
+                'location',
+                'form',
+                'module'
+			]
+            $scope.nextPage = ->
+                if $scope.page 
+                    if pages.indexOf($scope.page)>-1 && (pages.indexOf($scope.page) < (pages.length-1))
+                        next = pages[ pages.indexOf($scope.page)+1 ]
+                        $location.path "businesses/#{$rootScope.id}/create-events/#{next}"
+            $scope.previousPage = ->
+                if $scope.page 
+                    if pages.indexOf($scope.page)>-1 && pages.indexOf($scope.page) > 0
+                        next = pages[ pages.indexOf($scope.page)-1 ]
+                        $location.path "businesses/#{$rootScope.id}/create-events/#{next}"
+            section = $routeParams.section 
+            if section
+                $scope.page = section
+            else
+                $scope.page = "init"
+	]

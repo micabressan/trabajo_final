@@ -1,0 +1,6 @@
+.expnd-content a:hover {
+	background-color: rgba(30, 7, 28, 0.51)
+}
+li a:hover, .expendable:hover .expnd-btn {
+	background-color: black;
+}

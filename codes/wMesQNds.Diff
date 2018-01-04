@@ -1,0 +1,187 @@
+--- /data/Code/lisa/results/wltests_aosp_utilest/wa.9ea4cdd_test_hikey49/__meta/raw_config/sched-evaluation-small.yaml	2017-11-14 12:27:34.111914140 +0000
++++ /data/Code/lisa/results/wltests_hikey960_utilest/wa.f12d596_test_utilest_16/__meta/raw_config/sched-evaluation-full.yaml	2017-11-22 13:27:47.044533575 +0000
+@@ -12,9 +12,9 @@
+   # Collect energy data, ftrace files, and dmesg
+   # You may want to edit your config.yaml to set up the energy_measurement
+   # instrument (an example configuration is provided in this repo).
+-  instrumentation: [energy_measurement, trace-cmd, dmesg]
++  instrumentation: [energy_measurement, dmesg]
+   # Do everything 5 times, if not otherwise specified by the specific workload
+-  iterations: 2
++  iterations: 5
+ 
+   # To aid reproducibility and try to reduce noise in power measurements,
+   # minimise the screen brightness and set airplane mode on.
+@@ -36,89 +36,95 @@
+ ################################################################################
+ workloads:
+ 
+-################################################################################
+-# Homescreen
+-# Sit on the homescreen for 15 seconds
+-  - name: homescreen
+-    classifiers:
+-       tag: sit_3s
+-    workload_parameters:
+-      duration: 3
+-
+-################################################################################
+-# Exoplayer
+-
+-# Play 30 seconds of a video with Exoplayer - this is the basis for the
+-# YouTube app, so it's hoped that this is a decent proxy for Youtube
+-# performance on devices where running the real app is impractical.
+-  - name: exoplayer
+-    classifiers:
+-       tag: mov_720p_3s
+-    workload_parameters:
+-      format: "mov_720p"
+-      duration: 3
+-
+-# Play 30 seconds of a OGG Vorbis audio with Exoplayer
+-  - name: exoplayer
+-    classifiers:
+-       tag: ogg_128kbps_3s
+-    workload_parameters:
+-      format: "ogg_128kbps"
+-      duration: 3
+-
+-################################################################################
+-# PCMark
+-
+-  - name: pcmark
+-    classifiers:
+-       tag: iter_5
+-    iterations: 5
++# ################################################################################
++# # Homescreen
++# # Sit on the homescreen for 15 seconds
++#   - name: homescreen
++#     classifiers:
++#        tag: sit_15s
++#     workload_parameters:
++#       duration: 15
++#
++# ################################################################################
++# # Exoplayer
++#
++# # Play 30 seconds of a video with Exoplayer - this is the basis for the
++# # YouTube app, so it's hoped that this is a decent proxy for Youtube
++# # performance on devices where running the real app is impractical.
++#   - name: exoplayer
++#     classifiers:
++#        tag: mov_720p_30s
++#     workload_parameters:
++#       format: "mov_720p"
++#       duration: 30
++#
++# # Play 30 seconds of a OGG Vorbis audio with Exoplayer
++#   - name: exoplayer
++#     classifiers:
++#        tag: ogg_128kbps_30s
++#     workload_parameters:
++#       format: "ogg_128kbps"
++#       duration: 30
++#
++# ################################################################################
++# # PCMark
++#
++#   - name: pcmark
++#     classifiers:
++#        tag: single
++#     iterations: 10
+ 
+ ################################################################################
+ # Geekbench
+ 
+   - name: geekbench
++    id: geekbench
+     classifiers:
+-       tag: iter_3
++       tag: iter_30
+     runtime_parameters:
+       airplane_mode: false
+-    iterations: 3
+-
+-################################################################################
+-# Jankbench
+-
+-  - name: jankbench
+-    classifiers:
+-      tag: iter_3
+-    workload_parameters:
+-      test: list_view
+-    iterations: 3
+-
+-  - name: jankbench
+-    classifiers:
+-      tag: iter_3
+-    workload_parameters:
+-      test: image_list_view
+-    iterations: 3
+-
+-  - name: jankbench
+-    classifiers:
+-      tag: iter_3
+-    workload_parameters:
+-      test: shadow_grid
+-    iterations: 3
+-
+-  - name: jankbench
+-    classifiers:
+-      tag: iter_3
+-    workload_parameters:
+-      test: low_hitrate_text
+-    iterations: 3
+-
+-  - name: jankbench
+-    classifiers:
+-      tag: iter_3
+-    workload_parameters:
+-      test: edit_text
+-    iterations: 3
++    iterations: 10
+ 
++# ################################################################################
++# # Jankbench
++#
++#   - name: jankbench
++#     id: jankbench-list_view
++#     classifiers:
++#       tag: iter_30
++#     workload_parameters:
++#       test: list_view
++#     iterations: 30
++#
++#   - name: jankbench
++#     id: jankbench-image_list_view
++#     classifiers:
++#       tag: iter_30
++#     workload_parameters:
++#       test: image_list_view
++#     iterations: 30
++#
++#   - name: jankbench
++#     id: jankbench-shadow_grid
++#     classifiers:
++#       tag: iter_30
++#     workload_parameters:
++#       test: shadow_grid
++#     iterations: 30
++#
++#   - name: jankbench
++#     id: jankbench-low_hitrate_text
++#     classifiers:
++#       tag: iter_30
++#     workload_parameters:
++#       test: low_hitrate_text
++#     iterations: 30
++#
++#   - name: jankbench
++#     id: jankbench-edit_text
++#     classifiers:
++#       tag: iter_30
++#     workload_parameters:
++#       test: edit_text
++#     iterations: 30
++#

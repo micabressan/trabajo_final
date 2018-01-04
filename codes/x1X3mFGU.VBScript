@@ -1,0 +1,8 @@
+Problem with Windows update form 10/10/2017. Microsoft patches the Microsoft JET Database Engine. However it is no longer possible to link Excel files with Access 2000 or to open linked EXCEL files (.xls). Users complains that the Excel access over Microsoft.Jet.OLEDB.4.0 no longer works.
+Updates causing problem: 
+Windows 7 -	KB4041678, KB4041681
+Windows 8.1 - KB4041693, KB4041687
+Windows Server 2008 R2 - KB4041678, KB4041681
+Windows 10 - KB4041676, KB4041691
+Windows Server 2016 - KB4041691 
+Solution is to unistall above updates or/and change in code from Microsoft.Jet.OLEDB.4.0. to Microsoft.ACE.OLEDB.12.0.

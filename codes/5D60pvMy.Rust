@@ -1,0 +1,46 @@
+extern crate image;
+
+use image::ImageResult;
+use image::GenericImage;
+use image::DynamicImage;
+use std::fs::File;
+
+static WHITE: [u8; 4] = [248, 248, 248, 255];
+static BLUE : [u8; 4] = [112, 146, 190, 255];
+
+fn read_image(
+    filename: &str
+) -> ImageResult<DynamicImage> {
+    image::open(filename)
+}
+
+fn main() {
+    let te = read_image("ex2.png").expect("error reading PNG file");
+    let mut of = File::create("out.png").expect("Failure creating out.png");
+    let mut ot = DynamicImage::new_rgba8(te.dimensions().0, te.dimensions().1);
+    ot.copy_from(&te, 0, 0);
+    let iter = te.pixels();
+    for (x, y, q) in iter {
+        if q.data != WHITE {
+            continue;
+        }
+
+        let xd: [i64;2] = [x as i64 - 1, x as i64 + 1];
+        let yd: [i64;2] = [y as i64 - 1, y as i64 + 1];
+
+        for &i in xd.into_iter() {
+            if i < 0 { continue; }
+            if te.get_pixel(i as u32, y).data == BLUE {
+                ot.put_pixel(i as u32, y, image::Rgba::<u8>{data: [0, 0, 0, 255]});
+            }
+        }
+
+        for &i in yd.into_iter() {
+            if i < 0 { continue; }
+            if te.get_pixel(x, i as u32).data == BLUE {
+                ot.put_pixel(x, i as u32, image::Rgba::<u8>{data: [0, 0, 0, 255]});
+            }
+        }
+    }
+    ot.save(&mut of, image::ImageFormat::PNG).expect("Save failed...");
+}

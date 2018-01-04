@@ -1,0 +1,475 @@
+<Page
+    x:Class="BouchardProduction.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BouchardProduction"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="PopUpStyles" TargetType="Popup">
+            <Setter Property="IsLightDismissEnabled" Value="True"/>
+            <Setter Property="ChildTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <PopupThemeTransition/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PopUpTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="10,7,0,0"/>
+        </Style>
+
+        <Style x:Key="FontIcon" TargetType="FontIcon">
+            <Setter Property="FontFamily" Value="/Assets/Fonts/fontawesome.otf#Font Awesome 5 Free Solid"/>
+        </Style>
+
+        <Style x:Key="TextIcon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="/Assets/Fonts/fontawesome.otf#Font Awesome 5 Free Solid"/>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#2b5b90"/>
+        </Style>
+
+
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+
+        <Grid x:Name="PopUpGrid" Grid.Row="1" >
+
+            <RelativePanel>
+
+                <Popup x:Name="main_work_station_popup" Height="300" Width="400" IsOpen="False" IsLightDismissEnabled="False" HorizontalAlignment="Center"  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Style="{StaticResource PopUpStyles}" LayoutUpdated="main_popup_LayoutUpdated">
+                    <StackPanel Orientation="Vertical" Width="400" RelativePanel.AlignVerticalCenterWithPanel="True" Background="#f2f2f2" RelativePanel.AlignHorizontalCenterWithPanel="True" >
+                        <Border  BorderBrush="#ccc" BorderThickness="1" Padding="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,10">
+                                    <SymbolIcon Symbol="OtherUser"/>
+                                    <TextBlock Text="Work Station"  TextAlignment="Center" Margin="8,18,0,20" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10,0,10,10" Width="380">
+                                    <ComboBox x:Name="main_workstation_list" Width="200" HorizontalAlignment="Center" SelectionChanged="main_printer_list_SelectionChanged"/>
+                                    <TextBlock Text="Select a workstation" Width="100" Foreground="#5a5a5a"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,20" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Description:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <StackPanel Width="220">
+                                        <TextBlock x:Name="main_workstation_desc_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" >
+                                    <Button Padding="5" Width="150" x:Name="main_workstation_save"  Click="main_popup_save_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Glyph="" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Save Changes"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <StackPanel Margin="20,0,20,0"></StackPanel>
+                                    <Button x:Name="main_work_station_close"  Padding="5" Width="150">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"
+                                                FontSize="13"/>
+                                            <TextBlock Text="Close"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Popup>
+
+                <Popup x:Name="main_ip_popup" Height="470" Width="400" IsOpen="False" IsLightDismissEnabled="False" HorizontalAlignment="Center"  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Style="{StaticResource PopUpStyles}" LayoutUpdated="main_popup_LayoutUpdated">
+                    <StackPanel Orientation="Vertical" Width="400" RelativePanel.AlignVerticalCenterWithPanel="True" Background="#f2f2f2" RelativePanel.AlignHorizontalCenterWithPanel="True" >
+                        <Border  BorderBrush="#ccc" BorderThickness="1" Padding="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,10">
+                                    <SymbolIcon Symbol="Print"/>
+                                    <TextBlock x:Name="main_popup_header" Text="Zebra Printer"  TextAlignment="Center" Margin="8,18,0,20" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10,0,10,10" Width="380">
+                                    <ComboBox x:Name="main_popup_list" Width="200" HorizontalAlignment="Center" SelectionChanged="main_printer_list_SelectionChanged"/>
+                                    <TextBlock Text="Select a device" Width="100" Foreground="#5a5a5a"/>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" Visibility="Collapsed" >
+                                    <TextBlock x:Name="main_ip_status"  FontWeight="ExtraLight" Foreground="Red"/>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" >
+                                    <TextBlock Text="Device Information" FontWeight="ExtraLight"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="SSID:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="main_popup_ssid_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="IP Address:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="main_popup_ip_txt" Text="" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Mac Address:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="main_popup_mac_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Port Used:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="main_popup_port_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Printer Model:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="main_popup_model_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,20" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Description:" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <StackPanel Width="220">
+                                        <TextBlock x:Name="main_popup_desc_txt" Margin="0,5,10,0" TextWrapping="Wrap" Foreground="#5a5a5a"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+
+                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" >
+                                    <Button Padding="5" Width="150" x:Name="main_popup_save"  Click="main_popup_save_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Glyph="" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Save Changes"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <StackPanel Margin="20,0,20,0"></StackPanel>
+                                    <Button x:Name="main_zebra_close" Padding="5" Width="150">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"
+                                                FontSize="13"/>
+                                            <TextBlock Text="Close"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Popup>
+
+
+                <Popup x:Name="main_scale_port_popup" Width="400" IsOpen="False" Height="480" IsLightDismissEnabled="False" HorizontalAlignment="Center" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Style="{StaticResource PopUpStyles}" LayoutUpdated="main_popup_LayoutUpdated">
+                    <StackPanel Orientation="Vertical" Width="400" RelativePanel.AlignVerticalCenterWithPanel="True" Background="#f2f2f2" RelativePanel.AlignHorizontalCenterWithPanel="True" Visibility="Visible">
+                        <Border  BorderBrush="#ccc" BorderThickness="1" Padding="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,10">
+                                    <FontIcon
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Glyph=""/>
+                                    <TextBlock Text="Weigher"  TextAlignment="Center" Margin="8,18,0,20" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" Visibility="Collapsed">
+                                    <TextBlock x:Name="main_scale_status" FontWeight="ExtraLight" Foreground="Red"/>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,15" >
+                                    <TextBlock Text="Port configuration:" FontSize="15" FontWeight="Light"  Foreground="#5a5a5a"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Port" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_list" Width="200"  HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Baud rate" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_baud" Width="200" HorizontalAlignment="Center" >
+                                        <ComboBoxItem>1200</ComboBoxItem>
+                                        <ComboBoxItem>2400</ComboBoxItem>
+                                        <ComboBoxItem>4800</ComboBoxItem>
+                                        <ComboBoxItem>9600</ComboBoxItem>
+                                        <ComboBoxItem>14400</ComboBoxItem>
+                                        <ComboBoxItem>19200</ComboBoxItem>
+                                        <ComboBoxItem>28800</ComboBoxItem>
+                                        <ComboBoxItem>38400</ComboBoxItem>
+                                        <ComboBoxItem>57600</ComboBoxItem>
+                                        <ComboBoxItem>115200</ComboBoxItem>
+                                        <ComboBoxItem>230400</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Data bits" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_data_bits" Width="200" HorizontalAlignment="Center" >
+                                        <ComboBoxItem>5</ComboBoxItem>
+                                        <ComboBoxItem>6</ComboBoxItem>
+                                        <ComboBoxItem>7</ComboBoxItem>
+                                        <ComboBoxItem>8</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Stop bits" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_stop_bits"  Width="200" HorizontalAlignment="Center" >
+                                        <ComboBoxItem>1</ComboBoxItem>
+                                        <ComboBoxItem>2</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,5" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Parity" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_parity"  Width="200" HorizontalAlignment="Center" >
+                                        <ComboBoxItem>none</ComboBoxItem>
+                                        <ComboBoxItem>even</ComboBoxItem>
+                                        <ComboBoxItem>odd</ComboBoxItem>
+                                        <ComboBoxItem>mark</ComboBoxItem>
+                                        <ComboBoxItem>space</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,10,25" Width="340" Height="Auto">
+                                    <StackPanel Width="120">
+                                        <TextBlock Text="Flow control" Margin="0,5,10,0" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="main_port_flow_control"  Width="200" HorizontalAlignment="Center" >
+                                        <ComboBoxItem>none</ComboBoxItem>
+                                        <ComboBoxItem>RTS/CTS</ComboBoxItem>
+                                        <ComboBoxItem>DTR/DSR</ComboBoxItem>
+                                        <ComboBoxItem>XON/XOFF</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" >
+                                    <Button Padding="5" Width="150" x:Name="main_port_save" Click="main_popup_save_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Connect"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <StackPanel Margin="20,0,20,0"></StackPanel>
+                                    <Button x:Name="main_port_close"  Padding="5" Width="150">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"
+                                                FontSize="13"/>
+                                            <TextBlock Text="Close"/>
+                                        </StackPanel>
+                                    </Button>
+                                    
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Popup>
+
+
+                <Popup Width="400" Height="220" x:Name="main_scale_monitor_popup" IsLightDismissEnabled="False" IsOpen="False" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Style="{StaticResource PopUpStyles}" LayoutUpdated="main_popup_LayoutUpdated">
+
+                    <StackPanel Orientation="Vertical" Width="400" RelativePanel.AlignVerticalCenterWithPanel="True" Background="#f2f2f2" RelativePanel.AlignHorizontalCenterWithPanel="True" Visibility="Visible">
+                        <Border  BorderBrush="#ccc" BorderThickness="1" Padding="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,10">
+                                    <FontIcon
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Glyph=""/>
+                                    <TextBlock Text="Weight"  TextAlignment="Center" Margin="8,18,0,20" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,15" >
+                                    <Border  BorderBrush="#ccc" BorderThickness="1" Padding="10">
+                                        <TextBlock x:Name="main_scale_weight_txt" Width="200" TextAlignment="Center" Text="" FontSize="15" FontWeight="Light" />
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="10,10,0,5" >
+                                    <Button x:Name="main_scale_monitor_close"  Padding="5" Width="200">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Close"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+                    </StackPanel>
+                </Popup>
+
+                <Popup x:Name="main_about_popup" Width="500" Height="320" IsOpen="False" IsLightDismissEnabled="True" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Style="{StaticResource PopUpStyles}" LayoutUpdated="main_popup_LayoutUpdated">
+
+                    <StackPanel Orientation="Vertical" Width="500" RelativePanel.AlignVerticalCenterWithPanel="True" Background="#f2f2f2" RelativePanel.AlignHorizontalCenterWithPanel="True" Visibility="Visible">
+                        <Border  BorderBrush="#ccc" BorderThickness="1" Padding="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,10">
+                                    <FontIcon
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Glyph=""/>
+                                    <TextBlock Text="About"  TextAlignment="Center" Margin="8,17,0,20" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Width="460">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,0"  Width="230" Height="Auto">
+                                        <TextBlock Text="Bouchard Production Tool" Margin="0,1,10,0" FontWeight="Light"/>
+                                        <TextBlock x:Name="main_build_version" Text="Version 1.2.27" Margin="0,0,10,0" FontWeight="Light"/>
+                                        <TextBlock Text="© 2017 Bouchard NV" Margin="0,0,10,0" FontWeight="Light"/>
+                                        <TextBlock Text="All rights reserved" Margin="0,0,10,15" FontWeight="Light"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,10"  Width="230" Height="Auto">
+                                        <TextBlock Text="Built in Windows: 10.0.15063" Margin="0,0,10,0" FontWeight="Light"/>
+                                        <TextBlock x:Name="main_build_date" Text="Built on December 27,2017" Margin="0,0,10,0" FontWeight="Light"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Width="460" Margin="0,15,0,0">
+
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Height="Auto">
+                                        <StackPanel>
+                                            <TextBlock Text="Enterprise Resource Planner URL:" Margin="0,0,0,10" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                        <Border  BorderBrush="#ccc" BorderThickness="1,1,1,1" Padding="0">
+                                            <StackPanel Width="455">
+                                                <TextBox x:Name="main_about_website_txt" Margin="0,0,0,0" TextWrapping="Wrap" Foreground="#5a5a5a" BorderThickness="0" TextAlignment="Left"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <TextBox x:Name="main_about_mac_txt" VerticalAlignment="Center" TextAlignment="Left" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Margin="0,15,0,5" >
+                                        <Button x:Name="main_about_save" Click="main_about_save_Click" Padding="5" Width="Auto">
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Glyph="" Margin="0,0,10,0"/>
+                                                <TextBlock Text="Save Changes"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+
+
+                            </StackPanel>
+
+                        </Border>
+                    </StackPanel>
+
+                </Popup>
+
+            </RelativePanel>
+        </Grid>
+
+        <!--COMMAND BAR UPPER RIGHT-->
+        <StackPanel Grid.Row="0">
+
+            <CommandBar DefaultLabelPosition="Right">
+                <AppBarButton x:Name="main_forward" Icon="Forward" Click="AppBarButton_Click" Visibility="Collapsed"/>
+                <AppBarButton x:Name="main_printer_ip" Icon="Dislike" Label="Printer" Click="AppBarButton_Click" Visibility="Collapsed"/>
+                <AppBarButton x:Name="main_dongle_ip" Icon="Dislike" Label="Dongle IP" Click="AppBarButton_Click" Visibility="Collapsed"/>
+
+                <AppBarButton x:Name="main_workstation" Icon="OtherUser" Label="Work Station" Click="AppBarButton_Click"/>
+                <AppBarButton x:Name="main_zebra_ip" Icon="Print" Label="Zebra Printer" Click="AppBarButton_Click"/>
+                <AppBarButton x:Name="main_scale_port" Icon="MapDrive" Label="Weigher" Click="AppBarButton_Click"/>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Name="main_scale_monitor" Icon="PreviewLink" Label="Scale Monitor" Click="AppBarButton_Click"/>
+                    <AppBarButton x:Name="main_about" Icon="ContactInfo" Label="About" Click="AppBarButton_Click"/>
+                </CommandBar.SecondaryCommands>
+
+                <CommandBar.Content>
+                    <TextBlock x:Name="main_header" Text="I'm still learning!!!" Margin="12,14" Visibility="Collapsed"/>
+                </CommandBar.Content>
+            </CommandBar>
+
+            <!--
+            
+            <CommandBar>
+                <AppBarButton Name="main_forward" Icon="Forward" Click="AppBarButton_Click" Visibility="Collapsed"/>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Name="main_printer_ip" Icon="Print" Label="Printer IP" Click="AppBarButton_Click"/>
+                    <AppBarButton Name="main_zebra_ip" Icon="Dislike" Label="Zebra IP" Click="AppBarButton_Click"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Name="main_dongle_ip" Icon="Dislike" Label="Dongle IP" Click="AppBarButton_Click"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Name="main_scale_port" Icon="Dislike" Label="Scale Port" Click="AppBarButton_Click"/>
+                    <AppBarButton Name="main_scale_monitor" Icon="Dislike" Label="Scale Monitor" Click="AppBarButton_Click"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Name="main_about" Icon="Dislike" Label="About" Click="AppBarButton_Click"/>
+                </CommandBar.SecondaryCommands>
+
+                <CommandBar.Content>
+                    <TextBlock x:Name="main_header" Text="I'm still learning!!!" Margin="12,14" Visibility="Collapsed"/>
+                </CommandBar.Content>
+            </CommandBar>
+            
+            -->
+        </StackPanel>
+
+        <!-- WEBVIEW -->
+        <Grid Height="Auto" Grid.Row="1">
+            <WebView Name="main_webview" Source="https://hgsapp-qa.azurewebsites.net/workorderproduction" ScriptNotify="main_webview_ScriptNotify" NavigationStarting="main_webview_NavigationStarting"/>
+            <!--<WebView Name="main_webview" Source="ms-appx-web:///uwp_webview_call_text.html" ScriptNotify="main_webview_ScriptNotify" NavigationStarting="main_webview_NavigationStarting"/>-->
+            <!--<WebView Name="main_webview" Source="https://hgsapp-qa.azurewebsites.net/uwp_webview_call_text.html" ScriptNotify="main_webview_ScriptNotify" NavigationStarting="main_webview_NavigationStarting" DOMContentLoaded="main_webview_DOMContentLoaded"/>-->
+            <!--<WebView Name="main_webview" Source="https://hgsapp-qa.azurewebsites.net/uwp_webview_call_text.html" ScriptNotify="main_webview_ScriptNotify" NavigationStarting="main_webview_NavigationStarting" DOMContentLoaded="main_webview_DOMContentLoaded"/>-->
+
+        </Grid>
+
+        <!--<Popup x:Name="main_ip_popup" HorizontalOffset="200" VerticalOffset="200"  IsLightDismissEnabled="True">-->
+    </Grid>
+
+</Page>

@@ -1,0 +1,15 @@
+//Шапка XSD документа
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.epam5.piankov.com/device"
+		xmlns:tns="http://www.epam5.piankov.com/device"
+		elementFormDefault="qualified">
+
+
+
+//Шапка XML документа
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.epam5.piankov.com/device"
+		xmlns:tns="http://www.epam5.piankov.com/device"
+		elementFormDefault="qualified">

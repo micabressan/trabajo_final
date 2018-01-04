@@ -1,0 +1,31 @@
+s.boot;
+
+SynthDef(\justasine, {| freq = 440, gate = 0, cutoff = 1000,amp=0.25|
+	e = EnvGen.kr(Env.adsr(0.01,0.01,1,0.01),gate,doneAction:2);
+	x = Pulse.ar(freq,0.5,e*amp);
+	f = BLowPass4.ar(x,cutoff);
+	o = Mix([f]);
+	Out.ar(0,[o,o]);
+}).send(s);
+
+
+MIDIClient.init;
+
+v = Voicer.new(12,\justasine, addAction:\addToHead);
+k = MIDIClient.sources.collect {|port,i|
+	VoicerMIDISocket.new(MIDIChannelIndex(port.postln,0),v);
+};
+
+f = \cutoff.asSpec;
+// list of the symbols you can use for this is in ControlSpec:initClass
+
+(
+	c = CCResponder({ |src,chan,num,value| a.set( \cutoff, f.map( value/127 ) ) },
+		nil, // any source
+		nil, // any channel
+		1, // CC number 80
+		nil // any value
+	)
+)v 
+
+s.freeAll;

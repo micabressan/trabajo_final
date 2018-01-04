@@ -1,0 +1,9 @@
+using System.Threading.Tasks;
+
+namespace WSAudioApp.Interfaces
+{
+    public interface IAudioService
+    {
+        Task PlayAudioFile(string fileName);
+    }
+}

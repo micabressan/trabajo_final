@@ -1,0 +1,42 @@
+import numpy as np
+
+#height point*
+yi=10
+
+#heightWhitePixelPlace
+hwpp=[1,2,3,4,6,8,9,10]
+
+#conbined continuos coordinates as the same group.
+contGroup=[]
+group=[hwpp[0]]
+for pt in hwpp[1:]:
+	h=group[-1]
+	if pt-h==1:
+		group.append(pt)
+	else:
+		group=tuple(group)
+		contGroup.append(group)
+		group=[pt]
+	if pt==hwpp[-1]:
+		contGroup.append(tuple(group))
+print(contGroup)
+
+print('\nheight point: %s'%yi)
+'''=== method 1 ===
+for group in contGroup:
+	if yi in group:
+		if len(group)>=2:
+			yl=group[0]
+			yu=group[-1]
+		else:
+			yl=group[0]
+try:
+	print('yl: %s; yu: %s'%(yl,yu))
+except:
+	print('yl: %s'%yl)'''
+
+print('the elements in this group are:')
+for group in contGroup:
+	if yi in group:
+		for element in group:
+			print(element)

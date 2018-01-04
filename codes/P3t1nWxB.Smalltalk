@@ -1,0 +1,70 @@
+|unCpu colProcesos colProcesos2 colProcesos3 colProcesos4 unProceso unaFecha unDia unDia2 unMes unaHora hour hora1 hora2|
+
+unCpu:=Cpu crearCpu: 'Intel'.
+
+
+"_______________________________________________________________________________"
+unaFecha:=Fecha crearFecha:21 mes:4 year:2017.
+unaHora:=Hora crearHora: 13 minuto: 15 segundo: 00.
+unProceso:=Proceso crearProceso: 'Explorer' tipo: 'exe' tamanio: '144kb' prioridad: 1 horacreacion:unaHora fechacreacion: unaFecha.
+unProceso modHora: unaHora.
+unCpu agregarProceso:unProceso.
+
+unaFecha:=Fecha crearFecha:7 mes:7 year:2017.
+unaHora:=Hora crearHora: 15 minuto: 15 segundo: 43.
+unProceso:=Proceso crearProceso: 'Chrome' tipo: 'exe' tamanio: '9999mb' prioridad: 1 horacreacion:unaHora fechacreacion: unaFecha.
+unProceso modHora: unaHora.
+unCpu agregarProceso:unProceso.
+
+unaFecha:=Fecha crearFecha:8 mes:8 year:2017.
+unaHora:=Hora crearHora: 14 minuto: 25 segundo: 43.
+unProceso:=Proceso crearProceso: 'Injected' tipo: 'exe' tamanio: '144kb' prioridad: 1 horacreacion:unaHora fechacreacion: unaFecha.
+unProceso modHora: unaHora.
+unCpu agregarProceso:unProceso.
+
+unaFecha:=Fecha crearFecha:9 mes:11 year:2017.
+unaHora:=Hora crearHora: 9 minuto: 45 segundo: 43.
+unProceso modHora: unaHora.
+unProceso:=Proceso crearProceso: 'cmd' tipo: 'exe' tamanio: '44kb' prioridad: 1 horacreacion:unaHora fechacreacion: unaFecha.
+unCpu agregarProceso:unProceso.
+colProcesos:= unCpu verColProc.
+
+"____________________MOSTRAR PROCESOS MOD ENTE A Y B HS_____________________________________________________"
+
+
+hora1:= (Prompter prompt: 'Ingrese hora inicial') asNumber.
+hora2:= (Prompter prompt: 'Ingrese hora final') asNumber.
+
+colProcesos:= unCpu verColProc.
+colProcesos2:= colProcesos select:[: unProceso | ((unProceso verCreateHour )verHora >= hora1) & ((unProceso verCreateHour )verHora <= hora2) ].
+Transcript show:'Hay ',(colProcesos size)printString,'  procesos en total |'.
+Transcript show:'Hay  ',(colProcesos2 size)printString,' procesos encontrados entre las horas seleccionadas |'. 
+colProcesos2 do:[: unProceso | Transcript show:'Nombre del proceso >> ', unProceso verNombre,'--| '. ].
+colProcesos inspect.
+colProcesos2 inspect.
+
+
+
+"_____________________CREAR COL CON PROCESOS MODIF 24HS ANTES________________________________________________"
+
+
+unDia:= (Prompter prompt: 'Ingrese dia') asNumber.
+unMes:= (Prompter prompt: 'Ingrese mes')asNumber.
+hora1:=(Prompter prompt: 'Ingrese hora')asNumber.
+unDia:=unDia-1.
+
+colProcesos3:= colProcesos select:[: unProceso | ((unProceso verCreateDate)verDia = unDia) & ((unProceso verCreateDate)verMes = unMes) & ((unProceso verCreateHour)verHora <= hora1) ].
+colProcesos3 inspect.
+Transcript show:'Hay ',(colProcesos3 size)printString,'  procesos encontrados  |'.
+
+
+
+"____________________________LISTAR PROCESOS DE X MES_________________________________________________________"
+
+
+
+
+unMes:= (Prompter prompt: 'Ingrese mes [1 AL 12]')asNumber.
+colProcesos4:=colProcesos select:[: unProceso | ((unProceso verCreateDate)verMes = unMes)].
+colProcesos4 do:[: unProceso | Transcript show:'Nombre del proceso >> ', unProceso verNombre,'--| '. ].
+colProcesos4 inspect.

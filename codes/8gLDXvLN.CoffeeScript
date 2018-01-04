@@ -1,0 +1,19 @@
+cached = (ttl) ->
+  return (req, res, next) ->
+    cache_key = "call:#{req.url}"
+    cache.get cache_key, (err, data) ->
+      if data != null
+        res.end data
+      else
+        res.send_without_caching = res.send
+        res.send = (body) ->
+          cache.setex cache_key, ttl, JSON.stringify(body)
+          res.send_without_caching body
+        next()
+
+
+
+# /en-gb/sports
+app.get '/:locale/sports', cached(60), (req, res) ->
+  models.Sport.list {locale: req.params.locale}, (sports) ->
+    res.send {status: {success: true, errorCode: 0}, sports: sports}

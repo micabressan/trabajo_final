@@ -1,0 +1,50 @@
+Console.WriteLine("Kérlek adj meg egy számot");
+            
+            string x = Console.ReadLine();
+            int y = Convert.ToInt32(x);
+            int z = y / 2;
+           
+            int j = 0;
+            if (z*2==y  )  
+            {
+                Console.WriteLine("Páros");
+                
+            }
+            else
+            {
+                Console.WriteLine("Páratlan");
+            }
+            int u = 0;
+            for (int i = 2; i < y-1; i++)
+            {
+                if (y % i == 0)
+                {
+                    u = u + 1;
+                    i++;
+                    Console.WriteLine(u);
+                }
+                else
+                {
+                    i++;
+                    Console.WriteLine(u);
+                }
+                
+            }
+            
+            if (u>0)
+            {
+                Console.WriteLine("Prím");
+            }
+            else
+            {
+                Console.WriteLine("Nem prím");
+            }
+            int zs = u + 2;
+            Console.Write("Összesen ",u+2);
+            Console.Write(" osztója van");
+            Console.ReadLine();
+        }
+        
+       
+    }
+}

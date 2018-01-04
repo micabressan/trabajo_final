@@ -1,0 +1,31 @@
+
+    def add_dynamics(word, dynamic) do
+      dynamic([c], like(c.search_index, ^("%#{word}%")) and ^dynamic ) 
+    end
+
+    def profile_search(map) do
+      pagination = if map[:pagination_clause], do: dynamic([p], p.id > ^map[:pagination_clause] ), else: true
+
+      ###
+      query = Enum.reduce(String.split(map[:q]), true, fn (x,acc) -> add_dynamics(x, acc) end)
+      IO.inspect query
+      ###
+
+
+
+
+      birth_date_between = if map[:birth_date_between] do
+        [date1, date2] = map[:birth_date_between]
+        dynamic([p], p.birth_date > ^Tools.string_to_dbdate(date1) and p.birth_date < ^Tools.string_to_dbdate(date2) )
+      else
+        true
+      end
+  
+      Repo.all(from p in Alfayda.Profile,
+               where: ^map[:equal_clauses],
+               where: ^pagination,
+               where: ^birth_date_between,
+               where: ^query,
+               where: p.public_profile == ^true,
+               limit: 50 )
+    end

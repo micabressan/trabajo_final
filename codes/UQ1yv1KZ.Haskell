@@ -1,0 +1,6 @@
+import qualified Data.Set as S
+sieve2 :: (Integral a) => [a]->[a]->[a]
+sieve2 [] y = y
+sieve2 (x:xs) y = sieve2 my_filter2 my_filter
+    where my_filter = filter (\a -> ((div a x /= 0) && (div x a == 1) || (mod a x /= 0))) y
+          my_filter2 = S.toList $ S.intersection (S.fromList xs) (S.fromList my_filter)

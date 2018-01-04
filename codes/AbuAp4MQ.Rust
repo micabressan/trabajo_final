@@ -1,0 +1,33 @@
+fn classify_points(points: &mut Vec<Point>, starting_point: [f64; 3]) {
+    // Create a 3D KdTree
+    let dimensions = 3;
+    let mut kdtree: KdTree<TreePoint, _> = KdTree::new(dimensions);
+
+    // add all the points to the tree
+    for point in points.iter() {
+        // TODO: find top_left most point
+        if point.x == 438000.12 && point.y == 4462999.95 {
+            kdtree.add([point.x, point.y, point.z], TreePoint(point, true)).unwrap();
+        }
+        kdtree.add([point.x, point.y, point.z], TreePoint(point, false)).unwrap();
+    }
+
+    // study from one point to the next, classifying what we can as we go
+    classify_ground(kdtree, starting_point);
+}
+
+fn classify_ground<T, U>(kdtree: KdTree<U,U>, starting_point: [f64; 3]) where U: std::convert::AsRef<[f64]> {
+    // find all points within proper slope to be considered "ground"
+    let nearest = kdtree.nearest(&starting_point, 15, &squared_euclidean).unwrap();
+    // only take interest in the points that are within 1.5m and have yet to be classified
+    for n in &nearest {
+        if n.0 <= 1.5 && (n.1).1 {
+            // check point slope from "starting_point", if under a value, it is a new ground;
+            // add it to the list of "recursive calls to make"
+        }
+    }
+    // store those point values
+    unsafe {
+        GROUND_CLASSIFIED_COUNT += 1;
+    }
+}

@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str1[20] = "this is stricmp";
+    char str2[20] = "THIS IS STRICMP";
+    int n;
+
+    n = stricmp(str1, str2);
+
+    if (n == 0)
+    printf("Oba wiersze sa identyczne.\n");
+
+    else if (n == -1)
+    printf("Pierwszy mniejszy od drugiego.\n");
+
+    else
+    printf("Pierwszy wiekszy od drugiego.\n");
+
+    system("pause");
+    return 0;
+}

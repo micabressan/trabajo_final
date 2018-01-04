@@ -1,0 +1,50 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import ObjectProperty
+from kivy.clock import Clock
+import socket
+import time
+
+class BoxWidget(BoxLayout):
+    s = socket.socket()
+    host = '127.0.0.1'
+    port = 5000
+    display = ObjectProperty
+    chat = ObjectProperty
+
+
+    def listen(self):
+        self.s.bind((self.host, self.port))
+        self.s.listen(1)
+        conn, addr = self.s.accept()
+        self.display.text = 'Connection from: ' + str(addr)
+        message = 'Thank you connecting'
+        conn.send(message.encode())
+        self.s.setblocking(0)
+
+    def send_data(self):
+        message = 'Hello'
+        self.conn.send(message.encode())
+        
+    def receive_message(self, dt):
+        try:
+            data = self.conn.recv(1024).decode()
+            strdata = str(data)
+            print(strdata)
+        except:
+            print('No Data')
+
+    def message(self):
+        message = 'Message'
+    
+
+
+class ServerApp(App):
+
+    def build(self):
+        Box = BoxWidget()
+        Clock.schedule_interval(Box.receive_message, 1)
+        return Box
+
+if __name__ == '__main__':
+    ServerApp().run()

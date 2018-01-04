@@ -1,0 +1,12 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Body>
+      <soapenv:Fault>
+         <faultcode>soapenv:Server.generalException</faultcode>
+         <faultstring>WSDoAllReceiver: security processing failed; nested exception is: 
+	org.apache.ws.security.WSSecurityException: The security token could not be authenticated or authorized</faultstring>
+         <detail>
+            <ns1:hostname xmlns:ns1="http://xml.apache.org/axis/">prodzsws05</ns1:hostname>
+         </detail>
+      </soapenv:Fault>
+   </soapenv:Body>
+</soapenv:Envelope>

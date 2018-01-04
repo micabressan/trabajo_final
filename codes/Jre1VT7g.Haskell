@@ -1,0 +1,49 @@
+import qualified Data.Map as Map
+import Data.Maybe
+import Data.List
+
+data Color = White | Black deriving (Show, Eq)
+
+moves :: [(Int, Int)]
+moves = [(-1, -2), (1, -2), (2, 1), (2, -1), (1, 2), (-1, 2), (-2, 1), (-2, -1)]
+
+add :: (Int, Int) -> (Int, Int) -> (Int, Int)
+add (x,y) (a,b) = (x + a, y + b)
+
+nodeValues :: [((Int, Int), Int)]
+nodeValues = [((x,y), x*10+y) | x <- [0..9], y <- [0..9]]
+
+isValidMove :: (Int, Int) -> Bool
+isValidMove (x,y) = x < 10 && x >= 0 && y < 10 && y >= 0
+
+getNextMove :: (Int, Int) -> Map.Map (Int, Int) Color -> (Int, Int)
+getNextMove p m = if null sameColors then optimalMove (>) valids else optimalMove (<) sameColors
+    where
+        valids = filter isValidMove $ map (add p) moves
+        sameColors = filter (\p2 -> m Map.! p2 == m Map.! p ) valids
+
+optimalMove :: (Int -> Int -> Bool) -> [(Int, Int)] -> (Int, Int)
+optimalMove pr = foldr1 f
+    where
+        f x z = if  pr (fromJust (lookup x nodeValues)) (fromJust (lookup z nodeValues)) then x else z
+
+move :: (Int, Int) -> Map.Map (Int, Int) Color -> Map.Map (Int, Int) Color
+move oldPos m = Map.insert oldPos v m
+    where
+        v = if Map.lookup oldPos m == Just White then Black else White
+
+main = do
+    let m = Map.fromList [((x,y), White) | y <- [0..9], x <- [0..9]]
+        ooh = run 200 (0,0) m
+    print (countBlacks ooh)
+
+run :: Int -> (Int, Int) -> Map.Map (Int, Int) Color -> Map.Map (Int, Int) Color
+run i pos m 
+    | i == 0 = m
+    | otherwise = run (i-1) next nm
+    where
+        next = getNextMove pos m
+        nm = move pos m
+
+countBlacks :: Map.Map (Int, Int) Color -> Int
+countBlacks m = sum $ map (\(x,y) -> if y == Black then 1 else 0) (Map.toList m)

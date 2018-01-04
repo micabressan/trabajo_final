@@ -1,0 +1,47 @@
+# files:
+# resources
+# ├── sessions.coffee
+# ├── test
+# │   └── subtest.coffee
+# └── test.coffee
+
+# 1)
+
+@resources.push(path.join(start, file)) if file.match /\.coffee$/ for file in files
+
+#=>
+    if ((function() {
+      var _j, _len2, _results;
+      _results = [];
+      for (_j = 0, _len2 = files.length; _j < _len2; _j++) {
+        file = files[_j];
+        _results.push(file.match(/\.coffee$/));
+      }
+      return _results;
+    })()) {
+      return resources_2.push(path.join(start, file));
+    }
+
+
+# Results in @resources = 
+# [ 'resources/sessions.coffee',
+#   'resources/test/subtest.coffee' ]
+
+# 2) However, the following:
+
+for file in files
+	@resources.push(path.join(start, file)) if file.match /\.coffee$/
+
+#=>
+    for (_i = 0, _len = files.length; _i < _len; _i++) {
+      file = files[_i];
+      if (file.match(/\.coffee$/)) {
+        resources_1.push(path.join(start, file));
+      }
+    }
+
+
+# Correctly results in @resources = 
+# [ 'resources/test.coffee',
+#   'resources/sessions.coffee',
+#   'resources/test/subtest.coffee' ]

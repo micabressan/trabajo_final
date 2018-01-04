@@ -1,0 +1,9 @@
+use failure::Error;
+
+// doesn't compile:
+pub type IResult<I, O> = nom::IResult<I,O, Error>;
+// error:
+// I and O are unused type parameters
+
+// does compile:
+pub type IResult<I> = Result<I, Error>;

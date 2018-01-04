@@ -1,0 +1,21 @@
+#-*- coding: utf-8 -*-
+msg=u'ТЕРМИНАТОРПРИБЫВАЕТСЕДЬМОГОВПОЛНОЧЬ'
+n=5
+m=len(msg)/5
+
+print "Message: " + msg
+
+cipher = ''
+i = 0
+j = 0
+a = 0
+while a < len(msg):
+    cipher += msg[i+j*n]
+    j+=1
+    if j == m:
+        j = 0
+        i += 1
+    a += 1
+        
+        
+print "Cipher: " + cipher

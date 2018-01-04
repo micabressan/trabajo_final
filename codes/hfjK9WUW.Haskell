@@ -1,0 +1,11 @@
+--
+-- Problem 2
+--
+
+eu2_fib 0 = 0
+eu2_fib 1 = 1
+eu2_fib x = eu2_fib(x-1) + eu2_fib(x-2)
+eu2 lim = (f 0 0)
+  where f = (\x a -> if (eu2_fib x < lim) then f (x + 1) (a + eu2_fib x) else a)
+
+eu2_solution = eu2 4000000

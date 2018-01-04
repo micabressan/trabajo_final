@@ -1,0 +1,18 @@
+POST /v3/directline/conversations/HLKoxs57ptTEz5QKNIuasY/activities HTTP/1.1
+Host: directline.botframework.com
+Authorization: Bearer lBG0TMyVKYA.cwA.dMM.rTlLfWrdgGLo5EdRNX2_cW8ij_Vw-hnyh_JFHAn2gJM
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 1801b0e4-be2b-c0f5-726d-862ef5d77eda
+
+{
+    "type": "message",
+    "from": {
+        "id": "MobileApp"
+    },
+    "text": "хей"
+}
+
+{
+    "id": "HLKoxs57ptTEz5QKNIuasY|0000000"
+}

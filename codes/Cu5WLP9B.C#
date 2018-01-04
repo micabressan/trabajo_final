@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Diagnostics;
+
+namespace AssaultCubeTrainer
+{
+    class Program
+    {
+        public static int Base = 0x00509b74;
+        public static int Health = 0xF8;
+        public static int Ammo = 0x150;
+        public static int Armour = 0xFC;
+        public static int PistolAmmo = 0x114;
+        public static int PistolClip = 0x13C;
+        public static int MGAmmo = 0x128;
+        public static int Grenades = 0x158;
+        public static int KnifeDelay = 0x160;
+        public static int PistolDelay = 0x164;
+        public static int MGDelay = 0x178;
+        public static int GrenadeDelay = 0x180;
+        public static int Mouse1Down = 0x224;
+        public static int PosX = 0x38;
+        public static int PosY = 0x3C;
+        public static int PosZ = 0x08;
+        public static int MouseX = 0x40;
+        public static int MouseY = 0x44;
+
+        static void Main(string[] args)
+        {
+            VAMemory vam = new VAMemory("ac_client");
+
+            int LocalPlayer = vam.ReadInt32((IntPtr)Base);
+
+            while(true)
+            {
+                int address = LocalPlayer + Health;
+                vam.WriteInt32((IntPtr)address, 9999);
+
+                address = LocalPlayer + Ammo;
+                vam.WriteInt32((IntPtr)address, 9999);
+
+                address = LocalPlayer + Armour;
+                vam.WriteInt32((IntPtr)address, 9999);
+
+                address = LocalPlayer + MGAmmo;
+                vam.WriteInt32((IntPtr)address, 9999);
+
+                address = LocalPlayer + Grenades;
+                vam.WriteInt32((IntPtr)address, 9999);
+
+                address = LocalPlayer + MGDelay;
+                vam.WriteInt32((IntPtr)address, 0);
+
+                address = LocalPlayer + PistolDelay;
+                vam.WriteInt32((IntPtr)address, 0);
+
+                address = LocalPlayer + GrenadeDelay;
+                vam.WriteInt32((IntPtr)address, 0);
+
+                address = LocalPlayer + KnifeDelay;
+                vam.WriteInt32((IntPtr)address, 0);
+            }
+        }
+    }
+}

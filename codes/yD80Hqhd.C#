@@ -1,0 +1,93 @@
+var container = Bootstrap.InitContainer(this);
+
+public class Bootstrap
+    {
+        public static Container InitContainer(UmbracoApplicationBase applicationBase)
+        {
+            var container = new Container();
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+            container.Options.ConstructorResolutionBehavior = new HumbleConstructorBehavior();
+
+            #region Repositories
+            container.Register<INewsletterRepository, NewsletterRepository>();
+            container.Register<ITemplateRepository, TemplateRepository>();
+            container.Register<ICurrencyRepository, CurrencyRepository>();
+            container.Register<IResellerRepository, ResellerRepository>();
+            container.Register<IVATRepository, VATRepository>();
+            container.Register<IAppResourcesRepository, AppResourcesRepository>();
+            container.Register<IAspNetUserRepository, AspNetUserRepository>();
+            container.Register<IComplianceRepository, ComplianceRepository>();
+            container.Register<IGlobalizationRepository, GlobalizationRepository>();
+            container.Register<IIPCountryRepository, IPCountryRepository>();
+            #endregion
+
+            #region Services
+            container.Register<ICommunicationService, CommunicationService>();
+            container.Register<IEncryptionService, EncryptionService>();
+            container.Register<IGlobalizationSerivce, GlobalizationSerivce>();
+            container.Register<ISettingService, SettingService>();
+            container.Register<IContextService, ContextService>();
+            container.Register<ICurrencyService, CurrencyService>();
+            container.Register<IDateService, DateService>();
+            container.Register<IResellerService, ResellerService>();
+            container.Register<IVATService, VATService>();
+            container.Register<ICacheService, CacheService>();
+            container.Register<IAspNetMembershipService, AspNetMembershipService2>();
+            container.Register<ISessionService, SessionService>();
+            container.Register<IHttpContextService, HttpContextService>();
+            container.Register<INewsletterService, NewsletterService>();
+            container.Register<IComplianceService, ComplianceService>();
+            container.Register<IIPCountryService, IPCountryService>();
+            #endregion
+
+            #region Misc
+            container.Register(() => applicationBase, Lifestyle.Scoped);
+            #endregion
+
+            container.RegisterMvcControllers();
+            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+            container.Verify();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+
+            return container;
+        }
+    }
+
+public class HumbleConstructorBehavior : IConstructorResolutionBehavior
+    {
+        public ConstructorInfo GetConstructor(Type implementationType)
+        {
+            var constructors = from ctor in implementationType.GetConstructors()
+                               orderby ctor.GetParameters().Length
+                               select ctor;
+            var constructorList = constructors.ToList();
+
+            if (constructorList.Count == 1)
+            {
+                return constructorList.First();
+            }
+
+            if (constructorList.Count > 1)
+            {
+                foreach (var constructorInfo in constructorList)
+                {
+                    var parameters = constructorInfo.GetParameters();
+
+                    if (parameters.Length == 0)
+                        return constructorInfo;
+
+                    if (parameters.Length == 1)
+                    {
+                        if (parameters[0].ParameterType == typeof(UmbracoContext))
+                        {
+                            return constructorInfo;
+                        }
+                    }
+                }
+            }
+
+            throw new Exception($"Could not find proper constructor to use for {implementationType}");
+        }
+    }

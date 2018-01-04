@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<aCoolName>
+	<BaseTile index="1"/>
+	
+	<!--hsplit, vsplit and rotate are optional-->
+	<Rule index="2" hsplit="1" vsplit="1" rotate="90">
+		<Condition x="0" y="1" value="full"/>
+		<Condition x="0" y="-1" value="empty"/>
+		<Condition x="1" y="0" value="35"/> <!--35 is an index-->
+		<Random value="150"/>
+	</Rule>
+<aCoolName>

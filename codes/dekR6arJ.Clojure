@@ -1,0 +1,14 @@
+;; structs.clj
+
+(ns structs)
+
+(defrecord Rule [name doc actions])
+
+;; core.clj
+
+(ns core
+  (:use structs))
+
+(println "rule=" (structs.Rule. "rule1" "description"  []))
+
+; Result ==>   'rule= #:structs.Rule{:name rule1, :doc description, :actions []}'

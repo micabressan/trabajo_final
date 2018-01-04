@@ -1,0 +1,1097 @@
+' ScriptCryptor Project Options Begin
+' HasVersionInfo: No
+' Companyname: PwC
+' Productname: Script - LMCC
+' Filedescription: 
+' Copyrights: PwC
+' Trademarks: PwC
+' Originalname: 
+' Comments: 
+' Productversion:  3. 0. 0. 0
+' Fileversion:  3. 0. 0. 0
+' Internalname: 
+' Appicon: 
+' AdministratorManifest: No
+' ScriptCryptor Project Options End
+'Option Explicit
+'********************************************************************************
+'*	Author: Shishir Asati - shishir.asati@in.pwc.com                            *
+'*	Purpose: SAM Software Inventory                                             *
+'*                                                                              *
+Const Version="1.0" '                                                           *
+Const ScriptName="PwC_MS_Standalone.vbs"
+Const EncryptionEnabled=FALSE
+Const LocalModeEnabled=TRUE
+PwCMACID=""
+PwCHostname=""
+CurrentLocation=""
+Dim oWMI, oReg
+'********************************************************************************
+
+'********************************************************************************
+'*Featues:  *********************************************************************
+'********************************************************************************
+'OS Information
+'Microsoft Specific Installations
+'Event log check
+'SQL Edition check
+
+Set objFileSystem = CreateObject("Scripting.fileSystemObject")
+Path = Left(WScript.ScriptFullName, InStr(WScript.ScriptFullName, WScript.ScriptName)-1)
+ForReading = 1
+ForWriting = 2
+ForAppending = 8
+
+	
+If Date <= #2017-03-31# Then
+	If Err <> 1 Then
+		'MsgBox "Script Started!!!! " & vbNewLine & "Calling System Functions. Please Wait..."
+		'ActivationStatus (oWMI)
+		'CPUInformation(oWMI)
+		'Events(oWMI)
+		'Extract_UsersInformation(oWMI)
+		'Extracts inventory on a machine
+		Inventory(WScript.CreateObject("WScript.Shell").ExpandEnvironmentStrings("%COMPUTERNAME%"))
+		'OSInformation(oWMI)
+		'SoftwareInformation(objReg)
+		End If
+Else
+	MsgBox "Script Expired!!!"	
+End If
+
+
+
+Function Inventory(strComputer)
+	arrMoniker = Split(strComputer, ";")
+	intStart = Now()
+	
+	'strComputer is either the machine name or a semi-colon delimited string in this format: "machine name;domain\username;password"
+	If UBound(arrMoniker) > 0 Then
+		On Error Resume Next
+		Set oWMI = CreateObject("WbemScripting.SWbemLocator").ConnectServer(arrMoniker(0), "root\CIMV2", arrMoniker(1), arrMoniker(2)) 	
+		On Error Resume Next
+		Set oReg = CreateObject("WbemScripting.SWbemLocator").ConnectServer(arrMoniker(0), "root\default", arrMoniker(1), arrMoniker(2)).Get("StdRegProv") 	
+	Else
+		On Error Resume Next
+		Set oWMI = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & arrMoniker(0) & "\root\CIMV2") 
+		On Error Resume Next
+		Set oReg = GetObject("winmgmts:\\" & arrMoniker(0) & "\root\default:StdRegProv") 
+	End If
+
+	'Collecting information
+	if LocalModeEnabled Then
+	tempoutput = MAC(oWMI)
+	temoutput = CurrentMachineHostname(oWMI)
+	pwcmacidfilename=UCase(arrMoniker(0)) & "_" & PwCMACID
+	strOutputFile = Path & "\" & pwcmacidfilename & ".txt"
+	
+	Else
+	strOutputFile = Path & "\" & UCase(arrMoniker(0)) & ".txt"
+End If
+
+	output = ""
+	If Err = 0 Then
+		output = output & "### Operating System & Hardware Details ###" & vbCrLf & OSInformation(oWMI)
+'		output = output & "### OEM Details ###" & vbCrLf & OEM
+'		output = output & "### Windows OS Activation Details ###" & vbCrLf & ActivationStatus(oWMI)
+'		output = output & "### CPU Information ###" & vbCrLf & CPUInformation(oWMI)
+'		output = output & "### SLMGR ###" & vbCrLf & SLMGR()
+		output = output & vbCrLf & "### MAC ###" & vbCrLf & MAC(oWMI)
+		output = output & "### Terminal Server Information ###" & vbCrLf & TerminalServiceschk(oWMI)
+		output = output & "### Installed Software Application ###" & vbCrLf & SoftwareInformation(oReg)
+		output = output & "### Office 2010 License Status###" & Ospp201064bit & vbCrLf
+		output = output & "### Office 2010 License Status###" & Ospp201064bit3 & vbCrLf
+		output = output & "### Office 2010 License Status###" & Ospp201032bit & vbCrLf
+		output = output & "### Office 2010 License Status###" & Ospp201032bit2 & vbCrLf
+		output = output & "### Office 2013/365 License Status###" & vbCrLf & Ospp201364bit & vbCrLf
+		output = output & "### Office 2013/365 License Status###" & vbCrLf & Ospp201364bit2 & vbCrLf
+		output = output & "### Office 2013/365 License Status###" & vbCrLf & Ospp201364bit3 & vbCrLf
+		output = output & "### Office 2013/365 License Status###" & vbCrLf & Ospp201332bit & vbCrLf
+		output = output & "### Office 2016/365 License Status###" & vbCrLf & Ospp201664bit & vbCrLf
+		output = output & "### Office 2016/365 License Status###" & vbCrLf & Ospp201632bit2 & vbCrLf
+		output = output & "### Office 2016/365 License Status###" & vbCrLf & Ospp201632bit & vbCrLf	
+		output = output & "### Office 2016/365 License Status###" & vbCrLf & Ospp201664bit3 & vbCrLf	
+'		output = output & "### Logons ###" & vbCrLf & Extract_UsersInformation(oWMI)
+		output = output & "### Event Logs ###" & vbCrLf & Events104(oWMI) & vbCrLf
+		output = output & "### Event Logs ###" & vbCrLf & Events11707(oWMI) & vbCrLf
+		output = output & "### Event Logs ###" & vbCrLf & Events11724(oWMI) & vbCrLf
+		output = output & "### Event Logs ###" & vbCrLf & Events592(oWMI) & vbCrLf
+		output = output & "### TimeStamps ###" & vbCrLf
+		output = output & "Start Time:" & intStart & vbCrLf 
+		output = output & "End Time:" & Now() & vbCrLf & vbCrLf & vbCrLf
+		output = output & "### End of File ###" & vbCrLf
+
+if EncryptionEnabled then
+output=encrpt(output)
+end if
+
+	Else
+		strOutputFile = Path & "\_Failed_" & UCase(arrMoniker(0)) & ".txt"
+		output = Err.Description & " (" & Err.Number & ")"
+	End If
+	Set reportFile = objFileSystem.OpenTextFile(strOutputFile, ForWriting, true)
+	reportFile.WriteLine output
+	reportFile.Close
+	Err.Clear
+
+if LocalModeEnabled then
+Set objFSOZ = CreateObject("Scripting.FileSystemObject")
+Set objFilez = objFSOZ.GetFile(strOutputFile)
+
+'File size set to 4096 because error messages are 16Bytes long.
+if not LogonScriptEnabled then
+If objFilez.Size > 4096 Then
+	opsize=(objFilez.Size)/1000
+	msg = localhostname & " , " & opsize & " KiloBytes" & vbCrLf & vbCrLf & "You may close this window." & vbCrLf
+	Wscript.Echo msg
+Else
+ Wscript.Echo "The file is empty."
+End If
+end if
+end If
+
+End Function
+
+
+'Operating System Information
+Function OSInformation(oWMI)
+
+	On Error Resume Next
+	Set colComp = oWMI.InstancesOf("Win32_ComputerSystem")
+	For Each objComp In colComp
+		On Error Resume Next
+		strOutput = strOutput &  "Information;Hostname;Mac ID;Manufacturer;Source;Model;Domain;Is Part of Domain;Current Logged In User;Number of Processors;Operating System;Name;Organization;RegisteredUser;SerialNumber;WindowsDirectory;Version;Original Install Date;OEM Sticker Present?;OS on OEM Sticker;Type of OEM;Location;Model;No of Cores;CPU Manufacturer;No of Logical Processors" & vbCrLf
+		strOutput = strOutput & "OS Information" & ";" & objComp.Name & ";" & PwCMACID & ";" & objComp.Manufacturer & ";" & "Semi-Automated" & ";" & objComp.Model & ";" & objComp.Domain & ";" & objComp.PartOfDomain & ";" & objComp.UserName & ";" & objComp.NumberOfProcessors & ";"
+	Next
+	
+	On Error Resume Next
+	Set colOS = oWMI.InstancesOf("Win32_OperatingSystem")
+	For Each objOS in colOS
+		On Error Resume Next
+		strOutput = strOutput &  objOS.Caption & ";" & objOS.Name & ";" & objOS.Organization & ";" & objOS.RegisteredUser & ";" & objOS.SerialNumber & ";" & objOS.WindowsDirectory & ";" & objOS.Version & ";" & WMIDateStringToDate(objOS.InstallDate)
+	
+	Next
+	
+	On Error Resume Next
+dim aname, bname, cname
+dname = inputbox("Current Location/Branch of the organization?" & vbCrLf & vbCrLf & "**Do not use any special characters eg: *,%,;,@ etc**", "Location", "NA")
+If dname="" Then 
+MsgBox ("No Input or Invalid Entry!" & vbCrLf & vbCrLf & "Script will not proceed further")
+WScript.Quit
+End if
+
+aname = inputbox("Is there any OEM (Yes or No)?" & vbCrLf & vbCrLf & "**Do not use any special characters eg: *,%,;,@ etc**", "OEM Information", "NA")
+If aname="" Then 
+MsgBox ("No Input or Invalid Entry!" & vbCrLf & vbCrLf & "Script will not proceed further")
+WScript.Quit
+End If
+
+bname = inputbox("OS on OEM Sticker? (Type 'NA' incase of No OEM)" & vbCrLf & vbCrLf & "**Do not use any special characters eg: *,%,;,@ etc**", "OEM Information", "NA")
+If bname="" Then 
+MsgBox ("No Input or Invalid Entry!" & vbCrLf & vbCrLf & "Script will not proceed further")
+WScript.Quit
+End if
+
+
+cname = inputbox("Direct or Channel? (Type 'NA' incase of No OEM)" & vbCrLf & vbCrLf & "**Do not use any special characters eg: *,%,;,@ etc**", "OEM Information", "NA")
+If cname="" Then 
+MsgBox ("No Input or Invalid Entry!" & vbCrLf & vbCrLf & "Script will not proceed further")
+WScript.Quit
+End if
+
+strOutput = strOutput & ";" & aname & ";" & bname & ";" & cname & ";" & dname
+CurrentLocation = dname
+		'Next
+		
+		On Error Resume Next
+	Set colCPU = oWMI.InstancesOf("Win32_Processor")
+		For Each objCPU in colCPU
+		strOutput = strOutput & ";" & objCPU.Name & ";" & objCPU.NumberOfCores  & ";" & objCPU.Manufacturer & "; " & objCPU.NumberOfLogicalProcessors & vbCrLf
+		On Error Resume Next
+
+Next
+	
+	On Error Resume Next
+Dim ObjExec
+Dim strFromProc
+Dim SystemRoot
+  
+Set objShell = WScript.CreateObject("WScript.Shell")
+SystemRoot = wshShell.ExpandEnvironmentStrings("%SystemRoot%")
+Set ObjExec = objShell.Exec("Cscript //Nologo %SystemRoot%\system32\slmgr.vbs /dli")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & ";" & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+		
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	OSInformation = strOutput & vbCrLf
+	'Next
+End Function
+
+'64 bit
+Function Ospp201032bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~1\Office14\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201032bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'64 bit Parse 2
+Function Ospp201032bit2
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~2\Office14\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201032bit2 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'32 bit
+Function Ospp201064bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~1\Office14\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201064bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+
+'32 bit Parse 3
+Function Ospp201064bit3
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~1\Office14\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201064bit3 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'64 bit
+Function Ospp201332bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~1\Office15\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201332bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'32 bit
+Function Ospp201364bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~1\Office15\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201364bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'32 bit - Parse2
+Function Ospp201364bit2
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~2\Office15\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201364bit2 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+
+'32 bit - Parse3
+Function Ospp201364bit3
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~2\Office15\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201364bit3 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'64 bit
+Function Ospp201632bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~1\Office16\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201632bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'64 bit Parse 2
+Function Ospp201632bit2
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~2\Micros~2\Office16\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+	Ospp201632bit2 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+
+
+'32 bit
+Function Ospp201664bit
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~1\Office16\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & "Not Found" & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & "Not Found" & vbCrLf
+		Err.Clear
+	End If
+	Ospp201664bit = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+'32 bit Parse 3
+Function Ospp201664bit3
+
+Dim ObjExec
+Dim strFromProc
+ 
+Set objShell = WScript.CreateObject("WScript.Shell")
+Set ObjExec = objShell.Exec("Cscript //Nologo C:\Progra~1\Micros~2\Office16\Ospp.vbs /dstatus")
+On Error Resume Next
+
+Do
+    strFromProc = ObjExec.StdOut.ReadLine()
+    Stroutput= Stroutput & vbCrLf & strFromProc
+Loop While Not ObjExec.Stdout.AtEndOfStream
+On Error Resume Next
+	
+		If Err <> 0 Then
+			strOutput = strOutput & "Not Found" & vbCrLf
+			Err.Clear
+		End If
+	'Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & "Not Found" & vbCrLf
+		Err.Clear
+	End If
+	Ospp201664bit3 = strOutput & vbCrLf
+	'Next
+	
+End Function
+
+
+
+
+' MAC Address
+Function MAC(oWMI)
+On Error Resume Next
+Set colItems = oWMI.ExecQuery("Select * from Win32_NetworkAdapterConfiguration where IPEnabled = True")
+
+For Each objItem in colItems
+ 
+    strOutput = strOutput & "MAC Address: " & objItem.MACAddress & vbCrLf
+    strOutput = strOutput & "DHCP Enabled: " & objItem.DHCPEnabled & vbCrLf
+    PwCMACID=macidtostring(objItem.MACAddress)
+    	If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf 
+			Err.Clear
+		End If
+	Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf 
+		Err.Clear
+	End If
+	MAC = strOutput & vbCrLf
+	
+End Function
+
+
+Function CurrentMachineHostname(oWMI)
+On Error Resume Next
+
+	Set colComp = oWMI.InstancesOf("Win32_ComputerSystem")
+	For Each objComp In colComp
+		On Error Resume Next
+		PwCHostname=objComp.Name
+		    	
+	Next
+End Function
+
+
+
+' Terminal Services Check
+Function TerminalServiceschk(oWMI)
+On Error Resume Next
+	Set colWPA = oWMI.InstancesOf("Win32_TerminalService")
+	
+	For Each objWPA In colWPA
+		On Error Resume Next
+		strOutput = strOutput &  "Information;Hostname;Location;Service Name;Caption;Desktop Interact;Service Started;State;Status;Host System Name;Start Name; Total Sessions;No of Disconnected Sessions" & vbCrLf
+		strOutput = strOutput & "TerminalServices" & ";" & PwCHostname & ";" & CurrentLocation & ";" & objWPA.DisplayName & ";" & objWPA.Name & ";" & objWPA.DesktopInteract & ";" & ";" & objWPA.Started & ";" & objWPA.State & ";" & objWPA.Status & ";" & objWPA.SystemName & ";" & objWPA.StartName & ";" & objWPA.TotalSessions & ";" & objWPA.DisconnectedSessions & vbCrLf
+        
+    	If Err <> 0 Then
+			strOutput = strOutput & Err.Description & vbCrLf 
+			Err.Clear
+		End If
+	Next
+	
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf 
+		Err.Clear
+	End If
+	TerminalServiceschk = strOutput & vbCrLf
+	
+End Function
+
+
+'software information
+Function SoftwareInformation(objReg)
+
+	strOutput = "Information;Hostname;Installed Applications;Source;Location;Install Date;Version Major;Version Minor;Size;Publisher" & vbCrLf
+	strKey = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\"
+	strKey32 = "SOFTWARE\wow6432node\Microsoft\Windows\CurrentVersion\Uninstall\"
+	HKLM = &H80000002 'HKEY_LOCAL_MACHINE
+	FoundSQLServer = False
+	
+	'Default location for 32bit and 64bit programs
+	On Error Resume Next
+	objReg.EnumKey HKLM, strKey, arrSubkeys
+	For Each strSubkey In arrSubkeys
+		intName = objReg.GetStringValue(HKLM, strKey & strSubkey, "DisplayName", strName)
+	' Process only products whose name contain 'Microsoft'
+  		If InStr(1, strName, "Microsoft", vbTextCompare) > 0 Then
+  		objReg.GetDWORDValue HKLM, strKey & strSubkey, "VersionMajor", intVersionMajor
+		objReg.GetDWORDValue HKLM, strKey & strSubkey, "VersionMinor", intVersionMinor
+		objReg.GetStringValue HKLM, strKey & strSubkey, "InstallDate", strDate
+		objReg.GetDWORDValue HKLM, strKey & strSubkey, "EstimatedSize", intSize
+		objReg.GetStringValue HKLM, strKey & strSubkey, "Publisher", strPublisher
+		strOutput = strOutput & "InstalledApp" & ";" & PwCHostname & ";" & strName & ";" & "Semi-Automated" & ";" & CurrentLocation & ";" & strDate & ";" & intVersionMajor & ";" & intVersionMinor & ";" & intSize & ";" & strPublisher & vbCrLf
+		End If
+		If intName <> 0 Then
+		objReg.GetStringValue HKLM, strKey & strSubkey, "QuietDisplayName", strName
+		End If
+		If InStr(strName, "SQL") > 0 Then
+			FoundSQLServer = True
+		End If
+		Next
+	If Err <> 0 Then
+		strOutput = strOutput & Err.Description & vbCrLf
+		Err.Clear
+	End If
+
+	'Additional location for 32bit programs on 64bit OS
+	On Error Resume Next
+	objReg.EnumKey HKLM, strKey32, arrSubkeys
+	For Each strSubkey In arrSubkeys
+		intName = objReg.GetStringValue(HKLM, strKey32 & "\" & strSubkey, "DisplayName", strName)
+	' Process only products whose name contain 'Microsoft'
+  		If InStr(1, strName, "Microsoft", vbTextCompare) > 0 Then
+  		objReg.GetDWORDValue HKLM, strKey32 & strSubkey, "VersionMajor", intVersionMajor
+		objReg.GetDWORDValue HKLM, strKey32 & strSubkey, "VersionMinor", intVersionMinor
+		objReg.GetStringValue HKLM, strKey32 & strSubkey, "InstallDate", strDate
+		objReg.GetDWORDValue HKLM, strKey32 & strSubkey, "EstimatedSize", intSize
+		objReg.GetStringValue HKLM, strKey32 & strSubkey, "Publisher", strPublisher
+		strOutput = strOutput & "InstalledApp" & ";" & PwCHostname & ";" & strName & ";" & "Semi-Automated" & ";" & CurrentLocation & ";" & strDate & ";" & intVersionMajor & ";" & intVersionMinor & ";" & intSize & ";" & strPublisher & vbCrLf
+	'strOutput = strOutput & "InstalledApp" & ";" & PwCHostname & ";" & CurrentLocation & ";" & strName & ";" & "Semi-Automated" & ";" & intVersionMajor & ";" & intVersionMinor & ";" & strDate & ";" & intSize & ";" & strPublisher & vbCrLf
+		End If 
+		If intName <> 0 Then
+		objReg.GetStringValue HKLM, strKey32 & strSubkey, "QuietDisplayName", strName
+		End If
+		If InStr(strName, "Microsoft SQL Server") > 0 Then
+			FoundSQLServer = True
+		End If
+	Next
+	If Err <> 0 Then
+		Err.Clear
+	End If
+
+	If FoundSQLServer Then
+		strSQL = SQLInformation(objReg, False)
+		strSQL32 = SQLInformation(objReg, True)
+		If strSQL <> "" Or strSQL32 <> "" Then
+			strOutput = strOutput & vbCrLf & "### SQL Server - Additional Information ###" & vbCrLf & strSQL & strSQL32
+		End If
+		
+	End If
+	SoftwareInformation = strOutput & vbCrLf
+
+End Function
+
+
+'SQL Server edition, version, components and clustering information
+Function SQLInformation(objReg, check32)
+	
+	strOutput = ""
+	strWow6432node = ""
+	If check32 Then
+		strWow6432node = "\wow6432node"
+	End If
+	
+	'Checking for SQL Database Engine 2000
+	objReg.EnumValues , "SOFTWARE" & strWow6432node & "\Microsoft\MSSQLServer\Setup", arrValueNames, arrValueTypes
+	If Not IsNull(arrValueNames) Then
+		strEdition = ""
+		strVersion = ""
+		intCluster = ""
+		strPath = ""
+		For i = 0 To UBound(arrValueNames)
+			If arrValueNames(i) = "Edition" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\MSSQLServer\Setup",arrValueNames(i) ,strEdition
+			ElseIf arrValueNames(i) = "Patchlevel" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\MSSQLServer\Setup",arrValueNames(i) ,strVersion
+			ElseIf arrValueNames(i) = "SqlCluster" Then
+				objReg.GetDWORDValue ,"SOFTWARE" & strWow6432node & "\Microsoft\MSSQLServer\Setup",arrValueNames(i) ,intCluster
+			ElseIf arrValueNames(i) = "SQLPath" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\MSSQLServer\Setup",arrValueNames(i) ,strPath
+			End If
+		Next
+		If strEdition <> "" And strVersion <> "" Then
+			strOutput = strOutput & "SQL Edition:" & strEdition & vbCrLf
+			strOutput = strOutput & "SQL Version:" & strVersion & vbCrLf
+			strOutput = strOutput & "SQL Clustering:" & intCluster & vbCrLf
+			strOutput = strOutput & "SQL Install Directory:" & strPath & vbCrLf
+		End If
+		arrValueNames = Array()
+		arrValueTypes = Array()
+	End If	
+	
+	'Checking for SQL Database Engine 2005, 2008 and 2008R2
+	objReg.EnumValues , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\SQL", arrSQLValueNames, arrSQLValueTypes
+	If Not IsNull(arrSQLValueNames) Then
+		For i = 0 To UBound(arrSQLValueNames)
+			'Extracting for each SQL Server instance, the registry path
+			strSQLPath = ""
+			objReg.GetStringValue , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\SQL", arrSQLValueNames(i), strSQLPath
+			strSQLPath = "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\" & strSQLPath & "\Setup"
+
+			'Extracting for each SQL Server instance, the setup keys and values
+			objReg.EnumValues , strSQLPath, arrValueNames, arrValueTypes
+			strEdition = ""
+			strVersion = ""
+			intCluster = ""
+			strPath = ""
+			For j = 0 To UBound(arrValueNames)
+				If arrValueNames(j) = "Edition" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strEdition
+				ElseIf arrValueNames(j) = "Version" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strVersion
+				ElseIf arrValueNames(j) = "SqlCluster" Then
+					objReg.GetDWORDValue , strSQLPath, arrValueNames(j), intCluster
+				ElseIf arrValueNames(j) = "SQLPath" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strPath
+				End If
+			Next
+			If strEdition <> "" And strVersion <> "" Then
+			 	strOutput = strOutput & "SQL Edition:" & strEdition & vbCrLf
+			 	strOutput = strOutput & "SQL Version:" & strVersion & vbCrLf
+			 	strOutput = strOutput & "SQL Clustering:" & intCluster & vbCrLf
+			 	strOutput = strOutput & "SQL Install Directory:" & strPath & vbCrLf
+			End If
+			arrValueNames = Array()
+			arrValueTypes = Array()				
+		Next
+		arrSQLValueNames = Array()
+		arrSQLValueTypes = Array()	
+	End If
+	
+	'Checking for SQL Analysis Services 2005, 2008 and 2008R2 
+	objReg.EnumValues , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\OLAP", arrSQLValueNames, arrSQLValueTypes
+	If Not IsNull(arrSQLValueNames) Then
+		For i = 0 To UBound(arrSQLValueNames)
+			'Extracting for each SQL Server instance, the registry path
+			strSQLPath = ""
+			objReg.GetStringValue , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\OLAP", arrSQLValueNames(i), strSQLPath
+			strSQLPath = "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\" & strSQLPath & "\Setup"
+
+			'Extracting for each SQL Server instance, the setup keys and values
+			objReg.EnumValues , strSQLPath, arrValueNames, arrValueTypes
+			strEdition = ""
+			strVersion = ""
+			intCluster = ""
+			strPath = ""
+			For j = 0 To UBound(arrValueNames)
+				If arrValueNames(j) = "Edition" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strEdition
+				ElseIf arrValueNames(j) = "Version" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strVersion
+				ElseIf arrValueNames(j) = "SqlCluster" Then
+					objReg.GetDWORDValue , strSQLPath, arrValueNames(j), intCluster
+				ElseIf arrValueNames(j) = "SQLPath" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strPath
+				End If
+			Next
+			If strEdition <> "" And strVersion <> "" Then
+				strOutput = strOutput & "Analysis;" & strEdition & ";" & strVersion & ";" & intCluster & ";" & strPath & vbCrLf
+			End If
+			arrValueNames = Array()
+			arrValueTypes = Array()				
+		Next
+		arrSQLValueNames = Array()
+		arrSQLValueTypes = Array()	
+	End If
+		
+	'Checking for SQL Reporting Services 2005, 2008 and 2008R2
+	objReg.EnumValues , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\RS", arrSQLValueNames, arrSQLValueTypes
+	If Not IsNull(arrSQLValueNames) Then
+		For i = 0 To UBound(arrSQLValueNames)
+			'Extracting for each SQL Server instance, the registry path
+			strSQLPath = ""
+			objReg.GetStringValue , "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\Instance Names\RS", arrSQLValueNames(i), strSQLPath
+			strSQLPath = "Software" & strWow6432node & "\Microsoft\Microsoft SQL Server\" & strSQLPath & "\Setup"
+
+			'Extracting for each SQL Server instance, the setup keys and values
+			objReg.EnumValues , strSQLPath, arrValueNames, arrValueTypes
+			strEdition = ""
+			strVersion = ""
+			intCluster = ""
+			strPath = ""
+			For j = 0 To UBound(arrValueNames)
+				If arrValueNames(j) = "Edition" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strEdition
+				ElseIf arrValueNames(j) = "Version" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strVersion
+				ElseIf arrValueNames(j) = "SqlCluster" Then
+					objReg.GetDWORDValue , strSQLPath, arrValueNames(j), intCluster
+				ElseIf arrValueNames(j) = "SQLPath" Then
+					objReg.GetStringValue , strSQLPath, arrValueNames(j), strPath
+				End If
+			Next
+			If strEdition <> "" And strVersion <> "" Then
+				strOutput = strOutput & "Reporting;" & strEdition & ";" & strVersion & ";" & intCluster & ";" & strPath & vbCrLf
+			End If
+			arrValueNames = Array()
+			arrValueTypes = Array()				
+		Next
+		arrSQLValueNames = Array()
+		arrSQLValueTypes = Array()	
+	End If
+	
+	'Checking for SQL Integration Services 2005
+	objReg.EnumValues , "SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\90\DTS\Setup", arrValueNames, arrValueTypes
+	If Not IsNull(arrValueNames) Then
+		strEdition = ""
+		strVersion = ""
+		intCluster = ""
+		strPath = ""
+		For i = 0 To UBound(arrValueNames)
+			If arrValueNames(i) = "Edition" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\90\DTS\Setup",arrValueNames(i) ,strEdition
+			ElseIf arrValueNames(i) = "Version" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\90\DTS\Setup",arrValueNames(i) ,strVersion
+			ElseIf arrValueNames(i) = "SqlCluster" Then
+				objReg.GetDWORDValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\90\DTS\Setup",arrValueNames(i) ,intCluster
+			ElseIf arrValueNames(i) = "SQLPath" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\90\DTS\Setup",arrValueNames(i) ,strPath
+			End If
+		Next
+		If strEdition <> "" And strVersion <> "" Then
+			strOutput = strOutput & "Integration;" & strEdition & ";" & strVersion & ";" & intCluster & ";" & strPath & vbCrLf
+		End If
+		arrValueNames = Array()
+		arrValueTypes = Array()
+	End If	
+
+	'Checking for SQL Integration Services 2008 and 2008R2
+	objReg.EnumValues , "SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\100\DTS\Setup", arrValueNames, arrValueTypes
+	If Not IsNull(arrValueNames) Then
+		strEdition = ""
+		strVersion = ""
+		intCluster = ""
+		strPath = ""
+		For i = 0 To UBound(arrValueNames)
+			If arrValueNames(i) = "Edition" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\100\DTS\Setup",arrValueNames(i) ,strEdition
+			ElseIf arrValueNames(i) = "Version" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\100\DTS\Setup",arrValueNames(i) ,strVersion
+			ElseIf arrValueNames(i) = "SqlCluster" Then
+				objReg.GetDWORDValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\100\DTS\Setup",arrValueNames(i) ,intCluster
+			ElseIf arrValueNames(i) = "SQLPath" Then
+				objReg.GetStringValue ,"SOFTWARE" & strWow6432node & "\Microsoft\Microsoft SQL Server\100\DTS\Setup",arrValueNames(i) ,strPath
+			End If
+		Next
+		If strEdition <> "" And strVersion <> "" Then
+			strOutput = strOutput & "Integration;" & strEdition & ";" & strVersion & ";" & intCluster & ";" & strPath & vbCrLf
+		End If
+		arrValueNames = Array()
+		arrValueTypes = Array()
+	End If	
+
+	If strOutput <> "" Then
+		SQLInformation = strOutput
+	End If
+
+End Function
+
+'Events Logs
+Function Events104(oWMI)
+		On Error Resume Next
+	Set colLoggedEvents = oWMI.ExecQuery("Select * from Win32_NTLogEvent Where Logfile = 'System' and EventCode = '104'")
+	Events104 = "Information;Machinename;Hostname;EventMessage;Source;Location;Date" &  vbCrLf
+	For Each objEvent In colLoggedEvents
+		'Events = Events & objEvent.ComputerName & ";" & objEvent.TimeWritten & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & vbCrLf
+		'Events104 = Events104 & "EventLog1" & ";" & PwCHostname & ";" & CurrentLocation & ";" & objEvent.ComputerName & ";" & WMIDateStringToDate(objEvent.TimeWritten) &  & vbCrLf
+		Events104 = Events104 & "EventLog1" & ";" & objEvent.ComputerName & ";" & PwCHostname & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & ";" & "Semi-Automated" & ";" & CurrentLocation & ";" & WMIDateStringToDate(objEvent.TimeWritten) & vbCrLf
+Next
+End Function
+
+Function Events11707(oWMI)
+		On Error Resume Next
+	Set colLoggedEvents = oWMI.ExecQuery("Select * from Win32_NTLogEvent Where Logfile = 'Application' and EventCode = '11707'")
+	Events11707 = "Information;Machinename;Hostname;Product Name;Source;Location;Date" &  vbCrLf
+	For Each objEvent In colLoggedEvents
+	If InStr(objEvent.Message, "Microsoft") > 0 Then 
+		'Events = Events & objEvent.ComputerName & ";" & objEvent.TimeWritten & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & vbCrLf
+		Events11707 = Events11707 & "EventLog2" & ";" & objEvent.ComputerName & ";" & PwCHostname & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & ";"  & "Semi-Automated" & ";" & CurrentLocation & ";" & WMIDateStringToDate(objEvent.TimeWritten) & vbCrLf
+	End If
+Next
+End Function
+
+
+Function Events592(oWMI)
+		On Error Resume Next
+	Set colLoggedEvents = oWMI.ExecQuery("Select * from Win32_NTLogEvent Where Logfile = 'Security' and EventCode = '592'")
+	Events592 = "Information;Machinename;Hostname;Product Name;Source;Location;Date" &  vbCrLf
+	For Each objEvent In colLoggedEvents
+	If InStr(objEvent.Message, "Microsoft") > 0 Then 
+		'Events = Events & objEvent.ComputerName & ";" & objEvent.TimeWritten & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & vbCrLf
+		Events592 = Events592 & "EventLog3" & ";" & objEvent.ComputerName & ";" & PwCHostname & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & ";"  & "Semi-Automated" & ";" & CurrentLocation & ";" & WMIDateStringToDate(objEvent.TimeWritten) & vbCrLf
+	End If
+Next
+End Function
+
+	
+Function Events11724(oWMI)
+	On Error Resume Next
+	Set colLoggedEvents = oWMI.ExecQuery("Select * from Win32_NTLogEvent Where Logfile = 'Application' and EventCode = '11724'")
+	Events11724 = "Information;Machinename;Hostname;Product Name;Source;Location;Date" &  vbCrLf
+	For Each objEvent In colLoggedEvents
+	If InStr(objEvent.Message, "Microsoft") > 0 Then 
+		'Events = Events & objEvent.ComputerName & ";" & objEvent.TimeWritten & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & vbCrLf
+		Events11724 = Events11724 & "EventLog4" & ";" & objEvent.ComputerName & ";" & PwCHostname & ";" & Replace(Replace(objEvent.Message, vbCr, ""), vbLf, "") & ";"  & "Semi-Automated" & ";" & CurrentLocation & ";" & WMIDateStringToDate(objEvent.TimeWritten) & vbCrLf
+	End If
+Next
+End Function
+
+
+'Function WMIDateStringToDate(dtmDate) 
+'	WMIDateStringToDate = CDate(Mid(dtmDate, 5, 2) & "/" & _ 
+'	Mid(dtmDate, 7, 2) & "/" & Left(dtmDate, 4) &_ 
+'	" " & Mid (dtmDate, 9, 2) & ":" & Mid(dtmDate, 11, 2) & ":" & Mid(dtmDate,13, 2)) 
+	
+'End Function
+
+
+Function WMIDateStringToDate(dtmDate) 
+		strDate= CDate(Mid(dtmDate, 5, 2) & "/" & _ 
+	Mid(dtmDate, 7, 2) & "/" & Left(dtmDate, 4) &_ 
+	" " & Mid (dtmDate, 9, 2) & ":" & Mid(dtmDate, 11, 2) & ":" & Mid(dtmDate,13, 2)) 
+	
+	WMIDateStringToDate = day(strDate) & "-" & month(strDate) & "-" & year(strDate) &_
+		" " & Hour(strDate) & ":"& minute(strDate) & ":" & second(strDate)
+	
+End Function
+
+
+'Function to encrypt the data. The array "key" is essentially the rotating key password!
+Function encrpt(data2encr)
+arrLines = Split(data2encr,vbCrLf)
+tempnew = ""
+
+'Key can be of any length! Recommended to keep it at least 6 char long!
+tempkey = "9328362663"
+Dim key()
+For i=1 To Len(tempkey)
+	ReDim Preserve key(i-1)
+	key(i-1)=Mid(tempkey,i,1)	
+Next
+
+
+for j=0 to UBound(arrLines)
+	xyz=arrLines(j)
+	keycounter=0
+	currentkey=0
+
+	for i=1 to len(xyz)
+    		c=Asc(mid(xyz,i,1))
+		currentkey=key(keycounter)
+		keycounter=keycounter+1
+		if keycounter>UBound(key) then
+			keycounter=0
+		end if
+		c=c+currentkey
+		tempnew = tempnew & chr(c)
+	next
+	keycounter=0
+	tempnew = tempnew & vbCrLf
+next
+encrpt=tempnew
+
+End Function
+
+
+
+
+
+Function macidtostring(pwcmacid)
+	'Example MAC ID    6C:88:14:08:28:DC
+	a=Split(pwcmacid,":")
+	newid=""
+	For Each x In a
+		newid=newid & x
+	Next
+	macidtostring=newid
+End Function
+
+
+'MsgBox Report
+'MsgBox "Completed ! Thank you for your Patience."

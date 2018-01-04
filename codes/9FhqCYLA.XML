@@ -1,0 +1,102 @@
+<!-- ORDER -->
+	<table name="store_order" phpName="store_order">
+		<vendor type="mysql">
+			<parameter name="Charset" value="utf8"/>
+		</vendor>
+		<behavior name="timestampable"/>
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="user_id" sqlType="SMALLINT(5) UNSIGNED" phpType="int" required="false"/>
+		<column name="session_id" type="integer" required="false"/>
+		<column name="store_gateway_id" type="integer" required="false"/>
+		<column name="store_gateway_transaction_id" type="integer" required="false"/>
+		<column name="store_shipper_id" type="integer" required="false"/>
+		<!-- PRICE DATA -->
+		<column name="tax_price" type="decimal" phpType="float" size="10" scale="2" required="true"/>
+		<column name="item_price" type="decimal" phpType="float" size="10" scale="2" required="true"/>
+		<column name="total_price" type="decimal" phpType="float" size="10" scale="2" required="true"/>
+		<!-- INLINE SHIPPER RATE START -->
+		<column name="rate_code" type="varchar"/>
+		<column name="rate_name" type="varchar"/>
+		<column name="rate_price" type="decimal" phpType="float" size="10" scale="2"/>
+		<column name="rate_insurance_amount" type="decimal" phpType="float" size="10" scale="2"/>
+		<column name="rate_arrival_earliest" type="date"/>
+		<column name="rate_arrival_latest" type="date"/>
+		<!-- INLINE SHIPPER RATE END -->
+		<!-- INLINE SHIPPING ADDRESS START -->
+		<column name="shipping_fullname" type="varchar"/>
+		<column name="shipping_company" type="varchar"/>
+		<column name="shipping_address1" type="varchar"/>
+		<column name="shipping_address2" type="varchar"/>
+		<column name="shipping_city" type="varchar"/>
+		<column name="shipping_state" type="varchar"/>
+		<column name="shipping_zip" type="varchar" size="10"/>
+		<column name="shipping_country" type="varchar" size="2"/>
+		<column name="shipping_phone" type="varchar" size="16"/>
+		<column name="shipping_phone_extension" type="varchar" size="8"/>
+		<column name="shipping_email" type="varchar"/>
+		<!-- INLINE SHIPPING ADDRESS END -->
+		<!-- INLINE BILLING ADDRESS START -->
+		<column name="billing_fullname" type="varchar"/>
+		<column name="billing_company" type="varchar"/>
+		<column name="billing_address1" type="varchar"/>
+		<column name="billing_address2" type="varchar"/>
+		<column name="billing_city" type="varchar"/>
+		<column name="billing_state" type="varchar"/>
+		<column name="billing_zip" type="varchar" size="10"/>
+		<column name="billing_country" type="varchar" size="2"/>
+		<column name="billing_phone" type="varchar" size="16"/>
+		<column name="billing_phone_extension" type="varchar" size="8"/>
+		<column name="billing_email" type="varchar"/>
+		<!-- INLINE BILLING ADDRESS END -->
+		<foreign-key foreignTable="login" onDelete="SETNULL" onUpdate="CASCADE">
+			<reference local="user_id" foreign="user_id"/>
+		</foreign-key>
+		<foreign-key foreignTable="session" onDelete="SETNULL" onUpdate="CASCADE">
+			<reference local="session_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="store_gateway" onDelete="RESTRICT" onUpdate="CASCADE">
+			<reference local="store_gateway_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="store_gateway_transaction" onDelete="RESTRICT" onUpdate="CASCADE">
+			<reference local="store_gateway_transaction_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="store_shipper" onDelete="RESTRICT" onUpdate="CASCADE">
+			<reference local="store_shipper_id" foreign="id"/>
+		</foreign-key>
+		<unique>
+			<unique-column name="store_gateway_transaction_id"/>
+		</unique>
+	</table>
+	<table name="store_order_item" phpName="store_order_item">
+		<vendor type="mysql">
+			<parameter name="Charset" value="utf8"/>
+		</vendor>
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="store_order_id" type="integer" required="true"/>
+		<column name="store_product_id" type="integer" required="false"/>
+		<column name="store_item_id" type="integer" required="false"/>
+		<!-- INLINE PRODUCT START -->
+		<column name="product_name" type="varchar" required="true"/>
+		<column name="product_description" type="longvarchar" required="true"/>
+		<!-- INLINE PRODUCT END -->
+		<!-- INLINE ITEM START -->
+		<column name="item_name" type="varchar" size="255" required="true"/>
+		<column name="item_code" type="varchar" size="255" required="true"/>
+		<column name="item_price" type="decimal" phpType="float" size="10" scale="2" required="true"/>
+		<column name="item_discount_price" type="decimal" phpType="float" size="10" scale="2" required="false"/>
+		<!-- INLINE ITEM END -->
+		<column name="quantity" type="integer" required="true"/>
+		<foreign-key foreignTable="store_order" onDelete="CASCADE" onUpdate="CASCADE">
+			<reference local="store_order_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="store_product" onDelete="SETNULL" onUpdate="CASCADE">
+			<reference local="store_product_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="store_item" onDelete="SETNULL" onUpdate="CASCADE">
+			<reference local="store_item_id" foreign="id"/>
+		</foreign-key>
+		<unique>
+			<unique-column name="store_order_id"/>
+			<unique-column name="store_item_id"/>
+		</unique>
+	</table>

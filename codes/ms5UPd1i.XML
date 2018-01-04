@@ -1,0 +1,15 @@
+<Task Name = "Collateral Conditions Review">
+	<Create>PPR, OSS - Bailee Review,OSS - Coll Delay,OSS - Coll Exception,OSS - VOE,OSS Manager,OAR,OAR Manager,Conditions Manager,Conditions Reviewer, PPR Manager, Compliance Manager,Funding Manager,Sr. Ops Manager,Task Manager</Create>
+	<Complete>PPR, OSS - Bailee Review,OSS - Coll Delay,OSS - Coll Exception,OSS - VOE,OSS Manager,OAR,OAR Manager,Conditions Manager,Conditions Reviewer, PPR Manager, Compliance Manager,Funding Manager,Sr. Ops Manager,Task Manager</Complete>
+	<UnComplete>PPR, OSS - Bailee Review,OSS - Coll Delay,OSS - Coll Exception,OSS - VOE,OSS Manager,OAR,OAR Manager,Conditions Manager,Conditions Reviewer, PPR Manager, Compliance Manager,Funding Manager,Sr. Ops Manager,Task Manager</UnComplete>
+	<UnCreate>PPR, OSS - Bailee Review,OSS - Coll Delay,OSS - Coll Exception,OSS - VOE,OSS Manager,OAR,OAR Manager,Conditions Manager,Conditions Reviewer, PPR Manager, Compliance Manager,Funding Manager,Sr. Ops Manager,Task Manager</UnCreate>
+		<Rush></Rush>
+</Task>
+
+<Task Name = "Collateral Exception Review">
+	<Create>Task Manager, OSS - Coll Exception, OSS Manager, Sr. Ops Manager, Conditions Reviewer, Conditions Reviewer Mgr.</Create>
+	<Complete>Task Manager, OSS - Coll Exception, OSS Manager, Sr. Ops Manager, Conditions Reviewer, Conditions Reviewer Mgr.</Complete>
+	<UnComplete>Task Manager, OSS Manager, Sr. Ops Manager, Conditions Reviewer, Conditions Reviewer Mgr.</UnComplete>
+	<UnCreate>Task Manager, Sr. OPS Manager</UnCreate>
+	<Rush></Rush>
+</Task>

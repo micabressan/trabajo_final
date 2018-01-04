@@ -1,0 +1,56 @@
+-- | We need type witnesses to handle manipulation of dictionaries with entries of all possible 
+-- primitive types in generic code.
+data TypeWitness a where 
+    TypeWitnessI32   :: Int32         -> TypeWitness Int32
+    TypeWitnessW32   :: Word32        -> TypeWitness Word32
+    TypeWitnessI64   :: Int64         -> TypeWitness Int64
+    TypeWitnessW64   :: Word64        -> TypeWitness Word64
+    TypeWitnessASCII :: AsciiString   -> TypeWitness AsciiString
+    TypeWitnessUNI   :: UnicodeString -> TypeWitness UnicodeString
+    TypeWitnessBS    :: B.ByteString  -> TypeWitness B.ByteString
+    TypeWitnessDec   :: Decimal       -> TypeWitness Decimal
+
+-- | Primitive type class.
+class Primitive a where
+    type Delta a       :: *
+    witnessType        :: a -> TypeWitness a
+    assertType         :: (Primitive b) => TypeWitness b -> a
+    toValue            :: a -> Value
+    defaultBaseValue   :: a
+    ivToPrimitive      :: InitialValueAttr -> a
+    delta              :: a -> Delta a -> a
+    ftail              :: a -> a -> a
+    readP              :: Parser a
+    readD              :: Parser (Delta a)
+    readT              :: Parser a
+
+    readT = readP
+
+
+instance Primitive Int32 where
+    type Delta Int32 = Int32 
+    witnessType = TypeWitnessI32
+    assertType (TypeWitnessI32 i) = i
+    assertType _ = error "Type mismatch."
+    toValue = I32
+    defaultBaseValue = 0 
+    ivToPrimitive = read . trimWhiteSpace . text
+    delta = (+)
+    ftail = error "S2:Tail operator is only applicable to ascii, unicode and bytevector fields."
+    readP = int
+    readD = int
+    readT = error "S2:Tail operator is only applicable to ascii, unicode and bytevector fields."
+
+
+
+intF2P' (FieldInstrContent fname (Just Mandatory) (Just (Delta oc)))
+    = let   baseValue (Assigned p) = assertType p
+            baseValue (Undefined) = h oc
+                where   h (OpContext _ _ (Just iv)) = ivToPrimitive iv
+                        h (OpContext _ _ Nothing) = defaultBaseValue
+            baseValue (Empty) = error "D6: previous value in a delta operator can not be empty."
+
+    in
+        do 
+            d <- l2 readD
+            Just <$> (flip  delta d <$> (baseValue <$> prevValue fname oc))

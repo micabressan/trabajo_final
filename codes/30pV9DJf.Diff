@@ -1,0 +1,45 @@
+diff --git a/difint.c b/difint.c
+index d8d8f74..d94e3f3 100644
+--- a/difint.c
++++ b/difint.c
+@@ -5,7 +5,7 @@
+ 
+ double cheb3(double a, double b)
+ {
+-	static double g[2] = { 0.0, M_SQRT_2};
++	static double g[2] = { 0.0, M_SQRT2};
+ 	double w;
+ 	int mflag;
+ 
+diff --git a/sslib.h b/sslib.h
+index 7b4a219..97e7b83 100644
+--- a/sslib.h
++++ b/sslib.h
+@@ -25,19 +25,10 @@ Complex cmul1(Complex a, double k);
+ Complex cdiv(Complex a, Complex b);
+ Complex cdiv1(Complex a, double k);
+ Complex cln(Complex a);
+-Complex clog10(Complex a);
+-Complex cexp(Complex a);
+-Complex cpow(Complex a, Complex b);
+ Complex cpowd(Complex a, double n);
+-Complex csin(Complex a);
+-Complex ccos(Complex a);
+-Complex ctan(Complex a);
+-Complex csqrt(Complex a);
+ Complex tocomplex(double x, double y);
+-Complex conj(Complex a);
+ Complex cfunc(Complex *a, int n, Complex x);
+ double cabslt(Complex a);
+-double carg(Complex a);
+ int ceq(Complex a, Complex b);
+ int cne(Complex a, Complex b);
+ 
+@@ -52,7 +43,6 @@ double besi1(double x);
+ double besk0(double x);
+ double besk1(double x);
+ double erfnc(double x);
+-double gammaf(double x);
+ double legend(double x, int n);
+ double celi1(double k, double eps);
+ double celi2(double k, double eps);

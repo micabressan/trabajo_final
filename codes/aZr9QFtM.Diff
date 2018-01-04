@@ -1,0 +1,25 @@
+diff --git a/lglaf.lua b/lglaf.lua
+index e2dc58a..7412a53 100644
+--- a/lglaf.lua
++++ b/lglaf.lua
+@@ -42,9 +42,9 @@ function lglaf.dissector(tvb, pinfo, tree)
+     local endpoint = usb_endpoint().value
+
+     -- Process only bulk packets from (EP 5) and to the device (EP 3)
+-    if not ((endpoint == 0x85 or endpoint == 3) and transfer_type == 3) then
+-        return 0
+-    end
++    -- if not ((endpoint == 0x85 or endpoint == 3) and transfer_type == 3) then
++    --     return 0
++    -- end
+
+     pinfo.cols.protocol = lglaf.name
+
+@@ -102,4 +102,7 @@ function lglaf.init()
+     usb_product:add(0x1004633e, lglaf) -- LG G3 (D855) or LG V10 (H962)
+     usb_product:add(0x1004627f, lglaf) -- LG G3 (VS985)
+     usb_product:add(0x10046298, lglaf) -- LG G4 (VS986)
++    local usb_bulk_dissectors = DissectorTable.get("usb.bulk")
++    usb_bulk_dissectors:add(0xFF, lglaf)
++    usb_bulk_dissectors:add(0xFFFF, lglaf)
+ end

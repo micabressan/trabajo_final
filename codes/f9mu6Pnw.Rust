@@ -1,0 +1,22 @@
+use std::io;
+
+fn main() {
+    let mut input:String = String::new();
+    
+    io::stdin().read_line(&mut input)
+        .expect("Cannot read input!");
+
+    let chars:Vec<char> = input.chars().collect();
+    let offset = chars.len() / 2;
+    let mut result:u32 = 0;
+    
+    for x in 0..chars.len() - 1 {
+        let current = chars[x].to_digit(10).unwrap();
+        let next = chars[(x + offset)%(chars.len() - 1)].to_digit(10).unwrap();
+        if current == next {
+            result += current;
+        }
+    }
+
+    println!("{}", result);
+}

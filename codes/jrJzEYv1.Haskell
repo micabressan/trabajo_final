@@ -1,0 +1,39 @@
+--funkcja licząca silnie
+silnia :: (Num a, Ord a) => a -> a
+silnia n = if n == 1 then 1 else n * silnia (n - 1)
+--sprawdzenie warunku n <= m!*b który sprawdza jaka cyfra jest na danej pozycji (bez dwoch ostatnich)
+pogrupuj ::  Int -> Int -> Int -> Int
+pogrupuj n m b = if n <= (silnia m)*b then b else pogrupuj n m (b+1)
+--wstawienie liczby uzyskanej do listy
+wstaw :: Int -> [Int] -> [Int]
+wstaw x lista = lista ++ [x]
+
+lista = []
+--wyłuskanie dwóch ostatnich liczb
+ostatnie :: Int -> [Int] -> [Int]
+ostatnie m lista =  [x | x <- [0..m], not (elem x lista )] 
+--sprawdzenie i zwórcenie większej z dwóch ostatnich
+wiekszy:: [Int]-> Int
+wiekszy lista = if head lista > last lista then head lista else last lista
+--sprawdzenie i zwórcenie mniejszej z dwóch ostatnich
+mniejszy:: [Int]-> Int
+mniejszy lista = if head lista < last lista then head lista else last lista
+--ustalenie kolejności dwóch ostatnich liczb jeżeli n parzyste to pierwsza liczba będzie mniejsza jeżeli nieparzyste to pierwszą będzie licza większa
+naKoniec :: Int -> Int -> [Int] -> [Int]
+naKoniec n m lista = let { min = mniejszy (ostatnie m lista) ; max = wiekszy (ostatnie m lista)} in if n`mod`2 == 1 then wstaw max (wstaw min lista) else  wstaw min (wstaw max lista) 
+--rekurencyjne ustalenie kolejności liczb w permutacji
+wygladListy :: Int -> Int -> Int -> Int -> [Int] -> [Int]
+wygladListy n m mm a lista = let  x = pogrupuj n mm 1 in if mm >= 2 then wygladListy n m (mm-1)(a+1)(wstaw (x-1+a) lista) else naKoniec n m lista
+-- zamiana liczb od 10 do 15 na odpowiedniki heksalne od A do F
+konwenter :: Int -> String
+konwenter znak = if znak == 10 then "A" else if znak == 11 then "B" else if znak == 12 then "C" else if znak == 13 then "D" else if znak == 14 then "E" else if znak == 15 then "F" else show znak 
+-- złączenie poszczególnych elementów wyniku
+petlaWyswietlajaca :: Int -> Int -> [Int] -> String -> String
+petlaWyswietlajaca i m lista napis = let napis1 = napis ++ konwenter (lista !! i) ++ " "  in if i < m then petlaWyswietlajaca (i+1) m lista napis1 else napis1 
+--wyświetlenie całości 
+calosc :: Int -> Int-> IO()
+calosc n m = do
+let x = m
+let lista = wygladListy n m x 0 []
+let i = 0
+print(petlaWyswietlajaca i m lista "")

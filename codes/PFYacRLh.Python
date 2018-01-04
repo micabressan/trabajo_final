@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+#
+# Horus Ground Station - Test Utilities.
+#
+#
+from dateutil.parser import *
+import traceback
+
+def read_telemetry_csv(filename,
+    datetime_field = 0,
+    latitude_field = 3,
+    longitude_field = 4,
+    altitude_field = 5,
+    delimiter=','):
+    ''' 
+    Read in a Telemetry CSV file.
+    Fields to use can be set as arguments to this function.
+    By default we maintain compatability with the log files output by radiosonde_auto_rx, as they are good sources
+    of flight telemetry data.
+    These have output like the following:
+    2017-12-27T23:21:59.560,M2913374,982,-34.95143,138.52471,719.9,-273.0,RS92,401.520
+    <datetime>,<serial>,<frame_no>,<lat>,<lon>,<alt>,<temp>,<sonde_type>,<freq>
+
+    Note that the datetime field must be parsable by dateutil.parsers.parse.
+
+    If any fields are missing, or invalid, this function will return None.
+
+    The output data structure is in the form:
+    [
+        [datetime (as a datetime object), latitude, longitude, altitude],
+        [datetime (as a datetime object), latitude, longitude, altitude],
+        ...
+    ]
+    '''
+
+    output = []
+
+    f = open(filename,'r')
+
+    for line in f:
+        try:
+            # Split line by comma delimiters.
+            _fields = line.split(delimiter)
+
+            # Attempt to parse fields.
+            _datetime = parse(_fields[datetime_field])
+            _latitude = float(_fields[latitude_field])
+            _longitude = float(_fields[longitude_field])
+            _altitude = float(_fields[altitude_field])
+
+            output.append([_datetime, _latitude, _longitude, _altitude])
+        except:
+            traceback.print_exc()
+            return None
+
+    f.close()
+
+    return output
+
+
+if __name__ == '__main__':
+    # Basic test of the above function. Read in a file and print out the resultant array structure
+    import sys
+    filename = sys.argv[1]
+
+    print(read_telemetry_csv(filename))

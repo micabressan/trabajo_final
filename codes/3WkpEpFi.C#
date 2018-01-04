@@ -1,0 +1,109 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+
+namespace lab10
+{ 
+    public class Button // собственный класс с кнопочками, там внутри их количество и название
+    {
+        public int count;
+        public string title;
+        public Button(int count, string title)
+        {
+            this.count = count;
+            this.title = title;
+        }
+        public void Show()
+        {
+            Console.WriteLine("\nButtons\nCount: {0}\nTitle: {1}\n", count, title);
+        }
+    }
+    class Program
+    {
+        static void ButtonsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) // функция обработки события коллекции. Фишка в том, что в коллекции типа ObservableCollection мы можем вызывать события, когда меняем какой-то элемент внутри коллекции
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add: // обрабатываем событие добавление элемента
+                    Button new_butt = e.NewItems[0] as Button;
+                    Console.WriteLine("Added new object: {0}", new_butt.title); // мы здесь выводим сообщение о том, что добавили кнопочку
+                    break; 
+                case NotifyCollectionChangedAction.Remove: // обрабатываем событие удаления
+                    Button old_butt = e.OldItems[0] as Button;
+                    Console.WriteLine("Removed object: {0}", old_butt.title);
+                    break;
+                case NotifyCollectionChangedAction.Replace: // замены
+                    Button replaced_butt = e.OldItems[0] as Button;
+                    Button replacing_butt = e.NewItems[0] as Button;
+                    Console.WriteLine("Object {0} replased object {1}", 
+                                        replaced_butt.title, replacing_butt.title);
+                    break;
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Working with ArrayList.");
+            ArrayList list = new ArrayList() { 27, 54, 81, 108, 135 }; // здесь создаём коллекцию типа ArrayList с обычными числами
+            list.Add("string"); // но в неё также можно впихнуть строку (или что угодно)
+            list.RemoveAt(5); // удаляем элемент
+            Console.WriteLine("Length: {0}", list.Count); // выводим длину
+            foreach (var element in list) //выводим элементы
+            { Console.Write(element + " "); }
+            Console.WriteLine("\nThe object to search for ({0}) is at index {1}.", list[4], list.BinarySearch(list[4])); // бинарный поиск элемента внутри коллекции
+
+            Console.WriteLine("\nWorking with Queue.");
+            Queue<int> queue = new Queue<int>(); // работаем с очередью из предыдущая семестра, в данном случае типа int
+            queue.Enqueue(27); // ставим числа в очередь
+            queue.Enqueue(54);
+            queue.Enqueue(81);
+            queue.Enqueue(108);
+            queue.Enqueue(135);
+            int count = queue.Count;
+            for (int i = 0; i < count; i++)
+            { Console.Write(queue.Dequeue() + " "); } // так как пройти по очереди просто так нельзя, то для того, чтобы вывести элементы нужно последовательно удалить из очереди их. Удалили - получили элемент - вывели на экран
+
+            Console.WriteLine("\n\nWorking with Dictionary."); // словарь типа "ключи: значение"
+            Dictionary<int, int> dictionary = new Dictionary<int, int>(); // ключ - число, значение - тоже число
+            dictionary.Add(1, 27); // добавляем элемент: ключ - 1, значение - 27
+            dictionary.Add(2, 54);
+            dictionary.Add(3, 81);
+            dictionary.Add(4, 108);
+            dictionary.Add(5, 135);
+            foreach (KeyValuePair<int, int> keyValue in dictionary) // каждый элемент коллекции Dictionary являет собой тип KeyValuePair (пара - ключ: значение)
+            { Console.WriteLine(keyValue.Key + " - " + keyValue.Value); } // вывели ключ и значение
+            Console.WriteLine("The value search for is {0}.", dictionary[3]); // обращаемся как в обычном массиве по индексу к элементу
+            
+            Console.WriteLine("\nWorking with Queue<Button>."); // делаем всё тоже самое, что и вверху, только вместо обычных типов, мои кнопочки
+            Button button1 = new Button(7, "accept");
+            Button button2 = new Button(3, "cancle");
+            Button button3 = new Button(1, "okay");
+            Queue<Button> buttons = new Queue<Button>();
+            buttons.Enqueue(button1);
+            buttons.Enqueue(button2);
+            buttons.Enqueue(button3);
+            int quantity = buttons.Count;
+            for (int i = 0; i < quantity; i++)
+            { Console.Write(buttons.Dequeue().title + " "); }
+
+            Console.WriteLine("\n\nWorking with Dictionary<int, Button>.");
+            Dictionary<int, Button> dict_buttons = new Dictionary<int, Button>();
+            dict_buttons.Add(1, button1);
+            dict_buttons.Add(2, button2);
+            dict_buttons.Add(3, button3);
+            foreach (KeyValuePair<int, Button> keyValue in dict_buttons)
+            { Console.WriteLine(keyValue.Key + " - " + keyValue.Value.title); }
+            Console.WriteLine("The value search for is {0}.", dict_buttons[3]);
+
+            Console.WriteLine("\nWorking with ObservableColletion<Button>."); // та самая наблюдаемая коллекция. Тут примитивное добавление и удаление элементов - ничего сложного. Основная логика вверху описана. 
+            ObservableCollection<Button> obs_buttons = new ObservableCollection<Button>();
+            obs_buttons.CollectionChanged += ButtonsCollectionChanged; // подписываем на события (функция вверху)
+            obs_buttons.Add(button1);
+            obs_buttons.Add(button2);
+            obs_buttons.Add(button3);
+            obs_buttons.RemoveAt(2);
+        }
+    }
+}

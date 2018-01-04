@@ -1,0 +1,24 @@
+(defn remove-doc
+  [doc-pointer]
+
+  (def doc-id (first (query (-> (select :id)
+                                (from :work.texts)
+                                (where [:= :text_pointer doc-pointer])
+                                )
+                            )
+                     )
+    )
+
+    (println doc-pointer)
+    (println doc-id)
+
+    (insert-query ["DELETE FROM work.texts WHERE id = ?" doc-id])
+    (insert-query (-> (delete-from :work.text_to_words)
+                      (where [:= :text_id :text_id])
+                      )
+                  )
+    (insert-query (-> (delete-from :work.links_between_words)
+                      (where [:= :document_id :document_id])
+                      )
+                  )
+  )

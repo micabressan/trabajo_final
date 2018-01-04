@@ -1,0 +1,8 @@
+poissonProcess :: (Floating a, Integral b) => b -> a -> a
+poissonProcess k lambda = exp (-lambda) * lambda^k / fromIntegral (factorial k)
+
+yesno :: PureMT -> Double -> (Bool, PureMT)
+yesno gen lambda = let 
+        (pr, newGen) = randomDouble gen
+        threshold = 1.0 - poissonProcess 0 lambda
+    in (pr < threshold, newGen)

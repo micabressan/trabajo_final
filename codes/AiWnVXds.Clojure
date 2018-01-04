@@ -1,0 +1,12 @@
+;(= (__ 3) '(1 1 2))
+
+(defn fib-seq [x]
+  (def container (reduce conj [] (range x)))
+  (map-indexed
+    (fn [index item]
+      (if (<= index 1)
+        1
+        (nth container 0)));figure out what to return after index 1
+    container))
+
+(fib-seq 3)

@@ -1,0 +1,3 @@
+gen_vec_op(Op) ->
+    ?SUCHTHAT({Oper, V1, V2}, {Op, list(integer()), list(integer())}, 
+            length(V1) =:= length(V2) andalso length(V1) > 0 andalso length(V1) =< 100).

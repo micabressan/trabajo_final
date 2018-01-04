@@ -1,0 +1,4 @@
+(car(manufacturer BMD) (model X500) (color Black) (seats 5) (doors 5) (class midsize) (body-style sedan) (transmission manual) (engine-volume 3.0))
+(car(manufacturer Audo) (model RFC3) (color Metallic) (seats 8) (doors 4) (class family-car) (body-style sedan) (transmission automatic) (engine-volume 3.8))
+(car(manufacturer Toyko) (model Pluto) (color White) (seats 5) (doors 5) (class compact) (body-style minivan) (transmission manual) (engine-volume 3.1))
+(car(manufacturer Hazo) (model Mada) (color White) (seats 2) (doors 3) (class compact) (body-style hatchback) (transmission automatic) (engine-volume 2.0))

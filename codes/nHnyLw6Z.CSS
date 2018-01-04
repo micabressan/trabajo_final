@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>My Stream Animated Panels</title>
+		<meta http-equiv="refresh" content="4">
+		<style>
+			@font-face {
+				font-family: 'Dolce Vita';
+				src: url('fonts/Dolce Vita.ttf');
+				}
+			#reminderContainer {
+				width: 0px;
+				height: 0px;
+				background: #2e5794;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				overflow: hidden;
+				color: white;
+				font-family: 'Dolce Vita';
+				-webkit-box-shadow: 0px 0px 20px #0f3369;
+				-webkit-animation: animateReminder 2s 0s 1;
+				}
+			#reminderHeader {
+				width: 300px;
+				height: 26px;
+				background: #0f3369;
+				position: relative;
+				overflow: hidden;
+				text-align: center;
+				font-size: 22px;
+				}
+			#reminderContent {
+				width: 300px;
+				height: 74px;
+				background: #2e5794;
+				position: relative;
+				overflow: hidden;
+				color: white;
+				text-align: center;
+				font-size: 18px;
+				top: 12px;
+				//left: 10px;
+				}
+			#twitchLogo {
+				width: 55px;
+				height: 55px;
+				position: relative;
+				float: left;
+				bottom: 5px;
+				left: 15px;
+				}
+				@-webkit-keyframes animateReminder {
+				0%, 100% {
+					width: 0px;
+					height: 24px;
+					}
+				20%, 80% {
+					width: 300px;
+					height: 24px;
+					}
+				30%, 70% {
+					width: 300px;
+					height: 94px;
+					}
+				
+		</style>		
+	</head>
+	<body>
+		<div id="reminderContainer">
+			<div id="reminderHeader">
+				<span>Reminder :</span>
+			</div>
+
+			<div id="reminderContent">
+				<image id="twitchLogo" src="twitchLogo.png">
+				<div="reminderContentText">
+					<span>
+						Enjoying the Stream ?<br>
+						Don't forget to follow!
+					</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

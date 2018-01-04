@@ -1,0 +1,13 @@
+>>> process_ls("""acpid.pid     console-kit-daemon.pid  lock        pm-utils      sdp                      upstart-socket-bridge.pid
+acpid.socket  crond.pid               mdm.pid     postgresql    sendsigs.omit.d          upstart-udev-bridge.pid
+apache2       crond.reboot            mdm_socket  pppconfig     shm                      user
+apache2.pid   cups                    motd        resolvconf    udev                     utmp
+avahi-daemon  dbus                    mount       rsyslogd.pid  udisks                   wicd
+console       dhclient.pid            network     samba         udisks2                  wpa_supplicant
+ConsoleKit    initramfs               plymouth    screen        upstart-file-bridge.pid""")
+['acpid.pid', 'acpid.socket', 'apache2', 'apache2.pid', 'avahi-daemon', 'console', 'ConsoleKit',
+ 'console-kit-daemon.pid', 'crond.pid', 'crond.reboot', 'cups', 'dbus', 'dhclient.pid', 'initramfs',
+ 'lock', 'mdm.pid', 'mdm_socket', 'motd', 'mount', 'network', 'plymouth', 'pm-utils', 'postgresql',
+ 'pppconfig', 'resolvconf', 'rsyslogd.pid', 'samba', 'screen', 'sdp', 'sendsigs.omit.d', 'shm', 'udev',
+ 'udisks', 'udisks2', 'upstart-file-bridge.pid', 'upstart-socket-bridge.pid', 'upstart-udev-bridge.pid',
+ 'user', 'utmp', 'wicd', 'wpa_supplicant']

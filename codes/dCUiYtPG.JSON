@@ -1,0 +1,1602 @@
+[
+    {
+        "$": {
+            "ASIN": "142210284X",
+            "status": "Success"
+        },
+        "AllOfferListingsConsidered": "false",
+        "Product": {
+            "$": {
+                "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+                "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd"
+            },
+            "Identifiers": {
+                "MarketplaceASIN": {
+                    "MarketplaceId": "ATVPDKIKX0DER",
+                    "ASIN": "142210284X"
+                }
+            },
+            "LowestOfferListings": {
+                "LowestOfferListing": [
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "489858",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "36911",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "3",
+                        "SellerFeedbackCount": "1842009",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "True"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "3",
+                        "SellerFeedbackCount": "558146",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "True"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "False",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "215829",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "6.96"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "2.97"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "2",
+                        "SellerFeedbackCount": "4917",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "6.96"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "6.96"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "False",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "6140",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "False",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "35639",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.02"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "2.43"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.59"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "Just Launched"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "0",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.00"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "4760",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.56"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.79"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.77"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Collectible",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "9605",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "13.79"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.80"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "80-89%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "48425",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "14.26"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "10.27"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "70-79%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "98",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "14.27"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "10.00"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.27"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "80-89%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "48425",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "15.18"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "11.19"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "174025",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "15.19"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "15.19"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "Unknown"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "$": {
+            "ASIN": "1844161668",
+            "status": "Success"
+        },
+        "AllOfferListingsConsidered": "false",
+        "Product": {
+            "$": {
+                "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+                "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd"
+            },
+            "Identifiers": {
+                "MarketplaceASIN": {
+                    "MarketplaceId": "ATVPDKIKX0DER",
+                    "ASIN": "1844161668"
+                }
+            },
+            "LowestOfferListings": {
+                "LowestOfferListing": [
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1098",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.49"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.50"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Acceptable",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "4516",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.49"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.50"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "2",
+                        "SellerFeedbackCount": "11566",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.53"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.38"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.15"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1537",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.47"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.49"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "11",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "12.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "56608",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "14.75"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "10.10"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.65"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "77",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.86"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.86"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "358",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.87"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.87"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "95",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.88"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "17.88"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "False",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "22.02"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "22.02"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "80-89%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "15819",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "22.87"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "18.88"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "2",
+                        "SellerFeedbackCount": "2459",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "23.94"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "19.95"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "2384",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "35.73"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "35.73"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "False",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "80-89%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "385",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "38.38"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "35.39"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "2.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Collectible",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "650",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "42.49"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "38.50"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1876",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "43.97"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "39.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Collectible",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1876",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "43.97"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "39.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "3-7 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1584",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "49.17"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "45.18"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "Unknown"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "$": {
+            "ASIN": "0989391108",
+            "status": "Success"
+        },
+        "AllOfferListingsConsidered": "true",
+        "Product": {
+            "$": {
+                "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+                "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd"
+            },
+            "Identifiers": {
+                "MarketplaceASIN": {
+                    "MarketplaceId": "ATVPDKIKX0DER",
+                    "ASIN": "0989391108"
+                }
+            },
+            "LowestOfferListings": {
+                "LowestOfferListing": [
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "New",
+                            "ItemSubcondition": "New",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "3",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "18.94"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "14.95"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "3208",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "39.94"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "35.95"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "77",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "39.95"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "39.95"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "337",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "70.64"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "70.64"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "66549",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "70.65"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "65.95"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.70"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "$": {
+            "ASIN": "B009NOF57C",
+            "status": "Success"
+        },
+        "AllOfferListingsConsidered": "false",
+        "Product": {
+            "$": {
+                "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+                "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd"
+            },
+            "Identifiers": {
+                "MarketplaceASIN": {
+                    "MarketplaceId": "ATVPDKIKX0DER",
+                    "ASIN": "B009NOF57C"
+                }
+            },
+            "LowestOfferListings": {
+                "LowestOfferListing": [
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "3283",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Acceptable",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "1378395",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "90-94%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "10",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.10"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "489858",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.09"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Amazon",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "658085",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.38"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.38"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "3",
+                        "SellerFeedbackCount": "3283",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "True"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "Less than 70%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "5",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "2",
+                        "SellerFeedbackCount": "20",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "8.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "95-97%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "3283",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.98"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "0.00"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Good",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "4",
+                        "SellerFeedbackCount": "73",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.98"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Mint",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "Unknown",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "4",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "9.99"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "5.00"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.99"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "3-7 days"
+                            },
+                            "SellerPositiveFeedbackRating": "80-89%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "358",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "11.17"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "6.25"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "4.92"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "VeryGood",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "149014",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "11.51"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.53"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.98"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    },
+                    {
+                        "Qualifiers": {
+                            "ItemCondition": "Used",
+                            "ItemSubcondition": "Acceptable",
+                            "FulfillmentChannel": "Merchant",
+                            "ShipsDomestically": "True",
+                            "ShippingTime": {
+                                "Max": "0-2 days"
+                            },
+                            "SellerPositiveFeedbackRating": "98-100%"
+                        },
+                        "NumberOfOfferListingsConsidered": "1",
+                        "SellerFeedbackCount": "149014",
+                        "Price": {
+                            "LandedPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "11.51"
+                            },
+                            "ListingPrice": {
+                                "CurrencyCode": "USD",
+                                "Amount": "7.53"
+                            },
+                            "Shipping": {
+                                "CurrencyCode": "USD",
+                                "Amount": "3.98"
+                            }
+                        },
+                        "MultipleOffersAtLowestPrice": "False"
+                    }
+                ]
+            }
+        }
+    }
+]

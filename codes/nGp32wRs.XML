@@ -1,0 +1,19 @@
+ <TabItem x:Name="StudentTab" Header="Studenten">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="StudentDataGrid" AlternatingRowBackground="LightBlue" SelectionMode="Extended" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"             Binding="{Binding ID}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Vorname"        Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="Nachname"       Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Geburtsdatum"   Binding="{Binding Birthdate}"/>
+                            <DataGridTextColumn Header="Straße"         Binding="{Binding Street}"/>
+                            <DataGridTextColumn Header="Hausnummer"     Binding="{Binding HouseNumber}"/>
+                            <DataGridTextColumn Header="PLZ"            Binding="{Binding Zip}"/>
+                            <DataGridTextColumn Header="Stadt"          Binding="{Binding City}"/>
+                            <DataGridTextColumn Header="Semester"       Binding="{Binding Semester}"/>
+                            <DataGridTextColumn Header="Abschluss"      Binding="{Binding Degree}"/>
+                            <!--<DataGridTextColumn Header="Kurse"          Binding="{Binding Courses}"/>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>

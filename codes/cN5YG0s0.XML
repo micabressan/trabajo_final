@@ -1,0 +1,207 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:annotation>
+      <xsd:documentation xml:lang="pl">
+         XML Schema do ice_hockey.xml
+      </xsd:documentation>
+   </xsd:annotation>
+
+   <xsd:element name="liga" type="liga_typ"/>
+
+   <xsd:complexType name="liga_typ">
+      <xsd:sequence>
+         <xsd:element ref="adres_internetowy"/>
+         <xsd:element name="druzyny">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="druzyna" type="druzyna_typ" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="nazwa" type="xsd:string" use="required"/>
+      <xsd:attribute ref="rok_zalozenia"/>
+   </xsd:complexType>
+
+   <xsd:complexType name="druzyna_typ">
+      <xsd:sequence>
+         <xsd:element name="nazwa" type="xsd:string"/>
+         <xsd:element name="dane_druzyny" type="dane_druzyny_typ"/>
+         <xsd:element ref="kadra"/>
+         <xsd:element name="tytuly" type="tytuly_typ" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="sponsorzy" type="sponsorzy_typ"/>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="id_druzyny_typ" use="required"/>
+      <xsd:attribute ref="rok_zalozenia"/>
+   </xsd:complexType>
+
+   <xsd:complexType name="dane_druzyny_typ">
+      <xsd:sequence>
+         <xsd:element name="herb" type="xsd:string"/>
+         <xsd:element name="siedziba" type="siedziba_typ"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="sponsorzy_typ">
+      <xsd:sequence>
+         <xsd:element name="sponsor" minOccurs="0" maxOccurs="unbounded">
+            <xsd:simpleType>
+               <xsd:union memberTypes="adres_internetowy_typ nazwa_sponsora"/>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="nazwa_sponsora">
+      <xsd:restriction base="xsd:string">
+         <xsd:pattern value="[A-Z]*"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:group name="dane_personalne">
+      <xsd:sequence>
+         <xsd:element name="imie" type="xsd:string"/>
+         <xsd:element name="nazwisko" type="xsd:string"/>
+         <xsd:element name="zdjecie" type="zdjecie_typ"/>
+      </xsd:sequence>
+   </xsd:group>
+
+   <xsd:complexType name="osoba_typ">
+      <xsd:sequence>
+         <xsd:group ref="dane_personalne"/>
+         <xsd:element name="adres" type="adres_typ"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:element name="kadra">
+      <xsd:complexType>
+         <xsd:choice minOccurs="1" maxOccurs="unbounded">
+            <xsd:element name="zawodnik">
+               <xsd:complexType>
+                  <xsd:all>
+                     <xsd:element name="dane_osobowe">
+                        <xsd:complexType>
+                           <xsd:complexContent>
+                              <xsd:extension base="osoba_typ">
+                                 <xsd:attribute name="masa" type="masa_typ" use="required"/>
+                                 <xsd:attribute name="pozycja" type="pozycja_enum" use="required"/>
+                              </xsd:extension>
+                           </xsd:complexContent>             
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:all>
+                  <xsd:attribute name="id" type="id_zawodnika" use="required"/>
+               </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="trener" type="trener_typ"/>
+         </xsd:choice>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:complexType name="trener_typ">
+      <xsd:sequence>
+         <xsd:element name="dane_osobowe" type="osoba_typ"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="pozycja_enum">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="lewy obrońca"/>
+         <xsd:enumeration value="prawy obrońca"/>
+         <xsd:enumeration value="środkowy"/>
+         <xsd:enumeration value="lewy skrzydłowy"/>
+         <xsd:enumeration value="prawy skrzydłowy"/>
+         <xsd:enumeration value="bramkarz"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   
+
+   <xsd:complexType name="adres_typ">
+      <xsd:sequence>
+         <xsd:element name="miejscowosc" type="xsd:string"/>
+         <xsd:element name="ulica" type="xsd:string"/>
+         <xsd:element name="numer">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:minExclusive value="1"/>
+                  <xsd:maxExclusive value="128"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="kod_pocztowy">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:pattern value="\d{2}-\d{3}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="siedziba_typ">
+     <xsd:complexContent>
+       <xsd:extension base="adres_typ">
+         <xsd:sequence>
+           <xsd:element ref="adres_internetowy"/>
+         </xsd:sequence>
+       </xsd:extension>
+     </xsd:complexContent>
+   </xsd:complexType>
+
+   <xsd:element name="adres_internetowy" type="adres_internetowy_typ"/>
+   
+   <xsd:simpleType name="adres_internetowy_typ">
+      <xsd:restriction base="xsd:string">
+         <xsd:pattern value="www.[A-Za-z0-9]*\.(pl|com)"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="id_druzyny_typ">
+      <xsd:restriction base="xsd:string"> 
+         <xsd:pattern value="[A-Z]{2}-[0-9]{3}"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="id_zawodnika">
+      <xsd:restriction base="xsd:string">
+         <xsd:pattern value="[A-Z]{3}[0-9]{4}-[0-9]{2}"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:attribute name="rok_zalozenia">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{4}"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+   </xsd:attribute>
+
+   <xsd:simpleType name="tytuly_typ">
+     <xsd:list itemType="xsd:string"/>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="masa_rest">
+      <xsd:restriction base="xsd:decimal">
+         <xsd:minInclusive value="60"/>
+         <xsd:maxInclusive value="300"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="masa_typ">
+       <xsd:union memberTypes="masa_rest brak_danych_typ" />
+   </xsd:simpleType>
+
+   <xsd:simpleType name="brak_danych_typ">
+      <xsd:restriction base="xsd:string">
+            <xsd:pattern value="brak danych"/>
+         </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="zdjecie_typ">
+      <xsd:restriction base="xsd:string">
+         <xsd:pattern value="([A-Za-z0-9]|-|_)*\.(png|jpg|tif)"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+</xsd:schema>

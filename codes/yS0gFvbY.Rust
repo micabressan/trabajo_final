@@ -1,0 +1,21 @@
+extern crate image;
+extern crate md5;
+use image::{FilterType};
+use md5::{Md5, Digest};
+use std::fs::File;
+use std::path::Path;
+
+
+fn main() {
+    let output_path = Path::new("~/.cache/thumbnails/large").canonicalize().unwrap();
+    let mut hasher = Md5::new();
+    let mut path = Path::new("./data/test.png").canonicalize().unwrap().to_str().unwrap().to_string();
+    path.insert_str(0, "file://");
+    hasher.input(path.as_bytes());
+    let hash = hasher.result();
+    let mut output = File::create(output_path.push(hash).set_extension("png");
+    println!("{}", path);
+    println!("{:x}", hash);
+    // let img = image::open("data/test.png").expect("Opening image failed");
+    // let thumbnail = img.resize(256, 256, FilterType::Lanczos3);
+}

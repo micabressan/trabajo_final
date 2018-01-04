@@ -1,0 +1,143 @@
+body{
+	font-family: sans-serif;
+	background-color:  grey;
+}
+div#main-container{
+font-weight: 600;
+margin: auto;
+margin-top: 100px;
+width: 600px;
+border-radius: 10px;
+}
+#window-header{
+	color: white;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding-top: 8px;
+	padding-left: 13px;
+	height: 25px;
+	width: 587px;
+	background-color: #ff816e;
+	margin: 0px;
+
+}
+#f-section{
+	display: flex;
+	flex-direction: row;
+	background-color: white;
+}
+#search{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+	height: 35px;
+	background-color: #f2f0f2;
+}
+#main-container{
+	display: block;
+}
+#friendsss {
+	width: 291px;
+		border-right: solid rgba(0,0,0,0.1) 1px;
+	overflow-y:scroll;
+	 /*overflow-y:hidden;*/
+	  height:400px;
+	/*flex-direction: row;*/
+}
+#selected-friends{
+	width: 291px;
+	/*flex-direction: row;*/
+}
+li{
+position: relative;	
+}
+img.plus, img.cross{
+/*	position: absolute;
+	right:0;
+	
+*/
+width: 14px;
+height: 14px;
+
+}
+img.cross{
+width: 14px;
+height: 14px;
+
+}
+img.friends{
+	border-radius: 50px;
+	width: 55px;
+	height: 55px;
+}
+input{
+	background-image: url(images/search.svg);
+	background-position:  5px center;
+	background-repeat: no-repeat;	
+	background-size: 20px;
+	outline: none;
+	height: 22px;
+	padding-left:28px;
+	width: 250px;
+	border-radius: 15px;
+}
+p{
+	padding-top:3px;
+	padding-left: 5px;
+	margin-top: 0px;
+}
+
+#saving-panel{
+	background-color: #f2f0f2;
+	border-bottom-right-radius:10px ;
+	border-bottom-left-radius:10px ;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 45px;
+}
+button{
+	color: white;
+	padding: 7px;
+	background-color: #ff816e;
+	margin-right: 10px;
+	height: 30px;
+	border-radius: 10px;
+	border: none;
+	/*outline: none;*/
+}
+ul{
+	display: flex;
+	flex-direction: column;
+	list-style-type:  none;
+	margin-left: 22px;
+	 margin-top:0px;
+	 padding-left:0px;
+	 
+}	
+li{
+	border-top: solid rgba(0,0,0,0.1) 1px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 0px;
+	padding-top: 5px;
+	padding-right: 12px;
+	height: 61px;
+
+}
+
+#selected-friends-search {
+	margin-right: 18px;
+}
+div#selected-friends {
+	overflow-y: scroll;
+	height: 400px;
+}
+/*#added-to-list{
+	
+
+}*/

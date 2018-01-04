@@ -1,0 +1,66 @@
+from evennia import DefaultScript
+from evennia import default_cmds
+import urllib2
+import xml.etree.ElementTree as ElementTree
+from world.utils import cemit
+
+"""
+  Module to add live weather reporting and events to the MUD.
+  
+  Only does temperature for now, more features to come.
+"""
+
+_WEATHER = {}
+
+def fetchWeather(station):
+    ret = {}
+
+    url = "http://w1.weather.gov/xml/current_obs/%s.xml"
+    result = urllib2.urlopen(url % (station)).read()
+    tree = ElementTree.fromstring(result)
+    ret['cur'] = tree.find('.//temp_f').text
+    lat = tree.find('.//latitude').text
+    lon = tree.find('.//longitude').text
+
+    url = "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php?lat=%s&lon=%s&format=12+hourly&numDays=1"
+    result = urllib2.urlopen(url % (lat, lon)).read()
+    tree = ElementTree.fromstring(result)
+
+    ret['high'] = tree.find('.//*temperature[@type="maximum"]/value').text
+    ret['low'] = tree.find('.//*temperature[@type="minimum"]/value').text
+
+    return ret
+
+class WeatherTicker(DefaultScript):
+
+    def at_script_creation(self):
+        super(WeatherTicker, self).at_script_creation()
+        self.repeats = -1
+        self.interval = 60 * 60
+
+    def at_repeat(self):
+        ret = fetchWeather('KEED')
+        _WEATHER.update(ret)
+
+    def at_weather_event(self, new):
+        pass
+
+
+class CmdWeather(default_cmds.MuxCommand):
+    """
+    Syntax: @weather
+    
+    Displays the current weather.
+    
+    """
+
+    key = "@weather"
+    aliases = ["weather"]
+    locks = "cmd:all()"
+    help_category = "General"
+
+    def func(self):
+        try:
+            self.caller.msg("It is currently %s degrees with a high of %s and a low of %s." % (_WEATHER['cur'], _WEATHER['high'], _WEATHER['low']))
+        except KeyError:
+            self.caller.msg("Oops. Looks like you tried to access the weather before it's first update. Try back in 30 seconds or so.")

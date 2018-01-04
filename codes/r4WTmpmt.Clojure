@@ -1,0 +1,8 @@
+(deftest test-my-flat-map
+    (is (= '() (my-flat-map #(list %) '())))                                            ;; povik so prazna lista
+    (is (= '() (my-flat-map #(list %) nil)))                                            ;; povik so nil lista
+    (is (= '(1 2 3) (my-flat-map #(list %) '(1 2 3))))                                  ;; funkcijata sto sozdava lista od eden element ne ja menuva listata
+    (is (= '(1 1 2 2 3 3) (my-flat-map #(list %1 %1) '(1 2 3))))                        ;; ilustrativen povik
+    (is (= '(1 1 2 4 3 9 4 16 5 25) (my-flat-map #(list %1 (* %1 %1)) '(1 2 3 4 5))))   ;; ilustrativen povik
+    (is (= '() (my-flat-map #(list %) [])))                                             ;; vektor se pretvora vo lista
+    (is (= '(0 1 1 2 2 3) (my-flat-map #(list (dec %1) %1) [1 2 3]))) )                 ;; vektor se pretvora vo lista

@@ -1,0 +1,32 @@
+[
+	{
+		"orig_txID": "0x6c882b441a2d2c58d6b60bc0933e57269297becf46f4db28c0d62bf24a5dd821",
+		"user": "0x6ad6596b5be9f511f80e0c1f192fdab9d7670daa",
+		"token":	87328,
+		"paymentID": "119mr", // darunter vermerkt im smart contract
+		"txID" :	"0x6c882b441a2d2c58d6b60bc0933e57269297becf46f4db28c0d62bf24a5dd821",
+		"timestamp" : "1514906079",
+		"status" :"success",
+		"meta_info" : "Nachvergütung Rabattphase XY" // als schnelle info für wenn man in der DB stöbert
+	},
+	{
+		"orig_txID": "0x30796abd6baddd3e78e6fb2f7baa3189b73536fb7bd7a8b1f2b7806afe373c73",
+		"user": "0x2e8f343b9708b62cadd9730d0b4f89ffe4d2ceef",
+		"token":	849803,
+		"paymentID": "PMoqV",
+		"timestamp" : "1514906079",
+		"status" :"success",
+		"txID" :	"0x07671e99eb61297166bf15e65b698456abed08a9a739cc4079f580c2d08585c0",
+		"meta_info" : "Nachvergütung Rabattphase XY"
+	},
+	{
+		"orig_txID": "0x23b159d08a56bc2fb17e2efc03868629100f097f14141b007aa0a67e2ecb14b9",
+		"user": "0x0da995ac99cac57062f14c769b3ceb10283b7d8e",
+		"token":	4030,
+		"paymentID": "75S6N",
+		"timestamp" : "1514906079",
+		"status" :"success",
+		"txID" :	"0x15b25af5c103c581282135cd413147b1315a4fbaa792fa6918fe922cae7773d5",
+		"meta_info" : "Nachvergütung Rabattphase XY"
+	}
+]

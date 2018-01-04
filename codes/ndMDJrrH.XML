@@ -1,0 +1,24 @@
+<!ENTITY % susemanager-entities SYSTEM "susemanager-decl.ent">
+        %susemanager-entities;
+
+        <!ENTITY % sgml.features "IGNORE">
+        <!ENTITY % xml.features "INCLUDE">
+        <!ENTITY % dbcent PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.5//EN"
+                "http://www.oasis-open.org/docbook/xml/4.5/dbcentx.mod">
+        %dbcent;
+
+        <!-- BEGIN test order of recursion -->
+        <!ENTITY susemgrdb      "<phrase xmlns='http://docbook.org/ns/docbook'>&suse; Manager with Database</phrase>">
+        <!ENTITY susemgrproxy   "<phrase xmlns='http://docbook.org/ns/docbook'>&susemgr; Proxy</phrase>">
+        <!ENTITY susemgr        "<phrase xmlns='http://docbook.org/ns/docbook'>&suse; Manager</phrase>">
+        <!ENTITY suse           "<phrase xmlns='http://docbook.org/ns/docbook'>SUSE</phrase>">
+        <!ENTITY novell         "<phrase xmlns='http://docbook.org/ns/docbook'>Novell</phrase>">
+        <!-- END test order of recursion -->
+
+        <!-- Include product and network entities -->
+        <!ENTITY % network-entities SYSTEM "network-decl.ent">
+        %network-entities;
+
+
+        <!ENTITY % susemgr-entities SYSTEM "susemanager-decl.ent">
+        %susemgr-entities;

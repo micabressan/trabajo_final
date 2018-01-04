@@ -1,0 +1,10 @@
+import System.IO
+
+
+pCount n 0 = if n <= 2 then 1 else 0
+pCount n k = if n <= 2 then 0 else k * pCount (n-1) k + (n + k - 3) * pCount  (n-1) (k-1)
+
+
+main =  do {
+  print . pCount 5 3;
+  }

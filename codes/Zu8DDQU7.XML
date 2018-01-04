@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+
+    <input name="surveyId"/>
+
+
+    <on-start>
+        <evaluate expression="new pwr.groupproject.vouchers.bean.form.AnsweredSurveyForm(companySurveyServiceImpl.getSurveyByIdWithQuestion(surveyId))" result="flowScope.answeredSurveyForm" />
+        <evaluate expression="new pwr.groupproject.vouchers.bean.dto.rest.SurveyDtoRest(companySurveyServiceImpl.getSurveyByIdWithQuestion(surveyId))" result="flowScope.survey" />
+    </on-start>
+
+
+    <view-state id="step1" view="/user/survey.html" model="answeredSurveyForm">
+
+        <transition on="Submit" to="step2">
+            <evaluate expression="surveyController.test()" />
+        </transition>
+        <transition on="cancel" to="cancel" validate="false" bind="false"></transition>
+    </view-state>
+
+    <view-state id="step2" view="/user/receive_voucher.html" model="answeredSurveyForm">
+        <transition on="Receive" to="success">
+
+        </transition>
+        <transition on="cancel" to="cancel" validate="false"></transition>
+        <transition on="previousStep" to="step1" validate="false"></transition>
+    </view-state>
+
+    <end-state id="success" view="/user/receive_finished_landing"></end-state>
+    <end-state id="cancel" view="externalRedirect:/"></end-state>
+
+</flow>

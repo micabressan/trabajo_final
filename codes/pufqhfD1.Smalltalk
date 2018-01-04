@@ -1,0 +1,52 @@
+"This script takes a directory path as an argument and concatenates the current date
+ to all jpeg file names"
+
+[ Object < #CoralTmp ]
+
+CoralTmp class>>usage
+[
+	Console << 'Usage: coral ' << CoralScriptWriting getScriptName << ' directory'	<< String crlf.
+]
+
+[
+	| folder fs folderRef stream date jpegFiles |
+
+	(CoralScriptWriting hasOption: #h) ifTrue: [ CoralTmp usage. ^ self ].
+
+	[ folder := CoralScriptWriting getAllArgumentsWithoutMinusButScriptName first ]
+		on: SubscriptOutOfBounds do: [ Console << String crlf. CoralTmp usage. ^ self ].
+
+	fs := FSDiskFilesystem currentClass createDefault.
+	folderRef := fs root navigateWith: (fs resolve: folder).
+	folderRef isDirectory ifFalse: [ Console << 'This directory does not exist.'. ^ self ].
+	
+	stream := WriteStream on: String new.
+	DateAndTime today printYMDOn: stream.
+	stream close.
+	date := stream contents.
+	
+	jpegFiles := folderRef children select: [ :each | 
+		| extension |
+		extension := each extension asLowercase.
+		
+		#(jpg jpeg jpe jfif jif) anySatisfy: [ :ext | extension endsWith: ext ]
+	].
+		
+	jpegFiles do: [ :each | 
+		| newName |
+		newName := WriteStream on: String new.
+		newName
+			nextPutAll: each parent fullName;
+			nextPut: $/;
+			nextPutAll: each base;
+			nextPut: $_;
+			nextPutAll: date;
+			nextPut: $.;
+			nextPutAll: each extension.
+		
+		Console << '> Process: ' << each basename << String crlf.
+		each renameAs: newName contents.
+	].
+	
+	Console << 'Done.' << String crlf.
+]

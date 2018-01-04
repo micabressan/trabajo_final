@@ -1,0 +1,184 @@
+@charset "utf-8";
+
+
+/* Edit do Cabeçalho */
+
+	#cabecalho {
+	background-color: #0000FE;
+	width: 100%;
+	height: 45%;
+	position: absolute;
+	left: -0.1%;
+
+}
+
+/* Edit Menu */
+
+#menu {
+	background-color: #DCDCDC;
+	width: 96%;
+	height: 10%;
+	position: absolute;
+	top: 40%;
+	left: 2%;
+}
+
+#menu li {
+	display: inline-block;
+	margin: 10px ;
+	right: 50px;
+	line-height: 1px;
+}
+
+
+#menu a{
+	text-decoration: none;
+	color: #000000;
+}
+
+
+#menu a:hover{
+	text-decoration: underline;
+	text-decoration-color: #000000;
+
+}
+
+
+
+/* Edit Conteudo */
+
+#conteudo {
+	background-color: #ffffff;
+	width: 100%;
+	height: 1500px;
+
+
+}
+
+/*Edit  div blocos e areas */
+#area_esq
+	{
+		background-color: #CCCCCC;
+		position: absolute;
+		top: 55%;
+		left: 2%;
+		width: 64.2%; 
+		height: 54.4%;
+		padding: 0.6%;
+	}
+
+#area_dir {
+	background-color: #CCCCCC;
+	position: absolute;
+	top: 55%;
+	width: 30%;
+	height: 57%;
+	right: 2%;
+}
+
+#box1 {
+	background-color: #CCCCCC;
+	top: 120%;
+	width: 20%;
+	height: 54%;
+	left: 2%;
+	margin-top: 1%;
+}
+
+.ft1 {
+	border: 7px solid #777777;
+	padding-left: 20px;
+	padding-top: 30px;
+	
+}
+
+
+#box2 {
+	background-color: #CCCCCC;
+	background-image: url(img/3.jpg);
+	background-repeat: no-repeat;
+	background-position: 50% 40%;
+	border: 7px solid #777777;
+	position: absolute;
+	top: 120%;
+	width: 20%;
+	height: 54%;
+	left: 27%;
+}
+
+
+
+
+
+#box3 {
+	background-color: #CCCCCC;
+	background-image: url(img/4.jpg);
+	background-repeat: no-repeat;
+	background-position: 50% 40%;
+	border: 7px solid #777777;
+	position: absolute;
+	top: 120%;
+	width: 20%;
+	height: 54%;
+	right: 2%;
+}
+
+
+#box4{
+	background-color: #CCCCCC;
+	background-image: url(img/5.jpg);
+	background-repeat: no-repeat;
+	background-position: 50% 40%;
+	border: 7px solid #777777;
+	position: absolute;
+	top: 120%;
+	width: 20%;
+	height: 54%;
+	right: 27%;
+
+}
+
+
+
+
+
+
+/* Edit Rodape */
+#rodape {
+	background-color: #0000FE;
+	width: 100%;
+	height: 250px;
+}
+
+
+/* Formatação de botões */
+
+#btn1 {
+	color: white;
+	font-family: arial;
+	background-color: #0000FE;
+	width: 20%;
+	height: 8%;
+	font-style: italic;
+	font-size: larger;
+	border-top: #0754A4;
+	border-left: #0754A4;
+	border-bottom: #0754A4;
+	border-right:#0754A4; 
+
+}
+
+
+/*Formatação da imagens de dentro das box*/
+
+#img1 {
+	padding-left: 1.3%;
+}
+
+
+
+/*30 Pixels são 2% em largura, o calculo a se fazer é: (numero de pixels)x2/30;
+	// As dimensões desse monitor são 1366 de largura e 768 de altura*/
+
+/*O calculo da alura é: (O numero de pixels)x100/768; 
+	Para se obter o valor desejado da altura em porcentagem adicione 5 unidades no resultado*/

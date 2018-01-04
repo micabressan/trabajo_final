@@ -1,0 +1,10 @@
+POST la Applyments
+JobId cu ID-ul 5 e luat, poate ar trebui sters Applyment-ul inainte
+
+{
+  "UserId": "d0ca8fe3-5135-42da-8cf5-74d94cd9763d",
+  "JobId": 5,
+  "Proposal": "Test"
+}
+
+Iar la delete de job am facut direct din swagger, nu am payload. Am completat ID-ul job-ului si push the button :)

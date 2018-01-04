@@ -1,0 +1,35 @@
+// Responses to a registration request
+
+// Default response: Only error codes.
+{
+  "errors": {
+    "username": [
+      "length",
+      "trailing-underscore",
+      "leading-underscare"
+    ],
+    "email": [
+      "email"
+    ],
+    "asdf": [
+      "invalid-field"
+    ]
+  }
+}
+
+// With debug on.
+{
+  "errors": {
+    "username": {
+      "length": "usernames must be at least 2 characters long",
+      "trailing-underscore": "usernames may not end with underscore",
+      "leading-undercsore": "usernames may not start with underscores"
+    },
+    "email": {
+      "email": "email is not valid"
+    },
+    "asdf": {
+      "invalid-field": "that field is invalid"
+    }
+  }
+}

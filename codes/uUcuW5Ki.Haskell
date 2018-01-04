@@ -1,0 +1,7 @@
+maxOrd                  :: String -> Integer
+maxOrd s                = hittaLangsta s 0 0
+        where
+        hittaLangsta [] currentMax temp         = max currentMax temp
+        hittaLangsta (a:rest) currentMax temp
+                | isAlpha a                     = hittaLangsta rest currentMax temp+1
+                | otherwise                     = let longest = max temp currentMax in hittaLangsta rest longest 0

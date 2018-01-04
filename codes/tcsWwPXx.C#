@@ -1,0 +1,198 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Digger
+{
+	class Terrain : ICreature
+	{
+		public CreatureCommand Act(int x, int y)
+		{
+			return new CreatureCommand();
+		}
+
+		public bool DeadInConflict(ICreature conflictedObject)
+		{
+			return true;
+		}
+
+		public int GetDrawingPriority()
+		{
+			return 10;
+		}
+
+		public string GetImageFileName()
+		{
+			return "Terrain.png";
+		}
+	}
+
+	class Player : ICreature
+	{
+		public CreatureCommand Act(int x, int y)
+		{
+			var moving = new CreatureCommand(); 
+			switch (Game.KeyPressed) 
+			{ 
+				case Keys.Up: 
+					if (y - 1 >= 0 && !(Game.Map[x, y - 1] is Sack)) 
+						moving.DeltaY -= 1; 
+				break; 
+				case Keys.Down: 
+					if (y + 1 < Game.MapHeight && !(Game.Map[x, y + 1] is Sack)) 
+						moving.DeltaY += 1; 
+				break; 
+				case Keys.Left: 
+					if (x - 1 >= 0 && !(Game.Map[x - 1, y] is Sack)) 
+						moving.DeltaX -= 1; 
+				break; 
+				case Keys.Right: 
+					if (x + 1 < Game.MapWidth && !(Game.Map[x + 1, y] is Sack)) 
+						moving.DeltaX += 1; 
+				break; 
+			} 
+			return moving;
+		}
+
+		public bool DeadInConflict(ICreature conflictedObject)
+		{
+			return (conflictedObject is Sack);
+		}
+
+		public int GetDrawingPriority()
+		{
+			return 1;
+		}
+
+		public string GetImageFileName()
+		{
+			return "Digger.png";
+		}
+	}
+
+	class Sack : ICreature
+	{
+		int Blocks;
+
+		public CreatureCommand Act(int x, int y)
+		{
+			if (y + 1 < Game.MapHeight)
+			{
+				if (Game.Map[x, y+1] == null || (Game.Map[x, y+1] is Player) && Blocks > 0)
+				{
+					Blocks++;
+					return new CreatureCommand { DeltaY = 1 };
+				}
+			}
+
+			if (Blocks > 1)
+				return new CreatureCommand { TransformTo = new Gold() };
+			Blocks = 0;
+			return new CreatureCommand();
+		}
+
+		public bool DeadInConflict(ICreature conflictedObject)
+		{
+			return false;
+		}
+
+		public int GetDrawingPriority()
+		{
+			return 5;
+		}
+
+		public string GetImageFileName()
+		{
+			return "Sack.png";
+		}
+	}
+
+	class Gold : ICreature
+	{
+		public CreatureCommand Act (int x, int y)
+		{
+			return new CreatureCommand();
+		}
+
+		public bool DeadInConflict(ICreature conflictedObject)
+		{
+			if (conflictedObject is Player)
+				Game.Scores += 10;
+			return true;
+		}
+
+		public int GetDrawingPriority()
+		{
+			return 5;
+		}
+
+		public string GetImageFileName()
+		{
+			return "Gold.png";
+		}
+	}
+	
+	class Monster : ICreature
+	{
+		public CreatureCommand Act(int x, int y)
+		{
+			int playerX;
+			int playerY;
+			if (GetCoords(out playerX, out playerY))
+			{
+				var deltaX = Math.Sign(playerX - x);
+				var deltaY = Math.Sign(playerY - y);
+				if (deltaX != 0)
+				{
+					if (x + deltaX < Game.MapWidth && x + deltaX >= 0 &&
+						!(Game.Map[x + deltaX, y] is Terrain) && !(Game.Map[x + deltaX, y] is Sack))
+						return new CreatureCommand { DeltaX = deltaX };
+				}
+				if (deltaX != 0)
+				{
+					if (y + deltaY< Game.MapHeight && y + deltaY >= 0 &&
+						!(Game.Map[x, y + deltaY] is Terrain) && !(Game.Map[x, y + deltaY] is Sack))
+						return new CreatureCommand { DeltaY = deltaY };
+				}
+			}
+			return new CreatureCommand();
+		}
+		
+		public bool GetCoords(out int playerX, out int playerY)
+		{
+			playerX = 0;
+			playerY = 0;
+			for (var y = 0; y < Game.MapHeight; y++)
+			{
+				for (var x = 0; x < Game.MapWidth; x++)
+				{
+					if (Game.Map[x, y] is Player)
+					{
+						playerX = x;
+						playerY = y;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		public bool DeadInConflict(ICreature conflictedObject)
+		{
+			return (conflictedObject is Sack);
+		}
+		
+		public int GetDrawingPriority()
+		{
+			return 2;
+		}
+		
+		public string GetImageFileName()
+		{
+			return "Monster.png";
+		}
+	}
+}

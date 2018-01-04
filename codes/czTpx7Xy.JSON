@@ -1,0 +1,72 @@
+[
+    {
+        "id": "3231",
+        "name": "Blouses"
+    },
+    {
+        "id": "3235",
+        "name": "Broeken"
+    },
+    {
+        "id": "3236",
+        "name": "Jurken",
+        "subcategories": [
+            {
+                "id": "3237",
+                "name": "test 2"
+            }
+        ]
+    },
+    {
+        "id": "3233",
+        "name": "Jassen",
+        "subcategories": [
+            {
+                "id": "3232",
+                "name": "Jeans",
+                "subcategories": [
+                    {
+                        "id": "3367",
+                        "name": "Empty category"
+                    },
+                    {
+                        "id": "3366",
+                        "name": "jeans2"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "3229",
+        "name": "Merkkleertjes"
+    },
+    {
+        "id": "3222",
+        "name": "Merkkleertjes - Jongens shirts"
+    },
+    {
+        "id": "3224",
+        "name": "Merkkleertjes - Jongensbroeken"
+    },
+    {
+        "id": "3225",
+        "name": "Merkkleertjes - Jurken"
+    },
+    {
+        "id": "3223",
+        "name": "Merkkleertjes - Rokken"
+    },
+    {
+        "id": "3226",
+        "name": "Roos en Tijn - Jongens Shirts"
+    },
+    {
+        "id": "3228",
+        "name": "Roos en Tijn - Meisjes broeken"
+    },
+    {
+        "id": "3230",
+        "name": "Truien en Vesten"
+    }
+]

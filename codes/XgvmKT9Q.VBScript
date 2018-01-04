@@ -1,0 +1,11 @@
+Function LiczbaKolorowych(Zakres As Range, Zrodlo As Range)
+    
+    LiczbaKolorowych = 0
+    
+    For Each cell In Zakres
+        If (cell.Interior.Color = Zrodlo.Interior.Color) And (cell.Font.Bold = Zrodlo.Font.Bold) And (cell.Font.Color = Zrodlo.Font.Color) Then
+            LiczbaKolorowych = LiczbaKolorowych + 1
+        End If
+    Next
+
+End Function

@@ -1,0 +1,77 @@
+-- A U F G A B E  2
+
+type Nat1 = Int
+type Wahrheitswert = Bool
+type Name = String
+type Alter = Nat1
+type Gemeinde = String
+type Strasse = String
+type Hausnr = Nat1
+type Wohnsitze = [Anschrift]
+type Melderegister = [Person]
+
+data Geschlecht = M | W | X deriving (Show, Eq, Ord)
+data Person = P Name Alter Geschlecht Wohnsitze deriving (Show, Eq, Ord)
+data Anschrift = A Gemeinde Strasse Hausnr deriving (Show, Eq, Ord)
+data Registerbaum = Leer | Verzweigung Registerbaum Person Registerbaum deriving (Show, Eq, Ord)
+
+
+migration :: Melderegister -> Registerbaum
+migration [] = Leer
+migration m = foldl add Leer m
+
+add :: Registerbaum -> Person -> Registerbaum
+add Leer p = Verzweigung Leer p Leer
+add (Verzweigung links (P n1 a1 g1 w1) rechts) (P n a g w)
+  | fehlerhaft (P n1 a1 g1 w1) (P n a g w) = Verzweigung Leer (P n1 a1 g1 w1) Leer
+  | notfehlerhaft (P n1 a1 g1 w1) (P n a g w) = Verzweigung links (P n1 a1 g1 (w1 ++ w)) rechts
+  | n < n1 = Verzweigung (add links (P n a g w)) (P n1 a1 g1 w1) rechts
+  | n > n1 = Verzweigung links (P n1 a1 g1 w1) (add rechts (P n a g w))
+
+
+inOrder :: Registerbaum -> Melderegister
+inOrder Leer = []
+inOrder (Verzweigung links p rechts) = inOrder links ++ [p] ++ inOrder rechts
+
+rolle_rueckwaerts :: Registerbaum -> Melderegister
+rolle_rueckwaerts Leer = []
+rolle_rueckwaerts (Verzweigung links p rechts) = rolle_rueckwaerts rechts ++ [p] ++ rolle_rueckwaerts links
+
+fehlerhaft :: Person -> Person -> Wahrheitswert
+fehlerhaft (P n1 a1 g1 w1) (P n2 a2 g2 w2) =
+  if n1 == n2 && (a1 /= a2 || g2 /= g2) then True
+  else False
+
+notfehlerhaft :: Person -> Person -> Wahrheitswert
+notfehlerhaft (P n1 a1 g1 w1) (P n2 a2 g2 w2) =
+  if n1 == n2 && a1 == a2 && g1 == g2 then True
+  else False
+
+{-
+bereinige_Anschriften :: Registerbaum -> Registerbaum
+bereinige_Anschriften Leer = Leer
+bereinige_Anschriften (Verzweigung links p rechts) = bereinige_Anschriften links
+
+duplikat :: Person -> Person
+duplikat (P _ _ _ w) = 
+-}
+
+
+p1 = P "Al" 19 M [A "Gem1" "Str1" 4, A "Gem2" "Str10" 5]
+p2 = P "Allie" 20 W [A "Gem1" "Str5" 20]
+p21 = P "Allie" 20 W [A "GemNeu1" "StrNeu2" 20]
+p3 = P "Bill" 40 M [A "Gem5" "Str7" 1, A "Gem5" "Str3" 2]
+p4 = P "Charlie" 18 M [A "Gem3" "Str4" 1]
+p5 = P "Charlotte" 18 W [A "Gem3" "Str4" 1]
+p1f = P "Al" 17 M [A "Gem1" "Str1" 4, A "Gem2" "Str10" 5]
+p3f = P "Bill" 40 W [A "Gem5" "Str7" 1, A "Gem5" "Str3" 2]
+p5f = P "Charlotte" 17 M [A "Gem3" "Str4" 1]
+p5a = P "Charlotte" 18 W [A "Gem4" "Str8" 20, A "Gem3" "Str4" 1]
+p6 = P "Dave" 40 M [A "Gem5" "Str8" 20, A "Gem4" "Str8" 20, A "Gem1" "Str4" 5, A "Gem1" "Str4" 4]
+p7 = P "Elanor" 39 W [A "Gem7" "Str8" 19, A "Gem5" "Str8" 20, A "Gem5" "Str8" 20, A "Gem 7" "Str8" 19]
+
+g1 = "Oberpullendorf" :: Gemeinde
+g2 = "" :: Gemeinde
+g3 = "St. Veit an der Glan" :: Gemeinde
+
+m1 = [p1, p2, p21, p3, p4]

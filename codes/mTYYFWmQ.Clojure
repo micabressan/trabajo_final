@@ -1,0 +1,30 @@
+(ns kotitehtava3.core
+  (:gen-class))
+
+(declare q0 q1 q2 q3 q4 q5 q6 q7)
+
+(defn state [l]
+  (fn [s]
+    (let [x (str (first s))]
+      (let [f (get l (keyword x))]
+        (if (nil? f)
+          false
+          (f (rest s)))))))
+
+(defn q8 [s]
+  (if (empty? s)
+    true ; this is final state
+    ((state {:a q7, :b q6}) s)))
+
+(defn q7 [s] ((state {:a q8, :b q3}) s))
+(defn q6 [s] ((state {:a q3, :b q8}) s))
+(defn q5 [s] ((state {:a q2, :b q6}) s))
+(defn q4 [s] ((state {:a q7, :b q1}) s))
+(defn q3 [s] ((state {:a q6, :b q7}) s))
+(defn q2 [s] ((state {:a q5, :b q3}) s))
+(defn q1 [s] ((state {:a q3, :b q4}) s))
+(defn q0 [s] ((state {:a q2, :b q1}) s))
+
+(defn -main
+  [& args]
+  (println (str (q0 (first args)))))

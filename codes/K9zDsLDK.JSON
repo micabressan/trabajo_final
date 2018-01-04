@@ -1,0 +1,81 @@
+{
+  "facility_id": 3,
+  "patient_censuses": [
+    {
+      "id": 46,
+      "patient_id": 178,
+      "authorizations": "test 1",
+      "patient_procedures": [
+        {
+          "id": 61,
+          "date": "2018-01-01T16:53:10.529Z",
+          "procedures": [
+            {
+              "id": "85",
+              "facility_procedure_id": 102,
+              "provider_id": 7,
+              "state": "delete"
+            }
+          ],
+          "state": "update"
+        },
+        {
+          "id": 63,
+          "date": "2018-01-07T16:53:10.529Z",
+          "procedures": [
+            {
+              "id": "91",
+              "facility_procedure_id": 109,
+              "provider_id": 9,
+              "state": "delete"
+            },
+            {
+              "id": "92",
+              "facility_procedure_id": 110,
+              "provider_id": 8,
+              "state": "delete"
+            }
+          ],
+          "state": "update"
+        }
+      ],
+      "dx_codes": [
+        {
+          "id": 88,
+          "facility_diagnosis_id": 31,
+          "state": "delete"
+        },
+        {
+          "id": 91,
+          "facility_diagnosis_id": 44,
+          "state": "delete"
+        }
+      ],
+      "state": "update"
+    },
+    {
+      "id": 47,
+      "patient_id": 179,
+      "authorizations": "test 2 ",
+      "patient_procedures": [
+        {
+          "id": 65,
+          "date": "2018-01-04T16:53:10.529Z",
+          "procedures": [
+            {
+              "id": "97",
+              "facility_procedure_id": 110,
+              "provider_id": 8,
+              "state": "delete"
+            }
+          ],
+          "state": "update"
+        }
+      ],
+      "dx_codes": [],
+      "state": "update"
+    }
+  ],
+  "start_date": "2018-01-03T16:53:10.529Z",
+  "status": 1
+}

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Frame type="Frame" name="GameUI/UIContainer" file="GameUI">
+		<Frame type="Frame" name="DebugFrame">
+		
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			
+			<AcceptsMouse val="true"/>
+			<Height val="600"/>
+			<Width val="1200"/>
+	
+			<Animation name="Show">
+				<Event event="OnShown" action="Reset,Play"/>
+         
+				<Controller type="Fade" end="Pause">
+					<Key type="Curve" time="0" value="0" out="Slow"/>
+					<Key type="Curve" time=".6" value="255" in="Slow"/>
+				</Controller>
+			</Animation>
+			
+			<Frame type="Image" name="Background">
+				<Anchor relative="$parent"/>
+				
+				<Texture val="Assets/Textures/ui_ingame_tutorial_textborder_terr.dds"/>
+				<TextureType val="NineSlice"/>
+				<Alpha val="200"/>
+				<Blur val="True"/>
+				<BlurAmount val="3"/>
+			</Frame>
+			
+			<Frame type="Label" name="Title">
+			
+				<Anchor side="Top" relative="$parent" pos="Min" offset="60"/>
+				<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+				
+				<Style val="LayoutDebugPanelTitle"/>
+				<Width val="600"/>
+				<Text val="CHOOSE RACE!"/>
+			</Frame>
+			
+			<!-- Terran Glow -->
+			<Frame type="Frame" name="TerranGlow" template="UnitModelFrameTemplate/UnitFrame">
+			
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-50"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="400"/>
+				<Width val="400"/>
+				<Visible val="false"/>
+				<AcceptsMouse val="true"/>
+				
+			</Frame>
+			
+			<!-- Marine -->
+			<Frame type="UnitModelFrame" name="TerranRace" template="StandardUnitModelTemplates/UnitModelFrameTemplate">
+				<Visible val="true"/>
+				<AcceptsMouse val="true"/>
+				<Height val="200"/>
+				<Width val="200"/>
+			
+			</Frame>
+			
+			<!-- MarineButton -->
+			<Frame type="Button" name="TerranButton" template="LotV_GenericTemplates/LotV_OrangeButtonTemplate">
+			
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="300"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				<Alpha val="1"/>
+				
+				<Animation name="TerranIsClicked">
+					<Event event="OnMouseDown" action="Reset,Play"/>
+					<Controller type="State" frame="$parent" stateGroup="SkinToggle" end="Pause">
+						<Key type="Identifier" time="0" value="Terran"/>
+					</Controller>
+				</Animation>	
+				
+			</Frame>
+			
+			<!-- Protoss Glow -->
+			<Frame type="Frame" name="ProtossGlow" template="UnitModelFrameTemplate/UnitFrame">
+				<Anchor side="Left" relative="$parent" pos="Min" offset="85"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-100"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="400"/>
+				<Width val="400"/>
+				<Visible val="false"/>
+				<AcceptsMouse val="true"/>
+				
+			</Frame>	
+			
+			<!-- Zealot -->
+			<Frame type="Frame" name="ProtossRace" template="UnitModelFrameTemplate/UnitFrame">
+			
+				<Anchor side="Left" relative="$parent" pos="Min" offset="120"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="300"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				<AcceptsMouse val="true"/>
+				
+
+			</Frame>
+			
+			<!-- ProtossButton -->
+			<Frame type="Button" name="ProtossButton" template="LotV_GenericTemplates/LotV_OrangeButtonTemplate">
+			
+				<Anchor side="Left" relative="$parent" pos="Min" offset="120"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="300"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				<Alpha val="0"/>
+				
+				<Animation name="ProtossIsClicked">
+					<Event event="OnMouseDown" action="Reset,Play"/>
+					<Controller type="State" frame="$parent" stateGroup="SkinToggle" end="Pause">
+						<Key type="Identifier" time="0" value="Protoss"/>
+					</Controller>
+				</Animation>	
+				
+			</Frame>
+			
+			<!-- Zerg Glow -->
+			<Frame type="Frame" name="ZergGlow" template="UnitModelFrameTemplate/UnitFrame">
+				<Height val="400"/>
+				<Width val="400"/>
+				<Visible val="false"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="-65"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-30"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Left" relative="$this" pos="Min" offset="0"/>
+				<AcceptsMouse val="true"/>
+			</Frame>	
+			
+			<!-- Zergling -->
+			<Frame type="Frame" name="ZergRace" template="UnitModelFrameTemplate/UnitFrame">
+			
+				<Anchor side="Right" relative="$parent" pos="Max" offset="-120"/>
+				<Anchor side="Left" relative="$this" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="300"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				<AcceptsMouse val="true"/>
+				
+				<Frame type="UnitModelFrame" name="HeroModel">
+					<TurningEnabled val="true"/>
+					<Animation name="HaloCreate">
+						<Event event="OnMouseDown" action="Reset,Play" frame="$this"/>
+						<Controller type="ActorMsg" end="Pause" frame="$this">
+							<Key type="Identifier" time="0.05" value="HaloStart"/>
+							<Key type="Identifier" time="0.05" value="HaloSetColor 244,189,43"/>
+						</Controller>
+					</Animation>
+				</Frame>		
+
+
+	
+			</Frame>
+			
+			<!-- ZerglingButton -->
+			<Frame type="Button" name="ZergButton" template="LotV_GenericTemplates/LotV_OrangeButtonTemplate">
+			
+				<Anchor side="Right" relative="$parent" pos="Max" offset="-120"/>
+				<Anchor side="Left" relative="$this" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				
+				<Height val="300"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				<Alpha val="0"/>
+				
+				<Animation name="ZergIsClicked">
+					<Event event="OnMouseDown" action="Reset,Play"/>
+					<Controller type="State" frame="$parent" stateGroup="SkinToggle" end="Pause">
+						<Key type="Identifier" time="0" value="Zerg"/>
+					</Controller>
+					
+				</Animation>					
+			</Frame>
+			
+			<!-- ChooseButton -->
+			<Frame type="Button" name="ChooseButton" template="LotV_GenericTemplates/LotV_OrangeButtonTemplate">
+			
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="-60"/>
+				<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+				
+				<Height val="120"/>
+				<Width val="300"/>
+				<Visible val="true"/>
+				
+				<Frame type="Label" name="Label">
+					<Text val="CHOOSE"/>
+					<Style val="LayoutDebugPanelTitle"/>
+					<Visible val="true"/>
+					
+				</Frame>
+				
+			</Frame>
+			
+			<!-- State groups based on checkbox -->
+			<StateGroup name="SkinToggle">
+				<DefaultState val="Terran"/>
+            
+				<State name="Terran">
+					<Action type="SetProperty" frame="Background" texture="Assets/Textures/ui_ingame_tutorial_textborder_terr.dds"/>
+					<Action type="SetProperty" frame="Title" color="180,255,210"/>
+					<Action type="SetProperty" frame="TerranGlow" visible="true"/>
+					<Action type="SetProperty" frame="ZergGlow" visible="false"/>
+					<Action type="SetProperty" frame="ProtossGlow" visible="false"/>
+				</State>
+        
+				<State name="Protoss">
+					<Action type="SetProperty" frame="Background" texture="Assets/Textures/ui_ingame_tutorial_textborder_prot.dds"/>
+					<Action type="SetProperty" frame="Title" color="150,200,255"/>
+					<Action type="SetProperty" frame="TerranGlow" visible="false"/>
+					<Action type="SetProperty" frame="ZergGlow" visible="false"/>
+					<Action type="SetProperty" frame="ProtossGlow" visible="true"/>
+					
+				</State>
+				<State name="Zerg">
+					<Action type="SetProperty" frame="Background" texture="Assets/Textures/ui_ingame_tutorial_textborder_zerg.dds"/>
+					<Action type="SetProperty" frame="Title" color="255,210,180"/>
+					<Action type="SetProperty" frame="TerranGlow" visible="false"/>
+					<Action type="SetProperty" frame="ZergGlow" visible="true"/>
+					<Action type="SetProperty" frame="ProtossGlow" visible="false"/>
+				</State>
+			</StateGroup>
+			
+		</Frame>
+	</Frame>
+</Desc>

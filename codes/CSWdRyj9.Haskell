@@ -1,0 +1,7 @@
+move :: Board -> (Int,Int) -> (Int,Int) -> [[Bool]]
+move [[]] from to = [[]]
+move (x:board) from to = [ replace i | i <- [0..(length x)-1]] : move board from to
+  where ycoord    = (length x) - 1
+            neighbor = findNeighbor board from to
+            pegs       = map (fst) $ filter (\i -> snd i == ycoord) [from, to, neighbor]
+            replace i = if elem i pegs then not $ x !! i else x !! i

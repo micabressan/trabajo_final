@@ -1,0 +1,9 @@
+button.rstore-domain-search-button.submit:before {
+    content: '\f002';
+    font-family: "Font Awesome 5 Free";
+    font-size: 2em;
+}
+
+button.rstore-domain-search-button.submit {
+padding:7px;
+}

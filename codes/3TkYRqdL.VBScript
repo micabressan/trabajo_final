@@ -1,0 +1,17 @@
+Dim WshNetwork
+Set WshNetwork = CreateObject("WScript.Network")
+varComputerName = WshNetwork.ComputerName
+
+Const wdUserTemplatesPath = 2
+Set objWord = CreateObject("Word.Application")
+Set objOptions = objWord.Options
+
+if LCase(Left(varComputerName, 4)) = "URVet-" then
+	objOptions.DefaultFilePath(wdUserTemplatesPath) = "\\domain\dfs\dkcit\OfficeTemplatesVet"
+elseif LCase(Left(varComputerName, 7)) = "URClinic-" then
+	objOptions.DefaultFilePath(wdUserTemplatesPath) = "\\domain\dfs\dkcit\OfficeTemplatesClinic"
+else
+	msgbox "The required letterhead for use in Microsoft Word has not been configured due to a system error. Please log out, then log in again, and if this error persists, contact your not-so-friendly neighbourhood techie." & vbNewLine & vbNewLine & "Grrr...", 16, "Letterhead Not Configured!"
+end if
+
+objWord.Quit
