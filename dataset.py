@@ -25,19 +25,18 @@ for files in files_list:
 
 def my_tokenizer(content):
 
-    character = list(set(Python + Java))
-    letters = []
-    for x in map(chr, range(97, 123)):
-        letters.append(x)
-    for y in map(chr, range(65, 91)):
-        letters.append(y)
+    words = list(set(Python + Java))
+    letters = [x for x in map(chr, range(97, 123))] +
+            [y for y in map(chr, range(65, 91))]
 
+    new_content = ''
     for element in content:
-        if element not in character:
-            content.replace(letter, '')
+        if element not in letters:
+            new_content = new_content + ' '
+        else:
+            new_content = new_content + element
 
-    return content.split()
-
+    return [w for w in new_content.split() if w in words]
 
 vectorizer = CountVectorizer(tokenizer=my_tokenizer)
 vectorizer.fit_transform(content)

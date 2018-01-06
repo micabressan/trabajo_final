@@ -28,7 +28,10 @@ def one_line_comment(text):
 
 
 def multiline_comment(text):
-    comment_characters = [('/\*', '\*/'),('<!--', '-->'), ('/\+', '\+/'), ('"""', '"""'), ('\'\'\'', '\'\'\''), ('{-', '-}'), ('--\[\[', '\]\]'), ('###', '###'), ('\(comment', '\)'), ('=begin', '=cut'), 				('=begin', '=end')]
+    comment_characters = [('/\*', '\*/'),('<!--', '-->'), ('/\+', '\+/'),
+                        ('"""', '"""'), ('\'\'\'', '\'\'\''), ('{-', '-}'),
+                        ('--\[\[', '\]\]'), ('###', '###'), ('\(comment', '\)'),
+                        ('=begin', '=cut'), ('=begin', '=end')]
     for begin, end in comment_characters:
         regular_expresion = begin + '([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*' + end
         text = re.sub(regular_expresion, 'COMMENT', text)

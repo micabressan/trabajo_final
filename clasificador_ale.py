@@ -1,9 +1,22 @@
 from util import load_data, load_data_language
 
 from sklearn.pipeline import Pipeline
-
+import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_moons, make_circles, make_classification
+from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+
 
 from sklearn.model_selection import train_test_split
 
@@ -21,13 +34,18 @@ from keywords import *
 
 def my_tokenizer(content):
 
-    character = list(set(Python + Java))
+    words = list(set(Python + Java))
+    letters = [x for x in map(chr, range(97, 123))] + [y for y in map(chr, range(65, 91))]
 
+
+    new_content = ''
     for element in content:
-        if element not in character:
-            content.replace(element, '')
+        if element not in letters:
+            new_content = new_content + ' '
+        else:
+            new_content = new_content + element
 
-    return content.split()
+    return [w for w in new_content.split() if w in words]
 
 
 
@@ -61,80 +79,26 @@ def preprocessor(text):
     return text
 
 #http://scikit-learn.org/stable/modules/feature_extraction.html
-
+'''
 if __name__ == '__main__':
-    X, y = load_data_language('codes', ['Python'])
+    X, y = load_data_language('codes', ['Python', 'Java'])
     #X, y = load_data('codes')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    text_clf = Pipeline(
-        [
-            ('vect', CountVectorizer(preprocessor=preprocessor)),
-            ('tfidf', TfidfTransformer(use_idf=False)),
-            ('clf', SGDClassifier(
-                loss='hinge',
-                penalty='l2',
-                alpha=1e-3,
-                random_state=42,
-                max_iter=5,
-                tol=None)),])
+    classifiers = [SGDClassifier( loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None), KNeighborsClassifier(3), SVC(kernel="linear", C=0.025), SVC(gamma=2, C=1), DecisionTreeClassifier(max_depth=5), RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1), MLPClassifier(alpha=1), AdaBoostClassifier()]
 
-    text_clf.fit(X_train, y_train)
-    predicted = text_clf.predict(X_test)
-    print(metrics.accuracy_score(predicted, y_test))
-    print metrics.classification_report(y_test, predicted)
-    print metrics.confusion_matrix(y_test, predicted)
+    for c in classifiers:
 
+        print c
+        text_clf = Pipeline(
+            [
+                ('vect', CountVectorizer()),
+                ('tfidf', TfidfTransformer(use_idf=False)),
+                ('clf', c),])
 
-----
-    count_vect = CountVectorizer(tokenizer=tokenizer)
-
-    #tfidf_transformer = TfidfTransformer()
-
-    X_train_counts = count_vect.fit_transform(X_train)
-    #X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
-
-    X_test_counts = count_vect.transform(X_test)
-    #X_test_tfidf = tfidf_transformer.transform(X_test_counts)
-
-    clf = MultinomialNB().fit(X_train_tfidf, y_train)
-    predicted = clf.predict(X_test_tfidf)
-    print(metrics.accuracy_score(predicted, y_test))
-
-    clf = LinearSVC().fit(X_train_counts, y_train)
-    predicted = clf.predict(X_test_counts)
-    print(metrics.accuracy_score(predicted, y_test))
-
-    #print metrics.classification_report(y_test, predicted)
-    #print metrics.confusion_matrix(y_test, predicted)
-
-
-    clf = SGDClassifier(
-        loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None
-        ).fit(X_train_counts, y_train)
-
-    predicted = clf.predict(X_test_counts)
-    print(metrics.accuracy_score(predicted, y_test))
-
-    #print metrics.classification_report(y_test, predicted)
-    #print metrics.confusion_matrix(y_test, predicted)
-
-    '''
-
-if __name__ == '__main__':
-
-    content = '''
-                import sys
-
-                if( len( sys.argv ) ) != 5:
-	                raise Exception('e necessario a matriz completa.')
-                    listNumbers = sys.argv
-                    listNumbers.pop()
-                    castInt = lambda x : int(x)
-                    listNumbers = [ castInt(x) for x in range(len(listNumbers)) ]
-                    result = ( listNumbers[0] * listNumbers[3] ) - ( listNumbers[1] * listNumbers[2] )
-                    print( result )
-                '''
-
-    print my_tokenizer(content)
+        text_clf.fit(X_train, y_train)
+        predicted = text_clf.predict(X_test)
+        print(metrics.accuracy_score(predicted, y_test))
+        #print metrics.classification_report(y_test, predicted)
+        #print metrics.confusion_matrix(y_test, predicted)

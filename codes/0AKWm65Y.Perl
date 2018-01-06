@@ -1,0 +1,1 @@
+$db_query = qq{INSERT INTO $db_table_name VALUES ("$left", "$right", $RMSD_val)};
