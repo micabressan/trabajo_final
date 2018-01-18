@@ -1,0 +1,10 @@
+sum_years :: [Nummer] -> [String]
+sum_years songs = sort(removeDup[g.groep \\ g <- songs])
+
+verkorten :: [Int] Int Bool -> [String]
+verkorten [] _ _					= toString []
+verkorten [x] _ _ 					= toString [x]
+verkorten [x,y] x True				= toString [x] ++ "-" ++ [y]
+verkorten [x,y] x False				= toString [x,y]
+verkorten [x,y:xs] ly s && ly == y 	= verkorten [xs] y True
+otherwise							= verkorten [xs] ly False

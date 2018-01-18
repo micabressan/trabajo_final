@@ -1,0 +1,5 @@
+longestWord :: [String] -> String
+longestWord [] = ""
+longestWord (x:xs) = x ++ longestAdequateWord  ++ (longestWord (remove longe    stAdequateWord xs))
+     where longestAdequateWord = maxLength (filter (\y -> (last x) == (head y    )) xs)
+           remove x = filter (/= x)

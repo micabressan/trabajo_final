@@ -1,0 +1,34 @@
+diff --git a/epg_ui/source/prod_epg/config/ams_bindings.json b/epg_ui/source/prod_epg/config/ams_bindings.json
+index c2a64ab..c05f0a7 100755
+--- a/epg_ui/source/prod_epg/config/ams_bindings.json
++++ b/epg_ui/source/prod_epg/config/ams_bindings.json
+@@ -440,6 +440,17 @@
+             "alternative_values": {}
+         }
+     },
++    "network1": {
++        "apiUri": {
++            "default_value": "ams://network1",
++            "alternative_values": {}
++        },
++        "endPoint": {
++            "default_value": "http://127.0.0.1:8080/as/network",
++            "alternative_values": {}
++        }
++
++    },
+     "network/status": {
+         "apiUri": {
+             "default_value": "ams://network/status",
+@@ -458,9 +469,9 @@
+             "alternative_values": {}
+         },
+         "endPoint": {
+-            "default_value": "$['base']/network/wireless/scan/status",
++            "default_value": "127.0.0.1:8080/as/network/wireless/scan/status",
+             "alternative_values": {
+-                "$['localWs']/network/wireless/scan/status" : ["IP", "IP_DEU", "IP_ITA", "release_APPLETV", "release_APPLETV_DEU", "release_APPLETV_ITA", "dev_APPLETV"]
++                "127.0.0.1:8080/as/network/wireless/scan/status" : ["IP", "IP_DEU", "IP_ITA", "release_APPLETV", "release_APPLETV_DEU", "release_APPLETV_ITA", "dev_APPLETV"]
+             }
+         }
+     },

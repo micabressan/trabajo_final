@@ -1,0 +1,49 @@
+commit bf0d566ad49ce491652f584161b2724a8cb3d487
+Author: Johan Hedberg <johan.hedberg@intel.com>
+Date:   Wed Oct 12 00:48:59 2011 +0300
+
+    Fix compilation error on 32-bit systems
+    
+    This fixes the following compilation error with GLib on 32-bit sytems:
+    
+    audio/media.c: In function 'get_setting':
+    audio/media.c:1109:44: error: cast to pointer from integer of different size [-Werror=int-to-pointer-cast]
+    audio/media.c: In function 'set_setting':
+    audio/media.c:1132:41: error: cast to pointer from integer of different size [-Werror=int-to-pointer-cast]
+
+diff --git a/audio/media.c b/audio/media.c
+index 32dab86..ef595b3 100644
+--- a/audio/media.c
++++ b/audio/media.c
+@@ -1102,11 +1102,12 @@ static const char *metadata_to_str(uint32_t id)
+ static int get_setting(uint8_t attr, void *user_data)
+ {
+        struct media_player *mp = user_data;
++       guint attr_uint = attr;
+        void *value;
+ 
+        DBG("%s", attr_to_str(attr));
+ 
+-       value = g_hash_table_lookup(mp->settings, GUINT_TO_POINTER(attr));
++       value = g_hash_table_lookup(mp->settings, GUINT_TO_POINTER(attr_uint));
+        if (!value)
+                return -EINVAL;
+ 
+@@ -1118,6 +1119,7 @@ static int set_setting(uint8_t attr, uint8_t val, void *user_data)
+        struct media_player *mp = user_data;
+        struct media_adapter *adapter = mp->adapter;
+        const char *property, *value;
++       guint attr_uint = attr;
+        DBusMessage *msg;
+        DBusMessageIter iter, var;
+ 
+@@ -1129,7 +1131,7 @@ static int set_setting(uint8_t attr, uint8_t val, void *user_data)
+        if (property == NULL || value == NULL)
+                return -EINVAL;
+ 
+-       if (!g_hash_table_lookup(mp->settings, GUINT_TO_POINTER(attr)))
++       if (!g_hash_table_lookup(mp->settings, GUINT_TO_POINTER(attr_uint)))
+                return -EINVAL;
+
+ 
+        msg = dbus_message_new_method_call(mp->sender, mp->path,

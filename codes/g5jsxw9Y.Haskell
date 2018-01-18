@@ -1,0 +1,12 @@
+prim2 :: (Eq a, Ord b) => [(a, a, b)] -> [(a, a, b)]
+prim2 edges = newF edges [(\(first,_,_) -> first) (head edges)] [] 
+
+newF :: (Eq a, Ord b) => [(a, a, b)]  -> [a] -> [(a, a, b)] -> [(a, a, b)]
+newF edges firsts finalReturn = if null remainingList 
+								then 
+									finalReturn
+								else 
+									newF edges (union firsts [x,y]) (finalReturn ++ [nextMin]) 
+									where
+										remainingList = filter (\(a,b,_) -> elem a firsts /= elem b firsts) edges
+										nextMin@(x,y,_) = minim (\(_,_,c) -> c) remainingList

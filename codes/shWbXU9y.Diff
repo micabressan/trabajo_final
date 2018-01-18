@@ -1,0 +1,60 @@
+diff --git a/jobcreator/__main__.py b/jobcreator/__main__.py
+index 573bf17..06de65c 100644
+--- a/jobcreator/__main__.py
++++ b/jobcreator/__main__.py
+@@ -104,6 +104,7 @@ PARSER.add_argument('-g', '--group', action='store', help='Specifies the group o
+ PARSER.add_argument('-t', '--tag', action='store', help='Human readable tag of the build.')
+ PARSER.add_argument('-o', '--outfile', action='store', help='File path to store job file. If not specified output will go to stdout')
+ PARSER.add_argument('--host', action='append', help='Machine hostname', required=True)
++PARSER.add_argument('--task', action='store', help='Add this task into setup phase')
+ 
+ PARSER.add_argument('-d', '--distro', action='store', type=distro_string, help='Distribution to install. This have to match RHEL-. or RHEL. regex. If not specified, decision is based on kernel nvr.', required=True)
+ PARSER.add_argument('-c', '--config', action='store', help='Test configuration (scenario) to run [Default: %(default)s]', choices=SUPPORTED_CONFIGS, required=True)
+@@ -190,6 +191,9 @@ else:
+ if args.upstream:
+     recipe_set = decorate(recipe_set, decorators.Upstream)
+ 
++if args.task:
++    recipe_set = decorate(recipe_set, decorators.AddTasks, args.task)
++
+ job.set_recipe_set(recipe_set)
+ job_xml = str(job)
+ ##################################################################
+diff --git a/jobcreator/decorators.py b/jobcreator/decorators.py
+index 1b91f15..ea5a605 100644
+--- a/jobcreator/decorators.py
++++ b/jobcreator/decorators.py
+@@ -33,6 +33,16 @@ class Upstream(RecipeSetDecorator):
+         self.append_task_to_all_recipes(rm_ivtv, m.Recipe.PHASE_INSTALL)
+ 
+ 
++class AddTasks(RecipeSetDecorator):
++    def __init__(self, decorated_recipeset, task_list):
++        self._tasks = task_list
++        super(AddTasks, self).__init__(decorated_recipeset)
++
++    def init_tasks(self, recipes):
++        # We add this task to every recipeset
++        for task in self._tasks:
++            self.append_task_to_all_recipes(dist.RawTask(task), m.Recipe.PHASE_PRE_SETUP)
++
+ class KernelInstall(RecipeSetDecorator):
+     def __init__(self, decorated_recipeset, kernel_package_name, kernel_repo, decorate_guests=True):
+         self.kernel_package_name = kernel_package_name
+diff --git a/jobcreator/tasks/dist.py b/jobcreator/tasks/dist.py
+index c554c21..c21829f 100644
+--- a/jobcreator/tasks/dist.py
++++ b/jobcreator/tasks/dist.py
+@@ -95,3 +95,12 @@ class PackageInstall(Task):
+ 
+ class Dummy(Task):
+     NAME = '/distribution/utils/dummy'
++
++
++class RawTask(Task):
++    def __init__(self, task, role=Task.ROLE_STANDALONE):
++        super(RawTask, self).__init__(role)
++        self._task = task
++
++    def __str__(self):
++        return self._task

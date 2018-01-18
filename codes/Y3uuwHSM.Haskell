@@ -1,0 +1,125 @@
+module Prim 
+
+where 
+
+import List
+import Random
+import Test.QuickCheck
+
+randNum :: Int -> Int -> Int
+randNum bound seed = head (randomRs (0, bound) (mkStdGen seed))
+
+-- finds element in nonempty list with minimal f-value
+minim :: (Ord b) => (a -> b) -> [a] -> a
+minim f = head . (sortBy (\ x y -> compare (f x) (f y))) 
+
+useHead :: (Ord b) => (a -> b) -> [a] -> a
+useHead f xs = head xs
+
+-- The . operator omits the list variable for clarity
+
+
+-- finds list of edgedges that form minimum spanning tree
+-- no matter where we put the root
+prim :: (Eq a, Ord b) => [(a, a, b)] -> Bool -> [(a, a, b)]
+prim edges useMin = 
+	f [(\(first,_,_) -> first) (head edges)] [] 
+		where
+		  f firsts finalReturn = 
+			  if null remainingList 
+				then 
+					finalReturn
+				else 
+					f (union firsts [x,y]) (nextMin:finalReturn) 
+					where
+						remainingList = filter (\(a,b,_) -> elem a firsts /= elem b firsts) edges
+						nextMin@(x,y,_) = minim (\(_,_,c) -> c) remainingList
+
+
+						
+
+--Edited version of Prim.
+--More readable
+--And to use 'useHead' instead of 'minim'
+prim2 :: (Eq a, Ord b) => [(a, a, b)] -> Bool -> [(a, a, b)]
+prim2 edges useMin= newF edges [(\(first,_,_) -> first) (head edges)] [] useMin
+
+newF :: (Eq a, Ord b) => [(a, a, b)]  -> [a] -> [(a, a, b)] -> Bool -> [(a, a, b)]
+newF edges firsts finalReturn useMin = 
+	if null remainingList 
+	then 
+		finalReturn
+	else 
+		newF edges (union firsts [x,y]) (finalReturn ++ [nextMin]) useMin
+		where
+			remainingList = filter (\(a,b,_) -> elem a firsts /= elem b firsts) edges
+			nextMin@(x,y,_) = if useMin 
+							  then
+								minim (\(_,_,c) -> c) remainingList
+							  else
+								useHead (\(_,_,c) -> c) remainingList
+			
+			
+
+-- example run
+main :: IO ()
+main = print $ prim (genMap 1) True
+					
+					
+--default map:
+--	  [('A', 'D',  5), ('A', 'B', 7), ('B', 'D', 9)
+--    ,('B', 'C',  8), ('C', 'E', 5), ('B', 'E', 7)
+--    ,('D', 'E', 15), ('D', 'F', 6), ('E', 'F', 8)
+--    ,('F', 'G', 11), ('E', 'G', 9)]					
+
+main2 :: Int -> Bool -> IO ()
+main2 seed useMin = print $ prim2 (genMap seed) useMin
+
+genMap :: Int -> [(Char,Char,Int)]
+genMap seed = [('A', 'D', randNum 20 seed),
+			   ('A', 'B', randNum 20 seed+1), 
+			   ('B', 'D', randNum 20 seed+2),
+			   ('B', 'C', randNum 20 seed+3), 
+			   ('C', 'E', randNum 20 seed+4), 
+			   ('B', 'E', randNum 20 seed+5),
+			   ('D', 'E', randNum 20 seed+6), 
+			   ('D', 'F', randNum 20 seed+7), 
+			   ('E', 'F', randNum 20 seed+8),
+			   ('F', 'G', randNum 20 seed+9), 
+			   ('E', 'G', randNum 20 seed+10)]
+
+--[("Alkmaar","Den Haag",randNum 10 seed),
+--("Amsterdam","Rotterdam",randNum 10 seed+1),
+--("Amsterdam","Alkmaar",randNum 10 seed+2),
+--("Amsterdam","Den Haag",randNum 10 seed+3)]
+
+	   
+prop :: Int -> IO ()
+prop seed = print $ prop_ANI seed
+
+
+getWeight :: (Ord b) => (a -> b) -> [a] -> [b]
+getWeight f xs = map f xs
+
+prop_SRT :: Int -> Bool
+prop_SRT seed = 
+		minimCount <= randCount
+		where
+			route = genMap seed
+			minimCount = sum ( getWeight (\(_,_,c) -> c) (prim2 route True))
+			randCount = sum ( getWeight (\(_,_,c) -> c) (prim2 route False))
+			
+				
+			
+prop_ANI :: Int -> Bool
+prop_ANI seed = resultNodes == uniqueNodes
+		   where
+		   	route = genMap seed
+			resultNodes = nub (map (\(a,_,_) -> a) (prim2 route True) ++ map (\(_,a,_) -> a) (prim2 route True))
+			uniqueNodes = nub (map (\(a,_,_) -> a) route ++ map (\(_,a,_) -> a) route)
+
+
+--instance (Ord a, Arbitrary a, Ord b) => Arbitrary (a,a,b) where
+--arbitrary = do
+--return xs <- orderedList
+--return (Set (nub xs))

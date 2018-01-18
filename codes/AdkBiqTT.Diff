@@ -1,0 +1,60 @@
+From 11a349ce16420b1d63dbc157ba49d2af3253aab2 Mon Sep 17 00:00:00 2001
+From: Gareth Stockwell <gareth.stockwell@accenture.com>
+Date: Fri, 7 Oct 2011 13:01:14 +0100
+Subject: [PATCH 4/4] Connect QCamera::error signal to QDeclarativeCamera::error
+
+Reviewed-by: PENDING
+---
+ .../declarative/multimedia/qdeclarativecamera.cpp  |    7 +++++--
+ .../declarative/multimedia/qdeclarativecamera_p.h  |    3 +--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/plugins/declarative/multimedia/qdeclarativecamera.cpp b/plugins/declarative/multimedia/qdeclarativecamera.cpp
+index 4e7cca2..75c43b3 100644
+--- a/plugins/declarative/multimedia/qdeclarativecamera.cpp
++++ b/plugins/declarative/multimedia/qdeclarativecamera.cpp
+@@ -111,9 +111,9 @@ void QDeclarativeCamera::_q_nativeSizeChanged(const QSizeF &size)
+     setImplicitHeight(size.height());
+ }
+ 
+-void QDeclarativeCamera::_q_error(int errorCode, const QString &errorString)
++void QDeclarativeCamera::_q_error()
+ {
+-    emit error(Error(errorCode), errorString);
++    emit error(Error(m_camera->error()), m_camera->errorString());
+     emit errorChanged();
+ }
+ 
+@@ -276,6 +276,9 @@ QDeclarativeCamera::QDeclarativeCamera(QDeclarativeItem *parent) :
+     m_exposure = m_camera->exposure();
+     m_focus = m_camera->focus();
+ 
++    connect(m_camera, SIGNAL(error(QCamera::Error)),
++			this, SLOT(_q_error()));
++
+     connect(m_viewfinderItem, SIGNAL(nativeSizeChanged(QSizeF)),
+             this, SLOT(_q_nativeSizeChanged(QSizeF)));
+     connect(m_viewfinderItem, SIGNAL(framePainted()),
+diff --git a/plugins/declarative/multimedia/qdeclarativecamera_p.h b/plugins/declarative/multimedia/qdeclarativecamera_p.h
+index f666a22..8014e67 100644
+--- a/plugins/declarative/multimedia/qdeclarativecamera_p.h
++++ b/plugins/declarative/multimedia/qdeclarativecamera_p.h
+@@ -96,7 +96,6 @@ class QDeclarativeCamera : public QDeclarativeItem
+     Q_PROPERTY(qreal maximumOpticalZoom READ maximumOpticalZoom NOTIFY maximumOpticalZoomChanged)
+     Q_PROPERTY(qreal digitalZoom READ digitalZoom WRITE setDigitalZoom NOTIFY digitalZoomChanged)
+     Q_PROPERTY(qreal maximumDigitalZoom READ maximumDigitalZoom NOTIFY maximumDigitalZoomChanged)
+-
+     Q_ENUMS(State)
+     Q_ENUMS(LockStatus)
+     Q_ENUMS(Error)
+@@ -264,7 +263,7 @@ protected:
+ private Q_SLOTS:
+     void _q_updateState(QCamera::State);
+     void _q_nativeSizeChanged(const QSizeF &size);
+-    void _q_error(int, const QString &);
++    void _q_error();
+     void _q_imageCaptured(int, const QImage&);
+     void _q_imageSaved(int, const QString&);
+     void _q_captureFailed(int, QCameraImageCapture::Error, const QString&);
+-- 
+1.7.4.msysgit.0

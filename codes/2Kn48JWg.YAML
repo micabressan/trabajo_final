@@ -1,0 +1,20 @@
+    - name: Set sshd settings.
+      lineinfile:
+        dest: '/etc/ssh/sshd_config'
+        validate: '/usr/sbin/sshd -t -f %s'
+        line: '{{ item.setting }} {{ item.value }}'
+        regexp: '^{{ item.setting }}'
+        state: '{{ item.state }}'
+      with_items:
+        - { setting: 'KerberosAuthentication', value: 'no', state: 'present' }
+        - { setting: 'AuthorizedKeysCommandUser', value: 'nobody', state: 'present' }
+        - { setting: 'AuthorizedKeysCommand', value: '/usr/bin/sss_ssh_authorizedkeys', state: 'present' }
+        - { setting: 'GSSAPIAuthentication', value: 'yes', state: 'present' }
+        - { setting: 'PermitRootLogin', value: 'no', state: 'present' }
+        - { setting: 'UseDNS', value: 'no', state: 'present' }
+        - { setting: 'ClientAliveInterval', value: '1800', state: 'present' }
+        - { setting: 'ClientAliveCountMax', value: '0', state: 'present' }
+    - name: Reload sshd settings.
+      service:
+        name: sshd
+        state: restarted

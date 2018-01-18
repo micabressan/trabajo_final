@@ -1,0 +1,24 @@
+jaren :: [Nummer] -> [String]
+jaren db = [verkortWeergeven x \\ x <- opvolgende (alleJaren db)]
+
+verkortWeergeven :: [Int] -> String
+verkortWeergeven [x:xs]
+| length xs == 0 = toString x 
+| otherwise      = toString x +++ "-" +++ toString (hd xs)
+
+opvolgende :: [Int] -> [[Int]]
+opvolgende [x:xs]
+| length xs == 0 = []
+| x == (hd xs)-1 = [[x, nieuwe ]: opvolgende rest]
+| otherwise      = [[x]: opvolgende xs]
+	where 
+		(nieuwe, rest) = nieuw (hd xs) (tl xs) 
+
+nieuw :: Int [Int] -> (Int,[Int])
+nieuw hx xs 
+| length xs == 0    = (hx, [hx])		
+| hx == (hd xs) - 1 = nieuw (hd xs) (tl xs)
+| otherwise         = (hx,xs) 
+
+alleJaren :: [Nummer] -> [Int]
+alleJaren db = sort (removeDup [x.jaar \\ x <- db | x.jaar <> 0])

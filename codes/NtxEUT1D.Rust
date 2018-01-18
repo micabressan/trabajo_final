@@ -1,0 +1,81 @@
+#[macro_use]
+extern crate glium;
+use glium::glutin;
+use glium::Surface;
+
+#[derive(Clone, Copy)]
+struct Vertex {
+    position: [f32; 2],
+}
+
+fn main() {
+    // 1. The **winit::EventsLoop** for handling events.
+    let mut events_loop = glium::glutin::EventsLoop::new();
+    // 2. Parameters for building the Window.
+    let window = glium::glutin::WindowBuilder::new()
+        .with_dimensions(1024, 768)
+        .with_title("Hello world");
+    // 3. Parameters for building the OpenGL context.
+    let context = glium::glutin::ContextBuilder::new();
+    // 4. Build the Display with the given window and OpenGL context parameters and register the
+    //    window with the events_loop.
+    let display = glium::Display::new(window, context, &events_loop).unwrap();
+
+    implement_vertex!(Vertex, position);
+
+    // we create the shape an add `t` to each x coordinate
+    let shape = vec![
+        Vertex { position: [-0.5, -0.5] },
+        Vertex { position: [ 0.0,  0.5] },
+        Vertex { position: [ 0.5, -0.25] },
+    ];
+    let vertex_buffer = glium::VertexBuffer::new(&display, &shape).unwrap();
+    let index_buffer = glium::IndexBuffer::new(&display, glium::index::PrimitiveType::LineLoop, &vec![0, 1, 1, 2u16]).unwrap();
+
+    let vertex_shader_src = r#"
+        #version 140
+
+        in vec2 position;
+
+        void main() {
+            gl_Position = vec4(position, 0.0, 1.0);
+        }
+    "#;
+
+    let fragment_shader_src = r#"
+        #version 140
+
+        out vec4 color;
+
+        void main() {
+            color = vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    "#;
+
+    let program = glium::Program::from_source(&display, vertex_shader_src, fragment_shader_src, None).unwrap();
+
+    let mut closed = false;
+    while !closed {
+        // drawing
+        let mut target = display.draw();
+        target.clear_color(0.0, 0.0, 1.0, 1.0);
+        target.draw(&vertex_buffer, &index_buffer, &program, &uniform! {
+
+        },
+        &glium::DrawParameters {
+            line_width: Some(10.0),
+            .. Default::default()
+        }).unwrap();
+        target.finish().unwrap();
+
+        events_loop.poll_events(|event| {
+            match event {
+                glutin::Event::WindowEvent { event, .. } => match event {
+                    glutin::WindowEvent::Closed => closed = true,
+                    _ => ()
+                },
+                _ => (),
+            }
+        });
+    }
+}

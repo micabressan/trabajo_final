@@ -1,0 +1,53 @@
+import XMonad hiding (Tall)
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.HintedTile
+import XMonad.Layout.NoBorders
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.FadeInactive
+
+myLayout = avoidStruts $
+         smartBorders $
+         hintedTile Tall |||
+         hintedTile Wide |||
+         noBorders Full  |||
+         threeCol
+
+  -- hintedTile listens to application hints, so as not to break gVim.
+  where
+     hintedTile = HintedTile nmaster delta ratio TopLeft
+     threeCol   = ThreeCol nmaster delta ratio
+     nmaster    = 1
+     delta      = 3/100
+     ratio      = 1/2
+
+-- note to self: xprop | grep WM_CLASS
+myManageHook = composeAll
+    [ className =? "Gimp" --> doFloat, className =? "Gloobus-preview" -->doFloat,
+      (className =? "Chromium-browser" <&&> resource =? "Dialog") --> doFloat,
+      className =? "Nm-connection-editor" --> doFloat, className =?"Gnome-display-properties"--> doFloat,
+      className =? "VirtualBox" --> doFloat, title =? "VLC (XVideo output)" --> doFullFloat,
+      className =? "Docky" --> doFloat, className =? "MPlayer" --> doFloat, className =? "Totem" --> doFullFloat]
+
+flashfix = composeOne [ isFullscreen -?> doFullFloat ]
+
+
+main = do
+    xmonad $ defaultConfig
+        { 
+          -- Left WIN Key as modifying
+          -- rather than Left ALT
+          modMask = mod4Mask
+
+        , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig <+> flashfix
+
+        -- I used to use: avoidStruts $ layoutHook defaultConfig
+        , layoutHook = myLayout
+
+	, handleEventHook = ewmhDesktopsEventHook  
+      -- This hack is necessary to make Java GUIs like NetBeans work.  See the FAQ.
+	, startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
+	, logHook = ewmhDesktopsLogHook >> fadeInactiveLogHook 0.8
+        }

@@ -1,0 +1,18 @@
+version: "3"
+services:
+    php71:
+        build:
+            ./docker/php71
+        image: docker/php71/dockerfile
+        ports:
+            - "8071:80"
+        volumes:
+            - ./:/var/www/html/
+            - /Applications/XAMPP/htdocs/dbwebb-kurser/config/:/etc/apache2/sites-available
+        links:
+            - "db:database"
+    db:
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root

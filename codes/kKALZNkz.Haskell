@@ -1,0 +1,24 @@
+class Character (a :: * -> *) where
+  showVal :: a b -> b -> String
+
+
+data ExampleCharacter a where
+  Variable :: ExampleCharacter String
+  EqualSign :: ExampleCharacter ()
+  Deref :: ExampleCharacter ()
+  EOF :: ExampleCharacter ()
+
+
+instance Character ExampleCharacter where
+  showVal Variable = id
+  showVal EqualSign = const "="
+  showVal Deref = const "*"
+
+
+data Symbol :: forall a. ExampleCharacter a -> * where
+  Terminal :: a -> Symbol (b :: ExampleCharacter a)
+
+-- so far so good. Now, let's try to generalize over ExampleCharacter
+
+data Symbol :: (forall a c. Character c) => c a -> * where
+  Terminal :: a -> Symbol (b :: c a) -- whoops, compiler complains

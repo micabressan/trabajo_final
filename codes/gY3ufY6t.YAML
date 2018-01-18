@@ -1,0 +1,23 @@
+
+
+- name: Get VPC cloudformation stack outputs
+  cloudformation_facts:
+    stack_name: "{{ cf_win_ec2_asg_vpc_stack_name }}"
+    aws_access_key: "{{ cf_win_ec2_asg_aws_access_key }}"
+    aws_secret_key: "{{ cf_win_ec2_asg_aws_secret_key }}"
+    security_token: "{{ cf_win_ec2_asg_security_token }}"
+    region: "{{ cf_win_ec2_asg_aws_region }}"
+  register: vpc_stack
+
+- name: Display vpc_stack
+  debug:
+    var: "vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.{{ cf_win_ec2_asg_subnet1_name }}"
+    verbosity: 2
+
+- name: Set vpc stack facts.
+  set_fact:
+    cf_win_ec2_asg_vpc_id: "{{ vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.VPCId }}"
+    cf_win_ec2_asg_subnet1: "{{ vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.'[cf_win_ec2_asg_subnet1_name]' }}"
+     cf_win_ec2_asg_subnet2: "{{ vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.'[cf_win_ec2_asg_subnet2_name]' }}"
+    cf_win_ec2_asg_subnet1: "{{ vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.}}{{ cf_win_ec2_asg_subnet1_name }}"
+    cf_win_ec2_asg_subnet2: "{{ vpc_stack.ansible_facts['cloudformation'][cf_win_ec2_asg_vpc_stack_name].stack_outputs.[cf_win_ec2_asg_subnet2_name] }}"

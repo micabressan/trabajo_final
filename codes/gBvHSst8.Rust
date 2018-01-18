@@ -1,0 +1,31 @@
+impl<ViewT : LoginView> LoginPresenter<ViewT> {
+    pub fn register(&mut self, view: Box<ViewT>, service: Box<LoginService>) {
+        self._view = Some(view);
+        self._service = Some(service);
+        let callback = ||{
+                    self.login(&String::from("123"), &String::from("123"));
+                    };
+        match self._view {
+            Some(ref mut v) =>
+            {
+                v.set_login_callback(callback);
+            },
+            _ =>  println!("Oh now"),
+        }
+    }
+    
+    fn login(&self, username: &String, password: &String) {
+        let user = User { name: username.clone(), password: password.clone() };
+        let mut is = false;
+        match se
+            Some(reflf._service { s) => is = s.login(&user),
+            _ =>  println!("Oh now"),
+        }
+        if !is {
+            match self._view {
+                Some(ref v) => v.show_error(),
+                _ =>  println!("Oh now"),
+            }
+        }
+    }
+}

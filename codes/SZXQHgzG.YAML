@@ -1,0 +1,20 @@
+# SaltStack top.sls
+base:
+  'minion01*':
+    - apache
+    - owncloud
+      #- configure_for: apache
+
+  'minion02*':
+    - nginx
+    - owncloud
+      #- configure_for: nginx
+
+
+#Ansible example:
+- hosts: webservers
+  tasks:
+  - include_role:
+       name: owncloud
+    vars:
+      configure_for: nginx

@@ -1,0 +1,6 @@
+isPrime 2 = True
+isPrime n = all ((>0) . (n`mod`)) $ 2:[3,5..n-1]
+msg n = if n then "world" else "codesprint"
+main = do
+  num <- readLn :: IO Integer
+  mapM_ (\x -> putStrLn $ "Hello " ++ (msg . isPrime $ num)) [1..num]

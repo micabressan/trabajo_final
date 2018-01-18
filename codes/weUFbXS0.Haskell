@@ -1,0 +1,14 @@
+square :: Integer -> Integer
+square n = n*n
+ 
+sqsq :: Integer -> Integer
+sqsq = square . square -- here we use function composition.
+
+-- So what if I wanted to do something like
+add :: Integer -> Integer -> Integer
+add n m = n+m
+
+addsq :: Integer -> Integer -> Integer
+addsq n m = square (add n m) -- but instead off doing it this way is there a way to do this using . --- e.g by doing 
+square . add 
+-- but I tried this and it's not valid

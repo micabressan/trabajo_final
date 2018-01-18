@@ -1,0 +1,59 @@
+# osprey configuration file.
+#---------------------------
+# usage:
+#  osprey worker config.yaml
+
+estimator:
+    # The model/estimator to be fit.
+    eval: |
+        Pipeline([
+                ('tica', tICA()),
+                ('cluster', MiniBatchKMeans()),
+                ('msm', MarkovStateModel(lag_time=100, n_timescales=5, verbose=True)),
+        ])
+
+    # for eval, a python package containing the estimator definitions
+    eval_scope: msmbuilder
+
+
+strategy:
+    name: random
+
+search_space:
+  cluster__n_clusters:
+    min: 50
+    max: 5000
+    type: int
+
+  tica__lag_time:
+    min: 1
+    max: 200
+    type: int
+
+  tica__commute_mapping:
+    choices:
+      - True
+      - False
+    type: enum
+
+  tica__n_components:
+    min: 1
+    max: 20
+    type: int
+
+
+cv:
+  name: shufflesplit
+  params:
+    n_splits: 5
+    test_size: 0.4
+
+dataset_loader:
+  # specification of the dataset on which to train the models.
+  name: numpy
+  params:
+    filenames: /work/je714/cross-validations/ef-hand/sctrajs/*
+
+
+trials:
+  uri: sqlite:////work/je714/cross-validations/ef-hand/osprey-trials.db

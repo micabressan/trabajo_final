@@ -1,0 +1,22 @@
+2018-01-16 13:14:02 ERROR (MainThread) [homeassistant.config] Invalid config for [http]: file not readable for dictionary value @ data['http']['ssl_key']. Got '/home/homeassistant/.homeassistant/privkey.pem'. (See /home/homeassistant/.homeassistant/configuration.yaml, line 10). Please check the docs at https://home-assistant.io/components/http/
+2018-01-16 13:14:02 ERROR (MainThread) [homeassistant.setup] Setup failed for http: Invalid config.
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of websocket_api. Setup failed for dependencies: http
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Setup failed for websocket_api: Could not setup all dependencies.
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of system_log. Setup failed for dependencies: http
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Setup failed for system_log: Could not setup all dependencies.
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of api. Setup failed for dependencies: http
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Setup failed for api: Could not setup all dependencies.
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of frontend. Setup failed for dependencies: api, websocket_api, http, system_log
+2018-01-16 13:14:03 ERROR (MainThread) [homeassistant.setup] Setup failed for frontend: Could not setup all dependencies.
+2018-01-16 13:14:04 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of history. Setup failed for dependencies: http
+2018-01-16 13:14:04 ERROR (MainThread) [homeassistant.setup] Setup failed for history: Could not setup all dependencies.
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of logbook. Setup failed for dependencies: frontend
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Setup failed for logbook: Could not setup all dependencies.
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of panel_iframe. Setup failed for dependencies: frontend
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Setup failed for panel_iframe: Could not setup all dependencies.
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of config. Setup failed for dependencies: http
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Setup failed for config: Could not setup all dependencies.
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of media_player. Setup failed for dependencies: http
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Setup failed for media_player: Could not setup all dependencies.
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Unable to setup dependencies of tts. Setup failed for dependencies: http
+2018-01-16 13:14:05 ERROR (MainThread) [homeassistant.setup] Setup failed for tts: Could not setup all dependencies.

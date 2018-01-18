@@ -1,0 +1,22 @@
+import Data.Foldable (toList)
+import qualified Data.Sequence as Seq
+import Data.Sequence ((|>))
+import Control.Exception.Base (assert)
+
+windows :: Int -> [a] -> [[a]]
+windows n l
+  | n == 0 = []:map (\a -> []) l
+  | otherwise = go Seq.empty 0 l
+  where
+    go _ _ [] = []
+    go buf bufn (x:xs) | bufn' == n   = toList buf' : go buf'' bufn xs
+                       | bufn' < n    = go buf' bufn' xs
+                       | otherwise    = assert False []
+      where
+        bufn' = bufn + 1
+        buf'  = buf |> x
+        buf'' = Seq.drop 1 buf'
+
+main = do
+  print $ windows 0 [1,2,3,4]
+  print $ windows 2 [1,2,3,4]

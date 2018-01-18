@@ -1,0 +1,1031 @@
+module C exposing (..)
+
+
+type alias Record =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : Record1
+    , fieldK : Record2
+    , fieldL : Record3
+    , nestedA : RecordN1
+    , nestedB : RecordN2
+    , nestedC : RecordN3
+    , nestedA_ : RecordNN1
+    , nestedB_ : RecordNN2
+    , nestedC_ : RecordNN3
+    }
+
+
+type alias Record1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias Record2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias Record3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias RecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : Record1
+    }
+
+
+type alias RecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : Record2
+    }
+
+
+type alias RecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : Record3
+    }
+
+
+type alias RecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : RecordN1
+    , nestedB : RecordN2
+    , nestedC : RecordN3
+    }
+
+
+type alias RecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : RecordN1
+    , nestedB : RecordN2
+    , nestedC : RecordN3
+    , nestedD : RecordNN1
+    }
+
+
+type alias RecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : RecordN1
+    , nestedB : RecordN2
+    , nestedC : RecordN3
+    , nestedD : RecordNN1
+    , nestedE : RecordNN2
+    }
+
+
+fieldA : { b | fieldA : a } -> a
+fieldA =
+    .fieldA
+
+
+fieldB : { b | fieldB : a } -> a
+fieldB =
+    .fieldB
+
+
+fieldC : { b | fieldC : a } -> a
+fieldC =
+    .fieldC
+
+
+usageA : Record -> Int
+usageA record =
+    fieldA record
+
+
+usageB : Record -> Bool
+usageB record =
+    fieldB record
+
+
+usageC : Record -> String
+usageC record =
+    fieldC record
+
+
+usageNA : Record1 -> Int
+usageNA record =
+    fieldA record
+
+
+usageNB : RecordN1 -> Bool
+usageNB record =
+    fieldB record
+
+
+usageNC : RecordN2 -> String
+usageNC record =
+    fieldC record
+
+
+usageNA_ : RecordNN1 -> Int
+usageNA_ record =
+    fieldA record
+
+
+usageNB_ : RecordNN2 -> Bool
+usageNB_ record =
+    fieldB record
+
+
+usageNC_ : RecordNN3 -> String
+usageNC_ record =
+    fieldC record
+
+
+type alias ARecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : ARecord1
+    , fieldK : ARecord2
+    , fieldL : ARecord3
+    , nestedA : ARecordN1
+    , nestedB : ARecordN2
+    , nestedC : ARecordN3
+    , nestedA_ : ARecordNN1
+    , nestedB_ : ARecordNN2
+    , nestedC_ : ARecordNN3
+    }
+
+
+type alias ARecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias ARecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias ARecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias ARecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ARecord1
+    }
+
+
+type alias ARecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : ARecord2
+    }
+
+
+type alias ARecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : ARecord3
+    }
+
+
+type alias ARecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ARecordN1
+    , nestedB : ARecordN2
+    , nestedC : ARecordN3
+    }
+
+
+type alias ARecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ARecordN1
+    , nestedB : ARecordN2
+    , nestedC : ARecordN3
+    , nestedD : ARecordNN1
+    }
+
+
+type alias ARecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ARecordN1
+    , nestedB : ARecordN2
+    , nestedC : ARecordN3
+    , nestedD : ARecordNN1
+    , nestedE : ARecordNN2
+    }
+
+
+usageAA : ARecord -> Int
+usageAA record =
+    fieldA record
+
+
+usageBA : ARecord -> Bool
+usageBA record =
+    fieldB record
+
+
+usageCA : ARecord -> String
+usageCA record =
+    fieldC record
+
+
+usageNAA : ARecord1 -> Int
+usageNAA record =
+    fieldA record
+
+
+usageNBA : ARecordN1 -> Bool
+usageNBA record =
+    fieldB record
+
+
+usageNCA : ARecordN2 -> String
+usageNCA record =
+    fieldC record
+
+
+usageNA_A : ARecordNN1 -> Int
+usageNA_A record =
+    fieldA record
+
+
+usageNB_A : ARecordNN2 -> Bool
+usageNB_A record =
+    fieldB record
+
+
+usageNC_A : ARecordNN3 -> String
+usageNC_A record =
+    fieldC record
+
+
+type alias BRecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : BRecord1
+    , fieldK : BRecord2
+    , fieldL : BRecord3
+    , nestedA : BRecordN1
+    , nestedB : BRecordN2
+    , nestedC : BRecordN3
+    , nestedA_ : BRecordNN1
+    , nestedB_ : BRecordNN2
+    , nestedC_ : BRecordNN3
+    }
+
+
+type alias BRecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias BRecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias BRecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias BRecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : BRecord1
+    }
+
+
+type alias BRecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : BRecord2
+    }
+
+
+type alias BRecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : BRecord3
+    }
+
+
+type alias BRecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : BRecordN1
+    , nestedB : BRecordN2
+    , nestedC : BRecordN3
+    }
+
+
+type alias BRecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : BRecordN1
+    , nestedB : BRecordN2
+    , nestedC : BRecordN3
+    , nestedD : BRecordNN1
+    }
+
+
+type alias BRecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : BRecordN1
+    , nestedB : BRecordN2
+    , nestedC : BRecordN3
+    , nestedD : BRecordNN1
+    , nestedE : BRecordNN2
+    }
+
+
+usageAB : BRecord -> Int
+usageAB record =
+    fieldA record
+
+
+usageBB : BRecord -> Bool
+usageBB record =
+    fieldB record
+
+
+usageCB : BRecord -> String
+usageCB record =
+    fieldC record
+
+
+usageNAB : BRecord1 -> Int
+usageNAB record =
+    fieldA record
+
+
+usageNBB : BRecordN1 -> Bool
+usageNBB record =
+    fieldB record
+
+
+usageNCB : BRecordN2 -> String
+usageNCB record =
+    fieldC record
+
+
+usageNA_B : BRecordNN1 -> Int
+usageNA_B record =
+    fieldA record
+
+
+usageNB_B : BRecordNN2 -> Bool
+usageNB_B record =
+    fieldB record
+
+
+usageNC_B : BRecordNN3 -> String
+usageNC_B record =
+    fieldC record
+
+
+type alias CRecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : CRecord1
+    , fieldK : CRecord2
+    , fieldL : CRecord3
+    , nestedA : CRecordN1
+    , nestedB : CRecordN2
+    , nestedC : CRecordN3
+    , nestedA_ : CRecordNN1
+    , nestedB_ : CRecordNN2
+    , nestedC_ : CRecordNN3
+    }
+
+
+type alias CRecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias CRecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias CRecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias CRecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : CRecord1
+    }
+
+
+type alias CRecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : CRecord2
+    }
+
+
+type alias CRecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : CRecord3
+    }
+
+
+type alias CRecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : CRecordN1
+    , nestedB : CRecordN2
+    , nestedC : CRecordN3
+    }
+
+
+type alias CRecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : CRecordN1
+    , nestedB : CRecordN2
+    , nestedC : CRecordN3
+    , nestedD : CRecordNN1
+    }
+
+
+type alias CRecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : CRecordN1
+    , nestedB : CRecordN2
+    , nestedC : CRecordN3
+    , nestedD : CRecordNN1
+    , nestedE : CRecordNN2
+    }
+
+
+usageAC : CRecord -> Int
+usageAC record =
+    fieldA record
+
+
+usageBC : CRecord -> Bool
+usageBC record =
+    fieldB record
+
+
+usageCC : CRecord -> String
+usageCC record =
+    fieldC record
+
+
+usageNAC : CRecord1 -> Int
+usageNAC record =
+    fieldA record
+
+
+usageNBC : CRecordN1 -> Bool
+usageNBC record =
+    fieldB record
+
+
+usageNCC : CRecordN2 -> String
+usageNCC record =
+    fieldC record
+
+
+usageNA_C : CRecordNN1 -> Int
+usageNA_C record =
+    fieldA record
+
+
+usageNB_C : CRecordNN2 -> Bool
+usageNB_C record =
+    fieldB record
+
+
+usageNC_C : CRecordNN3 -> String
+usageNC_C record =
+    fieldC record
+
+
+type alias DRecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : DRecord1
+    , fieldK : DRecord2
+    , fieldL : DRecord3
+    , nestedA : DRecordN1
+    , nestedB : DRecordN2
+    , nestedC : DRecordN3
+    , nestedA_ : DRecordNN1
+    , nestedB_ : DRecordNN2
+    , nestedC_ : DRecordNN3
+    }
+
+
+type alias DRecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias DRecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias DRecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias DRecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : DRecord1
+    }
+
+
+type alias DRecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : DRecord2
+    }
+
+
+type alias DRecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : DRecord3
+    }
+
+
+type alias DRecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : DRecordN1
+    , nestedB : DRecordN2
+    , nestedC : DRecordN3
+    }
+
+
+type alias DRecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : DRecordN1
+    , nestedB : DRecordN2
+    , nestedC : DRecordN3
+    , nestedD : DRecordNN1
+    }
+
+
+type alias DRecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : DRecordN1
+    , nestedB : DRecordN2
+    , nestedC : DRecordN3
+    , nestedD : DRecordNN1
+    , nestedE : DRecordNN2
+    }
+
+
+usageAD : DRecord -> Int
+usageAD record =
+    fieldA record
+
+
+usageBD : DRecord -> Bool
+usageBD record =
+    fieldB record
+
+
+usageCD : DRecord -> String
+usageCD record =
+    fieldC record
+
+
+usageNAD : DRecord1 -> Int
+usageNAD record =
+    fieldA record
+
+
+usageNBD : DRecordN1 -> Bool
+usageNBD record =
+    fieldB record
+
+
+usageNCD : DRecordN2 -> String
+usageNCD record =
+    fieldC record
+
+
+usageNA_D : DRecordNN1 -> Int
+usageNA_D record =
+    fieldA record
+
+
+usageNB_D : DRecordNN2 -> Bool
+usageNB_D record =
+    fieldB record
+
+
+usageNC_D : DRecordNN3 -> String
+usageNC_D record =
+    fieldC record
+
+
+type alias ERecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : ERecord1
+    , fieldK : ERecord2
+    , fieldL : ERecord3
+    , nestedA : ERecordN1
+    , nestedB : ERecordN2
+    , nestedC : ERecordN3
+    , nestedA_ : ERecordNN1
+    , nestedB_ : ERecordNN2
+    , nestedC_ : ERecordNN3
+    }
+
+
+type alias ERecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias ERecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias ERecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias ERecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ERecord1
+    }
+
+
+type alias ERecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : ERecord2
+    }
+
+
+type alias ERecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : ERecord3
+    }
+
+
+type alias ERecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ERecordN1
+    , nestedB : ERecordN2
+    , nestedC : ERecordN3
+    }
+
+
+type alias ERecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ERecordN1
+    , nestedB : ERecordN2
+    , nestedC : ERecordN3
+    , nestedD : ERecordNN1
+    }
+
+
+type alias ERecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : ERecordN1
+    , nestedB : ERecordN2
+    , nestedC : ERecordN3
+    , nestedD : ERecordNN1
+    , nestedE : ERecordNN2
+    }
+
+
+usageAE : ERecord -> Int
+usageAE record =
+    fieldA record
+
+
+usageBE : ERecord -> Bool
+usageBE record =
+    fieldB record
+
+
+usageCE : ERecord -> String
+usageCE record =
+    fieldC record
+
+
+usageNAE : ERecord1 -> Int
+usageNAE record =
+    fieldA record
+
+
+usageNBE : ERecordN1 -> Bool
+usageNBE record =
+    fieldB record
+
+
+usageNCE : ERecordN2 -> String
+usageNCE record =
+    fieldC record
+
+
+usageNA_E : ERecordNN1 -> Int
+usageNA_E record =
+    fieldA record
+
+
+usageNB_E : ERecordNN2 -> Bool
+usageNB_E record =
+    fieldB record
+
+
+usageNC_E : ERecordNN3 -> String
+usageNC_E record =
+    fieldC record
+
+
+type alias FRecord =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    , fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    , fieldJ : FRecord1
+    , fieldK : FRecord2
+    , fieldL : FRecord3
+    , nestedA : FRecordN1
+    , nestedB : FRecordN2
+    , nestedC : FRecordN3
+    , nestedA_ : FRecordNN1
+    , nestedB_ : FRecordNN2
+    , nestedC_ : FRecordNN3
+    }
+
+
+type alias FRecord1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    }
+
+
+type alias FRecord2 =
+    { fieldD : Result String Int
+    , fieldE : Result String Bool
+    , fieldF : Result String String
+    }
+
+
+type alias FRecord3 =
+    { fieldG : Maybe Int
+    , fieldH : Maybe Bool
+    , fieldI : Maybe String
+    }
+
+
+type alias FRecordN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : FRecord1
+    }
+
+
+type alias FRecordN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedB : FRecord2
+    }
+
+
+type alias FRecordN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedC : FRecord3
+    }
+
+
+type alias FRecordNN1 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : FRecordN1
+    , nestedB : FRecordN2
+    , nestedC : FRecordN3
+    }
+
+
+type alias FRecordNN2 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : FRecordN1
+    , nestedB : FRecordN2
+    , nestedC : FRecordN3
+    , nestedD : FRecordNN1
+    }
+
+
+type alias FRecordNN3 =
+    { fieldA : Int
+    , fieldB : Bool
+    , fieldC : String
+    , nestedA : FRecordN1
+    , nestedB : FRecordN2
+    , nestedC : FRecordN3
+    , nestedD : FRecordNN1
+    , nestedE : FRecordNN2
+    }
+
+
+usageAF : FRecord -> Int
+usageAF record =
+    fieldA record
+
+
+usageBF : FRecord -> Bool
+usageBF record =
+    fieldB record
+
+
+usageCF : FRecord -> String
+usageCF record =
+    fieldC record
+
+
+usageNAF : FRecord1 -> Int
+usageNAF record =
+    fieldA record
+
+
+usageNBF : FRecordN1 -> Bool
+usageNBF record =
+    fieldB record
+
+
+usageNCF : FRecordN2 -> String
+usageNCF record =
+    fieldC record
+
+
+usageNA_F : FRecordNN1 -> Int
+usageNA_F record =
+    fieldA record
+
+
+usageNB_F : FRecordNN2 -> Bool
+usageNB_F record =
+    fieldB record
+
+
+usageNC_F : FRecordNN3 -> String
+usageNC_F record =
+    fieldC record

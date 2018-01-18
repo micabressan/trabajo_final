@@ -1,0 +1,1 @@
+totaletijdalbum x [y:ys] = [(fst y, snd y, toString(foldl (+) zero [v.Nummer.lengte\\v<-x | v.Nummer.groep == fst y && v.Nummer.album == snd y]))] ++ (totaletijdalbum x ys)

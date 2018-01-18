@@ -1,0 +1,10 @@
+roleX:
+    # Needed for for managing XYZ spec PDFS
+	"/Volumes/BigDD/SpecialData1":
+		- READ
+	    - WRITE
+   "/Volumes/BigDD/SpecialData2":
+		- READ
+    # So and So says roleX users will need this access to update X video
+   "/Volumes/BigDD/VideoDataQ":
+        - READ

@@ -1,0 +1,5 @@
+square :: Integer -> Integer
+square n = n*n
+
+sqsq :: Integer -> Integer
+sqsq = square . square

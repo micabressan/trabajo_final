@@ -86,7 +86,18 @@ if __name__ == '__main__':
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    classifiers = [SGDClassifier( loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None), KNeighborsClassifier(3), SVC(kernel="linear", C=0.025), SVC(gamma=2, C=1), DecisionTreeClassifier(max_depth=5), RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1), MLPClassifier(alpha=1), AdaBoostClassifier()]
+    classifiers = [
+        SGDClassifier( loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None), 
+        KNeighborsClassifier(3),
+        SVC(kernel="linear", C=0.025), SVC(gamma=2, C=1),
+        GaussianProcessClassifier(1.0 * RBF(1.0)),
+        DecisionTreeClassifier(max_depth=5),
+        RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+        MLPClassifier(alpha=1),
+        AdaBoostClassifier(),
+        GaussianNB(),
+        QuadraticDiscriminantAnalysis()
+        ]
 
     for c in classifiers:
 

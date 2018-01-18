@@ -1,0 +1,314 @@
+diff --git a/libavcodec/cabac.c b/libavcodec/cabac.c
+index 57ab395..b79a0e9 100644
+--- a/libavcodec/cabac.c
++++ b/libavcodec/cabac.c
+@@ -103,6 +103,7 @@ const uint8_t ff_h264_norm_shift[512]= {
+  *
+  * @param buf_size size of buf in bits
+  */
++#if 0
+ void ff_init_cabac_encoder(CABACContext *c, uint8_t *buf, int buf_size){
+     init_put_bits(&c->pb, buf, buf_size);
+ 
+@@ -115,6 +116,7 @@ void ff_init_cabac_encoder(CABACContext *c, uint8_t *buf, int buf_size){
+ 
+     c->pb.bit_left++; //avoids firstBitFlag
+ }
++#endif
+ 
+ /**
+  *
+diff --git a/libavcodec/cabac.h b/libavcodec/cabac.h
+index 1260642..288fb68 100644
+--- a/libavcodec/cabac.h
++++ b/libavcodec/cabac.h
+@@ -30,6 +30,7 @@
+ #include <stddef.h>
+ 
+ #include "put_bits.h"
++#include "bytestream.h"
+ 
+ //#undef NDEBUG
+ #include <assert.h>
+@@ -40,14 +41,18 @@
+ typedef struct CABACContext{
+     int low;
+     int range;
++#if 0
+     int outstanding_count;
++#endif
+ #ifdef STRICT_LIMITS
+     int symCount;
+ #endif
+-    const uint8_t *bytestream_start;
+     const uint8_t *bytestream;
++    const uint8_t *bytestream_start;
+     const uint8_t *bytestream_end;
++#if 0
+     PutBitContext pb;
++#endif
+ }CABACContext;
+ 
+ extern uint8_t ff_h264_mlps_state[4*64];
+@@ -64,7 +69,7 @@ void ff_init_cabac_encoder(CABACContext *c, uint8_t *buf, int buf_size);
+ void ff_init_cabac_decoder(CABACContext *c, const uint8_t *buf, int buf_size);
+ void ff_init_cabac_states(CABACContext *c);
+ 
+-
++#if 0
+ static inline void put_cabac_bit(CABACContext *c, int b){
+     put_bits(&c->pb, 1, b);
+     for(;c->outstanding_count; c->outstanding_count--){
+@@ -90,23 +95,26 @@ static inline void renorm_cabac_encoder(CABACContext *c){
+     }
+ }
+ 
+-static void refill(CABACContext *c){
+-#if CABAC_BITS == 16
+-        c->low+= (c->bytestream[0]<<9) + (c->bytestream[1]<<1);
+-#else
+-        c->low+= c->bytestream[0]<<1;
+ #endif
+-    c->low -= CABAC_MASK;
+-    c->bytestream+= CABAC_BITS/8;
++
++static int refill(const uint8_t **bytestreamp, int low){
++    const uint8_t *bytestream = *bytestreamp;
++    low += (bytestream[0]<<9) + (bytestream[1]<<1);
++    low -= CABAC_MASK;
++    *bytestreamp += CABAC_BITS/8;
++    return low;
+ }
+ 
+ static inline void renorm_cabac_decoder(CABACContext *c){
+-    while(c->range < 0x100){
+-        c->range+= c->range;
+-        c->low+= c->low;
+-        if(!(c->low & CABAC_MASK))
+-            refill(c);
++    int range = c->range, low = c->low;
++    while(range < 0x100){
++        range+= range;
++        low  += low;
++        if(!(low & CABAC_MASK))
++            low = refill(&c->bytestream, low);
+     }
++    c->range = range;
++    c->low   = low;
+ }
+ 
+ static inline void renorm_cabac_decoder_once(CABACContext *c){
+@@ -114,49 +122,52 @@ static inline void renorm_cabac_decoder_once(CABACContext *c){
+     c->range<<= shift;
+     c->low  <<= shift;
+     if(!(c->low & CABAC_MASK))
+-        refill(c);
++        c->low = refill(&c->bytestream, c->low);
+ }
+ 
+ #ifndef get_cabac_inline
+-static void refill2(CABACContext *c){
++static int refill2(const uint8_t **bytestreamp, int low){
++    const uint8_t *bytestream = *bytestreamp;
+     int i, x;
+ 
+-    x= c->low ^ (c->low-1);
++    x= low ^ (low-1);
+     i= 7 - ff_h264_norm_shift[x>>(CABAC_BITS-1)];
+ 
+     x= -CABAC_MASK;
+-
+-#if CABAC_BITS == 16
+-        x+= (c->bytestream[0]<<9) + (c->bytestream[1]<<1);
+-#else
+-        x+= c->bytestream[0]<<1;
+-#endif
+-
+-    c->low += x<<i;
+-    c->bytestream+= CABAC_BITS/8;
++    x+= (bytestream[0]<<9) + (bytestream[1]<<1);
++    *bytestreamp += CABAC_BITS/8;
++    
++    low += x<<i;
++    return low;
+ }
+ 
+-static av_always_inline int get_cabac_inline(CABACContext *c, uint8_t * const state){
++static av_always_inline __attribute__((hot)) int get_cabac_inline(CABACContext *c, uint8_t * const state){
++    int range = c->range, low = c->low;
+     int s = *state;
+-    int RangeLPS= ff_h264_lps_range[2*(c->range&0xC0) + s];
+-    int bit, lps_mask;
++    int RangeLPS= ff_h264_lps_range[2*(range&0xC0) + s];
++    int lps_mask;
+ 
+-    c->range -= RangeLPS;
+-    lps_mask= ((c->range<<(CABAC_BITS+1)) - c->low)>>31;
++    range -= RangeLPS;
++    lps_mask= ((range<<(CABAC_BITS+1)) - low)>>31;
+ 
+-    c->low -= (c->range<<(CABAC_BITS+1)) & lps_mask;
+-    c->range += (RangeLPS - c->range) & lps_mask;
++    low   -= (range<<(CABAC_BITS+1)) & lps_mask;
++    range += (RangeLPS - range) & lps_mask;
+ 
+     s^=lps_mask;
+     *state= (ff_h264_mlps_state+128)[s];
+-    bit= s&1;
+ 
+-    lps_mask= ff_h264_norm_shift[c->range];
+-    c->range<<= lps_mask;
+-    c->low  <<= lps_mask;
+-    if(!(c->low & CABAC_MASK))
+-        refill2(c);
+-    return bit;
++    lps_mask= ff_h264_norm_shift[range];
++    range<<= lps_mask;
++    low  <<= lps_mask;
++    
++    if (low & CABAC_MASK) {
++    } else {
++        low = refill2(&c->bytestream, low);
++    }
++    
++    c->range = range;
++    c->low   = low;
++    return s&1;
+ }
+ #endif
+ 
+@@ -168,36 +179,43 @@ static int av_unused get_cabac(CABACContext *c, uint8_t * const state){
+     return get_cabac_inline(c,state);
+ }
+ 
+-static int av_unused get_cabac_bypass(CABACContext *c){
+-    int range;
+-    c->low += c->low;
++static int av_unused __attribute__((hot)) get_cabac_bypass(CABACContext *c){
++    int range = c->range, low = c->low;
++    low += low;
+ 
+-    if(!(c->low & CABAC_MASK))
+-        refill(c);
+-
+-    range= c->range<<(CABAC_BITS+1);
+-    if(c->low < range){
++    if(low & CABAC_MASK) {
++    } else {
++        low = refill(&c->bytestream, low);
++    }
++    
++    range= range<<(CABAC_BITS+1);
++    if(low < range){
++        c->low = low;
+         return 0;
+     }else{
+-        c->low -= range;
++        low -= range;
++        c->low = low;
+         return 1;
+     }
+ }
+ 
+ 
+ #ifndef get_cabac_bypass_sign
+-static av_always_inline int get_cabac_bypass_sign(CABACContext *c, int val){
+-    int range, mask;
+-    c->low += c->low;
++static av_always_inline __attribute__((hot)) int get_cabac_bypass_sign(CABACContext *c, int val){
++    int range = c->range, low = c->low, mask;
++    low += low;
+ 
+-    if(!(c->low & CABAC_MASK))
+-        refill(c);
+-
+-    range= c->range<<(CABAC_BITS+1);
+-    c->low -= range;
+-    mask= c->low >> 31;
++    if(low & CABAC_MASK) {
++    } else {
++        low = refill(&c->bytestream, low);
++    }
++        
++    range= range<<(CABAC_BITS+1);
++    low -= range;
++    mask= low >> 31;
+     range &= mask;
+-    c->low += range;
++    low += range;
++    c->low = low;
+     return (val^mask)-mask;
+ }
+ #endif
+diff --git a/libavcodec/h264_cabac.c b/libavcodec/h264_cabac.c
+index 065b6e8..6b668f3 100644
+--- a/libavcodec/h264_cabac.c
++++ b/libavcodec/h264_cabac.c
+@@ -1565,7 +1565,7 @@ DECLARE_ASM_CONST(1, uint8_t, last_coeff_flag_offset_8x8)[63] = {
+     5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8
+ };
+ 
+-static av_always_inline void decode_cabac_residual_internal( H264Context *h, DCTELEM *block, int cat, int n, const uint8_t *scantable, const uint32_t *qmul, int max_coeff, int is_dc ) {
++static av_always_inline av_flatten void decode_cabac_residual_internal( H264Context *h, DCTELEM *block, int cat, int n, const uint8_t *scantable, const uint32_t *qmul, int max_coeff, int is_dc ) {
+     static const int significant_coeff_flag_offset[2][14] = {
+       { 105+0, 105+15, 105+29, 105+44, 105+47, 402, 484+0, 484+15, 484+29, 660, 528+0, 528+15, 528+29, 718 },
+       { 277+0, 277+15, 277+29, 277+44, 277+47, 436, 776+0, 776+15, 776+29, 675, 820+0, 820+15, 820+29, 733 }
+diff --git a/libavcodec/x86/cabac.h b/libavcodec/x86/cabac.h
+index 545cf7c..01fd951 100644
+--- a/libavcodec/x86/cabac.h
++++ b/libavcodec/x86/cabac.h
+@@ -101,6 +101,7 @@ static av_always_inline int get_cabac_inline_x86(CABACContext *c,
+ }
+ #endif /* ARCH_X86 && HAVE_7REGS && !defined(BROKEN_RELOCATIONS) */
+ 
++#if 0
+ #define get_cabac_bypass_sign get_cabac_bypass_sign_x86
+ static av_always_inline int get_cabac_bypass_sign_x86(CABACContext *c, int val)
+ {
+@@ -137,5 +138,6 @@ static av_always_inline int get_cabac_bypass_sign_x86(CABACContext *c, int val)
+     );
+     return val;
+ }
++#endif
+ 
+ #endif /* AVCODEC_X86_CABAC_H */
+diff --git a/libavutil/x86/bswap.h b/libavutil/x86/bswap.h
+index b60d9cc..83a0199 100644
+--- a/libavutil/x86/bswap.h
++++ b/libavutil/x86/bswap.h
+@@ -29,32 +29,22 @@
+ #include "libavutil/attributes.h"
+ 
+ #define av_bswap16 av_bswap16
+-static av_always_inline av_const unsigned av_bswap16(unsigned x)
++static av_always_inline av_const uint16_t av_bswap16(uint16_t x)
+ {
+-    __asm__("rorw $8, %w0" : "+r"(x));
+-    return x;
++    return x << 8 | x >> 8;
+ }
+ 
+ #define av_bswap32 av_bswap32
+ static av_always_inline av_const uint32_t av_bswap32(uint32_t x)
+ {
+-#if HAVE_BSWAP
+-    __asm__("bswap   %0" : "+r" (x));
+-#else
+-    __asm__("rorw    $8,  %w0 \n\t"
+-            "rorl    $16, %0  \n\t"
+-            "rorw    $8,  %w0"
+-            : "+r"(x));
+-#endif
+-    return x;
++    return __builtin_bswap32(x);
+ }
+ 
+ #if ARCH_X86_64
+ #define av_bswap64 av_bswap64
+ static inline uint64_t av_const av_bswap64(uint64_t x)
+ {
+-    __asm__("bswap  %0": "=r" (x) : "0" (x));
+-    return x;
++    return __builtin_bswap64(x);
+ }
+ #endif

@@ -1,0 +1,163 @@
+23:33:06 INFO]: [ServerListPlus] Enabling ServerListPlus v3.4.7
+[23:33:07 INFO]: [ServerListPlus] [Core] Reloading configuration...
+[23:33:07 INFO]: [ServerListPlus] [Core] Loaded configuration: ServerStatusConf
+[23:33:07 WARN]: [ServerListPlus] [Core] Unable to parse a part of the configura
+tion. Make sure the YAML syntax is valid!
+org.yaml.snakeyaml.constructor.ConstructorException: Cannot create property=Favi
+con for JavaBean=net.minecrell.serverlistplus.core.config.PluginConf@c71fef
+in 'reader', line 72, column 5:
+--- !Plugin
+^
+Cannot create property=ResizeStrategy for JavaBean=net.minecrell.serverlistplus.
+core.config.PluginConf$FaviconConf@123eee9
+in 'reader', line 87, column 3:
+Timeout: 10s
+^
+Can't construct a java object for tag:yaml.org,2002:net.minecrell.serverlistplus
+.core.favicon.ResizeStrategy$2; exception=Unable to find enum value 'SCALE' for
+enum class: net.minecrell.serverlistplus.core.favicon.ResizeStrategy$2
+in 'reader', line 89, column 19:
+ResizeStrategy: !!net.minecrell.serverlistplus.c ...
+^
+
+in 'reader', line 89, column 19:
+ResizeStrategy: !!net.minecrell.serverlistplus.c ...
+^
+
+in 'reader', line 87, column 3:
+Timeout: 10s
+^
+
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:268) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+(Constructor.java:149) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructYamlObject.constr
+uct(Constructor.java:308) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructDocument(Base
+Constructor.java:161) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructo
+r.java:127) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:547) ~[spigot.jar:git-Spigot
+-3d850ec-809c399]
+at net.minecrell.serverlistplus.core.ConfigurationManager.reload(Configu
+rationManager.java:96) [ServerListPlus-3.4.7-Universal%20(1).jar:?]
+at net.minecrell.serverlistplus.core.ServerListPlusCore.reload(ServerLis
+tPlusCore.java:186) [ServerListPlus-3.4.7-Universal%20(1).jar:?]
+at net.minecrell.serverlistplus.core.ServerListPlusCore.<init>(ServerLis
+tPlusCore.java:135) [ServerListPlus-3.4.7-Universal%20(1).jar:?]
+at net.minecrell.serverlistplus.core.ServerListPlusCore.<init>(ServerLis
+tPlusCore.java:87) [ServerListPlus-3.4.7-Universal%20(1).jar:?]
+at net.minecrell.serverlistplus.bukkit.BukkitPlugin.onEnable(BukkitPlugi
+n.java:139) [ServerListPlus-3.4.7-Universal%20(1).jar:?]
+at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:264) [sp
+igot.jar:git-Spigot-3d850ec-809c399]
+at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader
+.java:337) [spigot.jar:git-Spigot-3d850ec-809c399]
+at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManage
+r.java:403) [spigot.jar:git-Spigot-3d850ec-809c399]
+at org.bukkit.craftbukkit.v1_12_R1.CraftServer.enablePlugin(CraftServer.
+java:382) [spigot.jar:git-Spigot-3d850ec-809c399]
+at org.bukkit.craftbukkit.v1_12_R1.CraftServer.enablePlugins(CraftServer
+.java:331) [spigot.jar:git-Spigot-3d850ec-809c399]
+at net.minecraft.server.v1_12_R1.MinecraftServer.t(MinecraftServer.java:
+422) [spigot.jar:git-Spigot-3d850ec-809c399]
+at net.minecraft.server.v1_12_R1.MinecraftServer.l(MinecraftServer.java:
+383) [spigot.jar:git-Spigot-3d850ec-809c399]
+at net.minecraft.server.v1_12_R1.MinecraftServer.a(MinecraftServer.java:
+338) [spigot.jar:git-Spigot-3d850ec-809c399]
+at net.minecraft.server.v1_12_R1.DedicatedServer.init(DedicatedServer.ja
+va:272) [spigot.jar:git-Spigot-3d850ec-809c399]
+at net.minecraft.server.v1_12_R1.MinecraftServer.run(MinecraftServer.jav
+a:545) [spigot.jar:git-Spigot-3d850ec-809c399]
+at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+Caused by: org.yaml.snakeyaml.constructor.ConstructorException: Cannot create pr
+operty=ResizeStrategy for JavaBean=net.minecrell.serverlistplus.core.config.Plug
+inConf$FaviconConf@123eee9
+in 'reader', line 87, column 3:
+Timeout: 10s
+^
+Can't construct a java object for tag:yaml.org,2002:net.minecrell.serverlistplus
+.core.favicon.ResizeStrategy$2; exception=Unable to find enum value 'SCALE' for
+enum class: net.minecrell.serverlistplus.core.favicon.ResizeStrategy$2
+in 'reader', line 89, column 19:
+ResizeStrategy: !!net.minecrell.serverlistplus.c ...
+^
+
+in 'reader', line 89, column 19:
+ResizeStrategy: !!net.minecrell.serverlistplus.c ...
+^
+
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:268) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+(Constructor.java:149) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.newInstan
+ce(Constructor.java:281) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:246) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+... 23 more
+Caused by: org.yaml.snakeyaml.constructor.ConstructorException: Can't construct
+a java object for tag:yaml.org,2002:net.minecrell.serverlistplus.core.favicon.Re
+sizeStrategy$2; exception=Unable to find enum value 'SCALE' for enum class: net.
+minecrell.serverlistplus.core.favicon.ResizeStrategy$2
+in 'reader', line 89, column 19:
+ResizeStrategy: !!net.minecrell.serverlistplus.c ...
+^
+
+at org.yaml.snakeyaml.constructor.Constructor$ConstructYamlObject.constr
+uct(Constructor.java:313) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:247) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+(Constructor.java:149) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.newInstan
+ce(Constructor.java:281) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:246) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+... 23 more
+Caused by: org.yaml.snakeyaml.error.YAMLException: Unable to find enum value 'SC
+ALE' for enum class: net.minecrell.serverlistplus.core.favicon.ResizeStrategy$2
+at org.yaml.snakeyaml.constructor.Constructor$ConstructScalar.constructS
+tandardJavaInstance(Constructor.java:475) ~[spigot.jar:git-Spigot-3d850ec-809c39
+9]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructScalar.construct(
+Constructor.java:352) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructYamlObject.constr
+uct(Constructor.java:308) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:247) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+(Constructor.java:149) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck
+(BaseConstructor.java:207) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseCo
+nstructor.java:196) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.newInstan
+ce(Constructor.java:281) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+at org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct
+JavaBean2ndStep(Constructor.java:246) ~[spigot.jar:git-Spigot-3d850ec-809c399]
+... 23 more
+[23:33:07 WARN]: [ServerListPlus] [Core] Could not load all configurations from
+the configuration file. Please make sure the syntax is correct. Type '/slp save'
+if you want to add the missing parts.

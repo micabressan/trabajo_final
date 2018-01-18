@@ -1,0 +1,10 @@
+countLeavs [] = 0
+countLeavs n = 1
+countLeavs (x:xs) = (countLeavs x) + (countLeavs xs)
+
+
+
+main = do
+       print $ countLeavs []
+       print $ countLeavs 1
+       print $ countLeavs [1,2,3,4]

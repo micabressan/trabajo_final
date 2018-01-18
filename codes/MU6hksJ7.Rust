@@ -1,0 +1,184 @@
+use std::fs::File;
+use std::io::BufReader;
+use std::io::prelude::*;
+
+fn get_word_list() -> Result<Vec<String>, std::io::Error> {
+    let mut contents = String::new();
+    {
+        let file = File::open("words.txt")?;
+        let mut buf_reader = BufReader::new(file);
+        buf_reader.read_to_string(&mut contents)?;
+    }
+
+    Ok(contents.split("\r\n").map(|s| s.to_string()).collect())
+}
+
+fn digit_could_match_char(digit: char, c: char) -> bool {
+    match digit {
+        '1' => match c {
+            'q' | 'a' | 'z' => return true,
+            _ => return false,
+        },
+        '2' => match c {
+            'w' | 's' | 'x' => return true,
+            _ => return false,
+        },
+        '3' => match c {
+            'e' | 'd' | 'c' => return true,
+            _ => return false,
+        },
+        '4' => match c {
+            'r' | 'f' | 'v' => return true,
+            _ => return false,
+        },
+        '5' => match c {
+            't' | 'g' | 'b' => return true,
+            _ => return false,
+        },
+        '6' => match c {
+            'y' | 'h' | 'n' => return true,
+            _ => return false,
+        },
+        '7' => match c {
+            'u' | 'j' | 'm' => return true,
+            _ => return false,
+        },
+        '8' => match c {
+            'i' | 'k' => return true,
+            _ => return false,
+        },
+        '9' => match c {
+            'o' | 'l' => return true,
+            _ => return false,
+        },
+        '0' => match c {
+            'p' => return true,
+            _ => return false,
+        },
+        _ => panic!("That's not a digit."),
+    }
+}
+
+fn solve(word_list: &Vec<String>, crypt: &str) -> String {
+    let mut solution = String::new();
+
+    let mut possibilites = Vec::<String>::new();
+
+    let chars = crypt.chars().enumerate();
+    for (i, c) in chars {
+        if possibilites.is_empty() {
+            // We collect our initial list of possibilities
+            for word in word_list {
+                match word.chars().nth(0) {
+                    Some(word_c) => if digit_could_match_char(c, word_c.to_lowercase().next().unwrap()) {
+                        possibilites.push(word.clone());
+                    },
+                    None => panic!("Impossible"),
+                }
+                
+            }
+        } else {
+            // Process of elimination
+            let mut size = possibilites.len() - 1;
+            let mut possibility_index = 0;
+            while possibility_index < size {
+                match possibilites[possibility_index].chars().nth(i) {
+                    Some(word_c) => if !digit_could_match_char(c, word_c.to_lowercase().next().unwrap()) {
+                        possibilites.remove(possibility_index);
+                        size -= 1; // We just removed an element so we need to update our iteration.
+                    },
+                    None => { possibilites.remove(possibility_index); size -= 1; },
+                }
+                possibility_index += 1;
+            }
+        }
+    }
+
+    /* If we had two remaining possibilities: "modular" and "modularity",
+     * and our crypt could only match "modular", then we choose it.
+     *
+     * This also works if we just had one possibility in possibilities.
+     */
+
+    if !possibilites.is_empty() {
+        for possibility in possibilites {
+            if solution.len() > possibility.len() || solution.is_empty() {
+                solution = possibility;
+            }
+        }
+    } else {
+        // We never got a possibility, so we make it all question marks
+        for digit in crypt.chars() {
+            solution.push('?');
+        }
+    }
+
+    solution
+}
+
+fn decode(input: &str) -> String {
+    let mut output = String::new();
+
+    let words = get_word_list().unwrap();
+
+    let mut current_crypt = String::new();
+
+    let chars = input.chars();
+    for c in chars {
+        if c.is_numeric() {
+            current_crypt.push(c);
+        } else {
+            match c {
+                ' ' | '\n' => {
+                    output.push_str(solve(&words, current_crypt.as_str()).as_str());
+                },
+                _ => output.push(c),
+            }
+        }
+    }
+
+    if !current_crypt.is_empty() {
+        output.push_str(solve(&words, current_crypt.as_str()).as_str());
+    }
+
+    output
+}
+
+fn encode(input: &str) -> String {
+    let mut output = String::new();
+
+    let chars = input.chars();
+    for c in chars {
+        if c.is_alphabetic() {
+            match c.to_lowercase().next().unwrap() {
+                'q' | 'a' | 'z' => output.push('1'),
+                'w' | 's' | 'x' => output.push('2'),
+                'e' | 'd' | 'c' => output.push('3'),
+                'r' | 'f' | 'v' => output.push('4'),
+                't' | 'g' | 'b' => output.push('5'),
+                'y' | 'h' | 'n' => output.push('6'),
+                'u' | 'j' | 'm' => output.push('7'),
+                'i' | 'k' =>       output.push('8'),
+                'o' | 'l' =>       output.push('9'),
+                'p' =>             output.push('0'),
+                _ => unimplemented!(),
+            }
+        } else {
+            output.push(c);
+        }
+    }
+
+    output
+}
+
+fn main() {
+    /*
+    let crypt = encode("Hello, world!");
+    let decrypt = decode(crypt.as_str());
+
+    println!("  Crypt: {}\n", crypt);
+    println!("Decrypt: {}", decrypt);
+    */
+
+    println!("{:?}", decode("526252526374"));
+}

@@ -1,0 +1,14 @@
+cycles' :: (Int, Int)     -- ^ Current cycle element (same as @last cycle@)
+        -> [(Int, Int)]   -- ^ Current cycle
+        -> [(Int, Int)]   -- ^ Mappings
+        -> [[(Int, Int)]] -- ^ Cycles
+cycles' (i, x) cycle mappings =
+    case find (\(j, y) -> x == j) mappings of
+        (Just next) -> if next `elem` cycle
+                          then cycle : nextCycles
+                          else cycles' next (cycle ++ [next]) mappings
+        Nothing     -> error "all elements from `cycle` must be included in `mappings`"
+    where mappings' = mappings \\ cycle
+          nextCycles | null mappings' = []
+                     | otherwise      = cycles' newStart [newStart] mappings'
+          newStart = head mappings'

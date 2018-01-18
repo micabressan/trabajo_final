@@ -1,0 +1,26 @@
+module Main where
+
+data MyCTree a = Nil 
+                | Leaf a
+                | Branch (MyCTree a) (MyCTree a) 
+                deriving (Eq,Ord,Show,Read)
+
+tree_leaves :: Num a => MyCTree a -> a
+tree_leaves Nil = 0
+tree_leaves (Leaf n) = 1
+tree_leaves (Branch t1 t2) = tree_leaves t1 + tree_leaves t2 
+
+main :: IO ()
+main  =
+    do
+    putStrLn "Begin program"
+
+    let aMyTree = Branch (Leaf 1) (Leaf 2)
+    print aMyTree
+    print (tree_leaves aMyTree)
+
+    let aMyTree2 = Branch (Branch (Leaf 1) (Leaf 2)) (Branch (Leaf 1) (Leaf 2))
+    print aMyTree2
+    print (tree_leaves aMyTree2)
+
+    putStrLn "End program"

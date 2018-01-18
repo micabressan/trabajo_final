@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - name: do something
+      pause:
+        seconds: 5

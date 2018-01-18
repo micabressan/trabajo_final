@@ -1,0 +1,11 @@
+countOfDigInAList :: Int -> [Int] -> Int
+countOfDigInAList n xs 
+  |null xs = 0
+  |n == (head xs) = 1 + countOfDigInAList n (tail xs)
+  |otherwise = countOfDigInAList n (tail xs)
+
+remDupl :: [Int] -> [Int]
+remDupl xs = [x | x <- xs, countOfDigInAList x xs == 1]
+
+sumUnique :: [[Int]] -> Int
+sumUnique xs = sum (concat (map remDupl xs))

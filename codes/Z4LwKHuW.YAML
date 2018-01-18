@@ -1,0 +1,10 @@
+- hosts: 127.0.0.1
+  connection: local
+  become: false
+  tasks:
+  - name: create hosts_active group
+    add_host:
+      hostname: "{{ item }}"
+      group: "hosts_active"
+    with_items: "{{ groups['all'] }}"
+    check_mode: no

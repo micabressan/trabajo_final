@@ -1,0 +1,9 @@
+{-# LANGUAGE ExistentialQuantification, RankNTypes, TypeFamilies #-}
+
+
+class X x where
+  x_ :: x -> ()
+
+proof :: X x => (forall x. X x => x -> y) -> x -> y
+proof p ex =
+  p ex

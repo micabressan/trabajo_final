@@ -1,0 +1,18 @@
+{-# LANGUAGE OverloadedStrings, ApplicativeDo #-}
+
+import           Prelude hiding (takeWhile)
+import           Data.Attoparsec.ByteString.Char8
+import qualified Data.ByteString.Char8 as BC
+import           Data.IntMap
+import           Control.Monad
+import           Control.Applicative
+import           Data.Monoid
+import           Data.Functor
+
+parser :: Alternative f => f a -> f b -> f () -> f [a]
+parser p s q = find
+  where
+  find = do
+    this <- fmap Right p <|> fmap Left q
+    next <- s *> find <|> pure []
+    pure $ either (const next) (: next) this

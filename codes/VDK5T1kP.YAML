@@ -1,0 +1,53 @@
+7:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 6
+      8:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+          damage: 1
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 7
+      9:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+          damage: 2
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 8
+      10:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+          damage: 3
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 9
+      11:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+          damage: 4
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 10
+      12:
+        type: item
+        item:
+          material: Planks
+          quantity: 1
+          damage: 5
+        buyPrice: 12.5
+        sellPrice: 6.25
+        slot: 11

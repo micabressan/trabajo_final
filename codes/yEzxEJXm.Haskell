@@ -1,0 +1,5 @@
+calcDist :: String -> String -> Integer -> Integer -> Float
+calcDist [] [] diff l | fromIntegral fromIntegral diff / fromIntegral l >= 0.74 = 3.3 
+                           | otherwise = error "bajs"
+calcDist (heada:taila) (headb:tailb) diff l | heada==headb = calcDist taila tailb diff (l+1)
+                                                             | otherwise = calcDist taila tailb (diff+1) (l+1)

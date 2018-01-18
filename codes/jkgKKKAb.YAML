@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:    
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-name: route
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  name: my-service-ingress
+  namespace: default
+spec:
+  rules:
+  - host: service1.domain.com
+    http:
+      paths:
+      - backend:
+          serviceName: my-service
+          servicePort: 80
+        path: /my-service
+  tls:
+  - hosts:
+    - service1.domain.com
+    secretName: tls-domain

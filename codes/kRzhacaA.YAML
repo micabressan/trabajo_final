@@ -1,0 +1,4 @@
+[workstation]
+
+[workstation:vars]
+ansible_winrm_transport=credssp

@@ -1,0 +1,22 @@
+[23:21:00] [Server thread/INFO]: [SkyClans] Enabling SkyClans v1.0
+[23:21:00] [Server thread/INFO]: ---------------
+[23:21:00] [Server thread/INFO]: Enabling §eSkyClans§7. Version: 1.0.
+[23:21:00] [Server thread/ERROR]: An exception has occurred while loading Chunk (invalid world), Clan Tag: stt!
+[23:21:00] [Server thread/ERROR]: An exception has occurred while loading Chunk (invalid world), Clan Tag: st1!
+[23:21:00] [Server thread/ERROR]: An exception has occurred while loading Chunk (invalid world), Clan Tag: st1!
+[23:21:00] [Server thread/ERROR]: Error occurred while enabling SkyClans v1.0 (Is it up to date?)
+java.lang.NullPointerException: null
+	at org.bukkit.Location.getChunk(Location.java:82) ~[Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at me.skyvox.clans.totem.TotemManager.loadTotems(TotemManager.java:253) ~[?:?]
+	at me.skyvox.clans.Sky.onEnable(Sky.java:155) ~[?:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:264) ~[Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader.java:337) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:402) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at org.bukkit.craftbukkit.v1_12_R1.CraftServer.enablePlugin(CraftServer.java:380) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at org.bukkit.craftbukkit.v1_12_R1.CraftServer.enablePlugins(CraftServer.java:329) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at net.minecraft.server.v1_12_R1.MinecraftServer.t(MinecraftServer.java:422) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at net.minecraft.server.v1_12_R1.MinecraftServer.l(MinecraftServer.java:383) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at net.minecraft.server.v1_12_R1.MinecraftServer.a(MinecraftServer.java:338) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at net.minecraft.server.v1_12_R1.DedicatedServer.init(DedicatedServer.java:272) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at net.minecraft.server.v1_12_R1.MinecraftServer.run(MinecraftServer.java:545) [Spigot.jar:git-Spigot-65e8124-bde2a93]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]

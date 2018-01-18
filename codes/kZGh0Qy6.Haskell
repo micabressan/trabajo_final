@@ -1,0 +1,64 @@
+Aufgabe 1
+mnr = [ 7, 6, 5, 4, 3, 2, 1 ] {- Matrikelnummer -}
+name = "Max Mustermann" {- Name -}
+knz = "E 033 4711" {- Studienkennzahl -}
+
+t1 = ("p1", (reverse . take 2 . words . \_ -> name)"!");
+
+-- ("p1", ["Mustermann", "Max"]) :: ([Char], [[Char]])
+
+t2 = ( \x y z a  -> x(z(z(z(a)))));
+
+-- (a -> b) -> c -> (a -> a) -> a -> b
+
+t3 = t2 (take 4) (\x-> x++x) reverse mnr
+
+-- [1,2,3,4] :: [Int]
+
+t4 = [[i+2]|i<-mnr,i+2<5] ++ [[i|i<-mnr,3<i,i>4]];
+
+-- [[4],[3], [7,6,5]] :: [[Int]]
+
+t5 = take 4 [[j|j<-[5..i]]|i<-mnr]
+
+-- [[5,6,7],[5,6],[5]]
+
+tls xs = xs : case xs of _:ys  -> tls ys; _-> []
+-- [a] -> [[a]]
+t6 = ((tls.take 2) mnr, take 5[(i,j)|(i:j:_)<-tls mnr, i<j]);
+-- ([[7,6],[6],[]], []) :: ([[Int]], [(Int, Int)])
+
+p (a:b:l) xs ys = p l (a:b:xs) (b:ys);
+p _ xs ys = (sum ys, product xs);
+-- (Int, Int)
+
+t7 = ( p [mnr!!5, mnr!!6] [] [], p mnr [] []);
+
+-- ((1, 2), (12, 5040)) :: ((Int, Int), (Int, Int))
+
+Aufgabe 2
+
+Erstellen sie einen polymorphen algebraischen Datentyp BTree der einem Binärbaum entspricht. Jeder Knoten enthält ein polymorphes Element und zwei Unterbäume. Ein Knoten bzw. die Unterbäume können auch leer sein. 
+
+-- BEGIN <<LÖSUNG HIER>>
+
+-- END <<LÖSUNG HIER>>
+
+Aufgabe 3
+Geben Sie einen konkreten Wert für folgenden Typ in Haskell-Syntax inklusive Zeichnung an: ( BTree Integer, BTree String ). Die Bäume sollen die Werte 1,2 und "ab" enthalten. 
+
+-- BEGIN <<LÖSUNG HIER>>
+
+-- END <<LÖSUNG HIER>>
+
+Aufgabe 4
+Definieren Sie eine Funktion jdif die für einen BTree genau dann True liefert, wenn für jeden Knoten gilt, dass das Element des Knotens nicht in den Unterbäumen des Knotens vorkommt. (Typklasse!) 
+-- BEGIN <<LÖSUNG HIER>>
+
+-- END <<LÖSUNG HIER>>
+
+Aufgabe 5
+Definieren Sie filtert, das eine einstellige boolsche Funktion und einen BTree erwartet und eine Liste jener Elemente in beliebiger Reihenfolge zurückliefert, bei denen die Funktion für das Element True ist. Geben Sie auch hier eine möglichst allgemeine Typdeklaration für filtert an! 
+-- BEGIN <<LÖSUNG HIER>>
+
+-- END <<LÖSUNG HIER>>

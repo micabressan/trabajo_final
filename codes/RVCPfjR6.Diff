@@ -1,0 +1,13 @@
+diff --git a/src/server/scripts/Northrend/UtgardeKeep/UtgardePinnacle/boss_svala.cpp b/src/server/scripts/Northrend/UtgardeKeep/UtgardePinnacle/boss_svala.cpp
+index 1b70de6..997be5b 100644
+--- a/src/server/scripts/Northrend/UtgardeKeep/UtgardePinnacle/boss_svala.cpp
++++ b/src/server/scripts/Northrend/UtgardeKeep/UtgardePinnacle/boss_svala.cpp
+@@ -128,7 +128,7 @@ public:
+             if (!who)
+                 return;
+ 
+-            if (Phase == IDLE && me->IsValidAttackTarget(who) && me->IsWithinDistInMap(who, 40))
++            if (Phase == IDLE && who->GetTypeId() == TYPEID_PLAYER && !who->ToPlayer()->isGameMaster() && me->IsWithinDistInMap(who, 40))
+             {
+                 Phase = INTRO;
+                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);

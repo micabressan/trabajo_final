@@ -1,0 +1,23 @@
+fib :: Int -> Int
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
+
+-- Builds a list with a function so long as a filter returns true
+-- Parameters:
+--   * Start value
+--   * Function to apply
+--   * Filter function
+--
+-- Returns:
+--   * List of values while function is true
+buildListWhile :: Enum a => a -> (a -> a) -> (a -> Bool) -> [a]
+buildListWhile v f g =
+	if g v
+	then [f v] ++ buildListWhile (succ v) f g
+	else []
+
+
+
+-- sum [fib x | x <- [1 .. 34], even x && fib x <= 4000000]
+-- Gives correct answer: 4613732

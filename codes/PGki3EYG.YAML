@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: proxystage-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: proxy-stage.loc
+    http:
+      paths:
+      - backend:
+          serviceName: proxystage
+          servicePort: 80

@@ -1,0 +1,54 @@
+fn solve(word_list: &Vec<String>, crypt: &str) -> String {
+    let mut solution = String::new();
+
+    let mut possibilites = Vec::<String>::new();
+    let mut gathered_initial_possibilities = false;
+
+    let chars = crypt.chars().enumerate();
+    for (i, c) in chars {
+        if !gathered_initial_possibilities {
+            // We collect our initial list of possibilities
+            for word in word_list {
+                if digit_could_match_char(c, word.chars().nth(0).unwrap().to_lowercase().next().unwrap()) {
+                    possibilites.push(word.clone());
+                }
+            }
+            gathered_initial_possibilities = true;
+        } else {
+            // Process of elimination
+            for possibility in &mut possibilites {
+                match possibility.chars().nth(i) {
+                    Some(word_c) => if !digit_could_match_char(c, word_c.to_lowercase().next().unwrap()) {
+                        possibilites.remove_item(&possibility);
+                    },
+                    None => {
+                        possibilites.remove_item(&possibility);
+                    },
+                }
+            }
+        }
+    }
+
+    /* If we had two remaining possibilities: "modular" and "modularity",
+     * and our crypt could only match "modular", then we choose it.
+     *
+     * This also works if we just had one possibility in possibilities.
+     */
+
+    if !possibilites.is_empty() {
+        for possibility in possibilites.clone() {
+            if (solution.len() > possibility.len() && possibility.len() >= crypt.len()) || solution.is_empty() {
+                solution = possibility;
+            }
+        }
+    } else {
+        // We never got a possibility, so we make it all question marks
+        for digit in crypt.chars() {
+            solution.push('?');
+        }
+    }
+
+    //eprintln!("{:?}", possibilites);
+
+    solution
+}

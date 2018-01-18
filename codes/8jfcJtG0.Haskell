@@ -1,0 +1,4 @@
+swapList :: [a] -> [a] 
+swapList [] = []
+swapList [x] = [x] 
+swapList (x:y:xs) = y : x : (swapList xs)

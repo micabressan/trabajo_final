@@ -1,0 +1,88 @@
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
+import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
+import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.Grid
+import Graphics.X11.ExtraTypes.XF86
+
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey conf
+    where
+        uhook = withUrgencyHookC NoUrgencyHook urgentConfig
+        conf = uhook myConfig
+
+myConfig = defaultConfig
+    { terminal          = terminal'
+    , workspaces        = workspaces'
+    , layoutHook        = layoutHook'
+    , manageHook        = manageHook' <+>  manageDocks <+> manageHook defaultConfig
+    , modMask           = modMask'
+    , focusFollowsMouse = False
+    }
+    `additionalKeys` keys'
+    `additionalKeysP` keysP'
+
+modMask' = mod4Mask
+
+terminal' = "urxvt"
+
+workspaces' = ["im", "web", "term", "vim", "any", "pdf", "video", "mus", "torrents"]
+
+myBar = "xmobar"
+
+myPP = xmobarPP { ppCurrent = xmobarColor "#859900" "" . wrap "<" ">"
+                , ppUrgent = xmobarColor "#dc322f" "" . wrap "[" "]" . xmobarStrip
+                , ppTitle = \_ -> ""
+                , ppSep = xmobarColor "#268bd2" "" " <+> "
+                }
+
+toggleStrutsKey _ = (modMask' .|. shiftMask, xK_b)
+
+urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
+
+layoutHook' = smartBorders %24 avoidStruts
+    %24 onWorkspace "im" Full
+    %24 onWorkspace "web" Full
+    %24 onWorkspace "term" (Grid ||| Full)
+    %24 onWorkspace "vim" Full
+    %24 layoutHook defaultConfig
+
+manageHook' = composeAll
+    [ title =? "mcabber"           --> doShift "im"
+    , className =? "Uzbl-tabbed"   --> doShift "web"
+    , className =? "Uzbl-browser"  --> doShift "web"
+    , title =? "vim"               --> doShift "vim"
+    , title =? "zathura"           --> doShift "pdf"
+    , className =? "gnome-mplayer" --> doShift "video"
+    , title =? "cmus"              --> doShift "mus"
+    , title =? "Transmission"      --> doShift "torrents"
+    , className =? "Gxmessage"     --> doFloat
+    , title =? "xmessage"          --> doFloat
+    ] 
+
+keys' =
+    [ ((modMask' .|. shiftMask, xK_space), spawn %24 terminal' ++ " -e vifm")
+    , ((modMask' .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+    , ((0, xK_Print), spawn "scrot -e 'mv %24f ~/shots/; scrot-loader ~/shots/%24n'")
+    , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv %24f ~/shots/; scrot-loader ~/shots/%24n'")
+    , ((modMask', xK_Print), spawn "sleep 0.2; scrot -b -e 'mv %24f ~/shots/; scrot-loader ~/shots/%24n'")
+    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+")
+    , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+    , ((0, xF86XK_AudioPlay), spawn "cmus-remote --pause")
+    , ((0, xF86XK_AudioStop), spawn "cmus-remote --stop")
+    , ((0, xF86XK_AudioPrev), spawn "cmus-remote --prev")
+    , ((0, xF86XK_AudioNext), spawn "cmus-remote --next")
+    ]
+
+keysP' =
+    [ ("M-x w", spawn "uzbl-tabbed")
+    , ("M-x i", spawn %24 terminal' ++ " -e mcabber")
+    , ("M-x v", spawn %24 terminal' ++ " -e vim")
+    , ("M-x m", spawn %24 terminal' ++ " -e cmus")
+    , ("M-x f", spawn %24 "gnome-mplayer")
+    , ("M-x t", spawn "transmission-gtk")
+    , ("M-x p", spawn "zathura")
+    ]

@@ -1,0 +1,27 @@
+17.01 21:00:40 [Server] ERROR Could not pass event EntityRegainHealthEvent to TokenEnchant v11.18.0
+17.01 21:00:40 [Server] INFO org.bukkit.event.EventException: null
+17.01 21:00:40 [Server] INFO at org.bukkit.plugin.EventExecutor$2.execute(EventExecutor.java:72) ~[PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at co.aikar.timings.TimedEventExecutor.execute(TimedEventExecutor.java:78) ~[PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:62) ~[PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at org.bukkit.plugin.SimplePluginManager.fireEvent(SimplePluginManager.java:515) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:500) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityLiving.heal(EntityLiving.java:789) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityLiving.heal(EntityLiving.java:780) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityHorseAbstract.n(EntityHorseAbstract.java:492) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityLiving.B_(EntityLiving.java:1974) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityInsentient.B_(EntityInsentient.java:247) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.EntityHorseAbstract.B_(EntityHorseAbstract.java:526) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.World.entityJoinedWorld(World.java:1771) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.World.h(World.java:1741) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.World.tickEntities(World.java:1562) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.WorldServer.tickEntities(WorldServer.java:675) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.MinecraftServer.D(MinecraftServer.java:913) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.DedicatedServer.D(DedicatedServer.java:426) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.MinecraftServer.C(MinecraftServer.java:767) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at net.minecraft.server.v1_12_R1.MinecraftServer.run(MinecraftServer.java:665) [PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO at java.lang.Thread.run(Thread.java:748) [?:1.8.0_131]
+17.01 21:00:40 [Server] INFO Caused by: java.lang.ClassCastException: org.bukkit.craftbukkit.v1_12_R1.entity.CraftLlama cannot be cast to org.bukkit.entity.Player
+17.01 21:00:40 [Server] INFO at me.glaremasters.regenenchant.RegenEnchant.onPlayerHeal(RegenEnchant.java:32) ~[?:?]
+17.01 21:00:40 [Server] INFO at com.destroystokyo.paper.event.executor.asm.generated.GeneratedEventExecutor1005.execute(Unknown Source) ~[?:?]
+17.01 21:00:40 [Server] INFO at org.bukkit.plugin.EventExecutor$2.execute(EventExecutor.java:70) ~[PaperSpigot-1.12.2-b1286.jar:git-Paper-1286]
+17.01 21:00:40 [Server] INFO ... 19 more

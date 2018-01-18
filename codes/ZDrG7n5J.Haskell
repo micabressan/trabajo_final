@@ -1,0 +1,19 @@
+data Exp = C Int | Op (Int -> Int -> Int) String Exp Exp
+
+add e1 e2 = Op (+) "+" e1 e2-- add
+sub e1 e2 = Op (-) "-" e1 e2-- substract
+mul e1 e2 = Op (*) "*" e1 e2-- multiply
+div e1 e2 = Op div "/" e1 e2-- divide
+
+eval :: Exp -> Int
+-- expressie evalueren
+eval (Op op _ e1 e2) = (eval e1) `op` (eval e2)
+-- constante evalueren
+eval (C x) = x
+-- voorbeeld: 5 + (10 * (1 - 4)), eval exp1 print -25
+exp1 = (C 5) `add` ((C 10) `mul` ((C 1) `div` (C 4)))
+
+nbAdds :: Exp -> Int
+nbAdds (C x) = 0
+nbAdds (Op op "+" e1 e2) = (nbAdds e1) + (nbAdds e2) + 1
+nbAdds (Op op _ e1 e2)   = (nbAdds e1) + (nbAdds e2)

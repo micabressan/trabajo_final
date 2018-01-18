@@ -1,0 +1,252 @@
+#![allow(non_upper_case_globals)]
+#![allow(non_snake_case)]
+
+extern crate gl;
+extern crate image;
+extern crate cgmath;
+extern crate tobj;
+extern crate libc;
+
+mod common;
+mod shader;
+mod macros;
+mod camera;
+mod mesh;
+mod model;
+mod utils;
+
+extern crate rand;
+use self::rand::Rng;
+
+use std::process;
+use std::io::{self, Write};
+use std::ffi;
+use std::ffi::CStr;
+use std::mem;
+use std::os::raw::c_void;
+use std::ptr;
+use libc::{RTLD_NOW};
+use std::collections::HashMap;
+use std::sync::Mutex;
+#[macro_use]
+extern crate lazy_static;
+
+use shader::Shader;
+use camera::Camera;
+use model::Model;
+
+use cgmath::{Matrix4, vec3, Point3, Vector4, Deg, perspective};
+use cgmath::prelude::*;
+
+struct Tab {
+    bufferHandle: u32,
+}
+
+lazy_static! {
+    static ref tabs: Mutex<HashMap<usize, Tab>> = {
+        Mutex::new(HashMap::new())
+    };
+}
+
+// settings
+const SCR_WIDTH: u32 = 1280;
+const SCR_HEIGHT: u32 = 720;
+
+static mut oAsteroidShader: std::option::Option<Shader> = None;
+static mut oPlanetShader: std::option::Option<Shader> = None;
+static mut oRock: std::option::Option<Model> = None;
+static mut oPlanet: std::option::Option<Model> = None;
+static mut amount: usize = 100000;
+
+#[no_mangle]
+pub extern "C" fn init() {
+    // gl: load all OpenGL function pointers
+    // ---------------------------------------
+    unsafe {
+        let handle = libc::dlopen(ffi::CStr::from_bytes_with_nul_unchecked("libGL.so.1\0".as_bytes()).as_ptr(), RTLD_NOW);
+        if handle.is_null () {
+            writeln!(&mut io::stderr(), "{}", ffi::CStr::from_ptr(libc::dlerror()).to_string_lossy().as_ref()).unwrap();
+            process::exit(1);
+        }
+        
+        gl::load_with(|symbol| libc::dlsym (handle, ffi::CString::new (symbol).unwrap().as_ptr()) as *const _);
+    }
+
+    unsafe {
+        // configure global opengl state
+        // -----------------------------
+        gl::Enable(gl::DEPTH_TEST);
+
+        // build and compile shaders
+        // -------------------------
+        oAsteroidShader = Some(Shader::new(
+            "resources/shaders/10.3.asteroids.vs",
+            "resources/shaders/10.3.asteroids.fs"));
+        oPlanetShader = Some(Shader::new(
+            "resources/shaders/10.3.planet.vs",
+            "resources/shaders/10.3.planet.fs"));
+
+        // load models
+        // -----------
+        oRock = Some(Model::new("resources/objects/rock/rock.obj"));
+        oPlanet = Some(Model::new("resources/objects/planet/planet.obj"));
+    }
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn set_tab_seed(tabID: usize, seed: usize) {
+    let borrowedTabs = tabs.lock ().unwrap ();
+    let tab = borrowedTabs.get (&tabID).unwrap ();
+    gl::BindBuffer(gl::ARRAY_BUFFER, tab.bufferHandle);
+    
+    // generate a large list of semi-random model transformation matrices
+    // ------------------------------------------------------------------
+    let mut modelMatrices: Vec<Matrix4<f32>> = Vec::with_capacity(amount);
+    let mut rng: rand::StdRng = rand::SeedableRng::from_seed(&[seed][..]);
+    let radius = 150.0;
+    let offset: f32 = 25.0;
+    for i in 0..amount {
+        let angle = i as i32 as f32 / amount as f32 * 360.0;
+        let mut displacement = (rng.gen::<i32>() % (2.0 * offset * 100.0) as i32) as f32 / 100.0 - offset;
+        let x = angle.sin() * radius + displacement;
+        displacement = (rng.gen::<i32>() % (2.0 * offset * 100.0) as i32) as f32 / 100.0 - offset;
+        let y = displacement * 0.4; // keep height of asteroid field smaller compared to width of x and z
+        displacement = (rng.gen::<i32>() % (2.0 * offset * 100.0) as i32) as f32 / 100.0 - offset;
+        let z = angle.cos() * radius + displacement;
+        let mut model = Matrix4::<f32>::from_translation(vec3(x, y, z));
+
+        // 2. scale: Scale between 0.05 and 0.25
+        let scale = (rng.gen::<i32>() % 20) as f32 / 100.0 + 0.05;
+        model = model * Matrix4::from_scale(scale);
+
+        // 3. rotation: add random rotation around a (semi)randomly picked rotation axis vector
+        let rotAngle = (rng.gen::<i32>() % 360) as f32;
+        model = model * Matrix4::from_axis_angle(vec3(0.4, 0.6, 0.8).normalize(), Deg(rotAngle));
+
+        // 4. now add to list of matrices
+        modelMatrices.push(model);
+    }
+
+    // configure instanced array
+    // -------------------------
+    gl::BufferData(
+        gl::ARRAY_BUFFER,
+        (amount * mem::size_of::<Matrix4<f32>>()) as isize,
+        &modelMatrices[0] as *const Matrix4<f32> as *const c_void,
+        gl::STATIC_DRAW);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn create_tab(tabID: usize) {
+    let mut buffer = 0;
+    gl::GenBuffers(1, &mut buffer);
+
+    let mut borrowedTabs = tabs.lock ().unwrap ();
+    borrowedTabs.insert (tabID, Tab {bufferHandle: buffer});
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn close_tab(tabID: usize) {
+    let mut borrowedTabs = tabs.lock ().unwrap ();
+    {
+        let tab = borrowedTabs.get_mut (&tabID).unwrap ();
+        gl::DeleteBuffers (1, &tab.bufferHandle);
+    }
+    borrowedTabs.remove (&tabID);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn switch_to_tab(tabID: usize) {
+    let borrowedTabs = tabs.lock ().unwrap ();
+    let tab = borrowedTabs.get (&tabID).unwrap ();
+    gl::BindBuffer(gl::ARRAY_BUFFER, tab.bufferHandle);
+    
+    let rock = match oRock {
+        Some (ref mut x) => &mut *x,
+        None => panic!(),
+    };
+
+    // set transformation matrices as an instance vertex attribute (with divisor 1)
+    // note: we're cheating a little by taking the, now publicly declared, VAO of the model's mesh(es) and adding new vertexAttribPointers
+    // normally you'd want to do this in a more organized fashion, but for learning purposes this will do.
+    // -----------------------------------------------------------------------------------------------------------------------------------
+    let size_mat4 = mem::size_of::<Matrix4<f32>>() as i32;
+    let size_vec4 = mem::size_of::<Vector4<f32>>() as i32;
+    for mesh in &rock.meshes {
+        let VAO = mesh.VAO;
+        gl::BindVertexArray(VAO);
+        // set attribute pointers for matrix (4 times vec4)
+        gl::EnableVertexAttribArray(3);
+        gl::VertexAttribPointer(3, 4, gl::FLOAT, gl::FALSE, size_mat4, ptr::null());
+        gl::EnableVertexAttribArray(4);
+        gl::VertexAttribPointer(4, 4, gl::FLOAT, gl::FALSE, size_mat4, size_vec4 as *const c_void);
+        gl::EnableVertexAttribArray(5);
+        gl::VertexAttribPointer(5, 4, gl::FLOAT, gl::FALSE, size_mat4, (2 * size_vec4) as *const c_void);
+        gl::EnableVertexAttribArray(6);
+        gl::VertexAttribPointer(6, 4, gl::FLOAT, gl::FALSE, size_mat4, (3 * size_vec4) as *const c_void);
+
+        gl::VertexAttribDivisor(3, 1);
+        gl::VertexAttribDivisor(4, 1);
+        gl::VertexAttribDivisor(5, 1);
+        gl::VertexAttribDivisor(6, 1);
+
+        gl::BindVertexArray(0);
+    }
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn render() {
+    let camera = Camera {
+        Position: Point3::new(0.0, 0.0, 155.0),
+        ..Camera::default()
+    };
+
+    gl::ClearColor(0.1, 0.1, 0.1, 1.0);
+    gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
+
+    // configure transformation matrices
+    let projection: Matrix4<f32> = perspective(Deg(45.0), SCR_WIDTH as f32 / SCR_HEIGHT as f32, 0.1, 1000.0);
+    let view = camera.GetViewMatrix();
+
+    let asteroidShader = match oAsteroidShader {
+        Some (ref mut x) => &mut *x,
+        None => panic!(),
+    };
+    let planetShader = match oPlanetShader {
+        Some (ref mut x) => &mut *x,
+        None => panic!(),
+    };
+    let rock = match oRock {
+        Some (ref mut x) => &mut *x,
+        None => panic!(),
+    };
+    let planet = match oPlanet {
+        Some (ref mut x) => &mut *x,
+        None => panic!(),
+    };
+    
+    asteroidShader.useProgram();
+    asteroidShader.setMat4(c_str!("projection"), &projection);
+    asteroidShader.setMat4(c_str!("view"), &view);
+    planetShader.useProgram();
+    planetShader.setMat4(c_str!("projection"), &projection);
+    planetShader.setMat4(c_str!("view"), &view);
+
+    // draw planet
+    let mut model = Matrix4::<f32>::from_translation(vec3(0.0, -3.0, 0.0));
+    model = model * Matrix4::from_scale(4.0);
+    planetShader.setMat4(c_str!("model"), &model);
+    planet.Draw(&planetShader);
+
+    // draw meteorites
+    asteroidShader.useProgram();
+    asteroidShader.setInt(c_str!("texture_diffuse1"), 0);
+    gl::ActiveTexture(gl::TEXTURE0);
+    gl::BindTexture(gl::TEXTURE_2D, rock.textures_loaded[0].id); // note: we also made the textures_loaded vector public (instead of private) from the model class.
+
+    for mesh in &rock.meshes {
+        gl::BindVertexArray(mesh.VAO);
+        gl::DrawElementsInstanced(gl::TRIANGLES, mesh.indices.len() as i32, gl::UNSIGNED_INT, ptr::null(), amount as i32);
+        gl::BindVertexArray(0);
+    }
+}

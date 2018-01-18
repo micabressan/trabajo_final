@@ -1,0 +1,5 @@
+pub fn connection<'a, 'b>(req: &mut Request<'a, 'b>) -> &'a Result<PooledConnection<ConnectionManager<PgConnection>>, r2d2::Error> {
+    // Get a diesel connection
+    let db_pool = req.get::<Read<DbPool>>().unwrap();
+	&db_pool.get()
+}

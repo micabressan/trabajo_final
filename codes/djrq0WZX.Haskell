@@ -1,0 +1,47 @@
+{-
+Aufgabe 1
+--------------------------------------------------------------------------------
+-}
+t1 = ("p1", (drop 9.show) mnr, (head.words.(let no n = name; in no))"No");
+
+t2 = (\x y z a -> ((x.y)z, (y.x)z));
+
+t3 = t2 reverse (take 3) mnr (drop 3);
+
+t4 = ((drop 4) [[i-2]|i<-mnr], [i|i<-mnr, i>3]);
+
+t5 = take 4 [[i|j<-[i..5]]|i<-mnr];
+
+ml = (tail.tail.reverse.tail);
+t6 = (ml mnr, take 5 [(i,j)|i<-ml mnr, j<-ml mnr, j>=i]);
+
+p o (a:l) (b:m) n = o a b : p o l m n;
+p o _ _ n = n;
+t7 = p (+) (reverse mnr) mnr [11];
+
+
+{-
+Aufgabe 2
+--------------------------------------------------------------------------------
+Definieren Sie einen polymorphen algebraischen Datentyp BTplus zur Darstellung von Binärbäumen. Jeder Knoten enthält zwei unabhängige polymorphe Elemente sowie zwei Unterbäume. Ein Baum kann auch leer sein. 
+-}
+
+{-
+Aufgabe 3
+--------------------------------------------------------------------------------
+Geben Sie einen konkreten BTplus Baum an, der die Werte "a" und 2 enthält und genau zwei Knoten hat. Geben Sie auch den Typ des Baums an. 
+-}
+
+
+{-
+Aufgabe 4
+--------------------------------------------------------------------------------
+Zwei Bäume sollen verglichen werden wobei die Struktur übereinstimmen muss und für jeden Knoten das erste Element des ersten Baums dem zweiten Element des zweiten Baums entsprechen muss. 
+Wenn die beiden Bäume übereinstimmten, soll True zurückgegeben werden, sonst False. 
+-}
+
+{-
+Aufgabe 5
+--------------------------------------------------------------------------------
+Die Funktion filterbt soll eine einstellige Boolsche funktion sowie zwei BTplus Bäume als Parameter akzeptieren und eine Liste der Elemente beider Bäume zurückgeben, bei denen die Boolsche-Funktion True liefert. Wobei im ersten Baum nur die ersten Elemente des Knotens (Node x _ _ _ _) und im zweiten Baum nur die Elemente des zweiten Knotens (Node _ y _ _ _) geprüft und in die Liste aufgenommen werden sollen. 
+-}

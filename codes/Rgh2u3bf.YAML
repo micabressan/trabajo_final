@@ -1,0 +1,37 @@
+version: "2"
+services:
+    db:
+        image: quickes/pg1c:9.6.6-1
+        environment:
+            - DEBUG=false
+            - PG_TRUST_LOCALNET=true
+            - PG_PASSWORD=admin
+        volumes:
+            - pg-data:/var/lib/postgresql
+            - pg-run:/run/postgresql
+        command: >
+            -c shared_buffers=512MB
+            -c work_mem=256MB
+            -c maintenance_work_mem=512MB
+            -c temp_buffers=256MB
+            -c effective_cache_size=1GB
+            -c effective_io_concurrency=4
+            -c autovacuum=on
+            -c synchronous_commit=off
+            -c commit_delay=500
+    pgadmin:
+        image: fenglc/pgadmin4:latest
+        ports:
+            - 8812:5050
+        links:
+            - db:db
+        environment:
+            - DEFAULT_USER=admin
+            - DEFAULT_PASSWORD=admin
+        volumes:
+            - pg-admin:/var/lib/pgadmin
+
+volumes:
+    pg-data:
+    pg-run:
+    pg-admin:

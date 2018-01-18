@@ -1,0 +1,10 @@
+{-# LANGUAGE ExistentialQuantification, RankNTypes, TypeFamilies #-}
+
+
+class X x where
+
+data ExistsX = forall x. X x => ExistsX x
+
+proof :: (forall x. X x => x -> y) -> ExistsX -> y
+proof p (ExistsX x) =
+  p x

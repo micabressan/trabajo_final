@@ -1,0 +1,11 @@
+2018-01-17 19:13:37 ERROR (MainThread) [homeassistant.core] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/lib/python3.5/asyncio/tasks.py", line 239, in _step
+    result = coro.send(None)
+  File "/srv/homeassistant/lib/python3.5/site-packages/homeassistant/helpers/entity.py", line 266, in async_update_ha_state
+    self.entity_id, state, attr, self.force_update)
+  File "/srv/homeassistant/lib/python3.5/site-packages/homeassistant/core.py", line 745, in async_set
+    state = State(entity_id, new_state, attributes, last_changed)
+  File "/srv/homeassistant/lib/python3.5/site-packages/homeassistant/core.py", line 535, in __init__
+    "Format should be <domain>.<object_id>").format(entity_id))
+homeassistant.exceptions.InvalidEntityFormatError: Invalid entity id encountered: media_player.. Format should be <domain>.<object_id>

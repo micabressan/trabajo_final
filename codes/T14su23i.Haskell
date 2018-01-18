@@ -1,0 +1,33 @@
+module Prim where 
+import List
+	 
+-- finds element in nonempty list with minimal f-value
+minim :: (Ord b) => (a -> b) -> [a] -> a
+minim f = head . (sortBy (\ x y -> compare (f x) (f y)))
+
+-- finds list of edges that form minimum spanning tree
+-- no matter where we put the root
+prim :: (Eq a, Ord b) => [(a, a, b)] -> [(a, a, b)]
+prim es = f [(\(v,_,_) -> v) $ head es] [] 
+	where
+	f vs t = 
+		if null r 
+		then t 
+		else f (union vs [x,y]) (m:t) 
+			where
+				r = filter (\(a,b,_) -> elem a vs /= elem b vs) es
+				m@(x,y,_) = minim (\(_,_,c) -> c) r
+
+-- example run
+main :: IO ()
+main = print $ prim [	('A', 'D',  5), 
+						('A', 'B', 	7), 
+						('B', 'D', 	9),
+						('B', 'C',  8), 
+						('C', 'E', 	5), 
+						('B', 'E', 	7),
+						('D', 'E', 	15), 
+						('D', 'F', 	6), 
+						('E', 'F', 	8),
+						('F', 'G', 	11), 
+						('E', 'G', 	9)]

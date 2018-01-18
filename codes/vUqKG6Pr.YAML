@@ -1,0 +1,71 @@
+light:
+  - platform: mqtt_json
+    name: "bathroom_plant"
+    state_topic: "home/whitestrip1"
+    command_topic: "home/whitestrip1/set"
+    brightness: true
+    rgb: false
+    optimistic: false
+    qos: 0
+    
+sensor:
+  - platform: mqtt
+    name: "Light_Sensor_Bathroom"
+    state_topic: "home/whitestrip1/sensor"
+    qos: 0
+#No unit, raw value
+    unit_of_measurement: "Raw"
+    
+binary_sensor:
+  - platform: template
+    sensors:
+      bathroom_light_is_on:
+        value_template: '{{ float(states.sensor.light_sensor_bathroom.state) > 26 }}'
+        friendly_name: 'Main light status'
+        device_class: light
+automation:
+  - alias: Turn on bathroom lights when there is movement
+    trigger:
+      - platform: mqtt
+        topic: home/433toMQTT
+        payload: 9316106
+      - platform: mqtt
+        topic: homesense/433toMQTT
+        payload: 9316106
+    condition:
+      condition: and
+      conditions:
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: device_tracker.me
+            state: 'home'
+          - condition: state
+            entity_id: device_tracker.not_me
+            state: 'home'
+    action:
+      - service: timer.start
+        entity_id: timer.timer_bathroom
+        data_template:
+          entity_id: timer.timer_bathroom
+          duration: '00:{% if now().hour < 6 %} 3 {% else %} 30 {% endif %}:00'
+      - service: light.turn_on
+        data_template:
+          entity_id: light.bathroom_plant
+          transition: '{% if now().hour < 6 %} 30 {% else %} 10 {% endif %}'
+          brightness: '{% if now().hour < 6 %} 60 {% else %} 230 {% endif %}'
+  - alias: Turn off bathroom lights at end of timer
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.timer_bathroom
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.bathroom_plant
+          transition: 50
+
+timer:
+  timer_bathroom:
+    duration: '00:30:00'

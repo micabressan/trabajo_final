@@ -1,0 +1,83 @@
+Config:
+  Usuario: "trow"
+  Max_Maquinas_Ligadas_Por_Player: 1
+  Tempo_Msg_Aquecendo: 5
+
+SQL:
+  Modo: 2
+  Host: "localhost"
+  DataBase: "trow"
+  User: "trow"
+  Pass: "trow"
+
+Msg:
+  Nao_Pode_Por: "&cVoce nao pode por/usar a maquina &a@maquina"
+  Maquina_Sendo_Usada: "&cEssa maquina ja esta sendo usada."
+  Tenha_Combustivel_Em_Maos: "&cTenha combustivel em maos para usar a maquina."
+  Voce_Ativou_Uma_Maquina: "&3[TGMaquina] &bVoce ativou a maquina &a@maquina"
+  Use_Pegar_Maquina: "&cUse: &a/pegarmaquina &e<Maquina>&c."
+  Use_Pegar_Combustivel: "&cUse: &a/pegarcombustivel &6<Maquina>&c."
+  Maquina_Nao_Existe: "&cEssa maquina nao existe!"
+  Pegou_Maquina: "&3[TGMaquina] &bVoce pegou a maquina &a@maquina"
+  Pegou_Carvao: "&3[TGMaquina] &bVoce pegou combustivel para a maquina &a@maquina."
+  Necessario_Mais_Combustivel: "&cE necessario mais combustivel para ligar a maquina."
+  Max_Maquinas_Ja_Funcionando: "&cVoce ja bateu o limite de maquinas ligadas."
+  Aquecendo: "&3[TGMaquina] &bMaquina &a@maquina&b, aquecendo..."
+  Maquina_Desligando: "&3[TGMaquina] &bMaquina desligando..."
+  Sem_Dinheiro: "&cSem dinheiro para comprar isso..."
+
+Maquinas:
+  Cookie:
+    #ID:DATA do item que sera considerado a maquina.
+    Maquina_ID: "19:0"
+    #ID:DATA do item que sera dropado pela maquina.
+    Item_Dropado: "357:0"
+    #ID:DATA do item que sera dropado pela maquina.
+    Combustivel_ID: "263:0"
+    #Quantidade de itens que a maquina ira dropar.
+    Qnt_Item_Dropado: 64
+    #Quantidade de vezes que estes itens seram dropados.
+    Vezes_Sera_Dropado: 2
+    #Em segundos
+    Tempo_Drop: 60
+    #Quanto de combustivel sera necessario para ativar a maquina.
+    Combustivel_Necessario: 10
+    #Pegar_Combustivel-> A quantidade de combustivel que sera pega com o /pegarcombustivel <maquina>
+    Pegar_Combustivel: 10
+    Precos:
+      Maquina: 5000
+      Combustivel: 3000
+    Nomes:
+      Maquina: "&eMaquina de Cookies"
+      Item_Dropado: "&dCookie :3"
+      Combustivel: "&cCombustivel"
+    Lores:
+      Maquina:
+      - '&6Coloque a maquina no chao brodi!'
+      Combustivel:
+      - '&6Coloque combustivel na maquina brodi!'
+      Item_Dropado:
+      - '&6Item dropado da maquina Pao'
+  Pao:
+    Maquina_ID: "5:2"
+    Item_Dropado: "354:0"
+    Combustivel_ID: "263:1"
+    Qnt_Item_Dropado: 2
+    Vezes_Sera_Dropado: 2
+    Tempo_Drop: 60
+    Combustivel_Necessario: 10
+    Pegar_Combustivel: 10
+    Precos:
+      Maquina: 5000
+      Combustivel: 3000
+    Nomes:
+      Maquina: "&eMaquina de Cookies"
+      Item_Dropado: "&dCookie :3"
+      Combustivel: "&cCombustivel"
+    Lores:
+      Maquina:
+      - '&6Coloque a maquina no chao brodi!'
+      Combustivel:
+      - '&6Coloque combustivel na maquina brodi!'
+      Item_Dropado:
+      - '&6Item dropado da maquina Pao'

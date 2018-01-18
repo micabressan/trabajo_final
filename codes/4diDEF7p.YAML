@@ -1,0 +1,209 @@
+#     ___ _         _    ___     _                                       
+#    / __| |_  __ _| |_ / __|___| |___ _ _                               
+#   | (__| ' \/ _` |  _| (__/ _ \ / _ \ '_|                              
+#    \___|_||_\__,_|\__|\___\___/_\___/_|                                
+#                                                                        
+#    __  __         _       _            ___  _    _    ___ ___ _____ _  
+#   |  \/  |__ _ __| |___  | |__ _  _   / _ \| |  | |  |_ _| __|_  / | | 
+#   | |\/| / _` / _` / -_) | '_ \ || | | (_) | |__| |__ | || _| / /|_  _|
+#   |_|  |_\__,_\__,_\___| |_.__/\_, |  \___/|____|____|___|___/___| |_| 
+#  
+
+usePlaceholderAPI: false
+useChatLogger: false
+
+#    ___               _       _             
+#   | _ \___ _ _ _ __ (_)_____(_)___ _ _  ___
+#   |  _/ -_| '_| '  \| (_-(_-| / _ | ' \(_-<
+#   |_| \___|_| |_|_|_|_/__/__|_\___|_||_/__/
+#                                            
+
+Permissions:
+  Alert: "Chat.Alert"
+  useColor: "Chat.Color"
+  toggleGrammar: "Chat.Grammar.Toggle"
+  useGrammar: "Chat.Grammar"
+  bypassMute: "Chat.Mute.Bypass"
+  muteChat: "Chat.Mute"
+  bypassFilter: "Chat.Filter.Bypass"
+  chatClear: "Chat.Clear"
+  staffChat: "Chat.StaffChat"
+  clearOwnChat: "Clear.Myself"
+  clearGlobalChat: "Clear.All"
+  reload: "ChatColor.reload"
+  
+GUI-Permissions:
+  openColor: "Chat.Inventory.Open.Color"
+  openAmplifier: "Chat.Inventory.Open.Amplifier"
+  openAllInventorys: "Chat.Inventory.*"
+  
+ColorPermissions:
+  1: "Chat.Inventory.1"
+  2: "Chat.Inventory.2"
+  3: "Chat.Inventory.3"
+  4: "Chat.Inventory.4"
+  5: "Chat.Inventory.5"
+  6: "Chat.Inventory.6"
+  7: "Chat.Inventory.7"
+  8: "Chat.Inventory.8"
+  9: "Chat.Inventory.9"
+  0: "Chat.Inventory.0"
+  a: "Chat.Inventory.a"
+  b: "Chat.Inventory.b"
+  c: "Chat.Inventory.c"
+  d: "Chat.Inventory.d"
+  e: "Chat.Inventory.e"
+  f: "Chat.Inventory.f"
+  
+AmplifierPermissions:
+  Italic: "Chat.Amplifier.Italic"
+  Bold: "Chat.Amplifier.Bold"
+  Magic: "Chat.Amplifier.Magic"
+  Underline: "Chat.Amplifier.Strikethrough"
+  Strikethrough: "Chat.Amplifier.Underline"
+  
+#    __  __                            
+#   |  \/  |___ ________ _ __ _ ___ ___
+#   | |\/| / -_(_-(_-/ _` / _` / -_(_-<
+#   |_|  |_\___/__/__\__,_\__, \___/__/
+#                         |___/        
+  
+Messages:
+  NoPermissions: "&cYou do not have permission to do this!"
+  Alert-Prefix: "&8[&c&lAlert&8]"
+  Mute-On: "&c&lGlobal mute enabled"
+  Mute-Off: "&a&lGlobal mute disabled. You may now talk again"
+  Chat-Is-Muted: "&cYou can not talk as chat is muted"
+
+#    ___                   _   
+#   | _____ _ _ _ __  __ _| |_ 
+#   | _/ _ | '_| '  \/ _` |  _|
+#   |_|\___|_| |_|_|_\__,_|\__|
+#                              
+  
+Format:
+  Chat: "&7%Player% &8&l:&f "
+  StaffChat: "&8[&9StaffChat&8] &7%Player% &8&l:&b "
+  
+#    __  __      _           _      _    
+#   |  \/  |__ _| |_ ___ _ _(_)__ _| |___
+#   | |\/| / _` |  _/ -_| '_| / _` | (_-<
+#   |_|  |_\__,_|\__\___|_| |_\__,_|_/__/
+#                                        
+
+Materials:
+  Color-GUI-Materials: "WOOL"  
+  Normal: "Bedrock"
+  Italic: "Diamond_Block"
+  Strikethrough: "Gold_Block"
+  Underline: "Redstone_Block"
+  Magic: "Iron_Block"
+  Bold: "Emerald_Block"
+  Grammar: "Arrow"
+  ColorGUI: "Gold_Ingot"
+  AmplifierGUI: "Iron_Ingot"
+  No-Permissions: "Barrier"
+  Back: "Barrier"
+
+#     ___ _   _ ___   _____ _ _   _        
+#    / __| | | |_ _| |_   _(_| |_| |___ ___
+#   | (_ | |_| || |    | | | |  _| / -_(_-<
+#    \___|\___/|___|   |_| |_|\__|_\___/__/
+#                                          
+
+GUI-Titles:
+  Main: "&9&lChatColor"
+  Amplifier: "&9&lChatColor &8- &9&l Amplifiers"
+  Color: "&9&lChatColor &8- &9&l Colors"
+  ChatClear: "&9&lChatColor &8- &9&lClearChat"
+
+#    ___ _               _  _                   
+#   |_ _| |_ ___ _ __   | \| |__ _ _ __  ___ ___
+#    | ||  _/ -_| '  \  | .` / _` | '  \/ -_(_-<
+#   |___|\__\___|_|_|_| |_|\_\__,_|_|_|_\___/__/
+#                                               
+
+Item-Names:
+  0: "&0"
+  1: "&1"
+  2: "&2"
+  3: "&3"
+  4: "&4"
+  5: "&5"
+  6: "&6"
+  7: "&7"
+  8: "&8"
+  9: "&9"
+  0: "&0"
+  a: "&a"
+  b: "&b"
+  c: "&c"
+  d: "&d"
+  e: "&e"
+  f: "&f"
+  Back: "&cBack"
+  NoPermissions: "&cNo Permissions!"
+  AmplifierGUI: "&f&l&oAmplifiers"
+  ColorGUI: "&e&lColors"
+  Normal: "&7Normal"
+  Italic: "&b&oItalic"
+  Strikethrough: "&e&mStrikethrough"
+  Underline: "&c&nUnderline"
+  Magic: "&f&kMagic"
+  Bold: "&a&lBold"
+  Grammar: "&aToggle Grammar"
+  Clear-All: "&c&lChat Clear - Global"
+  Clear-Myself: "&a&lChat Clear - Myself"
+
+#    ___                 _            _      
+#   | _ )_ _ ___ __ _ __| |__ __ _ __| |_ ___
+#   | _ | '_/ _ / _` / _` / _/ _` (_-|  _(_-<
+#   |___|_| \___\__,_\__,_\__\__,_/__/\__/__/
+#                                            
+
+useBroadcasts: true
+
+Delay: 300
+
+Broadcasts:
+- "&bWelcome to our server, Don't forget to vote!"
+- "&5Donate at www.google.com"
+- "&bHave fun!"
+
+#     ___ _         _     ___ _ _ _           
+#    / __| |_  __ _| |_  | __(_| | |_ ___ _ _ 
+#   | (__| ' \/ _` |  _| | _|| | |  _/ -_| '_|
+#    \___|_||_\__,_|\__| |_| |_|_|\__\___|_|  
+#                                             
+
+useChatFilter: false
+
+Chat-Filter-Message: "&4Error! &6You can not say this!"
+
+Chat-Filter:
+- fuck
+- shit
+- crap
+- kys
+- dick
+
+Auto-Fix-Seconds: 300
+Auto-Fix-Messages-In-Console: false
+
+#    ___       __     
+#   |_ _|_ _  / _|___ 
+#    | || ' \|  _/ _ \
+#   |___|_||_|_| \___/
+#                     
+
+useInfoCommand: true
+
+Info-Messages:
+  - "&8&l&m============================================="
+  - "&b"
+  - "&bOur website is www.google.com"
+  - "&bOur YouTube is www.youtube.com/channel"
+  - "&bYou can have as many messages as you like"
+  - "&bEnjoy"
+  - "&b"
+  - "&8&l&m============================================="
