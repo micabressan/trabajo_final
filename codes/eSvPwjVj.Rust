@@ -1,0 +1,96 @@
+// Our test program we're tokenizing. We could also
+// read a String from a file and use that, but this
+// is best for testing purposes.
+static SOURCE: &'static /*' <- ignore*/ str =
+"int main(void)
+{
+    int a = 2;
+    a = a * 2;
+    return 0;
+}";
+
+fn main() {
+    println!("{:?}", tokenize(SOURCE));
+}
+
+#[derive(Debug)]
+enum Keyword {
+    Int,        // int
+    Void,       // void
+    Return,     // return
+}
+
+#[derive(Debug)]
+enum Symbol {
+    LParen,     // (
+    RParen,     // )
+    LBrace,     // {
+    RBrace,     // }
+    Assign,     // =
+    Semicolon,  // ;
+    Multiply,   // *
+}
+
+// The token definition.
+#[derive(Debug)]
+enum Token {
+    Keyword(Keyword),
+    Symbol(Symbol),
+    Identifier(String),
+    Integer(i32),
+}
+
+fn tokenize(source: &str) -> Vec<Token> {
+    let mut tokens = Vec::<Token>::new();
+    // Every character (including whitespace) in the source code.
+    let mut chars = source.chars().peekable();
+
+    while let Some(c) = chars.next() {
+        match c {
+            // If the character we've just read is a symbol,
+            // then we make that a single token.
+            '(' => tokens.push(Token::Symbol(Symbol::LParen)),
+            ')' => tokens.push(Token::Symbol(Symbol::RParen)),
+            '{' => tokens.push(Token::Symbol(Symbol::LBrace)),
+            '}' => tokens.push(Token::Symbol(Symbol::RBrace)),
+            '=' => tokens.push(Token::Symbol(Symbol::Assign)),
+            ';' => tokens.push(Token::Symbol(Symbol::Semicolon)),
+            '*' => tokens.push(Token::Symbol(Symbol::Multiply)),
+            _ => {
+                // If the character we read is numerical.
+                if c.is_numeric() {
+                    let mut full_num = String::new();
+                    full_num.push(c);
+
+                    // We read every consecutive digit following (if any).
+                    while chars.peek().unwrap().is_numeric() {
+                        full_num.push(chars.next().unwrap());
+                    }
+
+                    // We convert the String to an integer and add the token.
+                    let num = full_num.as_str().parse::<i32>().unwrap();
+                    tokens.push(Token::Integer(num));
+                }
+                else if c.is_alphabetic() {
+                    let mut full_word = String::new();
+                    full_word.push(c);
+
+                    // We read every consecutive character following (if any).
+                    while chars.peek().unwrap().is_alphabetic() {
+                        full_word.push(chars.next().unwrap());
+                    }
+
+                    // The whole word we've built can be a keyword so we check before
+                    // we go to the assumption its an identifier for something.
+                    match full_word.as_str() {
+                        "int" => tokens.push(Token::Keyword(Keyword::Int)),
+                        "void" => tokens.push(Token::Keyword(Keyword::Void)),
+                        "return" => tokens.push(Token::Keyword(Keyword::Return)),
+                        _ => tokens.push(Token::Identifier(full_word)),
+                    }
+                }
+            }
+        }
+    }
+    tokens
+}

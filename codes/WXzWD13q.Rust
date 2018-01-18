@@ -1,0 +1,15 @@
+struct CachedFile(NamedFile);
+
+impl<'r> Responder<'r> for CachedFile {
+    fn respond_to(self, req: &Request) -> response::Result<'r> {
+        let nfile_response = self.0.respond_to(req)?;
+        Response::build_from(nfile_response)
+            .raw_header("Cache-control", "max-age=86400") //  24h (24*60*60)
+            .ok()
+    }
+}
+
+#[get("/resources/<file..>")]
+fn files(file: PathBuf) -> Option<CachedFile> {
+    NamedFile::open(Path::new("resources/").join(file)).ok().map(|nf| CachedFile(nf))
+}

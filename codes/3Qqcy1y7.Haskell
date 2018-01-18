@@ -1,0 +1,138 @@
+import Graphics.Image
+import Graphics.Image.Types
+import Graphics.Image.IO
+import Data.List
+import Control.Parallel.Strategies
+
+-- Params
+imagePath :: String
+imagePath = "1.png"
+
+blackPixel :: Pixel RGB Double
+blackPixel = PixelRGB 0 0 0
+
+whitePixel :: Pixel RGB Double
+whitePixel = PixelRGB 1 1 1
+
+greenPixel :: Pixel RGB Double
+greenPixel = PixelRGB 0 1 0
+
+redPixel :: Pixel RGB Double
+redPixel = PixelRGB 1 0 0
+
+color :: (Int, Int) -> [(Int, Int)] -> [(Int, Int)] -> [(Int, Int)] -> Pixel RGB Double
+color pixel inputPixels circlePixels bisectorPixels
+  | elem pixel inputPixels = redPixel
+  | elem pixel circlePixels = greenPixel
+  | elem pixel bisectorPixels = whitePixel
+  | otherwise = blackPixel
+
+-- Functions
+imagePixels :: Pixel RGB Double -> Image VU RGB Double -> [(Int, Int)]
+imagePixels color image = [(x, y) | x <- [0 .. width - 1], y <- [0 .. height - 1], (==) (index image (y, x)) color]
+  where
+    width = cols image
+    height = rows image
+
+uniquePairs :: Ord a => [a] -> [(a, a)]
+uniquePairs list = [(a, b) | a <- list, b <- list, a > b]
+
+lineValue :: Double -> Double -> Double -> Double
+lineValue a b x = a * x + b
+
+circleValue :: Double -> Double -> Double -> Double -> Double -> Bool
+circleValue a b r x y =
+  (==) (round (sqrt (partOne + partTwo))) (round r)
+  where
+    partOne = (^) (x - a) 2
+    partTwo = (^) (y - b) 2
+
+distance :: (Double, Double) -> (Double, Double) -> Double
+distance (x1, y1) (x2, y2) = sqrt (((^) (x2 - x1) 2) + ((^) (y2 - y1) 2))
+
+middleSectorPoint :: (Double, Double) -> (Double, Double) -> (Double, Double)
+middleSectorPoint (x1, y1) (x2, y2) = ((x1 + x2) / 2, (y1 + y2) / 2)
+
+bisectorLineAParameter :: (Double, Double) -> (Double, Double) -> Double
+bisectorLineAParameter (x1, y1) (x2, y2) = -1 / ((y2 - y1) / (x2 - x1))
+
+bisectorLineBParameter :: (Double, Double) -> (Double, Double) -> Double
+bisectorLineBParameter (x1, y1) (x2, y2) =
+  snd middlePoint - fst middlePoint * aParameter
+  where
+    middlePoint = middleSectorPoint (x1, y1) (x2, y2)
+    aParameter = bisectorLineAParameter (x1, y1) (x2, y2)
+
+bisectorLine :: (Double, Double) -> (Double, Double) -> (Double -> Double)
+bisectorLine (x1, y1) (x2, y2) =
+    (\ x -> lineValue aParameter bParameter x)
+    where
+      aParameter = bisectorLineAParameter (x1, y1) (x2, y2)
+      bParameter = bisectorLineBParameter (x1, y1) (x2, y2)
+
+values :: Int -> Int -> Int -> Int -> (Double -> Double) -> [(Int, Int)]
+values minimumX maximumX minimumY maximumY equation =
+  [(x, y) | x <- [minimumX .. maximumX - 1], y <- [minimumY .. maximumY - 1], round (equation (fromIntegral x)) == y]
+
+count :: Ord a => a -> [a] -> Int
+count element list = length (Prelude.filter (== element) list)
+
+centerVotes :: Int -> Int -> [(Int, Int)] -> [(Int, Int)]
+centerVotes width height pixels =
+  concat (parMap rdeepseq accumulator bisectorLines)
+    where
+      uniquePixelPairs = uniquePairs pixels
+      bisectorLines = parMap rdeepseq (\ ((x1, y1),(x2, y2)) -> bisectorLine (fromIntegral x1, fromIntegral y1) (fromIntegral x2, fromIntegral y2)) uniquePixelPairs
+      accumulator equation = values 0 width 0 height equation
+
+printSuccess :: String -> IO ()
+printSuccess message = putStrLn ("[Success] " ++ message)
+
+printError :: String -> IO ()
+printError message = putStrLn ("[Error] " ++ message)
+
+printImageLoadingError :: String -> IO ()
+printImageLoadingError errorMessage = printError ("Loading image failed!" ++ errorMessage)
+
+printImageLoadingSuccess :: IO ()
+printImageLoadingSuccess = printSuccess "Image loaded!"
+
+main :: IO ()
+main = do
+  loadedImage <- readImage imagePath :: IO (Either String (Image VU RGB Double))
+
+  either printImageLoadingError processImage loadedImage
+
+processImage :: Image VU RGB Double -> IO()
+processImage image = do
+  printImageLoadingSuccess
+  let width = cols image
+  let height = rows image
+  let blackPixels = imagePixels blackPixel image
+
+  let circleCenterVotes = centerVotes width height blackPixels
+  let uniqueCenterVotes = nub circleCenterVotes
+  let countedUniqueCenterVotes = parMap rdeepseq (\ element -> ((count element circleCenterVotes), element)) uniqueCenterVotes
+  let sortedCountedUniqueCenterVotes = reverse $ sort $ countedUniqueCenterVotes
+  let bisectorPixels = parMap rdeepseq (\ (count, pixel) -> pixel ) sortedCountedUniqueCenterVotes
+
+  let circleCenter = bisectorPixels !! 0
+
+  let distanceFromCenter point = distance (fromIntegral $ fst $ circleCenter, fromIntegral $ snd $ circleCenter) point
+
+  let radiusVotes = parMap rseq (\ pixel -> round (distanceFromCenter $ (fromIntegral $ fst $ pixel, fromIntegral $ snd $ pixel))) blackPixels
+  let uniqueRadiusVotes = nub radiusVotes
+  let countedUniqueRadiusVotes = parMap rseq (\ element -> ((count element radiusVotes), element)) uniqueRadiusVotes
+  let sortedCountedRadiusVotes = reverse $ sort $ countedUniqueRadiusVotes
+
+  let radius = (\ (count, radius) -> radius) (sortedCountedRadiusVotes !! 0)
+
+  let selectedCircle x y = circleValue (fromIntegral $ fst circleCenter) (fromIntegral $ snd circleCenter) (fromIntegral radius) x y
+
+  let circleValues = [(x,y) | x <- [0 .. width - 1], y <- [0 .. height - 1], selectedCircle (fromIntegral x) (fromIntegral y)]
+
+  let outputImage = makeImage (height, width) (\ (rows, columns) -> color (columns, rows) blackPixels circleValues bisectorPixels) :: Image RPS RGB Double
+
+  writeImage "accu.png" outputImage
+
+  printSuccess "Finished!"

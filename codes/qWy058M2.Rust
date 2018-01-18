@@ -1,0 +1,26 @@
+extern crate openhmd_rs_sys;
+extern crate libc;
+use openhmd_rs_sys::*;
+use libc::c_float;
+use std::{thread, time};
+use std::time::Duration;
+fn main(){
+    unsafe{
+        let context = ohmd_ctx_create();
+        let probe = ohmd_ctx_probe(&context);
+        println!("probe {}", probe);
+        let device = ohmd_list_open_device(context, 0);
+        ohmd_ctx_update(context);
+        let mut rot = 0.0;
+        loop{
+            rot += 0.001;
+            let mut out2: [c_float; 16] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0];
+            ohmd_device_getf(&device, ohmd_float_value::OHMD_ROTATION_QUAT, &mut out2);
+            out2[3] = rot;
+            let output = ohmd_device_setf(&device, ohmd_float_value::OHMD_EXTERNAL_SENSOR_FUSION, &mut out2);
+            thread::sleep(Duration::from_millis(40));
+            ohmd_ctx_update(context);
+            println!("{:?}", out2);
+        }
+    }
+}

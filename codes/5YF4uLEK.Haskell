@@ -1,0 +1,5 @@
+capitalizedRec :: String -> String
+capitalizedRec [] = []
+capitalizedRec (x:xs)	| (x == (toUpper x) and x /= (xs !! 1))  x = toLower x : capitalizedRec xs
+						| xs !! 1 x = toUpper x : capitalizedRec xs
+						| otherwise = capitalizedRec xs

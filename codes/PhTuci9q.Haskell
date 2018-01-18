@@ -1,0 +1,8 @@
+if :: bool -> expr -> expr -> expr
+if True expr _ = expr
+if False _ expr = expr
+
+if True (4 + 5) (7 + 2)
+
+if (a>6) (println "Yes")
+		 (println "No")

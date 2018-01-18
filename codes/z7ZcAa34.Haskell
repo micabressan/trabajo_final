@@ -1,0 +1,7 @@
+dropV :: forall n i a. (KnownNat n, KnownNat i, i <= n) => Vector n a -> Vector (n-i) a
+dropV v = case (Proxy :: Proxy 1) %<=? (Proxy :: Proxy i) of
+               LE Refl -> case (unsafeCoerce Refl :: (1 <=? n) :~: 'True, unsafeCoerce Refl :: ((i-1) <=? (n-1)) :~: 'True) of
+                               (Refl, Refl) -> case v of
+                                                  x :. xs -> (dropV :: Vector (n-1) a -> Vector ((n-1)-(i-1)) a ) xs -- for some reason writing n-i instead of (n-1)-(i-1) causes a problem
+               NLE nle -> case deduceZero nle of
+                               Refl -> v

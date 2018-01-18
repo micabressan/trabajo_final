@@ -1,0 +1,12 @@
+uloha1 "" xs = xs
+uloha1 x xs = uloha1 (drop 3 x) xs++[reverse (take 3 x)]
+
+uloha2 x = uloha1 (reverse x) []
+
+uloha3 n = uloha2 (show n)
+
+uloha4 xs = foldr (\a b -> if b=="" then a else a++"."++b) "" xs
+
+uloha5 xs = (xs!!0)!!0 :  " x 10^ " ++  show (length (concat xs) -1)
+
+uloha6 n = uloha4 (uloha3 n) ++ " ~ " ++ uloha5 (uloha3 n)

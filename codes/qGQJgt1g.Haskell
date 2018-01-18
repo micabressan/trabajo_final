@@ -1,0 +1,5 @@
+func :: [Int] -> Int
+func arr
+    | list == [] = 0
+    | otherwise  = last list + 1
+    where list = [i | i <- [1..9], let x = arr !! i, head arr < x, x < last arr]

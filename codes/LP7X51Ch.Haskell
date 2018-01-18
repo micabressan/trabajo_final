@@ -1,0 +1,5 @@
+fibSeries = map f [0..]
+            where
+              f 0 = 1
+              f 1 = 1
+              f x = fib (x - 1) + fib (x - 2)

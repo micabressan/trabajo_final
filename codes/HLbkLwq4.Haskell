@@ -1,0 +1,27 @@
+-- 8. crosswordFind
+
+-- List-comprehension version
+crosswordFind :: Char -> Int -> Int -> [String] -> [String]
+crosswordFind _ _ _ [] = []
+crosswordFind letter inPosition len words = [ x | x <- words, length x == len, (x !! inPosition) == letter, len > inPosition, len > 0, inPosition >= 0, inPosition < length x]
+
+-- Recursive version
+crosswordFindRec :: Char -> Int -> Int -> [String] -> [String]
+crosswordFindRec _ _ _ [] = []
+crosswordFindRec letter inPosition len (x:words) | length x == len && ((x !! inPosition) == letter) && (len > inPosition) && (len > 0) && (inPosition >= 0) && (inPosition < length x) = x : crosswo\
+rdFindRec letter inPosition len words
+                                                 | otherwise = crosswordFindRec letter inPosition len words
+
+-- Mutual test
+prop_crosswordFind :: Char -> Int -> Int -> [String] -> Bool
+prop_crosswordFind letter inPosition len words = crosswordFind letter inPosition len words == crosswordFindRec letter inPosition len words
+
+
+
+
+*Main> quickCheck prop_crosswordFind
+*** Failed! Exception: 'Prelude.(!!): index too large' (after 7 tests and 7 shrinks):
+'a'
+3
+3
+["aaa"]

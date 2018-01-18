@@ -1,0 +1,141 @@
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.Scratchpad
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Grid
+import XMonad.Layout.IM
+import XMonad.Layout.LayoutHints
+import XMonad.Layout.Reflect
+import XMonad.Layout.ToggleLayouts
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowNavigation
+import XMonad.Layout.BoringWindows
+
+import qualified XMonad.StackSet as W
+import XMonad.Actions.UpdatePointer
+import XMonad.Actions.GridSelect
+import Data.Ratio ((%))
+import System.IO
+
+myTerminal = "nx"
+myModMask = mod4Mask
+myNormalBorderColor  = "grey20"
+myFocusedBorderColor = "grey60"
+
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+myLayout = windowNavigation $ subTabbed $ boringWindows $
+           smartBorders $ avoidStruts $ layoutHintsToCenter defaultLayout
+  where
+    defaultLayout = Full ||| tiled ||| Mirror tiled ||| three
+      where
+        -- default tiling algorithm partitions the screen into two panes
+        tiled = Tall nmaster delta tallRatio
+        three = ThreeColMid nmaster delta threeRatio
+        -- The default number of windows in the master pane
+        nmaster = 1
+        -- Default proportion of screen occupied by master pane
+        tallRatio = 1/2
+        threeRatio = 1/3
+        -- Percent of screen to increment by when resizing panes
+        delta = 3/100
+
+myManageHook = composeAll
+    [ className =? "MPlayer"        --> doFloat
+    , title =? "org-capture"        --> doCenterFloat
+    , className =? "Gimp"           --> doFloat
+    , className =? "Gimp-2.6"       --> doFloat
+    , className =? "Vncviewer"      --> doFloat
+    -- for bugster
+    , className =? "com-sun-javaws-Main"  --> doFloat
+    , className =? "Vlc"           --> doFloat
+    , className =? "BasicWin"      --> doFloat
+    , className =? "Firefox"       --> doShift "3"
+    , className =? "Iceweasel"     --> doShift "3"
+    , className =? "Conkeror"      --> doShift "3"
+    , className =? "chromium-browser" --> doShift "3"
+    , className =? "google-chrome" --> doShift "3"
+    , className =? "Rhythmbox"     --> doShift "8"
+    , className =? "Icedove"	   --> doFloat
+    , appName =? "Mail"	   --> unfloat
+    , resource  =? "desktop_window" --> doIgnore
+    , resource  =? "kdesktop"       --> doIgnore
+    , isFullscreen --> doFullFloat
+    ]
+    where unfloat = ask >>= doF . W.sink
+
+myKeys =        
+  [ ((myModMask, xK_f), spawn "ffap")
+  , ((myModMask, xK_r), spawn "x-remember")
+  , ((myModMask, xK_b), sendMessage ToggleStruts)
+  , ((myModMask, xK_s), scratchpadSpawnAction scratchpadConf)
+  , ((myModMask, xK_Up), spawn "rhythmbox-client --no-start --play-pause")
+  , ((myModMask, xK_Left), spawn "rhythmbox-client --no-start --prev")
+  , ((myModMask, xK_Right), spawn "rhythmbox-client --no-start --next")
+  , ((myModMask .|. shiftMask, xK_Up), spawn "amixer -q set PCM 4+ unmute")
+  , ((myModMask .|. shiftMask, xK_Down), spawn "amixer -q set PCM 4- unmute")
+--  , ((myModMask .|. shiftMask , xK_l), spawn "xscreensaver-command -lock")
+  , ((myModMask .|. controlMask, xK_c), kill)
+  , ((myModMask .|. controlMask .|. shiftMask, xK_l), spawn "xdisp laptop")
+  , ((myModMask .|. controlMask .|. shiftMask, xK_d), spawn "xdisp desktop")
+    -- XF86AudioLowerVolume
+  , ((0, 0x1008ff11), spawn "amixer -q set PCM 4- unmute")
+    -- XF86AudioRaiseVolume
+  , ((0, 0x1008ff13), spawn "amixer -q set PCM 4+ unmute")
+  , ((myModMask, xK_P), spawn "exe=`dmenu_path | dmenu -fn '-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*'` && eval \"exec $exe\"")
+  , ((myModMask, xK_p), spawn "gmrun")
+  , ((myModMask, xK_g), goToSelected defaultGSConfig)
+
+    -- The following relate to tabbed sub-layouts.
+  , ((myModMask .|. controlMask, xK_h), sendMessage $ pullGroup L)
+  , ((myModMask .|. controlMask, xK_l), sendMessage $ pullGroup R)
+  , ((myModMask .|. controlMask, xK_k), sendMessage $ pullGroup U)
+  , ((myModMask .|. controlMask, xK_j), sendMessage $ pullGroup D)
+    
+  , ((myModMask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
+  , ((myModMask .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
+    
+  , ((myModMask .|. controlMask, xK_period), onGroup W.focusUp')
+  , ((myModMask .|. controlMask, xK_comma), onGroup W.focusDown')
+
+  , ((myModMask, xK_j), focusDown)
+  , ((myModMask, xK_k), focusUp)
+
+  ]
+  ++
+  [((m .|. myModMask, k), windows $ f i)
+  | (i, k) <- zip myWorkspaces [xK_1 .. xK_9]
+  , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  
+scratchpadConf = defaultConfig
+                 { terminal = "xterm"
+                 }
+
+main = do
+  xmproc <- spawnPipe "xmobar"
+  xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
+        { manageHook = manageDocks <+> myManageHook -- make sure to include myManageHook definition from above
+                       <+> scratchpadManageHook (W.RationalRect 0.1 0.2 0.8 0.6)
+                       <+> manageHook defaultConfig
+        , layoutHook = myLayout
+        , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc
+                                              , ppCurrent = wrap "[" "]"
+                                              , ppTitle = xmobarColor "orange" "" . shorten 50
+                                              , ppVisible = wrap "(" ")"
+                                              , ppHidden = xmobarColor "grey40" ""
+                                              , ppUrgent = xmobarColor "" "red" . xmobarStrip
+                                              }
+        , terminal = myTerminal
+        , modMask = myModMask
+        , normalBorderColor  = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
+        , borderWidth = 2
+        , workspaces = myWorkspaces
+        } `additionalKeys` myKeys

@@ -1,0 +1,39 @@
+arr = [10, 7, 3, 4, 11, 15]
+
+getLess :: [Int] -> [Int]
+getLess [] = []
+getLess (x:xs) = [y | y <- xs, y < x]
+
+getGreat :: [Int] -> [Int]
+getGreat [] = []
+getGreat (x:xs) = [y | y <- xs, y > x]
+
+quick :: [Int] -> [Int]
+quick []     = []
+quick (x:xs) = quick(getLess([x]++xs)) ++ [x] ++ quick(getGreat([x]++xs))
+
+
+isSort :: [Int] -> Bool
+isSort [] = True
+isSort (x:xs)
+    |xs == [] = True
+    |x > head xs = False
+    |otherwise = True
+    
+
+bubble :: [Int] -> [Int]
+bubble [] = []
+bubble (x:xs)
+    |length xs == 0 = [x]
+    |x < head xs    = [x] ++ bubble(xs)
+    |x > head xs    = [head xs] ++ [x] ++ bubble(drop 1 xs)
+    |isSort(x:xs) == True = [x]++xs
+    |isSort(x:xs) == False = bubble(x:xs)
+    |otherwise      = bubble(xs)
+    
+testA = print(getLess arr)
+testB = print(getGreat arr)
+testC = print(quick arr)
+testD = print(bubble arr)
+    
+main = testD

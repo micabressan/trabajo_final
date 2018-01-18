@@ -1,0 +1,8 @@
+use std::collections::HashMap;
+
+fn main() {
+    let mut hm: HashMap<String, [String; 2]> = HashMap::new();
+    let arr = ["a".to_string(), "b".to_string()];
+    hm.insert("xyz".to_string(), arr);
+    for _ in arr.iter() {}
+}

@@ -1,0 +1,28 @@
+extern crate libc;
+use libc::{c_char, c_int, c_float};
+
+struct ohmd_context;
+struct ohmd_device;
+enum ohmd_float_value{
+    OHMD_ROTATION_QUAT
+}
+
+#[link(name = "openhmd")]
+#[allow(non_snake_case)]
+extern {
+    fn ohmd_ctx_create() -> ohmd_context;
+    fn ohmd_ctx_get_error(ctx: ohmd_context) -> c_char;
+    fn ohmd_ctx_probe(ctx: ohmd_context) -> c_int;
+    fn ohmd_ctx_update(ctx: ohmd_context);
+    fn ohmd_device_getf(device: ohmd_device, otype: ohmd_float_value, out: c_float) -> c_int;
+    fn ohmd_list_open_device(ctx: ohmd_context, index: c_int) -> ohmd_device;
+}
+
+pub fn test(){
+    unsafe{
+        let contex = ohmd_ctx_create();
+        let device = ohmd_list_open_device(contex, 0);
+        //let mut out: c_float = 0.0;
+        //println!("probe {}", ohmd_device_getf(device, ohmd_float_value::OHMD_ROTATION_QUAT, out));
+    }
+}

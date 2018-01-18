@@ -1,0 +1,6 @@
+weaveHunks:: Int->[Int]->[Int]->[Int]
+
+weaveHunks _ [] [] = []
+weaveHunks n xs ys = (take n xs) ++ (take n ys) ++ (weaveHunks n (drop n xs) (drop n ys))
+
+main = do print $ weaveHunks 2 [1..10] [11..20]

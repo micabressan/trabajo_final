@@ -1,0 +1,32 @@
+    loop {
+        merge_occured = false;
+
+        for group in &mut groups {
+            group.calculate_spacing(target_distance, &mut values);
+        }
+
+        if groups.len() > 1 {
+            let mut len = groups.len();
+            let mut currentGroup = &mut groups[0];
+            let mut i = 1;
+
+            while i < len && len > 1 {
+                let index = if i <= len { i } else { 0 };
+
+                if groups_intersect(currentGroup, &groups[index], target_distance, period) {
+                    merge_occured = true;
+                    let nextGroup = groups.remove(index);
+                    currentGroup.merge(nextGroup, period, &mut values, target_distance);
+                    len -= 1;
+                } else {
+                    currentGroup = &mut groups[index];
+                }
+
+                i -= 1;
+            }
+        }
+
+        if !merge_occured || groups.len() <= 1 {
+            break;
+        }
+    }

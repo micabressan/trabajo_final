@@ -1,0 +1,27 @@
+#[derive(Debug)]
+struct Animal {
+	name: String,
+	legs: u32
+}
+
+impl Animal {
+    pub fn new(name: String, legs: u32) -> Animal {
+	    Animal { name: name,
+	           legs: legs }
+	}
+}
+
+fn main() {
+	let zoo : [Animal; 3] = [
+	    Animal::new( "Dog".to_string(), 4 ),
+		Animal::new( "Chicken".to_string(), 2 ),
+		Animal::new( "Snail".to_string(), 0 ),
+	];
+	println!("-> Before update {:?}", zoo);
+	println!("-> After update (modified) {:?}", zoo.iter()
+        .map(|animal| { 
+            Animal::new(animal.name.to_string(), 999)
+        })
+        .collect::<Vec<Animal>>() );
+	println!("-> After update (modified) {:?}", zoo);
+}

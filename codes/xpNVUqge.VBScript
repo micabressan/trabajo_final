@@ -1,0 +1,71 @@
+'Option Explict
+
+
+Sub Test()
+   Dim processName
+   processName = "notepad++"
+   'Set oTestedApp = TestedApps.notepad
+
+   Call Open()
+   
+   Set oProcess = getApplicationProcess(processName)
+   
+   
+   Call CreateNewFile(oProcess)
+   'Call setText("Testowy tekst")
+' Save file
+
+   Call Close()
+End Sub 
+   
+
+Function Open()
+   Call TestedApps.notepad.Run
+'   If oTestedApp.Exists Then
+'      Call Log.AppendFolder("Open aplication '" & oTestedApp & "'")
+'      Call oTestedApp.Run 
+'      Call Log.PopLogFolder()
+'   Else
+'      Call Log.Error("'" & oTestedApp & "' doesn't exist")
+'   End IF
+End Function
+
+
+Function Close()
+   Call TestedApps.notepad.Close
+'    If oTestedApp.Exists Then
+'      Call Log.AppendFolder("Close aplication '" & oTestedApp & "'")
+'      Call oTestedApp.Close
+'      Call Log.PopLogFolder()
+'   Else
+'      Call Log.Error("'" & oTestedApp & "' doesn't exist")
+'   End IF
+End Function
+
+
+Function getApplicationProcess (processName)
+   Call Log.AppendFolder("Get reference to '" & processName & "' process")
+   Set getApplicationProcess  = Sys.Process(processName)
+   
+   If getApplicationProcess.Exists Then
+      Call Log.Message("Got : " & getApplicationProcess.FullName)
+   Else
+      Call Log.Error("'" & processName & "' doesn't exist")
+   End IF
+   
+   Call Log.PopLogFolder()
+End Function
+   
+
+Function CreateNewFile(oProcess)
+   Set window = oProcess.FindChild()
+   window.MainMenu.Click("File|Open...")
+   oProcess.Window("#32770", "Open").OpenFile 
+End Function
+
+
+Function getChild(oProcess, processName)
+   Set getChild = oProcess.FindChild(PropNames, PropValues, 1)
+   window.MainMenu.Click("File|Open...")
+   oProcess.Window("#32770", "Open").OpenFile 
+End Function

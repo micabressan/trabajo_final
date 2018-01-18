@@ -1,0 +1,37 @@
+mod drawable {
+
+    extern crate rand;
+    use self::rand::Rng;
+    use std::collections::HashMap;
+    use std::hash::Hash;
+    use std::cmp::Eq;    
+    
+    struct Pair<'a, T> where T: 'a {
+        upper_bound: f32,
+        data: &'a T,
+    }
+    
+    pub struct Drawable<'a, T> where T: 'a {
+        distribution: Vec<Pair<'a, T>>,
+    }
+
+    impl<'a, T> Drawable<'a, T> where T: Hash + Eq + 'a {
+
+        pub fn new(data_to_probability_map: HashMap<&'a T, f32>) -> Drawable<&'a T> {
+            let mut running_p_sum: f32 = 0.0;
+            let mut distribution: Vec<Pair<&'a T>> = Vec::new();
+            for (&data, p) in data_to_probability_map.iter() {
+                running_p_sum += *p;
+                // &data does not live long enough: 
+                let entry_pair: Pair<&'a T> = Pair { upper_bound: running_p_sum, data: &data };
+                distribution.push(entry_pair);
+            }
+            Drawable { distribution: distribution }
+            // borrowed value must be valid for the lifetime 'a as defined on the impl
+        }
+
+        pub fn draw(&self) {
+            let r: f32 = rand::random();
+        }
+    }
+}

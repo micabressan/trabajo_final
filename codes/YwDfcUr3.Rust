@@ -1,0 +1,5 @@
+        match rng.choose(&Vec::from_iter(modules_to_run.iter().map(String::as_str))).unwrap() {
+            &"bootlog" => bootlog::run(),
+            &"cargo" => cargo::run(),
+            _ => panic!("Unknown module!"),
+        }

@@ -1,0 +1,21 @@
+-- 6. capitalized
+
+-- List-comprehension version
+capitalized :: String -> String
+capitalized [] = []
+capitalized xs = toUpper( head(xs)) : [toLower(x) | x <- xs, x /= head(xs)]
+
+
+-- Recursive version
+
+lowerRest :: String -> String
+lowerRest [] = []
+lowerRest (x:xs)  = toLower x : lowerRest xs
+
+capitalizedRec :: String -> String
+capitalizedRec [] = []
+capitalizedRec xs = toUpper(head(xs)) : lowerRest(tail(xs))
+
+-- Mutual test
+prop_capitalized :: String -> Bool
+prop_capitalized xs = capitalizedRec xs == capitalized xs

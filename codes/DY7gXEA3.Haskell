@@ -1,0 +1,20 @@
+power :: Integer -> Integer -> Integer
+power _ k | k < 0 = error "power: negative argument"
+power _ 0 = 1
+power n k = n * power n (k-1)
+
+power2 :: Integer -> Integer -> Integer
+power2 _ k | k < 0 = error "power2: negative argument"
+power2 _ 0 = 1
+power2 n k = if even k 
+             then power2 (n*n) (k `div` 2) 
+             else n * power2 n (k-1)
+             
+bpowersub :: Integer -> Integer -> Integer -> Integer
+bpowersub _ k _ | k < 0 = error "bpowersub: negative argument"
+bpowersub _ 0 r = r
+bpowersub n k r = bpowersub n (k-1) n*r
+
+bpower :: Integer -> Integer -> Integer
+bpower _ k | k < 0 = error "bpower: negative argument"
+bpower n k = bpowersub n k 1

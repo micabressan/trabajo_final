@@ -1,0 +1,28 @@
+> Same in Rust. For example, a Box or Vec owns memory on the heap - if they don’t dealloc it in drop, it’s leaked. There’s no real difference between C++ and Rust here.
+
+Try to run the following code. The drop() function of the ObjectA doesn't destruct the 'b' member, i.e. it doesn't call to any equivalent of the delete operator of C++. But the it doesn't leak.
+
+    struct ObjectA {
+        b: Box<ObjectB>
+    }
+    
+    struct ObjectB;
+    
+    impl Drop for ObjectA {
+        fn drop(&mut self) {
+            println!("dropping ObjectA")
+        }
+    }
+    
+    impl Drop for ObjectB {
+        fn drop(&mut self) {
+            println!("dropping ObjectB")
+        }
+    }
+    
+    fn main() {
+        {
+            let _a: ObjectA = ObjectA { b: Box::new(ObjectB) };
+        }
+        println!("End")
+    }

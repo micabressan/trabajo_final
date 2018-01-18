@@ -1,0 +1,11 @@
+        app.values_of("modules")
+            .unwrap()
+            .map(|x| x.clone())
+            .cloned()
+            .collect()
+
+error[E0277]: the trait bound `str: std::clone::Clone` is not satisfied
+  --> src/main.rs:49:14
+   |
+49 |             .cloned()
+   |              ^^^^^^ the trait `std::clone::Clone` is not implemented for `str`

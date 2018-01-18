@@ -1,0 +1,22 @@
+(-/)::Maybe [a]->Maybe [a]->Maybe [a]
+(-/) (Just b) (Just c) = Just (b++c)
+(-/) b c = Nothing
+auxProcura'::[RTree a]->[a]
+auxProcura' [] = []
+auxProcura' ((R b l):t) = [b] ++ auxProcura' l ++ auxProcura' t
+auxProcura::RTree a->[a]
+auxProcura (R b c) = b : auxProcura' c
+findIndex::Eq a=>a->[[a]]->Int
+findIndex x (h:t) = if elem x h
+                    then 0
+                    else 1 + findIndex x t
+procura::Eq a=>a->RTree a->Maybe [Int]
+procura x (R a []) = if x/=a
+                     then Nothing
+                     else Just []
+procura x (R a l) = if x==a
+                    then Just []
+                    else if elem x (auxProcura' l)
+                         then Just [ix] -/ procura x (l!!ix) 
+                         else Nothing
+                  where ix = findIndex x (map auxProcura l)

@@ -1,0 +1,13 @@
+--c)
+remove :: TurmaA -> Numero -> Maybe TurmaA
+remove tA@(Al (num,_)) n
+  |n == num = Nothing
+  |n /= num = Just tA
+remove fork@(Fork (min,max) tL tR) n
+  = let removedL = remove tL n ;
+        removedR = remove tR n in
+    if n < min || n > max then Just fork
+    else case (removedL,removedR) of
+         (Nothing,Just r) -> Just r
+         (Just l,Nothing) -> Just l
+         (Just l,Just r) -> Just (Fork (min,max) l r)

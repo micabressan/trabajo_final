@@ -1,0 +1,17 @@
+// atomic operations based on cmpxchg
+fn atomic_opf(a: &mut f32, b: f32, cmpxchg: fn(&mut u32, u32, u32) -> u32, op: fn(f32, f32) -> f32) -> f32 {
+    let addr_as_ui  = bitcast[&mut u32](a);
+    let mut assumed = *addr_as_ui;
+    let mut old     = cmpxchg(addr_as_ui, assumed, bitcast[u32](op(b, bitcast[f32](assumed))));
+
+    while assumed != old {
+        assumed = old;
+        old = cmpxchg(addr_as_ui, assumed, bitcast[u32](op(b, bitcast[f32](assumed))));
+    }   
+
+    bitcast[f32](old)
+}
+
+fn acc_atomic_addf(a: &mut f32, b: f32) -> f32 { atomic_opf(a, b, opencl_atomic_cmpxchg_u32, |x, y| { x + y }) }
+fn acc_atomic_minf(a: &mut f32, b: f32) -> f32 { atomic_opf(a, b, opencl_atomic_cmpxchg_u32, |x, y| { if x < y { x } else { y } }) }
+fn acc_atomic_mulf(a: &mut f32, b: f32) -> f32 { atomic_opf(a, b, opencl_atomic_cmpxchg_u32, |x, y| { x * y }) }

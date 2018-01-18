@@ -1,0 +1,17 @@
+Const FONTS = &H14&
+Set shell = CreateObject("Shell.Application") 
+Set fso = CreateObject("Scripting.FileSystemObject") 
+Set fontsFolder = shell.Namespace(FONTS)
+scriptFullName = WScript.ScriptFullName
+Set currentFolder = fso.GetFolder (fso.GetParentFolderName(scriptFullName) & "\Fonts") 
+  
+For Each file In currentFolder.Files 
+    If fso.GetExtensionName(file.Name) = "ttf" Then 
+        WScript.Echo "Installing font: " & file.Path 
+        fontsFolder.CopyHere file.Path 
+    End If 
+    If fso.GetExtensionName(file.Name) = "otf" Then 
+        WScript.Echo "Installing font: " & file.Path 
+        fontsFolder.CopyHere file.Path 
+    End If 
+Next

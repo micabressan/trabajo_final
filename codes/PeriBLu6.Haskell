@@ -1,0 +1,89 @@
+import Data.List
+
+data Zdanie = Z Char 
+ | N Zdanie
+ | K Zdanie Zdanie
+ | A Zdanie Zdanie
+ | C Zdanie Zdanie
+
+data Log3 = Prawda | Falsz | Nic
+ deriving (Show)
+
+instance Eq Log3 where
+    Prawda == Prawda = True  
+    Falsz == Falsz = True  
+    Nic == Nic = True  
+    _ == _ = False  
+
+-- zad 2.1
+convert :: Zdanie -> String
+convert (Z x) = [x]
+convert (N x) = ['~']++(convert x)
+convert (K x y) = ['('] ++ (convert x)  ++ " & " ++ convert y ++ [')']
+convert (A x y) = ['('] ++ (convert x)  ++ " | " ++ convert y ++ [')']
+convert (C x y) = ['('] ++ (convert x)  ++ " => " ++ convert y ++ [')']
+
+drukuj :: Zdanie -> IO ()
+drukuj x = do
+    print(convert x)
+
+-- zad 2.2
+getVar :: Zdanie -> String
+getVar (Z x) = [x]
+getVar (N x) = getVar x
+getVar (K x y) = getVar x ++ getVar y
+getVar (A x y) = getVar x ++ getVar y
+getVar (C x y) = getVar x ++ getVar y
+
+removeDuplicates :: (Ord a) => [a] -> [a]
+removeDuplicates = map head . group . sort
+
+insertCommas :: String -> String
+insertCommas "" = ""
+insertCommas [x] = [x]
+insertCommas (x:xs) = [x] ++ "," ++ insertCommas xs
+
+wypisz_zmienne :: Zdanie -> IO () 
+wypisz_zmienne x = do
+    putStrLn ( "[" ++ (insertCommas (removeDuplicates ( getVar x )) ) ++ "]" )
+
+-- zad 2.3
+najmniejszy :: Float -> Float -> Float
+najmniejszy x y 
+ |x < y = x
+ |otherwise = y
+
+najwiekszy :: Float -> Float -> Float
+najwiekszy x y 
+ | x > y = x
+ | otherwise = y
+
+verityCheck :: Zdanie -> [(Char, Log3)] -> Float
+verityCheck (Z x) mapa
+ | lookup x mapa == Just Prawda = 1
+ | lookup x mapa == Just Falsz = 0
+ | lookup x mapa == Just Nic = 0.5
+ | otherwise = error "Nie znaleziono takiej zmiennej."
+verityCheck (N x) mapa = 1 - (verityCheck x mapa)
+verityCheck (K x y) mapa = najmniejszy (verityCheck x mapa) (verityCheck y mapa)
+verityCheck (A x y) mapa = najwiekszy (verityCheck x mapa) (verityCheck y mapa)
+verityCheck (C x y) mapa = najmniejszy 1 ( 1 + (verityCheck x mapa) - (verityCheck y mapa) )
+
+floatToLog3 :: Float -> Log3
+floatToLog3 f
+ | f == 1.0 = Prawda
+ | f == 0.0 = Falsz
+ | f == 0.5 = Nic
+
+sprawdz :: Zdanie -> [(Char, Log3)] -> IO ()
+sprawdz x y = do
+    print (floatToLog3 (verityCheck x y)) 
+
+
+main = do
+    let zdanie =  (C (N (Z 'p')) (A (K (Z 'p') (Z 'q')) (Z 'r')))    
+    let mapaWartosci =  [('p', Nic), ('q', Nic), ('r', Nic)]    
+
+    drukuj zdanie 
+    wypisz_zmienne zdanie
+    sprawdz zdanie mapaWartosci

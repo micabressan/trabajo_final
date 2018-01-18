@@ -1,0 +1,29 @@
+data Multiplier = NoneMult | LetterMult Int | WordMult Int
+
+wordMultipliers :: Map.Map (Int, Int) Multiplier
+wordMultipliers = Map.fromList $ filter (isPositiveMult . snd) laidOut
+   where isPositiveMult l = case l of
+                                 NoneMult -> False
+                                 _        -> True
+         laidOut = [((x, y), charToMult $ (boardLayout!!x)!!y) | x <- [0..14], y <- [0..14]]
+         charToMult c = case c of
+                             'T' -> WordMult 3
+                             't' -> LetterMult 3
+                             'D' -> WordMult 2
+                             'd' -> LetterMult 2
+                             _   -> NoneMult
+         boardLayout = [ "TnnnnnnTnnnnnnT"
+                       , "nDnnntnnntnnnDn"
+                       , "nnDnnndndnnnDnn"
+                       , "dnnDnnndnnnDnnd"
+                       , "nnnnDnnnnnDnnnn"
+                       , "ntnnntnnntnnntn"
+                       , "nndnnndndnnndnn"
+                       , "TnndnnnnnnndnnT"
+                       , "nndnnndndnnndnn"
+                       , "ntnnntnnntnnntn"
+                       , "nnnnDnnnnnDnnnn"
+                       , "dnnDnnndnnnDnnd"
+                       , "nnDnnndndnnnDnn"
+                       , "nDnnntnnntnnnDn"
+                       , "TnnnnnnTnnnnnnT" ]

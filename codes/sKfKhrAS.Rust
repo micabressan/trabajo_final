@@ -1,0 +1,10 @@
+fn main() {
+    let a = 4;
+    match a % 2 {
+        0 => match a {
+            0 => println!("{:?} is zero", a),
+            _ => println!("{:?} is even", a),
+        },
+        _ => unimplemented!(),
+    };
+}

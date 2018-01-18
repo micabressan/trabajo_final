@@ -1,0 +1,41 @@
+-- Toimiva funktio, joka palauttaa väärää tyyppiä olevan arvon.
+
+ftail' :: [a] -> [a]
+
+ftail' xs = foldr f (const []) xs True
+
+    where
+
+        f x acc = \firstElement ->
+
+            if firstElement
+
+                then acc False
+
+                else x:acc False
+
+				
+
+-- Yritelmä funktiosta, joka palauttaisi oikeaa tyyppiä. Ei toimi.
+
+ftail :: [a] -> Maybe [a]
+
+ftail xs = foldr f (const Nothing) xs True
+
+    where
+
+        f x acc = \firstElement ->
+
+            if firstElement
+
+                then Just (acc False)
+
+                else Just (x:acc False)
+
+-- Tarjoaa seuraavaa virhettä:
+
+-- * Couldn't match type `Maybe [a]' with `[a]'
+
+--      Expected type: a -> (Bool -> Maybe [a]) -> Bool -> Maybe [a]
+
+--        Actual type: a -> (Bool -> [a]) -> Bool -> Maybe [a]

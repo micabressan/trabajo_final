@@ -1,0 +1,9 @@
+isTip (Tip x) = True
+isTip _ = False
+desTip (Tip x) = x
+desNodeR (Node _ t) = t
+desNodeL (Node t _) = t
+
+unfoldBTree istip tip leftT rightT x
+  | istip x = Tip (tip x)
+  | otherwise = Node (unfoldBTree istip tip leftT rightT (leftT x)) (unfoldBTree istip tip leftT rightT (rightT x))

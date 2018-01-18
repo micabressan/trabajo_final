@@ -1,0 +1,26 @@
+jobj.iter()
+    .map(|name, x| {
+        let jbook_parse = |x| {
+            let entry_parse = |x| -> Option<[f32; 3]> {
+                if let Value::Array(x) = x.as_array() {
+                    let a = x.next();
+                    let b = x.next();
+                    let c = x.next();
+                    match (a, b, c) {
+                        (Some(a), Some(b), Some(c)) => Some([a, b, c]),
+                        _ => None
+                    }
+                }
+            };
+            x.as_array()
+                .filter_map(|x| x)
+                .iter()
+                .map(|x| entry_parse(x))
+                .filter_map(|x| x)
+        }
+        Orderbook {
+            name : name
+            ask : jbook_parse(x, "ask").collect(),
+            bid : jbook_parse(y, "bid").collect(),
+        }
+    })

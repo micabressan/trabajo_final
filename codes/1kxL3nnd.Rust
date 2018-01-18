@@ -1,0 +1,13 @@
+    if let Some(tech_tree_node_entity) = tech_tree_node_entity {
+            if let Some(current_tooltip) = self.current_tooltip {
+                // only create if node entity has changed
+                if current_tooltip != tech_tree_node_entity {
+                    if let Some(container_node) = scene.get_node_for_entity(tech_tree_node_entity) {
+                        let tooltip_node = create_tooltip::create(&entities, &mut color_storage, &mut rect_storage, &mut text_storage, &mut transform_storage, 0.0, 0.0);
+                        self.current_tooltip = Some(tooltip_node.entity.unwrap().clone());
+                        container_node.sub_nodes.push(tooltip_node);
+                    }
+                }
+            }
+        }
+    }

@@ -1,0 +1,102 @@
+BEFORE: 
+{-# LANGUAGE GeneralizedNewtypeDeriving, UndecidableInstances #-}
+module ItalianSubs.API.Remote where
+    
+import qualified Network.HTTP.Client as N
+import qualified Data.ByteString.Lazy as B
+
+import           Control.Monad.Reader
+import           Control.Monad.Except
+import           Control.Exception (SomeException)
+
+newtype Remote a = Remote { unwrap :: ExceptT String (ReaderT N.Manager IO) a }
+                 deriving(Functor, Applicative, Monad)
+
+instance MonadIO Remote where
+    liftIO = Remote . liftIO
+
+runRequest :: Remote a -> N.Manager -> IO (Either String a)
+runRequest (Remote r) = runReaderT . runExceptT $  r
+
+withManager :: N.Manager -> Remote a -> IO (Either String a)
+withManager = flip runRequest
+
+networkCall :: (N.Manager -> IO b) -> Remote b
+networkCall call = Remote $ ask >>= liftIO . call
+
+networkOperation :: Remote a -> (a -> N.Manager -> IO b) -> Remote b
+networkOperation r call = r >>= networkCall . call
+
+try :: Either String a -> Remote a
+try = Remote . ExceptT . return
+
+parse :: (a -> Either String b) -> Remote a -> Remote b
+parse parser r = r >>= try . parser
+
+infix 0 `parse`
+
+makeRequest :: String -> (N.Request -> N.Request) -> Remote (N.Response B.ByteString)
+makeRequest url customize = do
+    request <- customize <$> try createRequest
+    networkCall (N.httpLbs request)
+
+    where createRequest :: Either String N.Request
+          createRequest = either (Left . show) -- Show SomeException
+                                 Right
+                                 (N.parseRequest url)
+
+makeRequest' :: String -> Remote (N.Response B.ByteString)
+makeRequest' url = makeRequest url id
+
+----------------------------------------------------------------------------------------------------
+
+AFTER: 
+{-# LANGUAGE GeneralizedNewtypeDeriving, UndecidableInstances #-}
+module ItalianSubs.API.Remote where                                                                                                                                                                                                                                                                                                                                                                                                               
+----------------------------------------------------------------------------------------------------
+import qualified Network.HTTP.Client as N
+import qualified Data.ByteString.Lazy as B                                                                                                                                                                                                                                                                                                                                                                                                                                
+----------------------------------------------------------------------------------------------------
+import           Control.Monad.Reader
+import           Control.Monad.Except
+import           Control.Exception (SomeException)                                                                                                                                                                                                                                                                                                                                                                                      
+----------------------------------------------------------------------------------------------------
+newtype Remote a = Remote { unwrap :: ExceptT String (ReaderT N.Manager IO) a }
+deriving(Functor, Applicative, Monad)                                                                                                                                                                                                                                                                                                                                                                                               
+----------------------------------------------------------------------------------------------------
+instance MonadIO Remote where
+liftIO = Remote . liftIO                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+----------------------------------------------------------------------------------------------------
+runRequest :: Remote a -> N.Manager -> IO (Either String a)
+runRequest (Remote r) = runReaderT . runExceptT $  r                                                                                                                                                                                                                                                                                                                                                                                                    
+----------------------------------------------------------------------------------------------------
+withManager :: N.Manager -> Remote a -> IO (Either String a)
+withManager = flip runRequest                                                                                                                                                                                                                                                                                                                                                                                                                          
+----------------------------------------------------------------------------------------------------
+networkCall :: (N.Manager -> IO b) -> Remote b
+networkCall call = Remote $ ask >>= liftIO . call                                                                                                                                                                                                                                                                                                                                                                                                                    
+----------------------------------------------------------------------------------------------------
+networkOperation :: Remote a -> (a -> N.Manager -> IO b) -> Remote b
+networkOperation r call = r >>= networkCall . call                                                                                                                                                                                                                                                                                                                                                                                             
+----------------------------------------------------------------------------------------------------
+try :: Either String a -> Remote a
+try = Remote . ExceptT . return                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+----------------------------------------------------------------------------------------------------
+parse :: (a -> Either String b) -> Remote a -> Remote b
+parse parser r = r >>= try . parser                                                                                                                                                                                                                                                                                                                                                                                                                         
+----------------------------------------------------------------------------------------------------
+infix 0 `parse`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+----------------------------------------------------------------------------------------------------
+makeRequest :: String -> (N.Request -> N.Request) -> Remote (N.Response B.ByteString)
+makeRequest url customize = do
+request <- customize <$> try createRequest
+networkCall (N.httpLbs request)                                                                                                                                                                                                                                                                                                                     
+----------------------------------------------------------------------------------------------------
+where createRequest :: Either String N.Request
+createRequest = either (Left . show) -- Show SomeException
+Right
+(N.parseRequest url)                                                                                                                                                                                                                                                                                                                                                                                
+----------------------------------------------------------------------------------------------------
+makeRequest' :: String -> Remote (N.Response B.ByteString)
+makeRequest' url = makeRequest url id                                                                                                                                                                                                                                                                                                                                                                                                                    
+----------------------------------------------------------------------------------------------------

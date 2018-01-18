@@ -1,0 +1,12 @@
+module Exam where
+
+oddSum :: [Integer] -> Integer
+oddSum xs = oddSum' xs 0
+    where
+        oddSum' :: [Integer] -> Integer -> Integer
+        oddSum' [] sumAcc = sumAcc
+        oddSum' (x:xs) sumAcc = oddSum' xs (sumAcc + (if (even x) then x else 0))
+
+oddSumNoTail :: [Integer] -> Integer
+oddSumNoTail [] = 0
+oddSumNoTail (x:xs) = (if (even x) then x else 0) + (oddSumNoTail xs)

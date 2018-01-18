@@ -1,0 +1,236 @@
+Sub FillInternetForm()
+    Dim size As Integer, i As Integer, count As Integer
+    Dim Name
+    Dim j As Integer
+   
+    Dim IEobj As Object
+   
+    ' for loop parametars
+   
+    size = WorksheetFunction.CountA(Sheets("sheet1").Columns("C")) - 1
+    count = WorksheetFunction.CountA(Sheets("sheet1").Columns("U"))
+   
+    'IE object
+   
+    Set IEobj = CreateObject("internetexplorer.application")
+    IEobj.Visible = True
+    IEobj.navigate ("https://eu6.salesforce.com/a005800000EPs70")
+   
+    Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+    'sign in to SF if we are not
+   
+    If IEobj.document.Url <> "https://eu6.salesforce.com/a005800000EPs70" Then
+        IEobj.document.getelementbyid("username").Value = "tally@dawsat.com"
+        IEobj.document.getelementbyid("password").Value = "Dawsat2017$"
+        IEobj.document.getelementbyid("Login").Click
+    End If
+    Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+   
+    For i = count To size
+        j = 0
+        Name = Split(Sheets("Sheet1").Range("C" & i + 1).Value, " ")
+       
+       
+        If UBound(Name, 1) = 3 Then
+            IEobj.navigate ("https://eu6.salesforce.com/003/e?CF00N5800000BNBDq=Online+Groubs%2C+%2C+Saturday%2C+11&CF00N5800000BNBDq_lkid=a005800000EPs70&retURL=%2Fa005800000EPs70&RecordType=01258000000ccRm&ent=Contact")
+         
+            Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+         
+            'First Name
+            'If IEobj.document.getelementbyid("name_firstcon2").Value <> Empty Then
+              IEobj.document.getelementbyid("name_firstcon2").Value = Name(0)
+            'End If
+         
+         'Father Name
+             IEobj.document.getelementbyid("00N5800000BNBDR").Value = Name(1)
+             
+         'Middle Name
+            'If IEobj.document.getelementbyid("name_middlecon2").Value <> Empty Then
+                IEobj.document.getelementbyid("name_middlecon2").Value = Name(2)
+            'End If
+           
+         'Last Name
+           'If IEobj.document.getelementbyid("name_lastcon2").Value <> Empty Then
+               IEobj.document.getelementbyid("name_lastcon2").Value = Name(UBound(Name, 1))
+           'End If
+       
+         
+         'Birthdate
+          IEobj.document.getelementbyid("con7").Value = Format(CDate(Sheets("Sheet1").Range("D" & i + 1).Value), "dd/MM/yyyy")
+         
+         'Mobile
+          IEobj.document.getelementbyid("con12").Value = Sheets("Sheet1").Range("E" & i + 1).Value 'country
+         
+         'service type
+          If Sheets("Sheet1").Range("H" & i + 1).Value = "áÞÇÁ æÇÍÏ" Then
+            IEobj.document.getelementbyid("00N5800000BNBJU").Value = "One Time Session(1 meeting)"
+          ElseIf Sheets("Sheet1").Range("H" & i + 1).Value = "ÑÒãÉ 4 áÞÇÆÇÊ (ÇæäáÇíä)" Then
+             IEobj.document.getelementbyid("00N5800000BNBJU").Value = "Online ( 4 Meetings per month)"
+          Else
+             IEobj.document.getelementbyid("00N5800000BNBJU").Value = "Full Package(13 Meetings)"
+         End If
+         
+         
+         
+         
+         
+         'Food sensitivities
+         IEobj.document.getelementbyid("00N5800000BNBDg").Value = Sheets("Sheet1").Range("J" & i + 1).Value
+         
+         'chronic medications
+         If Sheets("Sheet1").Range("N" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAX").Value = "No"
+             IEobj.document.getelementbyid("00N5800000BNB7s").Value = "-"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAX").Value = "Yes"
+             IEobj.document.getelementbyid("00N5800000BNB7s").Value = Sheets("Sheet1").Range("O" & i + 1).Value
+         End If
+                 
+                 
+         'Health decleration
+         If Sheets("Sheet1").Range("I" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBDv").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBDv").Value = "Yes"
+         End If
+         
+         'Smoke
+         If Sheets("Sheet1").Range("L" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAS").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAS").Value = "Yes"
+         End If
+         
+         'blood presure
+         IEobj.document.getelementbyid("00N5800000BNBEK").Value = "-"
+         
+         'Diabetes
+         If Sheets("Sheet1").Range("M" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAN").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAN").Value = "Yes"
+         End If
+             
+         'save
+         IEobj.document.getelementsbyname("save")(0).Click
+         
+          Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+          If IEobj.LocationURL = "https://eu6.salesforce.com/003/e" Then
+             Sheets("Sheet1").Range("U" & i + 1).Value = "Fales"
+         
+          Else
+             For Each element In IEobj.document.getElementsByTagName("a")
+                If InStr(element.innertext, "payments#/fromLinkPay?") Then
+                    Sheets("Sheet1").Range("V" & i + 1).Value = element.innertext
+                    Exit For
+                 End If
+            Next
+            End If
+         'name of 3
+        ElseIf UBound(Name, 1) < 3 Then
+         IEobj.navigate ("https://eu6.salesforce.com/003/e?CF00N5800000BNBDq=Online+Groubs%2C+%2C+Saturday%2C+11&CF00N5800000BNBDq_lkid=a005800000EPs70&retURL=%2Fa005800000EPs70&RecordType=01258000000ccRm&ent=Contact")
+         
+            Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+         
+            'First Name
+            'If IEobj.document.getelementbyid("name_firstcon2").Value <> Empty Then
+              IEobj.document.getelementbyid("name_firstcon2").Value = Name(0)
+            'End If
+         
+         'Father Name
+          '   IEobj.document.getelementbyid("00N5800000BNBDR").Value = Name(1)
+             
+         'Middle Name
+            'If IEobj.document.getelementbyid("name_middlecon2").Value <> Empty Then
+                IEobj.document.getelementbyid("name_middlecon2").Value = Name(1)
+            'End If
+           
+         'Last Name
+           'If IEobj.document.getelementbyid("name_lastcon2").Value <> Empty Then
+               IEobj.document.getelementbyid("name_lastcon2").Value = Name(UBound(Name, 1))
+           'End If
+         
+         
+         'Birthdate
+          IEobj.document.getelementbyid("con7").Value = Format(CDate(Sheets("Sheet1").Range("D" & i + 1).Value), "dd/MM/yyyy")
+         
+         'Mobile
+          IEobj.document.getelementbyid("con12").Value = Sheets("Sheet1").Range("E" & i + 1).Value 'country
+         
+        'service type
+          If Sheets("Sheet1").Range("H" & i + 1).Value = "áÞÇÁ æÇÍÏ" Then
+            IEobj.document.getelementbyid("00N5800000BNBJU").Value = "One Time Session(1 meeting)"
+          ElseIf Sheets("Sheet1").Range("H" & i + 1).Value = "ÑÒãÉ 4 áÞÇÆÇÊ (ÇæäáÇíä)" Then
+             IEobj.document.getelementbyid("00N5800000BNBJU").Value = "Online ( 4 Meetings per month)"
+          Else
+             IEobj.document.getelementbyid("00N5800000BNBJU").Value = "Full Package(13 Meetings)"
+         End If
+         
+         
+         
+         
+         
+         'Food sensitivities
+         IEobj.document.getelementbyid("00N5800000BNBDg").Value = Sheets("Sheet1").Range("J" & i + 1).Value
+         
+         'chronic medications
+         If Sheets("Sheet1").Range("N" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAX").Value = "No"
+             IEobj.document.getelementbyid("00N5800000BNB7s").Value = "-"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAX").Value = "Yes"
+             IEobj.document.getelementbyid("00N5800000BNB7s").Value = Sheets("Sheet1").Range("O" & i + 1).Value
+         End If
+                 
+                 
+         'Health decleration
+         If Sheets("Sheet1").Range("I" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBDv").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBDv").Value = "Yes"
+         End If
+         
+         'Smoke
+         If Sheets("Sheet1").Range("L" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAS").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAS").Value = "Yes"
+         End If
+         
+         'blood presure
+         IEobj.document.getelementbyid("00N5800000BNBEK").Value = "-"
+         
+         'Diabetes
+         If Sheets("Sheet1").Range("M" & i + 1).Value = "áÇ" Then
+             IEobj.document.getelementbyid("00N5800000BNBAN").Value = "No"
+         Else
+             IEobj.document.getelementbyid("00N5800000BNBAN").Value = "Yes"
+         End If
+             
+         'save
+         IEobj.document.getelementsbyname("save")(0).Click
+         
+          Do While IEobj.Busy = True Or IEobj.readyState <> 4: DoEvents: Loop
+          If IEobj.LocationURL = "https://eu6.salesforce.com/003/e" Then
+             Sheets("Sheet1").Range("U" & i + 1).Value = "Fales"
+         
+          Else
+             For Each element In IEobj.document.getElementsByTagName("a")
+                If InStr(element.innertext, "payments#/fromLinkPay?") Then
+                    Sheets("Sheet1").Range("V" & i + 1).Value = element.innertext
+                    Exit For
+                 End If
+            Next
+            End If
+          Else
+          Sheets("Sheet1").Range("U" & i + 1).Value = "Fales"
+         End If
+         If Sheets("Sheet1").Range("U" & i + 1).Value <> "Fales" Then
+         Sheets("Sheet1").Range("U" & i + 1).Value = "true"
+         End If
+        Next i
+ 
+ 
+ 
+ 
+End Sub

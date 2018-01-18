@@ -1,0 +1,37 @@
+================= cargo build error
+error[E0271]: type mismatch resolving `<MetricServer as hyper::client::Service>::Error == hyper::Error`
+  --> metrics/src/lib.rs:30:38
+   |
+30 |         let mut server = Http::new().bind(&addr, || Ok(MetricServer)).unwrap();
+   |                                      ^^^^ expected struct `failure::Error`, found enum `hyper::Error`
+   |
+   = note: expected type `failure::Error`
+              found type `hyper::Error`
+
+error: aborting due to previous error
+
+error: Could not compile `metrics`.
+
+================= relevant code snippet:
+fn init() {
+    thread::spawn(|| {
+        let addr = "127.0.0.1:9898".parse().unwrap();
+        let mut server = Http::new().bind(&addr, || Ok(MetricServer)).unwrap();  <-- error here
+    });
+}
+
+impl MetricServer {
+    fn metric_response(&self, req: Request) -> std::result::Result<Response, failure::Error> {
+      ...    
+    }
+}
+
+impl Service for MetricServer {
+    type Request = Request;
+    type Response = Response;
+    type Error = failure::Error;
+    type Future = FutureResult<Response, failure::Error>;
+    fn call(&self, req: Request) -> Self::Future {
+        futures::future::result(self.metric_response(req))
+    }
+}

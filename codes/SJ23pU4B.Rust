@@ -1,0 +1,8 @@
+pub fn main() {
+    enum S {
+        OFF,
+        ON,
+    }
+    use self::S::*;
+    println!("{}", ON);
+}

@@ -1,0 +1,3 @@
+perms :: [a] -> [[a]]
+perms []  = [[]]
+perms x   = concatMap (\n -> map ((x !! n) :) (perms (take n x ++ drop (n + 1) x))) [0..(length x - 1)]

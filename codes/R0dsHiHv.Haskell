@@ -1,0 +1,13 @@
+{- 
+
+It's intended to take the contents of a file, convert it to individual lines, take the first 10 characters of each line, convert them to numbers and then give me a list of the 10 combined numbers from each line.
+
+Where it then flops is on the 'take' where it suddenly wants a Bool? Why is that?
+-}
+
+sortFile :: [Char] -> [Int]
+sortFile input =
+  let allLines = lines input
+      rightnumbers = filter (\line -> take 10 line) allLines
+      result = map ord $ unlines rightnumbers
+  in result

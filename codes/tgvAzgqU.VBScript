@@ -1,0 +1,12 @@
+Sub Run()
+
+ 'DlgOk "ID:" + PatNo
+ 'DlgOk "CARD:" + controlvalue("ElectroCardNo")
+
+ Dim shell
+ Set shell = CreateObject("WScript.Shell")
+ shell.Run Chr(34) & "C:\SKUD\parsec.exe " & Chr(34) & " " & PatNo & " " & controlvalue("ElectroCardNo"), 1, 1
+ Set shell = Nothing
+ 
+ 
+End Sub

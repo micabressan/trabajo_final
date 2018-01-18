@@ -1,0 +1,41 @@
+main :: IO()
+main = do
+  print(count_digits 877)
+  print(sum_digits 877)
+  print(pow 5.5 2)
+  print(sum_digits_iter 877)
+  print(rev 156)
+
+count_digits :: Int -> Int
+count_digits n = if n < 10 then 1 else 1 + count_digits (n `div` 10)
+
+sum_digits :: Int -> Int 
+sum_digits n = if n == 0 then 0 else (n `mod` 10) + sum_digits (n `div` 10) 
+
+pow :: Double -> Int -> Double 
+pow x n = if n == 0 then 1 else x * pow x (n - 1)
+
+sum_digits_iter :: Int -> Int
+sum_digits_iter n = helper n 0
+ where
+  helper :: Int -> Int -> Int
+  helper 0 res = res
+  helper n res = helper (n `div` 10) (res + (n `mod` 10))
+
+rev :: Int -> Int
+rev n = helper n 0
+ where 
+  helper :: Int -> Int -> Int 
+  helper 0 res  = res
+  helper n res = helper (n `div` 10) (res * 10 + (n `mod` 10)) 
+  
+prime :: Int -> Bool
+prime 1 = False
+prime 2 = True
+prime n = helper n 2
+ where
+  helper :: Int -> Int -> Bool
+  helper n k
+   | n == k = True
+   | mod n k == 0 = False
+   | otherwise = helper n (k + 1)

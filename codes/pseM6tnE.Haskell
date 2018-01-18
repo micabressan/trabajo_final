@@ -1,0 +1,39 @@
+type Board = [[Char]]
+
+start :: Board
+start = ["oo", "ooo", "oooo", "ooooo", "oooooo"]
+
+f2s :: Board -> String
+f2s f = concat $ [fst z ++ [snd z] ++ "\n" | z <- zip (map (\i -> i ++ take (10 - (length i)) (repeat '.')) f) ['1'..'5']]
+
+set :: Board -> Int -> Board
+set f j = take (j-1) f ++ [init $ f!!(j-1)] ++ drop j f
+
+loop :: Int -> Board -> Int -> Int -> IO ()
+loop n f a b = do putStr $ take 20 $ repeat '\n'
+                  putStr $ f2s f
+                  putStr $ "\nIgrac A bodovi: " ++ show a ++ "\nIgrac B bodovi: " ++ show b ++ "\n\n"
+                  if a==3 then
+                     do putStr "Pobijedio je igrac A"
+                  else if b==3 then
+                     do putStr "Pobijedio je igrac B"
+                  else
+                     do let c = if (n `mod` 2 == 0) then 'A' else 'B'
+                        putStr $ "Na potezu je igrac " ++ [c] ++ "\n>> "
+                        i <- getLine 
+                        if (i `elem` [[k] | k <- ['1'..'5']]) then
+                           do let j = read i :: Int
+                              
+                              if length (f!!(j-1)) > 0 then
+                                    if length (f!!(j-1)) == 1 then
+                                       case c of 'A' -> loop (n+1) (set f j) (a+1) b
+                                                 'B' -> loop (n+1) (set f j) a (b+1)
+                                    else
+                                       loop (n+1) (set f j) a b
+                              else
+                                 loop n f a b
+                        else
+                           loop n f a b
+
+main :: IO()
+main = do loop 0 start 0 0

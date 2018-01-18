@@ -1,0 +1,23 @@
+'********************************************
+' Click_down.vbs
+'********************************************
+Set WshShell = CreateObject("Wscript.Shell")
+WshShell.AppActivate("binary")
+WScript.Sleep 250
+WshShell.SendKeys "^l"
+WScript.Sleep 250
+WshShell.SendKeys "javascript:document.getElementById{(}'dwn_button'{)}.click{(}{)};document.getElementById{(}'invest_now_button'{)}.click{(}{)};"
+WScript.Sleep 500
+WshShell.SendKeys "{ENTER}"
+
+'********************************************
+' Click_up.vbs
+'********************************************
+Set WshShell = CreateObject("Wscript.Shell")
+WshShell.AppActivate("binary")
+WScript.Sleep 250
+WshShell.SendKeys "^l"
+WScript.Sleep 250
+WshShell.SendKeys "javascript:document.getElementById{(}'up_button'{)}.click{(}{)};document.getElementById{(}'invest_now_button'{)}.click{(}{)};"
+WScript.Sleep 500
+WshShell.SendKeys "{ENTER}"

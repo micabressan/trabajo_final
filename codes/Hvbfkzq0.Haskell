@@ -1,0 +1,11 @@
+import FRP.Elerea.Simple
+import Control.Applicative
+import Control.Arrow (second)
+
+main = do
+  (str,strUpdater) <- do second (getLine>>=) <$> external ""
+  loop <- start $ return $ (=="q") <$> str
+  untilM_ (==True) $ strUpdater >> loop
+    where untilM_ p m = do
+            p' <- p <$> m
+            if p' then return () else untilM_ p m

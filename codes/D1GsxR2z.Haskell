@@ -1,0 +1,24 @@
+module UnicodeOperators where
+	(≥) :: Ord a => a -> a -> Bool
+	(≥) = (>=)
+	infix 4 ≥
+
+	(≤) :: Ord a => a -> a -> Bool
+	(≤) = (<=)
+	infix 4 ≤
+
+	(≠) :: Eq a => a -> a -> Bool
+	(≠) = (/=)
+	infix 4 ≠
+
+	(·) :: Num a => a -> a -> a
+	(·) = (*)
+	infixl 7 ·
+
+	(∧) :: Bool -> Bool -> Bool
+	(∧) = (&&)
+	infixr 3 ∧
+
+	(∨) :: Bool -> Bool -> Bool
+	(∨) = (||)
+	infixr 2 ∨

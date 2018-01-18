@@ -1,0 +1,7 @@
+seqDistance						:: MolSeq -> MolSeq -> Float
+seqDistance (MolSeq _ _ DNA) (MolSeq _ _ Protein)	= error "Type mismatch"
+seqDistance (MolSeq _ _ Protein) (MolSeq _ _ DNA)       = error "Type mismatch"
+seqDistance (MolSeq _ a _) (MolSeq _ b _)
+	| not (length a == length b)			= error "Wrong length"
+	| ((alpha a b)/(length a)) > 0.73		= 3.3		
+	| otherwise					= -(3/4)*(log(1-4*((alpha a b)/(length a))/3))

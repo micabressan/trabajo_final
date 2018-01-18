@@ -1,0 +1,63 @@
+module Bot.Parser.Parser where
+
+import           Data.Functor.Identity (Identity)
+import           Text.Parsec
+import qualified Text.Parsec.Expr      as Ex
+import           Text.Parsec.String    (Parser)
+import qualified Text.Parsec.Token     as Token
+
+langDef :: Token.LanguageDef ()
+langDef =
+  Token.LanguageDef
+  { Token.commentStart = ""
+  , Token.commentEnd = ""
+  , Token.commentLine = ""
+  , Token.nestedComments = False
+  , Token.identStart = oneOf ""
+  , Token.identLetter = oneOf ""
+  , Token.opStart = oneOf ""
+  , Token.opLetter = oneOf ""
+  , Token.reservedNames = []
+  , Token.reservedOpNames = []
+  , Token.caseSensitive = True
+  }
+
+data Expr
+  = Expr String
+  | Album Expr
+  | Performer Expr
+  | Title Expr
+  deriving (Show)
+
+lexer :: Token.TokenParser ()
+lexer = Token.makeTokenParser langDef
+
+whiteSpace = Token.whiteSpace lexer
+
+reservedOp :: String -> Parser ()
+reservedOp = Token.reservedOp lexer
+
+prefixOp :: String -> (a -> a) -> Ex.Operator String () Identity a
+prefixOp name label = Ex.Prefix (reservedOp name >> return label)
+
+table :: Ex.OperatorTable String () Identity Expr
+table = [[prefixOp ",,t" Title, prefixOp ",,a" Album, prefixOp ",,p" Performer]]
+
+expr :: Parser Expr
+expr = Ex.buildExpressionParser table factor
+
+factor :: Parser Expr
+factor = do
+  value <- Token.stringLiteral lexer
+  return (Expr value)
+
+content :: Parser a -> Parser a
+content parser = do
+  whiteSpace
+  parser
+
+parseExpr :: String -> Either ParseError [Expr]
+parseExpr s = parse (content $ many expr) "" s
+
+-- ",,a\"asdasd2\",,t\"jhkhjh\""
+-- [Album (Expr "asdasd2"),Title (Expr "jhkhjh")]

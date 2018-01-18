@@ -1,0 +1,28 @@
+use std::io;
+use std::io::Write;
+
+fn greet(person: &str) {
+    println!("Hello, {}!", person);
+}
+
+fn main() {
+    let mut input = String::new();
+
+    loop {
+        print!("Enter your name: ");
+        std::io::stdout().flush().unwrap();
+
+        match io::stdin().read_line(&mut input) {
+            Ok(_) => {
+                input = String::from(input.trim());
+                break
+            }
+            Err(error) => {
+                println!("error: {}", error);
+                continue
+            }
+        }
+    }
+
+    greet(&input[..]);
+}

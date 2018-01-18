@@ -1,0 +1,14 @@
+#[derive(Debug)]
+enum MyOptional<T>
+{
+    MyNone,
+    MySome(T),
+}
+
+
+fn main()
+{
+    println!("Hello world!");
+    let te = MyOptional::MySome(6);
+    println!("Value is: {:?}", te);
+}

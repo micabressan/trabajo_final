@@ -1,0 +1,9 @@
+makeMenu :: [(String, IO ())] -> IO Menu
+makeMenu pairs = do
+  menu <- menuNew
+  let withCoords = zip pairs [0..]
+  forM_ withCoords $ \row -> do
+    let ((name, act), pos) = row
+    item <- menuItemNewWithLabel name
+    menuAttach menu item 0 1 pos (pos + 1)
+  return menu

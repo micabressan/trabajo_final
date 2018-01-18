@@ -1,0 +1,13 @@
+module SumaFacts where
+
+sumaFacts :: Int -> Int -> Int
+fact :: Int -> Int
+sumatorioAaB :: Int -> Int -> Int
+
+sumatorioAaB a b = if a>b then sumatorioAaB b a
+	else (if b==a then fact a else (((fact b) + (sumatorioAaB a (b-1)))))
+
+fact 0 = 1
+fact n = n * (fact (n - 1))
+
+sumaFacts a b = sumatorioAaB a b

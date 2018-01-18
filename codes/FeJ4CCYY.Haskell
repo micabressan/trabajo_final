@@ -1,0 +1,16 @@
+data Foo a = MkFoo
+ 
+--I thought this would be possible with PolyKinds on
+:set -XPolyKinds
+:t MkFoo :: Foo Either
+ 
+-- I get this
+ 
+{-
+interactive>:1:14: error:
+    • Expecting two more arguments to ‘Either’
+      Expected a type, but ‘Either’ has kind ‘* -> * -> *’
+    • In the first argument of ‘Foo’, namely ‘Either’
+      In an expression type signature: Foo Either
+      In the expression: MkFoo :: Foo Either
+-}

@@ -1,0 +1,10 @@
+bconfig = {
+  maxBet: 5,
+  espera: 300,
+  toggleHilo: falso
+};
+ 
+ 
+hilo = 'hola';
+multiplicador = 2;
+rollDice = function () {

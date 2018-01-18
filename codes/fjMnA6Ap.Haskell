@@ -1,0 +1,196 @@
+{-# LANGUAGE DeriveFunctor #-}
+
+module Kata.BraceExpansion (expandBraces) where
+
+import Control.Applicative
+import Control.Arrow
+import Control.Monad
+import Data.Array (Ix(..), inRange)
+import Data.List
+import Data.List.Split
+import Data.Maybe
+
+expandBraces :: String -> [String]
+expandBraces = expandParsed . reverse . process
+
+expandParsed :: [Parse Char] -> [String]
+expandParsed [] = [[]]
+expandParsed (x:xs) =
+  case x of
+    ParseSimple s -> map (s ++) $ expandParsed xs
+    ParseGroup gr -> [g ++ s  | g <- expandGroup gr, s <- expandParsed xs]
+
+expandGroup :: Group Char -> [String]
+expandGroup [] = []
+expandGroup (End:rest) = expandGroup rest
+expandGroup (G g rest:restg) =
+  (liftA2 (++) (expandGroup g) (expandGroupItem rest)) ++ (expandGroup restg)
+expandGroup (S s rest:restg) =
+  (map (s ++) (expandGroupItem rest)) ++ (expandGroup restg)
+
+expandGroupItem :: GroupItem Char -> [String]
+expandGroupItem End = [[]]
+expandGroupItem (S s rest) = map (s ++) $ expandGroupItem rest
+expandGroupItem (G g rest) = liftA2 (++) (expandGroup g) (expandGroupItem rest)
+
+
+data Parse a
+  = ParseSimple [a]
+  | ParseGroup (Group a)
+  deriving (Show)
+
+type Group a = [GroupItem a]
+
+data GroupItem a
+  = End
+  | S [a]
+      (GroupItem a)
+  | G (Group a)
+      (GroupItem a)
+  deriving (Functor, Show)
+
+data Token
+  = Open !Int
+  | Close !Int
+  | Non !Char !Int
+  | Separator !Int
+  deriving (Eq, Show)
+
+biggestGroups :: Ix a => [(a, a)] -> [(a, a)]
+biggestGroups [] = []
+biggestGroups [y] = [y]
+biggestGroups (x:y:xs) =
+  if uncurry (&&) . (join (***)) (inRange x) $  y
+    then biggestGroups (x:xs)
+    else x : biggestGroups (y:xs)
+
+
+process :: String -> [Parse Char]
+process str =
+  let xs = convert str
+      matches = findMatches xs
+      bigs = biggestGroups matches
+  in cleanup $ foldr
+                (\(open, close) (list, ts) ->
+                   let before = takeWhile ((< open) . tokenindex) ts
+                       after = dropWhile ((<= close) . tokenindex) ts
+                       gr =
+                         takeWhile ((< close) . tokenindex) .
+                         dropWhile ((<= open) . tokenindex) $
+                         ts
+                       withins = withinGroups (open, close) matches
+                   in ( (ParseGroup $
+                         (map (fmap backToChar) $
+                          processGroup gr (delete (open, close) withins))) :
+                        ParseSimple (map backToChar before) : list
+                      , after))
+                ([], xs)
+                (reverse bigs)
+  where
+    cleanup (parsed, leftover) =
+      (ParseSimple $ map backToChar leftover) : parsed
+
+processGroup :: [Token] -> [(Int, Int)] -> Group Token
+processGroup ts bnds =
+  let separators =
+        mapMaybe
+          (\x ->
+             case isSep x of
+               Just i ->
+                 if any (`inRange` i) bnds
+                   then if null bnds
+                           then Just i
+                           else Nothing
+                   else Just i
+               Nothing -> Nothing)
+          ts
+      splits = splitWhen (flip elem separators . tokenindex) ts
+  in map (go End) splits
+  where
+    go b a =
+      if all isNon a
+        then S a b
+        else case find isOpen a of
+               Just (Open o) ->
+                 case snd <$> find ((== o) . fst) bnds of
+                   Just c ->
+                     case span ((< o) . tokenindex) a of
+                       (us, vs) ->
+                         case (second (drop 1) $ span ((< c) . tokenindex) (drop 1 vs)) of
+                           (uss, vss) ->
+                             let withins = delete (o, c) (withinGroups (o, c) bnds)
+                                 gr = processGroup uss withins
+                             in if null us
+                                   then (if null vss
+                                           then G gr b
+                                           else G gr (go b vss))
+                                   else if null vss
+                                           then S us (G gr b)
+                                           else S us (G gr (go b vss))
+                   _ -> undefined
+               _ -> undefined
+
+isOpen :: Token -> Bool
+isOpen (Open _) = True
+isOpen _ = False
+
+isNon :: Token -> Bool
+isNon (Non _ _) = True
+isNon _ = False
+
+isSep :: Token -> Maybe Int
+isSep (Separator i) = Just i
+isSep _ = Nothing
+
+tokenindex :: Token -> Int
+tokenindex (Open i) = i
+tokenindex (Close i) = i
+tokenindex (Non _ i) = i
+tokenindex (Separator i) = i
+
+backToChar :: Token -> Char
+backToChar t =
+  case t of
+    Non c _ -> c
+    Separator _ -> ','
+    _ -> error "backToChar: You should not get here"
+
+stripNon :: Token -> Char
+stripNon (Non c _) = c
+stripNon _ = error "stripNon:error"
+
+withinGroups :: Ix a => (a, a) -> [(a, a)] -> [(a, a)]
+withinGroups x xs = filter (uncurry (&&) . (join (***)) (inRange x)) xs
+
+convert :: String -> [Token]
+convert =
+  snd .
+  mapAccumL
+    (\i c ->
+       case (c == '{', c == '}') of
+         (True, False) -> (succ i, (Open i))
+         (False, True) -> (succ i, (Close i))
+         _ ->
+           if c == ','
+             then (succ i, Separator i)
+             else (succ i, Non c i))
+    0
+
+findMatches :: [Token] -> [(Int, Int)]
+findMatches xs =
+  catMaybes [findMatchingParen x (drop 1 $ dropWhile (/= x) xs) | x <- xs]
+
+findMatchingParen :: Token -> [Token] -> Maybe (Int, Int)
+findMatchingParen (Open open) xs = go (0 :: Int) xs
+  where
+    go _ [] = Nothing
+    go i (y:ys) =
+      case y of
+        Non _ _ -> go i ys
+        Separator _ -> go i ys
+        Open _ -> go (i + 1) ys
+        (Close close) ->
+          if i == 0
+            then Just (open, close)
+            else go (pred i) ys
+findMatchingParen _ _ = Nothing

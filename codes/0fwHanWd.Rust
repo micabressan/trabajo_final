@@ -1,0 +1,18 @@
+pub struct SoundSys;
+impl<'a> System<'a> for SoundSys {
+    type SystemData = (
+        WriteStorage<'a, SoundComp>,
+    );
+
+    fn run(&mut self, data: Self::SystemData) {
+        let mut sound_comp = data;
+
+        for s in (&mut sound_comp).join() {
+            for sound_to_play in &s.to_play {
+                s.sounds[&sound_to_play].play().unwrap();
+            }
+
+            s.to_play = Vec::new();
+        }
+    }
+}
