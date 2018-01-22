@@ -1,0 +1,90 @@
+##
+## LeoFS Docs
+##
+## Note:
+##   - Dependencies:
+##       - mkdocs-material (pip install mkdocs-material)
+##       - pygments (pip install pygments)
+##       - pymdown-extensions (pip install pymdown-extensions)
+##
+site_name: LeoFS Documentation
+repo_url: https://github.com/leo-project/leofs
+repo_name: 'GitHub'
+site_author: LeoProject
+site_favicon: favicon.ico
+copyright: (c) 2012-2017 LeoProject. All rights reserved.
+site_description: LeoProject makes LeoFS, which is an open source distributed object storage system and a highly available, distributed, eventually consistent storage system. LeoFS is supporting the following features:Multi-protocol Support - S3-API, REST-API and NFS v3, Large Object Support, Multi Data Center Replication and others.
+
+google_analytics: ['UA-5301881-3', 'leo-project.net']
+
+docs_dir: 'docs'
+theme: 'material'
+markdown_extensions:
+    - admonition
+    - codehilite(linenums=true)
+    - footnotes
+    - meta
+    - toc(permalink=true)
+    - pymdownx.betterem(smart_enable=all)
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.tasklist(custom_checkbox=true)
+    - pymdownx.tilde
+
+pages:
+- Introduction: 'index.md'
+- What's New?: 'whats_new.md'
+- Getting Started:
+    - Quick Installation and Setup: 'installation/quick.md'
+    - Building a LeoFS' cluster with Ansible: installation/cluster.md
+- Concept and Architecture:
+    - LeoFS' Architecture: 'architecture/README.md'
+    - LeoGateway's Architecture: 'architecture/leo_gateway.md'
+    - LeoStorage's Architecture: 'architecture/leo_storage.md'
+    - LeoManager's Architecture: 'architecture/leo_manager.md'
+- For Administrators:
+    - Setup:
+        - Planning for Production: 'admin/setup/planning_for_production.md'
+        - Supported Platforms: 'admin/setup/supported_platforms.md'
+        - Hardware Requirements: 'admin/setup/hardware_requirements.md'
+        - Network Configurations: 'admin/setup/network_config.md'
+        - Load Balancing Configuration: 'admin/system_admin/load_balancing.md'
+    - Settings:
+        - Cluster Settings: 'admin/settings/cluster.md'
+        - Environment Configuration: 'admin/settings/environment_config.md'
+        - LeoManager Settings: 'admin/settings/leo_manager.md'
+        - LeoStorage Settings: 'admin/settings/leo_storage.md'
+        - LeoGateway Settings: 'admin/settings/leo_gateway.md'
+    - Interface:
+        - S3-API: 'admin/protocols/s3.md'
+        - REST-API: 'admin/protocols/rest.md'
+        - NFS v3: 'admin/protocols/nfs_v3.md'
+    - System Operations:
+        - Operation Flow: 'admin/system_operations/flow.md'
+        - Systemd Services: 'admin/system_operations/systemd.md'
+        - S3-API related Operations: 'admin/system_operations/s3.md'
+        - Cluster Operations: 'admin/system_operations/cluster.md'
+        - Data Operations: 'admin/system_operations/data.md'
+        - Multi Data Center Replication: 'admin/system_operations/multi_dc_replication.md'
+        ## - Others: 'admin/system_operations/others.md'
+    - System Administration:
+        - Log Management: 'admin/system_admin/log_management.md'
+        - Persistent Configuration: 'admin/system_admin/persistent_configuration.md'
+        ## - LeoManager's Maintenance: 'admin/system_admin/leo_manager.md'
+        ## - System Monitoring: 'admin/system_admin/monitoring.md'
+        - System Migration: 'admin/system_admin/migration.md'
+        ## - Backup and Restore: 'admin/system_admin/backup_and_restore.md'
+        - System Integration: 'admin/system_admin/integration.md'
+        - Multiple Node Instances: 'admin/system_admin/multiple_nodes.md'
+    - Index of LeoFS' Commands: 'admin/index_of_commands.md'
+    ## - Troubleshooting: 'admin/troubleshooting.md'
+- Benchmark: 'benchmark/README.md'
+- FAQ:
+    - LeoFS Fundamentals: 'faq/fundamentals.md'
+    - LeoFS Limits: 'faq/limits.md'
+    - LeoFS Administration: 'faq/administration.md'
+    - LeoFS Clients: 'faq/client.md'
+- Production Checklist: 'production_checklist/README.md'

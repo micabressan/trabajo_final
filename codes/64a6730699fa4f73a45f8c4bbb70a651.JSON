@@ -1,0 +1,73 @@
+{
+  "initial:before": {
+    "loopback#favicon": {
+      "params": "$!../public/favicon.ico"
+    },
+    "loopback#static": {
+      "params": [
+        "$!../public",
+        {
+          "maxAge": "86400000"
+        }
+      ]
+    }
+  },
+  "initial": {
+    "compression": {},
+    "morgan": {
+      "params": ":status :method :response-time ms - :url"
+    },
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    }
+  },
+  "session": {
+    "./middlewares/sessions.js": {}
+  },
+  "auth:before": {
+    "./middlewares/add-return-to": {}
+  },
+  "parse": {
+    "body-parser#json": {},
+    "body-parser#urlencoded": {
+      "params": {
+        "extended": true
+      }
+    },
+    "method-override": {},
+    "./middlewares/cookie-parser": {}
+  },
+  "parse:after": {
+    "./middlewares/validator": {}
+  },
+  "routes:before": {
+    "./middlewares/express-extensions": {},
+    "express-flash": {},
+    "helmet#xssFilter": {},
+    "helmet#noSniff": {},
+    "helmet#frameguard": {},
+    "./middlewares/csurf": {},
+    "./middlewares/constant-headers": {},
+    "./middlewares/csp": {},
+    "./middlewares/jade-helpers": {},
+    "./middlewares/migrate-completed-challenges": {},
+    "./middlewares/add-lang": {},
+    "./middlewares/flash-cheaters": {},
+    "./middlewares/passport-login": {}
+  },
+  "files": {},
+  "final:after": {
+    "./middlewares/error-reporter": {},
+    "./middlewares/error-handlers": {},
+    "strong-error-handler": {
+      "params": {
+        "debug": false,
+        "log": true
+      }
+    }
+  }
+}

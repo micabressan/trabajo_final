@@ -74,7 +74,6 @@ def multiline_comment(text):
 
 def move_files(origin_folder, destination_folder, language, extension):
 
-
     destination = os.path.join(destination_folder, language)
     if not os.path.exists(destination):
         os.makedirs(destination)
@@ -85,12 +84,89 @@ def move_files(origin_folder, destination_folder, language, extension):
 
     for origin in files_to_move:
         if os.stat(origin).st_size > 1024:
-            file_name = uuid.uuid4().hex + '.' + extension
+            file_name = uuid.uuid4().hex + '.' + language
             shutil.move(origin, os.path.join(destination,file_name))
 
 
 if __name__ == '__main__':
-    move_files('/home/alexis/Descargas',
-               '/home/alexis/Escritorio/trabajo_final/language',
-               'Python',
-               'py')
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Markdown',
+               'md')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'JSON',
+               'json')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'YAML',
+               'yml')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'CSS',
+               'css')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Ruby',
+               'rb')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'PHP',
+               'php')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Go',
+               'go')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'C++',
+               'cpp')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Erlang',
+               'hrl')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Groovy',
+               'groovy')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'D',
+               'd')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'VBScript',
+               'vbs')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Clojure',
+               'clj')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Rust',
+               'rs')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'Haskell',
+               'hs')
+
+    move_files('/home/mica/Descargas',
+               '/home/mica/Escritorio/codes',
+               'SQL',
+               'sql')
+
+    languages_file_frecuency('codes')

@@ -1,0 +1,2636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE doc SYSTEM "doc.dtd">
+<doc title="{[project]} User Guide" subtitle="{[user-guide-subtitle]} / {[postgres]} {[pg-version]}">
+    <description>The {[project]} User Guide demonstrates how to quickly and easily setup {[project]} for your {[postgres]} database. Step-by-step instructions lead the user through all the important features of the fastest, most reliable {[postgres]} backup and restore solution.</description>
+
+    <variable-list>
+        <!-- Variables used by the rest of the script -->
+        <variable key="user-guide-subtitle" keyword="default">Debian &amp; Ubuntu</variable>
+        <variable key="user-guide-subtitle" keyword="co6">RHEL &amp; CentOS 6</variable>
+
+        <variable key="user-guide-os" keyword="default">Debian/Ubuntu</variable>
+        <variable key="user-guide-os" keyword="co6">RHEL/CentOS 6</variable>
+
+        <variable key="pgbackrest-base-dir" eval="y">
+            use File::Basename qw(dirname);
+            use Cwd qw(abs_path);
+
+            dirname(dirname(abs_path($0)));
+        </variable>
+
+        <variable key="pg-version" keyword="default">9.4</variable>
+        <variable key="pg-version" keyword="co6">9.5</variable>
+        <variable key="pg-version-upgrade" keyword="default">9.5</variable>
+        <variable key="pg-version-upgrade" keyword="co6">9.6</variable>
+
+        <variable key="pg-bin-path" keyword="default">/usr/lib/postgresql/{[pg-version]}/bin</variable>
+        <variable key="pg-bin-path" keyword="co6">/usr/pgsql-{[pg-version]}/bin</variable>
+
+        <variable key="pg-bin-upgrade-path" keyword="default">/usr/lib/postgresql/{[pg-version-upgrade]}/bin</variable>
+        <variable key="pg-bin-upgrade-path" keyword="co6">/usr/pgsql-{[pg-version-upgrade]}/bin</variable>
+
+        <variable key="pg-home-path">/home/postgres</variable>
+
+        <variable key="perl-lib-path">/usr/share/perl5</variable>
+        <variable key="perl-bin-path">/usr/bin</variable>
+
+        <variable key="backrest-repo-path">/var/lib/pgbackrest</variable>
+        <variable key="backrest-repo-cipher-type">aes-256-cbc</variable>
+        <variable key="backrest-repo-cipher-pass">zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO</variable>
+        <variable key="br-user">backrest</variable>
+        <variable key="br-group">{[br-user]}</variable>
+        <variable key="br-home-path">/home/{[br-user]}</variable>
+
+        <variable key="postgres-cluster-demo">demo</variable>
+        <variable key="backrest-config-demo">/etc/{[project-exe]}.conf</variable>
+
+        <variable key="db-path-default" keyword="default">/var/lib/postgresql/[version]/[cluster]</variable>
+        <variable key="db-path-default" keyword="co6">/var/lib/pgsql/[version]/data</variable>
+
+        <variable key="db-path" keyword="default">/var/lib/postgresql/{[pg-version]}/{[postgres-cluster-demo]}</variable>
+        <variable key="db-path" keyword="co6">/var/lib/pgsql/{[pg-version]}/data</variable>
+
+        <variable key="db-path-upgrade" keyword="default">/var/lib/postgresql/{[pg-version-upgrade]}/{[postgres-cluster-demo]}</variable>
+        <variable key="db-path-upgrade" keyword="co6">/var/lib/pgsql/{[pg-version-upgrade]}/data</variable>
+
+        <variable key="spool-path">/var/spool/pgbackrest</variable>
+
+        <variable key="postgres-install-upgrade" keyword="default">apt-get install postgresql-{[pg-version-upgrade]}</variable>
+        <variable key="postgres-install-upgrade" keyword="co6">yum install postgresql96-server</variable>
+
+        <variable key="postgres-config-demo" keyword="default">/etc/postgresql/{[pg-version]}/{[postgres-cluster-demo]}/postgresql.conf</variable>
+        <variable key="postgres-config-demo" keyword="co6">{[db-path]}/postgresql.conf</variable>
+
+        <variable key="postgres-config-demo-upgrade" keyword="default">/etc/postgresql/{[pg-version-upgrade]}/{[postgres-cluster-demo]}/postgresql.conf</variable>
+        <variable key="postgres-config-demo-upgrade" keyword="co6">{[db-path-upgrade]}/postgresql.conf</variable>
+
+        <variable key="postgres-hba-demo" keyword="default">/etc/postgresql/{[pg-version]}/{[postgres-cluster-demo]}/pg_hba.conf</variable>
+        <variable key="postgres-hba-demo" keyword="co6">{[db-path]}/pg_hba.conf</variable>
+
+        <variable key="postgres-hba-demo-upgrade" keyword="default">/etc/postgresql/{[pg-version-upgrade]}/{[postgres-cluster-demo]}/pg_hba.conf</variable>
+        <variable key="postgres-hba-demo-upgrade" keyword="co6">{[db-path-upgrade]}/pg_hba.conf</variable>
+
+        <variable key="postgres-pgpass">{[pg-home-path]}/.pgpass</variable>
+
+        <variable key="postgres-log-demo" keyword="default">/var/log/postgresql/postgresql-{[pg-version]}-{[postgres-cluster-demo]}.log</variable>
+        <variable key="postgres-log-demo" keyword="co6">{[db-path]}/pg_log/postgresql.log</variable>
+
+        <variable key="postgres-log-pgstartup-demo" keyword="co6">/var/lib/pgsql/{[pg-version]}/pgstartup.log</variable>
+
+        <variable key="postgres-recovery-demo" keyword="default">{[db-path]}/recovery.conf</variable>
+        <variable key="postgres-recovery-demo" keyword="co6">{[db-path]}/recovery.conf</variable>
+
+        <!-- Hosts -->
+        <variable key="host-os" keyword="default">u16</variable>
+        <variable key="host-os" keyword="co6">co6</variable>
+
+        <variable key="host-user" eval="y">use English; getpwuid($UID) eq 'root' ? 'ubuntu' : getpwuid($UID) . ''</variable>
+        <variable key="host-mount">{[pgbackrest-base-dir]}:/backrest</variable>
+        <variable key="image-repo">pgbackrest/test</variable>
+
+        <variable key="host-s3-server">s3-server</variable>
+
+        <variable key="host-db-primary">db-primary</variable>
+        <variable key="host-db-primary-user">{[host-user]}</variable>
+        <variable key="host-db-primary-image">{[image-repo]}:{[host-os]}-base</variable>
+        <variable key="host-db-primary-mount">{[host-mount]}</variable>
+
+        <variable key="host-db-standby">db-standby</variable>
+        <variable key="host-db-standby-user">{[host-db-primary-user]}</variable>
+        <variable key="host-db-standby-image">{[host-db-primary-image]}</variable>
+        <variable key="host-db-standby-mount">{[host-mount]}</variable>
+
+        <variable key="host-backup">backup</variable>
+        <variable key="host-backup-user">{[host-user]}</variable>
+        <variable key="host-backup-image">{[image-repo]}:{[host-os]}-base</variable>
+        <variable key="host-backup-mount">{[host-mount]}</variable>
+
+        <!-- Commands for various operations -->
+        <variable key="cmd-backup-last">ls -1 {[backrest-repo-path]}/backup/demo | tail -5 | head -1</variable>
+
+        <!-- Data used to demonstrate backup/restore operations -->
+        <variable key="test-table-data">Important Data</variable>
+
+        <!-- Database cluster commmands -->
+        <variable key="db-cluster-wait">sleep 2</variable>
+
+        <variable key="db-cluster-create" keyword="default">pg_createcluster {[pg-version]} {[postgres-cluster-demo]}</variable>
+        <variable key="db-cluster-create" keyword="co6">service postgresql-{[pg-version]} initdb</variable>
+
+        <variable key="db-cluster-create-upgrade" keyword="default">pg_createcluster {[pg-version-upgrade]} {[postgres-cluster-demo]}</variable>
+
+        <variable key="db-cluster-start" keyword="default">pg_ctlcluster {[pg-version]} {[postgres-cluster-demo]} start</variable>
+        <variable key="db-cluster-start" keyword="co6">service postgresql-{[pg-version]} start</variable>
+
+        <variable key="db-cluster-start-upgrade" keyword="default">pg_ctlcluster {[pg-version-upgrade]} {[postgres-cluster-demo]} start</variable>
+        <variable key="db-cluster-start-upgrade" keyword="co6">service postgresql-{[pg-version-upgrade]} start</variable>
+
+        <variable key="db-cluster-stop" keyword="default">pg_ctlcluster {[pg-version]} {[postgres-cluster-demo]} stop</variable>
+        <variable key="db-cluster-stop" keyword="co6">service postgresql-{[pg-version]} stop</variable>
+
+        <variable key="db-cluster-restart" keyword="default">pg_ctlcluster {[pg-version]} {[postgres-cluster-demo]} restart</variable>
+        <variable key="db-cluster-restart" keyword="co6">service postgresql-{[pg-version]} restart</variable>
+
+        <variable key="db-cluster-reload" keyword="default">pg_ctlcluster {[pg-version]} {[postgres-cluster-demo]} reload</variable>
+        <variable key="db-cluster-reload" keyword="co6">service postgresql-{[pg-version]} reload</variable>
+
+        <variable key="db-cluster-check-upgrade" keyword="default">pg_lsclusters</variable>
+        <variable key="db-cluster-check-upgrade" keyword="co6">service postgresql-{[pg-version-upgrade]} status</variable>
+    </variable-list>
+
+    <!-- ======================================================================================================================= -->
+    <block-define id="setup-ssh-intro">
+        <p><backrest/> requires trusted (no password) SSH to enable communication between the hosts.</p>
+    </block-define>
+
+    <block-define id="setup-ssh">
+        <execute-list host="{[setup-ssh-host]}">
+            <title>Create <host>{[setup-ssh-host]}</host> host key pair</title>
+
+            <execute user="postgres">
+                <exe-cmd>mkdir -m 750 -p {[pg-home-path]}/.ssh</exe-cmd>
+            </execute>
+            <execute user="postgres">
+                <exe-cmd>ssh-keygen -f {[pg-home-path]}/.ssh/id_rsa -t rsa -b 4096 -N ""</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Exchange keys between <host>{[host-backup]}</host> and <host>{[setup-ssh-host]}</host>.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Copy <host>{[setup-ssh-host]}</host> public key to <host>{[host-backup]}</host></title>
+
+            <execute user="root" err-suppress="y">
+                <exe-cmd>ssh root@{[setup-ssh-host]} cat {[pg-home-path]}/.ssh/id_rsa.pub |
+                    sudo -u backrest tee -a {[br-home-path]}/.ssh/authorized_keys</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[setup-ssh-host]}">
+            <title>Copy <host>{[host-backup]}</host> public key to <host>{[setup-ssh-host]}</host></title>
+
+            <execute user="root" err-suppress="y">
+                <exe-cmd>ssh root@{[host-backup]} cat {[br-home-path]}/.ssh/id_rsa.pub |
+                    sudo -u postgres tee -a {[pg-home-path]}/.ssh/authorized_keys</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Test that connections can be made from <host>{[host-backup]}</host> to <host>{[setup-ssh-host]}</host> and vice versa.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Test connection from <host>{[host-backup]}</host> to <host>{[setup-ssh-host]}</host></title>
+
+            <execute user="backrest" err-suppress="y">
+                <exe-cmd>ssh postgres@{[setup-ssh-host]}</exe-cmd>
+                <exe-cmd-extra>-o StrictHostKeyChecking=no ls</exe-cmd-extra>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[setup-ssh-host]}">
+            <title>Test connection from <host>{[setup-ssh-host]}</host> to <host>{[host-backup]}</host></title>
+
+            <execute user="postgres" err-suppress="y">
+                <exe-cmd>ssh backrest@{[host-backup]}</exe-cmd>
+                <exe-cmd-extra>-o StrictHostKeyChecking=no ls</exe-cmd-extra>
+            </execute>
+        </execute-list>
+    </block-define>
+
+    <!-- ======================================================================================================================= -->
+    <block-define id="br-install">
+        <p keyword="default"><backrest/> is written in Perl which is included with {[user-guide-os]} by default.  Some additional modules must also be installed but they are available as standard packages.</p>
+
+        <execute-list host="{[br-install-host]}" keyword="default">
+            <title>Install required Perl packages</title>
+
+            <execute user="root">
+                <exe-cmd>apt-get install libdbd-pg-perl libio-socket-ssl-perl libxml-libxml-perl</exe-cmd>
+                <exe-cmd-extra>-y 2>&amp;1</exe-cmd-extra>
+            </execute>
+        </execute-list>
+
+        <p keyword="co6"><backrest/> is written in Perl which is not included with {[user-guide-os]} by default, however all required modules are available as standard packages.</p>
+
+        <execute-list host="{[br-install-host]}" keyword="co6">
+            <title>Install required Perl packages</title>
+
+            <execute user="root">
+                <exe-cmd>yum install perl perl-Time-HiRes perl-parent perl-JSON
+                    perl-Digest-SHA perl-DBD-Pg perl-XML-LibXML perl-IO-Socket-SSL</exe-cmd>
+                <exe-cmd-extra>-y</exe-cmd-extra>
+            </execute>
+        </execute-list>
+
+        <p keyword="default">{[user-guide-os]} packages for <backrest/> are available at <link url="https://www.postgresql.org/download/linux/ubuntu/">apt.postgresql.org</link>.  If they are not provided for your distribution/version it is easy to download the source and install manually.</p>
+
+        <p keyword="co6">{[user-guide-os]} packages for <backrest/> are available from <link url="{[crunchy-url-base]}">Crunchy Data</link> or <link url="http://yum.postgresql.org">yum.postgresql.org</link>, but it is also easy to download the source and install manually.</p>
+
+        <execute-list host="{[br-install-host]}">
+            <title>Download version <id>{[version]}</id> of <backrest/></title>
+
+            <!-- This is shown to the user but never actually run for the very good reason that the release is not available before the documentation is built -->
+            <execute user="root" skip="y">
+                <exe-cmd>wget -q -O -
+                    {[github-url-release]}/{[version]}.tar.gz |
+                    sudo tar zx -C /root</exe-cmd>
+            </execute>
+
+            <!-- These commands simulate what the command above would do if it could be run -->
+            <execute user="root" show="n">
+                <exe-cmd>mkdir /root/pgbackrest-release-{[version]}</exe-cmd>
+            </execute>
+            <execute user="root" show="n">
+                <exe-cmd>cp -r /backrest/build /root/pgbackrest-release-{[version]}</exe-cmd>
+            </execute>
+            <execute user="root" show="n">
+                <exe-cmd>cp -r /backrest/lib /root/pgbackrest-release-{[version]}</exe-cmd>
+            </execute>
+            <execute user="root" show="n">
+                <exe-cmd>cp -r /backrest/libc /root/pgbackrest-release-{[version]}</exe-cmd>
+            </execute>
+            <execute user="root" show="n">
+                <exe-cmd>cp -r /backrest/src /root/pgbackrest-release-{[version]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[br-install-host]}">
+            <title>Install <backrest/></title>
+
+            <execute user="root">
+                <exe-cmd>cp -r /root/pgbackrest-release-{[version]}/lib/pgBackRest
+                    {[perl-lib-path]}</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>find {[perl-lib-path]}/pgBackRest -type f -exec chmod 644 {} +</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>find {[perl-lib-path]}/pgBackRest -type d -exec chmod 755 {} +</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>mkdir -m 770 /var/log/pgbackrest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>chown {[br-install-user]}:{[br-install-group]} /var/log/pgbackrest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>touch {[backrest-config-demo]}</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>chmod 640 {[backrest-config-demo]}</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>chown {[br-install-user]}:{[br-install-group]} {[backrest-config-demo]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <!-- LibC installation -->
+        <p><backrest/> includes a companion C library that enhances performance and enables the `checksum-page` option and encryption.  Pre-built packages are generally a better option than building the C library manually but the steps required are given below for completeness.  Depending on the distribution a number of packages may be required which will not be enumerated here.</p>
+
+        <execute-list host="{[br-install-host]}">
+            <title>Build and Install C Library</title>
+
+            <execute user="root">
+                <exe-cmd>sh -c 'cd /root/pgbackrest-release-{[version]}/libc &amp;&amp;
+                    perl Makefile.PL INSTALLMAN1DIR=none INSTALLMAN3DIR=none'</exe-cmd>
+            </execute>
+            <execute user="root" err-suppress="y">
+                <exe-cmd>make -C /root/pgbackrest-release-{[version]}/libc test</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>make -C /root/pgbackrest-release-{[version]}/libc install</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <!-- Bin installation -->
+        <p>Although most of <backrest/> is written in Perl, the main executable is written in C.  This allows certain time-critical commands (like async <cmd>archive-push</cmd>) to run more quickly.</p>
+
+        <execute-list host="{[br-install-host]}">
+            <title>Build and Install Binary</title>
+
+            <execute user="root" err-suppress="y">
+                <exe-cmd>make -C /root/pgbackrest-release-{[version]}/src</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>make -C /root/pgbackrest-release-{[version]}/src install</exe-cmd>
+            </execute>
+        </execute-list>
+    </block-define>
+
+    <block-define id="br-install-repo">
+        <execute-list host="{[br-install-host]}">
+            <title>Create the <backrest/> repository</title>
+
+            <execute user="root">
+                <exe-cmd>mkdir {[backrest-repo-path]}</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>chmod 750 {[backrest-repo-path]}</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>chown {[br-install-user]}:{[br-install-group]} {[backrest-repo-path]}</exe-cmd>
+            </execute>
+        </execute-list>
+    </block-define>
+
+    <!-- SECTION => INTRODUCTION -->
+    <section id="introduction">
+        <title>Introduction</title>
+
+        <p>This user guide is intended to be followed sequentially from beginning to end &amp;mdash; each section depends on the last.  For example, the <link section="/backup">Backup</link> section relies on setup that is performed in the <link section="/quickstart">Quick Start</link> section.  Once <backrest/> is up and running then skipping around is possible but following the user guide in order is recommended the first time through.</p>
+
+        <p>Although the examples are targeted at {[user-guide-os]} and <postgres/> {[pg-version]}, it should be fairly easy to apply this guide to any Unix distribution and <postgres/> version. Note that only 64-bit distributions are currently supported due to 64-bit operations in the Perl code.  The only OS-specific commands are those to create, start, stop, and drop <postgres/> clusters.  The <backrest/> commands will be the same on any Unix system though the locations to install Perl libraries and executables may vary.
+
+        Configuration information and documentation for PostgreSQL can be found in the <postgres/> <link url='http://www.postgresql.org/docs/{[pg-version]}/static/index.html'>Manual</link>.</p>
+
+        <p>A somewhat novel approach is taken to documentation in this user guide.  Each command is run on a virtual machine when the documentation is built from the XML source.  This means you can have a high confidence that the commands work correctly in the order presented.  Output is captured and displayed below the command when appropriate.  If the output is not included it is because it was deemed not relevant or was considered a distraction from the narrative.</p>
+
+        <p>All commands are intended to be run as an unprivileged user that has sudo privileges for both the <user>root</user> and <user>postgres</user> users.  It's also possible to run the commands directly as their respective users without modification and in that case the <cmd>sudo</cmd> commands can be stripped off.</p>
+    </section>
+
+    <!-- SECTION => CONCEPTS -->
+    <section id="concept">
+        <title>Concepts</title>
+
+        <p>The following concepts are defined as they are relevant to <backrest/>, <postgres/>, and this user guide.</p>
+
+        <!-- SECTION => CONCEPTS - BACKUP -->
+        <section id="backup">
+            <title>Backup</title>
+
+            <p>A backup is a consistent copy of a database cluster that can be restored to recover from a hardware failure, to perform Point-In-Time Recovery, or to bring up a new standby.</p>
+
+            <p><b>Full Backup</b>: <backrest/> copies the entire contents of the database cluster to the backup server. The first backup of the database cluster is always a Full Backup. <backrest/> is always able to restore a full backup directly. The full backup does not depend on any files outside of the full backup for consistency.</p>
+
+            <p><b>Differential Backup</b>: <backrest/> copies only those database cluster files that have changed since the last full backup. <backrest/> restores a differential backup by copying all of the files in the chosen differential backup and the appropriate unchanged files from the previous full backup. The advantage of a differential backup is that it requires less disk space than a full backup, however, the differential backup and the full backup must both be valid to restore the differential backup.</p>
+
+            <p><b>Incremental Backup</b>: <backrest/> copies only those database cluster files that have changed since the last backup (which can be another incremental backup, a differential backup, or a full backup). As an incremental backup only includes those files changed since the prior backup, they are generally much smaller than full or differential backups. As with the differential backup, the incremental backup depends on other backups to be valid to restore the incremental backup. Since the incremental backup includes only those files since the last backup, all prior incremental backups back to the prior differential, the prior differential backup, and the prior full backup must all be valid to perform a restore of the incremental backup. If no differential backup exists then all prior incremental backups back to the prior full backup, which must exist, and the full backup itself must be valid to restore the incremental backup.</p>
+        </section>
+
+        <!-- SECTION => CONCEPTS - RESTORE -->
+        <section id="restore">
+            <title>Restore</title>
+
+            <p>A restore is the act of copying a backup to a system where it will be started as a live database cluster.  A restore requires the backup files and one or more WAL segments in order to work correctly.</p>
+        </section>
+
+        <!-- SECTION => CONCEPTS - WAL -->
+        <section id="wal">
+            <title>Write Ahead Log (WAL)</title>
+
+            <p>WAL is the mechanism that <postgres/> uses to ensure that no committed changes are lost. Transactions are written sequentially to the WAL and a transaction is considered to be committed when those writes are flushed to disk. Afterwards, a background process writes the changes into the main database cluster files (also known as the heap). In the event of a crash, the WAL is replayed to make the database consistent.</p>
+
+            <p>WAL is conceptually infinite but in practice is broken up into individual 16MB files called segments.  WAL segments follow the naming convention <id>0000000100000A1E000000FE</id> where the first 8 hexadecimal digits represent the timeline and the next 16 digits are the logical sequence number (LSN).</p>
+
+        </section>
+
+        <!-- SECTION => CONCEPTS - ENCRYPTION -->
+        <section id="encryption">
+            <title>Encryption</title>
+
+            <p>Encryption is the process of converting data into a format that is unrecognizable unless the appropriate password (also referred to as passphrase) is provided.</p>
+
+            <p><backrest/> will encrypt the repository based on a user-provided password, thereby preventing unauthorized access to data stored within the repository.</p>
+        </section>
+    </section>
+
+    <!-- SECTION => INSTALLATION -->
+    <section id="installation">
+        <title>Installation</title>
+
+        <!-- Create S3 server first to allow it time to boot before being used -->
+        <host-add name="{[host-s3-server]}" user="root" image="{[image-repo]}:{[host-os]}-s3-server" os="{[host-os]}"/>
+
+        <p>A new host named <host>db-primary</host> is created to contain the demo cluster and run <backrest/> examples.</p>
+
+        <host-add name="{[host-db-primary]}" user="{[host-db-primary-user]}" image="{[host-db-primary-image]}" os="{[host-os]}" mount="{[host-db-primary-mount]}"/>
+
+        <p>If <backrest/> has been installed before it's best to be sure that no prior copies of it are still installed.  Depending on how old the version of pgBackRest is it may have been installed in a few different locations.  The following commands will remove all prior versions of pgBackRest.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Remove prior <backrest/> installations</title>
+
+            <execute user="root">
+                <exe-cmd>rm -f /usr/bin/pgbackrest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>rm -f /usr/bin/pg_backrest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>rm -rf /usr/lib/perl5/BackRest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>rm -rf {[perl-lib-path]}/BackRest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>rm -rf /usr/lib/perl5/pgBackRest</exe-cmd>
+            </execute>
+            <execute user="root">
+                <exe-cmd>rm -rf {[perl-lib-path]}/pgBackRest</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <block id="br-install">
+            <block-variable-replace key="br-install-host">{[host-db-primary]}</block-variable-replace>
+            <block-variable-replace key="br-install-user">postgres</block-variable-replace>
+            <block-variable-replace key="br-install-group">postgres</block-variable-replace>
+        </block>
+
+        <p><backrest/> should now be properly installed but it is best to check.  If any dependencies were missed then you will get an error when running <backrest/> from the command line.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Make sure the installation worked</title>
+
+            <execute output="y" filter="n">
+                <exe-cmd>{[project-exe]}</exe-cmd>
+            </execute>
+        </execute-list>
+    </section>
+
+    <!-- SECTION => QUICKSTART -->
+    <section id="quickstart">
+        <title>Quick Start</title>
+
+        <p>The Quick Start section will cover basic configuration of <backrest/> and <postgres/> and introduce the <cmd>backup</cmd>, <cmd>restore</cmd>, and <cmd>info</cmd> commands.</p>
+
+        <!-- SECTION => QUICKSTART - SETUP DEMO CLUSTER -->
+        <section id="setup-demo-cluster">
+            <title>Setup Demo Cluster</title>
+
+            <p>Creating the demo cluster is optional but is strongly recommended, especially for new users, since the example commands in the user guide reference the demo cluster; the examples assume the demo cluster is running on the default port (i.e. 5432). The cluster will not be started until a later section because there is still some configuration to do.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create the demo cluster</title>
+
+                <execute user="postgres">
+                    <exe-cmd>
+                        {[pg-bin-path]}/initdb
+                            -D {[db-path]} -k -A peer</exe-cmd>
+                </execute>
+
+                <execute keyword="default" user="root" output="y" filter="n">
+                    <exe-cmd>{[db-cluster-create]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>By default <postgres/> will only accept local connections.  The examples in this guide will require connections from other servers so <pg-option>listen_addresses</pg-option> is configured to listen on all interfaces.  This may not be appropriate for secure installations.</p>
+
+            <postgres-config host="{[host-db-primary]}" file="{[postgres-config-demo]}">
+                <title>Set <pg-option>listen_addresses</pg-option></title>
+
+                <postgres-config-option key="listen_addresses">'*'</postgres-config-option>
+            </postgres-config>
+
+            <p>For demonstration purposes the <pg-option>log_line_prefix</pg-option> setting will be minimally configured.  This keeps the log output as brief as possible to better illustrate important information.</p>
+
+            <postgres-config host="{[host-db-primary]}" file="{[postgres-config-demo]}">
+                <title>Set <pg-option>log_line_prefix</pg-option></title>
+
+                <postgres-config-option key="log_line_prefix">''</postgres-config-option>
+            </postgres-config>
+
+            <p keyword="co6">By default {[user-guide-os]} includes the day of the week in the log filename.  This makes automating the user guide a bit more complicated so the <pg-option>log_filename</pg-option> is set to a constant.</p>
+
+            <postgres-config host="{[host-db-primary]}" keyword="co6" file="{[postgres-config-demo]}">
+                <title>Set <pg-option>log_filename</pg-option></title>
+
+                <postgres-config-option key="log_filename">'postgresql.log'</postgres-config-option>
+            </postgres-config>
+        </section>
+
+        <!-- SECTION => QUICKSTART - CONFIGURE STANZA -->
+        <section id="configure-stanza">
+            <title>Configure Cluster Stanza</title>
+
+            <option-description key="stanza"/>
+
+            <p>The name 'demo' describes the purpose of this cluster accurately so that will also make a good stanza name.</p>
+
+            <p><backrest/> needs to know where the base data directory for the <postgres/> cluster is located.  The path can be requested from <postgres/> directly but in a recovery scenario the <postgres/> process will not be available.  During backups the value supplied to <backrest/> will be compared against the path that <postgres/> is running on and they must be equal or the backup will return an error.  Make sure that <br-option>db-path</br-option> is exactly equal to <pg-option>data_directory</pg-option> in <file>postgresql.conf</file>.</p>
+
+            <p>By default {[user-guide-os]} stores clusters in <path>{[db-path-default]}</path> so it is easy to determine the correct path for the data directory.</p>
+
+            <p>When creating the <file>{[backrest-config-demo]}</file> file, the database owner (usually <id>postgres</id>) must be granted read privileges.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure the <postgres/> cluster data directory</title>
+
+                <backrest-config-option section="demo" key="db-path">{[db-path]}</backrest-config-option>
+
+                <backrest-config-option section="global" key="log-level-stderr">off</backrest-config-option>
+                <backrest-config-option section="global" key="log-timestamp">n</backrest-config-option>
+            </backrest-config>
+
+            <p><backrest/> configuration files follow the Windows INI convention.  Sections are denoted by text in brackets and key/value pairs are contained in each section.  Lines beginning with <id>#</id> are ignored and can be used as comments.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - CREATE REPOSITORY -->
+        <section id="create-repository">
+            <title>Create the Repository</title>
+
+            <option-description key="repo-path"/>
+
+            <p>For this demonstration the repository will be stored on the same host as the <postgres/> server.  This is the simplest configuration and is useful in cases where traditional backup software is employed to backup the database host.</p>
+
+            <block id="br-install-repo">
+                <block-variable-replace key="br-install-host">{[host-db-primary]}</block-variable-replace>
+                <block-variable-replace key="br-install-user">postgres</block-variable-replace>
+                <block-variable-replace key="br-install-group">postgres</block-variable-replace>
+            </block>
+
+            <p>The repository path must be configured so <backrest/> knows where to find it.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure the <backrest/> repository path</title>
+
+                <backrest-config-option section="global" key="repo-path">{[backrest-repo-path]}</backrest-config-option>
+            </backrest-config>
+        </section>
+
+        <!-- SECTION => QUICKSTART - CONFIGURE ARCHIVING -->
+        <section id="configure-archiving">
+            <title>Configure Archiving</title>
+
+            <p>Backing up a running <postgres/> cluster requires WAL archiving to be enabled.  Note that <i>at least</i> one WAL segment will be created during the backup process even if no explicit writes are made to the cluster.</p>
+
+            <postgres-config host="{[host-db-primary]}" file="{[postgres-config-demo]}">
+                <title>Configure archive settings</title>
+
+                <postgres-config-option key="archive_command">'{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} archive-push %p'</postgres-config-option>
+                <postgres-config-option key="archive_mode">on</postgres-config-option>
+                <postgres-config-option key="wal_level">hot_standby</postgres-config-option>
+                <postgres-config-option key="max_wal_senders">3</postgres-config-option>
+            </postgres-config>
+
+            <p>The <pg-option>wal_level</pg-option> setting must be set to <pg-setting>archive</pg-setting> at a minimum but <pg-setting>hot_standby</pg-setting> and <pg-setting>logical</pg-setting> also work fine for backups.  Setting <pg-option>wal_level</pg-option> to <pg-setting>hot_standy</pg-setting> and increasing <pg-option>max_wal_senders</pg-option> is a good idea even if you do not currently run a hot standby as this will allow them to be added later without restarting the primary cluster.</p>
+
+            <p>The <postgres/> cluster must be restarted after making these changes and before performing a backup.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Restart the {[postgres-cluster-demo]} cluster</title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-restart]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>When archiving a WAL segment is expected to take more than 60 seconds (the default) to reach the <backrest/> repository, then the <backrest/> <br-option>archive-timeout</br-option> option should be increased. Note that this option is not the same as the <postgres/> <pg-option>archive_timeout</pg-option> option which is used to force a WAL segment switch; useful for databases where there are long periods of inactivity. For more information on the <postgres/> <pg-option>archive_timeout</pg-option> option, see <postgres/> <link url="https://www.postgresql.org/docs/current/static/runtime-config-wal.html">Write Ahead Log</link>.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - RETENTION -->
+        <section id="retention">
+            <title>Configure Retention</title>
+
+            <p><backrest/> expires backups based on retention options.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure retention to 2 full backups</title>
+
+                <backrest-config-option section="global" key="retention-full">2</backrest-config-option>
+            </backrest-config>
+
+            <p>More information about retention can be found in the <link section="/retention">Retention</link> section.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - CONFIGURE ENCRYPTION -->
+        <!-- Since S3 and backup host require configure-archiving, this section must come after. -->
+        <section id="configure-encryption">
+            <title>Configure Repository Encryption</title>
+
+            <p>The repository will be configured with a cipher type and key to demonstrate encryption. The companion C library is required for encryption, see <link section="/installation">Installation</link>.</p>
+
+            <p>It is important to use a long, random passphrase for the cipher key.  A good way to generate one is to run: <code>openssl rand -base64 48</code>.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure <backrest/> repository encryption</title>
+
+                <backrest-config-option section="global" key="repo-cipher-type">{[backrest-repo-cipher-type]}</backrest-config-option>
+                <backrest-config-option section="global" key="repo-cipher-pass">{[backrest-repo-cipher-pass]}</backrest-config-option>
+            </backrest-config>
+
+            <p>Once the repository has been configured and the stanza created and checked, the repository encryption settings cannot be changed.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - STANZA CREATE -->
+        <section id="create-stanza">
+            <title>Create the Stanza</title>
+
+            <p>The <cmd>stanza-create</cmd> command must be run on the host where the repository is located to initialize the stanza. It is recommended that the <cmd>check</cmd> command be run after <cmd>stanza-create</cmd> to ensure archiving and backups are properly configured.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create the stanza and check the configuration</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info stanza-create</exe-cmd>
+                    <exe-highlight>completed successfully</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => QUICKSTART - CHECK CONFIGURATION -->
+        <section id="check-configuration">
+            <title>Check the Configuration</title>
+            <cmd-description key="check"/>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Check the configuration</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info check</exe-cmd>
+                    <exe-highlight> successfully stored in the archive at </exe-highlight>
+                </execute>
+            </execute-list>
+
+            <!-- Decided not to show the error in this part of the user guide but added as a debug statement for reference. -->
+            <execute-list keyword="debug" host="{[host-db-primary]}">
+                <title>Example of an invalid configuration</title>
+
+                <execute output="y" err-expect="82">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --archive-timeout=.1 check</exe-cmd>
+                    <exe-highlight>could not find WAL segment|did not reach the archive</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => QUICKSTART - PERFORM BACKUP -->
+        <section id="perform-backup">
+            <title>Perform a Backup</title>
+
+            <p>To perform a backup of the <postgres/> cluster run <backrest/> with the <cmd>backup</cmd> command.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Backup the {[postgres-cluster-demo]} cluster</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]}
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>no prior backup exists|full backup size</exe-highlight>
+                </execute>
+
+                <execute show="n" variable-key="backup-full-first">
+                    <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>By default <backrest/> will attempt to perform an incremental backup.  However, an incremental backup must be based on a full backup and since no full backup existed <backrest/> ran a full backup instead.</p>
+
+            <p>The <br-option>type</br-option> option can be used to specify a full or differential backup.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Differential backup of the {[postgres-cluster-demo]} cluster</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=diff
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>diff backup size</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>This time there was no warning because a full backup already existed.  While incremental backups can be based on a full <i>or</i> differential backup, differential backups must be based on a full backup.  A full backup can be performed by running the <cmd>backup</cmd> command with <br-setting>{[dash]}-type=full</br-setting>.</p>
+
+            <p>More information about the <cmd>backup</cmd> command can be found in the <link section="/backup">Backup</link> section.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - SCHEDULE BACKUP -->
+        <section id="schedule-backup">
+            <title>Schedule a Backup</title>
+
+            <p>Backups can be scheduled with utilities such as cron.</p>
+
+            <p>In the following example, two cron jobs are configured to run; full backups are scheduled for 6:30 AM every Sunday with differential backups scheduled for 6:30 AM Monday through Saturday. If this crontab is installed for the first time mid-week, then pgBackRest will run a full backup the first time the differential job is executed, followed the next day by a differential backup.</p>
+
+            <code-block title="crontab">
+                #m h   dom mon dow   command
+                30 06  *   *   0     pgbackrest --type=full --stanza=demo backup
+                30 06  *   *   1-6   pgbackrest --type=diff --stanza=demo backup
+            </code-block>
+
+            <p>Once backups are scheduled it's important to configure retention so backups are expired on a regular schedule, see <link section="/retention">Retention</link>.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - BACKUP INFO -->
+        <section id="backup-info" depend="perform-backup">
+            <title>Backup Information</title>
+
+            <p>Use the <cmd>info</cmd> command to get information about backups.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Get info for the {[postgres-cluster-demo]} cluster</title>
+
+                <execute filter="n" output="y">
+                    <exe-cmd>{[project-exe]} info</exe-cmd>
+                    <exe-highlight>(full|incr|diff) backup</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Each stanza has a separate section and it is possible to limit output to a single stanza with the <br-option>--stanza</br-option> option.  The stanza '<id>status</id>' gives a brief indication of the stanza's health.  If this is '<id>ok</id>' then <backrest/> is functioning normally.  The '<id>wal archive min/max</id>' shows the minimum and maximum WAL currently stored in the archive.  Note that there may be gaps due to archive retention policies or other reasons.</p>
+
+            <p>The backups are displayed oldest to newest.  The oldest backup will <i>always</i> be a full backup (indicated by an <id>F</id> at the end of the label) but the newest backup can be full, differential (ends with <id>D</id>), or incremental (ends with <id>I</id>).</p>
+
+            <p>The '<id>timestamp start/stop</id>' defines the time period when the backup ran.  The '<id>timestamp stop</id>' can be used to determine the backup to use when performing Point-In-Time Recovery.  More information about Point-In-Time Recovery can be found in the <link section="/pitr">Point-In-Time Recovery</link> section.</p>
+
+            <p>The '<id>wal start/stop</id>' defines the WAL range that is required to make the database consistent when restoring.  The <cmd>backup</cmd> command will ensure that this WAL range is in the archive before completing.</p>
+
+            <p>The '<id>database size</id>' is the full uncompressed size of the database while '<id>backup size</id>' is the amount of data actually backed up (these will be the same for full backups).  The '<id>repository size</id>' includes all the files from this backup and any referenced backups that are required to restore the database while '<id>repository backup size</id>' includes only the files in this backup (these will also be the same for full backups).  Repository sizes reflect compressed file sizes if compression is enabled in <backrest/> or the filesystem.</p>
+
+            <p>The '<id>backup reference list</id>' contains the additional backups that are required to restore this backup.</p>
+        </section>
+
+        <!-- SECTION => QUICKSTART - PERFORM RESTORE -->
+        <section id="perform-restore" depend="perform-backup">
+            <title>Restore a Backup</title>
+
+            <p>Backups can protect you from a number of disaster scenarios, the most common of which are hardware failure and data corruption.  The easiest way to simulate data corruption is to remove an important <postgres/> cluster file.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Stop the {[postgres-cluster-demo]} cluster and delete the <file>pg_control</file> file</title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>rm {[db-path]}/global/pg_control</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Starting the cluster without this important file will result in an error.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Attempt to start the corrupted {[postgres-cluster-demo]} cluster</title>
+
+                <execute keyword="default" user="root" output="y" err-expect="1">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                    <exe-highlight>could not find the database system</exe-highlight>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+
+                <execute keyword="co6" user="root" show="n">
+                    <exe-cmd>rm -f {[postgres-log-pgstartup-demo]}</exe-cmd>
+                </execute>
+
+                <execute keyword="co6" user="root" err-expect="1">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute keyword="co6" user="root" output="y">
+                    <exe-cmd>cat {[postgres-log-pgstartup-demo]}</exe-cmd>
+                    <exe-highlight-type>error</exe-highlight-type>
+                    <exe-highlight>could not find the database system</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>To restore a backup of the <postgres/> cluster run <backrest/> with the <cmd>restore</cmd> command. The cluster needs to be stopped (in this case it is already stopped) and all files must be removed from the <postgres/> data directory.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Remove old files from {[postgres-cluster-demo]} cluster</title>
+
+                <execute>
+                    <exe-cmd>find {[db-path]} -mindepth 1 -delete</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Restore the {[postgres-cluster-demo]} cluster and start <postgres/></title>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} restore</exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>This time the cluster started successfully since the restore replaced the missing <file>pg_control</file> file.</p>
+
+            <p>More information about the <cmd>restore</cmd> command can be found in the <link section="/restore">Restore</link> section.</p>
+        </section>
+    </section>
+
+    <!-- SECTION => BACKUP -->
+    <section id="backup" depend="/quickstart/create-stanza">
+        <title>Backup</title>
+
+        <p>The Backup section introduces additional <cmd>backup</cmd> command features.</p>
+
+        <!-- SECTION => BACKUP - START-FAST -->
+        <section id="option-start-fast">
+            <title>Fast Start Option</title>
+
+            <p>By default <backrest/> will wait for the next regularly scheduled checkpoint before starting a backup.  Depending on the <pg-option>checkpoint_timeout</pg-option> and <pg-option>checkpoint_segments</pg-option> settings in <postgres/> it may be quite some time before a checkpoint completes and the backup can begin.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Incremental backup of the {[postgres-cluster-demo]} cluster with the regularly scheduled checkpoint</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>backup begins after the next regular checkpoint completes</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>When <br-setting>{[dash]}-start-fast</br-setting> is passed on the command-line or  <br-setting>start-fast=y</br-setting> is set in <file>{[backrest-config-demo]}</file> an immediate checkpoint is requested and the backup will start more quickly. This is convenient for testing and for ad-hoc backups.  For instance, if a backup is being taken at the beginning of a release window it makes no sense to wait for a checkpoint.  Since regularly scheduled backups generally only happen once per day it is unlikely that enabling the <br-option>start-fast</br-option> in <file>{[backrest-config-demo]}</file> will negatively affect performance, however for high-volume transactional systems you may want to pass <br-setting>{[dash]}-start-fast</br-setting> on the command-line instead. Alternately, it is possible to override the setting in the configuration file by passing <br-setting>{[dash]}-no-start-fast</br-setting> on the command-line.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Enable the <br-option>start-fast</br-option> option</title>
+
+                <backrest-config-option section="global" key="start-fast">y</backrest-config-option>
+            </backrest-config>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Incremental backup of the {[postgres-cluster-demo]} cluster with an immediate checkpoint</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>backup begins after the requested immediate checkpoint completes</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => BACKUP - STOP-AUTO -->
+        <section id="option-stop-auto">
+            <title>Automatic Stop Option</title>
+
+            <p>Sometimes <backrest/> will exit unexpectedly and the backup in progress on the <postgres/> cluster will not be properly stopped.  <backrest/> exits as quickly as possible when an error occurs so that the cause can be reported accurately and is not masked by another problem that might happen during a more extensive cleanup.</p>
+
+            <p>Here an error is intentionally caused by removing repository permissions.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Revoke write privileges in the <backrest/> repository and attempt a backup</title>
+
+                <execute user="root">
+                    <exe-cmd>chmod 550 {[backrest-repo-path]}/backup/{[postgres-cluster-demo]}/</exe-cmd>
+                </execute>
+
+                <execute output="y" err-expect="47">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>ERROR:</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Even when the permissions are fixed <backrest/> will still be unable to perform a backup because the <postgres/> cluster is stuck in backup mode.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Restore write privileges in the <backrest/> repository and attempt a backup</title>
+
+                <execute user="root">
+                    <exe-cmd>chmod 750 {[backrest-repo-path]}/backup/{[postgres-cluster-demo]}/</exe-cmd>
+                </execute>
+
+                <execute output="y" err-expect="57">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>ERROR:</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Enabling the <br-option>stop-auto</br-option> option allows <backrest/> to stop the current backup if it detects that no other <backrest/> backup process is running.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Enable the <br-option>stop-auto</br-option> option</title>
+
+                <backrest-config-option section="global" key="stop-auto">y</backrest-config-option>
+            </backrest-config>
+
+            <p>Now <backrest/> will stop the old backup and start a new one so the process completes successfully.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform an incremental backup</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>cluster is already in backup mode|backup begins after the requested immediate checkpoint completes</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Although useful this feature may not be appropriate when another third-party backup solution is being used to take online backups as <backrest/> will not recognize that the other software is running and may terminate a backup started by that software.  However, it would be unusual to run more than one third-party backup solution at the same time so this is not likely to be a problem.</p>
+
+            <p>Note that <id>pg_dump</id> and <id>pg_base_backup</id> do not take online backups so are not affected.  It is safe to run them in conjunction with <backrest/>.</p>
+        </section>
+
+        <!-- SECTION => BACKUP - ARCHIVE-TIMEOUT -->
+        <section id="option-archive-timeout">
+            <title>Archive Timeout</title>
+
+            <p>During an online backup <backrest/> waits for WAL segments that are required for backup consistency to be archived. This wait time is governed by the <backrest/> <br-option>archive-timeout</br-option> option which defaults to 60 seconds. If archiving an individual segment is known to take longer then this option should be increased.</p>
+        </section>
+    </section>
+
+    <!-- SECTION => RETENTION -->
+    <section id="retention" depend="quickstart/perform-backup">
+        <title>Retention</title>
+
+        <p>Generally it is best to retain as many backups as possible to provide a greater window for <link section="/pitr">Point-in-Time Recovery</link>, but practical concerns such as disk space must also be considered.  Retention options remove older backups once they are no longer needed.</p>
+
+        <!-- SECTION => RETENTION - FULL -->
+        <section id="full">
+            <title>Full Backup Retention</title>
+
+            <p>Set <br-option>retention-full</br-option> to the number of full backups required.  New backups must be completed before expiration will occur &amp;mdash; that means if <br-setting>retention-full=2</br-setting> then there will be three full backups stored before the oldest one is expired.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure <br-option>retention-full</br-option></title>
+
+                <backrest-config-option section="global" key="retention-full">2</backrest-config-option>
+            </backrest-config>
+
+            <p>Backup <br-setting>retention-full=2</br-setting> but currently there is only one full backup so the next full backup to run will not expire any full backups.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform a full backup</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=full
+                        --log-level-console=detail backup</exe-cmd>
+                    <exe-highlight>archive retention on backup {[backup-full-first]}|remove archive</exe-highlight>
+                </execute>
+
+                <execute show="n" variable-key="backup-full-second">
+                    <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Archive <i>is</i> expired because WAL segments were generated before the oldest backup.  These are not useful for recovery &amp;mdash; only WAL segments generated after a backup can be used to recover that backup.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform a full backup</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=full
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>expire full backup set\: {[backup-full-first]}|archive retention on backup {[backup-full-second]}|remove archive</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>The <id>{[backup-full-first]}</id> full backup is expired and archive retention is based on the <id>{[backup-full-second]}</id> which is now the oldest full backup.</p>
+        </section>
+
+        <!-- SECTION => RETENTION - DIFF -->
+        <section id="diff">
+            <title>Differential Backup Retention</title>
+
+            <p>Set <br-option>retention-diff</br-option> to the number of differential backups required.  Differentials only rely on the prior full backup so it is possible to create a <quote>rolling</quote> set of differentials for the last day or more.  This allows quick restores to recent points-in-time but reduces overall space consumption.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure <br-option>retention-diff</br-option></title>
+
+                <backrest-config-option section="global" key="retention-diff">1</backrest-config-option>
+            </backrest-config>
+
+            <p>Backup <br-setting>retention-diff=1</br-setting> so two differentials will need to be performed before one is expired.  An incremental backup is added to demonstrate incremental expiration.  Incremental backups cannot be expired independently &amp;mdash; they are always expired with their related full or differential backup.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform differential and incremental backups</title>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=diff backup</exe-cmd>
+                </execute>
+
+                <execute show="n" variable-key="backup-diff-second">
+                    <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=incr backup</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Now performing a differential backup will expire the previous differential and incremental backups leaving only one differential backup.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform a differential backup</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=diff
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>expire diff backup set: {[backup-diff-second]}</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => RETENTION - ARCHIVE -->
+        <section id="archive">
+            <title>Archive Retention</title>
+
+            <p>Although <backrest/> automatically removes archived WAL segments when expiring backups (the default expires WAL for full backups based on the <br-option>retention-full</br-option> option), it may be useful to expire archive more aggressively to save disk space.  Note that full backups are treated as differential backups for the purpose of differential archive retention.</p>
+
+            <p>Expiring archive will never remove WAL segments that are required to make a backup consistent. However, since Point-in-Time-Recovery (PITR) only works on a continuous WAL stream, care should be taken when aggressively expiring archive outside of the normal backup expiration process.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure <br-option>retention-diff</br-option></title>
+
+                <backrest-config-option section="global" key="retention-diff">2</backrest-config-option>
+            </backrest-config>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Perform differential backup</title>
+
+                <execute show="n" variable-key="backup-diff-first">
+                    <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+                </execute>
+
+                <!-- Push a few WAL segments to make the example below more interesting -->
+                <execute show="n">
+                    <exe-cmd>psql -c "
+                        select pg_create_restore_point('generate WAL'); select pg_switch_xlog();
+                        select pg_create_restore_point('generate WAL'); select pg_switch_xlog();"</exe-cmd>
+                </execute>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=diff
+                        --log-level-console=info backup</exe-cmd>
+                    <exe-highlight>new backup label</exe-highlight>
+                </execute>
+
+                <execute show="n" variable-key="backup-diff-second">
+                    <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Expire archive</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --log-level-console=detail
+                        --retention-archive-type=diff --retention-archive=1 expire</exe-cmd>
+                    <exe-highlight>archive retention on backup {[backup-diff-first]}|remove archive</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>The <id>{[backup-diff-first]}</id> differential backup has archived WAL segments that must be retained to make the older backups consistent even though they cannot be played any further forward with PITR. WAL segments generated after <id>{[backup-diff-first]}</id> but before <id>{[backup-diff-second]}</id> are removed. WAL segments generated after the new backup <id>{[backup-diff-second]}</id> remain and can be used for PITR.</p>
+
+            <p>Since full backups are considered differential backups for the purpose of differential archive retention, if a full backup is now performed with the same settings, only the archive for that full backup is retained for PITR.</p>
+        </section>
+    </section>
+
+    <!-- SECTION => RESTORE -->
+    <section id="restore" depend="quickstart/perform-backup">
+        <title>Restore</title>
+
+        <p>The Restore section introduces additional <cmd>restore</cmd> command features.</p>
+
+        <!-- SECTION => RESTORE - DELTA -->
+        <section id="option-delta">
+            <title>Delta Option</title>
+
+            <p><link section="/quickstart/perform-restore">Restore a Backup</link> in <link section="/quickstart">Quick Start</link> required the database cluster directory to be cleaned before the <cmd>restore</cmd> could be performed.  The <br-option>delta</br-option> option allows <backrest/> to automatically determine which files in the database cluster directory can be preserved and which ones need to be restored from the backup &amp;mdash; it also <i>removes</i> files not present in the backup manifest so it will dispose of divergent changes.  This is accomplished by calculating a <link url="https://en.wikipedia.org/wiki/SHA-1">SHA-1</link> cryptographic hash for each file in the database cluster directory.  If the <id>SHA-1</id> hash does not match the hash stored in the backup then that file will be restored.  This operation is very efficient when combined with the <br-option>process-max</br-option> option.  Since the <postgres/> server is shut down during the restore, a larger number of processes can be used than might be desirable during a backup when the <postgres/> server is running.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Stop the {[postgres-cluster-demo]} cluster, perform delta restore</title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+                </execute>
+
+                <execute output="y" filter="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta
+                        --log-level-console=detail restore</exe-cmd>
+                    <exe-highlight>demo\/PG_VERSION - exists and matches backup|check\/clean db path|restore global\/pg_control</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Restart <postgres/></title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => RESTORE - DELTA -->
+        <section id="option-db-include">
+            <title>Restore Selected Databases</title>
+
+            <p>There may be cases where it is desirable to selectively restore specific databases from a cluster backup.  This could be done for performance reasons or to move selected databases to a machine that does not have enough space to restore the entire cluster backup.</p>
+
+            <p>To demonstrate this feature two databases are created: test1 and test2.  A fresh backup is run so <backrest/> is aware of the new databases.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create two test databases and perform a backup</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "create database test1;"
+                    </exe-cmd>
+                </execute>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "create database test2;"
+                    </exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=incr backup</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Each test database will be seeded with tables and data to demonstrate that recovery works with selective restore.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create a test table in each database</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "create table test1_table (id int);
+                                 insert into test1_table (id) values (1);" test1
+                    </exe-cmd>
+                </execute>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "create table test2_table (id int);
+                                 insert into test2_table (id) values (2);" test2
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>One of the main reasons to use selective restore is to save space.  The size of the test1 database is shown here so it can be compared with the disk utilization after a selective restore.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Show space used by test1 database</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        du -sh {[db-path]}/base/16384
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Stop the cluster and restore only the test2 database.  Built-in databases (<id>template0</id>, <id>template1</id>, and <id>postgres</id>) are always restored.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Restore from last backup including only the test2 database</title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta
+                        {[dash]}-db-include=test2 restore</exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Once recovery is complete the test2 database will contain all previously created tables and data.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Demonstrate that the test2 database was recovered</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "select * from test2_table;" test2
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The test1 database, despite successful recovery, is not accessible.  This is because the entire database was restored as sparse, zeroed files.  <postgres/> can successfully apply WAL on the zeroed files but the database as a whole will not be valid because key files contain no data.  This is purposeful to prevent the database from being accidentally used when it might contain partial data that was applied during WAL replay.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Attempting to connect to the test1 database will produce an error</title>
+
+                <execute output="y" filter="n" err-expect="2">
+                    <exe-cmd>
+                        psql -c "select * from test1_table;" test1
+                    </exe-cmd>
+                    <exe-highlight>relation mapping file.*contains invalid data</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Since the test1 database is restored with sparse, zeroed files it will only require as much space as the amount of WAL that is written during recovery.  While the amount of WAL generated during a backup and applied during recovery can be significant it will generally be a small fraction of the total database size, especially for large databases where this feature is most likely to be useful.</p>
+
+            <p>It is clear that the test1 database uses far less disk space during the selective restore than it would have if the entire database had been restored.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Show space used by test1 database after recovery</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        du -sh {[db-path]}/base/16384
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>At this point the only action that can be taken on the invalid test1 database is <id>drop database</id>. <backrest/> does not automatically drop the database since this cannot be done until recovery is complete and the cluster is accessible.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Drop the test1 database</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "drop database test1;"
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Now that the invalid test1 database has been dropped only the test2 and built-in databases remain.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>List remaining databases</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "select oid, datname from pg_database order by oid;"
+                    </exe-cmd>
+                    <exe-highlight>test2</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+    </section>
+
+    <!-- SECTION => PITR -->
+    <section id="pitr" depend="quickstart/perform-backup">
+        <title>Point-in-Time Recovery</title>
+
+        <p><link section="/quickstart/perform-restore">Restore a Backup</link> in <link section="/quickstart">Quick Start</link> performed default recovery, which is to play all the way to the end of the WAL stream.  In the case of a hardware failure this is usually the best choice but for data corruption scenarios (whether machine or human in origin) Point-in-Time Recovery (PITR) is often more appropriate.</p>
+
+        <p>Point-in-Time Recovery (PITR) allows the WAL to be played from the last backup to a specified time, transaction id, or recovery point.  For common recovery scenarios time-based recovery is arguably the most useful.  A typical recovery scenario is to restore a table that was accidentally dropped or data that was accidentally deleted.  Recovering a dropped table is more dramatic so that's the example given here but deleted data would be recovered in exactly the same way.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Backup the {[postgres-cluster-demo]} cluster and create a table with very important data</title>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --type=diff backup</exe-cmd>
+            </execute>
+
+            <execute output="y">
+                <exe-cmd>
+                    psql -c "begin;
+                             create table important_table (message text);
+                             insert into important_table values ('{[test-table-data]}');
+                             commit;
+                             select * from important_table;"
+                </exe-cmd>
+                <exe-highlight>{[test-table-data]}</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>It is important to represent the time as reckoned by <postgres/> and to include timezone offsets.  This reduces the possibility of unintended timezone conversions and an unexpected recovery result.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Get the time from <postgres/></title>
+
+            <execute output="y" filter="n" variable-key="time-recovery-timestamp">
+                <exe-cmd>
+                    psql -Atc "select current_timestamp"
+                </exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Now that the time has been recorded the table is dropped.  In practice finding the exact time that the table was dropped is a lot harder than in this example.  It may not be possible to find the exact time, but some forensic work should be able to get you close.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Drop the important table</title>
+
+            <execute output="y" err-expect="1">
+                <exe-cmd>psql -c "begin;
+                                  drop table important_table;
+                                  commit;
+                                  select * from important_table;"</exe-cmd>
+                <exe-highlight>does not exist</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Now the restore can be performed with time-based recovery to bring back the missing table.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop <postgres/>, restore the {[postgres-cluster-demo]} cluster to <id>{[time-recovery-timestamp]}</id>, and display <file>recovery.conf</file></title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta
+                    {[dash]}-type=time "{[dash]}-target={[time-recovery-timestamp]}" restore</exe-cmd>
+            </execute>
+
+            <execute user="root" show="n">
+                <exe-cmd>rm {[postgres-log-demo]}</exe-cmd>
+            </execute>
+
+            <execute output="y">
+                <exe-cmd>cat {[postgres-recovery-demo]}</exe-cmd>
+                <exe-highlight>recovery_target_time</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>The <file>recovery.conf</file> file has been automatically generated by <backrest/> so <postgres/> can be started immediately. Once <postgres/> has finished recovery the table will exist again and can be queried.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Start <postgres/> and check that the important table exists</title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-start]}</exe-cmd>
+            </execute>
+
+            <execute show="n">
+                <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+            </execute>
+
+            <execute output="y">
+                <exe-cmd>psql -c "select * from important_table"</exe-cmd>
+                <exe-highlight>{[test-table-data]}</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>The <postgres/> log also contains valuable information.  It will indicate the time and transaction where the recovery stopped and also give the time of the last transaction to be applied.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Examine the <postgres/> log output</title>
+
+            <execute output="y">
+                <exe-cmd>cat {[postgres-log-demo]}</exe-cmd>
+                <exe-highlight>recovery stopping before|last completed transaction|starting point-in-time recovery</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>This example was rigged to give the correct result.  If a backup after the required time is chosen then <postgres/> will not be able to recover the lost table. <postgres/> can only play forward, not backward.  To demonstrate this the important table must be dropped (again).</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Drop the important table (again)</title>
+
+            <execute output="y" err-expect="1">
+                <exe-cmd>psql -c "begin;
+                                  drop table important_table;
+                                  commit;
+                                  select * from important_table;"</exe-cmd>
+                <exe-highlight>does not exist</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Now take a new backup and attempt recovery from the new backup.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Perform a backup then attempt recovery from that backup</title>
+
+            <execute show="n" variable-key="backup-last">
+                <exe-cmd>{[cmd-backup-last]}</exe-cmd>
+            </execute>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=incr backup</exe-cmd>
+            </execute>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta
+                     {[dash]}-type=time "{[dash]}-target={[time-recovery-timestamp]}" restore</exe-cmd>
+            </execute>
+
+            <execute user="root" show="n">
+                <exe-cmd>rm {[postgres-log-demo]}</exe-cmd>
+            </execute>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-start]}</exe-cmd>
+            </execute>
+
+            <execute show="n">
+                <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+            </execute>
+
+            <execute output="y" err-expect="1">
+                <exe-cmd>psql -c "select * from important_table"</exe-cmd>
+                <exe-highlight>does not exist</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Looking at the log output it's not obvious that recovery failed to restore the table.  The key is to look for the presence of the <quote>recovery stopping before...</quote> and <quote>last completed transaction...</quote> log messages.  If they are not present then the recovery to the specified point-in-time was not successful.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Examine the <postgres/> log output to discover the recovery was not successful</title>
+
+            <execute output="y">
+                <exe-cmd>cat {[postgres-log-demo]}</exe-cmd>
+                <exe-highlight>starting point-in-time recovery|consistent recovery state reached</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Using an earlier backup will allow <postgres/> to play forward to the correct time.  The <cmd>info</cmd> command can be used to find the next to last backup.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Get backup info for the {[postgres-cluster-demo]} cluster</title>
+
+            <execute filter="n" output="y">
+                <exe-cmd>{[project-exe]} info</exe-cmd>
+                <exe-highlight>{[backup-last]}</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>The default behavior for restore is to use the last backup but an earlier backup can be specified with the <br-option>{[dash]}-set</br-option> option.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop <postgres/>, restore from the selected backup, and start <postgres/></title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+
+            <execute>
+                <exe-cmd>
+                    {[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta
+                        {[dash]}-type=time "{[dash]}-target={[time-recovery-timestamp]}"
+                        {[dash]}-set={[backup-last]} restore
+                </exe-cmd>
+            </execute>
+
+            <execute user="root" show="n">
+                <exe-cmd>rm {[postgres-log-demo]}</exe-cmd>
+            </execute>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-start]}</exe-cmd>
+            </execute>
+
+            <execute show="n">
+                <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+            </execute>
+
+            <execute output="y">
+                <exe-cmd>psql -c "select * from important_table"</exe-cmd>
+                <exe-highlight>{[test-table-data]}</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Now the the log output will contain the expected <quote>recovery stopping before...</quote> and <quote>last completed transaction...</quote> messages showing that the recovery was successful.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Examine the <postgres/> log output for log messages indicating success</title>
+
+            <execute output="y">
+                <exe-cmd>cat {[postgres-log-demo]}</exe-cmd>
+                <exe-highlight>recovery stopping before|last completed transaction|starting point-in-time recovery</exe-highlight>
+            </execute>
+        </execute-list>
+    </section>
+
+    <!-- SECTION => S3-SUPPORT -->
+    <section id="s3-support" depend="/quickstart/configure-archiving">
+        <title>S3 Support</title>
+
+        <p><backrest/> supports storing repositories in <proper>Amazon S3</proper>.</p>
+
+        <backrest-config host="{[host-db-primary]}" show="n" file="{[backrest-config-demo]}">
+            <title>Clear the cipher settings</title>
+
+            <backrest-config-option section="global" key="repo-cipher-type">none</backrest-config-option>
+            <backrest-config-option section="global" key="repo-cipher-pass"></backrest-config-option>
+        </backrest-config>
+
+        <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+            <title>Configure <proper>S3</proper></title>
+
+            <backrest-config-option section="global" key="repo-type">s3</backrest-config-option>
+            <backrest-config-option section="global" key="repo-path">/</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-key">accessKey1</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-key-secret">verySecretKey1</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-bucket">demo-bucket</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-endpoint">s3.amazonaws.com</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-region">us-east-1</backrest-config-option>
+            <backrest-config-option section="global" key="repo-s3-verify-ssl">n</backrest-config-option>
+
+            <backrest-config-option section="global" key="process-max">4</backrest-config-option>
+        </backrest-config>
+
+        <p>Commands are run exactly as if the repository were stored on a local disk.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Create the stanza</title>
+
+            <!-- set host entries to redirect aws to local s3 server -->
+            <execute user="root" show='n'>
+                <exe-cmd>echo "{[host-s3-server-ip]} demo-bucket.s3.amazonaws.com s3.amazonaws.com" |
+                    sudo tee -a /etc/hosts</exe-cmd>
+            </execute>
+
+            <execute user="{[host-user]}" show='n'>
+                <exe-cmd>aws s3 --no-verify-ssl mb s3://demo-bucket 2>&amp;1</exe-cmd>
+            </execute>
+
+            <execute output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info stanza-create</exe-cmd>
+                <exe-highlight>completed successfully</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>File creation time in <proper>S3</proper> is relatively slow so commands benefit by increasing <br-option>process-max</br-option> to parallelize file creation.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Backup the {[postgres-cluster-demo]} cluster</title>
+
+            <execute output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]}
+                    --log-level-console=info backup</exe-cmd>
+                <exe-highlight>no prior backup exists|full backup size</exe-highlight>
+            </execute>
+        </execute-list>
+    </section>
+
+    <!-- SECTION => BACKUP HOST -->
+    <section id="delete-stanza" depend="/quickstart/create-stanza">
+        <title>Delete a Stanza</title>
+
+        <cmd-description key="stanza-delete"/>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop <postgres/> cluster to be removed</title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop <backrest/> for the stanza</title>
+
+            <execute output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info stop</exe-cmd>
+                <exe-highlight>completed successfully</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Delete the stanza</title>
+
+            <execute output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info stanza-delete</exe-cmd>
+                <exe-highlight>completed successfully</exe-highlight>
+            </execute>
+
+            <execute user="root" show="n">
+                <exe-cmd>{[db-cluster-start]}</exe-cmd>
+            </execute>
+        </execute-list>
+    </section>
+
+    <!-- SECTION => BACKUP HOST -->
+    <section id="backup-host" depend="/quickstart/configure-archiving">
+        <title>Dedicated Backup Host</title>
+
+        <p>The configuration described in <link section="/quickstart">Quickstart</link> is suitable for simple installations but for enterprise configurations it is more typical to have a dedicated <host>backup</host> host.  This separates the backups and WAL archive from the database server so <host>database</host> host failures have less impact.  It is still a good idea to employ traditional backup software to backup the <host>backup</host> host.</p>
+
+        <section id="install">
+            <title>Installation</title>
+
+            <p>A new host named <host>backup</host> is created to store the cluster backups.</p>
+
+            <host-add name="{[host-backup]}" user="{[host-backup-user]}" image="{[host-backup-image]}" os="{[host-os]}" mount="{[host-backup-mount]}"/>
+
+            <p>The <user>{[br-user]}</user> user is created to own the <backrest/> repository.  Any user can own the repository but it is best not to use <user>postgres</user> (if it exists) to avoid confusion.</p>
+
+            <execute-list host="{[host-backup]}">
+                <title>Create <user>{[br-user]}</user></title>
+
+                <execute keyword="default" user="root">
+                    <exe-cmd>adduser --disabled-password --gecos "" {[br-user]}</exe-cmd>
+                </execute>
+                <execute keyword="co6" user="root">
+                    <exe-cmd>groupadd {[br-group]}</exe-cmd>
+                </execute>
+                <execute keyword="co6" user="root">
+                    <exe-cmd>adduser -g{[br-group]} -n {[br-user]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <block id="br-install">
+                <block-variable-replace key="br-install-host">{[host-backup]}</block-variable-replace>
+                <block-variable-replace key="br-install-user">{[br-user]}</block-variable-replace>
+                <block-variable-replace key="br-install-group">{[br-user]}</block-variable-replace>
+            </block>
+
+            <block id="br-install-repo">
+                <block-variable-replace key="br-install-host">{[host-backup]}</block-variable-replace>
+                <block-variable-replace key="br-install-user">{[br-group]}</block-variable-replace>
+                <block-variable-replace key="br-install-group">{[br-group]}</block-variable-replace>
+            </block>
+        </section>
+
+        <section id="setup-ssh">
+            <title>Setup Trusted SSH</title>
+
+            <block id="setup-ssh-intro">
+                <block-variable-replace key="bogus">bogus !!!</block-variable-replace>
+            </block>
+
+            <execute-list host="{[host-backup]}">
+                <title>Create <host>{[host-backup]}</host> host key pair</title>
+
+                <execute user="backrest">
+                    <exe-cmd>mkdir -m 750 {[br-home-path]}/.ssh</exe-cmd>
+                </execute>
+                <execute user="backrest">
+                    <exe-cmd>ssh-keygen -f {[br-home-path]}/.ssh/id_rsa -t rsa -b 4096 -N ""</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <block id="setup-ssh">
+                <block-variable-replace key="setup-ssh-host">{[host-db-primary]}</block-variable-replace>
+            </block>
+        </section>
+
+        <!-- SECTION => BACKUP HOST - INSTALL/CONFIGURE -->
+        <section id="config">
+            <title>Configuration</title>
+
+            <backrest-config host="{[host-backup]}" show="n" owner="backrest:postgres" file="{[backrest-config-demo]}">
+                <title>Configure the <backrest/> repository path</title>
+
+                <backrest-config-option section="global" key="repo-path">{[backrest-repo-path]}</backrest-config-option>
+            </backrest-config>
+
+            <p>The <host>backup</host> host must be configured with the <host>db-primary</host> host/user and database path.  The primary will be configured as <id>db1</id> to allow a standby to be added later.</p>
+
+            <backrest-config host="{[host-backup]}" owner="backrest:postgres" file="{[backrest-config-demo]}">
+                <title>Configure <br-option>db1-host</br-option>/<br-option>db1-user</br-option> and <br-option>db1-path</br-option></title>
+
+                <backrest-config-option section="demo" key="db1-path">{[db-path]}</backrest-config-option>
+                <backrest-config-option section="demo" key="db1-host">{[host-db-primary]}</backrest-config-option>
+                <backrest-config-option section="demo" key="db1-user">postgres</backrest-config-option>
+
+                <backrest-config-option section="global" key="start-fast">y</backrest-config-option>
+                <backrest-config-option section="global" key="retention-full">2</backrest-config-option>
+
+                <backrest-config-option section="global" key="log-level-stderr">off</backrest-config-option>
+                <backrest-config-option section="global" key="log-timestamp">n</backrest-config-option>
+            </backrest-config>
+
+            <p>The database host must be configured with the backup host/user.  The default for the <br-option>backup-user</br-option> option is <id>backrest</id>.  If the <id>postgres</id> user does restores on the backup host it is best not to also allow the <id>postgres</id> user to perform backups.  However, the <id>postgres</id> user can read the repository directly if it is in the same group as the <id>backrest</id> user.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}" reset="y">
+                <title>Configure <br-option>backup-host</br-option>/<br-option>backup-user</br-option></title>
+
+                <backrest-config-option section="demo" key="db-path">{[db-path]}</backrest-config-option>
+
+                <backrest-config-option section="global" key="backup-host">{[host-backup]}</backrest-config-option>
+                <backrest-config-option section="global" key="backup-user">backrest</backrest-config-option>
+
+                <backrest-config-option section="global" key="log-level-file">detail</backrest-config-option>
+
+                <backrest-config-option section="global" key="log-level-stderr">off</backrest-config-option>
+                <backrest-config-option section="global" key="log-timestamp">n</backrest-config-option>
+            </backrest-config>
+
+            <p>Commands are run the same as on a single host configuration except that some commands such as <cmd>backup</cmd> and <cmd>expire</cmd> are run from the <host>backup</host> host instead of the <host>database</host> host.</p>
+
+            <p>Create the stanza in the new repository.</p>
+
+            <execute-list host="{[host-backup]}">
+                <title>Create the stanza</title>
+
+                <execute user="backrest" output="y" filter="n" >
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} stanza-create</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Check that the configuration is correct on both the <host>database</host> and <host>backup</host> hosts. More information about the <cmd>check</cmd> command can be found in <link section="/quickstart/check-configuration">Check the Configuration</link>.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Check the configuration</title>
+
+                <execute output="y" filter="n" >
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} check</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <execute-list host="{[host-backup]}">
+                <title>Check the configuration</title>
+
+                <execute user="backrest" output="y" filter="n" >
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} check</exe-cmd>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => BACKUP HOST - PERFORM BACKUP -->
+        <section id="perform-backup">
+            <title>Perform a Backup</title>
+
+            <p>To perform a backup of the <postgres/> cluster run <backrest/> with the <cmd>backup</cmd> command on the <host>backup</host> host.</p>
+
+            <execute-list host="{[host-backup]}">
+                <title>Backup the {[postgres-cluster-demo]} cluster</title>
+
+                <execute user="backrest" output="y" filter="n">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} backup</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Since a new repository was created on the <host>backup</host> host the warning about the incremental backup changing to a full backup was emitted.</p>
+        </section>
+
+        <!-- SECTION => BACKUP HOST - PERFORM RESTORE -->
+        <section id="perform-restore">
+            <title>Restore a Backup</title>
+
+            <p>To perform a restore of the <postgres/> cluster run <backrest/> with the <cmd>restore</cmd> command on the <host>database</host> host.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Stop the {[postgres-cluster-demo]} cluster, restore, and restart <postgres/></title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta restore</exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>A new backup must be performed due to the timeline switch.</p>
+
+            <execute-list host="{[host-backup]}">
+                <title>Backup the {[postgres-cluster-demo]} cluster</title>
+
+                <execute user="backrest">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} backup</exe-cmd>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => BACKUP HOST - ASYNCHRONOUS ARCHIVING -->
+        <section id="async-archiving" depend="config">
+            <title>Asynchronous Archiving</title>
+
+            <p>The <br-option>archive-async</br-option> option offloads WAL archiving to a separate process (or processes) to improve throughput.  It works by <quote>looking ahead</quote> to see which WAL segments are ready to be archived beyond the request that <postgres/> is currently making via the <code>archive_command</code>. WAL segments are transferred to the archive directly from the <path>pg_xlog</path>/<path>pg_wal</path> directory and success is only returned by the <code>archive_command</code> when the WAL segment has been safely stored in the archive.</p>
+
+            <p>The spool directory is created to hold the current status of WAL archiving.  Status files written into the spool directory are typically zero length and should consume a minimal amount of space (a few MB at most) and very little IO.  All the information in this directory can be recreated so it is not necessary to preserve the spool directory if the cluster is moved to new hardware.</p>
+
+            <p><b>NOTE:</b> In the original implementation of asynchronous archiving, WAL segments were copied to the spool directory before compression and transfer.  The new implementation copies WAL directly from the <path>pg_xlog</path> directory.  If asynchronous archiving was utilized in <id>v1.12</id> or prior, read the <id>v1.13</id> release notes carefully before upgrading.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create the spool directory</title>
+
+                <execute user="root">
+                    <exe-cmd>mkdir -m 750 {[spool-path]}</exe-cmd>
+                </execute>
+                <execute user="root">
+                    <exe-cmd>chown postgres:postgres {[spool-path]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The spool path must be configured and asynchronous archiving enabled.  Asynchronous archiving automatically confers some benefit by reducing the number of ssh connections made to the backup server, but setting <br-option>process-max</br-option> can drastically improve performance.  Be sure not to set <br-option>process-max</br-option> so high that it affects normal database operations.</p>
+
+            <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+                <title>Configure the spool path and asynchronous archiving</title>
+
+                <backrest-config-option section="global" key="spool-path">{[spool-path]}</backrest-config-option>
+                <backrest-config-option section="global" key="archive-async">y</backrest-config-option>
+                <backrest-config-option section="global:archive-push" key="process-max">2</backrest-config-option>
+            </backrest-config>
+
+            <p>The <file>archive-async.log</file> file can be used to monitor the activity of the asynchronous process.  A good way to test this is to quickly push a number of WAL segments.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Test parallel asynchronous archiving</title>
+
+                <execute output="n" show="n">
+                    <exe-cmd>rm -f /var/log/pgbackrest/demo-archive-async.log</exe-cmd>
+                </execute>
+
+                <execute output="n">
+                    <exe-cmd>
+                        psql -c "
+                            select pg_create_restore_point('test async push'); select pg_switch_xlog();
+                            select pg_create_restore_point('test async push'); select pg_switch_xlog();
+                            select pg_create_restore_point('test async push'); select pg_switch_xlog();
+                            select pg_create_restore_point('test async push'); select pg_switch_xlog();
+                            select pg_create_restore_point('test async push'); select pg_switch_xlog();"
+                    </exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info check</exe-cmd>
+                    <exe-highlight>WAL segment</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Now the log file will contain parallel, asynchronous activity.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Check results in the log</title>
+
+                <execute output="y">
+                    <exe-cmd>cat /var/log/pgbackrest/demo-archive-async.log</exe-cmd>
+                    <exe-highlight> WAL file\(s\) to archive|pushed WAL file 0000000</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+    </section>
+
+    <!-- SECTION => PARALLEL BACKUP-RESTORE -->
+    <section id="parallel-backup-restore" depend="backup-host/config">
+        <title>Parallel Backup / Restore</title>
+
+        <p><backrest/> offers parallel processing to improve performance of compression and transfer. The number of processes to be used for this feature is set using the <br-option>--process-max</br-option> option.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Check the number of CPUs</title>
+
+            <execute user="root" output="y">
+                <exe-cmd>lscpu</exe-cmd>
+                <exe-highlight>^CPU\(s\)\:</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>It is usually best not to use more than 25% of the available CPUs for the <cmd>backup</cmd> command.  Backups don't have to run that fast as long as they are performed regularly and the backup process should not impact database performance, if at all possible.</p>
+
+        <p>The restore command can and should use all available CPUs because during a restore the <postgres/> cluster is shut down and there is generally no other important work being done on the host.  If the host contains multiple clusters then that should be considered when setting restore parallelism.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Perform a backup with single process</title>
+
+            <execute user="backrest">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=full backup</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <backrest-config host="{[host-backup]}" owner="backrest:postgres" file="{[backrest-config-demo]}">
+            <title>Configure <backrest/> to use multiple <cmd>backup</cmd> processes</title>
+
+            <backrest-config-option section="global" key="process-max">3</backrest-config-option>
+        </backrest-config>
+
+        <execute-list host="{[host-backup]}">
+            <title>Perform a backup with multiple processes</title>
+
+            <execute user="backrest">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=full backup</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[host-backup]}">
+            <title>Get backup info for the {[postgres-cluster-demo]} cluster</title>
+
+            <execute filter="n" output="y" user="backrest">
+                <exe-cmd>{[project-exe]} info</exe-cmd>
+                <exe-highlight>timestamp start/stop</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>The performance of the last backup should be improved by using multiple processes.  For very small backups the difference may not be very apparent, but as the size of the database increases so will time savings.</p>
+    </section>
+
+    <!-- SECTION => START/STOP -->
+    <section id="start-stop" depend="/backup-host/config">
+        <title>Starting and Stopping</title>
+
+        <p>Sometimes it is useful to prevent <backrest/> from running on a system.  For example, when failing over from a primary to a standby it's best to prevent <backrest/> from running on the old primary in case <postgres/> gets restarted or can't be completely killed.  This will also prevent <backrest/> from running on <id>cron</id>.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop the <backrest/> services</title>
+
+            <execute>
+                <exe-cmd>{[project-exe]} stop</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>New <backrest/> processes will no longer run.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Attempt a backup</title>
+
+            <execute user="backrest" err-expect="62" output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} backup</exe-cmd>
+                <exe-highlight>\: stop file exists for all stanzas</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Specify the <br-option>--force</br-option> option to terminate any <backrest/> process that are currently running.  If <backrest/> is already stopped then stopping again will generate a warning.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop the <backrest/> services again</title>
+
+            <execute output="y" filter="n">
+                <exe-cmd>{[project-exe]} stop</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Start <backrest/> processes again with the <cmd>start</cmd> command.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Start the <backrest/> services</title>
+
+            <execute>
+                <exe-cmd>{[project-exe]} start</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>It is also possible to stop <backrest/> for a single stanza.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop <backrest/> services for the <id>demo</id> stanza</title>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} stop</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>New <backrest/> processes for the specified stanza will no longer run.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Attempt a backup</title>
+
+            <execute user="backrest" err-expect="62" output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} backup</exe-cmd>
+                <exe-highlight>\: stop file exists for stanza demo</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>The stanza must also be specified when starting the <backrest/> processes for a single stanza.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Start the <backrest/> services for the <id>demo</id> stanza</title>
+
+            <execute>
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} start</exe-cmd>
+            </execute>
+        </execute-list>
+    </section>
+
+    <!-- SECTION => REPLICATION -->
+    <section id="replication" depend="/backup-host/perform-backup">
+        <title>Replication</title>
+
+        <p>Replication allows multiple copies of a <postgres/> cluster (called standbys) to be created from a single primary.  The standbys are useful for balancing reads and to provide redundancy in case the primary host fails.</p>
+
+        <!-- SECTION => REPLICATION - INSTALLATION -->
+        <section id="installation">
+            <title>Installation</title>
+
+            <p>A new host named <host>db-standby</host> is created to run the standby.</p>
+
+            <host-add name="{[host-db-standby]}" user="{[host-db-standby-user]}" image="{[host-db-standby-image]}" os="{[host-os]}" mount="{[host-db-standby-mount]}"/>
+
+            <block id="br-install">
+                <block-variable-replace key="br-install-host">{[host-db-standby]}</block-variable-replace>
+                <block-variable-replace key="br-install-user">postgres</block-variable-replace>
+                <block-variable-replace key="br-install-group">postgres</block-variable-replace>
+            </block>
+        </section>
+
+        <!-- SECTION => REPLICATION - SETUP-SSH -->
+        <section id="setup-ssh">
+            <title>Setup Trusted SSH</title>
+
+            <block id="setup-ssh-intro">
+                <block-variable-replace key="bogus">bogus !!!</block-variable-replace>
+            </block>
+
+            <block id="setup-ssh">
+                <block-variable-replace key="setup-ssh-host">{[host-db-standby]}</block-variable-replace>
+            </block>
+        </section>
+
+        <!-- SECTION => REPLICATION - HOT-STANDBY -->
+        <section id="hot-standby">
+            <title>Hot Standby</title>
+
+            <p>A hot standby performs replication using the WAL archive and allows read-only queries.</p>
+
+            <p><backrest/> configuration is very similar to <host>db-primary</host> except that the <pg-option>standby_mode</pg-option> setting will be enabled to keep the cluster in recovery mode when the end of the WAL stream has been reached.</p>
+
+            <backrest-config host="{[host-db-standby]}" file="{[backrest-config-demo]}">
+                <title>Configure <backrest/> on the standby</title>
+
+                <backrest-config-option section="demo" key="db-path">{[db-path]}</backrest-config-option>
+
+                <backrest-config-option section="global" key="backup-host">{[host-backup]}</backrest-config-option>
+
+                <backrest-config-option section="demo" key="recovery-option">standby_mode=on</backrest-config-option>
+
+                <backrest-config-option section="global" key="log-level-stderr">off</backrest-config-option>
+                <backrest-config-option section="global" key="log-timestamp">n</backrest-config-option>
+            </backrest-config>
+
+            <p keyword="default">The demo cluster must be created (even though it will be overwritten restore) in order to create the <postgres/> configuration files.</p>
+
+            <execute-list keyword="default" host="{[host-db-standby]}">
+                <title>Create demo cluster</title>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-create]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p keyword="co6">Create the path where <postgres/> will be restored.</p>
+
+            <execute-list keyword="co6" host="{[host-db-standby]}">
+                <title>Create <postgres/> path</title>
+
+                <execute user="postgres">
+                    <exe-cmd>
+                        mkdir -p -m 700 {[db-path]}
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Now the standby can be created with the <cmd>restore</cmd> command.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Restore the {[postgres-cluster-demo]} standby cluster</title>
+
+                <execute keyword="default">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta restore</exe-cmd>
+                </execute>
+
+                <execute keyword="co6">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} restore</exe-cmd>
+                </execute>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>cat {[postgres-recovery-demo]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Note that the <pg-setting>standby_mode</pg-setting> setting has been written into the <file>recovery.conf</file> file.  Configuring recovery settings in <backrest/> means that the <file>recovery.conf</file> file does not need to be stored elsewhere since it will be properly recreated with each restore.  The <br-setting>--type=preserve</br-setting> option can be used with the <cmd>restore</cmd> to leave the existing <file>recovery.conf</file> file in place if that behavior is preferred.</p>
+
+            <p>The <pg-setting>hot_standby</pg-setting> setting must be enabled before starting <postgres/> to allow read-only connections on <host>db-standby</host>.  Otherwise, connection attempts will be refused.</p>
+
+            <postgres-config host="{[host-db-standby]}" file="{[postgres-config-demo]}">
+                <title>Enable <pg-option>hot_standby</pg-option> and configure logging</title>
+
+                <postgres-config-option key="hot_standby">on</postgres-config-option>
+                <postgres-config-option key="log_filename">'postgresql.log'</postgres-config-option>
+                <postgres-config-option key="log_line_prefix">''</postgres-config-option>
+            </postgres-config>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Start <postgres/></title>
+
+                <execute user="root" show="n">
+                    <exe-cmd>rm {[postgres-log-demo]}</exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The <postgres/> log gives valuable information about the recovery.  Note especially that the cluster has entered standby mode and is ready to accept read-only connections.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Examine the <postgres/> log output for log messages indicating success</title>
+
+                <execute output="y">
+                    <exe-cmd>cat {[postgres-log-demo]}</exe-cmd>
+                    <exe-highlight>entering standby mode|database system is ready to accept read only connections</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>An easy way to test that replication is properly configured is to create a table on <host>db-primary</host>.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create a new table on the primary</title>
+
+                <execute output="y">
+                    <exe-cmd>
+                        psql -c "
+                                 begin;
+                                 create table replicated_table (message text);
+                                 insert into replicated_table values ('{[test-table-data]}');
+                                 commit;
+                                 select * from replicated_table";
+                    </exe-cmd>
+                    <exe-highlight>{[test-table-data]}</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>And then query the same table on <host>db-standby</host>.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Query new table on the standby</title>
+
+                <execute output="y" err-expect="1">
+                    <exe-cmd>psql -c "select * from replicated_table;"</exe-cmd>
+                    <exe-highlight>does not exist</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>So, what went wrong?  Since <postgres/> is pulling WAL segments from the archive to perform replication, changes won't be seen on the standby until the WAL segment that contains those changes is pushed from <host>db-primary</host>.</p>
+
+            <p>This can be done manually by calling <code>pg_switch_xlog()</code> which pushes the current WAL segment to the archive (a new WAL segment is created to contain further changes).</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Call <code>pg_switch_xlog()</code></title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "select *, current_timestamp from pg_switch_xlog()";
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Now after a short delay the table will appear on <host>db-standby</host>.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Now the new table exists on the standby (may require a few retries)</title>
+
+                <execute output="y" retry="15" filter="n">
+                    <exe-cmd>psql -c "
+                        select *, current_timestamp from replicated_table"</exe-cmd>
+                    <exe-highlight>{[test-table-data]}</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Check the standby configuration for access to the repository.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Check the configuration</title>
+
+                <execute output="y">
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-log-level-console=info check</exe-cmd>
+                    <exe-highlight>all other checks passed</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+
+        <!-- SECTION => REPLICATION - STREAMING -->
+        <section id="streaming">
+            <title>Streaming Replication</title>
+
+            <p>Instead of relying solely on the WAL archive, streaming replication makes a direct connection to the primary and applies changes as soon as they are made on the primary.  This results in much less lag between the primary and standby.</p>
+
+            <p>Streaming replication requires a user with the replication privilege.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create replication user</title>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>
+                        psql -c "
+                            create user replicator password 'jw8s0F4' replication";
+                    </exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The <file>pg_hba.conf</file> file must be updated to allow the standby to connect as the replication user.  Be sure to replace the IP address below with the actual IP address of your <host>db-primary</host>.  A reload will be required after modifying the <file>pg_hba.conf</file> file.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create <file>pg_hba.conf</file> entry for replication user</title>
+
+                <execute>
+                    <exe-cmd>
+                        sh -c 'echo
+                        "host    replication     replicator      {[host-db-standby-ip]}/32           md5"
+                        >> {[postgres-hba-demo]}'
+                    </exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-reload]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The standby needs to know how to contact the primary so the <pg-option>primary_conninfo</pg-option> setting will be configured in <backrest/>.</p>
+
+            <backrest-config host="{[host-db-standby]}" file="{[backrest-config-demo]}">
+                <title>Set <pg-option>primary_conninfo</pg-option></title>
+
+                <backrest-config-option section="demo" key="recovery-option">primary_conninfo=host={[host-db-primary-ip]} port=5432 user=replicator</backrest-config-option>
+            </backrest-config>
+
+            <p>It is possible to configure a password in the <pg-option>primary_conninfo</pg-option> setting but using a <file>.pgpass</file> file is more flexible and secure.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Configure the replication password in the <file>.pgpass</file> file.</title>
+
+                <execute>
+                    <exe-cmd>
+                        sh -c 'echo
+                        "{[host-db-primary-ip]}:*:replication:replicator:jw8s0F4"
+                        >> {[postgres-pgpass]}'
+                    </exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>chmod 600 {[postgres-pgpass]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>Now the standby can be created with the <cmd>restore</cmd> command.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Stop <postgres/> and restore the {[postgres-cluster-demo]} standby cluster</title>
+
+                <execute user="root" err-suppress="y">
+                    <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+                </execute>
+
+                <execute>
+                    <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta restore</exe-cmd>
+                </execute>
+
+                <execute output="y" filter="n">
+                    <exe-cmd>cat {[postgres-recovery-demo]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p keyword="co6">By default {[user-guide-os]} stores the <file>postgresql.conf</file> file in the <postgres/> data directory.  That means the change made to <file>postgresql.conf</file> was overwritten by the last restore and the <pg-option>hot_standby</pg-option> setting must be enabled again.  Other solutions to this problem are to store the <file>postgresql.conf</file> file elsewhere or to enable the <pg-option>hot_standby</pg-option> setting on the <host>db-primary</host> host where it will be ignored.</p>
+
+            <postgres-config host="{[host-db-standby]}" keyword="co6" file="{[postgres-config-demo]}">
+                <title>Enable <pg-option>hot_standby</pg-option></title>
+
+                <postgres-config-option key="hot_standby">on</postgres-config-option>
+            </postgres-config>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Start <postgres/></title>
+
+                <execute user="root" show="n">
+                    <exe-cmd>rm {[postgres-log-demo]}</exe-cmd>
+                </execute>
+
+                <execute user="root">
+                    <exe-cmd>{[db-cluster-start]}</exe-cmd>
+                </execute>
+
+                <execute show="n">
+                    <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+                </execute>
+            </execute-list>
+
+            <p>The <postgres/> log will confirm that streaming replication has started.</p>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Examine the <postgres/> log output for log messages indicating success</title>
+
+                <execute output="y">
+                    <exe-cmd>cat {[postgres-log-demo]}</exe-cmd>
+                    <exe-highlight>started streaming WAL from primary</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <p>Now when a table is created on <host>db-primary</host> it will appear on <host>db-standby</host> quickly and without the need to call <code>pg_switch_xlog()</code>.</p>
+
+            <execute-list host="{[host-db-primary]}">
+                <title>Create a new table on the primary</title>
+
+                <execute output="y">
+                    <exe-cmd>
+                        psql -c "
+                                 begin;
+                                 create table stream_table (message text);
+                                 insert into stream_table values ('{[test-table-data]}');
+                                 commit;
+                                 select *, current_timestamp from stream_table";
+                    </exe-cmd>
+                    <exe-highlight>{[test-table-data]}</exe-highlight>
+                </execute>
+            </execute-list>
+
+            <execute-list host="{[host-db-standby]}">
+                <title>Query table on the standby</title>
+
+                <execute output="y" retry="2" filter="n">
+                    <exe-cmd>psql -c "
+                        select *, current_timestamp from stream_table"</exe-cmd>
+                    <exe-highlight>{[test-table-data]}</exe-highlight>
+                </execute>
+            </execute-list>
+        </section>
+    </section>
+
+    <!-- SECTION => STANDBY-BACKUP -->
+    <section id="standby-backup" depend="/replication/streaming">
+        <title>Backup from a Standby</title>
+
+        <p><backrest/> can perform backups on a standby instead of the primary.  Standby backups require the <host>db-standby</host> host to be configured and the <br-option>backup-standby</br-option> option enabled.  If more than one standby is configured then the first running standby found will be used for the backup.</p>
+
+        <backrest-config host="{[host-backup]}" owner="backrest:postgres" file="{[backrest-config-demo]}">
+            <title>Configure <br-option>db2-host</br-option>/<br-option>db2-user</br-option> and <br-option>db2-path</br-option></title>
+
+            <backrest-config-option section="demo" key="db2-path">{[db-path]}</backrest-config-option>
+            <backrest-config-option section="demo" key="db2-host">{[host-db-standby]}</backrest-config-option>
+            <backrest-config-option section="demo" key="db2-user">postgres</backrest-config-option>
+
+            <backrest-config-option section="global" key="backup-standby">y</backrest-config-option>
+        </backrest-config>
+
+        <p>Both the primary and standby databases are required to perform the backup, though the vast majority of the files will be copied from the standby to reduce load on the primary.  The database hosts can be configured in any order.  <backrest/> will automatically determine which is the primary and which is the standby.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Backup the {[postgres-cluster-demo]} cluster from <host>db-standby</host></title>
+
+            <execute user="backrest" output="y" filter="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} --log-level-console=detail backup</exe-cmd>
+                <exe-highlight>backup file db-primary|replay on the standby</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>This incremental backup shows that most of the files are copied from the <host>db-standby</host> host and only a few are copied from the <host>db-primary</host> host.</p>
+
+        <p><backrest/> creates a standby backup that is identical to a backup performed on the primary.  It does this by starting/stopping the backup on the <host>db-primary</host> host, copying only files that are replicated from the <host>db-standby</host> host, then copying the remaining few files from the <host>db-primary</host> host.  This means that logs and statistics from the primary database will be included in the backup.</p>
+    </section>
+
+    <!-- SECTION => STANZA UPGRADE -->
+    <section id="upgrade-stanza">
+        <title>Upgrading <postgres/></title>
+        <cmd-description key="stanza-upgrade"/>
+
+        <p>The following instructions are not meant to be a comprehensive guide for upgrading <postgres/>, rather they outline the general process for upgrading a primary and standby with the intent of demonstrating the steps required to reconfigure <backrest/>. It is recommended that a backup be taken prior to upgrading.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Stop old cluster and install new <postgres/> version</title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+
+            <execute user="root" err-suppress="y">
+                <exe-cmd>{[postgres-install-upgrade]}</exe-cmd>
+                <exe-cmd-extra>-y</exe-cmd-extra>
+            </execute>
+
+            <execute keyword="default" user="root" err-suppress="y" show="n">
+                <exe-cmd>pg_dropcluster {[pg-version-upgrade]} main</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Stop the old cluster on the standby since it will be restored from the newly upgraded cluster.</p>
+
+        <execute-list host="{[host-db-standby]}">
+            <title>Stop old cluster and install new <postgres/> version</title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-stop]}</exe-cmd>
+            </execute>
+
+            <execute user="root" err-suppress="y">
+                <exe-cmd>{[postgres-install-upgrade]}</exe-cmd>
+                <exe-cmd-extra>-y</exe-cmd-extra>
+            </execute>
+
+            <execute keyword="default" user="root" err-suppress="y" show="n">
+                <exe-cmd>pg_dropcluster {[pg-version-upgrade]} main</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Create the new cluster and perform upgrade.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Create new cluster and perform the upgrade</title>
+
+            <execute user="postgres">
+                <exe-cmd>
+                    {[pg-bin-upgrade-path]}/initdb
+                        -D {[db-path-upgrade]} -k -A peer
+                </exe-cmd>
+            </execute>
+
+            <execute user="root" keyword="default">
+                <exe-cmd>{[db-cluster-create-upgrade]}</exe-cmd>
+            </execute>
+
+            <execute user="postgres" output="y" keyword="default">
+                <exe-cmd>sh -c 'cd /var/lib/postgresql &amp;&amp;
+                        /usr/lib/postgresql/{[pg-version-upgrade]}/bin/pg_upgrade
+                            {[dash]}-old-bindir=/usr/lib/postgresql/{[pg-version]}/bin
+                            {[dash]}-new-bindir=/usr/lib/postgresql/{[pg-version-upgrade]}/bin
+                            {[dash]}-old-datadir={[db-path]}
+                            {[dash]}-new-datadir={[db-path-upgrade]}
+                            {[dash]}-old-options=" -c config_file={[postgres-config-demo]}"
+                            {[dash]}-new-options=" -c config_file={[postgres-config-demo-upgrade]}"'
+                </exe-cmd>
+                <exe-highlight>Upgrade Complete</exe-highlight>
+            </execute>
+
+            <execute user="postgres" output="y" keyword="co6">
+                <exe-cmd>sh -c 'cd /var/lib/pgsql &amp;&amp;
+                        /usr/pgsql-{[pg-version-upgrade]}/bin/pg_upgrade
+                            {[dash]}-old-bindir=/usr/pgsql-{[pg-version]}/bin
+                            {[dash]}-new-bindir=/usr/pgsql-{[pg-version-upgrade]}/bin
+                            {[dash]}-old-datadir={[db-path]}
+                            {[dash]}-new-datadir={[db-path-upgrade]}
+                            {[dash]}-old-options=" -c config_file={[postgres-config-demo]}"
+                            {[dash]}-new-options=" -c config_file={[postgres-config-demo-upgrade]}"'
+                </exe-cmd>
+                <exe-highlight>Upgrade Complete</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Configure the new cluster settings and port.</p>
+
+        <postgres-config host="{[host-db-primary]}" file="{[postgres-config-demo-upgrade]}">
+            <title>Configure <postgres/></title>
+
+            <postgres-config-option key="archive_command">'{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} archive-push %p'</postgres-config-option>
+            <postgres-config-option key="archive_mode">on</postgres-config-option>
+            <postgres-config-option key="wal_level">hot_standby</postgres-config-option>
+            <postgres-config-option key="max_wal_senders">3</postgres-config-option>
+            <postgres-config-option key="listen_addresses">'*'</postgres-config-option>
+            <postgres-config-option key="log_line_prefix">''</postgres-config-option>
+            <postgres-config-option key="port">5432</postgres-config-option>
+        </postgres-config>
+
+        <p>Update the <backrest/> configuration on all systems to point to the new cluster.</p>
+
+        <backrest-config host="{[host-db-primary]}" file="{[backrest-config-demo]}">
+            <title>Upgrade the <br-option>db-path</br-option></title>
+
+            <backrest-config-option section="demo" key="db-path">{[db-path-upgrade]}</backrest-config-option>
+        </backrest-config>
+
+        <backrest-config host="{[host-db-standby]}" file="{[backrest-config-demo]}">
+            <title>Upgrade the <br-option>db-path</br-option></title>
+
+            <backrest-config-option section="demo" key="db-path">{[db-path-upgrade]}</backrest-config-option>
+        </backrest-config>
+
+        <backrest-config host="{[host-backup]}" owner="backrest:postgres" file="{[backrest-config-demo]}">
+            <title>Upgrade <br-option>db1-path</br-option> and <br-option>db2-path</br-option>, disable backup from standby</title>
+
+            <backrest-config-option section="demo" key="db1-path">{[db-path-upgrade]}</backrest-config-option>
+            <backrest-config-option section="demo" key="db2-path">{[db-path-upgrade]}</backrest-config-option>
+
+            <backrest-config-option section="global" key="backup-standby">n</backrest-config-option>
+        </backrest-config>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Copy hba configuration</title>
+
+            <execute user="root">
+                <exe-cmd>cp {[postgres-hba-demo]}
+                    {[postgres-hba-demo-upgrade]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Before starting the new cluster, the <cmd>stanza-upgrade</cmd> command must be run on the server where the <backrest/> repository is located.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Upgrade the stanza</title>
+
+            <execute user="backrest" output="y">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-no-online
+                    {[dash]}-log-level-console=info stanza-upgrade</exe-cmd>
+                <exe-highlight>completed successfully</exe-highlight>
+            </execute>
+        </execute-list>
+
+        <p>Start the new cluster and confirm it is successfully installed.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Start new cluster</title>
+
+            <execute user="root" output="y">
+                <exe-cmd>{[db-cluster-start-upgrade]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Test configuration using the <cmd>check</cmd> command.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Check configuration</title>
+
+            <execute output="y" filter="n" >
+                <exe-cmd>{[db-cluster-check-upgrade]}</exe-cmd>
+            </execute>
+
+            <execute output="y" filter="n" >
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} check</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Remove the old cluster.</p>
+
+        <execute-list host="{[host-db-primary]}">
+            <title>Remove old cluster</title>
+
+            <execute keyword="default" user="root">
+                <exe-cmd>pg_dropcluster {[pg-version]} {[postgres-cluster-demo]}</exe-cmd>
+            </execute>
+
+            <execute keyword="co6" user="root">
+                <exe-cmd>rm -rf {[db-path]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Install the new <postgres/> binaries on the standby and create the cluster.</p>
+
+        <execute-list host="{[host-db-standby]}">
+            <title>Remove old cluster and create the new cluster</title>
+
+            <execute keyword="default" user="root">
+                <exe-cmd>pg_dropcluster {[pg-version]} {[postgres-cluster-demo]}</exe-cmd>
+            </execute>
+
+            <execute keyword="co6" user="root">
+                <exe-cmd>rm -rf {[db-path]}</exe-cmd>
+            </execute>
+
+            <execute user="postgres" keyword="co6">
+                <exe-cmd>
+                    mkdir -p -m 700 {[pg-bin-upgrade-path]}
+                </exe-cmd>
+            </execute>
+
+            <execute user="root" keyword="default">
+                <exe-cmd>{[db-cluster-create-upgrade]}</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Run the <cmd>check</cmd> on the backup host. The warning regarding the standby being down is expected since the standby cluster is down. Running this command demonstrates that the backup server is aware of the standby and is configured properly for the primary server.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Check configuration</title>
+
+            <execute user="backrest" output="y" filter="n" >
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} check</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Run a full backup on the new cluster and then restore the standby from the backup. The backup type will automatically be changed to <id>full</id> if <id>incr</id> or <id>diff</id> is requested.</p>
+
+        <execute-list host="{[host-backup]}">
+            <title>Run a full backup</title>
+
+            <execute user="backrest">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-type=full backup</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <execute-list host="{[host-db-standby]}">
+            <title>Restore the {[postgres-cluster-demo]} standby cluster</title>
+
+            <execute keyword="default">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} {[dash]}-delta restore</exe-cmd>
+            </execute>
+
+            <execute keyword="co6">
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} restore</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <postgres-config host="{[host-db-standby]}" file="{[postgres-config-demo-upgrade]}">
+            <title>Configure <postgres/></title>
+
+            <postgres-config-option key="hot_standby">on</postgres-config-option>
+        </postgres-config>
+
+        <execute-list host="{[host-db-standby]}">
+            <title>Start <postgres/> and check the <backrest/> configuration</title>
+
+            <execute user="root">
+                <exe-cmd>{[db-cluster-start-upgrade]}</exe-cmd>
+            </execute>
+
+            <execute show="n">
+                <exe-cmd>{[db-cluster-wait]}</exe-cmd>
+            </execute>
+
+            <execute user="postgres" output="y" filter="n" >
+                <exe-cmd>{[project-exe]} {[dash]}-stanza={[postgres-cluster-demo]} check</exe-cmd>
+            </execute>
+        </execute-list>
+
+        <p>Backup from standby can be enabled now that the standby is restored.</p>
+
+        <backrest-config host="{[host-backup]}" owner="backrest:postgres" file="{[backrest-config-demo]}">
+            <title>Reenable backup from standby</title>
+
+            <backrest-config-option section="global" key="backup-standby">y</backrest-config-option>
+        </backrest-config>
+    </section>
+</doc>

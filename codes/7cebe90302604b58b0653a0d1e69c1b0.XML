@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE doc SYSTEM "manifest.dtd">
+<doc>
+    <!-- System-wide variables  -->
+    <variable-list>
+        <variable key="project">pgBackRest</variable>
+        <variable key="project-tagline">Reliable PostgreSQL Backup &amp; Restore</variable>
+        <variable key="version" eval="y">use pgBackRest::Version; BACKREST_VERSION</variable>
+        <variable key="version-stable" eval="y">
+            use BackRestDoc::Custom::DocCustomRelease;
+
+            (new BackRestDoc::Custom::DocCustomRelease(
+                new BackRestDoc::Common::Doc("{[doc-path]}/xml/release.xml")))->currentStableVersion();
+        </variable>
+        <variable key="project-exe">pgbackrest</variable>
+        <variable key="project-url-root">/</variable>
+        <variable key="postgres">PostgreSQL</variable>
+        <variable key="dash">-</variable>
+        <variable key="project-logo">logo.png</variable>
+        <variable key="project-favicon">favicon.png</variable>
+
+        <!-- Release date - static allows for reproducible builds -->
+        <variable key="release-date-static">n</variable>
+        <variable key="release-date" eval="y">
+            use Time::Local;
+            use BackRestDoc::Custom::DocCustomRelease;
+
+            my ($second, $minute , $hour, $mday, $month, $year) = localtime();
+            $year += 1900;
+
+            if ('{[release-date-static]}' eq 'y')
+            {
+                my $strDate = (new BackRestDoc::Custom::DocCustomRelease(
+                    new BackRestDoc::Common::Doc("{[doc-path]}/xml/release.xml")))->releaseLast()->paramGet('date');
+
+                if ($strDate eq 'XXXX-XX-XX')
+                {
+                    confess &amp;log(ERROR, 'not possible to use static release dates on a dev build');
+                }
+                else
+                {
+                    ($year, $month, $mday) = split(/[\s.\-]+/, $strDate);
+                    $month -= 1;
+                }
+            }
+
+            my @stryMonth = ('January', 'February', 'March', 'April', 'May', 'June',
+                             'July', 'August', 'September', 'October', 'November', 'December');
+
+            $stryMonth[$month] . ' ' . $mday . ', ' . $year;
+        </variable>
+
+        <!-- Logo locations -->
+        <variable key="logo">{[doc-path]}/output/latex/logo</variable>
+
+        <!-- HTML variables  -->
+        <variable key="html-footer" eval='y'>
+            'Copyright &amp;copy; 2015' . '-' . substr('{[release-date]}', length('{[release-date]}') - 4) .
+            ', The PostgreSQL Global Development Group, &lt;a href="{[github-url-license]}">MIT License&lt;/a>.  Updated ' .
+            '{[release-date]}';
+        </variable>
+        <!-- <variable key="html-logo">&lt;img src=&quot;{[project-logo]}&quot;&gt;</variable> -->
+
+        <!-- PDF variables  -->
+        <variable key="pdf-title">{[project]} User Guide</variable>
+        <variable key="pdf-subtitle">Open Source PostgreSQL Backup and Restore Utility</variable>
+        <variable key="pdf-file">CrunchyBackRest-UserGuide-{[version]}</variable>
+    </variable-list>
+
+    <source-list>
+        <source key="index"/>
+        <source key="user-guide"/>
+        <source key="reference" type="custom"/>
+        <source key="release" type="custom"/>
+        <source key="coding"/>
+        <source key="test"/>
+    </source-list>
+
+    <render-list>
+        <render type="html">
+            <render-source key="index" menu="Home"/>
+            <render-source key="user-guide" menu="User Guide"/>
+            <render-source key="configuration" source="reference" menu="Configuration"/>
+            <render-source key="command" source="reference" menu="Commands"/>
+            <render-source key="release" menu="Releases"/>
+        </render>
+
+        <render type="pdf" file="{[pdf-file]}">
+            <render-source key="user-guide"/>
+        </render>
+
+        <render type="markdown">
+            <render-source key="index" file="../../../README.md"/>
+            <render-source key="coding" file="../../../CODING.md"/>
+            <render-source key="test" file="../../../test/README.md"/>
+        </render>
+    </render-list>
+</doc>
