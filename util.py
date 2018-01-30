@@ -89,14 +89,4 @@ def move_files(origin_folder, destination_folder, language, extension):
 
 
 if __name__ == '__main__':
-    move_files('/home/mica/Descargas',
-               '/home/mica/Escritorio/codes',
-               'YAML',
-               'yml')
-
-    move_files('/home/mica/Descargas',
-               '/home/mica/Escritorio/codes',
-               'VBScript',
-               'vbs')
-
-    languages_file_frecuency('codes')
+    load_data('codes')
