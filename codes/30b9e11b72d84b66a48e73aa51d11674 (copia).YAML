@@ -1,0 +1,43 @@
+env:
+    - GHCVER=7.10.3 TEST_PART=CORE1
+    - GHCVER=7.10.3 TEST_PART=CORE2
+    - GHCVER=7.10.3 TEST_PART=PROFILING
+    - GHCVER=7.10.3 TEST_PART=GHCJS
+
+addons:
+    apt:
+        sources:
+            - hvr-ghc
+        packages:
+            - build-essential
+            - nodejs
+            - cabal-install-1.22
+            - ghc-7.10.3
+            - alex-3.1.4
+            - happy-1.19.5
+
+before_install:
+    - export GHCJS_BOOTING=1
+    - export GHCJS_BOOTING_STAGE1=1
+    - nvm install 4
+    - export PATH=$HOME/.cabal/bin:/opt/ghc/$GHCVER/bin:/opt/cabal/1.22/bin:/opt/alex/3.1.4/bin:/opt/happy/1.19.5/bin:$PATH
+
+install:
+    - travis_retry cabal update
+    - cabal install --only-dependencies --enable-tests --enable-benchmarks
+    - cabal install --enable-tests --enable-benchmarks -v -j1 --ghc-options="+RTS -c -RTS"
+    - ghcjs --version
+    - ghcjs-boot --version
+    - ./test/runTravis.sh boot
+    - ghcjs-pkg list
+
+script:
+    - ./test/runTravis.sh test
+
+notifications:
+  irc:
+    channels: "irc.freenode.net#ghcjs"
+    skip_join: true
+  email: true
+
+sudo: false

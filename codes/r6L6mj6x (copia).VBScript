@@ -1,0 +1,17 @@
+'********************************************
+' Click_down.vbs
+'********************************************
+Set WshShell = CreateObject("Wscript.Shell")
+WshShell.AppActivate("hogehoge")
+'WshShell.SendKeys “^l”
+WshShell.SendKeys "javascript:{(}function{(}{)}{{}document.getElementById{(}'dwn_button'{)}.click{(}{)};document.getElementById('invest_now_button').click{(}{)};{}}{)}{(}{)};"
+WshShell.SendKeys "{ENTER}"
+
+'********************************************
+' Click_up.vbs
+'********************************************
+Set WshShell = CreateObject("Wscript.Shell")
+WshShell.AppActivate("hogehoge")
+'WshShell.SendKeys “^l”
+WshShell.SendKeys "javascript:{(}function{(}{)}{{}document.getElementById{(}'up_button'{)}.click{(}{)};document.getElementById('invest_now_button').click{(}{)};{}}{)}{(}{)};"
+WshShell.SendKeys "{ENTER}"

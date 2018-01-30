@@ -1,0 +1,28 @@
+Sub AnandaTranspose()
+'
+' AnandaTranspose Macro
+'
+Rem you can use ' or rem as the first character in a line to signify a remark
+'
+
+    Sheets("Input").Select
+    
+    ' first, select an area on the input sheet
+    Range("A1:P100").Select
+    
+    ' start the copy process
+    Selection.Copy
+    
+    ' click on the Output sheet
+    Sheets("Output").Select
+    
+    ' click on A1
+    Range("A1").Select
+    
+    ' perform the paste
+    Selection.PasteSpecial Paste:=xlPasteAll, Operation:=xlNone, SkipBlanks:= _
+        False, Transpose:=True
+    
+    ' complete the process
+    Application.CutCopyMode = False
+End Sub

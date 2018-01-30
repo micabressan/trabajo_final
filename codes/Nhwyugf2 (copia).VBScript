@@ -1,0 +1,6 @@
+'cscript vget.vbs >FILE.TXT
+'Run this vbscript at command line. Use above syntax to download/create FILE.TXT
+Set oX = CreateObject("Microsoft.XmlHTTP")
+oX.Open "GET", "http://www.realmofthemadgod.com/version.txt", False
+oX.Send ""
+WScript.Echo oX.responseText

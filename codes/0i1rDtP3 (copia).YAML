@@ -1,0 +1,7 @@
+version: '1.0'
+steps:
+    TestVolumes:
+      image: alpine
+      commands:
+        - ls ${{CF_VOLUME_PATH}}                  # check if the test file is there from the previous build
+        - touch ${{CF_VOLUME_PATH}}/testfile      # create a test file

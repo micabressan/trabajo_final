@@ -1,0 +1,2130 @@
+composer-cost: 1000
+hoe-cost: 1250
+fert-cost: 850
+composer-minutes: 5
+grams-minutes: 5
+xp-fertilizzante: 3
+lang:
+  ricevuto: Hai ricevuto %num %item
+  acquistook: Acquisto completato correttamente
+  nomoney: Non hai abbastanza soldi
+  nodubs: Non hai abbastanza dubs
+  getfert: Hai ricevuto del fertilizzante
+  noyourseed: Non e' il tuo seme
+  noyourcomposer: Non e' il tuo composer
+  composerok: Composer posizionato correttamente
+  composerremoved: Composer rimosso correttamente
+  composerremovedwrong: Composer rimosso in fase di trasformazione
+  composerritirato: Hai ritirato il fertilizzante prodotto
+  composernopotato: Non hai nessuna patata marcia fertilizzata
+  composertrasformazione: Sono in trasformazione %num patate marce fertilizzate
+  seedadded: Dei semi sono stati aggiunti al tuo inventario
+  seedok: Seme posizionato correttamente
+  seedremoved: Seme rimosso correttamente
+  foundubs: Hai trovato dei dubs
+  seedrankup: Il tuo seme e' salito di livello
+  getdrug: Hai raccolto la droga prodotta
+  onlyeveryminutes: Puoi raccogliere la droga solo ogni %num minuti
+  drugsell: Hai venuto la droga per $%num
+holo:
+- Lvl %level
+- '%rarity'
+- XP %nowxp/%neededxp
+- 1g = $%gramcost
+- '%gramppertime g / %grameveryminutes M'
+chest:
+  '1':
+    nome: Cassa
+    prezzo: 1111
+    loot:
+    - 1-40
+    - 2-30
+    - 5-30
+  '2':
+    nome: Cassa
+    prezzo: 1111
+    loot:
+    - 1-40
+    - 2-30
+    - 5-30
+  '3':
+    nome: Cassa
+    prezzo: 1111
+    loot:
+    - 1-40
+    - 2-30
+    - 5-30
+  '4':
+    nome: Cassa
+    prezzo: 1111
+    loot:
+    - 1-40
+    - 2-30
+    - 5-30
+  '5':
+    nome: Cassa
+    prezzo: 1111
+    loot:
+    - 1-40
+    - 2-30
+    - 5-30
+'1':
+  enabled: true
+  name: seme1
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'2':
+  enabled: true
+  name: seme2
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'3':
+  enabled: true
+  name: seme3
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'4':
+  enabled: true
+  name: seme4
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'5':
+  enabled: true
+  name: seme5
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'6':
+  enabled: true
+  name: seme6
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'7':
+  enabled: true
+  name: seme7
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'8':
+  enabled: true
+  name: seme8
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'9':
+  enabled: true
+  name: seme9
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+'10':
+  enabled: true
+  name: seme10
+  icon: SUGAR
+  raro: Comune
+  valore: 1555
+  level:
+    '1':
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '2':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '3':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '4':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '5':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '6':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '7':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '8':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '9':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '10':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '11':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '12':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '13':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '14':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '15':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '16':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '17':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '18':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '19':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '20':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '21':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '22':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '23':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '24':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '25':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '26':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '27':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '28':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '29':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '30':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '31':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '32':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '33':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '34':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '35':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '36':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '37':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '38':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '39':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200
+    '40':
+      xp-richiesti: 100
+      xp-farm: 10
+      grammi-ogni-time: 0.2
+      valore-grammo: 200

@@ -1,0 +1,53 @@
+#
+# DIYFUTURISM.COM
+#
+# USEFUL SENSOR: META MOTION SENSOR, MOTION LAST SEEN
+#
+
+#
+# in configuration.yaml
+#
+binary_sensor: !include binary_sensor.yaml
+variable:  
+  last_motion:
+    value: 'Unknown'
+    restore: true
+    attributes:
+      icon: mdi:map-marker
+      name: "Last Motion"
+#
+# in automation.yaml
+#
+# Update Last Motion variable
+- alias: "Update Last Motion"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.bathroom_motion, binary_sensor.closet_motion, binary_sensor.entry_motion_meta, binary_sensor.dining_motion_meta, binary_sensor.kitchen_motion_meta, binary_sensor.livingroom_motion_meta, binary_sensor.office_motion
+      to: 'on'
+  action:
+    - service: variable.set_variable
+      data:
+        variable: last_motion
+        attributes_template: >
+            {
+              "history_1": "{{ variable.state }}",
+              "history_2": "{{ variable.attributes.history_1 }}",
+              "history_3": "{{ variable.attributes.history_2 }}"
+            }
+      data_template:
+        value: "{{ trigger.to_state.attributes.friendly_name }}"
+#
+# in binary_sensor.yaml
+#
+    kitchen_motion_meta:
+      friendly_name: 'Kitchen Motion'
+      device_class: motion
+      value_template: >-
+        {%- if is_state("binary_sensor.kitchen_motion", "on")
+        or is_state("binary_sensor.fridge_motion", "on")
+        or is_state("binary_sensor.crawl_space_door", "on")
+          -%}
+        True
+        {%- else -%}
+        False
+        {%- endif %}

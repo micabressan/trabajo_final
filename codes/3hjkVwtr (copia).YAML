@@ -1,0 +1,19 @@
+# mChat configuration file
+# 
+#           **IMPORTANT**
+#   usage of mchat-message-format is restricted to:
+#       +suffix,+s, +prefix,+p, +group,+g, +world,+w, +time,+t, +name,+n, +dname,+dn, +health,+h +healthbar,+hb, +message,+msg,+m
+# 
+#   usage of mchat-name-format, mchat-playerEvent-format are restricted to:
+#       +suffix,+s, +prefix,+p, +group,+g, +world,+w, +time,+t, +name,+n, +dname,+dn, +health,+h +healthbar,+hb
+#           **************
+
+mchat-join-message: has joined the game.
+mchat-date-format: HH:mm:ss
+auto-Changed: 1
+mchat-API-only: false
+mchat-name-format: +p+dn+s&e
+mchat-playerEvent-format: +p+dn+s&e
+mchat-kick-message: has been kicked from the game.
+mchat-message-format: '+hb+p+dn+s&f: +message'
+mchat-leave-message: has left the game.

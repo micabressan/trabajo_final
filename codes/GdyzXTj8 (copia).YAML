@@ -1,0 +1,13 @@
+groups:
+    default:
+        default: true
+        permissions:
+        - modifyworld.*
+	Builder:
+		default: false
+		permissions:
+		-modifuworld.*
+users:
+    acethek1ng:
+        group:
+        - Builder

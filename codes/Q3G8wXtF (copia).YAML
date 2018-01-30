@@ -1,0 +1,29 @@
+   action:
+   - service: media_player.select_source
+     data_template:
+       entity_id: >
+         {% if is_state("input_select.speakers", "Kitchen") %}
+           media_player.sonos_kitchen
+         {%-elif is_state("input_select.speakers", "Cinema") %}
+           media_player.sonos_cinema
+         {% endif %}
+       source: >
+         {% if is_state("input_select.radio_station", "Veronica") %}
+           'Veronica'
+         {%-elif is_state("input_select.radio_station", "Absolute 80s") %}
+           'Absolute 80s'
+         {% endif %}
+
+In the template editor the result is:
+-----------------------------------------------
+action:
+   - service: media_player.select_source
+     data_template:
+       entity_id: >
+         
+           media_player.sonos_cinema
+         
+       source: >
+         
+           'Veronica'
+-----------------------------------------------

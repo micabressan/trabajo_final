@@ -1,0 +1,25 @@
+[21:10:20 INFO]: RFSMassacre issued server command: /hug
+[21:10:20 ERROR]: null
+org.bukkit.command.CommandException: Unhandled exception executing command 'hug' in plugin PlayerEmotesPro v1.8.1
+        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:46) ~[spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at org.bukkit.command.SimpleCommandMap.dispatch(SimpleCommandMap.java:141) ~[spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at org.bukkit.craftbukkit.v1_12_R1.CraftServer.dispatchCommand(CraftServer.java:649) ~[spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.PlayerConnection.handleCommand(PlayerConnection.java:1397) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.PlayerConnection.a(PlayerConnection.java:1232) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.PacketPlayInChat.a(PacketPlayInChat.java:45) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.PacketPlayInChat.a(PacketPlayInChat.java:1) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.PlayerConnectionUtils$1.run(SourceFile:13) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_144]
+        at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_144]
+        at net.minecraft.server.v1_12_R1.SystemUtils.a(SourceFile:46) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.MinecraftServer.D(MinecraftServer.java:748) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.DedicatedServer.D(DedicatedServer.java:406) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.MinecraftServer.C(MinecraftServer.java:679) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at net.minecraft.server.v1_12_R1.MinecraftServer.run(MinecraftServer.java:577) [spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        at java.lang.Thread.run(Unknown Source) [?:1.8.0_144]
+Caused by: java.lang.NullPointerException
+        at me.inamine.Action.Actions.doActions(Actions.java:68) ~[?:?]
+        at me.inamine.Util.Utils.universalEmote(Utils.java:65) ~[?:?]
+        at me.inamine.Emotes.Main.onCommand(Main.java:402) ~[?:?]
+        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:44) ~[spigot-1.12.2.jar:git-Spigot-3d850ec-809c399]
+        ... 15 more

@@ -1,0 +1,408 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Signup'
+
+Parameters:
+  SalesforceUrl:
+    Type: String
+  SalesforceUsername:
+    Type: String
+  SalesforcePassword:
+    Type: String
+  DocusignIntegratorKey:
+    Type: String
+  DocusignEmail:
+    Type: String
+  DocusignUrl:
+    Type: String
+  DocusignPassword:
+    Type: String
+
+Resources:
+  DocusignPostNotification:
+    Properties:
+      Description: "Send notifications from Docusign service"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        DocusignGetNotificationApi:
+          Properties:
+            Method: get
+            Path: /docusign/notification
+          Type: Api
+        DocusignPostNotificationApi:
+          Properties:
+            Method: post
+            Path: /docusign/notification
+          Type: Api
+      Handler: Api/docusign-post-notification.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforceGetInstall:
+    Properties:
+      Description: "Get installation informations"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforceGetInstallApi:
+          Properties:
+            Method: get
+            Path: /salesforce/install
+          Type: Api
+      Handler: Api/salesforce-get-install.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforceGetOpportunities:
+    Properties:
+      Description: "Get list of opportunities from Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforceGetOpportunitiesApi:
+          Properties:
+            Method: get
+            Path: /salesforce/opportunities
+          Type: Api
+      Handler: Api/salesforce-get-opportunities.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforceGetProducts:
+    Properties:
+      Description: "Get product list from Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforceGetProductsApi:
+          Properties:
+            Method: get
+            Path: /salesforce/products
+          Type: Api
+      Handler: Api/salesforce-get-products.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforcePostOpportunities:
+    Properties:
+      Description: "Create an opportunity to Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforcePostOpportunitiesApi:
+          Properties:
+            Method: post
+            Path: /salesforce/opportunities
+          Type: Api
+      Handler: Api/salesforce-post-opportunities.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforcePostShippingAdress:
+    Properties:
+      Description: "Create shipping address on salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforcePostShippingAdressApi:
+          Properties:
+            Method: post
+            Path: /salesforce/shippingaddress
+          Type: Api
+      Handler: Api/salesforce-post-shipping-adress.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SalesforcePutInstall:
+    Properties:
+      Description: "Update install details"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforcePutInstallApi:
+          Properties:
+            Method: put
+            Path: /salesforce/install
+          Type: Api
+      Handler: Api/salesforce-put-install.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SignupGetOpportunity:
+    Properties:
+      Description: "Get a single opportunity from Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SalesforceGetOpportunityApi:
+          Type: Api
+          Properties:
+            Method: get
+            Path: /salesforce/opportunity
+      Handler: Api/signup-get-opportunity.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SignupGetQuotation:
+    Properties:
+      Description: "Get existing quotation from Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SignupGetQuotationApi:
+          Properties:
+            Method: get
+            Path: /salesforce/quotation
+          Type: Api
+        SignupGetQuotationByOpportunityApi:
+          Properties:
+            Method: get
+            Path: /salesforce/quotation/by-opportunity
+          Type: Api
+      Handler: Api/signup-get-quotation.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SignupPostQuotation:
+    Properties:
+      Description: "Post quotation to Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+          DocusignIntegratorKey: !Ref DocusignIntagratorKey
+          DocusignEmail: !Ref DocusignEmail
+          DocusignUrl: !Ref DocusignUrl
+          DocusignPassword: !Ref DocusignPassword
+      Events:
+        SignupPostQuotationApi:
+          Properties:
+            Method: post
+            Path: /salesforce/quotation
+          Type: Api
+      Handler: Api/signup-quotation.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 180
+    Type: "AWS::Serverless::Function"
+  SignupPostPayments:
+    Properties:
+      Description: "Post payments to Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SignupPostPaymentsApi:
+          Properties:
+            Method: post
+            Path: /salesforce/payments
+          Type: Api
+      Handler: Api/signup-post-payments.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SlimpayGetPayment:
+    Properties:
+      Description: "Retrieve payment from Salesforce"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SlimpayGetPaymentApi:
+          Properties:
+            Method: get
+            Path: /salesforce/payment
+          Type: Api
+      Handler: Api/slimpay-get-payment.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SlimpayGetPaymentNotification:
+    Properties:
+      Description: "Get notification for payment status"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SlimpayGetPaymentNotificationApi:
+          Properties:
+            Method: get
+            Path: /salesforce/payment/notification
+          Type: Api
+        SlimpayPostPaymentNotificationApi:
+          Properties:
+            Method: post
+            Path: /salesforce/payment/notification
+          Type: Api
+      Handler: Api/slimpay-get-payment-notification.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+  SlimpayGetSepa:
+    Properties:
+      Description: "Get Sepa from Slimpay service"
+      Environment:
+        Variables:
+          QuotationTable: SignUpQuotation
+          SalesforceUrl: !Ref SalesforceUrl
+          SalesforceUsername: !Ref SalesforceUsername
+          SalesforcePassword: !Ref SalesforcePassword
+      Events:
+        SlimpayGetSepaApi:
+          Properties:
+            Method: get
+            Path: /salesforce/sepa
+          Type: Api
+      Handler: Api/slimpay-get-sepa.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs6.10
+      Timeout: 5
+    Type: "AWS::Serverless::Function"
+
+  #CORS
+  CORSFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Description: "Allow CORS"
+      Events:
+        SalesforceGetOpportunitiesCORSApi:
+          Type: Api
+          Properties:
+            Method: options
+            Path: /salesforce/opportunities
+        SalesforcePutInstallCORSApi:
+          Type: Api
+          Properties:
+            Method: options
+            Path: /salesforce/install
+        SignupPostQuotationCORSApi:
+          Type: Api
+          Properties:
+            Method: options
+            Path: /salesforce/quotation
+        SignupPostPaymentsCORSApi:
+          Type: Api
+          Properties:
+            Method: options
+            Path: /salesforce/payments
+      Handler: Api/cors.handler
+      Runtime: nodejs6.10
+      Timeout: 3
+
+  SignUpQuotation:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: QuotationID
+          AttributeType: S
+        - AttributeName: SlimpaySepaID
+          AttributeType: S
+        - AttributeName: SlimpayID
+          AttributeType: S
+        - AttributeName: EnvelopeID
+          AttributeType: S
+        - AttributeName: OpportunityID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: QuotationID
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      GlobalSecondaryIndexes:
+        - IndexName: "SlimpaySepaID"
+          KeySchema:
+            - AttributeName: "SlimpaySepaID"
+              KeyType: "HASH"
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 5
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "SlimpayID"
+          KeySchema:
+            - AttributeName: "SlimpayID"
+              KeyType: "HASH"
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 5
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "EnvelopeID"
+          KeySchema:
+            - AttributeName: "EnvelopeID"
+              KeyType: "HASH"
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 5
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "OpportunityID"
+          KeySchema:
+            - AttributeName: "OpportunityID"
+              KeyType: "HASH"
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 5
+          Projection:
+            ProjectionType: "ALL"

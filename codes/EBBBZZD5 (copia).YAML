@@ -1,0 +1,38 @@
+SW:
+  start: 1
+  amount: 2
+  firework: true
+  gamelobbyes: true
+  maps:
+    1: 'Castle'
+    2: 'DreamLand'
+  lore:
+    EN:
+      - ' '
+      - '&cMap: &c{map}'
+      - '&cOnline: &c{online}&7/&c{max}'
+      - ' '
+    RU:
+      - ' '
+      - '&cКарта: &c{map}'
+      - '&cОнлайн: &c{online}&7/&c{max}'
+      - ' '
+hub:
+  start: 1
+  amount: 2
+  firework: false
+  gamelobbyes: true
+  maps:
+    1: 'Halloween'
+    2: 'Archives'
+  lore:
+    EN:
+      - ' '
+      - ' '
+      - '&cOnline: &c{online}&7/&c150'
+      - ' '
+    RU:
+      - ' '
+      - ' '
+      - '&cОнлайн: &c{online}&7/&c150'
+      - ' '

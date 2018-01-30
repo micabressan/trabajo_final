@@ -1,0 +1,24 @@
+commit 80977097ced589852932b700ef4e62b44333234d
+Author: Norm Jacobs <naj@snapcon.com>
+Date:   Mon Jan 29 00:12:36 2018 -0600
+
+    pkglint should fail when RUNPATH contains defaults
+
+diff --git a/tools/python/pkglint/userland.py b/tools/python/pkglint/userland.py
+index d899cbec6..a3c7e7644 100644
+--- a/tools/python/pkglint/userland.py
++++ b/tools/python/pkglint/userland.py
+@@ -275,6 +275,14 @@ class UserlandActionChecker(base.ActionChecker):
+                                        match = True
+                                        break
+ 
++                       # The RUNPATH shouldn't contain any runtime linker
++                       # default paths (or the /64 equivalent link)
++                       if dir in ['/lib', '/lib/64',
++                                  '/lib/amd64', '/lib/sparcv9',
++                                  '/usr/lib', '/usr/lib/64',
++                                  '/usr/lib/amd64', '/usr/lib/sparcv9' ]:
++                               list.append(dir)
++
+                        if match == False:
+                                list.append(dir)

@@ -1,0 +1,55 @@
+hilfe_main:
+  type: command
+  debug: true
+  name: hilfe
+  description: Zeigt allgemeine Hilfe an
+  usage: /hilfe <&lt>Thema<&gt>
+  aliases: 
+   - help
+  script:
+#    Allgemeine Hilfe 1/2
+    - if <context.args.is_empty> {
+        - ^narrate "<&3><&m>---------------- <&b><&l> Craftasy<&6><&l> Hilfemenü <&3><&m>----------------"
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Hilfe und Support","hoverEvent":{"action":"show_text","value":"Wie benutze ich die Hilfe?"},"clickEvent":{"action":"run_command","value":"/hilfe hilfe"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Guide für neue Spieler","hoverEvent":{"action":"show_text","value":"Tipps zum erfolgreichen Start"},"clickEvent":{"action":"run_command","value":"/hilfe guide"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Die Regeln","hoverEvent":{"action":"show_text","value":"Welche Regeln gibt es?"},"clickEvent":{"action":"run_command","value":"/hilfe regeln"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Wichtige Links","hoverEvent":{"action":"show_text","value":"Livemap, Forum, Voiceserver, Kontaktmöglichkeiten"},"clickEvent":{"action":"run_command","value":"/hilfe kontakt"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Chat","hoverEvent":{"action":"show_text","value":"Infos zum Chatsystem"},"clickEvent":{"action":"run_command","value":"/hilfe chat"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Protection (\"Grundst<&uuml>ck\")","hoverEvent":{"action":"show_text","value":"Infos zur Sicherung von Kisten, Bauwerken..."},"clickEvent":{"action":"run_command","value":"/hilfe sicherung"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Skillsystem mcMMO","hoverEvent":{"action":"show_text","value":"Skills, Partyverwaltung, andere Features"},"clickEvent":{"action":"run_command","value":"/hilfe mcmmo"}}'
+        - ^execute as_server 'tellraw <player.name> [{"text":"<&3><&m>-------------------- "},{"text":"<&7> <&l><&lt><&lt><&lt>"},{"text":" <&3>|<&6>1/2<&3>| "},{"text":"<&e><&l><&gt><&gt><&gt> ","hoverEvent":{"action":"show_text","value":"Nächste Seite"},"clickEvent":{"action":"run_command","value":"/hilfe 2"}},{"text":"<&3><&m>--------------------"}]'
+        - ^narrate "<&3>Tipp:<&b> Klickt auf ein <&6>Thema<&b> oder schreibt <&e>/hilfe <&6>Thema"
+        }
+#    Allgemeine Hilfe 2/2
+      else if <context.args.first> == '2' {
+        - ^narrate "<&3><&m>---------------- <&b><&l> Craftasy<&6><&l> Hilfemenü <&3><&m>----------------"
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Reise","hoverEvent":{"action":"show_text","value":"Infos zu Befehlen, Portalen, Schiffen..."},"clickEvent":{"action":"run_command","value":"/hilfe reise"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Inventar","hoverEvent":{"action":"show_text","value":"Infos zu AutomaticInventory"},"clickEvent":{"action":"run_command","value":"/hilfe inventar"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Handel","hoverEvent":{"action":"show_text","value":"Infos zu ShowcaseStandalone"},"clickEvent":{"action":"run_command","value":"/hilfe handel"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Geld","hoverEvent":{"action":"show_text","value":"Infos zu iConomy"},"clickEvent":{"action":"run_command","value":"/hilfe iconomy"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Vote","hoverEvent":{"action":"show_text","value":"Infos zum Voting"},"clickEvent":{"action":"run_command","value":"/hilfe vote"}}'
+        - ^if <player.has_permission[treasurechest.access]> {
+          - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>TreasureChest","hoverEvent":{"action":"show_text","value":"Schatzkisteninformationen"},"clickEvent":{"action":"run_command","value":"/hilfe treasurechest"}}'
+          }
+        - ^if <player.has_permission[headdb.open]> {
+          - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>HeadDatabase","hoverEvent":{"action":"show_text","value":"Kopfdatenbanknutzung"},"clickEvent":{"action":"run_command","value":"/hilfe headdatabase"}}'
+          }
+        - ^if <player.has_permission[amc.admin]> {
+          - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>AntiMapCopy","hoverEvent":{"action":"show_text","value":"Kopierschutz für Customkarten"},"clickEvent":{"action":"run_command","value":"/hilfe antimapcopy"}}'
+          }
+        - ^execute as_server 'tellraw <player.name> [{"text":"<&3><&m>-------------------- "},{"text":"<&e> <&l><&lt><&lt><&lt>","hoverEvent":{"action":"show_text","value":"Vorige Seite"},"clickEvent":{"action":"run_command","value":"/hilfe"}},{"text":" <&3>|<&6>2/2<&3>| "},{"text":"<&7><&l><&gt><&gt><&gt> "},{"text":"<&3><&m>--------------------"}]'
+        - ^narrate "<&3>Tipp:<&b> Klickt auf ein <&6>Thema<&b> oder schreibt <&e>/hilfe <&6>Thema"
+        }
+#    Hilfe zur Hilfe
+      else if <context.args.first> == 'hilfe' {
+        - ^narrate "<&3><&m>--------------------<&b><&l> Hilfe!<&6><&l> Hilfe! <&3><&m>--------------------"
+        - ^narrate ""
+        - ^narrate "<&b>Wenn Ihr bis hierher gekommen seid, wisst Ihr bereits alles, um"
+        - ^narrate "<&b>Euch durch das Hilfemenü zu navigieren."
+        - ^narrate ""
+        - ^narrate "<&3>Tipp:<&b> Nutzt die <&e>Pfeile<&b> zum Navigieren über mehrere Seiten."
+        - ^narrate ""
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Befehlseingabe","hoverEvent":{"action":"show_text","value":"Was bedeuten diese ganzen Klammern?"},"clickEvent":{"action":"run_command","value":"/hilfe befehlseingabe"}}'
+        - ^execute as_server 'tellraw <player.name> {"text":"<&3>❉ <&6>Support","hoverEvent":{"action":"show_text","value":"Admin?"},"clickEvent":{"action":"run_command","value":"/hilfe support"}}'
+        - ^narrate "<&3><&m>-------------------- <&7> <&l><&lt><&lt><&lt> <&3>|<&6>1/1<&3>| <&7><&l><&gt><&gt><&gt> <&3><&m>--------------------"
+        }

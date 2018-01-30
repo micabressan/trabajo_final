@@ -1,0 +1,28 @@
+- name: Check if SSL cert is about the expire
+  shell: openssl x509 -checkend {{ ssl_expiry_threshold }} -noout -in /etc/letsencrypt/live/{{ item.domain }}/cert.pem 2>/dev/null
+  register: cert_expire_status
+  failed_when: "cert_expire_status.rc > 1"
+  changed_when: "cert_expire_status.rc != 0"
+  with_items: '{{vhosts}}'
+
+- name: Check if Cert SAN contains all altnames
+  shell: "openssl x509 -text -noout -in /etc/letsencrypt/live/{{ item.domain }}/cert.pem | grep DNS | tr -d 'DNS:' | tr , '\n' | tr -d ' '"
+  changed_when: "item.altnames is defined and not (item.altnames|issubset(cert_alt_name_status.stdout_lines))"
+  register: cert_alt_name_status
+  with_items: '{{vhosts}}'
+
+#Use of --cert-name is important to keep the same lineages  (not add <xxx>-0002 when removing domain from SAN)
+- name: (re)request SSL certs if cert does not exists or is about to expire, or if it is missing altnames.
+  shell: /usr/bin/certbot --renew-by-default -a webroot --webroot-path /var/www/le/ --server https://acme-v01.api.letsencrypt.org/directory --email {{ email }} --text --agree-tos --cert-name {{ item.0.item.domain }} -d {{ item.0.item.domain }}{% if item.0.item.altnames is defined %}{% for name in item.0.item.altnames %} -d {{ name }}{% endfor %}{% endif %} auth
+  when: "item.0.rc != 0 or item.1.changed"
+  with_together:
+    - "{{cert_expire_status.results}}"
+    - "{{cert_alt_name_status.results}}"
+  notify: restart_nginx
+
+- name: configure SSL vhosts
+  template:
+    src: vhosts.ssl.conf.j2
+    dest: /etc/nginx/sites-enabled/{{ item.domain }}.ssl.conf
+  with_items: '{{vhosts}}'
+  notify: restart_nginx

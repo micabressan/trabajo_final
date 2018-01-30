@@ -1,0 +1,23 @@
+```yaml
+stages:
+  - build
+  - check
+
+maven-build:
+  image: maven:3-jdk-8
+  stage: build
+  script:
+    - mvn compile
+  artifacts:
+    paths:
+      - target
+
+defprev-check:
+  image: docker
+  services:
+    - docker:dind
+
+  stage: check
+  script:
+    - docker run --rm -v $(pwd):/opt/dpc ${SIBYL_IMAGE} --project-dir=target --token=${TOKEN}
+```

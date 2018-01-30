@@ -1,0 +1,16 @@
+' --------------------------------------------------------------------------
+'  FUNCTION.......:  getWorkgroup()
+'  PURPOSE........:  Get Workgroup of Local Machine
+'  EXAMPLE........:  WScript.Echo getWorkgroup()
+'  REQUIREMENTS...:
+'  NOTES..........:  Domain Computer Returns [NULL]
+' --------------------------------------------------------------------------
+Function getWorkgroup()
+    Dim oWMIService, cItems, oItem, sWorkgroup
+    Set oWMIService = GetObject("winmgmts:\\.\root\CIMV2")
+    Set cItems = oWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+    For Each oItem In cItems
+        sWorkgroup = oItem.Workgroup
+    Next
+    getWorkgroup = sWorkgroup
+End Function

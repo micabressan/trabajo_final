@@ -1,0 +1,24 @@
+Private Sub CommandButton1_Click()
+    '先設定好現在使用的檔案、工作表，避免開啟多個檔案後混淆
+    Dim thisWB As Workbook, dataWB As Workbook
+    Set thisWB = ThisWorkbook
+    Dim src As Worksheet
+    Set src = thisWB.Worksheets("Source")
+    Dim fileNameRange As Range, cell As Range
+    '預設檔案列表放在A欄
+    Set fileNameRange = src.Range("A1", src.Range("A" & src.Rows.Count).End(xlUp))
+    
+    For Each cell In fileNameRange
+        On Error GoTo ErrorHandler
+        '預設所有檔案都放在同一個資料夾，如果資料夾不同，將thisWB.Path改成來源資料夾即可
+        Set dataWB = Workbooks.Open(thisWB.Path & "\" & cell.Value & ".xls")
+        dataWB.Sheets(1).Copy Before:=src
+        dataWB.Close
+NextCell:
+    Next cell
+    Exit Sub
+    
+ErrorHandler: '會進到這裡代表發生錯誤，而for loop中可能導致錯誤的，只有無法開啟檔案(檔名不存在)
+    MsgBox "找不到檔案：" & cell.Value
+    Resume NextCell
+End Sub

@@ -1,0 +1,78 @@
+users:
+    DiscoBiscuit:
+        permissions:
+            permissions.example: true
+        groups:
+        - superadmin
+    zerigax:
+        groups:
+        - superadmin
+    orange1134:
+        groups:
+        - superadmin
+    riosnyper:
+        groups:
+        - admin
+    irkalla:
+        groups:
+        - admin
+groups:
+    default:
+        permissions:
+            server.basics: true
+            HomeX.home: true
+            HomeX.sethome: true
+            commandbook.call: true
+            commandbook.motd: true
+            commandbook.spawn: true
+            commandbook.time: false
+            commandbook.time.set: false
+            superpermbridge.ecoCreature.Creature.*: true
+            mchat.prefix.default: true
+            myhome.home.basic.home: true
+            myhome.home.basic.set: true
+            permissions.build: true
+            superpermbridge.*warpz0r.warp.free: true
+    admin:
+        permissions:
+            server.admin: true
+            commandbook.time: false
+            mchat.prefix.admin: true
+            mchat.prefix.default: false
+            superpermbridge.*warpz0r.free.setwarp: true
+            superpermbridge.*warpz0r.list: true
+            logblock.tools.tool: true
+            logblock.tools.toolblock: true
+            logblock.lookup: true
+        inheritance:
+        - default
+    superadmin:
+        permissions:
+            server.superadmin: true
+            commandbook.time.set: false
+            mchat.prefix.admin: false
+            mchat.prefix.superadmin: true
+            superpermsbridge.*worldedit.*: true
+            worldedit.wand: true
+            worldedit.selection.pos: true
+            worldedit.selection.hpos: true
+            worldedit.selection.expand: true
+            worldedit.selection.contract: true
+            worldguard.region.define: true
+            worldguard.region.redefine.*: true
+            worldguard.region.claim: true
+            worldguard.region.select.*: true
+            worldguard.region.info.*: true
+            worldguard.region.addowner.*: true
+            worldguard.region.removeowner.*: true
+            worldguard.region.addmember.*: true
+            worldguard.region.removemember.*: true
+            worldguard.region.flag.regions.*: true
+            worldguard.region.flag.flags.*: true
+            permissions.reload: true
+            logblock.rollback: true
+        inheritance:
+        - admin
+messages:
+    build: '&cYou do not have permission to build here.'
+debug: false

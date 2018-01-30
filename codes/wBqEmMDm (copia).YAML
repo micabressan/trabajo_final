@@ -1,0 +1,23 @@
+  Spawners:
+    name: "&bSpawners"
+    items:
+      1:
+        type: item
+        item:
+          spawner: true
+          mob: ENDERMAN
+          name: '&bEnderman Spawner'
+          quantity: 1
+        buyPrice: 290000
+        sellPrice: -1
+        slot: 0
+      2:
+        type: item
+        item:
+          spawner: true
+          mob: SKELETON
+          name: '&bSkeleton Spawner'
+          quantity: 1
+        buyPrice: 100000
+        sellPrice: -1
+        slot: 1

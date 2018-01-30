@@ -1,0 +1,180 @@
+groups:
+    default:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Guest: true
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            badblocks.allowportalblock: true
+            badblocks.allowobsidian: true
+            badblocks.allowbedrock: true
+            badblocks.allowwater: true
+    Guest:
+        permissions:
+            mchat.color: true
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            lwc.protect: true
+            superpermbridge.myhome.home.*: true
+            superpermbridge.xwarp.warp.sign.*: true
+        inheritance:
+        - default
+    Builder:
+        permissions:
+            mchat.prefix.Builder: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            superpermbridge.xwarp.warp.to.*: true
+        inheritance:
+        - Guest
+    Trusted:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Trusted: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            superpermbridge.xwarp.warp.to.*: true
+            superpermbridge.xwarp.warp.create.*: true
+            superpermbridge.xwarp.warp.edit.*: true
+            superpermbridge.xwarp.warp.edit.cooldown: false
+            superpermbridge.xwarp.warp.edit.warmup: false
+        inheritance:
+        - Builder
+    Architect:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Architect: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            mcbans.lookup: true
+            badblocks.allowfire: true
+        inheritance:
+        - Trusted
+    Donor:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Donor: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            hawkeye.tool: true
+            superpermbridge.xwarp.warp.sign.create.*: true
+            badblocks.allowlava: true
+            badblocks.allowtnt: true
+            mcma.goto: true
+        inheritance:
+        - Architect
+    Moderator:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Moderator: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            hawkeye.tpto: true
+            mcbans.mod: true
+            superpermbridge.xwarp.warp.command.*: true
+            superpermbridge.xwarp.warp.admin.to.all: true
+        inheritance:
+        - Donor
+    Operator:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Operator: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Admin: false
+            lwc.mod: true
+            mcbans.ban.view: true
+            superpermbridge.xwarp.warp.edit.*: true
+            superpermbridge.xwarp.warp.admin.warp.others: true
+            goto: true
+            badblocks.allowall: true
+        inheritance:
+        - Moderator
+    Admin:
+        permissions:
+            permissions.build: true
+            mchat.prefix.Admin: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            superpermbridge.hawkeye.*: true
+            superpermbridge.myhome.*: true
+            bukkit.command.help: true
+            mcbans.ban.temp: true
+            mcbans.ban.global: true
+            mcbans.kick: true
+            mcbans.admin: true
+            bukkit.command.whitelist: true
+            bukkit.command.whitelist.*: true
+            superpermbridge.xwarp.warp.admin.*: true
+            badblocks.notify: true
+            badblocks.allowwater: true
+        inheritance:
+        - Operator
+    Owner:
+        permissions:
+            permissions.build: true
+            permissions.*: true
+            mchat.prefix.Owner: true
+            mchat.prefix.Guest: false
+            mchat.prefix.Builder: false
+            mchat.prefix.Trusted: false
+            mchat.prefix.Architect: false
+            mchat.prefix.Donor: false
+            mchat.prefix.Moderator: false
+            mchat.prefix.Operator: false
+            mchat.prefix.Admin: false
+            hawkeye.*: true
+            hawkeye.search: true
+            mcbans.*: true
+            superpermbridge.xwarp.*: true
+            bukkit.*: true
+            bukkit.command.op: true
+            badblocks.allowcmdinfo: true
+        inheritance:
+        - Admin
+messages:
+    build: '&cYou do not have permission to build here.'
+debug: false

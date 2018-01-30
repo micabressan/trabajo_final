@@ -1,0 +1,6 @@
+- name: Docker gen container
+  docker_container:
+    name: docker_gen
+    image: jwilder/docker-gen
+    state: present
+    pull: True

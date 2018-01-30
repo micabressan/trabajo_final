@@ -1,0 +1,163 @@
+pomoc:
+  aliases:
+    - pomoc
+    - help
+  description: Niezbędne_informacje
+  perform: 
+    1: 
+      type: send message
+      data:
+        - 'player'
+        - ''
+        - ''
+        - ''
+        - '&2&l################# &6&lMineS.pl &2&l#################'
+        - '&b&l/f &9- &f&lInformacje o gildiach'
+        - '&b&l/drop &9- &f&linformacje o dropie'
+        - '&b&l/umiejetnosci &9- &f&lInformacje o umiejetnosciach MCMMO'
+        - '&d&l/vip &9- &f&linformacje o randze &7[&b&lVIP&7]'
+        - '&d&l/supervip &9- &f&linformacje o randze &7[&9&lSuperVIP&7]'
+        - '&2&l###########################################'
+drop: 
+  aliases:
+    - drop
+    - stone
+  description: Informacje_dotyczące_dropu
+  perform: 
+    1: 
+      type: send message
+      data:
+        - 'player'
+        - ''
+        - ''
+        - ''
+        - '&2&l################# &6&lMineS.pl &2&l#################'
+        - '&3&lDiament - 1.00%'
+        - '&7&lRuda Żelaza - 3.50%'
+        - '&6&lRuda Złota - 2.20%'
+        - '&0&lWęgiel - 3.65% + drop z rudy'
+        - '&4&lCzerwony Proszek - 2% + drop z rudy (1-4)'
+        - '&1&lLazuryt - 0.90% (1-5)'
+        - '&2&lSzmaragd - 0.40%'
+        - '&4&lTnT - 0.05%'
+        - '&d&lMOBSPAWNER - 0.02%'
+        - '&2&l###########################################'
+umiejetnosci: 
+  aliases:
+    - umiejetnosci
+    - um
+    - skills
+  description: Informacje_dotyczące_umiejętności
+  perform: 
+    1: 
+      type: send message
+      data:
+        - 'player'
+        - ''
+        - ''
+        - ''
+        - '&2&l################# &6&lMineS.pl &2&l#################'
+        - '&b&l/archery-Wszystko odnośnie łucznictwa'
+        - '&b&l/unarmed-Wszystko odnośnie walki na pięści'
+        - '&b&l/axes-Wszystko odnośnie toporów'
+        - '&d&l/swords-Wszystko odnośnie mieczy'
+        - '&d&l/taming-Wsszystko odnośnie oswajania'
+        - '&d&l/fishing-Wszystko odnośnie rybactwa'
+        - '&d&l/excavation-Wszystko odnośnie wykopalisk'
+        - '&d&l/mining-Wszystko odnośnie górnictwa'
+        - '&d&l/woodcutting-Wszystko odnośnie rabania drzew'
+        - '&d&l/herbalism-Wszystko odnośnie zielarstwa'
+        - '&d&lWysoki poziom &2Swords - Większy % na krwawienie wroga'
+        - '&d&lWysoki poziom &2Archery - Większe obrażenia Oszołomienie'
+        - '&d&lWysoki poziom &2Unarmed - Wysokie obrażenia Odbijania strzał'
+        - '&d&lWysoki poziom &2Axes - Większe obrażenia:  15% szans na odzyskiwanie strzał z martwego celu'
+        - '&d&lWiększe obrażenia z efektem knock 2 ciosy krytyczne:  niszczenie zbroi'
+        - '&d&lWysoki poziom &2Taming - Duże obrażenia od wilków na rozbrojenie przez wrogów'
+        - '&d&lWysoki poziom &2Górnictwa - Częsty podwójny drop'
+        - '&d&lWysoki poziom &2Herbalism - Częsty podwójny drop oraz szczęście'
+        - '&d&lWysoki poziom &2Rybactwa - Mniejszy drop pułapek a większy drop skarbów i płyt muzycznych'
+        - '&d&lWysoki poziom &2Rąbania - Częsty podwójny drop:  dmuchawa do liści (odrazu niszczysz blok liści używając siekiery)'
+        - '&d&lWysoki poziom &2Excevation - Podwójny drop skarbów'
+        - '&d&lWysoki poziom &2Alchemy - Nowe miksturki z nowymi efektami:  &2/alchemy - Wszystko odnośnie Alchemii'
+        - '&d&lWysoki poziom &2Repair - Możliwość naprawy enchant EQ &2/repair - Wszystko odnośnie naprawy'
+        - '&d&lWysoki poziom Acrobatics - Szansa na zmniejszenie lub całkowite usunięcie DMG od upadku &2/acrobatics - Wszystko odnośnie Akrobatyki'
+        - 'Umiejętność &1&lAxes Topory &b----&1:     &4SKILLE RODZICIELSKIE    <&1---&b Umiejętność &1Excevation Wykopaliska'
+        - '&2/salvage - Wszystko odnośnie Odzyskiwania &1<&b--- &4SKILL DZIECIĘCY'
+        - 'Wysoki poziom &2Salvage - Odzyskiwanie enchantowanej książki z enchantem jaki miał przedmiot:  który został użyty w odzysku'
+        - 'Umiejętność &1Mining Górnictwo &b---&1:   &4SKILLE RODZICIELSKIE  <&1---&b Umiejętność &1Woodcutting'
+        - 'Wysoki poziom &2Smelting - Podwójne dropy:  więcej exp za przetapianie surowców w piecu'
+        - '&2/smelting - Wszystko odnośnie przetapiania &1<&b--- &4SKILL DZIECIĘCY'
+        - '&2&l################# &6&lMineS.pl &2&l##########################'
+vip: 
+  aliases:
+    - vip
+  description: Przywileje_VIP
+  perform: 
+    1: 
+      type: send message
+      data:
+        - 'player'
+        - ''
+        - ''
+        - ''
+        - '&2&l***************** &6&lMineS.pl &2&l*****************'
+        - '&a&l- Niebieski prefiks przed nickiem &7[&b&lVIP&7]'
+        - '&a&l- Dostęp do strefy VIP'
+        - '&a&l- Kolorowe pisanie na tabliczkach'
+        - '&a&l- Wchodzenie na pełny serwer'
+        - '&a&l- Dostęp do &d&lAnimacji &a&l(Bez skrzydeł, bloków)'
+        - '&a&l- Dostęp do rozpoczęcia głosowania na zmianę pogody &c/wv'
+        - '&a&l- Max 3 domy &c/sethome <nazwa>'
+        - '&a&l- Stół rzemieślniczy &c/wb'
+        - '&a&l- Zakładanie przedmiotów na głowę &c/hat'
+        - '&a&l- Dostęp do komendy: &c/feed'
+        - '&a&l- Dostęp do zmiany mobów w spawnerach: &c/spawner <mob>'
+        - '&6&l  Dostępne: &echicken, slime, cow, pig, skeleton, zombie, sheep, ocelot, spider'
+        - '&a&l- Możliwość przemiany w moba: &c/dis <mob>'
+        - '&6&l  Dostępne: &ecow, creeper, enderman, sheep, iron_golem, wolf, mushroom_cow, pig_zombie, pig, spider, zombie'
+        - '&a&l- Dostęp do: &c/kit vip'
+        - '&bDiamentowy miecz: &dOstrość III, Zaklęty ogień II'
+        - '&bDiamentowa siekiera: &dWydajność I, Niezniszczalność I'
+        - '&bDiamentowy kilof: &dWydajność I, Niezniszczalność I'
+        - '&bDiamentowy set: &dOchrona II'
+        - '&bZaczarowane złote jabłko, Magiczny stół do zaklęć'
+        - '&bx64 Butelki XP'
+        - '&2&l*******************************************'
+supervip: 
+  aliases:
+    - svip
+    - supervip
+  description: Przywileje_SVIP
+  perform: 
+    1: 
+      type: send message
+      data:
+        - 'player'
+        - ''
+        - ''
+        - ''
+        - '&2&l***************** &6&lMineS.pl &2&l*****************'
+        - '&a&l- Niebieski prefiks przed nickiem &7[&9&lSuperVIP&7]'
+        - '&a&l- Dostęp do strefy VIP'
+        - '&a&l- Kolorowe pisanie na tabliczkach'
+        - '&a&l- Wchodzenie na pełny serwer'
+        - '&a&l- Dostęp do &d&lAnimacji'
+        - '&a&l- Dostęp do rozpoczęcia głosowania na zmianę pogody &c/wv'
+        - '&a&l- Max 5 domów &c/sethome <nazwa>'
+        - '&a&l- Stół rzemieślniczy &c/wb'
+        - '&a&l- Dostęp do skrzyni kresu &c/ec'
+        - '&a&l- Zakładanie przedmiotów na głowę &c/hat'
+        - '&a&l- Dostęp do komendy: &c/feed &a&li &c/heal'
+        - '&a&l- Zakładanie przedmiotów na głowę &c/back'
+        - '&a&l- Dostęp do zmiany mobów w spawnerach: &c/spawner <mob>'
+        - '&6&l  Dostępne: &echicken, slime, cow, pig, skeleton, zombie, sheep, ocelot, spider, magmacube, bat, blaze, pigzombie, silverfish, mushroomcow, irongolem, polarbear, cavespider, creeper'
+        - '&a&l- Możliwość przemiany w moba: &c/dis <mob>'
+        - '&6&l  Dostępne: &ecow, creeper, enderman, sheep, iron_golem, wolf, mushroom_cow, pig_zombie, pig, spider, zombie, blaze, chicken, cave_spider, magma_cube, ocelot, horse, polar_bear, slime, skeleton, villager, snowman, squid, witch'
+        - '&a&l- Dostęp do: &c/kit supervip'
+        - '&bDiamentowy miecz: &dOstrość IV, Zaklęty ogień II'
+        - '&bDiamentowa siekiera: &dWydajność II, Niezniszczalność II'
+        - '&bDiamentowy kilof: &dWydajność II, Niezniszczalność II'
+        - '&bDiamentowy set: &dOchrona III, Niezniszczalność II'
+        - '&bx5 Zaczarowane złote jabłko, Magiczny stół do zaklęć'
+        - '&bx128 Butelki XP'
+        - '&2&l*******************************************'

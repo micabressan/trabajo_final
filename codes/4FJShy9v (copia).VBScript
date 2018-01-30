@@ -1,0 +1,63 @@
+Imports System.IO
+Imports System
+Public Class frmViewBot
+    Dim vc As Integer
+    Dim url As String
+    Dim counter As Integer
+    Dim i As Integer = 1
+    Dim Bot(i) As WebBrowser
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dir As String = My.Computer.FileSystem.SpecialDirectories.Temp
+        Dim filename As String = dir + "IpRefresh.exe" 'Look Below
+        File.WriteAllBytes(filename, My.Resources.IpRefresh)
+        lblStatus.ForeColor = Color.Red
+        MessageBox.Show("Remember to disable sound in Volume Mixer!", "Important")
+    End Sub
+    Private Sub RefreshRate_Tick(sender As Object, e As EventArgs) Handles RefreshRate.Tick
+        Process.Start(My.Computer.FileSystem.SpecialDirectories.Temp & "IpRefresh.exe")
+    End Sub
+    Private Sub txtInput_TextChanged(sender As Object, e As EventArgs) Handles txtInput.TextChanged
+        vc = 0
+    End Sub
+    Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        url = txtInput.Text
+        Dim interval As Integer = Val(txtInterval.Text)
+        If interval = 0 Then
+            interval = 9000
+            txtInterval.Text = "9000"
+        End If
+        RefreshRate.Interval = interval
+        RefreshRate.Enabled = True
+        Dim interval2 As Integer = Val(txtInput2.Text)
+        If interval2 = 0 Then
+            interval2 = 13000
+            txtInput2.Text = "13000"
+        End If
+        btnStart.Visible = False
+        lblStatus.Text = "Enabled"
+        lblStatus.ForeColor = Color.Green
+        Bot1.Interval = interval2
+        Bot1.Enabled = True
+    End Sub
+    Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
+        RefreshRate.Enabled = False
+        btnStart.Visible = True
+        lblStatus.Text = "Disabled"
+        lblStatus.ForeColor = Color.Red
+        Bot(i).Stop()
+    End Sub
+    Private Sub Bot1_Tick(sender As Object, e As EventArgs) Handles Bot1.Tick
+        If counter >= 50 Then
+            i += 1
+            counter = 0
+        End If
+        For x As Integer = 0 To i
+            Bot(i) = New WebBrowser
+        Next
+        vc += 1
+        lblEstimate.Text = "Estimated Views: " & vc
+        counter += 1
+        Bot(num).Stop()
+        Bot(i).Navigate(url)
+    End Sub
+End Class

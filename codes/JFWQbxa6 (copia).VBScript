@@ -1,0 +1,41 @@
+Private Sub CommandButton1_Click()
+    If Selection.Information(wdWithInTable) = True Then
+        
+        Dim iSelectionRowEnd As Integer
+        Dim iSelectionRowStart As Integer
+        Dim iSelectionRowCount As Integer
+        Dim iSelectionColCount As Integer
+        
+        Dim tbl As Table
+        Set tbl = Selection.Tables(1)
+        
+        iSelectionRowStart = Selection.Information(wdStartOfRangeRowNumber)
+        iSelectionColStart = Selection.Information(wdStartOfRangeColumnNumber)
+        
+        iSelectionRowCount = Selection.Rows.Count - 1
+        iSelectionColCount = Selection.Columns.Count - 1
+        
+        tbl.Range.Delete
+        tbl.Range.Shading.BackgroundPatternColorIndex = 0
+        
+        For j = 1 To iSelectionColCount
+            tbl.Cell(iSelectionRowStart, j + iSelectionColStart).Range.Text = j
+            tbl.Cell(iSelectionRowStart, j + iSelectionColStart).Shading.BackgroundPatternColor = RGB(255, 255, 0)
+        Next
+        
+        For i = 1 To iSelectionRowCount
+            tbl.Cell(i + iSelectionRowStart, iSelectionColStart).Range.Text = i
+            tbl.Cell(i + iSelectionRowStart, iSelectionColStart).Shading.BackgroundPatternColor = RGB(114, 84, 48)
+            For j = 1 To iSelectionColCount
+                tbl.Cell(iSelectionRowStart + i, iSelectionColStart + j).Range.Text = i * j
+                If (i + j) Mod 2 Then
+                    tbl.Cell(iSelectionRowStart + i, iSelectionColStart + j).Shading.BackgroundPatternColor = RGB(221, 197, 137)
+                Else
+                    tbl.Cell(iSelectionRowStart + i, iSelectionColStart + j).Shading.BackgroundPatternColor = RGB(161, 124, 71)
+                End If
+            Next
+        Next
+        
+        
+    End If
+End Sub

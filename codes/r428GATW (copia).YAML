@@ -1,0 +1,105 @@
+# GKits Configuration File
+# Replication of my GKits plugin, dedicated for AdvancedEnchantments.
+
+# Should GKits/this configuration/GKits command be enabled? [true/false]
+gkits-enabled: true
+
+inventory:
+  # Size of inventory
+  # * Determine size of GKits inventory (1 row = 9 slots, max 6 rows)
+  size: 3
+  # Name of inventory
+  # * Change the name of GKits inventory
+  name: '&6Advanced GKits'
+  # Custom inventory commnad
+  # * Create a handy command to open GKits inventory
+  custom-command: /gkits
+  sounds:
+    # Inventory opening sound
+    # * Sound is played on inventory open via comamnd
+    inventory-open: CLICK
+    # Usage of kit sound
+    # * Sound played upon the use of any of the available kits
+    kit-use: LEVEL_UP
+    # These are 1.8 sounds, if your server version is 1.9 or higher, please use different sounds.
+    # Invalid sounds will not spam console with errors, they will just not play.
+# Let players preview GKits by right-clicking on any gkit (permission: gkit.preview)
+preview:
+  enabled: true
+  inventory:
+    # Biggest the inventory can be, set to "AUTO" if you want inventory size to be set depending on gkit content amount.
+    # (1 row = 9 slots, max 6 rows)
+    max-size: 4
+    # If there is any free slots in preview inventory, should they be filled with selected block?
+    fill-blanks: true
+    material: STAINED_GLASS_PANE
+    data: 15
+# ((this adds custom enchantments support, you may give random level of custom enchantments, eg: "&fSpeed %1-3%" adding in lore))
+messages:
+  # Placeholders available:
+  # * {gkit} - Name of GKit
+  # * {cooldown} - Cooldown of GKit
+  cooldown: '&eYou cannot use this kit yet, kit &6{gkit}&e is on cooldown &7({cooldown})'
+  no-perm: '&eYou don''t have permissions to use &e{gkit}&6 kit.'
+  used-kit: '&eYou have used kit &6{gkit}.'
+kits:
+  # Kits may have some unique configuration, here are examples:
+  #  * you may give random level of custom enchantments, eg: "speed:%1-3%"
+  #  * add chance for an enchantment to not be added, eg: "!25!:speed:1"; 25% chance for the enchantment to not be added to item.
+  god:
+    slot: 0
+    delay: 6000
+    display:
+      no-permission:
+        material: STAINED_GLASS_PANE
+        data: 14
+        force-glow: false
+        name: '&c{gkit}'
+        lore:
+        - '&7&lSTATUS &cNot unlocked'
+        - '&cYou haven''t unlocked this kit yet!'
+      cooldown: 
+        material: STAINED_GLASS_PANE
+        data: 4
+        name: '&e{gkit}'
+        force-glow: false
+        lore:
+        - '&7&lSTATUS &eON COOLDOWN'
+        - '&c{cooldown}&f left until you can use this gkit.'
+      available:
+        material: STAINED_GLASS_PANE
+        data: 5
+        name: '&a{gkit}'
+        force-glow: false
+        lore:
+        - '&7&lSTATUS &aAVAILABLE'
+        - '&cYou can use this kit now.'
+    permission: gkits.god
+    content:
+      '1':
+        material: DIAMOND_SWORD
+        data: 0
+        amount: 1
+        name: '&c&lGOD SWORD'
+        lore:
+          - '&7Sword for the greatest warriors'
+        advanced-enchantments:
+          - "!20!:vampire:%1-2%"
+          - "poison:%1-3%"
+        enchants: 
+          - sharpness:5
+          - unbreaking:3
+      '2':
+        material: GOLD_HELMET
+        data: 0
+        amount: 1
+        name: '&6&lKING HELMET'
+        lore:
+          - '&7Helmet for kings'
+        advanced-enchantments:
+          - "glow:1"
+        enchants: 
+          - protection:4
+          - unbreaking:3
+      '3':
+        command: 'tell %player% You can add commands as items for gkits!'

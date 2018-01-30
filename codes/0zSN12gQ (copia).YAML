@@ -1,0 +1,106 @@
+version: '2'
+
+services:
+
+  front:
+    image: mailu/nginx:$VERSION
+    restart: always
+    env_file: .env
+    ports:
+    - "$BIND_ADDRESS4:80:80"
+    - "$BIND_ADDRESS4:443:443"
+    - "$BIND_ADDRESS4:110:110"
+    - "$BIND_ADDRESS4:143:143"
+    - "$BIND_ADDRESS4:993:993"
+    - "$BIND_ADDRESS4:995:995"
+    - "$BIND_ADDRESS4:25:25"
+    - "$BIND_ADDRESS4:465:465"
+    - "$BIND_ADDRESS4:587:587"
+    volumes:
+      - "$ROOT/certs:/certs"
+      - /etc/localtime:/etc/localtime:ro
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - "$ROOT/redis:/data"
+      - /etc/localtime:/etc/localtime:ro
+  imap:
+    image: mailu/dovecot:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/data:/data"
+      - "$ROOT/mail:/mail"
+      - "$ROOT/overrides:/overrides"
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - front
+
+  smtp:
+    image: mailu/postfix:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/data:/data"
+      - "$ROOT/overrides:/overrides"
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - front
+
+  antispam:
+    image: mailu/rspamd:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/filter:/var/lib/rspamd"
+      - "$ROOT/dkim:/dkim"
+      - "$ROOT/overrides/rspamd:/etc/rspamd/override.d"
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - front
+
+  antivirus:
+    image: mailu/$ANTIVIRUS:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/filter:/data"
+      - /etc/localtime:/etc/localtime:ro
+
+  webdav:
+    image: mailu/$WEBDAV:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/dav:/data"
+      - /etc/localtime:/etc/localtime:ro
+
+  admin:
+    image: mailu/admin:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/data:/data"
+      - "$ROOT/dkim:/dkim"
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - redis
+
+  webmail:
+    image: "mailu/$WEBMAIL:$VERSION"
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/webmail:/data"
+      - /etc/localtime:/etc/localtime:ro
+
+  fetchmail:
+    image: mailu/fetchmail:$VERSION
+    restart: always
+    env_file: .env
+    volumes:
+      - "$ROOT/data:/data"
+      - /etc/localtime:/etc/localtime:ro

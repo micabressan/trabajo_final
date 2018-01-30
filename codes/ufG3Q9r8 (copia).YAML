@@ -1,0 +1,21 @@
+---
+# Tasks for tesing role
+
+- name: test module win_adcomputer through windows with servers
+  gather_facts: false
+  hosts: all
+  roles:
+    name: win_adcomputer
+  tasks:
+  # - name: include_role win_adcomputer
+  #   include_role:
+  #     name: win_adcomputer
+  - name: Add linux computer to Active Directory OU
+    win_adcomputer:
+      name: "lab-test-0001"
+      sam_account_name: "lab-test-0001$"
+      dns_host_name: "lab-test-0001.my_org.local"
+      ou: "OU=lab,OU=Servers,OU=Resources,DC=my_org,DC=local"
+      description: "Test server"
+      enabled: true
+      state: present

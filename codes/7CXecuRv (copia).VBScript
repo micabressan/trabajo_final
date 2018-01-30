@@ -1,0 +1,74 @@
+Private Sub Btn_revisão_Click()
+'verificando quais campos estão ocupados na tabelas
+registros_ocupados = Worksheets("revisão").UsedRange.Rows.Count + 1
+'verificando se os campos necessários estão preenchidos
+
+Worksheets("revisão").Select
+Cells(registros_ocupados, 1) = CDbl(n_os)
+Cells(registros_ocupados, 2) = data
+Cells(registros_ocupados, 3) = q_atendeu
+Cells(registros_ocupados, 4) = q_solicitou
+Cells(registros_ocupados, 5) = n_cliente
+Cells(registros_ocupados, 6) = CDbl(cli_codigo)
+Cells(registros_ocupados, 7) = contato
+Cells(registros_ocupados, 8) = comercial
+Cells(registros_ocupados, 9) = celular
+Cells(registros_ocupados, 10) = residencial
+Cells(registros_ocupados, 11) = endereco
+Cells(registros_ocupados, 12) = bairro
+Cells(registros_ocupados, 13) = observação
+Cells(registros_ocupados, 14) = s_solicitado
+Cells(registros_ocupados, 15) = cbxServiço
+Cells(registros_ocupados, 16) = CDbl(ocorrencia)
+Cells(registros_ocupados, 17) = txt_ocorrencia
+Cells(registros_ocupados, 18) = Desc_serviço
+Cells(registros_ocupados, 19) = obs_interna
+Cells(registros_ocupados, 20) = data_tecnico
+Cells(registros_ocupados, 21) = tec_responsavel
+Cells(registros_ocupados, 22) = status
+Cells(registros_ocupados, 23) = data_status
+Cells(registros_ocupados, 24) = Desc_custos
+Cells(registros_ocupados, 25) = custos
+Cells(registros_ocupados, 26) = alt_mensal
+Cells(registros_ocupados, 27) = red_mensal
+Cells(registros_ocupados, 28) = Data_Acompanhamento
+Cells(registros_ocupados, 29) = dias_acompanhamento
+Cells(registros_ocupados, 30) = mot_acom
+Cells(registros_ocupados, 31) = cbx_pd1
+Cells(registros_ocupados, 32) = desc_pd1
+Cells(registros_ocupados, 33) = cbx_st1
+Cells(registros_ocupados, 34) = cbx_pd2
+Cells(registros_ocupados, 35) = desc_pd2
+Cells(registros_ocupados, 36) = cbx_st2
+
+'Exclusão da linha na tabela OS'
+ 
+ Worksheets("os").Select
+        Dim Linha As Integer
+        Dim os As Integer
+ 
+    
+  'On Error Resume Next 'para não gerar erro caso o registro não exista
+    
+  os = n_os
+  'Localiza um registro pelo método find
+  
+  Linha = Sheets("os").Range("A:A").Find(os).Row
+  
+  Selection.Delete Shift:=xlUp
+  'Selection.Sheets(os).Delete Shift:=xlUp
+  'Selection.Linha(os).Delete Shift:=xlUp
+  
+  'Selection.Linha.Delete shift:=xlUp
+  'DeleteSetting(Linha).Row
+  'Selection.Delete Shift:=xlUp
+  'DeleteSetting(linha,"os").shift :=xlup
+
+
+'Sub apagaLinha()
+'Columns("A:A").Select 'Adapte para a coluna que quiser
+'Selection.SpecialCells(xlCellTypeBlanks).Select
+'Selection.EntireRow.Delete
+'End Sub
+
+End Sub

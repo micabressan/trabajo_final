@@ -1,0 +1,12 @@
+message: '&cLass den Mist !'
+no-permission-message: '&cDazu hast du kein Recht'
+command-for-player-use-only: '&c'
+staff: '&4<player> &chat versucht den Server zu crashen! &7(&c<command>&7)'
+command-enabled: true
+command: kick <player> Lass den Mist !
+crash-alert-permission: crash.alert
+crash-bypass-permission: crash.bypass
+config-reload-permission: crash.reload
+config-reload-message: '&cConfig successfully reloaded'
+
+#config by: dagocept

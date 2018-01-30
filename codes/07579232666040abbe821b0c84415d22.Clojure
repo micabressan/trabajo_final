@@ -1,0 +1,57 @@
+(ns midje.util.t-thread-safe-var-nesting
+  (:require [midje.util.thread-safe-var-nesting :refer :all]
+            [midje.sweet :refer :all]
+            [clojure.zip :as zip]
+            [midje.test-util :refer :all]))
+
+(def root "root")
+(def unbound!)
+
+(facts "altered roots.."
+  "... nest"
+  root => "root"
+  (with-altered-roots {(var root) "override"} root) => "override"
+  root => "root"
+
+  "... work with lexical scope"
+  (let [appendage " ROOT!"]
+    (with-altered-roots {#'root "override"} (str root appendage)) => "override ROOT!"
+    root => "root")
+  root => "root"
+
+  "... work with unbound variables"
+  #'unbound! =not=> bound?
+  (with-altered-roots {#'unbound! "override"} unbound!) => "override"
+  #'unbound! =not=> bound?
+
+  "... work with throwables"
+  (try
+    (with-altered-roots {#'root "override"} (throw (Throwable. root)))
+    (catch Throwable ex
+      (.getMessage ex) => "override"))
+  root => "root")
+
+(facts "namespace values..."
+  "... can be set"
+  (namespace-value :testval) => nil
+  (set-namespace-value :testval '( ( (1) ) ))
+  (namespace-value :testval) => '( ( (1) ) )
+  (destroy-namespace-value :testval)
+
+  "... are accessed by a peculiar function"
+  (namespace-values-inside-out :peculiar) => '()
+
+  "... are usually used in a stack-oriented way"
+  (with-pushed-namespace-values :stacky '(1 2)
+    (with-pushed-namespace-values :stacky '(3 4)
+      (namespace-values-inside-out :stacky) => '(4 3 2 1)))
+
+  "... are not scrozzled by exceptions"
+  (try
+    (with-pushed-namespace-values :stacky '(1 2)
+      (namespace-values-inside-out :stacky) => '(2 1)
+      (throw (Throwable. root)))
+    (catch Throwable ex
+      (namespace-values-inside-out :stacky) => '())))
+
+

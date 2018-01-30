@@ -1,0 +1,62 @@
+nopermission: "&cNincs jogod ehhez!"
+unknown_error: "&cValami elromlott..."
+lagdetection: "Lagdetection a világban: &c%world"
+wrong_usage: "&c%usage"
+not_registered: "&cEz a játékos még nem csatlakozott!"
+
+world:
+  reseted: "A világod vissza lett állítva!"
+  still_loaded: "&cA világod még mindig be van töltve!"
+  not_on: "&cNem vagy a világon!"
+  created: "A világod készen áll. Szállj fel a &a/ws home"
+  already_exists: "&cMár van világod!"
+  delete:
+    own: "&cA világot törölve!"
+    other: "Törölte a világot &c%player&6 játékostól!"
+  does_not_exists: 
+    own: "&cNincs világod!"
+    other: "&cEz a játékos nem rendelkezik világgal!"
+  setting_up: "&aA világ megteremtése..."
+  playerlist: "Játékos ebben a világban: %player"
+
+member:
+  removed: "Törölted &c%player&6 játékost a világodból!"
+  added: "Hozzáadtad &c%player&6 játékost a világodhoz!"
+  already_added: "&cEz a játékos már tagja!"
+  not_added:
+    own: "&cEz a játékos nem tagja!"
+    other: "&cNem vagy hozzáadva ehhez a világhoz"
+
+request:
+  expired: "&cA kérelem lejárt!"
+  confirm: "&cKérjük, erősítsd meg a világ újraindítását: %command"
+  until_expire: "&cA kérés lejárati ideje %time másodperc!"
+  already_sent: "&cMár elküldtél egy kérelmet!"
+  not_sent: "&cNem küldtél kérést!"
+  invalid_input: "&c%input nem érvényes bemenet!"
+
+toggle:
+  gamemode:
+    enabled: "&a%player&6 most megváltoztathatja játékmódját!"
+    disabled: "&c%player&6 már nem tudja megváltoztatni játékmódját!"
+  teleport:
+    enabled: "&a%player&6 most teleportálhat!"
+    disabled: "&c%player&6 már nem teleportálhat!"
+  build:
+    enabled: "&a%player&6 most építhet!"
+    disabled: "&c%player&6 már nem építhet!"
+  fire:
+    enabled: "&aAktiváltad a tüzet!"
+    disabled: "&cDeaktiváltad a tüzet!"
+  tnt:
+    enabled: "&aAktiváltad a TNT-sebzést!"
+    disabled: "&cDeaktiváltad TNT-sebzést!"
+
+info:
+  owner: "Tulajdonos: %data"
+  id: "ID: %data"
+  member: "Tag: %data"
+  tnt: "TNT: %data"
+  fire: "Tűz: %data"
+  enabled: "&aBe"
+  disabled: "&cKi"

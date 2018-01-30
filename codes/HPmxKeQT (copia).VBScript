@@ -1,0 +1,66 @@
+' ================================
+' Title : Close All Browser update
+' Language : VBScript
+' Author : A.Kilya
+' 11/12/2017 14:45 PM
+' ================================
+ 
+' Variables Declarations
+Dim WshShell, oExec, service
+' Declare timer
+Dim t1, t11
+' Declare compteur
+Dim c : c = 0
+
+Set WshShell = CreateObject("WScript.Shell")
+
+' Declar Name of Process in array list
+Dim varProcess(6)
+varProcess(0) = "chrome.exe"
+varProcess(1) = "iexplore.exe"
+varProcess(2) = "firefox.exe"
+varProcess(3) = "Safari.exe"
+varProcess(4) = "opera.exe"
+varProcess(5) = "tor.exe"
+varProcess(6) = "torch.exe"
+
+' Start Loop
+Do 
+    Set service = GetObject ("winmgmts:")
+	
+	For Each Process in Service.InstancesOf ("Win32_Process")
+		For i=0 to 6 Step 1
+			If Process.Name = varProcess(i) Then
+				If c = 0 Then
+					WScript.Sleep 1800000 ' Wait period in milliseconds
+					Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+					c = 1
+					t1 = Timer()
+				ElseIf c = 1 Then
+					t11 = Timer()
+					If t11 >= t1+1800.00 Then
+						If Process.Name = varProcess(i) Then
+							WScript.Sleep 1800000
+							Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+							c = 2
+							t1 = Timer()
+						End If
+					End If
+					Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+				ElseIf c = 2 Then
+					t11 = Timer()
+					If t11 >= t1+1800.00 Then
+						If Process.Name = varProcess(i) Then
+							WScript.Sleep 1800000
+							Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+							c = 3
+						End If
+					End If
+					Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+				Else
+					Set oExec = WshShell.Exec("taskkill /f /im varProcess(i) /t")
+				End If
+			End If
+		Next
+	Next
+Loop While True

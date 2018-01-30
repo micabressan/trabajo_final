@@ -1,0 +1,965 @@
+* {
+  box-sizing: border-box;
+}
+
+/*=====================================================
+  contents of: styles/stepper-input.css
+  =====================================================*/
+.stepperInput {
+  /**
+   * Setting display to flex makes this container lay
+   * out its children using flexbox. By default, it 
+   * orders items horizontally, top-aligned.
+   * This has a similar effect to setting the children
+   * to have display: inline-block.
+   */
+  display: -ms-flexbox;
+  display: flex;
+}
+
+  .stepperInput__input {
+    border-left: 0;
+    border-right: 0;
+    width: 60px;
+    text-align: center;
+  }
+
+.button {
+  cursor: pointer;
+  padding: 5px 15px;
+  color: #FFFFFF;
+  background-color: #4EBBE4;
+  font-size: 12px;
+  border: 1px solid #16A2D7;
+  border-radius: 4px;
+}
+
+.button--addOnLeft {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.button--addOnRight {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input {
+  border: 1px solid #D7DBDD;
+  padding: 0 10px;
+  border-radius: 0;
+  box-shadow: none;
+}
+/*=====================================================
+  contents of: styles/tabs.css
+  =====================================================*/
+.tabs {
+  /**
+   * Setting display to flex makes this container lay
+   * out its children using flexbox, the exact same
+   * as in the above "Stepper input" example.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  border-bottom: 1px solid #D7DBDD;
+}
+
+  .tab {
+    cursor: pointer;
+    padding: 5px 30px;
+    color: #16A2D7;
+    font-size: 12px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tab.is-tab-selected {
+    border-bottom-color: #4EBBE4;
+  }
+
+/*=====================================================
+  contents of: styles/site-header.css
+  =====================================================*/
+.siteHeader {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Make the container put as much space as possible
+   * between its children, with the children at either
+   * end laying flush against the container's edges.
+   */
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+
+  padding: 10px;
+  background-color: #56727C;
+}
+
+  .siteHeader__section {
+    /**
+     * Lay out the children of this container with
+     * flexbox.
+     */
+    display: -ms-flexbox;
+    display: flex;
+
+    /**
+     * Align the children in the center, along
+     * the main axis. By default the children will
+     * align along their top edges.
+     */
+    -ms-flex-align: center;
+        align-items: center;
+  }
+
+    .siteHeader__item {
+      padding: 5px 15px;
+      font-size: 12px;
+    }
+
+    .siteHeader__item + .siteHeader__item {
+      margin-left: 5px;
+    }
+
+    .siteHeader__item.is-site-header-item-selected {
+      color: #FFFFFF;
+      background-color: #415F69;
+      border-radius: 4px;
+    }
+
+    .siteHeaderLogo {
+      font-size: 20px;
+      line-height: 0;
+      color: white;
+    }
+
+    .siteHeaderButton {
+      cursor: pointer;
+      color: #D9E9EF;
+    }
+
+/*=====================================================
+  contents of: styles/form-footer.css
+  =====================================================*/
+.formFooter {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Make the container put as much space as possible
+   * between its children, with the children at either
+   * end laying flush against the container's edges.
+   */
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+
+  /**
+   * Align the children in the center, along
+   * the main axis, which is horizontal in this case.
+   */
+  -ms-flex-align: center;
+      align-items: center;
+
+  border-top: 1px solid #D7DBDD;
+  padding: 10px;
+}
+
+  .formFooter__section {
+    /**
+     * This container orders items horizontally.
+     */
+    display: -ms-flexbox;
+    display: flex;
+
+    /**
+     * It aligns them vertically in the center.
+     */
+    -ms-flex-align: center;
+        align-items: center;
+  }
+
+    .formFooter__item + .formFooter__item {
+      margin-left: 5px;
+    }
+
+    .formFooterFeedback {
+      color: #86969C;
+      font-size: 12px;
+      line-height: 0;
+    }
+
+    .formFooterSpinner {
+      animation: formFooterSpinner 1s infinite steps(8, end);
+    }
+
+@keyframes formFooterSpinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.button--clear {
+  color: #16A2D7;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+
+/*=====================================================
+  contents of: styles/post.css
+  =====================================================*/
+.post {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.postUser {
+  /**
+   * The flex property is a short-hand for setting
+   * the flex-grow, flex-shrink, and flex-basis
+   * properties. These properties control how the
+   * element resizes to fill its container.
+   *
+   * The value we're using here is actually the
+   * default, but I'm including so I can explain it
+   * a bit. The default value equates to:
+   *
+   * - flex-grow: 0
+   * - flex-shrink: 1
+   * - flex-basis: auto
+   *
+   * We set flex-grow to 0, so this element won't
+   * expand to fill its container.
+   *
+   * We'll then set flex-shrink to 1 so that the
+   * element will shrink as its container gets
+   * smaller. However, it will only shrink so far
+   * because...
+   *
+   * ...we set flex-basis to auto. This causes
+   * the content's size to also be a factor in the
+   * calculation of the element's size. Because
+   * the width of a child element is set (below),
+   * this element won't shrink below that size.
+   *
+   * The net result is that this element stays a
+   * fixed size, neither expanding nor shrinking.
+   */
+  -ms-flex: 0 1 auto;
+      flex: 0 1 auto;
+
+  padding-bottom: 10px;
+}
+
+  .postUser__portrait {
+    /**
+     * We're using these three flexbox properties
+     * here to center the portrait icon inside of
+     * this element.
+     *
+     * We'll explore these properties in more detail
+     * in the "Stay Centered" section, so I'll only
+     * briefly summarize here:
+     *
+     * - display: flex instructs the browser to
+     *   use flexbox to lay out this element's
+     *   children.
+     * - justify-content: center will center the
+     *   icon along the main axis.
+     * - align-items: center will center the icon
+     *   along the secondary (perpendicular) axis.
+     */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+
+    width: 100px;
+    height: 90px;
+    font-size: 70px;
+    line-height: 0;
+  }
+
+  .postUser__name {
+    color: #57727C;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+  }
+
+.postBody {
+  /**
+   * We'll use the short-hand flex property again
+   * here, to make the body of the post expand to
+   * fill the container, and shrink as the container
+   * becomes narrower.
+   *
+   * By setting flex-grow to 1, we cause this
+   * element to expand to fill the container.
+   *
+   * Setting flex-shrink to 1 causes this element
+   * to shrink with the container.
+   *
+   * Last, we set flex-basis to 0 so that its
+   * size is solely determined by the size of
+   * the container. (The default value is auto,
+   * which would cause the content's size to also
+   * be a factor in this calculation.)
+   *
+   * The net result of these properties is that the
+   * element is a fluid size, and will expand and
+   * shrink with its container.
+   *
+   * NOTE: IE11 ignores flex short-hand declarations
+   * with unitless flex-basis values. So we have to
+   * use 0% instead of 0 as a workaround. You can
+   * find more info at:
+   * github.com/philipwalton/flexbugs.
+   */
+  -ms-flex: 1 1 0%;
+      flex: 1 1 0%;
+
+  position: relative;
+  padding: 15px;
+  border: 1px solid #CAD0D2;
+  border-radius: 4px;
+}
+
+.postBody:after,
+.postBody:before {
+  right: 100%;
+  top: 35px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.postBody:after {
+  border-color: transparent;
+  border-right-color: #ffffff;
+  border-width: 8px;
+  margin-top: -8px;
+}
+
+.postBody:before {
+  border-color: transparent;
+  border-right-color: #CAD0D2;
+  border-width: 9px;
+  margin-top: -9px;
+}
+
+  .postBody__content {
+    color: #57727C;
+    font-size: 12px;
+  }
+
+  .postBody__date {
+    margin-top: 5px;
+    color: #86969C;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+/*=====================================================
+  contents of: styles/side-bar.css
+  =====================================================*/
+.sideBar {
+  /**
+   * This container orders items according to flexbox
+   * rules. By default, this would arrange its children
+   * horizontally. However, the next property...
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * ...sets the main axis to be vertical instead of
+   * horizontal, so now the children are laid out
+   * vertically, from top to bottom.
+   */
+  -ms-flex-direction: column;
+      flex-direction: column;
+
+  /**
+   * It will also put as much space as possible
+   * between its children, with the children at either end
+   * laying flush against the container's edges.
+   */
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+
+  height: 300px;
+  width: 150px;
+  border-right: 1px solid #D7DBDD;
+  background-color: #FCFDFD;
+  padding: 10px;
+}
+
+  .sideBar__item {
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #16A2D7;
+    font-size: 12px;
+  }
+
+  .sideBar__item.is-side-bar-item-selected {
+    background-color: #EEF3F5;
+    border-radius: 4px;
+  }
+
+/*=====================================================
+  contents of: styles/centered-prompt.css
+  =====================================================*/
+.centeredPrompt {
+  /**
+   * Lay out the children of this container with
+   * flexbox.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Rotate the main axis so that the children
+   * are laid out vertically, the same as in the
+   * above "Side bar" example.
+   */
+  -ms-flex-direction: column;
+      flex-direction: column;
+
+  /**
+   * Instead of pushing the children apart, as in
+   * previous examples, we will group them together
+   * in the center of their container.
+   */
+  -ms-flex-pack: center;
+      justify-content: center;
+
+  /**
+   * Align the children in the center, along
+   * the main axis. Because the direction is
+   * "column" this has a similar effect as setting
+   * text-align: center.
+   */
+  -ms-flex-align: center;
+      align-items: center;
+
+  min-height: 300px;
+  padding: 10px;
+}
+
+  .centeredPrompt__item + .centeredPrompt__item {
+    margin-top: 5px;
+  }
+
+    .centeredPromptIcon {
+      font-size: 60px;
+      line-height: 0;
+    }
+
+    .centeredPromptLabel {
+      color: #86969C;
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .centeredPromptDetails {
+      color: #86969C;
+      font-size: 16px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+.icon {
+  color: #BCD2DA;
+}
+
+/*=====================================================
+  contents of: styles/centered-icon.css
+  =====================================================*/
+.centeredIcon {
+  /**
+   * Lay out the children of this container with
+   * flexbox.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * As in the above "Centered prmopt" example,
+   * we'll rotate the main axis so that the children
+   * are ordered vertically.
+   */
+  -ms-flex-direction: column;
+      flex-direction: column;
+
+  /**
+   * Same thing here as before: group the children
+   * together in the center of their container.
+   */
+  -ms-flex-pack: center;
+      justify-content: center;
+
+  /**
+   * Just like in the "Centered prmopt" example,
+   * align the children in the center, along the
+   * main axis.
+   */
+  -ms-flex-align: center;
+      align-items: center;
+
+  border: 1px solid #D7DBDD;
+  font-size: 40px;
+  width: 90px;
+  height: 90px;
+  border-radius: 100%;
+  box-shadow:
+    0 2px 1px rgba(0, 0, 0, 0.05),
+    0 2px 3px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/*=====================================================
+  contents of: styles/feature-list.css
+  =====================================================*/
+.featureListItem {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Align the children in the center, along
+   * the main axis, which is horizontal in this case.
+   */
+  -ms-flex-align: center;
+      align-items: center;
+
+  max-width: 400px;
+  padding: 10px;
+}
+
+.featureListItem + .featureListItem {
+  border-top: 1px solid #D7DBDD;
+}
+
+.featureListItem--reverse {
+  /**
+   * We can specify the flex-direction so that
+   * the children elements are displayed in the
+   * reverse order of how they appear in the
+   * markup.
+   */
+  -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+}
+
+  .featureListItem__icon,
+  .featureListItem__description {
+    padding: 5px 15px;
+  }
+
+  .featureListItem__icon {
+    font-size: 50px;
+    line-height: 0;
+  }
+
+  .featureListItem__description {
+    color: #57727C;
+    font-size: 12px;
+  }
+
+/*=====================================================
+  contents of: styles/stream.css
+  =====================================================*/
+.stream {
+  /**
+   * Lay out the children of this container with
+   * flexbox.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /*
+   * Set the main axis to be vertical, but present
+   * the children in reverse order of that in which
+   * they occur in the DOM.
+   */
+  -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse;
+}
+
+.post + .post {
+  margin-bottom: 5px;
+}
+
+/*=====================================================
+  contents of: styles/card.css
+  =====================================================*/
+.card {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Rotate the main axis so that the children
+   * are laid out vertically.
+   */
+  -ms-flex-direction: column;
+      flex-direction: column;
+
+  border: 1px solid #CAD0D2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+  .card__description {
+    /**
+     * Lay out the children of this container with
+     * flexbox.
+     */
+    display: -ms-flexbox;
+    display: flex;
+
+    /**
+     * We're going to lay out this element's children
+     * just like in the "Centered prompt" example.
+     * First we'll rotate the main axis so that the
+     * children are laid out vertically.
+     */
+    -ms-flex-direction: column;
+        flex-direction: column;
+
+    /**
+     * Just like in the "Centered prompt", we'll
+     * group the children in the center of their
+     * container.
+     */
+    -ms-flex-pack: center;
+        justify-content: center;
+
+    /**
+     * And just like in the "Centered prompt" example,
+     * we'll align the children in the center, along
+     * the main axis.
+     */
+    -ms-flex-align: center;
+        align-items: center;
+
+    padding: 15px 0;
+  }
+
+    .card__descriptionIcon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .card__descriptionText {
+      color: #57727C;
+      font-size: 12px;
+      text-align: center;
+      max-width: calc(100% - 30px);
+    }
+
+  .card__price {
+    text-align: center;
+    color: #57727C;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 15px;
+    border-top: 1px solid #D7DBDD;
+    background-color: #EEF3F5;
+  }
+
+.card--fixedWidth {
+  max-width: 120px;
+}
+
+/*=====================================================
+  contents of: index.css
+  =====================================================*/
+/*=====================================================
+  contents of: styles/card-group.css
+  =====================================================*/
+.cardGroup {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  border: 1px solid #CAD0D2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+  .cardGroup__card {
+    /**
+     * The flex property is a short-hand for setting
+     * the flex-grow, flex-shrink, and flex-basis
+     * properties. These properties control how the
+     * element resizes to fill its container.
+     *
+     * We'll set flex-grow to 1 so that it will
+     * expand to fill its container. (The default
+     * default value is 0.)
+     *
+     * We'll also set flex-shrink to 1 so that the
+     * element will shrink as its container gets
+     * smaller. (The default value is 1.)
+     *
+     * Last, we set flex-basis to 0 so that its
+     * size is solely determined by the size of
+     * the container. (The default value
+     * is auto, which would cause the content's
+     * size to also be a factor in this calculation.)
+     *
+     * The net result of these properties is that the
+     * element is a fluid size, and will expand and
+     * shrink with its container and siblings, but
+     * they will all have the same size, even if they
+     * have different amounts of content.
+     *
+     * NOTE: IE11 ignores flex short-hand declarations
+     * with unitless flex-basis values. So we have to
+     * use 0% instead of 0 as a workaround. You can
+     * find more info at:
+     * github.com/philipwalton/flexbugs.
+     */
+    -ms-flex: 1 1 0%;
+        flex: 1 1 0%;
+
+    border: none;
+    border-radius: 0;
+  }
+
+  .cardGroup__card + .cardGroup__card {
+    border-left: 1px solid #D7DBDD;
+  }
+
+  .cardGroup__cardDescription {
+    /**
+     * We're doing almost the exact same thing here as
+     * we did above. The difference is that its
+     * flex-basis is auto, so now the size of its content
+     * will affect how large it is.
+     */
+    -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+  }
+
+/*=====================================================
+  contents of: styles/photo.css
+  =====================================================*/
+.photo {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Align all the children to the end of the main
+   * axis. This is the right side, by default.
+   */
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+
+  /**
+   * Align all the children to the end of the
+   * secondary axis. This is the bottom, by default.
+   */
+  -ms-flex-align: end;
+      align-items: flex-end;
+
+  width: 145px;
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+}
+
+.photo--large {
+  height: 130px;
+}
+
+.photo1 {
+  background-image: url('images/dog_1.jpg');
+}
+
+/*=====================================================
+  contents of: styles/gallery.css
+  =====================================================*/
+.gallery {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Allow the children to wrap to the next "row",
+   * instead of trying to squeeze them all into
+   * a single row.
+   */
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+  width: 478px;
+  padding: 5px;
+  border: 1px solid #D7DBDD;
+}
+
+.photo2 {
+  background-image: url('images/dog_2.jpg');
+}
+
+.photo3 {
+  background-image: url('images/dog_3.jpg');
+}
+
+.photo4 {
+  background-image: url('images/dog_4.jpg');
+}
+
+.photo5 {
+  background-image: url('images/dog_5.jpg');
+}
+
+.photo6 {
+  background-image: url('images/dog_1.jpg');
+}
+
+.photo7 {
+  background-image: url('images/dog_2.jpg');
+}
+
+.photo8 {
+  background-image: url('images/dog_3.jpg');
+}
+
+.photo9 {
+  background-image: url('images/dog_4.jpg');
+}
+
+.photo10 {
+  background-image: url('images/dog_5.jpg');
+}
+
+/*=====================================================
+  contents of: styles/mosaic.css
+  =====================================================*/
+.mosaic {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: -ms-flexbox;
+  display: flex;
+
+  /**
+   * Set the main axis to be vertical instead of
+   * horizontal, so now the children are laid out
+   * vertically, from top to bottom.
+   */
+  -ms-flex-direction: column;
+      flex-direction: column;
+
+  /**
+   * Now when the children wrap, they'll wrap to the
+   * next "column".
+   */
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+  width: 478px;
+  height: 370px;
+  padding: 6px;
+  border: 1px solid #D7DBDD;
+  overflow: auto;
+}
+
+.photo:last-child {
+  /**
+   * This is the first part of a flexbox hack.
+   * It addresses a problem flexbox has with scrolling
+   * content. Without this hack, the children on the
+   * far right of the container will be flush against
+   * the container's right edge.
+   */
+  position: relative;
+}
+
+.photo:last-child::after {
+  /**
+   * This is the second part of the hack. It creates
+   * an invisible element on the last child that
+   * forces a space between the child and the right
+   * edge of the container.
+   */
+  display: block;
+  width: 11px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  visibility: hidden;
+  content: "";
+}
+
+.photo--small {
+  height: 70px;
+}
+
+.photo--medium {
+  height: 90px;
+}
+
+.photo11 {
+  background-image: url('images/dog_1.jpg');
+}
+
+.photo12 {
+  background-image: url('images/dog_2.jpg');
+}
+
+.photo13 {
+  background-image: url('images/dog_3.jpg');
+}
+
+.photo14 {
+  background-image: url('images/dog_4.jpg');
+}
+
+

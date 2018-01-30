@@ -1,0 +1,23 @@
+Sub Makro1()
+'
+' Makro1 Makro
+'
+
+Dim string_testowy As String
+Dim liczba_w_nawiasie As String
+Dim number_start As Integer
+Dim nawias_koniec As Integer
+
+string_testowy = "Lorem Ipsum (2017) BlaBla"
+number_start = InStr(string_testowy, "(") + 1
+nawias_koniec = InStr(string_testowy, ")")
+liczba_w_nawiasie = Mid(string_testowy, number_start, nawias_koniec - number_start)
+
+If liczba_w_nawiasie = "2017" Then
+MsgBox "Działa"
+Else
+MsgBox "Nie działa"
+End If
+
+
+End Sub

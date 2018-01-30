@@ -1,0 +1,29 @@
+# mChat Info config
+# Only needed if using PermissionsBukkit, superperms.
+
+groupnames:
+    admin: '[a]'
+    jadmin: '[ja]'
+    member: '[m]'
+    sadmin: '[sa]'
+mchat:
+    custVar:
+        admin: ''
+        jadmin: ''
+        member: ''
+        sadmin: ''
+    prefix:
+        admin: '&4DtK [SO] &7'
+        jadmin: '&aDtK [JA] &7'
+        member: '&cDtK [M] &7'
+        sadmin: '&9DtK [SA] &7'
+    suffix:
+        admin: ''
+        jadmin: ''
+        member: ''
+        sadmin: ''
+worldnames:
+    D3GN: '[D]'
+    DtK: '[DtK]'
+    Hello: '[H]'
+    Nether: '[N]'

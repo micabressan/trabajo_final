@@ -1,0 +1,61 @@
+# Every Open API file needs this
+swagger: '2.0'
+# Document metadata
+info:
+ version: "0.3.0"
+ title: Music API
+ 
+# URL data
+host: api.muzicplayz.com
+basePath: /v3
+schemes:
+- https
+# Endpoints
+paths:
+  # Playlists
+  /playlist:
+    # Get one or more playlists
+    get:
+      # Query parameters
+      parameters:
+        # Limit
+        - name: limit
+          in: query
+          required: false
+          type: integer
+ 
+        # Offset
+        - name: offset
+          in: query
+          required: false
+          type: integer
+          
+        # Search:
+        - name: search
+          in: query
+          required: false
+          type: integer
+ 
+      # Incomplete response (to finish later)
+      responses:
+        # Response code
+        200:
+          description: Successful response
+ 
+  # Photo album
+  /playlist/{playlist-id}:
+    # Get an album
+    delete:
+      # Query parameters
+      parameters:
+        # Album id
+        - name: playlist-id
+          in: path
+          required: true
+          type: string
+ 
+      # Incomplete response (to finish later)
+      responses:
+        # Response code
+        200:
+          description: Successful response

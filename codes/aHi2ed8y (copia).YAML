@@ -1,0 +1,115 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Gunnebogatan 54
+  # Location required to calculate the time the sun rises and sets
+  latitude: 57.7167
+  longitude: 11.9667
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 3
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+    
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather
+sensor:
+    platform: yr
+    name: Weather
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - windSpeed
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# Verisure
+verisure:
+  username: daniel.liebst@gmail.com
+  password: saddam08
+  
+  # Media Players
+media_player:
+  - platform: sonos
+    hosts:
+      - 192.168.1.24
+      - 192.168.1.5
+    
+  - platform: onkyo
+    host: 192.168.1.12
+    name: Receiver
+  
+  # Canary
+canary:
+  username: daniel.liebst@gmail.com
+  password: saddam08
+  
+  # Rfx
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A121J4C1-if00-port0
+  
+  # Switch
+      switch:
+  platform: rfxtrx
+  automatic_add: True
+    
+    # Västtrafik
+sensor:
+  - platform: vasttrafik
+    key: tYnA2HUzwTB7FJo9T6nxN5QxzSAa
+    secret: EpYfekOgarvQm5MbQbBso3F_Fzka
+    departures:
+      - name: Mot Korsvägen
+        from: Brobergsgatan
+        heading: Muraregatan
+        delay: 5

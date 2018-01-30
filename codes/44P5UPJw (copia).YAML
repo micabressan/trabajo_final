@@ -1,0 +1,10 @@
+ - platform: template
+    sensors:
+      sun_state:
+        friendly_name: "Solens läge"
+        value_template: >-
+          {% if is_state('sun.sun', 'above_horizon') %}
+            Uppe
+          {% else %}
+            Nere
+          {% endif %}

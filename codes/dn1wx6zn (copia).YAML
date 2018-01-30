@@ -1,0 +1,13 @@
+heat_template_version: 2017-09-01
+
+resources:
+  image_src:
+    type: OS::Glance::Image
+    properties:
+      container_format: bare
+      disk_format: qcow2
+      #visibility: true
+      location: http://(removed)/Installs/_Automation/_Images/_qcow2/boot.qcow2
+      #location: http://(removed)/Installs/_Automation/_Images/_qcow2/MultiVnicImage.qcow2
+      name: MultiVnic
+      protected: false

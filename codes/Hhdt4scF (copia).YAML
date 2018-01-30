@@ -1,0 +1,140 @@
+groups:
+    Noobies:
+        options:
+            rank: '1000'
+        default: true
+        worlds:
+        prefix: ''
+        permissions:
+        - 'lwc.deny'
+        - 'essentials.afk'
+        - 'essentials.mail'
+    Member:
+        options:
+            rank: '800'
+        default: false
+        prefix: '[&2Member&f]&8 '
+        permissions:
+        - 'essentials.give'
+        - 'essentials.afk'
+        - 'essentials.me'
+        - 'essentials.msg'
+        - 'essentials.mail.*'
+        - 'essentials.back'
+            - 'essentials.back.ondeath'
+            - 'essentials.balance'
+            - 'essentials.compass'
+            - 'essentials.depth'
+            - 'essentials.getpos'
+            - 'essentials.help'
+            - 'essentials.helpop'
+            - 'essentials.list'
+            - 'essentials.mail'
+            - 'essentials.mail.send'
+            - 'essentials.pay'
+            - 'essentials.ping'
+            - 'essentials.rules'
+            - 'essentials.sell'
+            - 'essentials.spawn'
+            - 'essentials.signs.disposal.create'
+            - 'essentials.reloadall'
+            - 'essentials.signs.disposal.use'
+            - 'essentials.signs.heal.use'
+            - 'essentials.signs.free.use'
+            - 'essentials.signs.mail.create'
+            - 'essentials.signs.mail.use'
+            - 'essentials.signs.protection.create'
+            - 'essentials.signs.protection.use'
+            - 'essentials.signs.trade.create'
+            - 'essentials.signs.trade.use'
+            - 'essentials.signs.buy.use'
+            - 'essentials.signs.sell.use'
+            - 'essentials.suicide'
+            - 'essentials.whois'
+            - 'essentials.give'
+            - 'essentials.item'
+            - 'lwc.protect'
+            - 'essentials.delhome'
+            - 'essentials.home'
+            - 'essentials.sethome'
+                Member:
+        options:
+            rank: '800'
+        default: false
+        prefix: '[&2Member&f]&8 '
+        permissions:
+    Mod:
+        options
+            rank: '700'
+        default: false
+        prefix: '[&1Mod&f]&b '
+        inheritance:
+        - Member
+        permissions:
+        - 'lwc.mod'
+            - 'essentials.god'
+            - 'essentials.god.others'
+            - 'essentials.heal'
+            - 'essentials.heal.cooldown.bypass'
+            - 'essentials.ban'
+            - 'essentials.banip'
+            - 'essentials.unbanip'
+            - 'essentials.burn'
+            - 'essentials.kick'
+            - 'essentials.kick.exempt'
+            - 'essentials.kick.notify'
+            - 'essentials.kill'
+            - 'essentials.tempban'
+            - 'essentials.tempban.exempt'
+            - 'essentials.unban'
+            - 'essentials.spawn'
+            - 'essentials.tp'
+            - 'essentials.bigtree'
+            - 'essentials.tree'
+            - 'essentials.jump'
+            - 'essentials.time'
+            - 'essentials.signs.heal.create'
+            - 'essentials.spawnmob'
+            - 'essentials.top'
+            - 'essentials.essentials'
+            - 'essentials.antioch'
+            - 'essentials.lightning'
+            - 'essentials.signs.buy.create'
+            - 'essentials.signs.sell.create'
+            - 'essentials.togglejail'
+            - 'worldedit.wand'
+            - 'worldedit.superpickaxe'
+            - 'worldedit.history.undo'
+            - 'worldedit.history.redo'
+            - 'worldedit.navigation.jumpto'
+            - 'worldedit.selection.pos'
+            - 'worldedit.region.set'
+            - 'residence.create'
+            - 'essentials.home.others'
+            - 'essentials.delhome.others'
+            - 'essentials.sethome.others'
+            - 'ichat.reload'
+            - 'ichat.color'
+    Admin:
+        prefix: prefix: '[&4Admin&f]&d '
+        permissions:
+        - '*'
+        options:
+            rank: '0'
+            
+users:
+    DooM3Pwns:
+        group:
+        - Admin
+    Coolkid619:
+        group:
+        - Member
+    deathcrafts:
+        group:
+        - Member
+    stxoo:
+        group:
+        - Member
+    GnarBarz:
+        group:
+        - Member

@@ -1,0 +1,128 @@
+objectDatabase:
+  - id: main_building_1
+    type: building
+    size: 5x5
+    buildRequirements:
+      time: 5m
+      workers: 1
+      resources:
+        - resourceType: gold
+          count: 100
+      landscape:
+        - plain
+    effects:
+      - type: slots_for_all_resources
+        count: 10
+  - id: main_building_2
+    type: building
+    size: 5x5
+    alsoPresent:
+      - id: main_building_1
+    buildRequirements:
+      time: 1h
+      workers: 2
+      upgradeFrom:
+        id: main_building_1
+      resources:
+        - resourceType: gold
+          count: 500
+        - resourceType: wood
+          count: 10
+      landscape:
+        - plain
+    effects:
+      - type: slots_for_all_resources
+        count: 25
+
+  - id: granary_1
+    type: building
+    size: 3x3
+    buildRequirements:
+      time: 30m
+      workers: 1
+      resources:
+        - resourceType: gold
+          count: 300
+        - resourceType: wood
+          count: 10
+        - resourceType: stone
+          count: 5
+      landscape:
+        - plain
+    effects:
+      - type: slots_for_resources
+        slots:
+          - resourceType: grain
+            count: 25
+  - id: granary_2
+    type: building
+    size: 3x3
+    alsoPresent:
+      - id: granary_1
+    buildRequirements:
+      time: 6h
+      workers: 1
+      upgradeFrom:
+        id: granary_1
+      resources:
+        - resourceType: gold
+          count: 1000
+        - resourceType: brick
+          count: 20
+        - resourceType: iron
+          count: 10
+      landscape:
+        - plain
+    effects:
+      - type: slots_for_resources
+        slots:
+          - resourceType: grain
+            count: 50
+
+  - id: market_1
+    type: building
+    size: 3x5
+    buildRequirements:
+      time: 4h
+      workers: 1
+      resources:
+        - resourceType: gold
+          count: 1000
+        - resourceType: wood
+          count: 30
+        - resourceType: brick
+          count: 30
+        - resourceType: iron
+          count: 30
+      landscape:
+        - plain
+    effects:
+      - type: unlock_feature
+        feature: market
+    upgradeFrom:
+      - id: granary_1
+  - id: auction_1
+    type: building
+    size: 5x5
+    buildRequirements:
+      time: 6h
+      workers: 1
+      resources:
+        - resourceType: gold
+          count: 1000
+        - resourceType: wood_plane
+          count: 15
+        - resourceType: stone
+          count: 15
+        - resourceType: iron
+          count: 15
+      landscape:
+        - plain
+      buildings:
+        - id: market_1
+        - id: embassy_1
+      unlocked_feature:
+        - feature: crypto_account
+    effects:
+      - type: unlock_feature
+        feature: global_market

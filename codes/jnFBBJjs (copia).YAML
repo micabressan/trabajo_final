@@ -1,0 +1,36 @@
+- action:
+  - data:
+      message: Temperatura C.O. > 60
+    service: notify.boguslaw
+  alias: Piec_temp60
+  condition: []
+  id: '1516088124325'
+  trigger:
+  - above: '60'
+    entity_id: sensor.temperatura_co
+    platform: numeric_state
+- action:
+  - data:
+      message: Temperatura C.O. < 45
+    service: notify.boguslaw
+  alias: PiecTemp_40
+  condition: []
+  id: '1516089387024'
+  trigger:
+  - below: '45'
+    entity_id: sensor.temperatura_co
+    platform: numeric_state
+- action:
+  - alias: ''
+    data:
+      entity_id: switch.bojler_switch
+    service: switch.turn_off
+  alias: Bojler_off
+  condition: []
+  id: '1516121356744'
+  trigger:
+  - entity_id: switch.bojler_switch
+    for:
+      minutes: 1
+    platform: state
+    to: 'ON'

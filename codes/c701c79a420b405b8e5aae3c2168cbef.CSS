@@ -1,0 +1,59 @@
+html, body {
+  height: 100%;
+  overflow: hidden; }
+
+.two-pane-app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; }
+  .two-pane-app *, .two-pane-app *::after, .two-pane-app *::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .two-pane-app .top {
+    position: absolute;
+    height: 3.75em;
+    padding: 1.25em;
+    line-height: 2.5em;
+    width: 100%;
+    border-bottom: 0.0625em solid rgba(0, 0, 0, 0.1); }
+  .two-pane-app .bottom {
+    position: absolute;
+    top: 3.75em;
+    bottom: 0;
+    width: 100%; }
+    .two-pane-app .bottom .left {
+      border-right: 0.0625em solid rgba(0, 0, 0, 0.1);
+      position: absolute;
+      width: 30%;
+      height: 100%;
+      overflow: auto; }
+      .two-pane-app .bottom .left .item {
+        height: 4em;
+        border-bottom: 0.0625em solid rgba(0, 0, 0, 0.1);
+        cursor: pointer; }
+        .two-pane-app .bottom .left .item:hover {
+          background: rgba(0, 0, 0, 0.1);
+          border-bottom: 0.0625em solid rgba(0, 0, 0, 0); }
+        .two-pane-app .bottom .left .item:last-child {
+          border-bottom: 0; }
+    .two-pane-app .bottom .right {
+      position: absolute;
+      width: 70%;
+      right: 0;
+      height: 100%;
+      overflow: auto;
+      padding: 1.25em; }
+  .two-pane-app .title {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+    background: rgba(0, 0, 0, 0.1);
+    width: 10em;
+    height: 1em;
+    margin-bottom: 1.25em; }

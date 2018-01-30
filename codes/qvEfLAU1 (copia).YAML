@@ -1,0 +1,1359 @@
+#Here are the lore and item name for every heads 
+Masks:
+Chicken:
+    Tiers:
+      I:
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eChicken Heads
+        - §6§l* §eChicken Heads §7I
+        - ''
+        - §E§lChicken Description
+        - §7§oChance to be immune to fall damage.
+        itemName: §e§lChicken Mask §6§l§nI
+      II:
+        itemName: §e§lChicken Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eChicken Heads
+        - §6§l* §eChicken Heads §7II
+        - ''
+        - §E§lChicken Description
+        - §7§oChance to be immune to fall damage.
+      III:
+        itemName: §e§lChicken Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eChicken Heads
+        - §6§l* §eChicken Heads §7III
+        - ''
+        - §E§lChicken Description
+        - §7§oChance to be immune to fall damage.
+      IV:
+        itemName: §e§lChicken Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eChicken Heads
+        - §6§l* §eChicken Heads §7IV
+        - ''
+        - §E§lChicken Description
+        - §7§oChance to be immune to fall damage.
+      V:
+        itemName: §e§lChicken Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eChicken Heads
+        - §6§l* §eChicken Heads §7V
+        - ''
+        - §E§lChicken Description
+        - §7§oChance to be immune to fall damage.
+  Sheep:
+    Tiers:
+      I:
+        itemName: §e§lSheep Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eSheep Heads
+        - §6§l* §eSheep Heads §7I
+        - ''
+        - §E§lSheep Description
+        - §7§oChance to give players jump boost.
+      II:
+        itemName: §e§lSheep Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eSheep Heads
+        - §6§l* §eSheep Heads §7II
+        - ''
+        - §E§lSheep Description
+        - §7§oChance to give players jump boost.
+      III:
+        itemName: §e§lSheep Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eSheep Heads
+        - §6§l* §eSheep Heads §7III
+        - ''
+        - §E§lSheep Description
+        - §7§oChance to give players jump boost.
+      IV:
+        itemName: §e§lSheep Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eSheep Heads
+        - §6§l* §eSheep Heads §7IV
+        - ''
+        - §E§lSheep Description
+        - §7§oChance to give players jump boost.
+      V:
+        itemName: §e§lSheep Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eSheep Heads
+        - §6§l* §eSheep Heads §7V
+        - ''
+        - §E§lSheep Description
+        - §7§oChance to give players jump boost.
+  Cow:
+    Tiers:
+      I:
+        itemName: §e§lCow Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eCow Heads
+        - §6§l* §eCow Heads §7I
+        - ''
+        - §E§lCow Description
+        - §7§oChance to be immune to all debuffs.
+      II:
+        itemName: §e§lCow Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eCow Heads
+        - §6§l* §eCow Heads §7II
+        - ''
+        - §E§lCow Description
+        - §7§oChance to be immune to all debuffs.
+      III:
+        itemName: §e§lCow Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eCow Heads
+        - §6§l* §eCow Heads §7III
+        - ''
+        - §E§lCow Description
+        - §7§oChance to be immune to all debuffs.
+      IV:
+        itemName: §e§lCow Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eCow Heads
+        - §6§l* §eCow Heads §7IV
+        - ''
+        - §E§lCow Description
+        - §7§oChance to be immune to all debuffs.
+      V:
+        itemName: §e§lCow Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eCow Heads
+        - §6§l* §eCow Heads §7V
+        - ''
+        - §E§lCow Description
+        - §7§oChance to be immune to all debuffs.
+  Spider:
+    Tiers:
+      I:
+        itemName: §e§lSpider Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eSpider Heads
+        - §6§l* §eSpider Heads §7I
+        - ''
+        - §E§lSpider Description
+        - §7§oChance to freeze your enemies with torture.
+      II:
+        itemName: §e§lSpider Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eSpider Heads
+        - §6§l* §eSpider Heads §7II
+        - ''
+        - §E§lSpider Description
+        - §7§oChance to freeze your enemies with torture.
+      III:
+        itemName: §e§lSpider Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eSpider Heads
+        - §6§l* §eSpider Heads §7III
+        - ''
+        - §E§lSpider Description
+        - §7§oChance to freeze your enemies with torture.
+      IV:
+        itemName: §e§lSpider Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eSpider Heads
+        - §6§l* §eSpider Heads §7IV
+        - ''
+        - §E§lSpider Description
+        - §7§oChance to freeze your enemies with torture.
+      V:
+        itemName: §e§lSpider Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eSpider Heads
+        - §6§l* §eSpider Heads §7V
+        - ''
+        - §E§lSpider Description
+        - §7§oChance to freeze your enemies with torture.
+  Zombie:
+    Tiers:
+      I:
+        itemName: §e§lZombie Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eZombie Heads
+        - §6§l* §eZombie Heads §7I
+        - ''
+        - §E§lZombie Description
+        - §7§oChance to spawn a zombie havoc.
+      II:
+        itemName: §e§lZombie Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eZombie Heads
+        - §6§l* §eZombie Heads §7II
+        - ''
+        - §E§lZombie Description
+        - §7§oChance to spawn a zombie havoc.
+      III:
+        itemName: §e§lZombie Mask §6§l§nIIi
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eZombie Heads
+        - §6§l* §eZombie Heads §7III
+        - ''
+        - §E§lZombie Description
+        - §7§oChance to spawn a zombie havoc.
+      IV:
+        itemName: §e§lZombie Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eZombie Heads
+        - §6§l* §eZombie Heads §7IV
+        - ''
+        - §E§lZombie Description
+        - §7§oChance to spawn a zombie havoc.
+      V:
+        itemName: §e§lZombie Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eZombie Heads
+        - §6§l* §eZombie Heads §7V
+        - ''
+        - §E§lZombie Description
+        - §7§oChance to spawn a zombie havoc.
+  Skeleton:
+    Tiers:
+      I:
+        itemName: §e§lSkeleton Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eSkeleton Heads
+        - §6§l* §eSkeleton Heads §7I
+        - ''
+        - §E§lSkeleton Description
+        - §7§oChance to sleep enemies with slowness III.
+      II:
+        itemName: §e§lSkeleton Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eSkeleton Heads
+        - §6§l* §eSkeleton Heads §7II
+        - ''
+        - §E§lSkeleton Description
+        - §7§oChance to sleep enemies with slowness III.
+      III:
+        itemName: §e§lSkeleton Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eSkeleton Heads
+        - §6§l* §eSkeleton Heads §7III
+        - ''
+        - §E§lSkeleton Description
+        - §7§oChance to sleep enemies with slowness III.
+      IV:
+        itemName: §e§lSkeleton Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eSkeleton Heads
+        - §6§l* §eSkeleton Heads §7IV
+        - ''
+        - §E§lSkeleton Description
+        - §7§oChance to sleep enemies with slowness III.
+      V:
+        itemName: §e§lSkeleton Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eSkeleton Heads
+        - §6§l* §eSkeleton Heads §7V
+        - ''
+        - §E§lSkeleton Description
+        - §7§oChance to sleep enemies with slowness III.
+  MagmaCube:
+    Tiers:
+      I:
+        itemName: §e§lMagmaCube Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eMagmaCube Heads
+        - §6§l* §eMagmaCube Heads §7I
+        - ''
+        - §E§lMagmaCube Description
+        - §7§oChance to gain resistance X in combat.
+      II:
+        itemName: §e§lMagmaCube Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eMagmaCube Heads
+        - §6§l* §eMagmaCube Heads §7II
+        - ''
+        - §E§lMagmaCube Description
+        - §7§oChance to gain resistance X in combat.
+      III:
+        itemName: §e§lMagmaCube Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eMagmaCube Heads
+        - §6§l* §eMagmaCube Heads §7III
+        - ''
+        - §E§lMagmaCube Description
+        - §7§oChance to gain resistance X in combat.
+      IV:
+        itemName: §e§lMagmaCube Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eMagmaCube Heads
+        - §6§l* §eMagmaCube Heads §7IV
+        - ''
+        - §E§lMagmaCube Description
+        - §7§oChance to gain resistance X in combat.
+      V:
+        itemName: §e§lMagmaCube Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eMagmaCube Heads
+        - §6§l* §eMagmaCube Heads §7V
+        - ''
+        - §E§lMagmaCube Description
+        - §7§oChance to gain resistance X in combat.
+  Blaze:
+    Tiers:
+      I:
+        itemName: §e§lBlaze Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eBlaze Heads
+        - §6§l* §eBlaze Heads §7I
+        - ''
+        - §E§lBlaze Description
+        - §7§oChance to launch players with bow shots.
+      II:
+        itemName: §e§lBlaze Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eBlaze Heads
+        - §6§l* §eBlaze Heads §7II
+        - ''
+        - §E§lBlaze Description
+        - §7§oChance to launch players with bow shots.
+      III:
+        itemName: §e§lBlaze Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eBlaze Heads
+        - §6§l* §eBlaze Heads §7III
+        - ''
+        - §E§lBlaze Description
+        - §7§oChance to launch players with bow shots.
+      IV:
+        itemName: §e§lBlaze Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eBlaze Heads
+        - §6§l* §eBlaze Heads §7IV
+        - ''
+        - §E§lBlaze Description
+        - §7§oChance to launch players with bow shots.
+      V:
+        itemName: §e§lBlaze Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eBlaze Heads
+        - §6§l* §eBlaze Heads §7V
+        - ''
+        - §E§lBlaze Description
+        - §7§oChance to launch players with bow shots.
+  EnderMan:
+    Tiers:
+      I:
+        itemName: §e§lEnderman Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eEnderman Heads
+        - §6§l* §eEnderman Heads §7I
+        - ''
+        - §E§lEnderman Description
+        - §7§oChance to teleport players with blindness.
+      II:
+        itemName: §e§lEnderman Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eEnderman Heads
+        - §6§l* §eEnderman Heads §7II
+        - ''
+        - §E§lEnderman Description
+        - §7§oChance to teleport players with blindness.
+      III:
+        itemName: §e§lEnderman Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eEnderman Heads
+        - §6§l* §eEnderman Heads §7III
+        - ''
+        - §E§lEnderman Description
+        - §7§oChance to teleport players with blindness.
+      IV:
+        itemName: §e§lEnderman Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eEnderman Heads
+        - §6§l* §eEnderman Heads §7IV
+        - ''
+        - §E§lEnderman Description
+        - §7§oChance to teleport players with blindness.
+      V:
+        itemName: §e§lEnderman Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eEnderman Heads
+        - §6§l* §eEnderman Heads §7V
+        - ''
+        - §E§lEnderman Description
+        - §7§oChance to teleport players with blindness.
+  Creeper:
+    Tiers:
+      I:
+        itemName: §e§lCreeper Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eCreeper Heads
+        - §6§l* §eCreeper Heads §7I
+        - ''
+        - §E§lCreeper Description
+        - §7§oChance to take III Hearts from enemies.
+      II:
+        itemName: §e§lCreeper Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eCreeper Heads
+        - §6§l* §eCreeper Heads §7II
+        - ''
+        - §E§lCreeper Description
+        - §7§oChance to take III Hearts from enemies.
+      III:
+        itemName: §e§lCreeper Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eCreeper Heads
+        - §6§l* §eCreeper Heads §7III
+        - ''
+        - §E§lCreeper Description
+        - §7§oChance to take III Hearts from enemies.
+      IV:
+        itemName: §e§lCreeper Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eCreeper Heads
+        - §6§l* §eCreeper Heads §7IV
+        - ''
+        - §E§lCreeper Description
+        - §7§oChance to take III Hearts from enemies.
+      V:
+        itemName: §e§lCreeper Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eCreeper Heads
+        - §6§l* §eCreeper Heads §7V
+        - ''
+        - §E§lCreeper Description
+        - §7§oChance to take III Hearts from enemies.
+  IronGolem:
+    Tiers:
+      I:
+        itemName: §e§lIronGolem Mask §6§l§nI
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §7860 §eIronGolem Heads
+        - §6§l* §eIronGolem Heads §7I
+        - ''
+        - §E§lIronGolem Description
+        - §7§oObtain I extra heart with slowness I.
+      II:
+        itemName: §e§lIronGolem Mask §6§l§nII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71204 §eIronGolem Heads
+        - §6§l* §eIronGolem Heads §7II
+        - ''
+        - §E§lIronGolem Description
+        - §7§oObtain II extra hearts with slowness I.
+      III:
+        itemName: §e§lIronGolem Mask §6§l§nIII
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71456 §eIronGolem Heads
+        - §6§l* §eIronGolem Heads §7III
+        - ''
+        - §E§lIronGolem Description
+        - §7§oObtain III extra hearts with slowness I.
+      IV:
+        itemName: §e§lIronGolem Mask §6§l§nIV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §71906 §eIronGolem Heads
+        - §6§l* §eIronGolem Heads §7IV
+        - ''
+        - §E§lIronGolem Description
+        - §7§oObtain IV extra hearts with slowness I.
+      V:
+        itemName: §e§lIronGolem Mask §6§l§nV
+        itemLore:
+        - ''
+        - §e§lIngrediants
+        - §6§l* §72304 §eIronGolem Heads
+        - §6§l* §eIronGolem Heads §7V
+        - ''
+        - §E§lIronGolem Description
+        - §7§oObtain V extra hearts with slowness I.
+#Here are some messages!
+Messages:
+  NotEnoughHeads: §c[!] You don't have enough §f§lHeads§c...
+  SuccesfullyPurchased: §a[!] You have purchased the head §f§lSuccessfully§a...
+#This messages are sended when the mask activate
+Effects:
+  Messages:
+    Chicken: §e§l** CHICKEN MASK §e§L**
+    Sheep: §f§l** SHEEP MASK §F§L**
+    Cow: §c§l** COW MASK §c§L**
+    Spider: §d§l** SPIDER MASK §d§L**
+    Zombie: §2§l** ZOMBIE MASK §2§L**
+    Skeleton: §7§l** SKELETON MASK §7§L**
+    Magma: §6§l** MAGMA MASK §6§L**
+    Blaze: §6§l** BLAZE MASK §6§L**
+    EnderMan: §5§l** ENDERMAN MASK §5§L**
+    Creeper: §a§l** CREEPER MASK §a§L**
+#Percentage of the heads drop
+head-drop-percentage: 100%
+#Head Item Name
+head-name: §e§l{type} Head §8(§7Click§8)
+#Head Item Lore
+head-lore:
+- ''
+- §6§l* §e§lCOMMAND §7/Heads
+- ''
+- §7§o((§f§oTip:§7§o Masks give special effects.))
+GUI:
+  headDisplayName: §e{type} §6Head §8(§7Click§8)
+  headLore:
+  - ''
+  - §e§l* §7Right-Click to view the §eEffects§7.
+  - §e§l* §7Right-Click to see the §eTier Levels§7.
+#Prizes for each tier
+MasksPrizes:
+  Tiers:
+    I: 1
+    II: 1
+    III: 1
+    IV: 1
+    V: 1
+#ItemName and Lore for each tiers and masks!
+MaskItem:
+  Chicken:
+    Tiers:
+      I:
+        itemName: §6§lChicken Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhen jumping off blocks you will
+        - §fhave the chance to not take fall
+        - §fdamage depending on the tier level.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8GFSG-TGER-BVSG
+      II:
+        itemName: §6§lChicken Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhen jumping off blocks you will
+        - §fhave the chance to not take fall
+        - §fdamage depending on the tier level.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8GFSG-TGER-BVSA
+      III:
+        itemName: §6§lChicken Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhen jumping off blocks you will
+        - §fhave the chance to not take fall
+        - §fdamage depending on the tier level.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8GFSG-TGER-BVST
+      IV:
+        itemName: §6§lChicken Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhen jumping off blocks you will
+        - §fhave the chance to not take fall
+        - §fdamage depending on the tier level.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8GFSG-TGER-BVSP
+      V:
+        itemName: §6§lChicken Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhen jumping off blocks you will
+        - §fhave the chance to not take fall
+        - §fdamage depending on the tier level.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8GFSG-TGER-BVSZ
+  Sheep:
+    Tiers:
+      I:
+        itemName: §6§lSheep Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FWhen being attacked the enemy
+        - §fplayer will receive jump boost V so
+        - §fyou can easily escape them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8SGHS-YTHF-VSSG
+      II:
+        itemName: §6§lSheep Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FWhen being attacked the enemy
+        - §fplayer will receive jump boost V so
+        - §fyou can easily escape them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8SGHS-YTHF-VSSA
+      III:
+        itemName: §6§lSheep Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FWhen being attacked the enemy
+        - §fplayer will receive jump boost V so
+        - §fyou can easily escape them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8SGHS-YTHF-VSSV
+      IV:
+        itemName: §6§lSheep Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FWhen being attacked the enemy
+        - §fplayer will receive jump boost V so
+        - §fyou can easily escape them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8SGHS-YTHF-VSST
+      V:
+        itemName: §6§lSheep Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FWhen being attacked the enemy
+        - §fplayer will receive jump boost V so
+        - §fyou can easily escape them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8SGHS-YTHF-VSSZ
+  Cow:
+    Tiers:
+      I:
+        itemName: §6§lCow Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fIf you were to be hit with
+        - §fdebuffs, they will be removed
+        - §fonce the mask activates.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8PMQL-EQSE-CZRA
+      II:
+        itemName: §6§lCow Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fIf you were to be hit with
+        - §fdebuffs, they will be removed
+        - §fonce the mask activates.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8PMQL-EQSE-CZRR
+      III:
+        itemName: §6§lCow Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fIf you were to be hit with
+        - §fdebuffs, they will be removed
+        - §fonce the mask activates.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8PMQL-EQSE-CZRQ
+      IV:
+        itemName: §6§lCow Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fIf you were to be hit with
+        - §fdebuffs, they will be removed
+        - §fonce the mask activates.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8PMQL-EQSE-CZRB
+      V:
+        itemName: §6§lCow Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fIf you were to be hit with
+        - §fdebuffs, they will be removed
+        - §fonce the mask activates.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8PMQL-EQSE-CZRZ
+  Spider:
+    Tiers:
+      I:
+        itemName: §6§lSpider Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fFreeze your enemy with torture
+        - §fas they combat tag you in pvp, so you can
+        - §fmake an escape.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8OZLW-AIDM-WJAY
+      II:
+        itemName: §6§lSpider Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fFreeze your enemy with torture
+        - §fas they combat tag you in pvp, so you can
+        - §fmake an escape.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8OZLW-AIDM-WJAS
+      III:
+        itemName: §6§lSpider Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fFreeze your enemy with torture
+        - §fas they combat tag you in pvp, so you can
+        - §fmake an escape.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8OZLW-AIDM-WJAU
+      IV:
+        itemName: §6§lSpider Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fFreeze your enemy with torture
+        - §fas they combat tag you in pvp, so you can
+        - §fmake an escape.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8OZLW-AIDM-WJAG
+      V:
+        itemName: §6§lSpider Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fFreeze your enemy with torture
+        - §fas they combat tag you in pvp, so you can
+        - §fmake an escape.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8OZLW-AIDM-WJAZ
+  Zombie:
+    Tiers:
+      I:
+        itemName: §6§lZombie Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fOnce you get combat tagged, instantly a
+        - §fzombie havoc group will chase your enemy
+        - §fto ensure death is upon them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8AYTR-SUXZ-KOQA
+      II:
+        itemName: §6§lZombie Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fOnce you get combat tagged, instantly a
+        - §fzombie havoc group will chase your enemy
+        - §fto ensure death is upon them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8AYTR-SUXZ-KOQF
+      III:
+        itemName: §6§lZombie Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fOnce you get combat tagged, instantly a
+        - §fzombie havoc group will chase your enemy
+        - §fto ensure death is upon them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8AYTR-SUXZ-KOQS
+      IV:
+        itemName: §6§lZombie Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fOnce you get combat tagged, instantly a
+        - §fzombie havoc group will chase your enemy
+        - §fto ensure death is upon them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8AYTR-SUXZ-KOQQ
+      V:
+        itemName: §6§lZombie Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fOnce you get combat tagged, instantly a
+        - §fzombie havoc group will chase your enemy
+        - §fto ensure death is upon them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8AYTR-SUXZ-KOQZ
+  Skeleton:
+    Tiers:
+      I:
+        itemName: §6§lSkeleton Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fPut your enemies to sleep as they
+        - §fcombat tag you in pvp, just make
+        - §fsure they don't wake up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8ZQAI-DIGW-REMX
+      II:
+        itemName: §6§lSkeleton Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fPut your enemies to sleep as they
+        - §fcombat tag you in pvp, just make
+        - §fsure they don't wake up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8ZQAI-DIGW-REMA
+      III:
+        itemName: §6§lSkeleton Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fPut your enemies to sleep as they
+        - §fcombat tag you in pvp, just make
+        - §fsure they don't wake up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8ZQAI-DIGW-REMC
+      IV:
+        itemName: §6§lSkeleton Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fPut your enemies to sleep as they
+        - §fcombat tag you in pvp, just make
+        - §fsure they don't wake up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8ZQAI-DIGW-REML
+      V:
+        itemName: §6§lSkeleton Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fPut your enemies to sleep as they
+        - §fcombat tag you in pvp, just make
+        - §fsure they don't wake up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8ZQAI-DIGW-REMZ
+  MagmaCube:
+    Tiers:
+      I:
+        itemName: §6§lMagmaCube Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fHave access to resistance X whilst
+        - §fcombat tagged from an enemy player
+        - §fin pvp.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8IEKZ-SJEA-HWQA
+      II:
+        itemName: §6§lMagmaCube Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fHave access to resistance X whilst
+        - §fcombat tagged from an enemy player
+        - §fin pvp.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8IEKZ-SJEA-HWQR
+      III:
+        itemName: §6§lMagmaCube Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fHave access to resistance X whilst
+        - §fcombat tagged from an enemy player
+        - §fin pvp.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8IEKZ-SJEA-HWQT
+      IV:
+        itemName: §6§lMagmaCube Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fHave access to resistance X whilst
+        - §fcombat tagged from an enemy player
+        - §fin pvp.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8IEKZ-SJEA-HWQJ
+      V:
+        itemName: §6§lMagmaCube Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fHave access to resistance X whilst
+        - §fcombat tagged from an enemy player
+        - §fin pvp.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8IEKZ-SJEA-HWQZ
+  Blaze:
+    Tiers:
+      I:
+        itemName: §6§lBlaze Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhilst shooting your bow shots you are
+        - §fable to launch players into the sky but
+        - §fdepending on the tier will determine the chance.
+        - §fgoes up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8KUZQ-YOWA-SFMA
+      II:
+        itemName: §6§lBlaze Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhilst shooting your bow shots you are
+        - §fable to launch players into the sky but
+        - §fdepending on the tier will determine the chance.
+        - §fgoes up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8KUZQ-YOWA-SFMF
+      III:
+        itemName: §6§lBlaze Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhilst shooting your bow shots you are
+        - §fable to launch players into the sky but
+        - §fdepending on the tier will determine the chance.
+        - §fgoes up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8KUZQ-YOWA-SFMS
+      IV:
+        itemName: §6§lBlaze Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhilst shooting your bow shots you are
+        - §fable to launch players into the sky but
+        - §fdepending on the tier will determine the chance.
+        - §fgoes up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8KUZQ-YOWA-SFMT
+      V:
+        itemName: §6§lBlaze Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fWhilst shooting your bow shots you are
+        - §fable to launch players into the sky but
+        - §fdepending on the tier will determine the chance.
+        - §fgoes up.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8KUZQ-YOWA-SFMZ
+  EnderMan:
+    Tiers:
+      I:
+        itemName: §6§lEnderman Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fCause blindness on your enemy in combat
+        - §fwhilst also teleporting them randomly in a
+        - §f10x10 radius.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8TAQL-DIEN-GOLA
+      II:
+        itemName: §6§lEnderman Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fCause blindness on your enemy in combat
+        - §fwhilst also teleporting them randomly in a
+        - §f10x10 radius.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8TAQL-DIEN-GOLF
+      III:
+        itemName: §6§lEnderman Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fCause blindness on your enemy in combat
+        - §fwhilst also teleporting them randomly in a
+        - §f10x10 radius.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8TAQL-DIEN-GOLY
+      IV:
+        itemName: §6§lEnderman Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fCause blindness on your enemy in combat
+        - §fwhilst also teleporting them randomly in a
+        - §f10x10 radius.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8TAQL-DIEN-GOLR
+      V:
+        itemName: §6§lEnderman Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fCause blindness on your enemy in combat
+        - §fwhilst also teleporting them randomly in a
+        - §f10x10 radius.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8TAQL-DIEN-GOLZ
+  Creeper:
+    Tiers:
+      I:
+        itemName: §6§lCreeper Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FAllow the enemy to hit you in combat but...
+        - §frevenge will be given as you take III
+        - §fhearts from them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8XSPZ-AKEA-XKER
+      II:
+        itemName: §6§lCreeper Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FAllow the enemy to hit you in combat but...
+        - §frevenge will be given as you take III
+        - §fhearts from them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8XSPZ-AKEA-XKEA
+      III:
+        itemName: §6§lCreeper Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FAllow the enemy to hit you in combat but...
+        - §frevenge will be given as you take III
+        - §fhearts from them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8XSPZ-AKEA-XKED
+      IV:
+        itemName: §6§lCreeper Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FAllow the enemy to hit you in combat but...
+        - §frevenge will be given as you take III
+        - §fhearts from them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8XSPZ-AKEA-XKEG
+      V:
+        itemName: §6§lCreeper Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §FAllow the enemy to hit you in combat but...
+        - §frevenge will be given as you take III
+        - §fhearts from them.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8XSPZ-AKEA-XKEZ
+  IronGolem:
+    Tiers:
+      I:
+        itemName: §6§lIronGolem Mask §e§l§nI
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fObtain hearts whilst holding this mask
+        - §fin your inventory, tier I will give you I extra
+        - §fheart.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8LOAZ-HQHX-AHXP
+      II:
+        itemName: §6§lIronGolem Mask §e§l§nII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fObtain hearts whilst holding this mask
+        - §fin your inventory, tier I will give you II extra
+        - §fhearts.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8LOAZ-HQHX-AHXS
+      III:
+        itemName: §6§lIronGolem Mask §e§l§nIII
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fObtain hearts whilst holding this mask
+        - §fin your inventory, tier I will give you III extra
+        - §fhearts.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8LOAZ-HQHX-AHXF
+      IV:
+        itemName: §6§lIronGolem Mask §e§l§nIV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fObtain hearts whilst holding this mask
+        - §fin your inventory, tier I will give you IV extra
+        - §fhearts.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8LOAZ-HQHX-AHXH
+      V:
+        itemName: §6§lIronGolem Mask §e§l§nV
+        itemLore:
+        - ''
+        - §6§l* §e§lDescription
+        - §fObtain hearts whilst holding this mask
+        - §fin your inventory, tier I will give you V extra
+        - §fhearts.
+        - ''
+        - §6§l* §e§lTier Levels §fI-V
+        - §6§l* §e§lUpgrade §fWith Heads from grinding mobs.
+        - ''
+        - §8LOAZ-HQHX-AHXH

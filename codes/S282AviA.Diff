@@ -1,0 +1,1230 @@
+diff --git a/src/server/game/Chat/Channels/Channel.h b/src/server/game/Chat/Channels/Channel.h
+index c646c67b..a034d112 100644
+--- a/src/server/game/Chat/Channels/Channel.h
++++ b/src/server/game/Chat/Channels/Channel.h
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -25,7 +25,7 @@
+ 
+ #include "Common.h"
+ 
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ #include "WorldPacket.h"
+ 
+ class Player;
+diff --git a/src/server/game/Entities/Item/Item.cpp b/src/server/game/Entities/Item/Item.cpp
+index 6a0b233e..b1821ff8 100644
+--- a/src/server/game/Entities/Item/Item.cpp
++++ b/src/server/game/Entities/Item/Item.cpp
+@@ -27,7 +27,7 @@
+ #include "ScriptMgr.h"
+ #include "ConditionMgr.h"
+ #include "Player.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ 
+ void AddItemsSetItem(Player* player, Item* item)
+ {
+diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
+index 003a0c7e..752b0170 100644
+--- a/src/server/game/Entities/Pet/Pet.cpp
++++ b/src/server/game/Entities/Pet/Pet.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -30,7 +30,7 @@
+ #include "Unit.h"
+ #include "Util.h"
+ #include "Group.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ #include "Battleground.h"
+ #include "InstanceScript.h"
+ #include "ArenaSpectator.h"
+@@ -61,7 +61,7 @@ Pet::~Pet()
+ }
+ 
+ void Pet::AddToWorld()
+-{ 
++{
+     ///- Register the pet for guid lookup
+     if (!IsInWorld())
+     {
+@@ -99,7 +99,7 @@ void Pet::AddToWorld()
+ }
+ 
+ void Pet::RemoveFromWorld()
+-{ 
++{
+     ///- Remove the pet from the accessor
+     if (IsInWorld())
+     {
+@@ -110,7 +110,7 @@ void Pet::RemoveFromWorld()
+ }
+ 
+ bool Pet::LoadPetFromDB(Player* owner, uint8 asynchLoadType, uint32 petentry, uint32 petnumber, bool current, AsynchPetSummon* info)
+-{ 
++{
+     // we are loading pet at that moment
+     if (owner->IsSpectator() || owner->GetPet() || !owner->IsInWorld() || !owner->FindMap())
+         return false;
+@@ -296,7 +296,7 @@ void Pet::DeleteFromDB(uint32 guidlow)
+ }
+ 
+ void Pet::setDeathState(DeathState s, bool /*despawn = false*/)                       // overwrite virtual Creature::setDeathState and Unit::setDeathState
+-{ 
++{
+     Creature::setDeathState(s);
+     if (getDeathState() == CORPSE)
+     {
+@@ -322,7 +322,7 @@ void Pet::setDeathState(DeathState s, bool /*despawn = false*/)
+ }
+ 
+ void Pet::Update(uint32 diff)
+-{ 
++{
+     if (m_removed)                                           // pet already removed, just wait in remove queue, no updates
+         return;
+ 
+@@ -402,7 +402,7 @@ void Pet::Update(uint32 diff)
+ }
+ 
+ void Pet::LoseHappiness()
+-{ 
++{
+     uint32 curValue = GetPower(POWER_HAPPINESS);
+     if (curValue <= 0)
+         return;
+@@ -413,7 +413,7 @@ void Pet::LoseHappiness()
+ }
+ 
+ HappinessState Pet::GetHappinessState()
+-{ 
++{
+     if (GetPower(POWER_HAPPINESS) < HAPPINESS_LEVEL_SIZE)
+         return UNHAPPY;
+     else if (GetPower(POWER_HAPPINESS) >= HAPPINESS_LEVEL_SIZE * 2)
+@@ -423,12 +423,12 @@ HappinessState Pet::GetHappinessState()
+ }
+ 
+ void Pet::Remove(PetSaveMode mode, bool returnreagent)
+-{ 
++{
+     m_owner->RemovePet(this, mode, returnreagent);
+ }
+ 
+ void Pet::GivePetXP(uint32 xp)
+-{ 
++{
+     if (getPetType() != HUNTER_PET)
+         return;
+ 
+@@ -481,7 +481,7 @@ void Pet::GivePetLevel(uint8 level)
+ }
+ 
+ bool Pet::CreateBaseAtCreature(Creature* creature)
+-{ 
++{
+     ASSERT(creature);
+ 
+     if (!CreateBaseAtTamed(creature->GetCreatureTemplate(), creature->GetMap(), creature->GetPhaseMask()))
+@@ -514,7 +514,7 @@ bool Pet::CreateBaseAtCreature(Creature* creature)
+ }
+ 
+ bool Pet::CreateBaseAtCreatureInfo(CreatureTemplate const* cinfo, Unit* owner)
+-{ 
++{
+     if (!CreateBaseAtTamed(cinfo, owner->GetMap(), owner->GetPhaseMask()))
+         return false;
+ 
+@@ -527,7 +527,7 @@ bool Pet::CreateBaseAtCreatureInfo(CreatureTemplate const* cinfo, Unit* owner)
+ }
+ 
+ bool Pet::CreateBaseAtTamed(CreatureTemplate const* cinfo, Map* map, uint32 phaseMask)
+-{ 
++{
+     ;//sLog->outDebug(LOG_FILTER_PETS, "Pet::CreateBaseForTamed");
+     uint32 guid=sObjectMgr->GenerateLowGuid(HIGHGUID_PET);
+     uint32 pet_number = sObjectMgr->GeneratePetNumber();
+@@ -554,7 +554,7 @@ bool Pet::CreateBaseAtTamed(CreatureTemplate const* cinfo, Map* map, uint32 phas
+ 
+ // TODO: Move stat mods code to pet passive auras
+ bool Guardian::InitStatsForLevel(uint8 petlevel)
+-{ 
++{
+     CreatureTemplate const* cinfo = GetCreatureTemplate();
+     ASSERT(cinfo);
+ 
+@@ -835,7 +835,7 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
+                         SetCreateMana(28 + 10*petlevel);
+                         SetCreateHealth(28 + 30*petlevel);
+                     }
+-                    
++
+                     AddAura(SPELL_HUNTER_PET_SCALING_04, this);
+                     AddAura(SPELL_DK_PET_SCALING_01, this);
+                     AddAura(SPELL_DK_PET_SCALING_02, this);
+@@ -861,10 +861,10 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
+                 }
+                 case NPC_GENERIC_IMP:
+                 case NPC_GENERIC_VOIDWALKER:
+-                { 
+-                    SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, float(petlevel - (petlevel / 4))); 
+-                    SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel + (petlevel / 4))); 
+-                    break; 
++                {
++                    SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, float(petlevel - (petlevel / 4)));
++                    SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel + (petlevel / 4)));
++                    break;
+                 }
+             }
+             break;
+@@ -901,7 +901,7 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
+ }
+ 
+ bool Pet::HaveInDiet(ItemTemplate const* item) const
+-{ 
++{
+     if (!item->FoodType)
+         return false;
+ 
+@@ -919,7 +919,7 @@ bool Pet::HaveInDiet(ItemTemplate const* item) const
+ }
+ 
+ uint32 Pet::GetCurrentFoodBenefitLevel(uint32 itemlevel) const
+-{ 
++{
+     // -5 or greater food level
+     if (getLevel() <= itemlevel + 5)                         //possible to feed level 60 pet with level 55 level food for full effect
+         return 35000;
+@@ -935,7 +935,7 @@ uint32 Pet::GetCurrentFoodBenefitLevel(uint32 itemlevel) const
+ }
+ 
+ void Pet::_LoadSpellCooldowns(PreparedQueryResult result)
+-{ 
++{
+     m_CreatureSpellCooldowns.clear();
+ 
+     if (result)
+@@ -979,7 +979,7 @@ void Pet::_LoadSpellCooldowns(PreparedQueryResult result)
+ }
+ 
+ void Pet::_SaveSpellCooldowns(SQLTransaction& trans, bool logout)
+-{ 
++{
+     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_PET_SPELL_COOLDOWNS);
+     stmt->setUInt32(0, m_charmInfo->GetPetNumber());
+     trans->Append(stmt);
+@@ -1009,7 +1009,7 @@ void Pet::_SaveSpellCooldowns(SQLTransaction& trans, bool logout)
+ }
+ 
+ void Pet::_LoadSpells(PreparedQueryResult result)
+-{ 
++{
+     if (result)
+     {
+         do
+@@ -1023,7 +1023,7 @@ void Pet::_LoadSpells(PreparedQueryResult result)
+ }
+ 
+ void Pet::_SaveSpells(SQLTransaction& trans)
+-{ 
++{
+     for (PetSpellMap::iterator itr = m_spells.begin(), next = m_spells.begin(); itr != m_spells.end(); itr = next)
+     {
+         ++next;
+@@ -1072,7 +1072,7 @@ void Pet::_SaveSpells(SQLTransaction& trans)
+ }
+ 
+ void Pet::_LoadAuras(PreparedQueryResult result, uint32 timediff)
+-{ 
++{
+     ;//sLog->outDebug(LOG_FILTER_PETS, "Loading auras for pet %u", GetGUIDLow());
+ 
+     if (result)
+@@ -1142,7 +1142,7 @@ void Pet::_LoadAuras(PreparedQueryResult result, uint32 timediff)
+ }
+ 
+ void Pet::_SaveAuras(SQLTransaction& trans, bool logout)
+-{ 
++{
+     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_PET_AURAS);
+     stmt->setUInt32(0, m_charmInfo->GetPetNumber());
+     trans->Append(stmt);
+@@ -1225,7 +1225,7 @@ void Pet::_SaveAuras(SQLTransaction& trans, bool logout)
+ }
+ 
+ bool Pet::addSpell(uint32 spellId, ActiveStates active /*= ACT_DECIDE*/, PetSpellState state /*= PETSPELL_NEW*/, PetSpellType type /*= PETSPELL_NORMAL*/)
+-{ 
++{
+     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId);
+     if (!spellInfo)
+     {
+@@ -1336,7 +1336,7 @@ bool Pet::addSpell(uint32 spellId, ActiveStates active /*= ACT_DECIDE*/, PetSpel
+     if (spellInfo->IsPassive())
+         CastSpell(this, spellId, true);
+     else
+-        m_charmInfo->AddSpellToActionBar(spellInfo);        
++        m_charmInfo->AddSpellToActionBar(spellInfo);
+ 
+     // unapply aura stats if dont meet requirements
+     // handle only if player is not loaded, loading is handled in loadfromdb
+@@ -1365,7 +1365,7 @@ bool Pet::addSpell(uint32 spellId, ActiveStates active /*= ACT_DECIDE*/, PetSpel
+ }
+ 
+ bool Pet::learnSpell(uint32 spell_id)
+-{ 
++{
+     // prevent duplicated entires in spell book
+     if (!addSpell(spell_id))
+         return false;
+@@ -1420,7 +1420,7 @@ void Pet::InitLevelupSpellsForLevel()
+ }
+ 
+ bool Pet::unlearnSpell(uint32 spell_id, bool learn_prev, bool clear_ab)
+-{ 
++{
+     if (removeSpell(spell_id, learn_prev, clear_ab))
+     {
+         if (!m_loading)
+@@ -1435,7 +1435,7 @@ bool Pet::unlearnSpell(uint32 spell_id, bool learn_prev, bool clear_ab)
+ }
+ 
+ bool Pet::removeSpell(uint32 spell_id, bool learn_prev, bool clear_ab)
+-{ 
++{
+     PetSpellMap::iterator itr = m_spells.find(spell_id);
+     if (itr == m_spells.end())
+         return false;
+@@ -1486,7 +1486,7 @@ bool Pet::removeSpell(uint32 spell_id, bool learn_prev, bool clear_ab)
+ }
+ 
+ void Pet::CleanupActionBar()
+-{ 
++{
+     for (uint8 i = 0; i < MAX_UNIT_ACTION_BAR_INDEX; ++i)
+         if (UnitActionBarEntry const* ab = m_charmInfo->GetActionBarEntry(i))
+             if (ab->GetAction() && ab->IsActionBarForSpell())
+@@ -1514,7 +1514,7 @@ void Pet::CleanupActionBar()
+ }
+ 
+ void Pet::InitPetCreateSpells()
+-{ 
++{
+     m_charmInfo->InitPetActionBar();
+     m_spells.clear();
+ 
+@@ -1525,7 +1525,7 @@ void Pet::InitPetCreateSpells()
+ }
+ 
+ bool Pet::resetTalents()
+-{ 
++{
+     Unit* owner = GetOwner();
+     if (!owner || owner->GetTypeId() != TYPEID_PLAYER)
+         return false;
+@@ -1681,7 +1681,7 @@ void Pet::resetTalentsForAllPetsOf(Player* owner, Pet* online_pet /*= NULL*/)
+ }
+ 
+ void Pet::InitTalentForLevel()
+-{ 
++{
+     uint8 level = getLevel();
+     uint32 talentPointsForLevel = GetMaxTalentPointsForLevel(level);
+     // Reset talents in case low level (on level down) or wrong points for level (hunter can unlearn TP increase talent)
+@@ -1699,7 +1699,7 @@ void Pet::InitTalentForLevel()
+ }
+ 
+ uint8 Pet::GetMaxTalentPointsForLevel(uint8 level)
+-{ 
++{
+     uint8 points = (level >= 20) ? ((level - 16) / 4) : 0;
+     // Mod points from owner SPELL_AURA_MOD_PET_TALENT_POINTS
+     if (Unit* owner = GetOwner())
+@@ -1708,7 +1708,7 @@ uint8 Pet::GetMaxTalentPointsForLevel(uint8 level)
+ }
+ 
+ void Pet::ToggleAutocast(SpellInfo const* spellInfo, bool apply)
+-{ 
++{
+     if (!spellInfo->IsAutocastable())
+         return;
+ 
+@@ -1757,7 +1757,7 @@ void Pet::ToggleAutocast(SpellInfo const* spellInfo, bool apply)
+ }
+ 
+ bool Pet::IsPermanentPetFor(Player* owner) const
+-{ 
++{
+     switch (getPetType())
+     {
+         case SUMMON_PET:
+@@ -1780,7 +1780,7 @@ bool Pet::IsPermanentPetFor(Player* owner) const
+ }
+ 
+ bool Pet::Create(uint32 guidlow, Map* map, uint32 phaseMask, uint32 Entry, uint32 pet_number)
+-{ 
++{
+     ASSERT(map);
+     SetMap(map);
+ 
+@@ -1799,14 +1799,14 @@ bool Pet::Create(uint32 guidlow, Map* map, uint32 phaseMask, uint32 Entry, uint3
+ }
+ 
+ bool Pet::HasSpell(uint32 spell) const
+-{ 
++{
+     PetSpellMap::const_iterator itr = m_spells.find(spell);
+     return itr != m_spells.end() && itr->second.state != PETSPELL_REMOVED;
+ }
+ 
+ // Get all passive spells in our skill line
+ void Pet::LearnPetPassives()
+-{ 
++{
+     CreatureTemplate const* cInfo = GetCreatureTemplate();
+     if (!cInfo)
+         return;
+@@ -1827,7 +1827,7 @@ void Pet::LearnPetPassives()
+ }
+ 
+ void Pet::CastPetAuras(bool current)
+-{ 
++{
+     Unit* owner = GetOwner();
+     if (!owner || owner->GetTypeId() != TYPEID_PLAYER)
+         return;
+@@ -1848,7 +1848,7 @@ void Pet::CastPetAuras(bool current)
+ }
+ 
+ void Pet::learnSpellHighRank(uint32 spellid)
+-{ 
++{
+     learnSpell(spellid);
+ 
+     if (uint32 next = sSpellMgr->GetNextSpellInChain(spellid))
+@@ -1880,7 +1880,7 @@ void Pet::SynchronizeLevelWithOwner()
+ }
+ 
+ void Pet::HandleAsynchLoadSucceed()
+-{ 
++{
+     Player* owner = GetOwner();
+     if (!owner)
+         return;
+@@ -1960,7 +1960,7 @@ void Pet::HandleAsynchLoadSucceed()
+         SetFlag(UNIT_FIELD_AURASTATE, 1<<(AURA_STATE_HEALTHLESS_35_PERCENT-1));
+     if (HealthAbovePct(75))
+         SetFlag(UNIT_FIELD_AURASTATE, 1<<(AURA_STATE_HEALTH_ABOVE_75_PERCENT-1));
+-    
++
+     // unapply aura stats if dont meet requirements
+      AuraApplicationMap const& Auras = GetAppliedAuras();
+     for (AuraApplicationMap::const_iterator itr = Auras.begin(); itr != Auras.end(); ++itr)
+@@ -2114,7 +2114,7 @@ void Pet::HandleAsynchLoadFailed(AsynchPetSummon* info, Player* player, uint8 as
+ }
+ 
+ void Pet::SetDisplayId(uint32 modelId)
+-{ 
++{
+     Guardian::SetDisplayId(modelId);
+ 
+     if (!isControlled())
+diff --git a/src/server/game/Entities/Player/SocialMgr.cpp b/src/server/game/Entities/Player/SocialMgr.cpp
+index cc1a24a4..4bab170a 100644
+--- a/src/server/game/Entities/Player/SocialMgr.cpp
++++ b/src/server/game/Entities/Player/SocialMgr.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -19,7 +19,7 @@
+ #include "SocialMgr.h"
+ 
+ #include "DatabaseEnv.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ #include "WorldPacket.h"
+ #include "Player.h"
+ #include "ObjectMgr.h"
+diff --git a/src/server/game/Handlers/CharacterHandler.cpp b/src/server/game/Handlers/CharacterHandler.cpp
+index 15ac45f2..f6aa87cf 100644
+--- a/src/server/game/Handlers/CharacterHandler.cpp
++++ b/src/server/game/Handlers/CharacterHandler.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -234,6 +234,7 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
+ 
+ void WorldSession::HandleCharEnumOpcode(WorldPacket & /*recvData*/)
+ {
++    AntiDOS.AllowOpcode(CMSG_CHAR_ENUM, false);
+     // remove expired bans
+     // pussywizard: moved to world update to do it once >_>
+     // PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_EXPIRED_BANS);
+@@ -762,7 +763,7 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPacket & recvData)
+         KickPlayer();
+         return;
+     }
+-    
++
+     // pussywizard:
+     if (WorldSession* sess = sWorld->FindOfflineSessionForCharacterGUID(GUID_LOPART(playerGuid)))
+         if (sess->GetAccountId() != GetAccountId())
+@@ -1298,7 +1299,7 @@ void WorldSession::HandlePlayerLoginToCharInWorld(Player* pCurrChar)
+             }
+         }
+     }
+-    
++
+     if (Group* group = pCurrChar->GetGroup())
+         group->SendUpdate();
+ 
+@@ -2225,7 +2226,7 @@ void WorldSession::HandleCharFactionOrRaceChange(WorldPacket& recvData)
+ 
+     // xinef: update global data
+     sWorld->UpdateGlobalNameData(GUID_LOPART(guid), playerData->name, newname);
+-    sWorld->UpdateGlobalPlayerData(GUID_LOPART(guid), 
++    sWorld->UpdateGlobalPlayerData(GUID_LOPART(guid),
+         PLAYER_UPDATE_DATA_NAME|PLAYER_UPDATE_DATA_RACE|PLAYER_UPDATE_DATA_GENDER, newname, 0, gender, race);
+ 
+     if (oldRace != race)
+diff --git a/src/server/game/Handlers/MiscHandler.cpp b/src/server/game/Handlers/MiscHandler.cpp
+index ce607d65..37f41f70 100644
+--- a/src/server/game/Handlers/MiscHandler.cpp
++++ b/src/server/game/Handlers/MiscHandler.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -172,12 +172,7 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket & recv_data)
+ 
+ void WorldSession::HandleWhoOpcode(WorldPacket & recv_data)
+ {
+-    ;//sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Recvd CMSG_WHO Message");
+-
+-    time_t now = time(NULL);
+-    if (now < timeWhoCommandAllowed)
+-        return;
+-    timeWhoCommandAllowed = now+3;
++    sLog->outError("WORLD: Recvd CMSG_WHO Message");
+ 
+     uint32 matchcount = 0;
+ 
+diff --git a/src/server/game/Reputation/ReputationMgr.cpp b/src/server/game/Reputation/ReputationMgr.cpp
+index b44a7bea..2ff4661c 100644
+--- a/src/server/game/Reputation/ReputationMgr.cpp
++++ b/src/server/game/Reputation/ReputationMgr.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -24,7 +24,7 @@
+ #include "World.h"
+ #include "ObjectMgr.h"
+ #include "ScriptMgr.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ 
+ const int32 ReputationMgr::PointsInRank[MAX_REPUTATION_RANK] = {36000, 3000, 3000, 3000, 6000, 12000, 21000, 1000};
+ 
+diff --git a/src/server/game/Server/Protocol/Opcodes.h b/src/server/game/Server/Protocol/Opcodes.h
+index f0867a7b..e6c093b7 100644
+--- a/src/server/game/Server/Protocol/Opcodes.h
++++ b/src/server/game/Server/Protocol/Opcodes.h
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -25,12 +25,6 @@
+ 
+ #include "Common.h"
+ 
+-// Note: this include need for be sure have full definition of class WorldSession
+-//       if this class definition not complete then VS for x64 release use different size for
+-//       struct OpcodeHandler in this header and Opcode.cpp and get totally wrong data from
+-//       table opcodeTable in source when Opcode.h included but WorldSession.h not included
+-#include "WorldSession.h"
+-
+ /// List of Opcodes
+ enum Opcodes
+ {
+@@ -1365,8 +1359,15 @@ enum PacketProcessing
+     PROCESS_THREADSAFE                                      //packet is thread-safe - process it in Map::Update()
+ };
+ 
++class WorldSession;
+ class WorldPacket;
+ 
++#if defined(__GNUC__)
++#pragma pack(1)
++#else
++#pragma pack(push, 1)
++#endif
++
+ struct OpcodeHandler
+ {
+     char const* name;
+@@ -1378,6 +1379,11 @@ struct OpcodeHandler
+ 
+ extern OpcodeHandler opcodeTable[NUM_MSG_TYPES];
+ 
++#if defined(__GNUC__)
++#pragma pack()
++#else
++#pragma pack(pop)
++#endif
+ /// Lookup opcode name for human understandable logging
+ inline const char* LookupOpcodeName(uint16 id)
+ {
+diff --git a/src/server/game/Server/WorldSession.cpp b/src/server/game/Server/WorldSession.cpp
+index 1158a82e..860c1c3e 100644
+--- a/src/server/game/Server/WorldSession.cpp
++++ b/src/server/game/Server/WorldSession.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -94,7 +94,7 @@ bool WorldSessionFilter::Process(WorldPacket* packet)
+ }
+ 
+ /// WorldSession constructor
+-WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter, bool isARecruiter, bool skipQueue, 
++WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter, bool isARecruiter, bool skipQueue,
+     time_t premium_services[MAX_PREMIUM_SERVICES]):
+ m_muteTime(mute_time), m_timeOutTime(0), m_GUIDLow(0), _player(NULL), m_Socket(sock),
+ _security(sec), _accountId(id), m_expansion(expansion), _logoutTime(0),
+@@ -102,7 +102,7 @@ m_inQueue(false), m_playerLoading(false), m_playerLogout(false), m_playerSave(fa
+ m_sessionDbcLocale(sWorld->GetDefaultDbcLocale()),
+ m_sessionDbLocaleIndex(locale),
+ m_latency(0), m_clientTimeDelay(0), m_TutorialsChanged(false), recruiterId(recruiter),
+-isRecruiter(isARecruiter), m_currentBankerGUID(0), timeWhoCommandAllowed(0), _lastAuctionListItemsMSTime(0), _lastAuctionListOwnerItemsMSTime(0), _skipQueue(skipQueue)
++isRecruiter(isARecruiter), m_currentBankerGUID(0), _lastAuctionListItemsMSTime(0), _lastAuctionListOwnerItemsMSTime(0), _skipQueue(skipQueue), AntiDOS(this)
+ {
+     memset(m_Tutorials, 0, sizeof(m_Tutorials));
+ 
+@@ -247,10 +247,17 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
+     bool deletePacket = true;
+     WorldPacket* firstDelayedPacket = NULL;
+     uint32 processedPackets = 0;
++    time_t currentTime = time(NULL);
++
++    if (!AntiDOS.EvaluateOpcode(*packet, currentTime))
++    {
++        delete packet;
++        KickPlayer();
++    }
+ 
+     while (m_Socket && !m_Socket->IsClosed() && !_recvQueue.empty() && _recvQueue.peek(true) != firstDelayedPacket && _recvQueue.next(packet, updater))
+     {
+-        if (packet->GetOpcode() < NUM_MSG_TYPES)
++        if (packet && packet->GetOpcode() < NUM_MSG_TYPES)
+         {
+             OpcodeHandler &opHandle = opcodeTable[packet->GetOpcode()];
+             try
+@@ -324,8 +331,11 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
+                 sLog->outError("WorldSession::Update ByteBufferException occured while parsing a packet (opcode: %u) from client %s, accountid=%i. Skipped packet.", packet->GetOpcode(), GetRemoteAddress().c_str(), GetAccountId());
+                 if (sLog->IsOutDebug())
+                 {
+-                    sLog->outDebug(LOG_FILTER_NETWORKIO, "Dumping error causing packet:");
+-                    packet->hexlike();
++                    if (packet)
++                    {
++                        sLog->outDebug(LOG_FILTER_NETWORKIO, "Dumping error causing packet:");
++                        packet->hexlike();
++                    }
+                 }
+             }
+         }
+@@ -561,6 +571,7 @@ void WorldSession::LogoutPlayer(bool save)
+ 
+     m_playerLogout = false;
+     m_playerSave = false;
++    AntiDOS.AllowOpcode(CMSG_CHAR_ENUM, true);
+     LogoutRequest(0);
+ }
+ 
+@@ -1272,3 +1283,285 @@ void WorldSession::InitWarden(BigNumber* k, std::string const& os)
+         // _warden->Init(this, k);
+     }
+ }
++
++bool WorldSession::DosProtection::EvaluateOpcode(WorldPacket& p, time_t time) const
++{
++    PacketCounter& packetCounter = _PacketThrottlingMap[p.GetOpcode()];
++    if (packetCounter.lastReceiveTime != time)
++    {
++        packetCounter.lastReceiveTime = time;
++        packetCounter.amountCounter = 0;
++    }
++
++    uint32 maxPacketCounterAllowed = GetMaxPacketCounterAllowed(p.GetOpcode());
++
++    bool dosTriggered = false;
++    // Check if player is flooding some packets
++    if (++packetCounter.amountCounter > maxPacketCounterAllowed)
++    {
++        dosTriggered = true;
++        sLog->outError("AntiDOS: Account %u, IP: %s, flooding packet (opc: %s (0x%X), count: %u)",
++                       +Session->GetAccountId(), Session->GetRemoteAddress().c_str(), opcodeTable[p.GetOpcode()].name, p.GetOpcode(), packetCounter.amountCounter);
++    }
++
++    // Then check if player is sending packets not allowed
++    if (!IsOpcodeAllowed(p.GetOpcode()))
++    {
++        dosTriggered = true;
++        // Opcode not allowed, let the punishment begin
++        sLog->outError("AntiDOS: Account %u, IP: %s, sent unacceptable packet (opc: %u, size: %u)",
++                    Session->GetAccountId(), Session->GetRemoteAddress().c_str(), p.GetOpcode(), (uint32)p.size());
++    }
++
++    // Return true if everything is fine, otherwise apply the configured policy
++    if (!dosTriggered)
++        return true;
++
++    switch (_policy)
++    {
++        case POLICY_LOG:
++            return true;
++        case POLICY_KICK:
++            sLog->outError("AntiDOS: Player kicked!");
++            return false;
++        case POLICY_BAN:
++        {
++            BanMode bm = (BanMode)sWorld->getIntConfig(CONFIG_PACKET_SPOOF_BANMODE);
++            uint32 duration = sWorld->getIntConfig(CONFIG_PACKET_SPOOF_BANDURATION); // in seconds
++            std::string nameOrIp = "";
++            switch (bm)
++            {
++                case BAN_CHARACTER: // not supported, ban account
++                case BAN_ACCOUNT: (void)AccountMgr::GetName(Session->GetAccountId(), nameOrIp); break;
++                case BAN_IP: nameOrIp = Session->GetRemoteAddress(); break;
++            }
++            sWorld->BanAccount(bm, nameOrIp, duration, "DOS (Packet Flooding/Spoofing", "Server: AutoDOS");
++            sLog->outError("AntiDOS: Player automatically banned for %u seconds.", duration);
++
++            return false;
++        }
++        default: // invalid policy
++            return true;
++    }
++}
++
++
++uint32 WorldSession::DosProtection::GetMaxPacketCounterAllowed(uint16 opcode) const
++{
++    uint32 maxPacketCounterAllowed;
++    switch (opcode)
++    {
++        // These opcodes are spammed by few addons so a very high limit is required
++        case CMSG_QUEST_QUERY:
++        case CMSG_MESSAGECHAT:
++        case CMSG_ITEM_QUERY_SINGLE:
++        case CMSG_ITEM_NAME_QUERY:
++        case CMSG_GAMEOBJECT_QUERY:
++        case CMSG_NAME_QUERY:
++        case CMSG_PET_NAME_QUERY:
++        case CMSG_CREATURE_QUERY:
++        case CMSG_NPC_TEXT_QUERY:
++        {
++            maxPacketCounterAllowed = 5000;
++            break;
++        }
++
++        case CMSG_ATTACKSTOP:
++        case CMSG_GUILD_QUERY:
++        case CMSG_ARENA_TEAM_QUERY:
++        case CMSG_TAXINODE_STATUS_QUERY:
++        case CMSG_TAXIQUERYAVAILABLENODES:
++        case CMSG_QUESTGIVER_QUERY_QUEST:
++        case CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY:
++        case CMSG_QUERY_QUESTS_COMPLETED:
++        case CMSG_QUEST_POI_QUERY:
++        case CMSG_QUERY_TIME:
++        case CMSG_PAGE_TEXT_QUERY:
++        case CMSG_PETITION_QUERY:
++        case CMSG_QUERY_INSPECT_ACHIEVEMENTS:
++        case CMSG_AREA_SPIRIT_HEALER_QUERY:
++        case CMSG_CORPSE_MAP_POSITION_QUERY:
++        case CMSG_MOVE_TIME_SKIPPED:
++        case CMSG_GUILD_BANK_QUERY_TAB:
++        case MSG_GUILD_BANK_LOG_QUERY:
++        case MSG_QUERY_GUILD_BANK_TEXT:
++        case MSG_CORPSE_QUERY:
++        case MSG_QUERY_NEXT_MAIL_TIME:
++        case MSG_GUILD_EVENT_LOG_QUERY:
++        case MSG_MOVE_SET_FACING:
++        case CMSG_INSPECT:
++        {
++            maxPacketCounterAllowed = 500;
++            break;
++        }
++
++        case CMSG_REQUEST_PARTY_MEMBER_STATS:
++        case CMSG_WHO:
++        case CMSG_SETSHEATHED:
++        case CMSG_CONTACT_LIST:
++        case CMSG_GUILD_SET_PUBLIC_NOTE:
++        case CMSG_GUILD_SET_OFFICER_NOTE:
++        {
++            maxPacketCounterAllowed = 50;
++            break;
++        }
++
++        case CMSG_SPELLCLICK:
++        case CMSG_GAMEOBJ_USE:
++        case CMSG_GAMEOBJ_REPORT_USE:
++        case MSG_RAID_TARGET_UPDATE:
++        case CMSG_QUESTGIVER_COMPLETE_QUEST:
++        {
++            maxPacketCounterAllowed = 20;
++            break;
++        }
++
++        case CMSG_PLAYER_LOGOUT:
++        case CMSG_LOGOUT_REQUEST:
++        case CMSG_LOGOUT_CANCEL:
++        case CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE:
++        case CMSG_REQUEST_VEHICLE_PREV_SEAT:
++        case CMSG_REQUEST_VEHICLE_NEXT_SEAT:
++        case CMSG_REQUEST_VEHICLE_SWITCH_SEAT:
++        case CMSG_TOGGLE_PVP:
++        case CMSG_ADD_FRIEND:
++        case CMSG_DEL_FRIEND:
++        case CMSG_SET_CONTACT_NOTES:
++        case CMSG_RESET_INSTANCES:
++        case CMSG_HEARTH_AND_RESURRECT:
++        case CMSG_CHAR_CREATE:
++        case CMSG_READY_FOR_ACCOUNT_DATA_TIMES:
++        case CMSG_CHAR_ENUM:
++        case CMSG_REALM_SPLIT:
++        case CMSG_CHAR_DELETE:
++        case CMSG_PLAYER_LOGIN:
++        case CMSG_PET_ABANDON:
++        case CMSG_PET_RENAME:
++        case CMSG_CHAR_RENAME:
++        case CMSG_CHAR_CUSTOMIZE:
++        case CMSG_CHAR_RACE_CHANGE:
++        case CMSG_CHAR_FACTION_CHANGE:
++        case CMSG_GMTICKET_CREATE:
++        case CMSG_GMTICKET_UPDATETEXT:
++        case CMSG_GMTICKET_DELETETICKET:
++        case CMSG_GMSURVEY_SUBMIT:
++        case CMSG_GM_REPORT_LAG:
++        case CMSG_BUG:
++        case CMSG_GMRESPONSE_RESOLVE:
++        case CMSG_ACTIVATETAXIEXPRESS:
++        case CMSG_ACTIVATETAXI:
++        case CMSG_SELF_RES:
++        case CMSG_INITIATE_TRADE:
++        case CMSG_BEGIN_TRADE:
++        case CMSG_UNLEARN_SKILL:
++        case CMSG_DISMISS_CONTROLLED_VEHICLE:
++        case CMSG_REQUEST_VEHICLE_EXIT:
++        case CMSG_LEARN_PREVIEW_TALENTS:
++        case CMSG_LEARN_PREVIEW_TALENTS_PET:
++        case CMSG_PLAYER_VEHICLE_ENTER:
++        case CMSG_CONTROLLER_EJECT_PASSENGER:
++        case CMSG_EQUIPMENT_SET_SAVE:
++        case CMSG_DELETEEQUIPMENT_SET:
++        case CMSG_REMOVE_GLYPH:
++        case CMSG_ALTER_APPEARANCE:
++        case CMSG_QUESTGIVER_ACCEPT_QUEST:
++        case CMSG_QUESTGIVER_CHOOSE_REWARD:
++        case CMSG_QUESTGIVER_REQUEST_REWARD:
++        case CMSG_QUESTGIVER_CANCEL:
++        case CMSG_QUESTLOG_REMOVE_QUEST:
++        case CMSG_QUEST_CONFIRM_ACCEPT:
++        case CMSG_DISMISS_CRITTER:
++        case CMSG_REPOP_REQUEST:
++        case CMSG_PETITION_BUY:
++        case CMSG_PETITION_SIGN:
++        case CMSG_TURN_IN_PETITION:
++        case CMSG_COMPLETE_CINEMATIC:
++        case CMSG_ITEM_REFUND:
++        case CMSG_SOCKET_GEMS:
++        case CMSG_WRAP_ITEM:
++        case CMSG_BUY_BANK_SLOT:
++        case CMSG_GROUP_ACCEPT:
++        case CMSG_GROUP_DECLINE:
++        case CMSG_GROUP_UNINVITE_GUID:
++        case CMSG_GROUP_UNINVITE:
++        case CMSG_GROUP_SET_LEADER:
++        case CMSG_GROUP_DISBAND:
++        case CMSG_GROUP_RAID_CONVERT:
++        case CMSG_GROUP_CHANGE_SUB_GROUP:
++        case CMSG_GROUP_ASSISTANT_LEADER:
++        case CMSG_OPT_OUT_OF_LOOT:
++        case CMSG_BATTLEMASTER_JOIN_ARENA:
++        case CMSG_LEAVE_BATTLEFIELD:
++        case CMSG_REPORT_PVP_AFK:
++        case CMSG_DUEL_ACCEPTED:
++        case CMSG_DUEL_CANCELLED:
++        case CMSG_CALENDAR_GET_CALENDAR:
++        case CMSG_CALENDAR_ADD_EVENT:
++        case CMSG_CALENDAR_UPDATE_EVENT:
++        case CMSG_CALENDAR_REMOVE_EVENT:
++        case CMSG_CALENDAR_COPY_EVENT:
++        case CMSG_CALENDAR_EVENT_INVITE:
++        case CMSG_CALENDAR_EVENT_SIGNUP:
++        case CMSG_CALENDAR_EVENT_RSVP:
++        case CMSG_CALENDAR_EVENT_REMOVE_INVITE:
++        case CMSG_CALENDAR_EVENT_MODERATOR_STATUS:
++        case CMSG_CALENDAR_COMPLAIN:
++        case CMSG_ARENA_TEAM_INVITE:
++        case CMSG_ARENA_TEAM_ACCEPT:
++        case CMSG_ARENA_TEAM_DECLINE:
++        case CMSG_ARENA_TEAM_LEAVE:
++        case CMSG_ARENA_TEAM_DISBAND:
++        case CMSG_ARENA_TEAM_REMOVE:
++        case CMSG_ARENA_TEAM_LEADER:
++        case CMSG_LOOT_METHOD:
++        case CMSG_GUILD_INVITE:
++        case CMSG_GUILD_ACCEPT:
++        case CMSG_GUILD_DECLINE:
++        case CMSG_GUILD_LEAVE:
++        case CMSG_GUILD_DISBAND:
++        case CMSG_GUILD_LEADER:
++        case CMSG_GUILD_MOTD:
++        case CMSG_GUILD_RANK:
++        case CMSG_GUILD_ADD_RANK:
++        case CMSG_GUILD_DEL_RANK:
++        case CMSG_GUILD_INFO_TEXT:
++        case CMSG_GUILD_BANK_DEPOSIT_MONEY:
++        case CMSG_GUILD_BANK_WITHDRAW_MONEY:
++        case CMSG_GUILD_BANK_BUY_TAB:
++        case CMSG_GUILD_BANK_UPDATE_TAB:
++        case CMSG_SET_GUILD_BANK_TEXT:
++        case MSG_SAVE_GUILD_EMBLEM:
++        case MSG_PETITION_RENAME:
++        case MSG_PETITION_DECLINE:
++        case MSG_TALENT_WIPE_CONFIRM:
++        case MSG_SET_DUNGEON_DIFFICULTY:
++        case MSG_SET_RAID_DIFFICULTY:
++        case MSG_RANDOM_ROLL:
++        case MSG_PARTY_ASSIGNMENT:
++        case MSG_RAID_READY_CHECK:
++        {
++            maxPacketCounterAllowed = 3;
++            break;
++        }
++
++        case CMSG_SET_ACTION_BUTTON:
++        {
++            maxPacketCounterAllowed = MAX_ACTION_BUTTONS;
++            break;
++        }
++
++        case CMSG_ITEM_REFUND_INFO:
++        {
++            maxPacketCounterAllowed = PLAYER_SLOTS_COUNT;
++            break;
++        }
++
++        default:
++        {
++            maxPacketCounterAllowed = 100;
++            break;
++        }
++    }
++
++    return maxPacketCounterAllowed;
++}
+diff --git a/src/server/game/Server/WorldSession.h b/src/server/game/Server/WorldSession.h
+index cb8e06dd..a0f9c936 100644
+--- a/src/server/game/Server/WorldSession.h
++++ b/src/server/game/Server/WorldSession.h
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -28,9 +28,11 @@
+ #include "AddonMgr.h"
+ #include "DatabaseEnv.h"
+ #include "World.h"
++#include "Opcodes.h"
+ #include "WorldPacket.h"
+ #include "GossipDef.h"
+ #include "Cryptography/BigNumber.h"
++#include "AccountMgr.h"
+ 
+ class Creature;
+ class GameObject;
+@@ -123,7 +125,7 @@ enum CharterTypes
+     ARENA_TEAM_CHARTER_5v5_TYPE                   = 5
+ };
+ 
+- 
++
+ enum PremiumServiceTypes
+ {
+     PREMIUM_TELEPORT                    = 0,
+@@ -206,6 +208,12 @@ class CharacterCreateInfo
+         virtual ~CharacterCreateInfo(){};
+ };
+ 
++struct PacketCounter
++{
++    time_t lastReceiveTime;
++    uint32 amountCounter;
++};
++
+ /// Player session in the World
+ class WorldSession
+ {
+@@ -984,6 +992,48 @@ class WorldSession
+         PreparedQueryResultFuture _loadActionsSwitchSpecCallback;
+         PreparedQueryResultFuture _CharacterAuraFrozenCallback;
+ 
++        friend class World;
++    protected:
++        class DosProtection
++        {
++            friend class World;
++        public:
++            DosProtection(WorldSession* s) : Session(s), _policy((Policy)sWorld->getIntConfig(CONFIG_PACKET_SPOOF_POLICY)) {}
++
++            bool EvaluateOpcode(WorldPacket& p, time_t time) const;
++            void AllowOpcode(uint16 opcode, bool allow) { _isOpcodeAllowed[opcode] = allow; }
++
++        protected:
++            enum Policy
++            {
++                POLICY_LOG,
++                POLICY_KICK,
++                POLICY_BAN,
++            };
++
++            bool IsOpcodeAllowed(uint16 opcode) const
++            {
++                OpcodeStatusMap::const_iterator itr = _isOpcodeAllowed.find(opcode);
++                if (itr == _isOpcodeAllowed.end())
++                    return true;    // No presence in the map indicates this is the first time the opcode was sent this session, so allow
++
++                return itr->second;
++            }
++
++            uint32 GetMaxPacketCounterAllowed(uint16 opcode) const;
++            WorldSession* Session;
++
++        private:
++            typedef std::unordered_map<uint16, bool> OpcodeStatusMap;
++            OpcodeStatusMap _isOpcodeAllowed; // could be bool array, but wouldn't be practical for game versions with non-linear opcodes
++            Policy _policy;
++            typedef std::unordered_map<uint16, PacketCounter> PacketThrottlingMap;
++            // mark this member as "mutable" so it can be modified even in const functions
++            mutable PacketThrottlingMap _PacketThrottlingMap;
++
++
++        } AntiDOS;
++
+     /***
+     END OF CALLBACKS
+     ***/
+@@ -1035,7 +1085,6 @@ class WorldSession
+         bool isRecruiter;
+         ACE_Based::LockedQueue<WorldPacket*, ACE_Thread_Mutex> _recvQueue;
+         uint64 m_currentBankerGUID;
+-        time_t timeWhoCommandAllowed;
+         uint32 _offlineTime;
+         bool _kicked;
+         bool _shouldSetOfflineInDB;
+diff --git a/src/server/game/Weather/Weather.cpp b/src/server/game/Weather/Weather.cpp
+index 3c5319d6..bd5a912d 100644
+--- a/src/server/game/Weather/Weather.cpp
++++ b/src/server/game/Weather/Weather.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -28,7 +28,7 @@
+ #include "ObjectMgr.h"
+ #include "Util.h"
+ #include "ScriptMgr.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ 
+ /// Create the Weather object
+ Weather::Weather(uint32 zone, WeatherData const* weatherChances)
+diff --git a/src/server/game/Weather/WeatherMgr.cpp b/src/server/game/Weather/WeatherMgr.cpp
+index 73b17d1e..80cd2687 100644
+--- a/src/server/game/Weather/WeatherMgr.cpp
++++ b/src/server/game/Weather/WeatherMgr.cpp
+@@ -1,6 +1,6 @@
+ /*
+- * Copyright (C) 
+- * Copyright (C) 
++ * Copyright (C)
++ * Copyright (C)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU General Public License as published by the
+@@ -27,7 +27,7 @@
+ #include "AutoPtr.h"
+ #include "Player.h"
+ #include "WorldPacket.h"
+-#include "Opcodes.h"
++#include "WorldSession.h"
+ 
+ namespace WeatherMgr
+ {
+diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
+index f97c72e8..d617367c 100644
+--- a/src/server/game/World/World.cpp
++++ b/src/server/game/World/World.cpp
+@@ -1331,6 +1331,14 @@ void World::LoadConfigSettings(bool reload)
+     m_bool_configs[CONFIG_CHINA_TOWN] = sConfigMgr->GetBoolDefault("ChinaTown.Enable", false);
+     m_int_configs[CONFIG_CHINA_TOWN_TIMER] = sConfigMgr->GetIntDefault("ChinaTown.Spam.Timer", 10);
+ 
++    //packet spoof punishment
++    m_int_configs[CONFIG_PACKET_SPOOF_POLICY] = sConfigMgr->GetIntDefault("PacketSpoof.Policy", (uint32)WorldSession::DosProtection::Policy::POLICY_KICK);
++    m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] = sConfigMgr->GetIntDefault("PacketSpoof.BanMode", (uint32)BAN_ACCOUNT);
++    if (m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] == BAN_CHARACTER || m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] > BAN_IP)
++        m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] = BAN_ACCOUNT;
++
++    m_int_configs[CONFIG_PACKET_SPOOF_BANDURATION] = sConfigMgr->GetIntDefault("PacketSpoof.BanDuration", 86400);
++
+     // call ScriptMgr if we're reloading the configuration
+     if (reload)
+         sScriptMgr->OnConfigLoad(reload);
+@@ -2486,10 +2494,16 @@ void World::KickAllLess(AccountTypes sec)
+             itr->second->KickPlayer();
+ }
+ 
+-/// Ban an account or ban an IP address, duration will be parsed using TimeStringToSecs if it is positive, otherwise permban
+ BanReturn World::BanAccount(BanMode mode, std::string const& nameOrIP, std::string const& duration, std::string const& reason, std::string const& author)
+ {
+     uint32 duration_secs = TimeStringToSecs(duration);
++    return BanAccount(mode, nameOrIP, duration_secs, reason, author);
++}
++
++/// Ban an account or ban an IP address, duration will be parsed using TimeStringToSecs if it is positive, otherwise permban
++BanReturn World::BanAccount(BanMode mode, std::string const& nameOrIP, uint32 duration_secs, std::string const& reason, std::string const& author)
++{
++    uint32 duration_secs = TimeStringToSecs(duration);
+     PreparedQueryResult resultAccounts = PreparedQueryResult(NULL); //used for kicking
+     PreparedStatement* stmt = NULL;
+ 
+diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
+index 45a08e54..9dde4f97 100644
+--- a/src/server/game/World/World.h
++++ b/src/server/game/World/World.h
+@@ -373,6 +373,9 @@ enum WorldIntConfigs
+     CONFIG_HUNGER_GAMES_LIMIT,
+     CONFIG_CALENDAR_KEEP_DAYS,                  // Sitowsky: When value is specified the calendar will delete everything specified value days back. (For speedup core loading).
+     CONFIG_CHINA_TOWN_TIMER,
++    CONFIG_PACKET_SPOOF_POLICY,
++    CONFIG_PACKET_SPOOF_BANMODE,
++    CONFIG_PACKET_SPOOF_BANDURATION,
+     INT_CONFIG_VALUE_COUNT
+ };
+ 
+@@ -809,6 +812,7 @@ class World
+         void KickAll();
+         void KickAllLess(AccountTypes sec);
+         BanReturn BanAccount(BanMode mode, std::string const& nameOrIP, std::string const& duration, std::string const& reason, std::string const& author);
++        BanReturn BanAccount(BanMode mode, std::string const& nameOrIP, uint32 duration_secs, std::string const& reason, std::string const& author);
+         bool RemoveBanAccount(BanMode mode, std::string const& nameOrIP);
+         BanReturn BanCharacter(std::string const& name, std::string const& duration, std::string const& reason, std::string const& author);
+         bool RemoveBanCharacter(std::string const& name);
+diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
+index 9610fead..e3bb41b6 100644
+--- a/src/server/worldserver/worldserver.conf.dist
++++ b/src/server/worldserver/worldserver.conf.dist
+@@ -3459,6 +3459,42 @@ Calendar.KeepDays = 0
+ ChinaTown.Enable = 1
+ ChinaTown.Spam.Timer = 10
+ 
++###################################################################################################
++#
++# Packet Spoof Protection Settings
++#
++# These settings determine which action to take when harmful packet spoofing is detected.
++#
++#    PacketSpoof.Policy
++#        Description: Determines the course of action when packet spoofing is detected.
++#        Values:     0 - Log only (LOG_FILTER_NETWORKIO)
++#                    1 - Log + kick
++#                    2 - Log + kick + ban
++
++PacketSpoof.Policy = 1
++
++#
++#    PacketSpoof.BanMode
++#        Description: If PacketSpoof.Policy equals 2, this will determine the ban mode.
++#        Values:     0 - Ban Account
++#                    2 - Ban IP
++#        Note: Banning by character not supported for logical reasons.
++#
++
++PacketSpoof.BanMode = 0
++
++#
++#    PacketSpoof.BanDuration
++#        Description: Duration of the ban in seconds. Only valid if PacketSpoof.Policy is set to 2.
++#                     Set to 0 for permanent ban.
++#        Default:     86400 seconds (1 day)
++#
++
++PacketSpoof.BanDuration = 86400
++
++#
++###################################################################################################
++
+ #
+ ###################################################################################################

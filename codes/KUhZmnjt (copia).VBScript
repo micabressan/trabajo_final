@@ -1,0 +1,17 @@
+' Use the speech api to say the clipboard content or the text entered in the input box
+Dim Message, Clip, SAPI
+
+' Get Clipboard Text
+Set objHTML	= CreateObject("htmlfile")
+Clip       	= objHTML.ParentWindow.ClipboardData.GetData("text")
+
+If Clip = "" or IsEmpty(Clip) or IsNull(Clip) Then
+	Clip = "Hello World!"
+End If
+
+' User Input
+Message	= InputBox("Enter your text:", "Say it!", Clip)
+
+' Speak
+Set SAPI	= CreateObject("sapi.spvoice")
+SAPI.Speak Message

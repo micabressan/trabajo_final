@@ -1,0 +1,34 @@
+# background and foreground MUST exist and MUST be hex color values
+# names cannot contain '-'  strings should be quoted
+colors:
+  bg: "#1F2326"
+  fg: "#F1F1F1"
+  bold: "#A9A9A9"
+  borders: "#000000"
+  termite: "rgba(30, 34, 36, 1.0)"
+  polybar: "#1F2326"
+
+xcolors: ["#494949", "#D64937", "#19BC9C", "#FFAD5D", "#4E88CF", "#AF86C8", "#5DD5FF", "#969896", "#F6F6F6"]
+# colors   0=black     1=red     2=green   3=yellow    4=blue    5=purple    6=cyan     7=grey     8=white
+
+# px is the bar underlines
+# OB will handle the border edge thickness in openbox
+borders:
+  px: 2
+  LR: 0
+  top: 0
+  bot: 0
+  OB: 0
+
+# set up seperate fonts for each
+fonts:
+  termite: "Fantasque Sans Mono 12"
+  polybar: "Fantasque Sans Mono:size=12:antialias=false;3"
+  xresource: "Fantasque Sans Mono:size=12:antialias=true"
+
+# polybar settings
+polybar:
+  height: 24
+  width: "100%"
+  radius: 0
+  bottom: "false"

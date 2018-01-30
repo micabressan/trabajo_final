@@ -1,0 +1,79 @@
+Index: libdisk.h
+===================================================================
+--- libdisk.h	(revision 226570)
++++ libdisk.h	(working copy)
+@@ -17,9 +17,6 @@
+ /* You can define a particular architecture here if you are debugging. */
+ /* #define P_DEBUG p_sparc64 */
+ 
+-#define MAX_NO_DISKS	32
+-/* Max # of disks Disk_Names() will return */
+-
+ #define MAX_SEC_SIZE    2048  /* maximum sector size that is supported */
+ #define MIN_SEC_SIZE	512   /* the sector size to end sensing at */
+ 
+Index: disk.c
+===================================================================
+--- disk.c	(revision 226570)
++++ disk.c	(working copy)
+@@ -190,7 +190,7 @@
+ char **
+ Disk_Names()
+ {
+-	int disk_cnt;
++	int i, disk_cnt;
+ 	char **disks;
+ 	int error;
+ 	size_t listsize;
+@@ -205,30 +205,36 @@
+ 	if (listsize == 0)
+ 		return (NULL);
+ 
+-	disks = malloc(sizeof *disks * (1 + MAX_NO_DISKS));
+-	if (disks == NULL)
++	disk1 = disklist = (char *)calloc(listsize + 1, sizeof *disklist);
++	if (disklist == NULL)
+ 		return NULL;
+-	disk1 = disklist = (char *)malloc(listsize + 1);
+-	if (disklist == NULL) {
+-		free(disks);
+-		return NULL;
+-	}
+-	memset(disks,0,sizeof *disks * (1 + MAX_NO_DISKS));
+-	memset(disklist, 0, listsize + 1);
++
+ 	error = sysctlbyname("kern.disks", disklist, &listsize, NULL, 0);
+ 	if (error || disklist[0] == 0) {
+ 		free(disklist);
+-		free(disks);
+ 		return NULL;
+ 	}
+-	for (disk_cnt = 0; disk_cnt < MAX_NO_DISKS; disk_cnt++) {
++
++	disk_cnt = 1;
++	for (i = 0; i < listsize; ++i) {
++		if (disklist[i] == ' ')
++			disk_cnt++;
++	}
++
++	disks = calloc(disk_cnt + 1, sizeof *disks);
++	if (disks == NULL) {
++		free(disklist);
++		return NULL;
++	}
++
++	for (i = 0; i < disk_cnt; ++i) {
+ 		disk2 = strsep(&disk1, " ");
+ 		if (disk2 == NULL)
+ 			break;
+-		disks[disk_cnt] = strdup(disk2);
+-		if (disks[disk_cnt] == NULL) {
+-			for (disk_cnt--; disk_cnt >= 0; disk_cnt--)
+-				free(disks[disk_cnt]);
++		disks[i] = strdup(disk2);
++		if (disks[i] == NULL) {
++			for (i--; i >= 0; i--)
++				free(disks[i]);
+ 			free(disklist);
+ 			free(disks);
+ 			return (NULL);

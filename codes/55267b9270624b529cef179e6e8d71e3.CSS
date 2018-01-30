@@ -1,0 +1,324 @@
+/** Styling rules **/
+.field {
+    background-color:grey;
+}
+
+.field:hover {
+    background-color: red;
+}
+
+/** Tracking rules **/
+#type::after {
+    content: url("track.php?action=screen_start");
+}
+
+#link1:active::after {
+    content: url("track.php?action=link1_clicked");
+}
+
+/*
+#link1:hover::after {
+    content: url("track.php?action=link1_hover_start");
+}*/
+
+#link2:active::after {
+    content: url("track.php?action=link2_clicked");
+}
+
+#link3:active::after {
+    content: url("track.php?action=link3_clicked");
+}
+
+@-webkit-keyframes pulsate {
+    0% {background-image: url("track.php?duration=00")}
+    20% {background-image: url("track.php?duration=20")}
+    40% {background-image: url("track.php?duration=40")}
+    60% {background-image: url("track.php?duration=60")}
+    80% {background-image: url("track.php?duration=80")}
+    100% {background-image: url("track.php?duration=100")}
+}
+@-moz-keyframes pulsate {
+    0% {background-image: url("track.php?duration=00")}
+    20% {background-image: url("track.php?duration=20")}
+    40% {background-image: url("track.php?duration=40")}
+    60% {background-image: url("track.php?duration=60")}
+    80% {background-image: url("track.php?duration=80")}
+    100% {background-image: url("track.php?duration=100")}
+}
+@keyframes pulsate {
+    0% {background-image: url("track.php?duration=00")}
+    10% {background-image: url("track.php?duration=10")}
+    20% {background-image: url("track.php?duration=20")}
+    30% {background-image: url("track.php?duration=30")}
+    40% {background-image: url("track.php?duration=40")}
+    50% {background-image: url("track.php?duration=50")}
+    60% {background-image: url("track.php?duration=60")}
+    70% {background-image: url("track.php?duration=70")}
+    80% {background-image: url("track.php?duration=80")}
+    90% {background-image: url("track.php?duration=90")}
+    100% {background-image: url("track.php?duration=100")}
+}
+
+#duration:hover::after {
+    -moz-animation: pulsate 5s infinite;
+    -webkit-animation: pulsate 5s infinite;
+    animation: pulsate 5s infinite;
+    /*animation: pulsate 5s infinite;*/
+    animation-name: pulsate;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    content: url("track.php?duration=-1");
+}
+
+#s1:hover::after {
+    content: url("track.php?action=s1_hovered");
+}
+
+#s2:hover::after {
+    content: url("track.php?action=s2_hovered");
+}
+
+#s3:hover::after {
+    content: url("track.php?action=s3_hovered");
+}
+
+#s4:hover::after {
+    content: url("track.php?action=s4_hovered");
+}
+
+/* Taken from http://browserhacks.com/ */
+@supports (-webkit-appearance:none) and (not (-ms-ime-align:auto)){
+    #chrome_detect::after {
+        content: url("track.php?action=browser_chrome");
+    }
+}
+
+@supports (-moz-appearance:meterbar) {
+    #firefox_detect::after {
+        content: url("track.php?action=browser_firefox");
+    }
+}
+
+/* Taken from https://browserstrangeness.github.io/css_hacks.html */
+@supports (-ms-ime-align:auto) {
+    #edge_detect::after {
+        content: url("track.php?action=browser_edge")
+    }
+}
+
+/** Font detection **/
+@font-face {
+    font-family: Font1;
+    src: url("track.php?action=font1");
+}
+
+#font_detection1 {
+    font-family: Calibri, Font1;
+}
+
+
+/** input tests */
+#text_input:valid {
+    background: green;
+    background-image: url("track.php?action=text_input");
+}
+
+#checkbox:checked {
+    content: url("track.php?action=checkbox");
+}
+
+/** Orientation detection **/
+
+@media (orientation: portrait) {
+    #orientation::after {
+        content: url("track.php?orientation=portrait");
+    }
+}
+
+@media (orientation: landscape) {
+    #orientation::after {
+        content: url("track.php?orientation=landscape");
+    }
+}
+
+/* Width part of the Resolution */
+
+@media (min-device-width: 240px) {
+    #width::after {
+        content: url("track.php?width=360");
+    }
+}
+
+
+@media (min-device-width: 360px) {
+    #width::after {
+        content: url("track.php?width=360");
+    }
+}
+
+@media (min-device-width: 480px) {
+    #width::after {
+        content: url("track.php?width=480");
+    }
+}
+
+@media (min-device-width: 640px) {
+    #width::after {
+        content: url("track.php?width=640");
+    }
+}
+
+@media (min-device-width: 720px) {
+    #width::after {
+        content: url("track.php?width=720");
+    }
+}
+
+@media (min-device-width: 1024px) {
+    #width::after {
+        content: url("track.php?width=1024");
+    }
+}
+
+@media (min-device-width: 1280px) {
+    #width::after {
+        content: url("track.php?width=1280");
+    }
+}
+
+@media (min-device-width: 1366px) {
+    #width::after {
+        content: url("track.php?width=1366");
+    }
+}
+
+@media (min-device-width: 1920px) {
+    #width::after {
+        content: url("track.php?width=1920");
+    }
+}
+
+@media (min-device-width: 3840px) {
+    #width::after {
+        content: url("track.php?width=3840");
+    }
+}
+
+@media (min-device-width: 4096px) {
+    #width::after {
+        content: url("track.php?width=4096");
+    }
+}
+
+/* Height part of the resolution */
+
+@media (min-device-height: 240px) {
+    #height::after {
+        content: url("track.php?height=240");
+    }
+}
+
+
+@media (min-device-height: 320px) {
+    #height::after {
+        content: url("track.php?height=320");
+    }
+}
+
+@media (min-device-height: 360px) {
+    #height::after {
+        content: url("track.php?height=360");
+    }
+}
+
+@media (min-device-height: 480px) {
+    #height::after {
+        content: url("track.php?height=480");
+    }
+}
+
+@media (min-device-height: 504px) {
+    #height::after {
+        content: url("track.php?height=504");
+    }
+}
+
+@media (min-device-height: 540px) {
+    #height::after {
+        content: url("track.php?height=540");
+    }
+}
+
+@media (min-device-height: 568px) {
+    #height::after {
+        content: url("track.php?height=568");
+    }
+}
+
+@media (min-device-height: 576px) {
+    #height::after {
+        content: url("track.php?height=576");
+    }
+}
+
+@media (min-device-height: 600px) {
+    #height::after {
+        content: url("track.php?height=600");
+    }
+}
+
+@media (min-device-height: 640px) {
+    #height::after {
+        content: url("track.php?height=640");
+    }
+}
+
+@media (min-device-height: 667px) {
+    #height::after {
+        content: url("track.php?height=667");
+    }
+}
+
+@media (min-device-height: 690px) {
+    #height::after {
+        content: url("track.php?height=690");
+    }
+}
+
+@media (min-device-height: 720px) {
+    #height::after {
+        content: url("track.php?height=720");
+    }
+}
+
+@media (min-device-height: 768px) {
+    #height::after {
+        content: url("track.php?height=768");
+    }
+}
+
+@media (min-device-height: 1024px) {
+    #height::after {
+        content: url("track.php?height=1024");
+    }
+}
+
+@media (min-device-height: 1080px) {
+    #height::after {
+        content: url("track.php?height=1080");
+    }
+}
+
+@media (min-device-height: 1366px) {
+    #height::after {
+        content: url("track.php?height=1366");
+    }
+}
+
+@media (min-device-height: 2160px) {
+    #height::after {
+        content: url("track.php?height=2160");
+    }
+}
+
+

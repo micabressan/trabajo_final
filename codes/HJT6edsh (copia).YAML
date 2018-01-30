@@ -1,0 +1,220 @@
+groups:
+  Member:
+    options:
+      default: 'true'
+      prefix: '&7MEMBER'
+    permissions:
+    - modifyworld.*
+    - essentials.build
+    - essentials.warp
+    - essentials.msg
+    worlds:
+      world:
+        permissions:
+        - sg.join
+        - ultracosmetics.openmenu
+        - ultracosmetics.command.menu
+        - ultracosmetics.gadgets.*
+        - ultracosmetics.pets.*
+        - ultracosmetics.suits.*
+        - ultracosmetics.emotes.*
+        inheritance:
+        - member
+      skypvp:
+        permissions:
+        - essentials.kit
+        - essentials.kits
+        - essentials.kit.Noob
+        - essentials.kits.Noob
+        - essentials.kit.Newbie
+        - essentials.kits.Newbie
+        - essentials.signs.use.balance
+        - essentials.signs.use.buy
+        - essentials.signs.use.disposal
+        - essentials.signs.use.enchant
+        - essentials.signs.use.free
+        - essentials.signs.use.heal
+        - essentials.signs.use.kit
+        - essentials.signs.use.repair
+        - essentials.signs.use.sell
+        - essentials.signs.use.trade
+        - essentials.signs.use.warp
+        - essentials.recipe
+        - essentials.pay
+        - essentials.balance
+        - essentials.warps.skypvp
+        - essentials.warp
+        - essentials.warp.list
+        inheritance:
+        - member
+      survival:
+        permissions:
+        - essentials.build
+        - essentials.kit
+        - essentials.warp.list
+        - essentials.kits
+        - essentials.kit.survival
+        - essentials.kits.survival
+        - essentials.home
+        - essentials.home.others
+        - essentials.home.others.default
+        - essentials.tpa
+        - essentials.tpaccept
+        - essentials.tpdeny
+        - essentials.signs.use.balance
+        - essentials.signs.use.buy
+        - essentials.signs.use.disposal
+        - essentials.signs.use.enchant
+        - essentials.signs.use.free
+        - essentials.signs.use.heal
+        - essentials.signs.use.kit
+        - essentials.signs.use.repair
+        - essentials.signs.use.sell
+        - essentials.signs.use.trade
+        - essentials.signs.use.warp
+        - essentials.recipe
+        - essentials.pay
+        - essentials.sethome
+        - essentials.balance
+        - essentials.warps.survival
+        - essentials.warps.shop
+        - essentials.warp
+        - shopguiplus.shops.*
+        - protectionstones.create
+        - protectionstones.destroy
+        - protectionstones.home
+        - shopguiplus.shop
+        inheritance:
+        - member
+    inheritance: []
+  VIP:
+    options:
+      default: 'false'
+      prefix: '&3&lVIP &7'
+    permissions:
+    - essentials.msg.color
+    - essentials.nick
+    - ultracosmetics.mounts.*
+    - ultracosmetics.hats.*
+    - ultracosmetics.particleeffects.*
+    worlds:
+      skypvp:
+        permissions:
+        - essentials.kit.Recruit
+        - essentials.kits.Recruit
+        inheritance:
+        - member
+    inheritance:
+    - Member
+  MOD:
+    options:
+      default: 'false'
+      prefix: '&6&lMOD &7'
+    permissions:
+    - server.staff
+    - essentials.ban
+    - essentials.tempban
+    - essentials.mute
+    - essentials.tempute
+    - essentials.kick
+    - essentials.banip
+    - essentials.vanish
+    inheritance:
+    - Member
+  ADMIN:
+    options:
+      default: 'false'
+      prefix: '&9ADMIN &7'
+    permissions:
+    - server.staff
+    - essentials.ban
+    - essentials.tempban
+    - essentials.mute
+    - essentials.tempute
+    - essentials.kick
+    - essentials.banip
+    - essentials.vanish
+    inheritance:
+    - Member
+  Owner:
+    options:
+      default: 'false'
+      prefix: '&4OWNER &7'
+    permissions:
+    - '*'
+    inheritance:
+    - Member
+  VIP++:
+    options:
+      prefix: '&5VIP++'
+  CO-OWNER:
+    options:
+      prefix: '&4CO-OWNER'
+  HELPER:
+    options:
+      prefix: '&2HELPER'
+  FLYER:
+    options:
+      prefix: '&8FLYER'
+  MOD+:
+    options:
+      prefix: '&3MOD+'
+schema-version: 2
+users:
+  a6171976-d57a-4556-be56-6987215863fe:
+    group:
+    - Member
+    options:
+      name: UzumakiYT
+  f8ffab91-4598-41ad-9a16-084e1075fbc8:
+    group:
+    - Member
+    options:
+      name: HinataYT
+  12f98aad-089e-40c9-9b94-d6e959a3815c:
+    group:
+    - VIP
+    options:
+      name: LuisBaggins
+  2b229b5f-23e7-34a9-83f2-9f9a224dc2e7:
+    group:
+    - Owner
+    options:
+      name: PedroSword
+  4333c578-87d2-3be8-8fd4-4343050ae4ab:
+    group:
+    - Operator
+    options:
+      name: bya
+  22041674-931e-37a5-8289-1ebc1b4638d6:
+    group:
+    - CO-OWNER
+    options:
+      name: Laner31
+  89145579-f7ca-3b13-9d12-eecd572fa999:
+    group:
+    - Member
+    options:
+      name: the_cool_gamer
+  c58cc66d-92fe-321b-97d3-72fd75371a1e:
+    group:
+    - CO-OWNER
+    options:
+      name: Slenderino
+  zstef:
+    group:
+    - Member
+  nekix:
+    group:
+    - Member
+  andrei:
+    group:
+    - Member
+  firegamerzyt:
+    group:
+    - Member
+  305ff50d-2b50-3c9a-8973-016b5353862d:
+    group:
+    - Owner
+    options:
+      name: diamond234

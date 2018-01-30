@@ -1,0 +1,34 @@
+trigger:
+  - platform: state
+    entity_id: lock.front_door_locked
+    to: 'unlocked'
+    for:
+      minutes: 5
+  - platform: state
+    entity_id: group.family
+    from: 'home'
+    to: 'not_home'
+  - platform: state
+    entity_id: group.friends
+    from: 'home'
+    to: 'not_home'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: group.family
+      state: 'not-home'
+    - condition: state
+      entity_id: group.friends
+      state: 'not-home'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: lock.front_door_locked
+          state: 'unlocked'
+          for:
+            minutes: 5
+action:
+  - service: lock.lock
+    data:
+      entity_id: lock.front_door_locked

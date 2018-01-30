@@ -1,0 +1,48 @@
+Public Function ReadtblRackIOCfg(rnRack As Integer) As Integer
+    'This routine reads information from the RackIOCfg table in the project database based on the current panel
+    Dim sSqlCmd As String
+
+    On Error GoTo ReadtblRackIOCfg_Error
+    
+    '-----Build the SQL string
+    sSqlCmd = "Select [Panel], [Rack], [Slot], [ModulePartNo], [ModuleDesc], " & _
+              "[ModuleDwgTemplate], [ModuleDwgNo], [NumModulesPerDwg], " & _
+              "[ModuleFuseNo], [ModulePowerWireNo], [CLogixRoutingString] " & _
+              "From RackIOCfg Where "
+    If rnRack = -1 Then
+        sSqlCmd = sSqlCmd & "[Panel] = '" & Worksheets("Mission Control").Cells(3, 3).Value & "'" & _
+                            " Order By [Rack], [Slot]"
+    Else
+        sSqlCmd = sSqlCmd & "[Panel] = '" & Worksheets("Mission Control").Cells(3, 3).Value & "' And " & _
+                            "[Rack] = " & rnRack & _
+                            " Order By [Rack], [Slot]"
+    End If
+    
+    '-----Execute the SQL command
+    Set grstRackIOCfg = New ADODB.Recordset
+    grstRackIOCfg.Open sSqlCmd, gadoConn, adOpenStatic, adLockOptimistic
+    
+    '-----Obtain the total number of records retrieved
+    On Error Resume Next
+    grstRackIOCfg.MoveLast
+    grstRackIOCfg.MoveFirst
+    On Error GoTo ReadtblRackIOCfg_Error
+    
+    '----If no records were retreived show an error message and exit the routine
+    If grstRackIOCfg.RecordCount <= 0 Then
+        grstRackIOCfg.Close
+        Call MsgBox("There Were No RackIOCfg Records Found In The Project Database For The Current Panel.", _
+                    vbInformation + vbOKOnly, _
+                    "Error In Routine: ReadtblRackIOCfg")
+        ReadtblRackIOCfg = CONST_FAULT
+        Exit Function
+    End If
+    
+    '-----Return OK if everything was processed properly
+    ReadtblRackIOCfg = CONST_OK
+        
+Exit Function
+ReadtblRackIOCfg_Error:
+    Call ErrorHandler("ReadtblRackIOCfg", Err)
+    ReadtblRackIOCfg = CONST_FAULT
+End Function

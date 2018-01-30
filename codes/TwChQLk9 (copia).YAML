@@ -1,0 +1,54 @@
+- name: Configure sabnzbd container
+  docker_container:
+    state: started
+    restart_policy: always
+    name: sabnzbd
+    image: linuxserver/sabnzbd
+    volumes:
+      - /mnt/nfs/docker/sabnzbd/config:/config
+      - /mnt/nfs/docker/sabnzbd/scripts:/scripts
+      - /mnt/nfs/Media:/data
+      - /mnt/nfs/Media/downloads:/downloads
+      - /mnt/nfs/Media/downloads/incomplete:/incomplete-downloads
+    ports:
+      - 8080:8080
+    env:
+      TZ: Europe/London
+      PUID: 1026
+      PGID: 100
+
+- name: Configure radarr container
+  docker_container:
+    state: started
+    restart_policy: always
+    name: radarr
+    image: linuxserver/radarr
+    volumes:
+      - /mnt/nfs/docker/radarr/config:/config
+      - /mnt/nfs/Media/Movies:/movies
+      - /mnt/nfs/Media/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 7878:7878
+    env:
+      TZ: Europe/London
+      PUID: 1026
+      PGID: 100
+
+- name: Configure sonarr container
+  docker_container:
+    state: started
+    restart_policy: always
+    name: sonarr
+    image: linuxserver/sonarr
+    volumes:
+      - /mnt/nfs/docker/sonarr/config:/config
+      - /mnt/nfs/Media/TV:/tv
+      - /mnt/nfs/Media/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8989:8989
+    env:
+      TZ: Europe/London
+      PUID: 1026
+      PGID: 100

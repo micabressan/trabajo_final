@@ -1,0 +1,30 @@
+Static start_time As DateTime
+Static stop_time As DateTime
+Dim elapsed_time As TimeSpan
+
+on error resume next
+
+URL = "http://10.152.200.11:8000/sap/public/ping?sap-client=100"
+
+wscript.Echo "    URL: ", URL
+
+status = 0
+
+Set req = CreateObject("WinHttp.WinHttpRequest.5.1")
+req.Open "GET", URL, False
+
+start_time = Now
+req.Send
+req.WaitForResponse 1
+elapsed_time = stop_time.Subtract(start_time)
+
+status = req.Status
+
+
+If status = 200 Then
+
+	wscript.Echo "0 SAP_Ping duration=" & elapsed_time.TotalSeconds.ToString("0.000000") & "PING succeeded"
+Else
+	wscript.Echo "2 SAP_Ping duration=" & elapsed_time.TotalSeconds.ToString("0.000000") & "PING failed"
+
+End If

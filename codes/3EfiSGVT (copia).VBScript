@@ -1,0 +1,97 @@
+Public ErrMsg As String
+Public QueueIsEmpty As Boolean
+ 
+Private Type FIFO_QueueType
+    value As Variant
+End Type
+ 
+Private Function InitializeQueue(fifo() As FIFO_QueueType) As Boolean
+    ErrMsg = ""
+    On Error GoTo InitErr
+        ReDim fifo(0)
+        QueueIsEmpty = True
+        InitializeQueue = True
+    Exit Function
+InitErr:
+    InitializeQueue = False
+    ErrMsg = Err.Description
+End Function
+ 
+Private Function Enqueue(fifo() As FIFO_QueueType, value As Variant) As Variant
+    ErrMsg = ""
+    On Error GoTo EnqueueErr
+        If IsEmpty(value) Or IsNull(value) Or value = "" Then Err.Raise 9999, , "No value to handle"
+        Dim idx As Long
+        
+        Dim fifoVal As FIFO_QueueType
+        fifoVal.value = value
+        
+        idx = UBound(fifo) + 1
+        ReDim Preserve fifo(idx)
+        fifo(idx) = fifoVal
+        QueueIsEmpty = False
+        Enqueue = True
+    Exit Function
+EnqueueErr:
+    Enqueue = Err.Description
+    ErrMsg = Err.Description
+End Function
+ 
+Private Function Dequeue(fifo() As FIFO_QueueType) As Variant
+    ErrMsg = ""
+    On Error GoTo PopErr
+        If UBound(fifo) = 0 Then
+            QueueIsEmpty = True
+            Err.Raise 9998, , "Queue is empty"
+        End If
+        
+        Dequeue = fifo(1).value
+        
+        Dim fifoTmp() As FIFO_QueueType
+        ReDim fifoTmp(UBound(fifo) - 1)
+        
+        If UBound(fifo) > 1 Then
+            For i = 1 To UBound(fifo) - 1
+                fifoTmp(i).value = fifo(i + 1).value
+            Next i
+            fifo = fifoTmp
+        Else
+            ReDim fifo(0)
+            QueueIsEmpty = True
+        End If
+    Exit Function
+PopErr:
+    Dequeue = Err.Description
+    ErrMsg = Err.Description
+End Function
+ 
+Private Function GetQueueCount(fifo() As FIFO_QueueType) As Long
+    If QueueIsEmpty Then GetQueueCount = 0 Else GetQueueCount = UBound(fifo)
+End Function
+ 
+Public Sub Test_Queue()
+    'Create a variable for the queue:
+    Dim queue() As FIFO_QueueType
+    
+    'Initializing the queue: Initializequeue(queue)
+    Debug.Print "Initialize: " & InitializeQueue(queue)
+    Debug.Print ""
+    Debug.Print "*** Push some Test Values:"
+    
+    'Pushing some values: Push(queue, value)
+    Debug.Print "EnQueue Test1: " & Enqueue(queue, "Test 1")
+    Debug.Print "EnQueue Test2: " & Enqueue(queue, "Test 2")
+    Debug.Print "EnQueue Test3: " & Enqueue(queue, "Test 3")
+    Debug.Print "EnQueue Test4: " & Enqueue(queue, "Test 4")
+    Debug.Print "EnQueue Test5: " & Enqueue(queue, "Test 5")
+    Debug.Print "EnQueue Null : " & Enqueue(queue, Null)
+ 
+    Debug.Print ""
+    Debug.Print "*** DeQueue all queued values:"
+    
+    'Removing/Getting the values Pop(queue)
+    Do While Not QueueIsEmpty
+        Debug.Print "DeQueue First In: " & GetQueueCount(queue) & " - " & Dequeue(queue)
+    Loop
+    Debug.Print "DeQueue First In: " & GetQueueCount(queue) & " - " & Dequeue(queue)
+End Sub

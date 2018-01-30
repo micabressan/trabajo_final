@@ -1,0 +1,13 @@
+geocoder.settings:
+ cache: 1
+  plugins_options:
+    googlemaps:
+      foo: bar
+      foo1: bar1
+    openstreetmap:
+      foo1: bar1
+      foo2: bar2
+    [...]:
+      [...]: [...]
+      [...]: [...]
+      [...]: [...]

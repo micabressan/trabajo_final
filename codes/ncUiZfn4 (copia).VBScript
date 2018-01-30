@@ -1,0 +1,35 @@
+Sub Main()
+    Dim numbers(1 To 10) As Double
+    Dim i As Integer
+    Dim recSet As New Recordset
+    
+    For i = 1 To 10
+        numbers(i) = Cells(i, i).Value
+    Next i
+    
+    Set recSet = ConvertToRecordset(numbers)
+    
+End Sub
+
+
+Private Function ConvertToRecordset(numbers() As Double) As Recordset
+
+    Dim recSet As New Recordset
+    Dim lRecCount
+    
+    lRecCount = UBound(numbers)
+    
+    recSet.Fields.Append "Numbers", adDouble, , adFldMayBeNull
+    recSet.Open
+    
+    Dim i As Integer
+    
+    For i = 1 To lRecCount
+        recSet.AddNew
+        recSet("Numbers").Value = numbers(i)
+        recSet.Update
+    Next i
+    
+    Set ConvertToRecordset = recSet
+    
+End Function

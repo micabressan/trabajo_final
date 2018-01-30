@@ -1,0 +1,7 @@
+Sub calc()
+    Range("D27").Value = "=D$26*9.5+$C27*0.5"
+    Range("D27").Select
+    Selection.AutoFill Destination:=Range("D27:L27")
+    Range("D27:L27").Select
+    Selection.AutoFill Destination:=Range("D27:L34")
+End Sub

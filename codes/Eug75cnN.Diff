@@ -1,0 +1,28 @@
+diff --git a/instsetoo_native/util/openoffice.lst b/instsetoo_native/util/openoffice.lst
+index 9003919..fe0723e 100644
+--- a/instsetoo_native/util/openoffice.lst
++++ b/instsetoo_native/util/openoffice.lst
+@@ -33,10 +33,11 @@ Globals
+ 			REGISTRYLAYERNAME Layers
+             SERVICEPACK 1
+             UPDATE_DATABASE 1
+-            CREATE_MSP_INSTALLSET 0
++            CREATE_MSP_INSTALLSET 1
+             UPDATE_DATABASE_LISTNAME finals_instsetoo.txt
+  			PACKAGEMAP package_names.txt,package_names_ext.txt
+ 			WINDOWSPATCHLEVEL 8
++			VENDORPATCHVERSION 1
+             OOOVENDOR The Document Foundation
+ 			OOODOWNLOADNAME 1
+ 			STARTCENTER_LAYOUT_STYLE 0
+diff --git a/setup_native/source/packinfo/finals_instsetoo.txt b/setup_native/source/packinfo/finals_instsetoo.txt
+index 5832dfa..58ee317 100644
+--- a/setup_native/source/packinfo/finals_instsetoo.txt
++++ b/setup_native/source/packinfo/finals_instsetoo.txt
+@@ -12,3 +12,5 @@
+ # OpenOffice	pro		de			\\<server>\<path>\msi\OOO300_m6_native_packed-1_de.9352\openofficeorg30.msi
+ # OpenOfficeLanguagePack	pro	es	\\<server>\<path>\msi\OOO300_m6_native_packed-1_es.9352\openofficeorg30.msi
+ # URE			pro		en-US		\\<server>\<path>\msi\OOO300_m6_native_packed-1_en-US.9352\ure14.msi
++LibreOffice		pro		en-US,af,ar,bn,ca,cs,da,de,el,en-GB,es,fi,fr,gu,he,hi,hu,it,ja,ko,mr,nb,nl,nn,pl,pt,pt-BR,ru,sk,sl,sv,ta,tr,xh,zh-CN,zh-TW,zu		c:\suse-3.4\src\first_build\libreoffice34.msi
++OpenOffice		pro		en-US,af,ar,bn,ca,cs,da,de,el,en-GB,es,fi,fr,gu,he,hi,hu,it,ja,ko,mr,nb,nl,nn,pl,pt,pt-BR,ru,sk,sl,sv,ta,tr,xh,zh-CN,zh-TW,zu		c:\suse-3.4\src\first_build\libreoffice34.msi
+\ No newline at end of file

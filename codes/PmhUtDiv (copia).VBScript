@@ -1,0 +1,43 @@
+'small nicety to ensure two-digits for better file sorting'
+Function NiceFileNumber(num As Integer) As String
+    If num < 10 Then
+        NiceFileNumber = "0" & num
+    Else
+        NiceFileNumber = num
+    End If
+End Function
+
+'the real function'
+Sub ExportAllCharts()
+    Dim i As Integer, exportCount As Integer
+    Dim fileNum As String, fileBase As String
+    Dim sheetObj As Worksheet
+    Dim chartObj As Chart
+
+    'current file location and name, with extension stripped'
+    fileBase = Left(ThisWorkbook.FullName, InStrRev(ThisWorkbook.FullName, ".") - 1)
+    exportCount = 0
+
+    'First, export all charts that are in their own sheets'
+    For Each chartObj In ActiveWorkbook.Charts
+        fileNum = NiceFileNumber(exportCount)
+        exportCount = exportCount + 1
+
+        'Do the export'
+        chartObj.Export fileBase & "_chart" & fileNum & ".png"
+    Next
+
+    'Then, export all charts that are embedded inside normal sheets'
+    For Each sheetObj In ActiveWorkbook.Worksheets
+        For i = 1 To sheetObj.ChartObjects.Count
+            fileNum = NiceFileNumber(exportCount)
+            exportCount = exportCount + 1
+
+            'Do the export'
+            sheetObj.ChartObjects(i).Activate
+            ActiveChart.Export fileBase & "_chart" & fileNum & ".png"
+        Next i
+    Next
+    
+    MsgBox "DONE"
+End Sub

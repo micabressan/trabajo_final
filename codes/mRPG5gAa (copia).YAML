@@ -1,0 +1,94 @@
+# ORM definition of the Service model.
+ServiceBundle\Entity\Service:
+    type: entity
+    table: services
+    repositoryClass: ServiceBundle\Repository\ServiceRepository
+
+    entityListeners:
+        ServiceBundle\Event\ServiceListener:
+            postUpdate: [postUpdateHandler]
+            preUpdate: [preUpdateHandler]
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+            length: 80
+        status:
+            type: smallint
+            options:
+                comment: 'Determines the status of service. Possible values: 0 - Inactive; 1 - Active;'
+        isQuoted:
+            type: boolean
+        basePrice:
+            type: float
+        hasUpload:
+            type: boolean
+        uploadName:
+            type: string
+            length: 50
+            nullable: true
+        uploadDescription:
+            type: string
+            length: 250
+            nullable: true
+        vat:
+            type: float
+        isUploadRequired:
+            type: boolean
+            nullable: true
+        description:
+            type: text
+            length: 500
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        hasTransportCost:
+            type: boolean
+        unpaidDistance:
+            type: smallint
+        pricePerKm:
+            type: float
+
+    oneToMany:
+        details:
+            targetEntity: Detail
+            mappedBy: service
+            cascade: ['persist', 'remove']
+        params:
+            targetEntity: Param
+            mappedBy: service
+            cascade: ['persist', 'remove']
+        worksiteAssocs:
+            targetEntity: VendorBundle\Entity\ServiceWorksiteAssoc
+            mappedBy: service
+            cascade: ['persist', 'remove']
+        priceRules:
+            targetEntity: OrderBundle\Entity\PriceRule
+            mappedBy: service
+
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: services
+            joinColumn:
+                nullable: false
+
+    oneToMany:
+        priceRules:
+             targetEntity: OrderBundle\Entity\PriceRule
+             mappedBy: service

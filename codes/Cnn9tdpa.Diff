@@ -1,0 +1,287 @@
+From 92d9746c8a8a002e3db7447c7706669a127fe8db Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Fri, 23 Sep 2011 02:43:57 +0200
+Subject: [PATCH 1/7] aacdec: disable locking code for parse_adts_frame_header() non zero chan config.
+ This fixes changing channels
+ It possibly might cause regressions but i cant avoid this without having a test
+ case that needs the locking code.
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacdec.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/libavcodec/aacdec.c b/libavcodec/aacdec.c
+index a3a6b42..0be45b7 100644
+--- a/libavcodec/aacdec.c
++++ b/libavcodec/aacdec.c
+@@ -2077,7 +2077,7 @@ static int parse_adts_frame_header(AACContext *ac, GetBitContext *gb)
+ 
+     size = avpriv_aac_parse_header(gb, &hdr_info);
+     if (size > 0) {
+-        if (ac->output_configured != OC_LOCKED && hdr_info.chan_config) {
++        if (hdr_info.chan_config) {
+             enum ChannelPosition new_che_pos[4][MAX_ELEM_ID];
+             memset(new_che_pos, 0, 4 * MAX_ELEM_ID * sizeof(new_che_pos[0][0]));
+             ac->m4ac.chan_config = hdr_info.chan_config;
+-- 
+1.7.0.2.msysgit.0
+
+
+From 5ac19e941ed9174ee0b931501377fc1e20bdad08 Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Fri, 23 Sep 2011 22:30:27 +0200
+Subject: [PATCH 2/7] aacsbr: add a assert0 to check for a inconsistency that
+ occured during debug. I dont know if this can happen normally but if so
+ it would be quite bad.
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacsbr.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/libavcodec/aacsbr.c b/libavcodec/aacsbr.c
+index 81b0b4c..2910395 100644
+--- a/libavcodec/aacsbr.c
++++ b/libavcodec/aacsbr.c
+@@ -33,6 +33,7 @@
+ #include "fft.h"
+ #include "aacps.h"
+ #include "libavutil/libm.h"
++#include "libavutil/avassert.h"
+ 
+ #include <stdint.h>
+ #include <float.h>
+@@ -1456,6 +1457,7 @@ static void sbr_mapping(AACContext *ac, SpectralBandReplication *sbr,
+         uint16_t *table = ch_data->bs_freq_res[e + 1] ? sbr->f_tablehigh : sbr->f_tablelow;
+         int k;
+ 
++        av_assert0(sbr->kx[1] <= table[0]);
+         for (i = 0; i < ilim; i++)
+             for (m = table[i]; m < table[i + 1]; m++)
+                 sbr->e_origmapped[e][m - sbr->kx[1]] = ch_data->env_facs[e+1][i];
+-- 
+1.7.0.2.msysgit.0
+
+
+From d429e4e8d5be640df559458a276ede09fd7de81f Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Fri, 23 Sep 2011 22:31:57 +0200
+Subject: [PATCH 3/7] aacsbr: prevent multiple ff_aac_sbr_ctx_init()
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacsbr.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/libavcodec/aacsbr.c b/libavcodec/aacsbr.c
+index 2910395..60fa701 100644
+--- a/libavcodec/aacsbr.c
++++ b/libavcodec/aacsbr.c
+@@ -130,6 +130,8 @@ av_cold void ff_aac_sbr_init(void)
+ av_cold void ff_aac_sbr_ctx_init(AACContext *ac, SpectralBandReplication *sbr)
+ {
+     float mdct_scale;
++    if(sbr->mdct.mdct_bits)
++        return;
+     sbr->kx[0] = sbr->kx[1] = 32; //Typo in spec, kx' inits to 32
+     sbr->data[0].e_a[1] = sbr->data[1].e_a[1] = -1;
+     sbr->data[0].synthesis_filterbank_samples_offset = SBR_SYNTHESIS_BUF_SIZE - (1280 - 128);
+-- 
+1.7.0.2.msysgit.0
+
+
+From 1f8eb2de1571be8187f7360c45aec0da6242142e Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Fri, 23 Sep 2011 22:34:26 +0200
+Subject: [PATCH 4/7] aacdec: Make aac-latm closer to the spec (not reading random data leading to random false configurations)
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+
+Conflicts:
+
+	libavcodec/aacdec.c
+---
+ libavcodec/aacdec.c |   14 +++++++-------
+ 1 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/libavcodec/aacdec.c b/libavcodec/aacdec.c
+index 0be45b7..8338e25 100644
+--- a/libavcodec/aacdec.c
++++ b/libavcodec/aacdec.c
+@@ -458,7 +458,7 @@ static int decode_ga_specific_config(AACContext *ac, AVCodecContext *avctx,
+ static int decode_audio_specific_config(AACContext *ac,
+                                         AVCodecContext *avctx,
+                                         MPEG4AudioConfig *m4ac,
+-                                        const uint8_t *data, int data_size)
++                                        const uint8_t *data, int data_size, int asclen)
+ {
+     GetBitContext gb;
+     int i;
+@@ -470,7 +470,7 @@ static int decode_audio_specific_config(AACContext *ac,
+ 
+     init_get_bits(&gb, data, data_size * 8);
+ 
+-    if ((i = avpriv_mpeg4audio_get_config(m4ac, data, data_size)) < 0)
++    if ((i = avpriv_mpeg4audio_get_config(m4ac, data, asclen/8)) < 0)
+         return -1;
+     if (m4ac->sampling_index > 12) {
+         av_log(avctx, AV_LOG_ERROR, "invalid sampling rate index %d\n", m4ac->sampling_index);
+@@ -570,7 +570,7 @@ static av_cold int aac_decode_init(AVCodecContext *avctx)
+     if (avctx->extradata_size > 0) {
+         if (decode_audio_specific_config(ac, ac->avctx, &ac->m4ac,
+                                          avctx->extradata,
+-                                         avctx->extradata_size) < 0)
++                                         avctx->extradata_size, 8*avctx->extradata_size) < 0)
+             return -1;
+     } else {
+         int sr, i;
+@@ -2307,7 +2307,7 @@ static inline uint32_t latm_get_value(GetBitContext *b)
+ }
+ 
+ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+-                                             GetBitContext *gb)
++                                             GetBitContext *gb, int asclen)
+ {
+     AVCodecContext *avctx = latmctx->aac_ctx.avctx;
+     MPEG4AudioConfig m4ac;
+@@ -2322,7 +2322,7 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+         bits_consumed =
+             decode_audio_specific_config(NULL, avctx, &m4ac,
+                                          gb->buffer + (config_start_bit / 8),
+-                                         get_bits_left(gb) / 8);
++                                         get_bits_left(gb) / 8, asclen);
+ 
+         if (bits_consumed < 0)
+             return AVERROR_INVALIDDATA;
+@@ -2380,11 +2380,11 @@ static int read_stream_mux_config(struct LATMContext *latmctx,
+ 
+         // for all but first stream: use_same_config = get_bits(gb, 1);
+         if (!audio_mux_version) {
+-            if ((ret = latm_decode_audio_specific_config(latmctx, gb)) < 0)
++            if ((ret = latm_decode_audio_specific_config(latmctx, gb, 0)) < 0)
+                 return ret;
+         } else {
+             int ascLen = latm_get_value(gb);
+-            if ((ret = latm_decode_audio_specific_config(latmctx, gb)) < 0)
++            if ((ret = latm_decode_audio_specific_config(latmctx, gb, ascLen)) < 0)
+                 return ret;
+             ascLen -= ret;
+             skip_bits_long(gb, ascLen);
+-- 
+1.7.0.2.msysgit.0
+
+
+From bd021c274a3ac1c415f224231de7d1d62336f6a0 Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Fri, 23 Sep 2011 22:41:10 +0200
+Subject: [PATCH 5/7] aacdec: fix channel reconfigs on LATM
+ Fixes FFmpeg ticket 200.
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacdec.c |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/libavcodec/aacdec.c b/libavcodec/aacdec.c
+index 8338e25..41d1aaa 100644
+--- a/libavcodec/aacdec.c
++++ b/libavcodec/aacdec.c
+@@ -2311,6 +2311,7 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+ {
+     AVCodecContext *avctx = latmctx->aac_ctx.avctx;
+     MPEG4AudioConfig m4ac;
++    AACContext *ac= &latmctx->aac_ctx;
+     int  config_start_bit = get_bits_count(gb);
+     int     bits_consumed, esize;
+ 
+@@ -2320,12 +2321,13 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+         return AVERROR_INVALIDDATA;
+     } else {
+         bits_consumed =
+-            decode_audio_specific_config(NULL, avctx, &m4ac,
++            decode_audio_specific_config(ac, avctx, &m4ac,
+                                          gb->buffer + (config_start_bit / 8),
+                                          get_bits_left(gb) / 8, asclen);
+ 
+         if (bits_consumed < 0)
+             return AVERROR_INVALIDDATA;
++        ac->m4ac= m4ac;
+ 
+         esize = (bits_consumed+7) / 8;
+ 
+-- 
+1.7.0.2.msysgit.0
+
+
+From a7f4fa723b1101c0c5146043f8aac0b27ab10f22 Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Thu, 20 Oct 2011 13:54:54 +0200
+Subject: [PATCH 6/7] aacdec: support chan config =1 stereo files
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacdec.c |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+
+diff --git a/libavcodec/aacdec.c b/libavcodec/aacdec.c
+index 41d1aaa..7dfa070 100644
+--- a/libavcodec/aacdec.c
++++ b/libavcodec/aacdec.c
+@@ -2135,6 +2135,15 @@ static int aac_decode_frame_int(AVCodecContext *avctx, void *data,
+         elem_id = get_bits(gb, 4);
+ 
+         if (elem_type < TYPE_DSE) {
++            if (!ac->tags_mapped && elem_type == TYPE_CPE && ac->m4ac.chan_config==1) {
++                enum ChannelPosition new_che_pos[4][MAX_ELEM_ID]= {0};
++                ac->m4ac.chan_config=2;
++
++                if (set_default_channel_config(ac->avctx, new_che_pos, 2)<0)
++                    return -1;
++                if (output_configure(ac, ac->che_pos, new_che_pos, 2, OC_TRIAL_FRAME)<0)
++                    return -1;
++            }
+             if (!(che=get_che(ac, elem_type, elem_id))) {
+                 av_log(ac->avctx, AV_LOG_ERROR, "channel element %d.%d is not allocated\n",
+                        elem_type, elem_id);
+-- 
+1.7.0.2.msysgit.0
+
+
+From a07baa99b7dbc361796000238b3e88864049c464 Mon Sep 17 00:00:00 2001
+From: Michael Niedermayer <michaelni@gmx.at>
+Date: Thu, 20 Oct 2011 21:57:52 +0200
+Subject: [PATCH 7/7] aacdec: only overwrite configuration if theres a actual change.
+ Fixes FFmpeg ticket 574.
+
+Signed-off-by: Michael Niedermayer <michaelni@gmx.at>
+---
+ libavcodec/aacdec.c |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/libavcodec/aacdec.c b/libavcodec/aacdec.c
+index 7dfa070..1dc19d5 100644
+--- a/libavcodec/aacdec.c
++++ b/libavcodec/aacdec.c
+@@ -2319,8 +2319,8 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+                                              GetBitContext *gb, int asclen)
+ {
+     AVCodecContext *avctx = latmctx->aac_ctx.avctx;
+-    MPEG4AudioConfig m4ac;
+     AACContext *ac= &latmctx->aac_ctx;
++    MPEG4AudioConfig m4ac=ac->m4ac;
+     int  config_start_bit = get_bits_count(gb);
+     int     bits_consumed, esize;
+ 
+@@ -2336,7 +2336,8 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
+ 
+         if (bits_consumed < 0)
+             return AVERROR_INVALIDDATA;
+-        ac->m4ac= m4ac;
++        if(ac->m4ac.sample_rate != m4ac.sample_rate || m4ac.chan_config != ac->m4ac.chan_config)
++            ac->m4ac= m4ac;
+ 
+         esize = (bits_consumed+7) / 8;
+ 
+-- 
+1.7.0.2.msysgit.0

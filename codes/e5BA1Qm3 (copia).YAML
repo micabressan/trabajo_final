@@ -1,0 +1,102 @@
+   magiccobblegenchances:
+    # These probabilities will apply by default
+     default:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.6
+       IRON_ORE: 1.5
+       GOLD_ORE: 1.2
+       DIAMOND_ORE: 0.45
+       REDSTONE_ORE: 1
+       LAPIS_ORE: 0.7
+       EMERALD_ORE: 0.15
+       MOB_SPAWNER: 0.01
+     #These probabilities will apply if island level is higher than 500.
+     500:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.55
+       IRON_ORE: 1.45
+       GOLD_ORE: 1.15
+       DIAMOND_ORE: 0.44
+       REDSTONE_ORE: 0.95
+       LAPIS_ORE: 0.65
+       EMERALD_ORE: 0.14
+       MOB_SPAWNER: 0.01
+     1000:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.50
+       IRON_ORE: 1.40
+       GOLD_ORE: 1.10
+       DIAMOND_ORE: 0.43
+       REDSTONE_ORE: 0.90
+       LAPIS_ORE: 0.60
+       EMERALD_ORE: 0.13
+       MOB_SPAWNER: 0.01
+     1500:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.45
+       IRON_ORE: 1.35
+       GOLD_ORE: 1.05
+       DIAMOND_ORE: 0.42
+       REDSTONE_ORE: 0.85
+       LAPIS_ORE: 0.55
+       EMERALD_ORE: 0.12
+       MOB_SPAWNER: 0.01
+     2000:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.40
+       IRON_ORE: 1.30
+       GOLD_ORE: 1
+       DIAMOND_ORE: 0.41
+       REDSTONE_ORE: 0.80
+       LAPIS_ORE: 0.50
+       EMERALD_ORE: 0.11
+       MOB_SPAWNER: 0.01
+     2500:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.35
+       IRON_ORE: 1.25
+       GOLD_ORE: 0.95
+       DIAMOND_ORE: 0.40
+       REDSTONE_ORE: 0.75
+       LAPIS_ORE: 0.45
+       EMERALD_ORE: 0.10
+       MOB_SPAWNER: 0.01
+     3000:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.30
+       IRON_ORE: 1.20
+       GOLD_ORE: 0.90
+       DIAMOND_ORE: 0.39
+       REDSTONE_ORE: 0.70
+       LAPIS_ORE: 0.40
+       EMERALD_ORE: 0.09
+       MOB_SPAWNER: 0.01
+     3500:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.25
+       IRON_ORE: 1.15
+       GOLD_ORE: 0.85
+       DIAMOND_ORE: 0.38
+       REDSTONE_ORE: 0.65
+       LAPIS_ORE: 0.35
+       EMERALD_ORE: 0.08
+       MOB_SPAWNER: 0.01
+     4000:
+       COBBLESTONE: 75.0
+       STONE: 10.0
+       COAL_ORE: 1.20
+       IRON_ORE: 1.10
+       GOLD_ORE: 0.80
+       DIAMOND_ORE: 0.37
+       REDSTONE_ORE: 0.60
+       LAPIS_ORE: 0.30
+       EMERALD_ORE: 0.07
+       MOB_SPAWNER: 0.01

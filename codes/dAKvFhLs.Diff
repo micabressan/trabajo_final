@@ -1,0 +1,22 @@
+--- C:/Users/34011-58-04/Documents/Afpa/FilRouge/camcam/forGit/minibrowser/cpp/trek.cpp
++++ C:/Users/34011-58-04/Documents/Afpa/FilRouge/camcam/forGit/minibrowser/cpp/trek.cpp
+@@ -81,6 +83,19 @@
+ 
+ }
+ 
++void Trek::addPhoto(Photo myphoto)
++{
++    QObjectList tmp = getPhotos();
++    tmp.push_back(new Photo(myphoto));
++    setPhotos(tmp);
++
++    qDebug() << "Photo added, il y a " << m_photos.length() + 1;
++    if( m_photos.length() == 0 )
++        qDebug() << " photo";
++    else qDebug() << " photos";
++    qDebug() << " dans ce trek !";
++}
++
+ bool Trek::didUserMove(GpsPoint &newGpsPoint)
+ {
+     return newGpsPoint.userMoved(*qobject_cast<GpsPoint*>(m_path.back()));

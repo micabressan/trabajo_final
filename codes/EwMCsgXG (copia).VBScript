@@ -1,0 +1,79 @@
+Sub ClearData()
+'
+' ClearData Makro
+'
+    Dim answer As Integer
+    answer = MsgBox("Are you sure you want to empty the sheet?", vbYesNo + vbQuestion, "Empty Sheet Data")
+    If answer = vbYes Then
+        With ActiveSheet.ListObjects(1)
+            If Not .DataBodyRange Is Nothing Then
+                .DataBodyRange.ClearContents
+                .DataBodyRange.Delete
+            End If
+        End With
+    End If
+End Sub
+
+Sub CopyTemplate()
+'
+' CopyTemplate Makro
+'
+    Dim title As Variant
+    title = InputBox("Give me new sheet name")
+    If title <> "" Then
+        ActiveSheet.Copy After:=Sheets(Sheets.Count)
+        ActiveSheet.Name = title
+    End If
+End Sub
+
+Sub AddBuy()
+'
+' AddNewLine Makro
+'
+    Set myNewRow = ActiveSheet.ListObjects(1).ListRows.Add
+    myNewRow.Range.Cells(1).Value = Date
+    myNewRow.Range.Cells(2).FormulaR1C1 = "=RC[-1]+90"
+    myNewRow.Range.Cells(6).FormulaR1C1 = "=IF(RC[-3]>0,RC[-3],IF(RC[-1]>0,R[-1]C-RC[-1],""""))"
+    myNewRow.Range.Cells(3).Select
+End Sub
+
+Sub AddSell()
+'
+' AddPoraba Makro
+'
+    Cells(ActiveCell.Row, 2).Select
+    If IsDate(ActiveCell) Then
+        
+        Dim ok As Boolean
+        ok = True
+        
+        Dim last As Integer
+        last = ActiveSheet.ListObjects(1).ListColumns(1).Range.Rows.Count + 1
+        
+        Do While ok
+            ActiveCell.Offset(1, 0).Select
+            If ActiveCell.Row > last Then
+                ok = False
+            End If
+            If IsDate(ActiveCell) Then
+                ok = False
+            End If
+        Loop
+        
+        If ActiveCell.Row > last Then
+            Set myNewRow = ActiveSheet.ListObjects(1).ListRows.Add
+        Else
+            ActiveCell.EntireRow.Insert
+        End If
+        
+        Set newRow = ActiveCell.EntireRow
+        newRow.Cells(5).Value = Date
+        newRow.Cells(3).ClearContents
+        newRow.Cells(7).FormulaR1C1 = "=IF(RC[-3]>0,RC[-3],IF(RC[-1]>0,R[-1]C-RC[-1],""""))"
+        newRow.Cells(6).Select
+        
+    Else
+        MsgBox "Select row With Buy Items"
+    End If
+        
+End Sub

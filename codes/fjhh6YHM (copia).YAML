@@ -1,0 +1,33 @@
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/psono/psono-server:$CI_BUILD_REF_NAME
+  CONTAINER_LATEST_IMAGE: registry.gitlab.com/psono/psono-server:latest
+
+stages:
+  - build
+  - deploy
+
+build-container:
+  stage: build
+  image: docker:git
+  services:
+    - docker:dind
+  script:
+    - docker build -f Dockerfile -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+	
+deploy-container:
+  stage: deploy
+  image: docker:git
+  services:
+    - docker:dind
+  script:
+    - sh ./var/deploy.sh
+  environment:
+    name: production
+    url: https://psono.pw
+  only:
+    - /^v[0-9]*\.[0-9]*\.[0-9]*$/

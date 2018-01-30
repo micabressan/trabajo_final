@@ -1,0 +1,35 @@
+MySQL:
+  Host: "localhost"
+  DataBase: "trow"
+  User: "trow"
+  Pass: "123"
+  Ativar_Checagem_Magnata: true
+  Tabela_Plugin_Economia: "iConomy"
+  Coluna_Nick_Player: "name"
+  Coluna_Money: "money"
+  Tempo_Checar_Magnata: 60
+
+Tela:
+  Title: "&2&lNovo Magnata"
+  SubTitle: "&d@magnata&f - &aR$@money"
+
+NPC:
+  Nome: "&2@magnata"
+
+Magnata:
+  Tag: "&2[Magnata] &f"
+  Atual: "null"
+  Sem_Permissao: "&cVoce nao tem permissao."
+  Magnata_Atual: "&2[Magnata] &aO magnata atual e &b@player&a, com &b$@money"
+  New_Magnata:
+  - '&2[Magnata] &aO player &e@magnata&a, e o novo magnata do servidor com &e@money'
+  Join:
+  - '&2[Magnata] &aO magnata &e@magnata&a, entrou no servidor com &e@money.'
+  Quit:
+  - '&2[Magnata] &aO magnata &e@magnata&a, saiu do servidor com &e@money.'
+
+Config:
+  Usuario: "trow"
+  Avisar:
+    Join: true
+    Quit: true

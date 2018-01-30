@@ -1,0 +1,8 @@
+test:
+  alias: "Flash light" 
+  sequence:    
+    - service: light.turn_on
+      data:
+        entity_id: light.TV_bank
+        brightness_pct: 90 
+        flash: short

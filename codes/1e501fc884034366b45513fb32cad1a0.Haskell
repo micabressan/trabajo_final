@@ -1,0 +1,299 @@
+{-# LANGUAGE DuplicateRecordFields    #-}
+module PostgREST.Types where
+import           Protolude
+import qualified GHC.Show
+import qualified Data.Aeson           as JSON
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.CaseInsensitive as CI
+import qualified Data.HashMap.Strict  as M
+import qualified Data.Set                  as S
+import           Data.Tree
+import           PostgREST.RangeQuery (NonnegRange)
+import           Network.HTTP.Types.Header (hContentType, Header)
+
+-- | Enumeration of currently supported response content types
+data ContentType = CTApplicationJSON | CTTextCSV | CTOpenAPI
+                 | CTSingularJSON | CTOctetStream
+                 | CTAny | CTOther ByteString deriving Eq
+
+data ApiRequestError = ActionInappropriate
+                     | InvalidBody ByteString
+                     | InvalidRange
+                     | ParseRequestError Text Text
+                     | UnknownRelation
+                     | NoRelationBetween Text Text
+                     | UnsupportedVerb
+                     deriving (Show, Eq)
+
+data DbStructure = DbStructure {
+  dbTables      :: [Table]
+, dbColumns     :: [Column]
+, dbRelations   :: [Relation]
+, dbPrimaryKeys :: [PrimaryKey]
+-- ProcDescription is a list because a function can be overloaded
+, dbProcs       :: M.HashMap Text [ProcDescription]
+, pgVersion     :: PgVersion
+} deriving (Show, Eq)
+
+data PgArg = PgArg {
+  pgaName :: Text
+, pgaType :: Text
+, pgaReq  :: Bool
+} deriving (Show, Eq, Ord)
+
+data PgType = Scalar QualifiedIdentifier | Composite QualifiedIdentifier deriving (Eq, Show, Ord)
+
+data RetType = Single PgType | SetOf PgType deriving (Eq, Show, Ord)
+
+data ProcVolatility = Volatile | Stable | Immutable
+  deriving (Eq, Show, Ord)
+
+data ProcDescription = ProcDescription {
+  pdName        :: Text
+, pdDescription :: Maybe Text
+, pdArgs        :: [PgArg]
+, pdReturnType  :: RetType
+, pdVolatility  :: ProcVolatility
+} deriving (Show, Eq)
+
+-- Order by least number of args in the case of overloaded functions
+instance Ord ProcDescription where
+  ProcDescription name1 des1 args1 rt1 vol1 `compare` ProcDescription name2 des2 args2 rt2 vol2
+    | name1 == name2 && length args1 < length args2  = LT
+    | name1 == name2 && length args1 > length args2  = GT
+    | otherwise = (name1, des1, args1, rt1, vol1) `compare` (name2, des2, args2, rt2, vol2)
+
+type Schema = Text
+type TableName = Text
+type SqlQuery = Text
+type SqlFragment = Text
+
+data Table = Table {
+  tableSchema      :: Schema
+, tableName        :: TableName
+, tableDescription :: Maybe Text
+, tableInsertable  :: Bool
+} deriving (Show, Ord)
+
+newtype ForeignKey = ForeignKey { fkCol :: Column } deriving (Show, Eq, Ord)
+
+data Column =
+    Column {
+      colTable       :: Table
+    , colName        :: Text
+    , colDescription :: Maybe Text
+    , colPosition    :: Int32
+    , colNullable    :: Bool
+    , colType        :: Text
+    , colUpdatable   :: Bool
+    , colMaxLen      :: Maybe Int32
+    , colPrecision   :: Maybe Int32
+    , colDefault     :: Maybe Text
+    , colEnum        :: [Text]
+    , colFK          :: Maybe ForeignKey
+    } deriving (Show, Ord)
+
+type Synonym = (Column,Column)
+
+data PrimaryKey = PrimaryKey {
+    pkTable :: Table
+  , pkName  :: Text
+} deriving (Show, Eq)
+
+data OrderDirection = OrderAsc | OrderDesc deriving (Eq)
+instance Show OrderDirection where
+  show OrderAsc  = "asc"
+  show OrderDesc = "desc"
+
+data OrderNulls = OrderNullsFirst | OrderNullsLast deriving (Eq)
+instance Show OrderNulls where
+  show OrderNullsFirst = "nulls first"
+  show OrderNullsLast  = "nulls last"
+
+data OrderTerm = OrderTerm {
+  otTerm      :: Field
+, otDirection :: Maybe OrderDirection
+, otNullOrder :: Maybe OrderNulls
+} deriving (Show, Eq)
+
+data QualifiedIdentifier = QualifiedIdentifier {
+  qiSchema :: Schema
+, qiName   :: TableName
+} deriving (Show, Eq, Ord)
+
+
+data RelationType = Child | Parent | Many | Root deriving (Show, Eq)
+
+{-|
+  The name 'Relation' here is used with the meaning
+  "What is the relation between the current node and the parent node".
+  It has nothing to do with PostgreSQL referring to tables/views as relations.
+-}
+data Relation = Relation {
+  relTable    :: Table
+, relColumns  :: [Column]
+, relFTable   :: Table
+, relFColumns :: [Column]
+, relType     :: RelationType
+, relLTable   :: Maybe Table
+, relLCols1   :: Maybe [Column]
+, relLCols2   :: Maybe [Column]
+} deriving (Show, Eq)
+
+-- | Cached attributes of a JSON payload
+data PayloadJSON = PayloadJSON {
+-- | This is the raw ByteString that comes from the request body.
+-- We cache this instead of an Aeson Value because it was detected that for large payloads the encoding
+-- had high memory usage, see #1005 for more details
+  pjRaw     :: BL.ByteString
+, pjType    :: PJType
+-- | Keys of the object or if it's an array these keys are guaranteed to be the same across all its objects
+, pjKeys    :: S.Set Text
+} deriving (Show, Eq)
+
+data PJType = PJArray { pjaLength :: Int } | PJObject deriving (Show, Eq)
+
+-- | e.g. whether it is []/{} or not
+pjIsEmpty :: PayloadJSON -> Bool
+pjIsEmpty (PayloadJSON _ PJObject keys) = S.size keys == 0
+pjIsEmpty (PayloadJSON _ (PJArray l) _) = l == 0
+
+data Proxy = Proxy {
+  proxyScheme     :: Text
+, proxyHost       :: Text
+, proxyPort       :: Integer
+, proxyPath       :: Text
+} deriving (Show, Eq)
+
+type Operator = Text
+operators :: M.HashMap Operator SqlFragment
+operators = M.union (M.fromList [
+  ("eq", "="),
+  ("gte", ">="),
+  ("gt", ">"),
+  ("lte", "<="),
+  ("lt", "<"),
+  ("neq", "<>"),
+  ("like", "LIKE"),
+  ("ilike", "ILIKE"),
+  ("in", "IN"),
+  ("is", "IS"),
+  ("cs", "@>"),
+  ("cd", "<@"),
+  ("ov", "&&"),
+  ("sl", "<<"),
+  ("sr", ">>"),
+  ("nxr", "&<"),
+  ("nxl", "&>"),
+  ("adj", "-|-"),
+  -- TODO: these are deprecated and should be removed in v0.5.0.0
+  ("@>", "@>"),
+  ("<@", "<@")]) ftsOperators
+
+ftsOperators :: M.HashMap Operator SqlFragment
+ftsOperators = M.fromList [
+  ("@@", "@@ to_tsquery"), -- TODO: '@@' deprecated
+  ("fts", "@@ to_tsquery"),
+  ("plfts", "@@ plainto_tsquery"),
+  ("phfts", "@@ phraseto_tsquery")
+  ]
+
+data OpExpr = OpExpr Bool Operation deriving (Eq, Show)
+data Operation = Op Operator SingleVal |
+                 In ListVal |
+                 Fts Operator (Maybe Language) SingleVal |
+                 Join QualifiedIdentifier ForeignKey deriving (Eq, Show)
+type Language = Text
+
+-- | Represents a single value in a filter, e.g. id=eq.singleval
+type SingleVal = Text
+-- | Represents a list value in a filter, e.g. id=in.(val1,val2,val3)
+type ListVal = [Text]
+
+data LogicOperator = And | Or deriving Eq
+instance Show LogicOperator where
+  show And  = "AND"
+  show Or = "OR"
+{-|
+  Boolean logic expression tree e.g. "and(name.eq.N,or(id.eq.1,id.eq.2))" is:
+
+            And
+           /   \
+  name.eq.N     Or
+               /  \
+         id.eq.1   id.eq.2
+-}
+data LogicTree = Expr Bool LogicOperator [LogicTree] | Stmnt Filter deriving (Show, Eq)
+
+type FieldName = Text
+type JsonPath = [Text]
+type Field = (FieldName, Maybe JsonPath)
+type Alias = Text
+type Cast = Text
+type NodeName = Text
+
+-- Rpc query param, only used for GET rpcs
+type RpcQParam = (Text, Text)
+
+{-|
+  Custom guc header, it's obtained by parsing the json in a:
+  `SET LOCAL "response.headers" = '[{"Set-Cookie": ".."}]'
+-}
+newtype GucHeader = GucHeader (Text, Text)
+
+instance JSON.FromJSON GucHeader where
+  parseJSON (JSON.Object o) = case headMay (M.toList o) of
+    Just (k, JSON.String s) | M.size o == 1 -> pure $ GucHeader (k, s)
+                            | otherwise     -> mzero
+    _ -> mzero
+  parseJSON _          = mzero
+
+toHeaders :: [GucHeader] -> [Header]
+toHeaders = map $ \(GucHeader (k, v)) -> (CI.mk $ toS k, toS v)
+
+{-|
+  This type will hold information about which particular 'Relation' between two tables to choose when there are multiple ones.
+  Specifically, it will contain the name of the foreign key or the join table in many to many relations.
+-}
+type RelationDetail = Text
+type SelectItem = (Field, Maybe Cast, Maybe Alias, Maybe RelationDetail)
+-- | Path of the embedded levels, e.g "clients.projects.name=eq.." gives Path ["clients", "projects"]
+type EmbedPath = [Text]
+data Filter = Filter { field::Field, opExpr::OpExpr } deriving (Show, Eq)
+
+data ReadQuery = Select { select::[SelectItem], from::[TableName], where_::[LogicTree], order::Maybe [OrderTerm], range_::NonnegRange } deriving (Show, Eq)
+data MutateQuery = Insert { in_::TableName, qPayload::PayloadJSON, returning::[FieldName] }
+                 | Delete { in_::TableName, where_::[LogicTree], returning::[FieldName] }
+                 | Update { in_::TableName, qPayload::PayloadJSON, where_::[LogicTree], returning::[FieldName] } deriving (Show, Eq)
+type ReadNode = (ReadQuery, (NodeName, Maybe Relation, Maybe Alias, Maybe RelationDetail))
+type ReadRequest = Tree ReadNode
+type MutateRequest = MutateQuery
+data DbRequest = DbRead ReadRequest | DbMutate MutateRequest
+
+instance Eq Table where
+  Table{tableSchema=s1,tableName=n1} == Table{tableSchema=s2,tableName=n2} = s1 == s2 && n1 == n2
+
+instance Eq Column where
+  Column{colTable=t1,colName=n1} == Column{colTable=t2,colName=n2} = t1 == t2 && n1 == n2
+
+-- | Convert from ContentType to a full HTTP Header
+toHeader :: ContentType -> Header
+toHeader ct = (hContentType, toMime ct <> "; charset=utf-8")
+
+-- | Convert from ContentType to a ByteString representing the mime type
+toMime :: ContentType -> ByteString
+toMime CTApplicationJSON = "application/json"
+toMime CTTextCSV         = "text/csv"
+toMime CTOpenAPI         = "application/openapi+json"
+toMime CTSingularJSON    = "application/vnd.pgrst.object+json"
+toMime CTOctetStream     = "application/octet-stream"
+toMime CTAny             = "*/*"
+toMime (CTOther ct)      = ct
+
+data PgVersion = PgVersion {
+  pgvNum  :: Int32
+, pgvName :: Text
+} deriving (Eq, Ord, Show)
+
+sourceCTEName :: SqlFragment
+sourceCTEName = "pg_source"

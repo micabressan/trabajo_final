@@ -1,0 +1,39 @@
+#
+# Home Assistant YAML
+# Bayesian Binary Sensor
+# https://home-assistant.io/components/binary_sensor.bayesian/
+#
+# Observes many device tracker entities to determine if home or not
+#
+# http://www.diyfuturism.com/index.php/2017/11/26/presence-detection-with-home-assistant-bayesian-probability/
+#
+- platform: bayesian
+  prior: 0.5
+  name: 'Brad Presence'
+  probability_threshold: 0.9
+  observations:
+    - entity_id: 'device_tracker.brad_ping'
+      prob_given_true: 0.9
+      prob_given_false: 0.1
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: 'device_tracker.brad_ios'
+      prob_given_true: 0.9
+      prob_given_false: 0.2
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: 'device_tracker.brad_owntracks'
+      prob_given_true: 0.9
+      prob_given_false: 0.4
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: 'device_tracker.brad_nodered'
+      prob_given_true: 0.8
+      prob_given_false: 0.2
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: 'device_tracker.tile_keys'
+      prob_given_true: 0.8
+      prob_given_false: 0.4
+      platform: 'state'
+      to_state: 'home'

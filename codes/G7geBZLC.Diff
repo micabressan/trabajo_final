@@ -1,0 +1,163 @@
+Index: source/network/NetServer.cpp
+===================================================================
+--- source/network/NetServer.cpp	(revision 21022)
++++ source/network/NetServer.cpp	(working copy)
+@@ -1,6 +1,6 @@
+-/* Copyright (C) 2017 Wildfire Games.
++/* Copyright (C) 2018 Wildfire Games.
+  * This file is part of 0 A.D.
+  *
+  * 0 A.D. is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 2 of the License, or
+@@ -1094,17 +1094,17 @@ bool CNetServerWorker::OnInGame(void* co
+ 		// TODO: we shouldn't send the message back to the client that first sent it
+ 	}
+ 	else if (message->GetType() == (uint)NMT_SYNC_CHECK)
+ 	{
+ 		CSyncCheckMessage* syncMessage = static_cast<CSyncCheckMessage*> (message);
+-		server.m_ServerTurnManager->NotifyFinishedClientUpdate(session->GetHostID(), session->GetUserName(), syncMessage->m_Turn, syncMessage->m_Hash);
++		server.m_ServerTurnManager->NotifyFinishedClientUpdate(*session, syncMessage->m_Turn, syncMessage->m_Hash);
+ 	}
+ 	else if (message->GetType() == (uint)NMT_END_COMMAND_BATCH)
+ 	{
+ 		// The turn-length field is ignored
+ 		CEndCommandBatchMessage* endMessage = static_cast<CEndCommandBatchMessage*> (message);
+-		server.m_ServerTurnManager->NotifyFinishedClientCommands(session->GetHostID(), endMessage->m_Turn);
++		server.m_ServerTurnManager->NotifyFinishedClientCommands(*session, endMessage->m_Turn);
+ 	}
+ 
+ 	return true;
+ }
+ 
+Index: source/network/NetServerTurnManager.cpp
+===================================================================
+--- source/network/NetServerTurnManager.cpp	(revision 21022)
++++ source/network/NetServerTurnManager.cpp	(working copy)
+@@ -1,6 +1,6 @@
+-/* Copyright (C) 2017 Wildfire Games.
++/* Copyright (C) 2018 Wildfire Games.
+  * This file is part of 0 A.D.
+  *
+  * 0 A.D. is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 2 of the License, or
+@@ -18,11 +18,13 @@
+ #include "precompiled.h"
+ 
+ #include "NetMessage.h"
+ #include "NetServerTurnManager.h"
+ #include "NetServer.h"
++#include "NetSession.h"
+ 
++#include "ps/CLogger.h"
+ #include "simulation2/system/TurnManager.h"
+ 
+ #if 0
+ #define NETSERVERTURN_LOG(...) debug_printf(__VA_ARGS__)
+ #else
+@@ -36,19 +38,31 @@ CNetServerTurnManager::CNetServerTurnMan
+ 	// so store dummy values into the saved lengths list
+ 	m_SavedTurnLengths.push_back(0);
+ 	m_SavedTurnLengths.push_back(0);
+ }
+ 
+-void CNetServerTurnManager::NotifyFinishedClientCommands(int client, u32 turn)
++void CNetServerTurnManager::NotifyFinishedClientCommands(CNetServerSession& session, u32 turn)
+ {
++	int client = session.GetHostID();
++
+ 	NETSERVERTURN_LOG("NotifyFinishedClientCommands(client=%d, turn=%d)\n", client, turn);
+ 
+ 	// Must be a client we've already heard of
+ 	ENSURE(m_ClientsReady.find(client) != m_ClientsReady.end());
+ 
+ 	// Clients must advance one turn at a time
+-	ENSURE(turn == m_ClientsReady[client] + 1);
++	if (turn != m_ClientsReady[client] + 1)
++	{
++		LOGERROR("NotifyFinishedClientCommands: Client %d (%s) is ready for turn %d, but expected %d",
++			client,
++			utf8_from_wstring(session.GetUserName()).c_str(),
++			turn,
++			m_ClientsReady[client] + 1);
++
++		session.Disconnect(NDR_UNKNOWN);
++	}
++
+ 	m_ClientsReady[client] = turn;
+ 
+ 	// Check whether this was the final client to become ready
+ 	CheckClientsReady();
+ }
+@@ -75,14 +89,28 @@ void CNetServerTurnManager::CheckClients
+ 
+ 	ENSURE(m_SavedTurnLengths.size() == m_ReadyTurn);
+ 	m_SavedTurnLengths.push_back(m_TurnLength);
+ }
+ 
+-void CNetServerTurnManager::NotifyFinishedClientUpdate(int client, const CStrW& playername, u32 turn, const CStr& hash)
++void CNetServerTurnManager::NotifyFinishedClientUpdate(CNetServerSession& session, u32 turn, const CStr& hash)
+ {
++
++	int client = session.GetHostID();
++	const CStrW& playername = session.GetUserName();
++
+ 	// Clients must advance one turn at a time
+-	ENSURE(turn == m_ClientsSimulated[client] + 1);
++	if (turn != m_ClientsSimulated[client] + 1)
++	{
++		LOGERROR("NotifyFinishedClientUpdate: Client %d (%s) is ready for turn %d, but expected %d",
++			client,
++			utf8_from_wstring(playername).c_str(),
++			turn,
++			m_ClientsReady[client] + 1);
++
++		session.Disconnect(NDR_UNKNOWN);
++	}
++
+ 	m_ClientsSimulated[client] = turn;
+ 
+ 	// Check for OOS only if in sync
+ 	if (m_HasSyncError)
+ 		return;
+Index: source/network/NetServerTurnManager.h
+===================================================================
+--- source/network/NetServerTurnManager.h	(revision 21022)
++++ source/network/NetServerTurnManager.h	(working copy)
+@@ -1,6 +1,6 @@
+-/* Copyright (C) 2017 Wildfire Games.
++/* Copyright (C) 2018 Wildfire Games.
+  * This file is part of 0 A.D.
+  *
+  * 0 A.D. is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 2 of the License, or
+@@ -20,10 +20,11 @@
+ 
+ #include <map>
+ #include "ps/CStr.h"
+ 
+ class CNetServerWorker;
++class CNetServerSession;
+ 
+ /**
+  * The server-side counterpart to CNetClientTurnManager.
+  * Records the turn state of each client, and sends turn advancement messages
+  * when all clients are ready.
+@@ -35,13 +36,13 @@ class CNetServerTurnManager
+ {
+ 	NONCOPYABLE(CNetServerTurnManager);
+ public:
+ 	CNetServerTurnManager(CNetServerWorker& server);
+ 
+-	void NotifyFinishedClientCommands(int client, u32 turn);
++	void NotifyFinishedClientCommands(CNetServerSession& session, u32 turn);
+ 
+-	void NotifyFinishedClientUpdate(int client, const CStrW& playername, u32 turn, const CStr& hash);
++	void NotifyFinishedClientUpdate(CNetServerSession& session, u32 turn, const CStr& hash);
+ 
+ 	/**
+ 	 * Inform the turn manager of a new client who will be sending commands.
+ 	 */
+ 	void InitialiseClient(int client, u32 turn);

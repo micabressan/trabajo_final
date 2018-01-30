@@ -1,0 +1,9 @@
+cron_minion_client:
+  cron.present:
+    - name: timeout -s 15 1000 nice -n 19 ionice -c 3 salt-call state.highstate
+    - user: root
+    - minute: {{ range(1,15)|random }},{{ range(16,30)|random }},{{ range(31,45)|random }},{{ range(46,59)|random }}
+    - hour: '*'
+    - daymonth: '*'
+    - month: '*'
+    - dayweek: '*'
