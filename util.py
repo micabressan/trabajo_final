@@ -3,19 +3,27 @@ import fnmatch
 import re
 import shutil
 import uuid
+import codecs
 
 
-def load_data(folder):
+def load_data(folder, n):
     "returns a (X, y) readed from codes folder"
     X = []
     y = []
+    
+    q = {}
 
     for f in os.listdir(folder):
-        text = open(os.path.join(folder, f)).read()
-        syntax = f.split('.')[-1]
-
-        X.append(text)
-        y.append(syntax.lower())
+        text = unicode(open(os.path.join(folder, f)).read(), errors='ignore')
+        syntax = f.split('.')[-1].lower()
+        
+        if syntax not in q.keys():
+            q[syntax] = 0
+            
+        if q[syntax] < n:
+            q[syntax] = q[syntax] + 1 
+            X.append(text)
+            y.append(syntax)
 
     return (X, y)
 
@@ -89,4 +97,5 @@ def move_files(origin_folder, destination_folder, language, extension):
 
 
 if __name__ == '__main__':
-    load_data('codes')
+    X, y = load_data('codes', 1)
+    
