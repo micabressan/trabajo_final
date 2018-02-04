@@ -5,25 +5,38 @@ import shutil
 import uuid
 import codecs
 
-
 def load_data(folder, n):
     "returns a (X, y) readed from codes folder"
     X = []
     y = []
-    
+
     q = {}
 
     for f in os.listdir(folder):
         text = unicode(open(os.path.join(folder, f)).read(), errors='ignore')
         syntax = f.split('.')[-1].lower()
-        
+
         if syntax not in q.keys():
             q[syntax] = 0
-            
+
         if q[syntax] < n:
-            q[syntax] = q[syntax] + 1 
+            q[syntax] = q[syntax] + 1
             X.append(text)
             y.append(syntax)
+
+    return (X, y)
+
+def load_data_folder(folder):
+    "returns a (X, y) readed from codes folder"
+    X = []
+    y = []
+
+    for f in os.listdir(folder):
+        text = unicode(open(os.path.join(folder, f)).read(), errors='ignore')
+        syntax = f.split('.')[-1].lower()
+
+        X.append(text)
+        y.append(syntax)
 
     return (X, y)
 
@@ -33,7 +46,7 @@ def load_data_language(folder, languages):
     y = []
 
     for f in os.listdir(folder):
-        text = open(os.path.join(folder, f)).read()
+        text = unicode(open(os.path.join(folder, f)).read(), errors='ignore')
         syntax = f.split('.')[-1]
 
         if syntax not in languages:
@@ -96,6 +109,18 @@ def move_files(origin_folder, destination_folder, language, extension):
             shutil.move(origin, os.path.join(destination,file_name))
 
 
+def copy_data(origin_folder, destination_folder, n):
+    q = {}
+    for f in os.listdir(origin_folder):
+        syntax = f.split('.')[-1].lower()
+        if syntax not in q.keys():
+            q[syntax] = 0
+
+        if q[syntax] < n:
+            q[syntax] = q[syntax] + 1
+
+            shutil.copy(os.path.join(origin_folder, f), os.path.join(destination_folder, f))
 if __name__ == '__main__':
-    X, y = load_data('codes', 1)
-    
+    #copy_data('codes', 'codes_prueba', 400)
+    languages_file_frecuency('codes_prueba')
+    X, y = load_data_folder('codes_prueba')

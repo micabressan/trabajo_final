@@ -1,0 +1,23 @@
+#random number generator between min and max value
+
+import random
+
+def random_numbers():
+	
+	print ("Give two numbers, min and max")
+	a = int(input ("Select min. "))
+	b = int(input ("Select max. "))
+	c = int(input("How many dice?"))
+	
+	numbers = [random.randint(a,b) for i in range (c)]
+	numbers.sort(reverse=True)
+	numbers = numbers[:-1]
+	print(','.join(str(n) for n in numbers))
+	stat_score = sum (numbers)
+	print("Stat =") 
+	print(stat_score)
+random_numbers()
+
+#dice_throw = (random_numbers())
+#stat_score = dicethrow[:-1]
+#print(stat_score)

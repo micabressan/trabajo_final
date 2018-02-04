@@ -1,0 +1,12 @@
+    for item in dict_for_final:
+        lengths_dict[item] = len(dict_for_final[item])
+    inverse = [(value, key) for key, value in lengths_dict.items()]
+    print "The Maximum value of these records is:"
+    print max(inverse)
+    print "The Minimum value of these records is:"
+    print min(inverse)
+    for item in lengths_dict:
+        if lengths_dict[item] in max(inverse) and item not in max(inverse):
+            print "%s also contains the maximum value of base pairs" %item
+        if lengths_dict[item] in min(inverse)and item not in min(inverse):
+            print "%s also contains the minimum value of base pairs." %item

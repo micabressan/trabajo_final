@@ -1,0 +1,30 @@
+#[derive(Debug)]
+struct Person {
+    name: &'static str,
+    age: u8
+}
+
+fn main() {
+
+    let _harrie = Person { 
+        name: "Peter", 
+        age: 27
+    };
+
+    let _henk = Person { 
+        name: "Henk", 
+        age: 50
+    };
+
+    let people: Vec<Person> = vec![_harrie, _henk];
+
+    let pool = people.iter()
+        .filter(|x| x.age > 30 )
+        .take(5)
+        .map(|x| x.name)
+        .collect::<Vec<&str>>();
+
+    for i in pool.iter() {
+        println!("{:?}", i)
+    }
+}

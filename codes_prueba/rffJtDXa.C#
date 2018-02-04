@@ -1,0 +1,90 @@
+// a classe abaixo está incompleta propositalmente,
+// apenas para demonstrar um exemplo de leitura de inteiro.
+public class Variaveis
+{
+    // exemplo de método de leitura básica de inteiro
+    public int LeInt()
+    {
+        bool digitou_certo;
+        int valor;
+
+        do
+        {
+            Console.Write("Digite um número inteiro: ");
+            digitou_certo = int.TryParse(Console.ReadLine(), out valor);
+
+            if (!digitou_certo)
+                Console.WriteLine("Erro, valor digitado não é um número inteiro.");
+        }
+        while (!digitou_certo);
+
+        return valor;
+    }
+
+    // exemplo de método de leitura de inteiro com mensagem customizada
+    // podem ser mantidas as duas versões do método LeInt por sobrecarga
+    public int LeInt(string p_mensagem)
+    {
+        bool digitou_certo;
+        int valor;
+
+        do
+        {
+            Console.Write(p_mensagem);
+            digitou_certo = int.TryParse(Console.ReadLine(), out valor);
+
+            if (!digitou_certo)
+                Console.WriteLine("Erro, valor digitado não é um número inteiro.");
+        }
+        while (!digitou_certo);
+
+        return valor;
+    }
+}
+
+
+// a classe abaixo está incompleta propositalmente,
+// apenas para demonstrar um exemplo de leitura de vetor de inteiros.
+public class Vetores
+{
+    private Variaveis variaveis;
+
+    public Vetores()
+    {
+        this.variaveis = new Variaveis();
+    }
+
+    // note como o método abaixo pede para o usuário digitar todos os elementos do vetor
+    // todos os métodos de leitura de vetores são semelhantes
+    public int[] LeVetorEstaticoInt()
+    {
+        int[] vetor;
+        int n;
+
+        // veja como fica mais prática a leitura de um inteiro com mensagem customizada
+        n = this.variaveis.LeInt("Digite o número de elementos do vetor: ");
+
+        vetor = new int[n];
+
+        for (int i = 0; i < n; i++)
+            vetor[i] = this.variaveis.LeInt("Digite o elemento " + i.ToString() + ": ");
+
+        return vetor;
+    }
+
+    public List<int> LeVetorDinamicoInt()
+    {
+        List<int> vetor;
+        int n;
+
+        // veja como fica mais prática a leitura de um inteiro com mensagem customizada
+        n = this.variaveis.LeInt("Digite o número de elementos do vetor: ");
+
+        vetor = new List<int>();
+
+        for (int i = 0; i < n; i++)
+            vetor.Add(this.variaveis.LeInt("Digite o elemento " + i.ToString() + ": "));
+
+        return vetor;
+    }
+}

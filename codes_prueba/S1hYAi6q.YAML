@@ -1,0 +1,276 @@
+swagger: '2.0'
+basePath: /personal/api
+host: relap.io
+info:
+  title: Relap Stat Proposal
+  termsOfService: 'https://relap.io/terms'
+  version: '1'
+  x-logo:
+    url: 'https://relap.io/images/relap_logo.png'
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /stat:
+    get:
+      operationId: getStat
+      x-mojo-to: 'Personal#get_stat'
+      summary: Stat
+      produces:
+        - application/json
+        - text/csv
+      parameters:
+        - $ref: '#/parameters/startDate'
+        - $ref: '#/parameters/stopDate'
+        - $ref: '#/parameters/companyId'
+        - $ref: '#/parameters/domains'
+        - $ref: '#/parameters/widgets'
+        - $ref: '#/parameters/frame'
+        - $ref: '#/parameters/columns'
+        - $ref: '#/parameters/totals'
+        - $ref: '#/parameters/dataFormat'
+        - $ref: '#/parameters/deviceType'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Stat'
+  /stat/monetization:
+    get:
+      operationId: getMonetizationStat
+      x-mojo-to: 'Personal#get_monetization_stat'
+      summary: Monetization stat
+      produces:
+        - application/json
+        - text/csv
+      parameters:
+        - $ref: '#/parameters/startDate'
+        - $ref: '#/parameters/stopDate'
+        - $ref: '#/parameters/companyId'
+        - $ref: '#/parameters/domains'
+        - $ref: '#/parameters/widgets'
+        - $ref: '#/parameters/frame'
+        - $ref: '#/parameters/monetizationColumns'
+        - $ref: '#/parameters/totals'
+        - $ref: '#/parameters/dataFormat'
+        - $ref: '#/parameters/deviceType'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Stat'
+  /stat/top:
+    get:
+      operationId: getStatTop
+      summary: Stat top urls
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/groupBy'
+        - $ref: '#/parameters/columns'
+        - $ref: '#/parameters/dataLength'
+      responses:
+        '200':
+          description: stat top array
+          schema:
+            $ref: '#/definitions/StatTop'
+parameters:
+  startDate:
+    name: start
+    in: query
+    description: Stat Period start date
+    required: true
+    type: string
+    format: date-time
+  stopDate:
+    name: stop
+    in: query
+    description: Stat Period stop date
+    required: true
+    type: string
+    format: date-time
+  companyId:
+    name: company_id
+    in: query
+    description: 'Company Id. If defined, stat will be returned for all confirmed domains.'
+    required: false
+    type: string
+  domains:
+    name: domains
+    in: query
+    description: >-
+      List of domains. Stat will be returned for all confirmed domains if empty
+      array is sent and companyId is required in such a case.
+    required: false
+    type: array
+    items:
+      type: string
+    default: []
+    collectionFormat: csv
+  widgets:
+    name: widgets
+    in: query
+    description: List of widgets. Stat will be returned for all widgets unless specified.
+    required: false
+    type: array
+    items:
+      type: string
+    default: []
+    collectionFormat: csv
+  frame:
+    name: frame
+    in: query
+    description: 'Aggregation frame: houre, day, month'
+    type: string
+    enum:
+      - hour
+      - day
+      - month
+    default: day
+    required: false
+  columns:
+    name: columns
+    in: query
+    description: Columns to return
+    type: array
+    items:
+      type: string
+      enum:
+        - loads
+        - shows
+        - clicks
+        - CTR
+        - trueCTR
+    collectionFormat: csv
+    required: false
+    default:
+      - clicks
+      - trueCTR
+  monetizationColumns:
+    name: columns
+    in: query
+    description: Monetization columns to return
+    type: array
+    items:
+      type: string
+      enum:
+        - loads
+        - shows
+        - clicks
+        - CTR
+        - trueCTR
+        - eCPM
+        - revenue
+    collectionFormat: csv
+    required: false
+    default:
+      - revenue
+      - eCPM
+      - shows
+  totals:
+    name: totals
+    in: query
+    description: Totals data
+    required: false
+    type: array
+    items:
+      type: string
+      enum:
+        - forPeriod
+    collectionFormat: csv
+    default:
+      - forPeriod
+  deviceType:
+    name: device_type
+    in: query
+    description: Device type
+    required: false
+    type: string
+    enum:
+      - all
+      - desktop
+      - mobile
+      - other
+    default: all
+  dataFormat:
+    name: data_format
+    in: query
+    description: Returned data format. JSON or *.csv
+    type: string
+    enum:
+      - json
+      - csv
+    default: json
+  groupBy:
+    name: group_by
+    in: query
+    description: How to group stat top
+    type: string
+    enum:
+      - clicks
+      - shows
+      - trueCTR
+  dataLength:
+    name: data_length
+    in: query
+    description: Number of items in stat top
+    type: integer
+    format: int32
+definitions:
+  Stat:
+    properties:
+      totals:
+        type: object
+        properties:
+          for_period:
+            $ref: '#/definitions/StatRow'
+      period:
+        type: array
+        items:
+          $ref: '#/definitions/StatRow'
+  StatRow:
+    properties:
+      date:
+        type: string
+        format: date-time
+      loads:
+        type: integer
+        format: int32
+      shows:
+        type: integer
+        format: int32
+      clicks:
+        type: integer
+        format: int32
+      CTR:
+        type: number
+      trueCTR:
+        type: number
+      eCPM:
+        type: number
+      revenue:
+        type: number
+  StatTop:
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+        format: uri
+      image:
+        type: string
+        format: uri
+      loads:
+        type: integer
+        format: int32
+      shows:
+        type: integer
+        format: int32
+      clicks:
+        type: integer
+        format: int32
+      CTR:
+        type: number
+      trueCTR:
+        type: number

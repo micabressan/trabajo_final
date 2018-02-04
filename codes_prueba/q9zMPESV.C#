@@ -1,0 +1,264 @@
+using DomainModel;
+using DomainModel.Interfaces;
+using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Documents;
+using Lucene.Net.Index;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Search;
+using Lucene.Net.Store;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BuisnessLayer;
+using BuisnessLayer.Contracts;
+namespace LuceneSearch
+{
+
+    public static class Lucene
+    {
+
+        private static string _luceneDir;
+        public static void setLuceneDir(string dir)
+        {
+            _luceneDir = dir;
+        }
+        private static FSDirectory _directoryTemp;
+        private static FSDirectory _directory
+        {
+            get
+            {
+                if (_directoryTemp == null) _directoryTemp = FSDirectory.Open(new DirectoryInfo(_luceneDir));
+                if (IndexWriter.IsLocked(_directoryTemp)) IndexWriter.Unlock(_directoryTemp);
+                var lockFilePath = Path.Combine(_luceneDir, "write.lock");
+                if (File.Exists(lockFilePath)) File.Delete(lockFilePath);
+                return _directoryTemp;
+            }
+        }
+
+        private static void _addToLuceneIndex(IModel model, IndexWriter writer)
+        {
+            // remove older index entry
+            if (model.GetType() == typeof(Bike))
+            {
+                Bike bike = model as Bike;
+                var searchQuery = new TermQuery(new Term("Id", bike.BikeId.ToString()));
+                writer.DeleteDocuments(searchQuery);
+                CategoryGetCommand c = new CategoryGetCommand() { CategoryId = bike.CategoryId };
+                CategoryGetCommandResult r = CommandInvoker.InvokeCommand<CategoryGetCommand, CategoryGetCommandResult>(c);
+                bike.Category = r.Category;
+                ProducerGetCommand pc = new ProducerGetCommand() { ProducerId = bike.ProducerId };
+                ProducerGetCommandResult pr = CommandInvoker.InvokeCommand<ProducerGetCommand, ProducerGetCommandResult>(pc);
+                bike.Producer = pr.Producer;
+                // add new index entry
+                var doc = new Document();
+                
+                // add lucene fields mapped to db fields
+                doc.Add(new Field("BikeId", bike.BikeId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                doc.Add(new Field("Color", bike.Color, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("SpeedCount", bike.SpeedCount.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("Model", bike.Model, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("ProducerName", bike.Producer.ProducerName, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("CategoryName", bike.Category.CategoryName, Field.Store.YES, Field.Index.ANALYZED));
+                
+
+                // add entry to index
+                writer.AddDocument(doc);
+            }
+            if (model.GetType() == typeof(Category))
+            {
+                Category category = model as Category;
+                var searchQuery = new TermQuery(new Term("CategoryId", category.CategoryId.ToString()));
+                writer.DeleteDocuments(searchQuery);
+
+                // add new index entry
+                var doc = new Document();
+
+                // add lucene fields mapped to db fields
+                doc.Add(new Field("CategoryId", category.CategoryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                doc.Add(new Field("CategoryName", category.CategoryName, Field.Store.YES, Field.Index.ANALYZED));
+                // add entry to index
+                writer.AddDocument(doc);
+            }
+            if (model.GetType() == typeof(DomainModel.Comment))
+            {
+                Comment comment = model as Comment;
+                var searchQuery = new TermQuery(new Term("CommentId", comment.Id.ToString()));
+                writer.DeleteDocuments(searchQuery);
+
+                // add new index entry
+                var doc = new Document();
+
+                // add lucene fields mapped to db fields
+                doc.Add(new Field("CommentId", comment.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                doc.Add(new Field("CommentTitle", comment.CommentTitle, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("CommentBody", comment.CommentBody, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field("CommentDate", comment.OnDate.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                // add entry to index
+                writer.AddDocument(doc);
+            }
+            if (model.GetType() == typeof(DomainModel.Producer))
+            {
+                Producer producer = model as Producer;
+                var searchQuery = new TermQuery(new Term("ProducerID", producer.ProducerId.ToString()));
+                writer.DeleteDocuments(searchQuery);
+
+                // add new index entry
+                var doc = new Document();
+
+                // add lucene fields mapped to db fields
+                doc.Add(new Field("ProducerId", producer.ProducerId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                doc.Add(new Field("ProducerName", producer.ProducerName, Field.Store.YES, Field.Index.ANALYZED));
+                // add entry to index
+                writer.AddDocument(doc);
+            }
+        }
+
+        public static void AddUpdateLuceneIndex(IEnumerable<IModel> data)
+        {
+            var analyzer = new StandardAnalyzer(global::Lucene.Net.Util.Version.LUCENE_30);
+            using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+            {
+                // add data to lucene search index (replaces older entry if any)
+                foreach (var model in data) _addToLuceneIndex(model, writer);
+                // close handles
+                analyzer.Close();
+                writer.Dispose();
+            }
+        }
+        public static void AddUpdateLuceneIndex(IModel data)
+        {
+            AddUpdateLuceneIndex(new List<IModel>() { data });
+        }
+
+        public static void ClearLuceneIndexRecord(int recordId,string recordName)
+        {
+            // init lucene
+            var analyzer = new StandardAnalyzer(global::Lucene.Net.Util.Version.LUCENE_30);
+            using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+            {
+                // remove older index entry
+                var searchQuery = new TermQuery(new Term(recordName, recordId.ToString()));
+                writer.DeleteDocuments(searchQuery);
+
+                // close handles
+                analyzer.Close();
+                writer.Dispose();
+            }
+        }
+        public static void Optimize() {
+            var analyzer = new StandardAnalyzer(global::Lucene.Net.Util.Version.LUCENE_30);
+            using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED)) {
+                analyzer.Close();
+                writer.Optimize();        
+                writer.Dispose();
+            }
+        }
+        private static string _mapLuceneDocumentToData(Document doc)
+        {
+            return doc.Get("BikeId");
+        }
+        private static IEnumerable<string> _mapLuceneToDataList(IEnumerable<Document> hits)
+        {
+            return hits.Select(_mapLuceneDocumentToData).ToList();
+        }
+        private static IEnumerable<string> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits,
+            IndexSearcher searcher)
+        {
+            return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc))).ToList();
+        }
+
+        private static Query parseQuery(string searchQuery, QueryParser parser)
+        {
+            Query query;
+            try
+            {
+                
+                //query = parser.Parse(searchQuery.Trim());
+                query = parser.Parse(searchQuery.ToLower() + "*");
+            }
+            catch (ParseException)
+            {
+                query = parser.Parse(QueryParser.Escape(searchQuery.Trim()));
+            }
+            return query;
+        }
+        private static IEnumerable<string> _search(string searchQuery, string searchField = "")
+        {
+            // validation
+            if (string.IsNullOrEmpty(searchQuery.Replace("*", "").Replace("?", ""))) return new List<string>();
+
+            if (!System.IO.Directory.EnumerateFiles(_luceneDir).Any())
+            {
+                return new List<string>();
+            }
+            // set up lucene searcher
+            using (var searcher = new IndexSearcher(_directory, false))
+            {
+                var hits_limit = 1000;
+                var analyzer = new StandardAnalyzer(global::Lucene.Net.Util.Version.LUCENE_30);
+
+                // search by single field
+                if (!string.IsNullOrEmpty(searchField))
+                {
+                    var parser = new QueryParser(global::Lucene.Net.Util.Version.LUCENE_30, searchField, analyzer);
+                    var query = parseQuery(searchQuery, parser);
+                    var hits = searcher.Search(query, hits_limit).ScoreDocs;
+                    var results = _mapLuceneToDataList(hits, searcher);
+                    analyzer.Close();
+                    searcher.Dispose();
+                    return results;
+                }
+                // search by multiple fields (ordered by RELEVANCE)
+                else
+                {
+                    var parser = new MultiFieldQueryParser
+                        (global::Lucene.Net.Util.Version.LUCENE_30, new[] 
+                        {
+                            "Color","SpeedCount","Model","CommentTitle","CommentBody","CategoryName","ProducerName"
+                        }, analyzer);
+                    var query = parseQuery(searchQuery, parser);
+                    var hits = searcher.Search
+                    (query, null, hits_limit, Sort.RELEVANCE).ScoreDocs;
+                    var results = _mapLuceneToDataList(hits, searcher);
+                    analyzer.Close();
+                    searcher.Dispose();
+                    return results;
+                }
+            }
+        }
+
+        public static IEnumerable<string> Search(string input, string fieldName = "")
+        {
+            if (string.IsNullOrEmpty(input)) return new List<string>();
+
+            var terms = input.Trim().Replace("-", " ").Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
+            input = string.Join(" ", terms);
+            IEnumerable<string> result = _search(input, fieldName);
+            return new HashSet<string>(result);
+        }
+        public static IEnumerable<string> SearchDefault(string input, string fieldName = "")
+        {
+            return string.IsNullOrEmpty(input) ? new List<string>() : _search(input, fieldName);
+        }
+        /*public static IEnumerable<SampleData> GetAllIndexRecords()
+        {
+            // validate search index
+            if (!System.IO.Directory.EnumerateFiles(_luceneDir).Any()) return new List<SampleData>();
+
+            // set up lucene searcher
+            var searcher = new IndexSearcher(_directory, false);
+            var reader = IndexReader.Open(_directory, false);
+            var docs = new List<Document>();
+            var term = reader.TermDocs();
+            while (term.Next()) docs.Add(searcher.Doc(term.Doc));
+            reader.Dispose();
+            searcher.Dispose();
+            return _mapLuceneToDataList(docs);
+        }
+         */
+    }
+}

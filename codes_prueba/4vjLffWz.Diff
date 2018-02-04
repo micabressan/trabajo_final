@@ -1,0 +1,74 @@
+diff --git a/bin/edpmh b/bin/edpmh
+index 6e6bb69..e508958 100755
+--- a/bin/edpmh
++++ b/bin/edpmh
+@@ -83,6 +83,7 @@ command :import do |c|
+       system.security = security unless security.id.nil?
+       system.primary_economy = primary_economy unless primary_economy.id.nil?
+       system.needs_permit = row['needs_permit']
++      system.minor_faction_count = row['minor_faction_presences'].length
+       system.save unless system.id.nil?
+       $stdout.write "\e[2K#{row['name']}\r"
+       $stdout.flush
+@@ -212,26 +213,31 @@ command :search do |c|
+       _srcs = []
+       srcs.each do |s|
+         next if t.id == s.id
+-        _srcs << s
++        pool = System.where{{systems[:id] => Station.distinct.select(:system_id).where(max_landing_pad_size: opts[:'landing-pad'])}}
++        pool = filter_dist(pool, s, opts[:'max-jump'])
++        _srcs << [s, (pool.count - 1)]
+       end
+       next if opts[:'max-sources'] and _srcs.length > opts[:'max-sources']
+-      _srcs.sort!{|a, b| dist(a, t) <=> dist(b, t)}
++      _srcs.sort!{|a, b| dist(a[0], t) <=> dist(b[0], t)}
+       pairs << [t, _srcs] unless _srcs.empty?
+     end
+ 
+     if ref.nil?
+-      pairs.sort!{|a, b| a[1].length <=> b[1].length}
++      pairs.sort!{|a, b| a[1][0].length <=> b[1][0].length}
+     else
+       pairs.sort!{|a, b| dist(a[0], ref) <=> dist(b[0], ref)}
+     end
+     puts "#{pairs.length} possible targets found:"
+     pairs.each do |t, _srcs|
+       puts
+-      puts "[ #{_srcs.length} ]"
+-      puts t.format
++      puts "[ #{_srcs.length} sources within #{opts[:'max-jump']} Ly of the Destination ]"
++      puts
++      puts "Destination #{t.format}"
+       puts
+       _srcs.each do |s|
+-        puts s.format(ident: 1, ref: t)
++        puts "       [ Source pool: #{s[1]} systems within #{opts[:'max-jump']} Ly radius having landing pad size: #{opts[:'landing-pad']} ]"
++        puts s[0].format(ident: 5, ref: t)
++        puts
+       end
+     end
+   end
+diff --git a/lib/elite_dangerous/db.rb b/lib/elite_dangerous/db.rb
+index 632ce80..bc33601 100644
+--- a/lib/elite_dangerous/db.rb
++++ b/lib/elite_dangerous/db.rb
+@@ -27,6 +27,7 @@ module EliteDangerous
+         column :is_populated, TrueClass
+         column :power, String
+         column :needs_permit, TrueClass
++        column :minor_faction_count, Integer
+         foreign_key :government_id, :governments
+         foreign_key :allegiance_id, :allegiances
+         foreign_key :power_state_id, :power_states
+diff --git a/lib/elite_dangerous/models.rb b/lib/elite_dangerous/models.rb
+index bcbd431..3da5a7a 100644
+--- a/lib/elite_dangerous/models.rb
++++ b/lib/elite_dangerous/models.rb
+@@ -49,6 +49,7 @@ module EliteDangerous
+           pfx = '  ' * ident
+           str = ''
+           str << pfx << "System: #{name} (#{id})#{", #{dist(self, ref)} Ly" unless ref.nil?}#{" [PERMIT REQUIRED]" if needs_permit}\n"
++          str << pfx << "  Minor Factions: #{minor_faction_count}\n"
+           str << pfx << "  Allegiance: #{allegiance.name} (#{government.name})\n"
+           str << pfx << "  Power: #{power} (#{power_state.name})\n" unless power.nil?
+           str << pfx << "  Primary Economy: #{primary_economy.name}\n" unless primary_economy.nil?

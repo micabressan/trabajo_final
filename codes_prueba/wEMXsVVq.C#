@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.SqlClient;
+using Microsoft.Win32;
+
+namespace UpdateDelayedLeads
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Guid> leadIds = GetDelayedLeads();
+
+            foreach (Guid leadId in leadIds)
+            {
+
+            }
+        }
+
+        private static List<Guid> GetDelayedLeads()
+        {
+            List<Guid> leadIds = new List<Guid>();
+            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            {
+                con.Open();
+                using (SqlCommand com = new SqlCommand("CRM_GetDelayedLeads", con))
+                {
+                    com.CommandType = System.Data.CommandType.StoredProcedure;
+                    using (SqlDataReader r = com.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            Guid leadId = Guid.Empty;
+                            if (r[0] != null && Guid.TryParse(r[0].ToString(), out leadId))
+                                leadIds.Add(leadId);
+                        }
+                    }
+                }
+            }
+            return leadIds;
+        }
+
+        private static string GetConnectionString()
+        {
+            //using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            //using (RegistryKey regkey = hklm.OpenSubKey("SOFTWARE\\Microsoft\\MSCRM"))
+            using (RegistryKey regkey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\MSCRM"))
+            {
+                string conSQLserver = regkey.GetValue("database").ToString().Replace("Provider=SQLOLEDB;", "");
+
+                return conSQLserver;
+            }
+        }
+        private static CrmService CreateCrmService()
+        {
+            //using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            //using (RegistryKey regkey = hklm.OpenSubKey("SOFTWARE\\Microsoft\\MSCRM"))
+            using (RegistryKey regkey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\MSCRM"))
+            {
+
+                CrmAuthenticationToken token = new CrmAuthenticationToken();
+                token.AuthenticationType = 0;
+                token.OrganizationName = (string)regkey.GetValue("CrmOrganization");
+
+                CrmService service = new CrmService();
+                service.Url = regkey.GetValue("ServerUrl") + "/2007/crmservice.asmx";
+                service.CrmAuthenticationTokenValue = token;
+                service.UseDefaultCredentials = true;
+
+                return service;
+            }
+        }
+    }
+}

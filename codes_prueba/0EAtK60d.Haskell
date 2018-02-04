@@ -1,0 +1,120 @@
+> {-#LANGUAGE GADTs           #-}
+> {-#LANGUAGE TypeOperators   #-}
+> {-#LANGUAGE RankNTypes      #-}
+> {-#LANGUAGE KindSignatures  #-}
+> {-#LANGUAGE TypeFamilies    #-}
+
+> import Data.Generics
+>
+> typeInfo :: (Data a) => a -> (Int, Char, [String])
+> typeInfo x = (intSum x, maxChar x, consList x)
+> intSum :: (Data a) => a -> Int
+> intSum = extQ (\x -> sum $ gmapQ intSum x) (id::(Int -> Int))
+> --intSum x = sum $ (extQ (gmapQ intSum) return) x
+> maxChar :: (Data a) => a -> Char
+> maxChar = extQ (\x -> maximum $ minBound : gmapQ maxChar x) (id::(Char -> Char))
+> --maxChar x = maximum $ minBound : (extQ (gmapQ maxChar) return) x
+> consList :: (Data a) => a -> [String]
+> consList x = (show (typeRepTyCon $ typeOf x)) : (concat $ gmapQ consList x)
+
+
+> data Type :: * -> * where
+>   Char :: Type Char
+>   Int  :: Type Int
+>   Bool :: Type Bool
+>   List :: Type a -> Type [a]
+>   Pair :: Type a -> Type b -> Type (a, b)
+>   Exp  :: Type a -> Type (Exp a)
+> 
+> char :: Char -> Constrp Char
+> char c = Constrp{constr = c, name = show c }
+> int :: Int -> Constrp Int
+> int i = Constrp{constr = i, name = show i }
+> bool :: Bool -> Constrp Bool
+> bool b = Constrp{constr = b, name = show b }
+>
+> data Typed a = (:>) { typeOf' :: Type a, val :: a }
+> 
+> infixl 1 :>
+> 
+> data Constrp a = Constrp { constr :: a, name :: String }
+> 
+> data Spine :: * -> * where
+>   Con :: Constrp a -> Spine a
+>   (:<>:) :: Spine (a -> b) -> Typed a -> Spine b
+> 
+> infixl 0 :<>:
+> 
+> type Datatype a = [Signature a]
+> 
+> data Signature :: * -> * where
+>   Sig :: Constrp a -> Signature a
+>   (:&:) :: Signature (a -> b) -> Type a -> Signature b
+> 
+> infixl 0 :&:
+>
+> data Exp :: * -> * where
+>   IntE    :: Int                        -> Exp Int
+>   BoolE   :: Bool                       -> Exp Bool
+>   IsZero  :: Exp Int                    -> Exp Bool
+>   Add     :: Exp Int  -> Exp Int        -> Exp Int
+>   If      :: Exp Bool -> Exp a -> Exp a -> Exp a
+>
+>
+> nil = Constrp ([]) "Nil"
+> cons = (Constrp (:) "Cons")
+> pair = (Constrp (,) ",")
+> intE = Constrp IntE "IntE"
+> boolE = Constrp BoolE "BoolE"
+> isZeroE = Constrp IsZero "IsZero"
+> addE = Constrp Add "Add"
+> ifE = Constrp If "If"
+>
+> fromSpine :: Spine a -> a
+> fromSpine (Con c) = constr c
+> fromSpine (f :<>: x) = (fromSpine f) (val x)
+>
+> toSpine :: Typed a -> Spine a
+> toSpine (Char :> c) = Con $ char c
+> toSpine (Int :> i) = Con $ int i
+> toSpine (Bool :> b) = Con $ bool b
+> toSpine (List a :> []) = Con $ nil
+> toSpine (List a :> (x:xs)) = Con cons :<>: (a :> x) :<>: (List a :> xs)
+> toSpine (Pair a b :> (x, y)) = Con pair :<>: (a :> x) :<>: (b :> y)
+> toSpine (Exp a :> (IntE i)) = Con intE :<>: (Int :> i) 
+> toSpine (Exp a :> (BoolE b)) = Con boolE :<>: (Bool :> b)
+> toSpine (Exp a :> (IsZero exp)) = Con isZeroE :<>: (Exp Int :> exp)
+> toSpine (Exp a :> (Add exp1 exp2)) = Con addE :<>: (Exp Int :> exp1) :<>: (Exp Int :> exp2)
+> toSpine (Exp a :> (If con exp1 exp2)) = Con ifE :<>: (Exp Bool :> con) :<>: (Exp a :> exp1) :<>: (Exp a :> exp2)
+>
+> fromConstrM :: (Monad m)
+>             => (forall b. Type b -> m (Signature b))
+>             -> Type a
+>             -> m a
+> fromConstrM f ta = do r <- f ta
+>                       k f r
+>                                            
+> k :: (Monad m) => (forall b. Type b -> m (Signature b)) -> Signature a -> m a                                     
+> k f (Sig x) = return $ constr x
+> k f (g :&: x) = do h <- k f g
+>                    y <- f x
+>                    z <- k f y
+>                    return $ h z
+>                  
+> datatype :: Type a -> Datatype a
+> datatype (Char) = [Sig (char c) | c <- [minBound .. maxBound ]]
+> datatype (Int) = [Sig (int i) | i <- [minBound .. maxBound ]]
+> datatype (List a) = [Sig nil , Sig cons :&: a :&: List a ]
+> datatype (Pair a b) = [Sig pair :&: a :&: b ]
+> --datatype (Exp a) = [Sig intE, Sig boolE, Sig isZeroE, Sig addE, Sig ifE]
+>
+> generate :: Type a -> [a]
+> generate a = generate' a 0
+>
+> generate' :: Type a -> Int -> [a]
+> generate' a 0 = []
+> generate' a n = concat [ generate'' s (n-1) | s <- datatype a]
+>
+> generate'' :: Signature a -> Int -> [a]
+> generate'' (Sig c) d = [constr c]
+> generate'' (s :&: a) d = [f x | f <- generate'' s d, x <- generate' a d]

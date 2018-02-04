@@ -1,0 +1,247 @@
+(import '(javax.swing JOptionPane))
+(use 'clojure.set)
+;;prompt the user for the amount of hands to run
+(def card-string (. JOptionPane showInputDialog nil (str "Enter cards in ValueSuit/ValueSuit/etc format"
+                                                      "\nExample: 2H/3D for 2 of Hearts and 3 of Diamonds"
+                                                      "\nOr, leave blank for no cards")
+                   "5 Card Poker Probability" (. JOptionPane QUESTION_MESSAGE)))
+(def hand-total (. Integer parseInt (. JOptionPane showInputDialog nil "Enter the amount of hands to deal"
+                  "5 Card Poker Probability" (. JOptionPane QUESTION_MESSAGE))))
+;;create list of user's inputted cards
+(defn split-string [string] (. string split "/"))
+(def card-string-length (count card-string))
+(def card-count (count (split-string card-string)))
+;;create vectors in [int str] format for all the cards inputted by the user
+(def card-list (into [] (for [num (range 0 card-count)]
+                 (cond
+                   (= 2 (count (get (split-string card-string) num)))
+                     (vector (. Integer parseInt (str (get (get (split-string card-string) num) 0)))
+                      (str (get (get (split-string card-string) num) 1)))
+                   (= 3 (count (get (split-string card-string) num)))
+                      (vector (. Integer parseInt (str (get (get (split-string card-string) num) 0)
+                        (get (get (split-string card-string) num) 1)))
+                        (str (get (get (split-string card-string) num) 2)))
+                   )
+                 ))
+  )
+;;create a new, shuffled deck
+(def suits ["C" "D" "H" "S"])
+(def values [1 2 3 4 5 6 7 8 9 10 11 12 13])
+(def new-deck (for [v values s suits] (vector v s)))
+(defn shuffled [] (shuffle new-deck))
+;;make a hand including cards that the user inputted
+(defn get-hand [deck] (if (= card-string-length 0)
+                        ;;if user enters no cards, fill with top 5 from shuffled deck
+                        (take 5 deck)
+                        ;;if user enters 5 cards, just use those cards
+                        (if (= card-string-length 14)
+                          (into [] card-list)
+                          ;;otherwise, generate enough non-duplicate cards to fill the hand
+                          (let [set-deck (set deck)
+                                set-cards (set card-list)
+                                non-duplicate-deck (shuffle (difference set-deck set-cards))
+                                rest-of-cards (take (- 5 card-count) non-duplicate-deck)]
+                            (concat rest-of-cards card-list)
+                           )
+                          )
+                        )
+  )
+;;used for checking hands
+(defn get-value [card] (nth card 0))
+(defn get-suit [card] (nth card 1))
+;;check for pair
+(defn pair? [hand] (let [sorted (sort-by first hand)]
+                     (if (= (get-value (nth sorted 0)) (get-value (nth sorted 1)))
+                       true
+                       (if (= (get-value (nth sorted 1)) (get-value (nth sorted 2)))
+                         true
+                         (if (= (get-value (nth sorted 2)) (get-value (nth sorted 3)))
+                           true
+                           (if (= (get-value (nth sorted 3)) (get-value (nth sorted 4)))
+                             true
+                             false
+                           )
+                         )
+                       )
+                     ))
+  )
+;;check for two pairs
+(defn two-pair? [hand] (let [sorted (sort-by first hand)]
+                         (if (and (= (get-value (nth sorted 0)) (get-value (nth sorted 1)))
+                               (= (get-value (nth sorted 2)) (get-value (nth sorted 3))))
+                           true
+                           (if (and (= (get-value (nth sorted 1)) (get-value (nth sorted 2)))
+                                 (= (get-value (nth sorted 3)) (get-value (nth sorted 4))))
+                            true
+                             (if (and (= (get-value (nth sorted 0)) (get-value (nth sorted 1)))
+                                   (= (get-value (nth sorted 3)) (get-value (nth sorted 4))))
+                               true
+                               false
+                               )
+                            )
+                         ))
+  )
+;;check for three of a kind
+(defn three-kind? [hand] (let [sorted (sort-by first hand)]
+                           (if (and (= (get-value (nth sorted 0)) (get-value (nth sorted 1))
+                                      (get-value (nth sorted 2))))
+                             true
+                             (if (and (= (get-value (nth sorted 1)) (get-value (nth sorted 2))
+                                        (get-value (nth sorted 3))))
+                               true
+                               (if (and (= (get-value (nth sorted 2)) (get-value (nth sorted 3))
+                                         (get-value (nth sorted 4))))
+                                 true
+                                 false
+                               )
+                             )
+                           ))
+  )
+;;check for straight
+(defn straight? [hand] (let [sorted (sort-by first hand)
+                             value (get-value (nth sorted 0))]
+                         (if (and (= value 1) (= (get-value (nth sorted 1)) 10))
+                           ;;check for ace through king straight
+                           (if (not= 11 (get-value (nth sorted 2)))
+                             false
+                             (if (not= 12 (get-value (nth sorted 3)))
+                               false
+                               (if (not= 13 (get-value (nth sorted 4)))
+                                 false
+                                 true
+                               )
+                             )
+                           )
+                           ;;check for all other straights
+                           (if (not= (+ value 1) (get-value (nth sorted 1)))
+                             false
+                             (if (not= (+ value 2) (get-value (nth sorted 2)))
+                               false
+                               (if (not= (+ value 3) (get-value (nth sorted 3)))
+                                 false
+                                 (if (not= (+ value 4) (get-value (nth sorted 4)))
+                                   false
+                                   true
+                                 )
+                               )
+                             )
+                           )
+                         ))
+  )
+;;check for flush
+(defn flush? [hand] (let [sorted (sort-by second hand)]
+                      ;;since sorted by suits, the first card's suit must equal the last card's suit for a flush
+                      (if (= (get-suit (nth sorted 0)) (get-suit (nth sorted 4)))
+                        true
+                        false
+                      ))
+  )
+;;check for full house
+(defn full-house? [hand] (let [sorted (sort-by first hand)
+                                value1 (get-value (nth sorted 0))
+                                value2 (get-value (nth sorted 4))]
+                            (if (= value1 (get-value (nth sorted 1)))
+                              (if (= value1 (get-value (nth sorted 2)))
+                                (if (= value2 (get-value (nth sorted 3)))
+                                  true
+                                  false
+                                )
+                                (if (= value2 (get-value (nth sorted 2)))
+                                  (if (= value2 (get-value (nth sorted 3)))
+                                    true
+                                    false
+                                  )
+                                  false
+                                )
+                              )
+                              false
+                            ))
+  )
+;;check for four of a kind
+(defn four-kind? [hand] (let [sorted (sort-by first hand)]
+                          (if (and (= (get-value (nth sorted 0)) (get-value (nth sorted 1))
+                                     (get-value (nth sorted 2)) (get-value (nth sorted 3))))
+                            true
+                            (if (and (= (get-value (nth sorted 1)) (get-value (nth sorted 2))
+                                       (get-value (nth sorted 3)) (get-value (nth sorted 4))))
+                              true
+                              false
+                            )
+                          ))
+  )
+;;check for straight flush
+(defn straight-flush? [hand] (let [straight (straight? hand)
+                                    flush (flush? hand)]
+                               (if (and (= straight true) (= flush true))
+                                 true
+                                 false
+                               ))
+  )
+;;check for royal flush
+(defn royal-flush? [hand] (let [sorted (sort-by first hand)
+                                straight-flush (straight-flush? hand)
+                                first-value (get-value (nth sorted 0))
+                                last-value (get-value (nth sorted 4))]
+                            (if (and (= straight-flush true) (and (= first-value 1) (= last-value 13)))
+                              true
+                              false
+                            ))
+  )
+;;global agents to keep track of how many of each hand we get
+(def amount-high (agent 0))
+(def amount-pair (agent 0))
+(def amount-two-pair (agent 0))
+(def amount-three-kind (agent 0))
+(def amount-straight (agent 0))
+(def amount-flush (agent 0))
+(def amount-full-house (agent 0))
+(def amount-four-kind (agent 0))
+(def amount-straight-flush (agent 0))
+(def amount-royal-flush (agent 0))
+;;increments agents based on what hand is drawn
+(defn outcomes [amount] (for [num (range 0 amount)] (let [hand (get-hand (shuffled))]
+                                                      (if (= (royal-flush? hand) true)
+                                                        (send amount-royal-flush inc)
+                                                        (if (= (straight-flush? hand) true)
+                                                          (send amount-straight-flush inc)
+                                                          (if (= (four-kind? hand) true)
+                                                            (send amount-four-kind inc)
+                                                            (if (= (full-house? hand) true)
+                                                              (send amount-full-house inc)
+                                                              (if (= (flush? hand) true)
+                                                                (send amount-flush inc)
+                                                                (if (= (straight? hand) true)
+                                                                  (send amount-straight inc)
+                                                                  (if (= (three-kind? hand) true)
+                                                                    (send amount-three-kind inc)
+                                                                    (if (= (two-pair? hand) true)
+                                                                      (send amount-two-pair inc)
+                                                                      (if (= (pair? hand) true)
+                                                                        (send amount-pair inc)
+                                                                        (send amount-high inc)
+                                                                        )
+                                                                      )
+                                                                    )
+                                                                  )
+                                                                )
+                                                              )
+                                                            )
+                                                          )
+                                                        )
+                                                        ))
+  )
+
+(dorun (outcomes hand-total))
+(. JOptionPane showMessageDialog nil (str "Results of " hand-total " Hands"
+                                "\n-------------------"
+                                "\nHigh Card: " (format "%.2f" (* 100.0 (/ @amount-high hand-total))) "%"
+                                "\nPair: " (format "%.2f" (* 100.0 (/ @amount-pair hand-total))) "%"
+                                "\nTwo Pair: " (format "%.2f" (* 100.0 (/ @amount-two-pair hand-total))) "%"
+                                "\nThree of a Kind: " (format "%.2f" (* 100.0 (/ @amount-three-kind hand-total))) "%"
+                                "\nStraight: " (format "%.2f" (* 100.0 (/ @amount-straight hand-total))) "%"
+                                "\nFlush: " (format "%.2f" (* 100.0 (/ @amount-flush hand-total))) "%"
+                                "\nFull House: " (format "%.2f" (* 100.0 (/ @amount-full-house hand-total))) "%"
+                                "\nFour of a Kind: " (format "%.2f" (* 100.0 (/ @amount-four-kind hand-total))) "%"
+                                "\nStraight Flush: " (format "%.2f" (* 100.0 (/ @amount-straight-flush hand-total))) "%"
+                                "\nRoyal Flush: " (format "%.2f" (* 100.0 (/ @amount-royal-flush hand-total))) "%")
+  "5 Card Poker Probability" (. JOptionPane INFORMATION_MESSAGE))

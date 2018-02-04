@@ -1,0 +1,29 @@
+import scrapy
+
+class BrickSetSpider(scrapy.Spider):
+	name = "brickset_spider"
+	allowed_domains = ['imgsrc.ru']
+	start_urls = ['http://imgsrc.ru/main/users.php']
+
+	def parse(self,response):
+		links = response.xpath('//@href').extract()
+		for link in links:
+			if "?let=" in link:
+				url_prefix = ('http://imgsrc.ru/main/users.php')
+				index_absolute_url = url_prefix + link
+				yield scrapy.Request(index_absolute_url, callback=self.parse_index)
+				yield scrapy.Request(absolute_url, callback=self.parse_attr)
+		
+	def parse_index(self,response):
+		links = response.xpath('//@href').extract()
+		for link in links:
+				base_url = ("http://imgsrc.ru")
+				absolute_url = base_url + link
+				yield scrapy.Request(absolute_url, callback=self.parse_attr)
+
+
+
+	def parse_attr(self, response):
+		yield {
+			'url': response.url,
+			}

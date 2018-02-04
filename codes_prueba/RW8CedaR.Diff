@@ -1,0 +1,49 @@
+--- PKGBUILD	2017-12-28 14:11:37.277015414 +0100
++++ PKGBUILD_NEW	2017-12-28 14:11:27.496965217 +0100
+@@ -1,17 +1,35 @@
++# Contributor: Vladimir Keleshev <vladimir [at] keleshev [dot] com>
++# Maintainer: ???
++
+ _name=schema
+-pkgname="python-$_name"
+-pkgver=0.6.5
++pkgbase="python-${_name}"
++pkgname=("python2-${_name}" "python-${_name}")
++pkgver=0.6.6
+ pkgrel=1
+ pkgdesc='Python module to validate and convert data structures.'
+-arch=('i686' 'x86_64')
+-url="https://github.com/halst/$_name"
++arch=('any')
++url="https://github.com/keleshev/${_name}"
+ license=('MIT')
+-depends=('python')
+-source=("https://files.pythonhosted.org/packages/source/s/$_name/$_name-$pkgver.tar.gz")
+-sha1sums=('5d2ec7bc20577099f614bc5ab2ee9096071f9fd3')
++makedepends=('python-setuptools' 'python-pytest' 'python2-setuptools' 'python2-pytest')
++source=("https://github.com/keleshev/${_name}/archive/v${pkgver}.tar.gz")
++sha1sums=('fad10e26ba7bb28ec0d0e57f4410882dc357ab63')
++
++check() {
++  cd ${_name}-${pkgver}
++  python2 setup.py test
++  python setup.py test
++}
++
++package_python2-schema() {
++  depends=('python2')
++  cd "${srcdir}/${_name}-${pkgver}"
++  python2 setup.py install --root="${pkgdir}" --optimize=1
++  install -Dm644 LICENSE-MIT ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE-MIT
++}
+ 
+-package() {
+-	cd "$srcdir/$_name-$pkgver"
+-	python setup.py install --root="$pkgdir" --optimize=1
+-	install -Dm644 {,"$pkgdir/usr/share/licenses/$pkgname/"}LICENSE-MIT
++package_python-schema() {
++  depends=('python')
++  cd "${srcdir}/${_name}-${pkgver}"
++  python setup.py install --root="${pkgdir}" --optimize=1
++  install -Dm644 LICENSE-MIT ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE-MIT
+ }

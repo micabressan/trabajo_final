@@ -1,0 +1,105 @@
+dim strSourceDir      : strSourceDir      = "C:\Users\user1\Desktop\PDF Reports"
+dim strTargetDir      : strTargetDir      = "C:\Users\user1\Desktop\TimeSheets"
+dim blnMoveIt         : blnMoveIt         = false   ' if set to false will just print what would happen, true will move.
+
+dim strFileName       : strFileName       = "Time sheet_"
+
+dim objFSO            : set  objFSO       = createobject("scripting.filesystemobject") 
+dim objFolder         : set  objFolder    = objFSO.getfolder(strSourceDir)  
+
+dim intCounterMatch   : intCounterMatch   = 0
+dim intCounterNoMatch : intCounterNoMatch = 0
+
+
+log ("Processing PDF Reports")
+log ("=========================================================================================")
+log ("strSourceDir:     " & strSourceDir)
+log ("strTargetDir:     " & strTargetDir)
+log ("blnMoveIt:        " & blnMoveIt)
+log ("=========================================================================================")
+
+for each file in objFolder.files
+
+  if instr (file.name, strFileName) > 0 then  
+  
+    intCounterMatch = intCounterMatch + 1
+
+    log ("------------------------------------------------------------------------------------")
+    Log ("Processing:            " & file.name)
+	dim strTimeStamp : strTimeStamp = mid(file.name, len(strFileName)+1, 6)
+	dim strYear      : strYear      = "20" & left(strTimeStamp,2)
+	dim strMonth     : strMonth     = mid(strTimeStamp,3,2)
+	dim strDay       : strDay       = mid(strTimeStamp,5,2)
+	
+	log ("TimeStampFromFileName: " & strTimeStamp & " [Year: " & strYear & ", Month: " & strMonth & ", Day: " & strDay & "]")
+  
+    dim strCopyToPath : strCopyToPath = strTargetDir & "\" & strYear & "\" & MonthToMonth(strMonth) & "\"
+	
+	log ("Source:                " & strSourceDir & "\" & file.name)
+	log ("Destination:           " & strCopyToPath)
+	
+	if blnMoveIt then
+	   if objFSO.FileExists (strCopyToPath & "\" & file.name) then
+	      log (strCopyToPath & "\" & file.name & " exists, will not move")
+	   else
+	      objFSO.MoveFile strSourceDir & "\" & file.name, strCopyToPath
+	   end if   
+	else
+	  ' Not in move mode.
+	end if
+	
+  else
+     'wscript.echo log (file.name & " not to be moved." )
+	 intCounterNoMatch = intCounterNoMatch + 1
+  end if
+  
+next
+
+log ("------------------------------------------------------------------------------------")
+log ("Summary of files processed")
+log ("  Files matched:     " & intCounterMatch)
+log ("  Files not matched: " & intCounterNoMatch)
+log ("------------------------------------------------------------------------------------")
+
+set  objFSO       = nothing
+set  objFolder    = nothing
+
+
+'Functions ---------------------------------------------------------------------------------
+
+function Log (strLine)
+
+   wscript.echo date() & " " & time() & " - " & strLine
+
+end function
+
+function MonthToMonth (intIn)
+
+   select case intIn
+     case 1
+	   MonthToMonth = "January"
+     case 2
+	   MonthToMonth = "February"
+     case 3
+	   MonthToMonth = "March"
+     case 4
+	   MonthToMonth = "April"
+	 case 5
+	   MonthToMonth = "May"
+     case 6
+	   MonthToMonth = "June"
+	 case 7
+	   MonthToMonth = "July"
+     case 8
+	   MonthToMonth = "August"
+	 case 9
+	   MonthToMonth = "September"
+     case 10
+	   MonthToMonth = "October"
+	 case 11
+	   MonthToMonth = "November"
+     case 12
+	   MonthToMonth = "December"
+   end select
+
+end function

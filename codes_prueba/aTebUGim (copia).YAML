@@ -1,0 +1,64 @@
+Config :
+    header:
+      text:
+      - '&2&l♛ &e&lThông tin :'
+      interval: 10
+      random: true
+    player-label:
+      text:
+      - '&d&l<cmd repeatmiddle="20">{player}</cmd>'
+      interval: 2
+      random: false
+    player-line1:
+      text:
+      - '&aTiền&7: &f{money}'
+      interval: 2
+      random: false
+    player-line2:
+      text:
+      - '&aCoins&7: &f{playerpoints}'
+      interval: 2
+      random: false
+    player-line3:
+      text:
+      - '&aPing&7: &f{ping}'
+      interval: 2
+      random: false 
+    spacer1:
+      text: []
+      interval: 100
+      random: false
+    island-label:
+      text:
+      - '&e&l★ &b&lThông tin đảo :'
+      interval: 10
+      random: false
+    island-1:
+      text:
+      - '&aLevels đảo&7: &f{askyblock_island_level}'
+      interval: 10
+      random: false
+    island-3:
+      text:
+      - '&aĐứng trên đảo&7: &f{askyblock_island_owner}'
+      interval: 10
+      random: false     
+    spacer2:
+      text: []
+      interval: 100
+      random: false 
+    server-label:
+      text:
+      - '&9&l✎ &6&lServer :'
+      interval: 100
+      random: false
+    server-line2:
+      text:
+      - '&a{onlineplayers} &fTrực tuyến'
+      interval: 10
+      random: false
+    footer:
+      text:
+      - '&c&n*3&a /napthe'
+      interval: 10
+      random: true

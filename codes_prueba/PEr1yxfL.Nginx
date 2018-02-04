@@ -1,0 +1,338 @@
+##############################################################################
+
+=============Fast server KVM VPS 2018 (Frontend Nginx >=1.12.2 + Backend Apache ~2.4 PHP (5/7) + VestaCP) ===
+=============fast server http://vk.cc/5VDdBb ===========
+=============update 01.12.2017 support / вопросы, пожелания, замечания просьба слать сюда 2010-10 @ mail.ru ==============
+
+Debian 8.7 PHP 7.0.16-1 Apache 2.4.10 Nginx 1.12.2 https://habrahabr.ru/post/282554/
+Linux 4.9.0-0.bpo.1-amd64 #1 SMP Debian 4.9.2-2~bpo8+1 (2017-01-26) x86_64 GNU/Linux
+(Работает все также и на php5* Apache 2.2.*)
+
+#  Test VPS !KVM  1x1024RAM 20Gb SSD
+## ab -r -n 10000 -c 10000 http://site.com/
+#Concurrency Level:      10000
+#Time taken for tests:   0.835 seconds
+#Complete requests:      10000
+#Failed requests:        0
+#Non-2xx responses:      10000
+#Total transferred:      3200000 bytes
+#HTML transferred:       1620000 bytes
+#Requests per second:    11976.08 [#/sec] (mean)
+#Time per request:       834.998 [ms] (mean)
+#Time per request:       0.083 [ms] (mean, across all concurrent requests)
+#Transfer rate:          3742.52 [Kbytes/sec] received
+#
+#Connection Times (ms)
+#              min  mean[+/-sd] median   max
+#Total:        530  644  66.0    646     758
+################################################################################################
+
+=============================Инструкция по установке ===========================================================
+
+Для работы качаем https://www.bitvise.com/ssh-client-download  (SSH+FTP) для полноценной работы.
+
+Условимся, что nginx будет слушать 80 порты, а перекидывать будет на 81 порт, который и будет слушать apache.
+
+Установка php 7 на Debian (если надо) https://rusadmin.biz/web-server/ustanovka-php-7-0-5-na-debian/
+
+APACHE : Файлы настроек подключений с расширением .conf в директории сервера /etc/apache2 и подпапки, если include прописан и незакоментирован в основном файле apache2.conf
+NGNIX  : Файлы настроек подключений с расширением .conf в директории сервера /etc/nginx и подпапки, если include прописан и незакоментирован в основном файле nginx.conf
+
+VPS берем тут http://vk.cc/5VDdBb (Высокое качество, низкие цены и вежливая техподдержка)
+
+#### 1.  Настраиваем APACHE ##########
+
+В нашем случае на сервере установлена Vesta CP.
+1.Настройки сайтов расположены /home/admin/conf/web/apache2.conf (Этот путь прописан в файле vesta.conf в папке /etc/apache2/conf.d)
+Меняем <VirtualHost *:*>  на <VirtualHost *:81>
+для всех указанных в нем сайтов
+2. Меняем также и в шаблоне добавления сайтов, в весте 
+В шаблонах Vesta  /usr/local/vesta/data/templates/web/apache2
+
+В файле default.tpl  (Если у Вас другой, выбирайте его. Смотреть в Veste в Packages в настройках Вашего профиля)
+
+3. В файле /etc/apache2/conf.d/*ип сервера*.conf заменяем все на:
+
+Для апач 2.2*
+Listen 127.0.0.1:81
+Listen вставить-ip-вашего-сервера:81
+NameVirtualHost 127.0.0.1:81
+NameVirtualHost вставить-ip-вашего-сервера:81
+Listen вставить-ip-вашего-сервера:8443
+
+
+Для апач 2.4*
+Listen 127.0.0.1:81
+Listen вставить-ip-вашего-сервера:81
+Listen вставить-ip-вашего-сервера:8443
+
+3.1. В /etc/apache2/mods-enabled  очисть конфиги, если они там есть файлы    *prefork.conf
+
+4. Для apache v 2.2 Файл /etc/apache2/apache2.conf Выглядит так . Заменям/дополняем свой (не забыв сохранить содержимое начального)
+===========================================
+http://pastebin.com/36xr3gru
+===========================================
+ Для apache v 2.4 Файл /etc/apache2/apache2.conf Выглядит так . Заменям/дополняем свой (не забыв сохранить содержимое начального)
+===========================================
+http://pastebin.com/sCs33xZA
+===========================================
+
+*Если версия Apache ниже 2.4  ( проверить можно командой apache2 -v  )
+Установка модуля RPAF (
+
+Т.к. теперь все запросы к Apache приходят не от удалённых клиентов, а от Nginx, то в итоге IP-адрес клиента Apache определяет как локальный (127.0.0.1). Для решения этой проблемы нам нужен модуль RPAF. Он берет тело заголовка X-Forwarded-For, присланного от фронтенда (Nginx) и заменяет значение заголовка REMOTE_ADDR на бекенде (Apache).
+
+В Debian или Ubuntu установка и включение модуля RPAF в Apache выполняется следующими командами:
+apt-get install libapache2-mod-rpaf
+a2enmod rpaf
+
+Настройка модуля RPAF
+Файл конфигурации RPAF находится:
+Debian/Ubuntu: /etc/apache2/mods-enabled/rpaf.conf
+
+Он должен содержать следующие строки:
+#
+RPAFenable On
+RPAFsethostname Off
+RPAFproxy_ips 127.0.0.1
+RPAFheader X-Real-IP
+#
+	
+*Если версия Apache 2.4 =========================Изменения https://httpd.apache.org/docs/2.4/upgrading.html
+	
+Apache начиная с версии 2.4 НЕ поддерживает mod_rpaf поэтому для отображения реальных ип делаем следующее.
+  	a2enmod remoteip
+	nano /etc/apache2/conf-available/remoteip.conf
+Вписываем строчки в файл remoteip.conf
+
+RemoteIPHeader X-Forwarded-For
+RemoteIPTrustedProxy 127.0.0.1
+
+Далее снова пишем в консоли
+	a2enconf remoteip
+Редактируем /etc/apache2/apache2.conf
+Меняем
+	LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+на
+	LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+Применяем и смотрим результат
+   /etc/init.d/apache2 restart
+   
+  
+#### 2.  Настраиваем Nginx##########	
+Узнать текущую версию:
+nginx -v 
+Обновление если надо (лучше обновить!) http://nginx.org/en/linux_packages.html#mainline   http://artana.ru/blog/all/obnovlenie-nginx-do-posledney-versii-debian/
+Полная информация о дистрибутиве операционки для выбора Codename при обновлении:
+lsb_release -a
+
+Файл настройки  http://pastebin.com/aRLRiYwu заменить на свой /etc/nginx/nginx.conf .  (Прописать там свой ипшник в раздел upstream B)
+=======================================================
+Не забываем создать соответствующие каталоги командами: (где root , имя пользователя)
+
+mkdir -p  /var/lib/nginx/cache
+chown -R root /var/lib/nginx/cache
+chmod 700 /var/lib/nginx/cache
+
+=======================================================
+Дополнительно: помещаем кеш nginx в ramdisk (tmpfs)
+Сейчас у нас кеширование настроено, но кеш хранится на жестком диске, что не является хорошим решение.
+ Оптимальнее будет смонтировать директорию с кешем nginx в память.
+Для этого откроем 
+nano /etc/fstab
+и добавим туда:
+tmpfs /var/lib/nginx/cache tmpfs nodev,nosuid,size=20M 0 0
+Если в настройках nginx вы указали больший размер кеша, то параметр size необходимо изменить в соответствии с указанным размером кеша (max_size), плюс небольшой запас.
+Сразу смонтируем директорию в память:
+sudo mount -a 
+service nginx restart; service apache2 restart; reboot;
+Теперь при каждой загрузке системы, директория /var/lib/nginx/cache будет помещаться в память, что должно уменьшить время отдачи страницы.
+
+=======================================================
+!!!!!!!!!!!!!!!! В настройках указан режим reuseport, он требует ядро линукса от версии 3.9 (Устанавливаем сами или просим ТП хостинга установить)
+Команда показать версию ядра
+uname -r
+Полная инфа о системе
+uname -a 
+
+Eсли версия ядра ниже и не будем его использовать, то 
+меняем  в конфиге nginx
+listen 80 reuseport; 
+на 
+listen 80;
+ 
+#### 3.  Обновления Ядра Linux для !KVM (OpenVZ не поддерживает) (Времени занимает 10 мин) ( пропускаем если не будем обновлять ядро)##############################################
+Желательно с прямыми ручонками своими, и не обливая клаву кофем )
+По инструкции https://codebeer.ru/obnovlenie-yadra-debian/ , после apt-get update
+apt-get install -t jessie-backports linux-headers-4.9.0-0.bpo.1-amd64
+apt-get install -t jessie-backports linux-image-4.9.0-0.bpo.1-amd64
+update-grub
+reboot
+======================
+
+#### 4. Быстродействие системы ##########
+
+4.0 !!!!--->>>  Очистка и перезагрузка сервера https://pastebin.com/w8aVmx9w
+
+
+!!!!Важный момент, снимаем лимиты (Проверка командой ulimit -n       (1024 изначально))
+В конец файла (/etc/security/limits.conf)
+nano /etc/security/limits.conf  
+добавить строки (где root - имя пользователя от которого работает апач)
+
+* soft nproc 65535
+* hard nproc 65535
+* soft nofile 65536 
+* hard nofile 65536
+root soft nofile 65536 
+root hard nofile 65536
+
+
+1.В файле php.ini  /etc/php/7.0/apache2
+memory_limit = 128M
+short_open_tag = On
+realpath_cache_size=16M
+realpath_cache_ttl=1200 
+session.name = session
+session.auto_start = 0
+output_buffering = On
+
+1.1 Файл подкачки
+www.youtube.com/watch?v=IYmYiAiFUN0
+#Подкачка как расширение памяти на VPS с SSD
+#установка (В данном случае это 200 Мегабайт)
+fallocate -l 200M /swapfile 
+chmod 0600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+#Смотрим свободное место
+df -h    
+#В файл
+nano /etc/fstab   
+#добавить строку для автозагрузки свапа
+/swapfile       none            swap    sw              0       0
+
+1.2 Оптимизация кеширования http://tolstiyman.blogspot.ru/2013/08/overcommit.html
+
+В файл конец /etc/sysctl.conf вставить 
+
+#Пишем в buffers/cache при <=10% свободной RAM памяти (Дефолт 60!)
+vm.swappiness = 10
+
+
+<--!Если больше 1Gb RAM-->
+В консоли:
+
+echo 2 > /proc/sys/vm/overcommit_memory
+echo 80 > /proc/sys/vm/overcommit_ratio
+
+В файл конец /etc/sysctl.conf вставить  еще строки
+
+#по-умолчанию равно 50
+vm.overcommit_ratio = 80
+#В этом случае допустимый объем пространства памяти будет swap+ram*overcommit_ratio/100 
+vm.overcommit_memory = 2
+
+
+
+2.Для настройки запуска служб есть отличная утилитка –sysv-rc-conf, которая хоть и выполнена в текстовом виде, 
+но очень удобна для этих целей.
+В официальном репозитории Debian она есть. В репозитории Ubuntu, кстати, тоже есть. 
+Для ее установки выполняем команду:
+apt-get install sysv-rc-conf
+http://adminway.ru/avtozagruzka-v-debian
+
+Или можно отключить все не нужное в весте 
+https://ваш ип:8083/list/server/
+
+3.Ковыряем системные переменные, защищаемся от некоторых видов атак (Не обязательно)
+Редактируем /etc/sysctl.conf
+nano /etc/sysctl.conf
+
+Дописываем в конец
+=========================
+
+# Защита от smurf-атак
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+# Защита от неправильных ICMP-сообщений
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+# Защита от SYN-флуда
+net.ipv4.tcp_syncookies = 1
+# Запрещаем маршрутизацию от источника
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+# Защита от спуфинга
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+# Мы не маршрутизатор, если конечно это так
+net.ipv4.ip_forward = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+# Включаем ExecShield при атаках направленных на переполнение буфера или срыв стэка
+kernel.exec-shield = 1
+kernel.randomize_va_space = 1
+# Расширяем диапазон доступных портов
+net.ipv4.ip_local_port_range = 2000 65000
+# Увеличиваем максимальный размер TCP-буферов
+net.ipv4.tcp_rmem = 4096 87380 8388608
+net.ipv4.tcp_wmem = 4096 87380 8388608
+net.core.rmem_max = 8388608
+net.core.wmem_max = 8388608
+net.core.netdev_max_backlog = 5000
+net.ipv4.tcp_window_scaling = 1
+
+=======================
+
+4.Ускоряем общую работу системы (Не обязательно)
+
+Prelink и Preload. 
+Prelink для создание статичных адресов библиотек, Preload это небольшое приложение, которое следит за файлами наиболее часто используемых приложений, и загружает их в память, когда система простаивает.
+1. Установка Prelink:
+apt-get -y install prelink
+
+Редактируем файл /etc/default/prelink:
+nano /etc/default/prelink
+
+Измените строку с PRELINKING=unknown на PRELINKING=yes
+Запускаем:
+/etc/cron.daily/prelink
+
+2.Установка Preload:
+apt-get -y install preload
+
+Все, больше ничего не требуется
+
+Завершение настройки (перезапуск сервисов)
+service nginx restart; service apache2 restart; reboot;
+
+Теперь связка работает, Nginx обрабатывает статичные данные, Apache - динамические.
+
+
+===========Cписок используемой литературы======================
+Кеширование в nginx - один из лучших мануалов
+https://syrog.ru/?p=314
+
+Увеличиваем производительность с помощью SO_REUSEPORT в NGINX 1.9.1
+https://habrahabr.ru/post/259403/
+
+Разбираемся в HTTP прокси NGINX, балансировке нагрузки, буферизации и кешировании
+http://devacademy.ru/posts/razbiraemsya-v-http-proksi-nginx-balansirovke-nagruzki-buferizatsii-i-keshirovanii/
+
+Оптимизируем VPS за 5$ (512MB RAM / 1 CPU) так, что сайт на wordpress выдерживает нагрузку в 42,735,587 хитов в день 
+https://habrahabr.ru/post/242011/
+
+Прокачка debian/ubuntu сервера для маленьких
+https://habrahabr.ru/post/186362/
+
+Прозрачное кеширование в nginx для всех и каждого
+https://habrahabr.ru/post/124684/
+
+Динамические виртуальные хосты (dynamic vhost) в nginx
+https://the-bosha.ru/2013/11/08/dinamicheskie-virtualnyie-hostyi-dynamic-vhost-v-nginx/
+
+Установка и настройка связки Nginx+Apache
+http://lib.clodo.ru/web-Сервер/webserver-lna.html
+
+Настройка сервера Debian 7 + nginx + apache
+http://desome.net/nastrojka-servera-nginx-apache.html
+http://desome.net/nastrojka-servera-debian-7-nginx-apache-chast-2.html

@@ -1,0 +1,165 @@
+### Eclipse Workspace Patch 1.0
+#P aCis_gameserver
+Index: dist/RegisterGameServer.bat
+===================================================================
+--- dist/RegisterGameServer.bat	(revisión: 5)
++++ dist/RegisterGameServer.bat	(copia de trabajo)
+@@ -1,4 +1,4 @@
+ @echo off
+ title aCis gameserver registration console
+-@java -Djava.util.logging.config.file=config/console.cfg -cp ./libs/*; net.sf.l2j.gsregistering.GameServerRegister
++@java -Djava.util.logging.config.file=config/console.cfg -cp ../libs/*; net.sf.l2j.gsregistering.GameServerRegister
+ @pause
+\ No newline at end of file
+Index: dist/LoginServer_loop.sh
+===================================================================
+--- dist/LoginServer_loop.sh	(revisión: 5)
++++ dist/LoginServer_loop.sh	(copia de trabajo)
+@@ -5,7 +5,7 @@
+ do
+ 	[ -f log/java0.log.0 ] && mv log/java0.log.0 "log/`date +%Y-%m-%d_%H-%M-%S`_java.log"
+ 	[ -f log/stdout.log ] && mv log/stdout.log "log/`date +%Y-%m-%d_%H-%M-%S`_stdout.log"
+-	nice -n -2 java -Xmx32m -cp ./libs/*:l2jserver.jar net.sf.l2j.loginserver.LoginServer > log/stdout.log 2>&1
++	nice -n -2 java -Xmx32m -cp ../libs/*:l2jserver.jar net.sf.l2j.loginserver.LoginServer > log/stdout.log 2>&1
+ 	err=$?
+ #	/etc/init.d/mysql restart
+ 	sleep 10;
+Index: dist/GameServer_loop.sh
+===================================================================
+--- dist/GameServer_loop.sh	(revisión: 5)
++++ dist/GameServer_loop.sh	(copia de trabajo)
+@@ -7,7 +7,7 @@
+ while :; do
+ 	[ -f log/java0.log.0 ] && mv log/java0.log.0 "log/`date +%Y-%m-%d_%H-%M-%S`_java.log"
+ 	[ -f log/stdout.log ] && mv log/stdout.log "log/`date +%Y-%m-%d_%H-%M-%S`_stdout.log"
+-	java -XX:+UseConcMarkSweepGC -Xmx2G -cp ./libs/*:l2jserver.jar net.sf.l2j.gameserver.GameServer > log/stdout.log 2>&1
++	java -XX:+UseConcMarkSweepGC -Xmx2G -cp ../libs/*:l2jserver.jar net.sf.l2j.gameserver.GameServer > log/stdout.log 2>&1
+ 	[ $? -ne 2 ] && break
+ #	/etc/init.d/mysql restart
+ 	sleep 10
+Index: dist/startSQLAccountManager.sh
+===================================================================
+--- dist/startSQLAccountManager.sh	(revisión: 5)
++++ dist/startSQLAccountManager.sh	(copia de trabajo)
+@@ -1,2 +1,2 @@
+ #!/bin/sh
+-java -Djava.util.logging.config.file=config/console.cfg -cp ./libs/*:l2jserver.jar:mysql-connector-java-5.1.26.jar net.sf.l2j.accountmanager.SQLAccountManager
++java -Djava.util.logging.config.file=config/console.cfg -cp ../libs/*:l2jserver.jar:mysql-connector-java-5.1.26.jar net.sf.l2j.accountmanager.SQLAccountManager
+Index: dist/GeoDataConverter.bat
+===================================================================
+--- dist/GeoDataConverter.bat	(revisión: 5)
++++ dist/GeoDataConverter.bat	(copia de trabajo)
+@@ -1,6 +1,6 @@
+ @echo off
+ title aCis geodata converter
+ 
+-java -Xmx512m -cp ./libs/*; net.sf.l2j.geodataconverter.GeoDataConverter
++java -Xmx512m -cp ../libs/*; net.sf.l2j.geodataconverter.GeoDataConverter
+ 
+ pause
+Index: dist/startGameServer.bat
+===================================================================
+--- dist/startGameServer.bat	(revisión: 5)
++++ dist/startGameServer.bat	(copia de trabajo)
+@@ -3,7 +3,7 @@
+ :start
+ REM -------------------------------------
+ REM Default parameters for a basic server.
+-java -XX:+UseConcMarkSweepGC -Xmx2G -cp ./libs/*; net.sf.l2j.gameserver.GameServer
++java -XX:+UseConcMarkSweepGC -Xmx2G -cp ../libs/*; net.sf.l2j.gameserver.GameServer
+ REM -------------------------------------
+ if ERRORLEVEL 2 goto restart
+ if ERRORLEVEL 1 goto error
+Index: build.xml
+===================================================================
+--- build.xml	(revisión: 5)
++++ build.xml	(copia de trabajo)
+@@ -10,7 +10,7 @@
+ 	<property name="build.dist.game" location="${build.dist}/gameserver" />
+ 
+ 	<target name="dist" depends="jar">
+-		<copy todir="${build.dist.login}/libs">
++		<copy todir="${build.dist}/libs">
+ 			<fileset dir="${src}/../lib">
+ 				<include name="c3p0-0.9.5-pre5.jar" />
+ 				<include name="mchange-commons-java-0.2.6.2.jar" />
+@@ -17,11 +17,6 @@
+ 				<include name="mysql-connector-java-5.1.26.jar" />
+ 			</fileset>
+ 		</copy>
+-		<copy todir="${build.dist.game}/libs">
+-			<fileset dir="${src}/../lib">
+-				<include name="*.jar" />
+-			</fileset>
+-		</copy>
+ 		<copy todir="${build.dist.login}">
+ 			<fileset dir="dist">
+ 				<include name="startAccountManager.*" />
+@@ -60,7 +55,6 @@
+ 				<include name="loginserver.properties" />
+ 			</fileset>
+ 		</copy>
+-		<mkdir dir="${build.dist.game}/data" />
+ 	</target>
+ 
+ 	<target name="jar" depends="compile" description="Create the jar file.">
+@@ -72,17 +66,12 @@
+ 			</manifest>
+ 		</jar>
+ 
+-		<copy todir="${build.dist.login}/libs">
++		<copy todir="${build.dist}/libs">
+ 			<fileset dir="${build}">
+ 				<include name="l2jserver.jar" />
+ 			</fileset>
+ 		</copy>
+ 
+-		<copy todir="${build.dist.game}/libs">
+-			<fileset dir="${build}">
+-				<include name="l2jserver.jar" />
+-			</fileset>
+-		</copy>
+ 	</target>
+ 
+ 	<target name="compile" depends="init" description="Compile the source.">
+Index: dist/startLoginServer.bat
+===================================================================
+--- dist/startLoginServer.bat	(revisión: 5)
++++ dist/startLoginServer.bat	(copia de trabajo)
+@@ -1,7 +1,7 @@
+ @echo off
+ title aCis loginserver console
+ :start
+-java -Xmx32m -cp ./libs/*; net.sf.l2j.loginserver.LoginServer
++java -Xmx32m -cp ../libs/*; net.sf.l2j.loginserver.LoginServer
+ if ERRORLEVEL 2 goto restart
+ if ERRORLEVEL 1 goto error
+ goto end
+Index: dist/startSQLAccountManager.bat
+===================================================================
+--- dist/startSQLAccountManager.bat	(revisión: 5)
++++ dist/startSQLAccountManager.bat	(copia de trabajo)
+@@ -1,4 +1,4 @@
+ @echo off
+ title aCis account manager console
+-@java -Djava.util.logging.config.file=config/console.cfg -cp ./libs/*; net.sf.l2j.accountmanager.SQLAccountManager
++@java -Djava.util.logging.config.file=config/console.cfg -cp ../libs/*; net.sf.l2j.accountmanager.SQLAccountManager
+ @pause
+Index: dist/GeoDataConverter.sh
+===================================================================
+--- dist/GeoDataConverter.sh	(revisión: 5)
++++ dist/GeoDataConverter.sh	(copia de trabajo)
+@@ -1,4 +1,4 @@
+ #! /bin/sh
+ 
+-java -Xmx512m -cp ./libs/*; net.sf.l2j.geodataconverter.GeoDataConverter > log/stdout.log 2>&1
++java -Xmx512m -cp ../libs/*; net.sf.l2j.geodataconverter.GeoDataConverter > log/stdout.log 2>&1
+ 
+Index: dist/RegisterGameServer.sh
+===================================================================
+--- dist/RegisterGameServer.sh	(revisión: 5)
++++ dist/RegisterGameServer.sh	(copia de trabajo)
+@@ -1,2 +1,2 @@
+ #!/bin/sh
+-java -Djava.util.logging.config.file=config/console.cfg -cp ./libs/*:l2jserver.jar net.sf.l2j.gsregistering.GameServerRegister
++java -Djava.util.logging.config.file=config/console.cfg -cp ../libs/*:l2jserver.jar net.sf.l2j.gsregistering.GameServerRegister

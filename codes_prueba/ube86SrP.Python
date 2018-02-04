@@ -1,0 +1,111 @@
+def add_sybs(coll):
+    """Если число символов в строке нечетно, добавляет пробел в конец"""
+    return coll if len(coll) % 2 == 0 else coll + " "
+
+def partition(coll, n):
+    """Разбивает переданную коллекцию на части по n элементов"""
+    p = []
+    for i in range(0, len(coll), n):
+        p.append(coll[i:i+n])
+    return p
+
+def char2bin(letter):
+    """Переводит символ в бинарную последовательность"""
+    return bin(ord(letter))
+
+def bin2char(binary):
+    """Переводит бинарную последовательность в символ"""
+    return chr(int(binary,2))
+
+def bitshiftrigth(binary, n):
+    """Побитовый кольцевой сдвиг вправо"""
+    b = binary
+    for _ in range(n):
+        b = b[:1] + b[:-1]
+    return b
+
+def handle_binary(b, n):
+    """Дополняет бинарную последовательность 
+    незначащими нулями до длины n"""
+    return ([0 for _ in range(n - (len(b) - 2))]
+           + [int(el) for el in b[2:]])
+
+def xor(b1, b2):
+    """Побитовый ксор"""
+    return [0 if r1 == r2 else 1 for r1, r2 in zip(b1, b2)]
+
+def make_block(pair, n):
+    """Составляет блок для шифрования из пары символов"""
+    return [handle_binary(char2bin(pair[0]), n),
+            handle_binary(char2bin(pair[1]), n)]
+
+def make_blocks(text, n):
+    """Разбивает текст на блоки"""
+    pairs = partition(add_sybs(text), 2)
+    return [make_block(pair, n) for pair in pairs]
+
+def encode_block(block, key, n):
+    """Функция шифрования блока"""
+    l = block[0]
+    r = block[1]
+    return [xor(r, bitshiftrigth(l, key)), l]
+
+def encode_blocks(blocks, key, n):
+    """Шифрует последовательность блоков"""
+    return [encode_block(block, key, n) for block in blocks]
+
+def list2str(arr):
+    """Переводит массив в строку"""
+    return ''.join([str(el) for el in arr])
+
+def block2str(block):
+    """Конвертирует блок в строку"""
+    return (bin2char(list2str(block[0])) +
+           bin2char(list2str(block[1])))
+
+def blocks2str(blocks):
+    """Конвертирует последоавтельность блоков в строку"""
+    return ''.join([block2str(block) for block in blocks])
+
+def last_round(block, key, n):
+    """Шифрование последнего раунда"""
+    l = block[0]
+    r = block[1]
+    return [l, xor(r, bitshiftrigth(l, key))]
+    
+def my_encode(text, n, key, k):
+    """Шифрование методом сети Файстеля"""
+    blocks = make_blocks(text, n)
+    print(blocks[0])
+    for _ in range(k-1):
+        print("Раунд: ", _)
+        blocks = encode_blocks(blocks, key, n)
+        print(blocks[0])
+    l = [last_round(block, key, n) for block in blocks]
+    print("Последний раунд:")
+    print(l[0])
+    return l 
+
+def last_swap(block):
+    """Меняет местами левую и правую часть блока"""
+    return [block[1], block[0]]
+
+def my_decode(blocks, key, n, k):
+    """Дешифрование методом сети Файстеля"""
+    print("Исходные данные")
+    print(blocks[0])
+    for _ in range(k):
+        print("Раунд: ", _)
+        print(blocks[0])
+        blocks = encode_blocks(blocks, key, n)
+    print("Последний раунд")
+    print(blocks[0])
+    return [last_swap(block) for block in blocks]
+
+key = len("Петр")
+text = "С милым рай и в шалаше"
+encoded_text = my_encode(text, 16, key, 16)
+text_str = blocks2str(encoded_text)
+
+print(text_str)
+print(blocks2str(my_decode(encoded_text, key, 16, 16)))

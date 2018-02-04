@@ -1,0 +1,56 @@
+Index: src/lib/elm_box.c
+===================================================================
+--- src/lib/elm_box.c	(revision 63624)
++++ src/lib/elm_box.c	(working copy)
+@@ -1,9 +1,16 @@
+ #include <Elementary.h>
+ #include "elm_priv.h"
+ 
+-#define SIG_CHILD_ADDED "child,added"
+-#define SIG_CHILD_REMOVED "child,removed"
++static const char SIG_CHILD_ADDED[] = "child,added";
++static const char SIG_CHILD_REMOVED[] = "child,removed";
+ 
++static const Evas_Smart_Cb_Description _signals[] = {
++  {SIG_CHILD_ADDED, ""},
++  {SIG_CHILD_REMOVED, ""},
++  {NULL, NULL}
++};
++
++
+ typedef struct _Widget_Data Widget_Data;
+ typedef struct _Transition_Animation_Data Transition_Animation_Data;
+ 
+@@ -76,6 +83,20 @@
+    return opt->obj;
+ }
+ 
++static void
++_cb_proxy_child_added(void *data, Evas_Object *o __UNUSED__, void *event_info)
++{
++   Evas_Object *box = data;
++   evas_object_smart_callback_call(box, SIG_CHILD_ADDED, event_info);
++}
++
++static void
++_cb_proxy_child_removed(void *data, Evas_Object *o __UNUSED__, void *event_info)
++{
++   Evas_Object *box = data;
++   evas_object_smart_callback_call(box, SIG_CHILD_REMOVED, event_info);
++}
++
+ static Eina_Bool
+ _elm_box_focus_next_hook(const Evas_Object *obj, Elm_Focus_Direction dir, Evas_Object **next)
+ {
+@@ -350,6 +371,12 @@
+ 
+    evas_object_smart_callback_add(obj, "sub-object-del", _sub_del, obj);
+ 
++   evas_object_smart_callbacks_descriptions_set(obj, _signals);
++   evas_object_smart_callback_add
++     (wd->box, SIG_CHILD_ADDED, _cb_proxy_child_added, obj);
++   evas_object_smart_callback_add
++     (wd->box, SIG_CHILD_REMOVED, _cb_proxy_child_removed, obj);
++
+    return obj;
+ }

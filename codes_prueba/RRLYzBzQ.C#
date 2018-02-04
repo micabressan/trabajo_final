@@ -1,0 +1,29 @@
+using (var db = new ProductsShopContext())
+            {
+
+                var users = db.Users.Where(u => u.ProductsSold.Count > 0)
+                    .OrderByDescending(u => u.ProductsSold.Count)
+                    .ThenBy(u => u.LastName)
+                    .Select(e => new
+                    {
+                        firstName = e.Firstname,
+                        lastName = e.LastName,
+                        age = e.Age,
+                        soldProducts = new
+                        {
+                            count = e.ProductsSold.Count,
+                            products = e.ProductsSold.Select(p => new { p.Name, p.Price })
+                        }
+                    });
+
+                var usersToSerialize = new
+                {
+                    usersCount = users.Count(),
+                    users
+                };
+
+
+                var jsonProduct = JsonConvert.SerializeObject(usersToSerialize, Formatting.Indented);
+
+                File.WriteAllText("users-and-products.json", jsonProduct);
+            }

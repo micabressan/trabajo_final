@@ -1,0 +1,8 @@
+def ps (p):
+    fh = p.iloc[:len(p)/2].TS_PCT.mean()
+    sh = p.iloc[len(p)/2:].TS_PCT.mean()
+    return sh-fh
+
+pgs = fieldInRange(alldata, "GS", (100,50)).groupby("PLAYER_ID")
+hc = pgs.agg(ps)
+hc = hc[hc.TS_PCT > 0]

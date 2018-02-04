@@ -1,0 +1,5 @@
+  tasks:
+    - name: testy
+      command: sleep 30
+      async: 5
+      retries: 3

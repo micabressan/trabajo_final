@@ -1,0 +1,17 @@
+<organizations default="interface_01">
+		<organization identifier="interface_01">
+			<title><![CDATA[IP Video Surveillance and Storage]]></title>
+			<item identifier="course_launch" identifierref="mainindex">
+				<title><![CDATA[IP Video Surveillance and Storage]]></title>
+			</item>
+			<imsss:sequencing>
+				<imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false"/>
+				<imsss:postConditionRule>
+					<imsss:ruleConditions>
+						<imsss:ruleCondition condition = "always"/>
+					</imsss:ruleConditions>
+					<imsss:ruleAction action="continue" />
+				</imsss:postConditionRule>
+			</imsss:sequencing>
+		</organization>
+	</organizations>

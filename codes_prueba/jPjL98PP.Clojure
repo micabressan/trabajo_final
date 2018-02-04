@@ -1,0 +1,10 @@
+(defn remove-dupes [key-fn sort-fn compare-fn items]
+  (->>  (group-by key-fn items)
+        (map (fn [[_ entries]]
+                (first (sort-by sort-fn compare-fn entries))))))
+
+(defn find-dupes [key-fn sort-fn compare-fn items]
+  (->>  (group-by key-fn items)
+        (mapcat (fn [[_ entries]]
+                  (when (> (count entries) 1)
+                    (rest (sort-by sort-fn compare-fn entries)))))))

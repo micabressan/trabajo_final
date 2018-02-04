@@ -1,0 +1,154 @@
+
+
+white = tocolor(255,255,255,255)
+green = tocolor(0,255,0,255)
+blue = tocolor(0,255,255,255)
+red = tocolor(255,0,0,255)
+
+dxDrawImage3D = (startX,startY,startZ,w,h,m,c,r,...) ->
+	endX, endY, endZ = startX+w, startY+h, (startZ+tonumber(r or 0)) or z
+	dxDrawMaterialLine3D(startX,startY,startZ, endX, endY, endZ, m, h, c or white, ...)
+
+	return {
+		startX: startX
+		startY: startY
+		startZ: startZ
+		endX: endX
+		endY: endY
+		endZ: endZ
+	}
+
+
+dxDrawTextOnElement = (TARGET,text,height,distance,R,G,B,alpha,size,font,checkBuildings,checkVehicles,checkPeds,checkDummies,seeThroughStuff,ignoreSomeObjectsForCamera,ignoredElement) ->
+	x, y, z = TARGET.x,TARGET.y,TARGET.z-1
+	x2, y2, z2 = getElementPosition(localPlayer)
+	distance = distance or 20
+	height = height or 1
+	sx, sy = getScreenFromWorldPosition(x, y, z+height)
+	if (sx) and (sy)
+		dxDrawText(text, sx+2, sy+2, sx, sy, tocolor(R or 255, G or 255, B or 255, alpha or 255), (size or 1), font or "arial", "center", "center")
+
+
+axis = {
+	arrow_x: dxCreateTexture("arrow.png")
+	xColor: white
+
+	x: 0
+	y: 0
+	z: 5
+
+	fx: 0
+	fy: 1
+	fz: 5
+}
+
+width = 2
+height = 1
+
+
+bindKey("r","down",()->
+	showCursor(not isCursorShowing())
+)
+
+_draw = dxDrawText
+dxDrawText = (text, x,y,...) ->
+
+	_draw(text, x+1,y+1, nil,nil, tocolor(0,0,0,255))
+	_draw(text, x,y,...)
+
+compareVectors = (V1,cType,V2) ->
+
+	if cType == ">"
+
+		if V1.x > V2.x and V1.y > V2.y and V1.z > V2.z
+			return true
+
+		return false
+
+	elseif cType == "<"
+		if V1.x < V2.x and V1.y < V2.y and V1.z < V2.z
+			return true
+
+		return false
+
+	outputDebugString("ERROR")
+
+render = () ->
+	px,py,pz = getElementPosition(localPlayer)
+
+	array = dxDrawImage3D(axis.x,axis.y,axis.z, width,height, axis.arrow_x, axis.xColor, 0, axis.fx,axis.fy,axis.fz)
+
+	cx,cy,cz,cx2,cy2,cz2,_,_ = getCameraMatrix()
+	Vector_Camera = Vector3(cx2,cy2,cz2)
+
+	--левый верхний
+	Vector_LU = Vector3(array.startX,array.startY,array.startZ+(height/2))
+	Vector_LU = Vector_LU-Vector_Camera
+	dxDrawLine3D(px,py,pz, Vector_LU.x,Vector_LU.y,Vector_LU.z, green, 2)
+	dxDrawTextOnElement(Vector_LU,"Vector_LU")
+	--Левый нижний
+	Vector_LD = Vector3(array.startX,array.startY,array.startZ-(height/2))
+	Vector_LD = Vector_LD-Vector_Camera
+	dxDrawLine3D(px,py,pz, Vector_LD.x,Vector_LD.y,Vector_LD.z, green, 2)
+	dxDrawTextOnElement(Vector_LD,"Vector_LD")
+	--Правый верхний
+	Vector_RU = Vector3(array.startX+(width), array.startY+(width/2), array.startZ+(height/2))
+	Vector_RU = Vector_RU-Vector_Camera
+	dxDrawLine3D(px,py,pz, Vector_RU.x,Vector_RU.y,Vector_RU.z, green, 2)
+	dxDrawTextOnElement(Vector_RU,"Vector_RU")
+	--Правый нижний
+	Vector_RD = Vector3(array.startX+(width), array.startY+(width/2), array.startZ-(height/2))
+	Vector_RD = Vector_RD-Vector_Camera
+	dxDrawLine3D(px,py,pz, Vector_RD.x,Vector_RD.y,Vector_RD.z, green, 2)
+	dxDrawTextOnElement(Vector_RD,"Vector_RD")
+
+
+
+	if not isCursorShowing()
+		return
+
+	_,_, wx,wy,wz = getCursorPosition()
+	Vector_Cursor = Vector3(wx,wy,wz)
+	
+
+	Vector_Target = Vector_Cursor-Vector_Camera
+	
+	--Vector_Target.x = math.max(0, Vector_Target.x)
+	--Vector_Target.y = Vector_Target.y/2
+	--outputDebugString("test: #{Vector_Target}")
+	--Курсор
+	dxDrawLine3D(px,py,pz, Vector_Target.x,Vector_Target.y,Vector_Target.z, blue, 4)
+
+	dxDrawText("Vector_LU: #{Vector_LU}", 410,300)
+	dxDrawText("Vector_LD: #{Vector_LD}", 410,320)
+	dxDrawText("Vector_RU: #{Vector_RU}", 410,340)
+	dxDrawText("Vector_RD: #{Vector_RD}", 410,360)
+	dxDrawText("Vector_Target: #{Vector_Target}", 410,380)
+
+	Vector_LU\normalize()
+	Vector_LD\normalize()
+	Vector_RU\normalize()
+	Vector_RD\normalize()
+	Vector_Target\normalize()
+
+
+	dxDrawText("Vector_LU: #{Vector_LU}", 10,300)
+	dxDrawText("Vector_LD: #{Vector_LD}", 10,320)
+	dxDrawText("Vector_RU: #{Vector_RU}", 10,340)
+	dxDrawText("Vector_RD: #{Vector_RD}", 10,360)
+	dxDrawText("Vector_Target: #{Vector_Target}", 10,380)
+
+	test_1 = compareVectors(Vector_Target,">",Vector_LU)
+	dxDrawText("TEST_1: #{test_1}",10,500)
+	test_2 = compareVectors(Vector_Target,"<",Vector_RD)
+	dxDrawText("TEST_2: #{test_2}",10,520)
+	if test_1 and test_2 --Если курсор внутри по X
+		
+		if compareVectors(Vector_Target,">",Vector_LD) and compareVectors(Vector_Target,"<",Vector_RD)
+			dxDrawText("V2",0,500)
+			axis.xColor = red
+			return
+
+	axis.xColor = white
+
+addEventHandler("onClientRender",root,render)

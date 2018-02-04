@@ -1,0 +1,85 @@
+use std::io::stdin;
+
+fn validate(input: &String) -> Option<String> {
+    for character in input.chars() {
+        if character != '0' && character != '1' {
+            return None
+        }
+    }
+
+    Some(input.clone().to_string())
+}
+
+fn get_index_within_bounds(index: &usize, offset: isize, length: &usize) -> usize {
+    let index = *index as isize;
+    let length = *length as isize - 1;
+    let raw_index = index + offset;
+
+    let new_index = match raw_index {
+        n if n < 0 => (n + length) as usize,
+        n if n > length => (n - length) as usize,
+        n => n as usize
+    };
+
+    new_index
+}
+
+fn next_step(state_string: &mut String) {
+    let state_vec: Vec<char> = state_string.chars().collect();
+    let length = state_vec.len();
+    let mut new_state_vec: Vec<char> = Vec::with_capacity(length);
+
+    for index in 0..length {
+        let b = state_vec[get_index_within_bounds(&index, -1, &length)];
+        let c = state_vec[get_index_within_bounds(&index, 0, &length)];
+        let a = state_vec[get_index_within_bounds(&index, 1, &length)];
+
+        //println!("{}: {} {} {} ", index, b, c, a);
+
+        new_state_vec.push(match (b, c, a) {
+            ('1', '1', '1') => '0',
+            ('1', '1', '0') => '1',
+            ('1', '0', '1') => '0',
+            ('1', '0', '0') => '1',
+            ('0', '1', '1') => '1',
+            ('0', '1', '0') => '0',
+            ('0', '0', '1') => '1',
+            ('0', '0', '0') => '0',
+            (_, _, _) => '0',
+        });
+    }
+
+    *state_string = format!("New: {} {} {} ",
+    new_state_vec[0],
+    new_state_vec[1],
+    new_state_vec[2]);
+}
+
+fn run_game(state: &String) {
+    println!("{}", state);
+    let mut new_state: String = *state;
+
+    for _ in 0..10 {
+        next_step(&mut new_state);
+        println!("{}", new_state);
+    }
+}
+
+fn main() {
+    let mut input_text = String::new();
+    println!("Enter the initial state (Only 0 and 1):");
+
+    stdin()
+        .read_line(&mut input_text)
+        .expect("failed to read from stdin");
+
+    let trimmed = input_text.trim().to_string();
+
+    match validate(&trimmed) {
+        Some(i) => {
+            println!("Input correct: 🌲🐑{}", i);
+            run_game(&i);
+        },
+        None => println!("Pattern has wrong character: {}", trimmed)
+    };
+}

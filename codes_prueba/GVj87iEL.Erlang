@@ -1,0 +1,14 @@
+loop(Socket, Transport, CroppedBuffer, ProcTime) ->
+        {Status, Data} = Transport:recv(Socket, 0, 60000),
+        case {Status, Data} of
+                {ok, Data} ->
+                        ?D("Cropped buffer in: ~p", CroppedBuffer),
+                        {Tm, {{ok, Len}, NewCroppedBuffer}} = timer:tc(?MODULE, process_query, [<<CroppedBuffer/binary, Data/binary>>]),
+                        ?I("*Partial processing time: ~B usec", Tm),
+                        ?I("~B metrics processed", Len),
+                        ?D("New Cropped buffer in: ~p", NewCroppedBuffer),
+                        loop(Socket, Transport, NewCroppedBuffer, ProcTime+Tm);
+                _ ->
+                        ?I("Processing time: ~p", ProcTime),
+                        ok = Transport:close(Socket)
+        end.

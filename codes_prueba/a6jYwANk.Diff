@@ -1,0 +1,509 @@
+Index: config/custom.properties
+===================================================================
+--- config/custom.properties	(revision 0)
++++ config/custom.properties	(working copy)
+@@ -0,0 +1,18 @@
++#=============================================================
++#                       Custom settings
++#=============================================================
++# Limit of displayed raid boss per page
++# Default: 15
++RaidBossInfoPageLimit = 15
++
++# Limit of displayed drop per page
++# Default: 15
++RaidBossDropPageLimit = 15
++
++# Displayed date format for dead raid boss
++# Default: (MMM dd, HH:mm)
++RaidBossDateFormat = (MMM dd, HH:mm)
++
++# Displayed raid boss
++# Syntax: bossId,bossId, ...
++RaidBossIds = 25238,25112,25281,25234,29019,25109,25188,25395,25029,29020,25434,25044,25269,25137,25426,25057,25176,25266,25073,25501,25020,25392,25067,25131,25079,25063,25450,29006,25404,25088,25189,25217,25290,25509,25460,25220,25276,25282,25182,25322,25372,25248,25418,25192,25328,25095,25319,25070,25444,25032,25493,25441,25385,25398,25496,25498,25198,25214,25423,29033,29030,29037,29036,25125,25143,25152,25325,25524,25431,29045,25010,25354,25255,25475,25013,25106,25162,25352,25512,29095,25467,25473,25001,25179,25118,25490,25463,25241,25140,25293,25115,25296,25166,25447,25260,25047,25026,25380,25054,25263,25305,25302,25299,25158,25092,25202,25366,25127,25245,25244,25470,25082,25134,25277,25170,25126,25407,25378,25481,25373,25429,25453,25119,25456,25415,25412,25504,25391,25205,29014,25420,25280,25249,25252,25019,25159,25272,25365,25523,25394,25076,29001,25514,25169,25051,25506,25388,25122,25041,25007,25383,25410,25226,25163,25099,29065,29046,29047,25211,25098,25146,25102,25155,25035,25478,25401,25103,25223,25306,25316,25369,25089,25233,25023,25229,25357,25256,25185,25016,25438,25360,25173,25085,25437,25230,25038,25362,25004,25060,25527,29028,25235,25315,25312,25309,25050,25128,25208,25199,25487,29040,25064,29022,25259,25484,25149,25375
+\ No newline at end of file
+Index: java/net/sf/l2j/Config.java
+===================================================================
+--- java/net/sf/l2j/Config.java	(revision 21)
++++ java/net/sf/l2j/Config.java	(working copy)
+@@ -43,6 +43,7 @@
+ 	protected static final Logger _log = Logger.getLogger(Config.class.getName());
+ 	
+ 	public static final String CLANS_FILE = "./config/clans.properties";
++	public static final String CUSTOM_FILE = "./config/custom.properties";
+ 	public static final String EVENTS_FILE = "./config/events.properties";
+ 	public static final String GEOENGINE_FILE = "./config/geoengine.properties";
+ 	public static final String HEXID_FILE = "./config/hexid.txt";
+@@ -132,6 +133,16 @@
+ 	public static int CH_FRONT2_FEE;
+ 	
+ 	// --------------------------------------------------
++	// Custom settings
++	// --------------------------------------------------
++	
++	public static int RAID_BOSS_INFO_PAGE_LIMIT;
++	public static int RAID_BOSS_DROP_PAGE_LIMIT;
++	public static String RAID_BOSS_DATE_FORMAT;
++	public static String RAID_BOSS_IDS;
++	public static List<Integer> LIST_RAID_BOSS_IDS;
++	
++	// --------------------------------------------------
+ 	// Events settings
+ 	// --------------------------------------------------
+ 	
+@@ -761,6 +772,19 @@
+ 			CH_FRONT1_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", 3031);
+ 			CH_FRONT2_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", 9331);
+ 			
++			// Custom settings
++			ExProperties custom = load(CUSTOM_FILE);
++			RAID_BOSS_INFO_PAGE_LIMIT = custom.getProperty("RaidBossInfoPageLimit", 15);
++			RAID_BOSS_DROP_PAGE_LIMIT = custom.getProperty("RaidBossDropPageLimit", 15);
++			RAID_BOSS_DATE_FORMAT = custom.getProperty("RaidBossDateFormat", "MMM dd, HH:mm");
++			RAID_BOSS_IDS = custom.getProperty("RaidBossIds", "0,0");
++			LIST_RAID_BOSS_IDS = new ArrayList<>();
++			for (String val : RAID_BOSS_IDS.split(","))
++			{
++				int npcId = Integer.parseInt(val);
++				LIST_RAID_BOSS_IDS.add(npcId);
++			}
++			
+ 			// Events config
+ 			ExProperties events = load(EVENTS_FILE);
+ 			ALT_OLY_START_TIME = events.getProperty("AltOlyStartTime", 18);
+Index: java/net/sf/l2j/gameserver/GameServer.java
+===================================================================
+--- java/net/sf/l2j/gameserver/GameServer.java	(revision 21)
++++ java/net/sf/l2j/gameserver/GameServer.java	(working copy)
+@@ -78,6 +78,7 @@
+ import net.sf.l2j.gameserver.instancemanager.AuctionManager;
+ import net.sf.l2j.gameserver.instancemanager.AutoSpawnManager;
+ import net.sf.l2j.gameserver.instancemanager.BoatManager;
++import net.sf.l2j.gameserver.instancemanager.RaidBossInfoManager;
+ import net.sf.l2j.gameserver.instancemanager.CastleManager;
+ import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
+ import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
+@@ -252,6 +253,7 @@
+ 		L2Manor.getInstance();
+ 		
+ 		StringUtil.printSection("NPCs");
++		RaidBossInfoManager.getInstance();
+ 		BufferTable.getInstance();
+ 		HerbDropTable.getInstance();
+ 		PetDataTable.getInstance();
+Index: java/net/sf/l2j/gameserver/instancemanager/GrandBossManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/instancemanager/GrandBossManager.java	(revision 21)
++++ java/net/sf/l2j/gameserver/instancemanager/GrandBossManager.java	(working copy)
+@@ -25,6 +25,7 @@
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ 
++import net.sf.l2j.Config;
+ import net.sf.l2j.L2DatabaseFactory;
+ import net.sf.l2j.gameserver.datatables.NpcTable;
+ import net.sf.l2j.gameserver.model.actor.L2Character;
+@@ -207,6 +208,9 @@
+ 	{
+ 		_storedInfo.put(bossId, info);
+ 		updateDb(bossId, false);
++		
++		if (Config.LIST_RAID_BOSS_IDS.contains(bossId))
++			RaidBossInfoManager.getInstance().updateRaidBossInfo(bossId, info.getLong("respawn_time"));
+ 	}
+ 	
+ 	private void storeToDb()
+Index: java/net/sf/l2j/gameserver/instancemanager/RaidBossInfoManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/instancemanager/RaidBossInfoManager.java	(revision 0)
++++ java/net/sf/l2j/gameserver/instancemanager/RaidBossInfoManager.java	(working copy)
+@@ -0,0 +1,87 @@
++/*
++ * This program is free software: you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation, either version 3 of the License, or (at your option) any later
++ * version.
++ * 
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
++ * details.
++ * 
++ * You should have received a copy of the GNU General Public License along with
++ * this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++package net.sf.l2j.gameserver.instancemanager;
++
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.util.Map;
++import java.util.concurrent.ConcurrentHashMap;
++import java.util.logging.Logger;
++
++import net.sf.l2j.Config;
++import net.sf.l2j.L2DatabaseFactory;
++
++/**
++ * @author rapfersan92
++ */
++public class RaidBossInfoManager
++{
++	private static final Logger _log = Logger.getLogger(RaidBossInfoManager.class.getName());
++	
++	private final Map<Integer, Long> _raidBosses;
++	
++	public static RaidBossInfoManager getInstance()
++	{
++		return SingletonHolder._instance;
++	}
++	
++	protected RaidBossInfoManager()
++	{
++		_raidBosses = new ConcurrentHashMap<>();
++		load();
++	}
++	
++	public void load()
++	{
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection())
++		{
++			PreparedStatement statement;
++			ResultSet rs;
++			
++			statement = con.prepareStatement("SELECT boss_id, respawn_time FROM grandboss_data UNION SELECT boss_id, respawn_time FROM raidboss_spawnlist ORDER BY boss_id");
++			rs = statement.executeQuery();
++			while (rs.next())
++			{
++				int bossId = rs.getInt("boss_id");
++				if (Config.LIST_RAID_BOSS_IDS.contains(bossId))
++					_raidBosses.put(bossId, rs.getLong("respawn_time"));
++			}
++			rs.close();
++			statement.close();
++		}
++		catch (Exception e)
++		{
++			_log.warning("Exception: RaidBossInfoManager load: " + e);
++		}
++		
++		_log.info("RaidBossInfoManager: Loaded " + _raidBosses.size() + " instances.");
++	}
++	
++	public void updateRaidBossInfo(int bossId, long respawnTime)
++	{
++		_raidBosses.put(bossId, respawnTime);
++	}
++	
++	public long getRaidBossRespawnTime(int bossId)
++	{
++		return _raidBosses.get(bossId);
++	}
++	
++	private static class SingletonHolder
++	{
++		protected static final RaidBossInfoManager _instance = new RaidBossInfoManager();
++	}
++}
+\ No newline at end of file
+Index: java/net/sf/l2j/gameserver/instancemanager/RaidBossSpawnManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/instancemanager/RaidBossSpawnManager.java	(revision 21)
++++ java/net/sf/l2j/gameserver/instancemanager/RaidBossSpawnManager.java	(working copy)
+@@ -26,6 +26,7 @@
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ 
++import net.sf.l2j.Config;
+ import net.sf.l2j.L2DatabaseFactory;
+ import net.sf.l2j.commons.random.Rnd;
+ import net.sf.l2j.gameserver.ThreadPoolManager;
+@@ -145,6 +146,9 @@
+ 			}
+ 			
+ 			_schedules.remove(bossId);
++			
++			if (Config.LIST_RAID_BOSS_IDS.contains(bossId))
++				RaidBossInfoManager.getInstance().updateRaidBossInfo(bossId, 0);
+ 		}
+ 	}
+ 	
+@@ -174,6 +178,9 @@
+ 				_schedules.put(boss.getNpcId(), ThreadPoolManager.getInstance().scheduleGeneral(new spawnSchedule(boss.getNpcId()), respawnDelay * 3600000));
+ 				updateDb();
+ 			}
++			
++			if (Config.LIST_RAID_BOSS_IDS.contains(boss.getNpcId()))
++				RaidBossInfoManager.getInstance().updateRaidBossInfo(boss.getNpcId(), respawnTime);
+ 		}
+ 		else
+ 		{
+Index: java/net/sf/l2j/gameserver/model/actor/instance/L2RaidBossInfoInstance.java
+===================================================================
+--- java/net/sf/l2j/gameserver/model/actor/instance/L2RaidBossInfoInstance.java	(revision 0)
++++ java/net/sf/l2j/gameserver/model/actor/instance/L2RaidBossInfoInstance.java	(working copy)
+@@ -0,0 +1,263 @@
++/*
++ * This program is free software: you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation, either version 3 of the License, or (at your option) any later
++ * version.
++ * 
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
++ * details.
++ * 
++ * You should have received a copy of the GNU General Public License along with
++ * this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++package net.sf.l2j.gameserver.model.actor.instance;
++
++import java.text.SimpleDateFormat;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.List;
++import java.util.Map;
++import java.util.StringTokenizer;
++import java.util.concurrent.ConcurrentHashMap;
++
++import net.sf.l2j.Config;
++import net.sf.l2j.commons.random.Rnd;
++import net.sf.l2j.gameserver.datatables.ItemTable;
++import net.sf.l2j.gameserver.datatables.NpcTable;
++import net.sf.l2j.gameserver.instancemanager.RaidBossInfoManager;
++import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
++import net.sf.l2j.gameserver.model.item.DropData;
++import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
++import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
++
++/**
++ * @author rapfersan92
++ */
++public class L2RaidBossInfoInstance extends L2NpcInstance
++{
++	private final Map<Integer, Integer> _lastPage = new ConcurrentHashMap<>();
++	
++	private final String[][] _messages =
++	{
++		{
++			"<font color=\"LEVEL\">%player%</font>, are you not afraid?",
++			"Be careful <font color=\"LEVEL\">%player%</font>!"
++		},
++		{
++			"Here is the drop list of <font color=\"LEVEL\">%boss%</font>!",
++			"Seems that <font color=\"LEVEL\">%boss%</font> has good drops."
++		},
++	};
++	
++	public L2RaidBossInfoInstance(int objectId, NpcTemplate template)
++	{
++		super(objectId, template);
++	}
++	
++	@Override
++	public void showChatWindow(L2PcInstance player, int val)
++	{
++		String name = "data/html/mods/raidbossinfo/" + getNpcId() + ".htm";
++		if (val != 0)
++			name = "data/html/mods/raidbossinfo/" + getNpcId() + "-" + val + ".htm";
++		
++		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
++		html.setFile(name);
++		html.replace("%objectId%", getObjectId());
++		player.sendPacket(html);
++		player.sendPacket(ActionFailed.STATIC_PACKET);
++	}
++	
++	@Override
++	public void onBypassFeedback(L2PcInstance player, String command)
++	{
++		StringTokenizer st = new StringTokenizer(command, " ");
++		String currentCommand = st.nextToken();
++		
++		if (currentCommand.startsWith("RaidBossInfo"))
++		{
++			int pageId = Integer.parseInt(st.nextToken());
++			_lastPage.put(player.getObjectId(), pageId);
++			showRaidBossInfo(player, pageId);
++		}
++		else if (currentCommand.startsWith("RaidBossDrop"))
++		{
++			int bossId = Integer.parseInt(st.nextToken());
++			int pageId = st.hasMoreTokens() ? Integer.parseInt(st.nextToken()) : 1;
++			showRaidBossDrop(player, bossId, pageId);
++		}
++		
++		super.onBypassFeedback(player, command);
++	}
++	
++	private void showRaidBossInfo(L2PcInstance player, int pageId)
++	{
++		List<Integer> infos = new ArrayList<>();
++		infos.addAll(Config.LIST_RAID_BOSS_IDS);
++		
++		final int limit = Config.RAID_BOSS_INFO_PAGE_LIMIT;
++		final int max = infos.size() / limit + (infos.size() % limit == 0 ? 0 : 1);
++		infos = infos.subList((pageId - 1) * limit, Math.min(pageId * limit, infos.size()));
++		
++		final StringBuilder sb = new StringBuilder();
++		sb.append("<html>");
++		sb.append("<center>");
++		sb.append("<body>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"center\">%name%</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"left\">" + _messages[0][Rnd.get(_messages.length)].replace("%player%", player.getName()) + "</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"224\" bgcolor=\"000000\">");
++		sb.append("<tr><td width=\"224\" align=\"center\">Raid Boss Infos</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		
++		for (int bossId : infos)
++		{
++			final NpcTemplate template = NpcTable.getInstance().getTemplate(bossId);
++			if (template == null)
++				continue;
++			
++			String bossName = template.getName();
++			if (bossName.length() > 23)
++				bossName = bossName.substring(0, 23) + "...";
++			
++			final long respawnTime = RaidBossInfoManager.getInstance().getRaidBossRespawnTime(bossId);
++			if (respawnTime <= System.currentTimeMillis())
++			{
++				sb.append("<tr>");
++				sb.append("<td width=\"146\" align=\"left\"><a action=\"bypass -h npc_%objectId%_RaidBossDrop " + bossId + "\">" + bossName + "</a></td>");
++				sb.append("<td width=\"110\" align=\"right\"><font color=\"9CC300\">Alive</font></td>");
++				sb.append("</tr>");
++			}
++			else
++			{
++				sb.append("<tr>");
++				sb.append("<td width=\"146\" align=\"left\"><a action=\"bypass -h npc_%objectId%_RaidBossDrop " + bossId + "\">" + bossName + "</a></td>");
++				sb.append("<td width=\"110\" align=\"right\"><font color=\"FB5858\">Dead</font> " + new SimpleDateFormat(Config.RAID_BOSS_DATE_FORMAT).format(new Date(respawnTime)) + "</td>");
++				sb.append("</tr>");
++			}
++		}
++		
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"224\" cellspacing=\"2\">");
++		sb.append("<tr>");
++		
++		for (int x = 0; x < max; x++)
++		{
++			final int pageNr = x + 1;
++			if (pageId == pageNr)
++				sb.append("<td align=\"center\">" + pageNr + "</td>");
++			else
++				sb.append("<td align=\"center\"><a action=\"bypass -h npc_%objectId%_RaidBossInfo " + pageNr + "\">" + pageNr + "</a></td>");
++		}
++		
++		sb.append("</tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"160\" cellspacing=\"2\">");
++		sb.append("<tr>");
++		sb.append("<td width=\"160\" align=\"center\"><a action=\"bypass -h npc_%objectId%_Chat 0\">Return</a></td>");
++		sb.append("</tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"center\">L2jBrasil</td></tr>");
++		sb.append("</table>");
++		sb.append("</center>");
++		sb.append("</body>");
++		sb.append("</html>");
++		
++		final NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
++		html.setHtml(sb.toString());
++		html.replace("%name%", getName());
++		html.replace("%objectId%", getObjectId());
++		player.sendPacket(html);
++	}
++	
++	private void showRaidBossDrop(L2PcInstance player, int bossId, int pageId)
++	{
++		final NpcTemplate template = NpcTable.getInstance().getTemplate(bossId);
++		if (template == null)
++			return;
++		
++		List<Integer> drops = new ArrayList<>();
++		for (DropData drop : template.getAllDropData())
++			drops.add(drop.getItemId());
++		
++		final int limit = Config.RAID_BOSS_DROP_PAGE_LIMIT;
++		final int max = drops.size() / limit + (drops.size() % limit == 0 ? 0 : 1);
++		drops = drops.subList((pageId - 1) * limit, Math.min(pageId * limit, drops.size()));
++		
++		final StringBuilder sb = new StringBuilder();
++		sb.append("<html>");
++		sb.append("<center>");
++		sb.append("<body>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"center\">%name%</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"left\">" + _messages[1][Rnd.get(_messages.length)].replace("%boss%", template.getName()) + "</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"224\" bgcolor=\"000000\">");
++		sb.append("<tr><td width=\"224\" align=\"center\">Raid Boss Drops</td></tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		
++		for (int itemId : drops)
++		{
++			String itemName = ItemTable.getInstance().getTemplate(itemId).getName();
++			if (itemName.length() > 47)
++				itemName = itemName.substring(0, 47) + "...";
++			
++			sb.append("<tr><td width=\"256\" align=\"center\">" + itemName + "</td></tr>");
++		}
++		
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"64\" cellspacing=\"2\">");
++		sb.append("<tr>");
++		
++		for (int x = 0; x < max; x++)
++		{
++			final int pageNr = x + 1;
++			if (pageId == pageNr)
++				sb.append("<td align=\"center\">" + pageNr + "</td>");
++			else
++				sb.append("<td align=\"center\"><a action=\"bypass -h npc_%objectId%_RaidBossDrop " + bossId + " " + pageNr + "\">" + pageNr + "</a></td>");
++		}
++		
++		sb.append("</tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"160\" cellspacing=\"2\">");
++		sb.append("<tr>");
++		sb.append("<td width=\"160\" align=\"center\"><a action=\"bypass -h npc_%objectId%_RaidBossInfo " + _lastPage.get(player.getObjectId()) + "\">Return</a></td>");
++		sb.append("</tr>");
++		sb.append("</table>");
++		sb.append("<br>");
++		sb.append("<table width=\"256\">");
++		sb.append("<tr><td width=\"256\" align=\"center\">L2jBrasil</td></tr>");
++		sb.append("</table>");
++		sb.append("</center>");
++		sb.append("</body>");
++		sb.append("</html>");
++		
++		final NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
++		html.setHtml(sb.toString());
++		html.replace("%name%", getName());
++		html.replace("%objectId%", getObjectId());
++		player.sendPacket(html);
++	}
++}
+\ No newline at end of file

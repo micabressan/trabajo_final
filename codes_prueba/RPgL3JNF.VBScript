@@ -1,0 +1,97 @@
+'URL of internet radio source
+strURL = "http://www.bbc.co.uk/radio/player/bbc_radio_two"
+'URL of offline audio file
+strMP3 = "C:\Windows\Media\Alarm02.wav"
+'Time in Mins
+intWait = 59
+'WLAN Profile Name
+strWLANProf = "Bob"
+'Volume to run at (%)
+intVolMax = 65
+
+set objShell = createobject("wscript.shell")
+
+'Set system volume to 0, but unmuted
+objshell.run "nircmd setsysvolume 0"
+objshell.run "nircmd mutesysvolume 0"
+
+intStopMinute = minute(now) + intWait
+if intStopMinute >= 60 then intStopMinute = intStopMinute - 60
+
+'Reset WLAN (try to fix that annoying issue)
+objshell.run "cmd.exe /C " & chr(34) & "netsh wlan disconnect" & chr(34),0,true
+wscript.sleep 2000
+objshell.run "cmd.exe /C " & chr(34) & "netsh wlan connect " & strWLANProf & chr(34),0,true
+wscript.sleep 10000
+
+'Find out if we're online
+boolOnline = Ping("8.8.8.8")
+'boolonline = false
+
+'Online = internet radio, offline = mp3
+if boolOnline = true then
+	
+	'Create an instance of IE (because it's VB-able), open the internet radio URL
+	Set objIE = CreateObject("InternetExplorer.Application")
+	objIE.navigate strURL
+	objIE.visible = 1
+
+	'Wait a while to give it time to load the stream
+	wscript.sleep 30000
+
+	'Gradually increase volume to the limit
+	intPercent = 0
+	do while not intPercent = intVolMax
+		intPercent = intPercent + 1
+		intVol = (65535 / 100) * intPercent
+		objshell.run "nircmd setsysvolume " & intVol
+		wscript.sleep 150
+	loop
+
+	'Wait for the length of the alarm
+	do while not minute(now) = intStopMinute
+		wscript.sleep 60000
+	loop
+
+	
+	'Close IE
+	objIE.quit
+else
+	'Set volume to the maximum set
+	intVol = (65535 / 100) * intVolMax
+	objshell.run "nircmd setsysvolume " & intVol
+
+	'Wait a minute
+	wscript.sleep 60000
+	
+	'Load media player
+	Set objWMP = createobject("wmplayer.ocx.7") 
+	intStop = 0	
+	
+	'Keep playing the mp3, over and over again
+	objWMP.url = strMP3
+	do while intStop <> 1
+		if objwmp.playstate = 1 then
+			objWMP.url = strMP3
+		elseif objwmp.playstate = 9 then
+			intStop = objshell.popup("Stop?",1,"Alarm Clock",&H20 + &H2000)
+		end if
+
+		if minute(now) = intStopMinute then intStop = 1
+	loop
+end if
+
+'Googled ping function
+Function Ping(strHost)
+	Dim objSh, strCommand, intWindowStyle, blnWaitOnReturn
+ 
+	blnWaitOnReturn = True
+	intWindowStyle = 0
+	strCommand = "%ComSpec% /C %SystemRoot%\system32\ping.exe -n 1 " _
+	& strHost & " | " & "%SystemRoot%\system32\find.exe /i " _
+	& Chr(34) & "TTL=" & Chr(34)
+ 
+	Set objSh = WScript.CreateObject("WScript.Shell")
+	Ping = Not CBool(objSh.Run(strCommand, intWindowStyle, blnWaitOnReturn))
+	Set objSh = Nothing
+End Function

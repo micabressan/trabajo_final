@@ -1,0 +1,13 @@
+(println "Main - Inicia")
+
+;En este momento ya se dispara el thread.
+(def objetoFuturo (future (println "Thread - Inicia")
+                          (Thread/sleep 5000)
+                          (println "Thread - Fin")
+                          100)
+)
+
+(println "Main - Se solicita estado objetoFuturo")
+(println "Main - Hilo bloqueado hasta que el Thread disparado termine su ejecución")
+(println "Resultado:" @objetoFuturo)
+(println "Main - Fin")

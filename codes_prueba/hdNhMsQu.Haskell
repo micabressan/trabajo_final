@@ -1,0 +1,10 @@
+-- problem number 10
+
+isPrime :: Integer -> Bool
+isPrime n = null [x | x <- [2..upperBound], n `mod` x == 0]
+    where upperBound = ceiling $ sqrt (fromIntegral n)
+
+primes :: [Integer]
+primes = filter isPrime [2..]
+
+main = print $ sum $ takeWhile (<2000000) primes

@@ -1,0 +1,180 @@
+From f3d806fff44168b6a89e5c98ca8cb720fba2f698 Mon Sep 17 00:00:00 2001
+From: Bradley T. Hughes <bradley.hughes@nokia.com>
+Date: Fri, 21 Oct 2011 09:59:54 +0200
+Subject: [PATCH] Fix performance regression on Mac OS X when
+ creating/destroying QMutex
+
+This reverts commit cf17b743d2fe84ab259b7232ab07b58a1872e18e, which
+changed QMutex to use a Mach semaphore_t on Mac OS X. We now use
+pthread_mutex_t on Mac OS X as well. Contention performance is mostly
+unchanged, but the new constructionQMutex() benchmark added in this
+commit shows that creating/destroying a semaphore_t is about 20 times
+slower than pthread_mutex_t.
+
+Reviewed-by: Olivier Goffart
+
+diff --git a/src/corelib/thread/qmutex_p.h b/src/corelib/thread/qmutex_p.h
+index a9923c4..d2ffd28 100644
+--- a/src/corelib/thread/qmutex_p.h
++++ b/src/corelib/thread/qmutex_p.h
+@@ -58,10 +58,6 @@
+ #include <QtCore/qnamespace.h>
+ #include <QtCore/qmutex.h>
+ 
+-#if defined(Q_OS_MAC)
+-# include <mach/semaphore.h>
+-#endif
+-
+ #if defined(Q_OS_SYMBIAN)
+ # include <e32std.h>
+ #endif
+@@ -83,9 +79,7 @@ public:
+     Qt::HANDLE owner;
+     uint count;
+ 
+-#if defined(Q_OS_MAC)
+-    semaphore_t mach_semaphore;
+-#elif defined(Q_OS_UNIX) && !defined(Q_OS_LINUX) && !defined(Q_OS_SYMBIAN)
++#if defined(Q_OS_UNIX) && !defined(Q_OS_LINUX) && !defined(Q_OS_SYMBIAN)
+     volatile bool wakeup;
+     pthread_mutex_t mutex;
+     pthread_cond_t cond;
+diff --git a/src/corelib/thread/qmutex_unix.cpp b/src/corelib/thread/qmutex_unix.cpp
+index 2a9d23c..790fad3 100644
+--- a/src/corelib/thread/qmutex_unix.cpp
++++ b/src/corelib/thread/qmutex_unix.cpp
+@@ -65,7 +65,7 @@
+ 
+ QT_BEGIN_NAMESPACE
+ 
+-#if !defined(Q_OS_MAC) && !defined(Q_OS_LINUX)
++#if !defined(Q_OS_LINUX)
+ static void report_error(int code, const char *where, const char *what)
+ {
+     if (code != 0)
+@@ -77,11 +77,7 @@ static void report_error(int code, const char *where, const char *what)
+ QMutexPrivate::QMutexPrivate(QMutex::RecursionMode mode)
+     : QMutexData(mode), maximumSpinTime(MaximumSpinTimeThreshold), averageWaitTime(0), owner(0), count(0)
+ {
+-#if defined(Q_OS_MAC)
+-    kern_return_t r = semaphore_create(mach_task_self(), &mach_semaphore, SYNC_POLICY_FIFO, 0);
+-    if (r != KERN_SUCCESS)
+-        qWarning("QMutex: failed to create semaphore, error %d", r);
+-#elif !defined(Q_OS_LINUX)
++#if !defined(Q_OS_LINUX)
+     wakeup = false;
+     report_error(pthread_mutex_init(&mutex, NULL), "QMutex", "mutex init");
+     report_error(pthread_cond_init(&cond, NULL), "QMutex", "cv init");
+@@ -90,47 +86,13 @@ QMutexPrivate::QMutexPrivate(QMutex::RecursionMode mode)
+ 
+ QMutexPrivate::~QMutexPrivate()
+ {
+-#if defined(Q_OS_MAC)
+-    kern_return_t r = semaphore_destroy(mach_task_self(), mach_semaphore);
+-    if (r != KERN_SUCCESS)
+-        qWarning("QMutex: failed to destroy semaphore, error %d", r);
+-#elif !defined(Q_OS_LINUX)
++#if !defined(Q_OS_LINUX)
+     report_error(pthread_cond_destroy(&cond), "QMutex", "cv destroy");
+     report_error(pthread_mutex_destroy(&mutex), "QMutex", "mutex destroy");
+ #endif
+ }
+ 
+-#if defined(Q_OS_MAC)
+-
+-bool QMutexPrivate::wait(int timeout)
+-{
+-    if (contenders.fetchAndAddAcquire(1) == 0) {
+-        // lock acquired without waiting
+-        return true;
+-    }
+-    kern_return_t r;
+-    if (timeout < 0) {
+-        do {
+-            r = semaphore_wait(mach_semaphore);
+-        } while (r == KERN_ABORTED);
+-	if (r != KERN_SUCCESS)
+-            qWarning("QMutex: infinite wait failed, error %d", r);
+-    } else {
+-        mach_timespec_t ts;
+-        ts.tv_nsec = ((timeout % 1000) * 1000) * 1000;
+-        ts.tv_sec = (timeout / 1000);
+-        r = semaphore_timedwait(mach_semaphore, ts);
+-    }
+-    contenders.deref();
+-    return r == KERN_SUCCESS;
+-}
+-
+-void QMutexPrivate::wakeUp()
+-{
+-    semaphore_signal(mach_semaphore);
+-}
+-
+-#elif defined(Q_OS_LINUX)
++#if defined(Q_OS_LINUX)
+ 
+ static inline int _q_futex(volatile int *addr, int op, int val, const struct timespec *timeout, int *addr2, int val2)
+ {
+@@ -174,7 +136,7 @@ void QMutexPrivate::wakeUp()
+     (void) _q_futex(&contenders._q_value, FUTEX_WAKE, 1, 0, 0, 0);
+ }
+ 
+-#else // !Q_OS_MAC && !Q_OS_LINUX
++#else // !Q_OS_LINUX
+ 
+ bool QMutexPrivate::wait(int timeout)
+ {
+@@ -221,7 +183,7 @@ void QMutexPrivate::wakeUp()
+     report_error(pthread_mutex_unlock(&mutex), "QMutex::unlock", "mutex unlock");
+ }
+ 
+-#endif // !Q_OS_MAC && !Q_OS_LINUX
++#endif // !Q_OS_LINUX
+ 
+ QT_END_NAMESPACE
+ 
+diff --git a/tests/benchmarks/corelib/thread/qmutex/tst_qmutex.cpp b/tests/benchmarks/corelib/thread/qmutex/tst_qmutex.cpp
+index 05a1575..eca38b6 100644
+--- a/tests/benchmarks/corelib/thread/qmutex/tst_qmutex.cpp
++++ b/tests/benchmarks/corelib/thread/qmutex/tst_qmutex.cpp
+@@ -128,7 +128,9 @@ private slots:
+     void noThread_data();
+     void noThread();
+ 
++    void constructionNative();
+     void uncontendedNative();
++    void constructionQMutex();
+     void uncontendedQMutex();
+     void uncontendedQMutexLocker();
+ 
+@@ -205,6 +207,15 @@ void tst_QMutex::noThread()
+     QCOMPARE(int(count), N);
+ }
+ 
++void tst_QMutex::constructionNative()
++{
++    QBENCHMARK {
++        NativeMutexType mutex;
++        NativeMutexInitialize(&mutex);
++        NativeMutexDestroy(&mutex);
++    }
++}
++
+ void tst_QMutex::uncontendedNative()
+ {
+     NativeMutexType mutex;
+@@ -216,6 +227,14 @@ void tst_QMutex::uncontendedNative()
+     NativeMutexDestroy(&mutex);
+ }
+ 
++void tst_QMutex::constructionQMutex()
++{
++    QBENCHMARK {
++        QMutex mutex;
++        Q_UNUSED(mutex);
++    }
++}
++
+ void tst_QMutex::uncontendedQMutex()
+ {
+     QMutex mutex;

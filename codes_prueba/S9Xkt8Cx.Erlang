@@ -1,0 +1,13 @@
+-module(test).
+
+-export([dummy/1]).
+
+-type d() :: foo | bar.
+
+-spec dummy(N :: integer()) -> d().
+dummy(0) ->
+    foo;
+dummy(1) ->
+    bar;
+dummy(N) ->
+    baz.

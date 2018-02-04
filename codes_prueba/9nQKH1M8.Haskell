@@ -1,0 +1,12 @@
+1  module Main where
+2
+3  import Graphics.UI.Gtk
+4  import Graphics.UI.Gtk.Glade
+5
+6  main = do
+7      initGUI
+8      Just xml <- xmlNew "hellogtk2hs.glade"
+9      window   <- xmlGetWidget xml castToWindow "window1"
+10     onDestroy window mainQuit
+11     widgetShowAll window
+12     mainGUI

@@ -1,0 +1,54 @@
+class spell_gen_model_visible : public SpellScriptLoader
+{
+public:
+    spell_gen_model_visible() : SpellScriptLoader("spell_gen_model_visible") { }
+
+    class spell_gen_model_visible_AuraScript : public AuraScript
+    {
+    public:
+        PrepareAuraScript(spell_gen_model_visible_AuraScript)
+
+        bool Load()
+        {
+            memset(_itemId, 0, sizeof(_itemId));
+            _modelId = 0;
+            return true;
+        }
+
+        void HandleEffectApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+        {
+            _modelId = GetUnitOwner()->GetDisplayId();
+            _hasFlag = GetUnitOwner()->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+            for (uint8 i = 0; i < 3; ++i)
+                _itemId[i] = GetUnitOwner()->GetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID + i);
+
+            GetUnitOwner()->SetDisplayId(11686);
+            GetUnitOwner()->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+            for (uint8 i = 0; i < 3; ++i)
+                 GetUnitOwner()->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID + i, 0);
+        }
+
+        void HandleEffectRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+        {
+            GetUnitOwner()->SetDisplayId(_modelId);
+            GetUnitOwner()->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+            for (uint8 i = 0; i < 3; ++i)
+                 GetUnitOwner()->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID + i, _itemId[i]);
+        }
+
+        void Register()
+        {
+            OnEffectApply += AuraEffectApplyFn(spell_gen_model_visible_AuraScript::HandleEffectApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            OnEffectRemove += AuraEffectRemoveFn(spell_gen_model_visible_AuraScript::HandleEffectRemove, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+        }
+
+    private:
+        uint32 _itemId[3];
+        uint32 _modelId;
+    };
+
+    AuraScript* GetAuraScript() const
+    {
+        return new spell_gen_model_visible_AuraScript();
+    }
+};

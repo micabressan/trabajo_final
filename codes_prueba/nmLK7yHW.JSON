@@ -1,0 +1,96 @@
+{
+	"Locale": "en",
+	"PrivateMessage": {
+		"FormatFrom": "(From {0}): {1}",
+		"FormatTo": "(To {0}): {1}",
+		"FormatSpy": "<gray>Spy: {0} -> {1}: {2}",
+		"ConsoleDisplayName": "*console*"
+	},
+	"UnfreezeOnDeath": true,
+	"UnfreezeOnQuit": true,
+	"EnableTextCommands": true,
+	"EnableDeathMessages": true,
+	"EnableJoinLeaveMessage": true,
+	"ShowPermissionOnErrorMessage": true,
+	"SaveCommandCooldowns": false,
+	"EnablePollRunningMessage": true,
+	"PollRunningMessageCooldown": 20,
+	"ServerFrameRate": -1,
+	"BackDelay": 10,
+	"ItemSpawnLimit": 10,
+	"AntiSpam": {
+		"Enabled": true,
+		"Interval": 3
+	},
+	"Updater": {
+		"CheckUpdates": true,
+		"DownloadLatest": true,
+		"AlertOnJoin": true
+	},
+	"Home": {
+		"TeleportDelay": 5,
+		"CancelTeleportWhenMove": true
+	},
+	"Warp": {
+		"TeleportDelay": 5,
+		"CancelTeleportWhenMove": false,
+		"PerWarpPermission": true
+	},
+	"VehicleFeatures": {
+		"RefuelPercentage": 20,
+		"RepairPercentage": 70
+	},
+	"Kit": {
+		"ShowCost": true,
+		"ShowCostIfZero": false,
+		"CostFormat": "{0}({1}{2})",
+		"GlobalCooldown": 0,
+		"ResetGlobalCooldownWhenDie": false
+	},
+	"Tpa": {
+		"CancelTeleportWhenMove": true,
+		"ExpireDelay": 10,
+		"TeleportDelay": 5
+	},
+	"Economy": {
+		"UseXp": false,
+		"XpCurrency": "Xp",
+		"UconomyCurrency": "$"
+	},
+	"AutoAnnouncer": {
+		"Interval": 30,
+		"RandomMessages": false,
+		"Enabled": true,
+		"Messages": [
+			"<green>Join Our Discord: 9aKRzbB",
+			"<blue>No Kos|Have Fun|Active admins!"
+		]
+	},
+	"AutoCommands": {
+		"Commands": [{
+				"RunOnce": false,
+				"Timer": 120,
+				"Commands": [
+					"say \"Be sure to drink your Ovaltine!\" 0 255 255",
+					"item * glue"
+				]
+			},
+			{
+				"RunOnce": false,
+				"Timer": 900,
+				"Commands": [
+					"clear v",
+					"respawnvehicles"
+				]
+			}
+		],
+		"Enabled": false
+	},
+	"GiveItemBlacklist": [],
+	"VehicleBlacklist": [],
+	"EnabledSystems": [
+		"kits",
+		"warps"
+	],
+	"DisabledCommands": []
+}

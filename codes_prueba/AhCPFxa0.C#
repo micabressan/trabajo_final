@@ -1,0 +1,122 @@
+System.Data.SQLite
+System.Data.SQLite.EF6
+System.Data.SQLite.Linq
+SQLite.CodeFirst
+EntityFramework
+EntityFramework.SqlServer
+
+using System.Data.Entity;
+using System.Data.SQLite;
+
+namespace SimpleScan.Model.Context
+{
+    public class BaseContext : DbContext
+    {
+        static string database = "test1.sqlite";
+
+        public BaseContext() : base(new SQLiteConnection()
+        {
+            ConnectionString = new SQLiteConnectionStringBuilder()
+            {
+                DataSource = database,
+                ForeignKeys = true
+            }.ConnectionString
+        }, true)
+        { }
+
+        public virtual DbSet<OrderTbl> OrderTbls { get; set; }
+        public virtual DbSet<Box> Boxes { get; set; }
+        public virtual DbSet<Operat> Operats { get; set;} 
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            var initializer = new SQLite.CodeFirst.SqliteCreateDatabaseIfNotExists<BaseContext>(modelBuilder);
+            Database.SetInitializer(initializer);
+
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+}
+
+   public class OperatDetail
+    {
+        public OperatDetail() { }
+        
+        public int Id { get; set; }
+        public int PageNumber { get; set; }
+        [Timestamp]
+        public DateTime ScanTime { get; set; }
+        public string DirectoryPath { get; set; }
+        public string FilePath { get; set; }
+        public bool Remove { get; set; }
+        public int OperatId { get; set; }
+
+        [ForeignKey("OperatId")]
+        public virtual Operat Operat { get; set; }
+    }
+
+
+public OperatDetail AddOperatDetail(string DirectoryPath, string FileName, int PageNumber, DateTime ScanTime, string OpId)
+        {
+            OperatDetail od;
+            using (var ctx = new BaseContext())
+            {
+                using (var dbTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        od = new OperatDetail()
+                        {
+                            DirectoryPath = DirectoryPath,
+                            FilePath = FileName,
+                            PageNumber = PageNumber,
+                            ScanTime = ScanTime,
+                            OperatId = ctx.Operats.Where(o => o.Iemz == OpId).Select(o => o.Id).Single(),
+                            Remove = false
+                        };
+                        ctx.OperatDetails.Add(od);
+                        ctx.SaveChanges();
+                        dbTransaction.Commit();
+                        ctx.Entry(od).GetDatabaseValues();
+                        
+                    }
+                    catch
+                    {
+                        dbTransaction.Rollback();
+                        return null;
+                    }
+                }
+            }
+            return od;
+        }
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+  </startup>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="v13.0" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+      <provider invariantName="System.Data.SQLite" type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6" />
+    </providers>
+  </entityFramework>
+  <system.data>
+    <DbProviderFactories>
+      <remove invariant="MySql.Data.MySqlClient" />
+      <add name="MySQL Data Provider" invariant="MySql.Data.MySqlClient" description=".Net Framework Data Provider for MySQL" type="MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
+      <remove invariant="System.Data.SQLite" />
+      <add name="SQLite Data Provider" invariant="System.Data.SQLite" description=".NET Framework Data Provider for SQLite" type="System.Data.SQLite.SQLiteFactory, System.Data.SQLite" />
+    </DbProviderFactories>
+  </system.data>
+</configuration>

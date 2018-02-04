@@ -1,0 +1,59 @@
+-- VERSION 1 DE IDIOTA
+--dividedList :: Integer->[(Integer,Bool)]
+--dividedList 2 = []
+--dividedList n = zip  [2..n-1] (map (n `isDividedBy` ) [2..n-1])
+
+--isPrime :: Integer->Bool
+--isPrime 1 = False
+--isPrime n = (trashFalseTuples (dividedList n)) == []
+
+    
+
+--primesBetween :: Integer -> Integer -> [Integer]
+--primesBetween n m = trashFalseTuples (zip [n..m] ( map isPrime [n..m]))
+
+--printPrimes :: Integer -> IO ()
+--printPrimes 0 = return()
+--printPrimes n = do 
+--    cotas <- getLine
+--    let pair =  words cotas
+--    let (min,max) =  (read (head pair) ::Integer , read (last pair) :: Integer)
+--    sequence_ $ (primesBetween min max) >>= (\x -> [print x])
+--    printPrimes (n-1)
+
+isDividedBy :: Integer->Integer->Bool
+isDividedBy n d = (n `rem` d) == 0
+
+
+trashFalseTuples :: [(Integer,Bool)] -> [Integer]
+trashFalseTuples [] = []
+trashFalseTuples n 
+    | snd (head n) = [fst (head n)] ++ trashFalseTuples (tail n)
+    | otherwise    = trashFalseTuples (tail n)
+
+
+
+isPrime' :: Integer->Integer->Bool
+isPrime' 1 1 = False
+isPrime' 2 1 = False
+isPrime' 2 2 = True
+isPrime' i n  
+    | i > ceiling (sqrt (fromIntegral n)) = True
+    | otherwise            = if (n `isDividedBy` i) then False else isPrime' (i+1) n
+
+primesBetween' :: Integer -> Integer -> [Integer]
+primesBetween' n m = trashFalseTuples (zip [n..m] ( map (2`isPrime'`) [n..m]))
+
+printPrimes' :: Integer -> IO ()
+printPrimes' 0 = return()
+printPrimes' n = do 
+    cotas <- getLine
+    let pair =  words cotas
+    let (min,max) =  (read (head pair) ::Integer , read (last pair) :: Integer)
+    sequence_ $ (primesBetween' min max) >>= (\x -> [print x])
+    printPrimes' (n-1)
+
+main = do
+    cases <- getLine
+    let n =  read cases :: Integer
+    printPrimes' n

@@ -1,0 +1,96 @@
+require.paths.push __dirname
+
+Canvas = require "canvas"
+Point = require "point"
+fs = require "fs"
+WorldCanvasView = require "world_canvas_view"
+
+write_canvas_to_file = (canvas, file, on_finish = ->) ->
+	out = fs.createWriteStream file
+	stream = canvas.createPNGStream()
+	stream.on "data", (data) ->
+		out.write data
+	stream.on "end", ->
+		out.close()
+		on_finish()
+
+render_point_in_context = (point, c2d) ->
+	c2d.save()
+	c2d.rotate point.r
+	c2d.beginPath()
+	c2d.moveTo -4, 0
+	c2d.lineTo 4, 0
+	c2d.moveTo 0, 0
+	c2d.lineTo 0, 4
+	c2d.stroke()
+	c2d.restore()
+
+create_canvas_context = ->
+	canvas = new Canvas 4096, 4096
+	c2d = canvas.getContext "2d"
+
+	c2d.lineWidth = 1.0
+	c2d.lineCap = "round"
+	c2d.lineJoin = "round"
+	c2d.strokeStyle = "black"
+	c2d.fillStyle = "white"
+	
+	c2d
+
+prepare_context_frame = (c2d) ->
+	c2d.fillRect 0, 0, c2d.canvas.width, c2d.canvas.height
+	c2d.translate c2d.canvas.width/2, c2d.canvas.height/2
+	c2d.scale 1, -1
+
+render_raster_in_context = (c2d, grid_size = 10, grid_repeat_distance = 120, highlight_every = 4) ->
+	c2d.save()
+	c2d.lineWidth = 0.25
+	c2d.fillStyle = "black"
+	
+	for i in [0..grid_repeat_distance]
+		length = grid_repeat_distance*grid_size
+		offset = i*grid_size
+		
+		highlight = i%highlight_every==0
+		
+		c2d.fontStyle = "12px monospace"
+		c2d.strokeStyle = "rgba(0, 0, 0, #{if highlight then 1.0 else 0.25})"
+		
+		c2d.beginPath()
+		c2d.moveTo -length, +offset
+		c2d.lineTo +length, +offset
+		c2d.moveTo -length, -offset
+		c2d.lineTo +length, -offset
+		c2d.moveTo +offset, -length
+		c2d.lineTo +offset, +length
+		c2d.moveTo -offset, -length
+		c2d.lineTo -offset, +length
+		c2d.stroke()
+		
+		if highlight && offset
+			x_text_offset = - c2d.measureText("+#{offset}").width/2
+			y_text_offset = 3
+			
+			c2d.save()
+			c2d.scale 1, -1
+		
+			c2d.fillText "+#{offset}", x_text_offset, + offset + y_text_offset
+			c2d.fillText "-#{offset}", x_text_offset, - offset + y_text_offset
+		
+			c2d.fillText "+#{offset}", + offset + x_text_offset, y_text_offset
+			c2d.fillText "-#{offset}", - offset + x_text_offset, y_text_offset
+			
+			c2d.restore()
+		
+	c2d.restore()
+
+c2d = create_canvas_context()
+point = new Point
+
+prepare_context_frame c2d
+
+render_raster_in_context c2d, 16, 128, 4
+render_point_in_context point, c2d
+
+write_canvas_to_file c2d.canvas, "point.png", ->
+	console.log "written file"

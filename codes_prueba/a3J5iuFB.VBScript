@@ -1,0 +1,54 @@
+
+On Error Resume Next
+Dim objSysInfo, objUser
+Set objSysInfo = CreateObject("ADSystemInfo")
+DQ = Chr(34)
+strUser = ""
+
+' Get the NETBIOS Domain name
+Set objSystemInfo = CreateObject("ADSystemInfo") 
+strDomain = objSystemInfo.DomainShortName
+
+' Prompt for userName
+strUserEmail = inputbox("Please enter the users full email address: ")
+
+UserNameFromEmail strUserEmail
+
+Function UserNameFromEmail(sEmail)
+    Const ADS_SCOPE_SUBTREE = 2
+    Const PageSize = 1000
+    Dim sRootLDAP, oConnection, oCommand, oRecordSet
+
+    sRootLDAP = "'LDAP://" & GetObject("LDAP://RootDSE").Get("defaultNamingContext") & "'"
+
+    Set oConnection = CreateObject("ADODB.Connection")
+    oConnection.Provider = "ADsDSOObject"
+    oConnection.Open "Active Directory Provider"
+    Set oCommand = CreateObject("ADODB.Command")
+    Set oCommand.ActiveConnection = oConnection
+    oCommand.CommandText = "Select sAMAccountName from " & sRootLDAP & " Where mail='" & sEmail & "'"
+    oCommand.Properties("Page Size") = PageSize
+    oCommand.Properties("Timeout") = 30
+    oCommand.Properties("Searchscope") = ADS_SCOPE_SUBTREE
+    oCommand.Properties("Cache Results") = True
+    Set oRecordSet = oCommand.Execute
+    oRecordSet.MoveFirst
+    strUser = """"& oRecordSet.Fields(0) & """"
+    strUser = Replace(strUser, DQ, "") 'replaces quotations with no spaces. 
+end function
+
+Function GetUserDN(byval strUserName,byval strDomain)
+	    ' Use name translate to return the distinguished name
+	    ' of a user from the NT UserName (sAMAccountName)
+	    ' and the NETBIOS domain name.
+
+	    Set objTrans = CreateObject("NameTranslate")
+	    objTrans.Init 1, strDomain
+	    objTrans.Set 3, strDomain & "\" & strUserName 
+	    strUserDN = objTrans.Get(1) 
+	    GetUserDN = strUserDN
+end function
+    
+Set objUser = GetObject("LDAP://" & GetUserDN(strUser,strDomain))
+   
+WScript.Echo "GENERAL" & vbCrLf & "=================================================" & vbCrLf & "First name: " & objUser.firstname & vbCrLf & "Last name: " & objUser.sn & vbCrLf & "Display name: " & objUser.displayName & vbCrLf & "" & vbCrLf & "Employee Number: " & objUser.employeeNumber & vbCrLf & "" & vbCrLf & "Description: " & objUser.description & vbCrLf & "Office: " & objUser.physicalDeliveryOfficeName & vbCrLf & "Telephone number: " & objUser.telephoneNumber & vbCrLf & "Other Telephone numbers: " & objUser.otherTelephone & vbCrLf & "Email: " & objUser.mail & vbCrLf & "Web page: " & objUser.wWWHomePage & vbCrLf & "" & vbCrLf & "ADDRESS" & vbCrLf & "=================================================" & vbCrLf &"Street: " & objUser.streetAddress & vbCrLf & "P.O. Box: " & objUser.postOfficeBox & vbCrLf & "City: " & objUser.l & vbCrLf & "State/province: " & objUser.st & vbCrLf & "Zip/Postal Code: " & objUser.postalCode & vbCrLf & "Country/region: " & objUser.c & vbCrLf & "" & vbCrLf & "" & vbCrLf & "ACCOUNT" & vbCrLf & "=================================================" & vbCrLf & "User logon name: " & objUser.userPrincipalName & vbCrLf & "pre-W2K logon name: " & objUser.sAMAccountName & vbCrLf & "AccountDisabled: " & objUser.AccountDisabled & vbCrLf & "" & vbCrLf & "DN: " & objUser.distinguishedName & vbCrLf & "" & vbCrLf & "TELEPHONE" & vbCrLf & "=================================================" & vbCrLf & "Home: " & objUser.homePhone & vbCrLf & "Mobile: " & objUser.mobile & vbCrLf & "Fax: " & objUser.facsimileTelephoneNumber & vbCrLf & "" & vbCrLf & "ORGANIZATION" & vbCrLf & "=================================================" & vbCrLf & "Title: " & objUser.title & vbCrLf & "Department: " & objUser.department & vbCrLf & "Office: " & objUser.physicalDeliveryOfficeName & vbCrLf &"Company: " & objUser.company & vbCrLf & "Manager: " & objUser.manager

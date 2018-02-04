@@ -1,0 +1,157 @@
+diff --git a/src/game/World.cpp b/src/game/World.cpp
+--- a/src/game/World.cpp
++++ b/src/game/World.cpp
+@@ -1153,6 +1153,14 @@
+     m_configs[CONFIG_LFG_MSG_COST_ENABLE] = sConfig.GetBoolDefault("LfgMsg.Cost.Enable", false);
+     m_configs[CONFIG_LFG_MSG_COST_INSIVER] = sConfig.GetIntDefault("LfgMsg.Cost.InSilver", 5);
+ 
++    m_configs[CONFIG_SERVER_AUTO_RESTART_HOUR] = sConfig.GetIntDefault("Server.AutoRestart.Hour", 4);
++    if (m_configs[CONFIG_SERVER_AUTO_RESTART_HOUR] > 23)
++    {
++        m_configs[CONFIG_SERVER_AUTO_RESTART_HOUR] = 4;
++    }
++
++    m_configs[CONFIG_SERVER_AUTO_RESTART_DISABLE] = sConfig.GetBoolDefault("Server.AutoRestart.Disable", false);
++
+     // SQLUpdater
+     m_configs[CONFIG_SQLUPDATER_ENABLED] = sConfig.GetBoolDefault("DatabaseUpdater.Enabled", false);
+     m_SQLUpdatesPath = sConfig.GetStringDefault("DatabaseUpdater.PathToUpdates", "");
+@@ -1740,6 +1748,9 @@
+     sConsole.SetLoadingLabel("Initialize AuctionHouseBot...", false);
+     auctionbot.Initialize();
+ 
++    sConsole.SetLoadingLabel("Initialize Server Auto Restart Time...", false);
++    InitServerAutoRestartTime();
++
+     // Delete all characters which have been deleted X days before
+     Player::DeleteOldCharacters();
+ 
+@@ -2053,6 +2064,9 @@
+         m_timers[WUPDATE_EVENTS].Reset();
+     }
+ 
++    if (m_gameTime > m_NextServerRestart)
++        AutoRestartServer();
++
+     // update the instance reset times
+     sInstanceSaveMgr.Update();
+ 
+@@ -2659,6 +2673,35 @@
+     }
+ }
+ 
++void World::InitServerAutoRestartTime()
++{
++    if (!serverRestartTime)
++        m_NextServerRestart = time_t(time(NULL));        // game time not yet init
++
++    // generate time by config
++    time_t curTime = time(NULL);
++    tm localTm = *localtime(&curTime);
++    localTm.tm_hour = getConfig(CONFIG_SERVER_AUTO_RESTART_HOUR);
++    localTm.tm_min = 0;
++    localTm.tm_sec = 0;
++
++    // current day reset time
++    time_t nextDayRestartTime = mktime(&localTm);
++
++    // next reset time before current moment
++    if (curTime >= nextDayRestartTime)
++        nextDayRestartTime += DAY;
++
++    // normalize reset time
++    m_NextServerRestart = serverRestartTime < curTime ? nextDayRestartTime - DAY : nextDayRestartTime;
++
++    if (!serverRestartTime)
++        m_timers[WUPDATE_SERVER_AUTO_RESTART_TIME, m_NextServerRestart];
++
++    if (m_configs[CONFIG_SERVER_AUTO_RESTART_DISABLE])
++        m_NextServerRestart += DAY*1;
++}
++
+ void World::ResetDailyQuests()
+ {
+     sLog.outDetail("Daily quests reset for all characters.");
+@@ -2679,6 +2722,19 @@
+     m_playerLimit = limit;
+ }
+ 
++void World::AutoRestartServer()
++{
++    std::string announce;
++    announce = "|cffD63931[Server]:|r |cffFF8C00automatic server restart after 1 minute.|r\n";
++    sWorld.SendServerMessage(SERVER_MSG_STRING, announce.c_str());
++    sLog.outString("Automatic server restart...");
++
++    sWorld.ShutdownServ(60, SHUTDOWN_MASK_RESTART, RESTART_EXIT_CODE);
++
++    m_NextServerRestart = time_t[m_NextServerRestart + DAY];
++    m_timers[WUPDATE_SERVER_AUTO_RESTART_TIME, m_NextServerRestart];
++}
++
+ void World::UpdateMaxSessionCounters()
+ {
+     m_maxActiveSessionCount = std::max(m_maxActiveSessionCount, uint32(m_sessions.size() - m_QueuedPlayer.size()));
+diff --git a/src/game/World.h b/src/game/World.h
+--- a/src/game/World.h
++++ b/src/game/World.h
+@@ -75,7 +75,8 @@
+     WUPDATE_CLEANDB     = 7,
+     WUPDATE_DELETECHARS = 8,
+     WUPDATE_AUTOBROADCAST = 9,
+-    WUPDATE_COUNT       = 10
++    WUPDATE_SERVER_AUTO_RESTART_TIME = 10,
++    WUPDATE_COUNT       = 11
+ };
+ 
+ // Configuration elements
+@@ -297,6 +298,8 @@
+     CONFIG_TRANS_ITEMCOUNT,
+     CONFIG_LFG_MSG_COST_ENABLE,
+     CONFIG_LFG_MSG_COST_INSIVER,
++    CONFIG_SERVER_AUTO_RESTART_HOUR,
++    CONFIG_SERVER_AUTO_RESTART_DISABLE,
+     CONFIG_VALUE_COUNT
+ };
+ 
+@@ -858,12 +861,15 @@
+         void _UpdateRealmCharCount(QueryResult_AutoPtr resultCharCount, uint32 accountId);
+ 
+         void InitDailyQuestResetTime();
++        void InitServerAutoRestartTime();
+         void ResetDailyQuests();
++        void AutoRestartServer();
+     private:
+         static volatile bool m_stopEvent;
+         static uint8 m_ExitCode;
+         uint32 m_ShutdownTimer;
+         uint32 m_ShutdownMask;
++        uint64 m_NextServerRestart;
+ 
+         //atomic op counter for active scripts amount
+         ACE_Atomic_Op<ACE_Thread_Mutex, long> m_scheduledScripts;
+diff --git a/src/oregoncore/oregoncore.conf.dist b/src/oregoncore/oregoncore.conf.dist
+--- a/src/oregoncore/oregoncore.conf.dist
++++ b/src/oregoncore/oregoncore.conf.dist
+@@ -2277,6 +2277,16 @@
+ #		Default: 5
+ #
++#	Server.AutoRestart.Hour
++#		Description: Hour of the day when the server restarts.
++#		Range:		0-23
++#		Default:	4 - (04:00 AM)
++#
++#	Server.AutoRestart.Disable
++#		Description: Disable server restart.
++#		Default:	0 - (Disabled, server restarted every day)
++#					1 - (Enabled)
++#
+ ###############################################################################
+ 
+@@ -2288,6 +2298,8 @@
+ LfgMsg.Cost.InSilver = 5
++Server.AutoRestart.Hour = 4
++Server.AutoRestart.Disable = 0
+ 
+ ###############################################################################
+ #  ANTICHEAT

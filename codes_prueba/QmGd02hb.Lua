@@ -1,0 +1,16 @@
+rednet.open("back")
+while true do
+x=math.random(0,1000000)
+y=math.random(0,100)
+p=math.random(0,1000)
+q=math.random(0,10000)
+e=math.random(0,100000)
+n=math.random(0,10000000)
+sleep(0.1)
+rednet.broadcast(p)
+rednet.broadcast(q)
+rednet.broadcast(e)
+rednet.broadcast(n)
+rednet.broadcast(y)
+rednet.broadcast(x)
+end

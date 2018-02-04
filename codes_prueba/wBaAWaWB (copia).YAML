@@ -1,0 +1,11 @@
+- action:
+    - delay: '00:02:00'
+    - service: hassio.addon_restart
+      data:
+        addon: a0d7b954_homebridge
+  alias: 'Starta Homebridge (homekit) efter HA restart'
+  condition: []
+  id: '1916217455713'
+  trigger:
+    - platform: homeassistant
+      event: start

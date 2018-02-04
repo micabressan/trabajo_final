@@ -1,0 +1,13 @@
+diff --git a/app/code/local/TM/DailyDeals/Block/Adminhtml/Deals/Edit/Tab/Label.php b/app/code/local/TM/DailyDeals/Block/Adminhtml/Deals/Edit/Tab/Label.php
+index b3b5930..b519e25 100644
+--- a/app/code/local/TM/DailyDeals/Block/Adminhtml/Deals/Edit/Tab/Label.php
++++ b/app/code/local/TM/DailyDeals/Block/Adminhtml/Deals/Edit/Tab/Label.php
+@@ -297,7 +297,7 @@ protected function _isAllowedAction($action)
+     protected function _getAdditionalElementTypes()
+     {
+         return array(
+-            'image' => Mage::getConfig()->getBlockClassName('prolabels/adminhtml_system_helper_image')
++            'image' => Mage::getConfig()->getBlockClassName('prolabels/adminhtml_rules_helper_image')
+         );
+     }
+ }

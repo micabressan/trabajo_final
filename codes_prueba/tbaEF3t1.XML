@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<codex>
+    <emitters>
+        <emitter class="jp.co.vcube.gate.CodexActivity">
+            <actions>
+                <action name="init" signature="init(java.lang.String who, boolean status)">
+                    <signature>
+                        <params type="java.lang.String"/>
+                        <params type="boolean"/>
+                    </signature>
+                </action>
+            </actions>
+            <properties/>
+        </emitter>
+        <emitter class="jp.co.vcube.gate.CodexActivity.OrientationEventListenerImpl">
+            <actions/>
+            <properties>
+                <property name="orientation" method="produceOrientation"
+                          type="jp.co.vcube.gate.CodexActivity.Orientation">
+                    <signature method="produceOrientation"
+                               return="jp.co.vcube.gate.CodexActivity.Orientation"/>
+                </property>
+                <property name="orientation2" method="produceOrientatio2"
+                          type="jp.co.vcube.gate.CodexActivity.Orientation">
+                    <signature method="produceOrientatio2"
+                               return="jp.co.vcube.gate.CodexActivity.Orientation"/>
+                </property>
+            </properties>
+        </emitter>
+    </emitters>
+    <receivers>
+        <receiver class="jp.co.vcube.gate.CodexActivity">
+            <actionHooks>
+                <actionHook name="init" method="initDiffArgsCount(java.lang.String who)">
+                    <signature method="initDiffArgsCount">
+                        <params type="java.lang.String"/>
+                    </signature>
+                </actionHook>
+                <actionHook name="user_login" method="onUserLogin(java.lang.String who)">
+                    <signature method="onUserLogin">
+                        <params type="java.lang.String"/>
+                    </signature>
+                </actionHook>
+            </actionHooks>
+            <propertySubscribers/>
+        </receiver>
+        <receiver class="jp.co.vcube.gate.CodexActivity.Init">
+            <actionHooks>
+                <actionHook name="init" method="init1(java.lang.String who, boolean status)">
+                    <signature method="init1">
+                        <params type="java.lang.String"/>
+                        <params type="boolean"/>
+                    </signature>
+                </actionHook>
+            </actionHooks>
+            <propertySubscribers>
+                <propertySubscriber
+                    name="orientation"
+                    method="onOrientationChange(jp.co.vcube.gate.CodexActivity.Orientation orientation)">
+                    <signature method="onOrientationChange">
+                        <params type="jp.co.vcube.gate.CodexActivity.Orientation orientation"/>
+                    </signature>
+                </propertySubscriber>
+                <propertySubscriber
+                    name="orphan"
+                    method="onOrientationChange3(jp.co.vcube.gate.CodexActivity.Orientation orientation)">
+                    <signature method="onOrientationChange3">
+                        <params type="jp.co.vcube.gate.CodexActivity.Orientation orientation"/>
+                    </signature>
+                </propertySubscriber>
+            </propertySubscribers>
+        </receiver>
+    </receivers>
+    <actions>
+        <action name="init(java.lang.String who, boolean status)"
+                class="jp.co.vcube.gate.CodexActivity">
+            <hook class="jp.co.vcube.gate.CodexActivity.Init"
+                  method="init1(java.lang.String who, boolean status)"/>
+        </action>
+    </actions>
+    <properties>
+        <property name="orientation"
+                  class="jp.co.vcube.gate.CodexActivity.OrientationEventListenerImpl" method="produceOrientation"
+                  type="jp.co.vcube.gate.CodexActivity.Orientation">
+            <subscriber
+                method="onOrientationChange(jp.co.vcube.gate.CodexActivity.Orientation orientation)"
+                owner="jp.co.vcube.gate.CodexActivity.Init"/>
+        </property>
+        <property name="orientation2"
+                  class="jp.co.vcube.gate.CodexActivity.OrientationEventListenerImpl" method="produceOrientatio2"
+                  type="jp.co.vcube.gate.CodexActivity.Orientation"/>
+    </properties>
+    <orphan-actionHooks>
+        <hook name="init"
+              class="jp.co.vcube.gate.CodexActivity" method="initDiffArgsCount(java.lang.String who)"/>
+        <hook name="user_login" class="jp.co.vcube.gate.CodexActivity"
+              method="onUserLogin(java.lang.String who)"/>
+    </orphan-actionHooks>
+    <orphan-subscriber>
+        <subscriber name="orphan"
+                    class="jp.co.vcube.gate.CodexActivity.Init"
+                    method="onOrientationChange3(jp.co.vcube.gate.CodexActivity.Orientation orientation)"/>
+    </orphan-subscriber>
+</codex>

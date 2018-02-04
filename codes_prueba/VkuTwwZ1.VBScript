@@ -1,0 +1,67 @@
+How to fetch the data from SQLSERVER in an array in VBA EXCEL instead to display it in worksheet
+-----
+https://www.experts-exchange.com/questions/28397572/How-to-fetch-the-data-from-SQLSERVER-in-an-array-in-VBA-EXCEL-instead-to-display-it-in-worksheet.html
+----
+Sub load_users()
+
+
+    Dim cnn As ADODB.Connection
+
+    Dim connectionString As String   Dim rst1 As ADODB.Recordset
+    Dim rst2 As ADODB.Recordset
+ 
+   Dim strSQL As String
+     
+    Dim User_ID As String
+    Dim User_PWD As String
+    Dim Initial_Catalog As String 'Nom de la base de données
+    Dim Workstation_ID As String
+    Dim Data_Source As String
+    
+    Application.ScreenUpdating = False
+    
+    On Error GoTo Verif_Connexion
+    User_ID = "my login " '"SYGES"   
+    User_PWD = "my password" ' "SYGES2014"  
+    Initial_Catalog = "DATABASE"  
+    Data_Source = "url"  
+    Workstation_ID = "url"  '
+      
+    Set cnn = New ADODB.Connection
+    connectionString = "Provider=SQLOLEDB.1;Persist Security Info=True;User ID=" & User_ID & ";PWD=" & User_PWD & ";Initial Catalog=" & Initial_Catalog & ";Data Source=" & Data_Source & ";Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=" & Workstation_ID & ";Use Encryption for Data=False;Tag with column collation when possible=False;"
+    
+    ThisWorkbook.Sheets("my_sheet").Range("A2:AZ65536").Value = ""
+    
+    strSQL = "select login, password from MYTABLE  "
+   
+    cnn.Open connectionString
+
+    Set rst = cnn.Execute(strSQL)
+    
+
+    ThisWorkbook.Sheets("my_sheet").Activate
+
+
+    ' HERE IS MY QUESTION
+    'This put the result in the worksheet
+    'I would like to have it in an array inside the code instead to displa it in the worksheet
+
+    ThisWorkbook.Sheets("my_sheet").Range("D7").CopyFromRecordset rst
+    
+
+     
+    rst.Close
+    cnn.Close
+    Set rst = Nothing
+    Set cnn = Nothing
+     
+end sub
+
+'**********************
+'solution
+'**********************
+
+ Dim arrRecordArray As Variant
+    Set rst = cnn.Execute(strSQL)
+ arrRecordArray = rst.GetRows
+MsgBox arrRecordArray(1, 1)

@@ -1,0 +1,2236 @@
+[
+    {
+        "data": {
+            "clpMarkets": [
+                {
+                    "code": "BTCCLP",
+                    "name": "BTC/CLP",
+                    "lastTrade": {
+                        "price": 11147994,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 11000000,
+                        "open": 11799990,
+                        "volume": 677041113,
+                        "variation": -0.06779582016594932,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "ETHCLP",
+                    "name": "ETH/CLP",
+                    "lastTrade": {
+                        "price": 556700,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 556700,
+                        "open": 542000,
+                        "volume": 13880986160,
+                        "variation": 0.027121771217712087,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "LTCCLP",
+                    "name": "LTC/CLP",
+                    "lastTrade": {
+                        "price": 224498,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 224498,
+                        "open": 221500,
+                        "volume": 9938123312,
+                        "variation": 0.013534988713318263,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "CHACLP",
+                    "name": "CHA/CLP",
+                    "lastTrade": {
+                        "price": 4990,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 4999,
+                        "open": 5350,
+                        "volume": 15944414860436,
+                        "variation": -0.06560747663551403,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "BCHCLP",
+                    "name": "BCH/CLP",
+                    "lastTrade": {
+                        "price": 2025000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 2025000,
+                        "open": 2050000,
+                        "volume": 376739682,
+                        "variation": -0.012195121951219523,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "DASHCLP",
+                    "name": "DASH/CLP",
+                    "lastTrade": {
+                        "price": 851000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 851000,
+                        "open": 811056,
+                        "volume": 3585645047,
+                        "variation": 0.04924937365607307,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "$",
+                        "format": "0,0",
+                        "units": 0,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                }
+            ],
+            "btcMarkets": [
+                {
+                    "code": "ETHBTC",
+                    "name": "ETH/BTC",
+                    "lastTrade": {
+                        "price": 4670000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": null,
+                        "open": null,
+                        "volume": 0,
+                        "variation": 0,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "฿",
+                        "format": "0,0.00[000000]",
+                        "units": 8,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "LTCBTC",
+                    "name": "LTC/BTC",
+                    "lastTrade": {
+                        "price": 3000000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": null,
+                        "open": null,
+                        "volume": 0,
+                        "variation": 0,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "฿",
+                        "format": "0,0.00[000000]",
+                        "units": 8,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "CHABTC",
+                    "name": "CHA/BTC",
+                    "lastTrade": {
+                        "price": 6500,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 17200,
+                        "open": 13150,
+                        "volume": 4801374428,
+                        "variation": 0.3079847908745248,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "฿",
+                        "format": "0,0.00[000000]",
+                        "units": 8,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "BCHBTC",
+                    "name": "BCH/BTC",
+                    "lastTrade": {
+                        "price": 37000000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": 601210,
+                        "open": 601210,
+                        "volume": 137432,
+                        "variation": 0,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "฿",
+                        "format": "0,0.00[000000]",
+                        "units": 8,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                },
+                {
+                    "code": "DASHBTC",
+                    "name": "DASH/BTC",
+                    "lastTrade": {
+                        "price": 8500000,
+                        "__typename": "MarketTrade"
+                    },
+                    "currentStats": {
+                        "close": null,
+                        "open": null,
+                        "volume": 0,
+                        "variation": 0,
+                        "__typename": "MarketStatsPoint"
+                    },
+                    "secondaryCurrency": {
+                        "symbol": "฿",
+                        "format": "0,0.00[000000]",
+                        "units": 8,
+                        "__typename": "Currency"
+                    },
+                    "__typename": "Market"
+                }
+            ]
+        }
+    },
+    {
+        "data": {
+            "market": {
+                "code": "CHACLP",
+                "name": "CHA/CLP",
+                "lastTrade": {
+                    "price": 4990,
+                    "__typename": "MarketTrade"
+                },
+                "mainCurrency": {
+                    "code": "CHA",
+                    "units": 8,
+                    "format": "0,0.00[000000]",
+                    "__typename": "Currency"
+                },
+                "secondaryCurrency": {
+                    "code": "CLP",
+                    "units": 0,
+                    "format": "0,0",
+                    "__typename": "Currency"
+                },
+                "__typename": "Market"
+            },
+            "stats": {
+                "close": 4999,
+                "volume": 18239322270881,
+                "variation": -0.1228285664151606,
+                "__typename": "MarketStatsPoint"
+            }
+        }
+    },
+    {
+        "data": {
+            "orderBook": {
+                "buy": [
+                    {
+                        "limitPrice": 4900,
+                        "amount": 30000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4885,
+                        "amount": 1000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4850,
+                        "amount": 692892695,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4819,
+                        "amount": 100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4804,
+                        "amount": 550000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4803,
+                        "amount": 8300000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4802,
+                        "amount": 3300000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4801,
+                        "amount": 8005000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4800,
+                        "amount": 46658330000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4792,
+                        "amount": 501052210,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4750,
+                        "amount": 5395000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4730,
+                        "amount": 400000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4718,
+                        "amount": 638000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4712,
+                        "amount": 5617400739,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4702,
+                        "amount": 730000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4701,
+                        "amount": 134850000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4700,
+                        "amount": 54288290000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4668,
+                        "amount": 13900000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4666,
+                        "amount": 1070000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4655,
+                        "amount": 3000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4654,
+                        "amount": 5283958806,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4650,
+                        "amount": 1600000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4610,
+                        "amount": 1100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4605,
+                        "amount": 112000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4601,
+                        "amount": 4900000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4600,
+                        "amount": 22898000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4570,
+                        "amount": 855000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4561,
+                        "amount": 10110000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4560,
+                        "amount": 8000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4559,
+                        "amount": 3300000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4557,
+                        "amount": 3000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4550,
+                        "amount": 1065000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4523,
+                        "amount": 1100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4520,
+                        "amount": 10000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4510,
+                        "amount": 2662294900,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4509,
+                        "amount": 2000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4505,
+                        "amount": 1500000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4504,
+                        "amount": 4000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4503,
+                        "amount": 300000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4502,
+                        "amount": 25850000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4501,
+                        "amount": 70568239550,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4500,
+                        "amount": 174268469855,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4499,
+                        "amount": 100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4470,
+                        "amount": 200000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4450,
+                        "amount": 1272000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4420,
+                        "amount": 345300000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4400,
+                        "amount": 6220000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4393,
+                        "amount": 100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4350,
+                        "amount": 5100000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4330,
+                        "amount": 2300000000,
+                        "__typename": "MarketBookOrder"
+                    }
+                ],
+                "sell": [
+                    {
+                        "limitPrice": 4990,
+                        "amount": 4399359719,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4991,
+                        "amount": 2400000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4998,
+                        "amount": 748425000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 4999,
+                        "amount": 7178454905,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5000,
+                        "amount": 6854746049,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5028,
+                        "amount": 5000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5029,
+                        "amount": 1417018000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5049,
+                        "amount": 7504218657,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5050,
+                        "amount": 5995800000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5060,
+                        "amount": 928047000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5097,
+                        "amount": 500000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5098,
+                        "amount": 3492650000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5099,
+                        "amount": 5993917844,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5100,
+                        "amount": 16742224950,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5101,
+                        "amount": 10000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5128,
+                        "amount": 1900000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5148,
+                        "amount": 1600000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5149,
+                        "amount": 14000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5150,
+                        "amount": 17219495145,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5197,
+                        "amount": 200000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5198,
+                        "amount": 481281262,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5199,
+                        "amount": 22536476404,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5200,
+                        "amount": 51347030000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5225,
+                        "amount": 199580000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5250,
+                        "amount": 1000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5251,
+                        "amount": 19900000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5279,
+                        "amount": 4000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5300,
+                        "amount": 8936649452,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5350,
+                        "amount": 3047900000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5386,
+                        "amount": 60800000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5399,
+                        "amount": 23481150000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5400,
+                        "amount": 48868102381,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5407,
+                        "amount": 15000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5440,
+                        "amount": 250000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5444,
+                        "amount": 4353000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5445,
+                        "amount": 17500000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5449,
+                        "amount": 30400000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5450,
+                        "amount": 9811451724,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5451,
+                        "amount": 3000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5456,
+                        "amount": 15000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5457,
+                        "amount": 6600000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5480,
+                        "amount": 567010886,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5490,
+                        "amount": 31345431320,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5495,
+                        "amount": 1000000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5496,
+                        "amount": 1903749500,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5497,
+                        "amount": 10642224833,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5498,
+                        "amount": 500000000,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5499,
+                        "amount": 28288192138,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5500,
+                        "amount": 153131414249,
+                        "__typename": "MarketBookOrder"
+                    },
+                    {
+                        "limitPrice": 5505,
+                        "amount": 2564791935,
+                        "__typename": "MarketBookOrder"
+                    }
+                ],
+                "spread": 90,
+                "__typename": "MarketOrderBook"
+            }
+        }
+    },
+    {
+        "data": {
+            "marketStats": [
+                {
+                    "_id": "6WoQFdo26mpaGNkp2",
+                    "open": 3778,
+                    "close": 3799,
+                    "high": 3799,
+                    "low": 3700,
+                    "volume": 182710733593,
+                    "count": 66,
+                    "fromDate": 1514196000000,
+                    "toDate": 1514199600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "x8mZ7ggLDKkf2fCBb",
+                    "open": 3799,
+                    "close": 3898,
+                    "high": 3899,
+                    "low": 3709,
+                    "volume": 522593105145,
+                    "count": 184,
+                    "fromDate": 1514199600000,
+                    "toDate": 1514203200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "shwrymJ5j3nzLoZjD",
+                    "open": 3859,
+                    "close": 3856,
+                    "high": 3949,
+                    "low": 3790,
+                    "volume": 943477637286,
+                    "count": 316,
+                    "fromDate": 1514203200000,
+                    "toDate": 1514206800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "iuqSdFHZWyFiyqm4A",
+                    "open": 3925,
+                    "close": 3920,
+                    "high": 3925,
+                    "low": 3850,
+                    "volume": 734351815206,
+                    "count": 322,
+                    "fromDate": 1514206800000,
+                    "toDate": 1514210400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "5WPNnDAMmatSxoakE",
+                    "open": 3920,
+                    "close": 4400,
+                    "high": 4496,
+                    "low": 3915,
+                    "volume": 2301199640206,
+                    "count": 1003,
+                    "fromDate": 1514210400000,
+                    "toDate": 1514214000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "jxkgF8PToHwG9TY4T",
+                    "open": 4383,
+                    "close": 4890,
+                    "high": 4990,
+                    "low": 4254,
+                    "volume": 3301245445495,
+                    "count": 1544,
+                    "fromDate": 1514214000000,
+                    "toDate": 1514217600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "HfQLwMDabRpZdz55F",
+                    "open": 4919,
+                    "close": 4947,
+                    "high": 5000,
+                    "low": 4500,
+                    "volume": 1764415920723,
+                    "count": 1104,
+                    "fromDate": 1514217600000,
+                    "toDate": 1514221200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "StCmgPBNaCRSriQrD",
+                    "open": 4900,
+                    "close": 5355,
+                    "high": 5476,
+                    "low": 4060,
+                    "volume": 2460933774786,
+                    "count": 1193,
+                    "fromDate": 1514221200000,
+                    "toDate": 1514224800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "m7WDFenJdYPfAYxyu",
+                    "open": 5350,
+                    "close": 6945,
+                    "high": 6948,
+                    "low": 5300,
+                    "volume": 3110754117372,
+                    "count": 1497,
+                    "fromDate": 1514224800000,
+                    "toDate": 1514228400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "G6ADhWmJDD85q4t7y",
+                    "open": 6945,
+                    "close": 7400,
+                    "high": 8650,
+                    "low": 4500,
+                    "volume": 5443292598774,
+                    "count": 2859,
+                    "fromDate": 1514228400000,
+                    "toDate": 1514232000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "iWAbva54F4YhTwug2",
+                    "open": 7499,
+                    "close": 5480,
+                    "high": 7499,
+                    "low": 5000,
+                    "volume": 3100854792721,
+                    "count": 1815,
+                    "fromDate": 1514232000000,
+                    "toDate": 1514235600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "fWpg66Y3foWP7kWxr",
+                    "open": 5480,
+                    "close": 6090,
+                    "high": 7200,
+                    "low": 5300,
+                    "volume": 2574817338162,
+                    "count": 1209,
+                    "fromDate": 1514235600000,
+                    "toDate": 1514239200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "GWQ9XkggWtLgNZsCP",
+                    "open": 6090,
+                    "close": 5800,
+                    "high": 6199,
+                    "low": 5500,
+                    "volume": 1361901598381,
+                    "count": 973,
+                    "fromDate": 1514239200000,
+                    "toDate": 1514242800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "L3nWG7AfobwRDM4wa",
+                    "open": 5845,
+                    "close": 5697,
+                    "high": 5889,
+                    "low": 5510,
+                    "volume": 1020593439370,
+                    "count": 721,
+                    "fromDate": 1514242800000,
+                    "toDate": 1514246400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "nLcfXGL88gyP2G294",
+                    "open": 5696,
+                    "close": 6034,
+                    "high": 6100,
+                    "low": 5554,
+                    "volume": 843806663840,
+                    "count": 554,
+                    "fromDate": 1514246400000,
+                    "toDate": 1514250000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "FExkNz8R5F7NLQoBP",
+                    "open": 6034,
+                    "close": 6349,
+                    "high": 6900,
+                    "low": 6000,
+                    "volume": 1350745633998,
+                    "count": 869,
+                    "fromDate": 1514250000000,
+                    "toDate": 1514253600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "taGnFLtoAaeS9LFKh",
+                    "open": 6349,
+                    "close": 6200,
+                    "high": 6350,
+                    "low": 6001,
+                    "volume": 616384125772,
+                    "count": 542,
+                    "fromDate": 1514253600000,
+                    "toDate": 1514257200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "N9xfThZBmCTqwFxBE",
+                    "open": 6170,
+                    "close": 6670,
+                    "high": 6700,
+                    "low": 6101,
+                    "volume": 672619476532,
+                    "count": 600,
+                    "fromDate": 1514257200000,
+                    "toDate": 1514260800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "3qZt6CtpYCXrboi5r",
+                    "open": 6667,
+                    "close": 6656,
+                    "high": 6720,
+                    "low": 6606,
+                    "volume": 330386405755,
+                    "count": 361,
+                    "fromDate": 1514260800000,
+                    "toDate": 1514264400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "xt6BEcnipQEY9v2f4",
+                    "open": 6666,
+                    "close": 6696,
+                    "high": 6699,
+                    "low": 6634,
+                    "volume": 160094710524,
+                    "count": 218,
+                    "fromDate": 1514264400000,
+                    "toDate": 1514268000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "YcJHqJ96QhyMPynyi",
+                    "open": 6696,
+                    "close": 6690,
+                    "high": 6699,
+                    "low": 6646,
+                    "volume": 74581487105,
+                    "count": 84,
+                    "fromDate": 1514268000000,
+                    "toDate": 1514271600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "3QNgkd9CKZuCkW8fb",
+                    "open": 6690,
+                    "close": 6657,
+                    "high": 6749,
+                    "low": 6646,
+                    "volume": 83996932400,
+                    "count": 96,
+                    "fromDate": 1514271600000,
+                    "toDate": 1514275200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "cMQXFpZn6utGXpRTt",
+                    "open": 6657,
+                    "close": 6646,
+                    "high": 6710,
+                    "low": 6646,
+                    "volume": 16599463614,
+                    "count": 31,
+                    "fromDate": 1514275200000,
+                    "toDate": 1514278800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "iQZMs3NhXodbSpgy6",
+                    "open": 6646,
+                    "close": 6800,
+                    "high": 6800,
+                    "low": 6646,
+                    "volume": 102574739719,
+                    "count": 90,
+                    "fromDate": 1514278800000,
+                    "toDate": 1514282400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "jg3HTNR8gCzqDGKxW",
+                    "open": 6799,
+                    "close": 6785,
+                    "high": 6800,
+                    "low": 6240,
+                    "volume": 456563217493,
+                    "count": 249,
+                    "fromDate": 1514282400000,
+                    "toDate": 1514286000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "5muEvwwcwXBEtkwQa",
+                    "open": 6700,
+                    "close": 6800,
+                    "high": 6890,
+                    "low": 6263,
+                    "volume": 523519117963,
+                    "count": 477,
+                    "fromDate": 1514286000000,
+                    "toDate": 1514289600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "rrT8bHeXwMbBGtH99",
+                    "open": 6889,
+                    "close": 6950,
+                    "high": 6999,
+                    "low": 6551,
+                    "volume": 921643042282,
+                    "count": 762,
+                    "fromDate": 1514289600000,
+                    "toDate": 1514293200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "YSDfzPA7Txe7hM3tv",
+                    "open": 6881,
+                    "close": 6812,
+                    "high": 6986,
+                    "low": 6700,
+                    "volume": 651240044778,
+                    "count": 488,
+                    "fromDate": 1514293200000,
+                    "toDate": 1514296800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "RMeKWQ3pjjq8kkMKZ",
+                    "open": 6825,
+                    "close": 6000,
+                    "high": 6930,
+                    "low": 5500,
+                    "volume": 1809408011171,
+                    "count": 1009,
+                    "fromDate": 1514296800000,
+                    "toDate": 1514300400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "fQTTATWw2eRSGiRu5",
+                    "open": 6300,
+                    "close": 5530,
+                    "high": 6380,
+                    "low": 5003,
+                    "volume": 1350530653579,
+                    "count": 643,
+                    "fromDate": 1514300400000,
+                    "toDate": 1514304000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "BxA753aLY2pZLEGT9",
+                    "open": 5850,
+                    "close": 5797,
+                    "high": 5898,
+                    "low": 5500,
+                    "volume": 231936579328,
+                    "count": 158,
+                    "fromDate": 1514304000000,
+                    "toDate": 1514307600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "coERhcEmvAe6kbBcc",
+                    "open": 5530,
+                    "close": 5600,
+                    "high": 5790,
+                    "low": 5500,
+                    "volume": 203194261728,
+                    "count": 112,
+                    "fromDate": 1514307600000,
+                    "toDate": 1514311200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "82X3etP7anLGmtJTb",
+                    "open": 5550,
+                    "close": 5500,
+                    "high": 5600,
+                    "low": 5500,
+                    "volume": 261211157957,
+                    "count": 120,
+                    "fromDate": 1514311200000,
+                    "toDate": 1514314800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "TrE5ufMZzrwFuL9fd",
+                    "open": 5500,
+                    "close": 5003,
+                    "high": 5500,
+                    "low": 5000,
+                    "volume": 622393105681,
+                    "count": 356,
+                    "fromDate": 1514314800000,
+                    "toDate": 1514318400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "ux8my3n2J44LyMREh",
+                    "open": 5010,
+                    "close": 5825,
+                    "high": 5940,
+                    "low": 4800,
+                    "volume": 2295373383536,
+                    "count": 1307,
+                    "fromDate": 1514318400000,
+                    "toDate": 1514322000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "fZwKAiyXJ9K75XKsJ",
+                    "open": 5601,
+                    "close": 5797,
+                    "high": 5810,
+                    "low": 5600,
+                    "volume": 825469597347,
+                    "count": 725,
+                    "fromDate": 1514322000000,
+                    "toDate": 1514325600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "9zg2JaJTvB3ZmRrbb",
+                    "open": 5797,
+                    "close": 6303,
+                    "high": 6395,
+                    "low": 5750,
+                    "volume": 853288160021,
+                    "count": 644,
+                    "fromDate": 1514325600000,
+                    "toDate": 1514329200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "v2gPfyeuMLqZHycbh",
+                    "open": 6390,
+                    "close": 5350,
+                    "high": 6400,
+                    "low": 5211,
+                    "volume": 1054088153006,
+                    "count": 761,
+                    "fromDate": 1514329200000,
+                    "toDate": 1514332800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "i2XmTYzitQ3baNGrJ",
+                    "open": 5350,
+                    "close": 5890,
+                    "high": 5900,
+                    "low": 5201,
+                    "volume": 549673522386,
+                    "count": 508,
+                    "fromDate": 1514332800000,
+                    "toDate": 1514336400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "3BdtDaAvTrT5JChBW",
+                    "open": 5890,
+                    "close": 5849,
+                    "high": 6000,
+                    "low": 5500,
+                    "volume": 742858902077,
+                    "count": 528,
+                    "fromDate": 1514336400000,
+                    "toDate": 1514340000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "eGKHjmnPLBJnGrwWx",
+                    "open": 5840,
+                    "close": 5720,
+                    "high": 5860,
+                    "low": 5550,
+                    "volume": 489589071112,
+                    "count": 492,
+                    "fromDate": 1514340000000,
+                    "toDate": 1514343600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "o6cZs3TmzzG377aiY",
+                    "open": 5690,
+                    "close": 5554,
+                    "high": 5720,
+                    "low": 5250,
+                    "volume": 1076163326926,
+                    "count": 843,
+                    "fromDate": 1514343600000,
+                    "toDate": 1514347200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "MRZiWbMqYox53Y9dd",
+                    "open": 5554,
+                    "close": 5351,
+                    "high": 5573,
+                    "low": 5350,
+                    "volume": 258658588589,
+                    "count": 279,
+                    "fromDate": 1514347200000,
+                    "toDate": 1514350800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "uoC6jqj2fi6WxLba9",
+                    "open": 5380,
+                    "close": 5211,
+                    "high": 5400,
+                    "low": 5203,
+                    "volume": 496964773857,
+                    "count": 313,
+                    "fromDate": 1514350800000,
+                    "toDate": 1514354400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "MEibNxnaQmYsMnRxK",
+                    "open": 5211,
+                    "close": 5270,
+                    "high": 5388,
+                    "low": 5203,
+                    "volume": 89453492198,
+                    "count": 136,
+                    "fromDate": 1514354400000,
+                    "toDate": 1514358000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "244RTctgMXRAReFxm",
+                    "open": 5310,
+                    "close": 5380,
+                    "high": 5390,
+                    "low": 5213,
+                    "volume": 80170705872,
+                    "count": 51,
+                    "fromDate": 1514358000000,
+                    "toDate": 1514361600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "sDrgQGHqZThLbcjjF",
+                    "open": 5300,
+                    "close": 5490,
+                    "high": 5490,
+                    "low": 5211,
+                    "volume": 51778412150,
+                    "count": 55,
+                    "fromDate": 1514361600000,
+                    "toDate": 1514365200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "uXRP9ut9xos9xs2uB",
+                    "open": 5485,
+                    "close": 5206,
+                    "high": 5485,
+                    "low": 5204,
+                    "volume": 192376219109,
+                    "count": 102,
+                    "fromDate": 1514365200000,
+                    "toDate": 1514368800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "aYyaxBuo4htSp8AcL",
+                    "open": 5361,
+                    "close": 5580,
+                    "high": 5600,
+                    "low": 5203,
+                    "volume": 282511837087,
+                    "count": 184,
+                    "fromDate": 1514368800000,
+                    "toDate": 1514372400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "mpC4SMwbzEFKGYN4c",
+                    "open": 5580,
+                    "close": 5590,
+                    "high": 5600,
+                    "low": 5500,
+                    "volume": 438698794196,
+                    "count": 264,
+                    "fromDate": 1514372400000,
+                    "toDate": 1514376000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "quGHKkGoLq9dNY28P",
+                    "open": 5590,
+                    "close": 5960,
+                    "high": 5990,
+                    "low": 5590,
+                    "volume": 1037908802245,
+                    "count": 664,
+                    "fromDate": 1514376000000,
+                    "toDate": 1514379600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "6wwTMZygA7Frj3KXY",
+                    "open": 5955,
+                    "close": 5799,
+                    "high": 5969,
+                    "low": 5606,
+                    "volume": 591846192205,
+                    "count": 483,
+                    "fromDate": 1514379600000,
+                    "toDate": 1514383200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "YfdHS7t33E6YhevNE",
+                    "open": 5799,
+                    "close": 5750,
+                    "high": 5839,
+                    "low": 5705,
+                    "volume": 592699482691,
+                    "count": 455,
+                    "fromDate": 1514383200000,
+                    "toDate": 1514386800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "6q5HGKspmRwJGpsnq",
+                    "open": 5749,
+                    "close": 5700,
+                    "high": 5797,
+                    "low": 5610,
+                    "volume": 583652037888,
+                    "count": 468,
+                    "fromDate": 1514386800000,
+                    "toDate": 1514390400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "waDn3oapfwtCTYKny",
+                    "open": 5699,
+                    "close": 5593,
+                    "high": 5749,
+                    "low": 5500,
+                    "volume": 937323123290,
+                    "count": 517,
+                    "fromDate": 1514390400000,
+                    "toDate": 1514394000000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "Hdz9pb6ByrCEro3Tc",
+                    "open": 5590,
+                    "close": 5607,
+                    "high": 5670,
+                    "low": 5509,
+                    "volume": 433941150482,
+                    "count": 362,
+                    "fromDate": 1514394000000,
+                    "toDate": 1514397600000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "YQhwkXqajoppD7359",
+                    "open": 5606,
+                    "close": 5576,
+                    "high": 5650,
+                    "low": 5508,
+                    "volume": 546654694372,
+                    "count": 484,
+                    "fromDate": 1514397600000,
+                    "toDate": 1514401200000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "KS4EhcsyCA2oJhk9o",
+                    "open": 5568,
+                    "close": 5350,
+                    "high": 5568,
+                    "low": 5300,
+                    "volume": 726041316450,
+                    "count": 460,
+                    "fromDate": 1514401200000,
+                    "toDate": 1514404800000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "gEZuGFcS4puGcNwFB",
+                    "open": 5300,
+                    "close": 4711,
+                    "high": 5526,
+                    "low": 3001,
+                    "volume": 4786546853355,
+                    "count": 2271,
+                    "fromDate": 1514404800000,
+                    "toDate": 1514408400000,
+                    "__typename": "MarketStatsPoint"
+                },
+                {
+                    "_id": "53KZtNTpHXgwDAAb8",
+                    "open": 4780,
+                    "close": 4999,
+                    "high": 5199,
+                    "low": 4702,
+                    "volume": 958903561899,
+                    "count": 560,
+                    "fromDate": 1514408400000,
+                    "toDate": 1514412000000,
+                    "__typename": "MarketStatsPoint"
+                }
+            ]
+        }
+    },
+    {
+        "data": {
+            "orders": {
+                "totalCount": 0,
+                "items": [],
+                "__typename": "PaginatedOrder"
+            }
+        }
+    },
+    {
+        "data": {
+            "history": [
+                {
+                    "_id": "zCtAzR5ysM6MCQFdP",
+                    "amount": 20000000,
+                    "price": 4990,
+                    "date": 1514410339198,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "hg2jZqC6pNNgi5kzT",
+                    "amount": 70140281,
+                    "price": 4990,
+                    "date": 1514410328400,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "keNCvtXsaAPBjttjM",
+                    "amount": 500000000,
+                    "price": 4990,
+                    "date": 1514410323096,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "NWqRzQNXB2yRqpxZa",
+                    "amount": 270434087,
+                    "price": 4999,
+                    "date": 1514410300502,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "txgTYtxxnpwcoWZtY",
+                    "amount": 494742076,
+                    "price": 4991,
+                    "date": 1514410300287,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "thaYymFfWF5Lt34RJ",
+                    "amount": 244348697,
+                    "price": 4990,
+                    "date": 1514410299955,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "sKWyAEAJsFNiKiWHa",
+                    "amount": 1005651303,
+                    "price": 4990,
+                    "date": 1514410298829,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "9aEau5e3dKvZpbNK7",
+                    "amount": 307107305,
+                    "price": 4850,
+                    "date": 1514410298312,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "p9g89gm4zDZmevg8M",
+                    "amount": 206100000,
+                    "price": 4850,
+                    "date": 1514410298016,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "YzQEoTZpvPWsvFjcb",
+                    "amount": 100000000,
+                    "price": 4900,
+                    "date": 1514410297708,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "KoFEk99jLrA9aYwSE",
+                    "amount": 10207000000,
+                    "price": 4900,
+                    "date": 1514410297479,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "mYXs6RZRZizJfApXm",
+                    "amount": 171734693,
+                    "price": 4900,
+                    "date": 1514410297254,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Ystp2vroc8cptoaGj",
+                    "amount": 150000000,
+                    "price": 4900,
+                    "date": 1514410296844,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "T8exqzPiTpunbzTPi",
+                    "amount": 1100000000,
+                    "price": 4900,
+                    "date": 1514410296634,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "TmFPf9WoARLvmxcyb",
+                    "amount": 1000000000,
+                    "price": 4900,
+                    "date": 1514410296393,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "X3ipw9LCPyZqubpC9",
+                    "amount": 2030000000,
+                    "price": 4900,
+                    "date": 1514410296080,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "gEiMYEbwkFC74t97y",
+                    "amount": 17500000,
+                    "price": 4900,
+                    "date": 1514410295873,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Cc2dccXhiyjEK9wTt",
+                    "amount": 37000000,
+                    "price": 4900,
+                    "date": 1514410295613,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "TrCN93ywNvS9TREhz",
+                    "amount": 10000000000,
+                    "price": 4900,
+                    "date": 1514410295400,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "32AuFr4iTD7MY9Ye4",
+                    "amount": 210000000,
+                    "price": 4900,
+                    "date": 1514410295231,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "XpvpdsYwhHQT2xdn3",
+                    "amount": 6255765956,
+                    "price": 4900,
+                    "date": 1514410294993,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "MRikJGbShL3PAzt8q",
+                    "amount": 658740000,
+                    "price": 4901,
+                    "date": 1514410294777,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "AJ4Sn4qmLiSZe5cEB",
+                    "amount": 790000000,
+                    "price": 4901,
+                    "date": 1514410294582,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "vvmncn4aBQNHLTeZ7",
+                    "amount": 750000000,
+                    "price": 4901,
+                    "date": 1514410294350,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "FTNNqJkd5p7zzXiDQ",
+                    "amount": 2300000000,
+                    "price": 4902,
+                    "date": 1514410294145,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "JHsFanaMjD6EAK9fc",
+                    "amount": 3000000000,
+                    "price": 4904,
+                    "date": 1514410293955,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "z7uBcb7ibigqvm3nv",
+                    "amount": 100000000,
+                    "price": 4910,
+                    "date": 1514410293740,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "RkhRfimzoJb2rnJhE",
+                    "amount": 100000000,
+                    "price": 4911,
+                    "date": 1514410293511,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "nunQYPcSwc8CAgdSu",
+                    "amount": 5000000000,
+                    "price": 4920,
+                    "date": 1514410293354,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "tXbF4RMBtqjjHJBXL",
+                    "amount": 500000000,
+                    "price": 4920,
+                    "date": 1514410293166,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "35PpcYgrWt9WdQKyC",
+                    "amount": 3000000000,
+                    "price": 4921,
+                    "date": 1514410293021,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "GGQAsQ9vxG4nB8tgx",
+                    "amount": 2000000000,
+                    "price": 4921,
+                    "date": 1514410292762,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "4w5iKTst3wPxSEhnt",
+                    "amount": 35800000000,
+                    "price": 4930,
+                    "date": 1514410292614,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "gqxTkeY4Sgzz3eD7s",
+                    "amount": 2000000000,
+                    "price": 4930,
+                    "date": 1514410292462,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Tq6dwAcP8mTvt3Kr2",
+                    "amount": 4607957113,
+                    "price": 4931,
+                    "date": 1514410292316,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "eYJDqo33F6yppJKEx",
+                    "amount": 100000000,
+                    "price": 4950,
+                    "date": 1514410292128,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "9AxomCzahms6za5rJ",
+                    "amount": 300540974,
+                    "price": 4991,
+                    "date": 1514410289274,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Z5hrEpBtfGpxTJyxM",
+                    "amount": 6010819475,
+                    "price": 4991,
+                    "date": 1514410284806,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "BLktQRAN3eWtRoPAB",
+                    "amount": 43558405,
+                    "price": 4991,
+                    "date": 1514410278801,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "DqPX22kbCHsrMm66d",
+                    "amount": 334288588,
+                    "price": 4931,
+                    "date": 1514410269873,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "apBfxWMgb6WRNg7Bz",
+                    "amount": 100000000,
+                    "price": 4932,
+                    "date": 1514410269669,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "wfD5Pn2gmwox7RJqm",
+                    "amount": 43231354,
+                    "price": 4991,
+                    "date": 1514410269419,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "4CodvGQJmfCXgXYke",
+                    "amount": 407124275,
+                    "price": 4997,
+                    "date": 1514410269153,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Qzh9SXs72pwoqS5PY",
+                    "amount": 500000000,
+                    "price": 4996,
+                    "date": 1514410268804,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "3k6RSLj38wpqMB4WS",
+                    "amount": 1000000000,
+                    "price": 4991,
+                    "date": 1514410254630,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "jqcYrR4czYdpThKro",
+                    "amount": 106263758,
+                    "price": 4997,
+                    "date": 1514410250540,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "4fhaLnjuPdCoCcGfB",
+                    "amount": 894346482,
+                    "price": 4997,
+                    "date": 1514410250327,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "hMHaHfrxPBFHY4cba",
+                    "amount": 99790000,
+                    "price": 4997,
+                    "date": 1514410245699,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "HwM4x4DXeJk2h5rkX",
+                    "amount": 2002921753,
+                    "price": 4997,
+                    "date": 1514410244439,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "CicEnjZvg2gHMdueb",
+                    "amount": 2941765,
+                    "price": 4997,
+                    "date": 1514410243801,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "2tQvQhRoqvyYzNf9W",
+                    "amount": 200080032,
+                    "price": 4998,
+                    "date": 1514410232044,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "dJqH3FbxhxBxhPoqA",
+                    "amount": 402480992,
+                    "price": 4998,
+                    "date": 1514410230589,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "d5rwADNfwjJDLFivw",
+                    "amount": 956768646,
+                    "price": 4991,
+                    "date": 1514410214665,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "zt5PdxHK5yGxaGehu",
+                    "amount": 100020004,
+                    "price": 4999,
+                    "date": 1514410214346,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "PayQReNRPTmfqoRRf",
+                    "amount": 100020004,
+                    "price": 4999,
+                    "date": 1514410213987,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "o8hEi6wEqDfkBjgGe",
+                    "amount": 1000000000,
+                    "price": 5000,
+                    "date": 1514410208921,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "qCk8bJisHdRa4Fb5b",
+                    "amount": 1605715154,
+                    "price": 4931,
+                    "date": 1514410194202,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "gwjn7qPnFAh8Lwirp",
+                    "amount": 510000000,
+                    "price": 4990,
+                    "date": 1514410193955,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "mgDL2Gtgb43zwySjC",
+                    "amount": 1000000000,
+                    "price": 4991,
+                    "date": 1514410193694,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "e5MyuZSNWXWojoJTq",
+                    "amount": 200000000,
+                    "price": 5000,
+                    "date": 1514410185441,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "cYBJdrXkaoEQMMYcz",
+                    "amount": 99800000,
+                    "price": 5000,
+                    "date": 1514410184999,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "AghnfPfQ7mabHgqYg",
+                    "amount": 2802039145,
+                    "price": 4931,
+                    "date": 1514410184489,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "CzuSNvez5e3dFLE82",
+                    "amount": 201000000,
+                    "price": 4950,
+                    "date": 1514410184198,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "aF3Kwzz2GuuLiiTNX",
+                    "amount": 3000000000,
+                    "price": 4952,
+                    "date": 1514410183981,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "xHBnasmEowZ3hY4z4",
+                    "amount": 300000000,
+                    "price": 4990,
+                    "date": 1514410183688,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "urrfjvnt4zB6r4jLR",
+                    "amount": 500000000,
+                    "price": 4990,
+                    "date": 1514410183504,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "McEaZzR5PpxDX7p9s",
+                    "amount": 800000000,
+                    "price": 4990,
+                    "date": 1514410183235,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "45c2dMkqYGL2eGK8k",
+                    "amount": 259400000,
+                    "price": 5000,
+                    "date": 1514410168069,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "s5aDEi8As3R4cfoMj",
+                    "amount": 2774609416,
+                    "price": 5000,
+                    "date": 1514410167569,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "5WQftNLMLe5pWoyb2",
+                    "amount": 100000000,
+                    "price": 5010,
+                    "date": 1514410167324,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "6ZLdCPwJuQfYgvFtR",
+                    "amount": 1000000000,
+                    "price": 5000,
+                    "date": 1514410161433,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "M76upfX24fdSf84Kr",
+                    "amount": 200000000,
+                    "price": 5000,
+                    "date": 1514410156934,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "jXwo9kfbZHAJSt65a",
+                    "amount": 1525390584,
+                    "price": 5000,
+                    "date": 1514410156709,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Hss9qs58GyQGcHwhZ",
+                    "amount": 19050000,
+                    "price": 5000,
+                    "date": 1514410154599,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "x9h4o6KKoQKfuCPKw",
+                    "amount": 100000000,
+                    "price": 5000,
+                    "date": 1514410152257,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Z2QMeQr2rtHcM5ETd",
+                    "amount": 2543000000,
+                    "price": 5000,
+                    "date": 1514410152044,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Cwuki6dtcD8cos6u3",
+                    "amount": 100000000,
+                    "price": 5000,
+                    "date": 1514410151860,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "yXncpBr78BxhAzEy9",
+                    "amount": 712559416,
+                    "price": 5000,
+                    "date": 1514410151670,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "R7QyRmcDg4d7yDf8t",
+                    "amount": 495781343,
+                    "price": 5049,
+                    "date": 1514410148252,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "TfKz4bKFA4Wknw59y",
+                    "amount": 264942450,
+                    "price": 5000,
+                    "date": 1514410144203,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "Bj8EENiAEoAhcBdaq",
+                    "amount": 1000000000,
+                    "price": 5000,
+                    "date": 1514410143104,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "LLYDQW2wTvNT6mmpg",
+                    "amount": 3000000000,
+                    "price": 5000,
+                    "date": 1514410142513,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "vy9bTFuYSDAdTFvfh",
+                    "amount": 2837715000,
+                    "price": 5000,
+                    "date": 1514410127930,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "jaLvkQmdctxwyMJZ5",
+                    "amount": 3000000000,
+                    "price": 5002,
+                    "date": 1514410127748,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "CsAXdL6QByBPC633c",
+                    "amount": 23199215,
+                    "price": 5095,
+                    "date": 1514410123288,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "dmeeL2899A9FyCtPJ",
+                    "amount": 235525025,
+                    "price": 5095,
+                    "date": 1514410120020,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "A5wxPCv6trnyhbAsi",
+                    "amount": 1984783134,
+                    "price": 5000,
+                    "date": 1514410117123,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "rkcegW8yLJch2ppa3",
+                    "amount": 500000000,
+                    "price": 5000,
+                    "date": 1514410116809,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "kLxg3qMhF686bxWSL",
+                    "amount": 3000000000,
+                    "price": 5000,
+                    "date": 1514410116551,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "io43qiNjB8DFzGqfe",
+                    "amount": 5190000000,
+                    "price": 5000,
+                    "date": 1514410116245,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "oe6t3dwDG3jjmddoj",
+                    "amount": 99980000,
+                    "price": 5000,
+                    "date": 1514410115952,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "psWWoBufSmisNuevt",
+                    "amount": 314920000,
+                    "price": 5000,
+                    "date": 1514410115727,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "yHKeXm2mmJnMAjSqk",
+                    "amount": 4000000000,
+                    "price": 5000,
+                    "date": 1514410115521,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "6yNhJGfBzW53bwCLz",
+                    "amount": 20000000,
+                    "price": 5000,
+                    "date": 1514410115313,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "xZHinutu9zBAy4JfT",
+                    "amount": 1000000000,
+                    "price": 5000,
+                    "date": 1514410115091,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "PidovjdP5mMsiBWtH",
+                    "amount": 2000000000,
+                    "price": 5000,
+                    "date": 1514410114922,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "qbAjcbq9tpaqCBCNd",
+                    "amount": 2198687527,
+                    "price": 5001,
+                    "date": 1514410114635,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "eeBcdvEns7226PsC4",
+                    "amount": 8000000000,
+                    "price": 5002,
+                    "date": 1514410114433,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "SgavoCw8ZdxPifBPp",
+                    "amount": 299234544,
+                    "price": 5095,
+                    "date": 1514410109585,
+                    "__typename": "MarketTrade"
+                },
+                {
+                    "_id": "9cX2syQrtFKeGFzDx",
+                    "amount": 100058881,
+                    "price": 5095,
+                    "date": 1514410109255,
+                    "__typename": "MarketTrade"
+                }
+            ]
+        }
+    }
+]

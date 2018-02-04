@@ -1,0 +1,9 @@
+{-# LANGUAGE NamedFieldPuns #-}
+
+data Huinya = Huinya { name :: String, dickSize :: Int }
+  deriving (Show)
+
+strs = ["nya", "hui", "lol"]
+nums = [42..]
+
+huys = map (\(name, dickSize) -> Huinya { name , dickSize }) $ zip strs nums

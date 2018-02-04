@@ -1,0 +1,80 @@
+Const HKLM   = &h80000002
+Const HKCU   = &H80000001
+Const DELETE = &h10000
+
+Set sh = CreateObject("WScript.Shell")
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+CurrentDirectory = fso.GetAbsolutePathName(".")
+temploc = sh.ExpandEnvironmentStrings("%temp%")
+
+Set reg = GetObject("winmgmts://./root/default:StdRegProv")
+reg.CheckAccess HKLM, "SYSTEM\CurrentControlSet", DELETE, isAdmin
+
+If Not isAdmin Then
+  ' Copie du CMD et du fichier REG vers le dossier temporaire
+  sourceCMDfile = fso.buildpath(CurrentDirectory, "OneDrive.CMD")
+  sourceREGfile = fso.buildpath(CurrentDirectory, "Cortana-Tel-Biom-Nolock.reg")
+  fso.CopyFile sourceCMDfile, temploc & "\"
+  fso.CopyFile sourceREGfile, temploc & "\"  
+  If WScript.Arguments.Count = 0 Then
+    ' Ouverture du script avec élévation de privilèges
+    CreateObject("Shell.Application").ShellExecute WScript.FullName, _
+      Chr(34) & WScript.ScriptFullName & Chr(34) & " uac", _
+      sh.CurrentDirectory, "runas", 1
+    WScript.Quit 0
+  Else
+    WScript.Echo "Privilege elevation failed!"
+    WScript.Quit 1
+  End If
+Else
+  ' Si le script dispose des privilèges
+  
+  ' Création des variables d exectuion
+  temploc = sh.ExpandEnvironmentStrings("%temp%")
+  sourceCMDfile = fso.buildpath(temploc, "OneDrive.CMD")
+  sourceREGfile = fso.buildpath(temploc, "Cortana-Tel-Biom-Nolock.reg")
+  Timeri Fiedler-Valenta
+  ' Suppression par Powershell des Apps préinstallées
+  Dim apps
+  Dim app
+  apps = Array("3DBuilder", _
+					  "Getstarted", _
+				 	  "MicrosoftOfficeHub", _
+				 	  "MicrosoftSolitaireCollection", _
+				 	  "SkypeApp", _
+					  "WindowsMaps", _
+					  "BingWeather", _
+					  "Office.OneNote", _
+					  "XboxApp", _
+					  "ZuneMusic", _
+					  "ZuneVideo", _
+					  "BingSports", _
+					  "BingNews", _
+					  "WindowsPhone", _
+					  "BingFinance", _
+					  "WindowsSoundRecorder", _
+					  "Windows.Photos", _
+					  "WindowsCamera", _
+					  "WindowsAlarms", _
+					  "People", _
+					  "MicrosoftEdge")
+  For Each  app In apps
+    sh.Run("powershell.exe Get-AppxPackage -AllUsers -Name Microsoft." & app & " | Remove-AppxPackage")
+  Next
+
+  ' Execution du CMD OneDrive
+    sh.Run("cmd.exe " & sourceCMDfile)
+ 
+  ' Ajout des informations au registre
+  sh.Run "regedit.exe /s " & Chr(34) & sourceREGfile & Chr(34), 0, True
+  
+  ' Suppression par Powershell des services de tracking
+  sh.Run("powershell.exe sc delete DiagTrack")
+  sh.Run("powershell.exe sc delete dmwappushservice")
+  sh.Run("powershell.exe echo "" > C:\ProgramData\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl")
+  
+  ' Suppression des fichiers temporaires
+  fso.DeleteFile sourceCMDfile
+  fso.DeleteFile sourceREGfile
+End If

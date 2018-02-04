@@ -1,0 +1,35 @@
+       # This is the home page 
+       location = / {
+	   limit_except GET POST HEAD { deny all; }
+           rewrite ^.*$ /Main/WebHome;
+       }
+
+       # Any URLs that do NOT match the regexes below will be rewritten here.
+       # Nginx tries all regexes and then defaults to the longest matching prefix
+       location / {
+	       limit_except GET POST HEAD { deny all; }
+           rewrite ^(.*)$ /bin/view/$1;
+       }
+
+       # The pub location is a static file repository apparently
+       location ~ ^/pub/ {
+	       limit_except GET POST HEAD { deny all; }
+           try_files $uri =404;
+       }
+
+       # This handles all /bin linkages
+       location ~ ^/bin/([a-z]+) {
+	       limit_except GET POST HEAD { deny all; }
+
+           include fastcgi_params;
+           gzip off;
+   	       fastcgi_buffer_size  1024k;
+	       fastcgi_buffers 256 512k;
+	       fastcgi_pass	unix:/path/to/socket
+           fastcgi_split_path_info ^(/bin/\w+)(.*);
+    	   fastcgi_param   SCRIPT_FILENAME         /home/foswiki/$fastcgi_script_name;
+  	       fastcgi_param   SCRIPT_NAME             $1;
+	       fastcgi_param   PATH_INFO               $fastcgi_path_info;
+	    }
+
+	    location ~ (^/lib|^/data|^/locale|^/templates|^/tools|^/work) { deny all; }

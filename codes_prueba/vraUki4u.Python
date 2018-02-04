@@ -1,0 +1,30 @@
+from bs4 import BeautifulSoup
+from time import gmtime, strftime
+import html5lib
+import requests
+
+print("Today's Animu Crack: "+strftime("%B %d")+"\n")
+url = requests.get("http://www.animefansftw.com")
+site_data = BeautifulSoup(url.content, "html5lib")
+
+for div in site_data.find_all("div", {"class": "date"}):
+    get_date = " ".join(div.text.split())
+    if get_date == strftime("%B %d"):
+        post_title = div.parent.parent.h1.text.strip()
+        post_url = div.parent.parent.a.get('href').strip()
+        print(post_title+"\n"+post_url+"\n")
+
+###########SCRIPT OUTPUT###################################
+Today's Animu Crack: August 16
+
+World Trigger Episode 42
+http://www.animefansftw.com/world-trigger-episode-42/ 
+
+One Piece Episode 705
+http://www.animefansftw.com/one-piece-episode-705/ 
+
+Cardfight!! Vanguard G Episode 41
+http://www.animefansftw.com/cardfight-vanguard-g-episode-41/ 
+
+Folktales from Japan Episode 175
+http://www.animefansftw.com/folktales-from-japan-episode-175/

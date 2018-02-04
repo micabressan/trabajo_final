@@ -1,0 +1,229 @@
+groups:
+  Guest:
+    prefix: '&e[Guest]'
+    permissions:
+    - modifyworld.*
+    - essentials.help
+    - -worldguard.build.block.place.tnt
+    - -worldguard.build.block.remove.tnt
+    - -worldguard.build.block.interact.tnt
+    - -worldguard.build.block.place.minecraft:skull:1
+    - -worldguard.build.block.remove.minecraft:skull:1
+    - -worldguard.build.block.interact.minecraft:skull:1
+    - -worldguard.build.item.use.lava_bucket
+    - -worldguard.build.item.use.flint_and_steel
+    - -essentials.build.break.minecraft:tnt
+    - -essentials.build.craft.minecraft:tnt
+    - -essentials.build.interact.minecraft:tnt
+    - -essentials.build.pickup.minecraft:tnt
+    - -essentials.build.place.minecraft:tnt
+    - -essentials.build.place.minecraft:skull:1
+    - bukkit.command.help
+    - bukkit.command.list
+    - bukkit.command.tell
+    - ColorWriter.Colors
+    - ColorWriter.RandomColors
+    - ColorWriter.Sign
+    - essentials.afk
+    - essentials.afk.kickexempt
+    - essentials.back
+    - essentials.back.ondeath
+    - essentials.build.break.*
+    - essentials.build.craft.*
+    - essentials.build.drop.*
+    - essentials.build.interact.*
+    - essentials.build.pickup.*
+    - essentials.build.place.*
+    - essentials.chat.url
+    - essentials.clearinventory
+    - essentials.fly.safelogin
+    - essentials.help
+    - essentials.keepxp
+    - essentials.kit
+    - essentials.kits.*
+    - essentials.list
+    - essentials.mail
+    - essentials.mail.send
+    - essentials.msg
+    - essentials.protect.exemptbreak
+    - essentials.protect.exemptplacement
+    - essentials.protect.exemptusage
+    - essentials.recipe
+    - essentials.rules
+    - essentials.seen
+    - essentials.seen.banreason
+    - essentials.signs.color
+    - essentials.signs.create.free
+    - essentials.signs.format
+    - essentials.suicide
+    - essentials.tpa
+    - essentials.tpaccept
+    - essentials.tpahere
+    - essentials.tpdeny
+    - essentials.warp
+    - essentials.warp.list
+    - essentials.warps.*
+    - essentials.worlds.Interstice
+    - essentials.worlds.Interstice_nether
+    - essentials.worlds.Interstice_the_end
+    - essentials.worlds.world
+    - essentials.worlds.world_nether
+    - essentials.worlds.world_the_end
+    - logblock.lookup
+    - logblock.me
+    - mh.set
+    - mh.tp
+    - multiverse.access.*
+    - multiverse.core.list.worlds
+    - multiverse.core.spawn.self
+    - multiverse.core.tp.self
+    - multiverse.exempt.*
+    - multiverse.help
+    - multiverse.teleport.self.*
+    - runecraft.teleport
+    - worldguard.build.block.interact.*
+    - worldguard.build.block.place.*
+    - worldguard.build.block.remove.*
+    - worldguard.build.entity.damage.*
+    - worldguard.build.entity.interact.*
+    - worldguard.build.entity.place.*
+    - worldguard.build.entity.remove.*
+    - worldguard.build.item.use.*
+    default: true
+  Regular:
+    prefix: '&a[Regular]'
+    inheritance:
+    - Guest
+    permissions:
+    - bukkit.command.gamemode
+    - bukkit.command.time.add
+    - bukkit.command.time.set
+    - bukkit.command.toggledownfall
+    - essentials.build.break.minecraft:tnt
+    - essentials.build.craft.minecraft:tnt
+    - essentials.build.interact.minecraft:tnt
+    - essentials.build.pickup.minecraft:tnt
+    - essentials.build.place.minecraft:skull:1
+    - essentials.build.place.minecraft:tnt
+    - essentials.delhome
+    - essentials.enchant
+    - essentials.enchantments.*
+    - essentials.exp
+    - essentials.exp.give
+    - essentials.exp.set
+    - essentials.feed
+    - essentials.fly
+    - essentials.gamemode
+    - essentials.gamemode.creative
+    - essentials.gamemode.spectator
+    - essentials.gamemode.survival
+    - essentials.hat
+    - essentials.heal
+    - essentials.home
+    - essentials.home.bed
+    - essentials.itemspawn.item-all
+    - essentials.me
+    - essentials.repair
+    - essentials.repair.*
+    - essentials.sethome
+    - essentials.sethome.bed
+    - essentials.sethome.multiple
+    - essentials.sethome.multiple.[setname]
+    - essentials.sethome.multiple.unlimited
+    - essentials.signs.create.*
+    - essentials.signs.use.*
+    - essentials.signs.use.info
+    - essentials.signs.use.kit
+    - essentials.signs.use.mail
+    - essentials.skull
+    - essentials.skull.*
+    - essentials.speed.fly
+    - essentials.time.set
+    - essentials.weather
+    - minecraft.command.gamemode
+    - runecraft.runes
+    - worldguard.build.block.interact.minecraft:skull:1
+    - worldguard.build.block.interact.tnt
+    - worldguard.build.block.place.minecraft:skull:1
+    - worldguard.build.block.place.tnt
+    - worldguard.build.block.remove.minecraft:skull:1
+    - worldguard.build.block.remove.tnt
+    - worldguard.build.item.use.flint_and_steel
+    - worldguard.build.item.use.lava_bucket
+  Moderator:
+    prefix: '&9[Mod]'
+    inheritance:
+    - Regular
+    permissions:
+    - bukkit.command.op.give
+    - bukkit.command.op.take
+    - ColorWriter.NoName
+    - essentials.afk.others
+    - essentials.burn
+    - essentials.chat.spy
+    - essentials.clearinventory.others
+    - essentials.exp.give.others
+    - essentials.exp.set.others
+    - essentials.feed.others
+    - essentials.fly.others
+    - essentials.gamemode.others
+    - essentials.heal.others
+    - essentials.info
+    - essentials.joinfullserver
+    - essentials.kick
+    - essentials.kill
+    - essentials.kit.others
+    - essentials.list.hidden
+    - essentials.mail.sendall
+    - essentials.mute
+    - essentials.powertool
+    - essentials.powertooltoggle
+    - essentials.seen.extra
+    - essentials.signs.break.*
+    - essentials.socialspy
+    - essentials.speed.others
+    - essentials.tp
+    - essentials.tppos
+    - essentials.vanish.interact
+    - essentials.vanish.see
+    - essentials.warp.otherplayers
+    - groupmanager.mandemote
+    - groupmanager.manudelp
+    - logblock.rollback
+    - logblock.spawnTools
+    - logblock.tools.tool
+    - logblock.tools.toolblock
+    - logblock.tp
+    - multiverse.core.list.environments
+    - multiverse.core.list.who
+    options:
+
+  Admin:
+    prefix: '&4[&n&2Stink &5Deity&r&4]'
+    inheritance:
+    - Moderator
+    permissions:
+    - minecraft.*
+    - bukkit.*
+    - essentials.*
+    - runecraft.*
+    - mh.*
+    - multiverse.*
+    - worldguard.*
+    - worldedit.*
+    - logblock.*
+    - ColorWriter.*
+    - lockette.*
+users:
+  e1ff517a-1330-4bf9-9c14-3f6ce64ffae2:
+    group:
+    - Admin
+    options:
+      name: TheLawnStink
+  acetroubles:
+    group:
+    - Moderator
+  _draku_:
+    group:
+    - Regular
+schema-version: 1

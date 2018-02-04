@@ -1,0 +1,3 @@
+filter'' :: (a -> Bool) -> [a] -> [a]
+filter'' f [] = []
+filter'' f xs = foldl ( \ys y -> if ( ( y== [] ) || ( f y ) == True ) then y:ys else ys ) [] xs

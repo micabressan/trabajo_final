@@ -1,0 +1,81 @@
+$bg-color: #333;
+$icon-color: rgba(0, 102, 255, 0.808);
+$dark-overlay: rgba(0,0,0,0.5);
+
+body {
+    background: lightgrey;
+}
+
+#topNavbar {
+    img {
+        @media screen and (min-width: 0px) {
+            max-width:75px;
+        }
+        @media screen and (min-width: 992px) {
+            max-width:100px;
+        }
+        @media screen and (min-width: 1200px) {
+            max-width:120px;
+        }
+    }
+}
+
+#contact-section {
+    
+    .fa {
+        color: $icon-color;
+    }
+}
+
+#welcome-section {
+    background: url('../img/header_panel.jpg') no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 300px;
+
+    .welcome-inner {
+        padding-top: 115px;
+        color: white;
+        -webkit-text-stroke-color: black 1px solid;
+    }
+
+    .dark-overlay {
+        background-color: $dark-overlay;
+        position: absolute;
+        top: 1;
+        left: 0;
+        width: 100%;
+        min-height: 300px;
+    }
+
+}
+
+#featured-section-lg,
+#featured-section-md,
+#featured-section-sm {
+    height:100%;
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      height: 100px;
+      width: 100px;
+      background-size: 100%, 100%;
+      border-radius: 50%;
+      background-image: none;
+    }
+    
+    .carousel-control-next-icon:after,
+    {
+      content: '>';
+      font-size: 55px;
+      color: $icon-color;
+    }
+    
+    .carousel-control-prev-icon:after {
+      content: '<';
+      font-size: 55px;
+      color: $icon-color;
+    }
+
+
+}

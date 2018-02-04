@@ -1,0 +1,41 @@
+upstream nodejs_demo {
+    server unix:/var/www/demo/run/node.socket;
+}
+
+server {
+    listen 80;
+    server_name demo.trendata.com;
+
+    rewrite ^ https://demo.trendata.com$request_uri? permanent;
+    access_log /var/log/nginx/td_demo_ac.log;
+    error_log /var/log/nginx/td_demo_err.log;
+
+}
+
+server {
+    listen 443 ssl;
+    ssl_certificate     ssl/STAR_trendata.com.crt;
+    ssl_certificate_key ssl/STAR_trendata.com.key;
+
+    server_name demo.trendata.com;
+
+    root /var/www/demo/static;
+    access_log /var/log/nginx/td_demo_ac.log;
+    error_log /var/log/nginx/td_demo_err.log;
+
+
+    location / {
+        try_files $uri @custom;
+    }
+
+    location @custom {
+        proxy_pass http://nodejs_demo;
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+    }
+
+}

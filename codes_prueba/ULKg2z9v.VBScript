@@ -1,0 +1,25 @@
+Public Class Form1
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ListBox1.Items.Add("John Dope")
+        ListBox1.Items.Add("Matthew Singer")
+        ListBox1.Items.Add("Rober Muchamore")
+        ListBox1.Items.Add("Dean Winchester")
+        ListBox1.Items.Add("Sam Winchester")
+        ListBox1.Items.Add("Benjamin Moore")
+        ListBox1.Items.Add("Ima Payne")
+        ListBox1.Visible = False
+        For Each item In ListBox1.Items
+            ListBox2.Items.Add(item)
+        Next
+    End Sub
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+        ListBox2.Items.Clear()
+        For Each item In ListBox1.Items
+            If item.contains(TextBox1.Text) Then
+                ListBox2.Items.Add(item)
+            End If
+        Next
+    End Sub
+End Class

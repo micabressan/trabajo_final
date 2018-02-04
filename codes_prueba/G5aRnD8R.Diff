@@ -1,0 +1,18 @@
+--- untitled
++++ (clipboard)
+@@ -1,5 +1,5 @@
+ // Handles toggling a category on/off when the category is pre-existing
+-$('#category-menu input.category-toggle').change(function () {
++$('.category-metabox input[type=checkbox]').change(function () {
+ 	if (!this.checked) return true;
+ 	var id,details = new Array();
+ 
+@@ -8,7 +8,7 @@
+ 		details.push($(item).val());
+ 	});
+ 
+-	id = $(this).attr('id').substr($(this).attr('id').indexOf("-")+1);
++	id = $(this).val();
+ 	// Load category spec templates
+ 	$.getJSON(spectemp_url+'&action=shopp_spec_template&category='+id,function (speclist) {
+ 		if (!speclist) return true;

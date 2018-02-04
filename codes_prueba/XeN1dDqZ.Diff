@@ -1,0 +1,125 @@
+diff -Naur asound.state~ asound.state
+--- asound.state~	2017-12-30 14:16:30.000000000 -0500
++++ asound.state	2017-12-30 16:34:04.948029827 -0500
+@@ -47,8 +47,8 @@
+ 	control.5 {
+ 		iface MIXER
+ 		name 'Speaker Playback ZC Switch'
+-		value.0 false
+-		value.1 false
++		value.0 true
++		value.1 true
+ 		comment {
+ 			access 'read write'
+ 			type BOOLEAN
+@@ -106,8 +106,8 @@
+ 	control.10 {
+ 		iface MIXER
+ 		name 'PCM Volume'
+-		value.0 204
+-		value.1 204
++		value.0 230
++		value.1 230
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -153,7 +153,7 @@
+ 	control.14 {
+ 		iface MIXER
+ 		name 'Treble Volume'
+-		value 0
++		value 15
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -233,7 +233,7 @@
+ 	control.21 {
+ 		iface MIXER
+ 		name 'ALC Capture Target Volume'
+-		value 3
++		value 0
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -387,7 +387,7 @@
+ 	control.35 {
+ 		iface MIXER
+ 		name 'Right Speaker Playback Invert Switch'
+-		value false
++		value true
+ 		comment {
+ 			access 'read write'
+ 			type BOOLEAN
+@@ -409,8 +409,8 @@
+ 	control.37 {
+ 		iface MIXER
+ 		name 'Bypass Left Playback Volume'
+-		value.0 2
+-		value.1 2
++		value.0 0
++		value.1 0
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -421,8 +421,8 @@
+ 	control.38 {
+ 		iface MIXER
+ 		name 'Bypass Right Playback Volume'
+-		value.0 2
+-		value.1 2
++		value.0 0
++		value.1 0
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -433,8 +433,8 @@
+ 	control.39 {
+ 		iface MIXER
+ 		name 'Bypass Mono Playback Volume'
+-		value.0 2
+-		value.1 2
++		value.0 0
++		value.1 0
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -455,8 +455,8 @@
+ 	control.41 {
+ 		iface MIXER
+ 		name 'Headphone Playback Volume'
+-		value.0 89
+-		value.1 89
++		value.0 95
++		value.1 95
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -467,8 +467,8 @@
+ 	control.42 {
+ 		iface MIXER
+ 		name 'Speaker Playback Volume'
+-		value.0 102
+-		value.1 102
++		value.0 127
++		value.1 127
+ 		comment {
+ 			access 'read write'
+ 			type INTEGER
+@@ -510,7 +510,7 @@
+ 	control.46 {
+ 		iface MIXER
+ 		name 'Left Mixer Playback Switch'
+-		value false
++		value true
+ 		comment {
+ 			access 'read write'
+ 			type BOOLEAN
+@@ -570,7 +570,7 @@
+ 	control.52 {
+ 		iface MIXER
+ 		name 'Right Mixer Playback Switch'
+-		value false
++		value true
+ 		comment {
+ 			access 'read write'
+ 			type BOOLEAN

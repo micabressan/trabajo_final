@@ -1,0 +1,95 @@
+diff --git a/examples/shadowmappingcascade/shadowmappingcascade.cpp b/examples/shadowmappingcascade/shadowmappingcascade.cpp
+index 6ed67b4..b157dd8 100644
+--- a/examples/shadowmappingcascade/shadowmappingcascade.cpp
++++ b/examples/shadowmappingcascade/shadowmappingcascade.cpp
+@@ -282,12 +282,12 @@ public:
+ 		VkAttachmentDescription attachmentDescription{};
+ 		attachmentDescription.format = depthFormat;
+ 		attachmentDescription.samples = VK_SAMPLE_COUNT_1_BIT;
+-		attachmentDescription.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
++		attachmentDescription.loadOp = VK_ATTACHMENT_LOAD_OP_LOAD;
+ 		attachmentDescription.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+ 		attachmentDescription.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+ 		attachmentDescription.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+-		attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+-		attachmentDescription.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
++		attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_GENERAL;
++		attachmentDescription.finalLayout = VK_IMAGE_LAYOUT_GENERAL;
+ 
+ 		VkAttachmentReference depthReference = {};
+ 		depthReference.attachment = 0;
+@@ -297,7 +297,7 @@ public:
+ 		subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+ 		subpass.colorAttachmentCount = 0;
+ 		subpass.pDepthStencilAttachment = &depthReference;
+-
++		
+ 		// Use subpass dependencies for layout transitions
+ 		std::array<VkSubpassDependency, 2> dependencies;
+ 
+@@ -434,11 +434,47 @@ public:
+ 		VkRect2D scissor = vks::initializers::rect2D(SHADOWMAP_DIM, SHADOWMAP_DIM, 0, 0);
+ 		vkCmdSetScissor(depthPass.commandBuffer, 0, 1, &scissor);
+ 
++		// The depth image layout may still be
++		// UNDEFINED so we'll just set it up here.
++		VkImageMemoryBarrier barrier0 = {
++			VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
++			nullptr, 0,
++			VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT |
++			VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
++			VK_IMAGE_LAYOUT_UNDEFINED,
++			VK_IMAGE_LAYOUT_GENERAL,
++			VK_QUEUE_FAMILY_IGNORED,
++			VK_QUEUE_FAMILY_IGNORED,
++			depth.image,
++			VkImageSubresourceRange {
++					VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT,
++					0, 1, 0, SHADOW_MAP_CASCADE_COUNT } };
++		
++		vkCmdPipelineBarrier(depthPass.commandBuffer,
++			VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
++			VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
++			0, 0, nullptr, 0, nullptr, 1, &barrier0);
++		
+ 		// One pass per cascade
+ 		// The layer that this pass renders too is defined by the cascade's image view (selected via the cascade's decsriptor set)
+ 		for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
++			VkClearAttachment attachment;
++			attachment.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
++			attachment.colorAttachment = 0;
++			attachment.clearValue.depthStencil = { 1.0f, 0 };
++			
++			VkClearRect rect = { scissor, 0, 1 };
++			
++			// Pass 1: Clear the depth buffer to 1.0. This seems to work as expected.
+ 			renderPassBeginInfo.framebuffer = cascades[i].frameBuffer;
+ 			vkCmdBeginRenderPass(depthPass.commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
++			vkCmdClearAttachments(depthPass.commandBuffer, 1, &attachment, 1, &rect);
++			vkCmdEndRenderPass(depthPass.commandBuffer);
++			
++			// Pass 2: Render scene. This produces weird results with the
++			// HTILE flags set to 0x30f: Most fragments fail the depth test,
++			// those that pass write a value of 0.0 to the depth buffer.
++			vkCmdBeginRenderPass(depthPass.commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
+ 			vkCmdBindPipeline(depthPass.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, depthPass.pipeline);
+ 			renderScene(depthPass.commandBuffer, depthPass.pipelineLayout, cascades[i].descriptorSet, i);
+ 			vkCmdEndRenderPass(depthPass.commandBuffer);
+@@ -554,7 +590,7 @@ public:
+ 		std::vector<VkWriteDescriptorSet> writeDescriptorSets;
+ 
+ 		VkDescriptorImageInfo depthMapDescriptor =
+-			vks::initializers::descriptorImageInfo(depth.sampler, depth.view, VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
++			vks::initializers::descriptorImageInfo(depth.sampler, depth.view, VK_IMAGE_LAYOUT_GENERAL);
+ 
+ 		VkDescriptorSetAllocateInfo allocInfo =
+ 			vks::initializers::descriptorSetAllocateInfo(descriptorPool, &descriptorSetLayouts.base, 1);
+@@ -572,7 +608,7 @@ public:
+ 		// Each descriptor set represents a single layer of the array texture
+ 		for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
+ 			VK_CHECK_RESULT(vkAllocateDescriptorSets(device, &allocInfo, &cascades[i].descriptorSet));
+-			VkDescriptorImageInfo cascadeImageInfo = vks::initializers::descriptorImageInfo(depth.sampler, depth.view, VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
++			VkDescriptorImageInfo cascadeImageInfo = vks::initializers::descriptorImageInfo(depth.sampler, depth.view, VK_IMAGE_LAYOUT_GENERAL);
+ 			writeDescriptorSets = {
+ 				vks::initializers::writeDescriptorSet(cascades[i].descriptorSet, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 0, &depthPass.uniformBuffer.descriptor),
+ 				vks::initializers::writeDescriptorSet(cascades[i].descriptorSet, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, &cascadeImageInfo)

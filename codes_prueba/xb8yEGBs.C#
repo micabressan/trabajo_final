@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class movement : MonoBehaviour {
+
+    public Rigidbody2D player;
+    public float speed;
+    public float rotSpeed;
+    public GameObject wall;
+    public float delay;
+
+    private bool movementEnabled = true;
+
+
+    // Use this for initialization
+    void Start () {
+        player = GetComponent<Rigidbody2D>();
+        wall = GetComponent<GameObject>();
+    }
+
+    IEnumerator timeDisabled ()
+    {
+        yield return new WaitForSeconds(delay);
+        movementEnabled = true;
+    }
+
+    void OnCollisionEnter2D(Collision2D wall)
+    {
+        movementEnabled = false;
+    }
+
+    void RotateLeft()
+    {
+        transform.Rotate(Vector3.forward * rotSpeed);
+    }
+
+    void RotateRight()
+    {
+        transform.Rotate(Vector3.back * rotSpeed);
+    }
+
+    void move()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            player.velocity = (transform.up * speed);
+        }
+        else
+        {
+            player.velocity = new Vector2(0, 0);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            RotateLeft();
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            RotateRight();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
+        if (movementEnabled == true)
+        {
+            move();
+        }
+        else
+        {
+            timeDisabled();
+        }
+        
+    }
+}

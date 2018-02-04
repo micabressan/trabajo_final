@@ -1,0 +1,10 @@
+# Looks like it works? (RedNifre)
+
+doh = (stuff) -> P.try -> stuff().reduce((l,r) -> l.then(r))
+
+doh -> [
+	read(tracePath)
+	_.map undefined # Trace.toString
+	_.join '\n\n'
+	console.log
+]

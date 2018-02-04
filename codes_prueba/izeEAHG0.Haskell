@@ -1,0 +1,43 @@
+import Data.Random.Normal
+import Data.List.Split
+import Control.Monad (replicateM)
+
+data GolfMean = GolfMean 
+                        { golfName :: String
+                        , golfCountry :: String
+                        , golfMean :: Float
+                        } deriving (Show)
+
+golfTextToTuple :: String -> GolfMean
+golfTextToTuple input = GolfMean (fields !! 0) (fields !! 1) (read (fields !! 2)) -- No input checking!! will crash if list returned by splitOn is not at least length 3
+                    where
+                        fields = splitOn "\t" input
+
+simulateRoundForPlayer' :: GolfMean -> IO (Integer)
+simulateRoundForPlayer' player = fmap round $ normalIO' (golfMean player, 2.8)
+
+simulateRoundForPlayer :: (GolfMean, [Integer]) -> IO (GolfMean, [Integer])
+simulateRoundForPlayer player = do
+    let (gm, rs) = player
+    newR <- simulateRoundForPlayer' gm
+    return (gm, rs ++ [newR])
+
+simulateRound :: [(GolfMean, [Integer])] -> IO ([(GolfMean, [Integer])])
+simulateRound input = mapM simulateRoundForPlayer input
+
+bestTotal :: [(GolfMean, [Integer])] -> [(GolfMean, [Integer])]
+bestTotal input = filter (\(_, rs) -> (sum rs) == min) input
+        where 
+            sums = map (\(gm, rs) -> (gm, sum rs)) input
+            min = minimum $ map snd sums
+
+main :: IO ()
+main = do
+    golfMeansText <- readFile "golfmeans.txt"
+    let golfMeans = map golfTextToTuple $ lines golfMeansText
+    result1 <- simulateRound $ map (\p -> (p,[])) golfMeans
+    result2 <- simulateRound result1
+    result3 <- simulateRound result2
+    result4 <- simulateRound result3
+    putStrLn $ show result4
+    putStrLn $ show $ bestTotal result4

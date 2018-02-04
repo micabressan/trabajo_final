@@ -1,0 +1,3 @@
+-- snd (splitAt 2 (sort ( concat[ [2^i,3^i, 5^i] | i<-[0.. 3335] ] ))) !! (1000 - 1 )
+
+-- snd (splitAt 2 (sort ( concat[ [2^i,3^i, 5^i] | i<-[0.. 3335] ] ))) !! (10000 - 1)

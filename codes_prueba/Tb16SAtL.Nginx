@@ -1,0 +1,36 @@
+server {
+    listen 80;
+
+    root /home/avoronoy/www/domen.dev;
+    index index.php index.html index.htm;
+
+    server_name domen.dev;
+
+    location / {
+index index.php;
+                if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)$") {
+                        access_log off;
+                        expires max;
+                }
+                try_files $uri $uri/ @handler;
+    }
+
+location @handler {
+                rewrite ^(.*) /index.php?$1 last;
+        }
+
+    location ~ \.php$ {
+
+
+       fastcgi_pass unix:/var/run/php5-fpm-domen.sock;
+
+fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+                include fastcgi_params;
+                fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+                fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+
+                fastcgi_index index.php;
+
+    }
+}

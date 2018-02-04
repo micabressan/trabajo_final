@@ -1,0 +1,37 @@
+[
+    {
+        "Name": "net_1",
+        "Id": "8a9ae0d69c9cd0abe5ff02dd2dae0229b4d6ae5f19d6ad3eec38466e0110d8a1",
+        "Created": "2017-12-02T20:14:11.706719752Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.1.0/24"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "f6d060a65acf1b38efc1d00d2106949d455c8facea3f1ece1029443b2defcbcb": {
+                "Name": "app_1_con",
+                "EndpointID": "535c34f652004a2bb8d55e6bbaf777430dfea93c95bca2354c5a31998099e40f",
+                "MacAddress": "02:42:c0:a8:01:0b",
+                "IPv4Address": "192.168.1.11/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]

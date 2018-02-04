@@ -1,0 +1,256 @@
+diff --git i/base/threading/thread_restrictions.cc w/base/threading/thread_restrictions.cc
+index e7e1716e08..3ae4e04c48 100644
+--- i/base/threading/thread_restrictions.cc
++++ w/base/threading/thread_restrictions.cc
+@@ -26,12 +26,7 @@ LazyInstance<ThreadLocalBoolean>::Leaky g_base_sync_primitives_disallowed =
+ }  // namespace
+ 
+ void AssertBlockingAllowed() {
+-  DCHECK(!g_blocking_disallowed.Get().Get())
+-      << "Function marked as blocking was called from a scope that disallows "
+-         "blocking! If this task is running inside the TaskScheduler, it needs "
+-         "to have MayBlock() in its TaskTraits. Otherwise, consider making "
+-         "this blocking work asynchronous or, as a last resort, you may use "
+-         "ScopedAllowBlocking in a narrow scope.";
++  return;
+ }
+ 
+ void DisallowBlocking() {
+@@ -54,7 +49,6 @@ ScopedAllowBlocking::ScopedAllowBlocking()
+ }
+ 
+ ScopedAllowBlocking::~ScopedAllowBlocking() {
+-  DCHECK(!g_blocking_disallowed.Get().Get());
+   g_blocking_disallowed.Get().Set(was_disallowed_);
+ }
+ 
+@@ -64,14 +58,10 @@ void DisallowBaseSyncPrimitives() {
+ 
+ ScopedAllowBaseSyncPrimitives::ScopedAllowBaseSyncPrimitives()
+     : was_disallowed_(g_base_sync_primitives_disallowed.Get().Get()) {
+-  DCHECK(!g_blocking_disallowed.Get().Get())
+-      << "To allow //base sync primitives in a scope where blocking is "
+-         "disallowed use ScopedAllowBaseSyncPrimitivesOutsideBlockingScope.";
+   g_base_sync_primitives_disallowed.Get().Set(false);
+ }
+ 
+ ScopedAllowBaseSyncPrimitives::~ScopedAllowBaseSyncPrimitives() {
+-  DCHECK(!g_base_sync_primitives_disallowed.Get().Get());
+   g_base_sync_primitives_disallowed.Get().Set(was_disallowed_);
+ }
+ 
+@@ -83,7 +73,6 @@ ScopedAllowBaseSyncPrimitivesOutsideBlockingScope::
+ 
+ ScopedAllowBaseSyncPrimitivesOutsideBlockingScope::
+     ~ScopedAllowBaseSyncPrimitivesOutsideBlockingScope() {
+-  DCHECK(!g_base_sync_primitives_disallowed.Get().Get());
+   g_base_sync_primitives_disallowed.Get().Set(was_disallowed_);
+ }
+ 
+@@ -95,19 +84,13 @@ ScopedAllowBaseSyncPrimitivesForTesting::
+ 
+ ScopedAllowBaseSyncPrimitivesForTesting::
+     ~ScopedAllowBaseSyncPrimitivesForTesting() {
+-  DCHECK(!g_base_sync_primitives_disallowed.Get().Get());
+   g_base_sync_primitives_disallowed.Get().Set(was_disallowed_);
+ }
+ 
+ namespace internal {
+ 
+ void AssertBaseSyncPrimitivesAllowed() {
+-  DCHECK(!g_base_sync_primitives_disallowed.Get().Get())
+-      << "Waiting on a //base sync primitive is not allowed on this thread to "
+-         "prevent jank and deadlock. If waiting on a //base sync primitive is "
+-         "unavoidable, do it within the scope of a "
+-         "ScopedAllowBaseSyncPrimitives. If in a test, "
+-         "use ScopedAllowBaseSyncPrimitivesForTesting.";
++    return;
+ }
+ 
+ void ResetThreadRestrictionsForTesting() {
+diff --git i/build/config/compiler/compiler.gni w/build/config/compiler/compiler.gni
+index f8026b67a8..5c6085b9b2 100644
+--- i/build/config/compiler/compiler.gni
++++ w/build/config/compiler/compiler.gni
+@@ -70,19 +70,19 @@ declare_args() {
+ 
+   # Whether or not we should use position independent code.
+   use_pic = true
++
++  # Exclude unwind tables for official builds as unwinding can be done from
++  # stack dumps produced by Crashpad at a later time "offline" in the crash
++  # server. For unofficial (e.g. development) builds and non-Chrome branded
++  # (e.g. Cronet which doesn't use Crashpad, crbug.com/479283) builds it's
++  # useful to be able to unwind at runtime.
++  exclude_unwind_tables =
++      (is_chrome_branded && is_official_build) ||
++      (is_chromecast && !is_cast_desktop_build && !is_debug && !is_fuchsia)
+ }
+ 
+ assert(!is_cfi || use_thin_lto, "CFI requires ThinLTO")
+ 
+-# Exclude unwind tables for official builds as unwinding can be done from stack
+-# dumps produced by Crashpad at a later time "offline" in the crash server.
+-# For unofficial (e.g. development) builds and non-Chrome branded (e.g. Cronet
+-# which doesn't use Crashpad, crbug.com/479283) builds it's useful to be able
+-# to unwind at runtime.
+-exclude_unwind_tables =
+-    (is_chrome_branded && is_official_build) ||
+-    (is_chromecast && !is_cast_desktop_build && !is_debug && !is_fuchsia)
+-
+ # If true, optimize for size. Does not affect windows builds.
+ # Linux & Mac favor speed over size.
+ # TODO(brettw) it's weird that Mac and desktop Linux are different. We should
+diff --git i/ui/gfx/linux/client_native_pixmap_dmabuf.cc w/ui/gfx/linux/client_native_pixmap_dmabuf.cc
+index 6611dcfef8..61354b2dd9 100644
+--- i/ui/gfx/linux/client_native_pixmap_dmabuf.cc
++++ w/ui/gfx/linux/client_native_pixmap_dmabuf.cc
+@@ -17,9 +17,6 @@
+ #include "base/strings/stringprintf.h"
+ #include "base/trace_event/trace_event.h"
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+-#include <linux/dma-buf.h>
+-#else
+ #include <linux/types.h>
+ 
+ struct dma_buf_sync {
+@@ -34,7 +31,6 @@ struct dma_buf_sync {
+ 
+ #define DMA_BUF_BASE 'b'
+ #define DMA_BUF_IOCTL_SYNC _IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
+-#endif
+ 
+ namespace gfx {
+ 
+diff --git i/third_party/WebKit/Source/platform/wtf/typed_arrays/ArrayBufferContents.h w/third_party/WebKit/Source/platform/wtf/typed_arrays/ArrayBufferContents.h
+index bd508956e5..4dc58bb711 100644
+--- i/third_party/WebKit/Source/platform/wtf/typed_arrays/ArrayBufferContents.h
++++ w/third_party/WebKit/Source/platform/wtf/typed_arrays/ArrayBufferContents.h
+@@ -62,7 +62,7 @@ class WTF_EXPORT ArrayBufferContents {
+           allocation_length_(length),
+           data_(data),
+           data_length_(length),
+-          kind_(AllocationKind::kNormal),
++          kind_(WTF::ArrayBufferContents::AllocationKind::kNormal),
+           deleter_(deleter) {}
+     DataHandle(void* allocation_base,
+                size_t allocation_length,
+@@ -93,11 +93,11 @@ class WTF_EXPORT ArrayBufferContents {
+              reinterpret_cast<uintptr_t>(allocation_base_) +
+                  allocation_length_);
+       switch (kind_) {
+-        case AllocationKind::kNormal:
++        case WTF::ArrayBufferContents::AllocationKind::kNormal:
+           DCHECK(deleter_);
+           deleter_(data_);
+           return;
+-        case AllocationKind::kReservation:
++        case WTF::ArrayBufferContents::AllocationKind::kReservation:
+           ReleaseReservedMemory(allocation_base_, allocation_length_);
+           return;
+       }
+diff --git i/third_party/WebKit/Source/platform/wtf/text/TextCodec.h w/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
+index 9c23de8d4a..f76d1e5718 100644
+--- i/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
++++ w/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
+@@ -68,10 +68,6 @@ enum FlushBehavior {
+   kDataEOF
+ };
+ 
+-static_assert(!kDoNotFlush, "DoNotFlush should be falsy");
+-static_assert(kFetchEOF, "FetchEOF should be truthy");
+-static_assert(kDataEOF, "DataEOF should be truthy");
+-
+ class WTF_EXPORT TextCodec {
+   USING_FAST_MALLOC(TextCodec);
+ 
+diff --git i/third_party/WebKit/Source/platform/wtf/LinkedHashSet.h w/third_party/WebKit/Source/platform/wtf/LinkedHashSet.h
+index 89d3313585..84b331cc06 100644
+--- i/third_party/WebKit/Source/platform/wtf/LinkedHashSet.h
++++ w/third_party/WebKit/Source/platform/wtf/LinkedHashSet.h
+@@ -731,6 +731,8 @@ inline LinkedHashSet<T, U, V, W>& LinkedHashSet<T, U, V, W>::operator=(
+   return *this;
+ }
+ 
++inline void SwapAnchor(LinkedHashSetNodeBase& a, LinkedHashSetNodeBase& b);
++
+ template <typename T, typename U, typename V, typename W>
+ inline void LinkedHashSet<T, U, V, W>::Swap(LinkedHashSet& other) {
+   impl_.swap(other.impl_);
+diff --git i/services/viz/public/cpp/compositing/quads_struct_traits.h w/services/viz/public/cpp/compositing/quads_struct_traits.h
+index c7b07abc33..cef4afafce 100644
+--- i/services/viz/public/cpp/compositing/quads_struct_traits.h
++++ w/services/viz/public/cpp/compositing/quads_struct_traits.h
+@@ -308,7 +308,7 @@ struct StructTraits<viz::mojom::TextureQuadStateDataView, viz::DrawQuad> {
+   static base::span<const float> vertex_opacity(const viz::DrawQuad& input) {
+     const viz::TextureDrawQuad* quad =
+         viz::TextureDrawQuad::MaterialCast(&input);
+-    return quad->vertex_opacity;
++    return base::make_span(quad->vertex_opacity);
+   }
+ 
+   static bool y_flipped(const viz::DrawQuad& input) {
+diff --git i/services/viz/public/cpp/compositing/filter_operation_struct_traits.h w/services/viz/public/cpp/compositing/filter_operation_struct_traits.h
+index 4d66831256..0273d708fa 100644
+--- i/services/viz/public/cpp/compositing/filter_operation_struct_traits.h
++++ w/services/viz/public/cpp/compositing/filter_operation_struct_traits.h
+@@ -138,7 +138,7 @@ struct StructTraits<viz::mojom::FilterOperationDataView, cc::FilterOperation> {
+   static base::span<const float> matrix(const cc::FilterOperation& operation) {
+     if (operation.type() != cc::FilterOperation::COLOR_MATRIX)
+       return base::span<const float>();
+-    return operation.matrix();
++    return base::make_span(operation.matrix());
+   }
+ 
+   static base::span<const gfx::Rect> shape(
+diff --git i/media/video/video_encode_accelerator.h w/media/video/video_encode_accelerator.h
+index 409e2a5fc3..2e00b82dc8 100644
+--- i/media/video/video_encode_accelerator.h
++++ w/media/video/video_encode_accelerator.h
+@@ -161,7 +161,7 @@ class MEDIA_EXPORT VideoEncodeAccelerator {
+   // handed back to the client, and afterwards the |flush_callback| will be
+   // called. The FlushCallback takes a boolean argument: |true| indicates the
+   // flush is complete; |false| indicates the flush is cancelled due to errors
+-  // or destruction. The client should not invoke Flush() or Encode() while the\
++  // or destruction. The client should not invoke Flush() or Encode() while the
+   // previous Flush() is not finished yet.
+   virtual void Flush(FlushCallback flush_callback);
+ 
+diff --git i/media/base/decoder_buffer.h w/media/base/decoder_buffer.h
+index 0341e5784f..60ffba708b 100644
+--- i/media/base/decoder_buffer.h
++++ w/media/base/decoder_buffer.h
+@@ -37,7 +37,7 @@ class MEDIA_EXPORT DecoderBuffer
+     : public base::RefCountedThreadSafe<DecoderBuffer> {
+  public:
+   enum {
+-    kPaddingSize = 32,
++    kPaddingSize = 64,
+ #if defined(ARCH_CPU_ARM_FAMILY)
+     kAlignmentSize = 16
+ #else
+diff --git i/components/assist_ranker/ranker_example_util.cc w/components/assist_ranker/ranker_example_util.cc
+index 54d4dbd58f..867b4627d1 100644
+--- i/components/assist_ranker/ranker_example_util.cc
++++ w/components/assist_ranker/ranker_example_util.cc
+@@ -2,6 +2,8 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <cmath>
++
+ #include "components/assist_ranker/ranker_example_util.h"
+ #include "base/bit_cast.h"
+ #include "base/format_macros.h"
+diff --git i/chrome/browser/vr/sample_queue.h w/chrome/browser/vr/sample_queue.h
+index c74f316f2e..48605c2035 100644
+--- i/chrome/browser/vr/sample_queue.h
++++ w/chrome/browser/vr/sample_queue.h
+@@ -6,6 +6,7 @@
+ #define CHROME_BROWSER_VR_SAMPLE_QUEUE_H_
+ 
+ #include <vector>
++#include <cstdint>
+ 
+ #include "base/macros.h"

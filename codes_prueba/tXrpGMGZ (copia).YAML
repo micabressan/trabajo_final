@@ -1,0 +1,103 @@
+stages:
+  - test
+  - plan
+  - apply
+  - destroy
+
+.common: &common
+  tags:
+    - eric
+
+#
+# Common blocks for environments
+#
+.dev_common: &dev_common
+  only: 
+    - &dev_branch_name dev
+
+.rc_common: &rc_common
+  only:
+    - &rc_branch_name rc
+
+.prod_common: &prod_common
+  only:
+    - &prod_branch_name /^v\d+\.\d+(\.\d+){0,1}$/
+
+.other_common: &other_common
+  except:
+    - *dev_branch_name
+    - *rc_branch_name
+    - *prod_branch_name
+
+#
+# Common blocks for stages
+#
+.plan_common: &plan_common
+  stage: plan
+  script:
+    - echo "This is the plan"
+
+.apply_common: &apply_common
+  stage: apply
+  script:
+    - echo "This is the apply"
+
+.destroy_common: &destroy_common
+  stage: destroy
+  when: manual
+  script:
+    - echo "This is the destroy"
+
+#
+# Permutations
+#
+dev_plan_job:
+  <<: *common
+  <<: *dev_common
+  <<: *plan_common
+
+rc_plan_job:
+  <<: *common
+  <<: *rc_common
+  <<: *plan_common
+
+prod_plan_job:
+  <<: *common
+  <<: *prod_common
+  <<: *plan_common
+
+dev_apply_job:
+  <<: *common
+  <<: *dev_common
+  <<: *apply_common
+
+rc_apply_job:
+  <<: *common
+  <<: *rc_common
+  <<: *apply_common
+
+prod_apply_job:
+  <<: *common
+  <<: *prod_common
+  <<: *apply_common
+
+dev_destroy_job:
+  <<: *common
+  <<: *dev_common
+  <<: *destroy_common
+
+rc_destroy_job:
+  <<: *common
+  <<: *rc_common
+  <<: *destroy_common
+
+prod_destroy_job:
+  <<: *common
+  <<: *prod_common
+  <<: *destroy_common
+
+other_job:
+  <<: *common
+  <<: *other_common
+  script:
+    - echo "This should run on all 'other' branches"

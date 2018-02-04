@@ -1,0 +1,42 @@
+environment:
+  nodejs_version: "9"
+
+platform:
+  - x64
+
+configuration:
+  - Release
+
+matrix:
+  fast_finish: true
+
+cache:
+  - '%UserProfile%\.m2'
+  - tmp -> scripts\package.js
+  - '%APPDATA%\npm-cache -> yarn.lock'
+  - node_modules -> yarn.lock
+  - '%SystemRoot%\boot.exe -> boot.properties'
+  - '%UserProfile%\.boot\cache\lib -> boot.properties'
+  - '%UserProfile%\.boot\cache\bin -> boot.properties'
+
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - cmd: npm install -g yarn
+  - cmd: yarn install
+  - ps: wget 'https://github.com/boot-clj/boot-bin/releases/download/latest/boot.exe' -OutFile "$pwd\boot.exe"
+  - cmd: 'move boot.exe %SystemRoot%' #set PATH=$pwd\boot.exe;%PATH%
+
+test_script:
+  - yarn lint
+  - yarn type:check
+  - yarn test
+  - cmd: boot test
+  - cmd: boot release-ci
+  - cmd: build\lumo.exe -c src\test\cljs;src\test\lumo;src\test\cljs_cp -D org.clojure/test.check:0.10.0-alpha2 scripts\lumo_test.cljs --test-cli-option true
+
+artifacts:
+  - path: build
+    name: Lumo
+
+# Don't actually build (MSBuild).
+build: off

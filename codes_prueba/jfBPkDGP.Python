@@ -1,0 +1,131 @@
+# GET FORKS
+###############################################
+	
+bk_dict = {bk.name: bk for bk in DB.select('bookmakers')}
+"""
+{
+	betcity: {
+		id: 1,
+		name: 'betcity',
+		balance: 12000,
+		currency: 'RUB',
+		site: 'betcity.ru',
+		login_url: '...',
+		logout_url: '...',
+		other_url1: '...',
+		....
+		other_urlN: '...',
+	},
+	1xbet: {
+		id: 2,
+		name: '1xbet',
+		balance: 30,
+		currency: 'USD',
+		site: '1xbet.com',
+		login_url: '...',
+		logout_url: '...',
+		other_url1: '...',
+		....
+		other_urlN: '...',
+	}
+}
+"""
+currencies = {c.code: c for c in DB.select('currencies')}
+"""
+{
+	USD: {
+		code: 'USD',
+		round: 1
+	}
+	RUB: {
+		code: 'RUB',
+		round: 10
+	}
+}
+"""
+cources = url.get('currencies_cources_in_json_url')
+for c in cources:
+	CurrenciesLog.write(c.code, c.cource) # write to DB
+	currencies[c.code].cource = c.cource
+
+next_page = True
+forks = []
+page_url_in_surebet = 'https://ru.surebet.com/surebets?order=profit&page=%d'
+page_num = 1
+while next_page:
+	page = url.get(page_url_in_surebet % page_num)
+
+	blocks = XPath('select_all_blocks_with_forks', page)
+	for b in blocks:
+		profit = XPath('get_profit') # 1.00%
+		live_time = parse_live_time(XPath('get_live_time')) # 9 hours
+
+		event_name_bk1 = XPath('get_event_name_bk1') # Лада — ЦСКА
+		event_name_bk2 = XPath('get_event_name_bk2') # Lada Togliatti — CSKA Moscow
+		bk1 = {
+			bk: bk_dict[XPath('get_bk1_name')], # 1xbet ,
+			path: XPath(...), # Хоккей. КХЛ. Регулярный чемпионат
+			command1: event_name_bk1.split(' - ')[0],
+			command2: event_name_bk1.split(' - ')[1],
+			condition: parse_condition(XPath(...)), # Ф2(−3.0)
+			coef: XPath(...),
+		}
+
+		bk2 = {
+			bk: bk_dict[XPath('get_bk2_name')], # William Hill  ,
+			path: XPath(...), # Ice Hockey - Kontinental Hockey League
+			command1: event_name_bk2.split(' - ')[0],
+			command2: event_name_bk2.split(' - ')[1],
+			condition: parse_condition(XPath(...)), # Ф1(+2.5)
+			coef: XPath(...),
+		}
+
+		fork = {
+			profit: profit,
+			live_time: live_time, 
+			bk1: bk1,
+			bk2: bk2,
+		}
+		forks.add(fork)
+		ForksLog.write(fork) # write to DB
+
+	next_page = bool(XPath('search_active_next_page_button'))
+	page_num += 1
+
+previous_best_forks = DB.select('previous_best_forks')
+
+best_fork_calcs = calc_best_forks(forks, previous_best_forks, currencies, bk_dict)
+"""
+Ищем подходящую вилку под наш случай, основываясь на балансе в бк и доходности вилки
+"""
+
+# MAKE BET
+###############################################
+if best_fork_calcs:
+	try:
+		login_bk(best_fork_calcs.bk1.id)
+		login_bk(best_fork_calcs.bk2.id)
+		
+		if check_coef(best_fork_calcs.bk1) and check_coef(best_fork_calcs.bk2):
+			try:
+				bet = make_bet(best_fork_calcs.bk1, best_fork_calcs.bk1.bet_amount)
+			except e:
+				ErrorLog.write(e, best_fork_calcs.bk1, 'bet error') # write to DB
+				return
+			BetLog.write(bet) # write to DB
+			bk = bk_dict[best_fork_calcs.bk1.id]
+			bk.balance = bet.bk_balance
+			bk.save() # write to DB
+
+			try:
+				bet = make_bet(best_fork_calcs.bk2, best_fork_calcs.bk2.bet_amount)
+			except e:
+				ErrorLog.write(e, best_fork_calcs.bk2, 'HARD BET ERROR') # write to DB
+				return
+			BetLog.write(bet) # write to DB
+			bk = bk_dict[best_fork_calcs.bk2.id]
+			bk.balance = bet.bk_balance
+			bk.save() # write to DB
+
+	except e:
+		ErrorLog.write(e, 'some simple error')

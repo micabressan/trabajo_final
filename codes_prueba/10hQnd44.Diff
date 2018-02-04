@@ -1,0 +1,18 @@
+diff --git a/src/network/ssl/qsslsocket_openssl.cpp b/src/network/ssl/qsslsocket_openssl.cpp
+index e4b7392..2175f7f 100644
+--- a/src/network/ssl/qsslsocket_openssl.cpp
++++ b/src/network/ssl/qsslsocket_openssl.cpp
+@@ -298,10 +298,14 @@ init_context:
+     else
+         options &= ~SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS;
+ 
++#ifdef SSL_OP_NO_TICKET
+     if (configuration.sslOptions & QSsl::SslOptionDisableSessionTickets)
+         options |= SSL_OP_NO_TICKET;
++#endif
++#ifdef SSL_OP_NO_COMPRESSION
+     if (configuration.sslOptions & QSsl::SslOptionDisableCompression)
+         options |= SSL_OP_NO_COMPRESSION;
++#endif
+ 
+     q_SSL_CTX_set_options(ctx, options);

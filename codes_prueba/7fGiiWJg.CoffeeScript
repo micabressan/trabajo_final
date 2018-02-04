@@ -1,0 +1,30 @@
+_ = require 'ramda'
+read = require './read'
+Promise = require 'bluebird'
+Trace = require('gush-data').Trace
+
+[__,__,tracePath] = process.argv
+
+###
+read(tracePath)
+.then _.map Trace.toString
+.then _.join '\n\n'
+.then console.log
+###
+
+# Do Notatation for Bluebird, Take 5 (RedNifre)
+
+doh = (stuff) -> Promise.try ->
+	stuff().reduce (previousValue,currentValue) ->
+		previousValue.then currentValue
+
+
+doItOutsideOfAPromise = ->
+	doh -> [
+		read(tracePath)
+		_.map (throw new Error()) # Trace.toString
+		_.join '\n\n'
+		console.log
+	]
+
+doItOutsideOfAPromise()

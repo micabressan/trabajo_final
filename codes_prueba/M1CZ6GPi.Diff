@@ -1,0 +1,130 @@
+@@ -289,7 +289,7 @@ digraph routes  {
+     r2_32 -> r2_33;
+     r2_33 -> r2_34;
+     r2_34 -> r2_35;
+-    r2_35 -> r4_0 [label="ClearFlags[999..986]"];
++    r2_35 -> r4_0 [label="ClearFlags[986..999]"];
+     
+     r2_0 [ shape=Mdiamond ];
+     r2_5 [shape="diamond"];
+@@ -317,7 +317,7 @@ digraph routes  {
+     r3_16 -> r3_17;
+     r3_17 -> r3_18;
+     r3_18 -> r3_19;
+-    r3_19 -> r5_0 [label="ClearFlags[999..992,986]"];
++    r3_19 -> r5_0 [label="ClearFlags[992..999,986]"];
+     
+     r3_0 [ shape=Mdiamond ];
+   }
+@@ -399,8 +399,8 @@ digraph routes  {
+     r4_47 -> r4_51 [label="-1\n000 + 0\nBS022KJ09=47"];
+     r4_48 -> r4_53 [label="BS022KK00=48"];
+     r4_49 -> r4_50 [label="0\n000 + 0\nBS022KJ08=49"];
+-    r4_49 -> r4_51 [label="1\n000 + 0"];
+-    r4_49 -> r4_52 [label="-1\n000 + 0\nBS022KJ09=49"];
++    r4_49 -> r4_52 [label="1\n000 + 0"];
++    r4_49 -> r4_51 [label="-1\n000 + 0\nBS022KJ09=49"];
+     r4_50 -> r4_51 [label="000 + 0\nBS022KJ09=50"];
+     r4_51 -> r4_53 [label="978 = 1\nREP02_2k_J03=1\nBS022KK00=50"];
+     r4_52 -> r4_51 [label="000 + 0\n979 = 1\nBS022KJ09=52"];
+@@ -413,10 +413,10 @@ digraph routes  {
+     r4_57 -> r4_58 [label="0\n000 + 0"];
+     r4_57 -> r4_59 [label="1\n002 + 7"];
+     r4_57 -> r4_60 [label="-1\n000 + 0"];
+-    r4_58 -> r4_66 [label="BS022KM00=58"];
++    r4_58 -> r4_66 [label="977 = 1\nBS022KM00=58"];
+     r4_59 -> r4_65;
+     r4_60 -> r4_64;
+-    r4_61 -> r4_66 [label="977 = 1\nBS022KM00=58"];
++    r4_61 -> r4_66 [label="BS022KM00=61"];
+     r4_62 -> r4_57;
+     r4_63 -> r4_61 [label="REP02_2K_L01=1"];
+     r4_64 -> r4_66 [label="BS022KM00=64"];
+@@ -601,10 +601,10 @@ digraph routes  {
+     r5_85 -> r5_87 [label="var(001) <= var(002)"];
+     r5_85 -> r5_86 [label="var(001) > var(002)"];
+     r5_86 -> r5_91;
+-    r5_87 -> r14_0 [label="ClearFlags[985..980]"];
++    r5_87 -> r14_0 [label="ClearFlags[980..985]"];
+     r5_88 -> r5_94;
+     r5_89 -> r5_101;
+-    r5_90 -> r17_0 [label="ClearFlags[985..980]"];
++    r5_90 -> r17_0 [label="ClearFlags[980..985]"];
+     r5_91 -> r5_92;
+     r5_92 -> r5_55;
+     r5_93 -> r5_95;
+@@ -741,7 +741,7 @@ digraph routes  {
+     r8_0 -> r8_1;
+     r8_1 -> r8_2;
+     r8_2 -> r8_3 [label="971 = 1"];
+-    r8_3 -> r23_0 [label="ClearFlags[979,978,965..962,971,802]"];
++    r8_3 -> r23_0 [label="ClearFlags[979,978,962..965,971,802]"];
+     
+     r8_0 [ shape=Mdiamond ];
+     
+@@ -765,7 +765,7 @@ digraph routes  {
+     label = "Route 10";
+     r10_0 -> r10_1;
+     r10_1 -> r10_2;
+-    r10_2 -> r24_0 [label="BS04KCA00=2\nBS04KC = 10\nClearFlags[979,978,968..966,940]"];
++    r10_2 -> r24_0 [label="BS04KCA00=2\nBS04KC = 10\nClearFlags[979,978,966..968,940]"];
+     
+     r10_0 [ shape=Mdiamond ];
+   }
+@@ -775,7 +775,7 @@ digraph routes  {
+     r11_0 -> r11_1 [label="971 = 1"];
+     r11_1 -> r11_2;
+     r11_2 -> r11_3;
+-    r11_3 -> r24_0 [label="BS04KCA00=3\nBS04KC = 11\nClearFlags[979,978,971,968..966]"];
++    r11_3 -> r24_0 [label="BS04KCA00=3\nBS04KC = 11\nClearFlags[979,978,971,966..968]"];
+     
+     r11_0 [ shape=Mdiamond ];
+   }
+@@ -788,7 +788,7 @@ digraph routes  {
+     r12_1 -> r12_2 [label="0\n000 + 0\nBS03B2A02=1"];
+     r12_2 -> r12_5;
+     r12_3 -> r12_4;
+-    r12_4 -> r30_0 [label="ClearFlags[979,978,968..966]"];
++    r12_4 -> r30_0 [label="ClearFlags[979,978,966..968]"];
+     r12_5 -> r12_7;
+     r12_6 -> r12_14;
+     r12_7 -> r12_8 [label="0\n000 + 0"];
+@@ -1417,7 +1417,7 @@ digraph routes  {
+     r18_34 -> r18_35 [label="1/-1\n000 + 0\nBS03SBF08=34"];
+     r18_34 -> r18_36 [label="0\n002 + 12\nBS03SBF09=34"];
+     r18_35 -> r18_37 [label="BS03SBG00=35"];
+-    r18_36 -> r18_37 [label="BS03SBG00=36"];
++    r18_36 -> r18_37 [label="966 = 1\nBS03SBG00=36"];
+     r18_37 -> r18_38 [label="966 == 1"];
+     r18_37 -> r18_39 [label="966 == 0 &&\n967 == 1"];
+     r18_37 -> r18_40 [label="966 == 0 &&\n967 == 0"];
+@@ -1859,7 +1859,7 @@ digraph routes  {
+     r26_14 -> r26_16 [label="1/-1\n001 + 13"];
+     r26_14 -> r26_15 [label="0\n000 + 0"];
+     r26_15 -> r26_17 [label="BS04SAF00=15"];
+-    r26_16 -> r26_17 [label="9BS04SAF00=15"];
++    r26_16 -> r26_17 [label="959 = 1\nBS04SAF00=15"];
+     r26_17 -> r26_18 [label="0\n000 + 0"];
+     r26_17 -> r26_19 [label="1\n000 + 0"];
+     r26_17 -> r26_20 [label="-1\n001 + 13"];
+@@ -2676,10 +2676,10 @@ digraph routes  {
+     r45_29 -> r45_33 [label="-1\n000 + 1"];
+     r45_30 -> r45_34 [label="1/-1\n000 + 1"];
+     r45_30 -> r45_28 [label="0\n002 + 17\nBS05KFG04=30"];
+-    r45_31 -> r45_4 [label="BS05B0D00=31\nBS05B0 = 45"];
++    r45_31 -> r40_4 [label="BS05B0D00=31\nBS05B0 = 45"];
+     r45_32 -> r45_2 [label="931 = 1\nBS05KFB01=32"];
+     r45_33 -> r45_2 [label="931 = 1\nBS05KFB01=33"];
+-    r45_34 -> r45_4 [label="BS05B0D00=34\nBS05B0 = 45"];
++    r45_34 -> r40_4 [label="BS05B0D00=34\nBS05B0 = 45"];
+     r45_35 -> r45_36 [label="931 == 1"];
+     r45_35 -> r45_37 [label="931 == 0"];
+     r45_36 -> r45_38 [label="BS05KFH03=36"];
+@@ -2845,7 +2845,7 @@ digraph routes  {
+     r48_20 -> r48_21;
+     r48_21 -> r48_10;
+     r48_22 -> end14;
+-    end14 -> r34_0 [label="942 == 1\nBS059HA00=22\n804 == 1"];
++    end14 -> r34_0 [label="942 == 1\nBS059HA00=22\n804 = 1"];
+     end14 -> END [label="942 == 0"];
+     r48_23 -> r48_1 [label="BS05SAB00=23"];

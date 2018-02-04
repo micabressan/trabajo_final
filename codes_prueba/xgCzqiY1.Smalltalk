@@ -1,0 +1,14 @@
+myGrid := PasteUpMorph new openInWorld.
+myGrid height: 1100;width:1100.
+
+rnd := [(-500 to: 500) atRandom].
+
+aRect := RectangleMorph new.
+myGrid addMorph: aRect.
+aRectb := RectangleMorph new.
+myGrid addMorph: aRectb.
+aRec := myGrid center.
+
+[Transcript show: (Time millisecondsToRun:[
+	1 to:1000 do: [:i| 
+		1 to: 1000 do: [:j|aRectb center: aRec +(rnd value@rnd value).aRect center: aRec +(rnd value@rnd value)]]]);cr] fork

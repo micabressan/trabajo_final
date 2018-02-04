@@ -1,0 +1,41 @@
+-module(trade_client).
+-compile(export_all).
+
+% START CLIENT FUNCTIONS
+% RETURN {ProcessPid, PlayerPid}
+% WHERE ProcessPid is a Pid to which you should send communicates
+% PlayerPid is a pid of trade player (process created by trade_fsm)
+start(Player_name) ->
+  {ok, Pid} = trade_fsm:start_link(Player_name),
+  {spawn(?MODULE, loop, [Pid]), Pid}.
+
+loop(Pid) ->
+  receive
+    % Starting a trade with user send by second param
+    % params OtherUser - a pid of another trade player process
+    {start_trade, OtherUser} ->
+      trade_fsm:trade(Pid, OtherUser),
+      loop(Pid);
+    % Accepting a trade
+    {accept_trade} ->
+      trade_fsm:accept_trade(Pid),
+      loop(Pid);
+    % Making an offer
+    % params Offer {string} - an offer
+    {make_offer, Offer} ->
+      trade_fsm:make_offer(Pid, Offer),
+      loop(Pid);
+    % Retracting an offer
+    % params Offer {string} - an offer to retract
+    {retract_offer, Offer} ->
+      trade_fsm:retract_offer(Pid, Offer),
+      loop(Pid);
+    % Send ready to trade system
+    {ready} ->
+      trade_fsm:ready(Pid),
+      loop(Pid);
+    % Send cancel to trade system
+    {cancel} ->
+      trade_fsm:cancel(Pid),
+      loop(Pid)
+  end.

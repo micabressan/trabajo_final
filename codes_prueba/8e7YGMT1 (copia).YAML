@@ -1,0 +1,116 @@
+ip_forward: true
+network_compression_threshold: 256
+stats: 35bbb041-bf2b-4d55-af20-5899ab28e628
+groups:
+  _BastiHD_:
+  - admin
+  SchobiWan_:
+  - admin
+  Nexapper:
+  - admin
+servers:
+  lobby:
+    motd: ''
+    address: 213.202.254.194:25100
+    restricted: false
+  factions:
+    motd: ''
+    address: 213.202.254.194:25200
+    restricted: false
+  buildserver:
+    motd: ''
+    address: 213.202.254.194:25300
+    restricted: false
+  creative:
+    motd: ''
+    address: 213.202.254.194:25400
+    restricted: false
+  skyblock:
+    motd: ''
+    address: 213.202.254.194:25500
+    restricted: false
+  Citybuild:
+    motd: ''
+    address: 213.202.254.194:25600
+    restricted: false
+  sg1:
+    motd: ''
+    address: 213.202.254.194:25710
+    restricted: false
+  sg2:
+    motd: ''
+    address: 213.202.254.194:25720
+    restricted: false
+  sg3:
+    motd: ''
+    address: 213.202.254.194:25730
+    restricted: false
+  bw1:
+    motd: ''
+    address: 213.202.254.194:25810
+    restricted: false
+  bw2:
+    motd: ''
+    address: 213.202.254.194:25820
+    restricted: false
+  bw3:
+    motd: ''
+    address: 213.202.254.194:25830
+    restricted: false
+  ki1:
+    motd: ''
+    address: 213.202.254.194:25910
+    restricted: false
+  ki2:
+    motd: ''
+    address: 213.202.254.194:25920
+    restricted: false
+  ki3:
+    motd: ''
+    address: 213.202.254.194:25930
+    restricted: false
+  Testserver:
+    motd: ''
+    address: 213.202.254.194:25999
+    restricted: false
+timeout: 30000
+player_limit: -1
+listeners:
+- query_port: 55555
+  motd: '&6&lMyGameNetwork.de &8&l[1.8-1.11] &2&lNEW        &3&l>>&c&lTeammitglieder
+    gesucht&3&l<<'
+  priorities:
+  - lobby
+  bind_local_address: true
+  tab_list: GLOBAL_PING
+  query_enabled: true
+  host: 213.202.254.194:25565
+  forced_hosts:
+    pvp.md-5.net: pvp
+  max_players: 1000
+  tab_size: 60
+  ping_passthrough: false
+  force_default_server: true
+  proxy_protocol: false
+prevent_proxy_connections: false
+permissions:
+  default:
+  - bungeecord.command.list
+  mod:
+  - bungeecord.command.server
+  - system.bc
+  - system.teamchat
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+  - bungeecord.command.send
+  - bungeecord.command.server
+  - system.bc
+  - system.teamchat
+online_mode: true
+log_commands: true
+disabled_commands:
+- disabledcommandhere
+connection_throttle: 1000

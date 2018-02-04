@@ -1,0 +1,130 @@
+diff --git a/source/blender/gpu/shaders/gpu_shader_material.glsl b/source/blender/gpu/shaders/gpu_shader_material.glsl
+index ec35420..b21fa1a 100644
+--- a/source/blender/gpu/shaders/gpu_shader_material.glsl
++++ b/source/blender/gpu/shaders/gpu_shader_material.glsl
+@@ -979,9 +979,10 @@ void texture_wood_sin(vec3 vec, out float value, out vec4 color, out vec3 normal
+        normal = vec3(0.0, 0.0, 0.0);
+ }
+ 
+-void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec3 normal)
++void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec4 lod_color, out vec3 normal)
+ {
+        color = texture2D(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
++       lod_color = texture2DLod(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
+        value = color.a;
+ 
+        normal.x = 2.0 * (color.r - 0.5);
+@@ -1408,16 +1409,18 @@ vec3 mtex_2d_mapping(vec3 vec)
+        return vec3(vec.xy * 0.5 + vec2(0.5), vec.z);
+ }
+:...skipping...
+diff --git a/source/blender/gpu/shaders/gpu_shader_material.glsl b/source/blender/gpu/shaders/gpu_shader_material.glsl
+index ec35420..b21fa1a 100644
+--- a/source/blender/gpu/shaders/gpu_shader_material.glsl
++++ b/source/blender/gpu/shaders/gpu_shader_material.glsl
+@@ -979,9 +979,10 @@ void texture_wood_sin(vec3 vec, out float value, out vec4 color, out vec3 normal
+        normal = vec3(0.0, 0.0, 0.0);
+ }
+ 
+-void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec3 normal)
++void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec4 lod_color, out vec3 normal)
+ {
+        color = texture2D(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
++       lod_color = texture2DLod(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
+        value = color.a;
+ 
+        normal.x = 2.0 * (color.r - 0.5);
+@@ -1408,16 +1409,18 @@ vec3 mtex_2d_mapping(vec3 vec)
+        return vec3(vec.xy * 0.5 + vec2(0.5), vec.z);
+ }
+ 
+:...skipping...
+diff --git a/source/blender/gpu/shaders/gpu_shader_material.glsl b/source/blender/gpu/shaders/gpu_shader_material.glsl
+index ec35420..b21fa1a 100644
+--- a/source/blender/gpu/shaders/gpu_shader_material.glsl
++++ b/source/blender/gpu/shaders/gpu_shader_material.glsl
+@@ -979,9 +979,10 @@ void texture_wood_sin(vec3 vec, out float value, out vec4 color, out vec3 normal
+        normal = vec3(0.0, 0.0, 0.0);
+ }
+ 
+-void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec3 normal)
++void texture_image(vec3 vec, float lodbias, sampler2D ima, out float value, out vec4 color, out vec4 lod_color, out vec3 normal)
+ {
+        color = texture2D(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
++       lod_color = texture2DLod(ima, (vec.xy + vec2(1.0, 1.0)) * 0.5, lodbias);
+        value = color.a;
+ 
+        normal.x = 2.0 * (color.r - 0.5);
+@@ -1408,16 +1409,18 @@ vec3 mtex_2d_mapping(vec3 vec)
+        return vec3(vec.xy * 0.5 + vec2(0.5), vec.z);
+ }
+ 
+-void mtex_cube_map(vec3 co, samplerCube ima, float lodbias, out float value, out vec4 color)
++void mtex_cube_map(vec3 co, samplerCube ima, float lodbias, out float value, out vec4 color, out vec4 lod_color)
+ {
+        color = textureCube(ima, co, lodbias);
++       lod_color = textureCubeLod(ima, co, lodbias);
+        value = 1.0;
+ }
+ 
+ void mtex_cube_map_refl_from_refldir(
+-        samplerCube ima, vec3 reflecteddirection, float lodbias, out float value, out vec4 color)
++        samplerCube ima, vec3 reflecteddirection, float lodbias, out float value, out vec4 color, out vec4 lod_color)
+ {
+         color = textureCube(ima, reflecteddirection, lodbias);
++               lod_color = textureCubeLod(ima, reflecteddirection, lodbias);
+         value = color.a;
+ }
+ 
+diff --git a/source/blender/nodes/shader/nodes/node_shader_texture.c b/source/blender/nodes/shader/nodes/node_shader_texture.c
+index 3461f01..6a9fe13 100644
+--- a/source/blender/nodes/shader/nodes/node_shader_texture.c
++++ b/source/blender/nodes/shader/nodes/node_shader_texture.c
+@@ -37,13 +37,14 @@
+ 
+ /* **************** TEXTURE ******************** */
+ static bNodeSocketTemplate sh_node_texture_in[] = {
+-       {       SOCK_VECTOR, 1, "Vector",       0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, PROP_NONE, SOCK_HIDE_VALUE},       /* no limit */
+-       {       SOCK_FLOAT,     1, "Lod Bias",  0.0f, 0.0f, 0.0f, 0.0f, -99.0f, 99.0f, PROP_NONE, 0 },
++       {       SOCK_VECTOR, 1, "Vector",         0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, PROP_NONE, SOCK_HIDE_VALUE},     /* no limit */
++       {       SOCK_FLOAT,     1, "Lod Bias",    0.0f, 0.0f, 0.0f, 0.0f, -99.0f, 99.0f, PROP_NONE, 0 },
+        {       -1, 0, ""       }
+ };
+ static bNodeSocketTemplate sh_node_texture_out[] = {
+        {       SOCK_FLOAT, 0, N_("Value"), 0, 0, 0, 0, 0, 0, PROP_NONE, SOCK_NO_INTERNAL_LINK},
+        {       SOCK_RGBA, 0, N_("Color"), 0, 0, 0, 0, 0, 0, PROP_NONE, SOCK_NO_INTERNAL_LINK},
++    {   SOCK_RGBA, 0, N_("Lod Color"), 0, 0, 0, 0, 0, 0, PROP_NONE, SOCK_NO_INTERNAL_LINK},
+        {       SOCK_VECTOR, 0, N_("Normal"), 0, 0, 0, 0, 0, 0, PROP_NONE, SOCK_NO_INTERNAL_LINK},
+        {       -1, 0, ""       }
+ };
+@@ -60,7 +61,7 @@ static void node_shader_exec_texture(void *data, int UNUSED(thread), bNode *node
+                
+                short thread = shi->thread;
+                
+-               /* out: value, color, normal */
++               /* out: value, color, lod_color, normal */
+                
+                /* we should find out if a normal as output is needed, for now we do all */
+                texres.nor = nor;
+@@ -138,8 +139,8 @@ static int gpu_shader_texture(GPUMaterial *mat, bNode *node, bNodeExecData *UNUS
+                        if (!GPU_material_use_world_space_shading(mat))
+                                GPU_link(mat, "direction_transform_m4v3", in[0].link, GPU_builtin(GPU_INVERSE_VIEW_MATRIX), &in[0].link);
+                        GPU_link(mat, "mtex_cube_map_refl_from_refldir",
+-                               GPU_cube_map(tex->ima, &tex->iuser, false), in[0].link, in[1].link, &out[0].link, &out[1].link);
+-                       GPU_link(mat, "color_to_normal", out[1].link, &out[2].link);
++                               GPU_cube_map(tex->ima, &tex->iuser, false), in[0].link, in[1].link, &out[0].link, &out[1].link, &out[2].link);
++                       GPU_link(mat, "color_to_normal", out[1].link, &out[3].link);
+                }
+ 
+                ImBuf *ibuf = BKE_image_acquire_ibuf(tex->ima, &tex->iuser, NULL);
+@@ -147,6 +148,7 @@ static int gpu_shader_texture(GPUMaterial *mat, bNode *node, bNodeExecData *UNUS
+                    GPU_material_do_color_management(mat))
+                {
+                        GPU_link(mat, "srgb_to_linearrgb", out[1].link, &out[1].link);
++                       GPU_link(mat, "srgb_to_linearrgb", out[2].link, &out[2].link);
+                }
+                BKE_image_release_ibuf(tex->ima, ibuf, NULL);
+ 
+diff --git a/source/blender/nodes/shader/nodes/node_shader_texture_lod.c b/source/blender/nodes/shader/nodes/node_shader_texture_lod.c
+deleted file mode 100644
+index e69de29..0000000

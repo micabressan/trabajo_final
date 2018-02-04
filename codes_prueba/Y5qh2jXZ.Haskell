@@ -1,0 +1,10 @@
+-- | given a tree of branching factor of 1 (List)
+-- count the elements in that tree.
+countLeavs (x:xs) = 1 + countLeavs xs
+countLeavs _ = 0 
+ 
+ 
+main = do
+       print $ countLeavs []
+       print $ countLeavs [1]
+       print $ countLeavs [1,2,3,4]

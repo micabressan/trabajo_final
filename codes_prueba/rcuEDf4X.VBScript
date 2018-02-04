@@ -1,0 +1,51 @@
+Function ReadUTF8CSVToSheet(file As String)
+    Dim ws As Worksheet
+    Dim strText As String
+
+    ' read utf-8 file to strText variable
+   With CreateObject("ADODB.Stream")
+        .Open
+        .Type = 1  ' Private Const adTypeBinary = 1
+        .LoadFromFile file
+        .Type = 2  ' Private Const adTypeText = 2
+        .Charset = "utf-8"
+        strText = .ReadText(-1)  ' Private Const adReadAll = -1
+    End With
+
+    ' parse strText data to a sheet
+    Set ws = Sheets.Add()
+    intRow = 1
+    For Each strLine In Split(strText, Chr(10))
+        If strLine <> "" Then
+            With ws
+                .Cells(intRow, 1) = strLine
+                .Cells(intRow, 1).TextToColumns Destination:=Cells(intRow, 1), DataType:=xlDelimited, _
+                    TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=False, _
+                    Semicolon:=False, Comma:=True, Space:=False, Other:=False
+            End With
+
+            intRow = intRow + 1
+        End If
+    Next strLine
+
+    ReadUTF8CSVToSheet = ws.Name
+
+End Function
+
+
+Function GetFile() As String
+Dim filename__path As Variant
+
+
+filename__path = Application.GetOpenFilename(FileFilter:="Csv (*.CSV), *.CSV", Title:="Select File To Be Opened")
+
+
+If filename__path = False Then Exit Function
+GetFile = filename__path
+strSheetName = ReadUTF8CSVToSheet(GetFile)
+
+End Function
+
+Private Sub CommandButton1_Click()
+Call GetFile
+End Sub

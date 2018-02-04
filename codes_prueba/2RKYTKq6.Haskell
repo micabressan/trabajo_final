@@ -1,0 +1,30 @@
+module Kata.BraceExpansion (expandBraces) where
+
+getBraces :: String -> Maybe (Int, Int)
+getBraces str = if (start /= end && start /= -1) then (Just (start, end)) else Nothing
+  where
+  checkChar (start, end, i, braces) c
+    | start /= -1 && end /= -1 = (start, end, 0, 0)
+    | c == '{'  = (if (braces == 0) then i else start, end, i+1, braces+1)
+    | c == '}'  = (start, if (braces == 1) then i else end, i+1, braces-1)
+    | otherwise = (start, end, i+1, braces)
+  indices = foldl checkChar (-1, -1, 0, 0) str
+  start   = (\i -> case i of (x,_,_,_) -> x) indices
+  end     = (\i -> case i of (_,x,_,_) -> x) indices
+
+extractOptions :: String -> [String]
+extractOptions str = res $ foldl f ("", [], 0) str where
+  f (w, ws, bs) c
+    | c == '{'  = ('{':w, ws, bs+1)
+    | c == '}'  = ('}':w, ws, bs-1)
+    | c == ','  = if bs == 0 then ("", (reverse w):ws, bs) else (',':w, ws, bs)
+    | otherwise = (c:w, ws, bs)
+  res (w,ws,_) = (reverse w):ws
+
+
+expandBraces :: String -> [String]
+expandBraces str = case (getBraces str) of
+  (Just (i, j)) -> mergeResults $ map expandBraces expanded where
+    mergeResults = (foldl (\res l -> res ++ l) ([]))
+    expanded     = [take i str ++ option ++ drop (j+1) str | option <- extractOptions (drop (i+1) . take (j) $ str)]
+  Nothing       -> [str]

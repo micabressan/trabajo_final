@@ -1,0 +1,926 @@
+{
+	"GPU_PROFILE":
+	{
+		"GPU_0":
+		{
+			"renderers": [{"n": "Adreno 205"}, {"n": "Adreno (TM) 205"}, {"n":"NVIDIA Tegra", "-":"0xc0f"}, {"n": "PowerVR SGX 540"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"startTextureLOD": 1,
+			"useDof": false,
+			"useRoadSpecular": false,
+			"useCarSpecular": false,
+			"useParaboloidReflection": false,
+			"useStaticParaboloidReflection": true,
+			"useCarQualityLighting": false,
+			"useHighQualityCars": false,
+			"roadTextureAnisotropy": 0,
+			"useSkidMarks": false,
+			"useCarParticles": false,
+			"usePerfBoost": true,
+			"sortSolidsFrontToBack": false,
+			"GFXOption": "VERYLOW",
+			"FPSLimit": 30
+		},
+		"GPU_1":
+		{
+			"renderers": [{"n": "NVIDIA Tegra 2"}, {"n": "Adreno (TM) 220"}, {"n": "Adreno (TM) 220"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"startTextureLOD": 1,
+			"useDof": false,
+			"useParaboloidReflection": false,
+			"useStaticParaboloidReflection": true,
+			"useCarQualityLighting": false,
+			"useHighQualityCars": false,
+			"roadTextureAnisotropy": 0,
+			"usePerfBoost": true,
+			"useTrafficCars": false,
+			"GFXOption": "LOW",
+			"FPSLimit": 30
+		},
+		"GPU_2":
+		{
+			"renderers": [{"n": "NVIDIA Tegra 3"}, {"n": "Adreno 225"}, {"n": "Adreno (TM) 225"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"startTextureLOD": 1,
+			"useDof": false,
+			"roadTextureAnisotropy": 0,
+			"usePerfBoost": true,
+			"GFXOption": "MEDIUM",
+			"fullScreenBlurQuality": 1,
+			"FPSLimit": 30
+		},
+		"GPU_2.5":
+		{
+			"renderers": [{"n": "PowerVR SGX 544"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"startTextureLOD": 1,
+			"useDof": false,
+			"useParaboloidReflection": false,
+			"useStaticParaboloidReflection": true,
+			"allowRoadReflectionInAP": false,
+			"roadReflectionRTFrenquentReset": 50,
+			"roadTextureAnisotropy": 0,
+			"usePerfBoost": true,
+			"GFXOption": "MEDIUM",
+			"FPSLimit": 30
+		},
+		"GPU_3":
+		{
+			"renderers": [{"n": "Mali-400 MP"}, {"n": "Adreno 305"}, {"n": "Adreno (TM) 305"}, {"n": "Adreno 306"}, {"n": "Adreno (TM) 306"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"startTextureLOD": 1,
+			"useDof": false,
+			"usePerfBoost": true,
+			"GFXOption": "MEDIUM",
+			"FPSLimit": 30
+		},
+		"GPU_3.5":
+		{
+			"renderers": [{"n": "Adreno 320"}, {"n": "Adreno (TM) 320"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"useDof": false,
+			"GFXOption": "MEDIUM",
+			"FPSLimit": 30
+		},
+		"GPU_4":
+		{
+			"renderers": [{"n": "Mali-T604"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"useDof": false,
+			"GFXOption": "MEDIUM",
+			"FPSLimit": 30
+		},
+		"GPU_4.5":
+		{
+			"renderers": [{"n": "PowerVR SGX 544MP"}, {"n": "powervr rogue hood"}, {"n": "powervr rogue g6430"}],
+			"OptimCarLods": true,
+			"defaultTextureFiltering": 1,
+			"roadReflectionRTFrenquentReset": 35,
+			"GFXOption": "HIGH",
+			"FPSLimit": 30
+		},
+		"GPU_5":
+		{
+			"renderers": [{"n": "NVIDIA Tegra 4"}, {"n":"NVIDIA Tegra", "+":"0xc0f"}, {"n": "Adreno 330"}, {"n": "Adreno (TM) 330"}, {"n": "mali-t628"}, {"n": "Adreno 418"}, {"n": "Adreno (TM) 418"}, {"n": "nvidia tegra"}, {"n": "mali-t624"}, {"n": "Adreno 430"}, {"n": "Adreno (TM) 430"}, {"n": "powervr rogue gx6250"}, {"n": "mali-t760"},{"n": "Adreno 540"},{"n": "Adreno (TM) 540"},{"n": "mali-g71"}],
+			"OptimCarLods": false,
+			"defaultTextureFiltering": 1,
+			"GFXOption": "HIGH",
+			"FPSLimit": 30
+		}
+	},
+	"CPU_PROFILE":
+	{
+		"CPU_0":
+		{
+			"useTrafficCars": false,
+			"useBreakables": true,
+			"useSimplifiedCarCollisions": false,
+			"useAICarSounds": false,
+			"useAICarParticles": false,
+			"useQualityPhysics": false,
+			"useNetworkWakeupThread": false,
+			"useAnamorphicGlows": false,
+			"disablePhysicsThread": false
+		},
+		"CPU_0.5":
+		{
+			"processors": [{"core": 2, "min": 1.0, "max": 1.2}],
+			"useTrafficCars": false,
+			"useBreakables": true,
+			"useSimplifiedCarCollisions": false,
+			"useAICarSounds": false,
+			"useAICarParticles": false,
+			"useQualityPhysics": false,
+			"useNetworkWakeupThread": false,
+			"useAnamorphicGlows": false,
+			"disablePhysicsThread": false
+		},
+		"CPU_1":
+		{
+			"processors": [{"core": 2, "min": 1.2}, {"core": 4, "min": 1.0, "max": 1.2}, {"core": 4, "min": 1.5, "max": 1.6}],
+			"useTrafficCars": true,
+			"useBreakables": true,
+			"useSimplifiedCarCollisions": false,
+			"useAICarSounds": false,
+			"useAICarParticles": false,
+			"useQualityPhysics": false,
+			"disablePhysicsThread": false,
+			"useNetworkWakeupThread": false
+		},
+		"CPU_2":
+		{
+			"processors": [{"core": 4, "min": 1.2, "max": 1.5},{"core": 6, "min": 1.4}],
+			"useTrafficCars": true,
+			"useBreakables": true,
+			"useSimplifiedCarCollisions": false,
+			"useAICarSounds": false,
+			"useAICarParticles": false,
+			"useQualityPhysics": true,
+			"disablePhysicsThread": false,
+			"useNetworkWakeupThread": false
+		},
+		"CPU_3":
+		{
+			"processors": [{"core": 4, "min": 1.6},{"core": 8, "min": 1.0}],
+			"useTrafficCars": true,
+			"useBreakables": true,
+			"useSimplifiedCarCollisions": false,
+			"useAICarSounds": true,
+			"useAICarParticles": false,
+			"useQualityPhysics": true,
+			"disablePhysicsThread": false,
+			"useNetworkWakeupThread": true
+		}
+	},
+	"MEM_PROFILE":
+	{
+		"MEM_0":
+		{
+			"startTextureLOD": 1,
+			"textureBudgetMB": 80,
+			"freeMoreMemory": true,
+			"dropAICarLodWhenManyCarsOnScreen": true,
+			"useTextureStreaming": true
+		},
+		"MEM_1":
+		{
+			"memory":
+			{
+				"min": 768,
+				"max": 1024
+			},
+			"textureBudgetMB": 172,
+			"freeMoreMemory": false,
+			"dropAICarLodWhenManyCarsOnScreen": true,
+			"useTextureStreaming": true
+		},
+		"MEM_2":
+		{
+			"memory":
+			{
+				"min": 1024,
+				"max": 1536
+			},
+			"textureBudgetMB": 256,
+			"dropAICarLodWhenManyCarsOnScreen": true,
+			"useTextureStreaming": true
+		},
+		"MEM_3":
+		{
+			"memory":
+			{
+				"min": 1536
+			},
+			"textureBudgetMB": 384,
+			"dropAICarLodWhenManyCarsOnScreen": true,
+			"useTextureStreaming": true
+		}
+	},
+	"RES_PROFILE":
+	{
+		"RES_0":
+		{
+			"scaleDisplay": 100,
+			"useAA": false
+		},
+		"RES_1":
+		{
+			"resolutions":
+			{
+				"minDII": 4.0,
+				"maxDII": 7.0,
+				"minW": 1920,
+				"maxW": 2500,
+				"minH": 1080,
+				"maxH": 1400
+			},
+			"scaleDisplay": 70,
+			"useAA": false
+		},
+		"RES_1.5":
+		{
+			"resolutions":
+			{
+				"minDII": 6.0,
+				"maxDII": 7.0,
+				"minW": 1920,
+				"minH": 1104
+			},
+			"scaleDisplay": 100,
+			"useAA": true,
+			"scaleAABuffer": 0.75
+		},
+		"RES_2":
+		{
+			"resolutions":
+			{
+				"minDII": 4.0,
+				"maxDII": 8.0,
+				"minW": 1100,
+				"maxW": 1920,
+				"minH": 700,
+				"maxH": 1080
+			},
+			"scaleDisplay": 85,
+			"useAA": false,
+			"scaleAABuffer": -1
+		},
+		"RES_3":
+		{
+			"resolutions":
+			{
+				"minDII": 8.0,
+				"maxDII": 8.9,
+				"minW": 1280,
+				"minH": 800
+			},
+			"scaleDisplay": 80,
+			"useAA": false
+		},
+		"RES_4":
+		{
+			"resolutions":
+			{
+				"minDII": 8.9,
+				"minW": 1280,
+				"minH": 800
+			},
+			"scaleDisplay": 60,
+			"useAA": false,
+			"scaleAABuffer": -1
+		},
+		"RES_5":
+		{
+			"scaleDisplay": 55,
+			"useAA": false,
+			"scaleAABuffer": -1
+		},
+		"RES_6":
+		{
+			"scaleDisplay": 85,
+			"useAA": false
+		},
+		"RES_7":
+		{
+			"resolutions":
+			{
+				"minDII": 9,
+				"minW": 1280,
+				"minH": 800
+			},
+			"scaleDisplay": 90,
+			"useAA": true,
+			"scaleAABuffer": 1.0
+		},
+		"RES_8":
+		{
+			"scaleDisplay": 60,
+			"useAA": false
+		},
+		"RES_9":
+		{
+			"scaleDisplay": 50,
+			"useAA": false
+		},
+		"RES_TEGRA_4_NORMAL":
+		{
+			"scaleDisplay": 100,
+			"useAA": false,
+			"scaleAABuffer": -1
+		},
+		"RES_TEGRA_4_CONSOLE":
+		{
+			"scaleDisplay": 85,
+			"useAA": false,
+			"scaleAABuffer": -1
+		},
+		"RES_HIGH_1":
+		{
+			"resolutions":
+			{
+				"minDII": 5.4,
+				"maxDII": 7.0,
+				"minW": 2560,
+				"minH": 1440
+			},
+			"scaleDisplay": 60,
+			"useAA": false
+		},
+		"RES_HIGH_2":
+		{
+			"resolutions":
+			{
+				"minDII": 5.0,
+				"maxDII": 5.3,
+				"minW": 2560,
+				"minH": 1440
+			},
+			"scaleDisplay": 56,
+			"useAA": false
+		}
+	},
+	"OPT_PROFILE":
+	{
+		"VERYLOW":
+		{
+			"useShadows": false,
+			"postFX": true,
+			"useCustomPFX": false,
+			"useCheapCustomPFX": true,
+			"useCheapColorCorrection": false,
+			"useVertexFresnel": true,
+			"cutoffDistanceOverride": 800,
+			"useCarDirt": false,
+			"useFog": false,
+			"useRoadReflection": false,
+			"useMotionBlur": false,
+			"useLensflare": false,
+			"useQualityRoadReflection": false,
+			"useGlassCrackPFX": false,
+			"fullScreenBlurQuality": 1
+		},
+		"LOW":
+		{
+			"useShadows": false,
+			"postFX": true,
+			"useCustomPFX": false,
+			"useCheapCustomPFX": true,
+			"useCheapColorCorrection": true,
+			"useVertexFresnel": true,
+			"cutoffDistanceOverride": 800,
+			"useCarDirt": true,
+			"useRoadReflection": false,
+			"useMotionBlur": false,
+			"useQualityRoadReflection": false,
+			"useGlassCrackPFX": false,
+			"fullScreenBlurQuality": 1
+		},
+		"MEDIUM":
+		{
+			"useShadows": true,
+			"postFX": true,
+			"useCheapCustomPFX": true,
+			"useCheapColorCorrection": true,
+			"useVertexFresnel": false,
+			"cutoffDistanceOverride": 0,
+			"useCarDirt": true,
+			"useRoadReflection": true,
+			"useMotionBlur": false,
+			"useQualityRoadReflection": false,
+			"useGlassCrackPFX": false
+		},
+		"HIGH":
+		{
+			"useShadows": true,
+			"postFX": true,
+			"useCheapCustomPFX": false,
+			"useCheapColorCorrection": false,
+			"useVertexFresnel": false,
+			"cutoffDistanceOverride": 0,
+			"useCarDirt": true,
+			"useRoadReflection": true,
+			"useQualityRoadReflection": true,
+			"useGlassCrackPFX": true
+		}
+	},
+	"SPECIFICS":
+	{	
+		"aftb":
+		{
+			"RES": "3"
+		},
+		"afts":
+		{
+			"RES": "3"
+		},
+		"e2303":
+		{
+			"GPU": "3",
+			"CPU": "0.5",
+			"MEM": "0",
+			"RES": "1"
+		},
+		"sgp511":
+		{
+			"RES": "1"
+		},
+		"htc vle_u":
+		{
+			"CPU": "0.5",
+			"MEM": "1"
+		},		
+		"shield tablet|a1-840fhd":
+		{
+			"RES": "6"
+		},	
+		"nexus player":
+		{		
+			"GPU": "5",
+			"RES": "0",
+			"CPU": "1",
+			"MEM": "1"
+		},
+		"kfsowi":
+		{
+			"RES": "1"
+		},
+		"kffowi":
+		{		
+			"MEM": "0",
+			"CPU": "0.5"
+		},
+		"kftt":
+		{		
+			"GPU": "0",
+			"RES": "2",
+			"CPU": "0",
+			"MEM": "0"
+		},
+		"gt-i9300":
+		{		
+			"GPU": "2",
+			"CPU": "0",
+			"MEM": "0"
+		},
+		"bravia 2015|bravia 4k 2015":
+		{		
+			"GPU": "2",
+			"RES": "1",
+			"CPU": "0.5",
+			"MEM": "0"
+		},
+		"mojo|mad catz m.o.j.o.":
+		{		
+			"CPU": "1",
+			"RES": "6"			
+		},
+		"asus android game box":
+		{		
+			"RES": "0"
+		},
+		"kfjwi|kfjwa":
+		{
+			"GPU": "2",
+			"CPU": "0",
+			"MEM": "0",
+			"RES": "9"
+		},
+		"mb860|droid4":
+		{
+			"MEM": "0",
+			"GPU": "0"
+		},
+		"sm-g920f|sm-g925f|shield android tv":
+		{
+			"RES": "0"
+		},
+		"sm-n915fy":
+		{
+			"RES": "0"
+		},
+		"sm-n7505":
+		{
+			"GPU": "4.5",
+			"RES": "1"
+		},
+		"sm-n750":
+		{
+			"GPU": "5",
+			"RES": "1"
+		},
+		"nexus 6":
+		{
+			"GPU": "5",
+			"RES": "8"
+		},
+		"nexus 9":
+		{
+			"GPU": "5"
+		},
+		"sm-n910s|sm-n910f|sm-g906s":
+		{
+			"GPU": "5",
+			"RES": "3"
+		},
+		"sm-t230":
+		{
+			"GPU": "2",
+			"RES": "1",
+			"CPU": "0.5",
+			"MEM": "0"
+		},
+		"samsung-sgh-i717":
+		{
+			"GPU": "0",
+			"RES": "1",
+			"MEM": "0"
+		},
+		"transformer prime tf201":
+		{
+			"GPU": "1",
+			"RES": "2",
+			"CPU": "1",
+			"MEM": "1"
+		},
+		"lg-d855":
+		{
+			"GPU": "5",
+			"RES": "9",
+			"CPU": "2",
+			"MEM": "3"
+		},
+		"sm-a700f":
+		{
+			"RES": "8"
+		},
+		"gt-i9505":
+		{
+			"GPU": "3",
+			"RES": "8"
+		},
+		"me302c":
+		{
+			"GPU": "4.5",
+			"CPU": "1",
+			"MEM": "1",
+			"RES": "8"
+		},
+		"gt-i9500":
+		{
+			"RES": "8"
+		},
+		"darkside":
+		{
+			"GPU": "1",
+			"CPU": "0",
+			"MEM": "0",
+			"RES": "4"
+		},
+		"gt-i9220|gt-n7000":
+		{			
+			"GPU": "0",
+			"RES": "4"
+		},
+		"gt-i9260|sc-02d":
+		{			
+			"GPU": "1"
+		},
+		"lenovo k900_row":
+		{
+			"GPU": "2",
+			"CPU": "1",
+			"RES": "5"		
+		},
+		"htc butterfly|htl21|htc6435lvw":
+		{
+			"GPU": "2",
+			"CPU": "0",
+			"RES": "5",
+			"MEM": "0"
+		},
+		"nexus 4":
+		{
+			"RES": "6"
+		},
+		"nexus 10":
+		{
+			"RES": "4"
+		},
+		"at10le-a":
+		{
+			"RES": "4"
+		},
+		"sm-p600|sm-p601":
+		{
+			"GPU": "5",
+			"RES": "5"
+		},
+		"sm-g900h|sm-g900f":
+		{
+			"MEM": "2",
+			"RES": "8"
+		},
+		"sm-n900":
+		{
+			"RES": "8"
+		},
+		"redhookbay|starxtrem":
+		{
+			"GPU": "2",
+			"CPU": "0.5"
+		},
+		"byt_t_ffrd10":
+		{
+			"GPU": "2",
+			"CPU": "0.5"
+		},
+		"thinkpad tablet":
+		{
+			"RES": "2"
+		},
+		"gt-i8190|gt-i8200n":
+		{
+			"GPU": "1",
+			"MEM": "0",
+			"RES": "7",
+			"CPU": "0"
+		},
+		"isw16sh|sht21|lt22i|shv-e160s|lg-f160s|im-a840s":
+		{
+			"RES": "0",
+			"GPU": "1"
+		},
+		"htc sensation z710e|htc sensation 4g|xt910|so-02d|shv-e120s|im-a760s|lt26i|gt-i9100|im-a800s|shw-m380s|adr6425lvw|a500":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"lt28h":
+		{
+			"reduceDepthFighting": true,
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"gt-p5100":
+		{
+			"reduceDepthFighting": true,
+			"GPU": "0",
+			"MEM": "1",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"adr6400l":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"b1-a71":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"me302kl":
+		{
+			"GPU": "1",
+			"MEM": "1",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"lg-d685":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"kfot":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0.5"
+		},
+		"me172v":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"me173x":
+		{
+			"GPU": "1",
+			"MEM": "1",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"sc-05d":
+		{
+			"GPU": "1",
+			"MEM": "1",
+			"RES": "0",
+			"CPU": "1"
+		},
+		"sc-06d":
+		{
+			"RES": "0"
+		},
+		"sch-i535|sgh-t999|sgh-t999v|samsung-sgh-i747|sph-l710|sch-r530|sch-r530m|samsung-sgh-i747m|sch-r530u":
+		{
+			"GPU": "2",
+			"CPU": "0",
+			"MEM": "0",
+			"RES": "3"
+		},
+		"galaxy nexus|galaxy+nexus":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"CPU": "0",
+			"RES": "1"
+		},
+		"sol21":
+		{
+			"GPU": "2",
+			"MEM": "2",
+			"RES": "0",
+			"CPU": "1"
+		},
+		"mediapad 10 fhd":
+		{
+			"GPU": "0",
+			"MEM": "1",
+			"RES": "0",
+			"CPU": "0.5"
+		},
+		"bntv400":
+		{
+			"GPU": "1",
+			"MEM": "0",
+			"RES": "2",
+			"CPU": "0"
+		},
+		"bntv600":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "2",
+			"CPU": "0"
+		},
+		"gt-p3200|gt-p3210|sm-t211|gt-p5210|gt-p5200|sm-t311|gt-n5100|gt-n5110|sgh-i467m|sm-t310|sm-t312":
+		{
+			"reduceDepthFighting": true,
+			"GPU": "1",
+			"MEM": "1",
+			"RES": "0",
+			"CPU": "0"
+		},
+		"sm-t210|sm-t210r|sm-t2105":
+		{
+			"reduceDepthFighting": true,
+			"GPU": "0",
+			"MEM": "1",
+			"RES": "2",
+			"CPU": "0"
+		},
+		"hudl ht7s3|hudl+ht7s3":
+		{
+			"GPU": "1",
+			"MEM": "0",
+			"RES": "1",
+			"CPU": "0.5"
+		},
+		"gt-p7500":
+		{
+			"GPU": "0",
+			"MEM": "1",
+			"RES": "3",
+			"CPU": "0.5"
+		},
+		"gt-p5110":
+		{
+			"textureBudgetMB": 45,
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"samsung-sgh-i957":
+		{
+			"GPU": "1",
+			"MEM": "0",
+			"RES": "0",
+			"CPU": "0.5"
+		},
+		"gt-i8260l":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"gt-p3100":
+		{
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "1",
+			"CPU": "0"
+		},
+		"xt1032|xt1039":
+		{
+			"MEM": "0"
+		},
+		"asus_t00f":
+		{
+			"MEM": "2",
+			"CPU": "2",			
+			"RES": "7"
+		},
+		"gt-p6200":
+		{
+			"GPU": "2"
+		},
+		"gt-p1000|gt-p1010|gt-i9000|n861|lg-p920|lg-p990|htc desire|st15i|droidx|walkman|st25i":
+		{
+			"textureBudgetMB": 85,
+			"GPU": "0",
+			"MEM": "0",
+			"RES": "3",
+			"CPU": "0"
+		},
+		"gt-i9082":
+		{
+			"textureBudgetMB": 130
+		},
+		"htc+vle_u|c525c|mb886":
+		{
+			"MEM": "0"
+		},
+		"sm-n910f|sm-n9005|sm-g900f|sm-g900h|sm-n750|sm-n910s|sm-n7505":
+		{
+			"GPU": "4"
+		},
+		"nexus+7": {
+			"GPU": "0",
+			"CPU": "0"
+		}
+	},
+	"RES_PROFILE_NEW":
+	{
+		"RES_HIGH":
+		{
+			"PPI_MOBILE": 326,
+			"PPI_TABLET": 236
+		},
+		"RES_MEDIUM":
+		{
+			"PPI_MOBILE": 270,
+			"PPI_TABLET": 200
+		},
+		"RES_LOW":
+		{
+			"PPI_MOBILE": 220,
+			"PPI_TABLET": 196
+		},
+		"RES_VERYLOW":
+		{
+			"PPI_MOBILE": 220,
+			"PPI_TABLET": 196
+		}
+	}
+}

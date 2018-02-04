@@ -1,0 +1,56 @@
+server {
+    # Редирект на HTTPS
+    listen      REAL_IP:80;
+    server_name site.ru www.site.ru;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen      93.170.105.102:443 ssl;
+    server_name site.ru www.site.ru;
+
+    # Устанавливать Keep-Alive соединения с посетителями
+    keepalive_timeout               60 60;
+
+    # Сжатие данных перед отправкой клиенту. Обратите внимание, из типов здесь присутствует только text/plain, для других данных применяется сжатие на бэкенде на более высоком уровне компрессии, после чего эти данные отправляются в кэш. Сделано для того, чтобы избежать нагрузок на CPU при сжатии динамических документов.
+    gzip                on;
+    gzip_comp_level     1;
+    gzip_min_length     512;
+    gzip_buffers        8 64k;
+    gzip_types text/plain;
+    gzip_proxied        any;
+
+    # Отдавать предпочтение шифрам, заданным на сервере
+    ssl_prefer_server_ciphers on;
+    # Установка длительности TLS сессии в 2 минуты
+    ssl_session_cache shared:TLS:2m;
+    ssl_session_timeout 2m;
+
+    # Задание файла, содержащего сертификат сайта и сертификат УЦ
+    ssl_certificate      /etc/ssl/combined.crt;
+    # Указание закрытого ключа
+    ssl_certificate_key  /etc/ssl/3_site.ru.key;
+
+    # Файл с параметрами Диффи-Хеллмана
+    ssl_dhparam /etc/ssl/dh2048.pem;
+
+    # Поддерживаемые протоколы
+    ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+
+    # Наборы шифров, данный набор включает forward secrecy
+    ssl_ciphers EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA512:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:ECDH+AESGCM:ECDH+AES256:DH+AESGCM:DH+AES256:RSA+AESGCM:!aNULL:!eNULL:!LOW:!RC4:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS;
+
+    # Передача Strict-Transport-Secutiry заголовка
+    add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains';
+
+    location / {
+        # Проксирование на Varnish
+        proxy_pass      http://127.0.0.1:6081/;
+
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto https;
+        proxy_set_header    X-Forwarded-Port  443;
+    }
+}

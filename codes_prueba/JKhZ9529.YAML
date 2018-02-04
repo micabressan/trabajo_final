@@ -1,0 +1,118 @@
+groups:
+  Zwerver:
+    options:
+      prefix: '&7Zwerver'
+      rank: '999'
+      default: true
+    permissions:
+      - essentials.time
+      - essentials.afk.auto
+      - essentials.list
+      - essentials.ping
+      - essentials.rules
+      - essentials.worlds.Lobby
+      - essentials.worlds.Skyblock
+      - essentials.worlds.Spijkenisse
+      - essentails.worlds.ASkyBlock
+      - minecraft.help
+      - -mwm.balance
+    worlds:
+      Spijkenisse:
+        - essentials.afk.auto
+        - modify.world.*
+  Burger:
+    options:
+      prefix: '&aBurger'
+      rank: '998'
+    inheritance:
+      - Zwerver
+    permissions:
+      - essentails.mail
+      - essentials.mail.send
+      - essentials.compass
+      - essentials.me
+      - essentials.msg
+      - essentials.realname
+    worlds:
+      Skyblock: []
+      Spijkenisse:
+        - essentials.balance
+        - essentials.hat
+        - essentials.keepxp
+        - essentials.tpaccept
+        - essentials.tpdeny
+        - essentials.tptoggle
+        - essentials.warp.list
+  Donator:
+    options:
+      prefix: '&eDonator'
+      rank: '500'
+    inheritance:
+        - Burger
+    permissions:
+      - essentails.seen
+    worlds:
+      Skyblock: []
+      Spijkenisse:
+        - essentials.back.ondeath
+        - essentials.chat.color
+        - essentials.chat.url
+        - essentials.feed
+        - essentials.getpos
+        - essentials.home.bed
+        - essentials.ignore
+        - essentials.joinfullserver
+        - essentials.kits.Donator
+        - essentials.list.hidden
+        - essentials.msg.*
+        - essentials.nick.color
+        - essentials.sethome.bed
+        - essentials.tpa
+        - essentials.tpahere
+        - essentials.warps.*
+        - minetopiasdb.openbank
+        - minetopiasdb.plotinfo
+        - minetopiasdb.prullenbak
+        - minetopiasdb.spaarrekening
+        - minetopiasdb.staff
+  Donator++:
+    options:
+      prefix: '&eDonator++'
+      rank: '971'
+    inheritance:
+      - Donator
+    permissions: []
+    worlds:
+      Skyblock: []
+      Spijkenisse:
+        - -essentials.kits.Donator
+        - essentials.afk.kickexempt
+        - essentials.back
+        - essentials.chat.format
+        - essentials.chat.shout
+        - essentials.enderchest
+        - essentials.feed.cooldown.bypass
+        - essentials.hat
+        - essentials.heal
+        - essentials.helpop
+        - essentials.kits.Donator++
+        - essentials.list.hidden
+        - essentials.nick.format
+        - essentials.nick.magic
+        - essentials.ptime
+        - essentials.sethome
+        - essentials.silentjoin
+        - essentials.silentquit
+        - essentials.sleepignored
+        - essentials.speed.walk
+        - essentials.vanish.effect
+        - essentials.weather
+        - minetopiasdb.plottp
+users:
+  &7Zwerver:
+  creeperboy_12:
+    group:
+      - Donator++
+worlds:
+  Skyblock:
+  Spijkenisse:

@@ -1,0 +1,45 @@
+# HG changeset patch
+# User Mike Hansen <mhansen@gmail.com>
+# Date 1312614505 25200
+# Node ID 15e5547b6e8cd04e1be287a1b233858baf79f459
+# Parent  cd8efa56becd94cb811236a754d3e9444fc90d9a
+imported patch figure_out_nt_sagenb_infinite_recursion.patch
+
+diff --git a/sagenb/notebook/worksheet.py b/sagenb/notebook/worksheet.py
+--- a/sagenb/notebook/worksheet.py
++++ b/sagenb/notebook/worksheet.py
+@@ -307,7 +307,7 @@
+ 
+         d = {#############
+              # basic identification
+-             'name': self.name(),
++             'name': unicode(self.name()),
+              'id_number': int(self.id_number()),
+ 
+              #############
+@@ -392,6 +392,8 @@
+             pass
+         for key, value in obj.iteritems():
+             if key == 'name':
++                if repr(value) == '<_LazyString broken>':
++                    value = ''
+                 self.set_name(value)
+             elif key == 'id_number':
+                 self.__id_number = value
+@@ -708,7 +710,7 @@
+         try:
+             return self.__name
+         except AttributeError:
+-            self.__name = lazy_gettext("Untitled")
++            self.__name = gettext("Untitled")
+             return self.__name
+ 
+     def set_name(self, name):
+@@ -728,7 +730,7 @@
+             u'A renamed worksheet'
+         """
+         if len(name.strip()) == 0:
+-            name = lazy_gettext('Untitled')
++            name = gettext('Untitled')
+         name = unicode_str(name)
+         self.__name = name

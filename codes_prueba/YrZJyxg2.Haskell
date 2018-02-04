@@ -1,0 +1,14 @@
+n := 200;
+X = Table[ 
+  RandomFunction[
+   GeometricBrownianMotionProcess[0.003891778458, 0.0242575309, 
+    14512], {0, 10, .1}], n];(*0.003891778458 0.0242575309*)
+Mx := Table[GeometricMean[X[[k]]], {k, 1, n}];
+Sx := Table[StandardDeviation[X[[k]]], {k, 1, n}];
+M = Mean[Mx];
+S  = Mean[Sx];
+ListPlot[X, 
+ Epilog -> {{ InfiniteLine[{0, M}, {M, 0}], 
+    InfiniteLine[{0, M + S}, {M + S, 0}] , 
+    InfiniteLine[{0, M - S}, {M - S, 0}] }  }, ImageSize -> Large, 
+ Joined -> True]

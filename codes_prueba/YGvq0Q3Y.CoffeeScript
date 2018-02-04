@@ -1,0 +1,75 @@
+#Xlbot
+#integracao com gcloud e rockerchat
+
+sleep = (ms) ->
+  start = new Date().getTime()
+  continue while new Date().getTime() - start < ms
+
+module.exports = (robot) ->
+  robot.respond /(.*)$/i, (msg) ->
+
+    @exec = require('child_process').exec
+    cmd = msg.match[1]
+    info = ' '
+
+    
+    myKey = 
+      type: "service_account",
+      project_id: "xlsol-homolog",
+      private_key_id: "1e8c437c146ce022a0d2dd125f3d798f164249e6",
+      private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC5uPGJ5n0Z8GNZ\nf6824I6EZ+6OqeMDha+7AaOgf0jTp03JRKV5L421eex7yXTbFc9THrCN9+blBHu0\nk3lTogid8P1MfSkIKiZlovOb93kaR9gCCNsnrbk5B8Kfva8IwgnV/GRKeZyNZWLG\ngi3y9k7vNHmvIgh4PmkkG/leQHIJXl+zgVohNWIPCW/t+Is9RY2O5uQWylWVTlt2\nKWCGb031kXnQGB9CDf2lOxNZnND2lMPub5x1Nbpf1Fc6tZTcdPVkWSD4bXvjw0Tj\nJm2kNg4XTdtAKhHTWuzg5QmIu5KzYtLmkqJHCp+t09rdr0lakKaQZDr93kxIx7Nn\nECdMxqCTAgMBAAECggEABoR0IXaPrvstxARu5c+ai2X0TAMFND3wQpvrneRpmK0s\ngHgiuxkinBrjuXJX4fT8JLq/z7OX4YiMk3PWFEvBiVKy04jUNEpPtPheG9E4PuZa\nMQlrhhMaxrgRfzaSWmMozN7BtuVZS5L3v5HuQoeckdi3E8tvcvzJsW/eio1baHMH\n4txvlr2gq3/oZYtdBusCsLjSPIcQS7ssohGnpKRSS8x2Zzu2u1RtCrnRVZht5C9C\n/U27+27qV8CFRK9mnhWz2WmULHmFWesSUx1ZHEclcKTVo0yGlV/u4QvI9CV5ZSNM\ntCUhWgsU2DgB05w9ETDlIukJf70F/Un7xx9DbWEuQQKBgQDmMrsVTMiB5EbDmvCn\nnypaAHoG1D0v+AytDEvEFNy41mKm6DzsoWZhOYf0NmzGyKD92CJLFQrSJf4qGE8w\nLJV9hGtZ/aSjvSgvd1sYD7/TiXuFncnkLOnpaaGks609pkU/TB1d02tqtvR5xg2J\n4C0+OO1le9UPkClP9TDY995s0wKBgQDOigiBXTRDwkj7rUa3j+2k3XSt6dIM6D9S\nXkHTBySv3Ere4xgIrS2p++IpuMffEgOsDSGFkAGZGex5P8lCvQJfPkrq6LYzSQwJ\n6qcTuYAS/LuArcRaoac2hgMvaPFLK0cwHWFExCnzpW1MK8pps37rxIMzJY0w9iPv\n9wjR7JOlQQKBgFDAjxxjuRrHx4MqwS0sCqFT9XqbzXMcYuX5oEKCxwMYQbcnVOf1\nnoKQuf6TcQkyrDcgMLeCBC/AIC8IJA9UNIS5hScmcTD3VDeCeTQxoitE2U4AEii3\nEL9OzOOIHEe6IiSYQNz/I3lmANEPBwTM3VIsiirFi/JPsg5YhvA105L9AoGAEP1b\ny8Bt/zDpLgLH8WuegdRRt8inJbapFs54HbLVur2lTwZhQL12Jyh4JzRzBI+Hy8xc\nuI7rArwWLrcniBziKBGIuiAgdMGKgvpRehblSSqPBfvFTitEBQErG+hHCQbrWTLh\ngHWeedNe1Ug4408Hnr9Qh5GMNr3YoPGyQQpz7sECgYAJn6Tij9ycgyZpSXdiTsvc\nqtP6gYb0yn81prehy0BTW56+0NUMiyiWau8vLFiCgWR3jSvbK4YFZEV7HTW6FBtI\nAe6h9Qjo4r7LhTVh3l+Qxdoz8G4ng+6zw21y3hmN/lsyMga9mFniAaQn1qKk5xa+\n7J1PBgY+KJ2C/8r2kowaGw==\n-----END PRIVATE KEY-----\n",
+      client_email: "xlhubot@xlsol-homolog.iam.gserviceaccount.com",
+      client_id: "110860284573746645755",
+      auth_uri: "https://accounts.google.com/o/oauth2/auth",
+      token_uri: "https://accounts.google.com/o/oauth2/token",
+      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+      client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/xlhubot%40xlsol-homolog.iam.gserviceaccount.com"
+
+
+    auth = '/usr/bin/gcloud auth  activate-service-account "xlhubot@xlsol-homolog.iam.gserviceaccount.com" --key-file=/home/hubot/scripts/'+myKey
+
+
+    #lista de usuarios permitidos a usar o bot
+    list_permission = ['gabriel.dutra', 'teste.teste']
+
+    #lista de comandos permitidos, tudo que for diferente disso nao sera lido pelo bot
+    list_commands = ['ligar homolog', 'desligar homolog']
+
+    if cmd is 'ligar homolog' && msg.message.user.name in list_permission
+
+      @exec auth
+
+      msg.send "Ola, #{msg.message.user.name}. Estou ligando ambiente de homolog..."
+      info = "#{msg.message.user.name}, o ambiente de homolog foi ligado com sucesso!!"
+
+      sleep 2000
+      cmd = "gcloud compute instances list"
+
+    else if cmd is 'desligar homolog' && msg.message.user.name in list_permission
+
+      msg.send "#{msg.message.user.name}, estou desligando ambiente de homolog..."
+      info = "#{msg.message.user.name}, o ambiente de homolog foi desligado com sucesso!!"
+
+      sleep 2000
+      cmd = "ls"
+
+    else if cmd is 'ajuda'
+        msg.send "comandos: \n ligar homolog\n desligar homolog"
+        return -1
+
+    else if cmd not in list_commands
+      msg.send "#{msg.message.user.name}, o comando que voce digitou e invalido\nUse: @xlbot ajuda para obter ajuda"
+      return -1
+
+    else
+      msg.send "#{msg.message.user.name},voce nao esta autorizado a executar esta acao"
+      return -1
+
+    @exec cmd, (info, error, stdout, stderr) ->
+      if error
+        msg.send error
+        msg.send stderr
+      else
+        msg.send stdout
+
+    msg.send info

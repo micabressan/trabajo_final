@@ -1,0 +1,19 @@
+ [HttpPost]
+        [Route("StartDaily")]
+        [BaseAuthorize]
+        public IActionResult StartDaily(string outletCode, string deviceId, string deviceName)
+        {
+            string msg = string.Empty;
+            if (string.IsNullOrEmpty(outletCode))
+                msg += "Outletcode cannot be null" + "\n";
+            if (string.IsNullOrEmpty(deviceId))
+                msg += "DeviceId cannot be null" + "\n";
+            if (string.IsNullOrEmpty(deviceName))
+                msg += "DeviceName cannot be null" + "\n";
+            if (!string.IsNullOrEmpty(msg))
+                return Ok(new JObject(status: false, message: msg));
+            var storeDaily = _dailyService.StartDaily(outletCode, deviceId, deviceName);
+            if (storeDaily == null)
+                return Ok(new JObject());
+            return Ok(new JObject(storeDaily));
+        }

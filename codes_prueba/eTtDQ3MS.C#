@@ -1,0 +1,7 @@
+                    System.Reflection.Assembly assembly = typeof(Microsoft.SharePoint.Administration.SPIisSettings).Assembly;
+                    Type typeVirtualDirectory = assembly.GetType("Microsoft.SharePoint.Administration.SPIisVirtualDirectory");
+                    Type typeWebSite = typeof(Microsoft.SharePoint.Administration.SPIisWebSite);
+                    Object valVirtualDirectory = typeWebSite.GetProperty("RootVirtualDirectory", (BindingFlags.Instance | BindingFlags.NonPublic)).GetValue(current2);
+                    Object val = typeVirtualDirectory.GetProperty("Path").GetValue(valVirtualDirectory);
+                    DirectoryInfo directoryInfo = val as DirectoryInfo;
+                    System.Console.WriteLine(directoryInfo.ToString());

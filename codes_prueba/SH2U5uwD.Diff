@@ -1,0 +1,82 @@
+From 44874e4bb0ef9d5a326a48a669c034126ddd35f8 Mon Sep 17 00:00:00 2001
+From: Bodrick <bodricklight@gmail.com>
+Date: Sat, 15 Aug 2015 15:24:04 +0100
+Subject: [PATCH] Give no xp or drops from randomly spawned monsters.
+
+---
+ crawl-ref/source/mon-place.cc | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/crawl-ref/source/mon-place.cc b/crawl-ref/source/mon-place.cc
+index fc59779..364d54e 100644
+--- a/crawl-ref/source/mon-place.cc
++++ b/crawl-ref/source/mon-place.cc
+@@ -362,7 +362,7 @@ void spawn_random_monsters()
+     if (player_on_orb_run())
+         rate = you_worship(GOD_CHEIBRIADOS) ? 16 : 8;
+     else if (!player_in_starting_abyss())
+-        rate = _scale_spawn_parameter(rate, 6 * rate, 0);
++        rate = _scale_spawn_parameter(rate, 6 * rate, 6 * rate);
+ 
+     if (rate == 0)
+     {
+@@ -400,6 +400,10 @@ void spawn_random_monsters()
+         mgen_data mg(WANDERING_MONSTER);
+         mg.proximity = prox;
+         mg.foe = (player_on_orb_run()) ? MHITYOU : MHITNOT;
++
++        // Give no xp or drops for random spawns.
++        mg.extra_flags |= (MF_NO_REWARD | MF_HARD_RESET);
++
+         mons_place(mg);
+         viewwindow();
+         return;
+@@ -414,6 +418,9 @@ void spawn_random_monsters()
+         mg.flags |= MG_PERMIT_BANDS;
+     }
+ 
++    // Give no xp or drops for random spawns.
++    mg.extra_flags |= (MF_NO_REWARD | MF_HARD_RESET);
++
+     mons_place(mg);
+     viewwindow();
+ }
+-- 
+1.9.5.msysgit.0
+
+From c13d07f57a0d3919cb2c41fe348b0fc51c0430e2 Mon Sep 17 00:00:00 2001
+From: Bodrick <bodricklight@gmail.com>
+Date: Fri, 14 Aug 2015 23:07:39 +0100
+Subject: [PATCH] Always set hunger to HUNGER_MAXIMUM
+
+---
+ crawl-ref/source/food.cc | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/crawl-ref/source/food.cc b/crawl-ref/source/food.cc
+index ad6135d..590fcd3 100644
+--- a/crawl-ref/source/food.cc
++++ b/crawl-ref/source/food.cc
+@@ -75,7 +75,9 @@ void make_hungry(int hunger_amount, bool suppress_msg,
+     set_redraw_status(REDRAW_HUNGER);
+ #endif
+ 
+-    you.hunger -= hunger_amount;
++    you.hunger = HUNGER_MAXIMUM;
++
++//    you.hunger -= hunger_amount;
+ 
+     if (you.hunger < 0)
+         you.hunger = 0;
+@@ -106,7 +108,8 @@ void lessen_hunger(int satiated_amount, bool suppress_msg, int max)
+     if (you_foodless())
+         return;
+ 
+-    you.hunger += satiated_amount;
++    you.hunger = HUNGER_MAXIMUM;
++//    you.hunger += satiated_amount;
+ 
+     const hunger_state_t max_hunger_state = max == -1 ? HS_ENGORGED
+                                                       : (hunger_state_t) max;
+-- 
+1.9.5.msysgit.0

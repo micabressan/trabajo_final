@@ -1,0 +1,9 @@
+@@ -611,7 +611,7 @@ POE::Session->create(
+                     = sprintf( "100.00%% (avg. %4.2f kB/s) $dur", $$heap{spd} );
+                 if ( CHECK_CRC32 ) {
+                     $line .= $$heap{invalid_crc} ? ' CRC FAILED' : (
+-                        defined $$heap{invalid_crc} ? ' CRC NOT FOUND' : ' CRC MATCHES'
++                        defined $$heap{valid_crc} ? ' CRC MATCHES' : ' CRC NOT FOUND'
+                     );
+                 }
+                 $$heap{prevlen} = 0 unless $$heap{prevlen};

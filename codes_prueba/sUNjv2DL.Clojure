@@ -1,0 +1,7 @@
+(require '[clj-time.core :as t])
+(defn sunday-at-24
+	[]
+	(->> (range 1 2016)
+		 (map #(= 7 (t/day-of-week (t/date-time % 12 24))))
+		 (filter true?)
+		 count))

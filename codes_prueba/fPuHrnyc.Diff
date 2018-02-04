@@ -1,0 +1,692 @@
+diff --git a/web/crea_cours/voir_note.php b/web/crea_cours/voir_note.php
+index 8a5c82e..f26abae 100644
+--- a/web/crea_cours/voir_note.php
++++ b/web/crea_cours/voir_note.php
+@@ -2,38 +2,46 @@
+ <?php require_once($_SERVER['DOCUMENT_ROOT'].'/includes/base.inc.php'); ?>
+ <?php if ($_SESSION["masters"]==11){
+         header("Location:/crea_cours/voir_note_masters.php");
+-        exit();
++        die(" ");
+ }
+ 
+ 
+-function donne_ects($Classe,$ID_module,$an) // FIXME: should be in a helper file
++
++function donne_ects($Classe,$ID_module,$an)
+ {
+     global $db_link;
++    
+     $data3 = No2_SQLQuery::execute(
+         "select * from  `crea_ects` where ID_Classe =:ID_Classe and ID_session=:ID_session and ID_module = :ID_module LIMIT 1",
+         [ ':ID_Classe' => $Classe, ':ID_session' => $an, ':ID_module' => $ID_module ]
+     );
+-    $Points  ="";
+-    if (!is_null($data3))
+-    {
++    $nombre = count($data3);
++    $Points  =""; 
++    if ($nombre!=0)
++    { 
+         $Points  = $data3['Points'];
+         if ($Points==0){ $Points ="";} else {$Points =" ECTS : $Points"; }
+     }
+     return $Points;
+ }
+ 
+-function Aff_intervenant($str) // FIXME: should be in a helper file
++ 
++function Aff_intervenant($str)
+ {
+     return strtoupper($str);
+      return ucfirst(strtolower(trim($str)));
+ }
+ 
+ 
+-    $VarIDEtudiant = GET_nombre('ID', $id_eleve);
+-    $a = GET_nombre("a",0);
+-    $classe = GET_Nombre('classe', $Classe_eleve);
+-
+-    if (!empty($classe)) {
++    $VarIDEtudiant = GET_nombre('ID',$id_eleve); 
++    $a= GET_nombre("a",0);
++    $classe = $_GET['classe'];
++    if (empty($classe)) 
++    {
++        $classe =  $Classe_eleve;
++    }
++    if (!empty($classe)) 
++    {
+         $data = No2_SQLQuery::execute(
+             "SELECT * FROM  `crea_classe` where ref=:ref LIMIT 1",
+             [ ':ref' => $classe ]
+@@ -43,19 +51,19 @@ function Aff_intervenant($str) // FIXME: should be in a helper file
+         $DateDebut     = $data['DateDebut'];
+         $DateSession2     = $data['DateSession2'];
+         $DateDebut3     = $data['DateDebut3'];
+-
++        
+         $debut1 = $data['DateDebut'];
+         $debut2 = $data['DateSession2'];
+         $debut3 = $data['DateDebut3'];
+-
++            
+         $fin1     = $data['fin1'];
+         $fin2     = $data['fin2'];
+         $fin3     = $data['fin3'];
+-
++        
+         if ($data['masters']==11){
+             header("Location:/crea_cours/voir_note_masters.php?ID=$VarIDEtudiant&classe=$classe");
+-            exit();
+-        }
++            die(" ");
++        } 
+     }
+ ?>
+ <?php if ($a==0){
+@@ -65,14 +73,14 @@ function Aff_intervenant($str) // FIXME: should be in a helper file
+     $ndebut2 = $d[0].$d[1].$d[2];
+     $d =  explode("-", $debut3);
+     $ndebut3 = $d[0].$d[1].$d[2];
+-
++        
+     $d =  explode("-", $fin1);
+     $nfin1 = $d[0].$d[1].$d[2];
+     $d =  explode("-", $fin2);
+     $nfin2 = $d[0].$d[1].$d[2];
+     $d =  explode("-", $fin3);
+     $nfin3 = $d[0].$d[1].$d[2];
+-
++    
+     $j=  date('Ymd');
+     $a= 1;
+     if (($j>=$ndebut1) and ($j<=$nfin1)){$a=1;}
+@@ -88,7 +96,7 @@ function ecrit_moyenne_module($ID_module,$note,$nbnote,$Niveau_eleve,$ID_session
+     global $coulmoyenne;
+     global $VarIDEtudiant;
+     global $classe;
+-
++    
+     //echo($ID_module."<br>");
+     //echo("Note".$note."<br>");
+ 
+@@ -99,26 +107,32 @@ function ecrit_moyenne_module($ID_module,$note,$nbnote,$Niveau_eleve,$ID_session
+         $moyenne1 = arrondi($moyenne);
+         $comp = "";
+         // if ($Niveau_eleve<>0) { $comp = "(".substr($moyenne , 0,4).")"; }
++        
+         // va chercher s'il existe des ajouts au module
+         //echo($StrReqs."<br>");
+         $datas = No2_SQLQuery::execute(
+-            "SELECT * from `crea_ajout` where ID_Classe =:classe and  ID_module = :ID_module and session = :ID_session LIMIT 1",
++            "SELECT * from `crea_ajout` where ID_Classe =:classe and  ID_module = :ID_module and← session = :ID_session LIMIT 1",
+             [ ':classe' => $classe, ':ID_module' => $ID_module, ':ID_session' => $ID_session ]
+         );
+-        if (!is_null($datas))
++        $nombre1 =0;
++        $nombre = count($datas);
++        if ($nombre>0)
+         {
+             $ID_Cours = $datas['ref'];
+             $datat = No2_SQLQuery::execute(
+-                "SELECT * FROM `crea_note_ajout` WHERE ID_eleve = :VarIDEtudiant AND ID_cours = :ID_Cours AND Note<>0 LIMIT 1",
+-                [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $ID_Cours ]
++                "select * from `crea_note_ajout` where ID_eleve =:VarIDEtudiant and ID_cours =:ID_Cours and Note<>'' LIMIT 1",
++                [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $ID_cours ]
+             );
+-            if (!is_null($datat))
++            $nombre1 = count($datat);
++			$ajout = 0+$datat['Note'];
++			if (($nombre1==1) and ($ajout==0)){$nombre1 =0;}
++            if ($nombre1>0)
+             {
+                 $ajout = $datat['Note'];
+                 $raison = $datas['Nom_Cours'];
+             }
+         }
+-        if (is_null($datas))
++        if ($nombre1==0)
+         {
+              if ($_SESSION["masters_int"]<>1) { 
+             echo("<tr><td colspan=9  bgcolor='$coulmoyenne' align=right >&nbsp;<b>Moyenne du module: ".formate_note($moyenne1)." $comp</b></td></tr>");
+@@ -139,7 +153,7 @@ function ecrit_moyenne_session($note,$nbnote,$Niveau_eleve,$ID_session)
+     global $session2;
+     global $session3;
+     global $coulmoyenne;
+-    global $VarIDEtudiant;
++    global $$VarIDEtudiant;
+     global $classe;
+     global $nomsession;
+ 
+@@ -160,20 +174,21 @@ function ecrit_moyenne_session($note,$nbnote,$Niveau_eleve,$ID_session)
+         // va chercher s'il existe des ajouts au module
+         //echo($StrReqs."<br>");
+         $datas = No2_SQLQuery::execute(
+-            "SELECT * from `crea_ajout` where ID_Classe =:classe and  ID_module =-1 and- session = :ID_session LIMIT 1",
++            "SELECT * from `crea_ajout` where ID_Classe =:classe and  ID_module =-1 and←- session = :ID_session LIMIT 1",
+             [ ':classe' => $classe, ':ID_session' => $ID_session ]
+         );
+         $nombre1 =0;
+-        if (!is_null($datas))
++        $nombre = count($datas);
++        if ($nombre>0)
+         {
+             $ID_Cours = $datas['ref'];
+             $datat = No2_SQLQuery::execute(
+                 "select * from `crea_note_ajout` where ID_eleve =:VarIDEtudiant and ID_cours =:ID_Cours and Note<>0 LIMIT 1",
+                 [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_Cours' => $ID_Cours ]
+             );
+-            if (!is_null($datat))
++            $nombre1 = count($datat);
++            if ($nombre1>0)
+             {
+-                $nombre1 = 1;
+                 $ajout = $datat['Note'];
+                 $raison = $datas['Nom_Cours'];
+             }
+@@ -192,7 +207,7 @@ function ecrit_moyenne_session($note,$nbnote,$Niveau_eleve,$ID_session)
+ 
+         if ($session1==0){$session1=$moyenne1;} else {$session2=$moyenne1; }
+     }
+-    return isset($moyenne1) ? $moyenne1 : null;
++    return $moyenne1;
+ }
+ 
+ function ecrit_moyenne_finale($note,$nbnote,$Niveau_eleve) 
+@@ -207,13 +222,22 @@ function ecrit_moyenne_finale($note,$nbnote,$Niveau_eleve)
+ 
+         echo("<tr><td colspan=9  bgcolor='$coulmoyenne' align=right >&nbsp;<span class='rouge'><b>Moyenne générale : ".formate_note($moyenne1)." $comp</b></span></td></tr>");
+     }
+-    return isset($moyenne1) ? $moyenne1 : null;
++    return $moyenne1;
+ }
+ 
+ 
+-    $resume = GET_Nombre('resume', 0);
++    $resume = $_GET['resume']; 
++    if (empty($resume)) 
++    {
++        $resume = 0;
++    }
+ 
+-    $VarIDEtudiant = GET_Nombre('ID', $id_eleve);
++    $VarIDEtudiant = $_GET['ID']; 
++    if (empty($VarIDEtudiant)) 
++    {
++        $VarIDEtudiant =  $id_eleve;
++    }
++    
+ 
+     $data = No2_SQLQuery::execute(
+         "SELECT * FROM  `users` where ref=:ref LIMIT 1",
+@@ -224,6 +248,7 @@ function ecrit_moyenne_finale($note,$nbnote,$Niveau_eleve)
+     $VarClasse                = $data["Classe"];
+     $VarAncienne_Classe        = $data["Ancienne_Classe"];
+ 
++
+     $data = No2_SQLQuery::execute(
+         "SELECT * FROM  `crea_classe` where ref=:ref LIMIT 1",
+         [ ':ref' => $classe ]
+@@ -288,11 +313,13 @@ function examen($groupe,$Classe,$an)
+ ?>
+ 
+ 
+-<?php function bulletin($classe,$nom_classe,$session) {
+-        global $db_link;
++<?php function bulletin($classe,$nom_classe,$session) { ?>
++<?php         global $db_link; 
+         global $VarIDEtudiant;
+         global $resume;
+-        global $Niveau_eleve;
++    //global $Niveau_eleve; 
++        
++        
+     $data = No2_SQLQuery::execute(
+         "SELECT * FROM  `crea_classe` where ref=:ref LIMIT 1",
+         [ ':ref' => $classe ]
+@@ -300,14 +327,16 @@ function examen($groupe,$Classe,$an)
+     $nom_classe     = $data['nom_classe'];
+     $nb_annee = $data['nb_annee'];
+     $masters= $data['masters'];
+-    $DateDebut = format_date3(POST_Chaine('DateDebut'));
+-    $DateSession2 = format_date3(POST_Chaine('DateSession2'));
+-    $DateDebut3 = format_date3(POST_Chaine('DateDebut3'));
++    $DateDebut = format_date3($_POST['DateDebut']);
++    $DateSession2 = format_date3($_POST['DateSession2']);
++    $DateDebut3 = format_date3($_POST['DateDebut3']);
+     $nomsession ="";
+     if ($nb_annee==1){$nomsession =" Période ";}
+     if ($nb_annee==2){$nomsession =" Session ";}
+     if ($nb_annee==3){$nomsession =" Année ";}
+      if ($_SESSION["masters_int"]==1) { $nomsession =" Master ";}
++        
++        
+ ?>
+ <table border='0'cellpadding='2' cellspacing='1'  bgcolor='#999999'> 
+ <?php if ($resume==0){  ?>
+@@ -332,6 +361,237 @@ function examen($groupe,$Classe,$an)
+   </tr>
+ <?php } ?>
+ <?php
++
++    $rs=0; // memorise session
++    $rm =0; // memorise module
++    $notes_module=0; // notes de la module
++    $nombre_note_module=0; // nombre de notes dans la module
++    $session1 =0;
++    $session2=0;
++    $session3=0;
++    $toutes_notes=0; // notes  
++    $nombre_toutes_notes=0; // nombre de notes  
++    $notes_session=0; // notes de la cession
++    $nombre_notes_session=0; // nombre de notes dans la session
++
++
++
++//------------------------------------------------------------------------------------
++// chercher s'il y a des notes de specialisation pour lui
++$nombre_speci=0;
++	
++	
++	
++	//$StrReq = "SELECT * FROM `crea_specialisation_note` WHERE ID_eleve=$VarIDEtudiant";
++	$data = No2_SQLQuery::execute(
++		"select distinct(specialisation) from  `crea_specialisation_note` where ID_eleve =:VarIDEtudiant",
++		[ ':VarIDEtudiant' => $VarIDEtudiant ]
++	);
++
++	$nombre_speci = count($data);
++	if ($nombre_speci>0)
++	{  
++		$ID_specialisation = $data['specialisation'];
++
++		//$StrReq = "SELECT * FROM `crea_specialisation` WHERE ref=$ID_specialisation and annee=$session";
++		//$data = No2_SQLQuery::execute($StrReq);
++
++		$data = No2_SQLQuery::execute(
++		"select * from  `crea_specialisation` where ref =:ID_specialisation limit 1" ,
++		[ ':ID_specialisation' => $ID_specialisation ]
++	);
++		
++		$nombre_speci = count($data)+0;
++	}
++if ($nombre_speci>0)
++{  
++	$Nom_specialisation = $data['specialisation'];
++	echo("<tr><td  colspan=8><b>Spécialisation : $Nom_specialisation</b></td></tr>");
++	
++	
++	//$StrReq = "SELECT * from  `crea_epreuve_specialisation` where specialisation=$ID_specialisation and parent=0";
++    $datas = No2_SQLQuery::execute(
++        "SELECT * from `crea_epreuve_specialisation` where ID_Classe =:classe and parent=0 ",
++        [ ':classe' => $classe, ':f_session' => $f_session ],
++        [ 'return_as_collection' => true ]
++    );
++    $nombre_groupe = count($datas);
++
++	$Moyenne_examen =0;
++	$Total_examen =0;
++	if ($nombre_groupe>0)
++	{ ?>
++		<tr><td colspan=6  bgcolor='#ffffff'>Points ECTS</td>
++        
++<?php		
++		$i =0;
++        foreach ($datas as $data)
++        {
++			if ($i==0)
++			{
++				echo("<td bgcolor='#ffffff' colspan=4>");
++				if ($data['ECTS']>0) { 
++					echo("ECTS ".stripslashes($data['ECTS']));
++				}
++				echo("</td>");
++				echo("</tr>");
++				$i=1;
++			}
++			?>
++  			<tr align="left" valign="top" bgcolor="#999999">
++				<td colspan=7>&nbsp;&nbsp;&nbsp;<?php echo(stripslashes($data['Nom_Cours']));?> &nbsp;(<?php echo($data['Coefficient']);?> %)</td>
++                <td nowrap align="right">
++				<?php 
++				if ($data['ECTS']>0) { 
++					//echo("ECTS ".stripslashes($data['ECTS']));
++				}
++				?>
++                </td> 
++			  </tr>
++			<?php              
++				$Moyenne_groupe =0;
++				$total_groupe = 0;
++                //$StrReq6 = "SELECT * FROM  `crea_epreuve_specialisation` where parent=".$data['ref']." order by Date_epreuve,Nom_Cours, ref desc ";
++				$datas6 = No2_SQLQuery::execute(
++                    "SELECT * FROM  `crea_epreuve_specialisation` where parent=:parent order by Date_epreuve,Nom_Cours, ref desc ",
++                    [ ':parent' => $data['ref'] ],
++                    [ 'return_as_collection' => true ]
++                );
++				foreach ($datas6 as $data6)
++                {
++            ?>
++                  <tr align="left" valign="top" bgcolor='#ffffff'>
++                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo(stripslashes($data6['Nom_Cours']));?>&nbsp;</td>
++                    <td>&nbsp;<?php echo(stripslashes(format_date2($data6['Date_epreuve'])));?>&nbsp;</td>
++                    <td>
++<?php                    
++              	//$responsable= Aff_intervenant($data6['Responsable']);
++				//die($data6['Responsable']);
++				if ($data6['id_intervenant1']>0)
++				{
++				//	$StrReq11="SELECT * FROM  `crea_eleve` where ref=".$data6['id_intervenant1'];
++					$datas11 = No2_SQLQuery::execute(
++						"SELECT * FROM  `crea_eleve` where ref=:id_intervenant1",
++						[ ':id_intervenant1' => $data6['id_intervenant1'] ]
++					);
++					if (strlen($responsable)<2) { $responsable= " ";}
++					$responsable .= " ";
++					$responsable .= Aff_intervenant($data11["nom_eleve"]);
++					$responsable .= " ";
++					$responsable .= Aff_intervenant($data11["prenom_eleve"]);
++				}
++                    
++                    
++ ?>                   
++                    </td>
++                    <td><?
++                        $data7 = No2_SQLQuery::execute(
++                            "select * from  `crea_specialisation_note` where ID_eleve =:VarIDEtudiant and ID_cours =:ID_cours LIMIT 1",
++                            [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $data6['ref'] ]
++                        );
++                        $nombre7 = count($data7);
++						$Commentaire = $data7['Commentaire'];
++					
++		$Commentaire = $data7['Commentaire'];
++		$strEvaluation= $Commentaire;
++		if ((strlen($Commentaire)>50) or (strrpos( $Commentaire,"<br>")>0) or  (strrpos( $Commentaire ,"<br />" )>0)) 
++		{
++			$strEvaluation = str_replace ("<br />" , "<br>" , $strEvaluation );
++			$a = strrpos($strEvaluation,"<br>",0 );
++			while ($a<>false)
++			{
++				$a = strrpos($strEvaluation,"<br>",0 );
++				if ($a>0) 
++				{
++					$strEvaluation = substr($strEvaluation,0,$a);
++				}
++			}
++			$strEvaluation = substr($strEvaluation,0,50)."...";
++			$strEvaluation = "
++			<a href=\"#\" style=\"color:#FF0000\" >$strEvaluation
++			<span>$Commentaire</span>
++			</a>";
++		}
++		echo($strEvaluation);
++?>					
++</td>
++                    <td></td>
++                    <td>&nbsp;<?php echo(stripslashes($data6['Coefficient']));?>%&nbsp;</td>
++                    <td colspan= 2 align=right>
++ 					<?
++						$Note ="";
++                        $data7 = No2_SQLQuery::execute(
++                            "select count(*) as nombre7 from  `crea_specialisation_note` where ID_eleve =:VarIDEtudiant and ID_cours =:ID_cours LIMIT 1",
++                            [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $data6['ref'] ]
++                        );
++                        $nombre7 = $data7["nombre7"];
++						if ($nombre7!=0)
++						{ 
++							$data7 = No2_SQLQuery::execute(
++								"select * from  `crea_specialisation_note` where ID_eleve =:VarIDEtudiant and ID_cours =:ID_cours LIMIT 1",
++								[ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $data6['ref'] ]
++							);
++
++							$Commentaire = $data7['Commentaire'];
++							$Note = $data7['Note'];
++							if ($Note==0){ $Note ="";}
++						}
++						echo($Note) ; // note de l'examen
++						//echo(">".$Note * $data6['Coefficient']/100);
++						if ($Note>"")
++						{
++							$Moyenne_groupe = $Moyenne_groupe+($Note * $data6['Coefficient']/100) ;
++							//$total_groupe = $total_groupe+$data6['Coefficient'];
++						}
++           	}  ?>
++  			<tr align="left" valign="top" bgcolor="#cccccc">
++				<td colspan=7>&nbsp;&nbsp;&nbsp;Moyenne <?php echo(stripslashes($data['Nom_Cours']));?> &nbsp;</td>
++				<td align="right">&nbsp;<?
++					//if ($total_groupe<>0){$Moyenne_groupe = $Moyenne_groupe/$total_groupe;}
++					$m = $Moyenne_groupe;
++					//$Moyenne_groupe = narrondi_2c($Moyenne_groupe);
++					$Moyenne_groupe = arrondi($Moyenne_groupe);
++					if ($Moyenne_groupe>0)
++					{
++						$Moyenne_examen = $Moyenne_examen+($Moyenne_groupe * $data['Coefficient']) ;
++						$Total_examen 	= 	$Total_examen+$data['Coefficient'];
++					}
++					if ($Moyenne_groupe>0) {echo($Moyenne_groupe);}; 
++					//if ($_SESSION["Niveau_eleve"]>0) {echo("(".$m.")");} ?> 
++                  </td>
++			  </tr>
++            
++			<?
++		}
++	} // nombre groupe
++	//die("111"); 
++ 	if ($Total_examen>0) 
++	{ ?>   
++    <tr align="left" valign="top" bgcolor="#cccccc">
++        <td colspan=7>&nbsp;&nbsp;&nbsp;<b>Moyenne spécialisation</b> &nbsp;</td>
++        <td align="right">&nbsp;<?
++			//echo($Moyenne_examen);
++			$Moyenne_examen = $Moyenne_examen/$Total_examen;
++			$Moyenne_examen = arrondi($Moyenne_examen);
++			if ($Moyenne_examen>0) {echo("<b>".$Moyenne_examen."</b>");} ?>
++        </td>
++    </tr>
++ <?php } 
++	$notes_session = $notes_session+$Moyenne_examen; // notes de la cession
++	$nombre_note_session=$nombre_note_session+1; // nombre de notes dans la session
++ 
++ 
++ 
++ ?>     
++ <?php } //examens visibles ?>
++<?
++//-------------------------------------------------------------
++
++
++
++
++
++
+     $aArgs = [ ':classe' => $classe, ':session' => $session ];
+     $StrReq = "SELECT * FROM  `crea_cours` where ID_Classe =:classe and affiche=1 and session=:session order by session,ID_module,Date_epreuve, ref desc ";
+ if ($masters==1)
+@@ -344,42 +604,31 @@ if ($masters==1)
+ 
+ $datas = No2_SQLQuery::execute($StrReq, $aArgs, [ 'return_as_collection' => true ]);
+     
+-    $rs=0; // memorise session
+-    $rm =0; // memorise module
+-    $notes_module=0; // notes de la module
+-    $nombre_note_module=0; // nombre de notes dans la module
+-    $session1 =0;
+-    $session2=0;
+-    $session3=0;
+-    $toutes_notes=0; // notes  
+-    $nombre_toutes_notes=0; // nombre de notes  
+-    $notes_session=0; // notes de la cession
+-    $nombre_note_session=0; // nombre de notes dans la session
+     foreach ($datas as $data)
+     {
+         // changement de module
+         if (($data['ID_module']<>$rm) or ($data['session']<>$rs)) // changemant de module
+         {
+             $moyenne = ecrit_moyenne_module($rm,$notes_module,$nombre_note_module,$Niveau_eleve,$rs);
+-
++    
+             if ($moyenne>0)
+             {
+                 $notes_session = $notes_session+$moyenne; // notes de la cession
+                 $nombre_note_session=$nombre_note_session+1; // nombre de notes dans la session
+             }
+-
++    
+             if ($data['session']<>$rs) // changement de session
+             {
+                 ecrit_moyenne_session($notes_session,$nombre_note_session,$Niveau_eleve,$rs) ;
+                 $rs=$data['session'];
+-                echo('<tr><td colspan=8 bgcolor="' . (isset($coulsession) ? $coulsession : '') . '">&nbsp;<b><span class="blanc">' . $nomsession. ' ' . $rs . '</span></b></td></tr>');
++                echo("<tr><td colspan=8 bgcolor='$coulsession'>&nbsp;<b><span class='blanc'>$nomsession $rs</span></b></td></tr>");
+                 $notes_session=0; // notes de la cession
+                 $nombre_note_session=0; // nombre de notes dans la session
+             }
+-
++            
+             $toutes_notes = $toutes_notes+$moyenne; // notes de la cession
+             $nombre_toutes_notes=$nombre_toutes_notes+1; // nombre de notes dans la session
+-
++            
+             $notes_module=0; // notes de la cession
+             $nombre_note_module=0; // nombre de notes dans la session
+             $rm=$data['ID_module'];
+@@ -390,8 +639,8 @@ $datas = No2_SQLQuery::execute($StrReq, $aArgs, [ 'return_as_collection' => true
+             );
+             foreach ($datas2 as $data2)
+             {
+-                echo('<tr><td colspan=7  bgcolor="' . (isset($coulmodule) ? $coulmodule : '') . '">&nbsp;<b>' . $data2['nom_module'] . '</b></td><td nowrap>' . donne_ects($classe,$data['ID_module'],$data['session']) . '</td></tr>');
+-            }
++            echo("<tr><td colspan=7  bgcolor='$coulmodule'>&nbsp;<b>".$data2['nom_module']."</b></td><td nowrap>".donne_ects($classe,$data['ID_module'],$data['session'])."</td></tr>");
++            } 
+         } // si changement de module
+ ?>
+         <?php if ($resume==0){  ?>
+@@ -512,8 +761,7 @@ $datas = No2_SQLQuery::execute($StrReq, $aArgs, [ 'return_as_collection' => true
+ }  
+ }
+ // operations de la fin 
+-    $f_session = !empty($data['session']) ? $data['session']+0 : null;
+-    $f_module = !empty($f_module) ? $f_module : null;
++    $f_session = $data['session']+0;
+     $f_session = $session;
+ 
+         $moyenne = ecrit_moyenne_module($f_module,$notes_module,$nombre_note_module,$Niveau_eleve,$f_session);
+@@ -529,16 +777,19 @@ $datas = No2_SQLQuery::execute($StrReq, $aArgs, [ 'return_as_collection' => true
+             "SELECT * FROM  `crea_repartition` where ID_Classe =:classe and session=:f_session LIMIT 1",
+             [ ':classe' => $classe, ':f_session' => $f_session ]
+         );
+-        if (is_null($data5)) {
++        $nombre = count($data5);
++        if ($nombre ==0)
++        { 
+             $repartition_module = 100;
+             $repartition_examen = 100;
+             $repartition_travail = 100;
+          } else {
+             $repartition_module = $data5['module'];
+             $repartition_examen = $data5['examen'];
+-            $repartition_travail = !empty($data5['diplome']) ? $data5['diplome'] : null; // FIXME
++            $repartition_travail = $data5['diplome'];
++        
+         }
+-
++        
+         // moyenne de l'année
+         $moyenne_anne = ecrit_moyenne_session($notes_session,$nombre_note_session,$Niveau_eleve,$f_session) ;
+         if ($session2>0)
+@@ -614,9 +865,10 @@ if ($affiche_examens==1)
+         [ ':classe' => $classe, ':f_session' => $f_session ],
+         [ 'return_as_collection' => true ]
+     );
++    $nombre_groupe = count($datas);
+     $Moyenne_examen =0;
+     $Total_examen =0;
+-    if (!is_null($datas))
++    if ($nombre_groupe>0)
+     { ?>
+         <tr><td colspan=9  bgcolor='#fffff'>&nbsp;</td></tr>
+         <tr><td colspan=6  bgcolor='#ffffff'>Examen</td>
+@@ -672,8 +924,9 @@ if ($affiche_examens==1)
+                             "select * from  `crea_note_examen` where ID_eleve =$VarIDEtudiant and ID_cours =:ID_cours LIMIT 1",
+                             [ ':VarIDEtudiant' => $VarIDEtudiant, ':ID_cours' => $data6['ref'] ]
+                         );
+-                        if (!is_null($data7))
+-                        {
++                        $nombre7 = count($data7);
++                        if ($nombre7!=0)
++                        { 
+                             $Commentaire = $data7['Commentaire'];
+                             $Note = $data7['Note'];
+                             if ($Note==0){ $Note ="";}
+@@ -716,7 +969,7 @@ if ($affiche_examens==1)
+       </tr>
+  <?php } ?>     
+     <tr><td colspan=8  bgcolor='#fffff'>&nbsp;</td></tr>
+-    <tr><td colspan=7 bgcolor="<?= isset($coulsession) ? $coulsession : '' ?>">&nbsp;<b><span class='blanc'>Moyenne Finale</span></b></td></tr>
++    <tr><td colspan=7 bgcolor='<?php echo($coulsession);?>'>&nbsp;<b><span class='blanc'>Moyenne Finale</span></b></td></tr>
+     <tr align="left" valign="top" bgcolor="#cccccc">
+         <td colspan=6 nowrap>&nbsp;&nbsp;&nbsp;<b>Moyenne de l'année</b> &nbsp;</td> 
+         <td nowrap="nowrap">&nbsp;&nbsp;&nbsp;<?php echo($repartition_module); ?> %&nbsp;</td> 
+@@ -727,7 +980,8 @@ if ($affiche_examens==1)
+                 "SELECT * FROM  `crea_ajout_an` where ID_eleve=:VarIDEtudiant and ID_classe=:classe and session=:f_session LIMIT 1",
+                 [ ':VarIDEtudiant' => $VarIDEtudiant, ':classe' => $classe, ':f_session' => $f_session ]
+             );
+-        if (!is_null($data)) // si fiche n'existe pas
++        $nombre = count($data);
++        if ($nombre >0) // si fiche n'existe pas
+         {
+             $Nom_Cours         = $data['Nom_Cours'];
+             $Note     = $data['Note'];
+@@ -745,7 +999,7 @@ if ($affiche_examens==1)
+ <?php
+         }
+ ?>
+-<?php if (!empty($Moyenne_examen) && $Moyenne_examen>0) { ?>
++<?php if ($Moyenne_examen>0) { ?>
+     <tr align="left" valign="top" bgcolor="#cccccc">
+         <td colspan=6>&nbsp;&nbsp;&nbsp;<b>Moyenne examens</b> &nbsp;</td>
+         <td>&nbsp;&nbsp;&nbsp;<?php echo($repartition_examen); ?> %&nbsp;</td> 
+@@ -759,7 +1013,7 @@ if ($affiche_examens==1)
+         <td colspan=7>&nbsp;&nbsp;&nbsp;<b>Moyenne finale</b> &nbsp;</td>
+         <?php
+ 
+-        if (!empty($Moyenne_examen) && $Moyenne_examen>0){
++        if ($Moyenne_examen>0){
+             $moyenne_finale = ($Moyenne_examen*$repartition_examen) + ($moyenne_anne*$repartition_module);
+             $moyenne_finale =  $moyenne_finale / ($repartition_examen+$repartition_module);
+         } else {
+@@ -775,9 +1029,10 @@ if ($affiche_examens==1)
+             "select sum(Points) as totECTS from  `crea_ects` where ID_Classe =:classe and ID_session=:f_session LIMIT 1",
+             [ ':classe' => $classe, ':f_session' => $f_session ]
+         );
++    $nombre = count($data3);
+     $totECTS  =0; 
+-    if (!is_null($data3))
+-    {
++    if ($nombre!=0)
++    { 
+         $totECTS  = $data3['totECTS'];
+     }
+     
+@@ -785,8 +1040,9 @@ if ($affiche_examens==1)
+         "SELECT * from  `crea_examen` where ID_Classe =:classe and parent=0 and session = :f_session LIMIT 1",
+         [ ':classe' => $classe, ':f_session' => $f_session ]
+     );
+-    if (!is_null($data))
+-    {
++    $nombre_groupe = count($data);
++    if ($nombre_groupe>0)
++    { 
+         $totECTS = $totECTS+$data['ECTS'];
+     }
+     
+@@ -825,7 +1081,7 @@ a:hover span, a:focus span{
+ <?php if ($a==1) { bulletin($VarClasse,$nom_classe,1);} ?>
+ <?php if ($a==2) { bulletin($VarClasse,$nom_classe,2);} ?>
+ <?php if ($a==3) { bulletin($VarClasse,$nom_classe,3);} ?>
+-<?php if ($Niveau_eleve > 1) { ?><br>
++<?php if ($sNiveau_eleve>1) { ?><br>
+ <a href="/crea_eleve/liste.php?classe=<?php echo($classe); ?>">Retour</a>
+ <?php }?>
+ <?php ((is_null($___mysqli_res = mysqli_close($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res); ?>

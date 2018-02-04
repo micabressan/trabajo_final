@@ -1,0 +1,40 @@
+class exports.MainRouter extends Backbone.Router
+	routes :
+		"" : "home"
+		"/path/:id" : "getPath"
+
+	home: ->
+		app.setup()
+		$('body').html app.views.home.render().el
+
+	getPath: (_id) ->
+		app.setup()
+		if _id?
+			app.models.path.id = _id
+			@navigate('/path/'+_id, false) 
+			app.models.path.fetch()
+		$('body').html app.views.home.render().el
+
+
+//---------
+
+
+class exports.HomeView extends Backbone.View
+	id: 'home-view'
+
+	events:
+		'click .addPage' : 'addPage'
+		'click .delPage' : 'delPage'
+		'click .moveLeft' : 'moveLeft'
+		'click .moveRight' : 'moveRight'
+		'click .savePath' : 'savePath'
+		'click .clonePath' : 'clonePath'
+		'click .deletePath' : 'deletePath'
+
+	initialize: ->
+
+	render: ->
+		console.log('rendering')
+		$(@el).html homeTemplate()
+		@$('#pathArea').html app.views.path.render().el
+		@

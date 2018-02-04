@@ -1,0 +1,46 @@
+
+--- util/crossgcc/buildgcc.orig	2015-08-14 09:17:37.000000000 +0000
++++ util/crossgcc/buildgcc	2015-08-14 09:17:27.000000000 +0000
+@@ -334,6 +334,7 @@ build_GMP() {
+ 		|| touch .failed
+ 	$MAKE $JOBS || touch .failed
+ 	$MAKE install DESTDIR=$DESTDIR || touch .failed
++	GMP_DIR=$DESTDIR$TARGETDIR
+ 
+ 	normalize_dirs
+ 
+@@ -351,6 +352,7 @@ build_MPFR() {
+ 		touch .failed
+ 	$MAKE $JOBS || touch .failed
+ 	$MAKE install DESTDIR=$DESTDIR || touch .failed
++	MPFR_DIR=$DESTDIR$TARGETDIR
+ 
+ 	normalize_dirs
+ 
+@@ -367,6 +369,7 @@ build_MPC() {
+ 		touch .failed
+ 	$MAKE $JOBS || touch .failed
+ 	$MAKE install DESTDIR=$DESTDIR || touch .failed
++	MPC_DIR=$DESTDIR$TARGETDIR
+ 
+ 	normalize_dirs
+ }
+@@ -389,6 +392,7 @@ build_BINUTILS() {
+ 		--target=${TARGETARCH} --enable-targets=${TARGETARCH}${ADDITIONALTARGET} \
+ 		--disable-werror --disable-nls --enable-lto --enable-gold \
+ 		--enable-plugins --enable-multilibs CFLAGS="$HOSTCFLAGS" || touch .failed
++	BINUTILS_DIR=$DESTDIR$TARGETDIR
+ 	$MAKE $JOBS || touch .failed
+ 	$MAKE install DESTDIR=$DESTDIR || touch .failed
+ }
+@@ -408,8 +412,8 @@ build_GCC() {
+ 		--disable-libssp --disable-bootstrap --disable-nls \
+ 		--disable-libquadmath --without-headers \
+ 		${GCC_OPTIONS} --enable-languages="c" \
+-		--with-gmp=$DESTDIR$TARGETDIR --with-mpfr=$DESTDIR$TARGETDIR \
+-		--with-mpc=$DESTDIR$TARGETDIR --with-libelf=$DESTDIR$TARGETDIR \
++		--with-gmp=$GMP_DIR --with-mpfr=$MPFR_DIR \
++		--with-mpc=$MPC_DIR --with-libelf=$DESTDIR$TARGETDIR \
+ 		--with-pkgversion="coreboot toolchain v$CROSSGCC_VERSION $CROSSGCC_DATE" \
+ 		|| touch .failed
+ 	$MAKE $JOBS CFLAGS_FOR_BUILD="$HOSTCFLAGS" all-gcc || touch .failed

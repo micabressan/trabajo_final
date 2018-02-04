@@ -1,0 +1,10 @@
+fn main() {
+    let mut v = 0;
+    let mut adj = move || {
+        v += 1
+    };
+    while v < 3 {
+        adj();
+        println!("{}", v)
+    }
+}

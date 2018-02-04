@@ -1,0 +1,32 @@
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+import pandas as pd
+import numpy as np
+
+with pd.HDFStore('data_new.h5') as store:
+	y = store['y']
+	x = store['x']
+	id = store['ids']
+	
+model = Sequential()
+
+model.add(Dense(256, activation='relu', input_dim=x.shape[1]))
+model.add(Dropout(0.2))
+
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(1))
+
+model.compile(optimizer='adam', loss='mse', metrics=['acc', 'mae'])
+
+model.fit(x, y, epochs=10000, verbose=1, batch_size=128)
+
+model.save('model_new.h5')

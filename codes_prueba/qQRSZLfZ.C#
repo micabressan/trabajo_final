@@ -1,0 +1,17 @@
+using UnityEngine;
+using System.Collections;
+
+public class bulletScript : MonoBehaviour {
+	// 1- переменная дизайнера
+	// Повереждение
+	public int damage = 1;
+	//Наносит ли вред игроку
+	public bool isEnemyShot = false;
+	// Use this for initialization
+	public float bulletSpeed = 6;
+	void Start () {
+		GetComponent<Rigidbody2D>().AddForce(new Vector2(1000*bulletSpeed, 0));
+		Destroy (gameObject, 20);
+	}
+	
+}

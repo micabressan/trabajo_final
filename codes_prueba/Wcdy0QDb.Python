@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  graph_python.py
+#  
+#  Copyright 2017 akbida <akbida@asus-laptop-02>
+
+
+
+
+
+def predecesseur(G,S) :
+    pred = []
+    for key,values in graph.items():
+        for val in values :
+            if val == S :
+                pred.append(key)
+    return pred
+
+def sucesseur(G,S) :
+    return graph[S]
+
+def fonctionOrdinale(G):
+	i = 1
+	numerotation = []
+	sommetNumerotes = []
+	sommets = G.keys()
+	j = 0
+# Inialisation on cherche le premier sommet sans prédecesseurs
+	while len(predecesseur(G,sommets[j]))>0 and j < len(sommets):
+			j = j+1
+	depart = sommets[j]
+	numerotation.append([depart,i])
+	sommetNumerotes.append(depart)
+	i = i+1
+	
+	
+#Tant que tous les sommets ne sont pas numérotés on continue
+	while len(sommetNumerotes)<len(sommets) and j <= len(sommets):
+		
+		
+		
+		
+		# on examine et numérote ses sucesseurs : si il n'ont pas de prédecesseurs ou
+		# si tous leurs prédecesseurs déjà numérotés
+		for S in sucesseur(G,depart) :
+			if  not(S in sommetNumerotes)  :  
+				#print "on examine ", S," dont les predecesseurs sont  ",pred
+				isIn = True
+				for T in predecesseur(G,S) :
+					isIn = isIn and (T in sommetNumerotes)
+				#Si tous les predesseurs de S sont numérotés on le numerote
+				if isIn :
+					numerotation.append([S,i])
+					sommetNumerotes.append(S)
+					i = i +1
+		# on va chercher un nouveau point de départ
+		j = 0
+		predecesseurtousmarque = False
+		while j < len(sommets)  and predecesseurtousmarque == False :
+			if not(sommets[j] in sommetNumerotes):
+				predecesseurtousmarque = True
+				pred_de_sommetJ = predecesseur(G,sommets[j])
+				for T in pred_de_sommetJ :
+					predecesseurtousmarque = predecesseurtousmarque and (T in sommetNumerotes)
+				if predecesseurtousmarque :
+						#print "j ajoute le sommet par bactracking ",sommets[j]
+						
+						numerotation.append([sommets[j],i])
+						sommetNumerotes.append(sommets[j])
+						i=i+1
+						print numerotation
+			j=j+1 
+		
+		depart = sommets[j-1]
+
+
+	return numerotation
+     
+
+graph = {
+            'A': ['B'],
+            'B': ['D','E','F'],
+            'C': ['A','B','D'],
+            'D': ['E'],
+            'E':[],
+            'F':['E']
+}
+
+
+fonctionOrdinale(graph)

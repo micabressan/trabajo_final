@@ -1,0 +1,5 @@
+fn Vegas(mut a: i32, mut b: i32) {
+    let temp = a;
+    a = b;
+    b = temp;
+}

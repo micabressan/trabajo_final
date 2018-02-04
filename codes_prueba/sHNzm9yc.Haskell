@@ -1,0 +1,63 @@
+import Data.Map hiding (map, null, filter)
+
+main = do
+    map <- readMap
+    print $ calculate map
+
+readMap = do
+    content <- readFile "table.txt"
+    return $ toMap $ toMatrix content
+
+calculate map = max' $ newWave map $ newWave map $ newWave map $ toPaths map
+    
+unit  = Path [] 0
+max'  paths = foldr max'' unit paths
+max'' path1 path2 = if path1 > path2 then path1 else path2
+
+-- Initialization
+
+count :: [a] -> Int -> [(Int,a)]
+count []     _ = []
+count (x:xs) i = (i, x) : count xs (i+1)
+
+toMatrix :: String -> [[Int]]
+toMatrix text = map (toInts.words) $ lines text where
+    toInts ss = map toInt ss where
+        toInt s = read s :: Int
+
+toMap :: [[Int]] -> Map (Int,Int) Int
+toMap      matrix = fromList $ concat $ map toRow $ count matrix 1 where
+    toRow (j,row) = map (toCell j) $ count row 1 where
+        toCell j (i,num) = ((i,j), num)
+
+-- Paths construction
+
+diag1 = ( 1, 1)
+diag2 = (-1, 1)
+right = ( 1, 0)
+down  = ( 0, 1)
+ways  = [diag1, diag2, right, down]
+
+instance (Num a, Num b) => Num (a,b) where
+    (a,b) + (x,y) = (a + x, b + y)
+    (a,b) - (x,y) = (a - x, b - y)
+--    (a,b) * (x,y)
+  --  fromInteger i = (i,i)
+
+data Path = Path {points::[(Int,Int)], production::Int} deriving Show
+instance Eq Path where
+    (Path points1 product1) == (Path points2 product2) = product1 == product2
+instance Ord Path where
+    (Path points1 product1) >  (Path points2 product2) = product1 >  product2
+
+appendPath :: Path -> Map (Int,Int) Int -> [Path]
+appendPath (Path [point] p) map = [Path (new:point:[]) prod | way <- ways, let new = point + way, let prod = p * (map ! new),member new map]
+appendPath (Path (x:y:t) p) map = if member new map then [Path (new:x:y:t) prod] else [] where
+                                  prod = p * (map ! new)
+                                  new  = x + (x - y)
+
+toPaths :: Map (Int,Int) Int -> [Path]
+toPaths points = map (\(point,value) -> Path [point] value) $ toList points
+
+newWave :: Map (Int,Int) Int -> [Path] -> [Path]
+newWave points paths = concat $ map ((flip appendPath) points) paths

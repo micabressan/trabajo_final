@@ -1,0 +1,41 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+namespace Siege
+{
+    [System.Serializable]
+    public class TeamSummaryView
+    {
+        public Text roundTimer;
+        public Text roundCount;
+    }
+
+    [System.Serializable]
+    public class TeamSummaryData
+    {
+        public int roundTimer;
+        public int roundCount;
+    }
+
+    public class TeamMembersViewController : MonoBehaviour
+    {
+        public TeamViewController team_1;
+        public TeamViewController team_2;
+
+        public TeamSummaryView team_summary_view;
+        public TeamSummaryData team_summary_data;
+
+        public int RoundTimer
+        {
+            get;
+            set;
+        }
+
+        public int RoundCount
+        {
+            get;
+            set;
+        }
+    }
+}

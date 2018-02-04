@@ -1,0 +1,8 @@
+<connectionStrings>
+        <add name="DefaultConnection" connectionString="server=mysql9.unoeuro.com; userid=madsskipper_dk;password=dIfL2008;pooling=yes;Database=madsskipper_dk_db" providerName="MySql.Data.MySqlClient"/>
+    </connectionStrings>
+    <system.data>
+        <DbProviderFactories>
+            <add name="MySql.Data.MySqlClient" invariant="MySql.Data.MySqlClient" description=".Net Framework Data Provider for MySQL" type="MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data, Version=5.1.54%, Culture=neutral, PublicKeyToken=c5687fc88969c44d"/>
+        </DbProviderFactories>
+    </system.data>

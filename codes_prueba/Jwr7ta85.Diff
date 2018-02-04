@@ -1,0 +1,14 @@
+diff --git a/src/libs/utils/filesearch.cpp b/src/libs/utils/filesearch.cpp
+index 98386de..956002c 100644
+--- a/src/libs/utils/filesearch.cpp
++++ b/src/libs/utils/filesearch.cpp
+@@ -247,7 +247,8 @@ void runFileSearchRegExp(QFutureInterface<FileSearchResultList> &future,
+             int lengthOfLine = line.size();
+             int pos = 0;
+             while ((pos = expression.indexIn(line, pos)) != -1) {
+-                results << FileSearchResult(s, lineNr, line,
++                QString foo = line.mid(1);
++                results << FileSearchResult(s, lineNr, foo,
+                                               pos, expression.matchedLength(),
+                                               expression.capturedTexts());
+                 ++numMatches;

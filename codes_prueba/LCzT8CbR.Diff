@@ -1,0 +1,3379 @@
+diff -Naur xen-9999-bef/.gitignore xen-9999-aft/.gitignore
+--- xen-9999-bef/.gitignore	2015-08-16 08:29:52.832771173 +0300
++++ xen-9999-aft/.gitignore	2015-08-16 08:30:57.832765013 +0300
+@@ -224,9 +224,10 @@
+ xen/arch/x86/asm-offsets.s
+ xen/arch/x86/boot/mkelf32
+ xen/arch/x86/xen.lds
++xen/arch/x86/boot/cmdline.S
+ xen/arch/x86/boot/reloc.S
+-xen/arch/x86/boot/reloc.bin
+-xen/arch/x86/boot/reloc.lnk
++xen/arch/x86/boot/*.bin
++xen/arch/x86/boot/*.lnk
+ xen/arch/x86/efi.lds
+ xen/arch/x86/efi/check.efi
+ xen/arch/x86/efi/disabled
+diff -Naur xen-9999-bef/xen/arch/x86/boot/build32.mk xen-9999-aft/xen/arch/x86/boot/build32.mk
+--- xen-9999-bef/xen/arch/x86/boot/build32.mk	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/build32.mk	2015-08-16 08:32:12.234757961 +0300
+@@ -13,7 +13,7 @@
+ 	sed 's/ /,0x/g' | sed 's/,0x$$//' | sed 's/^[0-9]*,/ .long /') >$@
+ 
+ %.bin: %.lnk
+-	$(OBJCOPY) -O binary $< $@
++	$(OBJCOPY) -O binary -j .text $< $@
+ 
+ %.lnk: %.o
+ 	$(LD) $(LDFLAGS_DIRECT) -N -Ttext 0 -o $@ $<
+@@ -30,6 +30,8 @@
+ 			esac; \
+ 		done
+ 
++cmdline.o: cmdline.c $(CMDLINE_DEPS)
++
+ reloc.o: reloc.c $(RELOC_DEPS)
+ 
+ .PRECIOUS: %.bin %.lnk
+diff -Naur xen-9999-bef/xen/arch/x86/boot/cmdline.c xen-9999-aft/xen/arch/x86/boot/cmdline.c
+--- xen-9999-bef/xen/arch/x86/boot/cmdline.c	1970-01-01 02:00:00.000000000 +0200
++++ xen-9999-aft/xen/arch/x86/boot/cmdline.c	2015-08-16 08:30:57.833765013 +0300
+@@ -0,0 +1,396 @@
++/*
++ * Copyright (c) 2015 Oracle Co.
++ *      Daniel Kiper <daniel.kiper@xxxxxxxxxx>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ * strlen(), strncmp(), strspn() and strcspn() were copied from
++ * Linux kernel source (linux/lib/string.c).
++ *
++ * max() was copied from xen/xen/include/xen/kernel.h.
++ *
++ */
++
++/*
++ * This entry point is entered from xen/arch/x86/boot/head.S with:
++ *   - 0x4(%esp) = &cmdline,
++ *   - 0x8(%esp) = &early_boot_opts.
++ */
++asm (
++    "    .text                         \n"
++    "    .globl _start                 \n"
++    "_start:                           \n"
++    "    jmp  cmdline_parse_early      \n"
++    );
++
++#include "video.h"
++
++#define VESA_WIDTH     0
++#define VESA_HEIGHT    1
++#define VESA_DEPTH     2
++
++#define VESA_SIZE      3
++
++#define NULL   ((void *)0)
++
++#define __cdecl                __attribute__((__cdecl__))
++#define __packed       __attribute__((__packed__))
++#define __text         __attribute__((__section__(".text")))
++#define __used         __attribute__((__used__))
++
++#define max(x,y) ({ \
++        const typeof(x) _x = (x);       \
++        const typeof(y) _y = (y);       \
++        (void) (&_x == &_y);            \
++        _x > _y ? _x : _y; })
++
++#define tolower(c) ((c) | 0x20)
++
++#define strlen_static(s) (sizeof(s) - 1)
++
++typedef unsigned char u8;
++typedef unsigned short u16;
++typedef unsigned int size_t;
++
++#define U16_MAX        ((u16)(~0U))
++
++/*
++ * Keep in sync with trampoline.S:early_boot_opts label!
++ */
++typedef struct __packed {
++    u8 skip_realmode;
++    u8 opt_edd;
++    u8 opt_edid;
++    u16 boot_vid_mode;
++    u16 vesa_size[VESA_SIZE];
++} early_boot_opts_t;
++
++static const char empty_chars[] __text = " \n\r\t";
++
++/**
++ * strlen - Find the length of a string
++ * @s: The string to be sized
++ */
++static size_t strlen(const char *s)
++{
++    const char *sc;
++
++    for ( sc = s; *sc != '\0'; ++sc )
++        /* nothing */;
++    return sc - s;
++}
++
++/**
++ * strncmp - Compare two length-limited strings
++ * @cs: One string
++ * @ct: Another string
++ * @count: The maximum number of bytes to compare
++ */
++static int strncmp(const char *cs, const char *ct, size_t count)
++{
++    unsigned char c1, c2;
++
++    while ( count )
++    {
++        c1 = *cs++;
++        c2 = *ct++;
++        if ( c1 != c2 )
++            return c1 < c2 ? -1 : 1;
++        if ( !c1 )
++            break;
++        count--;
++    }
++    return 0;
++}
++
++/**
++ * strspn - Calculate the length of the initial substring of @s which only contain letters in @accept
++ * @s: The string to be searched
++ * @accept: The string to search for
++ */
++static size_t strspn(const char *s, const char *accept)
++{
++    const char *p;
++    const char *a;
++    size_t count = 0;
++
++    for ( p = s; *p != '\0'; ++p )
++    {
++        for ( a = accept; *a != '\0'; ++a )
++        {
++            if ( *p == *a )
++                break;
++        }
++        if ( *a == '\0' )
++            return count;
++        ++count;
++    }
++    return count;
++}
++
++/**
++ * strcspn - Calculate the length of the initial substring of @s which does not contain letters in @reject
++ * @s: The string to be searched
++ * @reject: The string to avoid
++ */
++static size_t strcspn(const char *s, const char *reject)
++{
++    const char *p;
++    const char *r;
++    size_t count = 0;
++
++    for ( p = s; *p != '\0'; ++p )
++    {
++        for ( r = reject; *r != '\0'; ++r )
++        {
++            if ( *p == *r )
++                return count;
++        }
++        ++count;
++    }
++    return count;
++}
++
++static int strtoi(const char *s, const char *stop, const char **next)
++{
++    int base = 10, i, ores = 0, res = 0;
++
++    if ( *s == '0' )
++      base = (tolower(*++s) == 'x') ? (++s, 16) : 8;
++
++    for ( ; *s != '\0'; ++s )
++    {
++        for ( i = 0; stop && stop[i] != '\0'; ++i )
++            if ( *s == stop[i] )
++                goto out;
++
++        if ( *s < '0' || (*s > '7' && base == 8) )
++        {
++            res = -1;
++            goto out;
++        }
++
++        if ( *s > '9' && (base != 16 || tolower(*s) < 'a' || tolower(*s) > 'f') )
++        {
++            res = -1;
++            goto out;
++        }
++
++        res *= base;
++        res += (tolower(*s) >= 'a') ? (tolower(*s) - 'a' + 10) : (*s - '0');
++
++        if ( ores > res )
++        {
++            res = -1;
++            goto out;
++        }
++
++        ores = res;
++    }
++
++out:
++    if ( next )
++      *next = s;
++
++    return res;
++}
++
++static const char *find_opt(const char *cmdline, const char *opt, int arg)
++{
++    size_t lc, lo;
++    static const char mm[] __text = "--";
++
++    lo = strlen(opt);
++
++    for ( ; ; )
++    {
++        cmdline += strspn(cmdline, empty_chars);
++
++        if ( *cmdline == '\0' )
++            return NULL;
++
++        lc = strcspn(cmdline, empty_chars);
++
++        if ( !strncmp(cmdline, mm, max(lc, strlen_static(mm))) )
++            return NULL;
++
++        if ( !strncmp(cmdline, opt, arg ? lo : max(lc, lo)) )
++            return cmdline;
++
++        cmdline += lc;
++    }
++}
++
++static u8 skip_realmode(const char *cmdline)
++{
++    static const char nrm[] __text = "no-real-mode";
++    static const char tboot[] __text = "tboot=";
++
++    if ( find_opt(cmdline, nrm, 0) || find_opt(cmdline, tboot, 1) )
++        return 1;
++
++    return 0;
++}
++
++static u8 edd_parse(const char *cmdline)
++{
++    const char *c;
++    size_t la;
++    static const char edd[] __text = "edd=";
++    static const char edd_off[] __text = "off";
++    static const char edd_skipmbr[] __text = "skipmbr";
++
++    c = find_opt(cmdline, edd, 1);
++
++    if ( !c )
++        return 0;
++
++    c += strlen_static(edd);
++    la = strcspn(c, empty_chars);
++
++    if ( !strncmp(c, edd_off, max(la, strlen_static(edd_off))) )
++        return 2;
++    else if ( !strncmp(c, edd_skipmbr, max(la, strlen_static(edd_skipmbr))) )
++        return 1;
++
++    return 0;
++}
++
++static u8 edid_parse(const char *cmdline)
++{
++    const char *c;
++    size_t la;
++    static const char edid[] __text = "edid=";
++    static const char edid_force[] __text = "force";
++    static const char edid_no[] __text = "no";
++
++    c = find_opt(cmdline, edid, 1);
++
++    if ( !c )
++        return 0;
++
++    c += strlen_static(edid);
++    la = strcspn(c, empty_chars);
++
++    if ( !strncmp(c, edid_no, max(la, strlen_static(edid_no))) )
++        return 1;
++    else if ( !strncmp(c, edid_force, max(la, strlen_static(edid_force))) )
++        return 2;
++
++    return 0;
++}
++
++static u16 rows2vmode(int rows)
++{
++    switch ( rows )
++    {
++    case 25:
++        return VIDEO_80x25;
++
++    case 28:
++        return VIDEO_80x28;
++
++    case 30:
++        return VIDEO_80x30;
++
++    case 34:
++        return VIDEO_80x34;
++
++    case 43:
++        return VIDEO_80x43;
++
++    case 50:
++        return VIDEO_80x50;
++
++    case 60:
++        return VIDEO_80x60;
++
++    default:
++        return ASK_VGA;
++    }
++}
++
++static void vga_parse(const char *cmdline, early_boot_opts_t *ebo)
++{
++    const char *c;
++    int tmp;
++    size_t la;
++    static const char empty_chars_comma[] __text = " \n\r\t,";
++    static const char x[] __text = "x";
++    static const char vga[] __text = "vga=";
++    static const char vga_current[] __text = "current";
++    static const char vga_gfx[] __text = "gfx-";
++    static const char vga_mode[] __text = "mode-";
++    static const char vga_text_80x[] __text = "text-80x";
++
++    c = find_opt(cmdline, vga, 1);
++
++    if ( !c )
++        return;
++
++    ebo->boot_vid_mode = ASK_VGA;
++
++    c += strlen_static(vga);
++    la = strcspn(c, empty_chars_comma);
++
++    if ( !strncmp(c, vga_current, max(la, strlen_static(vga_current))) )
++        ebo->boot_vid_mode = VIDEO_CURRENT_MODE;
++    else if ( !strncmp(c, vga_text_80x, strlen_static(vga_text_80x)) )
++    {
++        c += strlen_static(vga_text_80x);
++        ebo->boot_vid_mode = rows2vmode(strtoi(c, empty_chars_comma, NULL));
++    }
++    else if ( !strncmp(c, vga_gfx, strlen_static(vga_gfx)) )
++    {
++        tmp = strtoi(c + strlen_static(vga_gfx), x, &c);
++
++        if ( tmp < 0 || tmp > U16_MAX )
++            return;
++
++        ebo->vesa_size[VESA_WIDTH] = tmp;
++
++        tmp = strtoi(++c, x, &c);
++
++        if ( tmp < 0 || tmp > U16_MAX )
++            return;
++
++        ebo->vesa_size[VESA_HEIGHT] = tmp;
++
++        tmp = strtoi(++c, empty_chars_comma, NULL);
++
++        if ( tmp < 0 || tmp > U16_MAX )
++            return;
++
++        ebo->vesa_size[VESA_DEPTH] = tmp;
++
++        ebo->boot_vid_mode = VIDEO_VESA_BY_SIZE;
++    }
++    else if ( !strncmp(c, vga_mode, strlen_static(vga_mode)) )
++    {
++        tmp = strtoi(c + strlen_static(vga_mode), empty_chars_comma, NULL);
++
++        if ( tmp < 0 || tmp > U16_MAX )
++            return;
++
++        ebo->boot_vid_mode = tmp;
++    }
++}
++
++static void __cdecl __used cmdline_parse_early(const char *cmdline, early_boot_opts_t *ebo)
++{
++    ebo->skip_realmode = skip_realmode(cmdline);
++    ebo->opt_edd = edd_parse(cmdline);
++    ebo->opt_edid = edid_parse(cmdline);
++    vga_parse(cmdline, ebo);
++}
+diff -Naur xen-9999-bef/xen/arch/x86/boot/cmdline.S xen-9999-aft/xen/arch/x86/boot/cmdline.S
+--- xen-9999-bef/xen/arch/x86/boot/cmdline.S	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/cmdline.S	1970-01-01 02:00:00.000000000 +0200
+@@ -1,367 +0,0 @@
+-/******************************************************************************
+- * cmdline.S
+- *
+- * Early command-line parsing.
+- */
+-
+-        .code32
+-
+-#include "video.h"
+-
+-# NB. String pointer on stack is modified to point past parsed digits.
+-.Latoi:
+-        push    %ebx
+-        push    %ecx
+-        push    %edx
+-        push    %esi
+-        xor     %ebx,%ebx       /* %ebx = accumulator */
+-        mov     $10,%ecx        /* %ecx = base (default base 10) */
+-        mov     16+4(%esp),%esi /* %esi = pointer into ascii string. */
+-        lodsb
+-        cmpb    $'0',%al
+-        jne     2f
+-        mov     $8,%ecx         /* Prefix '0' => octal (base 8) */
+-        lodsb
+-        cmpb    $'x',%al
+-        jne     2f
+-        mov     $16,%ecx        /* Prefix '0x' => hex (base 16) */
+-1:      lodsb
+-2:      sub     $'0',%al
+-        jb      4f
+-        cmp     $9,%al
+-        jbe     3f
+-        sub     $'A'-'0'-10,%al
+-        jb      4f
+-        cmp     $15,%al
+-        jbe     3f
+-        sub     $'a'-'A',%al
+-        jb      4f
+-3:      cmp     %cl,%al
+-        jae     4f
+-        movzbl  %al,%eax
+-        xchg    %eax,%ebx
+-        mul     %ecx
+-        xchg    %eax,%ebx
+-        add     %eax,%ebx
+-        jmp     1b
+-4:      mov     %ebx,%eax
+-        dec     %esi
+-        mov     %esi,16+4(%esp)
+-        pop     %esi
+-        pop     %edx
+-        pop     %ecx
+-        pop     %ebx
+-        ret
+-
+-.Lstrstr:
+-        push    %ecx
+-        push    %edx
+-        push    %esi
+-        push    %edi
+-        xor     %eax,%eax
+-        xor     %ecx,%ecx
+-        not     %ecx
+-        mov     16+4(%esp),%esi
+-        mov     16+8(%esp),%edi
+-        repne   scasb
+-        not     %ecx
+-        dec     %ecx
+-        mov     %ecx,%edx
+-1:      mov     16+8(%esp),%edi
+-        mov     %esi,%eax
+-        mov     %edx,%ecx
+-        repe    cmpsb
+-        je      2f
+-        xchg    %eax,%esi
+-        inc     %esi
+-        cmpb    $0,-1(%eax)
+-        jne     1b
+-        xor     %eax,%eax
+-2:      pop     %edi
+-        pop     %esi
+-        pop     %edx
+-        pop     %ecx
+-        ret
+-
+-.Lstr_prefix:
+-        push    %esi
+-        push    %edi
+-        mov     8+4(%esp),%esi /* 1st arg is prefix string */
+-        mov     8+8(%esp),%edi /* 2nd arg is main string */
+-1:      lodsb
+-        test    %al,%al
+-        jz      2f
+-        scasb
+-        je      1b
+-        sbb     %eax,%eax
+-        or      $1,%al
+-        jmp     3f
+-2:      xor     %eax,%eax
+-3:      pop     %edi
+-        pop     %esi
+-        ret
+-
+-.Lstrlen:
+-        push    %ecx
+-        push    %esi
+-        push    %edi
+-        xor     %eax,%eax
+-        xor     %ecx,%ecx
+-        not     %ecx
+-        mov     12+4(%esp),%edi
+-        repne   scasb
+-        not     %ecx
+-        dec     %ecx
+-        mov     %ecx,%eax
+-        pop     %edi
+-        pop     %esi
+-        pop     %ecx
+-        ret
+-
+-.Lfind_option:
+-        mov     4(%esp),%eax
+-        dec     %eax
+-        push    %ebx
+-1:      pushl   4+8(%esp)
+-        inc     %eax
+-        push    %eax
+-        call    .Lstrstr
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jz      3f
+-        cmp     %eax,4+4(%esp)
+-        je      2f
+-        cmpb    $' ',-1(%eax)
+-        jne     1b
+-2:      mov     %eax,%ebx
+-        pushl   4+8(%esp)
+-        call    .Lstrlen
+-        add     $4,%esp
+-        xadd    %eax,%ebx
+-        /* NUL check (as $'\0' == 0x30 in GAS) */
+-        cmpb    $0,(%ebx)
+-        je      3f
+-        cmpb    $' ',(%ebx)
+-        je      3f
+-        cmpb    $'=',(%ebx)
+-        jne     1b
+-3:      pop     %ebx
+-        ret
+-
+-cmdline_parse_early:
+-        pusha
+-
+-        /* Bail if there is no command line to parse. */
+-        mov     sym_phys(multiboot_ptr),%ebx
+-        mov     MB_flags(%ebx),%eax
+-        test    $4,%al
+-        jz      .Lcmdline_exit
+-        mov     MB_cmdline(%ebx),%eax
+-        test    %eax,%eax
+-        jz      .Lcmdline_exit
+-
+-        /* Check for 'no-real-mode' command-line option. */
+-        pushl   $sym_phys(.Lno_rm_opt)
+-        pushl   MB_cmdline(%ebx)
+-        call    .Lfind_option
+-        test    %eax,%eax
+-        setnz   %al
+-        or      %al,sym_phys(skip_realmode)
+-
+-        /* Check for 'tboot=' command-line option. */
+-        movl    $sym_phys(.Ltboot_opt),4(%esp)
+-        call    .Lfind_option
+-        test    %eax,%eax
+-        setnz   %al
+-        or      %al,sym_phys(skip_realmode) /* tboot= implies no-real-mode */
+-
+-.Lparse_edd:
+-        /* Check for 'edd=' command-line option. */
+-        movl    $sym_phys(.Ledd_opt),4(%esp)
+-        call    .Lfind_option
+-        test    %eax,%eax
+-        jz      .Lparse_edid
+-        cmpb    $'=',3(%eax)
+-        jne     .Lparse_edid
+-        add     $4,%eax
+-        movb    $2,sym_phys(opt_edd)  /* opt_edd=2: edd=off */
+-        cmpw    $0x666f,(%eax)            /* 0x666f == "of" */
+-        je      .Lparse_edid
+-        decb    sym_phys(opt_edd)     /* opt_edd=1: edd=skipmbr */
+-        cmpw    $0x6b73,(%eax)            /* 0x6b73 == "sk" */
+-        je      .Lparse_edid
+-        decb    sym_phys(opt_edd)     /* opt_edd=0: edd=on (default) */
+-
+-.Lparse_edid:
+-        /* Check for 'edid=' command-line option. */
+-        movl    $sym_phys(.Ledid_opt),4(%esp)
+-        call    .Lfind_option
+-        test    %eax,%eax
+-        jz      .Lparse_vga
+-        cmpb    $'=',4(%eax)
+-        jne     .Lparse_vga
+-        add     $5,%eax
+-        mov     %eax,%ebx
+-        push    %ebx
+-        pushl   $sym_phys(.Ledid_force)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        movb    $2,sym_phys(opt_edid) /* opt_edid=2: edid=force */
+-        test    %eax,%eax
+-        jz      .Lparse_vga
+-        push    %ebx
+-        pushl   $sym_phys(.Ledid_no)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        decb    sym_phys(opt_edid)    /* opt_edid=1: edid=no */
+-        test    %eax,%eax
+-        jz      .Lparse_vga
+-        decb    sym_phys(opt_edid)    /* opt_edid=0: default */
+-
+-.Lparse_vga:
+-        /* Check for 'vga=' command-line option. */
+-        movl    $sym_phys(.Lvga_opt),4(%esp)
+-        call    .Lfind_option
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jz      .Lcmdline_exit
+-        cmpb    $'=',3(%eax)
+-        jne     .Lcmdline_exit
+-        add     $4,%eax
+-
+-        /* Found the 'vga=' option. Default option is to display vga menu. */
+-        movw    $ASK_VGA,sym_phys(boot_vid_mode)
+-
+-        /* Check for 'vga=text-80x<rows>. */
+-        mov     %eax,%ebx
+-        push    %ebx
+-        pushl   $sym_phys(.Lvga_text80)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jnz     .Lparse_vga_gfx
+-
+-        /* We have 'vga=text-80x<rows>'. */
+-        add     $8,%ebx
+-        push    %ebx
+-        call    .Latoi
+-        add     $4,%esp
+-        mov     %ax,%bx
+-        lea     sym_phys(.Lvga_text_modes),%esi
+-1:      lodsw
+-        test    %ax,%ax
+-        jz      .Lcmdline_exit
+-        cmp     %ax,%bx
+-        lodsw
+-        jne     1b
+-        mov     %ax,sym_phys(boot_vid_mode)
+-        jmp     .Lcmdline_exit
+-
+-.Lparse_vga_gfx:
+-        /* Check for 'vga=gfx-<width>x<height>x<depth>'. */
+-        push    %ebx
+-        pushl   $sym_phys(.Lvga_gfx)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jnz     .Lparse_vga_mode
+-
+-        /* We have 'vga=gfx-<width>x<height>x<depth>'. */
+-        /* skip 'gfx-' */
+-        add     $4,%ebx
+-        /* parse <width> */
+-        push    %ebx
+-        call    .Latoi
+-        pop     %esi
+-        mov     %ax,sym_phys(vesa_size)+0
+-        /* skip 'x' */
+-        lodsb
+-        cmpb    $'x',%al
+-        jne     .Lcmdline_exit
+-        /* parse <height> */
+-        push    %esi
+-        call    .Latoi
+-        pop     %esi
+-        mov     %ax,sym_phys(vesa_size)+2
+-        /* skip 'x' */
+-        lodsb
+-        cmpb    $'x',%al
+-        jne     .Lcmdline_exit
+-        /* parse <depth> */
+-        push    %esi
+-        call    .Latoi
+-        pop     %esi
+-        mov     %ax,sym_phys(vesa_size)+4
+-        /* commit to vesa mode */
+-        movw    $VIDEO_VESA_BY_SIZE,sym_phys(boot_vid_mode)
+-        jmp     .Lcmdline_exit
+-
+-.Lparse_vga_mode:
+-        /* Check for 'vga=mode-<mode>'. */
+-        push    %ebx
+-        pushl   $sym_phys(.Lvga_mode)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jnz     .Lparse_vga_current
+-
+-        /* We have 'vga=mode-<mode>'. */
+-        add     $5,%ebx
+-        push    %ebx
+-        call    .Latoi
+-        add     $4,%esp
+-        mov     %ax,sym_phys(boot_vid_mode)
+-        jmp     .Lcmdline_exit
+-
+-.Lparse_vga_current:
+-        /* Check for 'vga=current'. */
+-        push    %ebx
+-        pushl   $sym_phys(.Lvga_current)
+-        call    .Lstr_prefix
+-        add     $8,%esp
+-        test    %eax,%eax
+-        jnz     .Lcmdline_exit
+-
+-        /* We have 'vga=current'. */
+-        movw    $VIDEO_CURRENT_MODE,sym_phys(boot_vid_mode)
+-
+-.Lcmdline_exit:
+-        popa
+-        ret
+-
+-        .pushsection .init.rodata, "a", @progbits
+-
+-.Lvga_text_modes: /* rows, mode_number */
+-        .word   25,VIDEO_80x25
+-        .word   50,VIDEO_80x50
+-        .word   43,VIDEO_80x43
+-        .word   28,VIDEO_80x28
+-        .word   30,VIDEO_80x30
+-        .word   34,VIDEO_80x34
+-        .word   60,VIDEO_80x60
+-        .word   0
+-
+-.Lvga_opt:
+-        .asciz  "vga"
+-.Lvga_text80:
+-        .asciz  "text-80x"
+-.Lvga_gfx:
+-        .asciz  "gfx-"
+-.Lvga_mode:
+-        .asciz  "mode-"
+-.Lvga_current:
+-        .asciz  "current"
+-.Lno_rm_opt:
+-        .asciz  "no-real-mode"
+-.Ltboot_opt:
+-        .asciz  "tboot"
+-.Ledid_opt:
+-        .asciz  "edid"
+-.Ledid_force:
+-        .asciz  "force"
+-.Ledid_no:
+-        .asciz  "no"
+-.Ledd_opt:
+-        .asciz  "edd"
+-
+-        .popsection
+diff -Naur xen-9999-bef/xen/arch/x86/boot/edd.S xen-9999-aft/xen/arch/x86/boot/edd.S
+--- xen-9999-bef/xen/arch/x86/boot/edd.S	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/edd.S	2015-08-16 08:30:57.834765013 +0300
+@@ -142,9 +142,6 @@
+ edd_done:
+         ret
+ 
+-opt_edd:
+-        .byte   0                               # edd=on/off/skipmbr
+-
+ GLOBAL(boot_edd_info_nr)
+         .byte   0
+ GLOBAL(boot_mbr_signature_nr)
+diff -Naur xen-9999-bef/xen/arch/x86/boot/head.S xen-9999-aft/xen/arch/x86/boot/head.S
+--- xen-9999-bef/xen/arch/x86/boot/head.S	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/head.S	2015-08-16 08:30:57.835765013 +0300
+@@ -1,5 +1,6 @@
+ #include <xen/config.h>
+ #include <xen/multiboot.h>
++#include <xen/multiboot2.h>
+ #include <public/xen.h>
+ #include <asm/asm_defns.h>
+ #include <asm/desc.h>
+@@ -11,13 +12,37 @@
+         .text
+         .code32
+ 
+-#define sym_phys(sym)     ((sym) - __XEN_VIRT_START)
++#define sym_phys(sym)     ((sym) - __XEN_VIRT_START + XEN_IMG_PHYS_START - XEN_IMG_OFFSET)
++#define sym_offset(sym)   ((sym) - __XEN_VIRT_START)
+ 
+ #define BOOT_CS32        0x0008
+ #define BOOT_CS64        0x0010
+ #define BOOT_DS          0x0018
+ #define BOOT_PSEUDORM_CS 0x0020
+ #define BOOT_PSEUDORM_DS 0x0028
++#define BOOT_FS          0x0030
++
++#define MB2_HT(name)      (MULTIBOOT2_HEADER_TAG_##name)
++#define MB2_TT(name)      (MULTIBOOT2_TAG_TYPE_##name)
++
++        .macro mb2ht_args arg, args:vararg
++        .long \arg
++        .ifnb \args
++        mb2ht_args \args
++        .endif
++        .endm
++
++        .macro mb2ht_init type, req, args:vararg
++        .align MULTIBOOT2_TAG_ALIGN
++        0:
++        .short \type
++        .short \req
++        .long 1f - 0b
++        .ifnb \args
++        mb2ht_args \args
++        .endif
++        1:
++        .endm
+ 
+ ENTRY(start)
+         jmp     __start
+@@ -34,24 +59,84 @@
+         .long   -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
+ multiboot1_header_end:
+ 
++/*** MULTIBOOT2 HEADER ****/
++/* Some ideas are taken from grub-2.00/grub-core/tests/boot/kernel-i386.S file. */
++        .align  MULTIBOOT2_HEADER_ALIGN
++
++.Lmultiboot2_header:
++        /* Magic number indicating a Multiboot2 header. */
++        .long   MULTIBOOT2_HEADER_MAGIC
++        /* Architecture: i386. */
++        .long   MULTIBOOT2_ARCHITECTURE_I386
++        /* Multiboot2 header length. */
++        .long   .Lmultiboot2_header_end - .Lmultiboot2_header
++        /* Multiboot2 header checksum. */
++        .long   -(MULTIBOOT2_HEADER_MAGIC + MULTIBOOT2_ARCHITECTURE_I386 + \
++                        (.Lmultiboot2_header_end - .Lmultiboot2_header))
++
++        /* Multiboot2 information request tag. */
++        mb2ht_init MB2_HT(INFORMATION_REQUEST), MB2_HT(REQUIRED), \
++                   MB2_TT(BASIC_MEMINFO), MB2_TT(MMAP)
++
++        /* Align modules at page boundry. */
++        mb2ht_init MB2_HT(MODULE_ALIGN), MB2_HT(REQUIRED)
++
++        /* Load address preference. */
++        mb2ht_init MB2_HT(RELOCATABLE), MB2_HT(OPTIONAL), \
++                   sym_phys(start), /* Min load address. */ \
++                   0xffffffff, /* Max load address (4 GiB - 1). */ \
++                   0x200000, /* Load address alignment (2 MiB). */ \
++                   MULTIBOOT2_LOAD_PREFERENCE_HIGH
++
++        /* Console flags tag. */
++        mb2ht_init MB2_HT(CONSOLE_FLAGS), MB2_HT(OPTIONAL), \
++                   MULTIBOOT2_CONSOLE_FLAGS_EGA_TEXT_SUPPORTED
++
++        /* Framebuffer tag. */
++        mb2ht_init MB2_HT(FRAMEBUFFER), MB2_HT(OPTIONAL), \
++                   0, /* Number of the columns - no preference. */ \
++                   0, /* Number of the lines - no preference. */ \
++                   0  /* Number of bits per pixel - no preference. */
++
++        /* Do not disable EFI boot services. */
++        mb2ht_init MB2_HT(EFI_BS), MB2_HT(OPTIONAL)
++
++        /* EFI64 entry point. */
++        mb2ht_init MB2_HT(ENTRY_ADDRESS_EFI64), MB2_HT(OPTIONAL), \
++                   sym_phys(__efi64_start)
++
++        /* Multiboot2 header end tag. */
++        mb2ht_init MB2_HT(END), MB2_HT(REQUIRED)
++.Lmultiboot2_header_end:
++
+         .section .init.rodata, "a", @progbits
+         .align 4
+ 
+         .word   0
+ gdt_boot_descr:
+-        .word   6*8-1
+-        .long   sym_phys(trampoline_gdt)
++        .word   7*8-1
++gdt_boot_descr_addr:
++        .long   sym_offset(trampoline_gdt)
++        .long   0 /* Needed for 64-bit lgdt */
++
++cs32_switch_addr:
++        .long   sym_offset(cs32_switch)
++        .word   BOOT_CS32
+ 
+ .Lbad_cpu_msg: .asciz "ERR: Not a 64-bit CPU!"
+ .Lbad_ldr_msg: .asciz "ERR: Not a Multiboot bootloader!"
++.Lbad_mb2_ldr: .asciz "ERR: Use latest Multiboot2 compatible bootloader!"
+ 
+         .section .init.text, "ax", @progbits
+ 
+ bad_cpu:
+-        mov     $(sym_phys(.Lbad_cpu_msg)),%esi # Error message
++        lea     sym_offset(.Lbad_cpu_msg)(%ebp),%esi # Error message
+         jmp     print_err
+ not_multiboot:
+-        mov     $(sym_phys(.Lbad_ldr_msg)),%esi # Error message
++        lea     sym_offset(.Lbad_ldr_msg)(%ebp),%esi # Error message
++        jmp     print_err
++mb2_too_old:
++        lea     sym_offset(.Lbad_mb2_ldr)(%ebp),%esi # Error message
+ print_err:
+         mov     $0xB8000,%edi  # VGA framebuffer
+ 1:      mov     (%esi),%bl
+@@ -71,65 +156,291 @@
+ .Lhalt: hlt
+         jmp     .Lhalt
+ 
++        .code64
++
++__efi64_start:
++        cld
++
++        /* Load default Xen image base address. */
++        mov     $sym_phys(__image_base__),%ebp
++
++        /* Check for Multiboot2 bootloader. */
++        cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
++        je      efi_multiboot2_proto
++
++        /* Jump to not_multiboot after switching CPU to x86_32 mode. */
++        lea     not_multiboot(%rip),%rdi
++        jmp     x86_32_switch
++
++efi_multiboot2_proto:
++        /*
++         * Multiboot2 information address is 32-bit,
++         * so, zero higher half of %rbx.
++         */
++        mov     %ebx,%ebx
++
++        /* Skip Multiboot2 information fixed part. */
++        lea     MB2_fixed_sizeof(%rbx),%rcx
++
++0:
++        /* Get Xen image base address from Multiboot2 information. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_BASE_ADDR,MB2_tag_type(%rcx)
++        jne     1f
++
++        mov     MB2_base_addr(%rcx),%ebp
++        sub     $XEN_IMG_OFFSET,%rbp
++        jmp     4f
++
++1:
++        /* Get EFI SystemTable address from Multiboot2 information. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64,MB2_tag_type(%rcx)
++        jne     2f
++
++        mov     MB2_efi64_st(%rcx),%rsi
++
++        /* Do not go into real mode on EFI platform. */
++        movb    $1,skip_realmode(%rip)
++        jmp     4f
++
++2:
++        /* Get EFI ImageHandle address from Multiboot2 information. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64_IH,MB2_tag_type(%rcx)
++        jne     3f
++
++        mov     MB2_efi64_ih(%rcx),%rdi
++        jmp     4f
++
++3:
++        /* Is it the end of Multiboot2 information? */
++        cmpl    $MULTIBOOT2_TAG_TYPE_END,MB2_tag_type(%rcx)
++        je      run_bs
++
++4:
++        /* Go to next Multiboot2 information tag. */
++        add     MB2_tag_size(%rcx),%ecx
++        add     $(MULTIBOOT2_TAG_ALIGN-1),%rcx
++        and     $~(MULTIBOOT2_TAG_ALIGN-1),%rcx
++        jmp     0b
++
++run_bs:
++        push    %rax
++        push    %rdi
++
++        /* Initialize BSS (no nasty surprises!). */
++        lea     __bss_start(%rip),%rdi
++        lea     __bss_end(%rip),%rcx
++        sub     %rdi,%rcx
++        shr     $3,%rcx
++        xor     %eax,%eax
++        rep     stosq
++
++        pop     %rdi
++
++        /*
++         * IN: %rdi - EFI ImageHandle, %rsi - EFI SystemTable.
++         * OUT: %rax - multiboot2.mem_lower. Do not get this value from
++         * MULTIBOOT2_TAG_TYPE_BASIC_MEMINFO tag. It could be bogus on
++         * EFI platforms.
++         */
++        call    efi_multiboot2
++
++        /* Convert multiboot2.mem_lower to bytes/16. */
++        mov     %rax,%rcx
++        shr     $4,%rcx
++
++        pop     %rax
++
++        /* Jump to trampoline_setup after switching CPU to x86_32 mode. */
++        lea     trampoline_setup(%rip),%rdi
++
++x86_32_switch:
++        cli
++
++        /* Initialise GDT. */
++        add     %ebp,gdt_boot_descr_addr(%rip)
++        lgdt    gdt_boot_descr(%rip)
++
++        /* Reload code selector. */
++        add     %ebp,cs32_switch_addr(%rip)
++        ljmpl   *cs32_switch_addr(%rip)
++
++        .code32
++
++cs32_switch:
++        /* Initialise basic data segments. */
++        mov     $BOOT_DS,%edx
++        mov     %edx,%ds
++        mov     %edx,%es
++        mov     %edx,%fs
++        mov     %edx,%gs
++        mov     %edx,%ss
++
++        /* Disable paging. */
++        mov     %cr0,%edx
++        and     $(~X86_CR0_PG),%edx
++        mov     %edx,%cr0
++
++        /* Jump to earlier loaded address. */
++        jmp     *%edi
++
+ __start:
+         cld
+         cli
+ 
++        /* Load default Xen image base address. */
++        mov     $sym_phys(__image_base__),%ebp
++
++        /* Bootloaders may set multiboot{1,2}.mem_lower to a nonzero value. */
++        xor     %edx,%edx
++
++        /* Check for Multiboot2 bootloader. */
++        cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
++        je      multiboot2_proto
++
++        /* Check for Multiboot bootloader. */
++        cmp     $MULTIBOOT_BOOTLOADER_MAGIC,%eax
++        jne     not_multiboot
++
++        /* Get mem_lower from Multiboot information. */
++        testb   $MBI_MEMLIMITS,MB_flags(%ebx)
++
++        /* Not available? BDA value will be fine. */
++        cmovnz  MB_mem_lower(%ebx),%edx
++        jmp     trampoline_bios_setup
++
++multiboot2_proto:
++        /* Skip Multiboot2 information fixed part. */
++        lea     MB2_fixed_sizeof(%ebx),%ecx
++
++0:
++        /* Get Xen image base address from Multiboot2 information. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_BASE_ADDR,MB2_tag_type(%ecx)
++        jne     1f
++
++        mov     MB2_base_addr(%ecx),%ebp
++        sub     $XEN_IMG_OFFSET,%ebp
++        jmp     3f
++
++1:
++        /* Get mem_lower from Multiboot2 information. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_BASIC_MEMINFO,MB2_tag_type(%ecx)
++        jne     2f
++
++        mov     MB2_mem_lower(%ecx),%edx
++        jmp     3f
++
++2:
++        /* EFI mode is not supported via legacy BIOS path. */
++        cmpl    $MULTIBOOT2_TAG_TYPE_EFI32,MB2_tag_type(%ecx)
++        je      mb2_too_old
++
++        cmpl    $MULTIBOOT2_TAG_TYPE_EFI64,MB2_tag_type(%ecx)
++        je      mb2_too_old
++
++        /* Is it the end of Multiboot2 information? */
++        cmpl    $MULTIBOOT2_TAG_TYPE_END,MB2_tag_type(%ecx)
++        je      trampoline_bios_setup
++
++3:
++        /* Go to next Multiboot2 information tag. */
++        add     MB2_tag_size(%ecx),%ecx
++        add     $(MULTIBOOT2_TAG_ALIGN-1),%ecx
++        and     $~(MULTIBOOT2_TAG_ALIGN-1),%ecx
++        jmp     0b
++
++trampoline_bios_setup:
++        mov     %ebp,%esi
++
+         /* Initialise GDT and basic data segments. */
+-        lgdt    %cs:sym_phys(gdt_boot_descr)
++        add     %ebp,sym_offset(gdt_boot_descr_addr)(%esi)
++        lgdt    sym_offset(gdt_boot_descr)(%esi)
++
+         mov     $BOOT_DS,%ecx
+         mov     %ecx,%ds
+         mov     %ecx,%es
++        mov     %ecx,%fs
++        mov     %ecx,%gs
+         mov     %ecx,%ss
+ 
+-        /* Check for Multiboot bootloader */
+-        cmp     $MULTIBOOT_BOOTLOADER_MAGIC,%eax
+-        jne     not_multiboot
+-
+         /* Set up trampoline segment 64k below EBDA */
+-        movzwl  0x40e,%eax          /* EBDA segment */
+-        cmp     $0xa000,%eax        /* sanity check (high) */
++        movzwl  0x40e,%ecx          /* EBDA segment */
++        cmp     $0xa000,%ecx        /* sanity check (high) */
+         jae     0f
+-        cmp     $0x4000,%eax        /* sanity check (low) */
++        cmp     $0x4000,%ecx        /* sanity check (low) */
+         jae     1f
+ 0:
+-        movzwl  0x413,%eax          /* use base memory size on failure */
+-        shl     $10-4,%eax
++        movzwl  0x413,%ecx          /* use base memory size on failure */
++        shl     $10-4,%ecx
+ 1:
+         /*
+          * Compare the value in the BDA with the information from the
+          * multiboot structure (if available) and use the smallest.
+          */
+-        testb   $MBI_MEMLIMITS,(%ebx)
+-        jz      2f                  /* not available? BDA value will be fine */
+-        mov     MB_mem_lower(%ebx),%edx
+         cmp     $0x100,%edx         /* is the multiboot value too small? */
+-        jb      2f                  /* if so, do not use it */
++        jb      trampoline_setup    /* if so, do not use it */
+         shl     $10-4,%edx
+-        cmp     %eax,%edx           /* compare with BDA value */
+-        cmovb   %edx,%eax           /* and use the smaller */
++        cmp     %ecx,%edx           /* compare with BDA value */
++        cmovb   %edx,%ecx           /* and use the smaller */
+ 
+-2:      /* Reserve 64kb for the trampoline */
+-        sub     $0x1000,%eax
++trampoline_setup:
++        mov     %ebp,%esi
++
++        /* Initialize 0-15 bits of BOOT_FS segment descriptor base address. */
++        mov     %ebp,%edx
++        shl     $16,%edx
++        or      %edx,(sym_offset(trampoline_gdt)+BOOT_FS)(%esi)
++
++        /* Initialize 16-23 bits of BOOT_FS segment descriptor base address. */
++        mov     %ebp,%edx
++        shr     $16,%edx
++        and     $0x000000ff,%edx
++        or      %edx,(sym_offset(trampoline_gdt)+BOOT_FS+4)(%esi)
++
++        /* Initialize 24-31 bits of BOOT_FS segment descriptor base address. */
++        mov     %ebp,%edx
++        and     $0xff000000,%edx
++        or      %edx,(sym_offset(trampoline_gdt)+BOOT_FS+4)(%esi)
++
++        /* Initialize %fs and later use it to access Xen data if possible. */
++        mov     $BOOT_FS,%edx
++        mov     %edx,%fs
++
++        /* Reserve 64kb for the trampoline. */
++        sub     $0x1000,%ecx
+ 
+         /* From arch/x86/smpboot.c: start_eip had better be page-aligned! */
+-        xor     %al, %al
+-        shl     $4, %eax
+-        mov     %eax,sym_phys(trampoline_phys)
++        xor     %cl, %cl
++        shl     $4, %ecx
++        mov     %ecx,%fs:sym_offset(trampoline_phys)
++
++        /* Save Xen image base address for later use. */
++        mov     %ebp,%fs:sym_offset(xen_img_base_phys_addr)
+ 
+         /* Save the Multiboot info struct (after relocation) for later use. */
+-        mov     $sym_phys(cpu0_stack)+1024,%esp
+-        push    %ebx
++        lea     (sym_offset(cpu0_stack)+1024)(%ebp),%esp
++        push    %eax                /* Multiboot magic. */
++        push    %ebx                /* Multiboot information address. */
++        push    %ecx                /* Boot trampoline address. */
+         call    reloc
+-        mov     %eax,sym_phys(multiboot_ptr)
++        add     $12,%esp            /* Remove reloc() args from stack. */
++        mov     %eax,%fs:sym_offset(multiboot_ptr)
++
++        /*
++         * Do not zero BSS on EFI platform here.
++         * It was initialized earlier.
++         */
++        cmpb    $1,%fs:sym_offset(skip_realmode)
++        je      1f
+ 
+-        /* Initialize BSS (no nasty surprises!) */
+-        mov     $sym_phys(__bss_start),%edi
+-        mov     $sym_phys(__bss_end),%ecx
++        /* Initialize BSS (no nasty surprises!). */
++        lea     sym_offset(__bss_start)(%ebp),%edi
++        lea     sym_offset(__bss_end)(%ebp),%ecx
+         sub     %edi,%ecx
++        shr     $2,%ecx
+         xor     %eax,%eax
+-        rep     stosb
++        rep     stosl
+ 
++1:
+         /* Interrogate CPU extended features via CPUID. */
+         mov     $0x80000000,%eax
+         cpuid
+@@ -138,8 +449,8 @@
+         jbe     1f
+         mov     $0x80000001,%eax
+         cpuid
+-1:      mov     %edx,sym_phys(cpuid_ext_features)
+-        mov     %edx,sym_phys(boot_cpu_data)+CPUINFO_FEATURE_OFFSET(X86_FEATURE_LM)
++1:      mov     %edx,%fs:sym_offset(cpuid_ext_features)
++        mov     %edx,%fs:(sym_offset(boot_cpu_data)+CPUINFO_FEATURE_OFFSET(X86_FEATURE_LM))
+ 
+         /* Check for availability of long mode. */
+         bt      $X86_FEATURE_LM & 0x1f,%edx
+@@ -147,63 +458,119 @@
+ 
+         /* Stash TSC to calculate a good approximation of time-since-boot */
+         rdtsc
+-        mov     %eax,sym_phys(boot_tsc_stamp)
+-        mov     %edx,sym_phys(boot_tsc_stamp+4)
++        mov     %eax,%fs:sym_offset(boot_tsc_stamp)
++        mov     %edx,%fs:sym_offset(boot_tsc_stamp+4)
++
++        /* Update frame addreses in page tables. */
++        lea     sym_offset(__page_tables_start)(%ebp),%edx
++        mov     $((__page_tables_end-__page_tables_start)/8),%ecx
++1:      testl   $_PAGE_PRESENT,(%edx)
++        jz      2f
++        add     %ebp,(%edx)
++2:      add     $8,%edx
++        loop    1b
+ 
+-        /* Initialise L2 boot-map page table entries (16MB). */
+-        mov     $sym_phys(l2_bootmap),%edx
+-        mov     $PAGE_HYPERVISOR|_PAGE_PSE,%eax
+-        mov     $8,%ecx
++        /* Initialise L2 boot-map page table entries (14MB). */
++        lea     sym_offset(l2_bootmap)(%ebp),%edx
++        lea     sym_offset(start)(%ebp),%eax
++        and     $~((1<<L2_PAGETABLE_SHIFT)-1),%eax
++        mov     %eax,%ebx
++        shr     $(L2_PAGETABLE_SHIFT-3),%ebx
++        and     $(L2_PAGETABLE_ENTRIES*4*8-1),%ebx
++        add     %ebx,%edx
++        add     $(PAGE_HYPERVISOR|_PAGE_PSE),%eax
++        mov     $7,%ecx
+ 1:      mov     %eax,(%edx)
+         add     $8,%edx
+         add     $(1<<L2_PAGETABLE_SHIFT),%eax
+         loop    1b
++
+         /* Initialise L3 boot-map page directory entry. */
+-        mov     $sym_phys(l2_bootmap)+__PAGE_HYPERVISOR,%eax
+-        mov     %eax,sym_phys(l3_bootmap) + 0*8
++        lea     (sym_offset(l2_bootmap)+__PAGE_HYPERVISOR)(%ebp),%eax
++        lea     sym_offset(l3_bootmap)(%ebp),%ebx
++        mov     $4,%ecx
++1:      mov     %eax,(%ebx)
++        add     $8,%ebx
++        add     $(L2_PAGETABLE_ENTRIES*8),%eax
++        loop    1b
++
++        /* Initialise L2 direct map page table entries (14MB). */
++        lea     sym_offset(l2_identmap)(%ebp),%edx
++        lea     sym_offset(start)(%ebp),%eax
++        and     $~((1<<L2_PAGETABLE_SHIFT)-1),%eax
++        mov     %eax,%ebx
++        shr     $(L2_PAGETABLE_SHIFT-3),%ebx
++        and     $(L2_PAGETABLE_ENTRIES*4*8-1),%ebx
++        add     %ebx,%edx
++        add     $(PAGE_HYPERVISOR|_PAGE_PSE),%eax
++        mov     $7,%ecx
++1:      mov     %eax,(%edx)
++        add     $8,%edx
++        add     $(1<<L2_PAGETABLE_SHIFT),%eax
++        loop    1b
++
+         /* Hook 4kB mappings of first 2MB of memory into L2. */
+-        mov     $sym_phys(l1_identmap)+__PAGE_HYPERVISOR,%edi
+-        mov     %edi,sym_phys(l2_xenmap)
+-        mov     %edi,sym_phys(l2_bootmap)
++        lea     (sym_offset(l1_identmap)+__PAGE_HYPERVISOR)(%ebp),%edi
++        mov     %edi,%fs:sym_offset(l2_bootmap)
+ 
+         /* Apply relocations to bootstrap trampoline. */
+-        mov     sym_phys(trampoline_phys),%edx
+-        mov     $sym_phys(__trampoline_rel_start),%edi
+-        mov     %edx,sym_phys(trampoline_phys)
++        mov     %fs:sym_offset(trampoline_phys),%edx
++        lea     sym_offset(__trampoline_rel_start)(%ebp),%edi
++        lea     sym_offset(__trampoline_rel_stop)(%ebp),%esi
+ 1:
+         mov     (%edi),%eax
+         add     %edx,(%edi,%eax)
+         add     $4,%edi
+-        cmp     $sym_phys(__trampoline_rel_stop),%edi
++        cmp     %esi,%edi
+         jb      1b
+ 
+         /* Patch in the trampoline segment. */
+         shr     $4,%edx
+-        mov     $sym_phys(__trampoline_seg_start),%edi
++        lea     sym_offset(__trampoline_seg_start)(%ebp),%edi
++        lea     sym_offset(__trampoline_seg_stop)(%ebp),%esi
+ 1:
+         mov     (%edi),%eax
+         mov     %dx,(%edi,%eax)
+         add     $4,%edi
+-        cmp     $sym_phys(__trampoline_seg_stop),%edi
++        cmp     %esi,%edi
+         jb      1b
+ 
++        /* Do not parse command line on EFI platform here. */
++        cmpb    $1,%fs:sym_offset(skip_realmode)
++        je      1f
++
++        /* Bail if there is no command line to parse. */
++        mov     %fs:sym_offset(multiboot_ptr),%ebx
++        testl   $MBI_CMDLINE,MB_flags(%ebx)
++        jz      1f
++
++        cmpl    $0,MB_cmdline(%ebx)
++        jz      1f
++
++        lea     sym_offset(early_boot_opts)(%ebp),%eax
++        push    %eax
++        pushl   MB_cmdline(%ebx)
+         call    cmdline_parse_early
++        add     $8,%esp             /* Remove cmdline_parse_early() args from stack. */
++
++1:
+ 
+         /* Switch to low-memory stack.  */
+-        mov     sym_phys(trampoline_phys),%edi
++        mov     %fs:sym_offset(trampoline_phys),%edi
+         lea     0x10000(%edi),%esp
+         lea     trampoline_boot_cpu_entry-trampoline_start(%edi),%eax
+         pushl   $BOOT_CS32
+         push    %eax
+ 
+         /* Copy bootstrap trampoline to low memory, below 1MB. */
+-        mov     $sym_phys(trampoline_start),%esi
++        lea     sym_offset(trampoline_start)(%ebp),%esi
+         mov     $trampoline_end - trampoline_start,%ecx
+         rep     movsb
+ 
+         /* Jump into the relocated trampoline. */
+         lret
+ 
++cmdline_parse_early:
+ #include "cmdline.S"
+ 
+ reloc:
+diff -Naur xen-9999-bef/xen/arch/x86/boot/Makefile xen-9999-aft/xen/arch/x86/boot/Makefile
+--- xen-9999-bef/xen/arch/x86/boot/Makefile	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/Makefile	2015-08-16 08:30:57.835765013 +0300
+@@ -1,8 +1,14 @@
+ obj-bin-y += head.o
+ 
+-RELOC_DEPS = $(BASEDIR)/include/asm-x86/config.h $(BASEDIR)/include/xen/multiboot.h
++CMDLINE_DEPS = video.h
+ 
+-head.o: reloc.S
++RELOC_DEPS = $(BASEDIR)/include/asm-x86/config.h $(BASEDIR)/include/xen/multiboot.h \
++             $(BASEDIR)/include/xen/multiboot2.h
++
++head.o: cmdline.S reloc.S
++
++cmdline.S: cmdline.c $(CMDLINE_DEPS)
++	$(MAKE) -f build32.mk $@ CMDLINE_DEPS="$(CMDLINE_DEPS)"
+ 
+ reloc.S: reloc.c $(RELOC_DEPS)
+ 	$(MAKE) -f build32.mk $@ RELOC_DEPS="$(RELOC_DEPS)"
+diff -Naur xen-9999-bef/xen/arch/x86/boot/reloc.c xen-9999-aft/xen/arch/x86/boot/reloc.c
+--- xen-9999-bef/xen/arch/x86/boot/reloc.c	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/reloc.c	2015-08-16 08:30:57.836765013 +0300
+@@ -5,20 +5,37 @@
+  * and modules. This is most easily done early with paging disabled.
+  *
+  * Copyright (c) 2009, Citrix Systems, Inc.
++ * Copyright (c) 2013, 2014, 2015 Oracle Co.
+  *
+  * Authors:
+  *    Keir Fraser <keir@xxxxxxxxxxx>
++ *    Daniel Kiper <daniel.kiper@xxxxxxxxx>
+  */
+ 
+-/* entered with %eax = BOOT_TRAMPOLINE */
++/*
++ * This entry point is entered from xen/arch/x86/boot/head.S with:
++ *   - 0x4(%esp) = BOOT_TRAMPOLINE_ADDRESS,
++ *   - 0x8(%esp) = MULTIBOOT_INFORMATION_ADDRESS,
++ *   - 0xc(%esp) = MULTIBOOT_MAGIC.
++ */
+ asm (
+     "    .text                         \n"
+     "    .globl _start                 \n"
+     "_start:                           \n"
++    "    push %ebp                     \n"
++    "    mov  %esp,%ebp                \n"
+     "    call 1f                       \n"
+-    "1:  pop  %ebx                     \n"
+-    "    mov  %eax,alloc-1b(%ebx)      \n"
+-    "    jmp  reloc                    \n"
++    "1:  pop  %ecx                     \n"
++    "    mov  0x8(%ebp),%eax           \n"
++    "    mov  %eax,alloc-1b(%ecx)      \n"
++    "    mov  0x10(%ebp),%eax          \n"
++    "    push %eax                     \n"
++    "    mov  0xc(%ebp),%eax           \n"
++    "    push %eax                     \n"
++    "    call reloc                    \n"
++    "    add  $8,%esp                  \n"
++    "    pop  %ebp                     \n"
++    "    ret                           \n"
+     );
+ 
+ /*
+@@ -31,11 +48,20 @@
+     );
+ 
+ typedef unsigned int u32;
++typedef unsigned long long u64;
++
+ #include "../../../include/xen/multiboot.h"
++#include "../../../include/xen/multiboot2.h"
+ 
+-static void *reloc_mbi_struct(void *old, unsigned int bytes)
++define ALIGN_UP(addr, align) \
++                (((addr) + (typeof(addr))(align) - 1) & ~((typeof(addr))(align) - 1))
++
++#define get_mb2_data(tag, type, member) (((type *)(tag))->member)
++
++static u32 alloc_mem(u32 bytes)
+ {
+-    void *new;
++    u32 s;
++
+     asm(
+     "    call 1f                      \n"
+     "1:  pop  %%edx                   \n"
+@@ -43,57 +69,199 @@
+     "    sub  %1,%0                   \n"
+     "    and  $~15,%0                 \n"
+     "    mov  %0,alloc-1b(%%edx)      \n"
+-    "    mov  %0,%%edi                \n"
+-    "    rep  movsb                   \n"
+-       : "=&r" (new), "+c" (bytes), "+S" (old)
+-	: : "edx", "edi", "memory");
+-    return new;
++       : "=&r" (s) : "r" (bytes) : "edx", "memory");
++
++    return s;
++}
++
++static void zero_mem(u32 s, u32 bytes)
++{
++    asm volatile("rep stosb" : "+D" (s), "+c" (bytes) : "a" (0) : "memory");
++}
++
++static u32 copy_mem(u32 src, u32 bytes)
++{
++    u32 dst, dst_asm;
++
++    dst = alloc_mem(bytes);
++    dst_asm = dst;
++
++    asm volatile("rep movsb" : "+S" (src), "+D" (dst_asm), "+c" (bytes) : : "memory");
++
++    return dst;
+ }
+ 
+-static char *reloc_mbi_string(char *old)
++static u32 copy_string(u32 src)
+ {
+-    char *p;
+-    for ( p = old; *p != '\0'; p++ )
++    u32 p;
++
++    if ( src == 0 )
++        return 0;
++
++    for ( p = src; *(char *)p != '\0'; p++ )
+         continue;
+-    return reloc_mbi_struct(old, p - old + 1);
++
++return copy_mem(src, p - src + 1);
+ }
+ 
+-multiboot_info_t *reloc(multiboot_info_t *mbi_old)
++static multiboot_info_t *mbi_mbi(void *mbi_in)
+ {
+-    multiboot_info_t *mbi = reloc_mbi_struct(mbi_old, sizeof(*mbi));
+     int i;
++    multiboot_info_t *mbi_out;
++
++    mbi_out = (multiboot_info_t *)copy_mem((u32)mbi_in, sizeof(*mbi_out));
+ 
+-    if ( mbi->flags & MBI_CMDLINE )
+-        mbi->cmdline = (u32)reloc_mbi_string((char *)mbi->cmdline);
++    if ( mbi_out->flags & MBI_CMDLINE )
++        mbi_out->cmdline = copy_string(mbi_out->cmdline);
+ 
+-    if ( mbi->flags & MBI_MODULES )
++    if ( mbi_out->flags & MBI_MODULES )
+     {
+-        module_t *mods = reloc_mbi_struct(
+-            (module_t *)mbi->mods_addr, mbi->mods_count * sizeof(module_t));
++	module_t *mods;
++
++        mbi_out->mods_addr = copy_mem(mbi_out->mods_addr,
++                                      mbi_out->mods_count * sizeof(module_t));
+ 
+-        mbi->mods_addr = (u32)mods;
++        mods = (module_t *)mbi_out->mods_addr;
+ 
+-        for ( i = 0; i < mbi->mods_count; i++ )
++        for ( i = 0; i < mbi_out->mods_count; i++ )
+         {
+             if ( mods[i].string )
+-                mods[i].string = (u32)reloc_mbi_string((char *)mods[i].string);
++                mods[i].string = copy_string(mods[i].string);
+         }
+     }
+ 
+-    if ( mbi->flags & MBI_MEMMAP )
+-        mbi->mmap_addr = (u32)reloc_mbi_struct(
+-            (memory_map_t *)mbi->mmap_addr, mbi->mmap_length);
+-
+-    if ( mbi->flags & MBI_LOADERNAME )
+-        mbi->boot_loader_name = (u32)reloc_mbi_string(
+-            (char *)mbi->boot_loader_name);
++    if ( mbi_out->flags & MBI_MEMMAP )
++        mbi_out->mmap_addr = copy_mem(mbi_out->mmap_addr, mbi_out->mmap_length);
++
++    if ( mbi_out->flags & MBI_LOADERNAME )
++        mbi_out->boot_loader_name = copy_string(mbi_out->boot_loader_name);
+ 
+     /* Mask features we don't understand or don't relocate. */
+-    mbi->flags &= (MBI_MEMLIMITS |
+-                   MBI_CMDLINE |
+-                   MBI_MODULES |
+-                   MBI_MEMMAP |
+-                   MBI_LOADERNAME);
++    mbi_out->flags &= (MBI_MEMLIMITS |
++                       MBI_CMDLINE |
++                       MBI_MODULES |
++                       MBI_MEMMAP |
++                       MBI_LOADERNAME);
++
++    return mbi_out;
++}
+ 
+-    return mbi;
++static multiboot_info_t *mbi2_mbi(void *mbi_in)
++{
++    /* Do not complain that mbi_out_mods is not initialized. */
++    module_t *mbi_out_mods = (module_t *)0;
++    memory_map_t *mmap_dst;
++    multiboot2_memory_map_t *mmap_src;
++    multiboot2_tag_t *tag;
++    multiboot_info_t *mbi_out;
++    u32 ptr;
++    unsigned int i, mod_idx = 0;
++
++    mbi_out = (multiboot_info_t *)alloc_mem(sizeof(*mbi_out));
++    zero_mem((u32)mbi_out, sizeof(*mbi_out));
++
++    /* Skip Multiboot2 information fixed part. */
++    tag = mbi_in + sizeof(multiboot2_fixed_t);
++
++    for ( ; ; )
++    {
++        if ( tag->type == MULTIBOOT2_TAG_TYPE_MODULE )
++            ++mbi_out->mods_count;
++        else if ( tag->type == MULTIBOOT2_TAG_TYPE_END )
++        {
++            mbi_out->flags = MBI_MODULES;
++            mbi_out->mods_addr = alloc_mem(mbi_out->mods_count * sizeof(module_t));
++            mbi_out_mods = (module_t *)mbi_out->mods_addr;
++            break;
++        }
++
++        /* Go to next Multiboot2 information tag. */
++        tag = (multiboot2_tag_t *)(ALIGN_UP((u32)tag + tag->size, MULTIBOOT2_TAG_ALIGN));
++
++        /* Check Multiboot2 information total size just in case. */
++       if ( (void *)tag - mbi_in >= ((multiboot2_fixed_t *)mbi_in)->total_size )
++           break;
++    }
++
++    /* Skip Multiboot2 information fixed part. */
++    tag = mbi_in + sizeof(multiboot2_fixed_t);
++
++    for ( ; ; )
++    {
++        switch ( tag->type )
++        {
++        case MULTIBOOT2_TAG_TYPE_BOOT_LOADER_NAME:
++            mbi_out->flags |= MBI_LOADERNAME;
++            ptr = (u32)get_mb2_data(tag, multiboot2_tag_string_t, string);
++            mbi_out->boot_loader_name = copy_string(ptr);
++            break;
++
++        case MULTIBOOT2_TAG_TYPE_CMDLINE:
++            mbi_out->flags |= MBI_CMDLINE;
++            ptr = (u32)get_mb2_data(tag, multiboot2_tag_string_t, string);
++            mbi_out->cmdline = copy_string(ptr);
++            break;
++
++        case MULTIBOOT2_TAG_TYPE_BASIC_MEMINFO:
++            mbi_out->flags |= MBI_MEMLIMITS;
++            mbi_out->mem_lower = get_mb2_data(tag, multiboot2_tag_basic_meminfo_t, mem_lower);
++            mbi_out->mem_upper = get_mb2_data(tag, multiboot2_tag_basic_meminfo_t, mem_upper);
++            break;
++
++        case MULTIBOOT2_TAG_TYPE_MMAP:
++            mbi_out->flags |= MBI_MEMMAP;
++            mbi_out->mmap_length = get_mb2_data(tag, multiboot2_tag_mmap_t, size);
++            mbi_out->mmap_length -= sizeof(multiboot2_tag_mmap_t);
++            mbi_out->mmap_length += sizeof(((multiboot2_tag_mmap_t){0}).entries);
++            mbi_out->mmap_length /= get_mb2_data(tag, multiboot2_tag_mmap_t, entry_size);
++            mbi_out->mmap_length *= sizeof(memory_map_t);
++
++            mbi_out->mmap_addr = alloc_mem(mbi_out->mmap_length);
++
++            mmap_src = get_mb2_data(tag, multiboot2_tag_mmap_t, entries);
++            mmap_dst = (memory_map_t *)mbi_out->mmap_addr;
++
++            for ( i = 0; i < mbi_out->mmap_length / sizeof(memory_map_t); ++i )
++            {
++                mmap_dst[i].size = sizeof(memory_map_t);
++                mmap_dst[i].size -= sizeof(((memory_map_t){0}).size);
++                mmap_dst[i].base_addr_low = (u32)mmap_src[i].addr;
++                mmap_dst[i].base_addr_high = (u32)(mmap_src[i].addr >> 32);
++                mmap_dst[i].length_low = (u32)mmap_src[i].len;
++                mmap_dst[i].length_high = (u32)(mmap_src[i].len >> 32);
++                mmap_dst[i].type = mmap_src[i].type;
++            }
++            break;
++
++        case MULTIBOOT2_TAG_TYPE_MODULE:
++            mbi_out_mods[mod_idx].mod_start = get_mb2_data(tag, multiboot2_tag_module_t, mod_start);
++            mbi_out_mods[mod_idx].mod_end = get_mb2_data(tag, multiboot2_tag_module_t, mod_end);
++            ptr = (u32)get_mb2_data(tag, multiboot2_tag_module_t, cmdline);
++            mbi_out_mods[mod_idx].string = copy_string(ptr);
++            mbi_out_mods[mod_idx].reserved = 0;
++            ++mod_idx;
++            break;
++
++        case MULTIBOOT2_TAG_TYPE_END:
++            return mbi_out;
++
++        default:
++            break;
++        }
++
++        /* Go to next Multiboot2 information tag. */
++        tag = (multiboot2_tag_t *)(ALIGN_UP((u32)tag + tag->size, MULTIBOOT2_TAG_ALIGN));
++
++        /* Check Multiboot2 information total size just in case. */
++       if ( (void *)tag - mbi_in >= ((multiboot2_fixed_t *)mbi_in)->total_size )
++            return mbi_out;
++    }
++}
++
++static multiboot_info_t __attribute__((__used__)) *reloc(void *mbi_in, u32 mb_magic)
++{
++    if ( mb_magic == MULTIBOOT2_BOOTLOADER_MAGIC )
++        return mbi2_mbi(mbi_in);
++    else
++        return mbi_mbi(mbi_in);
+ }
+diff -Naur xen-9999-bef/xen/arch/x86/boot/trampoline.S xen-9999-aft/xen/arch/x86/boot/trampoline.S
+--- xen-9999-bef/xen/arch/x86/boot/trampoline.S	2015-08-16 08:29:52.975771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/trampoline.S	2015-08-16 08:30:57.836765013 +0300
+@@ -1,3 +1,5 @@
++#include "video.h"
++
+         .code16
+ 
+ /* NB. bootsym() is only usable in real mode, or via BOOT_PSEUDORM_DS. */
+@@ -50,12 +52,20 @@
+         /* 0x0028: real-mode data @ BOOT_TRAMPOLINE */
+         .long   0x0000ffff
+         .long   0x00009200
++        /*
++         * 0x0030: ring 0 Xen data, 16 MiB size, base
++         * address is initialized during runtime.
++         */
++        .quad   0x00c0920000001000
+ 
+         .pushsection .trampoline_rel, "a"
+         .long   trampoline_gdt + BOOT_PSEUDORM_CS + 2 - .
+         .long   trampoline_gdt + BOOT_PSEUDORM_DS + 2 - .
+         .popsection
+ 
++GLOBAL(xen_img_base_phys_addr)
++        .long   0
++
+ GLOBAL(cpuid_ext_features)
+         .long   0
+ 
+@@ -80,7 +90,8 @@
+         mov     %ecx,%cr4
+ 
+         /* Load pagetable base register. */
+-        mov     $sym_phys(idle_pg_table),%eax
++        mov     bootsym_rel(xen_img_base_phys_addr,4,%eax)
++        lea     sym_offset(idle_pg_table)(%eax),%eax
+         add     bootsym_rel(trampoline_xen_phys_start,4,%eax)
+         mov     %eax,%cr3
+ 
+@@ -201,8 +212,20 @@
+         /* Jump to the common bootstrap entry point. */
+         jmp     trampoline_protmode_entry
+ 
++/*
++ * Keep in sync with cmdline.c:early_boot_opts_t type!
++ */
++early_boot_opts:
+ skip_realmode:
+         .byte   0
++opt_edd:
++        .byte   0                               /* edd=on/off/skipmbr */
++opt_edid:
++        .byte   0                               /* EDID parsing option (force/no/default). */
++GLOBAL(boot_vid_mode)
++        .word   VIDEO_80x25                     /* If we don't run at all, assume basic video mode 3 at 80x25. */
++vesa_size:
++        .word   0,0,0                           /* width x depth x height */
+ 
+ GLOBAL(kbd_shift_flags)
+         .byte   0
+diff -Naur xen-9999-bef/xen/arch/x86/boot/video.S xen-9999-aft/xen/arch/x86/boot/video.S
+--- xen-9999-bef/xen/arch/x86/boot/video.S	2015-08-16 08:29:52.976771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/video.S	2015-08-16 08:30:57.837765012 +0300
+@@ -945,7 +945,6 @@
+ #endif
+         ret
+ 
+-opt_edid:       .byte   0       # EDID parsing option (force/no/default)
+ mt_end:         .word   0       # End of video mode table if built
+ edit_buf:       .space  6       # Line editor buffer
+ card_name:      .word   0       # Pointer to adapter name
+@@ -991,11 +990,6 @@
+ 
+ force_size:     .word   0       # Use this size instead of the one in BIOS vars
+ 
+-vesa_size:      .word   0,0,0   # width x depth x height
+-
+-/* If we don't run at all, assume basic video mode 3 at 80x25. */
+-GLOBAL(boot_vid_mode)
+-        .word   VIDEO_80x25
+ GLOBAL(boot_vid_info)
+         .byte   0, 0    /* orig_x, orig_y */
+         .byte   3       /* text mode 3    */
+diff -Naur xen-9999-bef/xen/arch/x86/boot/wakeup.S xen-9999-aft/xen/arch/x86/boot/wakeup.S
+--- xen-9999-bef/xen/arch/x86/boot/wakeup.S	2015-08-16 08:29:52.976771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/wakeup.S	2015-08-16 08:30:57.837765012 +0300
+@@ -119,8 +119,10 @@
+         mov     %eax, %ss
+         mov     $bootsym_rel(wakeup_stack, 4, %esp)
+ 
++        mov     bootsym_rel(xen_img_base_phys_addr, 4, %ebx)
++
+         # check saved magic again
+-        mov     $sym_phys(saved_magic), %eax
++        lea     sym_offset(saved_magic)(%ebx), %eax
+         add     bootsym_rel(trampoline_xen_phys_start, 4, %eax)
+         mov     (%eax), %eax
+         cmp     $0x9abcdef0, %eax
+@@ -133,7 +135,7 @@
+         mov     %ecx, %cr4
+ 
+         /* Load pagetable base register */
+-        mov     $sym_phys(idle_pg_table),%eax
++        lea     sym_offset(idle_pg_table)(%ebx),%eax
+         add     bootsym_rel(trampoline_xen_phys_start,4,%eax)
+         mov     %eax,%cr3
+ 
+diff -Naur xen-9999-bef/xen/arch/x86/boot/x86_64.S xen-9999-aft/xen/arch/x86/boot/x86_64.S
+--- xen-9999-bef/xen/arch/x86/boot/x86_64.S	2015-08-16 08:29:52.976771160 +0300
++++ xen-9999-aft/xen/arch/x86/boot/x86_64.S	2015-08-16 08:30:57.838765012 +0300
+@@ -81,7 +81,6 @@
+         .quad 0x0000910000000000     /* per-CPU entry (limit == cpu)      */
+         .align PAGE_SIZE, 0
+ 
+-GLOBAL(__page_tables_start)
+ /*
+  * Mapping of first 2 megabytes of memory. This is mapped with 4kB mappings
+  * to avoid type conflicts with fixed-range MTRRs covering the lowest megabyte
+@@ -101,21 +100,18 @@
+         .endr
+         .size l1_identmap, . - l1_identmap
+ 
+-/* Mapping of first 16 megabytes of memory. */
++GLOBAL(__page_tables_start)
++
+ GLOBAL(l2_identmap)
+-        .quad sym_phys(l1_identmap) + __PAGE_HYPERVISOR
+-        pfn = 0
+-        .rept 7
+-        pfn = pfn + (1 << PAGETABLE_ORDER)
+-        .quad (pfn << PAGE_SHIFT) | PAGE_HYPERVISOR | _PAGE_PSE
+-        .endr
+-        .fill 4 * L2_PAGETABLE_ENTRIES - 8, 8, 0
++        .quad sym_offset(l1_identmap) + __PAGE_HYPERVISOR
++        .fill 4 * L2_PAGETABLE_ENTRIES - 1, 8, 0
+         .size l2_identmap, . - l2_identmap
+ 
+ GLOBAL(l2_xenmap)
+-        idx = 0
+-        .rept 8
+-        .quad sym_phys(__image_base__) + (idx << L2_PAGETABLE_SHIFT) + (PAGE_HYPERVISOR | _PAGE_PSE)
++        .quad 0
++        idx = 1
++        .rept 7
++        .quad sym_offset(__image_base__) + (idx << L2_PAGETABLE_SHIFT) + (PAGE_HYPERVISOR | _PAGE_PSE)
+         idx = idx + 1
+         .endr
+         .fill L2_PAGETABLE_ENTRIES - 8, 8, 0
+@@ -125,7 +121,7 @@
+         idx = 0
+         .rept L2_PAGETABLE_ENTRIES
+         .if idx == l2_table_offset(FIXADDR_TOP - 1)
+-        .quad sym_phys(l1_fixmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l1_fixmap) + __PAGE_HYPERVISOR
+         .else
+         .quad 0
+         .endif
+@@ -136,7 +132,7 @@
+ GLOBAL(l3_identmap)
+         idx = 0
+         .rept 4
+-        .quad sym_phys(l2_identmap) + (idx << PAGE_SHIFT) + __PAGE_HYPERVISOR
++        .quad sym_offset(l2_identmap) + (idx << PAGE_SHIFT) + __PAGE_HYPERVISOR
+         idx = idx + 1
+         .endr
+         .fill L3_PAGETABLE_ENTRIES - 4, 8, 0
+@@ -146,9 +142,9 @@
+         idx = 0
+         .rept L3_PAGETABLE_ENTRIES
+         .if idx == l3_table_offset(XEN_VIRT_START)
+-        .quad sym_phys(l2_xenmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l2_xenmap) + __PAGE_HYPERVISOR
+         .elseif idx == l3_table_offset(FIXADDR_TOP - 1)
+-        .quad sym_phys(l2_fixmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l2_fixmap) + __PAGE_HYPERVISOR
+         .else
+         .quad 0
+         .endif
+@@ -158,13 +154,13 @@
+ 
+ /* Top-level master (and idle-domain) page directory. */
+ GLOBAL(idle_pg_table)
+-        .quad sym_phys(l3_bootmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l3_bootmap) + __PAGE_HYPERVISOR
+         idx = 1
+         .rept L4_PAGETABLE_ENTRIES - 1
+         .if idx == l4_table_offset(DIRECTMAP_VIRT_START)
+-        .quad sym_phys(l3_identmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l3_identmap) + __PAGE_HYPERVISOR
+         .elseif idx == l4_table_offset(XEN_VIRT_START)
+-        .quad sym_phys(l3_xenmap) + __PAGE_HYPERVISOR
++        .quad sym_offset(l3_xenmap) + __PAGE_HYPERVISOR
+         .else
+         .quad 0
+         .endif
+diff -Naur xen-9999-bef/xen/arch/x86/dmi_scan.c xen-9999-aft/xen/arch/x86/dmi_scan.c
+--- xen-9999-bef/xen/arch/x86/dmi_scan.c	2015-08-16 08:29:52.979771160 +0300
++++ xen-9999-aft/xen/arch/x86/dmi_scan.c	2015-08-16 08:30:57.838765012 +0300
+@@ -229,7 +229,7 @@
+ {
+ 	static unsigned int __initdata instance;
+ 
+-	if (efi_enabled) {
++       if (efi_enabled(EFI_PLATFORM)) {
+ 		if (efi_smbios3_size && !(instance & 1)) {
+ 			*base = efi_smbios3_address;
+ 			*len = efi_smbios3_size;
+@@ -693,7 +693,7 @@
+ 
+ void __init dmi_scan_machine(void)
+ {
+-	if ((!efi_enabled ? dmi_iterate(dmi_decode) :
++        if ((!efi_enabled(EFI_PLATFORM) ? dmi_iterate(dmi_decode) :
+ 	                    dmi_efi_iterate(dmi_decode)) == 0)
+  		dmi_check_system(dmi_blacklist);
+ 	else
+diff -Naur xen-9999-bef/xen/arch/x86/domain_page.c xen-9999-aft/xen/arch/x86/domain_page.c
+--- xen-9999-bef/xen/arch/x86/domain_page.c	2015-08-16 08:29:52.979771160 +0300
++++ xen-9999-aft/xen/arch/x86/domain_page.c	2015-08-16 08:30:57.839765012 +0300
+@@ -36,7 +36,7 @@
+      * domain's page tables but current may point at another domain's VCPU.
+      * Return NULL as though current is not properly set up yet.
+      */
+-    if ( efi_enabled && efi_rs_using_pgtables() )
++     if ( efi_enabled(EFI_PLATFORM) && efi_rs_using_pgtables() )
+         return NULL;
+ 
+     /*
+diff -Naur xen-9999-bef/xen/arch/x86/efi/efi-boot.h xen-9999-aft/xen/arch/x86/efi/efi-boot.h
+--- xen-9999-bef/xen/arch/x86/efi/efi-boot.h	2015-08-16 08:29:52.980771159 +0300
++++ xen-9999-aft/xen/arch/x86/efi/efi-boot.h	2015-08-16 08:30:57.839765012 +0300
+@@ -103,9 +103,36 @@
+         *(u16 *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
+ }
+ 
++#define EBMALLOC_SIZE  MB(1)
++
++static char __initdata ebmalloc_mem[EBMALLOC_SIZE];
++static char __initdata *ebmalloc_free = NULL;
++
++/* EFI boot allocator. */
++static void __init *ebmalloc(size_t size)
++{
++    void *ptr;
++
++    /*
++     * Init ebmalloc_free on runtime. Static initialization
++     * will not work because it puts virtual address there.
++     */
++    if ( ebmalloc_free == NULL )
++        ebmalloc_free = ebmalloc_mem;
++
++    ptr = ebmalloc_free;
++
++    ebmalloc_free += size;
++
++    if ( ebmalloc_free - ebmalloc_mem > sizeof(ebmalloc_mem) )
++        blexit(L"Out of static memory\r\n");
++
++    return ptr;
++}
++
+ static void __init place_string(u32 *addr, const char *s)
+ {
+-    static char *__initdata alloc = start;
++    char *alloc = NULL;
+ 
+     if ( s && *s )
+     {
+@@ -113,7 +140,7 @@
+         const char *old = (char *)(long)*addr;
+         size_t len2 = *addr ? strlen(old) + 1 : 0;
+ 
+-        alloc -= len1 + len2;
++        alloc = ebmalloc(len1 + len2);
+         /*
+          * Insert new string before already existing one. This is needed
+          * for options passed on the command line to override options from
+@@ -196,16 +223,14 @@
+ 
+ static void *__init efi_arch_allocate_mmap_buffer(UINTN map_size)
+ {
+-    place_string(&mbi.mem_upper, NULL);
+-    mbi.mem_upper -= map_size;
+-    mbi.mem_upper &= -__alignof__(EFI_MEMORY_DESCRIPTOR);
+-    if ( mbi.mem_upper < xen_phys_start )
+-        return NULL;
+-    return (void *)(long)mbi.mem_upper;
++    return ebmalloc(map_size);
+ }
+ 
+ static void __init efi_arch_pre_exit_boot(void)
+ {
++    if ( !efi_enabled(EFI_LOADER) )
++        return;
++
+     if ( !trampoline_phys )
+     {
+         if ( !cfg.addr )
+@@ -640,6 +665,33 @@
+     return 1; /* x86 always uses a config file */
+ }
+ 
++paddr_t __init efi_multiboot2(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
++{
++    EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
++    UINTN cols, gop_mode = ~0, rows;
++
++    set_bit(EFI_PLATFORM, &efi.flags);
++
++    efi_init(ImageHandle, SystemTable);
++
++    efi_console_set_mode();
++
++    if ( StdOut->QueryMode(StdOut, StdOut->Mode->Mode,
++                           &cols, &rows) == EFI_SUCCESS )
++        efi_arch_console_init(cols, rows);
++
++    gop = efi_get_gop();
++    gop_mode = efi_find_gop_mode(gop, 0, 0, 0);
++    efi_arch_edd();
++    efi_tables();
++    setup_efi_pci();
++    efi_variables();
++    efi_set_gop_mode(gop, gop_mode);
++    efi_exit_boot(ImageHandle, SystemTable);
++
++    return cfg.addr;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff -Naur xen-9999-bef/xen/arch/x86/efi/Makefile xen-9999-aft/xen/arch/x86/efi/Makefile
+--- xen-9999-bef/xen/arch/x86/efi/Makefile	2015-08-16 08:29:52.980771159 +0300
++++ xen-9999-aft/xen/arch/x86/efi/Makefile	2015-08-16 08:30:57.840765012 +0300
+@@ -1,14 +1,16 @@
+ CFLAGS += -fshort-wchar
+ 
+-obj-y += stub.o
+-
+-create = test -e $(1) || touch -t 199901010000 $(1)
+-
+ efi := $(filter y,$(x86_64)$(shell rm -f disabled))
+ efi := $(if $(efi),$(shell $(CC) $(filter-out $(CFLAGS-y) .%.d,$(CFLAGS)) -c check.c 2>disabled && echo y))
+ efi := $(if $(efi),$(shell $(LD) -mi386pep --subsystem=10 -o check.efi check.o 2>disabled && echo y))
+-efi := $(if $(efi),$(shell rm disabled)y,$(shell $(call create,boot.init.o); $(call create,runtime.o)))
++efi := $(if $(efi),$(shell rm disabled)y)
+ 
+-extra-$(efi) += boot.init.o relocs-dummy.o runtime.o compat.o
++extra-y += relocs-dummy.o
+ 
+-stub.o: $(extra-y)
++ifeq ($(efi),y)
++obj-y += boot.init.o
++obj-y += compat.o
++obj-y += runtime.o
++else
++obj-y += stub.o
++endif
+diff -Naur xen-9999-bef/xen/arch/x86/efi/stub.c xen-9999-aft/xen/arch/x86/efi/stub.c
+--- xen-9999-bef/xen/arch/x86/efi/stub.c	2015-08-16 08:29:52.980771159 +0300
++++ xen-9999-aft/xen/arch/x86/efi/stub.c	2015-08-16 08:30:57.840765012 +0300
+@@ -4,9 +4,19 @@
+ #include <xen/lib.h>
+ #include <asm/page.h>
+ 
+-#ifndef efi_enabled
+-const bool_t efi_enabled = 0;
+-#endif
++struct efi __read_mostly efi = {
++       .flags   = 0, /* Initialized later. */
++       .acpi    = EFI_INVALID_TABLE_ADDR,
++       .acpi20  = EFI_INVALID_TABLE_ADDR,
++       .mps     = EFI_INVALID_TABLE_ADDR,
++       .smbios  = EFI_INVALID_TABLE_ADDR,
++       .smbios3 = EFI_INVALID_TABLE_ADDR
++};
++
++void __init efi_multiboot2(void)
++{
++    /* TODO: Fail if entered! */
++}
+ 
+ void __init efi_init_memory(void) { }
+ 
+diff -Naur xen-9999-bef/xen/arch/x86/Makefile xen-9999-aft/xen/arch/x86/Makefile
+--- xen-9999-bef/xen/arch/x86/Makefile	2015-08-16 08:29:52.974771160 +0300
++++ xen-9999-aft/xen/arch/x86/Makefile	2015-08-16 08:30:57.841765012 +0300
+@@ -72,15 +72,16 @@
+                          echo '$(TARGET).efi'; fi)
+ 
+ $(TARGET): $(TARGET)-syms $(efi-y) boot/mkelf32
+-	./boot/mkelf32 $(TARGET)-syms $(TARGET) 0x100000 \
+-	`$(NM) -nr $(TARGET)-syms | head -n 1 | sed -e 's/^\([^ ]*\).*/0x\1/'`
+-
++#      THIS IS UGLY HACK! PLEASE DO NOT COMPLAIN. I WILL FIX IT IN NEXT RELEASE.
++	./boot/mkelf32 $(TARGET)-syms $(TARGET) $(XEN_IMG_PHYS_START) 0xffff82d081000000
++#      ./boot/mkelf32 $(TARGET)-syms $(TARGET) 0x100000 \
++#      `$(NM) -nr $(TARGET)-syms | head -n 1 | sed -e 's/^\([^ ]*\).*/0x\1/'`
+ 
+ ALL_OBJS := $(BASEDIR)/arch/x86/boot/built_in.o $(BASEDIR)/arch/x86/efi/built_in.o $(ALL_OBJS)
+ 
+ ifeq ($(lto),y)
+ # Gather all LTO objects together
+-prelink_lto.o: $(ALL_OBJS)
++prelink_lto.o: $(ALL_OBJS) efi/relocs-dummy.o
+ 	$(LD_LTO) -r -o $@ $^
+ 
+ prelink-efi_lto.o: $(ALL_OBJS) efi/runtime.o efi/compat.o
+@@ -90,14 +91,14 @@
+ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+ 	$(LD) $(LDFLAGS) -r -o $@ $^
+ 
+-prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o efi/boot.init.o
++prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o
+ 	$(guard) $(LD) $(LDFLAGS) -r -o $@ $^
+ else
+-prelink.o: $(ALL_OBJS)
++prelink.o: $(ALL_OBJS) efi/relocs-dummy.o
+ 	$(LD) $(LDFLAGS) -r -o $@ $^
+ 
+-prelink-efi.o: $(ALL_OBJS) efi/boot.init.o efi/runtime.o efi/compat.o
+-	$(guard) $(LD) $(LDFLAGS) -r -o $@ $(filter-out %/efi/built_in.o,$^)
++prelink-efi.o: $(ALL_OBJS)
++	$(guard) $(LD) $(LDFLAGS) -r -o $@ $^
+ endif
+ 
+ $(BASEDIR)/common/symbols-dummy.o:
+@@ -146,9 +147,6 @@
+ 	if $(guard) false; then rm -f $@; echo 'EFI support disabled'; fi
+ 	rm -f $(@D)/.$(@F).[0-9]*
+ 
+-efi/boot.init.o efi/runtime.o efi/compat.o: $(BASEDIR)/arch/x86/efi/built_in.o
+-efi/boot.init.o efi/runtime.o efi/compat.o: ;
+-
+ asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c
+ 	$(CC) $(filter-out -flto,$(CFLAGS)) -S -o $@ $<
+ 
+@@ -173,4 +171,4 @@
+ 	rm -f asm-offsets.s *.lds boot/*.o boot/*~ boot/core boot/mkelf32
+ 	rm -f $(BASEDIR)/.xen-syms.[0-9]* boot/.*.d
+ 	rm -f $(BASEDIR)/.xen.efi.[0-9]* efi/*.o efi/.*.d efi/*.efi efi/disabled efi/mkreloc
+-	rm -f boot/reloc.S boot/reloc.lnk boot/reloc.bin
++	rm -f boot/cmdline.S boot/reloc.S boot/*.lnk boot/*.bin
+diff -Naur xen-9999-bef/xen/arch/x86/mm.c xen-9999-aft/xen/arch/x86/mm.c
+--- xen-9999-bef/xen/arch/x86/mm.c	2015-08-16 08:29:52.985771159 +0300
++++ xen-9999-aft/xen/arch/x86/mm.c	2015-08-16 08:30:57.842765012 +0300
+@@ -343,7 +343,8 @@
+ 
+     subarch_init_memory();
+ 
+-    efi_init_memory();
++    if ( efi_enabled(EFI_PLATFORM) )
++        efi_init_memory();
+ 
+     mem_sharing_init();
+ 
+diff -Naur xen-9999-bef/xen/arch/x86/mpparse.c xen-9999-aft/xen/arch/x86/mpparse.c
+--- xen-9999-bef/xen/arch/x86/mpparse.c	2015-08-16 08:29:52.987771159 +0300
++++ xen-9999-aft/xen/arch/x86/mpparse.c	2015-08-16 08:30:57.843765012 +0300
+@@ -557,7 +557,7 @@
+ 
+ static __init void efi_unmap_mpf(void)
+ {
+-	if (efi_enabled)
++        if (efi_enabled(EFI_PLATFORM))
+ 		clear_fixmap(FIX_EFI_MPF);
+ }
+ 
+@@ -715,7 +715,7 @@
+ {
+ 	unsigned int address;
+ 
+-	if (efi_enabled) {
++        if (efi_enabled(EFI_PLATFORM)) {
+ 		efi_check_config();
+ 		return;
+ 	}
+diff -Naur xen-9999-bef/xen/arch/x86/Rules.mk xen-9999-aft/xen/arch/x86/Rules.mk
+--- xen-9999-bef/xen/arch/x86/Rules.mk	2015-08-16 08:29:52.974771160 +0300
++++ xen-9999-aft/xen/arch/x86/Rules.mk	2015-08-16 08:30:57.843765012 +0300
+@@ -15,6 +15,10 @@
+ HAS_PDX := y
+ xenoprof := y
+ 
++XEN_IMG_PHYS_START = 0x200000
++
++CFLAGS += -DXEN_IMG_PHYS_START=$(XEN_IMG_PHYS_START)
++
+ CFLAGS += -I$(BASEDIR)/include 
+ CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-generic
+ CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-default
+diff -Naur xen-9999-bef/xen/arch/x86/setup.c xen-9999-aft/xen/arch/x86/setup.c
+--- xen-9999-bef/xen/arch/x86/setup.c	2015-08-16 08:29:52.988771159 +0300
++++ xen-9999-aft/xen/arch/x86/setup.c	2015-08-16 08:30:57.844765012 +0300
+@@ -291,9 +291,6 @@
+     if ( start >= end )
+         return NULL;
+ 
+-    if ( end <= BOOTSTRAP_MAP_BASE )
+-        return (void *)(unsigned long)start;
+-
+     ret = (void *)(map_cur + (unsigned long)(start & mask));
+     start &= ~mask;
+     end = (end + mask) & ~mask;
+@@ -444,8 +441,8 @@
+ {
+     struct boot_video_info *bvi = &bootsym(boot_vid_info);
+ 
+-    /* The EFI loader fills vga_console_info directly. */
+-    if ( efi_enabled )
++    /* vga_console_info is filled directly on EFI platform. */
++    if ( efi_enabled(EFI_PLATFORM) )
+         return;
+ 
+     if ( (bvi->orig_video_isVGA == 1) && (bvi->orig_video_mode == 3) )
+@@ -641,6 +638,9 @@
+ 
+     printk("Command line: %s\n", cmdline);
+ 
++    printk("Xen image base address: 0x%08lx\n",
++           xen_phys_start ? xen_phys_start : (unsigned long)xen_img_base_phys_addr);
++
+     printk("Video information:\n");
+ 
+     /* Print VGA display mode information. */
+@@ -695,7 +695,7 @@
+     if ( !(mbi->flags & MBI_MODULES) || (mbi->mods_count == 0) )
+         panic("dom0 kernel not specified. Check bootloader configuration.");
+ 
+-    if ( efi_enabled )
++    if ( efi_enabled(EFI_LOADER) )
+     {
+         set_pdx_range(xen_phys_start >> PAGE_SHIFT,
+                       (xen_phys_start + BOOTSTRAP_MAP_BASE) >> PAGE_SHIFT);
+@@ -708,7 +708,11 @@
+         l3_bootmap[l3_table_offset(BOOTSTRAP_MAP_BASE)] =
+             l3e_from_paddr(__pa(l2_bootmap), __PAGE_HYPERVISOR);
+ 
+-        memmap_type = loader;
++        memmap_type = "EFI";
++    }
++    else if ( efi_enabled(EFI_PLATFORM) )
++    {
++        memmap_type = "EFI";
+     }
+     else if ( e820_raw_nr != 0 )
+     {
+@@ -806,7 +810,7 @@
+      * we can relocate the dom0 kernel and other multiboot modules. Also, on
+      * x86/64, we relocate Xen to higher memory.
+      */
+-    for ( i = 0; !efi_enabled && i < mbi->mods_count; i++ )
++    for ( i = 0; !efi_enabled(EFI_LOADER) && i < mbi->mods_count; i++ )
+     {
+         if ( mod[i].mod_start & (PAGE_SIZE - 1) )
+             panic("Bootloader didn't honor module alignment request.");
+@@ -831,10 +835,8 @@
+         uint64_t s, e, mask = (1UL << L2_PAGETABLE_SHIFT) - 1;
+         uint64_t end, limit = ARRAY_SIZE(l2_identmap) << L2_PAGETABLE_SHIFT;
+ 
+-        /* Superpage-aligned chunks from BOOTSTRAP_MAP_BASE. */
+         s = (boot_e820.map[i].addr + mask) & ~mask;
+         e = (boot_e820.map[i].addr + boot_e820.map[i].size) & ~mask;
+-        s = max_t(uint64_t, s, BOOTSTRAP_MAP_BASE);
+         if ( (boot_e820.map[i].type != E820_RAM) || (s >= e) )
+             continue;
+ 
+@@ -872,7 +874,7 @@
+             /* Select relocation address. */
+             e = end - reloc_size;
+             xen_phys_start = e;
+-            bootsym(trampoline_xen_phys_start) = e;
++            bootsym(trampoline_xen_phys_start) = e - xen_img_base_phys_addr;
+ 
+             /*
+              * Perform relocation to new physical address.
+@@ -882,7 +884,7 @@
+              */
+             load_start = (unsigned long)_start - XEN_VIRT_START;
+             barrier();
+-            move_memory(e + load_start, load_start, _end - _start, 1);
++            move_memory(e + load_start, load_start + xen_img_base_phys_addr, _end - _start, 1);
+ 
+             /* Walk initial pagetables, relocating page directory entries. */
+             pl4e = __va(__pa(idle_pg_table));
+@@ -891,27 +893,27 @@
+                 if ( !(l4e_get_flags(*pl4e) & _PAGE_PRESENT) )
+                     continue;
+                 *pl4e = l4e_from_intpte(l4e_get_intpte(*pl4e) +
+-                                        xen_phys_start);
++                                        xen_phys_start - xen_img_base_phys_addr);
+                 pl3e = l4e_to_l3e(*pl4e);
+                 for ( j = 0; j < L3_PAGETABLE_ENTRIES; j++, pl3e++ )
+                 {
+                     /* Not present, 1GB mapping, or already relocated? */
+                     if ( !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) ||
+                          (l3e_get_flags(*pl3e) & _PAGE_PSE) ||
+-                         (l3e_get_pfn(*pl3e) > 0x1000) )
++                         (l3e_get_pfn(*pl3e) > PFN_DOWN(xen_phys_start)) )
+                         continue;
+                     *pl3e = l3e_from_intpte(l3e_get_intpte(*pl3e) +
+-                                            xen_phys_start);
++                                            xen_phys_start - xen_img_base_phys_addr);
+                     pl2e = l3e_to_l2e(*pl3e);
+                     for ( k = 0; k < L2_PAGETABLE_ENTRIES; k++, pl2e++ )
+                     {
+                         /* Not present, PSE, or already relocated? */
+                         if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) ||
+                              (l2e_get_flags(*pl2e) & _PAGE_PSE) ||
+-                             (l2e_get_pfn(*pl2e) > 0x1000) )
++                             (l2e_get_pfn(*pl2e) > PFN_DOWN(xen_phys_start)) )
+                             continue;
+                         *pl2e = l2e_from_intpte(l2e_get_intpte(*pl2e) +
+-                                                xen_phys_start);
++                                                xen_phys_start - xen_img_base_phys_addr);
+                     }
+                 }
+             }
+@@ -922,10 +924,10 @@
+                                    PAGE_HYPERVISOR_RWX | _PAGE_PSE);
+             for ( i = 1; i < L2_PAGETABLE_ENTRIES; i++, pl2e++ )
+             {
+-                if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
++                if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) || (l2e_get_pfn(*pl2e) > PFN_DOWN(xen_phys_start)))
+                     continue;
+                 *pl2e = l2e_from_intpte(l2e_get_intpte(*pl2e) +
+-                                        xen_phys_start);
++                                        xen_phys_start - xen_img_base_phys_addr);
+             }
+ 
+             /* Re-sync the stack and then switch to relocated pagetables. */
+@@ -994,8 +996,10 @@
+ 
+     if ( !xen_phys_start )
+         panic("Not enough memory to relocate Xen.");
+-    reserve_e820_ram(&boot_e820, efi_enabled ? mbi->mem_upper : __pa(&_start),
+-                     __pa(&_end));
++
++    printk("New Xen image base address: 0x%08lx\n", xen_phys_start);
++
++    reserve_e820_ram(&boot_e820, __pa(&_start), __pa(&_end));
+ 
+     /* Late kexec reservation (dynamic start address). */
+     kexec_reserve_area(&boot_e820);
+@@ -1067,14 +1071,12 @@
+ 
+         set_pdx_range(s >> PAGE_SHIFT, e >> PAGE_SHIFT);
+ 
+-        /* Need to create mappings above BOOTSTRAP_MAP_BASE. */
+-        map_s = max_t(uint64_t, s, BOOTSTRAP_MAP_BASE);
++        map_s = s;
+         map_e = min_t(uint64_t, e,
+                       ARRAY_SIZE(l2_identmap) << L2_PAGETABLE_SHIFT);
+ 
+         /* Pass mapped memory to allocator /before/ creating new mappings. */
+         init_boot_pages(s, min(map_s, e));
+-        s = map_s;
+         if ( s < map_e )
+         {
+             uint64_t mask = (1UL << L2_PAGETABLE_SHIFT) - 1;
+diff -Naur xen-9999-bef/xen/arch/x86/shutdown.c xen-9999-aft/xen/arch/x86/shutdown.c
+--- xen-9999-bef/xen/arch/x86/shutdown.c	2015-08-16 08:29:52.988771159 +0300
++++ xen-9999-aft/xen/arch/x86/shutdown.c	2015-08-16 08:30:57.844765012 +0300
+@@ -116,7 +116,7 @@
+ static void default_reboot_type(void)
+ {
+     if ( reboot_type == BOOT_INVALID )
+-        reboot_type = efi_enabled ? BOOT_EFI
++        reboot_type = efi_enabled(EFI_PLATFORM) ? BOOT_EFI
+                                   : acpi_disabled ? BOOT_KBD
+                                                   : BOOT_ACPI;
+ }
+diff -Naur xen-9999-bef/xen/arch/x86/time.c xen-9999-aft/xen/arch/x86/time.c
+--- xen-9999-bef/xen/arch/x86/time.c	2015-08-16 08:29:52.989771159 +0300
++++ xen-9999-aft/xen/arch/x86/time.c	2015-08-16 08:30:57.845765012 +0300
+@@ -690,7 +690,7 @@
+     static bool_t __read_mostly cmos_rtc_probe;
+     boolean_param("cmos-rtc-probe", cmos_rtc_probe);
+ 
+-    if ( efi_enabled )
++    if ( efi_enabled(EFI_PLATFORM) )
+     {
+         res = efi_get_time();
+         if ( res )
+diff -Naur xen-9999-bef/xen/arch/x86/x86_64/asm-offsets.c xen-9999-aft/xen/arch/x86/x86_64/asm-offsets.c
+--- xen-9999-bef/xen/arch/x86/x86_64/asm-offsets.c	2015-08-16 08:29:52.990771159 +0300
++++ xen-9999-aft/xen/arch/x86/x86_64/asm-offsets.c	2015-08-16 08:30:57.845765012 +0300
+@@ -13,6 +13,7 @@
+ #include <asm/fixmap.h>
+ #include <asm/hardirq.h>
+ #include <xen/multiboot.h>
++#include <xen/multiboot2.h>
+ 
+ #define DEFINE(_sym, _val)                                                 \
+     asm volatile ("\n.ascii\"==>#define " #_sym " %0 /* " #_val " */<==\"" \
+@@ -166,4 +167,13 @@
+     OFFSET(MB_flags, multiboot_info_t, flags);
+     OFFSET(MB_cmdline, multiboot_info_t, cmdline);
+     OFFSET(MB_mem_lower, multiboot_info_t, mem_lower);
++    BLANK();
++
++    DEFINE(MB2_fixed_sizeof, sizeof(multiboot2_fixed_t));
++    OFFSET(MB2_tag_type, multiboot2_tag_t, type);
++    OFFSET(MB2_tag_size, multiboot2_tag_t, size);
++    OFFSET(MB2_base_addr, multiboot2_tag_base_addr_t, base_addr);
++    OFFSET(MB2_mem_lower, multiboot2_tag_basic_meminfo_t, mem_lower);
++    OFFSET(MB2_efi64_st, multiboot2_tag_efi64_t, pointer);
++    OFFSET(MB2_efi64_ih, multiboot2_tag_efi64_ih_t, pointer);
+ }
+diff -Naur xen-9999-bef/xen/arch/x86/x86_64/mm.c xen-9999-aft/xen/arch/x86/x86_64/mm.c
+--- xen-9999-bef/xen/arch/x86/x86_64/mm.c	2015-08-16 08:29:52.991771158 +0300
++++ xen-9999-aft/xen/arch/x86/x86_64/mm.c	2015-08-16 08:30:57.846765012 +0300
+@@ -43,7 +43,7 @@
+ 
+ /* Enough page directories to map into the bottom 1GB. */
+ l3_pgentry_t __section(".bss.page_aligned") l3_bootmap[L3_PAGETABLE_ENTRIES];
+-l2_pgentry_t __section(".bss.page_aligned") l2_bootmap[L2_PAGETABLE_ENTRIES];
++l2_pgentry_t __section(".bss.page_aligned") l2_bootmap[4 * L2_PAGETABLE_ENTRIES];
+ 
+ l2_pgentry_t *compat_idle_pg_table_l2;
+ 
+diff -Naur xen-9999-bef/xen/arch/x86/xen.lds.S xen-9999-aft/xen/arch/x86/xen.lds.S
+--- xen-9999-bef/xen/arch/x86/xen.lds.S	2015-08-16 08:29:52.992771158 +0300
++++ xen-9999-aft/xen/arch/x86/xen.lds.S	2015-08-16 08:30:57.846765012 +0300
+@@ -38,7 +38,7 @@
+   . = __XEN_VIRT_START;
+   __image_base__ = .;
+ #endif
+-  . = __XEN_VIRT_START + MB(1);
+++  . = __XEN_VIRT_START + XEN_IMG_OFFSET;
+   _start = .;
+   .text : {
+         _stext = .;            /* Text and read-only data */
+@@ -162,6 +162,7 @@
+   . = ALIGN(STACK_SIZE);
+   __init_end = .;
+ 
++  . = ALIGN(8);
+   .bss : {                     /* BSS */
+        __bss_start = .;
+        *(.bss.stack_aligned)
+@@ -175,6 +176,7 @@
+        *(.bss.percpu.read_mostly)
+        . = ALIGN(SMP_CACHE_BYTES);
+        __per_cpu_data_end = .;
++       . = ALIGN(8);
+        __bss_end = .;
+   } :text
+   _end = . ;
+@@ -189,8 +191,6 @@
+   .pad : {
+     . = ALIGN(MB(16));
+   } :text
+-#else
+-  efi = .;
+ #endif
+ 
+   /* Sections to be discarded */
+diff -Naur xen-9999-bef/xen/common/efi/boot.c xen-9999-aft/xen/common/efi/boot.c
+--- xen-9999-bef/xen/common/efi/boot.c	2015-08-16 08:29:52.993771158 +0300
++++ xen-9999-aft/xen/common/efi/boot.c	2015-08-16 08:30:57.847765012 +0300
+@@ -79,6 +79,17 @@
+ static int set_color(u32 mask, int bpp, u8 *pos, u8 *sz);
+ static bool_t match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2);
+ 
++static void efi_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable);
++static void efi_console_set_mode(void);
++static EFI_GRAPHICS_OUTPUT_PROTOCOL *efi_get_gop(void);
++static UINTN efi_find_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
++                               UINTN cols, UINTN rows, UINTN depth);
++static void efi_tables(void);
++static void setup_efi_pci(void);
++static void efi_variables(void);
++static void efi_set_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop, UINTN gop_mode);
++static void efi_exit_boot(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable);
++
+ static const EFI_BOOT_SERVICES *__initdata efi_bs;
+ static UINT32 __initdata efi_bs_revision;
+ static EFI_HANDLE __initdata efi_ih;
+@@ -595,6 +606,161 @@
+     return NULL;
+ }
+ 
++static void __init efi_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
++{
++    efi_ih = ImageHandle;
++    efi_bs = SystemTable->BootServices;
++    efi_bs_revision = efi_bs->Hdr.Revision;
++    efi_rs = SystemTable->RuntimeServices;
++    efi_ct = SystemTable->ConfigurationTable;
++    efi_num_ct = SystemTable->NumberOfTableEntries;
++    efi_version = SystemTable->Hdr.Revision;
++    efi_fw_vendor = SystemTable->FirmwareVendor;
++    efi_fw_revision = SystemTable->FirmwareRevision;
++
++    StdOut = SystemTable->ConOut;
++    StdErr = SystemTable->StdErr ?: StdOut;
++}
++
++static void __init efi_console_set_mode(void)
++{
++    UINTN cols, rows, size;
++    unsigned int best, i;
++
++    for ( i = 0, size = 0, best = StdOut->Mode->Mode;
++          i < StdOut->Mode->MaxMode; ++i )
++    {
++        if ( StdOut->QueryMode(StdOut, i, &cols, &rows) == EFI_SUCCESS &&
++             cols * rows > size )
++        {
++            size = cols * rows;
++            best = i;
++        }
++    }
++    if ( best != StdOut->Mode->Mode )
++        StdOut->SetMode(StdOut, best);
++}
++
++static EFI_GRAPHICS_OUTPUT_PROTOCOL __init *efi_get_gop(void)
++{
++    EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info;
++    EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
++    EFI_HANDLE *handles;
++    EFI_STATUS status;
++    UINTN info_size, size = 0;
++    static EFI_GUID __initdata gop_guid = EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID;
++    unsigned int i;
++
++    status = efi_bs->LocateHandle(ByProtocol, &gop_guid, NULL, &size, NULL);
++    if ( status == EFI_BUFFER_TOO_SMALL )
++        status = efi_bs->AllocatePool(EfiLoaderData, size, (void **)&handles);
++    if ( !EFI_ERROR(status) )
++        status = efi_bs->LocateHandle(ByProtocol, &gop_guid, NULL, &size,
++                                      handles);
++    if ( EFI_ERROR(status) )
++        size = 0;
++    for ( i = 0; i < size / sizeof(*handles); ++i )
++    {
++        status = efi_bs->HandleProtocol(handles[i], &gop_guid, (void **)&gop);
++        if ( EFI_ERROR(status) )
++            continue;
++        status = gop->QueryMode(gop, gop->Mode->Mode, &info_size, &mode_info);
++        if ( !EFI_ERROR(status) )
++            break;
++    }
++    if ( handles )
++        efi_bs->FreePool(handles);
++    if ( EFI_ERROR(status) )
++        gop = NULL;
++
++    return gop;
++}
++
++static UINTN __init efi_find_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
++                                      UINTN cols, UINTN rows, UINTN depth)
++{
++    EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info;
++    EFI_STATUS status;
++    UINTN gop_mode = ~0, info_size, size;
++    unsigned int i;
++
++    if ( !gop )
++        return gop_mode;
++
++    for ( i = size = 0; i < gop->Mode->MaxMode; ++i )
++    {
++        unsigned int bpp = 0;
++
++        status = gop->QueryMode(gop, i, &info_size, &mode_info);
++        if ( EFI_ERROR(status) )
++            continue;
++        switch ( mode_info->PixelFormat )
++        {
++        case PixelBitMask:
++            bpp = hweight32(mode_info->PixelInformation.RedMask |
++                            mode_info->PixelInformation.GreenMask |
++                            mode_info->PixelInformation.BlueMask);
++            break;
++        case PixelRedGreenBlueReserved8BitPerColor:
++        case PixelBlueGreenRedReserved8BitPerColor:
++            bpp = 24;
++            break;
++        default:
++            continue;
++        }
++        if ( cols == mode_info->HorizontalResolution &&
++             rows == mode_info->VerticalResolution &&
++             (!depth || bpp == depth) )
++        {
++            gop_mode = i;
++            break;
++        }
++        if ( !cols && !rows &&
++             mode_info->HorizontalResolution *
++             mode_info->VerticalResolution > size )
++        {
++            size = mode_info->HorizontalResolution *
++                   mode_info->VerticalResolution;
++            gop_mode = i;
++        }
++    }
++
++    return gop_mode;
++}
++
++static void __init efi_tables(void)
++{
++    unsigned int i;
++
++    /* Obtain basic table pointers. */
++    for ( i = 0; i < efi_num_ct; ++i )
++    {
++        static EFI_GUID __initdata acpi2_guid = ACPI_20_TABLE_GUID;
++        static EFI_GUID __initdata acpi_guid = ACPI_TABLE_GUID;
++        static EFI_GUID __initdata mps_guid = MPS_TABLE_GUID;
++        static EFI_GUID __initdata smbios_guid = SMBIOS_TABLE_GUID;
++        static EFI_GUID __initdata smbios3_guid = SMBIOS3_TABLE_GUID;
++
++        if ( match_guid(&acpi2_guid, &efi_ct[i].VendorGuid) )
++              efi.acpi20 = (long)efi_ct[i].VendorTable;
++        if ( match_guid(&acpi_guid, &efi_ct[i].VendorGuid) )
++              efi.acpi = (long)efi_ct[i].VendorTable;
++        if ( match_guid(&mps_guid, &efi_ct[i].VendorGuid) )
++              efi.mps = (long)efi_ct[i].VendorTable;
++        if ( match_guid(&smbios_guid, &efi_ct[i].VendorGuid) )
++              efi.smbios = (long)efi_ct[i].VendorTable;
++        if ( match_guid(&smbios3_guid, &efi_ct[i].VendorGuid) )
++              efi.smbios3 = (long)efi_ct[i].VendorTable;
++    }
++
++#ifndef CONFIG_ARM /* TODO - disabled until implemented on ARM */
++    dmi_efi_get_table(efi.smbios != EFI_INVALID_TABLE_ADDR
++                      ? (void *)(long)efi.smbios : NULL,
++                      efi.smbios3 != EFI_INVALID_TABLE_ADDR
++                      ? (void *)(long)efi.smbios3 : NULL);
++#endif
++}
++
+ static void __init setup_efi_pci(void)
+ {
+     EFI_STATUS status;
+@@ -682,6 +848,95 @@
+     efi_bs->FreePool(handles);
+ }
+ 
++static void __init efi_variables(void)
++{
++    EFI_STATUS status;
++
++    status = (efi_rs->Hdr.Revision >> 16) >= 2 ?
++             efi_rs->QueryVariableInfo(EFI_VARIABLE_NON_VOLATILE |
++                                       EFI_VARIABLE_BOOTSERVICE_ACCESS |
++                                       EFI_VARIABLE_RUNTIME_ACCESS,
++                                       &efi_boot_max_var_store_size,
++                                       &efi_boot_remain_var_store_size,
++                                       &efi_boot_max_var_size) :
++             EFI_INCOMPATIBLE_VERSION;
++    if ( EFI_ERROR(status) )
++    {
++        efi_boot_max_var_store_size = 0;
++        efi_boot_remain_var_store_size = 0;
++        efi_boot_max_var_size = status;
++        PrintStr(L"Warning: Could not query variable store: ");
++        DisplayUint(status, 0);
++        PrintStr(newline);
++    }
++}
++
++static void __init efi_set_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop, UINTN gop_mode)
++{
++    EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info;
++    EFI_STATUS status;
++    UINTN info_size;
++
++    if ( !gop )
++        return;
++
++    /* Set graphics mode. */
++    if ( gop_mode < gop->Mode->MaxMode && gop_mode != gop->Mode->Mode )
++        gop->SetMode(gop, gop_mode);
++
++    /* Get graphics and frame buffer info. */
++    status = gop->QueryMode(gop, gop->Mode->Mode, &info_size, &mode_info);
++    if ( !EFI_ERROR(status) )
++        efi_arch_video_init(gop, info_size, mode_info);
++}
++
++static void __init efi_exit_boot(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
++{
++    EFI_STATUS status;
++    UINTN info_size = 0, map_key;
++    bool_t retry;
++
++    efi_bs->GetMemoryMap(&info_size, NULL, &map_key,
++                         &efi_mdesc_size, &mdesc_ver);
++    info_size += 8 * efi_mdesc_size;
++    efi_memmap = efi_arch_allocate_mmap_buffer(info_size);
++    if ( !efi_memmap )
++        blexit(L"Unable to allocate memory for EFI memory map");
++
++    for ( retry = 0; ; retry = 1 )
++    {
++        efi_memmap_size = info_size;
++        status = SystemTable->BootServices->GetMemoryMap(&efi_memmap_size,
++                                                         efi_memmap, &map_key,
++                                                         &efi_mdesc_size,
++                                                         &mdesc_ver);
++        if ( EFI_ERROR(status) )
++            PrintErrMesg(L"Cannot obtain memory map", status);
++
++        efi_arch_process_memory_map(SystemTable, efi_memmap, efi_memmap_size,
++                                    efi_mdesc_size, mdesc_ver);
++
++        efi_arch_pre_exit_boot();
++
++        status = SystemTable->BootServices->ExitBootServices(ImageHandle,
++                                                             map_key);
++        efi_bs = NULL;
++        if ( status != EFI_INVALID_PARAMETER || retry )
++            break;
++    }
++
++    if ( EFI_ERROR(status) )
++        PrintErrMesg(L"Cannot exit boot services", status);
++
++    /* Adjust pointers into EFI. */
++    efi_ct = (void *)efi_ct + DIRECTMAP_VIRT_START;
++#ifdef USE_SET_VIRTUAL_ADDRESS_MAP
++    efi_rs = (void *)efi_rs + DIRECTMAP_VIRT_START;
++#endif
++    efi_memmap = (void *)efi_memmap + DIRECTMAP_VIRT_START;
++    efi_fw_vendor = (void *)efi_fw_vendor + DIRECTMAP_VIRT_START;
++}
++
+ static int __init __maybe_unused set_color(u32 mask, int bpp, u8 *pos, u8 *sz)
+ {
+    if ( bpp < 0 )
+@@ -701,34 +956,26 @@
+ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+ {
+     static EFI_GUID __initdata loaded_image_guid = LOADED_IMAGE_PROTOCOL;
+-    static EFI_GUID __initdata gop_guid = EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID;
+     static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
+     EFI_LOADED_IMAGE *loaded_image;
+     EFI_STATUS status;
+     unsigned int i, argc;
+     CHAR16 **argv, *file_name, *cfg_file_name = NULL, *options = NULL;
+-    UINTN map_key, info_size, gop_mode = ~0;
+-    EFI_HANDLE *handles = NULL;
++    UINTN gop_mode = ~0;
+     EFI_SHIM_LOCK_PROTOCOL *shim_lock;
+     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop = NULL;
+-    EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info;
+     union string section = { NULL }, name;
+-    bool_t base_video = 0, retry;
++    bool_t base_video = 0;
+     char *option_str;
+     bool_t use_cfg_file;
+ 
+-    efi_ih = ImageHandle;
+-    efi_bs = SystemTable->BootServices;
+-    efi_bs_revision = efi_bs->Hdr.Revision;
+-    efi_rs = SystemTable->RuntimeServices;
+-    efi_ct = SystemTable->ConfigurationTable;
+-    efi_num_ct = SystemTable->NumberOfTableEntries;
+-    efi_version = SystemTable->Hdr.Revision;
+-    efi_fw_vendor = SystemTable->FirmwareVendor;
+-    efi_fw_revision = SystemTable->FirmwareRevision;
++#ifndef CONFIG_ARM /* Disabled until runtime services implemented. */
++    set_bit(EFI_PLATFORM, &efi.flags);
++    set_bit(EFI_LOADER, &efi.flags);
++#endif
++
++    efi_init(ImageHandle, SystemTable);
+ 
+-    StdOut = SystemTable->ConOut;
+-    StdErr = SystemTable->StdErr ?: StdOut;
+     use_cfg_file = efi_arch_use_config_file(SystemTable);
+ 
+     status = efi_bs->HandleProtocol(ImageHandle, &loaded_image_guid,
+@@ -789,23 +1036,7 @@
+         }
+ 
+         if ( !base_video )
+-        {
+-            unsigned int best;
+-            UINTN cols, rows, size;
+-
+-            for ( i = 0, size = 0, best = StdOut->Mode->Mode;
+-                  i < StdOut->Mode->MaxMode; ++i )
+-            {
+-                if ( StdOut->QueryMode(StdOut, i, &cols, &rows) == EFI_SUCCESS &&
+-                     cols * rows > size )
+-                {
+-                    size = cols * rows;
+-                    best = i;
+-                }
+-            }
+-            if ( best != StdOut->Mode->Mode )
+-                StdOut->SetMode(StdOut, best);
+-        }
++            efi_console_set_mode();
+     }
+ 
+     PrintStr(L"Xen " __stringify(XEN_VERSION) "." __stringify(XEN_SUBVERSION)
+@@ -824,27 +1055,7 @@
+                                &cols, &rows) == EFI_SUCCESS )
+             efi_arch_console_init(cols, rows);
+ 
+-        status = efi_bs->LocateHandle(ByProtocol, &gop_guid, NULL, &size, NULL);
+-        if ( status == EFI_BUFFER_TOO_SMALL )
+-            status = efi_bs->AllocatePool(EfiLoaderData, size, (void **)&handles);
+-        if ( !EFI_ERROR(status) )
+-            status = efi_bs->LocateHandle(ByProtocol, &gop_guid, NULL, &size,
+-                                          handles);
+-        if ( EFI_ERROR(status) )
+-            size = 0;
+-        for ( i = 0; i < size / sizeof(*handles); ++i )
+-        {
+-            status = efi_bs->HandleProtocol(handles[i], &gop_guid, (void **)&gop);
+-            if ( EFI_ERROR(status) )
+-                continue;
+-            status = gop->QueryMode(gop, gop->Mode->Mode, &info_size, &mode_info);
+-            if ( !EFI_ERROR(status) )
+-                break;
+-        }
+-        if ( handles )
+-            efi_bs->FreePool(handles);
+-        if ( EFI_ERROR(status) )
+-            gop = NULL;
++        gop = efi_get_gop();
+ 
+         /* Get the file system interface. */
+         dir_handle = get_parent_handle(loaded_image, &file_name);
+@@ -952,46 +1163,8 @@
+ 
+         dir_handle->Close(dir_handle);
+ 
+-        if ( gop && !base_video )
+-        {
+-            for ( i = size = 0; i < gop->Mode->MaxMode; ++i )
+-            {
+-                unsigned int bpp = 0;
+-
+-                status = gop->QueryMode(gop, i, &info_size, &mode_info);
+-                if ( EFI_ERROR(status) )
+-                    continue;
+-                switch ( mode_info->PixelFormat )
+-                {
+-                case PixelBitMask:
+-                    bpp = hweight32(mode_info->PixelInformation.RedMask |
+-                                    mode_info->PixelInformation.GreenMask |
+-                                    mode_info->PixelInformation.BlueMask);
+-                    break;
+-                case PixelRedGreenBlueReserved8BitPerColor:
+-                case PixelBlueGreenRedReserved8BitPerColor:
+-                    bpp = 24;
+-                    break;
+-                default:
+-                    continue;
+-                }
+-                if ( cols == mode_info->HorizontalResolution &&
+-                     rows == mode_info->VerticalResolution &&
+-                     (!depth || bpp == depth) )
+-                {
+-                    gop_mode = i;
+-                    break;
+-                }
+-                if ( !cols && !rows &&
+-                     mode_info->HorizontalResolution *
+-                     mode_info->VerticalResolution > size )
+-                {
+-                    size = mode_info->HorizontalResolution *
+-                           mode_info->VerticalResolution;
+-                    gop_mode = i;
+-                }
+-            }
+-        }
++        if ( !base_video )
++            gop_mode = efi_find_gop_mode(gop, cols, rows, depth);
+     }
+ 
+     efi_arch_edd();
+@@ -999,111 +1172,19 @@
+     /* XXX Collect EDID info. */
+     efi_arch_cpu();
+ 
+-    /* Obtain basic table pointers. */
+-    for ( i = 0; i < efi_num_ct; ++i )
+-    {
+-        static EFI_GUID __initdata acpi2_guid = ACPI_20_TABLE_GUID;
+-        static EFI_GUID __initdata acpi_guid = ACPI_TABLE_GUID;
+-        static EFI_GUID __initdata mps_guid = MPS_TABLE_GUID;
+-        static EFI_GUID __initdata smbios_guid = SMBIOS_TABLE_GUID;
+-        static EFI_GUID __initdata smbios3_guid = SMBIOS3_TABLE_GUID;
+-
+-        if ( match_guid(&acpi2_guid, &efi_ct[i].VendorGuid) )
+-	       efi.acpi20 = (long)efi_ct[i].VendorTable;
+-        if ( match_guid(&acpi_guid, &efi_ct[i].VendorGuid) )
+-	       efi.acpi = (long)efi_ct[i].VendorTable;
+-        if ( match_guid(&mps_guid, &efi_ct[i].VendorGuid) )
+-	       efi.mps = (long)efi_ct[i].VendorTable;
+-        if ( match_guid(&smbios_guid, &efi_ct[i].VendorGuid) )
+-	       efi.smbios = (long)efi_ct[i].VendorTable;
+-        if ( match_guid(&smbios3_guid, &efi_ct[i].VendorGuid) )
+-	       efi.smbios3 = (long)efi_ct[i].VendorTable;
+-    }
+-
+-#ifndef CONFIG_ARM /* TODO - disabled until implemented on ARM */
+-    dmi_efi_get_table(efi.smbios != EFI_INVALID_TABLE_ADDR
+-                      ? (void *)(long)efi.smbios : NULL,
+-                      efi.smbios3 != EFI_INVALID_TABLE_ADDR
+-                      ? (void *)(long)efi.smbios3 : NULL);
+-#endif
++    efi_tables();
+ 
+     /* Collect PCI ROM contents. */
+     setup_efi_pci();
+ 
+     /* Get snapshot of variable store parameters. */
+-    status = (efi_rs->Hdr.Revision >> 16) >= 2 ?
+-             efi_rs->QueryVariableInfo(EFI_VARIABLE_NON_VOLATILE |
+-                                       EFI_VARIABLE_BOOTSERVICE_ACCESS |
+-                                       EFI_VARIABLE_RUNTIME_ACCESS,
+-                                       &efi_boot_max_var_store_size,
+-                                       &efi_boot_remain_var_store_size,
+-                                       &efi_boot_max_var_size) :
+-             EFI_INCOMPATIBLE_VERSION;
+-    if ( EFI_ERROR(status) )
+-    {
+-        efi_boot_max_var_store_size = 0;
+-        efi_boot_remain_var_store_size = 0;
+-        efi_boot_max_var_size = status;
+-        PrintStr(L"Warning: Could not query variable store: ");
+-        DisplayUint(status, 0);
+-        PrintStr(newline);
+-    }
++    efi_variables();
+ 
+     efi_arch_memory_setup();
+ 
+-    if ( gop )
+-    {
+-
+-        /* Set graphics mode. */
+-        if ( gop_mode < gop->Mode->MaxMode && gop_mode != gop->Mode->Mode )
+-            gop->SetMode(gop, gop_mode);
++    efi_set_gop_mode(gop, gop_mode);
+ 
+-        /* Get graphics and frame buffer info. */
+-        status = gop->QueryMode(gop, gop->Mode->Mode, &info_size, &mode_info);
+-        if ( !EFI_ERROR(status) )
+-            efi_arch_video_init(gop, info_size, mode_info);
+-    }
+-
+-    info_size = 0;
+-    efi_bs->GetMemoryMap(&info_size, NULL, &map_key,
+-                         &efi_mdesc_size, &mdesc_ver);
+-    info_size += 8 * efi_mdesc_size;
+-    efi_memmap = efi_arch_allocate_mmap_buffer(info_size);
+-    if ( !efi_memmap )
+-        blexit(L"Unable to allocate memory for EFI memory map");
+-
+-    for ( retry = 0; ; retry = 1 )
+-    {
+-        efi_memmap_size = info_size;
+-        status = SystemTable->BootServices->GetMemoryMap(&efi_memmap_size,
+-                                                         efi_memmap, &map_key,
+-                                                         &efi_mdesc_size,
+-                                                         &mdesc_ver);
+-        if ( EFI_ERROR(status) )
+-            PrintErrMesg(L"Cannot obtain memory map", status);
+-
+-        efi_arch_process_memory_map(SystemTable, efi_memmap, efi_memmap_size,
+-                                    efi_mdesc_size, mdesc_ver);
+-
+-        efi_arch_pre_exit_boot();
+-
+-        status = SystemTable->BootServices->ExitBootServices(ImageHandle,
+-                                                             map_key);
+-        efi_bs = NULL;
+-        if ( status != EFI_INVALID_PARAMETER || retry )
+-            break;
+-    }
+-
+-    if ( EFI_ERROR(status) )
+-        PrintErrMesg(L"Cannot exit boot services", status);
+-
+-    /* Adjust pointers into EFI. */
+-    efi_ct = (void *)efi_ct + DIRECTMAP_VIRT_START;
+-#ifdef USE_SET_VIRTUAL_ADDRESS_MAP
+-    efi_rs = (void *)efi_rs + DIRECTMAP_VIRT_START;
+-#endif
+-    efi_memmap = (void *)efi_memmap + DIRECTMAP_VIRT_START;
+-    efi_fw_vendor = (void *)efi_fw_vendor + DIRECTMAP_VIRT_START;
++    efi_exit_boot(ImageHandle, SystemTable);
+ 
+     efi_arch_post_exit_boot();
+     for( ; ; ); /* not reached */
+diff -Naur xen-9999-bef/xen/common/efi/runtime.c xen-9999-aft/xen/common/efi/runtime.c
+--- xen-9999-bef/xen/common/efi/runtime.c	2015-08-16 08:29:52.994771158 +0300
++++ xen-9999-aft/xen/common/efi/runtime.c	2015-08-16 08:30:57.848765011 +0300
+@@ -10,14 +10,10 @@
+ 
+ #ifndef COMPAT
+ 
+-#ifdef CONFIG_ARM  /* Disabled until runtime services implemented */
+-const bool_t efi_enabled = 0;
+-#else
++#ifndef CONFIG_ARM
+ # include <asm/i387.h>
+ # include <asm/xstate.h>
+ # include <public/platform.h>
+-
+-const bool_t efi_enabled = 1;
+ #endif
+ 
+ unsigned int __read_mostly efi_num_ct;
+@@ -42,11 +38,12 @@
+ UINT64 __read_mostly efi_boot_max_var_size;
+ 
+ struct efi __read_mostly efi = {
+-	.acpi   = EFI_INVALID_TABLE_ADDR,
+-	.acpi20 = EFI_INVALID_TABLE_ADDR,
+-	.mps    = EFI_INVALID_TABLE_ADDR,
+-	.smbios = EFI_INVALID_TABLE_ADDR,
+-	.smbios3 = EFI_INVALID_TABLE_ADDR,
++       .flags   = 0, /* Initialized later. */
++       .acpi    = EFI_INVALID_TABLE_ADDR,
++       .acpi20  = EFI_INVALID_TABLE_ADDR,
++       .mps     = EFI_INVALID_TABLE_ADDR,
++       .smbios  = EFI_INVALID_TABLE_ADDR,
++       .smbios3 = EFI_INVALID_TABLE_ADDR
+ };
+ 
+ const struct efi_pci_rom *__read_mostly efi_pci_roms;
+@@ -170,6 +167,9 @@
+ {
+     unsigned int i, n;
+ 
++    if ( !efi_enabled(EFI_PLATFORM) )
++        return -EOPNOTSUPP;
++
+     switch ( idx )
+     {
+     case XEN_FW_EFI_VERSION:
+@@ -304,6 +304,9 @@
+     EFI_STATUS status = EFI_NOT_STARTED;
+     int rc = 0;
+ 
++    if ( !efi_enabled(EFI_PLATFORM) )
++        return -EOPNOTSUPP;
++
+     switch ( op->function )
+     {
+     case XEN_EFI_get_time:
+diff -Naur xen-9999-bef/xen/drivers/acpi/osl.c xen-9999-aft/xen/drivers/acpi/osl.c
+--- xen-9999-bef/xen/drivers/acpi/osl.c	2015-08-16 08:29:53.001771157 +0300
++++ xen-9999-aft/xen/drivers/acpi/osl.c	2015-08-16 08:30:57.848765011 +0300
+@@ -65,7 +65,7 @@
+ 
+ acpi_physical_address __init acpi_os_get_root_pointer(void)
+ {
+-	if (efi_enabled) {
++       if (efi_enabled(EFI_PLATFORM)) {
+ 		if (efi.acpi20 != EFI_INVALID_TABLE_ADDR)
+ 			return efi.acpi20;
+ 		else if (efi.acpi != EFI_INVALID_TABLE_ADDR)
+diff -Naur xen-9999-bef/xen/include/asm-x86/config.h xen-9999-aft/xen/include/asm-x86/config.h
+--- xen-9999-bef/xen/include/asm-x86/config.h	2015-08-16 08:29:53.017771156 +0300
++++ xen-9999-aft/xen/include/asm-x86/config.h	2015-08-16 08:30:57.849765011 +0300
+@@ -114,6 +114,7 @@
+                  trampoline_phys-__pa(trampoline_start)))
+ extern char trampoline_start[], trampoline_end[];
+ extern char trampoline_realmode_entry[];
++extern unsigned int xen_img_base_phys_addr;
+ extern unsigned int trampoline_xen_phys_start;
+ extern unsigned char trampoline_cpu_started;
+ extern char wakeup_start[];
+@@ -280,6 +281,8 @@
+ #endif
+ #define DIRECTMAP_VIRT_END      (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE)
+ 
++#define XEN_IMG_OFFSET          0x200000
++
+ #ifndef __ASSEMBLY__
+ 
+ /* This is not a fixed value, just a lower limit. */
+diff -Naur xen-9999-bef/xen/include/asm-x86/page.h xen-9999-aft/xen/include/asm-x86/page.h
+--- xen-9999-bef/xen/include/asm-x86/page.h	2015-08-16 08:29:53.023771155 +0300
++++ xen-9999-aft/xen/include/asm-x86/page.h	2015-08-16 08:30:57.849765011 +0300
+@@ -283,7 +283,7 @@
+ extern l2_pgentry_t  *compat_idle_pg_table_l2;
+ extern unsigned int   m2p_compat_vstart;
+ extern l2_pgentry_t l2_xenmap[L2_PAGETABLE_ENTRIES],
+-    l2_bootmap[L2_PAGETABLE_ENTRIES];
++    l2_bootmap[4*L2_PAGETABLE_ENTRIES];
+ extern l3_pgentry_t l3_bootmap[L3_PAGETABLE_ENTRIES];
+ extern l2_pgentry_t l2_identmap[4*L2_PAGETABLE_ENTRIES];
+ extern l1_pgentry_t l1_identmap[L1_PAGETABLE_ENTRIES],
+diff -Naur xen-9999-bef/xen/include/xen/efi.h xen-9999-aft/xen/include/xen/efi.h
+--- xen-9999-bef/xen/include/xen/efi.h	2015-08-16 08:29:53.033771154 +0300
++++ xen-9999-aft/xen/include/xen/efi.h	2015-08-16 08:30:57.850765011 +0300
+@@ -2,15 +2,18 @@
+ #define __XEN_EFI_H__
+ 
+ #ifndef __ASSEMBLY__
++#include <xen/bitops.h>
+ #include <xen/types.h>
+ #endif
+ 
+-extern const bool_t efi_enabled;
+-
+ #define EFI_INVALID_TABLE_ADDR (~0UL)
+ 
++#define EFI_PLATFORM   0
++#define EFI_LOADER     1
++
+ /* Add fields here only if they need to be referenced from non-EFI code. */
+ struct efi {
++    unsigned long flags;
+     unsigned long mps;          /* MPS table */
+     unsigned long acpi;         /* ACPI table (IA64 ext 0.71) */
+     unsigned long acpi20;       /* ACPI table (ACPI 2.0) */
+@@ -40,6 +43,16 @@
+ int efi_compat_get_info(uint32_t idx, union compat_pf_efi_info *);
+ int efi_compat_runtime_call(struct compat_pf_efi_runtime_call *);
+ 
++/*
++ * Test whether the above EFI_* bits are enabled.
++ *
++ * Stolen from Linux Kernel.
++ */
++static inline bool_t efi_enabled(int feature)
++{
++    return test_bit(feature, &efi.flags) != 0;
++}
++
+ #endif /* !__ASSEMBLY__ */
+ 
+ #endif /* __XEN_EFI_H__ */
+diff -Naur xen-9999-bef/xen/include/xen/multiboot2.h xen-9999-aft/xen/include/xen/multiboot2.h
+--- xen-9999-bef/xen/include/xen/multiboot2.h	1970-01-01 02:00:00.000000000 +0200
++++ xen-9999-aft/xen/include/xen/multiboot2.h	2015-08-16 08:30:57.850765011 +0300
+@@ -0,0 +1,182 @@
++/*
++ *  Copyright (C) 1999,2003,2007,2008,2009,2010  Free Software Foundation, Inc.
++ *
++ *  multiboot2.h - Multiboot 2 header file.
++ *
++ *  Based on grub-2.00/include/multiboot2.h file.
++ *
++ *  Permission is hereby granted, free of charge, to any person obtaining a copy
++ *  of this software and associated documentation files (the "Software"), to
++ *  deal in the Software without restriction, including without limitation the
++ *  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
++ *  sell copies of the Software, and to permit persons to whom the Software is
++ *  furnished to do so, subject to the following conditions:
++ *
++ *  The above copyright notice and this permission notice shall be included in
++ *  all copies or substantial portions of the Software.
++ *
++ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL ANY
++ *  DEVELOPER OR DISTRIBUTOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++ *  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
++ *  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __MULTIBOOT2_H__
++#define __MULTIBOOT2_H__
++
++/* The magic field should contain this.  */
++#define MULTIBOOT2_HEADER_MAGIC                        0xe85250d6
++
++/* This should be in %eax on x86 architecture.  */
++#define MULTIBOOT2_BOOTLOADER_MAGIC            0x36d76289
++
++/* How many bytes from the start of the file we search for the header.  */
++#define MULTIBOOT2_SEARCH                      32768
++
++/* Multiboot 2 header alignment. */
++#define MULTIBOOT2_HEADER_ALIGN                        8
++
++/* Alignment of multiboot 2 modules.  */
++#define MULTIBOOT2_MOD_ALIGN                   0x00001000
++
++/* Alignment of the multiboot 2 info structure.  */
++#define MULTIBOOT2_INFO_ALIGN                  0x00000008
++
++/* Multiboot 2 architectures. */
++#define MULTIBOOT2_ARCHITECTURE_I386   0
++#define MULTIBOOT2_ARCHITECTURE_MIPS32 4
++
++/* Header tag types. */
++#define MULTIBOOT2_HEADER_TAG_END                      0
++#define MULTIBOOT2_HEADER_TAG_INFORMATION_REQUEST      1
++#define MULTIBOOT2_HEADER_TAG_ADDRESS                  2
++#define MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS            3
++#define MULTIBOOT2_HEADER_TAG_CONSOLE_FLAGS            4
++#define MULTIBOOT2_HEADER_TAG_FRAMEBUFFER              5
++#define MULTIBOOT2_HEADER_TAG_MODULE_ALIGN             6
++#define MULTIBOOT2_HEADER_TAG_EFI_BS                   7
++#define MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS_EFI32      8
++#define MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS_EFI64      9
++#define MULTIBOOT2_HEADER_TAG_RELOCATABLE              10
++
++/* Header tag flags. */
++#define MULTIBOOT2_HEADER_TAG_REQUIRED 0
++#define MULTIBOOT2_HEADER_TAG_OPTIONAL 1
++
++/* Where image should be loaded (suggestion not requirement). */
++#define MULTIBOOT2_LOAD_PREFERENCE_NONE        0
++#define MULTIBOOT2_LOAD_PREFERENCE_LOW         1
++#define MULTIBOOT2_LOAD_PREFERENCE_HIGH        2
++
++/* Header console tag console_flags. */
++#define MULTIBOOT2_CONSOLE_FLAGS_CONSOLE_REQUIRED      1
++#define MULTIBOOT2_CONSOLE_FLAGS_EGA_TEXT_SUPPORTED    2
++
++/* Flags set in the 'flags' member of the multiboot header.  */
++#define MULTIBOOT2_TAG_TYPE_END                        0
++#define MULTIBOOT2_TAG_TYPE_CMDLINE            1
++#define MULTIBOOT2_TAG_TYPE_BOOT_LOADER_NAME   2
++#define MULTIBOOT2_TAG_TYPE_MODULE             3
++#define MULTIBOOT2_TAG_TYPE_BASIC_MEMINFO      4
++#define MULTIBOOT2_TAG_TYPE_BOOTDEV            5
++#define MULTIBOOT2_TAG_TYPE_MMAP               6
++#define MULTIBOOT2_TAG_TYPE_VBE                        7
++#define MULTIBOOT2_TAG_TYPE_FRAMEBUFFER                8
++#define MULTIBOOT2_TAG_TYPE_ELF_SECTIONS       9
++#define MULTIBOOT2_TAG_TYPE_APM                        10
++#define MULTIBOOT2_TAG_TYPE_EFI32              11
++#define MULTIBOOT2_TAG_TYPE_EFI64              12
++#define MULTIBOOT2_TAG_TYPE_SMBIOS             13
++#define MULTIBOOT2_TAG_TYPE_ACPI_OLD           14
++#define MULTIBOOT2_TAG_TYPE_ACPI_NEW           15
++#define MULTIBOOT2_TAG_TYPE_NETWORK            16
++#define MULTIBOOT2_TAG_TYPE_EFI_MMAP           17
++#define MULTIBOOT2_TAG_TYPE_EFI_BS             18
++#define MULTIBOOT2_TAG_TYPE_EFI32_IH           19
++#define MULTIBOOT2_TAG_TYPE_EFI64_IH           20
++#define MULTIBOOT2_TAG_TYPE_BASE_ADDR          21
++
++/* Multiboot 2 tag alignment. */
++#define MULTIBOOT2_TAG_ALIGN                   8
++
++/* Memory types. */
++#define MULTIBOOT2_MEMORY_AVAILABLE            1
++#define MULTIBOOT2_MEMORY_RESERVED             2
++#define MULTIBOOT2_MEMORY_ACPI_RECLAIMABLE     3
++#define MULTIBOOT2_MEMORY_NVS                  4
++#define MULTIBOOT2_MEMORY_BADRAM               5
++
++/* Framebuffer types. */
++#define MULTIBOOT2_FRAMEBUFFER_TYPE_INDEXED    0
++#define MULTIBOOT2_FRAMEBUFFER_TYPE_RGB                1
++#define MULTIBOOT2_FRAMEBUFFER_TYPE_EGA_TEXT   2
++
++#ifndef __ASSEMBLY__
++typedef struct {
++    u32 total_size;
++    u32 reserved;
++} multiboot2_fixed_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++} multiboot2_tag_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u32 base_addr;
++} multiboot2_tag_base_addr_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    char string[0];
++} multiboot2_tag_string_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u32 mem_lower;
++    u32 mem_upper;
++} multiboot2_tag_basic_meminfo_t;
++
++typedef struct __packed {
++    u64 addr;
++    u64 len;
++    u32 type;
++    u32 zero;
++} multiboot2_memory_map_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u32 entry_size;
++    u32 entry_version;
++    multiboot2_memory_map_t entries[0];
++} multiboot2_tag_mmap_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u64 pointer;
++} multiboot2_tag_efi64_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u64 pointer;
++} multiboot2_tag_efi64_ih_t;
++
++typedef struct {
++    u32 type;
++    u32 size;
++    u32 mod_start;
++    u32 mod_end;
++    char cmdline[0];
++} multiboot2_tag_module_t;
++#endif /* __ASSEMBLY__ */
++
++#endif /* __MULTIBOOT2_H__ */

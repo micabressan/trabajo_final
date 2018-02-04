@@ -1,0 +1,25 @@
+Sub DisableAlarms_CustomConfig()
+	Set se = Parent.Parent
+	For Each obj In se
+		Sweep obj
+	Next
+End Sub
+
+Sub Sweep( obj )
+	Dim itmX, itmY	
+	Dim regex : Set regex = New RegExp
+	regex.IgnoreCase = True
+	regex.Pattern = "^(ATM_(Defeito|PosConsist))$"
+	
+	For Each itmX In obj
+		If (regex.Test( itmX.Name )) Then
+			For Each itmY In itmX
+				If ( InStr(TypeName( itmY ), "Alarm") > 0 ) Then
+					itmY.AlarmVerify = False
+				End If
+			Next
+		Else
+			Sweep itmX
+		End If
+	Next
+End Sub

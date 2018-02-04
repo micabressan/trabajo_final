@@ -1,0 +1,272 @@
+diff --git a/dummyA/Scripts/AIPathNavigation.cs b/dummyB/Scripts/AIPathNavigation.cs
+index ab02075..1313ee8 100755
+--- a/dummyA/Scripts/AIPathNavigation.cs
++++ b/dummyB/Scripts/AIPathNavigation.cs
+@@ -3,13 +3,15 @@ using UnityEngine;
+ 
+ namespace SpaceRTSKit
+ {
++	using Pathfinding;
++
+ 	/// <summary>
+ 	/// Special Navigation derivation created for the A* Pathfinding project implementation
+ 	/// </summary>
+-	[RequireComponent(typeof(SpaceRTSAIPath))]
++	[RequireComponent(typeof(AIPath))]
+ 	public class AIPathNavigation : Navigation
+ 	{
+-		private SpaceRTSAIPath aiPathAgent = null;
++		private AIPath aiPathAgent = null;
+ 
+ 		protected override void Start()
+ 		{
+@@ -36,6 +38,32 @@ namespace SpaceRTSKit
+ 			aiPathAgent = null;
+ 		}
+ 
++		/// <summary>
++		/// Instantly teleports the GameEntity to the given position maintaining the looking at direction.
++		/// </summary>
++		/// <param name="position">The new position where must be located thee game entity.</param>
++		public override void Teleport(Vector3 position)
++		{
++			if(aiPathAgent !=null && aiPathAgent.enabled)
++			{
++				aiPathAgent.Teleport(position);
++				OnMoveDestinationReached();
++			}
++			else
++				base.Teleport(position);
++		}
++
++		/// <summary>
++		/// Instantly teleports the GameEntity to the given position and looking at the given direction
++		/// </summary>
++		/// <param name="position">The new position where must be located thee game entity.</param>
++		/// <param name="direction">The new direction that must be looking at the game entity.</param>
++		public override void Teleport(Vector3 position, Vector3 direction)
++		{
++			transform.rotation = Quaternion.LookRotation(direction.normalized);
++			Teleport(position);
++		}
++
+ 		/// <summary>
+ 		/// Called after a EngageMovement order.
+ 		/// Override to add special behaviours.
+@@ -46,7 +74,8 @@ namespace SpaceRTSKit
+ 			if(aiPathAgent != null && aiPathAgent.enabled)
+ 			{
+ 				// We should search from the current position
+-				aiPathAgent.StartPath(destination);
++				aiPathAgent.destination = destination;
++				aiPathAgent.SearchPath();
+ 			}
+ 			base.OnMovementOrderEngage(destination);
+ 		}
+@@ -59,9 +88,7 @@ namespace SpaceRTSKit
+ 		{
+ 			if (aiPathAgent != null && aiPathAgent.enabled)
+ 			{
+-				if( aiPathAgent.pathPending )
+-					return false;
+-				return aiPathAgent.TargetReached;
++				return !aiPathAgent.pathPending && aiPathAgent.reachedEndOfPath;
+ 			}
+ 			else
+ 				return base.IsFinalDestinationReached();
+@@ -74,11 +101,16 @@ namespace SpaceRTSKit
+ 		{
+ 			if( aiPathAgent != null && aiPathAgent.enabled)
+ 			{
+-				//if (!aiPathAgent.pathPending && aiPathAgent.pathStatus != NavMeshPathStatus.PathComplete)
+-				//{
+-				//	StopMovement();
+-				//	return;
+-				//}
++				// Tell the AIPath component to calculate how it wants to move.
++				// This will not actually move the AI, that would have been done
++				// by calling aiPathAgent.FinalizeMovement(nextPosition, nextRotation)
++				// however since we want to perform our own movement calculations we
++				// will skip that part.
++				// This method will however update the steeringTarget field which we will use below.
++				Vector3 nextPosition;
++				Quaternion nextRotation;
++				aiPathAgent.MovementUpdate(Time.deltaTime, out nextPosition, out nextRotation);
++
+ 				Vector3 totalMoveVector = aiPathAgent.steeringTarget - BasePosition;
+ 				Quaternion targetLookAt = totalMoveVector != Vector3.zero ? Quaternion.LookRotation(totalMoveVector.normalized) : transform.rotation;
+ 				Advance(targetLookAt, moveConfig.accel);
+@@ -94,9 +126,16 @@ namespace SpaceRTSKit
+ 		[ContextMenu("Refresh NavMeshAgent Data")]
+ 		public void RefreshAIPathAgentData()
+ 		{
+-			aiPathAgent = GetComponent<SpaceRTSAIPath>();
+-			if(aiPathAgent == null)
+-				Debug.LogWarning("This component requires a SpaceRTSAIPath attached to this GameObject.", this.gameObject);
++			aiPathAgent = GetComponent<AIPath>();
++			if(aiPathAgent == null) {
++				Debug.LogWarning("This component requires an AIPath component attached to this GameObject.", this.gameObject);
++			} else {
++				aiPathAgent.slowdownDistance = stoppingDistance;
++				aiPathAgent.endReachedDistance = stoppingDistance;
++				// Make sure the AI doesn't use it's own movement code. We want to override that
++				// to make it more realistic for a spaceship.
++				aiPathAgent.canMove = false;
++			}
+ 		}
+ 	}
+ }
+\ No newline at end of file
+diff --git a/dummyA/Scripts/AStarSpatialSystem.cs b/dummyB/Scripts/AStarSpatialSystem.cs
+index f8f7908..389f8fd 100755
+--- a/dummyA/Scripts/AStarSpatialSystem.cs
++++ b/dummyB/Scripts/AStarSpatialSystem.cs
+@@ -23,11 +23,7 @@ namespace NullPointerGame.AStarIntegration
+ 		/// <returns>A string array will a the layer area names for the spatial system.</returns>
+ 		public override string [] GetAreaNames()
+ 		{
+-			AstarPath current = GameObject.FindObjectOfType<AstarPath>();
+-			if(current!=null)
+-				return current.GetTagNames();
+-			else
+-				return base.GetAreaNames();
++			return AstarPath.FindTagNames();
+ 		}
+ 
+ 		/// <summary>
+@@ -41,10 +37,9 @@ namespace NullPointerGame.AStarIntegration
+ 		{
+ 			NNConstraint constraint = NNConstraint.Default;
+ 			constraint.tags = masks;
+-			constraint.constrainArea = true;
+ 			NNInfo info = AstarPath.active.GetNearest(pingPosition, constraint);
+ 			closestPoint = info.position;
+-			return true;
++			return info.node != null;
+ 		}
+ 
+ 		/// <summary>
+@@ -107,40 +102,23 @@ namespace NullPointerGame.AStarIntegration
+ 			unwalkConstraint.walkable = false;
+ 			NNInfo tagInfo = AstarPath.active.GetNearest(pingPosition, unwalkConstraint);
+ 
+-			// Analize the results	
+-			if(unwalkInfo.node == null && tagInfo.node == null)
+-			{
+-				edgePosition = pingPosition;
+-				dist = 0.0f;
+-				return false;
+-			}
+-			else if(unwalkInfo.node == null && tagInfo.node != null)
+-			{
+-				edgePosition = tagInfo.position;
+-				dist = Vector3.Distance(pingPosition, tagInfo.position);
++			dist = float.PositiveInfinity;
++			edgePosition = pingPosition;
+ 
+-			}
+-			else if(unwalkInfo.node != null && tagInfo.node == null)
+-			{
+-				edgePosition = unwalkInfo.position;
++			if (unwalkInfo.node != null) {
+ 				dist = Vector3.Distance(pingPosition, unwalkInfo.position);
++				edgePosition = unwalkInfo.position;
+ 			}
+-			else // if(unwalkInfo.node != null && tagInfo.node != null)
+-			{
+-				float unwalkDistance = Vector3.Distance(pingPosition, unwalkInfo.position);
+-				float tagDistance = Vector3.Distance(pingPosition, tagInfo.position);
+-				if(unwalkDistance < tagDistance)
+-				{
+-					edgePosition = unwalkInfo.position;
+-					dist = unwalkDistance;
+-				}
+-				else
+-				{
++
++			if (tagInfo.node != null) {
++				var d = Vector3.Distance(pingPosition, tagInfo.position);
++				if (d < dist) {
++					dist = d;
+ 					edgePosition = tagInfo.position;
+-					dist = tagDistance;
+ 				}
+ 			}
+-			return true;
++
++			return !float.IsPositiveInfinity(dist);
+ 		}
+ 
+ 		[ContextMenu("Rebuild")]
+diff --git a/dummyA/Scripts/SpaceRTSAIPath.cs b/dummyA/Scripts/SpaceRTSAIPath.cs
+deleted file mode 100755
+index 1e84859..0000000
+--- a/dummyA/Scripts/SpaceRTSAIPath.cs
++++ /dev/null
+@@ -1,66 +0,0 @@
+-using Pathfinding;
+-using UnityEngine;
+-
+-namespace SpaceRTSKit
+-{
+-
+-	/// <summary>
+-	/// Implementation of the Aron granberg's A* Pathfinding Project. Must be used along with the AIPathNavigation
+-	/// </summary>
+-	public class SpaceRTSAIPath : AIPath
+-	{
+-		public bool pathPending = false;
+-
+-		public Vector3 steeringTarget 
+-		{
+-			get
+-			{
+-				if(interpolator.valid)
+-				{
+-					interpolator.MoveToLocallyClosestPoint(tr.position, true, false);
+-					interpolator.MoveToCircleIntersection2D(tr.position, pickNextWaypointDist, movementPlane);
+-					return interpolator.position;
+-				}
+-				else
+-					return tr.position;
+-			}
+-		}
+-
+-		public void StartPath(Vector3 targetPosition)
+-		{
+-			pathPending = true;
+-			seeker.StartPath(GetFeetPosition(), targetPosition);
+-		}
+-
+-		public override void OnPathComplete (Path _p)
+-		{
+-			base.OnPathComplete(_p);
+-			pathPending = false;
+-		}
+-
+-		protected override void MovementUpdate(float deltaTime)
+-		{
+-			if (!interpolator.valid)
+-			{
+-				velocity2D = Vector3.zero;
+-			}
+-			else
+-			{
+-				Vector3 currentPosition = tr.position;
+-
+-				interpolator.MoveToLocallyClosestPoint(currentPosition, true, false);
+-				interpolator.MoveToCircleIntersection2D(currentPosition, pickNextWaypointDist, movementPlane);
+-				targetPoint = interpolator.position;
+-				Vector2 dir = movementPlane.ToPlane(targetPoint - currentPosition);
+-
+-				float distanceToEnd = dir.magnitude + interpolator.remainingDistance;
+-
+-				if (distanceToEnd <= endReachedDistance && !TargetReached)
+-				{
+-					TargetReached = true;
+-					OnTargetReached();
+-				}
+-			}
+-		}
+-	}
+-}

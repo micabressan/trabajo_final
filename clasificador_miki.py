@@ -1,4 +1,4 @@
-from util import load_data
+from util import load_data, load_data_folder
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -11,12 +11,12 @@ if __name__ == '__main__':
 
     print ('cargando datos ... ')
 
-    X, y = load_data('codes', 500)
+    X, y = load_data_folder('codes_prueba')
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
     print ('normalizando ... ')
 
-    count_vect = CountVectorizer()
+    count_vect = CountVectorizer(min_df=0.1)
 
     X_train_counts = count_vect.fit_transform(X_train)
     X_train_tf = TfidfTransformer(use_idf=False).fit_transform(X_train_counts)

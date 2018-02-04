@@ -1,0 +1,35 @@
+Sub Save()
+    Dim CountOfChar, StartRow, StartCell, EndRow, EndCell As Integer
+    CountOfChar = 19
+    StartRow = 4
+    StartCell = 3
+    Dim Str As String
+    
+    Dim I As Integer
+    I = 0
+    Dim M As Integer
+    For Each cel In Range(Cells(StartRow, 3), Cells(StartRow + CountOfChar - 1, StartCell + CountOfChar - 1))
+        I = I + 1
+        If cel.Value = "" Then
+            Str = Str & "0"
+        End If
+        If cel.Value Like "*<*" Then
+            Str = Str & "1"
+        End If
+        If cel.Value Like "*=*" Then
+            Str = Str & "2"
+        End If
+        If cel.Value Like "*>*" Then
+            Str = Str & "3"
+        End If
+        If (I Mod CountOfChar) <> 0 Then
+            Str = Str & ","
+        End If
+        If (I Mod CountOfChar) = 0 Then
+            Str = Str & vbCrLf
+        End If
+    Next cel
+    Open "table.txt" For Output As #1
+        Print #1, Str
+    Close #1
+End Sub

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+
+<?xml-stylesheet type="text/css"  href="http://www.YourWebSite.com/feed/rss.css" ?>
+
+<channel>  
+
+    <title>Your Home Page Title</title>  
+
+    <link>http://www.YourWebSite.com</link>  
+
+     <description> 
+
+        <![CDATA[    
+
+          Know bla bla bla of 
+
+          <a href="http://www.YourWebSite.com">[ Read more...]</a>         
+
+        ]]> 
+
+        </description>
+ </channel>
+
+</rss>

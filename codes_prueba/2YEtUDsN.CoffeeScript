@@ -1,0 +1,9 @@
+App.config [
+    "$routeProvider", "$locationProvider"
+    ($routeProvider, $locationProvider) ->
+        console.log "routes"
+        overlay.routes.forEach (value) ->
+            $routeProvider.when(value.path, value.route)
+    
+        $routeProvider.otherwise redirectTo: "/login"
+]

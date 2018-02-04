@@ -1,0 +1,30 @@
+image: python:3.6.3
+
+variables:
+  MYSQL_DATABASE: users
+  MYSQL_ROOT_PASSWORD: Root_pass
+  MYSQL_USER: mysql_user
+  MYSQL_PASSWORD: mysql_pass
+
+services:
+  - mariadb
+  - redis
+
+before_script:
+  - python -V
+  - pip install virtualenv
+
+test:
+  tags:
+    - docker
+    - python
+  variables:
+    DATABASE_URL: "mysql://mysql_user:mysql_pass@mariadb:3306/users"
+  script:
+    - virtualenv  .env
+    - source .env/bin/activate
+    - which python
+    - cd app
+    - pip install -r requirements/test.txt
+    - pip install -e .
+    - pytest --flake8 --cov=heimdallr

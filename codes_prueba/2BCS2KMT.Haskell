@@ -1,0 +1,19 @@
+data Matrix a = Mat Int Int [[a]]
+  deriving (Show, Eq)
+
+makeList0 = \x -> take x [0 | _ <- [1..]]
+
+matAddEColumn (Mat n m (cols @ ((el : _) : _))) = 
+  Mat n (m + 1) (cols ++ [map (\i -> if i == m + 1 then el else 0) [1..]])
+
+matAddERow (mt @ (Mat n m (cols @ ((el : _) : _)))) = 
+  Mat (n + 1) m (map (\(x, i) -> x ++ [if i == n + 1 then el else 0])
+                     (zipWith (,) cols [1..m]))
+
+getMat = \(mt @ (Mat n1 m1 _)) n m -> 
+  if n > n1 
+  then getMat (matAddERow mt) n m
+  else 
+  if m > m1
+  then getMat (matAddEColumn mt) n m
+  else mt

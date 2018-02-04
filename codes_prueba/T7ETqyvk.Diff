@@ -1,0 +1,121 @@
+diff --git a/src/pregmod/widgets/economyWidgets.tw b/src/pregmod/widgets/economyWidgets.tw
+index 0e4a3ed..dd156eb 100644
+--- a/src/pregmod/widgets/economyWidgets.tw
++++ b/src/pregmod/widgets/economyWidgets.tw
+@@ -394,15 +394,15 @@
+ 		<<if State.temporary[$args[1]].toLowerCase() == "all" || "max">> 
+ 			<<set State.temporary[$args[1]] = Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))>>
+ 			<<replace `'#'+$args[0]+'AssetsPurchasing'`>> 
+-				Bought <<print commaNum(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500)))>> units for <<print cashFormat(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))*500*State.variables[$args[0]+"AssetPrice"])>>
++				Bought <<print commaNum(commaNum(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))))>> units for <<print commaNum(cashFormat(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))*500*State.variables[$args[0]+"AssetPrice"]))>>
+ 			<</replace>>
+ 			<<set State.variables[$args[0]+"Assets"] += (eval(parse('_Num' + $args[0]))) * 500>>
+ 			<<set $corpCash -= (eval(parse('_Num' + $args[0]))) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 			<<replace '#cashOnHand'>>
+-				<<print cashFormat($corpCash)>>
++				<<print commaNum(cashFormat($corpCash))>>
+ 			<</replace>>
+ 			<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-				<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<print Math.floor(State.variables[$args[0]+"Assets"]/500)>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++				<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<print commaNum(Math.floor(State.variables[$args[0]+"Assets"]/500))>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 			<</replace>>
+ 			<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>
+ 		<<else>>
+@@ -414,15 +414,15 @@
+ 		<<set _DesPerc = State.temporary[$args[1]]>>
+ 		<<set State.temporary[$args[1]] = Math.floor((Math.clamp((Number.parseFloat(State.temporary[$args[1]])/100),0,1)*$corpCash)/(State.variables[$args[0]+"AssetPrice"] * 500))>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			Purchased <<print commaNum(State.temporary[$args[1]])>> units (<<print (State.temporary[$args[1]]*(State.variables[$args[0]+"AssetPrice"] * 50000)/$corpCash).toFixed(2)>>% of cash, desired was _DesPerc)
++			Purchased <<print commaNum(commaNum(State.temporary[$args[1]]))>> units (<<print commaNum((State.temporary[$args[1]]*(State.variables[$args[0]+"AssetPrice"] * 50000)/$corpCash).toFixed(2))>>% of cash, desired was _DesPerc)
+ 		<</replace>>
+ 		<<set State.variables[$args[0]+"Assets"] += (eval(parse('_Num' + $args[0]))) * 500>>
+ 		<<set $corpCash -= (eval(parse('_Num' + $args[0]))) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 		<<replace '#cashOnHand'>>
+-			<<print cashFormat($corpCash)>>
++			<<print commaNum(cashFormat($corpCash))>>
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-			<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<print Math.floor(State.variables[$args[0]+"Assets"]/500)>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++			<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<print commaNum(Math.floor(State.variables[$args[0]+"Assets"]/500))>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 		<</replace>>
+ 		<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>
+ /* Successful buy */
+@@ -430,16 +430,16 @@
+ 		<<set State.variables[$args[0]+"Assets"] += (eval(parse('_Num' + $args[0]))) * 500>>
+ 		<<set $corpCash -= (eval(parse('_Num' + $args[0]))) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 		<<replace '#cashOnHand'>>
+-			<<print cashFormat($corpCash)>>
++			<<print commaNum(cashFormat($corpCash))>>
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-			<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<print Math.floor(State.variables[$args[0]+"Assets"]/500)>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++			<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<print commaNum(Math.floor(State.variables[$args[0]+"Assets"]/500))>> unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>><</replace>>
+ /* Unsuccessful buy but have enough cash for more than 1 unit */
+ 	<<elseif $corpCash > 500 * State.variables[$args[0]+"AssetPrice"]>> 
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			The corp can only buy <<print Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))>> more unit<<if Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500)) > 1 >>s<</if>> of $args[0] assets. 
++			The corp can only buy <<print commaNum(Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500)))>> more unit<<if Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500)) > 1 >>s<</if>> of $args[0] assets. 
+ 		<</replace>>
+ 		<<set State.temporary[$args[1]] = Math.floor($corpCash/(State.variables[$args[0]+"AssetPrice"] * 500))>>
+ 		<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>
+@@ -453,16 +453,16 @@
+ /* Sell all */
+ 		<<if State.temporary[$args[1]].toLowerCase() == "all" || "max">>
+ 			<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-				Sold <<print commaNum(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500))>> units for <<print cashFormat(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)*500*State.variables[$args[0]+"AssetPrice"])>>
++				Sold <<print commaNum(commaNum(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)))>> units for <<print commaNum(cashFormat(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)*500*State.variables[$args[0]+"AssetPrice"]))>>
+ 			<</replace>>
+ 			<<set State.temporary[$args[1]] = Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)>>
+ 			<<set State.variables[$args[0]+"Assets"] -= eval(parse('_Num' + $args[0])) * 500>>
+ 			<<set $corpCash += eval(parse('_Num' + $args[0])) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 			<<replace '#cashOnHand'>>
+-				<<print cashFormat($corpCash)>>
++				<<print commaNum(cashFormat($corpCash))>>
+ 			<</replace>>
+ 			<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-				<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<if Math.ceil(State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print Math.ceil(State.variables[$args[0]+"Assets"]/500)>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++				<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<if Math.ceil(State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print commaNum(Math.ceil(State.variables[$args[0]+"Assets"]/500))>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 			<</replace>>
+ 			<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>
+ /* Error if decimal or not "all" or "max" string */
+@@ -474,15 +474,15 @@
+ 		<<set _DesPerc = State.temporary[$args[1]]>>
+ 		<<set State.temporary[$args[1]] = Math.ceil((State.variables[$args[0]+"Assets"]-500)/500*(Math.clamp((Number.parseFloat(State.temporary[$args[1]])/100),0,1)))>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			Sold <<print commaNum(State.temporary[$args[1]])>> units (<<print (State.temporary[$args[1]]*100/((State.variables[$args[0]+"Assets"]-500)/500)).toFixed(2)>>% of $args[0] assets, desired was _DesPerc)
++			Sold <<print commaNum(commaNum(State.temporary[$args[1]]))>> units (<<print commaNum((State.temporary[$args[1]]*100/((State.variables[$args[0]+"Assets"]-500)/500)).toFixed(2))>>% of $args[0] assets, desired was _DesPerc)
+ 		<</replace>>
+ 		<<set State.variables[$args[0]+"Assets"] -= eval(parse('_Num' + $args[0])) * 500>>
+ 		<<set $corpCash += eval(parse('_Num' + $args[0])) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 		<<replace '#cashOnHand'>>
+-			<<print cashFormat($corpCash)>>
++			<<print commaNum(cashFormat($corpCash))>>
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-			<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<if Math.ceil(State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print Math.ceil(State.variables[$args[0]+"Assets"]/500)>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++			<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<if Math.ceil(State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print commaNum(Math.ceil(State.variables[$args[0]+"Assets"]/500))>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 		<</replace>>
+ 		<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>
+ /* Successful sell */
+@@ -490,16 +490,16 @@
+ 		<<set State.variables[$args[0]+"Assets"] -= eval(parse('_Num' + $args[0])) * 500>>
+ 		<<set $corpCash += eval(parse('_Num' + $args[0])) * 500 * State.variables[$args[0]+"AssetPrice"]>>
+ 		<<replace '#cashOnHand'>>
+-			<<print cashFormat($corpCash)>>
++			<<print commaNum(cashFormat($corpCash))>>
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsDisp'`>>
+-			<<print cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"])>> (<<if (State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print Math.ceil(State.variables[$args[0]+"Assets"]/500)>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
++			<<print commaNum(cashFormat(State.variables[$args[0]+"AssetPrice"] * State.variables[$args[0]+"Assets"]))>> (<<if (State.variables[$args[0]+"Assets"]/500) <1>> <1 <<else>><<print commaNum(Math.ceil(State.variables[$args[0]+"Assets"]/500))>> <</if>>unit<<if State.variables[$args[0]+"Assets"]/500 > 1>>s<</if>>)
+ 		<</replace>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>><</replace>>
+ /* Unsuccessful sell but have enough assets for more than 1 unit */
+ 	<<elseif State.variables[$args[0]+"Assets"] > 500>>
+ 		<<replace `'#'+$args[0]+'AssetsPurchasing'`>>
+-			The corp can only sell <<print Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)>> more unit<<if Math.ceil((State.variables[$args[0]+"Assets"]-500)/500) > 1 >>s<</if>> of $args[0] assets. 
++			The corp can only sell <<print commaNum(Math.ceil((State.variables[$args[0]+"Assets"]-500)/500))>> more unit<<if Math.ceil((State.variables[$args[0]+"Assets"]-500)/500) > 1 >>s<</if>> of $args[0] assets. 
+ 		<</replace>>
+ 		<<set State.temporary[$args[1]] = Math.ceil((State.variables[$args[0]+"Assets"]-500)/500)>>
+ 		<<replace `'#'+'controls'+$args[0]`>><<CorpDevBuySell $args[0] $args[1]>><</replace>><<script>>setReplaceTextboxMaxLength(State.temporary["textboxMLArg"], 10);<</script>>

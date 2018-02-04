@@ -1,0 +1,18 @@
+import subprocess, sys, time
+flg = False
+first = True
+#python3 temp.py -l
+if (len(sys.argv) > 1):
+	if ("l" in sys.argv[1]): flg = True
+while (flg or first):
+	cpu = str(subprocess.check_output(["sensors"],stderr=subprocess.STDOUT))
+	gpu = str(subprocess.check_output(["nvidia-smi"],stderr=subprocess.STDOUT))
+	cpu_index = cpu.find("C", cpu.find("Core 1:") + 5) - 12
+	gpu_index = gpu.find("| N/A") + 8
+	if (not first):
+		#move cursor
+		print("\033[9D\033[3A")
+	print("CPU: " + cpu[cpu_index:cpu_index+2] + "°C")
+	print("GPU: " + gpu[gpu_index:gpu_index+2] + "°C")
+	first = False
+	time.sleep(1)

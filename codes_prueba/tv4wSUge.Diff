@@ -1,0 +1,103 @@
+
+This changeset causes the userland-mangler to strip runtime linker default search directories from ELF files that it comes across.  This is a bit heavy handed.  I generally like to see component builds do the right thing.  When a search path is modified, messages like:
+	i386/logs/zziplib.publish.log:Stripping /usr/lib/amd64 from RUNPATH in /builds/updated/oi-userland-libtool/components/archiver/zziplib/build/prototype/i386/usr/bin/amd64/unzip-mem
+	i386/logs/zziplib.publish.log:Stripping /usr/lib/amd64 from RPATH in /builds/updated/oi-userland-libtool/components/archiver/zziplib/build/prototype/i386/usr/bin/amd64/unzip-mem
+
+are emitted to stderr in the event that someone cares enough to adjust the component build.
+
+naj@home:/builds/updated/oi-userland-libtool$ git show 723e3c68b
+commit 723e3c68b401f5eb2af59ad18bc0e1d88b7261e0 (HEAD -> oi/hipster)
+Author: Norm Jacobs <naj@snapcon.com>
+Date:   Mon Jan 29 00:13:58 2018 -0600
+
+    userland-mangler: strip runtime linker default directories from R*PATH
+
+diff --git a/tools/userland-mangler b/tools/userland-mangler
+index 7b6dd5703..761ac81a9 100755
+--- a/tools/userland-mangler
++++ b/tools/userland-mangler
+@@ -31,6 +31,9 @@
+ import os
+ import sys
+ import re
++import subprocess
++import shutil
++
+ 
+ import pkg.fmri
+ import pkg.manifest
+@@ -194,12 +197,70 @@ def mangle_manpage(manifest, action, text):
+ 
+        return result
+ 
+-
+ #
+-# mangler.elf.strip = (true|false)
++# mangler.elf.strip_runpath = (true|false)
+ #
+ def mangle_elf(manifest, action, src, dest):
+-       pass
++       strip_elf_runpath = action.attrs.pop('mangler.elf.strip_runpath', 'true')
++       if strip_elf_runpath is 'false':
++               return
++
++       #
++       # Strip any runtime linker default search path elements from the file
++       #
++       ELFEDIT = '/usr/bin/elfedit'
++
++       # runtime linker default search path elements + /64 link
++       rtld_default_dirs = [ '/lib', '/usr/lib',
++                             '/lib/64', '/usr/lib/64',
++                             '/lib/amd64', '/usr/lib/amd64',
++                             '/lib/sparcv9', '/usr/lib/sparcv9' ]
++
++       runpath_re = re.compile('.+\s(RPATH|RUNPATH)\s+\S+\s+(\S+)')
++
++       # Retreive the search path from the object file.  Use elfedit(1) because pkg.elf only
++       # retrieves the RUNPATH.  Note that dyn:rpath and dyn:runpath return both values.
++       # Both RPATH and RUNPATH are expected to be the same, but in an overabundand of caution,
++       # process each element found separately.
++       result = subprocess.Popen([ELFEDIT, '-re', 'dyn:runpath', src ],
++                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++        result.wait()
++       if result.returncode != 0:      # no RUNPATH or RPATH to potentially strip
++               return
++
++       for line in result.stdout:
++               result = runpath_re.match(line)
++               if result != None:
++                       element = result.group(1)
++                       original_dirs = result.group(2).split(":")
++                       keep_dirs = []
++                       matched_dirs = []
++
++                       for dir in original_dirs:
++                               if dir not in rtld_default_dirs:
++                                       keep_dirs.append(dir)
++                               else:
++                                       matched_dirs.append(dir)
++
++                       if len(matched_dirs) != 0:
++                               # Emit an "Error" message in case someone wants to look at the build log
++                               # and fix the component build so that this is a NOP.
++                               print >>sys.stderr, "Stripping %s from %s in %s" % (":".join(matched_dirs), element, src)
++
++                               # Make sure that there is a destdir to copy the file into for mangling.
++                               destdir = os.path.dirname(dest)
++                               if not os.path.exists(destdir):
++                                       os.makedirs(destdir)
++                               # Create a copy to mangle if it doesn't exist yet.
++                               if os.path.isfile(dest) == False:
++                                       shutil.copy2(src, dest)
++
++                               # Mangle the copy by deleting the tag if there is nothing left to keep
++                               # or replacing the value if there is something left.
++                               elfcmd = "dyn:delete %s" % element.lower()
++                               if len(keep_dirs) > 0:
++                                       elfcmd = "dyn:%s '%s'" % (element.lower(), ":".join(keep_dirs))
++                               subprocess.call([ELFEDIT, '-e', elfcmd, dest])
+ 
+ #
+ # mangler.script.file-magic =
+naj@home:/builds/updated/oi-userland-libtool$

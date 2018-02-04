@@ -1,0 +1,14 @@
+diff --git a/src/plugins/qt4projectmanager/qt4buildconfiguration.cpp b/src/plugins/qt4projectmanager/qt4buildconfiguration.cpp
+index 96dc194..ad8d3a1 100644
+--- a/src/plugins/qt4projectmanager/qt4buildconfiguration.cpp
++++ b/src/plugins/qt4projectmanager/qt4buildconfiguration.cpp
+@@ -368,6 +368,9 @@ void Qt4BuildConfiguration::setToolChain(ProjectExplorer::ToolChain *tc)
+     if (tc != 0 && !qt4Target()->possibleToolChains(this).contains(tc))
+         return;
+ 
++    if (toolChain() != tc)
++        return;
++
+     BuildConfiguration::setToolChain(tc);
+ 
+     emit proFileEvaluateNeeded(this);

@@ -1,0 +1,159 @@
+diff --git a/css/style.css b/css/style.css
+index e91b250..f18a7fe 100755
+--- a/css/style.css
++++ b/css/style.css
+@@ -8,11 +8,14 @@
+   box-sizing: border-box;
+ }
+ 
++
+ body, input {
+   font-family: 'Karla', sans-serif;
+ }
+ body {
+   background-color: #eee;
++  padding: 20px;
++  margin: 0;
+ }
+ 
+ li {
+@@ -24,6 +27,11 @@ p {
+   text-align: center;
+ }
+ 
++.form-box {
++  background-color: white;
++  border: 1px solid #e6e6e6;
++}
++
+ .form-box p, footer p {
+   text-align: center;
+   color: #999;
+@@ -39,7 +47,7 @@ p {
+ }
+ 
+ .container {
+-  max-width: 500px;
++  max-width: 760px;
+   margin: auto;
+ 
+ }
+@@ -48,12 +56,8 @@ p {
+   margin: 30px auto 10px auto;
+ }
+ 
+-.container {
+-  margin-top: 30px;
+-}
+-
+ form {
+-  margin: auto;
++  margin: 0 20px;
+ }
+ 
+ input {
+@@ -61,7 +65,7 @@ input {
+   display: block;
+   margin: 10px auto;
+   border-radius: 4px;
+-  width: 350px;
++  width: 100%;
+ }
+ 
+ footer {
+@@ -130,10 +134,11 @@ footer li {
+ }
+ 
+ @media only screen and (min-width: 600px) {
++  body {
++    padding: 40px 0 0 0;
++  }
+   .iphone-image, .form-box {
+-    display: flex;
+-    flex-wrap: wrap;
+-    justify-content: center;
++    display: block;
+     padding: 0 30px;
+   }
+ 
+@@ -144,12 +149,18 @@ footer {
+ .web-right-side {
+   display: flex;
+   flex-direction: row;
+-  background-color: #fafafa;
+   justify-content: center;
+ }
+ 
+ .form-box {
+-  background-color: purple;
++  display: flex;
++  justify-content: center;
++  flex-wrap: wrap;
++  
++}
++
++.or-text {
++  width: 100%;
+ }
+ 
+ }
+diff --git a/index.html b/index.html
+index 9a63cd6..0e1f2a1 100755
+--- a/index.html
++++ b/index.html
+@@ -15,31 +15,33 @@
+         <div class="iphone-image">
+           <img src="images/phones.png" alt="iPhones">
+         </div>
+-        <div class="form-box">
+-          <img class="logo" src="images/logo.png" alt="Instagram Logo">
+-          <p>Sign up to see photos and videos from your friends.</p>
+-          <a class ="login" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i> Log in with Facebook</a>
+-          <p>OR</p>
+-          <form>
+-            <input type="text" name="numberOrEmail" placeholder="Mobile Number or Email">
+-            <input type="text" name="fullName" placeholder="Full Name">
+-            <input type="text" name="fullName" placeholder="Username">
+-            <input type="text" name="password" placeholder="Password">
+-            <a href="#" class="login">Sign up</a>
+-          </form>
+-          <div class="terms">
+-            <p>By signing up, you agree to our<br><a href="#"> Terms &amp; Privacy Policy.</a></p>
++        <div class="form-box-container">
++          <div class="form-box">
++            <img class="logo" src="images/logo.png" alt="Instagram Logo">
++            <p>Sign up to see photos and videos from your friends.</p>
++            <a class ="login" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i> Log in with Facebook</a>
++            <p class="or-text">OR</p>
++            <form>
++              <input type="text" name="numberOrEmail" placeholder="Mobile Number or Email">
++              <input type="text" name="fullName" placeholder="Full Name">
++              <input type="text" name="fullName" placeholder="Username">
++              <input type="text" name="password" placeholder="Password">
++              <a href="#" class="login">Sign up</a>
++            </form>
++            <div class="terms">
++              <p>By signing up, you agree to our<br><a href="#"> Terms &amp; Privacy Policy.</a></p>
++            </div>
++          </div>
++          <div class="already-user">
++            <p>Have an account?<a href="#"> Log in</a></p>
++          </div>
++          <div class="getApp">
++            <p>Get the app.</p>
++            <img src="images/app-store.png" alt="App Store">
++            <img src="images/google-play.png" alt="Google Play">
+           </div>
+         </div>
+       </div>
+-      <div class="already-user">
+-        <p>Have an account?<a href="#"> Log in</a></p>
+-      </div>
+-      <div class="getApp">
+-        <p>Get the app.</p>
+-        <img src="images/app-store.png" alt="App Store">
+-        <img src="images/google-play.png" alt="Google Play">
+-      </div>
+     </div>
+   </main>
+   <footer>

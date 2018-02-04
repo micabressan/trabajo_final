@@ -1,0 +1,49 @@
+HTTPS/HTTP issue on S2M
+
+Muhammad Iqbal Jaiz reported 4 hours ago (Mon, 27 Jul at 6:30 AM) via Portal Meta
+Salam,
+
+I would like to report on HTTPS/HTTP issue on S2M system.
+
+There are few issues when try to access S2M through HTTPS (https://s2m.ecoprasinos.my/), for all it's site there. For your reference, please open one of the site (example : https://s2m.ecoprasinos.my/sites/SECL-A-006)
+
+1. Link on https://s2m.ecoprasinos.my/sites/SECL-A-006 (https) is changed to http://s2m.ecoprasinos.my:6002/sites/SECL-A-006 (http format with port number) whenever we click on certain link below
+
+Add new Item (List/Task List)
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/DDC/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/DDC%20Task/MyItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/IDC/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/IDC%20Task/MyItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/IFC/AllItems.aspx-
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/IFC%20Task/MyItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/Transmittal%20Client/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/Transmittal%20Contractor/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/Transmittal%20Task/MyItems.aspx
+- Also for "Title" link for each item
+
+Add a document (Repository)
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/DDCSequentialRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/DDCParallelRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/IDCSequentialRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/IDCParallelRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/IFCSequentialRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/IFCParallelRepository/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/FolderTransmittalClient/Forms/AllItems.aspx
+- https://s2m.ecoprasinos.my/sites/SECL-A-006/FolderTransmittalContractor/Forms/AllItems.aspx
+
+2. Some button/option is missing when access through https, meanwhile the button/option is shown up when access through http 
+
+Open one of the Repository list (example : https://s2m.ecoprasinos.my/sites/SECL-A-006/DDCParallelRepository/Forms/AllItems.aspx) and click a document. Ribbon button is missing (please refer to the below screenshot).
+
+3. Whenever we click on http link, then all links we click after that is become http.
+example : firstly access through https://s2m.ecoprasinos.my/sites/SECL-A-006/Lists/DDC/AllItems.aspx, then click "add new item", link changed to http format (with port number) : http://s2m.ecoprasinos.my:6002/sites/SECL-A-006/Lists/DDC/New_Form.aspx?Source=https%3A%2F%2Fs2m%2Eecoprasinos%2Emy%2Fsites%2FSECL%2DA%2D006%2FLists%2FDDC%2FAllItems%2Easpx&RootFolder=
+After that, we click again on link "DDC List", then link still keep in http format : http://s2m.ecoprasinos.my:6002/sites/SECL-A-006/Lists/DDC/AllItems.aspx
+
+The objective is to make the link is all in https format, since mostly client required https to access the site, and also to avoid user confusion about the change of link.
+
+Appreciate your help.
+
+Thank You.
+Regards
+
+Iqbal

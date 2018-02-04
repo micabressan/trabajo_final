@@ -1,0 +1,10 @@
+            Dim i As Integer
+            Dim x As Integer
+            x = 3
+
+            Sub macro_loop_test()
+              i = 1
+              Do While i < x
+                  Console.WriteLine("hello")
+              Loop
+            End sub

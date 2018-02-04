@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<SpawnGroups>
+<!--=================== DO NOT EDIT ABOVE THIS LINE =======================-->
+
+<!--==== CARGO SHIP SPAWNGROUP START====-->
+<SpawnGroup>
+	<Id>
+		<TypeId>SpawnGroupDefinition</TypeId>
+		<SubtypeId>UNIQUE_SPAWNGROUP_NAME</SubtypeId>
+	</Id>
+	<Icon>Textures\GUI\Icons\Fake.dds</Icon>
+	<Frequency>1.0</Frequency>
+	<IsPirate>false</IsPirate>
+	<IsEncounter>false</IsEncounter>
+	<Prefabs>
+	
+		<Prefab SubtypeId="PREFAB_FILE_NAME">
+			<Position>
+				<X>0.0</X>
+				<Y>0.0</Y>
+				<Z>0.0</Z>
+			</Position>
+			<BeaconText>BEACON_TEXT</BeaconText>
+			<Speed>15.0</Speed>
+		</Prefab>
+		
+	</Prefabs>
+</SpawnGroup>
+<!--==== CARGO SHIP SPAWNGROUP END====-->
+
+<!--==== EXPLORATION ENCOUNTER SPAWNGROUP START====-->
+<SpawnGroup>
+	<Id>
+		<TypeId>SpawnGroupDefinition</TypeId>
+		<SubtypeId>UNIQUE_SPAWNGROUP_NAME</SubtypeId>
+	</Id>
+	<Icon>Textures\GUI\Icons\Fake.dds</Icon>
+	<Frequency>1.0</Frequency>
+	<IsPirate>false</IsPirate>
+	<IsEncounter>true</IsEncounter>
+	<Prefabs>
+	
+		<Prefab SubtypeId="PREFAB_FILE_NAME">
+			<Position>
+				<X>0.0</X>
+				<Y>0.0</Y>
+				<Z>0.0</Z>
+			</Position>
+			<BeaconText>BEACON_TEXT</BeaconText>
+			<Speed>0.0</Speed>
+		</Prefab>
+		
+	</Prefabs>
+</SpawnGroup>
+<!--==== EXPLORATION ENCOUNTER SPAWNGROUP END====-->
+
+<!--==== PIRATE EXPLORATION ENCOUNTER SPAWNGROUP START====-->
+<SpawnGroup>
+	<Id>
+		<TypeId>SpawnGroupDefinition</TypeId>
+		<SubtypeId>UNIQUE_SPAWNGROUP_NAME</SubtypeId>
+	</Id>
+	<Icon>Textures\GUI\Icons\Fake.dds</Icon>
+	<Frequency>1.0</Frequency>
+	<IsPirate>true</IsPirate>
+	<IsEncounter>true</IsEncounter>
+	<Prefabs>
+	
+		<Prefab SubtypeId="PREFAB_FILE_NAME">
+			<Position>
+				<X>0.0</X>
+				<Y>0.0</Y>
+				<Z>0.0</Z>
+			</Position>
+			<BeaconText>BEACON_TEXT</BeaconText>
+			<Speed>0.0</Speed>
+		</Prefab>
+		
+	</Prefabs>
+</SpawnGroup>
+<!--==== PIRATE EXPLORATION ENCOUNTER SPAWNGROUP END====-->
+
+<!--==== PIRATE DRONE SPAWNGROUP START====-->
+<SpawnGroup>
+	<Id>
+		<TypeId>SpawnGroupDefinition</TypeId>
+		<SubtypeId>UNIQUE_SPAWNGROUP_NAME</SubtypeId>
+	</Id>
+	<Icon>Textures\GUI\Icons\Fake.dds</Icon>
+	<Frequency>1.0</Frequency>
+	<IsPirate>true</IsPirate>
+	<IsEncounter>false</IsEncounter>
+	<Prefabs>
+	
+		<Prefab SubtypeId="PREFAB_FILE_NAME">
+			<Position>
+				<X>0.0</X>
+				<Y>0.0</Y>
+				<Z>0.0</Z>
+			</Position>
+			<BeaconText>BEACON_TEXT</BeaconText>
+			<Speed>0.0</Speed>
+		</Prefab>
+		
+	</Prefabs>
+</SpawnGroup>
+<!--==== PIRATE DRONE SPAWNGROUP END====-->
+
+<!--===================== DO NOT EDIT BELOW THIS LINE ====================-->
+</SpawnGroups>
+</Definitions>

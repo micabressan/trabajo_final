@@ -1,0 +1,60 @@
+diff --git a/web/controllers/site.js b/web/controllers/site.js
+index ca16290..c6d9393 100644
+--- a/web/controllers/site.js
++++ b/web/controllers/site.js
+@@ -12,6 +12,15 @@ var render = function(template, req, res) {
+        res.render(template);
+ };
+ 
++var render404 = function(template, req, res) {
++       res.locals = {
++               user: JSON.stringify(req.session.user),
++               isLoggedIn: req.session.user && req.session.user.id,
++               isProduction: process.env.NODE_ENV === 'production'
++       };
++       res.status(404).render(template);
++};
++
+ var isMobile = function(req) {
+        return req.device.type === 'phone' || req.device.type === 'tablet';
+ };
+@@ -46,7 +55,7 @@ module.exports = {
+        registrationFinished: render.bind(null, 'site/registration-finished'),
+        adveriserRegistrationFinished: render.bind(null, 'site/registration-finished-for-advertiser'),
+        activationFinished:   render.bind(null, 'site/activation-finished'),
+-       error404:             render.bind(null, 'site/404'),
++       error404:             render404.bind(null, 'site/404'),
+ 
+        webMasters: function(req, res) {
+                isMobile(req) ? render('site/web-masters-mobile', req, res) : render('site/web-masters', req, res);
+diff --git a/web/views/manager-dashboard.hbs b/web/views/manager-dashboard.hbs
+index 894feae..84bd318 100644
+--- a/web/views/manager-dashboard.hbs
++++ b/web/views/manager-dashboard.hbs
+@@ -11,7 +11,11 @@
+                <meta name="HandheldFriendly" content="True">
+                <meta name="MobileOptimized" content="320">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+-               <link rel="stylesheet" href="/manager-dashboard/style.min.css" type="text/css"></link>
++               {{#if isProduction}}
++                       <link rel="stylesheet" href="/manager-dashboard/style.min.css" type="text/css"></link>
++               {{else}}
++                       <link rel="stylesheet" href="/manager-dashboard/style.css" type="text/css"></link>
++               {{/if}}
+                <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+                <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        </head>
+@@ -23,7 +27,10 @@
+                <script type="text/javascript">
+                        window.user = {{{user}}};
+                </script>
+-               <script src="/manager-dashboard/app.min.js"></script>
++               {{#if isProduction}}
++                       <script src="/manager-dashboard/app.min.js"></script>
++               {{else}}
++                       <script src="/manager-dashboard/app.js"></script>
++               {{/if}}
+        </body>
+-
+ </html>
+vlad@v:~/Projects/everad/cpa$

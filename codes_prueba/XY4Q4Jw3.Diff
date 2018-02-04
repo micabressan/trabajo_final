@@ -1,0 +1,92 @@
+Index: /trunk/L2_GameServer/java/config/Custom.properties
+===================================================================
+--- /trunk/L2_GameServer/java/config/Custom.properties	(revision 185)
++++ /trunk/L2_GameServer/java/config/Custom.properties	(revision 261)
+@@ -12,4 +12,21 @@
+ # Default: 0
+ ListOfAllowedToDropItems = 0
++
++# ---------------------------------------------------------------------------
++# Scheme Buffer Settings
++# ---------------------------------------------------------------------------
++# Max profiles per player.
++# Default 4
++MaxSchemeProfiles = 4
++
++# Max buffs per profile
++# Default 24
++MaxSchemeBuffsPerProfile = 24
++
++# Cost of each buffs
++# Each buff the player gets will cost him this cuantity
++# total price = profile buff count * BuffPrice
++# Default 0 adena
++BuffPrice = 0
+ 
+ #--------------------------------------------------
+Index: /trunk/L2_GameServer/java/com/l2jserver/CustomConfig.java
+===================================================================
+--- /trunk/L2_GameServer/java/com/l2jserver/CustomConfig.java	(revision 191)
++++ /trunk/L2_GameServer/java/com/l2jserver/CustomConfig.java	(revision 261)
+@@ -92,4 +92,8 @@
+ 	public static TIntIntHashMap ADENA_DROP_RATE_BY_LEVEL;
+ 	public static TIntArrayList LIST_ALLOWED_TO_DROP_ITEMS;
++	
++	public static int MAX_SCHEME_PROFILES;
++	public static int MAX_BUFFS_PER_PROFILE;
++	public static int PRICE_PER_BUFF;
+ 	
+ 	//--------------------------------------------------
+@@ -343,5 +347,10 @@
+ 				}
+ 			}
+-		}
++			
++			MAX_SCHEME_PROFILES = Integer.parseInt(CustomSettings.getProperty("MaxSchemeProfiles", "4"));
++			MAX_BUFFS_PER_PROFILE = Integer.parseInt(CustomSettings.getProperty("MaxSchemeBuffsPerProfile", "24"));
++			PRICE_PER_BUFF = Integer.parseInt(CustomSettings.getProperty("BuffPrice", "0"));
++		}
++		
+ 		catch (Exception e)
+ 		{
+Index: /trunk/L2_GameServer/java/com/l2jserver/gameserver/model/actor/instance/L2PcInstance.java
+===================================================================
+--- /trunk/L2_GameServer/java/com/l2jserver/gameserver/model/actor/instance/L2PcInstance.java	(revision 260)
++++ /trunk/L2_GameServer/java/com/l2jserver/gameserver/model/actor/instance/L2PcInstance.java	(revision 261)
+@@ -10989,4 +10989,15 @@
+ 		startWarnUserTakeBreak();
+ 		
++		// Add scheme buffer profiles
++		try
++		{
++			for (String st : L2SchemeBufferInstance.loadPlayerProfiles(this))
++				_profiles.add(st);
++		}
++		catch (Exception e)
++		{
++			e.printStackTrace();
++		}
++		
+ 		if (SevenSigns.getInstance().isSealValidationPeriod() || SevenSigns.getInstance().isCompResultsPeriod())
+ 		{
+@@ -15366,3 +15377,20 @@
+     	return _ccp.hasSetting(mask);
+     }
++    
++	private FastList<String> _profiles = new FastList<String>();
++	
++	public void addProfile(String profile)
++	{
++		_profiles.add(profile);
++	}
++	
++	public void removeProfile(String profile)
++	{
++		_profiles.remove(profile);
++	}
++	
++	public FastList<String> getSchemeProfiles()
++	{
++		return _profiles;
++	}
+ }

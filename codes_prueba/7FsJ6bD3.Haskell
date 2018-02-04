@@ -1,0 +1,2 @@
+length $ filter (uncurry (on (&&) ((`elem` [k | k <- [2..999], null [ x | x <- [2..k-1], mod k x  == (0::Int)]]) . read))) 
+       $ filter (uncurry (/=))  $ fmap ((id &&& reverse) . show) [1..999]

@@ -1,0 +1,106 @@
+Sub GerarRAT_Execute(Batch)
+    Dim cn, cng, rs ,resultado, i, selected, rng2
+    Dim MSWordVersion, guiaModelo
+    
+    'execute("set cn = CreateObject (""ADODB.Connection"")")
+    'execute("set rs = CreateObject (""ADODB.Recordset"")")
+    'Set cn = AMCreateObject ("ADODB.Connection",True)
+    'Set rs = AMCreateObject ("ADODB.RecordSet",True)
+
+    'cn.Open Vault.Table("RATConfig").DBConnection.ConnectionString
+    'cn.Open vault.Query("Test").DBConnection.ConnectionString 
+	
+    'cn.ConnectionString = ConnectionString
+    'cn.Open
+ 
+
+    If Batch.IsFirstInBatch Then    
+        Dim app, doc, rng, err
+
+        'rs.Open "SELECT [Template],[CamposCorpo],[QuantidadeCamposCabecalho] FROM [RelatorioTecnicoConfig]", cn',3,3
+            
+		client.Argument("Template") = "\\elnbsbsrv123h\amm3ext$\HVDC\RAT\RAT.doc"
+		client.Argument("CamposCorpo") = "NumeroEletronorte,Revision,Descricao"
+		client.Argument("QuantidadeCamposCabecalho") = "3"
+        
+        client.Argument("Campo") =  1 
+        
+    End If
+
+    '======= escreve os dados dos documentos no db
+  	resultado = ""
+    For i = 0 To Ubound(split(client.Argument("CamposCorpo"), ","))
+
+		 resultado = resultado  & eval("Document." & split(client.Argument("CamposCorpo"), ",")(i)) & "#"
+
+    Next
+       
+	resultado = Mid(resultado,1,len(resultado )-1)
+    
+    'cn.execute "INSERT INTO [RelatorioTecnico] ([Usuario],[IdDocumento],[Valores]) VALUES ('"& vault.User&"','"&Document.ID&"','"&resultado &"')"
+
+    If Batch.IsLastInBatch Then
+
+    	'======= escreve no doc
+	    Set App = CreateObject("Word.Application")	
+    	
+        guiaModelo = client.Argument("Template")
+        
+        If InStr(1, App.Version, ".") > 0 Then
+        	MSWordVersion = CInt(Split(App.Version, ".")(0))
+        Else
+        	MSWordVersion = CInt(Trim(App.Version))
+        End If
+        
+        'Necessário este tipo de verificação pois A MACRO EM CADA MODELO varia de acordo com a versão do MS-Word
+		Select Case MSWordVersion
+        	Case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 'versão do MS Office da estação é 2007 ou anterior
+            	guiaModelo = Replace(guiaModelo, "RAT.doc", "RAT.doc")
+                Set Doc = App.Documents.Open(guiaModelo,False,True)
+            
+            Case 13, 14 'versão do MS Office da estação é 2010
+            	guiaModelo = Replace(guiaModelo, "RAT.doc", "RAT.doc")
+                Set Doc = App.Documents.Open(guiaModelo,False,True)
+            
+            Case 15 'versão do MS Office da estação é 2013
+            	guiaModelo = Replace(guiaModelo, "RAT.doc", "RAT.doc")
+                Set Doc = App.Documents.Open(guiaModelo,False,False)
+            
+            Case Else 'versão do MS Office da estação é superior à 2013
+        		guiaModelo = Replace(guiaModelo, "RAT.doc", "RAT.doc")
+                Set Doc = App.Documents.Open(guiaModelo,False,False)
+                
+        End Select
+        
+        Set rng = Doc.Range(Doc.Bookmarks("ReportBody").Range.Start, Doc.Bookmarks("EndReportBody").Range.End)
+    
+        Call rng.Copy           
+        App.Selection.EndKey 6, 0
+
+        For i = 2 To  Batch.BatchSize				
+            App.Selection.PasteAndFormat(0 )
+        Next
+    
+        rs.Open "SELECT [Valores] FROM [RelatorioTecnico] WHERE [Usuario] = '"&vault.User&"'"  , cn',3,3
+    
+        Do While Not rs.EOF
+  
+        	resultado = split(rs(0),"#")
+            For i = 0 To Ubound(resultado) 
+  		        Set rng2 = Doc.Range(Doc.Hyperlinks(1).Range.Start,Doc.Hyperlinks(1).Range.End)
+                rng2.Text = resultado(i) '& Doc.Hyperlinks(1).Address
+                client.Argument("Campo") = cint(client.Argument("Campo")) +  1
+            Next
+    
+     	    rs.movenext
+        Loop
+    
+        App.Visible = True
+    
+    End If
+
+    If rs.State = 1 Then rs.Close: Set rs = Nothing
+    If cn.State = 1 Then cn.Close: Set cn = Nothing
+    
+    Client.Refresh AS_RF_CHANGED_CURRENTFOLDER
+End Sub

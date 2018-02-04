@@ -1,0 +1,22 @@
+diff --git a/src/network/access/qnetworkaccessbackend.cpp b/src/network/access/qnetworkaccessbackend.cpp
+index 108b423..e8483a9 100644
+--- a/src/network/access/qnetworkaccessbackend.cpp
++++ b/src/network/access/qnetworkaccessbackend.cpp
+@@ -85,7 +85,7 @@ QNetworkAccessBackendFactory::QNetworkAccessBackendFactory()
+ 
+ QNetworkAccessBackendFactory::~QNetworkAccessBackendFactory()
+ {
+-    if (QNetworkAccessBackendFactoryData::valid) {
++    if (QNetworkAccessBackendFactoryData::valid.load()) {
+         QMutexLocker locker(&factoryData()->mutex);
+         factoryData()->removeAll(this);
+     }
+@@ -94,7 +94,7 @@ QNetworkAccessBackendFactory::~QNetworkAccessBackendFactory()
+ QNetworkAccessBackend *QNetworkAccessManagerPrivate::findBackend(QNetworkAccessManager::Operation op,
+                                                                  const QNetworkRequest &request)
+ {
+-    if (QNetworkAccessBackendFactoryData::valid) {
++    if (QNetworkAccessBackendFactoryData::valid.load()) {
+         QMutexLocker locker(&factoryData()->mutex);
+         QNetworkAccessBackendFactoryData::ConstIterator it = factoryData()->constBegin(),
+                                                            end = factoryData()->constEnd();

@@ -1,0 +1,9 @@
+private void bt_upload_Click(object sender, EventArgs e)
+        {
+            SearchForm sf = new SearchForm();
+            DbConnections con = new DbConnections();
+            DbOperations dbo = new DbOperations(con.CString());
+            
+            dbo.UploadCandidate("azonosito", tb_candidateName.Text, tb_CandidateEmail.Text, tb_CandidatePhone.Text, "Nem");
+            this.Close();
+        }

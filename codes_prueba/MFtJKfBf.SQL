@@ -1,0 +1,6 @@
+WITH deleted AS (
+    delete from tbl_xxx where....
+    returning *
+)
+insert into tbl_xxx .......
+SELECT * FROM deleted;

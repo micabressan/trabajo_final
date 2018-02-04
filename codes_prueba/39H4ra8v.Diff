@@ -1,0 +1,33 @@
+diff --git a/routing/__init__.py b/routing/__init__.py
+index 528b811..51d8da0 100644
+--- a/routing/__init__.py
++++ b/routing/__init__.py
+@@ -17,7 +17,7 @@ class Faucet(metaclass=ABCMeta):
+         raise NotImplementedError
+ 
+ 
+-class PipeFaucet(Faucet):
++class RawPipeReader:
+ 
+     def __init__(self, pipe_fd):
+         fl = fcntl.fcntl(pipe_fd, fcntl.F_GETFL)
+@@ -30,7 +30,18 @@ class PipeFaucet(Faucet):
+         except OSError as ex:
+             raise EndpointClosedException(ex)
+         if line:
+-            return json.loads(line.decode())
++            return line.decode()
++
++
++class PipeFaucet(Faucet):
++
++    def __init__(self, pipe_fd):
++        self._reader = RawPipeReader(pipe_fd)
++
++    def read(self):
++        line = self._reader.read()
++        if line:
++            return json.loads(line)
+ 
+ 
+ class SocketFaucet(Faucet):

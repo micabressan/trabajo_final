@@ -1,0 +1,19 @@
+=== modified file 'CMakeLists.txt'
+--- CMakeLists.txt	2011-10-01 16:02:40 +0000
++++ CMakeLists.txt	2011-10-11 16:46:47 +0000
+@@ -13,6 +13,7 @@
+ set (RELEASE_NAME "Fast and connected.")
+ set (VERSION "0.2.0")
+ set (VERSION_INFO "Release")
++set (CMAKE_C_FLAGS "-ggdb")
+ 
+ list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+ 
+@@ -116,6 +117,7 @@
+     vapi/config.vapi
+ OPTIONS
+     --thread
++    -g
+     )
+ 
+ add_definitions(${CFLAGS} -Wall -Winit-self -Wwrite-strings -Wunreachable-code -Wstrict-prototypes )

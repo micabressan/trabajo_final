@@ -1,0 +1,42 @@
+(defn parser [tokens template]
+  (loop [result-map (first template), temps  (rest template), tokens tokens]
+    (cond (= :end (first temps)) (do (println "reached :end") [result-map tokens])
+          (or (empty? temps ) (empty tokens) (do (println "either templates or tokens are empty") nil))
+          (let [pat   (first temps)
+                tok (first tokens)]
+            (cond
+             
+             (or (and (= java.util.regex.Pattern (type pat)) ;do we match a pattern we should skip
+                      (re-matches pat tok))  
+                 (= pat tok))     ;or have a litteral match ?
+             (recur result-map (rest temps) (rest tokens)) ; we skip 
+             
+             
+             (list? pat) ;we found a list expressing how to extract
+             (let [[kw re fu] pat
+                   match (re-matches re tok)]
+               (if match ; we could extract the value, continuing.
+                   (recur (conj result-map
+                                [kw ((read-func fu) match)])
+                          (rest temps) (rest tokens))
+                   nil))
+             
+             (map? pat)
+             (let [{:keys [kw next-template type]} pat]
+               (cond (= type :1)
+                     (if-let [ [sub rem-tokens] (parser tokens next-template)]
+                       (recur (conj result-map [kw sub]) (rest temps) rem-tokens)
+                       (raise-excp pat tok tokens))
+                     
+                     (= type :*)
+                     (let [[res rem-tokens]
+                           (loop [result [] tokens tokens]
+                             (if-let [ [substruct rem-tokens] (parser tokens next-template)]
+                               (recur (conj result substruct) rem-tokens)
+                               [result tokens]))]
+                       (recur (conj result-map [kw res])
+                              (rest temps) rem-tokens))
+                     
+                     :else (raise-excp pat tok (rest tokens))))
+             
+             :else nil)))))

@@ -1,0 +1,157 @@
+diff --git a/eval.c b/eval.c
+index fa40583..cc700a7 100644
+--- a/eval.c
++++ b/eval.c
+@@ -251,6 +251,48 @@ int KingDistance(int sq1, int sq2)
+     return MAX(rankDistance, fileDistance);
+ }
+ 
++int KnightMobility(struct Board * b, int sq, int colour)
++{
++    int col = COL (sq);
++    int dest;
++    int mob = 0;
++
++    dest = sq - 6;
++    if (dest >= 0 && col < 6 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq - 10;
++    if (dest >= 0 && col > 1 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq - 15;
++    if (dest >= 0 && col < 7 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq - 17;
++    if (dest >= 0 && col > 0 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq + 6;
++    if (dest < 64 && col > 1 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq + 10;
++    if (dest < 64 && col < 6 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq + 15;
++    if (dest < 64 && col > 0 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++    dest = sq + 17;
++    if (dest < 64 && col < 7 && !(b->bitlist[dest] & b->sidemask[!colour] & b->piecemask[PAWN])) {
++        mob++;
++    }
++
++    return mob * MobilityPoint;
++}
++
+ int Eval(struct Board * b)
+ {
+     int sq, tmp, midgame, endgame, dest, phase;
+@@ -407,47 +449,10 @@ int Eval(struct Board * b)
+ 
+         phase -= 1;
+ 
+-        col = COL (sq);
+-        dest = sq - 6;
+-        if (dest >= 0 && col < 6 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq - 10;
+-        if (dest >= 0 && col > 1 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq - 15;
+-        if (dest >= 0 && col < 7 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq - 17;
+-        if (dest >= 0 && col > 0 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq + 6;
+-        if (dest < 64 && col > 1 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq + 10;
+-        if (dest < 64 && col < 6 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq + 15;
+-        if (dest < 64 && col > 0 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
+-        dest = sq + 17;
+-        if (dest < 64 && col < 7 && !(b->bitlist[dest] & b->sidemask[BLACK] & b->piecemask[PAWN])) {
+-            midgame += MobilityPoint;
+-            endgame += MobilityPoint;
+-        }
++        int mob = KnightMobility(b, sq, WHITE);
++
++        midgame += mob;
++        endgame += mob;
+     }
+ 
+     /* Black knights */
+@@ -466,47 +471,10 @@ int Eval(struct Board * b)
+ 
+         phase -= 1;
+ 
+-        col = COL (sq);
+-        dest = sq - 6;
+-        if (dest >= 0 && col < 6 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq - 10;
+-        if (dest >= 0 && col > 1 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq - 15;
+-        if (dest >= 0 && col < 7 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq - 17;
+-        if (dest >= 0 && col > 0 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq + 6;
+-        if (dest < 64 && col > 1 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq + 10;
+-        if (dest < 64 && col < 6 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq + 15;
+-        if (dest < 64 && col > 0 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
+-        dest = sq + 17;
+-        if (dest < 64 && col < 7 && !(b->bitlist[dest] & b->sidemask[WHITE] & b->piecemask[PAWN])) {
+-            midgame -= MobilityPoint;
+-            endgame -= MobilityPoint;
+-        }
++        int mob = KnightMobility(b, sq, BLACK);
++
++        midgame -= mob;
++        endgame -= mob;
+     }
+ 
+     /* White bishops */

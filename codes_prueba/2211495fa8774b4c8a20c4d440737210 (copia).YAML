@@ -1,0 +1,117 @@
+sudo: false
+services:
+  - docker
+
+language: cpp
+
+os:
+  - linux
+  - osx
+
+osx_image: xcode9
+
+cache:
+    directories:
+      - $HOME/.cache
+
+git:
+    depth: 100500
+
+env:
+    matrix:
+      - TARGET=source
+      - TARGET=test
+      - TARGET=coverage
+      - OS=el DIST=6
+      - OS=el DIST=7
+      - OS=fedora DIST=24
+      - OS=fedora DIST=25
+      - OS=fedora DIST=26
+      - OS=ubuntu DIST=precise
+      - OS=ubuntu DIST=trusty
+      - OS=ubuntu DIST=xenial
+      - OS=ubuntu DIST=zesty
+      - OS=debian DIST=wheezy
+      - OS=debian DIST=jessie
+      - OS=debian DIST=stretch
+
+matrix:
+    allow_failures:
+      - TARGET=coverage
+#      - env: OS=el DIST=6
+#      - env: OS=el DIST=7
+#      - env: OS=fedora DIST=24
+#      - env: OS=fedora DIST=25
+#      - env: OS=fedora DIST=26
+#      - env: OS=ubuntu DIST=precise
+#      - env: OS=ubuntu DIST=trusty
+#      - env: OS=ubuntu DIST=xenial
+#      - env: OS=ubuntu DIST=zesty
+#      - env: OS=debian DIST=wheezy
+#      - env: OS=debian DIST=jessie
+#      - env: OS=debian DIST=stretch
+    exclude:
+      - env: OS=el DIST=6
+        os: osx
+      - env: OS=el DIST=7
+        os: osx
+      - env: OS=fedora DIST=24
+        os: osx
+      - env: OS=fedora DIST=25
+        os: osx
+      - env: OS=fedora DIST=26
+        os: osx
+      - env: OS=ubuntu DIST=precise
+        os: osx
+      - env: OS=ubuntu DIST=trusty
+        os: osx
+      - env: OS=ubuntu DIST=xenial
+        os: osx
+      - env: OS=ubuntu DIST=zesty
+        os: osx
+      - env: OS=debian DIST=wheezy
+        os: osx
+      - env: OS=debian DIST=jessie
+        os: osx
+      - env: OS=debian DIST=stretch
+        os: osx
+      - env: TARGET=source
+        os: osx
+      - env: TARGET=coverage
+        os: osx
+
+script:
+  - git tag -d 1.7.5
+  - make -f .travis.mk ${TARGET}
+
+before_deploy:
+  - ls -l build/
+
+deploy:
+  # Deploy packages to PackageCloud
+  - provider: packagecloud
+    username: "tarantool"
+    repository: "1_8"
+    token: "${PACKAGECLOUD_TOKEN}"
+    dist: "${OS}/${DIST}"
+    package_glob: build/*.{rpm,deb,dsc}
+    skip_cleanup: true
+    on:
+      repo: tarantool/tarantool
+      branch: "1.8" # releases
+      condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
+  # Deploy source tarballs to S3
+  - provider: script
+    script: make -f .travis.mk source_deploy
+    skip_cleanup: true
+    on:
+      repo: tarantool/tarantool
+      branch: "1.8" # releases
+      condition: "x${TARGET} = xsource"
+
+notifications:
+  email:
+    recipients:
+      - build@tarantool.org
+    on_success: change
+    on_failure: always

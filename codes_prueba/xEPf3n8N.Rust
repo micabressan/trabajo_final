@@ -1,0 +1,13 @@
+for statement in &self.ast.statements {
+	match *statement {
+		Statement::FuncDecl(ref fd) => {
+			self.funcs.insert(fd.name.clone(), fd);
+		},
+		Statement::Import(ref i) => {
+			self.execute_import(i);
+		}
+		_ => ()
+	};
+};
+
+// self.execute_import() also uses self.funcs as mutable

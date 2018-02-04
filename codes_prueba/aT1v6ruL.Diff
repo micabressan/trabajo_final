@@ -1,0 +1,26 @@
+diff --git a/src/mux/video_filter.cpp b/src/mux/video_filter.cpp
+index dd7b3e7..4945523 100644
+--- a/src/mux/video_filter.cpp
++++ b/src/mux/video_filter.cpp
+@@ -48,16 +48,18 @@ GstElement *VideoFilter::make_gst_element()
+ 
+        gst_bin_add_many(GST_BIN(m_element), videoscale, m_scale_caps, NULL);
+        gst_bin_add_many(GST_BIN(m_element), videorate,  m_rate_caps,  NULL);
+-       gst_element_link_many(videoscale, m_scale_caps, NULL);
+-       gst_element_link_many(m_scale_caps, videorate, m_rate_caps, NULL);
++       //gst_element_link_many(videoscale, m_scale_caps, NULL);
++       //gst_element_link_many(m_scale_caps, videorate, m_rate_caps, NULL);
++       gst_element_link_many(videorate, m_rate_caps, NULL);
++       gst_element_link_many(m_rate_caps, videoscale, m_scale_caps, NULL);
+ 
+        // Create ghost pad for sink
+-       GstPad *pad = gst_element_get_static_pad(videoscale, "sink");
++       GstPad *pad = gst_element_get_static_pad(videorate, "sink");
+        gst_element_add_pad(m_element, gst_ghost_pad_new("sink", pad));
+        gst_object_unref(GST_OBJECT(pad));
+ 
+        // Create ghost pad for src
+-       pad = gst_element_get_static_pad(m_rate_caps, "src");
++       pad = gst_element_get_static_pad(m_scale_caps, "src");
+        gst_element_add_pad(m_element, gst_ghost_pad_new("src", pad));
+        gst_object_unref(GST_OBJECT(pad));

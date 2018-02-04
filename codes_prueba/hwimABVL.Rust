@@ -1,0 +1,11 @@
+fn classify_ground<TreePoint, U>(kdtree: KdTree<TreePoint,U>, starting_point: [f64; 3]) where U: std::convert::AsRef<[f64]> {
+    // find all points within proper slope to be considered "ground"
+    let nearest = kdtree.nearest(&starting_point, 15, &squared_euclidean).unwrap();
+    // only take interest in the points that are within 1.5m and have yet to be classified
+    for n in &nearest {
+        if n.0 <= 1.5 && (n.1).1 {
+            // check point slope from "starting_point", if under a value, it is a new ground;
+            // add it to the list of "recursive calls to make"
+        }
+    }
+}

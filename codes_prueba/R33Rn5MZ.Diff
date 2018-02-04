@@ -1,0 +1,59 @@
+diff --git a/dist/game/config/NPC.properties b/dist/game/config/NPC.properties
+index 5ee254c..20b7bfb 100644
+--- a/dist/game/config/NPC.properties
++++ b/dist/game/config/NPC.properties
+@@ -93,6 +93,10 @@
+ # Default: 2000
+ CorpseConsumeSkillAllowedTimeBeforeDecay = 2000
+ 
++# The Maximum Ag groRange allowed for L2Monster instances. Any value greater than this will be ignored and replaced by the option value.
++# Default: 450
++MaxAggroRange = 450
++
+ # ---------------------------------------------------------------------------
+ # Guards
+ # ---------------------------------------------------------------------------
+diff --git a/src/main/java/com/l2jserver/Config.java b/src/main/java/com/l2jserver/Config.java
+index 2f5674a..aaed8c2 100644
+--- a/src/main/java/com/l2jserver/Config.java
++++ b/src/main/java/com/l2jserver/Config.java
+@@ -802,6 +802,7 @@
+ 	public static int DEFAULT_CORPSE_TIME;
+ 	public static int SPOILED_CORPSE_EXTEND_TIME;
+ 	public static int CORPSE_CONSUME_SKILL_ALLOWED_TIME_BEFORE_DECAY;
++	public static int MAX_AGGRO_RANGE;
+ 	public static boolean GUARD_ATTACK_AGGRO_MOB;
+ 	public static boolean ALLOW_WYVERN_UPGRADER;
+ 	public static List<Integer> LIST_PET_RENT_NPC;
+@@ -1995,6 +1996,7 @@
+ 			DEFAULT_CORPSE_TIME = NPC.getInt("DefaultCorpseTime", 7);
+ 			SPOILED_CORPSE_EXTEND_TIME = NPC.getInt("SpoiledCorpseExtendTime", 10);
+ 			CORPSE_CONSUME_SKILL_ALLOWED_TIME_BEFORE_DECAY = NPC.getInt("CorpseConsumeSkillAllowedTimeBeforeDecay", 2000);
++			MAX_AGGRO_RANGE = NPC.getInt("MaxAggroRange", 450);
+ 			GUARD_ATTACK_AGGRO_MOB = NPC.getBoolean("GuardAttackAggroMob", false);
+ 			ALLOW_WYVERN_UPGRADER = NPC.getBoolean("AllowWyvernUpgrader", false);
+ 			String[] listPetRentNpc = NPC.getString("ListPetRentNpc", "30827").split(",");
+diff --git a/src/main/java/com/l2jserver/gameserver/model/actor/templates/L2NpcTemplate.java b/src/main/java/com/l2jserver/gameserver/model/actor/templates/L2NpcTemplate.java
+index d45dbb1..4b1b3e3 100644
+--- a/src/main/java/com/l2jserver/gameserver/model/actor/templates/L2NpcTemplate.java
++++ b/src/main/java/com/l2jserver/gameserver/model/actor/templates/L2NpcTemplate.java
+@@ -146,7 +146,18 @@
+ 		_corpseTime = set.getInt("corpseTime", Config.DEFAULT_CORPSE_TIME);
+ 		
+ 		_aiType = set.getEnum("aiType", AIType.class, AIType.FIGHTER);
+-		_aggroRange = set.getInt("aggroRange", 0);
++		
++		// limit the aggroRange to the maximum configured in NPC.properties file
++		int aggroRange = set.getInt("aggroRange", 0);
++		if (_type.equalsIgnoreCase("L2Monster") && (aggroRange >= Config.MAX_AGGRO_RANGE))
++		{
++			_aggroRange = Config.MAX_AGGRO_RANGE;
++		}
++		else
++		{
++			_aggroRange = aggroRange;
++		}
++		
+ 		_clanHelpRange = set.getInt("clanHelpRange", 0);
+ 		_dodge = set.getInt("dodge", 0);
+ 		_isChaos = set.getBoolean("isChaos", false);

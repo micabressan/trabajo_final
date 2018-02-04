@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sys
+from bs4 import BeautifulSoup
+from requests.auth import HTTPBasicAuth
+import requests
+
+
+def get_A():
+    db_url = "http://www.SERVER.sk/abc/Find&Fields=&ResultCount=1&datex=&srt1=score"
+    checkpage = requests.get(db_url, auth=HTTPBasicAuth('username', 'password'))
+    checksoup = BeautifulSoup(checkpage.content, "html.parser")
+    try:
+        query_result = checksoup.find_all('td')[3].text.strip()
+        return query_result
+    except:
+        return "ERROR : SERVER DB Finding"
+
+def get_B():
+    try:
+        site_status = requests.get('http://www.SERVER.sk/abc/findsometext.php').status_code
+        if site_status == 401:
+            return site_status
+        else :
+            return "ERROR : SERVER LOGIN"
+    except:
+        return "ERROR : SERVER LOGIN"
+
+
+def main(argv):
+
+    for arg in sys.argv:
+        if arg == '-a':
+            print get_A()
+            exit(1)
+        elif arg == '-b':
+            print get_B()
+            exit(1)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

@@ -1,0 +1,12 @@
+diff --git a/src/godot_openhmd.c b/src/godot_openhmd.c
+index 6cf55cb..36025d9 100644
+--- a/src/godot_openhmd.c
++++ b/src/godot_openhmd.c
+@@ -583,6 +583,7 @@ godot_transform godot_arvr_get_transform_for_eye(void *p_data, godot_int p_eye,
+ 
+ 			transform_for_eye = api->godot_transform_operator_multiply(&transform_for_eye, &hmd_transform);
+ 		} else if (openhmd_data->hmd_device != NULL) {
++			ohmd_ctx_update(openhmd_data->ohmd_ctx);
+ 			// Get our view matrices from OpenHMD
+ 			if (p_eye == 1) {
+ 				openhmd_transform_from_matrix(&transform_for_eye, openhmd_data->hmd_device, OHMD_LEFT_EYE_GL_MODELVIEW_MATRIX, world_scale);

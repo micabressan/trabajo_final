@@ -1,0 +1,29 @@
+[
+  {
+    "ptiSlot": {
+      "siEpoch": 0,
+      "siSlot": {
+        "getSlotIndex": 286
+      }
+    },
+    "ptiCond": "CPtxApplying",
+    "ptiInputs": [
+      {
+        "tag": "TxInUtxo",
+        "txInHash": "6ee67b11697c5e4cbc8f1d9631515082d31d2521fb5d180eeb8206ecf7cc8dd4",
+        "txInIndex": 0
+      }
+    ],
+    "ptiOutputs": [
+      {
+        "coin": 37499999828267,
+        "address": "DdzFFzCqrht2fehxXsyezHuPrkxLHJxbfsEb5vGXZfwniNRyBn9hfLiLLUz4z27CpfytYeEmKwgxopYTwQwtn9MBYNAQMq69prQiQYjE"
+      },
+      {
+        "coin": 5,
+        "address": "DdzFFzCqrhtCiiLVZtX8Ed8DFriGni43h8chAAoz9wCKwiQbzdLXCDGfPRY2ANavaEDDEK7DUVAHxR2oxfr9k7LwyachbkBP2FmyE47P"
+      }
+    ],
+    "ptiTxId": "e11e9af488bcf97c77ed9af4d1868da9cf84d6989ddecfb75f245a6e87a090db"
+  }
+]

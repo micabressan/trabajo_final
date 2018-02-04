@@ -1,0 +1,32 @@
+-module(divider).
+
+%% API
+-export([isPrime/1, primeDividers/1]).
+
+%% проверка на простое число
+isPrime(0)-> false;
+isPrime(1)-> true;
+isPrime(2)-> true;
+isPrime(N) -> isPrime(N,2).
+
+isPrime(N,N) -> true;
+isPrime(N,M) when N rem M == 0 -> false;
+isPrime(N,M) -> isPrime(N,M+1).
+
+
+primeDividers(N) -> primeDividers(N, 1, []).
+
+%% выход из рекурсии: текущее число дошло до заданного
+primeDividers(N, CurrentDivider, Mas) when CurrentDivider > N -> Mas;
+%% если текущее число делит заданное без остатка
+primeDividers(N, CurrentDivider, Mas) when N rem CurrentDivider == 0 ->
+  %% проверяем, простое ли текущее число
+  case isPrime(CurrentDivider) of
+    %% если да, добавляем его в массив
+    true ->
+      NewMas = Mas ++ [CurrentDivider],
+      primeDividers(N, CurrentDivider+1, NewMas);
+    false ->
+      primeDividers(N, CurrentDivider+1, Mas)
+  end;
+primeDividers(N, CurrentDivider, Mas) -> primeDividers(N, CurrentDivider+1, Mas).

@@ -1,0 +1,90 @@
+WebpackNotifierPlugin = require 'webpack-notifier'
+ExtractTextPlugin     = require 'extract-text-webpack-plugin'
+webpack               = require 'webpack'
+path                  = require 'path'
+npmRoot               = path.join __dirname, './node_modules'
+bowerRoot             = path.join __dirname, './bower_components'
+cssRoot               = path.join __dirname, './css'
+env                   = process.env.NODE_ENV
+
+plugins = [
+  new ExtractTextPlugin '[name].css'
+  new webpack.optimize.CommonsChunkPlugin 'vendor', 'vendor.js'
+  new WebpackNotifierPlugin()
+  new webpack.optimize.DedupePlugin()
+  new webpack.DefinePlugin
+    process :
+      env :
+        API_URL : JSON.stringify 'http://148.251.180.103/'
+]
+
+plugins.push new webpack.optimize.UglifyJsPlugin() if env is 'production'	
+
+module.exports =
+  entry :
+    bundle : [
+        'webpack/hot/dev-server'
+	'./coffee/main/main.coffee'
+    ]
+    vendor : [
+      'normalize.css'
+      'npm/bootstrap/dist/css/bootstrap.css'
+      'angular'
+      'angular-local-storage'
+      'angular-ui-router'
+    ]
+  output :
+    path : "#{__dirname}/js"
+    filename : 'bundle.js'
+  cache : on
+  watch : on unless env is 'production'
+  debug : on
+  devtool : 'source-map'
+  module :
+    loaders : [
+        test : /\.coffee$/
+        loader : 'coffee-loader'
+      ,
+        test : /\.js$/
+        exclude : /(node_modules|bower_components)/
+        loader : 'ng-annotate-loader!babel-loader'
+      ,
+        test : /\.css$/
+        loader : ExtractTextPlugin.extract 'style-loader', 'css-loader!csscomb-loader!cssnext-loader'
+      ,
+        test : /\.(png|jpg|gif|svg)/
+        loader : 'url-loader?limit=8192&name=img/[name].[ext]'
+      ,
+        test : /\.(eot|ttf|woff)/
+        loader : 'url-loader'
+      ,
+        test : /\.jade$/
+        loader : 'ng-cache?prefix=[dir]/[dir]!jade-html'
+    ]
+  resolve :
+    alias :
+      npm : npmRoot
+      bower : bowerRoot
+      css : cssRoot
+    extensions : [
+      ''
+      '.js'
+      '.json'
+      '.coffee'
+    ]
+  plugins : plugins
+  cssnext :
+    browsers : 'last 2 versions'
+    features:
+      rem : no
+    plugins : [
+      require 'postcss-nested'
+      require 'postcss-extend'
+      require 'precss'
+      require 'postcss-color-short'
+      require 'postcss-position'
+      require 'postcss-size'
+    ]
+    compress : on if env is 'production'
+    messages :
+      console : on

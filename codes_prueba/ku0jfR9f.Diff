@@ -1,0 +1,13 @@
+--- app/code/core/Mage/Core/Helper/Http.php
++++ app/code/core/Mage/Core/Helper/Http.php
+@@ -133,6 +133,10 @@
+             foreach ($headers as $var) {
+                 if ($this->_getRequest()->getServer($var, false)) {
+                     $this->_remoteAddr = $_SERVER[$var];
++                    if (strpos($this->_remoteAddr, ',') !== false) {
++                        $parts = explode(',', $this->_remoteAddr);
++                        $this->_remoteAddr = $parts[0];
++                    }
+                     break;
+                 }
+             }

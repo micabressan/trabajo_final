@@ -1,0 +1,192 @@
+diff --git a/common/common.h b/common/common.h
+index 1406255..994be69 100644
+--- a/common/common.h
++++ b/common/common.h
+@@ -424,6 +424,8 @@ struct x264_t
+     struct
+     {
+         ALIGNED_64( dctcoef luma16x16_dc[3][16] );
++        ALIGNED_64( int misalign_pad_align_1 );
++        int misalign_pad_1;
+         ALIGNED_16( dctcoef chroma_dc[2][8] );
+         // FIXME share memory?
+         ALIGNED_64( dctcoef luma8x8[12][64] );
+@@ -569,7 +571,11 @@ struct x264_t
+             ALIGNED_64( pixel fdec_buf[54*FDEC_STRIDE] );
+ 
+             /* i4x4 and i8x8 backup data, for skipping the encode stage when possible */
++            ALIGNED_64( int misalign_pad_align_1 );
++            int misalign_pad_1;
+             ALIGNED_16( pixel i4x4_fdec_buf[16*16] );
++            ALIGNED_64( int misalign_pad_align_2 );
++            int misalign_pad_2;
+             ALIGNED_16( pixel i8x8_fdec_buf[16*16] );
+             ALIGNED_64( dctcoef i8x8_dct_buf[3][64] );
+             ALIGNED_64( dctcoef i4x4_dct_buf[15][16] );
+@@ -577,11 +583,17 @@ struct x264_t
+             uint32_t i8x8_nnz_buf[4];
+ 
+             /* Psy trellis DCT data */
++            ALIGNED_64( int misalign_pad_align_3 );
++            int misalign_pad_3;
+             ALIGNED_64( dctcoef fenc_dct8[4][64] );
++            ALIGNED_64( int misalign_pad_align_4 );
++            int misalign_pad_4;
+             ALIGNED_64( dctcoef fenc_dct4[16][16] );
+ 
+             /* Psy RD SATD/SA8D scores cache */
+             ALIGNED_64( uint32_t fenc_satd_cache[32] );
++            ALIGNED_64( int misalign_pad_align_5 );
++            int misalign_pad_5;
+             ALIGNED_16( uint64_t fenc_hadamard_cache[9] );
+ 
+             int i4x4_cbp;
+@@ -610,6 +622,8 @@ struct x264_t
+         struct
+         {
+             /* real intra4x4_pred_mode if I_4X4 or I_8X8, I_PRED_4x4_DC if mb available, -1 if not */
++            ALIGNED_64( int misalign_pad_align_1 );
++            int misalign_pad_1;
+             ALIGNED_16( int8_t intra4x4_pred_mode[X264_SCAN8_LUMA_SIZE] );
+ 
+             /* i_non_zero_count if available else 0x80. intentionally misaligned by 8 for asm */
+@@ -619,6 +633,8 @@ struct x264_t
+             ALIGNED_4( int8_t ref[2][X264_SCAN8_LUMA_SIZE] );
+ 
+             /* 0 if not available */
++            ALIGNED_64( int misalign_pad_align_2 );
++            int misalign_pad_2;
+             ALIGNED_16( int16_t mv[2][X264_SCAN8_LUMA_SIZE][2] );
+             ALIGNED_8( uint8_t mvd[2][X264_SCAN8_LUMA_SIZE][2] );
+ 
+@@ -718,7 +734,11 @@ struct x264_t
+     uint32_t (*nr_residual_sum)[64];
+     uint32_t *nr_count;
+ 
++    ALIGNED_64( int misalign_pad_align_1 );
++    int misalign_pad_1;
+     ALIGNED_32( udctcoef nr_offset_denoise[4][64] );
++    ALIGNED_64( int misalign_pad_align_2 );
++    int misalign_pad_2;
+     ALIGNED_32( uint32_t nr_residual_sum_buf[2][4][64] );
+     uint32_t nr_count_buf[2][4];
+ 
+diff --git a/common/osdep.h b/common/osdep.h
+index fbc4801..31afba6 100644
+--- a/common/osdep.h
++++ b/common/osdep.h
+@@ -123,17 +123,29 @@ int x264_is_pipe( const char *path );
+ // - Apple gcc only maintains 4 byte alignment
+ // - llvm can align the stack, but only in svn and (unrelated) it exposes bugs in all released GNU binutils...
+ 
++#if 0
+ #define ALIGNED_ARRAY_EMU( mask, type, name, sub1, ... )\
+     uint8_t name##_u [sizeof(type sub1 __VA_ARGS__) + mask]; \
+     type (*name) __VA_ARGS__ = (void*)((intptr_t)(name##_u+mask) & ~mask)
++#else
++#define ALIGNED_ARRAY_EMU( mask, type, name, sub1, ... )\
++    uint8_t name##_u [sizeof(type sub1 __VA_ARGS__) + (mask*3+2)]; \
++    type (*name) __VA_ARGS__ = (void*)(((intptr_t)(name##_u+(mask*2+1)) & ~(mask*2+1)) + (mask+1))
++#define ALIGNED_ARRAY_EMU_ZERO( mask, attr, type, name, sub1, ... )\
++    attr uint8_t name##_u [sizeof(type sub1 __VA_ARGS__) + (mask*3+2)] = {0}; \
++    type (*name) __VA_ARGS__ = (void*)(((intptr_t)(name##_u+(mask*2+1)) & ~(mask*2+1)) + (mask+1))
++#define ALIGNED_ZERO_16( ... ) EXPAND( ALIGNED_ARRAY_EMU_ZERO( 15, __VA_ARGS__ ) )
++#define ALIGNED_ZERO_32( ... ) EXPAND( ALIGNED_ARRAY_EMU_ZERO( 31, __VA_ARGS__ ) )
++#define ALIGNED_ZERO_64( ... ) EXPAND( ALIGNED_ARRAY_EMU_ZERO( 63, __VA_ARGS__ ) )
++#endif
+ 
+-#if ARCH_ARM && SYS_MACOSX
++#if 1 || ARCH_ARM && SYS_MACOSX
+ #define ALIGNED_ARRAY_8( ... ) EXPAND( ALIGNED_ARRAY_EMU( 7, __VA_ARGS__ ) )
+ #else
+ #define ALIGNED_ARRAY_8( type, name, sub1, ... ) ALIGNED_8( type name sub1 __VA_ARGS__ )
+ #endif
+ 
+-#if ARCH_ARM
++#if 1 || ARCH_ARM
+ #define ALIGNED_ARRAY_16( ... ) EXPAND( ALIGNED_ARRAY_EMU( 15, __VA_ARGS__ ) )
+ #else
+ #define ALIGNED_ARRAY_16( type, name, sub1, ... ) ALIGNED_16( type name sub1 __VA_ARGS__ )
+@@ -145,12 +157,12 @@ int x264_is_pipe( const char *path );
+ #define NATIVE_ALIGN 64
+ #define ALIGNED_32( var ) DECLARE_ALIGNED( var, 32 )
+ #define ALIGNED_64( var ) DECLARE_ALIGNED( var, 64 )
+-#if STACK_ALIGNMENT >= 32
++#if 0 && STACK_ALIGNMENT >= 32
+ #define ALIGNED_ARRAY_32( type, name, sub1, ... ) ALIGNED_32( type name sub1 __VA_ARGS__ )
+ #else
+ #define ALIGNED_ARRAY_32( ... ) EXPAND( ALIGNED_ARRAY_EMU( 31, __VA_ARGS__ ) )
+ #endif
+-#if STACK_ALIGNMENT >= 64
++#if 0 && STACK_ALIGNMENT >= 64
+ #define ALIGNED_ARRAY_64( type, name, sub1, ... ) ALIGNED_64( type name sub1 __VA_ARGS__ )
+ #else
+ #define ALIGNED_ARRAY_64( ... ) EXPAND( ALIGNED_ARRAY_EMU( 63, __VA_ARGS__ ) )
+diff --git a/encoder/analyse.c b/encoder/analyse.c
+index a9d7dc2..bcb6911 100644
+--- a/encoder/analyse.c
++++ b/encoder/analyse.c
+@@ -78,6 +78,8 @@ typedef struct
+ 
+     int i_satd_i8x8;
+     int i_cbp_i8x8_luma;
++    ALIGNED_64( int misalign_pad_align_1 );
++    int misalign_pad_1;
+     ALIGNED_16( uint16_t i_satd_i8x8_dir[4][16] );
+     int i_predict8x8[4];
+ 
+@@ -558,7 +560,7 @@ static ALWAYS_INLINE const int8_t *predict_4x4_mode_available( int force_intra,
+ /* For trellis=2, we need to do this for both sizes of DCT, for trellis=1 we only need to use it on the chosen mode. */
+ static void inline psy_trellis_init( x264_t *h, int do_both_dct )
+ {
+-    ALIGNED_16( static pixel zero[16*FDEC_STRIDE] ) = {0};
++    ALIGNED_ZERO_16( static, pixel, zero,[16*FDEC_STRIDE] );
+ 
+     if( do_both_dct || h->mb.b_transform_8x8 )
+         h->dctf.sub16x16_dct8( h->mb.pic.fenc_dct8, h->mb.pic.p_fenc[0], zero );
+diff --git a/encoder/me.c b/encoder/me.c
+index 9cb5a84..7babd73 100644
+--- a/encoder/me.c
++++ b/encoder/me.c
+@@ -633,7 +633,7 @@ void x264_me_search_ref( x264_t *h, x264_me_t *m, int16_t (*mvc)[2], int i_mvc,
+             /* successive elimination by comparing DC before a full SAD,
+              * because sum(abs(diff)) >= abs(diff(sum)). */
+             uint16_t *sums_base = m->integral;
+-            ALIGNED_16( static pixel zero[8*FENC_STRIDE] ) = {0};
++            ALIGNED_ZERO_16( static, pixel, zero,[8*FENC_STRIDE] );
+             ALIGNED_ARRAY_16( int, enc_dc,[4] );
+             int sad_size = i_pixel <= PIXEL_8x8 ? PIXEL_8x8 : PIXEL_4x4;
+             int delta = x264_pixel_size[sad_size].w;
+diff --git a/encoder/rdo.c b/encoder/rdo.c
+index 68ba0a2..a83d719 100644
+--- a/encoder/rdo.c
++++ b/encoder/rdo.c
+@@ -96,7 +96,7 @@ static ALWAYS_INLINE int cached_satd( x264_t *h, int size, int x, int y )
+     static const uint8_t satd_shift_x[3] = {3,   2,   2};
+     static const uint8_t satd_shift_y[3] = {2-1, 3-2, 2-2};
+     static const uint8_t  satd_offset[3] = {0,   8,   16};
+-    ALIGNED_16( static pixel zero[16] ) = {0};
++    ALIGNED_ZERO_16( static, pixel, zero,[16] );
+     int cache_index = (x >> satd_shift_x[size - PIXEL_8x4]) + (y >> satd_shift_y[size - PIXEL_8x4])
+                     + satd_offset[size - PIXEL_8x4];
+     int res = h->mb.pic.fenc_satd_cache[cache_index];
+@@ -123,7 +123,7 @@ static ALWAYS_INLINE int cached_satd( x264_t *h, int size, int x, int y )
+ 
+ static inline int ssd_plane( x264_t *h, int size, int p, int x, int y )
+ {
+-    ALIGNED_16( static pixel zero[16] ) = {0};
++    ALIGNED_ZERO_16( static, pixel, zero,[16] );
+     int satd = 0;
+     pixel *fdec = h->mb.pic.p_fdec[p] + x + y*FDEC_STRIDE;
+     pixel *fenc = h->mb.pic.p_fenc[p] + x + y*FENC_STRIDE;
+@@ -912,8 +912,8 @@ int quant_trellis_cavlc( x264_t *h, dctcoef *dct,
+                          const uint8_t *zigzag, int ctx_block_cat, int lambda2, int b_ac,
+                          int b_chroma, int dc, int num_coefs, int idx, int b_8x8 )
+ {
+-    ALIGNED_16( dctcoef quant_coefs[2][16] );
+-    ALIGNED_16( dctcoef coefs[16] ) = {0};
++    ALIGNED_ARRAY_16( dctcoef, quant_coefs,[2],[16] );
++    ALIGNED_ZERO_16( ,dctcoef, coefs,[16] );
+     const uint32_t *coef_weight1 = b_8x8 ? x264_dct8_weight_tab : x264_dct4_weight_tab;
+     const uint32_t *coef_weight2 = b_8x8 ? x264_dct8_weight2_tab : x264_dct4_weight2_tab;
+     int delta_distortion[16];

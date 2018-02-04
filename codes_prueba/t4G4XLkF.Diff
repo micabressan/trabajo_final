@@ -1,0 +1,98 @@
+# HG changeset patch
+# User clanat
+# Date 1391684950 -21600
+# Branch trunk
+# Node ID 577a16481d334d53f6d765074167a032dece9875
+# Parent  9531ce1a819263e0da2f358177e58cf388460b5e
+Quest 9711 - part 1
+
+diff --git a/sql/2014_01_31_00_creature_template.sql b/sql/2014_01_31_00_creature_template.sql
+new file mode 100644
+--- /dev/null
++++ b/sql/2014_01_31_00_creature_template.sql
+@@ -0,0 +1,9 @@
++-- Ethereal Mutagen - Pet
++DELETE FROM `creature_template` WHERE `entry` = 27998;
++INSERT INTO `creature_template` (`entry`, `heroic_entry`, `KillCredit`, `modelid_A`, `modelid_A2`, `modelid_H`, `modelid_H2`, `name`, `subname`, `IconName`, `minlevel`, `maxlevel`, `minhealth`, `maxhealth`, `minmana`, `maxmana`, `armor`, `faction_A`, `faction_H`, `npcflag`, `speed`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `baseattacktime`, `rangeattacktime`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `class`, `race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `PetSpellDataId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `RacialLeader`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `callHelpRadius`, `ScriptName`) VALUES('27998','0',NULL,'25003','0','25003','0','Ethereal Mutagen - Pet','','','1','1','1','1','0','0','0','35','35','0','1','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','4','0','0','0','0','0','0','0','0','0','0','0','0','0','0',NULL,'0','0','0','0','0','3','0','1','0','0','2',NULL,'');
++
++-- Ethereal Mutagen - Player
++DELETE FROM `creature_template` WHERE `entry` = 28000;
++INSERT INTO `creature_template` (`entry`, `heroic_entry`, `KillCredit`, `modelid_A`, `modelid_A2`, `modelid_H`, `modelid_H2`, `name`, `subname`, `IconName`, `minlevel`, `maxlevel`, `minhealth`, `maxhealth`, `minmana`, `maxmana`, `armor`, `faction_A`, `faction_H`, `npcflag`, `speed`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `baseattacktime`, `rangeattacktime`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `class`, `race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `PetSpellDataId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `RacialLeader`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `callHelpRadius`, `ScriptName`) VALUES('28000','0',NULL,'19454','0','19454','0','Ethereal Mutagen - Player','','','1','1','1','1','0','0','0','35','35','0','1','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','4','0','0','0','0','0','0','0','0','0','0','0','0','0','0',NULL,'0','0','0','0','0','3','0','1','0','0','2',NULL,'');
++
++
+diff --git a/sql/2014_01_31_00_spell_proc_event.sql b/sql/2014_01_31_00_spell_proc_event.sql
+new file mode 100644
+--- /dev/null
++++ b/sql/2014_01_31_00_spell_proc_event.sql
+@@ -0,0 +1,1 @@
++delete from spell_proc_event where entry=15600;
+\ No newline at end of file
+diff --git a/sql/2014_02_06_00_waypoint_data.sql b/sql/2014_02_06_00_waypoint_data.sql
+new file mode 100644
+--- /dev/null
++++ b/sql/2014_02_06_00_waypoint_data.sql
+@@ -0,0 +1,64 @@
++-- Matis the Cruel - add new waypoints (by http://www.wowhead.com/npc=17664#map)
++delete from `waypoint_data` where `id` = '2665340996';
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','1','-1906.23','-10947.7','61.3697','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','2','-1920.13','-10924.4','61.7447','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','3','-1929.92','-10905.4','62.7281','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','4','-1933.37','-10888.4','63.8212','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','5','-1938.69','-10859.5','68.0693','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','6','-1937.45','-10843.5','72.5036','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','7','-1938.72','-10810.5','83.8325','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','8','-1937.15','-10797.6','87.8557','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','9','-1937.46','-10810.8','83.6633','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','10','-1932.65','-10832.4','76.2394','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','11','-1938.6','-10843.3','72.4485','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','12','-1938.19','-10860','67.9693','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','13','-1932.51','-10888.7','63.8372','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','14','-1929.52','-10902.4','62.8758','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','15','-1918.92','-10924.9','61.689','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','16','-1905.14','-10947.4','61.4036','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','17','-1893.4','-10962.9','61.248','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','18','-1883.67','-10982.5','60.7889','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','19','-1882.12','-11002.1','60.373','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','20','-1885.51','-11029.3','59.6578','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','21','-1884.88','-11055.9','59.498','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','22','-1861.43','-11079.1','61.1458','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','23','-1839.59','-11090.1','62.8308','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','24','-1821.93','-11107.8','64.2531','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','25','-1806.51','-11134.9','64.2415','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','26','-1793.3','-11159.6','64.3093','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','27','-1780.13','-11186','64.1393','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','28','-1778.15','-11205.7','63.3874','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','29','-1781.55','-11240.3','60.728','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','30','-1783.76','-11256.3','59.6908','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','31','-1784.08','-11278.4','58.2686','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','32','-1776.58','-11300','57.2757','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','33','-1763.18','-11326.5','56.3185','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','34','-1750.58','-11351.2','55.0666','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','35','-1740.25','-11378.3','52.9273','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','36','-1737.61','-11399.7','49.8657','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','37','-1730.6','-11425.2','45.7253','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','38','-1719.36','-11448.5','43.463','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','39','-1711.24','-11472.4','41.5466','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','40','-1719.4','-11450.9','43.29','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','41','-1728.85','-11424.6','45.8509','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','42','-1735.88','-11399','49.9734','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','43','-1740.54','-11378.6','52.8697','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','44','-1749.49','-11353.3','54.9159','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','45','-1760.81','-11327.7','56.2193','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','46','-1775.52','-11299.8','57.2959','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','47','-1782.41','-11280.1','58.245','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','48','-1784.21','-11257.3','59.6168','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','49','-1782.59','-11241.1','60.6494','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','50','-1777.93','-11206.4','63.3465','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','51','-1778.89','-11187.3','64.0587','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','52','-1792.83','-11159','64.3292','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','53','-1805.07','-11135.4','64.2291','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','54','-1819.12','-11111.2','64.3115','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','55','-1835.19','-11093.5','63.3339','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','56','-1859.33','-11079.5','61.2877','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','57','-1885.04','-11056.7','59.4891','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','58','-1885.94','-11033','59.5068','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','59','-1883.44','-11005.1','60.2443','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','60','-1883.39','-10986.5','60.6911','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','61','-1894.72','-10962.5','61.2769','0','0','0','100','0');
++insert into `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) values('2665340996','62','-1898.48','-10955.8','61.3423','0','0','0','100','0');

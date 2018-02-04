@@ -1,0 +1,334 @@
+diff --git a/infinoted/infinoted-autosave.c b/infinoted/infinoted-autosave.c
+index 7f7327e..1d12f5a 100644
+--- a/infinoted/infinoted-autosave.c
++++ b/infinoted/infinoted-autosave.c
+@@ -121,6 +121,7 @@ infinoted_autosave_session_save(InfinotedAutosave* autosave,
+   InfdDirectoryIter* iter;
+   GError* error;
+   gchar* path;
++  gchar autosave_hook_command[4096];
+   InfBuffer* buffer;
+ 
+   directory = autosave->directory;
+@@ -170,6 +171,19 @@ infinoted_autosave_session_save(InfinotedAutosave* autosave,
+     inf_buffer_set_modified(INF_BUFFER(buffer), FALSE);
+   }
+ 
++
++  if(autosave->autosave_hook != NULL)
++  {
++    snprintf(autosave_hook_command, 4095,"%s %s", autosave->autosave_hook, autosave->root_directory);
++    if(system(autosave_hook_command))
++    {
++      g_warning(
++         _("Autosave Hook failed to run: \"%s\""),
++         autosave_hook_command
++      );
++    }
++  }
++  
+   inf_signal_handlers_unblock_by_func(
+     G_OBJECT(buffer),
+     G_CALLBACK(infinoted_autosave_buffer_notify_modified_cb),
+@@ -320,6 +334,8 @@ infinoted_autosave_walk_directory(InfinotedAutosave* autosave,
+  */
+ InfinotedAutosave*
+ infinoted_autosave_new(InfdDirectory* directory,
++                       gchar* autosave_hook,
++                       gchar* root_directory,
+                        unsigned int autosave_interval)
+ {
+   InfinotedAutosave* autosave;
+@@ -328,6 +344,8 @@ infinoted_autosave_new(InfdDirectory* directory,
+   autosave = g_slice_new(InfinotedAutosave);
+ 
+   autosave->directory = directory;
++  autosave->autosave_hook = autosave_hook;
++  autosave->root_directory = root_directory;
+   autosave->autosave_interval = autosave_interval;
+   autosave->sessions = NULL;
+   g_object_ref(directory);
+diff --git a/infinoted/infinoted-autosave.h b/infinoted/infinoted-autosave.h
+index 28f21f0..4df224f 100644
+--- a/infinoted/infinoted-autosave.h
++++ b/infinoted/infinoted-autosave.h
+@@ -29,12 +29,16 @@ G_BEGIN_DECLS
+ typedef struct _InfinotedAutosave InfinotedAutosave;
+ struct _InfinotedAutosave {
+   InfdDirectory* directory;
++  gchar* autosave_hook;
++  gchar* root_directory;
+   unsigned int autosave_interval;
+   GSList* sessions;
+ };
+ 
+ InfinotedAutosave*
+ infinoted_autosave_new(InfdDirectory* directory,
++                       gchar* autosave_hook,
++                       gchar* root_directory,
+                        unsigned int autosave_interval);
+ 
+ void
+diff --git a/infinoted/infinoted-config-reload.c b/infinoted/infinoted-config-reload.c
+index 33ee893..a55c538 100644
+--- a/infinoted/infinoted-config-reload.c
++++ b/infinoted/infinoted-config-reload.c
+@@ -328,6 +328,8 @@ infinoted_config_reload(InfinotedRun* run,
+     {
+       run->autosave = infinoted_autosave_new(
+         run->directory,
++        startup->options->autosave_hook,
++        startup->options->root_directory,
+         startup->options->autosave_interval
+       );
+     }
+@@ -354,7 +356,8 @@ infinoted_config_reload(InfinotedRun* run,
+       run->dsync = infinoted_directory_sync_new(
+         run->directory,
+         startup->options->sync_directory,
+-        startup->options->sync_interval
++        startup->options->sync_interval,
++        startup->options->sync_hook
+       );
+     }
+   }
+diff --git a/infinoted/infinoted-directory-sync.c b/infinoted/infinoted-directory-sync.c
+index 7fb82f1..af0b400 100644
+--- a/infinoted/infinoted-directory-sync.c
++++ b/infinoted/infinoted-directory-sync.c
+@@ -143,6 +143,7 @@ infinoted_directory_sync_session_save(InfinotedDirectorySync* dsync,
+   InfTextChunk* chunk;
+   gchar* content;
+   gsize bytes;
++  char sync_hook_command[4096];
+ 
+   iter = &session->iter;
+   error = NULL;
+@@ -192,6 +193,18 @@ infinoted_directory_sync_session_save(InfinotedDirectorySync* dsync,
+ 
+       infinoted_directory_sync_session_start(session->dsync, session);
+     }
++    
++    if(dsync->sync_hook != NULL)
++    {
++      snprintf(sync_hook_command, 4095,"%s %s", dsync->sync_hook, session->path);
++      if(system(sync_hook_command))
++      {
++        g_warning(
++           _("Sync Hook failed to run: \"%s\""),
++           sync_hook_command
++        );
++      }
++    }
+ 
+     g_free(content);
+   }
+@@ -445,7 +458,8 @@ infinoted_directory_sync_walk_directory(InfinotedDirectorySync* dsync,
+ InfinotedDirectorySync*
+ infinoted_directory_sync_new(InfdDirectory* directory,
+                              const gchar* sync_directory,
+-                             unsigned int sync_interval)
++                             unsigned int sync_interval,
++                             const gchar* sync_hook)
+ {
+   InfinotedDirectorySync* dsync;
+   InfdDirectoryIter iter;
+@@ -455,6 +469,7 @@ infinoted_directory_sync_new(InfdDirectory* directory,
+   dsync->directory = directory;
+   dsync->sync_directory = g_strdup(sync_directory);
+   dsync->sync_interval = sync_interval;
++  dsync->sync_hook = g_strdup(sync_hook);
+   dsync->sessions = NULL;
+   g_object_ref(directory);
+ 
+diff --git a/infinoted/infinoted-directory-sync.h b/infinoted/infinoted-directory-sync.h
+index 6edd8e4..0008a6a 100644
+--- a/infinoted/infinoted-directory-sync.h
++++ b/infinoted/infinoted-directory-sync.h
+@@ -35,6 +35,7 @@ struct _InfinotedDirectorySync {
+   InfdDirectory* directory;
+   gchar* sync_directory;
+   unsigned int sync_interval;
++  gchar* sync_hook;
+   GSList* sessions;
+ };
+ 
+@@ -45,7 +46,8 @@ typedef enum _InfinotedDirectorySyncError {
+ InfinotedDirectorySync*
+ infinoted_directory_sync_new(InfdDirectory* directory,
+                              const gchar* sync_directory,
+-                             unsigned int sync_interval);
++                             unsigned int sync_interval,
++                             const gchar* sync_hook);
+ 
+ void
+ infinoted_directory_sync_free(InfinotedDirectorySync* autosave);
+diff --git a/infinoted/infinoted-options.c b/infinoted/infinoted-options.c
+index 2c403cd..5457237 100644
+--- a/infinoted/infinoted-options.c
++++ b/infinoted/infinoted-options.c
+@@ -578,6 +578,23 @@ infinoted_options_validate(InfinotedOptions* options,
+ 
+     return FALSE;
+   }
++  else if(options->sync_hook != NULL && (options->sync_interval == 0 || options->sync_directory == NULL))
++  {
++    g_set_error(
++      error,
++      infinoted_options_error_quark(),
++      INFINOTED_OPTIONS_ERROR_INVALID_SYNC_COMBINATION,
++      "%s",
++      _("A synchronization hook is given, but either the synchronization "
++        "directory or the synchronization interval is not set. Please "
++        "either set a valid synchronization interval and directory,"
++        "or set the synchronization hook to zero using "
++        "--sync-hook and sync-hook command line or config file "
++        "options.")
++    );
++
++    return FALSE;
++  }
+ 
+   return TRUE;
+ }
+@@ -631,6 +648,9 @@ infinoted_options_load(InfinotedOptions* options,
+     { "root-directory", 'r', 0,
+       G_OPTION_ARG_FILENAME, NULL,
+       N_("The directory to store documents into"), N_("DIRECTORY") },
++    { "autosave-hook", 0, 0,
++      G_OPTION_ARG_FILENAME, NULL,
++      N_("Script to run after saving documents"), N_("FILE") },
+     { "autosave-interval", 0, 0,
+       G_OPTION_ARG_INT, NULL,
+       N_("Interval within which to save documents, in seconds, or 0 to "
+@@ -662,6 +682,10 @@ infinoted_options_load(InfinotedOptions* options,
+          "sync-directory, in seconds, or 0 to disable directory "
+          "synchronization"),
+          N_("INTERVAL") },
++    { "sync-hook", 0, 0,
++      G_OPTION_ARG_FILENAME, NULL,
++      N_("A script or program which is called whenever a copy of the "
++         "document tree is stored"), N_("FILE") },
+ #ifdef LIBINFINITY_HAVE_LIBDAEMON
+     { "daemonize", 'd', 0,
+       G_OPTION_ARG_NONE, NULL,
+@@ -688,6 +712,7 @@ infinoted_options_load(InfinotedOptions* options,
+   entries[i++].arg_data = &port_number;
+   entries[i++].arg_data = &security_policy;
+   entries[i++].arg_data = &options->root_directory;
++  entries[i++].arg_data = &options->autosave_hook;
+   entries[i++].arg_data = &autosave_interval;
+   entries[i++].arg_data = &options->password;
+ #ifdef LIBINFINITY_HAVE_PAM
+@@ -697,6 +722,7 @@ infinoted_options_load(InfinotedOptions* options,
+ #endif /* LIBINFINITY_HAVE_PAM */
+   entries[i++].arg_data = &options->sync_directory;
+   entries[i++].arg_data = &sync_interval;
++  entries[i++].arg_data = &options->sync_hook;
+ #ifdef LIBINFINITY_HAVE_LIBDAEMON
+   entries[i++].arg_data = &options->daemonize;
+   entries[i++].arg_data = &kill_daemon;
+@@ -809,6 +835,14 @@ infinoted_options_load(InfinotedOptions* options,
+     g_free(options->password);
+     options->password = NULL;
+   }
++  
++  if(options->autosave_hook != NULL &&
++   strcmp(options->autosave_hook, "") == 0)
++  {
++    g_free(options->autosave_hook);
++    options->autosave_hook = NULL;
++  }
++
+ 
+ #ifdef LIBINFINITY_HAVE_PAM
+   if(options->pam_service != NULL && strcmp(options->pam_service, "") == 0)
+@@ -841,6 +875,13 @@ infinoted_options_load(InfinotedOptions* options,
+     options->sync_directory = NULL;
+   }
+ 
++  if(options->sync_hook != NULL &&
++     strcmp(options->sync_hook, "") == 0)
++  {
++    g_free(options->sync_hook);
++    options->sync_hook = NULL;
++  }
++
+   return infinoted_options_validate(options, error);
+ }
+ 
+@@ -883,6 +924,7 @@ infinoted_options_new(const gchar* const* config_files,
+   options->security_policy = INF_XMPP_CONNECTION_SECURITY_BOTH_PREFER_TLS;
+   options->root_directory =
+     g_build_filename(g_get_home_dir(), ".infinote", NULL);
++  options->autosave_hook = NULL;
+   options->autosave_interval = 0;
+   options->password = NULL;
+ #ifdef LIBINFINITY_HAVE_PAM
+@@ -892,6 +934,7 @@ infinoted_options_new(const gchar* const* config_files,
+ #endif /* LIBINFINITY_HAVE_PAM */
+   options->sync_directory = NULL;
+   options->sync_interval = 0;
++  options->sync_hook = NULL;
+ 
+ #ifdef LIBINFINITY_HAVE_LIBDAEMON
+   options->daemonize = FALSE;
+@@ -919,6 +962,7 @@ infinoted_options_free(InfinotedOptions* options)
+   g_free(options->certificate_file);
+   g_free(options->certificate_chain_file);
+   g_free(options->root_directory);
++  g_free(options->autosave_hook);
+   g_free(options->password);
+ #ifdef LIBINFINITY_HAVE_PAM
+   g_free(options->pam_service);
+@@ -926,6 +970,7 @@ infinoted_options_free(InfinotedOptions* options)
+   g_strfreev(options->pam_allowed_groups);
+ #endif
+   g_free(options->sync_directory);
++  g_free(options->sync_hook);
+   g_slice_free(InfinotedOptions, options);
+ }
+ 
+diff --git a/infinoted/infinoted-options.h b/infinoted/infinoted-options.h
+index d4e6558..6b2c0ee 100644
+--- a/infinoted/infinoted-options.h
++++ b/infinoted/infinoted-options.h
+@@ -37,6 +37,7 @@ struct _InfinotedOptions {
+   guint port;
+   InfXmppConnectionSecurityPolicy security_policy;
+   gchar* root_directory;
++  gchar* autosave_hook;
+   guint autosave_interval;
+   gchar* password;
+ #ifdef LIBINFINITY_HAVE_PAM
+@@ -46,6 +47,7 @@ struct _InfinotedOptions {
+ #endif /* LIBINFINITY_HAVE_PAM */
+ 
+   gchar* sync_directory;
++  gchar* sync_hook;
+   guint sync_interval;
+ 
+ #ifdef LIBINFINITY_HAVE_LIBDAEMON
+diff --git a/infinoted/infinoted-run.c b/infinoted/infinoted-run.c
+index 0a43a94..79255b5 100644
+--- a/infinoted/infinoted-run.c
++++ b/infinoted/infinoted-run.c
+@@ -231,6 +231,8 @@ infinoted_run_new(InfinotedStartup* startup,
+   {
+     run->autosave = infinoted_autosave_new(
+       run->directory,
++      startup->options->autosave_hook,
++      startup->options->root_directory,
+       startup->options->autosave_interval
+     );
+   }
+@@ -245,7 +247,8 @@ infinoted_run_new(InfinotedStartup* startup,
+     run->dsync = infinoted_directory_sync_new(
+       run->directory,
+       startup->options->sync_directory,
+-      startup->options->sync_interval
++      startup->options->sync_interval,
++      startup->options->sync_hook
+     );
+   }
+   else

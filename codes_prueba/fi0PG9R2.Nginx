@@ -1,0 +1,17 @@
+# nginx configuration
+
+error_page 404 /?type=pages&uri=%{REQUEST_URI}&%{QUERY_STRING};
+
+location / {
+	if (!-e $request_filename){	
+		rewrite ^/data(.*)$ /?type=data&uri=$request_uri&$query_string;
+	}
+}
+
+location /account {
+	rewrite ^/account(.*)$ /?type=pages&uri=$request_uri&$query_string;
+}
+
+location /info {
+	rewrite ^/info(.*)$ /?type=pages&uri=$request_uri&$query_string break;
+}

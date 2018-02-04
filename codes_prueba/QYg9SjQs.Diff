@@ -1,0 +1,32 @@
+diff --git a/golang_api.py b/golang_api.py
+index f752527..b36b833 100644
+--- a/golang_api.py
++++ b/golang_api.py
+@@ -286,9 +286,10 @@ type %(camel)s struct {
+         parents = ident.getParents()
+         if parents:
+             (parent, meta, _) = parents[0]
+-            quoted_list = map(lambda x: '"%s"' % x, parent.getDefaultFQName())
+-            parent_fqn = ', '.join(quoted_list)
+             parent_type = parent.getName()
++            quoted_list = map(lambda x: '"%s"' % x,
++                              parent.getDefaultFQName(parent_type))
++            parent_fqn = ', '.join(quoted_list)
+ 
+         decl = """
+ func (obj *%(camel)s) GetType() string {
+diff --git a/java_api.py b/java_api.py
+index 823e121..4ad09bf 100644
+--- a/java_api.py
++++ b/java_api.py
+@@ -291,7 +291,9 @@ public class %(cls)s extends ApiObjectBase {
+         parents = ident.getParents()
+         if parents:
+             (parent, meta, _) = parents[0]
+-            quoted_list = map(lambda x: '"%s"' % x, parent.getDefaultFQName())
++            parent_type = parent.getName()
++            quoted_list = map(lambda x: '"%s"' % x,
++                              parent.getDefaultFQName(parent_type))
+             fq_name = ', '.join(quoted_list)
+ 
+         decl = """

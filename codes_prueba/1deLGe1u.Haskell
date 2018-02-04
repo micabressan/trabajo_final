@@ -1,0 +1,11 @@
+move :: Board -> (Int,Int) -> (Int,Int) -> [[Bool]]
+move x:board (fx,fy) (tx,ty) = case ycoord of
+    0  -> []
+    fy -> makeMove x fx False
+    ty -> makeMove x tx True
+    ny -> makeMove x nx False
+    _  -> x : move board (fx,fy) (tx,ty)
+    where ycoord = length x
+              ny        = snd $ findNeighbor board (fx,fy) (tx,ty)
+              nx        = fst $ findNeighbor board (fx,fy) (tx,ty)
+              makeMove x a b = x : move board (fx,fy) (tx,ty) $ setElem x a b

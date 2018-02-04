@@ -1,0 +1,7 @@
+getStockQuote:unaAccion
+	| xmlResponse xmlDOM rate|
+	xmlResponse := ZnClient new
+		get: 'http://webservicex.net/stockquote.asmx/GetQuote?symbol=',unaAccion,''.
+	xmlDOM := XMLDOMParser parse: xmlResponse.
+	rate := ((xmlDOM elementAt: 'double') nodeAt: 1) string.
+	^ rate

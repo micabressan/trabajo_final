@@ -1,0 +1,45 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace ConsoleApplication
+{
+    internal static class Program
+    {
+        private static void Main()
+        {
+            int[] counter = new int[33];
+            int j = 1072;
+            int length = 0;
+
+            string path = "input.txt";
+            StreamReader sr = new StreamReader(path, Encoding.GetEncoding(1251));
+
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                for (int i = 0; i < 33; i++)
+                {
+                    char symbol = (char) j;
+                    foreach (char c in line)
+                    {
+                        if (symbol == c)
+                            counter[i]++;
+                    }
+                    j++;
+                }
+                length += line.Length;
+            }
+
+            j = 1072;
+            foreach (int t in counter)
+            {
+                char symbol = (char) j;
+                double result = Convert.ToDouble(t) / length * 100;
+                Console.WriteLine("{0} - {1:0.00}%", symbol,  result);
+                j++;
+            }
+            Console.ReadKey();
+        }
+    }
+}

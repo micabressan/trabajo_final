@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css?family={font_family}");
+
+html, .widget-EventList li > div {
+    -webkit-transform: rotateX({rotate_x}) rotateY({rotate_y});
+            transform: rotateX({rotate_x}) rotateY({rotate_y});
+}
+
+.widget-EventList, .widget-EventList * {
+    box-sizing: border-box;
+}
+
+.widget-EventList {
+    font-weight: 700;
+    font-size: {font_size};
+    font-family: "{font_family}";
+    color: {text_color};
+    background: {background};
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 10px 30px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.widget-EventList li {
+    width: 100%;
+    position: relative;
+    -webkit-animation: {show_animation} {animation_speed} forwards;
+            animation: {show_animation} {animation_speed} forwards;
+}
+
+.widget-EventList li > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.7;
+    -webkit-transition: opacity {animation_speed};
+            transition: opacity {animation_speed};
+}
+
+.widget-EventList li > div:last-child {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 4px;
+    padding: 0 10px;
+    opacity: 0.7;
+    font-size: 0.9em;
+    height: 1.2em;
+    line-height: 1.2em;
+    -webkit-animation: growB {animation_speed} forwards;
+            animation: growB {animation_speed} forwards;
+}
+
+.widget-EventList li:first-child > div:first-child {
+    opacity: 1;
+}
+
+.widget-EventList li:first-child > div:last-child {
+    -webkit-animation: growA {animation_speed} forwards;
+            animation: growA {animation_speed} forwards;
+}
+
+.widget-EventList li:nth-child(n+{max_events}) {
+    -webkit-animation: {hide_animation} {animation_speed} forwards;
+            animation: {hide_animation} {animation_speed} forwards;
+}
+
+
+@-webkit-keyframes growA {
+    0% {
+        opacity: 0;
+        font-size: 0em;
+        height: 0em;
+        line-height: 0em;
+        margin-bottom: 0px;
+        padding: 0;
+    }
+
+    100% {
+        opacity: 1;
+        font-size: 1em;
+        height: 1.6em;
+        line-height: 1.6em;
+        margin-bottom: 4px;
+        padding: 0 10px;
+    }
+}
+
+
+@keyframes growA {
+    0% {
+        opacity: 0;
+        font-size: 0em;
+        height: 0em;
+        line-height: 0em;
+        margin-bottom: 0px;
+        padding: 0;
+    }
+
+    100% {
+        opacity: 1;
+        font-size: 1em;
+        height: 1.6em;
+        line-height: 1.6em;
+        margin-bottom: 4px;
+        padding: 0 10px;
+    }
+}
+
+@-webkit-keyframes growB {
+    0% {
+        opacity: 1;
+        font-size: 1em;
+        height: 1.6em;
+        line-height: 1.6em;
+    }
+}
+
+@keyframes growB {
+    0% {
+        opacity: 1;
+        font-size: 1em;
+        height: 1.6em;
+        line-height: 1.6em;
+    }
+}
+
+.widget-EventList .tag {
+    font-size: 0.6em;
+    line-height: 0.6em;
+    top: 0.4em;
+    right: 0.3em;
+    position: absolute;
+}
+
+.widget-EventList .message {
+    padding-right: 3em;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.widget-EventList li {
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7), 0 0 2px rgba(0, 0, 0, 0.7), 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.widget-EventList li > div:first-child {
+    -webkit-filter: sepia(100%) brightness(250%) saturate(300%) hue-rotate(-45deg) hue-rotate({hue}) brightness({brightness}) saturate({saturation});
+            filter: sepia(100%) brightness(250%) saturate(300%) hue-rotate(-45deg) hue-rotate({hue}) brightness({brightness}) saturate({saturation});
+    background: -webkit-linear-gradient(63deg, #151515 5px, transparent 5px) 0 5px, -webkit-linear-gradient(243deg, #151515 5px, transparent 5px) 10px 0px, -webkit-linear-gradient(63deg, #222 5px, transparent 5px) 0px 10px, -webkit-linear-gradient(243deg, #222 5px, transparent 5px) 10px 5px, -webkit-linear-gradient(0deg, #1b1b1b 10px, transparent 10px), -webkit-linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+        linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+        linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+        linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+        linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+}

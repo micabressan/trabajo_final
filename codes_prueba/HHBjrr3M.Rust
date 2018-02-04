@@ -1,0 +1,42 @@
+#![allow(dead_code)]
+
+pub static NAME: &'static str = "init";
+pub static DESC: &'static str = "Initialize a glam project";
+
+extern crate git2;
+extern crate sqlite;
+
+use arguments::*;
+use std::process::exit;
+use std::env;
+use std::path::{Path, PathBuf};
+use std::io::{Write, stderr};
+
+pub fn call(args: Vec<String>) {
+    let current_dir = env::current_dir().unwrap();
+
+    if let Ok(repo) = git2::Repository::discover(&current_dir) {
+        let working_dir = repo.workdir();
+        if working_dir.is_none() {
+            writeln!(stderr(), "This is a bare repository and has no working directory").unwrap();
+            exit(1);
+        }
+
+        setup_repository(repo.path());
+        setup_database(&mut working_dir.unwrap().to_path_buf());
+    } else {
+        setup_database(&mut current_dir.clone());
+    }
+
+    println!("Initializing...");
+    exit(0);
+}
+
+fn setup_repository(repo_path: &Path) {
+    println!("Setting up repository: {}", repo_path.to_str().unwrap());
+}
+
+fn setup_database(working_dir: &mut PathBuf) {
+    working_dir.push(".glam");
+    println!("setting up database in {}", working_dir.as_path().to_str().unwrap());
+}

@@ -1,0 +1,100 @@
+#kodony stop UAA UAG UGA
+#kodon start AUG
+gb = 'sequence.gb'
+START = 'AUG'
+STOP1 = 'UAA'
+STOP2 = 'UAG'
+STOP3 = 'UGA'
+
+slownik = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
+    "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S",
+    "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
+    "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W",
+    "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L",
+    "CCU":"P", "CCC":"P", "CCA":"P", "CCG":"P",
+    "CAU":"H", "CAC":"H", "CAA":"Q", "CAG":"Q",
+    "CGU":"R", "CGC":"R", "CGA":"R", "CGG":"R",
+    "AUU":"I", "AUC":"I", "AUA":"I", "AUG":"M",
+    "ACU":"T", "ACC":"T", "ACA":"T", "ACG":"T",
+    "AAU":"N", "AAC":"N", "AAA":"K", "AAG":"K",
+    "AGU":"S", "AGC":"S", "AGA":"R", "AGG":"R",
+    "GUU":"V", "GUC":"V", "GUA":"V", "GUG":"V",
+    "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A",
+    "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
+    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
+
+def wczytajZPliku(nazwa):
+    origin_flag=False
+    sequence = []
+    with open(nazwa, 'r') as file:
+        for line in file:
+            line.strip('\n')
+            if line.startswith('ORIGIN'):
+                origin_flag = True
+                continue
+            else:
+                pass
+            if origin_flag:
+                sequence_line = line.strip()
+                sequence += ' '.join(line.replace('t', 'u').replace(' ', '').upper().split())
+                sequence = ''.join([i for i in sequence if not i.isdigit() and i.isalnum()])
+    return sequence
+
+def wypisz(tablica):
+    for index in tablica:
+        print(index)
+    print("")
+
+def startsStops(sequence): #wyznacza pozycje startów i stopów
+    starts = []
+    stops = []
+    for i in range(0,len(sequence),3):
+        str = sequence[i:i+3]
+        if(str == START):
+            starts.append(i)
+        elif(str == STOP1 or str == STOP2 or str == STOP3):
+            stops.append(i)
+    return starts,stops
+
+def sequence1(sequence): #wypisuje znalezione sekwencje
+    seq = []
+    starts,stops = startsStops(sequence)
+    for i in range(0,len(stops)):
+        for j in range(0,len(starts)):
+            seq.append(sequence[starts[j]:stops[i]+3])
+    return seq
+
+def transalte(seq):
+    translated = []
+    for str in seq:
+        tmp = ''
+        for x in range(0,len(str),3):
+            tmp += slownik[str[x:x+3]]
+        translated.append(tmp)
+    return translated
+
+def sprawdzSekewncje(translated):
+    text = input('Podaj sekwencje: ')
+    found = 0
+    for seq in translated: #przeszukujemy kazda sekwencje
+        if text in seq: #sprawdzamy czy wpisany ciag znajduje sie w sekwencji
+            print(seq)
+            found = found + 1
+    print("Znaleziono " + str(found) + " sekwencji.")
+
+
+
+
+sequence = wczytajZPliku(gb)
+seq = sequence1(sequence)
+wypisz(seq) #1
+
+seq.sort(key=len) #sortowanie
+
+wypisz(seq) #2
+
+translated = transalte(seq)
+
+wypisz(translated) #3
+
+sprawdzSekewncje(translated)

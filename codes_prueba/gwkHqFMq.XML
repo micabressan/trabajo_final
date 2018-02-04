@@ -1,0 +1,656 @@
+<modification>
+	<id>tshirtecommerce</id>
+	<version>1.1.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>Tshirtecommerce Team</author>
+
+	<!-- add right menu -->
+	<file name="admin/controller/common/menu.php">
+		<operation>
+			<search position="before"><![CDATA[$data['installer']]]></search>
+			<add><![CDATA[
+				$data['designer_build'] = $this->url->link('catalog/tshirtecommerce/index', 'token=' . $this->session->data['token'], 'SSL');
+				$data['designer_settings'] = $this->url->link('module/tshirtecommerce', 'token=' . $this->session->data['token'], 'SSL');
+				$data['designer_update'] = $this->url->link('catalog/tshirtecommerce/update', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/menu.tpl">
+		<operation>
+			<search position="before"><![CDATA[<li id="extension">]]></search>
+			<add><![CDATA[
+				<li><a class="parent"><img src="http://tshirtecommerce.com/icon.png"/> <span>T-Shirt eCommerce</span></a>
+					<ul>
+						<li><a href="<?php echo $designer_build; ?>">Product Build</a></li>
+						<li><a href="<?php echo $designer_settings; ?>">Settings</a></li>
+						<li><a href="<?php echo $designer_update; ?>">Update</a></li>
+					</ul>
+				</li>
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- add tab design in edit product -->
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[catalog/product_form.tpl]]></search>
+			<add><![CDATA[catalog/product_tshirtecommerce.tpl]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->model_localisation_language->getLanguages();]]></search>
+			<add><![CDATA[
+				if (isset($this->request->post['design_product_id'])) {
+					$data['design_product_id'] = $this->request->post['design_product_id'];
+				} elseif (isset($product_info['design_product_id'])) {
+					$data['design_product_id'] = $product_info['design_product_id'];
+				} else {
+					$data['design_product_id'] = '';
+				}
+
+				if (isset($this->request->post['design_product_title_img']))
+				{
+					$data['design_product_title_img'] = $this->request->post['design_product_title_img'];
+				}
+				elseif (isset($product_info['design_product_title_img']))
+				{
+					$data['design_product_title_img'] = $product_info['design_product_title_img'];
+				}
+				else
+				{
+					$data['design_product_title_img'] = '';
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- save value to database -->
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$product_id = $this->db->getLastId();]]></search>
+			<add><![CDATA[
+				if (isset($data['design_product_id'])) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET design_product_id = '" . $this->db->escape($data['design_product_id']) . "' WHERE product_id = '" . (int)$product_id . "'");
+				}
+
+				if (isset($data['design_product_title_img'])) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET design_product_title_img = '" . $this->db->escape($data['design_product_title_img']) . "' WHERE product_id = '" . (int)$product_id . "'");
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->event->trigger('pre.admin.product.edit', $data);]]></search>
+			<add><![CDATA[
+				if (isset($data['design_product_id'])) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET design_product_id = '" . $this->db->escape($data['design_product_id']) . "' WHERE product_id = '" . (int)$product_id . "'");
+				}
+				if (isset($data['design_product_title_img'])) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET design_product_title_img = '" . $this->db->escape($data['design_product_title_img']) . "' WHERE product_id = '" . (int)$product_id . "'");
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- get value from database -->
+	<file name="catalog/model/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$query->row['product_id'],]]></search>
+			<add><![CDATA[
+				'design_product_id'         => $query->row['design_product_id'],
+				'design_product_title_img'	=> $query->row['design_product_title_img'],
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- get value of field in front-end -->
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[$data['heading_title'] = $product_info['name'];]]></search>
+			<add><![CDATA[
+				$this->load->language('module/tshirtecommerce');
+				$data['tshirt_text_price'] = $this->language->get('tshirt_text_price_of_print');
+				$data['tshirt_text_button_custom'] = $this->language->get('tshirt_text_button_custom');
+
+				if (isset($product_info['design_product_id']))
+				{
+					$data['design_product_id'] = $product_info['design_product_id'];
+				}
+				else
+				{
+					$data['design_product_id'] =  '';
+				}
+
+				if (isset($product_info['design_product_title_img']))
+				{
+					$data['design_product_title_img'] = $product_info['design_product_title_img'];
+					$temp = explode('::', $data['design_product_title_img']);
+					if (isset($temp[2]))
+					{
+						if ($data['design_product_id'] != '' && strpos($data['design_product_id'], ':') > 0)
+						{
+							$data['design_print_price'] =  (float)$temp[2];
+							$data['design_print_price_lable'] = $this->currency->format($data['design_print_price']);
+						}
+						else
+						{
+							$data['design_print_price'] =  0;
+						}
+					}
+					else
+					{
+						$data['design_print_price'] =  0;
+					}
+				}
+				else
+				{
+					$data['design_product_title_img'] =  '';
+					$data['design_print_price'] =  0;
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- add button custom design -->
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+		<operation>
+			<search position="before"><![CDATA[<button type="button" id="button-cart"]]></search>
+			<add><![CDATA[
+				<?php
+				if(isset($design_product_id) && $design_product_id != '') {
+					$check_idea = explode(':', $design_product_id);
+					$parent_id = $product_id;
+					if ( count($check_idea) > 1 && isset($check_idea[4]))
+						$parent_id = $check_idea[4];
+				?>
+					<?php if ($data['design_print_price'] != 0) { ?>
+					<label class="control-label"><?php echo $tshirt_text_price; ?> <strong>+<?php echo $data['design_print_price_lable']; ?></strong></label> <br />
+					<?php } ?>
+
+					<input type="hidden" value="<?php echo $data['design_print_price']; ?>" name="design[price]"/>
+					<a id="button-design" class="btn btn-success btn-lg btn-block" href="index.php?route=tshirtecommerce/designer&product_id=<?php echo $design_product_id; ?>&parent_id=<?php echo $parent_id; ?>"><?php echo $tshirt_text_button_custom; ?></a>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+
+
+	<!-- custom add to cart -->
+	<file name="system/library/cart.php">
+		<operation>
+			<search position="after"><![CDATA[$option_data = array();]]></search>
+			<add><![CDATA[
+				$temp_options = json_decode($cart['option'], true);
+				if ( isset($temp_options['design']) )
+				{
+					//
+					$design = $temp_options['design'];
+				}
+				else
+				{
+					$design = false;
+				}
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[$product_data[] = array(]]></search>
+			<add><![CDATA[
+				if ($design != false && isset($design['price']))
+				{
+					$option_price = $option_price + $design['price'];
+				}
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[$product_discount_query =]]></search>
+			<add><![CDATA[
+				$discount_quantity = $cart['quantity'];
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[$reward * $cart['quantity'],]]></search>
+			<add><![CDATA[
+				'design' => $design,
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="before"><![CDATA[$data['products'][] = array(]]></search>
+			<add><![CDATA[
+				if (isset($product['design']) && $product['design'] != false && isset($product['design']['rowid']))
+				{
+					$design = $product['design'];
+
+					// images
+					if (isset($design['images']))
+					{
+						$images = json_decode(str_replace('&quot;', '"', $design['images']), true);
+
+						if (count($images) > 0)
+						{
+							if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+								$base_url = $this->config->get('config_ssl');
+							} else {
+								$base_url = $this->config->get('config_url');
+							}
+							$img = '';
+							foreach($images as $view => $src)
+							{
+								$img .= '<a href="'.$base_url.'/tshirtecommerce/'.$src.'"><img style="width:100px; margin:1%;" src="'.$base_url.'/tshirtecommerce/'.$src.'" alt="" title="" class="img-thumbnail"></a>';
+							}
+
+							$design_option = array(
+								'name'	=> 'Images',
+								'value'	=> '<br /><div>'.$img.'</div>'
+							);
+							$option_data[] = $design_option;
+						}
+					}
+
+					// colors
+					$design_option = array(
+						'name'	=> 'Color',
+						'value'	=> '<span title="'.$design['color_title'].'" style="background-color:#'.$design['color_hex'].';display:inline-block;border:1px solid #ccc;width:25px;height:25px;cursor:pointer;outline:1px solid #229BCA;margin-left 4px;"></span>'
+					);
+					$option_data[] = $design_option;
+
+					// options
+					if (isset($design['options']) && $design['options'] != '[]')
+					{
+						if (is_string($design['options']))
+							$design_options = json_decode( str_replace('&quot;', '"', $design['options']) );
+						else
+							$design_options = $design['options'];
+
+						$html = '';
+						for($i=0; $i<count($design_options); $i++)
+						{
+							if (empty($design_options[$i]['value'])) continue;
+
+							if (is_string($design_options[$i]['value']) && $design_options[$i]['value'] != '')
+							{
+								$html .= '<dt>'.$design_options[$i]['name'].': '.$design_options[$i]['value'].'</dt>';
+							}
+							else if (count($design_options[$i]['value']) > 0)
+							{
+								$html .= '<dt>'.$design_options[$i]['name'].': </dt>';
+
+								$html .=  '<dd>';
+								foreach ($design_options[$i]['value'] as $name => $value)
+								{
+									$html .=  $name.'  -  '.$value. '; ';
+								}
+								$html .=  '</dd>';
+							}
+						}
+						$design_option = array(
+							'name'	=> 'Options',
+							'value'	=> $html
+						);
+						$option_data[] = $design_option;
+					}
+
+					// teams
+					if (isset($design['teams']) && isset($design['teams']['name']) )
+					{
+						$table = '<table class="table table-bordered">'
+							. 		'<thead>'
+							. 			'<tr>'
+							. 				'<th>Name</th>'
+							. 				'<th>Number</th>'
+							. 				'<th>Sizes</th>'
+							. 			'</tr>'
+							. 		'</thead>'
+							. 		'<tbody>';
+
+						for($i=1; $i<=count($design['teams']['name']); $i++ )
+						{
+							$size = explode('::', $design['teams']['size'][$i]);
+							$table .=	'<tr>'
+								.			'<td>'.$design['teams']['name'][$i].'</td>'
+								.			'<td>'.$design['teams']['number'][$i].'</td>'
+								.			'<td>'.$size[0].'</td>'
+								.		'</tr>';
+						}
+
+						$table .= '</tbody></table>';
+
+						$design_option = array(
+							'name'	=> 'Team',
+							'value'	=> $table
+						);
+						$option_data[] = $design_option;
+					}
+
+				}
+				else
+				{
+					$design = '';
+				}
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[$this->cart->add($this->request->post['product_id']]]></search>
+			<add><![CDATA[
+				if (isset($this->request->post['design'])) {
+					$design = $this->request->post['design'];
+					$option['design'] = $design;
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA['model'      => $product['model'],]]></search>
+			<add><![CDATA[
+				'design'      => json_encode($design),
+			]]></add>
+		</operation>
+	</file>
+
+
+	<file name="catalog/controller/checkout/confirm.php">
+		<operation>
+			<search position="before"><![CDATA[$order_data['products'][] = array(]]></search>
+			<add><![CDATA[
+				if (isset($product['design']))
+				{
+					$design = json_encode($product['design']);
+				}
+				else
+				{
+					$design = '';
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->tax->getTax($product['price'], $product['tax_class_id']),]]></search>
+			<add><![CDATA[
+			'design'	 => $design,
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="after" index="1"><![CDATA[$order_product_id = $this->db->getLastId();]]></search>
+			<add><![CDATA[
+				if ( isset($product['design']) && $product['design'] != '' )
+				{
+					$this->db->query("INSERT INTO " . DB_PREFIX . "tshirtdesign_order SET order_product_id = '" . (int)$order_product_id . "', options = '" . $this->db->escape($product['design']) . "'");
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- order info of design -->
+	<file name="admin/controller/sale/order.php">
+		<operation>
+			<search position="after" index="2"><![CDATA[$this->model_sale_order->getOrderProducts($this->request->get['order_id']);]]></search>
+			<add><![CDATA[
+			$this->load->model('tshirtecommerce/order');
+			if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+				$base_url = HTTPS_CATALOG;
+			} else {
+				$base_url = HTTP_CATALOG;
+			}
+			$data['base_url'] = $base_url;
+			$data['tshirtecommerce_url'] = $this->url->link('tshirtecommerce/designer', '', 'SSL');
+			$data['tshirtecommerce_url'] = str_replace('/admin', '', $data['tshirtecommerce_url']);
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA['order_product_id' => $product['order_product_id'],]]></search>
+			<add><![CDATA[
+			'design'			=> $this->model_tshirtecommerce_order->getItem($product['order_product_id'], $product['product_id']),
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/sale/order_info.tpl">
+		<operation>
+			<search position="after"><![CDATA[<td class="text-left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>]]></search>
+			<add><![CDATA[
+			<br />
+			<?php if ( isset($product['design']) && $product['design'] != false) { $design = $product['design'];?>
+
+				<?php if(isset($design->color_title)) { ?>
+				<small><strong>Color:</strong> <span title="<?php echo $design->color_title; ?>" style="background-color:#<?php echo $design->color_hex; ?>;display:inline-block;border:1px solid #ccc;width:25px;height:25px;cursor:pointer;outline:1px solid #229BCA;margin-left 4px;"></span></small><br />
+				<?php }
+				elseif( (is_array($design) && isset($design['idea'])) || (is_object($design) && isset($design->idea)) )  { ?>
+					<p>
+				<p>
+					<a title="click to view design" target="_blank" href="<?php echo $tshirtecommerce_url; ?>&product_id=<?php echo $design[0].':'.$design[1].':'.$design[2].':'.$design[3].':'.$product['product_id']; ?>&parent_id=<?php echo $product['product_id']; ?>"><strong>View Design</strong></a>
+					 or Download design:
+					 <a title="click to download design" target="_blank" href="<?php echo $base_url; ?>/tshirtecommerce/design.php?idea=1&key=<?php echo $design[0].':'.$design[1].':'.$design[2].':'.$design[3].':'.$product['product_id']; ?>&view=front"><strong>Front</strong></a> -
+					 <a title="click to download design" target="_blank" href="<?php echo $base_url; ?>/tshirtecommerce/design.php?idea=1&key=<?php echo $design[0].':'.$design[1].':'.$design[2].':'.$design[3].':'.$product['product_id']; ?>&view=back"><strong>Back</strong></a> -
+					 <a title="click to download design" target="_blank" href="<?php echo $base_url; ?>/tshirtecommerce/design.php?idea=1&key=<?php echo $design[0].':'.$design[1].':'.$design[2].':'.$design[3].':'.$product['product_id']; ?>&view=left"><strong>Left</strong></a> -
+					 <a title="click to download design" target="_blank" href="<?php echo $base_url; ?>/tshirtecommerce/design.php?idea=1&key=<?php echo $design[0].':'.$design[1].':'.$design[2].':'.$design[3].':'.$product['product_id']; ?>&view=right"><strong>Right</strong></a>
+				</p>
+				<?php } ?>
+
+				<?php
+				// options
+				if (isset($design->options) && $design->options != '[]')
+				{
+					if (is_string($design->options))
+						$design_options = json_decode( str_replace('&quot;', '"', $design->options) );
+					else
+						$design_options = $design->options;
+
+
+					$html = '';
+					if (count($design_options))
+					{
+						foreach($design_options as $option)
+						{
+							if (isset($option->value))
+							{
+								if (is_string($option->value) && $option->value != '')
+								{
+									$html .= '<dt>'.$option->name.': '.$option->value.'</dt>';
+								}
+								else if (count($option->value) > 0)
+								{
+									$html .= '<dt>'.$option->name.': </dt>';
+
+									$html .=  '<dd>';
+									foreach ($option->value as $name => $value)
+									{
+										$html .=  $name.'  -  '.$value. '; ';
+									}
+									$html .=  '</dd>';
+								}
+							}
+						}
+					}
+					echo $html;
+				}
+
+				// teams
+				if (isset($design->teams) && isset($design->teams->name) )
+				{
+					$teams = json_decode( json_encode($design->teams), true );
+					$table = '<table class="table table-bordered">'
+						. 		'<thead>'
+						. 			'<tr>'
+						. 				'<th>Name</th>'
+						. 				'<th>Number</th>'
+						. 				'<th>Sizes</th>'
+						. 			'</tr>'
+						. 		'</thead>'
+						. 		'<tbody>';
+
+					for($i=1; $i<=count($teams['name']); $i++ )
+					{
+						$size = explode('::', $teams['size'][$i]);
+						$table .=	'<tr>'
+							.			'<td>'.$teams['name'][$i].'</td>'
+							.			'<td>'.$teams['number'][$i].'</td>'
+							.			'<td>'.$size[0].'</td>'
+							.		'</tr>';
+					}
+
+					$table .= '</tbody></table>';
+
+					echo $table;
+				}
+
+				// images
+				if (isset($design->images))
+				{
+					$images = json_decode(str_replace('&quot;', '"', $design->images), true);
+
+					if (count($images) > 0)
+					{
+						$img = '';
+						foreach($images as $view => $src)
+						{
+							$img .= '<div class="img-thumbnail" style="margin:2px;">'
+									. 	' <img style="width:100px;" src="'.$base_url.'/tshirtecommerce/'.$src.'" alt="" title="">'
+									.	'<br />'
+									.	'<a href="'.$base_url.'/tshirtecommerce/design.php?key='.$design->rowid.'&view='.$view.'" target="_blank" class="pull-right" title="Click to view design">Скачать</a>'
+									.'</div>';
+						}
+
+						echo $img;
+					}
+				}
+				?>
+
+			<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+
+
+
+	<!-- show design info to user -->
+	<file name="catalog/controller/account/order.php">
+		<operation>
+			<search position="after"><![CDATA[$this->model_account_order->getOrderProducts($this->request->get['order_id']);]]></search>
+			<add><![CDATA[
+				$this->load->model('tshirtecommerce/order');
+				if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+					$base_url = $this->config->get('config_ssl');
+				} else {
+					$base_url = $this->config->get('config_url');
+				}
+				$data['base_url'] = $base_url;
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[$option_data,]]></search>
+			<add><![CDATA[
+				'design' 	=> $this->model_tshirtecommerce_order->getItem($product['order_product_id'], $product['product_id']),
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/account/order_info.tpl">
+		<operation>
+			<search position="after"><![CDATA[<td class="text-left"><?php echo $product['name']; ?>]]></search>
+			<add><![CDATA[
+				<br />
+				<?php if ( isset($product['design']) && $product['design'] != false && isset($product['design']->rowid)) { $design = $product['design'];?>
+
+					<?php if(isset($design->color_title)) { ?>
+					<small><strong>Color:</strong> <span title="<?php echo $design->color_title; ?>" style="background-color:#<?php echo $design->color_hex; ?>;display:inline-block;border:1px solid #ccc;width:25px;height:25px;cursor:pointer;outline:1px solid #229BCA;margin-left 4px;"></span></small><br />
+					<?php } ?>
+
+					<?php
+					// options
+					if (isset($design->options) && $design->options != '[]')
+					{
+						if (is_string($design->options))
+							$design_options = json_decode( str_replace('&quot;', '"', $design->options) );
+						else
+							$design_options = $design->options;
+
+						if (is_object($design_options)) $design_options = (array) $design_options;
+
+						$html = '';
+						if (count($design_options))
+						{
+							foreach($design_options as $option)
+							{
+								if (isset($option->value))
+								{
+									if (is_string($option->value) && $option->value != '')
+									{
+										$html .= '<dt>'.$option->name.': '.$option->value.'</dt>';
+									}
+									else if (count($option->value) > 0)
+									{
+										$html .= '<dt>'.$option->name.': </dt>';
+
+										$html .=  '<dd>';
+										foreach ($option->value as $name => $value)
+										{
+											$html .=  $name.'  -  '.$value. '; ';
+										}
+										$html .=  '</dd>';
+									}
+								}
+							}
+						}
+						echo $html;
+					}
+
+					// teams
+					if (isset($design->teams) && isset($design->teams->name) )
+					{
+						$teams = json_decode( json_encode($design->teams), true );
+						$table = '<table class="table table-bordered">'
+							. 		'<thead>'
+							. 			'<tr>'
+							. 				'<th>Name</th>'
+							. 				'<th>Number</th>'
+							. 				'<th>Sizes</th>'
+							. 			'</tr>'
+							. 		'</thead>'
+							. 		'<tbody>';
+
+						for($i=1; $i<=count($teams['name']); $i++ )
+						{
+							$size = explode('::', $teams['size'][$i]);
+							$table .=	'<tr>'
+								.			'<td>'.$teams['name'][$i].'</td>'
+								.			'<td>'.$teams['number'][$i].'</td>'
+								.			'<td>'.$size[0].'</td>'
+								.		'</tr>';
+						}
+
+						$table .= '</tbody></table>';
+
+						echo $table;
+					}
+
+					// images
+					if (isset($design->images))
+					{
+						$images = json_decode(str_replace('&quot;', '"', $design->images), true);
+
+						if (count($images) > 0)
+						{
+							$img = '';
+							foreach($images as $view => $src)
+							{
+								$img .= '<div class="img-thumbnail" style="margin:2px;">'
+										.	'<a target="_blank" href="'.$base_url.'/tshirtecommerce/'.$src.'" class="pull-left" title="Click to view design"><img style="width:80px;" src="'.$base_url.'/tshirtecommerce/'.$src.'" alt="" title=""></a>'
+										.'</div>';
+							}
+
+							echo $img;
+						}
+					}
+					?>
+
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>

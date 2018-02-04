@@ -1,0 +1,13 @@
+NSObject subclass: B [
+	parse: what [ ^'bar']
+]
+
+
+NSObject subclass: SmalltalkTool [
+	
+	run [
+		| b  |
+		b := B new.
+		ETTranscript show: (b parse: {}); cr.
+	]
+]

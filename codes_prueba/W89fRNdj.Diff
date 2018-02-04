@@ -1,0 +1,22 @@
+diff --git a/src/plugins/remotelinux/abstractpackagingstep.cpp b/src/plugins/remotelinux/abstractpackagingstep.cpp
+index d2638a3..ed67422 100644
+--- a/src/plugins/remotelinux/abstractpackagingstep.cpp
++++ b/src/plugins/remotelinux/abstractpackagingstep.cpp
+@@ -149,7 +149,6 @@ bool AbstractPackagingStep::init()
+ {
+     d->cachedPackageDirectory = packageDirectory();
+     d->cachedPackageFilePath = packageFilePath();
+-    m_deploymentInfo = deployConfiguration()->deploymentInfo();
+     return true;
+ }
+ 
+@@ -167,8 +166,7 @@ void AbstractPackagingStep::setPackagingFinished(bool success)
+ // called in gui thread
+ void AbstractPackagingStep::setDeploymentInfoUnmodified()
+ {
+-    if (m_deploymentInfo.data())
+-        m_deploymentInfo.data()->setUnmodified();
++    deployConfiguration()->deploymentInfo()->setUnmodified();
+ }
+ 
+ void AbstractPackagingStep::raiseError(const QString &errorMessage)

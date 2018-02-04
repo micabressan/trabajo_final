@@ -1,0 +1,13 @@
+diff --git a/modules/perl/perl.c b/modules/perl/perl.c
+index 7bea434b9..5e2d6b1cb 100644
+--- a/modules/perl/perl.c
++++ b/modules/perl/perl.c
+@@ -159,7 +159,7 @@ struct module_exports exports = {
+        "perl",
+        MOD_TYPE_DEFAULT,/* class of this module */
+        MODULE_VERSION,
+-       RTLD_NOW | RTLD_GLOBAL,
++       DEFAULT_DLFLAGS,
+        &deps,      /* OpenSIPS module dependencies */
+        cmds,       /* Exported functions */
+        0,          /* Exported async functions */

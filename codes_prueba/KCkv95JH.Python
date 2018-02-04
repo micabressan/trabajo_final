@@ -1,0 +1,9 @@
+# open the file with a context manager that automatically handles exceptions and closing the file when we are done
+with open("Raises.dat") as f:
+	# iterate thru each line in the file
+	for line in f:
+		# Split the line at the semicolon, strip whitespace from both pieces, put result into a list
+		parsed_line = line.split(";").strip()
+		# Store elements of the list into descriptive variables
+		employee_id = parsed_line[0]
+		employee_salary = parsed_line[1]

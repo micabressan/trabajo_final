@@ -1,0 +1,42 @@
+   class Primes
+    {
+        static void Main(string[] args)
+        {
+
+            List<int> primes = new List<int>(); // we keep here all primes from the first one to the 251th
+            int number = 2; // the number we start from
+
+            int position1 = 24; // could be read from console
+            int position2 = 101; // could be read from console
+            int position3 = 251; // could be read from console
+
+            while (primes.Count <= position3) // primes list count <= maxNumberFromInput e.g. 251
+            {
+                bool isCurrentNumberPrime = true; // assert the number is prime, until we find the opposite
+
+                for (int divider = 2; divider <= Math.Sqrt(number); divider++)
+                {
+                    if (number % divider == 0) // if the number is divisble to any number from 2 to its root, it's certainly not prime
+                    {
+                        isCurrentNumberPrime = false;
+                        break; // we have determined that the number is not prime, we don't need to try to divide to any number anymore. Exit the loop
+                    }
+                }
+
+
+                if (isCurrentNumberPrime) // if the number hasn't divided to any number from the previous loop, the boolean variable will stay "true"
+                {
+                    primes.Add(number); // add the already determined prime number to our primes collection
+                }
+
+                number++; // go to the next number to check if it's prime again
+            }
+
+            Console.WriteLine(primes[position1 - 1]);
+            Console.WriteLine(primes[position2 - 1]);
+            Console.WriteLine(primes[position3 - 1]);
+            Console.WriteLine("----");
+            Console.WriteLine(primes[128]); // for sanity check let's try to find thr 127th prime
+        }
+
+    }

@@ -1,0 +1,2214 @@
+[
+  {
+    "vhash": "016066655d1d05655278za8jz21za031z18zc",
+    "submission_names": [
+      "chrome.exe",
+      "chrome_exe",
+      "chromes.exe",
+      "74c3bfe6-5edd-4dca-bf28-0b9001105079",
+      "d2d1a558-d66d-4c05-b9df-fc2a2d7cecf6",
+      "b35be764-169f-465a-aba7-799bddeeabc0",
+      "c75ab33f-3930-4710-a218-ff8f77cb1bda",
+      "09ce859a-3ec9-43a2-976b-fb146d2ce51a",
+      "6e75fff3-b96b-4562-9baf-632f75c2b0d0",
+      "a100b1db-feaf-4a90-8973-638e5087b558",
+      "7a2bbc4a-e460-4822-8e55-08da7116e133",
+      "48bf68af-6b92-41ad-a0ad-7b1accd8fafe",
+      "8bd866f2-94ba-45c4-a77b-25009cd103a9",
+      "2dade02f-8aef-40d1-8c72-a406e653d43b",
+      "023e730a-6982-4eb2-9e69-d7ebd5831cd7",
+      "e59ff1cb-89c6-434f-b7ed-269730caea7f",
+      "0b6817e6-3fdc-4900-992f-912c55e5fd28",
+      "cb64a8a5-e5d5-4133-b994-bd310bb5dad0",
+      "da28656d-ec51-43da-9725-1a00b357a4d1",
+      "b6698e9a-1152-48a1-9d7f-669e38f829e7",
+      "b69a5002-5f2f-4445-992c-b4fd6037bccd",
+      "83a1f634-2082-4b38-a9d0-b29052e857fa",
+      "0e94738a-2c1d-49fb-b21f-80b3fc0dad07",
+      "39e2898e-6923-406c-8f61-f3d4a89c18f2",
+      "c8c1de50-1f1f-4abb-8362-b2bc20fde298",
+      "e75717a75f2a35130bf7f7aee09dcb7d",
+      "BC24D71D180765E214B2136B77A6F7002A7F8D71.exe",
+      "C:\\Documents and Settings\\admin\\Local Settings\\Application Data\\Google\\Chrome\\Application\\chrome.exe",
+      "C:\\Documents and Settings\\Администратор.MICROSOF-B2E868\\Local Settings\\Application Data\\Google\\Chrome\\Application\\chrome.exe",
+      "file-4168626_exe",
+      "\\192.168.17.111\\Clients\\Storage\\CPServices\\FileManager\\1\\302abecd-47ae-4c0d-8516-e8b59a49767b.exe",
+      "\\192.168.17.111\\Clients\\Storage\\CPServices\\FileManager\\2\\394f0d57-ef52-4fe8-8ba6-664c29495168.exe",
+      "old_chrome.exe",
+      "C:\\Documents and Settings\\ikzelf\\Local Settings\\Application Data\\Google\\Chrome\\Temp\\scoped_dir_1600_7408\\chrome.exe",
+      "s:\\documents and settings\\andrpage\\Local Settings\\Application Data\\Google\\Chrome\\Application\\chrome.exe",
+      "C:\\Users\\Elfi\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe",
+      "I:\\GoogleChromePortable\\App\\Chrome-bin\\chrome.exe"
+    ],
+    "scan_date": "2017-08-19 12:59:53",
+    "first_seen": "2012-06-28 23:53:42",
+    "times_submitted": 158,
+    "additional_info": {
+      "exports": [
+        "CrashForException",
+        "DumpProcess",
+        "DumpProcessWithoutCrash",
+        "SetActiveURL",
+        "SetClientId",
+        "SetCommandLine",
+        "SetExperimentList",
+        "SetExtensionID",
+        "SetGpuInfo",
+        "SetNumberOfExtensions",
+        "SetNumberOfViews",
+        "SetPrinterInfo"
+      ],
+      "pe-timestamp": 1340869965,
+      "carbonblack_children": {
+        "cf2e38c1128a6d35ed995b0b31edb54e": [
+          "pepflashplayer.dll"
+        ],
+        "84d296de3a8ef6f83877353d80df7f00": [
+          "chromerecovery.exe"
+        ],
+        "d41d8cd98f00b204e9800998ecf8427e": [
+          "sf12.dll",
+          "ck7_oyv0.dll",
+          "mymd5qjd.dll",
+          "jpggnfxh.dll",
+          "sf10.dll"
+        ],
+        "4c8c0b0340c6234649c7f91fb5e89a54": [
+          "chromerecovery.exe"
+        ],
+        "be472797288f53aa9f56974b1a1fc18f": [
+          "googleupdatesetup.exe"
+        ],
+        "984cc93bb0ef86a0b4825269d8379d81": [
+          "googleupdatesetup.exe"
+        ],
+        "1ccff127853cc27abef24ecaf2881e0b": [
+          "chromerecovery.exe"
+        ]
+      },
+      "exiftool": {
+        "CodeSize": "652288",
+        "SubsystemVersion": "5.0",
+        "OfficialBuild": "1",
+        "LinkerVersion": "9.0",
+        "ImageVersion": "0.0",
+        "FileSubtype": "0",
+        "FileVersionNumber": "20.0.1132.47",
+        "LanguageCode": "English (U.S.)",
+        "FileFlagsMask": "0x0017",
+        "FileDescription": "Google Chrome",
+        "CharacterSet": "Unicode",
+        "InitializedDataSize": "591360",
+        "EntryPoint": "0x477b4",
+        "OriginalFileName": "chrome.exe",
+        "MIMEType": "application/octet-stream",
+        "LegalCopyright": "Copyright (C) 2006-2010 Google Inc. All Rights Reserved.",
+        "CompanyShortName": "Google",
+        "FileVersion": "20.0.1132.47",
+        "TimeStamp": "2012:06:28 08:52:45+01:00",
+        "FileType": "Win32 EXE",
+        "PEType": "PE32",
+        "InternalName": "chrome_exe",
+        "ProductVersion": "20.0.1132.47",
+        "UninitializedDataSize": "0",
+        "OSVersion": "5.0",
+        "FileOS": "Win32",
+        "Subsystem": "Windows GUI",
+        "MachineType": "Intel 386 or later, and compatibles",
+        "CompanyName": "Google Inc.",
+        "ProductShortName": "Chrome",
+        "ProductName": "Google Chrome",
+        "ProductVersionNumber": "20.0.1132.47",
+        "LastChange": "144678",
+        "FileTypeExtension": "exe",
+        "ObjectFileType": "Executable application"
+      },
+      "trid": "Win32 Executable MS Visual C++ (generic) (42.2%)\nWin64 Executable (generic) (37.3%)\nWin32 Dynamic Link Library (generic) (8.8%)\nWin32 Executable (generic) (6.0%)\nGeneric Win/DOS Executable (2.7%)",
+      "pe-imphash": "5b13ed4634c850a756a68062b1ccc0da",
+      "pe-resource-list": {
+        "fee27363bbb9ff9261fd8c92c365cfac4a136912ec31974cc9589d0ccaef046c": "data",
+        "3bb4bc2d723850f3978259c444749a86ab3292929dd310aa1c96015f1e1f7bb0": "data",
+        "d535a129604c5111b886e975487f5d10d8309eaaa757564859f9ea2b85e6a8bb": "data",
+        "7210c17f0756f245e3018662de0790f7c19aa79ee69c5baccbeafe8d24e5006f": "data",
+        "fb8ed8fb56ab825dccda5286028c13e8aaeab8ea8d6f8ade3086355048e8b58e": "data",
+        "e453a18b73a0cfe7e2e054ceae015e9c2b81c5c3a309e2905a2c3077a3d3a143": "data",
+        "af0f5872b5f3140ddac7f4ebc1208b3baf7b33a548c55fbf609d20026471bd4c": "data",
+        "b7cbc2192ff7cc5d73dbc3774e9f84183ab585328073cddc674d8f4ce7ba069e": "data",
+        "d59c518aae33d9a62c7b20de6ea95e18e33d44c12d3907c53ba3e52223242b91": "data",
+        "193ce5af496f31f38df1ef150c0a362a1a20275f60fc6deb50696557568586b3": "ASCII text",
+        "8ca552ed25bfd5b9450f892159ea58459bd795bcf4cc590ca6c18a2e6ae84550": "data",
+        "d374e1d20297fca1ccdc8849104dce9e1de6a07c774e0afaa6a588df4a19e4e1": "data",
+        "469b5ee25dcb86628a9d11fbdedfb27ac6364396e05d0cfda3120ad184e07319": "data",
+        "26d7b1b9b3b4a9ebec85a3f7ca550d7d306056012e3eb1eaa7903847c78c1da3": "data",
+        "5c1e67f81dfc5d481c124aff9ff16d6ce7d0e26743468fe6f66c9dff1c2ba764": "data",
+        "2b05ddfef936288c227b948fcd44de3d666f7f0c652baad2dc68cf1d3a308cbf": "data",
+        "8e434278f20562cbd90ca2bf1fc4693f52f21d38e4507fa603e2430b7ed671ab": "data",
+        "277f5e5fb6d7ecc4f38103d4e44a7ceaef36ae7a860c57cf8faf75d0cc26f429": "data",
+        "38af6a884340fa4fb06f5478339393832b7cc60b19dc39ca620d226dceb5f928": "data",
+        "f2dbac19a46c4d13a8f14afddefa51ebf17c49b9d1dfc69fb84c1c4e4d5080ec": "data",
+        "ab042eb74191e7eeb357b05cb361056f818901e7e01074585dfa90af7323ad0d": "data",
+        "69d44f8c8a563324a0e0bd2a96d01152362700f864ec12f381b37f9cee399053": "data",
+        "28531d00bee75de4e07529bdc31ddc1ed379ff009cfbaee8822d16fba4ec4c56": "data",
+        "ac6e94aa67b8a455666f00990cff4a0f5d0e8b5da639dcbfcb104a4f16e6e86b": "data",
+        "201a631b311b1d896fbd59d274e43309f24520b3f5963f23b758b5cf3ed41091": "data",
+        "6f61d8372adba642b686ba13db5fa1b14ac698969b8dad4cd3bf2c1fb1598f5a": "image/x-png",
+        "7390ac045cf63c0411de0e6ac254c790b6b4c033473aa755568208c50bdaea9f": "data",
+        "61a6d1c086f22df189836ce46fd9b7c5ff0ba90e8517125c7f2de39b686f3b13": "data",
+        "701e45895f624a3ee56354863496d2212811529ad53b9697cf092512aaaee9a2": "data",
+        "0ec862f883d820c48c51553e877088096e4ce9b6be6d7c7e1b04207a1af9bb6f": "data",
+        "a78aa1cf26c2b01a6c5ac4eeddf8c7ffd83718a27c5c6a8397f6f108e995213e": "data",
+        "3facc1cc3c89d7eddd757af8cf91a771657244b05b6f8360e3bd0096ef3cf8a0": "data",
+        "0d8cfcf648ef940e10a1d08d4c644e3877c1e3d453577221e8641e64735a74e4": "data",
+        "5b1f2525420971750b3e8be304a7eb0e3eeb50297018dfe6459772ad18ea3a21": "data",
+        "62be1865a72090ee2ddd89d5d474a3aeaca5540b442e9e98696ce038fd304de1": "data",
+        "93c37b691fac2354794286a316e8f462f71563db7ecd8e54ee2056720f51d677": "data",
+        "390dfbf4b0fb4b87e5c3ccbc5dc4345ab20f273699ac42f811472d2a0fe9d226": "data",
+        "3b8746752695c63cde73b1797aca0b308dc333681448f9e4ad13da94554b7616": "image/x-png",
+        "f0af5c24251960c3fbc3b9e1663aa6c2c2eccd35b652f22c2614f0d75ffc41a7": "data",
+        "e92cd3f88302025756d83022e60b153dc2a3aa1e772ddb93255a30b8ec8ec655": "data",
+        "9bf27eb42b7186743dac3a15f7404ae7971f6a168b605d46ae5985c60da2b72c": "data"
+      },
+      "pe-overlay": {
+        "size": 5656,
+        "filetype": "data",
+        "md5": "71777a001bdb9e6ef2618c125ea7c778",
+        "entropy": 7.291817483530105,
+        "offset": 1244672
+      },
+      "execution_parents": [
+        "cd6a982fd03b05a3825638cf165196e947eb48ef0f4e84dceed258468721bc09"
+      ],
+      "pe-resource-langs": {
+        "ENGLISH US": 41
+      },
+      "clam-av-pua": "ClamAV PUA (Possibly Unwanted Application)",
+      "carbonblack_parents": {
+        "f8f8065e6a98063f9f2fb92f0ed2c7c7": [
+          "n1e.activeefficiency.virtualappexporter.exe"
+        ]
+      },
+      "pe-debug": [
+        {
+          "timedatestamp": "Thu Jun 28 07:52:45 2012",
+          "codeview": {
+            "age": 1,
+            "guid": "a19a1c90-765e-4361-a743-a733ab2c1b54",
+            "name": "c:\\b\\build\\slave\\win\\build\\src\\build\\Release\\chrome_exe.pdb",
+            "signature": "RSDS"
+          },
+          "offset": 1001792,
+          "type_str": "IMAGE_DEBUG_TYPE_CODEVIEW",
+          "type": 2,
+          "size": 84
+        }
+      ],
+      "magic": "PE32 executable for MS Windows (GUI) Intel 80386 32-bit",
+      "sigcheck": {
+        "product": "Google Chrome",
+        "verified": "Signed",
+        "description": "Google Chrome",
+        "file version": "20.0.1132.47",
+        "original name": "chrome.exe",
+        "signing date": "10:28 AM 6/28/2012",
+        "signers": "Google Inc; VeriSign Class 3 Code Signing 2010 CA; VeriSign Class 3 Public Primary CA",
+        "counter signers details": [
+          {
+            "status": "This certificate or one of the certificates in the certificate chain is not time valid., The revocation status of the certificate or one of the certificates in the certificate chain is unknown., Error 65536 (0x10000), The revocation status of the certificate or one of the certificates in the certificate chain is either offline or stale.",
+            "valid usage": "Timestamp Signing",
+            "name": "Symantec Time Stamping Services Signer - G3",
+            "algorithm": "sha1RSA",
+            "valid from": "1:00 AM 5/1/2012",
+            "valid to": "12:59 AM 1/1/2013",
+            "serial number": "79 A2 A5 85 F9 D1 15 42 13 D9 B8 3E F6 B6 8D ED",
+            "cert issuer": "VeriSign Time Stamping Services CA",
+            "thumbprint": "8FD99D63FB3AFBD534A4F6E31DACD27F59504021"
+          },
+          {
+            "status": "This certificate or one of the certificates in the certificate chain is not time valid.",
+            "valid usage": "Timestamp Signing",
+            "name": "VeriSign Time Stamping Services CA",
+            "algorithm": "sha1RSA",
+            "valid from": "1:00 AM 12/4/2003",
+            "valid to": "12:59 AM 12/4/2013",
+            "serial number": "47 BF 19 95 DF 8D 52 46 43 F7 DB 6D 48 0D 31 A4",
+            "cert issuer": "Thawte Timestamping CA",
+            "thumbprint": "F46AC0C6EFBB8C6A14F55F09E2D37DF4C0DE012D"
+          },
+          {
+            "status": "Valid",
+            "valid usage": "Timestamp Signing",
+            "name": "Thawte Timestamping CA",
+            "algorithm": "md5RSA",
+            "valid from": "1:00 AM 1/1/1997",
+            "valid to": "12:59 AM 1/1/2021",
+            "serial number": "00",
+            "cert issuer": "Thawte Timestamping CA",
+            "thumbprint": "BE36A4562FB2EE05DBB3D32323ADF445084ED656"
+          }
+        ],
+        "counter signers": "Symantec Time Stamping Services Signer - G3; VeriSign Time Stamping Services CA; Thawte Timestamping CA",
+        "link date": "8:52 AM 6/28/2012",
+        "copyright": "Copyright (C) 2006-2010 Google Inc. All Rights Reserved.",
+        "signers details": [
+          {
+            "status": "This certificate or one of the certificates in the certificate chain is not time valid.",
+            "valid usage": "Code Signing",
+            "name": "Google Inc",
+            "algorithm": "sha1RSA",
+            "valid from": "1:00 AM 11/14/2011",
+            "valid to": "12:59 AM 11/14/2014",
+            "serial number": "09 E2 8B 26 DB 59 3E C4 E7 32 86 B6 64 99 C3 70",
+            "cert issuer": "VeriSign Class 3 Code Signing 2010 CA",
+            "thumbprint": "06C92BEC3BBF32068CB9208563D004169448EE21"
+          },
+          {
+            "status": "This certificate or one of the certificates in the certificate chain is not time valid.",
+            "valid usage": "Client Auth, Code Signing",
+            "name": "VeriSign Class 3 Code Signing 2010 CA",
+            "algorithm": "sha1RSA",
+            "valid from": "1:00 AM 9/30/2010",
+            "valid to": "12:59 AM 1/2/2014",
+            "serial number": "4D 62 90 E5 8C 54 F0 F1 EB 17 34 1A 13 10 E6 A4",
+            "cert issuer": "Class 3 Public Primary Certification Authority",
+            "thumbprint": "14FCF0BB187D563B568EEA5FC888A53D288698D6"
+          },
+          {
+            "status": "Valid",
+            "valid usage": "Email Protection, Client Auth, Code Signing, Server Auth",
+            "name": "VeriSign Class 3 Public Primary CA",
+            "algorithm": "md2RSA",
+            "valid from": "1:00 AM 1/29/1996",
+            "valid to": "12:59 AM 8/2/2028",
+            "serial number": "70 BA E4 1D 10 D9 29 34 B6 38 CA 7B 03 CC BA BF",
+            "cert issuer": "Class 3 Public Primary Certification Authority",
+            "thumbprint": "742C3192E607E424EB4549542BE1BBC53E6174E2"
+          }
+        ],
+        "internal name": "chrome_exe"
+      },
+      "compressed_parents": [
+        "4e818df3e24373e7c37b5d0606351624b16fc2b4fd736d5d7e484235d27a2de2",
+        "28f8c0d9a4e2decade931b82885e193c0e5eb3705480bff1ed04514d2fe84b54",
+        "5d13b7b2720ed799cfa134448ea6d83b34a802b77f9880effd4d27226e6652a4",
+        "83bf843d85fe4cbfb6faec68658362ca1726767c8043ce6e84428e5190fb6385",
+        "3e21f688390bb541db55b3196fd0b498730c8eb959488a653066e3027c94aa50",
+        "fdb8cb375786c96632ffc22cc1b2e9d30dd4646f36241ba8941628afda479d65",
+        "a7578b6a5d3738627bc93a2a3c3e2ac668ffc3ee8802d5c3756dc014e746faf3"
+      ],
+      "positives_delta": 0,
+      "pe-machine-type": 332,
+      "first_seen_itw": "2010-11-20 23:29:33",
+      "pe-resource-types": {
+        "RT_ICON": 34,
+        "RT_MANIFEST": 1,
+        "RT_VERSION": 1,
+        "RT_GROUP_ICON": 5
+      },
+      "autostart": [
+        {
+          "entry": "C:/Documents and Settings/as/Мои документы/Soft/Google Chrome 20.0.1132.47/App/Chrome-bin/chrome.exe",
+          "location": "HKU/S-1-5-21-823518204-651377827-1417001333-1004/SOFTWARE/Microsoft/Windows/ShellNoRoam/MUICache"
+        },
+        {
+          "entry": "cmd.exe",
+          "location": "Task Scheduler"
+        },
+        {
+          "entry": "c:\\users\\his gabeness\\appdata\\local\\google\\chrome\\application\\chrome.exe",
+          "location": "Task Scheduler"
+        }
+      ],
+      "imports": {
+        "VERSION.dll": [
+          "VerQueryValueW",
+          "GetFileVersionInfoW",
+          "GetFileVersionInfoSizeW"
+        ],
+        "WINMM.dll": [
+          "timeGetTime"
+        ],
+        "KERNEL32.dll": [
+          "GetStdHandle",
+          "GetConsoleOutputCP",
+          "ReleaseMutex",
+          "WaitForSingleObject",
+          "LockResource",
+          "CreateJobObjectW",
+          "SignalObjectAndWait",
+          "GetFileAttributesW",
+          "SetInformationJobObject",
+          "GetProcessId",
+          "DeleteCriticalSection",
+          "GetCurrentProcess",
+          "GetConsoleMode",
+          "GetLocaleInfoA",
+          "LocalAlloc",
+          "LoadLibraryExW",
+          "GetSystemDirectoryW",
+          "FreeEnvironmentStringsW",
+          "GetThreadContext",
+          "GetLocaleInfoW",
+          "SetStdHandle",
+          "GetFileTime",
+          "WideCharToMultiByte",
+          "GetProcAddress",
+          "GetStringTypeA",
+          "InterlockedExchange",
+          "WriteFile",
+          "GetTimeZoneInformation",
+          "GetSystemTimeAsFileTime",
+          "HeapReAlloc",
+          "GetStringTypeW",
+          "GetExitCodeProcess",
+          "LocalFree",
+          "ResumeThread",
+          "InitializeCriticalSection",
+          "LoadResource",
+          "TlsGetValue",
+          "QueryDosDeviceW",
+          "FormatMessageA",
+          "DebugBreak",
+          "GetEnvironmentVariableW",
+          "SetLastError",
+          "GetUserDefaultUILanguage",
+          "GetEnvironmentVariableA",
+          "WriteProcessMemory",
+          "GetModuleFileNameW",
+          "IsDebuggerPresent",
+          "ExitProcess",
+          "GetModuleFileNameA",
+          "RaiseException",
+          "EnumSystemLocalesA",
+          "UnhandledExceptionFilter",
+          "InterlockedDecrement",
+          "MultiByteToWideChar",
+          "TerminateJobObject",
+          "RegisterWaitForSingleObject",
+          "InterlockedExchangeAdd",
+          "CreateThread",
+          "SetEnvironmentVariableW",
+          "RtlCaptureStackBackTrace",
+          "SetNamedPipeHandleState",
+          "CreateSemaphoreW",
+          "GetModuleHandleA",
+          "CreateMutexW",
+          "GetSystemInfo",
+          "TzSpecificLocalTimeToSystemTime",
+          "SetEnvironmentVariableA",
+          "TerminateProcess",
+          "SearchPathW",
+          "WriteConsoleA",
+          "SetCurrentDirectoryW",
+          "VirtualQuery",
+          "VirtualQueryEx",
+          "SetEndOfFile",
+          "GetCurrentThreadId",
+          "LeaveCriticalSection",
+          "WriteConsoleW",
+          "InitializeCriticalSectionAndSpinCount",
+          "HeapFree",
+          "EnterCriticalSection",
+          "SetHandleCount",
+          "LoadLibraryW",
+          "GetVersionExW",
+          "SetEvent",
+          "QueryPerformanceCounter",
+          "GetTickCount",
+          "TlsAlloc",
+          "FlushFileBuffers",
+          "LoadLibraryA",
+          "RtlUnwind",
+          "FreeLibrary",
+          "GetStartupInfoA",
+          "GetWindowsDirectoryW",
+          "SetHandleInformation",
+          "GetUserDefaultLangID",
+          "OpenProcess",
+          "GetStartupInfoW",
+          "ReadProcessMemory",
+          "WaitForMultipleObjects",
+          "VirtualProtectEx",
+          "GetProcessHeap",
+          "CreateFileMappingW",
+          "AssignProcessToJobObject",
+          "WaitNamedPipeW",
+          "ExpandEnvironmentStringsW",
+          "UnmapViewOfFile",
+          "WTSGetActiveConsoleSessionId",
+          "ResetEvent",
+          "IsValidLocale",
+          "DuplicateHandle",
+          "GetUserDefaultLCID",
+          "GetTempPathW",
+          "CreateEventW",
+          "CreateFileW",
+          "GetFileType",
+          "TlsSetValue",
+          "CreateFileA",
+          "HeapAlloc",
+          "InterlockedIncrement",
+          "GetNativeSystemInfo",
+          "GetLastError",
+          "SystemTimeToFileTime",
+          "LCMapStringW",
+          "VirtualAllocEx",
+          "CreateNamedPipeW",
+          "GetConsoleCP",
+          "FindResourceW",
+          "LCMapStringA",
+          "UnregisterWaitEx",
+          "CompareStringW",
+          "GetThreadLocale",
+          "GetEnvironmentStringsW",
+          "lstrlenW",
+          "CreateProcessW",
+          "GetQueuedCompletionStatus",
+          "SizeofResource",
+          "GetCurrentDirectoryW",
+          "VirtualFreeEx",
+          "GetCurrentProcessId",
+          "CreateIoCompletionPort",
+          "GetCommandLineW",
+          "GetCPInfo",
+          "HeapSize",
+          "Sleep",
+          "InterlockedCompareExchange",
+          "SuspendThread",
+          "QueryPerformanceFrequency",
+          "ReleaseSemaphore",
+          "MapViewOfFile",
+          "TlsFree",
+          "SetFilePointer",
+          "ReadFile",
+          "SetUnhandledExceptionFilter",
+          "RtlCaptureContext",
+          "CloseHandle",
+          "GetACP",
+          "GetModuleHandleW",
+          "GetLongPathNameW",
+          "GetProcessHandleCount",
+          "IsValidCodePage",
+          "HeapCreate",
+          "OpenEventW",
+          "PostQueuedCompletionStatus",
+          "VirtualFree",
+          "TransactNamedPipe",
+          "VirtualAlloc",
+          "GetOEMCP",
+          "CompareStringA"
+        ],
+        "WTSAPI32.dll": [
+          "WTSQueryUserToken"
+        ],
+        "ADVAPI32.dll": [
+          "RegCreateKeyExW",
+          "RegCloseKey",
+          "CopySid",
+          "GetTraceEnableFlags",
+          "LookupPrivilegeValueW",
+          "GetSecurityInfo",
+          "RegDisablePredefinedCache",
+          "RegisterTraceGuidsW",
+          "RegQueryValueExW",
+          "SetSecurityDescriptorDacl",
+          "GetFileSecurityW",
+          "ConvertStringSecurityDescriptorToSecurityDescriptorW",
+          "CreateWellKnownSid",
+          "OpenProcessToken",
+          "DuplicateToken",
+          "RegOpenKeyExW",
+          "SetFileSecurityW",
+          "SetTokenInformation",
+          "ConvertSidToStringSidW",
+          "GetTokenInformation",
+          "DuplicateTokenEx",
+          "GetTraceEnableLevel",
+          "UnregisterTraceGuids",
+          "RegQueryInfoKeyW",
+          "RegDeleteValueW",
+          "RegEnumKeyExW",
+          "CreateRestrictedToken",
+          "GetLengthSid",
+          "ConvertStringSidToSidW",
+          "TraceEvent",
+          "CreateProcessAsUserW",
+          "SetEntriesInAclW",
+          "RevertToSelf",
+          "RegSetValueExW",
+          "ConvertSecurityDescriptorToStringSecurityDescriptorW",
+          "InitializeSecurityDescriptor",
+          "EqualSid",
+          "SetThreadToken",
+          "GetTraceLoggerHandle"
+        ],
+        "SHLWAPI.dll": [
+          "PathFileExistsW",
+          "PathRemoveFileSpecW"
+        ],
+        "USER32.dll": [
+          "GetUserObjectInformationW",
+          "CharUpperW",
+          "CloseDesktop",
+          "SetProcessWindowStation",
+          "CreateWindowStationW",
+          "MessageBoxW",
+          "GetProcessWindowStation",
+          "GetThreadDesktop",
+          "CreateDesktopW",
+          "CloseWindowStation"
+        ],
+        "USERENV.dll": [
+          "CreateEnvironmentBlock",
+          "DestroyEnvironmentBlock"
+        ]
+      },
+      "pe-entry-point": 292788,
+      "sections": [
+        [
+          ".text",
+          4096,
+          652169,
+          652288,
+          "6.72",
+          "e2985e195a1a2651961fcb99c754cf6d"
+        ],
+        [
+          ".rdata",
+          659456,
+          364331,
+          364544,
+          "4.96",
+          "f2533837a4a453d82e760fb0a5a9b20d"
+        ],
+        [
+          ".data",
+          1024000,
+          31772,
+          10752,
+          "4.28",
+          "cadc30c3d35f2912a3a92436006f2cde"
+        ],
+        [
+          ".tls",
+          1056768,
+          2,
+          512,
+          "0.00",
+          "bf619eac0cdf3f68d496ea9344137e8b"
+        ],
+        [
+          ".rsrc",
+          1060864,
+          175228,
+          175616,
+          "6.69",
+          "7b97c41bbbf05d5a86e2339cee302862"
+        ],
+        [
+          ".reloc",
+          1236992,
+          39834,
+          39936,
+          "5.22",
+          "4b450eb0a759f68fa62fbb7fc97203b7"
+        ]
+      ],
+      "pe-resource-detail": [
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "ab042eb74191e7eeb357b05cb361056f818901e7e01074585dfa90af7323ad0d",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "62be1865a72090ee2ddd89d5d474a3aeaca5540b442e9e98696ce038fd304de1",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "e453a18b73a0cfe7e2e054ceae015e9c2b81c5c3a309e2905a2c3077a3d3a143",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "image/x-png",
+          "sha256": "3b8746752695c63cde73b1797aca0b308dc333681448f9e4ad13da94554b7616",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "469b5ee25dcb86628a9d11fbdedfb27ac6364396e05d0cfda3120ad184e07319",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "7390ac045cf63c0411de0e6ac254c790b6b4c033473aa755568208c50bdaea9f",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "0d8cfcf648ef940e10a1d08d4c644e3877c1e3d453577221e8641e64735a74e4",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "26d7b1b9b3b4a9ebec85a3f7ca550d7d306056012e3eb1eaa7903847c78c1da3",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "b7cbc2192ff7cc5d73dbc3774e9f84183ab585328073cddc674d8f4ce7ba069e",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "93c37b691fac2354794286a316e8f462f71563db7ecd8e54ee2056720f51d677",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "d374e1d20297fca1ccdc8849104dce9e1de6a07c774e0afaa6a588df4a19e4e1",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "8ca552ed25bfd5b9450f892159ea58459bd795bcf4cc590ca6c18a2e6ae84550",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "3facc1cc3c89d7eddd757af8cf91a771657244b05b6f8360e3bd0096ef3cf8a0",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "ac6e94aa67b8a455666f00990cff4a0f5d0e8b5da639dcbfcb104a4f16e6e86b",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "701e45895f624a3ee56354863496d2212811529ad53b9697cf092512aaaee9a2",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "69d44f8c8a563324a0e0bd2a96d01152362700f864ec12f381b37f9cee399053",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "a78aa1cf26c2b01a6c5ac4eeddf8c7ffd83718a27c5c6a8397f6f108e995213e",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "3bb4bc2d723850f3978259c444749a86ab3292929dd310aa1c96015f1e1f7bb0",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "f0af5c24251960c3fbc3b9e1663aa6c2c2eccd35b652f22c2614f0d75ffc41a7",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "fee27363bbb9ff9261fd8c92c365cfac4a136912ec31974cc9589d0ccaef046c",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "9bf27eb42b7186743dac3a15f7404ae7971f6a168b605d46ae5985c60da2b72c",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "f2dbac19a46c4d13a8f14afddefa51ebf17c49b9d1dfc69fb84c1c4e4d5080ec",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "201a631b311b1d896fbd59d274e43309f24520b3f5963f23b758b5cf3ed41091",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "5b1f2525420971750b3e8be304a7eb0e3eeb50297018dfe6459772ad18ea3a21",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "390dfbf4b0fb4b87e5c3ccbc5dc4345ab20f273699ac42f811472d2a0fe9d226",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "8e434278f20562cbd90ca2bf1fc4693f52f21d38e4507fa603e2430b7ed671ab",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "d59c518aae33d9a62c7b20de6ea95e18e33d44c12d3907c53ba3e52223242b91",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "7210c17f0756f245e3018662de0790f7c19aa79ee69c5baccbeafe8d24e5006f",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "af0f5872b5f3140ddac7f4ebc1208b3baf7b33a548c55fbf609d20026471bd4c",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "image/x-png",
+          "sha256": "6f61d8372adba642b686ba13db5fa1b14ac698969b8dad4cd3bf2c1fb1598f5a",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "5c1e67f81dfc5d481c124aff9ff16d6ce7d0e26743468fe6f66c9dff1c2ba764",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "38af6a884340fa4fb06f5478339393832b7cc60b19dc39ca620d226dceb5f928",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "277f5e5fb6d7ecc4f38103d4e44a7ceaef36ae7a860c57cf8faf75d0cc26f429",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "0ec862f883d820c48c51553e877088096e4ce9b6be6d7c7e1b04207a1af9bb6f",
+          "type": "RT_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "e92cd3f88302025756d83022e60b153dc2a3aa1e772ddb93255a30b8ec8ec655",
+          "type": "RT_GROUP_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "28531d00bee75de4e07529bdc31ddc1ed379ff009cfbaee8822d16fba4ec4c56",
+          "type": "RT_GROUP_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "fb8ed8fb56ab825dccda5286028c13e8aaeab8ea8d6f8ade3086355048e8b58e",
+          "type": "RT_GROUP_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "d535a129604c5111b886e975487f5d10d8309eaaa757564859f9ea2b85e6a8bb",
+          "type": "RT_GROUP_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "61a6d1c086f22df189836ce46fd9b7c5ff0ba90e8517125c7f2de39b686f3b13",
+          "type": "RT_GROUP_ICON"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "2b05ddfef936288c227b948fcd44de3d666f7f0c652baad2dc68cf1d3a308cbf",
+          "type": "RT_VERSION"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "ASCII text",
+          "sha256": "193ce5af496f31f38df1ef150c0a362a1a20275f60fc6deb50696557568586b3",
+          "type": "RT_MANIFEST"
+        }
+      ]
+    },
+    "size": 1250328,
+    "scan_id": "7c7bbbc8710970b1e9c228c9519a265429536b4e0ad988daae33b266303ba592-1503147593",
+    "total": 63,
+    "harmless_votes": 11,
+    "verbose_msg": "Scan finished, information embedded",
+    "sha256": "7c7bbbc8710970b1e9c228c9519a265429536b4e0ad988daae33b266303ba592",
+    "type": "Win32 EXE",
+    "scans": {
+      "MicroWorld-eScan": {
+        "detected": false,
+        "version": "12.0.250.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "nProtect": {
+        "detected": false,
+        "version": "2017-08-19.02",
+        "result": null,
+        "update": "20170819"
+      },
+      "CMC": {
+        "detected": false,
+        "version": "1.1.0.977",
+        "result": null,
+        "update": "20170819"
+      },
+      "CAT-QuickHeal": {
+        "detected": false,
+        "version": "14.00",
+        "result": null,
+        "update": "20170819"
+      },
+      "ALYac": {
+        "detected": false,
+        "version": "1.1.1.2",
+        "result": null,
+        "update": "20170819"
+      },
+      "Malwarebytes": {
+        "detected": false,
+        "version": "2.1.1.1115",
+        "result": null,
+        "update": "20170819"
+      },
+      "Zillya": {
+        "detected": false,
+        "version": "2.0.0.3365",
+        "result": null,
+        "update": "20170817"
+      },
+      "AegisLab": {
+        "detected": false,
+        "version": "4.2",
+        "result": null,
+        "update": "20170819"
+      },
+      "TheHacker": {
+        "detected": false,
+        "version": "6.8.0.5.1851",
+        "result": null,
+        "update": "20170817"
+      },
+      "K7GW": {
+        "detected": false,
+        "version": "10.22.24328",
+        "result": null,
+        "update": "20170817"
+      },
+      "K7AntiVirus": {
+        "detected": false,
+        "version": "10.22.24353",
+        "result": null,
+        "update": "20170819"
+      },
+      "Arcabit": {
+        "detected": false,
+        "version": "1.0.0.817",
+        "result": null,
+        "update": "20170819"
+      },
+      "TrendMicro": {
+        "detected": false,
+        "version": "9.862.0.1074",
+        "result": null,
+        "update": "20170819"
+      },
+      "Baidu": {
+        "detected": false,
+        "version": "1.0.0.2",
+        "result": null,
+        "update": "20170817"
+      },
+      "F-Prot": {
+        "detected": false,
+        "version": "4.7.1.166",
+        "result": null,
+        "update": "20170819"
+      },
+      "Symantec": {
+        "detected": false,
+        "version": "1.4.0.0",
+        "result": null,
+        "update": "20170818"
+      },
+      "TotalDefense": {
+        "detected": false,
+        "version": "37.1.62.1",
+        "result": null,
+        "update": "20170819"
+      },
+      "TrendMicro-HouseCall": {
+        "detected": false,
+        "version": "9.950.0.1006",
+        "result": null,
+        "update": "20170819"
+      },
+      "Paloalto": {
+        "detected": false,
+        "version": "1.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "ClamAV": {
+        "detected": false,
+        "version": "0.99.2.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "VBA32": {
+        "detected": false,
+        "version": "3.12.26.4",
+        "result": null,
+        "update": "20170818"
+      },
+      "Kaspersky": {
+        "detected": false,
+        "version": "15.0.1.13",
+        "result": null,
+        "update": "20170819"
+      },
+      "BitDefender": {
+        "detected": false,
+        "version": "7.2",
+        "result": null,
+        "update": "20170819"
+      },
+      "NANO-Antivirus": {
+        "detected": false,
+        "version": "1.0.94.18377",
+        "result": null,
+        "update": "20170819"
+      },
+      "SUPERAntiSpyware": {
+        "detected": false,
+        "version": "5.6.0.1032",
+        "result": null,
+        "update": "20170819"
+      },
+      "Avast": {
+        "detected": false,
+        "version": "17.5.3585.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "Endgame": {
+        "detected": false,
+        "version": "0.7.6",
+        "result": null,
+        "update": "20170721"
+      },
+      "Emsisoft": {
+        "detected": false,
+        "version": "4.0.1.883",
+        "result": null,
+        "update": "20170819"
+      },
+      "Comodo": {
+        "detected": false,
+        "version": "27627",
+        "result": null,
+        "update": "20170819"
+      },
+      "F-Secure": {
+        "detected": false,
+        "version": "11.0.19100.45",
+        "result": null,
+        "update": "20170819"
+      },
+      "DrWeb": {
+        "detected": false,
+        "version": "7.0.28.2020",
+        "result": null,
+        "update": "20170819"
+      },
+      "VIPRE": {
+        "detected": false,
+        "version": "60406",
+        "result": null,
+        "update": "20170819"
+      },
+      "Invincea": {
+        "detected": false,
+        "version": "6.3.0.25415",
+        "result": null,
+        "update": "20170818"
+      },
+      "McAfee-GW-Edition": {
+        "detected": false,
+        "version": "v2015",
+        "result": null,
+        "update": "20170819"
+      },
+      "Sophos": {
+        "detected": false,
+        "version": "4.98.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "SentinelOne": {
+        "detected": false,
+        "version": "1.0.2.235",
+        "result": null,
+        "update": "20170806"
+      },
+      "Cyren": {
+        "detected": false,
+        "version": "5.4.30.7",
+        "result": null,
+        "update": "20170819"
+      },
+      "Jiangmin": {
+        "detected": false,
+        "version": "16.0.100",
+        "result": null,
+        "update": "20170819"
+      },
+      "Webroot": {
+        "detected": false,
+        "version": "1.0.0.207",
+        "result": null,
+        "update": "20170819"
+      },
+      "Avira": {
+        "detected": false,
+        "version": "8.3.3.4",
+        "result": null,
+        "update": "20170819"
+      },
+      "Antiy-AVL": {
+        "detected": false,
+        "version": "3.0.0.1",
+        "result": null,
+        "update": "20170819"
+      },
+      "Kingsoft": {
+        "detected": false,
+        "version": "2013.8.14.323",
+        "result": null,
+        "update": "20170819"
+      },
+      "Microsoft": {
+        "detected": false,
+        "version": "1.1.14003.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "ViRobot": {
+        "detected": false,
+        "version": "2014.3.20.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "ZoneAlarm": {
+        "detected": false,
+        "version": "1.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "GData": {
+        "detected": false,
+        "version": "A:25.13905B:25.10233",
+        "result": null,
+        "update": "20170819"
+      },
+      "AhnLab-V3": {
+        "detected": false,
+        "version": "3.9.2.18278",
+        "result": null,
+        "update": "20170819"
+      },
+      "McAfee": {
+        "detected": false,
+        "version": "6.0.6.653",
+        "result": null,
+        "update": "20170819"
+      },
+      "AVware": {
+        "detected": false,
+        "version": "1.5.0.42",
+        "result": null,
+        "update": "20170819"
+      },
+      "MAX": {
+        "detected": false,
+        "version": "2017.6.26.1",
+        "result": null,
+        "update": "20170819"
+      },
+      "Ad-Aware": {
+        "detected": false,
+        "version": "3.0.3.1010",
+        "result": null,
+        "update": "20170819"
+      },
+      "Cylance": {
+        "detected": false,
+        "version": "2.3.1.101",
+        "result": null,
+        "update": "20170819"
+      },
+      "WhiteArmor": {
+        "detected": false,
+        "version": null,
+        "result": null,
+        "update": "20170817"
+      },
+      "Zoner": {
+        "detected": false,
+        "version": "1.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "ESET-NOD32": {
+        "detected": false,
+        "version": "15941",
+        "result": null,
+        "update": "20170819"
+      },
+      "Tencent": {
+        "detected": false,
+        "version": "1.0.0.1",
+        "result": null,
+        "update": "20170819"
+      },
+      "Yandex": {
+        "detected": false,
+        "version": "5.5.1.3",
+        "result": null,
+        "update": "20170818"
+      },
+      "Ikarus": {
+        "detected": false,
+        "version": "0.1.5.2",
+        "result": null,
+        "update": "20170819"
+      },
+      "Fortinet": {
+        "detected": false,
+        "version": "5.4.247.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "AVG": {
+        "detected": false,
+        "version": "17.5.3585.0",
+        "result": null,
+        "update": "20170819"
+      },
+      "Panda": {
+        "detected": false,
+        "version": "4.6.4.2",
+        "result": null,
+        "update": "20170819"
+      },
+      "CrowdStrike": {
+        "detected": false,
+        "version": "1.0",
+        "result": null,
+        "update": "20170804"
+      },
+      "Qihoo-360": {
+        "detected": false,
+        "version": "1.0.0.1120",
+        "result": null,
+        "update": "20170819"
+      }
+    },
+    "tags": [
+      "peexe",
+      "signed",
+      "overlay"
+    ],
+    "authentihash": "833456e6050c69641d42781f8c1cc886f23524bf24eb77a9607229bb0108f26b",
+    "unique_sources": 112,
+    "positives": 0,
+    "ssdeep": "24576:hbCADccwEqVmdn35GbU/sQVwehEttfKujdnKPlq:tDccwEqVUnpCU/sQVw1tnjdnKPI",
+    "md5": "e75717a75f2a35130bf7f7aee09dcb7d",
+    "permalink": "https://www.virustotal.com/file/7c7bbbc8710970b1e9c228c9519a265429536b4e0ad988daae33b266303ba592/analysis/1503147593/",
+    "sha1": "114c52257780067e3f8bfab4d2706be6debc0ace",
+    "resource": "114c52257780067e3f8bfab4d2706be6debc0ace",
+    "response_code": 1,
+    "community_reputation": 28,
+    "malicious_votes": 7,
+    "ITW_urls": [],
+    "last_seen": "2017-08-19 12:59:53"
+  },
+  {
+    "response_code": 0,
+    "resource": "0F9228C7540E4CB83C7B4B974B06DE93C66D60A7",
+    "verbose_msg": "The requested resource is not among the finished, queued or pending scans"
+  },
+  {
+    "vhash": "015056655d156510f3z42z781z23z31z15z40019fz",
+    "submission_names": [
+      "dispci.exe",
+      "501334.exe",
+      "10e741ef66bdd9166434781d5a0ce465f50f270fdf538a351e91a5161458c888_dispci.exe",
+      "Bad Rabbit.exe.bin",
+      "DISKCODER",
+      "rabbit_changed_sum.exe",
+      "d:\\sample\\ransom-12\\Diskcoder\\FILE_12.1",
+      "d:\\sample\\ransom-12\\file\\Diskcoder\\FILE_12.1",
+      "d:\\sample\\ransom-12\\ransom-12-second\\TrojanWin32.Diskcoder\\FILE_12.1"
+    ],
+    "scan_date": "2017-11-27 02:14:50",
+    "first_seen": "2017-10-25 08:50:06",
+    "times_submitted": 5,
+    "additional_info": {
+      "first_seen_itw": "2010-11-20 23:29:33",
+      "exiftool": {
+        "SubsystemVersion": "5.1",
+        "InitializedDataSize": "69632",
+        "ImageVersion": "0.0",
+        "ProductName": "GrayWorm",
+        "FileVersionNumber": "1.1.846.118",
+        "UninitializedDataSize": "0",
+        "LanguageCode": "Unknown (0009)",
+        "FileFlagsMask": "0x0017",
+        "CharacterSet": "Unicode",
+        "LinkerVersion": "10.0",
+        "FileTypeExtension": "exe",
+        "OriginalFileName": "dispci.exe",
+        "MIMEType": "application/octet-stream",
+        "Subsystem": "Windows command line",
+        "FileVersion": "1.1.846.118",
+        "TimeStamp": "2017:10:22 03:33:09+01:00",
+        "FileType": "Win32 EXE",
+        "PEType": "PE32",
+        "ProductVersion": "1.1",
+        "FileDescription": "Microsoft Display Class Installer",
+        "OSVersion": "5.1",
+        "FileOS": "Win32",
+        "LegalCopyright": "http://diskcryptor.net/",
+        "MachineType": "Intel 386 or later, and compatibles",
+        "CodeSize": "72192",
+        "FileSubtype": "0",
+        "ProductVersionNumber": "1.1.846.118",
+        "EntryPoint": "0x6755",
+        "ObjectFileType": "Executable application"
+      },
+      "trid": "Win32 Executable MS Visual C++ (generic) (42.2%)\nWin64 Executable (generic) (37.3%)\nWin32 Dynamic Link Library (generic) (8.8%)\nWin32 Executable (generic) (6.0%)\nGeneric Win/DOS Executable (2.7%)",
+      "pe-imphash": "94f57453c539227031b918edd52fc7f1",
+      "pe-resource-list": {
+        "d3a319c82da836ea721a638f0015461c03118b0ee233cb6d0719dc53cbc0860a": "data",
+        "37a2c33d519bd2d27252e01b680aeeda62503b789bf0205706c30218f913239e": "ASCII text",
+        "b5b44c8aa1ebaa05e8883616ca252a38d25a06d32a3377d2389166369abb05e8": "data",
+        "4807680171398693fc796421785c7318aaef8504639dba4acc8135cbf31f9ef0": "data",
+        "fcdc82f62e9432819743a7714ae4670c5806831c2a83939be28b1cfba4c8a520": "data"
+      },
+      "pe-overlay": {
+        "size": 7,
+        "filetype": "ASCII text",
+        "md5": "77ec7d0ab26ed637a30c6d2269da4650",
+        "entropy": 2.5216406363433186,
+        "offset": 142848
+      },
+      "pe-resource-langs": {
+        "ENGLISH US": 5
+      },
+      "magic": "PE32 executable for MS Windows (console) Intel 80386 32-bit",
+      "sigcheck": {
+        "product": "GrayWorm",
+        "link date": "3:33 AM 10/22/2017",
+        "copyright": "http://diskcryptor.net/",
+        "original name": "dispci.exe",
+        "file version": "1.1.846.118",
+        "description": "Microsoft Display Class Installer"
+      },
+      "compressed_parents": [
+        "50a214dfa0688e0e8c34f88120154b32024f82b8f0db854ce21f6a593ef767fc"
+      ],
+      "positives_delta": -5,
+      "pe-resource-detail": [
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "d3a319c82da836ea721a638f0015461c03118b0ee233cb6d0719dc53cbc0860a",
+          "type": "EXEFILE"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "4807680171398693fc796421785c7318aaef8504639dba4acc8135cbf31f9ef0",
+          "type": "EXEFILE"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "fcdc82f62e9432819743a7714ae4670c5806831c2a83939be28b1cfba4c8a520",
+          "type": "EXEFILE"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "data",
+          "sha256": "b5b44c8aa1ebaa05e8883616ca252a38d25a06d32a3377d2389166369abb05e8",
+          "type": "RT_VERSION"
+        },
+        {
+          "lang": "ENGLISH US",
+          "filetype": "ASCII text",
+          "sha256": "37a2c33d519bd2d27252e01b680aeeda62503b789bf0205706c30218f913239e",
+          "type": "RT_MANIFEST"
+        }
+      ],
+      "behaviour-v1": {
+        "hooking": [
+          {
+            "type": "WH_MOUSE",
+            "method": "SetWindowsHook",
+            "success": true
+          },
+          {
+            "type": "WH_KEYBOARD",
+            "method": "SetWindowsHook",
+            "success": true
+          }
+        ],
+        "network": {
+          "udp": [],
+          "http": [],
+          "dns": [],
+          "tcp": []
+        },
+        "service": {
+          "controlled": [],
+          "opened": [],
+          "created": [],
+          "started": [],
+          "opened-managers": [],
+          "deleted": []
+        },
+        "extra": [
+          "SetWindowsHook"
+        ],
+        "process": {
+          "shellcmds": [],
+          "terminated": [],
+          "tree": [
+            {
+              "pid": 1744,
+              "name": "10e741ef66bdd9166434781d5a0ce465f50f270fdf538a351e91a5161458c888",
+              "children": []
+            }
+          ],
+          "injected": [],
+          "created": [
+            {
+              "proc": "C:\\WINDOWS\\system32\\cmd.exe /c schtasks /Delete /F /TN rhaegal",
+              "success": true
+            },
+            {
+              "proc": "C:\\WINDOWS\\system32\\schtasks.exe schtasks /Delete /F /TN rhaegal",
+              "success": true
+            }
+          ]
+        },
+        "hosts_file": null,
+        "windows": {
+          "searched": []
+        },
+        "runtime-dlls": [
+          {
+            "file": "rsaenh.dll",
+            "success": true
+          },
+          {
+            "file": "secur32.dll",
+            "success": true
+          },
+          {
+            "file": "userenv.dll",
+            "success": true
+          },
+          {
+            "file": "rpcrt4.dll",
+            "success": true
+          },
+          {
+            "file": "netapi32.dll",
+            "success": true
+          },
+          {
+            "file": "crypt32.dll",
+            "success": true
+          },
+          {
+            "file": "version.dll",
+            "success": true
+          },
+          {
+            "file": "advapi32.dll",
+            "success": true
+          },
+          {
+            "file": "kernel32.dll",
+            "success": true
+          }
+        ],
+        "mutex": {
+          "opened": [
+            {
+              "mutex": "ShimCacheMutex",
+              "success": true
+            }
+          ],
+          "created": []
+        },
+        "registry": {
+          "deleted": [],
+          "set": []
+        },
+        "filesystem": {
+          "opened": [
+            {
+              "path": "\\\\.\\dcrypt",
+              "success": false
+            },
+            {
+              "path": "C:\\WINDOWS\\system32\\rsaenh.dll",
+              "success": true
+            },
+            {
+              "path": "\\\\.\\PIPE\\lsarpc",
+              "success": true
+            },
+            {
+              "path": "c:\\autoexec.bat",
+              "success": true
+            },
+            {
+              "path": "C:\\Documents and Settings\\<USER>\\Application Data\\Microsoft\\Crypto\\RSA\\S-1-5-21-1275210071-920026266-1060284298-1003\\8c8436195f6e0875edb85e34665c32ec_fabbc6a1-c573-4ea0-9ca1-50004b35a440",
+              "success": false
+            },
+            {
+              "path": "C:\\Documents and Settings\\<USER>\\Application Data\\Microsoft\\Crypto\\RSA\\S-1-5-21-1275210071-920026266-1060284298-1003\\8c8436195f6e0875edb85e34665c32ec_fabbc6a1-c573-4ea0-9ca1-50004b35a440",
+              "success": true
+            },
+            {
+              "path": "C:\\WINDOWS\\system32\\cmd.exe",
+              "success": true
+            },
+            {
+              "path": "CONIN$",
+              "success": true
+            },
+            {
+              "path": "C:\\WINDOWS\\system32\\schtasks.exe",
+              "success": true
+            }
+          ],
+          "read": [
+            {
+              "path": "C:\\WINDOWS\\system32\\rsaenh.dll",
+              "success": true
+            },
+            {
+              "path": "c:\\autoexec.bat",
+              "success": true
+            }
+          ],
+          "moved": [],
+          "downloaded": [],
+          "written": [
+            {
+              "path": "C:\\Documents and Settings\\<USER>\\Application Data\\Microsoft\\Crypto\\RSA\\S-1-5-21-1275210071-920026266-1060284298-1003\\8c8436195f6e0875edb85e34665c32ec_fabbc6a1-c573-4ea0-9ca1-50004b35a440",
+              "success": true
+            }
+          ],
+          "replaced": [],
+          "deleted": [],
+          "copied": []
+        }
+      },
+      "pe-resource-types": {
+        "RT_MANIFEST": 1,
+        "EXEFILE": 3,
+        "RT_VERSION": 1
+      },
+      "pe-timestamp": 1508639589,
+      "imports": {
+        "CRYPT32.dll": [
+          "CryptStringToBinaryW",
+          "CryptDecodeObjectEx",
+          "CryptBinaryToStringW",
+          "CryptImportPublicKeyInfo"
+        ],
+        "KERNEL32.dll": [
+          "GetStdHandle",
+          "GetDriveTypeW",
+          "FileTimeToSystemTime",
+          "WaitForSingleObject",
+          "EncodePointer",
+          "SetConsoleCursorPosition",
+          "GetFileAttributesW",
+          "GetLocalTime",
+          "DeleteCriticalSection",
+          "GetCurrentProcess",
+          "GetConsoleMode",
+          "LocalAlloc",
+          "UnhandledExceptionFilter",
+          "GetLogicalDrives",
+          "FreeEnvironmentStringsW",
+          "lstrcatW",
+          "SetStdHandle",
+          "WideCharToMultiByte",
+          "WriteFile",
+          "GetSystemTimeAsFileTime",
+          "GetThreadTimes",
+          "GlobalMemoryStatusEx",
+          "HeapReAlloc",
+          "GetStringTypeW",
+          "SetEvent",
+          "LocalFree",
+          "GetTimeZoneInformation",
+          "LoadResource",
+          "FindClose",
+          "TlsGetValue",
+          "GetEnvironmentVariableW",
+          "SetLastError",
+          "DeviceIoControl",
+          "ReadConsoleInputA",
+          "GetModuleFileNameW",
+          "IsDebuggerPresent",
+          "HeapAlloc",
+          "FlushViewOfFile",
+          "FindNextVolumeW",
+          "HeapSetInformation",
+          "SetConsoleCtrlHandler",
+          "GetSystemDefaultLCID",
+          "InterlockedDecrement",
+          "MultiByteToWideChar",
+          "SetFilePointerEx",
+          "CreateThread",
+          "GetSystemDirectoryW",
+          "SetUnhandledExceptionFilter",
+          "IsProcessorFeaturePresent",
+          "DecodePointer",
+          "TerminateProcess",
+          "VirtualQuery",
+          "SetEndOfFile",
+          "GetVersion",
+          "LeaveCriticalSection",
+          "WriteConsoleW",
+          "InitializeCriticalSectionAndSpinCount",
+          "HeapFree",
+          "EnterCriticalSection",
+          "SetHandleCount",
+          "LoadLibraryW",
+          "SetConsoleMode",
+          "FindVolumeClose",
+          "GetOEMCP",
+          "QueryPerformanceCounter",
+          "GetTickCount",
+          "TlsAlloc",
+          "FlushFileBuffers",
+          "FillConsoleOutputCharacterW",
+          "RtlUnwind",
+          "GetFileSize",
+          "GetModuleHandleW",
+          "GetStartupInfoW",
+          "WaitForMultipleObjects",
+          "GetConsoleScreenBufferInfo",
+          "GetProcessHeap",
+          "CreateFileMappingW",
+          "GetFileSizeEx",
+          "VirtualLock",
+          "FindNextFileW",
+          "FindFirstFileW",
+          "GetProcAddress",
+          "CreateEventW",
+          "CreateFileW",
+          "GetFileType",
+          "TlsSetValue",
+          "ExitProcess",
+          "FindFirstVolumeW",
+          "InterlockedIncrement",
+          "GetLastError",
+          "SystemTimeToFileTime",
+          "LCMapStringW",
+          "HeapCreate",
+          "GetConsoleCP",
+          "GetProcessTimes",
+          "GetEnvironmentStringsW",
+          "VirtualFree",
+          "SizeofResource",
+          "GetCurrentProcessId",
+          "LockResource",
+          "GetCommandLineW",
+          "GetCPInfo",
+          "HeapSize",
+          "GetCommandLineA",
+          "GetCurrentThread",
+          "ExpandEnvironmentStringsW",
+          "MapViewOfFile",
+          "TlsFree",
+          "SetFilePointer",
+          "VirtualUnlock",
+          "ReadFile",
+          "CloseHandle",
+          "GetACP",
+          "GetCurrentThreadId",
+          "IsValidCodePage",
+          "UnmapViewOfFile",
+          "FindResourceW",
+          "CreateProcessW",
+          "Sleep",
+          "VirtualAlloc"
+        ],
+        "NETAPI32.dll": [
+          "NetWkstaGetInfo",
+          "NetApiBufferFree"
+        ],
+        "ADVAPI32.dll": [
+          "CryptDeriveKey",
+          "CryptDestroyKey",
+          "CryptReleaseContext",
+          "CryptGetKeyParam",
+          "CryptSetKeyParam",
+          "CryptDuplicateHash",
+          "CryptGetHashParam",
+          "CryptGenRandom",
+          "CryptAcquireContextW",
+          "CryptEncrypt",
+          "CryptDuplicateKey",
+          "CryptHashData",
+          "CryptDecrypt",
+          "CryptDestroyHash",
+          "CryptCreateHash"
+        ],
+        "ole32.dll": [
+          "CoCreateInstance",
+          "CoUninitialize",
+          "CoInitialize"
+        ],
+        "SHLWAPI.dll": [
+          "PathCombineW",
+          "StrStrIW",
+          "PathAppendW",
+          "PathFindExtensionW"
+        ],
+        "PSAPI.DLL": [
+          "GetProcessMemoryInfo"
+        ],
+        "USER32.dll": [
+          "GetOpenClipboardWindow",
+          "GetCursorInfo",
+          "GetInputState",
+          "EnumWindows",
+          "GetCapture",
+          "GetClipboardOwner",
+          "GetShellWindow",
+          "GetForegroundWindow",
+          "GetCaretPos",
+          "GetWindowThreadProcessId",
+          "GetWindowRect",
+          "GetKBCodePage",
+          "GetMessageTime",
+          "GetQueueStatus",
+          "GetLastActivePopup",
+          "GetClientRect",
+          "GetWindowInfo",
+          "CallNextHookEx",
+          "GetActiveWindow",
+          "GetWindowTextW",
+          "GetDesktopWindow",
+          "SetWindowsHookExW",
+          "GetCursor",
+          "GetFocus",
+          "GetGUIThreadInfo"
+        ]
+      },
+      "pe-entry-point": 26453,
+      "sections": [
+        [
+          ".text",
+          4096,
+          71754,
+          72192,
+          "6.58",
+          "0fa851de532b3dd96e1578a1fe912cea"
+        ],
+        [
+          ".rdata",
+          77824,
+          16444,
+          16896,
+          "4.83",
+          "e69552feb958791e5d7283cd1e9f0b0b"
+        ],
+        [
+          ".data",
+          98304,
+          220460,
+          6656,
+          "4.20",
+          "dc53a4c1670b55450713e13adc573c51"
+        ],
+        [
+          ".rsrc",
+          319488,
+          39724,
+          39936,
+          "6.17",
+          "538045e89d3956ece75779bbffedb57f"
+        ],
+        [
+          ".reloc",
+          360448,
+          5846,
+          6144,
+          "4.50",
+          "664441acad88cda5370381c965d187ab"
+        ]
+      ],
+      "pe-machine-type": 332
+    },
+    "size": 142855,
+    "scan_id": "10e741ef66bdd9166434781d5a0ce465f50f270fdf538a351e91a5161458c888-1511748890",
+    "total": 64,
+    "harmless_votes": 0,
+    "verbose_msg": "Scan finished, information embedded",
+    "sha256": "10e741ef66bdd9166434781d5a0ce465f50f270fdf538a351e91a5161458c888",
+    "type": "Win32 EXE",
+    "scans": {
+      "Bkav": {
+        "detected": true,
+        "version": "1.3.0.9410",
+        "result": "W32.FamVT.RabbitND.Worm",
+        "update": "20171124"
+      },
+      "MicroWorld-eScan": {
+        "detected": true,
+        "version": "14.0.297.0",
+        "result": "Trojan.GenericKD.6139888",
+        "update": "20171127"
+      },
+      "nProtect": {
+        "detected": false,
+        "version": "2017-11-27.01",
+        "result": null,
+        "update": "20171127"
+      },
+      "CMC": {
+        "detected": false,
+        "version": "1.1.0.977",
+        "result": null,
+        "update": "20171126"
+      },
+      "CAT-QuickHeal": {
+        "detected": true,
+        "version": "14.00",
+        "result": "Ransom.BadRabbit.B5",
+        "update": "20171125"
+      },
+      "ALYac": {
+        "detected": true,
+        "version": "1.1.1.2",
+        "result": "Trojan.Ransom.BadRabbit",
+        "update": "20171127"
+      },
+      "Malwarebytes": {
+        "detected": true,
+        "version": "2.1.1.1115",
+        "result": "Ransom.BadRabbit.TskLnk",
+        "update": "20171127"
+      },
+      "Zillya": {
+        "detected": false,
+        "version": "2.0.0.3436",
+        "result": null,
+        "update": "20171124"
+      },
+      "AegisLab": {
+        "detected": true,
+        "version": "4.2",
+        "result": "Troj.Generickd!c",
+        "update": "20171127"
+      },
+      "K7AntiVirus": {
+        "detected": true,
+        "version": "10.32.25366",
+        "result": "Trojan ( 0051a2c11 )",
+        "update": "20171124"
+      },
+      "K7GW": {
+        "detected": true,
+        "version": "10.32.25369",
+        "result": "Trojan ( 0051a2c11 )",
+        "update": "20171127"
+      },
+      "Cybereason": {
+        "detected": true,
+        "version": "0.0.914",
+        "result": "malicious.1b8fb7",
+        "update": "20171103"
+      },
+      "Arcabit": {
+        "detected": true,
+        "version": "1.0.0.827",
+        "result": "Trojan.Generic.D5DAFF0",
+        "update": "20171127"
+      },
+      "TrendMicro": {
+        "detected": true,
+        "version": "9.862.0.1074",
+        "result": "Ransom_Tibbar.R002C0DJP17",
+        "update": "20171127"
+      },
+      "Baidu": {
+        "detected": false,
+        "version": "1.0.0.2",
+        "result": null,
+        "update": "20171124"
+      },
+      "F-Prot": {
+        "detected": true,
+        "version": "4.7.1.166",
+        "result": "W32/DiskCoder.B.gen!Eldorado",
+        "update": "20171127"
+      },
+      "Symantec": {
+        "detected": true,
+        "version": "1.5.0.0",
+        "result": "Ransom.BadRabbit",
+        "update": "20171126"
+      },
+      "TotalDefense": {
+        "detected": false,
+        "version": "37.1.62.1",
+        "result": null,
+        "update": "20171126"
+      },
+      "TrendMicro-HouseCall": {
+        "detected": true,
+        "version": "9.950.0.1006",
+        "result": "Ransom_BADRABBIT.SMD",
+        "update": "20171127"
+      },
+      "Paloalto": {
+        "detected": true,
+        "version": "1.0",
+        "result": "generic.ml",
+        "update": "20171127"
+      },
+      "Kaspersky": {
+        "detected": true,
+        "version": "15.0.1.13",
+        "result": "Trojan-Ransom.Win32.BadRabbit.a",
+        "update": "20171127"
+      },
+      "BitDefender": {
+        "detected": true,
+        "version": "7.2",
+        "result": "Trojan.GenericKD.6139888",
+        "update": "20171127"
+      },
+      "NANO-Antivirus": {
+        "detected": true,
+        "version": "1.0.100.20407",
+        "result": "Trojan.Win32.BadRabbit.euhwom",
+        "update": "20171127"
+      },
+      "ViRobot": {
+        "detected": true,
+        "version": "2014.3.20.0",
+        "result": "Trojan.Win32.Agent.142848.Q",
+        "update": "20171126"
+      },
+      "Rising": {
+        "detected": true,
+        "version": "25.0.0.1",
+        "result": "Trojan.Ransom.BadRabbit!1.AC3A (CLASSIC)",
+        "update": "20171127"
+      },
+      "Ad-Aware": {
+        "detected": true,
+        "version": "3.0.3.1010",
+        "result": "Trojan.GenericKD.6139888",
+        "update": "20171126"
+      },
+      "Emsisoft": {
+        "detected": true,
+        "version": "4.0.1.883",
+        "result": "Trojan-Ransom.BadRabbit (A)",
+        "update": "20171127"
+      },
+      "Comodo": {
+        "detected": false,
+        "version": "28101",
+        "result": null,
+        "update": "20171127"
+      },
+      "F-Secure": {
+        "detected": true,
+        "version": "11.0.19100.45",
+        "result": "Trojan:W32/Rabbad.B",
+        "update": "20171127"
+      },
+      "DrWeb": {
+        "detected": true,
+        "version": "7.0.28.2020",
+        "result": "Trojan.BadRabbit.1",
+        "update": "20171127"
+      },
+      "VIPRE": {
+        "detected": true,
+        "version": "62722",
+        "result": "Trojan.Win32.Generic!BT",
+        "update": "20171127"
+      },
+      "Invincea": {
+        "detected": true,
+        "version": "6.3.1.25473",
+        "result": "heuristic",
+        "update": "20170914"
+      },
+      "McAfee-GW-Edition": {
+        "detected": true,
+        "version": "v2015",
+        "result": "Ransom-Badrabbit!7B5B089320D8",
+        "update": "20171127"
+      },
+      "TheHacker": {
+        "detected": false,
+        "version": "6.8.0.5.2170",
+        "result": null,
+        "update": "20171126"
+      },
+      "Ikarus": {
+        "detected": true,
+        "version": "0.1.5.2",
+        "result": "Trojan-Ransom.BadRabbit",
+        "update": "20171126"
+      },
+      "Cyren": {
+        "detected": true,
+        "version": "5.4.30.7",
+        "result": "W32/DiskCoder.B.gen!Eldorado",
+        "update": "20171127"
+      },
+      "Jiangmin": {
+        "detected": true,
+        "version": "16.0.100",
+        "result": "Trojan.BadRabbit.e",
+        "update": "20171127"
+      },
+      "Avira": {
+        "detected": true,
+        "version": "8.3.3.6",
+        "result": "TR/Diskcoder.12354",
+        "update": "20171126"
+      },
+      "Fortinet": {
+        "detected": true,
+        "version": "5.4.247.0",
+        "result": "W32/Diskcoder.D!tr.ransom",
+        "update": "20171127"
+      },
+      "Antiy-AVL": {
+        "detected": true,
+        "version": "3.0.0.1",
+        "result": "Trojan/Win32.TSGeneric",
+        "update": "20171127"
+      },
+      "Kingsoft": {
+        "detected": false,
+        "version": "2013.8.14.323",
+        "result": null,
+        "update": "20171127"
+      },
+      "Endgame": {
+        "detected": false,
+        "version": "1.1.3",
+        "result": null,
+        "update": "20171024"
+      },
+      "Microsoft": {
+        "detected": true,
+        "version": "1.1.14306.0",
+        "result": "Ransom:Win32/Tibbar.A",
+        "update": "20171127"
+      },
+      "SUPERAntiSpyware": {
+        "detected": false,
+        "version": "5.6.0.1032",
+        "result": null,
+        "update": "20171126"
+      },
+      "ZoneAlarm": {
+        "detected": true,
+        "version": "1.0",
+        "result": "Trojan-Ransom.Win32.BadRabbit.a",
+        "update": "20171126"
+      },
+      "Avast-Mobile": {
+        "detected": false,
+        "version": "171126-00",
+        "result": null,
+        "update": "20171126"
+      },
+      "Sophos": {
+        "detected": true,
+        "version": "4.98.0",
+        "result": "Troj/Ransom-ERK",
+        "update": "20171127"
+      },
+      "AhnLab-V3": {
+        "detected": true,
+        "version": "3.11.0.19332",
+        "result": "Trojan/Win32.Diskcoder.C2212682",
+        "update": "20171127"
+      },
+      "McAfee": {
+        "detected": true,
+        "version": "6.0.6.653",
+        "result": "Ransom-Badrabbit!7B5B089320D8",
+        "update": "20171127"
+      },
+      "AVware": {
+        "detected": true,
+        "version": "1.5.0.42",
+        "result": "Trojan.Win32.Generic!BT",
+        "update": "20171127"
+      },
+      "MAX": {
+        "detected": true,
+        "version": "2017.11.15.1",
+        "result": "malware (ai score=100)",
+        "update": "20171127"
+      },
+      "VBA32": {
+        "detected": true,
+        "version": "3.12.26.4",
+        "result": "Trojan-Ransom.BadRabbit",
+        "update": "20171124"
+      },
+      "WhiteArmor": {
+        "detected": false,
+        "version": null,
+        "result": null,
+        "update": "20171104"
+      },
+      "Panda": {
+        "detected": true,
+        "version": "4.6.4.2",
+        "result": "Trj/GdSda.A",
+        "update": "20171126"
+      },
+      "Zoner": {
+        "detected": false,
+        "version": "1.0",
+        "result": null,
+        "update": "20171127"
+      },
+      "ESET-NOD32": {
+        "detected": true,
+        "version": "16475",
+        "result": "Win32/Diskcoder.D",
+        "update": "20171127"
+      },
+      "Tencent": {
+        "detected": true,
+        "version": "1.0.0.1",
+        "result": "Suspicious.Heuristic.Gen.b.0",
+        "update": "20171127"
+      },
+      "Yandex": {
+        "detected": true,
+        "version": "5.5.1.3",
+        "result": "Trojan.Diskcoder!",
+        "update": "20171120"
+      },
+      "SentinelOne": {
+        "detected": false,
+        "version": "1.0.9.192",
+        "result": null,
+        "update": "20171113"
+      },
+      "GData": {
+        "detected": true,
+        "version": "A:25.14926B:25.10986",
+        "result": "Win32.Trojan-Ransom.BadRabbit.A",
+        "update": "20171127"
+      },
+      "AVG": {
+        "detected": true,
+        "version": "17.8.3705.0",
+        "result": "Win32:Malware-gen",
+        "update": "20171127"
+      },
+      "Avast": {
+        "detected": true,
+        "version": "17.8.3705.0",
+        "result": "Win32:Malware-gen",
+        "update": "20171127"
+      },
+      "CrowdStrike": {
+        "detected": true,
+        "version": "1.0",
+        "result": "malicious_confidence_100% (W)",
+        "update": "20171016"
+      },
+      "Qihoo-360": {
+        "detected": true,
+        "version": "1.0.0.1120",
+        "result": "Trojan.Generic",
+        "update": "20171127"
+      }
+    },
+    "tags": [
+      "peexe",
+      "overlay"
+    ],
+    "authentihash": "ba2a639b145a584a0c3710b45f7e02c10d480ab5258b7dffd32aa0516b6b6f70",
+    "unique_sources": 5,
+    "positives": 50,
+    "ssdeep": "3072:1keK/MwGT0834YW3pvyh8fcl/iL62iL6KKE:Sn/MZd4YW3pvyxl/iniN",
+    "md5": "7b5b089320d83de636b9befa84c47c3e",
+    "permalink": "https://www.virustotal.com/file/10e741ef66bdd9166434781d5a0ce465f50f270fdf538a351e91a5161458c888/analysis/1511748890/",
+    "sha1": "1824bc2e9595c102c49efc3db589ba36c7997142",
+    "resource": "1824bc2e9595c102c49efc3db589ba36c7997142",
+    "response_code": 1,
+    "community_reputation": -224,
+    "malicious_votes": 8,
+    "ITW_urls": [
+      "http://malware.picus.io/501334.exe"
+    ],
+    "last_seen": "2017-11-02 10:16:23"
+  }
+]

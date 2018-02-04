@@ -1,0 +1,97 @@
+[root@cloud cp]# cat /home/number1platespsp/public_html/cp/wordpress.conf
+########## IF RESOURCE DOES NOT EXIST IN WP THEN FORWARD REQUEST TO PROXY ############
+
+error_page 404 = @catch404;
+recursive_error_pages on;
+
+location @catch404 {
+        internal;
+        proxy_set_header Host plates.wearead.io;
+        proxy_pass https://127.0.0.1:10001$request_uri;
+}
+
+location @magento {
+        internal;
+        proxy_set_header Host plates.wearead.io;
+        proxy_buffering off;
+        proxy_pass https://127.0.0.1:10001;
+}
+
+########## SPECIFIC RULE FOR MAGENTO COMMON URLS TO REDUCE LOAD #############
+location ~ ^(/setup|/admin|/static|/js|/media|/pub) {
+        try_files $uri $uri/ @magento;
+}
+
+rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+
+
+
+set $skip_cache 0;
+
+# POST requests and urls with a query string should always go to PHP
+if ($request_method = POST) {
+        set $skip_cache 1;
+}
+
+if ($query_string != "") {
+        set $skip_cache 1;
+}
+
+# Don't cache uris containing the following segments
+if ($request_uri ~* "/wp-admin/|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml") {
+        set $skip_cache 1;
+}
+
+# Don't use the cache for logged in users or recent commenters
+if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in") {
+        set $skip_cache 1;
+}
+
+location / {
+        proxy_read_timeout 300;
+        try_files $uri $uri/ /index.php?$args;
+        expires 30d;
+}
+
+location /. { return 404; }
+
+location ~ .php/ { rewrite ^(.*.php)/ $1 last; }
+
+location ~ .php$ {
+        add_header X-skip $skip_cache;
+        add_header X-app "W";
+        expires off;
+        #fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_intercept_errors on;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param PHP_ADMIN_VALUE "open_basedir=/var/www/vhosts/plates.wearead.io:/var/www/default:/usr/share/php \n upload_tmp_dir=/var/www/vhosts/plates.wearead.io/tmp \n max_execution_time=600 \n error_reporting=E_ERROR \n display_errors=On";
+        fastcgi_param PHP_VALUE "include_path=/var/www/vhosts/plates.wearead.io/public_html/wordpress:/usr/share/php:.";
+
+        set $REQUESTED $request_uri;
+
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param QUERY_STRING $query_string;
+        fastcgi_param REQUEST_METHOD $request_method;
+        fastcgi_param CONTENT_TYPE $content_type;
+        fastcgi_param CONTENT_LENGTH $content_length;
+        fastcgi_buffers 256 16k;
+        fastcgi_buffer_size 32k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+#       fastcgi_cache_bypass $skip_cache;
+        fastcgi_no_cache $skip_cache;
+        fastcgi_pass_header Set-Cookie;
+        fastcgi_pass_header Cookie;
+        fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+
+        include fastcgi_params;
+
+#       fastcgi_cache PLATES;
+#       fastcgi_cache_valid  60m;
+        add_header X-Cache $upstream_cache_status;
+}
+
+location ~ /purge(/.*) {
+#       fastcgi_cache_purge PLATES "$scheme$request_method$host$1";
+}

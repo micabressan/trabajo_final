@@ -1,0 +1,18 @@
+(s/def ::fn-context ::bindings)
+(s/def ::fn-arglist (s/* ::symbol))
+(s/def ::fn-body ::form)
+
+(s/def ::fn-obj
+  (s/keys :req [::fn-context ::fn-arglist ::fn-body]))
+
+(s/def ::list
+  (s/or
+    :nil (comp nil? seq)
+    :cons (s/cat :head ::form :tail (s/* ::form))))
+
+(s/def ::form
+  (s/or
+    :symbol ::symbol
+    :integer ::integer
+    :closure ::fn-obj
+    :list ::list))

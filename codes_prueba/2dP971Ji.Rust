@@ -1,0 +1,68 @@
+use config::Config;
+use sdl2;
+use std::thread;
+use std::time;
+
+pub fn run(conf: Config) {
+    trace!("Initializing SDL.");
+    let sdl = sdl2::init().unwrap();
+    trace!("Initializing video.");
+    let video = sdl.video().unwrap();
+    trace!("Initializing events.");
+    let event = sdl.event().unwrap();
+    let mut event_pump = sdl.event_pump().unwrap();
+    trace!("Loading OpenGL library.");
+    video.gl_load_library_default().unwrap();
+    debug!(
+        "Detected video driver {} with {} displays.",
+        video.current_video_driver(),
+        video.num_video_displays().unwrap()
+    );
+
+    // Create 800x480 window. These are the dimensions of the Raspberry Pi 7"
+    // Touchscreen Display.
+    debug!("Creating window.");
+    let window = video
+        .window("oribi", 800, 480)
+        .opengl()
+        .resizable()
+        .build()
+        .unwrap();
+    if conf.hide_cursor {
+        sdl.mouse().show_cursor(false);
+    }
+    let mut canvas = window.into_canvas().accelerated().build().unwrap();
+    canvas.set_draw_color(sdl2::pixels::Color::RGB(255, 255, 255));
+
+    let frame_duration = time::Duration::new(0, 1000000000 / 60);
+    let mut done = false;
+    while !done {
+        let start_time = time::Instant::now();
+        // Handle events
+        for e in event_pump.poll_iter() {
+            let status = match e.clone() {
+                sdl2::event::Event::Quit { .. } |
+                sdl2::event::Event::AppTerminating { .. } => {
+                    done = true;
+                    Ok(())
+                }
+                sdl2::event::Event::KeyUp {
+                    keycode: Some(sdl2::keyboard::Keycode::Escape), ..
+                } => event.push_event(sdl2::event::Event::Quit { timestamp: 0 }),
+                e => {
+                    trace!("Event {:?}.", e);
+                    Ok(())
+                }
+            };
+            if let Err(err) = status {
+                warn!("Error handling event {:?}: {:?}.", e, err);
+            }
+        }
+        // Render
+        canvas.clear();
+        canvas.present();
+        if let Some(sleep_time) = frame_duration.checked_sub(start_time.elapsed()) {
+            thread::sleep(sleep_time);
+        }
+    }
+}

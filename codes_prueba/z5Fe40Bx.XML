@@ -1,0 +1,8 @@
+Źle:
+<header android:icon="@drawable/ic_ringer_volume_settings" android:action="com.android.settings.VIPER" android:title="@string/viper_settings" />
+
+
+Dobrze:
+<header android:icon="@drawable/ic_ringer_volume_settings" android:title="@string/viper_settings">
+    <intent android:action="com.android.settings.VIPER" />
+</header>

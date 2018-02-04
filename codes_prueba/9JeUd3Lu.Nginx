@@ -1,0 +1,14 @@
+  location = /test {
+    default_type application/json;
+    content_by_lua_block {
+      local body = 'Bitmap(frame="total_amount_dollars", rowID=100)'
+      local res = ngx.location.capture('/index/taxi-big/query', { method = ngx.HTTP_POST, body = body })
+
+      ngx.say(res.body)
+    }
+  }
+
+  location = /index/taxi-big/query {
+    proxy_set_header Connection keep-alive;
+    proxy_pass http://pilosaupstream;
+  }

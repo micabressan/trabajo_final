@@ -1,0 +1,40 @@
+public override void DoImpact(Target target, Actor firedBy, IEnumerable<int> damageModifiers)
+		{
+			var pos = target.CenterPosition;
+
+			if (!IsValidImpact(pos, firedBy))
+				return;
+
+			var availableActors = firedBy.World.FindActorsInCircle(pos, Range + VictimScanRadius);
+			foreach (var actor in availableActors)
+			{
+				if (!IsValidAgainst(actor, firedBy))
+					continue;
+
+				if (actor.IsDead)
+					continue;
+
+				var detachLimit = DetachLimit;
+				var attachables = actor.TraitsImplementing<DelayedWeaponAttachable>();
+				foreach(var attachable in attachables)
+				{
+					if (detachLimit == 0)
+						break;
+					var attachableTypes = attachable.Info.AttachableTypes.Where(at => AttachableTypes.Contains(at));
+
+					foreach(var attachableType in attachableTypes)
+					{
+						if (detachLimit == 0)
+							break;
+						var triggers = attachable.GetTriggers(attachableType);
+						foreach(var trigger in triggers)
+						{
+							if (detachLimit == 0)
+								break;
+							detachLimit -= 1;
+							attachable.Detach(trigger);
+						}
+					}
+				}
+			}
+		}

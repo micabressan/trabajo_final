@@ -1,0 +1,29 @@
+using System;
+using System.Linq;
+using KalugaGov.Domain.Entities;
+using KalugaGov.Domain.Services.Blocks.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace KalugaGov.Domain.Blocks
+{
+    /// <summary>
+    /// Распознователь сервиса блоков исходя из типа
+    /// </summary>
+    public class BlockServiceResolver : IBlockServiceResolver
+    {
+        private readonly IServiceProvider _provider;
+        
+        /// <summary />
+        public BlockServiceResolver(IServiceProvider provider)
+        {
+            _provider = provider;
+        }
+        
+
+        /// <inheritdoc />
+        public IBlockService Resolve(BlockTypeOption context)
+        {
+            return _provider.GetServices<IBlockService>().SingleOrDefault(a=>a.BlockType == context);
+        }
+    }
+}

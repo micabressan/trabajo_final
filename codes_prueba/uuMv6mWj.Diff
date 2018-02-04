@@ -1,0 +1,1025 @@
+Index: ace2dataset.cpp
+===================================================================
+--- ace2dataset.cpp	(revision 41033)
++++ ace2dataset.cpp	(working copy)
+@@ -98,11 +98,11 @@
+     double       adfGeoTransform[6];
+ 
+   public:
+-                ACE2Dataset();
+-    virtual ~ACE2Dataset() {}
++    ACE2Dataset();
++    ~ACE2Dataset() override {}
+ 
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    const char *GetProjectionRef(void) override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int Identify( GDALOpenInfo * );
+@@ -117,13 +117,13 @@
+ class ACE2RasterBand : public RawRasterBand
+ {
+   public:
+-            ACE2RasterBand(VSILFILE* fpRaw,
+-                           GDALDataType eDataType,
+-                           int nXSize, int nYSize);
+-    virtual ~ACE2RasterBand() {}
++    ACE2RasterBand( VSILFILE* fpRaw,
++                    GDALDataType eDataType,
++                    int nXSize, int nYSize );
++    ~ACE2RasterBand() override {}
+ 
+-    virtual const char *GetUnitType() override;
+-    virtual char **GetCategoryNames() override;
++    const char *GetUnitType() override;
++    char **GetCategoryNames() override;
+ };
+ 
+ /************************************************************************/
+Index: btdataset.cpp
+===================================================================
+--- btdataset.cpp	(revision 41033)
++++ btdataset.cpp	(working copy)
+@@ -61,15 +61,15 @@
+     float        m_fVscale;
+ 
+   public:
+-             BTDataset();
+-    virtual ~BTDataset();
++    BTDataset();
++    ~BTDataset() override;
+ 
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr SetProjection( const char * ) override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
+-    virtual CPLErr SetGeoTransform( double * ) override;
++    const char *GetProjectionRef(void) override;
++    CPLErr SetProjection( const char * ) override;
++    CPLErr GetGeoTransform( double * ) override;
++    CPLErr SetGeoTransform( double * ) override;
+ 
+-    virtual void   FlushCache() override;
++    void FlushCache() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+@@ -90,15 +90,15 @@
+   public:
+                    BTRasterBand( GDALDataset * poDS, VSILFILE * fp,
+                                  GDALDataType eType );
+-    virtual ~BTRasterBand() {}
++    ~BTRasterBand() override {}
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
+-    virtual CPLErr IWriteBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IWriteBlock( int, int, void * ) override;
+ 
+-    virtual const char* GetUnitType() override;
+-    virtual CPLErr SetUnitType(const char*) override;
+-    virtual double GetNoDataValue( int* = nullptr ) override;
+-    virtual CPLErr SetNoDataValue( double ) override;
++    const char* GetUnitType() override;
++    CPLErr SetUnitType(const char*) override;
++    double GetNoDataValue( int* = nullptr ) override;
++    CPLErr SetNoDataValue( double ) override;
+ };
+ 
+ /************************************************************************/
+@@ -266,7 +266,7 @@
+ 
+     return -32768;
+ }
+- 
++
+ CPLErr BTRasterBand::SetNoDataValue( double dfNoDataValue )
+ 
+ {
+Index: cpgdataset.cpp
+===================================================================
+--- cpgdataset.cpp	(revision 41033)
++++ cpgdataset.cpp	(working copy)
+@@ -79,17 +79,17 @@
+   CPLErr LoadStokesLine( int iLine, int bNativeOrder );
+ 
+   public:
+-                CPGDataset();
+-    virtual ~CPGDataset();
++    CPGDataset();
++    ~CPGDataset() override;
+ 
+-    virtual int    GetGCPCount() override;
+-    virtual const char *GetGCPProjection() override;
+-    virtual const GDAL_GCP *GetGCPs() override;
++    int GetGCPCount() override;
++    const char *GetGCPProjection() override;
++    const GDAL_GCP *GetGCPs() override;
+ 
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    const char *GetProjectionRef() override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+ };
+@@ -168,10 +168,10 @@
+     friend class CPGDataset;
+ 
+   public:
+-                   SIRC_QSLCRasterBand( CPGDataset *, int, GDALDataType );
+-    virtual ~SIRC_QSLCRasterBand() {}
++    SIRC_QSLCRasterBand( CPGDataset *, int, GDALDataType );
++    ~SIRC_QSLCRasterBand() override {}
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
+ };
+ 
+ static const int M11 = 0;
+@@ -204,12 +204,12 @@
+     int bNativeOrder;
+ 
+   public:
+-                   CPG_STOKESRasterBand( GDALDataset *poDS,
+-                                         GDALDataType eType,
+-                                         int bNativeOrder );
+-    virtual ~CPG_STOKESRasterBand() {}
++    CPG_STOKESRasterBand( GDALDataset *poDS,
++                          GDALDataType eType,
++                          int bNativeOrder );
++    ~CPG_STOKESRasterBand() override {}
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
+ };
+ 
+ /************************************************************************/
+Index: ctable2dataset.cpp
+===================================================================
+--- ctable2dataset.cpp	(revision 41033)
++++ ctable2dataset.cpp	(working copy)
+@@ -48,13 +48,13 @@
+     double      adfGeoTransform[6];
+ 
+   public:
+-                CTable2Dataset();
+-    virtual ~CTable2Dataset();
++    CTable2Dataset();
++    ~CTable2Dataset() override;
+ 
+-    virtual CPLErr SetGeoTransform( double * padfTransform ) override;
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef() override;
+-    virtual void   FlushCache(void) override;
++    CPLErr SetGeoTransform( double * padfTransform ) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
++    void   FlushCache(void) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int          Identify( GDALOpenInfo * );
+Index: dipxdataset.cpp
+===================================================================
+--- dipxdataset.cpp	(revision 41033)
++++ dipxdataset.cpp	(working copy)
+@@ -85,12 +85,12 @@
+     double      adfGeoTransform[6];
+ 
+   public:
+-                 DIPExDataset();
+-    virtual ~DIPExDataset();
++    DIPExDataset();
++    ~DIPExDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+-    virtual const char *GetProjectionRef( void ) override;
++    const char *GetProjectionRef( void ) override;
+     static GDALDataset *Open( GDALOpenInfo * );
+ };
+ 
+Index: ehdrdataset.h
+===================================================================
+--- ehdrdataset.h	(revision 41033)
++++ ehdrdataset.h	(working copy)
+@@ -93,14 +93,14 @@
+ 
+   public:
+     EHdrDataset();
+-    virtual ~EHdrDataset();
++    ~EHdrDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double *padfTransform ) override;
+-    virtual CPLErr SetGeoTransform( double *padfTransform ) override;
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr SetProjection( const char * ) override;
++    CPLErr GetGeoTransform( double *padfTransform ) override;
++    CPLErr SetGeoTransform( double *padfTransform ) override;
++    const char *GetProjectionRef() override;
++    CPLErr SetProjection( const char * ) override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char *pszFilename,
+@@ -138,11 +138,11 @@
+ 
+     int            minmaxmeanstddev;
+ 
+-    virtual CPLErr IRasterIO( GDALRWFlag, int, int, int, int,
+-                              void *, int, int, GDALDataType,
+-                              GSpacing nPixelSpace,
+-                              GSpacing nLineSpace,
+-                              GDALRasterIOExtraArg *psExtraArg ) override;
++    CPLErr IRasterIO( GDALRWFlag, int, int, int, int,
++                      void *, int, int, GDALDataType,
++                      GSpacing nPixelSpace,
++                      GSpacing nLineSpace,
++                      GDALRasterIOExtraArg *psExtraArg ) override;
+ 
+   public:
+     EHdrRasterBand( GDALDataset *poDS, int nBand, VSILFILE *fpRaw,
+@@ -150,20 +150,20 @@
+                     int nLineOffset,
+                     GDALDataType eDataType, int bNativeOrder,
+                     int nBits);
+-    virtual ~EHdrRasterBand() {}
++    ~EHdrRasterBand() override {}
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
+-    virtual CPLErr IWriteBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IWriteBlock( int, int, void * ) override;
+ 
+-    virtual double GetNoDataValue( int *pbSuccess = nullptr ) override;
+-    virtual double GetMinimum( int *pbSuccess = nullptr ) override;
+-    virtual double GetMaximum(int *pbSuccess = nullptr ) override;
+-    virtual CPLErr GetStatistics( int bApproxOK, int bForce,
+-                                  double *pdfMin, double *pdfMax,
+-                                  double *pdfMean, double *pdfStdDev ) override;
+-    virtual CPLErr SetStatistics( double dfMin, double dfMax,
+-                                  double dfMean, double dfStdDev ) override;
+-    virtual CPLErr SetColorTable( GDALColorTable *poNewCT ) override;
++    double GetNoDataValue( int *pbSuccess = nullptr ) override;
++    double GetMinimum( int *pbSuccess = nullptr ) override;
++    double GetMaximum(int *pbSuccess = nullptr ) override;
++    CPLErr GetStatistics( int bApproxOK, int bForce,
++                          double *pdfMin, double *pdfMax,
++                          double *pdfMean, double *pdfStdDev ) override;
++    CPLErr SetStatistics( double dfMin, double dfMax,
++                          double dfMean, double dfStdDev ) override;
++    CPLErr SetColorTable( GDALColorTable *poNewCT ) override;
+ };
+ 
+ #endif  // GDAL_FRMTS_RAW_EHDRDATASET_H_INCLUDED
+Index: eirdataset.cpp
+===================================================================
+--- eirdataset.cpp	(revision 41033)
++++ eirdataset.cpp	(working copy)
+@@ -56,11 +56,11 @@
+ 
+   public:
+     EIRDataset();
+-    virtual ~EIRDataset();
++    ~EIRDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static int          Identify( GDALOpenInfo * );
+     static GDALDataset *Open( GDALOpenInfo * );
+Index: fastdataset.cpp
+===================================================================
+--- fastdataset.cpp	(revision 41033)
++++ fastdataset.cpp	(working copy)
+@@ -118,8 +118,8 @@
+     int         OpenChannel( const char *pszFilename, int iBand );
+ 
+   public:
+-                FASTDataset();
+-    virtual ~FASTDataset();
++    FASTDataset();
++    ~FASTDataset() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+ 
+@@ -128,7 +128,7 @@
+     VSILFILE    *FOpenChannel( const char *, int iBand, int iFASTBand );
+     void        TryEuromap_IRS_1C_1D_ChannelNameConvention();
+ 
+-    virtual  char** GetFileList() override;
++    char** GetFileList() override;
+ };
+ 
+ /************************************************************************/
+Index: fujibasdataset.cpp
+===================================================================
+--- fujibasdataset.cpp	(revision 41033)
++++ fujibasdataset.cpp	(working copy)
+@@ -50,7 +50,7 @@
+                 FujiBASDataset();
+                 ~FujiBASDataset();
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+ };
+Index: genbindataset.cpp
+===================================================================
+--- genbindataset.cpp	(revision 41033)
++++ genbindataset.cpp	(working copy)
+@@ -205,12 +205,12 @@
+ 
+   public:
+     GenBinDataset();
+-    virtual ~GenBinDataset();
++    ~GenBinDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef(void) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef(void) override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+ };
+@@ -227,9 +227,9 @@
+ 
+   public:
+     GenBinBitRasterBand( GenBinDataset *poDS, int nBits );
+-    virtual ~GenBinBitRasterBand() {}
++    ~GenBinBitRasterBand() override {}
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
+ };
+ 
+ /************************************************************************/
+Index: gtxdataset.cpp
+===================================================================
+--- gtxdataset.cpp	(revision 41033)
++++ gtxdataset.cpp	(working copy)
+@@ -73,19 +73,19 @@
+     double      adfGeoTransform[6];
+ 
+   public:
+-                GTXDataset() : fpImage(nullptr) {
+-                      adfGeoTransform[0] = 0.0;
+-                      adfGeoTransform[1] = 1.0;
+-                      adfGeoTransform[2] = 0.0;
+-                      adfGeoTransform[3] = 0.0;
+-                      adfGeoTransform[4] = 0.0;
+-                      adfGeoTransform[5] = 1.0;
+-                }
+-    virtual ~GTXDataset();
++    GTXDataset() : fpImage(nullptr) {
++        adfGeoTransform[0] = 0.0;
++        adfGeoTransform[1] = 1.0;
++        adfGeoTransform[2] = 0.0;
++        adfGeoTransform[3] = 0.0;
++        adfGeoTransform[4] = 0.0;
++        adfGeoTransform[5] = 1.0;
++    }
++    ~GTXDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual CPLErr SetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef() override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    CPLErr SetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int          Identify( GDALOpenInfo * );
+@@ -103,15 +103,14 @@
+ class GTXRasterBand : public RawRasterBand
+ {
+   public:
++    GTXRasterBand( GDALDataset *poDS, int nBand, VSILFILE * fpRaw,
++                   vsi_l_offset nImgOffset, int nPixelOffset,
++                   int nLineOffset,
++                   GDALDataType eDataType, int bNativeOrder );
+ 
+-                 GTXRasterBand( GDALDataset *poDS, int nBand, VSILFILE * fpRaw,
+-                                 vsi_l_offset nImgOffset, int nPixelOffset,
+-                                 int nLineOffset,
+-                                 GDALDataType eDataType, int bNativeOrder );
++    ~GTXRasterBand() override;
+ 
+-    virtual ~GTXRasterBand();
+-
+-    virtual double GetNoDataValue( int *pbSuccess = nullptr ) override;
++    double GetNoDataValue( int *pbSuccess = nullptr ) override;
+ };
+ 
+ 
+Index: hkvdataset.cpp
+===================================================================
+--- hkvdataset.cpp	(revision 41033)
++++ hkvdataset.cpp	(working copy)
+@@ -54,13 +54,13 @@
+     friend class HKVDataset;
+ 
+   public:
+-                HKVRasterBand( HKVDataset *poDS, int nBand, VSILFILE * fpRaw,
+-                               unsigned int nImgOffset, int nPixelOffset,
+-                               int nLineOffset,
+-                               GDALDataType eDataType, int bNativeOrder );
+-    virtual     ~HKVRasterBand() {}
++    HKVRasterBand( HKVDataset *poDS, int nBand, VSILFILE * fpRaw,
++                   unsigned int nImgOffset, int nPixelOffset,
++                   int nLineOffset,
++                   GDALDataType eDataType, int bNativeOrder );
++    ~HKVRasterBand() override {}
+ 
+-    virtual CPLErr SetNoDataValue( double ) override;
++    CPLErr SetNoDataValue( double ) override;
+ };
+ 
+ /************************************************************************/
+@@ -196,18 +196,18 @@
+     double      dfNoDataValue;
+ 
+   public:
+-                HKVDataset();
+-    virtual     ~HKVDataset();
++    HKVDataset();
++    ~HKVDataset() override;
+ 
+-    virtual int GetGCPCount() override /* const */ { return nGCPCount; }
+-    virtual const char *GetGCPProjection() override;
+-    virtual const GDAL_GCP *GetGCPs() override;
++    int GetGCPCount() override /* const */ { return nGCPCount; }
++    const char *GetGCPProjection() override;
++    const GDAL_GCP *GetGCPs() override;
+ 
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    const char *GetProjectionRef(void) override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+-    virtual CPLErr SetGeoTransform( double * ) override;
+-    virtual CPLErr SetProjection( const char * ) override;
++    CPLErr SetGeoTransform( double * ) override;
++    CPLErr SetProjection( const char * ) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+Index: idadataset.cpp
+===================================================================
+--- idadataset.cpp	(revision 41033)
++++ idadataset.cpp	(working copy)
+@@ -146,15 +146,15 @@
+     void        ReadColorTable();
+ 
+   public:
+-                IDADataset();
+-    virtual ~IDADataset();
++    IDADataset();
++    ~IDADataset() override;
+ 
+-    virtual void FlushCache() override;
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual CPLErr SetProjection( const char * ) override;
++    void FlushCache() override;
++    const char *GetProjectionRef(void) override;
++    CPLErr SetProjection( const char * ) override;
+ 
+-    virtual CPLErr GetGeoTransform( double * ) override;
+-    virtual CPLErr SetGeoTransform( double * ) override;
++    CPLErr GetGeoTransform( double * ) override;
++    CPLErr SetGeoTransform( double * ) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+@@ -177,17 +177,17 @@
+     GDALColorTable       *poColorTable;
+ 
+   public:
+-                 IDARasterBand( IDADataset *poDSIn, VSILFILE *fpRaw, int nXSize );
+-    virtual     ~IDARasterBand();
++    IDARasterBand( IDADataset *poDSIn, VSILFILE *fpRaw, int nXSize );
++    ~IDARasterBand() override;
+ 
+-    virtual GDALRasterAttributeTable *GetDefaultRAT() override;
+-    virtual GDALColorInterp GetColorInterpretation() override;
+-    virtual GDALColorTable *GetColorTable() override;
+-    virtual double GetOffset( int *pbSuccess = nullptr ) override;
+-    virtual CPLErr SetOffset( double dfNewValue ) override;
+-    virtual double GetScale( int *pbSuccess = nullptr ) override;
+-    virtual CPLErr SetScale( double dfNewValue ) override;
+-    virtual double GetNoDataValue( int *pbSuccess = nullptr ) override;
++    GDALRasterAttributeTable *GetDefaultRAT() override;
++    GDALColorInterp GetColorInterpretation() override;
++    GDALColorTable *GetColorTable() override;
++    double GetOffset( int *pbSuccess = nullptr ) override;
++    CPLErr SetOffset( double dfNewValue ) override;
++    double GetScale( int *pbSuccess = nullptr ) override;
++    CPLErr SetScale( double dfNewValue ) override;
++    double GetNoDataValue( int *pbSuccess = nullptr ) override;
+ };
+ 
+ /************************************************************************/
+Index: iscedataset.cpp
+===================================================================
+--- iscedataset.cpp	(revision 41033)
++++ iscedataset.cpp	(working copy)
+@@ -85,11 +85,11 @@
+     enum Scheme eScheme;
+ 
+   public:
+-                ISCEDataset();
+-    virtual ~ISCEDataset();
++    ISCEDataset();
++    ~ISCEDataset() override;
+ 
+-    virtual void        FlushCache() override;
+-    virtual char      **GetFileList() override;
++    void FlushCache() override;
++    char **GetFileList() override;
+ 
+     static int          Identify( GDALOpenInfo *poOpenInfo );
+     static GDALDataset *Open( GDALOpenInfo *poOpenInfo );
+Index: landataset.cpp
+===================================================================
+--- landataset.cpp	(revision 41033)
++++ landataset.cpp	(working copy)
+@@ -114,14 +114,14 @@
+ 
+   public:
+                    LAN4BitRasterBand( LANDataset *, int );
+-    virtual ~LAN4BitRasterBand();
++    ~LAN4BitRasterBand() override;
+ 
+-    virtual GDALColorTable *GetColorTable() override;
+-    virtual GDALColorInterp GetColorInterpretation() override;
+-    virtual CPLErr SetColorTable( GDALColorTable * ) override;
+-    virtual CPLErr SetColorInterpretation( GDALColorInterp ) override;
++    GDALColorTable *GetColorTable() override;
++    GDALColorInterp GetColorInterpretation() override;
++    CPLErr SetColorTable( GDALColorTable * ) override;
++    CPLErr SetColorInterpretation( GDALColorInterp ) override;
+ 
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
+ };
+ 
+ /************************************************************************/
+@@ -144,16 +144,16 @@
+     CPLString   osSTAFilename;
+     void        CheckForStatistics(void);
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+   public:
+                 LANDataset();
+-    virtual ~LANDataset();
++    ~LANDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual CPLErr SetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef() override;
+-    virtual CPLErr SetProjection( const char * ) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    CPLErr SetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
++    CPLErr SetProjection( const char * ) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+Index: lcpdataset.cpp
+===================================================================
+--- lcpdataset.cpp	(revision 41033)
++++ lcpdataset.cpp	(working copy)
+@@ -61,12 +61,12 @@
+                                     GInt32 *panClasses );
+ 
+   public:
+-                LCPDataset();
+-    virtual ~LCPDataset();
++    LCPDataset();
++    ~LCPDataset() override;
+ 
+-    virtual char **GetFileList(void) override;
++    char **GetFileList(void) override;
+ 
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+     static int          Identify( GDALOpenInfo * );
+     static GDALDataset *Open( GDALOpenInfo * );
+@@ -75,7 +75,7 @@
+                                     int bStrict, char ** papszOptions,
+                                     GDALProgressFunc pfnProgress,
+                                     void * pProgressData );
+-    virtual const char *GetProjectionRef(void) override;
++    const char *GetProjectionRef(void) override;
+ 
+     int bHaveProjection;
+ };
+Index: loslasdataset.cpp
+===================================================================
+--- loslasdataset.cpp	(revision 41033)
++++ loslasdataset.cpp	(working copy)
+@@ -81,11 +81,11 @@
+     double      adfGeoTransform[6];
+ 
+   public:
+-                LOSLASDataset();
+-    virtual ~LOSLASDataset();
++    LOSLASDataset();
++    ~LOSLASDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef() override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int          Identify( GDALOpenInfo * );
+Index: mffdataset.cpp
+===================================================================
+--- mffdataset.cpp	(revision 41033)
++++ mffdataset.cpp	(working copy)
+@@ -68,21 +68,21 @@
+     void        ScanForProjectionInfo();
+ 
+   public:
+-                MFFDataset();
+-    virtual ~MFFDataset();
++    MFFDataset();
++    ~MFFDataset() override;
+ 
+     char        **papszHdrLines;
+ 
+     VSILFILE        **pafpBandFiles;
+ 
+-    virtual char** GetFileList() override;
++    char** GetFileList() override;
+ 
+-    virtual int    GetGCPCount() override;
+-    virtual const char *GetGCPProjection() override;
+-    virtual const GDAL_GCP *GetGCPs() override;
++    int GetGCPCount() override;
++    const char *GetGCPProjection() override;
++    const GDAL_GCP *GetGCPs() override;
+ 
+-    virtual const char *GetProjectionRef() override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    const char *GetProjectionRef() override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+@@ -109,12 +109,11 @@
+     bool           bNative;
+ 
+   public:
++    MFFTiledBand( MFFDataset *, int, VSILFILE *, int, int,
++                  GDALDataType, int );
++    ~MFFTiledBand() override;
+ 
+-                   MFFTiledBand( MFFDataset *, int, VSILFILE *, int, int,
+-                                 GDALDataType, int );
+-    virtual ~MFFTiledBand();
+-
+-    virtual CPLErr IReadBlock( int, int, void * ) override;
++    CPLErr IReadBlock( int, int, void * ) override;
+ };
+ 
+ /************************************************************************/
+Index: ndfdataset.cpp
+===================================================================
+--- ndfdataset.cpp	(revision 41033)
++++ ndfdataset.cpp	(working copy)
+@@ -51,12 +51,12 @@
+     const char  *Get( const char *pszKey, const char *pszDefault);
+ 
+   public:
+-                NDFDataset();
+-    virtual ~NDFDataset();
++    NDFDataset();
++    ~NDFDataset() override;
+ 
+-    virtual CPLErr  GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef(void) override;
+-    virtual char **GetFileList(void) override;
++    CPLErr  GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef(void) override;
++    char **GetFileList(void) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+ };
+Index: ntv2dataset.cpp
+===================================================================
+--- ntv2dataset.cpp	(revision 41033)
++++ ntv2dataset.cpp	(working copy)
+@@ -102,13 +102,13 @@
+     int         OpenGrid( char *pachGridHeader, vsi_l_offset nDataStart );
+ 
+   public:
+-                NTv2Dataset();
+-    virtual ~NTv2Dataset();
++    NTv2Dataset();
++    ~NTv2Dataset() override;
+ 
+-    virtual CPLErr SetGeoTransform( double * padfTransform ) override;
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef() override;
+-    virtual void   FlushCache(void) override;
++    CPLErr SetGeoTransform( double * padfTransform ) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
++    void FlushCache(void) override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int          Identify( GDALOpenInfo * );
+Index: pauxdataset.cpp
+===================================================================
+--- pauxdataset.cpp	(revision 41034)
++++ pauxdataset.cpp	(working copy)
+@@ -68,15 +68,15 @@
+     char        **papszAuxLines;
+     int         bAuxUpdated;
+ 
+-    virtual const char *GetProjectionRef() override;
+-    virtual CPLErr GetGeoTransform( double * ) override;
+-    virtual CPLErr SetGeoTransform( double * ) override;
++    const char *GetProjectionRef() override;
++    CPLErr GetGeoTransform( double * ) override;
++    CPLErr SetGeoTransform( double * ) override;
+ 
+-    virtual int    GetGCPCount() override;
+-    virtual const char *GetGCPProjection() override;
+-    virtual const GDAL_GCP *GetGCPs() override;
++    int    GetGCPCount() override;
++    const char *GetGCPProjection() override;
++    const GDAL_GCP *GetGCPs() override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static GDALDataset *Create( const char * pszFilename,
+@@ -94,20 +94,20 @@
+ {
+   public:
+ 
+-                 PAuxRasterBand( GDALDataset *poDS, int nBand, VSILFILE * fpRaw,
+-                                 vsi_l_offset nImgOffset, int nPixelOffset,
+-                                 int nLineOffset,
+-                                 GDALDataType eDataType, int bNativeOrder );
++    PAuxRasterBand( GDALDataset *poDS, int nBand, VSILFILE * fpRaw,
++                    vsi_l_offset nImgOffset, int nPixelOffset,
++                    int nLineOffset,
++                    GDALDataType eDataType, int bNativeOrder );
+ 
+-    virtual ~PAuxRasterBand();
++    ~PAuxRasterBand() override;
+ 
+-    virtual double GetNoDataValue( int *pbSuccess = nullptr ) override;
+-    virtual CPLErr SetNoDataValue( double ) override;
++    double GetNoDataValue( int *pbSuccess = nullptr ) override;
++    CPLErr SetNoDataValue( double ) override;
+ 
+-    virtual GDALColorTable *GetColorTable() override;
+-    virtual GDALColorInterp GetColorInterpretation() override;
++    GDALColorTable *GetColorTable() override;
++    GDALColorInterp GetColorInterpretation() override;
+ 
+-    virtual void SetDescription( const char *pszNewDescription ) override;
++    void SetDescription( const char *pszNewDescription ) override;
+ };
+ 
+ /************************************************************************/
+Index: pnmdataset.cpp
+===================================================================
+--- pnmdataset.cpp	(revision 41033)
++++ pnmdataset.cpp	(working copy)
+@@ -49,9 +49,9 @@
+ 
+   public:
+                 PNMDataset();
+-    virtual ~PNMDataset();
++    ~PNMDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * ) override;
++    CPLErr GetGeoTransform( double * ) override;
+ 
+     static int          Identify( GDALOpenInfo * );
+     static GDALDataset *Open( GDALOpenInfo * );
+Index: rawdataset.h
+===================================================================
+--- rawdataset.h	(revision 41033)
++++ rawdataset.h	(working copy)
+@@ -50,12 +50,12 @@
+     friend class RawRasterBand;
+ 
+   protected:
+-    virtual CPLErr      IRasterIO( GDALRWFlag, int, int, int, int,
+-                                   void *, int, int, GDALDataType,
+-                                   int, int *,
+-                                   GSpacing nPixelSpace, GSpacing nLineSpace,
+-                                   GSpacing nBandSpace,
+-                                   GDALRasterIOExtraArg* psExtraArg ) CPL_OVERRIDE;
++    CPLErr IRasterIO( GDALRWFlag, int, int, int, int,
++                      void *, int, int, GDALDataType,
++                      int, int *,
++                      GSpacing nPixelSpace, GSpacing nLineSpace,
++                      GSpacing nBandSpace,
++                      GDALRasterIOExtraArg* psExtraArg ) override;
+   public:
+                  RawDataset();
+          virtual ~RawDataset() = 0;
+@@ -111,10 +111,10 @@
+     int         IsSignificantNumberOfLinesLoaded( int nLineOff, int nLines );
+     void        Initialize();
+ 
+-    virtual CPLErr  IRasterIO( GDALRWFlag, int, int, int, int,
+-                              void *, int, int, GDALDataType,
+-                              GSpacing nPixelSpace, GSpacing nLineSpace,
+-                              GDALRasterIOExtraArg* psExtraArg ) CPL_OVERRIDE;
++    CPLErr IRasterIO( GDALRWFlag, int, int, int, int,
++                      void *, int, int, GDALDataType,
++                      GSpacing nPixelSpace, GSpacing nLineSpace,
++                      GDALRasterIOExtraArg* psExtraArg ) override;
+ 
+     int         CanUseDirectIO(int nXOff, int nYOff, int nXSize, int nYSize,
+                                GDALDataType eBufType);
+@@ -135,26 +135,24 @@
+ 
+     virtual ~RawRasterBand() /* = 0 */ ;
+ 
+-    // should CPL_OVERRIDE RasterIO eventually.
++    CPLErr  IReadBlock( int, int, void * ) override;
++    CPLErr  IWriteBlock( int, int, void * ) override;
+ 
+-    virtual CPLErr  IReadBlock( int, int, void * ) CPL_OVERRIDE;
+-    virtual CPLErr  IWriteBlock( int, int, void * ) CPL_OVERRIDE;
++    GDALColorTable *GetColorTable() override;
++    GDALColorInterp GetColorInterpretation() override;
++    CPLErr SetColorTable( GDALColorTable * ) override;
++    CPLErr SetColorInterpretation( GDALColorInterp ) override;
+ 
+-    virtual GDALColorTable *GetColorTable() CPL_OVERRIDE;
+-    virtual GDALColorInterp GetColorInterpretation() CPL_OVERRIDE;
+-    virtual CPLErr SetColorTable( GDALColorTable * ) CPL_OVERRIDE;
+-    virtual CPLErr SetColorInterpretation( GDALColorInterp ) CPL_OVERRIDE;
++    char **GetCategoryNames() override;
++    CPLErr SetCategoryNames( char ** ) override;
+ 
+-    virtual char **GetCategoryNames() CPL_OVERRIDE;
+-    virtual CPLErr SetCategoryNames( char ** ) CPL_OVERRIDE;
++    CPLErr FlushCache() override;
+ 
+-    virtual CPLErr  FlushCache() CPL_OVERRIDE;
++    CPLVirtualMem *GetVirtualMemAuto( GDALRWFlag eRWFlag,
++                                      int *pnPixelSpace,
++                                      GIntBig *pnLineSpace,
++                                      char **papszOptions ) override;
+ 
+-    virtual CPLVirtualMem  *GetVirtualMemAuto( GDALRWFlag eRWFlag,
+-                                               int *pnPixelSpace,
+-                                               GIntBig *pnLineSpace,
+-                                               char **papszOptions ) CPL_OVERRIDE;
+-
+     CPLErr          AccessLine( int iLine );
+ 
+     void            SetAccess( GDALAccess eAccess );
+Index: roipacdataset.cpp
+===================================================================
+--- roipacdataset.cpp	(revision 41033)
++++ roipacdataset.cpp	(working copy)
+@@ -54,8 +54,8 @@
+     char        *pszProjection;
+ 
+   public:
+-                ROIPACDataset( void );
+-    virtual ~ROIPACDataset( void );
++    ROIPACDataset();
++    ~ROIPACDataset() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo *poOpenInfo );
+     static int          Identify( GDALOpenInfo *poOpenInfo );
+@@ -63,12 +63,12 @@
+                                 int nXSize, int nYSize, int nBands,
+                                 GDALDataType eType, char **papszOptions );
+ 
+-    virtual void        FlushCache( void ) override;
++    void        FlushCache() override;
+     CPLErr              GetGeoTransform( double *padfTransform ) override;
+-    virtual CPLErr      SetGeoTransform( double *padfTransform ) override;
++    CPLErr      SetGeoTransform( double *padfTransform ) override;
+     const char         *GetProjectionRef( void ) override;
+-    virtual CPLErr      SetProjection( const char *pszNewProjection ) override;
+-    virtual char      **GetFileList( void ) override;
++    CPLErr      SetProjection( const char *pszNewProjection ) override;
++    char      **GetFileList() override;
+ };
+ 
+ /************************************************************************/
+Index: rrasterdataset.cpp
+===================================================================
+--- rrasterdataset.cpp	(revision 41033)
++++ rrasterdataset.cpp	(working copy)
+@@ -49,16 +49,16 @@
+     CPLString   m_osProjection;
+ 
+   public:
+-                RRASTERDataset();
+-       virtual ~RRASTERDataset();
++    RRASTERDataset();
++    ~RRASTERDataset() override;
+ 
+-    virtual char **GetFileList(void) override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int          Identify( GDALOpenInfo * );
+ 
+-    virtual CPLErr GetGeoTransform( double * ) override;
+-    virtual const char *GetProjectionRef(void) override;
++    CPLErr GetGeoTransform( double * ) override;
++  const char *GetProjectionRef() override;
+ };
+ 
+ /************************************************************************/
+@@ -80,16 +80,16 @@
+                     GDALDataType eDataType, int bNativeOrder );
+ 
+       void SetMinMax( double dfMin, double dfMax );
+-      virtual double GetMinimum( int *pbSuccess = nullptr ) override;
+-      virtual double GetMaximum(int *pbSuccess = nullptr ) override;
++      double GetMinimum( int *pbSuccess = nullptr ) override;
++      double GetMaximum( int *pbSuccess = nullptr ) override;
+ 
+ #ifdef UPDATE_SUPPORTED
+   protected:
+-      virtual CPLErr  IWriteBlock( int, int, void * );
+-      virtual CPLErr  IRasterIO( GDALRWFlag, int, int, int, int,
+-                                void *, int, int, GDALDataType,
+-                                GSpacing nPixelSpace, GSpacing nLineSpace,
+-                                GDALRasterIOExtraArg* psExtraArg );
++      CPLErr IWriteBlock( int, int, void * ) override;
++      CPLErr IRasterIO( GDALRWFlag, int, int, int, int,
++                        void *, int, int, GDALDataType,
++                        GSpacing nPixelSpace, GSpacing nLineSpace,
++                        GDALRasterIOExtraArg* psExtraArg ) override;
+ #endif
+ };
+ 
+Index: snodasdataset.cpp
+===================================================================
+--- snodasdataset.cpp	(revision 41033)
++++ snodasdataset.cpp	(working copy)
+@@ -56,13 +56,13 @@
+     friend class SNODASRasterBand;
+ 
+   public:
+-                    SNODASDataset();
+-    virtual ~SNODASDataset();
++    SNODASDataset();
++    ~SNODASDataset() override;
+ 
+-    virtual CPLErr GetGeoTransform( double * padfTransform ) override;
+-    virtual const char *GetProjectionRef(void) override;
++    CPLErr GetGeoTransform( double * padfTransform ) override;
++    const char *GetProjectionRef() override;
+ 
+-    virtual char **GetFileList() override;
++    char **GetFileList() override;
+ 
+     static GDALDataset *Open( GDALOpenInfo * );
+     static int Identify( GDALOpenInfo * );
+@@ -77,12 +77,12 @@
+ class SNODASRasterBand : public RawRasterBand
+ {
+   public:
+-            SNODASRasterBand( VSILFILE* fpRaw, int nXSize, int nYSize );
+-    virtual ~SNODASRasterBand() {}
++    SNODASRasterBand( VSILFILE* fpRaw, int nXSize, int nYSize );
++    ~SNODASRasterBand() override {}
+ 
+-    virtual double GetNoDataValue( int *pbSuccess = nullptr ) override;
+-    virtual double GetMinimum( int *pbSuccess = nullptr ) override;
+-    virtual double GetMaximum(int *pbSuccess = nullptr ) override;
++    double GetNoDataValue( int *pbSuccess = nullptr ) override;
++    double GetMinimum( int *pbSuccess = nullptr ) override;
++    double GetMaximum( int *pbSuccess = nullptr ) override;
+ };
+ 
+ /************************************************************************/

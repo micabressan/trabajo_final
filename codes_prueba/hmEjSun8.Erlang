@@ -1,0 +1,19 @@
+%% Map over a sequence represented as a fold, returning a new fold
+%% representing a sequence.
+map(MapFun, SF) ->
+    fun(FoldFun, Init) ->
+            SF(fun(El,Accu) -> FoldFun(MapFun(El),Accu) end,
+               Init)
+    end.
+
+%% Makes code more readable, not depending on representation.
+fold(F,I,SF) -> SF(F,I).
+
+%% Convenience.
+for(Fun, SF) -> SF(fun(E,_)->Fun(E) end, dummy).
+    
+
+%% Convert sequence to list.  Since these are left folds, folding a
+%% cons will yield a reversed list.
+to_rlist(SF) -> SF(fun(E,S)->[E|S] end, []).
+to_list(SF) -> lists:reverse(to_rlist(SF)).

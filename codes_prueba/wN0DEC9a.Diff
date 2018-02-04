@@ -1,0 +1,1306 @@
+### Eclipse Workspace Patch 1.0
+#P aCis_gameserver
+Index: java/net/sf/l2j/gameserver/communitybbs/Manager/ReportBBSManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/Manager/ReportBBSManager.java	(nonexistent)
++++ java/net/sf/l2j/gameserver/communitybbs/Manager/ReportBBSManager.java	(copia de trabajo)
+@@ -0,0 +1,124 @@
++package net.sf.l2j.gameserver.communitybbs.Manager;
++
++import java.io.BufferedWriter;
++import java.io.File;
++import java.io.FileWriter;
++import java.util.StringTokenizer;
++
++import net.sf.l2j.gameserver.data.cache.HtmCache;
++import net.sf.l2j.gameserver.data.xml.AdminData;
++import net.sf.l2j.gameserver.data.xml.PlayerData;
++import net.sf.l2j.gameserver.model.actor.instance.Player;
++
++public class ReportBBSManager extends BaseBBSManager
++{
++	protected ReportBBSManager()
++	{
++	}
++	
++	public static ReportBBSManager getInstance()
++	{
++		return SingletonHolder._instance;
++	}	
++	
++	@Override
++	public void parseCmd(String command, Player activeChar)
++	{
++		if (command.equals("_bbsreport"))
++			showReportContent(activeChar);
++		else if (command.startsWith("_bbsreport"))
++		{
++			StringTokenizer st = new StringTokenizer(command);
++			st.nextToken();
++			
++			String type = null;
++			String description = "";
++
++			try
++			{
++				type = st.nextToken();
++				
++				while (st.hasMoreTokens())
++				{
++					description = description + st.nextToken() + " ";
++				}
++				if (description.equals(""))
++				{
++					activeChar.sendMessage("Insert the description of your report first.");
++					return;
++				}
++				else if (description.length() >= 150)
++				{
++					activeChar.sendMessage("The current description length is " + description.length() + ". Maximum length is 150!");
++					return;
++				}	
++				
++				String name = "data/CommunityBoard/report/" + activeChar.getName() + ".txt";
++				File file = new File(name);
++				
++				boolean exist = file.createNewFile();
++				if (!exist)
++				{
++					activeChar.sendMessage("You have already submit a report, staff member must confirm it first.");
++					return;
++				}
++				
++				FileWriter fw = new FileWriter(name);
++				BufferedWriter bw = new BufferedWriter(fw);
++				
++				bw.write("Report:");
++				bw.newLine();
++				bw.write("- - - - - - - - - - - - - - - - - - - -");
++				bw.newLine();
++				bw.write("Account Name: " + activeChar.getAccountName());
++				bw.newLine();
++				bw.write("Account IP: " + activeChar.getClient().getConnection().getInetAddress().getHostAddress());
++				bw.newLine();
++				bw.write("- - - - - - - - - - - - - - - - - - - -");
++				bw.newLine();
++				bw.write("Name: " + activeChar.getName());
++				bw.newLine();
++				bw.write("Level: " + activeChar.getLevel());
++				bw.newLine();
++				bw.write("Class: " + activeChar.getTemplate().getClassName());
++				bw.newLine();
++				bw.write("BaseClass: " + PlayerData.getInstance().getClassNameById(activeChar.getBaseClass()));
++				bw.newLine();
++				bw.write("- - - - - - - - - - - - - - - - - - - -");
++				bw.newLine();
++				bw.write("Type: " + type);
++				bw.newLine();
++				bw.write("Description: " + description);
++				bw.close();
++				
++				separateAndSend(HtmCache.getInstance().getHtm(CB_PATH + "report/successfully.htm"), activeChar);
++				
++				for (Player gm : AdminData.getInstance().getAllGms(true))
++					gm.sendMessage("ATTENTION: " + activeChar.getName() + " just submitted a report! Please take care of his report by browsing in: data/CommunityBoard/report/ folder.");
++			}
++			catch (Exception e)
++			{
++				e.printStackTrace();
++			}
++		}
++		else
++			super.parseCmd(command, activeChar);
++	}
++
++	@Override
++	protected String getFolder()
++	{
++		return "report/";
++	}	
++	
++	private static void showReportContent(Player activeChar)
++	{
++		String content = HtmCache.getInstance().getHtm(CB_PATH + "report/report.htm");
++		separateAndSend(content, activeChar);	
++	}	
++	
++	private static class SingletonHolder
++	{
++		protected static final ReportBBSManager _instance = new ReportBBSManager();
++	}	
++}
+\ No newline at end of file
+Index: java/net/sf/l2j/gameserver/communitybbs/Manager/RepairBBSManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/Manager/RepairBBSManager.java	(nonexistent)
++++ java/net/sf/l2j/gameserver/communitybbs/Manager/RepairBBSManager.java	(copia de trabajo)
+@@ -0,0 +1,142 @@
++package net.sf.l2j.gameserver.communitybbs.Manager;
++
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.util.StringTokenizer;
++import java.util.logging.Level;
++
++import net.sf.l2j.L2DatabaseFactory;
++import net.sf.l2j.gameserver.data.cache.HtmCache;
++import net.sf.l2j.gameserver.model.actor.instance.Player;
++
++public class RepairBBSManager extends BaseBBSManager
++{
++	protected RepairBBSManager()
++	{
++	}
++	
++	public static RepairBBSManager getInstance()
++	{
++		return SingletonHolder._instance;
++	}	
++	
++	@Override
++	public void parseCmd(String command, Player activeChar)
++	{
++		if (command.equals("_bbsrepair"))
++			showRepairContent(activeChar);
++		else if (command.startsWith("_bbsrepair"))
++		{
++			StringTokenizer st = new StringTokenizer(command);
++			st.nextToken();
++			
++			if (activeChar.isInJail())
++			{
++				activeChar.sendMessage("The character that you are attempting to repair is in jail and this function cannot be used to help him.");
++				return;
++			}
++			
++			generateRepair(command, activeChar);
++		}
++		else
++			super.parseCmd(command, activeChar);
++	}
++
++	@Override
++	protected String getFolder()
++	{
++		return "repair/";
++	}
++	
++	public static void generateRepair(String command, Player activeChar)
++	{
++		String[] parts = command.split(" ");
++		if (parts.length != 2)
++			return;
++		
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection())
++		{
++			PreparedStatement statement = con.prepareStatement("UPDATE characters SET x=-84318, y=244579, z=-3730 WHERE char_name=?");
++			statement.setString(1, parts[1]);
++			statement.execute();
++			statement.close();
++			
++			statement = con.prepareStatement("SELECT obj_id FROM characters where char_name=?");
++			statement.setString(1, parts[1]);
++			ResultSet rset = statement.executeQuery();
++			int objId = 0;
++			if (rset.next())
++			{
++				objId = rset.getInt(1);
++			}
++			
++			rset.close();
++			statement.close();
++			
++			if (objId == 0)
++			{
++				con.close();
++				return;
++			}
++			
++			statement = con.prepareStatement("DELETE FROM character_shortcuts WHERE char_obj_id=?");
++			statement.setInt(1, objId);
++			statement.execute();
++			statement.close();
++			
++			statement = con.prepareStatement("UPDATE items SET loc=\"INVENTORY\" WHERE owner_id=?");
++			statement.setInt(1, objId);
++			statement.execute();
++			statement.close();
++		}
++		catch (Exception e)
++		{
++			_log.log(Level.WARNING, "could not repair char:", e);
++		}		
++		
++		separateAndSend(HtmCache.getInstance().getHtm(CB_PATH + "repair/successfully.htm"), activeChar);
++	}
++
++	public static String getAccountChars(Player activeChar)
++	{
++		String account = "";
++		String accountName = activeChar.getAccountName();
++		
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection())
++		{
++			PreparedStatement statement = con.prepareStatement("SELECT char_name FROM characters WHERE account_name=?");
++			statement.setString(1, accountName);
++			
++			ResultSet rset = statement.executeQuery();
++			while (rset.next()) 
++			{
++				if (activeChar.getName().compareTo(rset.getString(1)) != 0) 
++				{
++					account = account + rset.getString(1) + ";";
++				}
++			}
++			
++			rset.close();
++			statement.close();
++		}
++		catch (Exception e)
++		{
++			e.printStackTrace();
++		}
++		
++		return account;
++	}
++	
++	private static void showRepairContent(Player activeChar)
++	{
++		String content = HtmCache.getInstance().getHtm(CB_PATH + "repair/repair.htm");
++		content = content.replaceAll("%account_chars%", getAccountChars(activeChar));
++		separateAndSend(content, activeChar);
++	}
++
++	private static class SingletonHolder
++	{
++		protected static final RepairBBSManager _instance = new RepairBBSManager();
++	}
++}
+\ No newline at end of file
+Index: java/net/sf/l2j/gameserver/GameServer.java
+===================================================================
+--- java/net/sf/l2j/gameserver/GameServer.java	(revisión: 6)
++++ java/net/sf/l2j/gameserver/GameServer.java	(copia de trabajo)
+@@ -15,6 +15,7 @@
+ 
+ import net.sf.l2j.Config;
+ import net.sf.l2j.L2DatabaseFactory;
++import net.sf.l2j.gameserver.communitybbs.BB.Ranking;
+ import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
+ import net.sf.l2j.gameserver.data.ItemTable;
+ import net.sf.l2j.gameserver.data.SkillTable;
+@@ -189,7 +190,10 @@
+ 		
+ 		StringUtil.printSection("Community server");
+ 		if (Config.ENABLE_COMMUNITY_BOARD) // Forums has to be loaded before clan data
++		{
+ 			ForumsBBSManager.getInstance().initRoot();
++			Ranking.getInstance();
++		}
+ 		else
+ 			LOGGER.info("Community server is disabled.");
+ 		
+Index: java/net/sf/l2j/gameserver/communitybbs/BB/Ranking.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/BB/Ranking.java	(nonexistent)
++++ java/net/sf/l2j/gameserver/communitybbs/BB/Ranking.java	(copia de trabajo)
+@@ -0,0 +1,245 @@
++package net.sf.l2j.gameserver.communitybbs.BB;
++
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.util.Comparator;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.stream.Collectors;
++
++import net.sf.l2j.commons.concurrent.ThreadPool;
++import net.sf.l2j.commons.lang.StringUtil;
++
++import net.sf.l2j.L2DatabaseFactory;
++import net.sf.l2j.gameserver.model.World;
++import net.sf.l2j.gameserver.model.actor.instance.Player;
++import net.sf.l2j.gameserver.model.base.ClassId;
++
++public class Ranking
++{
++	public static final int PERIOD = 1 * 60 * 1000; // 1 minutes
++	
++	Map<String, RankingHolder> pvp = new HashMap<>();
++	Map<String, RankingHolder> pk = new HashMap<>();
++	
++	public Ranking()
++	{
++		ThreadPool.scheduleAtFixedRate(() -> generate(), 0, PERIOD);
++	}
++	
++	public void generate()
++	{
++		pvpList();
++		pkList();
++	}
++	
++	private void pvpList()
++	{
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection())
++		{
++			PreparedStatement ps = con.prepareStatement("SELECT char_name, base_class, pvpkills, level, online, onlinetime FROM characters WHERE pvpkills>0 AND accesslevel=0 ORDER BY pvpkills DESC LIMIT 18");
++			ResultSet rs = ps.executeQuery();
++			
++			pvp.clear();
++			while (rs.next())
++			{
++				RankingHolder rh = new RankingHolder();
++				rh.name = rs.getString("char_name");
++				rh.className = classId(rs.getInt("base_class"));
++				rh.level = rs.getInt("level");
++				rh.pvpKills = rs.getInt("pvpkills");
++				rh.onlineTime = onlineTime(rs.getInt("onlinetime"));
++				
++				pvp.put(rh.name, rh);
++			}
++			
++			rs.close();
++			ps.close();
++		}
++		catch (Exception e)
++		{
++			e.printStackTrace();
++		}
++	}
++
++	private void pkList()
++	{
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection())
++		{
++			PreparedStatement ps = con.prepareStatement("SELECT char_name, base_class, pkkills, level, online, onlinetime FROM characters WHERE pkkills>0 AND accesslevel=0 ORDER BY pkkills DESC LIMIT 18");
++			ResultSet rs = ps.executeQuery();
++			
++			pk.clear();
++			
++			while (rs.next())
++			{
++				RankingHolder rh = new RankingHolder();
++				rh.name = rs.getString("char_name");
++				rh.className = classId(rs.getInt("base_class"));
++				rh.level = rs.getInt("level");
++				rh.pkKills = rs.getInt("pkkills");
++				rh.onlineTime = onlineTime(rs.getInt("onlinetime"));
++				
++				pk.put(rh.name, rh);
++			}
++			
++			rs.close();
++			ps.close();
++		}
++		catch (Exception e)
++		{
++			e.printStackTrace();
++		}
++	}
++	
++	public String getPvp()
++	{
++		pvp.forEach((k,v) -> 
++		{
++			Player p = World.getInstance().getPlayer(v.name);
++			
++			if (p!= null)
++			{
++				v.pvpKills = p.getPvpKills();
++			}
++		});
++		
++		List<RankingHolder> ranking = pvp.values().stream().sorted(new Comparator<RankingHolder>()
++		{
++			@Override
++			public int compare(RankingHolder o1, RankingHolder o2)
++			{
++				return o2.pvpKills.compareTo(o1.pvpKills);
++			}
++
++        }).limit(18).collect(Collectors.toList());
++		
++		
++		final StringBuilder sb = new StringBuilder(2000);
++		
++		int pos = 1;
++		for (RankingHolder rh : ranking)
++		{
++			StringUtil.append(sb, "<table border=0 cellspacing=0 cellpadding=2 height=19 width=610><tr><td FIXWIDTH=5></td>");
++			StringUtil.append(sb, "<td FIXWIDTH=20>" + pos + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=160>" + rh.name+ "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=165>" + rh.className + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=80>" + rh.pvpKills + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=70>" + rh.level + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=150>" + rh.onlineTime +"</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=65>" + (World.getInstance().getPlayer(rh.name) != null ? "<font color=99FF00>Online</font>" : "<font color=CC0000>Offline</font>") +  "</td>");
++			StringUtil.append(sb, "</tr></table>");
++			pos++;
++		}
++
++		return sb.toString();
++	}	
++	
++	public String getPk()
++	{
++		pk.forEach((k,v) -> 
++		{
++			Player p = World.getInstance().getPlayer(v.name);
++			
++			if (p!= null)
++			{
++				v.pkKills = p.getPkKills();
++			}
++		});
++		
++		List<RankingHolder> ranking = pk.values().stream().sorted(new Comparator<RankingHolder>()
++		{
++			@Override
++			public int compare(RankingHolder o1, RankingHolder o2)
++			{
++				return o2.pkKills.compareTo(o1.pkKills);
++			}
++
++        }).limit(18).collect(Collectors.toList());
++		
++		
++		final StringBuilder sb = new StringBuilder(2000);
++		
++		int pos = 1;
++		for (RankingHolder rh : ranking)
++		{
++			StringUtil.append(sb, "<table border=0 cellspacing=0 cellpadding=2 height=19 width=610><tr><td FIXWIDTH=5></td>");
++			StringUtil.append(sb, "<td FIXWIDTH=20>" + pos + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=160>" + rh.name+ "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=165>" + rh.className + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=80>" + rh.pkKills + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=70>" + rh.level + "</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=150>" + rh.onlineTime +"</td>");
++			StringUtil.append(sb, "<td FIXWIDTH=65>" + (World.getInstance().getPlayer(rh.name) != null ? "<font color=99FF00>Online</font>" : "<font color=CC0000>Offline</font>") +  "</td>");
++			StringUtil.append(sb, "</tr></table>");
++			pos++;
++		}
++
++		return sb.toString();
++	}
++
++	private static class RankingHolder
++	{
++		String name;
++		String className;
++		Integer pvpKills;
++		Integer pkKills;
++		int level;
++		String onlineTime;
++		
++		public RankingHolder()
++		{
++			// Nothing.
++		}
++	}
++	
++	public String classId(int ordinal)
++	{
++		return ClassId.VALUES[ordinal].toString();
++	}
++
++	public String onlineTime(long seconds)
++	{
++		long remainingTime = seconds;
++		
++		final int days = (int) remainingTime / (24 * 3600);
++		remainingTime = remainingTime -(days * 3600 * 24);
++		
++		final int hours = (int) (remainingTime / 3600);
++		remainingTime = remainingTime -(hours * 3600);
++		
++		final int minutes = (int) ((remainingTime % 3600) / 60);
++		remainingTime = remainingTime -(minutes * 60);
++		
++		seconds = remainingTime;
++		String info = "";
++		
++		if (days > 0)
++			info = days + " Days";
++		else if (hours > 0)
++			info = hours + " Hours";
++		else if (minutes > 0)
++			info = minutes + " Minutes";
++		else if (info=="")
++		{	
++			if (seconds > 0)
++				info = seconds + " Seconds";
++			else
++				info = "N/A";
++		}
++		
++		return info;
++	}	
++	
++	public static Ranking getInstance()
++	{
++		return SingletonHolder._instance;
++	}	
++	
++	private static class SingletonHolder
++	{
++		protected static final Ranking _instance = new Ranking();
++	}
++}
+\ No newline at end of file
+Index: java/net/sf/l2j/gameserver/communitybbs/Manager/PasswordBBSManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/Manager/PasswordBBSManager.java	(nonexistent)
++++ java/net/sf/l2j/gameserver/communitybbs/Manager/PasswordBBSManager.java	(copia de trabajo)
+@@ -0,0 +1,112 @@
++package net.sf.l2j.gameserver.communitybbs.Manager;
++
++import java.security.MessageDigest;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.util.Base64;
++import java.util.StringTokenizer;
++
++import net.sf.l2j.commons.concurrent.ThreadPool;
++
++import net.sf.l2j.L2DatabaseFactory;
++import net.sf.l2j.gameserver.data.cache.HtmCache;
++import net.sf.l2j.gameserver.model.actor.instance.Player;
++
++public class PasswordBBSManager extends BaseBBSManager
++{
++	protected PasswordBBSManager()
++	{
++	}
++	
++	public static PasswordBBSManager getInstance()
++	{
++		return SingletonHolder._instance;
++	}	
++	
++	@Override
++	public void parseCmd(String command, Player activeChar)
++	{
++		if (command.equals("_bbspassword"))
++			showPasswordContent(activeChar);
++		else if (command.startsWith("_bbspassword"))
++		{
++			StringTokenizer st = new StringTokenizer(command);
++			st.nextToken();
++			
++			String password = ""; 
++			String repeat = "";
++			
++			try
++			{
++				if (st.hasMoreTokens())
++				{
++					password = st.nextToken();
++					repeat = st.nextToken();
++				}
++			}
++			catch (Exception e)
++			{
++				e.printStackTrace();
++			}
++			
++			generatePassword(password, repeat, activeChar);
++		}
++		else
++			super.parseCmd(command, activeChar);
++	}
++
++	@Override
++	protected String getFolder()
++	{
++		return "password/";
++	}
++	
++	public static void generatePassword(String password, String repeat, Player activeChar)
++	{
++		if (password.length() < 3)
++		{
++			activeChar.sendMessage("The new password is too short.");
++			return;
++		}
++		else if (password.length() > 16)
++		{
++			activeChar.sendMessage("The new password is too long.");
++			return;			
++		}
++		else if (!password.equals(repeat))
++		{
++			activeChar.sendMessage("The password you have entered is incorrect.");
++			return;			
++		}
++		
++		try (Connection con = L2DatabaseFactory.getInstance().getConnection()) 
++		{
++			PreparedStatement ps = con.prepareStatement("UPDATE accounts SET password=? WHERE login=?");
++			
++			byte[] newPassword = MessageDigest.getInstance("SHA").digest(password.getBytes("UTF-8"));
++			ps.setString(1, Base64.getEncoder().encodeToString(newPassword));
++			ps.setString(2, activeChar.getAccountName());
++			ps.executeUpdate();
++			ps.close();
++			
++			ThreadPool.schedule(() -> activeChar.logout(false), 10000);
++		}
++		catch (Exception e)
++		{
++			_log.warning("There was an error while updating account:" + e);
++		}
++		
++		separateAndSend(HtmCache.getInstance().getHtm(CB_PATH + "password/successfully.htm"), activeChar);
++	}	
++	
++	private static void showPasswordContent(Player activeChar)
++	{
++		String content = HtmCache.getInstance().getHtm(CB_PATH + "password/password.htm");
++		separateAndSend(content, activeChar);
++	}		
++	
++	private static class SingletonHolder
++	{
++		protected static final PasswordBBSManager _instance = new PasswordBBSManager();
++	}	
++}
+\ No newline at end of file
+Index: java/net/sf/l2j/gameserver/communitybbs/CommunityBoard.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/CommunityBoard.java	(revisión: 5)
++++ java/net/sf/l2j/gameserver/communitybbs/CommunityBoard.java	(copia de trabajo)
+@@ -6,6 +6,7 @@
+ import net.sf.l2j.gameserver.communitybbs.Manager.FriendsBBSManager;
+ import net.sf.l2j.gameserver.communitybbs.Manager.MailBBSManager;
+ import net.sf.l2j.gameserver.communitybbs.Manager.PostBBSManager;
++import net.sf.l2j.gameserver.communitybbs.Manager.RankingBBSManager;
+ import net.sf.l2j.gameserver.communitybbs.Manager.RegionBBSManager;
+ import net.sf.l2j.gameserver.communitybbs.Manager.TopBBSManager;
+ import net.sf.l2j.gameserver.communitybbs.Manager.TopicBBSManager;
+@@ -52,6 +53,8 @@
+ 			TopicBBSManager.getInstance().parseCmd(command, activeChar);
+ 		else if (command.startsWith("_bbsposts"))
+ 			PostBBSManager.getInstance().parseCmd(command, activeChar);
++		else if (command.startsWith("_bbsranking"))
++			RankingBBSManager.getInstance().parseCmd(command, activeChar);
+ 		else
+ 			BaseBBSManager.separateAndSend("<html><body><br><br><center>The command: " + command + " isn't implemented.</center></body></html>", activeChar);
+ 	}
+Index: java/net/sf/l2j/gameserver/communitybbs/Manager/RankingBBSManager.java
+===================================================================
+--- java/net/sf/l2j/gameserver/communitybbs/Manager/RankingBBSManager.java	(nonexistent)
++++ java/net/sf/l2j/gameserver/communitybbs/Manager/RankingBBSManager.java	(copia de trabajo)
+@@ -0,0 +1,62 @@
++package net.sf.l2j.gameserver.communitybbs.Manager;
++
++import java.util.StringTokenizer;
++
++import net.sf.l2j.gameserver.data.cache.HtmCache;
++import net.sf.l2j.gameserver.communitybbs.BB.Ranking;
++import net.sf.l2j.gameserver.model.actor.instance.Player;
++
++public class RankingBBSManager extends BaseBBSManager
++{
++	protected RankingBBSManager()
++	{
++	}
++	
++	public static RankingBBSManager getInstance()
++	{
++		return SingletonHolder._instance;
++	}
++	
++	@Override
++	public void parseCmd(String command, Player activeChar)
++	{
++		if (command.startsWith("_bbsranking"))
++		{
++			StringTokenizer st = new StringTokenizer(command, ";");
++			st.nextToken();
++			
++			final String currentCommand = st.nextToken();
++			if (currentCommand.equals("pvp"))
++				showPvpList(activeChar);
++			else if (currentCommand.equals("pk"))
++				showPkList(activeChar);
++		}
++		else
++			super.parseCmd(command, activeChar);
++	}
++
++	@Override
++	protected String getFolder()
++	{
++		return "ranking/";
++	}	
++	
++	private static void showPvpList(Player activeChar)
++	{
++		String content = HtmCache.getInstance().getHtm(CB_PATH + "ranking/ranking.htm");
++		content = content.replaceAll("%pvp_list%", Ranking.getInstance().getPvp());
++		separateAndSend(content, activeChar);		
++	}
++	
++	private static void showPkList(Player activeChar)
++	{
++		String content = HtmCache.getInstance().getHtm(CB_PATH + "ranking/ranking-1.htm");
++		content = content.replaceAll("%pk_list%", Ranking.getInstance().getPk());
++		separateAndSend(content, activeChar);		
++	}
++	
++	private static class SingletonHolder
++	{
++		protected static final RankingBBSManager _instance = new RankingBBSManager();
++	}	
++}
+\ No newline at end of file
+#P aCis_datapack
+Index: data/html/CommunityBoard/password/password.htm
+===================================================================
+--- data/html/CommunityBoard/password/password.htm	(nonexistent)
++++ data/html/CommunityBoard/password/password.htm	(copia de trabajo)
+@@ -0,0 +1,32 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Password Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		Changing your password often is not recommended, because more passwords means more confusion and you might forget it.
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=350 cellpadding=5>
++			<tr>
++				<tr>
++					<td width=100>New:</td>
++					<td width=200><edit var="new" width=100 height=12></td>
++				</tr>
++				<tr>
++					<td width=100 valign="top">Repeat:</td>
++					<td width=200 valign="top"><edit var="repeat" width=100 height=12></td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit password." action="bypass _bbspassword $new $repeat" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/password/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/password/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/password/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Password Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Password changing procedure has been successfully finished! You will be disconnected in 10 seconds, to confirm the password change.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/report/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/report/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/report/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Report Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Thank you for your report! We value player's problem reports because they are important for our server. Every reporting is making our server even more stronger.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/ranking/ranking-1.htm
+===================================================================
+--- data/html/CommunityBoard/ranking/ranking-1.htm	(nonexistent)
++++ data/html/CommunityBoard/ranking/ranking-1.htm	(copia de trabajo)
+@@ -0,0 +1,31 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Current:  <font color="CCCC66">Pk </font>| <br1></td> 
++				<td><a action="bypass _bbsranking;pvp"><font color="808080">Pvp</font></a></td>
++			</tr>
++		</table>	
++	</center>
++	<img src="L2UI.squaregray" width=610 height=1>
++	<table border="0" cellspacing="0" cellpadding="2" bgcolor="000000" height="24" width="610">
++		<tr>
++			<td FIXWIDTH=5></td>
++            <td FIXWIDTH=20>#</td>
++            <td FIXWIDTH=160>Name</td>
++			<td FIXWIDTH=165>Class</td>
++			<td fixwidth=80><font color="CCCC66">Pk</font></td>
++			<td fixwidth=70>Level</td>
++			<td fixwidth=150>Online</td>
++            <td FIXWIDTH=65>Status</td>			
++		</tr>		
++	</table>	
++	<img src="L2UI.squaregray" width=610 height=1>
++	%pk_list%
++</center></body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/ranking/ranking.htm
+===================================================================
+--- data/html/CommunityBoard/ranking/ranking.htm	(nonexistent)
++++ data/html/CommunityBoard/ranking/ranking.htm	(copia de trabajo)
+@@ -0,0 +1,31 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Current:  <font color="CCCC66">Pvp </font>| <br1></td> 
++				<td><a action="bypass _bbsranking;pk"><font color="808080">Pk</font></a></td>
++			</tr>
++		</table>	
++	</center>
++	<img src="L2UI.squaregray" width=610 height=1>
++	<table border="0" cellspacing="0" cellpadding="2" bgcolor="000000" height="24" width="610">
++		<tr>
++			<td FIXWIDTH=5></td>
++            <td FIXWIDTH=20>#</td>
++            <td FIXWIDTH=160>Name</td>
++			<td FIXWIDTH=165>Class</td>
++			<td fixwidth=80><font color="CCCC66">Pvp</font></td>
++			<td fixwidth=70>Level</td>
++			<td fixwidth=150>Online</td>
++            <td FIXWIDTH=65>Status</td>			
++		</tr>
++	</table>	
++	<img src="L2UI.squaregray" width=610 height=1>
++	%pvp_list%
++</center></body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/repair/repair.htm
+===================================================================
+--- data/html/CommunityBoard/repair/repair.htm	(nonexistent)
++++ data/html/CommunityBoard/repair/repair.htm	(copia de trabajo)
+@@ -0,0 +1,32 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Repair Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		Use this tool, to fix problems with your other character. Like client crashing while loading.
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=500 cellpadding=5>
++			<tr>
++				<tr>
++					<td>
++						Choose character name, that you wish to attempt to fix. It will be moved to Floran and removed shortcuts and keyboard configuration. 
++					</td>
++					<td>
++						<combobox var="accountChars" list="%account_chars%" width="170" height="15"/>
++					</td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit repair." action="bypass _bbsrepair $accountChars" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+Index: data/html/CommunityBoard/repair/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/repair/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/repair/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Repair Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Repairing procedure has been successfully finished! Re-login now on broken character, to confirm that repairing operation was successful.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/repair/repair.htm
+===================================================================
+--- data/html/CommunityBoard/repair/repair.htm	(nonexistent)
++++ data/html/CommunityBoard/repair/repair.htm	(copia de trabajo)
+@@ -0,0 +1,32 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Repair Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		Use this tool, to fix problems with your other character. Like client crashing while loading.
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=500 cellpadding=5>
++			<tr>
++				<tr>
++					<td>
++						Choose character name, that you wish to attempt to fix. It will be moved to Floran and removed shortcuts and keyboard configuration. 
++					</td>
++					<td>
++						<combobox var="accountChars" list="%account_chars%" width="170" height="15"/>
++					</td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit repair." action="bypass _bbsrepair $accountChars" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+Index: data/html/CommunityBoard/ranking/ranking-1.htm
+===================================================================
+--- data/html/CommunityBoard/ranking/ranking-1.htm	(nonexistent)
++++ data/html/CommunityBoard/ranking/ranking-1.htm	(copia de trabajo)
+@@ -0,0 +1,31 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Current:  <font color="CCCC66">Pk </font>| <br1></td> 
++				<td><a action="bypass _bbsranking;pvp"><font color="808080">Pvp</font></a></td>
++			</tr>
++		</table>	
++	</center>
++	<img src="L2UI.squaregray" width=610 height=1>
++	<table border="0" cellspacing="0" cellpadding="2" bgcolor="000000" height="24" width="610">
++		<tr>
++			<td FIXWIDTH=5></td>
++            <td FIXWIDTH=20>#</td>
++            <td FIXWIDTH=160>Name</td>
++			<td FIXWIDTH=165>Class</td>
++			<td fixwidth=80><font color="CCCC66">Pk</font></td>
++			<td fixwidth=70>Level</td>
++			<td fixwidth=150>Online</td>
++            <td FIXWIDTH=65>Status</td>			
++		</tr>		
++	</table>	
++	<img src="L2UI.squaregray" width=610 height=1>
++	%pk_list%
++</center></body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/password/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/password/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/password/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Password Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Password changing procedure has been successfully finished! You will be disconnected in 10 seconds, to confirm the password change.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/repair/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/repair/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/repair/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Repair Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Repairing procedure has been successfully finished! Re-login now on broken character, to confirm that repairing operation was successful.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/password/password.htm
+===================================================================
+--- data/html/CommunityBoard/password/password.htm	(nonexistent)
++++ data/html/CommunityBoard/password/password.htm	(copia de trabajo)
+@@ -0,0 +1,32 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Password Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		Changing your password often is not recommended, because more passwords means more confusion and you might forget it.
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=350 cellpadding=5>
++			<tr>
++				<tr>
++					<td width=100>New:</td>
++					<td width=200><edit var="new" width=100 height=12></td>
++				</tr>
++				<tr>
++					<td width=100 valign="top">Repeat:</td>
++					<td width=200 valign="top"><edit var="repeat" width=100 height=12></td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit password." action="bypass _bbspassword $new $repeat" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/report/report.htm
+===================================================================
+--- data/html/CommunityBoard/report/report.htm	(nonexistent)
++++ data/html/CommunityBoard/report/report.htm	(copia de trabajo)
+@@ -0,0 +1,30 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Report Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=500>
++			<tr>
++				<tr>
++					<td width="100">Type:</td>
++					<td align=left<combobox width="105" var="type" list="General;Skill;Quest;Bug"></td>
++				</tr>
++				<tr>
++					<td width="100">Description:</td>
++					<td align=left><multiedit var="description" width=350 height=200></td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit report." action="bypass _bbsreport $type $description" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/report/report.htm
+===================================================================
+--- data/html/CommunityBoard/report/report.htm	(nonexistent)
++++ data/html/CommunityBoard/report/report.htm	(copia de trabajo)
+@@ -0,0 +1,30 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Report Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=500>
++			<tr>
++				<tr>
++					<td width="100">Type:</td>
++					<td align=left<combobox width="105" var="type" list="General;Skill;Quest;Bug"></td>
++				</tr>
++				<tr>
++					<td width="100">Description:</td>
++					<td align=left><multiedit var="description" width=350 height=200></td>
++				</tr>	
++			</tr>
++		</table><br><br>
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<button value="Submit report." action="bypass _bbsreport $type $description" width=140 height=21 back="L2UI_ch3.msnbutton_down" fore="L2UI_ch3.msnbutton">
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/report/successfully.htm
+===================================================================
+--- data/html/CommunityBoard/report/successfully.htm	(nonexistent)
++++ data/html/CommunityBoard/report/successfully.htm	(copia de trabajo)
+@@ -0,0 +1,23 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Report Form:</td>
++			</tr>
++		</table>	
++		<img src="L2UI.squaregray" width=610 height=1><br>
++		<table width=600>
++			<tr>
++				<tr>
++					<td>Thank you for your report! We value player's problem reports because they are important for our server. Every reporting is making our server even more stronger.</td>
++				</tr>
++			</tr>
++		</table>
++	</center>
++</body></html>
+\ No newline at end of file
+Index: data/html/CommunityBoard/ranking/ranking.htm
+===================================================================
+--- data/html/CommunityBoard/ranking/ranking.htm	(nonexistent)
++++ data/html/CommunityBoard/ranking/ranking.htm	(copia de trabajo)
+@@ -0,0 +1,31 @@
++<html><body><br>
++	<table width="610">
++		<tr>
++			<td align="center" height="30"><img src="l2ui.bbs_lineage2" width="128" height="16"></td>
++		</tr>
++	</table>
++	<img src="L2UI.squaregray" width=610 height=1><br>
++	<center>
++		<table>
++			<tr>
++				<td>Current:  <font color="CCCC66">Pvp </font>| <br1></td> 
++				<td><a action="bypass _bbsranking;pk"><font color="808080">Pk</font></a></td>
++			</tr>
++		</table>	
++	</center>
++	<img src="L2UI.squaregray" width=610 height=1>
++	<table border="0" cellspacing="0" cellpadding="2" bgcolor="000000" height="24" width="610">
++		<tr>
++			<td FIXWIDTH=5></td>
++            <td FIXWIDTH=20>#</td>
++            <td FIXWIDTH=160>Name</td>
++			<td FIXWIDTH=165>Class</td>
++			<td fixwidth=80><font color="CCCC66">Pvp</font></td>
++			<td fixwidth=70>Level</td>
++			<td fixwidth=150>Online</td>
++            <td FIXWIDTH=65>Status</td>			
++		</tr>
++	</table>	
++	<img src="L2UI.squaregray" width=610 height=1>
++	%pvp_list%
++</center></body></html>
+\ No newline at end of file

@@ -1,0 +1,13 @@
+def check(par):
+    for x in par:
+        try:
+            x = int(x)
+        except ValueError:
+            print("Input not valid try again")
+            return False
+tabiha = True
+while tabiha:
+    dt = input("Sample Input: ").split()
+    if check(dt) != False:
+        print("Max number is: ",max(dt))
+        break

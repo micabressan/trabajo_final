@@ -1,0 +1,6 @@
+my_func = (a, b, use_args = false) ->
+  args = []
+  args.push 'foo'
+  args.push a, b if use_args?
+  args.push 'bar'
+  other_func.apply null, args

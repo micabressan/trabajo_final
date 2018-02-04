@@ -1,0 +1,34 @@
+use std::collections::HashMap;
+
+struct Cacher<T,A,R>
+    where T: Fn(A) -> R,
+          A: std::cmp::Eq + std::hash::Hash + std::marker::Copy,
+          R: std::clone::Clone + std::marker::Copy,
+{
+    func: T,
+    results: HashMap<A, R>,
+}
+
+impl<T, A, R> Cacher<T,A,R>
+    where T: Fn(A) -> R,
+         A: std::cmp::Eq + std::hash::Hash + std::marker::Copy,
+         R: std::clone::Clone + std::marker::Copy,
+{
+    fn new(func: T) -> Cacher<T, A, R> {
+        let results: HashMap<A,R> = HashMap::new();
+        Cacher {func, results}
+    }
+
+    fn value(&mut self, arg: A) -> R {
+		match self.results.get(&arg) {
+			Some(value) => value.clone(),
+			None => {
+				let ret: R = (self.func)(arg);
+				self.results.insert(arg, ret);
+				ret
+			}
+		}
+    }
+
+
+}

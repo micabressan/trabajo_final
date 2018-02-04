@@ -1,0 +1,11 @@
+import sys, md5
+
+m = md5.new()
+m.update("mydevid")
+m.update("createsession")
+m.update("myauthid")
+timestamp = sys.argv[1]
+m.update("\"" + timestamp + "\"")
+signature = m.hexdigest()
+url = "http://api.smitegame.com/smiteapi.svc/createsessionJson/mydevid/" + signature + "/" + timestamp
+print url

@@ -1,0 +1,16 @@
+
+{-
+No, we can't solve this problem on infinite lists using foldr, foldl or foldl'.
+
+There are two choices for folds on the infinite list, foldr and foldl.
+foldl f acc (x:xs) = foldl f (f x acc) xs
+foldr f acc (x:xs) = f x (foldr f acc xs)
+
+foldl is automatically out of the question since it doesn't let f take control until end of the list is reached - which is never, in the case of an infinite list.
+foldl' also doesn't help - it just makes the whole thing strict, but we still have to wait for the infinite list to end.
+
+So the only thing we can use is foldr. The only way we can partially evaluate foldr on an infinite list is when the function f ignores the second argument, which in our case are the other letters in the string.
+But we can't ignore the other letters, as the only way we can make a decision to split is to look at all the upcoming letters.
+
+Below is an implementation of splitter using right fold; it also breaks down on infinite lists.
+-}

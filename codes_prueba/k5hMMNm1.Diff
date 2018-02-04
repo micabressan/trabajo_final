@@ -1,0 +1,920 @@
+From f42266a85d47558ab2b0a5fd7d8c635919ebfd3d Mon Sep 17 00:00:00 2001
+From: Matteo Croce <matteo@openwrt.org>
+Date: Mon, 24 Aug 2015 00:48:46 +0200
+Subject: [PATCH] prefer GIT protocol over HTTP(S)
+
+---
+ kernel/exfat-nofuse/Makefile    | 2 +-
+ lang/dkjson/Makefile            | 2 +-
+ lang/json4lua/Makefile          | 2 +-
+ lang/lua-copas/Makefile         | 2 +-
+ lang/lua-coxpcall/Makefile      | 2 +-
+ lang/lua-lzlib/Makefile         | 2 +-
+ lang/lua-md5/Makefile           | 2 +-
+ lang/lua-mobdebug/Makefile      | 2 +-
+ lang/lua-mosquitto/Makefile     | 2 +-
+ lang/lua-rings/Makefile         | 2 +-
+ lang/lua-rs232/Makefile         | 2 +-
+ lang/lua-wsapi/Makefile         | 2 +-
+ lang/lua-xavante/Makefile       | 2 +-
+ lang/luafilesystem/Makefile     | 2 +-
+ lang/lualanes/Makefile          | 2 +-
+ lang/luarocks/Makefile          | 2 +-
+ lang/luasoap/Makefile           | 2 +-
+ lang/luasocket/Makefile         | 2 +-
+ lang/luasql/Makefile            | 2 +-
+ lang/micropython-lib/Makefile   | 2 +-
+ lang/micropython/Makefile       | 2 +-
+ lang/uuid/Makefile              | 2 +-
+ libs/engine_pkcs11/Makefile     | 2 +-
+ libs/hidapi/Makefile            | 2 +-
+ libs/hiredis/Makefile           | 2 +-
+ libs/libevhtp-1.1/Makefile      | 2 +-
+ libs/libimobiledevice/Makefile  | 2 +-
+ libs/liblz4/Makefile            | 2 +-
+ libs/libp11/Makefile            | 2 +-
+ libs/libplist/Makefile          | 2 +-
+ libs/libsearpc/Makefile         | 2 +-
+ libs/libtorrent/Makefile        | 2 +-
+ libs/libusbmuxd/Makefile        | 2 +-
+ libs/libuvc/Makefile            | 2 +-
+ libs/libwebsockets/Makefile     | 2 +-
+ libs/toxcore/Makefile           | 2 +-
+ multimedia/motion/Makefile      | 2 +-
+ multimedia/tvheadend/Makefile   | 2 +-
+ net/announce/Makefile           | 2 +-
+ net/apinger/Makefile            | 2 +-
+ net/cshark/Makefile             | 2 +-
+ net/knxd/Makefile               | 2 +-
+ net/kplex/Makefile              | 2 +-
+ net/mac-telnet/Makefile         | 2 +-
+ net/mtr/Makefile                | 2 +-
+ net/ntripcaster/Makefile        | 2 +-
+ net/ntripclient/Makefile        | 2 +-
+ net/ntripserver/Makefile        | 2 +-
+ net/ola/Makefile                | 2 +-
+ net/redsocks/Makefile           | 2 +-
+ net/rtorrent/Makefile           | 2 +-
+ net/seafile-ccnet/Makefile      | 2 +-
+ net/seafile-seahub/Makefile     | 2 +-
+ net/seafile-server/Makefile     | 2 +-
+ net/shadowsocks-client/Makefile | 2 +-
+ net/shadowsocks-libev/Makefile  | 2 +-
+ net/smartsnmpd/Makefile         | 2 +-
+ net/tgt/Makefile                | 2 +-
+ net/wavemon/Makefile            | 2 +-
+ net/xl2tpd/Makefile             | 2 +-
+ utils/hub-ctrl/Makefile         | 2 +-
+ utils/opensc/Makefile           | 2 +-
+ utils/rtl-ais/Makefile          | 2 +-
+ utils/stoken/Makefile           | 2 +-
+ utils/usbmuxd/Makefile          | 2 +-
+ 65 files changed, 65 insertions(+), 65 deletions(-)
+
+diff --git a/kernel/exfat-nofuse/Makefile b/kernel/exfat-nofuse/Makefile
+index 232ddee..925a499 100644
+--- a/kernel/exfat-nofuse/Makefile
++++ b/kernel/exfat-nofuse/Makefile
+@@ -13,7 +13,7 @@ PKG_VERSION:=git-20150301
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+-PKG_SOURCE_URL:=https://github.com/dorimanx/exfat-nofuse.git
++PKG_SOURCE_URL:=git://github.com/dorimanx/exfat-nofuse.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=63964d3fb69cffe9a38822a657bb3b3279eebadf
+diff --git a/lang/dkjson/Makefile b/lang/dkjson/Makefile
+index efb0012..3a41c43 100644
+--- a/lang/dkjson/Makefile
++++ b/lang/dkjson/Makefile
+@@ -11,7 +11,7 @@ PKG_NAME:=dkjson
+ PKG_VERSION:=2.5
+ PKG_RELEASE:=3
+ 
+-PKG_SOURCE_URL:=https://github.com/LuaDist/dkjson.git
++PKG_SOURCE_URL:=git://github.com/LuaDist/dkjson.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=e72ba0c9f5d8b8746fc306f6189a819dbb5cd0be
+ PKG_LICENSE:=MIT
+diff --git a/lang/json4lua/Makefile b/lang/json4lua/Makefile
+index 0e0c9c5..606f7c7 100644
+--- a/lang/json4lua/Makefile
++++ b/lang/json4lua/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/amrhassan/json4lua.git
++PKG_SOURCE_URL:=git://github.com/amrhassan/json4lua.git
+ PKG_SOURCE_VERSION:=$(PKG_VERSION)
+ 
+ PKG_MAINTAINER:=Amr Hassan <amr.hassan@gmail.com>
+diff --git a/lang/lua-copas/Makefile b/lang/lua-copas/Makefile
+index 4f073e2..bfd0eba 100644
+--- a/lang/lua-copas/Makefile
++++ b/lang/lua-copas/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/copas.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/copas.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=f39a80add9f7c010ac979297652bbaaea0360a27
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-coxpcall/Makefile b/lang/lua-coxpcall/Makefile
+index 6ca3ff8..7feda85 100644
+--- a/lang/lua-coxpcall/Makefile
++++ b/lang/lua-coxpcall/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/coxpcall.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/coxpcall.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=979257892884816c97391dfd7b0a7b30dcc8f479
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-lzlib/Makefile b/lang/lua-lzlib/Makefile
+index e4094f5..0f1ea5a 100644
+--- a/lang/lua-lzlib/Makefile
++++ b/lang/lua-lzlib/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/LuaDist/lzlib.git
++PKG_SOURCE_URL:=git://github.com/LuaDist/lzlib.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=79329a07d8f79c19eadd7ea2752b4c4e1574b015
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-md5/Makefile b/lang/lua-md5/Makefile
+index 36e0d9d..b760c54 100644
+--- a/lang/lua-md5/Makefile
++++ b/lang/lua-md5/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/md5.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/md5.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=024b65738b4434860777fc43d7cacaefea29ec60
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-mobdebug/Makefile b/lang/lua-mobdebug/Makefile
+index 3d11539..793c19c 100644
+--- a/lang/lua-mobdebug/Makefile
++++ b/lang/lua-mobdebug/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/pkulchenko/MobDebug.git
++PKG_SOURCE_URL:=git://github.com/pkulchenko/MobDebug.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=9a03aa59696647ba3b7f9ae2f29a9f28532a4feb
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-mosquitto/Makefile b/lang/lua-mosquitto/Makefile
+index 680df4b..eca81a4 100644
+--- a/lang/lua-mosquitto/Makefile
++++ b/lang/lua-mosquitto/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE_FILES:=LICENSE
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/flukso/lua-mosquitto.git
++PKG_SOURCE_URL:=git://github.com/flukso/lua-mosquitto.git
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ 
+ include $(INCLUDE_DIR)/package.mk
+diff --git a/lang/lua-rings/Makefile b/lang/lua-rings/Makefile
+index 9b39c96..202a329 100644
+--- a/lang/lua-rings/Makefile
++++ b/lang/lua-rings/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/rings.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/rings.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=2b8a900f8b9dbde304859a3ac9d437795c3fdde3
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-rs232/Makefile b/lang/lua-rs232/Makefile
+index 7ef5ac7..9276a2a 100644
+--- a/lang/lua-rs232/Makefile
++++ b/lang/lua-rs232/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/srdgame/librs232.git
++PKG_SOURCE_URL:=git://github.com/srdgame/librs232.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=a9d463181e7f7034fe6a55bc38e845fb04fa93ba
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-wsapi/Makefile b/lang/lua-wsapi/Makefile
+index b382ad6..7dcd525 100644
+--- a/lang/lua-wsapi/Makefile
++++ b/lang/lua-wsapi/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/wsapi.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/wsapi.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=eed8338401196cc155e59280adbe58d78933ead0
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lua-xavante/Makefile b/lang/lua-xavante/Makefile
+index 13b66ee..85ca918 100644
+--- a/lang/lua-xavante/Makefile
++++ b/lang/lua-xavante/Makefile
+@@ -14,7 +14,7 @@ PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>
+ PKG_LICENSE:=MIT
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/xavante.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/xavante.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=9825b905133e14d37a4c179f2d02367ab93f1ef6
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/luafilesystem/Makefile b/lang/luafilesystem/Makefile
+index 13abef6..54f2182 100644
+--- a/lang/luafilesystem/Makefile
++++ b/lang/luafilesystem/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=1.6.2
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=https://github.com/keplerproject/luafilesystem.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/luafilesystem.git
+ PKG_SOURCE_VERSION:=2fd989cd6c777583be1c93616018c55b2cbb1bcf
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/lualanes/Makefile b/lang/lualanes/Makefile
+index 06bc1e2..bebc62d 100644
+--- a/lang/lualanes/Makefile
++++ b/lang/lualanes/Makefile
+@@ -13,7 +13,7 @@ PKG_VERSION:=3.9.4
+ PKG_RELEASE=1
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.gz
+-PKG_SOURCE_URL:=https://github.com/LuaLanes/lanes.git
++PKG_SOURCE_URL:=git://github.com/LuaLanes/lanes.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=$(PKG_REV)
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/luarocks/Makefile b/lang/luarocks/Makefile
+index e0a0f57..5f07352 100644
+--- a/lang/luarocks/Makefile
++++ b/lang/luarocks/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/keplerproject/luarocks.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/luarocks.git
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ 
+ PKG_MAINTAINER:=Amr Hassan <amr.hassan@gmail.com>
+diff --git a/lang/luasoap/Makefile b/lang/luasoap/Makefile
+index 6ebf03b..c86869c 100644
+--- a/lang/luasoap/Makefile
++++ b/lang/luasoap/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=2014-08-21
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/tomasguisasola/luasoap.git
++PKG_SOURCE_URL:=git://github.com/tomasguisasola/luasoap.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=af1e100281cee4b972df10121e37e51d53367a98
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/lang/luasocket/Makefile b/lang/luasocket/Makefile
+index 5e7c983..2044ae2 100644
+--- a/lang/luasocket/Makefile
++++ b/lang/luasocket/Makefile
+@@ -13,7 +13,7 @@ PKG_VERSION:=3.0-rc1-20130909
+ PKG_RELEASE:=3
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+-PKG_SOURCE_URL:=https://github.com/diegonehab/luasocket.git
++PKG_SOURCE_URL:=git://github.com/diegonehab/luasocket.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ 
+diff --git a/lang/luasql/Makefile b/lang/luasql/Makefile
+index 204d6cc..4abe7b2 100644
+--- a/lang/luasql/Makefile
++++ b/lang/luasql/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/keplerproject/luasql.git
++PKG_SOURCE_URL:=git://github.com/keplerproject/luasql.git
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ 
+ PKG_LICENSE:=MIT
+diff --git a/lang/micropython-lib/Makefile b/lang/micropython-lib/Makefile
+index ee190bf..044d1d0 100644
+--- a/lang/micropython-lib/Makefile
++++ b/lang/micropython-lib/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=MIT, PSFL
+ PKG_LICENSE_FILES:=LICENSE
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/micropython/micropython-lib.git
++PKG_SOURCE_URL:=git://github.com/micropython/micropython-lib.git
+ PKG_SOURCE_VERSION:=863538b44f268ae39aa583f9cd124ed79ad7ba25
+ 
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION)
+diff --git a/lang/micropython/Makefile b/lang/micropython/Makefile
+index e5317d1..fda03b6 100644
+--- a/lang/micropython/Makefile
++++ b/lang/micropython/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=MIT
+ PKG_LICENSE_FILES:=LICENSE
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/micropython/micropython.git
++PKG_SOURCE_URL:=git://github.com/micropython/micropython.git
+ PKG_SOURCE_VERSION:=9220dc466a8d098ed669a33a617edd1118a3e35d
+ 
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/lang/uuid/Makefile b/lang/uuid/Makefile
+index a093e66..c42b27f 100644
+--- a/lang/uuid/Makefile
++++ b/lang/uuid/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/Tieske/uuid.git
++PKG_SOURCE_URL:=git://github.com/Tieske/uuid.git
+ PKG_SOURCE_VERSION:=version_$(PKG_VERSION)
+ 
+ PKG_MAINTAINER:=Amr Hassan <amr.hassan@gmail.com>
+diff --git a/libs/engine_pkcs11/Makefile b/libs/engine_pkcs11/Makefile
+index c7449ed..d5eab36 100644
+--- a/libs/engine_pkcs11/Makefile
++++ b/libs/engine_pkcs11/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=LGPL-2.1+
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/OpenSC/engine_pkcs11.git
++PKG_SOURCE_URL:=git://github.com/OpenSC/engine_pkcs11.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=0cc9d88eb291f5c545e5bc91d56866a2e0e95d48
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+diff --git a/libs/hidapi/Makefile b/libs/hidapi/Makefile
+index e8ef733..8304825 100644
+--- a/libs/hidapi/Makefile
++++ b/libs/hidapi/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.8.0-rc1
+ PKG_RELEASE:=2
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/signal11/hidapi.git
++PKG_SOURCE_URL:=git://github.com/signal11/hidapi.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=hidapi-$(PKG_VERSION)
+ PKG_SOURCE:=$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/hiredis/Makefile b/libs/hiredis/Makefile
+index 31971b9..ae74b64 100644
+--- a/libs/hiredis/Makefile
++++ b/libs/hiredis/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.13.1
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/redis/hiredis.git
++PKG_SOURCE_URL:=git://github.com/redis/hiredis.git
+ PKG_SOURCE_VERSION:=f58dd249d6ed47a7e835463c3b04722972281dbb
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+diff --git a/libs/libevhtp-1.1/Makefile b/libs/libevhtp-1.1/Makefile
+index 9d3cdbc..bd522c2 100644
+--- a/libs/libevhtp-1.1/Makefile
++++ b/libs/libevhtp-1.1/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE:=1
+ PKG_LICENSE:=BSD-3-Clause
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/ellzey/libevhtp.git
++PKG_SOURCE_URL:=git://github.com/ellzey/libevhtp.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=f70c920d4d8d4146ff662867f47c4b5854045b3c
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/libimobiledevice/Makefile b/libs/libimobiledevice/Makefile
+index 304cf27..98c607e 100644
+--- a/libs/libimobiledevice/Makefile
++++ b/libs/libimobiledevice/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=LGPL-2.1+
+ PKG_LICENSE_FILES:=COPYING.LESSER
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/libimobiledevice/libimobiledevice.git
++PKG_SOURCE_URL:=git://github.com/libimobiledevice/libimobiledevice.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=53eb963f8e6d607cca6b50381c10820a5e8357f4
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/liblz4/Makefile b/libs/liblz4/Makefile
+index c24d509..a6fdc6c 100644
+--- a/libs/liblz4/Makefile
++++ b/libs/liblz4/Makefile
+@@ -19,7 +19,7 @@ PKG_MAINTAINER:=Darik Horn <dajhorn@vanadac.com>
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/Cyan4973/lz4.git
++PKG_SOURCE_URL:=git://github.com/Cyan4973/lz4.git
+ PKG_SOURCE_VERSION:=$(PKG_VERSION)
+ 
+ include $(INCLUDE_DIR)/package.mk
+diff --git a/libs/libp11/Makefile b/libs/libp11/Makefile
+index c64f79c..6a6a761 100644
+--- a/libs/libp11/Makefile
++++ b/libs/libp11/Makefile
+@@ -17,7 +17,7 @@ PKG_LICENSE_FILES:=COPYING
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/OpenSC/libp11.git
++PKG_SOURCE_URL:=git://github.com/OpenSC/libp11.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=9f433022a039bbdf31f6c334f442ac3494ac4a07
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+diff --git a/libs/libplist/Makefile b/libs/libplist/Makefile
+index 4d7cb9c..ca26e29 100644
+--- a/libs/libplist/Makefile
++++ b/libs/libplist/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=LGPL-2.1+
+ PKG_LICENSE_FILES:=COPYING.LESSER
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/libimobiledevice/libplist.git
++PKG_SOURCE_URL:=git://github.com/libimobiledevice/libplist.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=cc907c0f162ee84e5698b9c27ac6fb0be8bb9bc0
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/libsearpc/Makefile b/libs/libsearpc/Makefile
+index 4ec9e93..89f0742 100644
+--- a/libs/libsearpc/Makefile
++++ b/libs/libsearpc/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ PKG_LICENSE:=GPL-3.0
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/haiwen/libsearpc.git
++PKG_SOURCE_URL:=git://github.com/haiwen/libsearpc.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=8998e7b2c5587f0b94c48db24e2952d08def5add
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/libtorrent/Makefile b/libs/libtorrent/Makefile
+index 2001235..d336475 100644
+--- a/libs/libtorrent/Makefile
++++ b/libs/libtorrent/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.13.4-git-1
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/rakshasa/libtorrent.git
++PKG_SOURCE_URL:=git://github.com/rakshasa/libtorrent.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=72e908707f01ee01a9b4918436c64348878b63f7
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/libusbmuxd/Makefile b/libs/libusbmuxd/Makefile
+index ec15bc2..883ec12 100644
+--- a/libs/libusbmuxd/Makefile
++++ b/libs/libusbmuxd/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=LGPL-2.1+
+ PKG_LICENSE_FILES:=COPYING.LGPLv2.1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/libimobiledevice/libusbmuxd.git
++PKG_SOURCE_URL:=git://github.com/libimobiledevice/libusbmuxd.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=f347085157006523622b0a7160be68d14f037c00
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/libs/libuvc/Makefile b/libs/libuvc/Makefile
+index 3c9b8b9..69bde5b 100644
+--- a/libs/libuvc/Makefile
++++ b/libs/libuvc/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE:=1
+ PKG_MAINTAINER:=Roger D <rogerdammit@gmail.com>
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/ktossell/libuvc.git
++PKG_SOURCE_URL:=git://github.com/ktossell/libuvc.git
+ PKG_SOURCE_VERSION:=2c6403405872aa865999b95ba15944295adf6c38
+ 
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/libs/libwebsockets/Makefile b/libs/libwebsockets/Makefile
+index d9952e6..d9237e9 100644
+--- a/libs/libwebsockets/Makefile
++++ b/libs/libwebsockets/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/warmcat/libwebsockets.git
++PKG_SOURCE_URL:=git://github.com/warmcat/libwebsockets.git
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ 
+ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_SOURCE_SUBDIR)
+diff --git a/libs/toxcore/Makefile b/libs/toxcore/Makefile
+index 07f0c76..2f781cb 100644
+--- a/libs/toxcore/Makefile
++++ b/libs/toxcore/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.0.0
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/irungentoo/toxcore.git
++PKG_SOURCE_URL:=git://github.com/irungentoo/toxcore.git
+ PKG_SOURCE_VERSION:=6d883f488ff59b2394982b62895d50b1d1d55bf4
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_SOURCE_VERSION)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/multimedia/motion/Makefile b/multimedia/motion/Makefile
+index 412b5f9..024085e 100644
+--- a/multimedia/motion/Makefile
++++ b/multimedia/motion/Makefile
+@@ -16,7 +16,7 @@ PKG_LICENSE:=GPLv2
+ PKG_LICENSE_FILES:=COPYING
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/Mr-Dave/motion.git
++PKG_SOURCE_URL:=git://github.com/Mr-Dave/motion.git
+ PKG_SOURCE_VERSION:=9479d910f2149b5558788bb86f97f26522794212
+ 
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+diff --git a/multimedia/tvheadend/Makefile b/multimedia/tvheadend/Makefile
+index 26c48a9..ad7bc31 100644
+--- a/multimedia/tvheadend/Makefile
++++ b/multimedia/tvheadend/Makefile
+@@ -15,7 +15,7 @@ PKG_SOURCE_SUBDIR:=$(PKG_NAME)
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.gz
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/tvheadend/tvheadend.git
++PKG_SOURCE_URL:=git://github.com/tvheadend/tvheadend.git
+ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
+ 
+ PKG_LICENSE:=GPL-3.0
+diff --git a/net/announce/Makefile b/net/announce/Makefile
+index 60d9e63..da7fbba 100644
+--- a/net/announce/Makefile
++++ b/net/announce/Makefile
+@@ -15,7 +15,7 @@ PKG_LICENSE_FILES:=src/LICENSE.txt
+ PKG_MAINTAINER:=Simon Peter <probono@puredarwin.org>
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/probonopd/announce.git
++PKG_SOURCE_URL:=git://github.com/probonopd/announce.git
+ PKG_SOURCE_VERSION:=1368525c7305ca5bb4134242f332344f5f7e94e3
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION)
+ PKG_SOURCE:=$(PKG_SOURCE_SUBDIR).tar.gz
+diff --git a/net/apinger/Makefile b/net/apinger/Makefile
+index 5d73ae1..3cde1dd 100644
+--- a/net/apinger/Makefile
++++ b/net/apinger/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.6.1
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/Jajcus/apinger.git
++PKG_SOURCE_URL:=git://github.com/Jajcus/apinger.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=c7da72f7ec26eedd7fd8d224c0e10787b204f94e
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/cshark/Makefile b/net/cshark/Makefile
+index cbfbed5..2daddfe 100644
+--- a/net/cshark/Makefile
++++ b/net/cshark/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=2015-03-13
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/cloudshark/cshark.git
++PKG_SOURCE_URL:=git://github.com/cloudshark/cshark.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=ab2ae2fbd72b6cbd57c95e3192edc3c1f475412b
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/knxd/Makefile b/net/knxd/Makefile
+index e0a6cd5..84a7345 100644
+--- a/net/knxd/Makefile
++++ b/net/knxd/Makefile
+@@ -15,7 +15,7 @@ PKG_VERSION=2015-07-19-$(PKG_SOURCE_VERSION)
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/knxd/knxd.git
++PKG_SOURCE_URL:=git://github.com/knxd/knxd.git
+ PKG_SOURCE_VERSION:=be1fcfe85cc1dfcc41f791cd9a45c57fe18da6a0
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/kplex/Makefile b/net/kplex/Makefile
+index 5fac1fa..07b95cd 100644
+--- a/net/kplex/Makefile
++++ b/net/kplex/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=20150809
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/stripydog/kplex.git
++PKG_SOURCE_URL:=git://github.com/stripydog/kplex.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=fec47cd1877ec7903969adefa4220838a706d940
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/mac-telnet/Makefile b/net/mac-telnet/Makefile
+index 7c67ed0..d2e08cc 100644
+--- a/net/mac-telnet/Makefile
++++ b/net/mac-telnet/Makefile
+@@ -9,7 +9,7 @@ PKG_VERSION:=2014-09-23
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/jow-/MAC-Telnet.git
++PKG_SOURCE_URL:=git://github.com/jow-/MAC-Telnet.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=269a5d7d53b59a2e4657ad3689e46ac057c22e28
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/mtr/Makefile b/net/mtr/Makefile
+index f3ca9ba..2fccad1 100644
+--- a/net/mtr/Makefile
++++ b/net/mtr/Makefile
+@@ -13,7 +13,7 @@ PKG_VERSION:=0.85+newdns-$(PKG_REV)
+ PKG_RELEASE:=2
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/traviscross/mtr.git
++PKG_SOURCE_URL:=git://github.com/traviscross/mtr.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=$(PKG_REV)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/ntripcaster/Makefile b/net/ntripcaster/Makefile
+index 7828a25..fc7a960 100644
+--- a/net/ntripcaster/Makefile
++++ b/net/ntripcaster/Makefile
+@@ -14,7 +14,7 @@ PKG_VERSION:=0.1.5
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/nunojpg/ntripcaster.git
++PKG_SOURCE_URL:=git://github.com/nunojpg/ntripcaster.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=03878920195cf854b38a1ea424f1cae57353fa87
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/ntripclient/Makefile b/net/ntripclient/Makefile
+index f0d92d5..f2ac9d9 100644
+--- a/net/ntripclient/Makefile
++++ b/net/ntripclient/Makefile
+@@ -14,7 +14,7 @@ PKG_VERSION:=1.5.0
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/nunojpg/ntripclient.git
++PKG_SOURCE_URL:=git://github.com/nunojpg/ntripclient.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=dcfb2cb3e6f31b7291a94e7f86379c78ffc0d44e
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/ntripserver/Makefile b/net/ntripserver/Makefile
+index a3e3cf9..9493aa5 100644
+--- a/net/ntripserver/Makefile
++++ b/net/ntripserver/Makefile
+@@ -14,7 +14,7 @@ PKG_VERSION:=1.5.1
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/nunojpg/ntripserver.git
++PKG_SOURCE_URL:=git://github.com/nunojpg/ntripserver.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=c3034ab575e8442222eb8c2ee9e224cac99cfa6d
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/ola/Makefile b/net/ola/Makefile
+index c2284aa..711ebf7 100644
+--- a/net/ola/Makefile
++++ b/net/ola/Makefile
+@@ -13,7 +13,7 @@ PKG_VERSION:=0.9.7
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/OpenLightingProject/ola.git
++PKG_SOURCE_URL:=git://github.com/OpenLightingProject/ola.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=2a306e4f0221fea9f4833ba04b042e72c6f10cd3
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/redsocks/Makefile b/net/redsocks/Makefile
+index caf541e..f4b0aa4 100644
+--- a/net/redsocks/Makefile
++++ b/net/redsocks/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=1
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/darkk/redsocks.git
++PKG_SOURCE_URL:=git://github.com/darkk/redsocks.git
+ PKG_SOURCE_VERSION:=release-0.4
+ 
+ PKG_MAINTAINER:=Johannes Morgenroth <jm@m-network.de>
+diff --git a/net/rtorrent/Makefile b/net/rtorrent/Makefile
+index bba6dde..3365677 100644
+--- a/net/rtorrent/Makefile
++++ b/net/rtorrent/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=0.9.4-git-1
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/rakshasa/rtorrent.git
++PKG_SOURCE_URL:=git://github.com/rakshasa/rtorrent.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=7343e33a6a0d279179b304a380bf011f1c8be64a
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/seafile-ccnet/Makefile b/net/seafile-ccnet/Makefile
+index 6c7ae8d..224d93e 100644
+--- a/net/seafile-ccnet/Makefile
++++ b/net/seafile-ccnet/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ PKG_LICENSE:=GPL-3.0
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/haiwen/ccnet.git
++PKG_SOURCE_URL:=git://github.com/haiwen/ccnet.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=a73109f09af4ecc49cdc4c57cdde51b38e15c31a
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/seafile-seahub/Makefile b/net/seafile-seahub/Makefile
+index cbedc5c..717be2d 100644
+--- a/net/seafile-seahub/Makefile
++++ b/net/seafile-seahub/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ PKG_LICENSE:=Apache-2.0
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/haiwen/seahub.git
++PKG_SOURCE_URL:=git://github.com/haiwen/seahub.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=3fb1288f920de03a4e2e6a06b60671ce98971742
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/seafile-server/Makefile b/net/seafile-server/Makefile
+index f671a79..c7f3f26 100644
+--- a/net/seafile-server/Makefile
++++ b/net/seafile-server/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)-2
+ PKG_LICENSE:=GPL-3.0
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/haiwen/seafile.git
++PKG_SOURCE_URL:=git://github.com/haiwen/seafile.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=c0166019c712e2e1d5e532fd5f7401b1b72db6d8
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/shadowsocks-client/Makefile b/net/shadowsocks-client/Makefile
+index e4344d6..79c5fb9 100644
+--- a/net/shadowsocks-client/Makefile
++++ b/net/shadowsocks-client/Makefile
+@@ -5,7 +5,7 @@ PKG_VERSION:=0.5
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=http://github.com/zhao-gang/shadowsocks-tiny.git
++PKG_SOURCE_URL:=git://github.com/zhao-gang/shadowsocks-tiny.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=d8ef02715f40de0fb7ba0f7267d3f8260f38ba80
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/shadowsocks-libev/Makefile b/net/shadowsocks-libev/Makefile
+index 415c2df..6c190d9 100644
+--- a/net/shadowsocks-libev/Makefile
++++ b/net/shadowsocks-libev/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=2.2.3
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/shadowsocks/shadowsocks-libev.git
++PKG_SOURCE_URL:=git://github.com/shadowsocks/shadowsocks-libev.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)
+ PKG_SOURCE_VERSION:=2b1eef11973de3f7380401fd20f937e84bc2b756
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/smartsnmpd/Makefile b/net/smartsnmpd/Makefile
+index 9be39cb..c6ac1ca 100644
+--- a/net/smartsnmpd/Makefile
++++ b/net/smartsnmpd/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=2014-08-13
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/credosemi/smartsnmp.git
++PKG_SOURCE_URL:=git://github.com/credosemi/smartsnmp.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=fb93473d895f058b2d8975d3cfa280ae2a8ae98d
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/net/tgt/Makefile b/net/tgt/Makefile
+index 77e5180..ac6fabc 100644
+--- a/net/tgt/Makefile
++++ b/net/tgt/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE:=4
+ PKG_USE_MIPS16:=0
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/fujita/tgt.git
++PKG_SOURCE_URL:=git://github.com/fujita/tgt.git
+ 
+ PKG_SOURCE_VERSION:=$(PKG_REV)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.gz
+diff --git a/net/wavemon/Makefile b/net/wavemon/Makefile
+index f843db8..dd044f8 100644
+--- a/net/wavemon/Makefile
++++ b/net/wavemon/Makefile
+@@ -14,7 +14,7 @@ PKG_RELEASE:=2
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_URL:=https://github.com/uoaerg/wavemon.git
++PKG_SOURCE_URL:=git://github.com/uoaerg/wavemon.git
+ PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+ 
+ PKG_LICENSE:=GPL-2.0+
+diff --git a/net/xl2tpd/Makefile b/net/xl2tpd/Makefile
+index bcccd01..58ffe28 100644
+--- a/net/xl2tpd/Makefile
++++ b/net/xl2tpd/Makefile
+@@ -15,7 +15,7 @@ PKG_LICENSE:=GPL-2.0
+ PKG_LICENSE_FILES:=LICENSE
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/xelerance/xl2tpd.git
++PKG_SOURCE_URL:=git://github.com/xelerance/xl2tpd.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=1cda2a266e2e957b81019d63a8902b28304a0ac4
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+diff --git a/utils/hub-ctrl/Makefile b/utils/hub-ctrl/Makefile
+index 48cca4d..f152b33 100644
+--- a/utils/hub-ctrl/Makefile
++++ b/utils/hub-ctrl/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=1.0
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/codazoda/hub-ctrl.c.git
++PKG_SOURCE_URL:=git://github.com/codazoda/hub-ctrl.c.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=3eef0240fac90067d081551e9f73dfa741d94a9e
+ PKG_LICENSE:=GPL-2.0+
+diff --git a/utils/opensc/Makefile b/utils/opensc/Makefile
+index adb249f..2e7dc49 100644
+--- a/utils/opensc/Makefile
++++ b/utils/opensc/Makefile
+@@ -17,7 +17,7 @@ PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/OpenSC/OpenSC.git
++PKG_SOURCE_URL:=git://github.com/OpenSC/OpenSC.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=a09ca246a797230c14bc33a34f2dddc4a4dbff40
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+diff --git a/utils/rtl-ais/Makefile b/utils/rtl-ais/Makefile
+index ed8ddd4..47efb05 100644
+--- a/utils/rtl-ais/Makefile
++++ b/utils/rtl-ais/Makefile
+@@ -12,7 +12,7 @@ PKG_VERSION:=20150722
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/dgiardini/rtl-ais.git
++PKG_SOURCE_URL:=git://github.com/dgiardini/rtl-ais.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=b805be0164475e58a73b57763a8cbbf8a2bd0ded
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+diff --git a/utils/stoken/Makefile b/utils/stoken/Makefile
+index 7fcbdad..f60ff87 100644
+--- a/utils/stoken/Makefile
++++ b/utils/stoken/Makefile
+@@ -13,7 +13,7 @@ PKG_REV:=c4d79ffbf5053e44be4b64da22b1b7fb6a51daf2
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/cernekee/stoken.git
++PKG_SOURCE_URL:=git://github.com/cernekee/stoken.git
+ 
+ PKG_SOURCE_VERSION:=$(PKG_REV)
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.gz
+diff --git a/utils/usbmuxd/Makefile b/utils/usbmuxd/Makefile
+index 239c84b..4269a52 100644
+--- a/utils/usbmuxd/Makefile
++++ b/utils/usbmuxd/Makefile
+@@ -16,7 +16,7 @@ PKG_MAINTAINER:=Lukasz Baj <l.baj@radytek.com>
+ PKG_LICENSE:=GPL-2.0
+ PKG_LICENSE_FILES:=COPYING.GPLv2
+ 
+-PKG_SOURCE_URL:=https://github.com/libimobiledevice/usbmuxd.git
++PKG_SOURCE_URL:=git://github.com/libimobiledevice/usbmuxd.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+ PKG_SOURCE_VERSION:=4bd7cd0d28e7f5920de51470b863f3aeee00409d
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+-- 
+2.1.4

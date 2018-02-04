@@ -1,0 +1,81 @@
+(ns kotitehtava3.core
+  (:gen-class))
+
+(declare q8)
+(declare q7)
+(declare q6)
+(declare q5)
+(declare q4)
+(declare q3)
+(declare q2)
+(declare q1)
+(declare q0)
+
+(defn q8 [s]
+  (if (empty? s)
+    true ; this is final state
+    (let [x (first s)]
+      (case (str x)
+        "a" (q7 (rest s))
+        "b" (q6 (rest s))
+        false))))
+
+(defn q7 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q8 (rest s))
+      "b" (q3 (rest s))
+      false)))
+
+(defn q6 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q3 (rest s))
+      "b" (q8 (rest s))
+      false)))
+
+(defn q5 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q2 (rest s))
+      "b" (q6 (rest s))
+      false)))
+
+(defn q4 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q7 (rest s))
+      "b" (q1 (rest s))
+      false)))
+
+(defn q3 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q6 (rest s))
+      "b" (q7 (rest s))
+      false)))
+
+(defn q2 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q5 (rest s))
+      "b" (q3 (rest s))
+      false)))
+
+(defn q1 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q3 (rest s))
+      "b" (q4 (rest s))
+      false)))
+
+(defn q0 [s]
+  (let [x (first s)]
+    (case (str x)
+      "a" (q2 (rest s))
+      "b" (q1 (rest s))
+      false)))
+
+(defn -main
+  [& args]
+  (println (str (q0 (first args)))))

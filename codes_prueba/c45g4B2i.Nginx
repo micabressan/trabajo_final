@@ -1,0 +1,3 @@
+ssl_certificate /config/keys/letsencrypt/fullchain.pem;
+ssl_certificate_key /config/keys/letsencrypt/privkey.pem;
+ssl_dhparam /config/nginx/dhparams.pem;

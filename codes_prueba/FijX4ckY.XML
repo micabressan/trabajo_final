@@ -1,0 +1,4 @@
+    <customErrors mode="On" defaultRedirect="/HelloError.aspx">
+      <error statusCode="403" redirect="/"/>
+      <error statusCode="404" redirect="/error.html"/>
+    </customErrors>

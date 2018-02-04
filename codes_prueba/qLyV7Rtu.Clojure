@@ -1,0 +1,7 @@
+
+  "All together now!"
+  (= "Test Testerson, 123 Test Lane, Testerville, TX"
+     ((fn [[a b]
+           {:keys [s c t]}]
+        (let [ab (str a " " b)]
+        (clojure.string/join ", " [ab s c t]))) ["Test" "Testerson"] test-address))

@@ -1,0 +1,112 @@
+#BlockRegen 2.0
+#
+#Developer: Aurorion
+#Version: 2.1
+
+Blocks:
+    #The block that gets broken
+    DIAMOND_ORE:
+        #The block to replace it with, DIRT;2 being podzol
+        replace-block: DIRT;2
+        #The delay in which this block regens to its original state
+        #In seconds
+        regen-delay: 3
+        #If you installed Vault you can give players money. Set to 0 to disable
+        money: 100
+        #You can specify a command that is executed by the console
+        #Example: console-command: "give %player% apple 64"
+        #Leave empty to ignore this function
+        console-command: "say The console-command function is working!"
+        #You can specify a command that is executed by the player itself
+        #Example: console-command: "me I, %player%, executed this command"
+        #Leave empty to ignore this function
+        player-command: "me I, %player%, executed this command"
+        #The amount of durability that is taken from the item used to break the block.
+        #Set this to 0 to ignore the function
+        tool-damage: 100
+        #Give drops, exp and amount as it would be in vanilla
+        #Set this to false to use the other options
+        natural-break: false
+        #If natural-break set to false then the drop-item section is used
+        drop-item:
+            #The material of the dropped item, STONE;3 being diorite
+            material: STONE;3
+            #The name that is given to the dropped item
+            name: "&6&l[&3BlockRegen&6&l]"
+            #The lores that are given to the dropped item
+            lores:
+            - "&fThese are some lores"
+            - "&cAnd &6they &eeven &asupport &dcolors!"
+            #drop-naturally to false sends it directly to the players inventory if there is place (drops it otherwise)
+            #Setting it to true drops it on the ground as it would in vanilla
+            drop-naturally: false
+            exp:
+                #drop-naturally to false gives the player the amount of exp directly
+                #Setting it to true drops it on the ground as it would in vanilla
+                drop-naturally: true
+                #The amount of exp it gives
+                amount: 100
+            #How many should the player get?
+            #This generates a random number between, in this case, 0 and 5
+            amount:
+                high: 5
+                low: 0
+        #Events are added in 2.0 and can do a few things already
+        #It can double drops on specific ores, give double exp or make ores have a chance of dropping custom equips
+        #Not wish to use this? You can completly remove it without getting null errors
+        #Below is an example. Read more info on the spigot updates page.
+        event:
+            event-name: Double Diamonds
+            #Bossbar option are 1.9 and above only
+            bossbar:
+                name: "&bDiamonds, diamonds everywhere!" 
+                color: BLUE
+            double-drops: true
+            double-exp: false
+            custom-item:
+                enabled: false
+                material: LEATHER_BOOTS
+                name: "&dFancy &bshoes"
+                lores:
+                - "&fLook at them shoessss"
+                - "&eBling bling bling"
+                drop-naturally: false
+                #How rare is it to get the item. In this case a 1 in 50 chance of getting it.
+                rarity: 50
+    LOG;2:
+        replace-block: BEDROCK
+        regen-delay: 3
+        money: 5
+        console-command: "say %player% is a badass lumberjack.."
+        player-command: 
+        tool-damage: 100
+        natural-break: false
+        drop-item:
+            material: GOLDEN_APPLE;1
+            name: "&eNotch's snack"
+            lores:
+            - "&fWhat do you call a golden shovel"
+            - "&4A gold digger"
+            drop-naturally: false
+            exp:
+                drop-naturally: false
+                amount: 100
+            amount:
+                high: 5
+                low: 0
+        event:
+            event-name: Quackers
+            bossbar:
+                name: "&aQuack quack quack"
+                color: GREEN
+            double-drops: false
+            double-exp: false
+            custom-item:
+                enabled: true
+                material: Bread
+                name: "&eGive it to them ducks"
+                lores:
+                - "&dCrumbling"
+                - "&aQuack quack quack"
+                drop-naturally: true
+                rarity: 10

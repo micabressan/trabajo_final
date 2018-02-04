@@ -1,0 +1,4 @@
+(defn insert-to-list []
+  (do
+    (update {:items @list-of-items} :items conj (:item @upcoming-item))
+    (js/alert (:item @upcoming-item))))

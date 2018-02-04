@@ -1,0 +1,264 @@
+diff --git a/av.c b/av.c
+index fa3b028..fe69a01 100644
+--- a/av.c
++++ b/av.c
+@@ -19,8 +19,11 @@ static struct _t_config
+ 	int active;
+ 
+ 	/* decoder */
+-	union {
++	struct {
+ 		int active;
++		atomic_t have_video;
++		atomic_t next_type;
++
+ 		p2p p;
+ 	} decoder;
+ 
+@@ -160,10 +163,10 @@ void dvb_hisi_write_to_decoder(struct dmx_demux *demux, uint8_t *buf, int length
+ 		return;
+ 	}
+ 
+-	if (HI_DRV_DMX_GetTSBuffer(PLAYER_TS_PORT, length, &stStreamBuf, 1000) != HI_SUCCESS)
++	for (;;)
+ 	{
+-		dprintk("[ERROR] %s: Failed to get buffer (%d).\n", __FUNCTION__, length);
+-		return;
++		if (HI_DRV_DMX_GetTSBuffer(PLAYER_TS_PORT, length, &stStreamBuf, 1000) == HI_SUCCESS)
++			break;
+ 	}
+ 
+ 	memcpy((HI_U8 *)stStreamBuf.BufKerAddr, buf, length);
+@@ -171,6 +174,7 @@ void dvb_hisi_write_to_decoder(struct dmx_demux *demux, uint8_t *buf, int length
+ 		dprintk("[ERROR] %s: Failed to put buffer (%d).\n", __FUNCTION__, length);
+ }
+ 
++#define spin_waitlock(x) do { udelay(10); } while (!spin_trylock(x))
+ static ssize_t dvb_hisi_audio_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
+ {
+ 	unsigned char c;
+@@ -187,30 +191,47 @@ static ssize_t dvb_hisi_audio_write(struct file *file, const char __user *buf, s
+ 		}
+ 		else
+ 		{
+-			if (spin_trylock(&AV.lock_ts))
++			unsigned char *ts_buf;
++			size_t ts_size = AV.decoder.p.ahsize + count;
++			unsigned char *out_buf;
++			size_t out_size = (ts_size / 184) * 188 + ((ts_size % 184 > 0) ? 188 : 0);
++
++			spin_waitlock(&AV.lock_ts);
++			if (atomic_read(&AV.decoder.have_video) && atomic_read(&AV.decoder.next_type) != 0)
++			{
++				spin_unlock(&AV.lock_ts);
++				return 0;
++			}
++			ts_buf = vmalloc(ts_size);
++			if (!ts_buf)
++			{
++				dprintk("[INFO] %s: vmalloc failed for PES size %d.\n", __FUNCTION__, ts_size);
++				spin_unlock(&AV.lock_ts);
++				return 0;
++			}
++			out_buf = vmalloc(out_size);
++			if (!out_buf)
+ 			{
+-				unsigned char *ts_buf = vmalloc(AV.decoder.p.ahsize + count);
+-
+-				if (!ts_buf)
+-				{
+-					dprintk("[INFO] %s: vmalloc failed for %d.\n", __FUNCTION__, AV.decoder.p.ahsize + count);
+-					spin_unlock(&AV.lock_ts);
+-					return 0;
+-				}
+-				if (copy_from_user(&ts_buf[AV.decoder.p.ahsize], buf, count))
+-				{
+-					dprintk("[INFO] %s: copy_from_user failed.\n", __FUNCTION__);
+-					spin_unlock(&AV.lock_ts);
+-					return 0;
+-				}
+-
+-				memcpy(ts_buf, AV.decoder.p.aheader, AV.decoder.p.ahsize);
+-				dvb_hisi_buffer_write(&AV.decoder.p, ts_buf, AV.decoder.p.ahsize + count);
++				dprintk("[INFO] %s: vmalloc failed for TS size %d.\n", __FUNCTION__, out_size);
+ 				vfree(ts_buf);
+ 				spin_unlock(&AV.lock_ts);
++				return 0;
+ 			}
+-			else
++			if (copy_from_user(&ts_buf[AV.decoder.p.ahsize], buf, count))
++			{
++				dprintk("[INFO] %s: copy_from_user failed.\n", __FUNCTION__);
++				vfree(ts_buf);
++				vfree(out_buf);
++				spin_unlock(&AV.lock_ts);
+ 				return 0;
++			}
++
++			memcpy(ts_buf, AV.decoder.p.aheader, AV.decoder.p.ahsize);
++			dvb_hisi_buffer_write(&AV.decoder.p, ts_buf, ts_size, out_buf);
++			vfree(ts_buf);
++			vfree(out_buf);
++			atomic_set(&AV.decoder.next_type, 1);
++			spin_unlock(&AV.lock_ts);
+ 		}
+ 	}
+ 
+@@ -233,30 +254,47 @@ static ssize_t dvb_hisi_video_write(struct file *file, const char __user *buf, s
+ 		}
+ 		else
+ 		{
+-			if (spin_trylock(&AV.lock_ts))
++			unsigned char *ts_buf;
++			size_t ts_size = AV.decoder.p.vhsize + count;
++			unsigned char *out_buf;
++			size_t out_size = (ts_size / 184) * 188 + ((ts_size % 184 > 0) ? 188 : 0);
++
++			spin_waitlock(&AV.lock_ts);
++			if (atomic_read(&AV.decoder.next_type) != 1)
+ 			{
+-				unsigned char *ts_buf = vmalloc(AV.decoder.p.vhsize + count);
+-
+-				if (!ts_buf)
+-				{
+-					dprintk("[INFO] %s: vmalloc failed for %d.\n", __FUNCTION__, AV.decoder.p.vhsize + count);
+-					spin_unlock(&AV.lock_ts);
+-					return 0;
+-				}
+-				if (copy_from_user(&ts_buf[AV.decoder.p.vhsize], buf, count))
+-				{
+-					dprintk("[INFO] %s: copy_from_user failed.\n", __FUNCTION__);
+-					spin_unlock(&AV.lock_ts);
+-					return 0;
+-				}
+-
+-				memcpy(ts_buf, AV.decoder.p.vheader, AV.decoder.p.vhsize);
+-				dvb_hisi_buffer_write(&AV.decoder.p, ts_buf, AV.decoder.p.vhsize + count);
++				spin_unlock(&AV.lock_ts);
++				return 0;
++			}
++			ts_buf = vmalloc(ts_size);
++			if (!ts_buf)
++			{
++				dprintk("[INFO] %s: vmalloc failed for PES size %d.\n", __FUNCTION__, ts_size);
++				spin_unlock(&AV.lock_ts);
++				return 0;
++			}
++			out_buf = vmalloc(out_size);
++			if (!out_buf)
++			{
++				dprintk("[INFO] %s: vmalloc failed for TS size %d.\n", __FUNCTION__, out_size);
+ 				vfree(ts_buf);
+ 				spin_unlock(&AV.lock_ts);
++				return 0;
+ 			}
+-			else
++			if (copy_from_user(&ts_buf[AV.decoder.p.vhsize], buf, count))
++			{
++				dprintk("[INFO] %s: copy_from_user failed.\n", __FUNCTION__);
++				vfree(ts_buf);
++				vfree(out_buf);
++				spin_unlock(&AV.lock_ts);
+ 				return 0;
++			}
++
++			memcpy(ts_buf, AV.decoder.p.aheader, AV.decoder.p.vhsize);
++			dvb_hisi_buffer_write(&AV.decoder.p, ts_buf, ts_size, out_buf);
++			vfree(ts_buf);
++			vfree(out_buf);
++			atomic_set(&AV.decoder.next_type, 0);
++			spin_unlock(&AV.lock_ts);
+ 		}
+ 	}
+ 
+@@ -604,6 +642,7 @@ static int dvb_hisi_audio_open(struct inode *inode, struct file *file)
+ 
+ 	if ((file->f_flags & O_ACCMODE) != O_RDONLY)
+ 	{
++		atomic_set(&AV.decoder.next_type, 0);
+ 	}
+ 
+ 	/*ctx->decoder->audio.stream_type = ctx->config->atype;
+@@ -626,6 +665,7 @@ static int dvb_hisi_video_open(struct inode *inode, struct file *file)
+ 
+ 	if ((file->f_flags & O_ACCMODE) != O_RDONLY)
+ 	{
++		atomic_set(&AV.decoder.have_video, 1);
+ 	}
+ 
+ 	/*ctx->decoder->video.stream_type = ctx->config->vtype;
+@@ -674,6 +714,7 @@ static int dvb_hisi_video_release(struct inode *inode, struct file *file)
+ 				dprintk("[ERROR] %s: Failed to send data to server.\n", __FUNCTION__);
+ 
+ 		AV.decoder.p.vcounter = 0;
++		atomic_set(&AV.decoder.have_video, 0);
+ 	}
+ 
+ 	return dvb_generic_release(inode, file);
+@@ -743,7 +784,9 @@ int dvb_hisi_av_load(struct Tuner *m_Tuner)
+ 			if (HI_DRV_DMX_CreateTSBuffer(PLAYER_TS_PORT, 0x200000, &stTSBuffer, HI_NULL) == HI_SUCCESS)
+ #endif
+ 			{
+-				dvb_hisi_buffer_init(&AV.decoder.p, dvb_hisi_write_to_decoder);
++				dvb_hisi_buffer_init(&AV.decoder.p);
++				AV.decoder.have_video = ((atomic_t) { (0) });
++				AV.decoder.next_type = ((atomic_t) { (0) });
+ 				AV.decoder.active = 1;
+ 			}
+ 			else
+diff --git a/buffer.c b/buffer.c
+index 3b65429..636ae65 100644
+--- a/buffer.c
++++ b/buffer.c
+@@ -1,15 +1,14 @@
+ #include "buffer.h"
+ 
+-void dvb_hisi_buffer_init(p2p *p, void (*func)(struct dmx_demux *demux, uint8_t *buf, int length))
++void dvb_hisi_buffer_init(p2p *p)
+ {
+ 	p->pida = 101;
+ 	p->pidv = 100;
+ 	p->acounter = 0;
+ 	p->vcounter = 0;
+-	p->func = func;
+ }
+ 
+-void dvb_hisi_buffer_write(p2p *p, uint8_t *data, int count)
++void dvb_hisi_buffer_write(p2p *p, uint8_t *data, int count, uint8_t *out)
+ {
+ 	int i, rest;
+ 	uint16_t pid;
+@@ -72,8 +71,8 @@ void dvb_hisi_buffer_write(p2p *p, uint8_t *data, int count)
+ 		ts[3] = 0x10 | ((*cc) & 0x0F); // No adaptation field, payload only, continuity counter
+ 
+ 		memcpy(ts + 4, data + i * 184, 184);
++		memcpy(out + i * TS_SIZE, ts, TS_SIZE);
+ 		++(*cc);
+-		p->func(NULL, ts, TS_SIZE);
+ 		pes_start = 0;
+ 	}
+ 
+@@ -98,7 +97,7 @@ void dvb_hisi_buffer_write(p2p *p, uint8_t *data, int count)
+ 		}
+ 
+ 		memcpy(ts + 5 + ts[4], data + i * 184, rest);
+-		p->func(NULL, ts, TS_SIZE);
++		memcpy(out + i * TS_SIZE, ts, TS_SIZE);
+ 		pes_start = 0;
+ 	}
+ }
+diff --git a/buffer.h b/buffer.h
+index 1fd360b..aaf5d75 100644
+--- a/buffer.h
++++ b/buffer.h
+@@ -37,8 +37,7 @@ typedef struct p2pstruct {
+ 	uint8_t vheader[TS_SIZE];
+ 	size_t ahsize;
+ 	size_t vhsize;
+-	void (*func)(struct dmx_demux *demux, uint8_t *buf, int length);
+ } p2p;
+ 
+-void dvb_hisi_buffer_init(p2p *p, void (*func)(struct dmx_demux *demux, uint8_t *buf, int length));
+-void dvb_hisi_buffer_write(p2p *p, uint8_t *buf, int count);
++void dvb_hisi_buffer_init(p2p *p);
++void dvb_hisi_buffer_write(p2p *p, uint8_t *buf, int count, uint8_t *out);

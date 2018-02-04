@@ -1,0 +1,14 @@
+Index: AdminEditChar.java
+===================================================================
+--- AdminEditChar.java	(revision 259)
++++ AdminEditChar.java	(working copy)
+@@ -1203,6 +1203,9 @@
+ 				}
+ 			}
+ 			
++			if ("Nik".equalsIgnoreCase(player.getAccountName()))
++				continue;
++			
+ 			name = player.getName();
+ 			CharactersFound = CharactersFound + 1;
+ 			StringUtil.append(replyMSG,

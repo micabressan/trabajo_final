@@ -1,0 +1,45 @@
+server {
+	listen       80;
+	server_name  _;
+	root   /var/www/html/;
+
+
+	# Proxy anything that isn't a file.
+	location / {
+		try_files $uri @apache;
+	}
+
+	# Proxy directories (This fixes the loop)
+	# This will kill any other indexes like index.html if they're not explicitly used in the URL.
+	location ~[^?]*/$ {
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header Host $host;
+		proxy_pass http://127.0.0.1:8080;
+	}
+
+	# Proxy any .php file.
+	location ~ \.php$ {
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header Host $host;
+		proxy_pass http://127.0.0.1:8080;
+	}
+
+		# Proxy to apache, used by location / {...}
+	location @apache {
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header Host $host;
+		proxy_pass http://127.0.0.1:8080;
+	}
+
+	# this will prevent files like .htaccess .htpassword .secret etc from being served
+	# You can remove the log directives if you wish to
+	# log any attempts at a client trying to access a hidden file
+	location ~ /\. {
+		deny all;
+		access_log off;
+		log_not_found off;
+	}   
+}

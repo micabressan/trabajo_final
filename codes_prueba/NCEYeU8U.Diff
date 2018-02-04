@@ -1,0 +1,1198 @@
+diff --git a/system/common/lib/libScePigletv2VSH.sprx.json b/system/common/lib/libScePigletv2VSH.sprx.json
+index 026a587..7acb097 100644
+--- a/system/common/lib/libScePigletv2VSH.sprx.json
++++ b/system/common/lib/libScePigletv2VSH.sprx.json
+@@ -1,8 +1,10 @@
+ {
+   "shared_object_names": [
+     "libkernel.prx",
+-    "libSceCompositeExt.prx",
++    "libSceComposite.prx",
++    "libSceDeci4h.prx",
+     "libSceLibcInternal.prx",
++    "libSceRegMgr.prx",
+     "libSceShaccVSH.prx",
+     "libSceSysCore.prx",
+     "libSceSysmodule.prx"
+@@ -16,6 +18,12 @@
+           "is_export": true,
+           "symbols": [
+             {
++              "id": 553247872402885225,
++              "hex_id": "07AD88023B508A69",
++              "encoded_id": "B62IAjtQimk",
++              "name": "_OrbisTextureImage2DCanvas"
++            },
++            {
+               "id": 14423401363739265755,
+               "hex_id": "C82A371F32904ADB",
+               "encoded_id": "yCo3HzKQSts",
+@@ -232,6 +240,24 @@
+               "name": "glAttachShader"
+             },
+             {
++              "id": 638513659606638632,
++              "hex_id": "08DC74CA5916A028",
++              "encoded_id": "CNx0ylkWoCg",
++              "name": "glBeginQuery"
++            },
++            {
++              "id": 5930070242224896994,
++              "hex_id": "524BD77768EDFBE2",
++              "encoded_id": "UkvXd2jt++I",
++              "name": "glBeginQueryEXT"
++            },
++            {
++              "id": 15784513765363802867,
++              "hex_id": "DB0DDBA3C0C5E2F3",
++              "encoded_id": "2w3bo8DF4vM",
++              "name": "glBeginTransformFeedback"
++            },
++            {
+               "id": 10776808743651496458,
+               "hex_id": "958EEA7451ABD20A",
+               "encoded_id": "lY7qdFGr0go",
+@@ -244,6 +270,18 @@
+               "name": "glBindBuffer"
+             },
+             {
++              "id": 5789087571098271020,
++              "hex_id": "5056F87958F0FD2C",
++              "encoded_id": "UFb4eVjw-Sw",
++              "name": "glBindBufferBase"
++            },
++            {
++              "id": 13795704148501458718,
++              "hex_id": "BF742FD48DCFEF1E",
++              "encoded_id": "v3Qv1I3P7x4",
++              "name": "glBindBufferRange"
++            },
++            {
+               "id": 13648468766635959392,
+               "hex_id": "BD691A07D359A460",
+               "encoded_id": "vWkaB9NZpGA",
+@@ -256,12 +294,30 @@
+               "name": "glBindRenderbuffer"
+             },
+             {
++              "id": 17612886973385905230,
++              "hex_id": "F46D8B629DC5944E",
++              "encoded_id": "9G2LYp3FlE4",
++              "name": "glBindSampler"
++            },
++            {
+               "id": 2581151270493917245,
+               "hex_id": "23D21767AD56903D",
+               "encoded_id": "I9IXZ61WkD0",
+               "name": "glBindTexture"
+             },
+             {
++              "id": 16550209313945910679,
++              "hex_id": "E5AE27AF2C1B7D97",
++              "encoded_id": "5a4nrywbfZc",
++              "name": "glBindTransformFeedback"
++            },
++            {
++              "id": 9207597318133660093,
++              "hex_id": "7FC7F4FA163239BD",
++              "encoded_id": "f8f0+hYyOb0",
++              "name": "glBindVertexArray"
++            },
++            {
+               "id": 8876399037851554332,
+               "hex_id": "7B2F4DE54FC2D21C",
+               "encoded_id": "ey9N5U-C0hw",
+@@ -292,6 +348,12 @@
+               "name": "glBlendFuncSeparate"
+             },
+             {
++              "id": 3706144512693895387,
++              "hex_id": "336EDECC5D6200DB",
++              "encoded_id": "M27ezF1iANs",
++              "name": "glBlitFramebuffer"
++            },
++            {
+               "id": 9557616118086231626,
+               "hex_id": "84A379389213E64A",
+               "encoded_id": "hKN5OJIT5ko",
+@@ -316,6 +378,30 @@
+               "name": "glClear"
+             },
+             {
++              "id": 2832352871259764155,
++              "hex_id": "274E89EE11FEF5BB",
++              "encoded_id": "J06J7hH+9bs",
++              "name": "glClearBufferfi"
++            },
++            {
++              "id": 9507302987864678230,
++              "hex_id": "83F0B9B213AF1F56",
++              "encoded_id": "g-C5shOvH1Y",
++              "name": "glClearBufferfv"
++            },
++            {
++              "id": 5943450733584860387,
++              "hex_id": "527B60F3D35C44E3",
++              "encoded_id": "Untg89NcROM",
++              "name": "glClearBufferiv"
++            },
++            {
++              "id": 16438973887364844702,
++              "hex_id": "E422F7A7344DCC9E",
++              "encoded_id": "5CL3pzRNzJ4",
++              "name": "glClearBufferuiv"
++            },
++            {
+               "id": 4487941366435478509,
+               "hex_id": "3E485EE5072AFBED",
+               "encoded_id": "Pkhe5Qcq++0",
+@@ -334,6 +420,12 @@
+               "name": "glClearStencil"
+             },
+             {
++              "id": 5810950004572434143,
++              "hex_id": "50A4A43DCE182EDF",
++              "encoded_id": "UKSkPc4YLt8",
++              "name": "glClientWaitSync"
++            },
++            {
+               "id": 6703155908013269855,
+               "hex_id": "5D0664C89331235F",
+               "encoded_id": "XQZkyJMxI18",
+@@ -352,12 +444,30 @@
+               "name": "glCompressedTexImage2D"
+             },
+             {
++              "id": 180865982648865349,
++              "hex_id": "028290A727BCD245",
++              "encoded_id": "AoKQpye80kU",
++              "name": "glCompressedTexImage3D"
++            },
++            {
+               "id": 6742019483374879251,
+               "hex_id": "5D9076FFD7528213",
+               "encoded_id": "XZB2-9dSghM",
+               "name": "glCompressedTexSubImage2D"
+             },
+             {
++              "id": 9946853625770252294,
++              "hex_id": "8A0A52AC04D79806",
++              "encoded_id": "igpSrATXmAY",
++              "name": "glCompressedTexSubImage3D"
++            },
++            {
++              "id": 10904299594752158345,
++              "hex_id": "9753DAB53DA36A89",
++              "encoded_id": "l1PatT2jaok",
++              "name": "glCopyBufferSubData"
++            },
++            {
+               "id": 14637381054409627509,
+               "hex_id": "CB226C844E1E5775",
+               "encoded_id": "yyJshE4eV3U",
+@@ -370,6 +480,12 @@
+               "name": "glCopyTexSubImage2D"
+             },
+             {
++              "id": 11972148240902409402,
++              "hex_id": "A6259D64D94E4CBA",
++              "encoded_id": "piWdZNlOTLo",
++              "name": "glCopyTexSubImage3D"
++            },
++            {
+               "id": 12342274109402324532,
+               "hex_id": "AB4890E90B6D1E34",
+               "encoded_id": "q0iQ6QttHjQ",
+@@ -406,24 +522,60 @@
+               "name": "glDeleteProgram"
+             },
+             {
++              "id": 4067498240247579808,
++              "hex_id": "3872A819567BC4A0",
++              "encoded_id": "OHKoGVZ7xKA",
++              "name": "glDeleteQueries"
++            },
++            {
++              "id": 8610631036193746244,
++              "hex_id": "777F1B4E6C482D44",
++              "encoded_id": "d38bTmxILUQ",
++              "name": "glDeleteQueriesEXT"
++            },
++            {
+               "id": 678291040054944479,
+               "hex_id": "0969C61B70CE22DF",
+               "encoded_id": "CWnGG3DOIt8",
+               "name": "glDeleteRenderbuffers"
+             },
+             {
++              "id": 8398466725678420645,
++              "hex_id": "748D58FD720012A5",
++              "encoded_id": "dI1Y-XIAEqU",
++              "name": "glDeleteSamplers"
++            },
++            {
+               "id": 12651223091235504457,
+               "hex_id": "AF922C5F574FC149",
+               "encoded_id": "r5IsX1dPwUk",
+               "name": "glDeleteShader"
+             },
+             {
++              "id": 8784657928168479150,
++              "hex_id": "79E95FD7B1CD19AE",
++              "encoded_id": "eelf17HNGa4",
++              "name": "glDeleteSync"
++            },
++            {
+               "id": 13086727633590920032,
+               "hex_id": "B59D65724079A360",
+               "encoded_id": "tZ1lckB5o2A",
+               "name": "glDeleteTextures"
+             },
+             {
++              "id": 13351185093806941925,
++              "hex_id": "B948F01AEEDA66E5",
++              "encoded_id": "uUjwGu7aZuU",
++              "name": "glDeleteTransformFeedbacks"
++            },
++            {
++              "id": 1332957055790398389,
++              "hex_id": "127F9D61433CBBB5",
++              "encoded_id": "En+dYUM8u7U",
++              "name": "glDeleteVertexArrays"
++            },
++            {
+               "id": 1668695541254453955,
+               "hex_id": "172865C0EEBFFAC3",
+               "encoded_id": "FyhlwO6-+sM",
+@@ -466,12 +618,48 @@
+               "name": "glDrawArrays"
+             },
+             {
++              "id": 6714118411713804903,
++              "hex_id": "5D2D571F5E1C7A67",
++              "encoded_id": "XS1XH14cemc",
++              "name": "glDrawArraysInstanced"
++            },
++            {
++              "id": 1692883487147472365,
++              "hex_id": "177E548FF18CB5ED",
++              "encoded_id": "F35Uj-GMte0",
++              "name": "glDrawArraysInstancedEXT"
++            },
++            {
++              "id": 1923820576152901481,
++              "hex_id": "1AB2C89F052E5769",
++              "encoded_id": "GrLInwUuV2k",
++              "name": "glDrawBuffers"
++            },
++            {
+               "id": 6768892424990119798,
+               "hex_id": "5DEFEFCC225E5776",
+               "encoded_id": "Xe-vzCJeV3Y",
+               "name": "glDrawElements"
+             },
+             {
++              "id": 16468847222216279655,
++              "hex_id": "E48D194AFC614667",
++              "encoded_id": "5I0ZSvxhRmc",
++              "name": "glDrawElementsInstanced"
++            },
++            {
++              "id": 15914376208624406626,
++              "hex_id": "DCDB38D800FC5062",
++              "encoded_id": "3Ns42AD8UGI",
++              "name": "glDrawElementsInstancedEXT"
++            },
++            {
++              "id": 8190274097388086402,
++              "hex_id": "71A9B2E5CBE66482",
++              "encoded_id": "camy5cvmZII",
++              "name": "glDrawRangeElements"
++            },
++            {
+               "id": 5514490597036729946,
+               "hex_id": "4C8767FB219B265A",
+               "encoded_id": "TIdn+yGbJlo",
+@@ -484,6 +672,30 @@
+               "name": "glEnableVertexAttribArray"
+             },
+             {
++              "id": 13838729738607515812,
++              "hex_id": "C00D0B606455D8A4",
++              "encoded_id": "wA0LYGRV2KQ",
++              "name": "glEndQuery"
++            },
++            {
++              "id": 6030202081608235958,
++              "hex_id": "53AF94D806147BB6",
++              "encoded_id": "U6+U2AYUe7Y",
++              "name": "glEndQueryEXT"
++            },
++            {
++              "id": 15295042623501764179,
++              "hex_id": "D442E83ABE480653",
++              "encoded_id": "1ELoOr5IBlM",
++              "name": "glEndTransformFeedback"
++            },
++            {
++              "id": 4455646019419462152,
++              "hex_id": "3DD5A27298615A08",
++              "encoded_id": "PdWicphhWgg",
++              "name": "glFenceSync"
++            },
++            {
+               "id": 70030567699630932,
+               "hex_id": "00F8CC6E2727CB54",
+               "encoded_id": "APjMbicny1Q",
+@@ -496,6 +708,12 @@
+               "name": "glFlush"
+             },
+             {
++              "id": 13864890767085540827,
++              "hex_id": "C069FCB17DBA15DB",
++              "encoded_id": "wGn8sX26Fds",
++              "name": "glFlushMappedBufferRange"
++            },
++            {
+               "id": 7076558106091155139,
+               "hex_id": "6234FC1AB1F96EC3",
+               "encoded_id": "YjT8GrH5bsM",
+@@ -508,6 +726,12 @@
+               "name": "glFramebufferTexture2D"
+             },
+             {
++              "id": 3782013319799538164,
++              "hex_id": "347C69138E7281F4",
++              "encoded_id": "NHxpE45ygfQ",
++              "name": "glFramebufferTextureLayer"
++            },
++            {
+               "id": 16210559396318565910,
+               "hex_id": "E0F779E23BF05616",
+               "encoded_id": "4Pd54jvwVhY",
+@@ -532,18 +756,48 @@
+               "name": "glGenFramebuffers"
+             },
+             {
++              "id": 9748926614975718427,
++              "hex_id": "874B251AB2FAA41B",
++              "encoded_id": "h0slGrL6pBs",
++              "name": "glGenQueries"
++            },
++            {
++              "id": 5181770922792932660,
++              "hex_id": "47E9593338855534",
++              "encoded_id": "R+lZMziFVTQ",
++              "name": "glGenQueriesEXT"
++            },
++            {
+               "id": 7352139322275666057,
+               "hex_id": "66080BC2A36C1889",
+               "encoded_id": "ZggLwqNsGIk",
+               "name": "glGenRenderbuffers"
+             },
+             {
++              "id": 539342231339469273,
++              "hex_id": "077C20E6DF5B09D9",
++              "encoded_id": "B3wg5t9bCdk",
++              "name": "glGenSamplers"
++            },
++            {
+               "id": 4115937157304983788,
+               "hex_id": "391EBF0992FEA0EC",
+               "encoded_id": "OR6-CZL+oOw",
+               "name": "glGenTextures"
+             },
+             {
++              "id": 18044840812454060783,
++              "hex_id": "FA6C271CFECBA2EF",
++              "encoded_id": "+mwnHP7Lou8",
++              "name": "glGenTransformFeedbacks"
++            },
++            {
++              "id": 157189130144729650,
++              "hex_id": "022E72AE58D44A32",
++              "encoded_id": "Ai5yrljUSjI",
++              "name": "glGenVertexArrays"
++            },
++            {
+               "id": 10403300070660408559,
+               "hex_id": "905FF24B938284EF",
+               "encoded_id": "kF-yS5OChO8",
+@@ -556,6 +810,24 @@
+               "name": "glGetActiveUniform"
+             },
+             {
++              "id": 18442007687781340901,
++              "hex_id": "FFEF2C48373AD6E5",
++              "encoded_id": "-+8sSDc61uU",
++              "name": "glGetActiveUniformBlockiv"
++            },
++            {
++              "id": 2896886128257929943,
++              "hex_id": "2833CE95D59212D7",
++              "encoded_id": "KDPOldWSEtc",
++              "name": "glGetActiveUniformBlockName"
++            },
++            {
++              "id": 4237161324021856246,
++              "hex_id": "3ACD6BC65658B7F6",
++              "encoded_id": "Os1rxlZYt-Y",
++              "name": "glGetActiveUniformsiv"
++            },
++            {
+               "id": 418248929944735728,
+               "hex_id": "05CDEB2F910B0FF0",
+               "encoded_id": "Bc3rL5ELD-A",
+@@ -574,12 +846,24 @@
+               "name": "glGetBooleanv"
+             },
+             {
++              "id": 16518802824845099348,
++              "hex_id": "E53E93A6199C8154",
++              "encoded_id": "5T6TphmcgVQ",
++              "name": "glGetBufferParameteri64v"
++            },
++            {
+               "id": 5623613770720114320,
+               "hex_id": "4E0B16EDE5C47690",
+               "encoded_id": "TgsW7eXEdpA",
+               "name": "glGetBufferParameteriv"
+             },
+             {
++              "id": 1101690703199523212,
++              "hex_id": "0F49FDDB888ED18C",
++              "encoded_id": "D0n924iO0Yw",
++              "name": "glGetBufferPointerv"
++            },
++            {
+               "id": 13486279070227561545,
+               "hex_id": "BB28E35C6AB2FC49",
+               "encoded_id": "uyjjXGqy-Ek",
+@@ -592,18 +876,54 @@
+               "name": "glGetFloatv"
+             },
+             {
++              "id": 13864250857089861948,
++              "hex_id": "C067B6B2D5BF093C",
++              "encoded_id": "wGe2stW-CTw",
++              "name": "glGetFragDataLocation"
++            },
++            {
+               "id": 12902177754909372248,
+               "hex_id": "B30DBE4F3651EF58",
+               "encoded_id": "sw2+TzZR71g",
+               "name": "glGetFramebufferAttachmentParameteriv"
+             },
+             {
++              "id": 5149913670627763738,
++              "hex_id": "47782B32B1B2261A",
++              "encoded_id": "R3grMrGyJho",
++              "name": "glGetInteger64i_v"
++            },
++            {
++              "id": 16280452794267506111,
++              "hex_id": "E1EFC98F10D495BF",
++              "encoded_id": "4e-JjxDUlb8",
++              "name": "glGetInteger64v"
++            },
++            {
++              "id": 9309214680256475989,
++              "hex_id": "8130F96DEA89F355",
++              "encoded_id": "gTD5beqJ81U",
++              "name": "glGetIntegeri_v"
++            },
++            {
+               "id": 18171045748499192228,
+               "hex_id": "FC2C85D57CAA99A4",
+               "encoded_id": "-CyF1XyqmaQ",
+               "name": "glGetIntegerv"
+             },
+             {
++              "id": 16692583090906823623,
++              "hex_id": "E7A7F7E14D317BC7",
++              "encoded_id": "56f34U0xe8c",
++              "name": "glGetInternalformativ"
++            },
++            {
++              "id": 15464919170160508382,
++              "hex_id": "D69E6E0C718BBDDE",
++              "encoded_id": "1p5uDHGLvd4",
++              "name": "glGetProgramBinary"
++            },
++            {
+               "id": 13356004244251113877,
+               "hex_id": "B95A0F18D5327995",
+               "encoded_id": "uVoPGNUyeZU",
+@@ -616,12 +936,60 @@
+               "name": "glGetProgramiv"
+             },
+             {
++              "id": 14565641939705630896,
++              "hex_id": "CA238E2C0DAF90B0",
++              "encoded_id": "yiOOLA2vkLA",
++              "name": "glGetQueryiv"
++            },
++            {
++              "id": 14926280023732247252,
++              "hex_id": "CF24CC994891DAD4",
++              "encoded_id": "zyTMmUiR2tQ",
++              "name": "glGetQueryObjecti64vEXT"
++            },
++            {
++              "id": 767218726637643995,
++              "hex_id": "0AA5B55DF243A8DB",
++              "encoded_id": "CqW1XfJDqNs",
++              "name": "glGetQueryObjectivEXT"
++            },
++            {
++              "id": 6377572415267776486,
++              "hex_id": "5881B052655DA7E6",
++              "encoded_id": "WIGwUmVdp+Y",
++              "name": "glGetQueryObjectui64vEXT"
++            },
++            {
++              "id": 12436029620027496735,
++              "hex_id": "AC95A70CEDF9991F",
++              "encoded_id": "rJWnDO35mR8",
++              "name": "glGetQueryObjectuiv"
++            },
++            {
++              "id": 9407192812847774889,
++              "hex_id": "828D100597663CA9",
++              "encoded_id": "go0QBZdmPKk",
++              "name": "glGetQueryObjectuivEXT"
++            },
++            {
+               "id": 10320257256830416342,
+               "hex_id": "8F38EB4BC80635D6",
+               "encoded_id": "jzjrS8gGNdY",
+               "name": "glGetRenderbufferParameteriv"
+             },
+             {
++              "id": 676534884515163402,
++              "hex_id": "096388E49DAFAD0A",
++              "encoded_id": "CWOI5J2vrQo",
++              "name": "glGetSamplerParameterfv"
++            },
++            {
++              "id": 12678655710444763204,
++              "hex_id": "AFF3A231BA89B844",
++              "encoded_id": "r-OiMbqJuEQ",
++              "name": "glGetSamplerParameteriv"
++            },
++            {
+               "id": 7101651885510625586,
+               "hex_id": "628E22C382580932",
+               "encoded_id": "Yo4iw4JYCTI",
+@@ -652,6 +1020,18 @@
+               "name": "glGetString"
+             },
+             {
++              "id": 4098901964360942620,
++              "hex_id": "38E2399EA2E2841C",
++              "encoded_id": "OOI5nqLihBw",
++              "name": "glGetStringi"
++            },
++            {
++              "id": 10329713880801575572,
++              "hex_id": "8F5A840BA0998294",
++              "encoded_id": "j1qEC6CZgpQ",
++              "name": "glGetSynciv"
++            },
++            {
+               "id": 11021281176962171720,
+               "hex_id": "98F374D652878348",
+               "encoded_id": "mPN01lKHg0g",
+@@ -664,12 +1044,30 @@
+               "name": "glGetTexParameteriv"
+             },
+             {
++              "id": 16561940582861707025,
++              "hex_id": "E5D7D53610991711",
++              "encoded_id": "5dfVNhCZFxE",
++              "name": "glGetTransformFeedbackVarying"
++            },
++            {
++              "id": 3687499583416607479,
++              "hex_id": "332CA1557AF2A2F7",
++              "encoded_id": "MyyhVXryovc",
++              "name": "glGetUniformBlockIndex"
++            },
++            {
+               "id": 12356142593812668622,
+               "hex_id": "AB79D639324720CE",
+               "encoded_id": "q3nWOTJHIM4",
+               "name": "glGetUniformfv"
+             },
+             {
++              "id": 4201233635540900501,
++              "hex_id": "3A4DC7BB80D69A95",
++              "encoded_id": "Ok3Hu4DWmpU",
++              "name": "glGetUniformIndices"
++            },
++            {
+               "id": 195375950799854540,
+               "hex_id": "02B61D6461145BCC",
+               "encoded_id": "ArYdZGEUW8w",
+@@ -682,12 +1080,30 @@
+               "name": "glGetUniformLocation"
+             },
+             {
++              "id": 827509533923112156,
++              "hex_id": "0B7BE78969BC74DC",
++              "encoded_id": "C3vniWm8dNw",
++              "name": "glGetUniformuiv"
++            },
++            {
+               "id": 14636712342591301286,
+               "hex_id": "CB200C53B3BAE6A6",
+               "encoded_id": "yyAMU7O65qY",
+               "name": "glGetVertexAttribfv"
+             },
+             {
++              "id": 14396294423848839377,
++              "hex_id": "C7C9E980EF7268D1",
++              "encoded_id": "x8npgO9yaNE",
++              "name": "glGetVertexAttribIiv"
++            },
++            {
++              "id": 3265936885019624060,
++              "hex_id": "2D52F04B1270C27C",
++              "encoded_id": "LVLwSxJwwnw",
++              "name": "glGetVertexAttribIuiv"
++            },
++            {
+               "id": 9340872360777462506,
+               "hex_id": "81A171EC0C67B2EA",
+               "encoded_id": "gaFx7Axnsuo",
+@@ -706,6 +1122,18 @@
+               "name": "glHint"
+             },
+             {
++              "id": 2588884370837069591,
++              "hex_id": "23ED909E684DDF17",
++              "encoded_id": "I+2QnmhN3xc",
++              "name": "glInvalidateFramebuffer"
++            },
++            {
++              "id": 17998220365579773407,
++              "hex_id": "F9C68610579565DF",
++              "encoded_id": "+caGEFeVZd8",
++              "name": "glInvalidateSubFramebuffer"
++            },
++            {
+               "id": 11376076668968433685,
+               "hex_id": "9DDFF1751778F815",
+               "encoded_id": "nd-xdRd4+BU",
+@@ -730,24 +1158,60 @@
+               "name": "glIsProgram"
+             },
+             {
++              "id": 133766274045910041,
++              "hex_id": "01DB3BB7AF6F1C19",
++              "encoded_id": "Ads7t69vHBk",
++              "name": "glIsQuery"
++            },
++            {
++              "id": 16461263440620208879,
++              "hex_id": "E47227E23C4AC2EF",
++              "encoded_id": "5HIn4jxKwu8",
++              "name": "glIsQueryEXT"
++            },
++            {
+               "id": 9032653532587221258,
+               "hex_id": "7D5A6E87E509E10A",
+               "encoded_id": "fVpuh+UJ4Qo",
+               "name": "glIsRenderbuffer"
+             },
+             {
++              "id": 5252069987913159424,
++              "hex_id": "48E319D3CD0DD300",
++              "encoded_id": "SOMZ080N0wA",
++              "name": "glIsSampler"
++            },
++            {
+               "id": 9508740463695884079,
+               "hex_id": "83F5D5127FF9EF2F",
+               "encoded_id": "g-XVEn-57y8",
+               "name": "glIsShader"
+             },
+             {
++              "id": 15739576798212669079,
++              "hex_id": "DA6E35B4C4723E97",
++              "encoded_id": "2m41tMRyPpc",
++              "name": "glIsSync"
++            },
++            {
+               "id": 12090022189497073598,
+               "hex_id": "A7C863202B903FBE",
+               "encoded_id": "p8hjICuQP74",
+               "name": "glIsTexture"
+             },
+             {
++              "id": 6058282763764596610,
++              "hex_id": "54135813530F7F82",
++              "encoded_id": "VBNYE1MPf4I",
++              "name": "glIsTransformFeedback"
++            },
++            {
++              "id": 1974044811048697847,
++              "hex_id": "1B65374BF542BFF7",
++              "encoded_id": "G2U3S-VCv-c",
++              "name": "glIsVertexArray"
++            },
++            {
+               "id": 11297848464427437749,
+               "hex_id": "9CCA0551E063CEB5",
+               "encoded_id": "nMoFUeBjzrU",
+@@ -760,6 +1224,24 @@
+               "name": "glLinkProgram"
+             },
+             {
++              "id": 6316251818047410355,
++              "hex_id": "57A7D59046A190B3",
++              "encoded_id": "V6fVkEahkLM",
++              "name": "glMapBufferRange"
++            },
++            {
++              "id": 6159924374900564133,
++              "hex_id": "557C72951137E0A5",
++              "encoded_id": "VXxylRE34KU",
++              "name": "glPauseTransformFeedback"
++            },
++            {
++              "id": 4422838952091541160,
++              "hex_id": "3D611497FE2D5EA8",
++              "encoded_id": "PWEUl-4tXqg",
++              "name": "glPigletGetShaderBinarySCE"
++            },
++            {
+               "id": 1789733843390099169,
+               "hex_id": "18D66972B9C2EEE1",
+               "encoded_id": "GNZpcrnC7uE",
+@@ -772,6 +1254,30 @@
+               "name": "glPolygonOffset"
+             },
+             {
++              "id": 11150376724949062744,
++              "hex_id": "9ABE188DDA5F5458",
++              "encoded_id": "mr4YjdpfVFg",
++              "name": "glProgramBinary"
++            },
++            {
++              "id": 15151831882330141497,
++              "hex_id": "D2461ED1B2B9F339",
++              "encoded_id": "0kYe0bK58zk",
++              "name": "glProgramParameteri"
++            },
++            {
++              "id": 5001033603982954885,
++              "hex_id": "45673D90F3321185",
++              "encoded_id": "RWc9kPMyEYU",
++              "name": "glQueryCounterEXT"
++            },
++            {
++              "id": 16989239688487277499,
++              "hex_id": "EBC5E77BDC4093BB",
++              "encoded_id": "68Xne9xAk7s",
++              "name": "glReadBuffer"
++            },
++            {
+               "id": 13038467469511616150,
+               "hex_id": "B4F1F1152FB9E696",
+               "encoded_id": "tPHxFS+55pY",
+@@ -790,12 +1296,48 @@
+               "name": "glRenderbufferStorage"
+             },
+             {
++              "id": 16198970959115761743,
++              "hex_id": "E0CE4E42F0F6B84F",
++              "encoded_id": "4M5OQvD2uE8",
++              "name": "glRenderbufferStorageMultisample"
++            },
++            {
++              "id": 580024327081642437,
++              "hex_id": "080CA90D68C949C5",
++              "encoded_id": "CAypDWjJScU",
++              "name": "glResumeTransformFeedback"
++            },
++            {
+               "id": 3193845668236156932,
+               "hex_id": "2C52D1B6AAA2E004",
+               "encoded_id": "LFLRtqqi4AQ",
+               "name": "glSampleCoverage"
+             },
+             {
++              "id": 9059152535694285089,
++              "hex_id": "7DB8933BD8231921",
++              "encoded_id": "fbiTO9gjGSE",
++              "name": "glSamplerParameterf"
++            },
++            {
++              "id": 9224768446089757747,
++              "hex_id": "8004F606DC698433",
++              "encoded_id": "gAT2BtxphDM",
++              "name": "glSamplerParameterfv"
++            },
++            {
++              "id": 201428527675280265,
++              "hex_id": "02CB9E2DBFB70B89",
++              "encoded_id": "AsueLb+3C4k",
++              "name": "glSamplerParameteri"
++            },
++            {
++              "id": 17734559723614612740,
++              "hex_id": "F61DD01B5DFFAD04",
++              "encoded_id": "9h3QG13-rQQ",
++              "name": "glSamplerParameteriv"
++            },
++            {
+               "id": 1901634385714105594,
+               "hex_id": "1A63F66605284CFA",
+               "encoded_id": "GmP2ZgUoTPo",
+@@ -856,6 +1398,12 @@
+               "name": "glTexImage2D"
+             },
+             {
++              "id": 14744521136928292435,
++              "hex_id": "CC9F0FDAADD97E53",
++              "encoded_id": "zJ8P2q3ZflM",
++              "name": "glTexImage3D"
++            },
++            {
+               "id": 15410028004739795157,
+               "hex_id": "D5DB6AD3115648D5",
+               "encoded_id": "1dtq0xFWSNU",
+@@ -880,12 +1428,48 @@
+               "name": "glTexParameteriv"
+             },
+             {
++              "id": 3199970537967240500,
++              "hex_id": "2C6894400740C534",
++              "encoded_id": "LGiUQAdAxTQ",
++              "name": "glTexStorage2D"
++            },
++            {
++              "id": 14276965392873820551,
++              "hex_id": "C621F861D8CA1187",
++              "encoded_id": "xiH4YdjKEYc",
++              "name": "glTexStorage2DEXT"
++            },
++            {
++              "id": 18388176690446186833,
++              "hex_id": "FF2FED467529B951",
++              "encoded_id": "-y-tRnUpuVE",
++              "name": "glTexStorage3D"
++            },
++            {
+               "id": 15866945059680056877,
+               "hex_id": "DC32B67710DE762D",
+               "encoded_id": "3DK2dxDedi0",
+               "name": "glTexSubImage2D"
+             },
+             {
++              "id": 10099652205860146977,
++              "hex_id": "8C292C2BC548CF21",
++              "encoded_id": "jCksK8VIzyE",
++              "name": "glTexSubImage3D"
++            },
++            {
++              "id": 12481439108737890493,
++              "hex_id": "AD36FABD69FD78BD",
++              "encoded_id": "rTb6vWn9eL0",
++              "name": "glTextureStorage2DEXT"
++            },
++            {
++              "id": 10162742959363974533,
++              "hex_id": "8D0950E0847DE585",
++              "encoded_id": "jQlQ4IR95YU",
++              "name": "glTransformFeedbackVaryings"
++            },
++            {
+               "id": 4389528575731211382,
+               "hex_id": "3CEABCFB9FE29C76",
+               "encoded_id": "POq8+5-inHY",
+@@ -910,6 +1494,18 @@
+               "name": "glUniform1iv"
+             },
+             {
++              "id": 6793252777195085868,
++              "hex_id": "5E467B689E26202C",
++              "encoded_id": "XkZ7aJ4mICw",
++              "name": "glUniform1ui"
++            },
++            {
++              "id": 16353117260299967839,
++              "hex_id": "E2F1F181767D1D5F",
++              "encoded_id": "4vHxgXZ9HV8",
++              "name": "glUniform1uiv"
++            },
++            {
+               "id": 8904125147936422575,
+               "hex_id": "7B91CEA55E5F7AAF",
+               "encoded_id": "e5HOpV5feq8",
+@@ -934,6 +1530,18 @@
+               "name": "glUniform2iv"
+             },
+             {
++              "id": 18413462477636328089,
++              "hex_id": "FF89C290907F5A99",
++              "encoded_id": "-4nCkJB-Wpk",
++              "name": "glUniform2ui"
++            },
++            {
++              "id": 1751819524208167506,
++              "hex_id": "184FB69363058A52",
++              "encoded_id": "GE+2k2MFilI",
++              "name": "glUniform2uiv"
++            },
++            {
+               "id": 2579902642881178166,
+               "hex_id": "23CDA7C8E8062A36",
+               "encoded_id": "I82nyOgGKjY",
+@@ -958,6 +1566,18 @@
+               "name": "glUniform3iv"
+             },
+             {
++              "id": 12465218185223975276,
++              "hex_id": "ACFD59E55A03B16C",
++              "encoded_id": "rP1Z5VoDsWw",
++              "name": "glUniform3ui"
++            },
++            {
++              "id": 4991899151250100347,
++              "hex_id": "4546C9D470D6107B",
++              "encoded_id": "RUbJ1HDWEHs",
++              "name": "glUniform3uiv"
++            },
++            {
+               "id": 2288085837841297668,
+               "hex_id": "1FC0E9F25C21F104",
+               "encoded_id": "H8Dp8lwh8QQ",
+@@ -982,24 +1602,84 @@
+               "name": "glUniform4iv"
+             },
+             {
++              "id": 7557755158262239013,
++              "hex_id": "68E28A461398CF25",
++              "encoded_id": "aOKKRhOYzyU",
++              "name": "glUniform4ui"
++            },
++            {
++              "id": 1040160113143315554,
++              "hex_id": "0E6F641CA56FFC62",
++              "encoded_id": "Dm9kHKVv-GI",
++              "name": "glUniform4uiv"
++            },
++            {
++              "id": 12188685655818862443,
++              "hex_id": "A926E90689FB7F6B",
++              "encoded_id": "qSbpBon7f2s",
++              "name": "glUniformBlockBinding"
++            },
++            {
+               "id": 11649273239932234425,
+               "hex_id": "A1AA884A8D9FEAB9",
+               "encoded_id": "oaqISo2f6rk",
+               "name": "glUniformMatrix2fv"
+             },
+             {
++              "id": 15869372611930912867,
++              "hex_id": "DC3B564F9E747863",
++              "encoded_id": "3DtWT550eGM",
++              "name": "glUniformMatrix2x3fv"
++            },
++            {
++              "id": 10441124080303379336,
++              "hex_id": "90E6530816429388",
++              "encoded_id": "kOZTCBZCk4g",
++              "name": "glUniformMatrix2x4fv"
++            },
++            {
+               "id": 17225491810354676119,
+               "hex_id": "EF0D3D8975974197",
+               "encoded_id": "7w09iXWXQZc",
+               "name": "glUniformMatrix3fv"
+             },
+             {
++              "id": 16196199365694422331,
++              "hex_id": "E0C475830F9F7D3B",
++              "encoded_id": "4MR1gw+ffTs",
++              "name": "glUniformMatrix3x2fv"
++            },
++            {
++              "id": 8067667752826565340,
++              "hex_id": "6FF61D13AD19F2DC",
++              "encoded_id": "b-YdE60Z8tw",
++              "name": "glUniformMatrix3x4fv"
++            },
++            {
+               "id": 13821488744917850284,
+               "hex_id": "BFCFCAC8BBE358AC",
+               "encoded_id": "v8-KyLvjWKw",
+               "name": "glUniformMatrix4fv"
+             },
+             {
++              "id": 16754018849559506213,
++              "hex_id": "E8823B6088316D25",
++              "encoded_id": "6II7YIgxbSU",
++              "name": "glUniformMatrix4x2fv"
++            },
++            {
++              "id": 12411197146956239562,
++              "hex_id": "AC3D6E0C3DAB12CA",
++              "encoded_id": "rD1uDD2rEso",
++              "name": "glUniformMatrix4x3fv"
++            },
++            {
++              "id": 15424885471325678735,
++              "hex_id": "D610339C93736C8F",
++              "encoded_id": "1hAznJNzbI8",
++              "name": "glUnmapBuffer"
++            },
++            {
+               "id": 16621082977181018,
+               "hex_id": "003B0CC972A31D5A",
+               "encoded_id": "ADsMyXKjHVo",
+@@ -1060,6 +1740,48 @@
+               "name": "glVertexAttrib4fv"
+             },
+             {
++              "id": 12476579027654883982,
++              "hex_id": "AD25B6859B753A8E",
++              "encoded_id": "rSW2hZt1Oo4",
++              "name": "glVertexAttribDivisor"
++            },
++            {
++              "id": 2910988343509092301,
++              "hex_id": "2865E879B02987CD",
++              "encoded_id": "KGXoebAph80",
++              "name": "glVertexAttribDivisorEXT"
++            },
++            {
++              "id": 14179989734917450764,
++              "hex_id": "C4C97188FC70AC0C",
++              "encoded_id": "xMlxiPxwrAw",
++              "name": "glVertexAttribI4i"
++            },
++            {
++              "id": 6154934571555883837,
++              "hex_id": "556AB861F15C0B3D",
++              "encoded_id": "VWq4YfFcCz0",
++              "name": "glVertexAttribI4iv"
++            },
++            {
++              "id": 11511042711645999647,
++              "hex_id": "9FBF705BAE02521F",
++              "encoded_id": "n79wW64CUh8",
++              "name": "glVertexAttribI4ui"
++            },
++            {
++              "id": 12545217492485390069,
++              "hex_id": "AE1990D78D9BBEF5",
++              "encoded_id": "rhmQ142bvvU",
++              "name": "glVertexAttribI4uiv"
++            },
++            {
++              "id": 805087316215751106,
++              "hex_id": "0B2C3EA6083661C2",
++              "encoded_id": "Cyw+pgg2YcI",
++              "name": "glVertexAttribIPointer"
++            },
++            {
+               "id": 7083362310203916117,
+               "hex_id": "624D287DEB183F55",
+               "encoded_id": "Yk0ofesYP1U",
+@@ -1072,16 +1794,22 @@
+               "name": "glViewport"
+             },
+             {
+-              "id": 14394059140534014911,
+-              "hex_id": "C7C1F8867B7E93BF",
+-              "encoded_id": "x8H4hnt+k78",
+-              "name": "scePigletAllocateSystemMemory"
++              "id": 125276029203053622,
++              "hex_id": "01BD11E28384FC36",
++              "encoded_id": "Ab0R4oOE-DY",
++              "name": "glWaitSync"
++            },
++            {
++              "id": 11635348778976645163,
++              "hex_id": "A179101158AD902B",
++              "encoded_id": "oXkQEVitkCs",
++              "name": "scePigletAllocateSystemMemoryEx"
+             },
+             {
+-              "id": 2266749741662474205,
+-              "hex_id": "1F751CE15A800FDD",
+-              "encoded_id": "H3Uc4VqAD90",
+-              "name": "scePigletAllocateVideoMemory"
++              "id": 12698511933250081296,
++              "hex_id": "B03A2D52DD6E1210",
++              "encoded_id": "sDotUt1uEhA",
++              "name": "scePigletAllocateVideoMemoryEx"
+             },
+             {
+               "id": 15999967652502764918,
+@@ -1090,34 +1818,46 @@
+               "name": "scePigletGetConfigurationVSH"
+             },
+             {
++              "id": 11630646935632872643,
++              "hex_id": "A1685BC4226204C3",
++              "encoded_id": "oWhbxCJiBMM",
++              "name": "scePigletGetInteger"
++            },
++            {
+               "id": 16928886957147449264,
+               "hex_id": "EAEF7CFE938467B0",
+               "encoded_id": "6u98-pOEZ7A",
+               "name": "scePigletGetUsageVSH"
+             },
+             {
+-              "id": 8561105152617838157,
+-              "hex_id": "76CF27C7128D764D",
+-              "encoded_id": "ds8nxxKNdk0",
+-              "name": "scePigletReleaseSystemMemory"
++              "id": 5764521359635338996,
++              "hex_id": "4FFFB1A2853756F4",
++              "encoded_id": "T-+xooU3VvQ",
++              "name": "scePigletReleaseSystemMemoryEx"
+             },
+             {
+-              "id": 13502992457293045085,
+-              "hex_id": "BB64441915BB1D5D",
+-              "encoded_id": "u2REGRW7HV0",
+-              "name": "scePigletReleaseVideoMemory"
+-            },
+-            {
+-              "id": 5241768028836521317,
+-              "hex_id": "48BE804009CCE565",
+-              "encoded_id": "SL6AQAnM5WU",
+-              "name": "scePigletSetConfiguration"
++              "id": 129177591554428863,
++              "hex_id": "01CAEE55C98ACFBF",
++              "encoded_id": "AcruVcmKz78",
++              "name": "scePigletReleaseVideoMemoryEx"
+             },
+             {
+               "id": 3734730244055261905,
+               "hex_id": "33D46D5E98D262D1",
+               "encoded_id": "M9RtXpjSYtE",
+               "name": "scePigletSetConfigurationVSH"
++            },
++            {
++              "id": 319861581923554094,
++              "hex_id": "04706069FFD9132E",
++              "encoded_id": "BHBgaf-ZEy4",
++              "name": null
++            },
++            {
++              "id": 4383044917266259719,
++              "hex_id": "3CD3B421403C9F07",
++              "encoded_id": "PNO0IUA8nwc",
++              "name": null
+             }
+           ]
+         }

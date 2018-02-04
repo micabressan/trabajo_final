@@ -1,0 +1,64 @@
+--
+-- Elliot Ceramidas
+-- Australia 2014
+--
+-- based on an assignment by Alex Mason
+--
+
+-- Huffman encoding and decoding
+
+module Codec.Huffman (
+
+   huffman_decode, -- ::          (Freq_Tree a, [Bit]) -> [a]
+   huffman_encode, -- :: Ord a => [a] -> (Freq_Tree a, [Bit])
+
+   -- Potentially useful for debugging or analysis:
+
+   replicate_Pos,        -- :: Pos -> a -> [a]
+   merge_least_frequent, -- :: [Freq_Tree a] -> [Freq_Tree a]
+   trees_to_huffman_tree -- :: [Freq_Tree a] -> Freq_Tree a
+
+) where
+
+import Data.Frequency_Tree (Freq_Tree, Bit, sort_trees, merge_trees, 
+    histogram_to_Freq_Trees, create_bit_sequence, freq_Tree_to_bitmap, follow_bit_path_to_one_value)
+import Data.Histogram (empty_histogram, create_histogram)
+import Data.Integer_Subtypes (Pos)
+
+replicate_Pos :: Pos -> a -> [a]
+replicate_Pos n x = case n of
+   1 -> [x]
+   _ -> x: replicate_Pos (n - 1) x
+
+--Breaks down a frequency tree with a binary bit list until the character that list leads to is found
+huffman_decode :: (Freq_Tree a, [Bit]) -> [a]
+huffman_decode (tree, list) = case list of
+  --If the list has any value at all
+  (_:_) -> (fst break_down) : huffman_decode (tree, (snd break_down))
+  [] -> []
+  where
+    break_down = (follow_bit_path_to_one_value tree list)
+      
+--Takes a list of trees and sorts them, the first two items in the list are then joined together
+merge_least_frequent :: [Freq_Tree a] -> [Freq_Tree a]
+merge_least_frequent trees = case (sort_trees trees) of
+    --Checks if there is atleast 3 value in the list
+    one:two:rest -> (merge_trees one two) : rest
+    [_] -> error "Huffman.merge_least_frequent: Given list with 1 or less values"
+    [] -> []
+
+--Reduces a list of trees into a single combined tree
+trees_to_huffman_tree :: [Freq_Tree a] -> Freq_Tree a
+trees_to_huffman_tree trees = case trees of
+    [item] -> item
+    --As long as there are two values do this
+    _:_ -> trees_to_huffman_tree (merge_least_frequent trees)
+    [] -> error "Huffman.trees_to_huffman_tree: Given Empty_Tree"
+
+--Takes a list and creates a single huffman tree and a list of bits to decode the tree
+huffman_encode :: Ord a => [a] -> (Freq_Tree a, [Bit])
+huffman_encode items = (to_huff, create_bit_sequence (freq_Tree_to_bitmap (to_huff)) items)
+    where
+        to_huff = trees_to_huffman_tree (histogram_to_Freq_Trees (create_histogram items empty_histogram))
+
+------------------------------------ Tests -----------------------------------

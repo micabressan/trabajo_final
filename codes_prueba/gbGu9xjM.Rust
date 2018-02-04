@@ -1,0 +1,163 @@
+extern crate rand;
+
+const SPAN: u32 = 1;
+
+use rand::Rng;
+use std::cmp;
+
+fn collapse_right(x: u32) -> u32 {
+	if x == 0 {
+		return 0
+	}
+	let mut num_shifts = 0;
+	loop {
+		let num_shifts_is_fine = ((x >> num_shifts) << num_shifts) == x;
+		let num_shifts_plus_one_is_fine =((x >> (num_shifts + 1)) << (num_shifts + 1)) == x;
+		if !num_shifts_is_fine {
+			panic!();
+		}
+		if num_shifts_is_fine && !num_shifts_plus_one_is_fine {
+			return x >> num_shifts;
+		} else {
+			num_shifts = num_shifts + 1;
+		}
+	}
+}
+
+fn get_span(mut x: u32) -> i32 {
+	if x == 0 {
+		return 0;
+	}
+	x = collapse_right(x);
+
+	for i in 0..32 {
+		if x >> i == 0 {
+			return i;
+		}
+	}
+	panic!();
+}
+
+fn make_esubtable_with(ids: &Vec<u32>) -> ESubTable {
+	let mut esubtable = ESubTable {
+		itablePtrs: [None; SPAN as usize]
+	};
+	for id in ids {
+		insert_into_esubtable(&mut esubtable, *id);
+	}
+	return esubtable;
+}
+
+fn make_zero_etable(capacity: u32) -> Vec<ESubTable> {
+	let mut etable: Vec<ESubTable> = Vec::new();
+	for _ in 0..capacity {
+		etable.push(make_esubtable_with(&Vec::new()));
+	}
+	return etable;
+}
+
+struct ESubTable {
+	itablePtrs: [Option<u32>; SPAN as usize]
+}
+
+fn insert_into_esubtable(esubtable: &mut ESubTable, id: u32) {
+	let esubindex = (id % SPAN) as usize;
+	esubtable.itablePtrs[esubindex] = Some(id)
+}
+
+fn insert_into_etable(etable: &mut Vec<ESubTable>, id: u32) {
+	let etopindex = (id % (etable.len() as u32)) as usize;
+	let mut esubtable = &mut etable[etopindex];
+	insert_into_esubtable(&mut esubtable, id);
+}
+
+fn get_members(esubtable: &ESubTable) -> Vec<u32> {
+	let mut members: Vec<u32> = Vec::new();
+	for j in 0..SPAN {
+		match esubtable.itablePtrs[j as usize] {
+			Some(id) => {
+				members.push(id);
+			}
+			None => {}
+		}
+	}
+	return members;
+}
+
+fn count_members(etable: &Vec<ESubTable>) -> u32 {
+	let mut count = 0;
+	for i in 0..etable.len() {
+		count = count + get_members(&etable[i]).len()
+	}
+	return count as u32;
+}
+
+fn generate_etable(mut rng: &mut rand::ThreadRng, ids: &Vec<u32>) -> (Vec<ESubTable>) {
+	let mut capacity = ids.len() as u32;
+	if ids.len() > 170 {
+		capacity = ((ids.len() as f32) * 1.5f32) as u32;
+	}
+	if ids.len() > 250 {
+		capacity = (ids.len() as u32) * 2;
+	}
+
+	loop {
+		let mut etable = make_zero_etable(capacity);
+
+		for id in ids.iter() {
+			insert_into_etable(&mut etable, *id);
+		}
+		let num_members = count_members(&etable);
+		if num_members == ids.len() as u32 {
+			return etable;
+		}
+
+		capacity = capacity + 1;
+	}
+}
+
+
+
+fn main() {
+	let mut rng = rand::thread_rng();
+
+	let increment = 10;
+	let stop = 100;
+	let mut num_elements = 0;
+	loop {
+		num_elements = num_elements + increment;
+
+		let mut sum_of_sizes_for_average: u64 = 0;
+		let mut num_trials = 100;
+		let mut worst_size_option: Option<u32> = None;
+
+		for _ in 0..num_trials {
+			let mut ids: Vec<u32> = Vec::new();
+			for _ in 0..num_elements {
+				ids.push(rng.gen::<u32>());
+			}
+			let etable = generate_etable(&mut rng, &ids);
+
+			let size = etable.len() as u32;
+
+			sum_of_sizes_for_average = sum_of_sizes_for_average + size as u64;
+			match worst_size_option {
+				None => {
+					worst_size_option = Some(size);
+				}
+				Some(previously_worst_size) => {
+					worst_size_option = Some(cmp::max(previously_worst_size, size));
+				}
+			}
+		}
+
+		let average_size = sum_of_sizes_for_average as f64 / num_trials as f64;
+		let worst_size = worst_size_option.unwrap_or(0);
+
+		println!("For {} elements, average size {} and worst size {}", num_elements, average_size, worst_size);
+
+		if num_elements >= stop {
+			break;
+		}
+	}
+}

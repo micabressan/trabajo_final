@@ -1,0 +1,30 @@
+set shell = createobject ("wscript.shell")
+
+strtext = inputbox ("Wpisz jaką wiadomością chcesz spamować")
+strtimes = inputbox ("Ile chcesz wsyłać wiadomości?")
+strspeed = inputbox ("Jak szybko? (1000 =1 wiad/s, 100 = 10 wiad/s)")
+strtimeneed = inputbox ("Ile sekund Ci zajmie zaznaczenie pola tekstowego?")
+If not isnumeric (strtimes & strspeed & strtimeneed) then
+msgbox "You entered something else then a number on Times, Speed and/or Time need. shutting down"
+wscript.quit
+End If
+strtimeneed2 = strtimeneed * 1000
+do
+msgbox "Masz " & strtimeneed & " sekund na kliknięcie w pole tekstowe."
+wscript.sleep strtimeneed2
+
+for i=0 to strtimes
+shell.sendkeys (strtext & "{enter}")
+wscript.sleep strspeed
+Next
+
+wscript.sleep strspeed * strtimes / 10
+returnvalue=MsgBox ("Czy chcesz ponowić akcję?",36)
+If returnvalue=6 Then
+Msgbox "Spambot zostanie uruchomiony ponownie"
+End If
+If returnvalue=7 Then
+msgbox "Spambot zostaje zamknięty"
+wscript.quit
+End IF
+loop

@@ -1,0 +1,114 @@
+import random
+import math
+import os
+import time
+import pylab as py
+import numpy as np
+
+start = time.time()
+randomtests = False
+nooftests = 10000
+count = 0
+results = []
+tests = []
+averages = []
+
+def order():
+	inshore, check = actualpots((1.0-perc) * pots)	
+	offshore, checkk = actualpots(perc * pots)
+	if check == True:
+		if offshore > 0:
+			offshore -= 1
+	return inshore, offshore
+
+def actualpots(x):
+	num = x
+	while num > 1:
+		num -= 1
+	if num == 0.5:
+		return int(math.ceil(x)), True
+	elif num > 0.5:
+		return int(math.ceil(x)), False
+	else:
+		return int(math.floor(x)), False
+
+if randomtests:
+	for q in range(nooftests):
+		if (q+1) % 10 == 0:
+			print("test number {:>4}".format(str(q+1).rjust(4)))
+		results.append([])
+		tests = []
+		if randomtests == True:
+			for x in range(10):
+				tests.append(random.randrange(0, 3))
+		perc = 0.0
+		for x in range(101):
+			pots = 5
+			money = 50
+			for y in tests:
+				inshore, offshore = order()
+				if y > 0:
+					money += (6 * offshore) + (2 * inshore)
+				else:
+					money += (4 * inshore)
+					pots = inshore
+				pots += (money // 5)
+				money = (money % 5)
+			results[q].append(money + (5 * pots))
+			perc += 0.01
+
+else:
+	nooftests = 1024
+	for x in range(1024):
+		tests.append(str(bin(x))[2:].rjust(10, "0"))
+	for q in range(len(tests)):
+		results.append([])
+		if (q+1) % 10 == 0 or (q+1) == nooftests:
+			print("test number", str(q+1).rjust(4))
+		perc = 0.00
+		for x in range(101):
+			pots = 5
+			money = 50
+			for t in tests[q]:
+				inshore, offshore = order()
+				if t == "1":
+					money += (2 * inshore) + (6 * offshore)
+				else:
+					money += (4 * inshore)
+					pots = inshore
+				pots += (money // 5)
+				money = (money % 5)
+			for e in range(2**tests[q].count("1")):
+				results[q].append(money + (pots * 5))
+			perc += 0.01
+
+print("\n")
+
+if randomtests:
+	print("other test")
+	total = 0
+	for y in range(101):
+		total = 0
+		for x in range(len(results)):
+			total += results[x][y]
+		averages.append(total/nooftests)
+else:
+	print("59049 test")
+	datacopy = results.copy()
+	averages = []
+	for y in range(101):
+		print("averaging at {:>3}%".format(y))
+		total = 0
+		for x in range(len(datacopy)):
+			for q in range(2**bin(x)[2:].count("1")):
+				total += datacopy[x].pop(0)
+		averages.append(total/59049)
+
+xc = py.arange(0, 101, 1)
+yc = np.array(averages)
+py.plot(xc, yc)
+py.xlabel("% of pots offshore")
+py.ylabel("expected return value")
+print("that took {} minutes and {} seconds".format(
+	int(time.time() - start) // 60, int(time.time() - start) % 60))
+py.show()

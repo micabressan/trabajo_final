@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE teams [
+<!ELEMENT teams (team)*>
+<!ELEMENT team EMPTY>
+<!ATTLIST team id CDATA #IMPLIED>
+<!ATTLIST team point CDATA #IMPLIED>
+]>
+
+<teams>
+	<team id="A1" point="0"/>
+	<team id="A2" point="0"/>
+	<team id="A3" point="0"/>
+	<team id="A4" point="0"/>
+	<team id="B1" point="0"/>
+	<team id="B2" point="0"/>
+	<team id="B3" point="0"/>
+	<team id="B4" point="0"/>
+	<team id="C1" point="0"/>
+	<team id="C2" point="0"/>
+	<team id="C3" point="0"/>
+	<team id="C4" point="0"/>
+	<team id="D1" point="0"/>
+	<team id="D2" point="0"/>
+	<team id="D3" point="0"/>
+	<team id="D4" point="0"/>
+	<team id="E1" point="0"/>
+	<team id="E2" point="0"/>
+	<team id="E3" point="0"/>
+	<team id="E4" point="0"/>
+	<team id="F1" point="0"/>
+	<team id="F2" point="0"/>
+	<team id="F3" point="0"/>
+	<team id="F4" point="0"/>
+	<team id="G1" point="0"/>
+	<team id="G2" point="0"/>
+	<team id="G3" point="0"/>
+	<team id="G4" point="0"/>
+	<team id="H1" point="0"/>
+	<team id="H2" point="0"/>
+	<team id="H3" point="0"/>
+	<team id="H4" point="0"/>
+</teams>
