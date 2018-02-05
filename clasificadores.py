@@ -32,22 +32,22 @@ from sklearn.linear_model.stochastic_gradient import SGDClassifier
 
 classifiers = [
     # AdaBoostClassifier(), #Descartado en la 1er ejecucion
-    # BaggingClassifier(),
+    BaggingClassifier(),
     # BernoulliNB(), #Descartado en la 1er ejecucion
-    # CalibratedClassifierCV(),
+    CalibratedClassifierCV(),
     # DecisionTreeClassifier(), #Descartad en la 1er ejecucion
-    # ExtraTreesClassifier(),
+    ExtraTreesClassifier(),
     # GaussianNB(), #Descartad en la 1er ejecucion
     # ExtraTreeClassifier(), #Descartad en la 1er ejecucion
-    # GradientBoostingClassifier(),
+    GradientBoostingClassifier(),
     # KNeighborsClassifier(), #Descartad en la 1er ejecucion
     # #LabelPropagation(), #Descartad en la 1er ejecucion
     # #LabelSpreading(), #Descartad en la 1er ejecucion
     # LinearDiscriminantAnalysis(), #Descartad en la 1er ejecucion
-    # LinearSVC(),
+    LinearSVC(),
     # LogisticRegression(), #Descartad en la 1er ejecucion
-    # LogisticRegressionCV(),
-    # MLPClassifier(),
+    LogisticRegressionCV(),
+    MLPClassifier(),
     MultinomialNB(),
     # NearestCentroid(), #Descartad en la 1er ejecucion
     # NuSVC(nu=0.3), #Descartad en la 1er ejecucion
@@ -56,7 +56,7 @@ classifiers = [
     # QuadraticDiscriminantAnalysis(), #Descartad en la 1er ejecucion
     # RadiusNeighborsClassifier(radius=1.1), #Descartad en la 1er ejecucion
     # RidgeClassifier(), #Descartad en la 1er ejecucion
-    # RandomForestClassifier(),
+    RandomForestClassifier(),
     # RidgeClassifierCV(), #Descartad en la 1er ejecucion
     # SVC(), #Descartad en la 1er ejecucion
     SGDClassifier(penalty='l2')
