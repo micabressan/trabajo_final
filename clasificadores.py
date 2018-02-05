@@ -59,7 +59,7 @@ classifiers = [
     # RandomForestClassifier(),
     # RidgeClassifierCV(), #Descartad en la 1er ejecucion
     # SVC(), #Descartad en la 1er ejecucion
-    SGDClassifier(penalty='l1')
+    SGDClassifier(penalty='l2')
     ]
 
 
