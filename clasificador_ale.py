@@ -27,11 +27,7 @@ class DenseTransformer(TransformerMixin):
 
 if __name__ == '__main__':
 
-    #print languages('codes_prueba')
-
-    #X, y = load_data('codes_prueba', 200)
     X, y = load_data_folder('codes_prueba')
-    #X, y = load_data_language('codes', ['Java', 'C#', 'Python'])
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
@@ -42,12 +38,12 @@ if __name__ == '__main__':
     #y_test = le.transform(y_test)
 
     for model in classifiers:
-        #print model.__str__()
+        print model.__str__()
         text_clf = Pipeline(
             [
-                ('vect', CountVectorizer(min_df=0.1)),
+                ('vect', CountVectorizer(min_df=1)),
                 ('tfidf', TfidfTransformer(use_idf=False)),
-                ('to_dense', DenseTransformer()),
+                #('to_dense', DenseTransformer()),
                 ('clf', model),])
 
         text_clf.fit(X_train, y_train)
