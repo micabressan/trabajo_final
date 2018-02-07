@@ -37,8 +37,8 @@ classifiers = [
     # CalibratedClassifierCV(),
     # DecisionTreeClassifier(),
     # ExtraTreesClassifier(),
-    # GaussianNB(),
     # ExtraTreeClassifier(),
+    # GaussianNB(),
     # GradientBoostingClassifier(),
     # KNeighborsClassifier(),
     # #LabelPropagation(),
@@ -56,8 +56,8 @@ classifiers = [
     # QuadraticDiscriminantAnalysis(),
     # RadiusNeighborsClassifier(radius=1.1),
     # RidgeClassifier(),
-    # RandomForestClassifier(),
     # RidgeClassifierCV(),
+    # RandomForestClassifier(),
     # SVC(),
     SGDClassifier()
     ]
