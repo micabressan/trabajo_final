@@ -9,6 +9,7 @@ from sklearn import metrics
 from clasificadores import classifiers
 from sklearn.base import TransformerMixin
 from sklearn import preprocessing
+from preprocessor import preprocessor
 
 
 
@@ -41,7 +42,7 @@ if __name__ == '__main__':
         print model.__str__()
         text_clf = Pipeline(
             [
-                ('vect', CountVectorizer(min_df=1)),
+                ('vect', CountVectorizer(min_df=0.1, preprocessor=preprocessor)),
                 ('tfidf', TfidfTransformer(use_idf=False)),
                 #('to_dense', DenseTransformer()),
                 ('clf', model),])

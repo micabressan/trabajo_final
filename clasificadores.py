@@ -31,35 +31,35 @@ from sklearn.linear_model.stochastic_gradient import SGDClassifier
 
 
 classifiers = [
-    # AdaBoostClassifier(), #Descartado en la 1er ejecucion
-    BaggingClassifier(),
-    # BernoulliNB(), #Descartado en la 1er ejecucion
-    CalibratedClassifierCV(),
-    # DecisionTreeClassifier(), #Descartad en la 1er ejecucion
-    ExtraTreesClassifier(),
-    # GaussianNB(), #Descartad en la 1er ejecucion
-    # ExtraTreeClassifier(), #Descartad en la 1er ejecucion
-    GradientBoostingClassifier(),
-    # KNeighborsClassifier(), #Descartad en la 1er ejecucion
-    # #LabelPropagation(), #Descartad en la 1er ejecucion
-    # #LabelSpreading(), #Descartad en la 1er ejecucion
-    # LinearDiscriminantAnalysis(), #Descartad en la 1er ejecucion
-    LinearSVC(),
-    # LogisticRegression(), #Descartad en la 1er ejecucion
-    LogisticRegressionCV(),
-    MLPClassifier(),
-    MultinomialNB(),
-    # NearestCentroid(), #Descartad en la 1er ejecucion
-    # NuSVC(nu=0.3), #Descartad en la 1er ejecucion
-    # PassiveAggressiveClassifier(), #Descartad en la 1er ejecucion
-    # Perceptron(), #Descartad en la 1er ejecucion
-    # QuadraticDiscriminantAnalysis(), #Descartad en la 1er ejecucion
-    # RadiusNeighborsClassifier(radius=1.1), #Descartad en la 1er ejecucion
-    # RidgeClassifier(), #Descartad en la 1er ejecucion
-    RandomForestClassifier(),
-    # RidgeClassifierCV(), #Descartad en la 1er ejecucion
-    # SVC(), #Descartad en la 1er ejecucion
-    SGDClassifier(penalty='l2')
+    # AdaBoostClassifier(),
+    # BaggingClassifier(),
+    # BernoulliNB(),
+    # CalibratedClassifierCV(),
+    # DecisionTreeClassifier(),
+    # ExtraTreesClassifier(),
+    # GaussianNB(),
+    # ExtraTreeClassifier(),
+    # GradientBoostingClassifier(),
+    # KNeighborsClassifier(),
+    # #LabelPropagation(),
+    # #LabelSpreading(),
+    # LinearDiscriminantAnalysis(),
+    # LinearSVC(),
+    # LogisticRegression(),
+    # LogisticRegressionCV(),
+    # MLPClassifier(),
+    # MultinomialNB(),
+    # NearestCentroid(),
+    # NuSVC(nu=0.3),
+    # PassiveAggressiveClassifier(),
+    # Perceptron(),
+    # QuadraticDiscriminantAnalysis(),
+    # RadiusNeighborsClassifier(radius=1.1),
+    # RidgeClassifier(),
+    # RandomForestClassifier(),
+    # RidgeClassifierCV(),
+    # SVC(),
+    SGDClassifier()
     ]
 
 
