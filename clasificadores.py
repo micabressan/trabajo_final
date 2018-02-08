@@ -29,79 +29,37 @@ from sklearn.linear_model.ridge import RidgeClassifierCV
 from sklearn.svm.classes import SVC
 from sklearn.linear_model.stochastic_gradient import SGDClassifier
 
-'''
-from sklearn.utils.testing import all_estimators
-from sklearn.neural_network import MLPClassifier
-from sklearn.neighbors import KNeighborsClassifier, NearestCentroid, RadiusNeighborsClassifier
-from sklearn.svm import SVC, LinearSVC, NuSVC
-from sklearn.gaussian_process import GaussianProcessClassifier
-from sklearn.gaussian_process.kernels import RBF
-from sklearn.tree import DecisionTreeClassifier, ExtraTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis, LinearDiscriminantAnalysis
-from sklearn.naive_bayes import BernoulliNB, GaussianNB, MultinomialNB
-from sklearn.semi_supervised import LabelSpreading, LabelPropagation
-from sklearn.linear_model import LogisticRegression, LogisticRegressionCV, RidgeClassifier, RidgeClassifierCV, SGDClassifier, Perceptron, PassiveAggressiveClassifier
 
-classifiers_old = [
-    MultinomialNB()
-    #SGDClassifier(),
-    #RidgeClassifier(),
-    #RidgeClassifierCV(),
-    #Perceptron(),
-    #PassiveAggressiveClassifier(),
-    #GaussianProcessClassifier(1.0 * RBF(1.0)),
-    #DecisionTreeClassifier(),
-    #ExtraTreeClassifier(),
-    #ExtraTreesClassifier(),
-    #RandomForestClassifier(),
-    #MLPClassifier(),
-    #GaussianNB(),
-    #BernoulliNB(),
-    #GaussianNB(),
-    #QuadraticDiscriminantAnalysis(),
-    #KNeighborsClassifier(),
-    #LabelPropagation(),
-    #LabelSpreading(),
-    #LinearDiscriminantAnalysis(),
-    #NearestCentroid(),
-    #RadiusNeighborsClassifier(),
-    #NuSVC(),
-    #SVC(),
-    #GradientBoostingClassifier()
-    ]
-'''
 classifiers = [
-    AdaBoostClassifier(), #anda
-    BaggingClassifier(), #anda
-    BernoulliNB(), #anda
-    CalibratedClassifierCV(), #anda
-    DecisionTreeClassifier(), #anda
-    ExtraTreesClassifier(), #anda
-    GaussianNB(), #anda
-    ExtraTreeClassifier(), #anda
-    #GaussianProcessClassifier(n_jobs=-1), #andan pero tienen problemas con grandes volumenes
-    #GradientBoostingClassifier(), #andan pero tienen problemas con grandes volumenes
-    KNeighborsClassifier(), #anda
-    #LabelPropagation(), #anda descomentar el codigo
-    #LabelSpreading(), #anda descomentar el codigo
-    LinearDiscriminantAnalysis(), #anda
-    LinearSVC(), #anda
-    LogisticRegression(), #anda
-    LogisticRegressionCV(), #anda
-    MLPClassifier(), #anda
-    MultinomialNB(), #anda
-    NearestCentroid(), #anda
-    NuSVC(nu=0.3),#anda cambiando el parametro a 0.3
-    PassiveAggressiveClassifier(), #anda
-    Perceptron(),#anda
-    QuadraticDiscriminantAnalysis(),#anda
-    RadiusNeighborsClassifier(),
-    RidgeClassifier(),#anda
-    RandomForestClassifier(),#anda
-    RidgeClassifierCV(),#anda
-    SVC(),#anda
-    SGDClassifier()#anda
+    # AdaBoostClassifier(),
+    # BaggingClassifier(),
+    # BernoulliNB(),
+    # CalibratedClassifierCV(),
+    # DecisionTreeClassifier(),
+    # ExtraTreesClassifier(),
+    # ExtraTreeClassifier(),
+    # GaussianNB(),
+    # GradientBoostingClassifier(),
+    # KNeighborsClassifier(),
+    # #LabelPropagation(),
+    # #LabelSpreading(),
+    # LinearDiscriminantAnalysis(),
+    # LinearSVC(),
+    # LogisticRegression(),
+    # LogisticRegressionCV(),
+    # MLPClassifier(),
+    # MultinomialNB(),
+    # NearestCentroid(),
+    # NuSVC(nu=0.3),
+    # PassiveAggressiveClassifier(),
+    # Perceptron(),
+    # QuadraticDiscriminantAnalysis(),
+    # RadiusNeighborsClassifier(radius=1.1),
+    # RidgeClassifier(),
+    # RidgeClassifierCV(),
+    # RandomForestClassifier(),
+    # SVC(),
+    SGDClassifier()
     ]
 
 
