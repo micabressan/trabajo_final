@@ -26,31 +26,37 @@ class DenseTransformer(TransformerMixin):
 
 if __name__ == '__main__':
 
-    X, y = load_data_folder('codes')
+    #X, y = load_data_folder('codes')
+    X, y = load_data('codes_prueba', 100)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    parameters = {'loss' : ['log', 'hinge', 'modified_huber', 'squared_hinge',
+    parameters = {
+
+                'vect__ngram_range': [(1, 1), (1, 2)],
+                'tfidf__use_idf': (True, False),
+                'clf__loss' : ['log', 'hinge', 'modified_huber', 'squared_hinge',
                         'perceptron', 'squared_loss', 'huber', #ver
                         'epsilon_insensitive', 'squared_epsilon_insensitive'],
-                'penalty' : ['l2', 'l1', 'elasticnet'],
-                'alpha' : ,
-                'l1_ratio' : ,
-                'fit_intercept' : [False, True],
-                'max_iter' : ,
-                'tol' : ,
-                'shuffle' : [False, True],
-                'verbose' : ,
-                'epsilon' : , #solo si loss es huber, epsilon_insensitive o squared_epsilon_insensitive
-                'n_jobs' : ,
-                'random_state' : ,
-                'learning_rate' : ['constant', 'optimal', 'invscaling'],
-                'eta0' : ,
-                'power_t' : ,
-                'class_weight' : ,
-                'warm_start' : [False, True],
-                'average' : [False, True],
-                'n_iter' : }
+                'clf__penalty' : ['l2', 'l1', 'elasticnet'],
+                'clf__alpha': (1e-2, 1e-3),
+                #'clf__l1_ratio' : ,
+                'clf__fit_intercept' : [False, True],
+                #'clf__max_iter' : ,
+                #'clf__tol' : ,
+                'clf__shuffle' : [False, True],
+                #'clf__verbose' : ,
+                #'clf__epsilon' : , #solo si loss es huber, epsilon_insensitive o squared_epsilon_insensitive
+                #'clf__n_jobs' : ,
+                #'clf__random_state' : ,
+                #'clf__learning_rate' : ['constant', 'optimal', 'invscaling'],
+                #'clf__eta0' : ,
+                #'clf__power_t' : ,
+                #'clf__class_weight' : ,
+                'clf__warm_start' : [False, True],
+                'clf__average' : [False, True]
+                #'clf__n_iter' :
+                }
 
     #descomentar para probar LabelPropagation y LabelSpreading
     #le = preprocessing.LabelEncoder()
@@ -67,10 +73,17 @@ if __name__ == '__main__':
                 #('to_dense', DenseTransformer()),
                 ('clf', model),])
 
-        gs_clf = GridSearchCV(clf, parameters, n_jobs=-1)
-        print gs_clf
-        text_clf.fit(X_train, y_train)
-        predicted = text_clf.predict(X_test)
+        gs_clf = GridSearchCV(text_clf, parameters, n_jobs=-1)
+        gs_clf.fit(X_train, y_train)
+        predicted = gs_clf.predict(X_test)
+
+        #text_clf.fit(X_train, y_train)
+        #predicted = text_clf.predict(X_test)
         print(metrics.accuracy_score(predicted, y_test))
+
+        print gs_clf.best_score_
+        for param_name in sorted(parameters.keys()):
+            print("%s: %r" % (param_name, gs_clf.best_params_[param_name]))
+
         #print metrics.classification_report(y_test, predicted)
         #print metrics.confusion_matrix(y_test, predicted)
