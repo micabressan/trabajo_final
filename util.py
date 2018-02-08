@@ -121,6 +121,4 @@ def copy_data(origin_folder, destination_folder, n):
 
             shutil.copy(os.path.join(origin_folder, f), os.path.join(destination_folder, f))
 if __name__ == '__main__':
-    #copy_data('codes', 'codes_prueba', 400)
-    languages_file_frecuency('codes_prueba')
-    X, y = load_data_folder('codes_prueba')
+    languages_file_frecuency('codes')

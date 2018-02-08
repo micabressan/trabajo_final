@@ -2,7 +2,7 @@ from util import *
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import metrics
 from clasificadores import classifiers
 from sklearn.base import TransformerMixin
@@ -26,9 +26,31 @@ class DenseTransformer(TransformerMixin):
 
 if __name__ == '__main__':
 
-    X, y = load_data_folder('codes_prueba')
+    X, y = load_data_folder('codes')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    parameters = {'loss' : ['log', 'hinge', 'modified_huber', 'squared_hinge',
+                        'perceptron', 'squared_loss', 'huber', #ver
+                        'epsilon_insensitive', 'squared_epsilon_insensitive'],
+                'penalty' : ['l2', 'l1', 'elasticnet'],
+                'alpha' : ,
+                'l1_ratio' : ,
+                'fit_intercept' : [False, True],
+                'max_iter' : ,
+                'tol' : ,
+                'shuffle' : ,
+                'verbose' : ,
+                'epsilon' : ,
+                'n_jobs' : ,
+                'random_state' : ,
+                'learning_rate' : ,
+                'eta0' : ,
+                'power_t' : ,
+                'class_weight' : ,
+                'warm_start' : ,
+                'average' : ,
+                'n_iter' : }
 
     #descomentar para probar LabelPropagation y LabelSpreading
     #le = preprocessing.LabelEncoder()
@@ -40,7 +62,7 @@ if __name__ == '__main__':
         print model.__str__()
         text_clf = Pipeline(
             [
-                ('vect', CountVectorizer(min_df=0.1, preprocessor=preprocessor)),
+                ('vect', CountVectorizer(min_df=1, preprocessor=preprocessor)),
                 ('tfidf', TfidfTransformer(use_idf=False)),
                 #('to_dense', DenseTransformer()),
                 ('clf', model),])

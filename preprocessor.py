@@ -31,4 +31,4 @@ def multiline_comment(text):
 
 def preprocessor(x):
     x = re.sub('\d+', 'NUMBER', x)
-    return string(x)
+    return string(one_line_comment(x))
