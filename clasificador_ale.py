@@ -39,17 +39,17 @@ if __name__ == '__main__':
                 'fit_intercept' : [False, True],
                 'max_iter' : ,
                 'tol' : ,
-                'shuffle' : ,
+                'shuffle' : [False, True],
                 'verbose' : ,
-                'epsilon' : ,
+                'epsilon' : , #solo si loss es huber, epsilon_insensitive o squared_epsilon_insensitive
                 'n_jobs' : ,
                 'random_state' : ,
-                'learning_rate' : ,
+                'learning_rate' : ['constant', 'optimal', 'invscaling'],
                 'eta0' : ,
                 'power_t' : ,
                 'class_weight' : ,
-                'warm_start' : ,
-                'average' : ,
+                'warm_start' : [False, True],
+                'average' : [False, True],
                 'n_iter' : }
 
     #descomentar para probar LabelPropagation y LabelSpreading
@@ -67,6 +67,8 @@ if __name__ == '__main__':
                 #('to_dense', DenseTransformer()),
                 ('clf', model),])
 
+        gs_clf = GridSearchCV(clf, parameters, n_jobs=-1)
+        print gs_clf
         text_clf.fit(X_train, y_train)
         predicted = text_clf.predict(X_test)
         print(metrics.accuracy_score(predicted, y_test))
