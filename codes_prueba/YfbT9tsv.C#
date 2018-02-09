@@ -1,5 +1,0 @@
-NullReferenceException: Object reference not set to an instance of an object
-X.ModelExtension.TryGetRootFacade[Unit] (UnityEngine.GameObject node) (at Assets/Code/Plugins/XProject/XModel/Model.cs:121)
-UnitApplyDamage.Run () (at Assets/Code/Logic/Behaviours/Units/tasks/impl/UnitApplyDamage.cs:35)
-TaskNodeExecutor.StartNextNode () (at Assets/Code/Logic/Behaviours/Units/tasks/TaskNodeExecutor.cs:77)
-TaskNodeExecutor.Update () (at Assets/Code/Logic/Behaviours/Units/tasks/TaskNodeExecutor.cs:58)

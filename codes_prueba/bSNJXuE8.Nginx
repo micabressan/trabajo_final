@@ -1,4 +1,0 @@
-ashley@Ashleys-Mac-mini /usr/local/etc/nginx % cat letsencrypt 
-location /.well-known/acme-challenge {
-    alias /usr/local/var/www/certbot/.well-known/acme-challenge;
-}

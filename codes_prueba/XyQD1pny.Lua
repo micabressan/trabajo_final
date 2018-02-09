@@ -1,2 +1,0 @@
-mods.thermalexpansion.Insolator.addRecipe(7200,<ThermalExpansion:material:516>, <customitems:wheat>, <customitems:wheat>, <customitems:seed>, <liquid:water> * 100);
-mods.thermalexpansion.Insolator.removeRecipe(<minecraft:cactus>);

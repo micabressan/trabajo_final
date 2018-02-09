@@ -1,8 +1,0 @@
-(defn remove-duplicates
-    "Gi otstranuva duplikat elementite od nulto nivo od listata lst."
-    ([lst] (remove-duplicates lst (list)))
-    ([lst acc] (let [h (first lst) t (rest lst)]
-        (cond
-            (empty? lst) (my-reverse acc)
-            (member? h acc) (recur t acc)
-            :else (recur t (cons h acc))))) )

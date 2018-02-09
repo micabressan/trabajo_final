@@ -1,1 +1,0 @@
-size = size max crd.row max crd.col

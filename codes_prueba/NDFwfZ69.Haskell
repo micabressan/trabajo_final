@@ -1,7 +1,0 @@
-lowerRest :: String -> String
-lowerRest [] = []
-lowerRest (x:xs)  = toLower x : lowerRest xs
-
-capitalizedRec :: String -> String
-capitalizedRec [] = []
-capitalizedRec xs = toUpper(head(xs)) : lowerRest(tail(xs))

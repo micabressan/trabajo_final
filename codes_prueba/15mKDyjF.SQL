@@ -1,1 +1,0 @@
-I could read a book about this without fnidnig such real-world approaches!

@@ -1,6 +1,0 @@
-evaluate :: Zdanie -> Bool
-evaluate (Z c) = getBoolVal Z c
-evaluate (N a) = evaluate (not a)
-evaluate (K a b) = (evaluate a) and (evaluate b)
-evaluate (A a b) = (evaluate a) or (evaluate b)
-evaluate (C a b) = evaluate (N a) or evaluate b

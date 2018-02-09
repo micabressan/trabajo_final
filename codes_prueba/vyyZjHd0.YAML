@@ -1,8 +1,0 @@
-defprev-check:
-  image: docker
-  services:
-   - docker:dind
- 
-  stage: check
-  script:
-   - wget -qO- ${DPC} | sh -s -- --project-dir=target --token=${TOKEN}

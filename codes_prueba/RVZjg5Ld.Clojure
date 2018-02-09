@@ -1,6 +1,0 @@
-(defn get-rule-fn [m r]
-  (cond
-    (rule-1? m r) (let [r2 (rule-1? m r)] #(rule-1 m r r2))
-    (rule-2? m r) (let [s (rule-2? m r)] #(rule-2 m r s))
-    (rule-3? m r) (let [[r2 s] (rule-3? m r)] #(rule-3 m r r2 s))
-    :else #(identity m)))

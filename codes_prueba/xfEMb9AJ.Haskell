@@ -1,4 +1,0 @@
-countOccurences :: Int -> (Int,Int)
-countOccurences = toResult . head . (sortBy (\x y -> length y `compare` length x)) . group . sort . toList
-        where toList = map (read . return) . show
-              toResult xs = (head xs, length xs)

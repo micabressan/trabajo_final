@@ -1,7 +1,0 @@
-    if@state.tiles
-      tiles = @state.tiles.map (tile)->
-        urlImage = 'background-image: url("marmaoctabrain.com' + tile.image +  '")'
-        <div className='service-tile' data-tile=1 onClick=@serviceClick id='tile1' style=urlImage >
-          <span className='servise-name'>{tile.title}</span>
-          <span className='servise-description'>{tile.description}</span>
-        </div>

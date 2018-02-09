@@ -1,8 +1,0 @@
- def sign_in(conn, %{username: username, password: password}) do
-
-    case Accounts.get_user!(username, password) do
-      {:ok, user} -> conn |> Guardian.Plug.sign_in(user) |> send_resp(204, "")
-      {:error, _} -> send_resp(conn, 404, "")
-    end
-    
-  end

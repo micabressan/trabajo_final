@@ -1,8 +1,0 @@
-list_max([X | Xs]) -> 
-	list_max(X, Xs).
-list_max(X, []) ->
-	X;
-list_max(X, [Y|Ys]) when X >= Y ->
-	list_max(X, Ys);
-list_max(_, [Y|Ys]) ->
-	list_max(Y, Ys).

@@ -1,5 +1,0 @@
-cache:
-  untracked: true
-  key: "$CI_BUILD_REF_NAME"
-  paths:
-    - /opt/plenv/versions/5.24.3/lib/perl5/

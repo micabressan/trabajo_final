@@ -1,8 +1,0 @@
-result = MsgBox ("NYAN NYAN NYAN NYAN NYAN!!!!!", vbYesNo, "memz.exe")
-
-Select Case result
-Case vbYes
-    MsgBox("Donald Trumpet")
-Case vbNo
-    MsgBox("Dolan Drump")
-End Select

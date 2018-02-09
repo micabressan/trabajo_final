@@ -1,3 +1,0 @@
----
-- name: Add credentials to Jenkins
-  script: /vagrant/jenkins/jenkins-add-credentials.sh http://localhost:8080 {{ jenkins_admin_username }} {{ jenkins_admin_password }}

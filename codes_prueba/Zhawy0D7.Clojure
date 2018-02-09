@@ -1,7 +1,0 @@
-(defn compute-count [counts char]
-    (assoc counts char (inc (counts char 0))))
-
-(defn char-count [str]
-    (reduce compute-count {} str))
-    
-(char-count "Cool stuff here.") => {\space 2, \C 1, \e 2, \f 2, \h 1, \l 1, \. 1, \o 2, \r 1, \s 1, \t 1, \u 1}

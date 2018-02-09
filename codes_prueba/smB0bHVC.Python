@@ -1,6 +1,0 @@
-b = df_your['timestamp_buy'].between(1513112400, 1513166400)
-j = 0
-for z in b:
-    if z == True:
-        j += 1
-print(j)

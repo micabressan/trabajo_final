@@ -1,3 +1,0 @@
- location /kfc {
-                return 302 'intent://kfc.ru/?#Intent;scheme=kfcguest;package=ru.kfc.kfc_delivery;S.browser_fallback_url=https://www.kfc.ru/;end;';
-        }

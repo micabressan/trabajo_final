@@ -1,8 +1,0 @@
-#!/usr/bin/env python
-#-*- coding: utf-8 -*-
-
-from fabric.api import run
-
-env.host_string = '192.168.1.19'
-env.user = 'dgea'
-env.password = '666ApOcAlIpsE666'

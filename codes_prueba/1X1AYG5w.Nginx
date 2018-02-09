@@ -1,6 +1,0 @@
-location ^~ /url-text/(*) {
-  if ($host ~* ^(www\.)?(foo\.com)$) {
-    return 301 $scheme://$host/new-url.html;
-  }
-  return 403;
-}

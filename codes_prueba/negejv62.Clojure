@@ -1,8 +1,0 @@
-(defn multirequest
-  "Returns an async channel that will take a single value from any channel that is parked on it.
-   Whenever you start an async request you should park an empty 'result' channel here.
-   When your request completes you may indicate more requests by parking additional 'result' channels before
-     pushing the result of your request onto its result channel.
-   When there are no 'result' channels remaining on the multirequest channel it completes and invokes the callback
-     function with a list of results."
-  [path callback])

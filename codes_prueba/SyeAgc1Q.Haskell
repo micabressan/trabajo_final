@@ -1,4 +1,0 @@
-diaSemana (d, m, a) = (700 +(26*x - 2) `div` 10 + d + y + y `div` 4 + z `div` 4 -2*z) `mod` 7
- where(x,y,z)  
-  | m<=2 x = m + 10, y = (a - 1) `mod` 100, z = (a - 1) `div` 100
-  | otherwise x = m - 2, y = a `mod` 100, z = a `div` 100

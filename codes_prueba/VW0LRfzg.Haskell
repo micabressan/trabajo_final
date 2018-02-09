@@ -1,3 +1,0 @@
-eu1_dvbl :: Int -> Int -> Bool
-eu1_dvbl x y = (x `mod` y) == 0
-eu1_solution = sum $ take 1000 [x | x <- [0..], any (eu1_dvbl x) [3,5]]

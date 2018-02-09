@@ -1,8 +1,0 @@
-sumVetor :: (Double,Double) -> (Double,Double) -> (Double,Double)
-sumVetor (x1,y1) (x2,y2) = (x1+x2,y1+y2)
-
-sumVetores :: [(Double,Double)] -> (Double,Double)
-sumVetores [] = (0,0)
-sumVetores (v:vs)
-  = let v' = sumVetores vs in
-    sumVetor v v'

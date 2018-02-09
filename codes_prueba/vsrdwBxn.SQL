@@ -1,1 +1,0 @@
-select productent0_.code as col_0_0_ from product productent0_ inner join product_reach_zones reachzones1_ on productent0_.id=reachzones1_.product_entity_id inner join reach_zones reachzonee2_ on reachzones1_.reach_zones_id=reachzonee2_.id and (reachzonee2_.load_capacity>=?) where productent0_.working_height>=?

@@ -1,6 +1,0 @@
-
-	VANILLA("Vanilla") , FLIST("Detailed w/ Faction List"), DETAILED("Detailed");
-	private final String readable;
-	private TabListType(String readable){
-		this.readable = readable;
-	}

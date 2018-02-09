@@ -1,7 +1,0 @@
-.ford{
-   filter: blur(5px);
-}
-
-.ford:focus{
-   filter: blur(0);
-}
